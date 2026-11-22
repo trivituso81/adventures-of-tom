@@ -262,7 +262,7 @@ SCENES.ch13After=()=>[
   {talk:'Boppy',lines:['It’s a Warden’s plate. It’s gold armor, and it hums. I like the hum.']},
   {talk:'Boppy',lines:['My back doesn’t hurt, Tommy, for the first time in eleven years. I made a deal.']},
   {talk:'Tom',lines:['What deal?']},
-  {talk:'Boppy',lines:['Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making a crisp.']},
+  {talk:'Boppy',lines:['Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making apple muffins.']},
   {talk:'Boppy',lines:['As long as I stand guard here, the glass dome stays up over Long Island. That’s the deal.']},
   {talk:'Tom',lines:['Dad, that’s the same deal he gave a mirrorball, an oven and a squirrel. It isn’t safe. It’s a freezer.']},
   {talk:'Boppy',lines:['Go home, Tom. Take your friends. Go back to the good coast.']},

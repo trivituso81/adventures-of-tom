@@ -59,7 +59,7 @@ Other canon: Michael is about 10% taller than the other adults; Justin (6'5" in 
 
 
 ## Part 2, Chapter 12 (canon, 2026-10-28)
-- Monochrome Marlowe (grey suit, clipboard "NOTES: LESS") is Vance's fixer. He takes colour and sound out of places. Debuts in ch12, tells Tom Long Island is under glass and Deedee has been baking a crisp for hours.
+- Monochrome Marlowe (grey suit, clipboard "NOTES: LESS") is Vance's fixer. He takes colour and sound out of places. Debuts in ch12, tells Tom Long Island is under glass and Deedee has been baking apple muffins for hours.
 - Amber is warmth that got stuck (Tom 2026-11-12, amberclear1): when Marlowe takes the colour and sound out of a place, the warmth of the moment has nowhere to go and sets hard around people. It is warm to the touch, it cannot be cracked, and it melts when someone brings warmth the person loves. The family learns this at Mr. Washington, proves it at Doña Carmen's (a warm pupusa) and the Alvarez house (running laps), and Tom says they will use it for Deedee.
 - Gridlock Prime is not angry, it is stuck. Nobody ever let it go first. Kind route: give it a green light.
 - Amy and TNB bond over Tom: he checks the door three times before bed (at nine he told Mom it was so Chester, the family cat, couldn't get out) and stands in doorways with a thermos. Tom's house wall has the girls' photos; he says good morning to them every day.
@@ -75,7 +75,7 @@ Other canon: Michael is about 10% taller than the other adults; Justin (6'5" in 
 
 ## Chapter 14: The Rikers Wall of Rivituso Row (canon, 2026-10-28)
 - Boppy took Vance's deal: a man in a long coat (never took his hat off) promised no aches, no slowing down, and the girls "safe in the good part, forever". He signed a paper that said WARDEN on top and did not read the bottom. The gold plate hums and makes him feel no ache; it does not take the ache away.
-- Deedee, in amber from the waist down, looping a plate of apple muffins. Rose eats the crisp and the loop breaks. Deedee was a nurse for forty years: "There is a very big difference" between no ache and no feeling. She calls Boppy ROBERT.
+- Deedee, in amber from the waist down, looping a plate of apple muffins. Rose eats the apple muffins and the loop breaks. Deedee was a nurse for forty years: "There is a very big difference" between no ache and no feeling. She calls Boppy ROBERT.
 - Boppy laughs when he is scared (he did at their wedding). You cannot hit him; hitting makes the armor stronger. DEFEND, Amy's pace, jokes, and Deedee.
 - Key lines: "I just didn't want to get too old to keep you all safe." / "You big nut. We keep each other safe." / Tom: "We always make our connection."
 - TNB and Nara hold the breach against Vance's Auditors (fourteen clipboards). Tombo `boppy2` Nobody Gets Past Us unlocks. Rose names the helm Sir Bucket.

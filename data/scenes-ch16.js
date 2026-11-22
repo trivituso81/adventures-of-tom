@@ -85,7 +85,7 @@ function ch16Run(pts) {
 // The girls wait at the Angel City cab stand, very quiet.
 const CH16_GIRL_LINES={
   Grace:['I got us in the cab. I did the right thing. Why does it feel like the wrong thing?','Boppy said nobody gets past them. Nobody did.','I’m not going to cry. I’m going to do my floor routine in a minute. That’s what I do.'],
-  Rose:['They’re just doing a really good statue. That’s all.','Tata said they’re still a little warm. So it’s not forever. It’s just a long time.','I kept the crisp tin. I’m going to fill it for when Deedee wakes up.']};
+  Rose:['They’re just doing a really good statue. That’s all.','Tata said they’re still a little warm. So it’s not forever. It’s just a long time.','I kept the apple muffin tin. I’m going to fill it for when Deedee wakes up.']};
 function ch16Girls() {
   if(typeof ch13Girls==='function') ch13Girls();
   const room=worlds.lacab; if(!room) return;

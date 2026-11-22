@@ -1104,9 +1104,9 @@
 {
 "voice": "grace",
 "speaker": "Grace",
-"text": "Tata. At the crisp.",
+"text": "Tata. At the apple muffins.",
 "ctx": "",
-"script": "[sheepish, small] Tah Tah. At the crisp."
+"script": "[sheepish, small] Tah Tah. At the apple muffins."
 },
 {
 "voice": "deedee",
@@ -2665,9 +2665,9 @@
 {
 "voice": "rose",
 "speaker": "Rose",
-"text": "Apple muffins! Deedee brings the teachers CRISP?",
+"text": "Apple muffins! Deedee brings the teachers APPLE MUFFINS?",
 "ctx": "",
-"script": "[astonished, delighted] Apple muffins! [scandalized, shrill] Deedee brings the teachers CRISP?"
+"script": "[astonished, delighted] Apple muffins! [scandalized, shrill] Deedee brings the teachers APPLE MUFFINS?"
 },
 {
 "voice": "amy",
@@ -6060,9 +6060,9 @@
 {
 "voice": "deedee",
 "speaker": "Deedee",
-"text": "Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring crisp.",
+"text": "Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring apple muffins.",
 "ctx": "",
-"script": "[tender, melting] Oh, honey. [warm, reassuring] Nobody has to turn off the lights. We'll come back. Every full moon. [brisk, gentle] I'll bring crisp."
+"script": "[tender, melting] Oh, honey. [warm, reassuring] Nobody has to turn off the lights. We'll come back. Every full moon. [brisk, gentle] I'll bring apple muffins."
 },
 {
 "voice": "?The Dome",
@@ -7096,9 +7096,9 @@
 {
 "voice": "deedee",
 "speaker": "Deedee",
-"text": "Tom! Sit. Eat. I made a crisp. Yes, I know it's nine in the morning. Do not argue.",
+"text": "Tom! Sit. Eat. I made apple muffins. Yes, I know it's nine in the morning. Do not argue.",
 "ctx": "Chapter 11: part2Open",
-"script": "[warm, bustling] Tom! Sit. Eat. [proud, firm] I made a crisp. Yes, I know it's nine in the morning. [sweet, warning] Do not argue."
+"script": "[warm, bustling] Tom! Sit. Eat. [proud, firm] I made apple muffins. Yes, I know it's nine in the morning. [sweet, warning] Do not argue."
 },
 {
 "voice": "tom",
@@ -7131,9 +7131,9 @@
 {
 "voice": "deedee",
 "speaker": "Deedee",
-"text": "A layover! Where? Never mind. Take a sweater. Actually, take two. And take the crisp.",
+"text": "A layover! Where? Never mind. Take a sweater. Actually, take two. And take the apple muffins.",
 "ctx": "Chapter 11: part2Open",
-"script": "[bright, thrilled] A layover! Where? Never mind. [brisk, fussing] Take a sweater. Actually, take two. And take the crisp."
+"script": "[bright, thrilled] A layover! Where? Never mind. [brisk, fussing] Take a sweater. Actually, take two. And take the apple muffins."
 },
 {
 "voice": "boppy",
@@ -8135,9 +8135,9 @@
 {
 "voice": "tom",
 "speaker": "Tom",
-"text": "Dad’s in his recliner. Mom has the crisp. They’re fine. They’re probably fine.",
+"text": "Dad’s in his recliner. Mom has the apple muffins. They’re fine. They’re probably fine.",
 "ctx": "Chapter 11: ch11After",
-"script": "[quiet, steady] Dad’s in his recliner. Mom has the crisp. [thin, hopeful] They’re fine. [uncertain, low] They’re probably fine."
+"script": "[quiet, steady] Dad’s in his recliner. Mom has the apple muffins. [thin, hopeful] They’re fine. [uncertain, low] They’re probably fine."
 },
 {
 "voice": "tnb",
@@ -10277,9 +10277,9 @@
 {
 "voice": "boppy",
 "speaker": "Boppy",
-"text": "Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making a crisp.",
+"text": "Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making apple muffins.",
 "ctx": "Scene ch13After",
-"script": "[flat, recited] Nobody gets hurt. Nobody gets old. Nobody gets left. [gentle, proud] Your mother’s inside. She’s fine. [flat, mechanical] She’s making a crisp."
+"script": "[flat, recited] Nobody gets hurt. Nobody gets old. Nobody gets left. [gentle, proud] Your mother’s inside. She’s fine. [flat, mechanical] She’s making apple muffins."
 },
 {
 "voice": "boppy",
@@ -10529,9 +10529,9 @@
 {
 "voice": "boppy",
 "speaker": "Boppy",
-"text": "Inside. She’s fine. She’s making a crisp. Don’t look at the porch.",
+"text": "Inside. She’s fine. She’s making apple muffins. Don’t look at the porch.",
 "ctx": "Scene ch14Open",
-"script": "[evasive] Inside. She’s fine. She’s making a crisp. [hurried] Don’t look at the porch."
+"script": "[evasive] Inside. She’s fine. She’s making apple muffins. [hurried] Don’t look at the porch."
 },
 {
 "voice": "rose",
@@ -10613,9 +10613,9 @@
 {
 "voice": "tom",
 "speaker": "Tom",
-"text": "She’s looping. Look at the tray. It’s the same crisp. Every time. It’s fresh, it’s perfect, and nobody ever eats it.",
+"text": "She’s looping. Look at the tray. Same apple muffins. Every time. They’re fresh, they’re perfect, and nobody ever eats them.",
 "ctx": "Scene ch14Deedee",
-"script": "[quiet, sad] She’s looping. Look at the tray. [careful, flat] It’s the same crisp. Every time. [aching, soft] It’s fresh, it’s perfect, and nobody ever eats it."
+"script": "[quiet, sad] She’s looping. Look at the tray. [careful, flat] Same apple muffins. Every time. [aching, soft] They’re fresh, they’re perfect, and nobody ever eats them."
 },
 {
 "voice": "tom",
@@ -10648,9 +10648,9 @@
 {
 "voice": "rose",
 "speaker": "Rose",
-"text": "Deedee. I’m going to eat the crisp now. Okay? Okay.",
+"text": "Deedee. I’m going to eat the apple muffins now. Okay? Okay.",
 "ctx": "Scene ch14Deedee",
-"script": "[gentle, resolved] Deedee. I’m going to eat the crisp now. [soft, brave] Okay? Okay."
+"script": "[gentle, resolved] Deedee. I’m going to eat the apple muffins now. [soft, brave] Okay? Okay."
 },
 {
 "voice": "rose",
@@ -14316,9 +14316,9 @@
 {
 "voice": "boppy",
 "speaker": "Boppy",
-"text": "And the crisp is excellent.",
+"text": "And the apple muffins are excellent.",
 "ctx": "Scene ch20Calm",
-"script": "[dry] And the crisp is excellent."
+"script": "[dry] And the apple muffins are excellent."
 },
 {
 "voice": "?Vance",
@@ -23160,9 +23160,9 @@
 {
 "voice": "sal",
 "speaker": "sal",
-"text": "Besides, you just got here. Go see your mother. She made crisp.",
+"text": "Besides, you just got here. Go see your mother. She made apple muffins.",
 "ctx": "",
-"script": "[warm, friendly] Besides, you just got here. Go see your mother. [relishing, drawn out] She made CRISP."
+"script": "[warm, friendly] Besides, you just got here. Go see your mother. [relishing, drawn out] She made APPLE MUFFINS."
 },
 {
 "voice": "tnb",

@@ -309,7 +309,7 @@ SCENES.ch12After=()=>[
   {walk:'Marlowe',to:[[15,7],[15,8]],speed:.3},
   {talk:'Marlowe',lines:['Love it. Hate it. Love it. Notes withdrawn.','I’ll be Downtown, at the Movie Palace. Come by. I’ll have notes for the rest of the family.']},
   {talk:'Tom',lines:['You work for Vance, and Vance closed Long Island. My mother isn’t answering her phone. Where is she?']},
-  {talk:'Marlowe',lines:['Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making a crisp.','She’s been making the same one for hours.']},
+  {talk:'Marlowe',lines:['Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making apple muffins.','She’s been making the same one for hours.']},
   {talk:'Tom',lines:['Tell me how to get in.']},
   {talk:'Marlowe',lines:['Notes are due at five.']},
   {call:()=>sfx.whoosh&&sfx.whoosh()}, {despawn:'Marlowe'},

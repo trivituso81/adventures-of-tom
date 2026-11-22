@@ -242,7 +242,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | TNB | I don't know what it is, babe. But it's pretty grape. | Tom happy (at "pretty grape") |
 | Tom | Don't make me laugh, it's freaky! ...Okay. It IS a little grape. | TNB happy (at "It IS a little grape") |
 | Tom | Something strange happened on Long Island too. A blob of mud with eyes climbed in my mother's kitchen window and ran off with her apple muffins. | TNB surprised (at "mud with eyes") |
-| TNB | The mud took Deedee's crisp? Is the mud okay? | Tom happy (at "Is the mud okay") |
+| TNB | The mud took Deedee's apple muffins? Is the mud okay? | Tom happy (at "Is the mud okay") |
 | Tom | We chased it to the pond. And there was a talking fish as big as a car, wearing her baking tin like a crown. | TNB surprised (at "talking fish") |
 | TNB | A talking fish! What did he say? | Tom happy (at "What did he say") |
 | Tom | He said "Glub." Then he gave Rose a gold coin. | TNB happy (at "Glub.") |
@@ -412,7 +412,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Deedee | Not one pepper for me either. Peppers give me gas. | Boppy unimpressed, Tom unimpressed |
 | Grace | Deedee. EVERYTHING gives you gas. | Deedee surprised, Tom happy, Rose happy, Boppy happy |
 | Deedee | Who told you that. | Grace scared, Tom scared |
-| Grace | Tata. At the crisp. | Tom scared, Deedee unimpressed, Rose happy |
+| Grace | Tata. At the apple muffins. | Tom scared, Deedee unimpressed, Rose happy |
 | Deedee | Tata is on thin ice. | Tom scared, Grace happy, Rose happy, Boppy happy |
 | Deedee | I have three pies in, so I'm staying put. Do NOT let him eat peppers on an empty stomach. | Boppy unimpressed, Tom happy |
 | Boppy | I never eat peppers on an empty stomach. I eat them on a full stomach. Then it's empty. | Deedee unimpressed, Tom unimpressed, Grace unimpressed, Rose happy |
@@ -734,7 +734,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | Line | Reactions |
 |---|---|---|
 | Grace | FOR EVERYONE, LOVE DEEDEE. That's Deedee’s handwriting! Everyone means us! | Rose surprised, Tom surprised, Amy surprised, Halverson happy |
-| Rose | Apple muffins! Deedee brings the teachers CRISP? | Grace happy, Tom happy, Amy surprised |
+| Rose | Apple muffins! Deedee brings the teachers APPLE MUFFINS? | Grace happy, Tom happy, Amy surprised |
 | Mr. Halverson | Every conference night. Twelve years. It's the only reason Gary shows up. | Amy surprised, Tom happy, Grace happy, Rose happy |
 | Amy | She never told me that. Of course she never told me that. | Tom loving, Grace loving |
 | Tom | To the moon and back. And apparently to the staff room. | Amy loving, Halverson happy, Grace happy |
@@ -1509,7 +1509,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | The Mirrorball | ...You asked me. Three times. Nobody has asked me to dance since 1971. | Tom loving, Deedee loving, Boppy happy |
 | The Mirrorball | I don't need the moon. I just needed somebody to ASK. | Tom loving, Deedee loving, Boppy loving |
 | The Mirrorball | ...Fine. The party is over. It was over in 1971. I just didn't want to be the one to turn off the lights. | Tom sad, Deedee sad, Boppy sad |
-| Deedee | Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring crisp. | Tom loving, Boppy loving |
+| Deedee | Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring apple muffins. | Tom loving, Boppy loving |
 | The Dome | The Mirrorball turns once, slowly, and lets go. A great round light rises out of her, up through the glass, and settles in the sky. The moon. Right where it belongs. | Tom surprised, Deedee surprised, Boppy surprised |
 | The Mirrorball | One dance. Before you go. Somebody. Please. | Tom scared, Deedee loving, Boppy happy |
 | Deedee | Tom. Dance with your mother. | Tom scared, Boppy happy |
@@ -1725,12 +1725,12 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Deedee | Tom! Sit. Eat. I made a crisp. Yes, I know it's nine in the morning. Do not argue. | Tom unimpressed, Boppy unimpressed |
+| Deedee | Tom! Sit. Eat. I made apple muffins. Yes, I know it's nine in the morning. Do not argue. | Tom unimpressed, Boppy unimpressed |
 | Tom | Trust me, I was not going to argue. | Deedee happy, Boppy unimpressed |
 | Boppy | A gold card came in the mail, addressed to my recliner. It says Priority Member. It’s junk mail. They send junk mail to furniture now. | Tom unimpressed, Deedee unimpressed |
 | Boppy | Don’t throw it out, though. It feels warm. Even my knee can feel it. | Tom surprised, Deedee unimpressed |
 | Tom | The boarding pass from Gate Zero is buzzing in my pocket. Now it says: YOUR LAYOVER IS NOW BOARDING. | Deedee surprised, Boppy unimpressed |
-| Deedee | A layover! Where? Never mind. Take a sweater. Actually, take two. And take the crisp. | Tom loving, Boppy unimpressed |
+| Deedee | A layover! Where? Never mind. Take a sweater. Actually, take two. And take the apple muffins. | Tom loving, Boppy unimpressed |
 | Boppy | Bring me back a pretzel. A real one. Not the airport kind. | Tom happy, Deedee unimpressed |
 | Deedee | To the moon and back, Tom. Both ways. | Tom loving, Boppy loving |
 
@@ -1908,7 +1908,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Amy | I’m calling her. I’m calling her right now. | Tom scared, TNB sad, Grace scared, Rose scared |
 | Amy | It’s ringing. It’s just ringing. Mom always picks up. Mom picks up on the FIRST ring. She picks up before it rings. | Tom scared, TNB sad, Grace scared, Rose scared |
 | Tom | Sit down. Everybody. Deep breath. | Amy scared, Grace scared, Rose scared, TNB loving |
-| Tom | Dad’s in his recliner. Mom has the crisp. They’re fine. They’re probably fine. | Amy sad, Grace sad, Rose sad, TNB loving |
+| Tom | Dad’s in his recliner. Mom has the apple muffins. They’re fine. They’re probably fine. | Amy sad, Grace sad, Rose sad, TNB loving |
 | TNB | Hey. We’ll go get them. Whatever he did, we’ll fix it. Things come apart. I fix things. | Tom loving, Amy loving, Grace proud, Rose happy |
 | Tom | We’ll go get them. We always make our connection. | Amy proud, TNB proud, Grace proud, Rose proud |
 | Rose | Which one is Los Angeles? | Tom loving, Amy loving, TNB happy, Grace unimpressed |
@@ -2106,7 +2106,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Marlowe | Love it. Hate it. Love it. Notes withdrawn. | Tom unimpressed, Amy unimpressed, TNB unimpressed, Grace surprised, Rose surprised, Nara angry |
 | Marlowe | I’ll be Downtown, at the Movie Palace. Come by. I’ll have notes for the rest of the family. | Tom angry, Amy angry, TNB unimpressed, Grace scared, Rose scared |
 | Tom | You work for Vance, and Vance closed Long Island. My mother isn’t answering her phone. Where is she? | Amy scared, TNB sad, Grace scared, Rose scared, Marlowe unimpressed |
-| Marlowe | Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making a crisp. | Tom scared, Amy scared, TNB sad, Grace scared, Rose scared |
+| Marlowe | Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making apple muffins. | Tom scared, Amy scared, TNB sad, Grace scared, Rose scared |
 | Marlowe | She’s been making the same one for hours. | Tom scared, Amy scared, TNB sad, Grace scared, Rose scared |
 | Tom | Tell me how to get in. | Amy angry, TNB proud, Grace scared, Rose scared, Marlowe unimpressed |
 | Marlowe | Notes are due at five. | Tom angry, Amy angry, TNB unimpressed, Grace angry, Rose surprised |
@@ -2289,7 +2289,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Boppy | It’s a Warden’s plate. It’s gold armor, and it hums. I like the hum. | Tom scared, Amy scared, TNB surprised |
 | Boppy | My back doesn’t hurt, Tommy, for the first time in eleven years. I made a deal. | Tom sad, Amy sad, TNB sad |
 | Tom | What deal? | Amy scared, TNB scared |
-| Boppy | Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making a crisp. | Tom scared, Amy scared, TNB scared, Nara scared |
+| Boppy | Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making apple muffins. | Tom scared, Amy scared, TNB scared, Nara scared |
 | Boppy | As long as I stand guard here, the glass dome stays up over Long Island. That’s the deal. | Tom sad, Amy sad, TNB sad |
 | Tom | Dad, that’s the same deal he gave a mirrorball, an oven and a squirrel. It isn’t safe. It’s a freezer. | Boppy angry, Amy proud, TNB proud |
 | Boppy | Go home, Tom. Take your friends. Go back to the good coast. | Tom sad, Amy sad, TNB unimpressed |
@@ -2331,7 +2331,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Tom | Girls. Stay behind me. He’s not himself. | Grace scared, Rose surprised, Boppy sad, Amy scared |
 | Amy | He’s completely himself. That’s the problem. He’s himself with a gate. | Tom unimpressed, Grace surprised, Boppy angry |
 | Grace | So. Where’s Deedee? | Boppy scared, Tom scared, Amy scared |
-| Boppy | Inside. She’s fine. She’s making a crisp. Don’t look at the porch. | Tom scared, Amy scared, Grace scared, Rose surprised |
+| Boppy | Inside. She’s fine. She’s making apple muffins. Don’t look at the porch. | Tom scared, Amy scared, Grace scared, Rose surprised |
 | Rose | Boppy. There’s a Deedee on the porch. | Boppy scared, Tom surprised, Amy surprised, Grace surprised |
 | Boppy | That’s a decoration. | Tom unimpressed, Amy unimpressed, Grace unimpressed, Rose unimpressed |
 | Rose | She waved. | Boppy scared, Tom surprised, Amy surprised, Grace surprised |
@@ -2348,12 +2348,12 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Deedee | Apple muffins, nine minutes. Apple muffins, nine minutes. Hello, sweetie. Apple muffins, nine minutes. | Tom scared, Amy scared, Grace scared, Rose scared |
 | Amy | Mom. It’s Amy. Mom, look at me. | Tom sad, Grace scared, Rose scared |
 | Deedee | Hello, Amy. Apple muffins, nine minutes. Do you want a bite? Apple muffins. Nine minutes. | Tom sad, Amy sad, Grace scared, Rose surprised |
-| Tom | She’s looping. Look at the tray. It’s the same crisp. Every time. It’s fresh, it’s perfect, and nobody ever eats it. | Amy sad, Grace sad, Rose sad |
+| Tom | She’s looping. Look at the tray. Same apple muffins. Every time. They’re fresh, they’re perfect, and nobody ever eats them. | Amy sad, Grace sad, Rose sad |
 | Tom | Amber is warmth that got stuck. She’s been baking for nobody for hours, so all that warmth has nowhere to go. | Amy surprised, Grace surprised, Rose surprised |
 | Rose | Maybe somebody just has to eat it. | Tom surprised, Amy surprised, Grace surprised |
 | Grace | Rose. That is the smartest thing you have said all week. | Rose proud, Tom happy, Amy happy |
 | Rose | I say smart things every day. They just come out as noise. | Grace unimpressed, Tom happy, Amy happy |
-| Rose | Deedee. I’m going to eat the crisp now. Okay? Okay. | Tom loving, Amy loving, Grace proud |
+| Rose | Deedee. I’m going to eat the apple muffins now. Okay? Okay. | Tom loving, Amy loving, Grace proud |
 | Rose | ...It’s SO good. It’s the best one. Deedee, it’s the best one you ever made. | Tom loving, Amy loving, Grace happy |
 | Deedee | Oh. Somebody ate it. Oh, Rosie. | Rose loving, Tom loving, Amy loving, Grace happy |
 | Deedee | Oh. I was making that for a long time, wasn’t I. | Tom loving, Amy loving, Grace loving, Rose loving |
@@ -3049,7 +3049,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Tom | Probably. And then she would sit down next to you anyway. | Amy loving, Deedee loving |
 | Vance | I could not make the minute stop hurting. So I stopped the minute. It did not stop hurting. It only stopped. | Tom sad, Amy sad, TNB sad, Grace sad, Rose sad, Deedee sad, Boppy sad |
 | Deedee | Honey. That’s all of it. That’s what living is. It hurts a little, every time, and you do it anyway. | Tom loving, Amy loving, TNB loving, Boppy loving |
-| Boppy | And the crisp is excellent. | Deedee unimpressed, Tom happy, Amy happy, Grace happy, Rose happy |
+| Boppy | And the apple muffins are excellent. | Deedee unimpressed, Tom happy, Amy happy, Grace happy, Rose happy |
 | Vance | I do not know how to start the clocks. | Tom loving, Amy sad, TNB sad, Deedee loving |
 | Tom | You don’t start them. You stop holding them. | Amy loving, TNB loving, Deedee loving |
 | Forever Engine | Julian lets go. A long breath goes out of him, the one that has been in him for twenty years. The Forever Engine lets go with him. One by one, every gear in the Moon begins to turn the right way, and far below, in two cities, every clock in the sky ticks forward, all together, to five o’clock. | Tom loving, Amy surprised, TNB surprised, Grace surprised, Rose surprised, Deedee loving, Boppy surprised, Nara surprised |
@@ -4996,7 +4996,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Deedee | Forty years in the same bed. It does not care what is going on. It just grows. | Tom proud, Amy proud, TNB proud, Grace proud, Rose proud, Boppy proud, Nara happy |
 | Stillness Core | A bridge of thick red stalks rises across the chasm under a roof of enormous green leaves. | Tom surprised, Amy surprised, TNB surprised, Grace surprised, Rose surprised, Deedee surprised, Boppy surprised, Nara surprised |
 | Boppy | You could drive a truck over that. | Deedee unimpressed, Tom happy, Amy happy |
-| Deedee | Do not. It is for the crisp. | Boppy happy, Tom happy, Grace happy, Rose happy |
+| Deedee | Do not. It is for the apple muffins. | Boppy happy, Tom happy, Grace happy, Rose happy |
 
 ## table: ch20 door boppy (chapter 20)
 

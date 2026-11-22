@@ -13,15 +13,15 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 
 | Mood | Lines |
 |---|---|
-| Happy | 183 |
-| Loving | 83 |
+| Happy | 182 |
+| Loving | 82 |
 | Sad | 63 |
-| Angry | 26 |
-| Scared | 39 |
-| Surprised | 51 |
-| Proud | 182 |
-| Unimpressed | 127 |
-| **All** | 754 |
+| Angry | 31 |
+| Scared | 37 |
+| Surprised | 49 |
+| Proud | 181 |
+| Unimpressed | 133 |
+| **All** | 758 |
 
 ## Lines by character
 
@@ -86,7 +86,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 3 | map pier, when {chapter:3,flag:ch3-jar} | Surprised | You saw it? Old Iron-Gill? Forty years I have run this shack. I thought it was a story. |
 | 3 | map pier, when {chapter:3,flag:ch3-jar} | Unimpressed | It went west, into the marsh. The Whispering Marsh. The reeds talk out there. Mostly nonsense. |
 
-### Principal Pruitt (17)
+### Principal Pruitt (16)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -97,7 +97,6 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 5 | map schoolyard, when {chapter:5,notFlag:ch5-done,flag:ch5-pruitt} | Scared | Clear the rooms, set the hallway clocks to seven, and the Cafetorium will open. I hope. |
 | 5 | scene ch5Pruitt | Happy | Mrs. Gregori! Thank goodness. And you brought the whole family. |
 | 5 | scene ch5Pruitt | Proud | Not haunted. Grumpy. Thirty-one years in this building. I know the difference. |
-| 5 | scene ch5Pruitt | Scared | The bells ring at random. The clocks in the hall all say different times. And the sign-up sheet got up off the table and walked into the school. |
 | 5 | scene ch5Pruitt | Scared | The Cafetorium doors run on the bell system, and the bells run on the hallway clocks. |
 | 5 | scene ch5Pruitt | Scared | Until the clocks are right, those doors won't open, and thirty parents are on their way. |
 | 5 | scene ch5Pruitt | Proud | So please set every clock in the hall to exactly seven o'clock. Not seven-thirty, and not six-fifty-nine. Seven. |
@@ -164,11 +163,11 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 7-10 | map library, when {from:7,flag:ch7-done} | Happy | It's quiet. Properly quiet. The good kind. Thank you, Tom. |
 | 7-10 | map library, when {from:7,flag:ch7-done} | Proud | Story time is Saturdays now. The Unread asked for Grace. By name. |
 | 7 | map library, when {chapter:7,notFlag:ch7-done,flag:ch7-page} | Scared | The Stacks are through the staff door. Please be careful. And please don't answer the books. |
-| 7 | map library, when {chapter:7,notFlag:ch7-done,flag:ch7-page} | Scared | I'm fine. Everything is fine. The dictionaries haven't slept in a week. |
+| 7 | map library, when {chapter:7,notFlag:ch7-done,flag:ch7-page} | Scared | I'm fine. Everything is fine. The dictionaries haven't slept since Monday. |
 | 7 | map library, when {chapter:7,notFlag:ch7-done} | Scared | It's fine. Everything is fine. Please whisper. |
 | 7 | map library, when {chapter:7,notFlag:ch7-done} | Scared | ...Did you hear that? That wasn't me. I'd know my own shush. |
 | 7 | scene ch7Page | Scared | Oh! Tom. Girls. Welcome to the Hush Library. Everything is fine. |
-| 7 | scene ch7Page | Scared | ...It's not fine. It started a week ago, and it's coming up from the Stacks, the old part of the library downstairs. |
+| 7 | scene ch7Page | Scared | ...It's not fine. It started on Monday night, and it's coming up from the Stacks, the old part of the library downstairs. |
 | 7 | scene ch7Page | Surprised | Every book down there is whispering everything it ever overheard. |
 | 7 | scene ch7Page | Surprised | That's seventy years of people reading quietly and thinking nobody was listening. |
 | 7 | scene ch7Page | Unimpressed | Books overhear EVERYTHING. That's why we whisper in here. It was never for the people. It's for the books. |
@@ -205,10 +204,10 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 1-10 | map tea, base | Surprised | The kettle has been gossiping again. |
 | 1-10 | map tea, base | Happy | It spilled the tea. Literally. |
 | 1-10 | map tea, base | Unimpressed | Please mind the dramatic biscuits. |
-| 3 | map tea, when {chapter:3,flag:ch3-tea} | Surprised | The kettle is still going on about that man in the long coat. Gold coins. Paying double. |
+| 3 | map tea, when {chapter:3,flag:ch3-tea} | Surprised | The kettle is still going on about that flash over the marsh. No thunder, no rain. It can't let it go. |
 | 3 | map tea, when {chapter:3,flag:ch3-tea} | Unimpressed | I told it to mind its own business. It's a kettle. It has no business. |
 | 3 | scene ch3Tea | Happy | Boppy! The usual? Ginger, peppermint, and a little honey for the stomach. |
-| 3 | scene ch3Tea | Surprised | The kettle says a man in a long coat has been buying up gold coins at Penny's shop. He pays double, and he never takes his hat off. |
+| 3 | scene ch3Tea | Surprised | The kettle says there was a big flash over the marsh this morning. Like lightning, but with no thunder and no rain. |
 | 3 | scene ch3Tea | Unimpressed | The kettle also says it'll rain on Tuesday. The kettle is wrong a lot. Enjoy the pier. |
 
 ### Luna (13)
@@ -229,7 +228,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 9 | scene ch9Luna | Sad | And my telescope can't find the moon. It's not behind a cloud. It's not anywhere. It's just GONE. |
 | 9 | scene ch9Luna | Surprised | ...It wasn't a closet. |
 
-### Sal (46)
+### Sal (44)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -243,8 +242,6 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 6 | cab flight to ch6 | Unimpressed | The girls stay home. School night. It's always a school night. |
 | 8 | cab flight to ch8 | Unimpressed | Los Angeles again? I'm starting to think you live there. |
 | 8 | cab flight to ch8 | Unimpressed | The girls stay home. School tomorrow. Library books are due. |
-| 1-10 | cab west | Happy | Los Angeles? You got it. Flights leave whenever I get there. |
-| 1-10 | cab west | Unimpressed | One thing. The girls stay home. Amy's rule. No flying on a school night. |
 | 1-10 | cab west | Happy | Airport? Hop in. Cab seven has been waiting all day. |
 | 1-10 | cab west | Proud | The girls stay put. Amy's orders. I follow Amy's orders. Everybody does. |
 | 1-10 | cab west | Unimpressed | LAX it is. Seat belts. Your niece is giving me the look. |
@@ -612,7 +609,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 4 | map studio, when {chapter:4,notFlag:ch4-done,flag:ch4-gate} | Scared | Last thing on my radio before the static was the Stage 7 fog machine. It turned itself on. |
 | 3 | scene ch3End | Scared | (on the radio) ...kkkt... Stage 7! The big door just unlocked itself! From the INSIDE! Is that bad? That feels bad. |
 | 4 | scene ch4Gate | Scared | TNB! TNB! The rack! Rack two! It's GONE. |
-| 4 | scene ch4Gate | Scared | It was right there in Stage 7. Then the fog machine turned itself on, and the lights went out, and things started CLAPPING. |
+| 4 | scene ch4Gate | Scared | It was right there in Stage 7. Then there was a HUGE flash, and the fog machine turned itself on, and the lights went out, and things started CLAPPING. |
 | 4 | scene ch4End | Happy | WRAP PARTY AT CRAFTY! Toni made a cake! It's shaped like a clapper! It's not clapping! |
 
 ### Dana (10)
@@ -628,31 +625,36 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 4 | scene ch4Gate | Unimpressed | And the Backlot is full of little grumpy things. One of them ate a cue card. One of them is clapping at the horse. |
 | 4 | scene ch4End | Happy | The rack! The costumes! We can shoot! We're shooting! That's a WRAP on today, everybody! |
 | 4 | scene ch4End | Proud | TNB, the studio wants you to have this. Gold-plated. It's the steamer from the lot’s very first wardrobe department. |
-| 4 | scene ch4End | Happy | And crew jackets. Wrap Party Jackets. Only the crew gets one. You're crew now. Even the dog. |
+| 4 | scene ch4End | Happy | And crew jackets. Wrap Party Jackets. Only the crew gets one. You're crew now. Even the stunt double. |
 
-### Bernadette (26)
+### Bernadette (31)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
-| 2-10 | map oakpark, base | Proud | Bernadette. Neighborhood Watch Captain, nineteen years. Nothing gets past me. |
-| 2-10 | map oakpark, base | Angry | Except squirrels. I'm working on it. |
-| 6-10 | map oakpark, when {from:6,flag:ch6-done} | Proud | Case closed. I've filed my report. With myself. I approved it. |
-| 6-10 | map oakpark, when {from:6,flag:ch6-done} | Proud | I said they were organized. Nobody believed me. Write that down. |
-| 6-10 | map oakpark, when {from:6,flag:ch6-done} | Loving | You're a good neighbor, Tom. So is the dog. Mostly the dog. |
-| 6 | map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park} | Proud | The lookouts first. Playground, garden, picnic tables. Then Nara digs. |
-| 6 | map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park} | Surprised | Then the tree. There's a knock. I have only ever heard parts of it. |
-| 6 | scene ch6Park | Angry | Halt. Neighborhood Watch. State your business. |
-| 6 | scene ch6Park | Proud | I know who you are. You water your drought garden. Everybody knows. |
-| 6 | scene ch6Park | Proud | Bernadette. Neighborhood Watch Captain, nineteen years. And I'll say it, because nobody else will. |
-| 6 | scene ch6Park | Scared | The squirrels are organized. |
-| 6 | scene ch6Park | Angry | They have lookouts in the playground, a spy in the community garden, |
-| 6 | scene ch6Park | Angry | and somebody at the picnic tables stuffing their cheeks with anything that's not nailed down. |
-| 6 | scene ch6Park | Surprised | Everything they steal goes up THAT tree, the Old Oak. There's a little door in the trunk that opens with a secret knock. I've only ever heard bits of it. |
-| 6 | scene ch6Park | Proud | Clear the squirrels out of those three spots, and Nara can dig up what they buried. I'd bet a piece of that secret knock is in each hole. |
-| 6 | scene ch6Park | Proud | I'll be here with my clipboard. |
-| 6 | scene ch6End | Proud | Neighborhood Watch Captain’s report: case closed. |
-| 6 | scene ch6End | Proud | I'd like it noted that I was right. |
-| 6 | scene ch6End | Proud | And these. Neighborhood Watch Vests. I give out one every nineteen years. Today I'm giving out three. Even the dog. |
+| 2-10 | map oakpark, base | Proud | Captain Bernadette, Neighborhood Watch, nineteen years. Nothing gets past me. |
+| 2-10 | map oakpark, base | Angry | Except the squirrels. And if you repeat that, I'll know. |
+| 6-10 | map oakpark, when {from:6,flag:ch6-done} | Proud | Case closed. I filed the report with myself, and I approved it. Somebody around here has to have standards. |
+| 6-10 | map oakpark, when {from:6,flag:ch6-done} | Angry | I SAID they were organized. Nobody believed me. I have the names of everybody who didn't. |
+| 6-10 | map oakpark, when {from:6,flag:ch6-done} | Unimpressed | You're an acceptable neighbor, 3468. The dog is a good one. |
+| 6 | map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park} | Unimpressed | Lookouts first: playground, garden, picnic tables. Then the dog digs. I don't know why I have to say everything twice. |
+| 6 | map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park} | Unimpressed | Then the tree. There's a knock, and no, I'm still not doing it. |
+| 6 | scene ch6Park | Angry | Stop right there. Neighborhood Watch. Names and house numbers. |
+| 6 | scene ch6Park | Unimpressed | I know who you are, 3468. You WATER a drought garden. I've left you two notes about it. |
+| 6 | scene ch6Park | Unimpressed | I don't do initials. You're the Other Tom. |
+| 6 | scene ch6Park | Proud | Captain Bernadette. I've run this Watch for nineteen years without one thank-you card. So listen closely, because I'm only saying this once. |
+| 6 | scene ch6Park | Angry | The squirrels are organized. |
+| 6 | scene ch6Park | Angry | Don't humor me, Other Tom. I get humored at every block meeting. |
+| 6 | scene ch6Park | Angry | They have lookouts in the playground, a spy in the community garden, and one at the picnic tables eating anything that's not nailed down. |
+| 6 | scene ch6Park | Unimpressed | I reported all of it. The city sent me a pamphlet about squirrels. |
+| 6 | scene ch6Park | Proud | Everything they steal goes up THAT tree, the Old Oak. There's a little door in the trunk that opens with a secret knock. I've only ever heard bits of it. |
+| 6 | scene ch6Park | Unimpressed | I'm a Captain. I don't chitter. |
+| 6 | scene ch6Park | Proud | Then here's what you're going to do. Clear the squirrels out of those three spots and let the dog dig. I'd bet a piece of that knock is in every hole. |
+| 6 | scene ch6Park | Proud | I'm the Captain. I supervise. I'll be right here with my clipboard, writing down how it goes. |
+| 6 | scene ch6End | Proud | Captain's report: case closed. |
+| 6 | scene ch6End | Proud | And I want it noted that I was right. For nineteen years. Out loud, please. |
+| 6 | scene ch6End | Angry | Louder. Mr. Washington's porch didn't hear you. |
+| 6 | scene ch6End | Unimpressed | And these are Neighborhood Watch vests. I give out one every nineteen years. Today I'm giving out three, so don't make me regret it. The dog's fits best. |
+| 6 | scene ch6End | Angry | It's reflective. Don't get sentimental. And 3468? Stop watering the cactus. |
 | 8 | scene ch8Block | Proud | Tom. Good. Neighborhood Watch Captain, potluck committee chair. Forty RSVPs. Thirty-nine dishes. One bread guy. |
 | 8 | scene ch8Block | Angry | Every pilot light on 2nd Avenue went out at noon. Every one. Including mine. I had a casserole IN there. |
 | 8 | scene ch8Block | Angry | They said it's the weekend. I said it's the POTLUCK. They hung up. I've filed a report. With myself. |
@@ -709,7 +711,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 2-10 | map boards, base | Proud | TNB? Longboard guy? He bombed Fargo Street once. No brakes. Legend. |
 | 2-10 | map boards, base | Happy | If you see him, tell him the wheels he ordered came in. The green ones. |
 
-### Sol (28)
+### Sol (27)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -717,7 +719,6 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 2-10 | map lacab, base | Unimpressed | Cab eight. Sal has cab seven. We don't talk about what happened to the other six. |
 | 2-10 | map lacab, base | Unimpressed | I go to the airport, the airport, and sometimes the airport. |
 | 5 | cab flight to ch5 | Unimpressed | Airport. Your young man fixed my visor. He made me promise to drive careful. So I'm going the speed limit. Everybody hates it. |
-| 7 | cab flight to ch7 | Unimpressed | LAX. I'm taking the long way. There are squirrels on the short way. |
 | 9 | cab flight to ch9 | Unimpressed | Airport. No eating in my cab. I can smell the potluck on you. It smells amazing. Still no. |
 | 1-10 | cab east | Happy | Airport. Love it. We'll be there in twenty minutes. Or two hours. Nobody knows. |
 | 1-10 | cab east | Proud | Long Island? Sure. I know a shortcut. It's not shorter, but it's mine. |
@@ -861,7 +862,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 2-10 | map tower, lines | Happy | My dog is named Bagel. He has more friends in this building than I do. |
 | 2-10 | map tower, lines | Unimpressed | The pool is on the roof. Nobody swims. Everyone takes photos of the pool. |
 
-### Miss Odette (7)
+### Miss Odette (8)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -872,8 +873,9 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 2 | map creole, when {chapter:2,flag:ch2-smog,notFlag:ch2-clear} | Happy | The gumbo never has to be done, baby. Isn't that nice? Nothing ever has to be done. |
 | 2 | map creole, when {chapter:2,flag:ch2-clear} | Proud | That smog had me stirring one pot for an hour. Best roux I ever made, though. |
 | 2 | map creole, when {chapter:2,flag:ch2-clear} | Loving | Sit. Eat. You and that boyfriend earned a bowl today. |
+| 2 | scene ch2End | Proud | I brought gumbo for the whole block. TNB! Sit DOWN. You're too skinny! |
 
-### Doña Carmen (12)
+### Doña Carmen (14)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -889,6 +891,8 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 12 | scene ch12Carmen | Sad | I was what? I had a whole sentence. I lost the sentence. It was a good sentence. |
 | 12 | scene ch12Carmen | Angry | That man stood on my step and said my sign was “too busy.” I said the sign is busy because the food is good. |
 | 12 | scene ch12Carmen | Loving | Go next door. The Alvarez house. They didn’t get any pupusas today. Take these. Feed the children first. The grown-ups will pretend they’re not hungry. |
+| 2 | scene ch2End | Angry | And YOU. Who touched my griddle? |
+| 2 | scene ch2End | Proud | They came out perfectly crispy. Don't ever do it again. |
 
 ### Jordan (3)
 
@@ -1059,7 +1063,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 12 | scene ch12Prime | Unimpressed | It’s not angry. It’s stuck. Stuck is very quiet, and Mr. Vance likes quiet. Do be quick. The notes are due at five. |
 | 12 | scene ch12After | Surprised | Love it. Hate it. Love it. Notes withdrawn. |
 | 12 | scene ch12After | Happy | I’ll be Downtown, at the Movie Palace. Come by. I’ll have notes for the rest of the family. |
-| 12 | scene ch12After | Proud | Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making a crisp. |
+| 12 | scene ch12After | Proud | Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making apple muffins. |
 | 12 | scene ch12After | Proud | She’s been making the same one for hours. |
 | 12 | scene ch12After | Unimpressed | Notes are due at five. |
 | 16 | scene ch16Open | Happy | Wonderful. Everybody came. I love a turnout. |

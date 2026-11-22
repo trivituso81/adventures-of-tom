@@ -85,7 +85,7 @@ SPK.bulbs=(P)=>{
   }
 };
 
-// The chart laid over Deedee's dining table, with Boppy's plate of crisp half under it. Fields x,y (top-left tile), w,h (tiles). Replaced by ch7-chart-table.
+// The chart laid over Deedee's dining table, with Boppy's plate of apple muffins half under it. Fields x,y (top-left tile), w,h (tiles). Replaced by ch7-chart-table.
 SPK.charttable=(P)=>{
   const x=P.x*T,y=P.y*T,w=P.w*T,h=P.h*T;
   ctx.fillStyle='#20202a30'; ctx.fillRect(x+3,y+h,w,5);
@@ -99,7 +99,7 @@ SPK.charttable=(P)=>{
   if(P.pencil) { ctx.fillStyle='#9a9a9a'; for(let c=0;c<6;c++) ctx.fillText('✓',x+w*(c+.25)/7,y+h*7.5/8); }   // row seven, in pencil
   ctx.fillStyle='#b8341c'; ctx.font='bold '+Math.max(9,T*.34)+'px "Trebuchet MS",system-ui,sans-serif'; ctx.textBaseline='top'; ctx.fillText('GRACE’S CHART',x+6,y+3);
   ctx.restore();
-  if(P.crisp) { const px=x+w*.78,py=y+h*.86; ctx.fillStyle='#fff'; ctx.beginPath(); ctx.ellipse(px,py,T*.5,T*.28,0,0,Math.PI*2); ctx.fill();   // the crisp, half under the paper
+  if(P.crisp) { const px=x+w*.78,py=y+h*.86; ctx.fillStyle='#fff'; ctx.beginPath(); ctx.ellipse(px,py,T*.5,T*.28,0,0,Math.PI*2); ctx.fill();   // the apple muffins, half under the paper
     ctx.save(); ctx.beginPath(); ctx.rect(x+w*.7,y+h*.8,T*2,T); ctx.clip(); ctx.restore(); ctx.fillStyle='#b8782e'; ctx.beginPath(); ctx.ellipse(px+4,py,T*.34,T*.18,0,0,Math.PI*2); ctx.fill(); }
 };
 

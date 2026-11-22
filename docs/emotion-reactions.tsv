@@ -140,7 +140,7 @@ scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	It's 
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	I don't know what it is, babe. But it's pretty grape.	tom	happy	pretty grape
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	Don't make me laugh, it's freaky! ...Okay. It IS a little grape.	tnb	happy	It IS a little grape
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	Something strange happened on Long Island too. A blob of mud with eyes climbed in my mother's kitchen window and ran off with her apple muffins.	tnb	surprised	mud with eyes
-scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	The mud took Deedee's crisp? Is the mud okay?	tom	happy	Is the mud okay
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	The mud took Deedee's apple muffins? Is the mud okay?	tom	happy	Is the mud okay
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	We chased it to the pond. And there was a talking fish as big as a car, wearing her baking tin like a crown.	tnb	surprised	talking fish
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	A talking fish! What did he say?	tom	happy	What did he say
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	He said "Glub." Then he gave Rose a gold coin.	tnb	happy	Glub.
@@ -282,9 +282,9 @@ scene	3	data/scenes.js	ch3Fishing	Grace	Deedee. EVERYTHING gives you gas.	rose	h
 scene	3	data/scenes.js	ch3Fishing	Grace	Deedee. EVERYTHING gives you gas.	boppy	happy
 scene	3	data/scenes.js	ch3Fishing	Deedee	Who told you that.	grace	scared
 scene	3	data/scenes.js	ch3Fishing	Deedee	Who told you that.	tom	scared
-scene	3	data/scenes.js	ch3Fishing	Grace	Tata. At the crisp.	tom	scared
-scene	3	data/scenes.js	ch3Fishing	Grace	Tata. At the crisp.	deedee	unimpressed
-scene	3	data/scenes.js	ch3Fishing	Grace	Tata. At the crisp.	rose	happy
+scene	3	data/scenes.js	ch3Fishing	Grace	Tata. At the apple muffins.	tom	scared
+scene	3	data/scenes.js	ch3Fishing	Grace	Tata. At the apple muffins.	deedee	unimpressed
+scene	3	data/scenes.js	ch3Fishing	Grace	Tata. At the apple muffins.	rose	happy
 scene	3	data/scenes.js	ch3Fishing	Deedee	Tata is on thin ice.	tom	scared
 scene	3	data/scenes.js	ch3Fishing	Deedee	Tata is on thin ice.	grace	happy
 scene	3	data/scenes.js	ch3Fishing	Deedee	Tata is on thin ice.	rose	happy
@@ -756,9 +756,9 @@ scene	5	data/scenes.js	ch5Snack	Grace	FOR EVERYONE, LOVE DEEDEE. That's Deedee�
 scene	5	data/scenes.js	ch5Snack	Grace	FOR EVERYONE, LOVE DEEDEE. That's Deedee’s handwriting! Everyone means us!	tom	surprised
 scene	5	data/scenes.js	ch5Snack	Grace	FOR EVERYONE, LOVE DEEDEE. That's Deedee’s handwriting! Everyone means us!	amy	surprised
 scene	5	data/scenes.js	ch5Snack	Grace	FOR EVERYONE, LOVE DEEDEE. That's Deedee’s handwriting! Everyone means us!	halverson	happy
-scene	5	data/scenes.js	ch5Snack	Rose	Apple muffins! Deedee brings the teachers CRISP?	grace	happy
-scene	5	data/scenes.js	ch5Snack	Rose	Apple muffins! Deedee brings the teachers CRISP?	tom	happy
-scene	5	data/scenes.js	ch5Snack	Rose	Apple muffins! Deedee brings the teachers CRISP?	amy	surprised
+scene	5	data/scenes.js	ch5Snack	Rose	Apple muffins! Deedee brings the teachers APPLE MUFFINS?	grace	happy
+scene	5	data/scenes.js	ch5Snack	Rose	Apple muffins! Deedee brings the teachers APPLE MUFFINS?	tom	happy
+scene	5	data/scenes.js	ch5Snack	Rose	Apple muffins! Deedee brings the teachers APPLE MUFFINS?	amy	surprised
 scene	5	data/scenes.js	ch5Snack	Mr. Halverson	Every conference night. Twelve years. It's the only reason Gary shows up.	amy	surprised
 scene	5	data/scenes.js	ch5Snack	Mr. Halverson	Every conference night. Twelve years. It's the only reason Gary shows up.	tom	happy
 scene	5	data/scenes.js	ch5Snack	Mr. Halverson	Every conference night. Twelve years. It's the only reason Gary shows up.	grace	happy
@@ -1849,8 +1849,8 @@ scene	9	data/scenes.js	ch9AfterBoss	The Mirrorball	I don't need the moon. I just
 scene	9	data/scenes.js	ch9AfterBoss	The Mirrorball	...Fine. The party is over. It was over in 1971. I just didn't want to be the one to turn off the lights.	tom	sad
 scene	9	data/scenes.js	ch9AfterBoss	The Mirrorball	...Fine. The party is over. It was over in 1971. I just didn't want to be the one to turn off the lights.	deedee	sad
 scene	9	data/scenes.js	ch9AfterBoss	The Mirrorball	...Fine. The party is over. It was over in 1971. I just didn't want to be the one to turn off the lights.	boppy	sad
-scene	9	data/scenes.js	ch9AfterBoss	Deedee	Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring crisp.	tom	loving
-scene	9	data/scenes.js	ch9AfterBoss	Deedee	Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring crisp.	boppy	loving
+scene	9	data/scenes.js	ch9AfterBoss	Deedee	Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring apple muffins.	tom	loving
+scene	9	data/scenes.js	ch9AfterBoss	Deedee	Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring apple muffins.	boppy	loving
 scene	9	data/scenes.js	ch9AfterBoss	The Dome	The Mirrorball turns once, slowly, and lets go. A great round light rises out of her, up through the glass, and settles in the sky. The moon. Right where it belongs.	tom	surprised
 scene	9	data/scenes.js	ch9AfterBoss	The Dome	The Mirrorball turns once, slowly, and lets go. A great round light rises out of her, up through the glass, and settles in the sky. The moon. Right where it belongs.	deedee	surprised
 scene	9	data/scenes.js	ch9AfterBoss	The Dome	The Mirrorball turns once, slowly, and lets go. A great round light rises out of her, up through the glass, and settles in the sky. The moon. Right where it belongs.	boppy	surprised
@@ -2370,8 +2370,8 @@ scene	10	data/scenes.js	ch10End	Deedee	To the moon and BACK.	amy	loving
 scene	10	data/scenes.js	ch10End	Deedee	To the moon and BACK.	boppy	loving
 scene	10	data/scenes.js	ch10End	Deedee	To the moon and BACK.	justin	loving
 scene	10	data/scenes.js	ch10End	Deedee	To the moon and BACK.	ellie	loving
-scene	11	data/scenes-p2.js	part2Open	Deedee	Tom! Sit. Eat. I made a crisp. Yes, I know it's nine in the morning. Do not argue.	tom	unimpressed
-scene	11	data/scenes-p2.js	part2Open	Deedee	Tom! Sit. Eat. I made a crisp. Yes, I know it's nine in the morning. Do not argue.	boppy	unimpressed
+scene	11	data/scenes-p2.js	part2Open	Deedee	Tom! Sit. Eat. I made apple muffins. Yes, I know it's nine in the morning. Do not argue.	tom	unimpressed
+scene	11	data/scenes-p2.js	part2Open	Deedee	Tom! Sit. Eat. I made apple muffins. Yes, I know it's nine in the morning. Do not argue.	boppy	unimpressed
 scene	11	data/scenes-p2.js	part2Open	Tom	Trust me, I was not going to argue.	deedee	happy
 scene	11	data/scenes-p2.js	part2Open	Tom	Trust me, I was not going to argue.	boppy	unimpressed
 scene	11	data/scenes-p2.js	part2Open	Boppy	A gold card came in the mail, addressed to my recliner. It says Priority Member. It’s junk mail. They send junk mail to furniture now.	tom	unimpressed
@@ -2380,8 +2380,8 @@ scene	11	data/scenes-p2.js	part2Open	Boppy	Don’t throw it out, though. It feel
 scene	11	data/scenes-p2.js	part2Open	Boppy	Don’t throw it out, though. It feels warm. Even my knee can feel it.	deedee	unimpressed
 scene	11	data/scenes-p2.js	part2Open	Tom	The boarding pass from Gate Zero is buzzing in my pocket. Now it says: YOUR LAYOVER IS NOW BOARDING.	deedee	surprised
 scene	11	data/scenes-p2.js	part2Open	Tom	The boarding pass from Gate Zero is buzzing in my pocket. Now it says: YOUR LAYOVER IS NOW BOARDING.	boppy	unimpressed
-scene	11	data/scenes-p2.js	part2Open	Deedee	A layover! Where? Never mind. Take a sweater. Actually, take two. And take the crisp.	tom	loving
-scene	11	data/scenes-p2.js	part2Open	Deedee	A layover! Where? Never mind. Take a sweater. Actually, take two. And take the crisp.	boppy	unimpressed
+scene	11	data/scenes-p2.js	part2Open	Deedee	A layover! Where? Never mind. Take a sweater. Actually, take two. And take the apple muffins.	tom	loving
+scene	11	data/scenes-p2.js	part2Open	Deedee	A layover! Where? Never mind. Take a sweater. Actually, take two. And take the apple muffins.	boppy	unimpressed
 scene	11	data/scenes-p2.js	part2Open	Boppy	Bring me back a pretzel. A real one. Not the airport kind.	tom	happy
 scene	11	data/scenes-p2.js	part2Open	Boppy	Bring me back a pretzel. A real one. Not the airport kind.	deedee	unimpressed
 scene	11	data/scenes-p2.js	part2Open	Deedee	To the moon and back, Tom. Both ways.	tom	loving
@@ -2898,10 +2898,10 @@ scene	11	data/scenes-p2.js	ch11After	Tom	Sit down. Everybody. Deep breath.	amy	s
 scene	11	data/scenes-p2.js	ch11After	Tom	Sit down. Everybody. Deep breath.	grace	scared
 scene	11	data/scenes-p2.js	ch11After	Tom	Sit down. Everybody. Deep breath.	rose	scared
 scene	11	data/scenes-p2.js	ch11After	Tom	Sit down. Everybody. Deep breath.	tnb	loving
-scene	11	data/scenes-p2.js	ch11After	Tom	Dad’s in his recliner. Mom has the crisp. They’re fine. They’re probably fine.	amy	sad
-scene	11	data/scenes-p2.js	ch11After	Tom	Dad’s in his recliner. Mom has the crisp. They’re fine. They’re probably fine.	grace	sad
-scene	11	data/scenes-p2.js	ch11After	Tom	Dad’s in his recliner. Mom has the crisp. They’re fine. They’re probably fine.	rose	sad
-scene	11	data/scenes-p2.js	ch11After	Tom	Dad’s in his recliner. Mom has the crisp. They’re fine. They’re probably fine.	tnb	loving
+scene	11	data/scenes-p2.js	ch11After	Tom	Dad’s in his recliner. Mom has the apple muffins. They’re fine. They’re probably fine.	amy	sad
+scene	11	data/scenes-p2.js	ch11After	Tom	Dad’s in his recliner. Mom has the apple muffins. They’re fine. They’re probably fine.	grace	sad
+scene	11	data/scenes-p2.js	ch11After	Tom	Dad’s in his recliner. Mom has the apple muffins. They’re fine. They’re probably fine.	rose	sad
+scene	11	data/scenes-p2.js	ch11After	Tom	Dad’s in his recliner. Mom has the apple muffins. They’re fine. They’re probably fine.	tnb	loving
 scene	11	data/scenes-p2.js	ch11After	TNB	Hey. We’ll go get them. Whatever he did, we’ll fix it. Things come apart. I fix things.	tom	loving
 scene	11	data/scenes-p2.js	ch11After	TNB	Hey. We’ll go get them. Whatever he did, we’ll fix it. Things come apart. I fix things.	amy	loving
 scene	11	data/scenes-p2.js	ch11After	TNB	Hey. We’ll go get them. Whatever he did, we’ll fix it. Things come apart. I fix things.	grace	proud
@@ -3529,15 +3529,15 @@ scene	12	data/scenes-ch12.js	ch12After	Tom	You work for Vance, and Vance closed 
 scene	12	data/scenes-ch12.js	ch12After	Tom	You work for Vance, and Vance closed Long Island. My mother isn’t answering her phone. Where is she?	grace	scared
 scene	12	data/scenes-ch12.js	ch12After	Tom	You work for Vance, and Vance closed Long Island. My mother isn’t answering her phone. Where is she?	rose	scared
 scene	12	data/scenes-ch12.js	ch12After	Tom	You work for Vance, and Vance closed Long Island. My mother isn’t answering her phone. Where is she?	marlowe	unimpressed
-scene	12	data/scenes-ch12.js	ch12After	Marlowe	Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making a crisp.	tom	scared
+scene	12	data/scenes-ch12.js	ch12After	Marlowe	Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making apple muffins.	tom	scared
 scene	12	data/scenes-ch12.js	ch12After	Marlowe	She’s been making the same one for hours.	tom	scared
-scene	12	data/scenes-ch12.js	ch12After	Marlowe	Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making a crisp.	amy	scared
+scene	12	data/scenes-ch12.js	ch12After	Marlowe	Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making apple muffins.	amy	scared
 scene	12	data/scenes-ch12.js	ch12After	Marlowe	She’s been making the same one for hours.	amy	scared
-scene	12	data/scenes-ch12.js	ch12After	Marlowe	Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making a crisp.	tnb	sad
+scene	12	data/scenes-ch12.js	ch12After	Marlowe	Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making apple muffins.	tnb	sad
 scene	12	data/scenes-ch12.js	ch12After	Marlowe	She’s been making the same one for hours.	tnb	sad
-scene	12	data/scenes-ch12.js	ch12After	Marlowe	Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making a crisp.	grace	scared
+scene	12	data/scenes-ch12.js	ch12After	Marlowe	Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making apple muffins.	grace	scared
 scene	12	data/scenes-ch12.js	ch12After	Marlowe	She’s been making the same one for hours.	grace	scared
-scene	12	data/scenes-ch12.js	ch12After	Marlowe	Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making a crisp.	rose	scared
+scene	12	data/scenes-ch12.js	ch12After	Marlowe	Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making apple muffins.	rose	scared
 scene	12	data/scenes-ch12.js	ch12After	Marlowe	She’s been making the same one for hours.	rose	scared
 scene	12	data/scenes-ch12.js	ch12After	Tom	Tell me how to get in.	amy	angry
 scene	12	data/scenes-ch12.js	ch12After	Tom	Tell me how to get in.	tnb	proud
@@ -4065,10 +4065,10 @@ scene	13	data/scenes-ch13.js	ch13After	Boppy	My back doesn’t hurt, Tommy, for 
 scene	13	data/scenes-ch13.js	ch13After	Boppy	My back doesn’t hurt, Tommy, for the first time in eleven years. I made a deal.	tnb	sad
 scene	13	data/scenes-ch13.js	ch13After	Tom	What deal?	amy	scared
 scene	13	data/scenes-ch13.js	ch13After	Tom	What deal?	tnb	scared
-scene	13	data/scenes-ch13.js	ch13After	Boppy	Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making a crisp.	tom	scared
-scene	13	data/scenes-ch13.js	ch13After	Boppy	Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making a crisp.	amy	scared
-scene	13	data/scenes-ch13.js	ch13After	Boppy	Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making a crisp.	tnb	scared
-scene	13	data/scenes-ch13.js	ch13After	Boppy	Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making a crisp.	nara	scared
+scene	13	data/scenes-ch13.js	ch13After	Boppy	Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making apple muffins.	tom	scared
+scene	13	data/scenes-ch13.js	ch13After	Boppy	Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making apple muffins.	amy	scared
+scene	13	data/scenes-ch13.js	ch13After	Boppy	Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making apple muffins.	tnb	scared
+scene	13	data/scenes-ch13.js	ch13After	Boppy	Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making apple muffins.	nara	scared
 scene	13	data/scenes-ch13.js	ch13After	Boppy	As long as I stand guard here, the glass dome stays up over Long Island. That’s the deal.	tom	sad
 scene	13	data/scenes-ch13.js	ch13After	Boppy	As long as I stand guard here, the glass dome stays up over Long Island. That’s the deal.	amy	sad
 scene	13	data/scenes-ch13.js	ch13After	Boppy	As long as I stand guard here, the glass dome stays up over Long Island. That’s the deal.	tnb	sad
@@ -4170,10 +4170,10 @@ scene	14	data/scenes-ch14.js	ch14Open	Amy	He’s completely himself. That’s th
 scene	14	data/scenes-ch14.js	ch14Open	Grace	So. Where’s Deedee?	boppy	scared
 scene	14	data/scenes-ch14.js	ch14Open	Grace	So. Where’s Deedee?	tom	scared
 scene	14	data/scenes-ch14.js	ch14Open	Grace	So. Where’s Deedee?	amy	scared
-scene	14	data/scenes-ch14.js	ch14Open	Boppy	Inside. She’s fine. She’s making a crisp. Don’t look at the porch.	tom	scared
-scene	14	data/scenes-ch14.js	ch14Open	Boppy	Inside. She’s fine. She’s making a crisp. Don’t look at the porch.	amy	scared
-scene	14	data/scenes-ch14.js	ch14Open	Boppy	Inside. She’s fine. She’s making a crisp. Don’t look at the porch.	grace	scared
-scene	14	data/scenes-ch14.js	ch14Open	Boppy	Inside. She’s fine. She’s making a crisp. Don’t look at the porch.	rose	surprised
+scene	14	data/scenes-ch14.js	ch14Open	Boppy	Inside. She’s fine. She’s making apple muffins. Don’t look at the porch.	tom	scared
+scene	14	data/scenes-ch14.js	ch14Open	Boppy	Inside. She’s fine. She’s making apple muffins. Don’t look at the porch.	amy	scared
+scene	14	data/scenes-ch14.js	ch14Open	Boppy	Inside. She’s fine. She’s making apple muffins. Don’t look at the porch.	grace	scared
+scene	14	data/scenes-ch14.js	ch14Open	Boppy	Inside. She’s fine. She’s making apple muffins. Don’t look at the porch.	rose	surprised
 scene	14	data/scenes-ch14.js	ch14Open	Rose	Boppy. There’s a Deedee on the porch.	boppy	scared
 scene	14	data/scenes-ch14.js	ch14Open	Rose	Boppy. There’s a Deedee on the porch.	tom	surprised
 scene	14	data/scenes-ch14.js	ch14Open	Rose	Boppy. There’s a Deedee on the porch.	amy	surprised
@@ -4214,9 +4214,9 @@ scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Hello, Amy. Apple muffins, nine m
 scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Hello, Amy. Apple muffins, nine minutes. Do you want a bite? Apple muffins. Nine minutes.	amy	sad
 scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Hello, Amy. Apple muffins, nine minutes. Do you want a bite? Apple muffins. Nine minutes.	grace	scared
 scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Hello, Amy. Apple muffins, nine minutes. Do you want a bite? Apple muffins. Nine minutes.	rose	surprised
-scene	14	data/scenes-ch14.js	ch14Deedee	Tom	She’s looping. Look at the tray. It’s the same crisp. Every time. It’s fresh, it’s perfect, and nobody ever eats it.	amy	sad
-scene	14	data/scenes-ch14.js	ch14Deedee	Tom	She’s looping. Look at the tray. It’s the same crisp. Every time. It’s fresh, it’s perfect, and nobody ever eats it.	grace	sad
-scene	14	data/scenes-ch14.js	ch14Deedee	Tom	She’s looping. Look at the tray. It’s the same crisp. Every time. It’s fresh, it’s perfect, and nobody ever eats it.	rose	sad
+scene	14	data/scenes-ch14.js	ch14Deedee	Tom	She’s looping. Look at the tray. Same apple muffins. Every time. They’re fresh, they’re perfect, and nobody ever eats them.	amy	sad
+scene	14	data/scenes-ch14.js	ch14Deedee	Tom	She’s looping. Look at the tray. Same apple muffins. Every time. They’re fresh, they’re perfect, and nobody ever eats them.	grace	sad
+scene	14	data/scenes-ch14.js	ch14Deedee	Tom	She’s looping. Look at the tray. Same apple muffins. Every time. They’re fresh, they’re perfect, and nobody ever eats them.	rose	sad
 scene	14	data/scenes-ch14.js	ch14Deedee	Tom	Amber is warmth that got stuck. She’s been baking for nobody for hours, so all that warmth has nowhere to go.	amy	surprised
 scene	14	data/scenes-ch14.js	ch14Deedee	Tom	Amber is warmth that got stuck. She’s been baking for nobody for hours, so all that warmth has nowhere to go.	grace	surprised
 scene	14	data/scenes-ch14.js	ch14Deedee	Tom	Amber is warmth that got stuck. She’s been baking for nobody for hours, so all that warmth has nowhere to go.	rose	surprised
@@ -4229,9 +4229,9 @@ scene	14	data/scenes-ch14.js	ch14Deedee	Grace	Rose. That is the smartest thing y
 scene	14	data/scenes-ch14.js	ch14Deedee	Rose	I say smart things every day. They just come out as noise.	grace	unimpressed
 scene	14	data/scenes-ch14.js	ch14Deedee	Rose	I say smart things every day. They just come out as noise.	tom	happy
 scene	14	data/scenes-ch14.js	ch14Deedee	Rose	I say smart things every day. They just come out as noise.	amy	happy
-scene	14	data/scenes-ch14.js	ch14Deedee	Rose	Deedee. I’m going to eat the crisp now. Okay? Okay.	tom	loving
-scene	14	data/scenes-ch14.js	ch14Deedee	Rose	Deedee. I’m going to eat the crisp now. Okay? Okay.	amy	loving
-scene	14	data/scenes-ch14.js	ch14Deedee	Rose	Deedee. I’m going to eat the crisp now. Okay? Okay.	grace	proud
+scene	14	data/scenes-ch14.js	ch14Deedee	Rose	Deedee. I’m going to eat the apple muffins now. Okay? Okay.	tom	loving
+scene	14	data/scenes-ch14.js	ch14Deedee	Rose	Deedee. I’m going to eat the apple muffins now. Okay? Okay.	amy	loving
+scene	14	data/scenes-ch14.js	ch14Deedee	Rose	Deedee. I’m going to eat the apple muffins now. Okay? Okay.	grace	proud
 scene	14	data/scenes-ch14.js	ch14Deedee	Rose	...It’s SO good. It’s the best one. Deedee, it’s the best one you ever made.	tom	loving
 scene	14	data/scenes-ch14.js	ch14Deedee	Rose	...It’s SO good. It’s the best one. Deedee, it’s the best one you ever made.	amy	loving
 scene	14	data/scenes-ch14.js	ch14Deedee	Rose	...It’s SO good. It’s the best one. Deedee, it’s the best one you ever made.	grace	happy
@@ -6488,11 +6488,11 @@ scene	20	data/scenes-ch20.js	ch20Calm	Deedee	Honey. That’s all of it. That’s
 scene	20	data/scenes-ch20.js	ch20Calm	Deedee	Honey. That’s all of it. That’s what living is. It hurts a little, every time, and you do it anyway.	amy	loving
 scene	20	data/scenes-ch20.js	ch20Calm	Deedee	Honey. That’s all of it. That’s what living is. It hurts a little, every time, and you do it anyway.	tnb	loving
 scene	20	data/scenes-ch20.js	ch20Calm	Deedee	Honey. That’s all of it. That’s what living is. It hurts a little, every time, and you do it anyway.	boppy	loving
-scene	20	data/scenes-ch20.js	ch20Calm	Boppy	And the crisp is excellent.	deedee	unimpressed
-scene	20	data/scenes-ch20.js	ch20Calm	Boppy	And the crisp is excellent.	tom	happy
-scene	20	data/scenes-ch20.js	ch20Calm	Boppy	And the crisp is excellent.	amy	happy
-scene	20	data/scenes-ch20.js	ch20Calm	Boppy	And the crisp is excellent.	grace	happy
-scene	20	data/scenes-ch20.js	ch20Calm	Boppy	And the crisp is excellent.	rose	happy
+scene	20	data/scenes-ch20.js	ch20Calm	Boppy	And the apple muffins are excellent.	deedee	unimpressed
+scene	20	data/scenes-ch20.js	ch20Calm	Boppy	And the apple muffins are excellent.	tom	happy
+scene	20	data/scenes-ch20.js	ch20Calm	Boppy	And the apple muffins are excellent.	amy	happy
+scene	20	data/scenes-ch20.js	ch20Calm	Boppy	And the apple muffins are excellent.	grace	happy
+scene	20	data/scenes-ch20.js	ch20Calm	Boppy	And the apple muffins are excellent.	rose	happy
 scene	20	data/scenes-ch20.js	ch20Calm	Vance	I do not know how to start the clocks.	tom	loving
 scene	20	data/scenes-ch20.js	ch20Calm	Vance	I do not know how to start the clocks.	amy	sad
 scene	20	data/scenes-ch20.js	ch20Calm	Vance	I do not know how to start the clocks.	tnb	sad
@@ -9069,10 +9069,10 @@ table	20	data/scenes-ch20.js	ch20 door deedee	Stillness Core	A bridge of thick r
 table	20	data/scenes-ch20.js	ch20 door deedee	Boppy	You could drive a truck over that.	deedee	unimpressed
 table	20	data/scenes-ch20.js	ch20 door deedee	Boppy	You could drive a truck over that.	tom	happy
 table	20	data/scenes-ch20.js	ch20 door deedee	Boppy	You could drive a truck over that.	amy	happy
-table	20	data/scenes-ch20.js	ch20 door deedee	Deedee	Do not. It is for the crisp.	boppy	happy
-table	20	data/scenes-ch20.js	ch20 door deedee	Deedee	Do not. It is for the crisp.	tom	happy
-table	20	data/scenes-ch20.js	ch20 door deedee	Deedee	Do not. It is for the crisp.	grace	happy
-table	20	data/scenes-ch20.js	ch20 door deedee	Deedee	Do not. It is for the crisp.	rose	happy
+table	20	data/scenes-ch20.js	ch20 door deedee	Deedee	Do not. It is for the apple muffins.	boppy	happy
+table	20	data/scenes-ch20.js	ch20 door deedee	Deedee	Do not. It is for the apple muffins.	tom	happy
+table	20	data/scenes-ch20.js	ch20 door deedee	Deedee	Do not. It is for the apple muffins.	grace	happy
+table	20	data/scenes-ch20.js	ch20 door deedee	Deedee	Do not. It is for the apple muffins.	rose	happy
 table	20	data/scenes-ch20.js	ch20 door boppy	Boppy	Legs. Like every doctor I have ever ignored. Hup.	tom	proud
 table	20	data/scenes-ch20.js	ch20 door boppy	Boppy	Legs. Like every doctor I have ever ignored. Hup.	amy	proud
 table	20	data/scenes-ch20.js	ch20 door boppy	Boppy	Legs. Like every doctor I have ever ignored. Hup.	tnb	proud

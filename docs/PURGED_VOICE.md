@@ -2,6 +2,27 @@
 
 Tom asked (again) for voice lines and clips that the full game never plays to be removed, because every unused line shows up in the Voice Library and the bake lists and costs ElevenLabs credits. This is the record. The audio itself is not lost: it is in git history at commit `6624b03` (the parent of the purge commit), so `git show 6624b03:data/voice/<id>.js` brings any of it back.
 
+## 2026-11-22 (`crispfix1`): 16 dialogue clips that said crisp
+
+Card c-crispfix. Tom: crisp was struck from the project, so every spoken line about Deedee's dessert now says apple muffins (list: claude/crispfix1-voice-lines.md). The old takes say "crisp", so `unused_voice.py` check 4 listed these 16 clips; they were removed (git history keeps the audio). The tnb line is a dead chapter 2 draft no scene plays.
+
+- `sal|Besides, you just got here. Go see your mother. She made crisp.`
+- `grace|Tata. At the crisp.`
+- `deedee|Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring crisp.`
+- `deedee|A layover! Where? Never mind. Take a sweater. Actually, take two. And take the crisp.`
+- `tom|Dad’s in his recliner. Mom has the crisp. They’re fine. They’re probably fine.`
+- `rose|Deedee. I’m going to eat the crisp now. Okay? Okay.`
+- `boppy|And the crisp is excellent.`
+- `boppy|Inside. She’s fine. She’s making a crisp. Don’t look at the porch.`
+- `tom|She’s looping. Look at the tray. It’s the same crisp. Every time. It’s fresh, it’s perfect, and nobody ever eats it.`
+- `boppy|Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making a crisp.`
+- `deedee|Tom! Sit. Eat. I made a crisp. Yes, I know it's nine in the morning. Do not argue.`
+- `kit|Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making a crisp.`
+- `tnb|The mud took Deedee's crisp? Is the mud okay?`
+- `boppy|Gracie, my crisp is under there.`
+- `boppy|I'll stay here and guard the crisp, Deary.`
+- `grace|Your crisp is under California, Boppy. Don't move. I'm presenting.`
+
 ## 2026-11-22 (`reports-2026-11-21b`): 27 chapter 2 dialogue clips left by fix-ch2play
 
 Card c-reports-13. `unused_voice.py` check 4 listed these after the chapter 2 line cuts and rewrites; each was no longer in any scene, harvest list or spot, so they were removed (git history keeps the audio). One more, TNB at the grey tree, was reworded in this build.

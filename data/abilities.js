@@ -517,7 +517,7 @@ const B8_ST_ALIAS={guard:['brace'],bodyguarded:['guarded'],pep_up:['pepup',.25],
 // Grace: Squishy Squeeze (legacy key squishy) -> Squishy Squeeze (squishy_squeeze), the same squishy; Like and Subscribe (the
 // legacy party heal) -> Welcome Back to My Channel, the vlog kind move she has from level 10.
 // Rose: Peekaboo (now the A1 Remix) -> Boo!!, the same sneak-up-and-pop-out kind move. Deedee: Registered Nut (A1 Remix) ->
-// Registered Nut, Reporting; Apple Muffins (A2 Remix) -> Corner-Piece Privilege, the same crisp; Sunday Dinner (the A6 stand-in
+// Registered Nut, Reporting; Apple Muffins (A2 Remix) -> Corner-Piece Privilege, the same apple muffins; Sunday Dinner (the A6 stand-in
 // until the Ultimates) -> Corner-Piece Privilege, her homemade food kind move (Pepper-Free Plate became Wet Floor!).
 // Boppy: Recliner Drop (now the A2 Remix) -> Recliner Reservation, the same recliner; Track Star Story (B4 Remix) -> In Nineteen
 // Seventy, the same 1970 story. GRUMBLE keeps its key.

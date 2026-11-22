@@ -44,7 +44,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Tom | Unimpressed | Then we better hurry. Before somebody licks the rest. |
 | Deedee | Loving | My favorite son! |
 | Deedee | Loving | And my girls! Come here, come here. |
-| Deedee | Loving | Tom, you must be starving! Sit. The crisp needs ten minutes on the counter. |
+| Deedee | Loving | Tom, you must be starving! Sit. The apple muffins need ten minutes on the counter. |
 | Deedee | Surprised | Where are my reading glasses? I had them one second ago. I need to read the timer. |
 | Grace | Unimpressed | Deedee. They're on your head. |
 | Deedee | Happy | So they are. Not one word to Boppy. |
@@ -73,15 +73,15 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Grace | Surprised | THERE! The thief! He still has the tin! |
 | Deedee | Angry | That's my GOOD tin, you overgrown handbag! |
 | Rose | Happy | Tata, he looks like a turtle wearing a hat. |
-| Tom | Proud | Nobody touches Deedee’s crisp. Everybody ready? |
+| Tom | Proud | Nobody touches Deedee’s apple muffins. Everybody ready? |
 | Deedee | Loving | Up, up. Everybody up. Deedee will make it better. |
-| Deedee | Happy | My tin! And look. Half the crisp is still in it. |
+| Deedee | Happy | My tin! And look. Half the apple muffins are still in it. |
 | Deedee | Happy | Then we split this half. Everybody home. Wait until Boppy hears about this. |
 | Boppy | Proud | You found the Big One? I TOLD everybody. Twenty years. |
 | Boppy | Surprised | My LURE! I lost that in 2006. Still shiny. Unlike me. |
 | Boppy | Loving | Keep it, Tom. For luck. The fish clearly didn't want it. |
-| Deedee | Loving | Sit. Everybody sit. Half a crisp is still a crisp. |
-| Rose | Happy | This is the best half a crisp I ever had. |
+| Deedee | Loving | Sit. Everybody sit. Half the apple muffins are still apple muffins. |
+| Rose | Happy | This is the best half batch of apple muffins I ever had. |
 | Grace | Happy | Tata, you're staying the WHOLE week, right? |
 | Tom | Loving | The whole week. And nobody is stealing anything else. |
 | Boppy | Angry | Slow down. Everybody eats too fast. My stomach. |
@@ -166,7 +166,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Deedee | Unimpressed | Not one pepper for me either. Peppers give me gas. |
 | Grace | Unimpressed | Deedee. EVERYTHING gives you gas. |
 | Deedee | Unimpressed | Who told you that. |
-| Grace | Proud | Tata. At the crisp. |
+| Grace | Proud | Tata. At the apple muffins. |
 | Deedee | Unimpressed | Tata is on thin ice. |
 | Deedee | Loving | I have three pies in, so I'm staying put. Do NOT let him eat peppers on an empty stomach. |
 | Boppy | Happy | I never eat peppers on an empty stomach. I eat them on a full stomach. Then it's empty. |
@@ -342,7 +342,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Grace | Proud | The footprints go into all three. Then out again. Then east, to the Cafetorium. |
 | Amy | Loving | Girls. That's excellent detective work. Gold stars. Both of you. |
 | Grace | Happy | FOR EVERYONE, LOVE DEEDEE. That's Deedee’s handwriting! Everyone means us! |
-| Rose | Surprised | Apple muffins! Deedee brings the teachers CRISP? |
+| Rose | Surprised | Apple muffins! Deedee brings the teachers APPLE MUFFINS? |
 | Amy | Loving | She never told me that. Of course she never told me that. |
 | Tom | Loving | To the moon and back. And apparently to the staff room. |
 | Amy | Proud | I've never been late in my life. Not once. Not even when I was born. I was early. |
@@ -703,7 +703,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Boppy | Unimpressed | Forever is a lot of dancing. And everybody dances too fast. |
 | Tom | Proud | Deedee, Boppy, behind me. No touching, please. |
 | Deedee | Loving | Up, everybody. Deedee is a nurse. |
-| Deedee | Loving | Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring crisp. |
+| Deedee | Loving | Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring apple muffins. |
 | Deedee | Loving | Tom. Dance with your mother. |
 | Tom | Unimpressed | I mostly sway. |
 | Deedee | Loving | Then sway with your mother. |
@@ -815,12 +815,12 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 
 | Character | Emotion | Dialogue |
 |---|---|---|
-| Deedee | Loving | Tom! Sit. Eat. I made a crisp. Yes, I know it's nine in the morning. Do not argue. |
+| Deedee | Loving | Tom! Sit. Eat. I made apple muffins. Yes, I know it's nine in the morning. Do not argue. |
 | Tom | Unimpressed | Trust me, I was not going to argue. |
 | Boppy | Unimpressed | This came for the recliner. A gold card. “Priority Member.” Junk mail. They send it to the recliner now. |
 | Boppy | Surprised | Don’t throw it out. It’s warm. I think it’s warm. My knee says it’s warm. |
 | Tom | Surprised | My boarding pass is buzzing in my pocket. It says: YOUR LAYOVER IS NOW BOARDING. |
-| Deedee | Loving | A layover! Where? Never mind. Take a sweater. Actually, take two. And take the crisp. |
+| Deedee | Loving | A layover! Where? Never mind. Take a sweater. Actually, take two. And take the apple muffins. |
 | Boppy | Unimpressed | Bring me back a pretzel. A real one. Not the airport kind. |
 | Deedee | Loving | To the moon and back, Tom. Both ways. |
 | Tom | Surprised | A pod seat. A real one. Somebody upgraded me and nobody told me why. |
@@ -910,7 +910,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Amy | Scared | I’m calling her. I’m calling her right now. |
 | Amy | Scared | It’s ringing. It’s just ringing. Mom always picks up. Mom picks up on the FIRST ring. She picks up before it rings. |
 | Tom | Loving | Sit down. Everybody. Deep breath. |
-| Tom | Scared | Dad’s in his recliner. Mom has the crisp. They’re fine. They’re probably fine. |
+| Tom | Scared | Dad’s in his recliner. Mom has the apple muffins. They’re fine. They’re probably fine. |
 | TNB | Loving | Hey. We’ll go get them. Whatever he did, we’ll fix it. Things come apart. I fix things. |
 | Tom | Proud | We’ll go get them. We always make our connection. |
 | Tom | Loving | And it’s where Nara and TNB live. It’s home. Our other home. |
@@ -1128,7 +1128,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Boppy | Happy | Warden’s plate. Gold. It hums. I like the hum. |
 | Boppy | Happy | My back doesn’t hurt, Tommy. It’s been eleven years. I made a deal. |
 | Tom | Scared | What deal? |
-| Boppy | Loving | Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making a crisp. |
+| Boppy | Loving | Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making apple muffins. |
 | Boppy | Proud | I stand here and the glass stays up. That’s the deal. |
 | Tom | Scared | Dad. That isn’t safe. That’s a freezer. |
 | Boppy | Angry | Go home, Tom. Take your friends. Go back to the good coast. |
@@ -1169,7 +1169,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Tom | Scared | Girls. Stay behind me. He’s not himself. |
 | Amy | Unimpressed | He’s completely himself. That’s the problem. He’s himself with a gate. |
 | Grace | Scared | So. Where’s Deedee? |
-| Boppy | Scared | Inside. She’s fine. She’s making a crisp. Don’t look at the porch. |
+| Boppy | Scared | Inside. She’s fine. She’s making apple muffins. Don’t look at the porch. |
 | Rose | Surprised | Boppy. There’s a Deedee on the porch. |
 | Boppy | Unimpressed | That’s a decoration. |
 | Rose | Happy | She waved. |
@@ -1180,12 +1180,12 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Deedee | Loving | Apple muffins, nine minutes. Apple muffins, nine minutes. Hello, sweetie. Apple muffins, nine minutes. |
 | Amy | Scared | Mom. It’s Amy. Mom, look at me. |
 | Deedee | Loving | Hello, Amy. Apple muffins, nine minutes. Do you want a bite? Apple muffins. Nine minutes. |
-| Tom | Sad | She’s looping. Look at the tray. It’s the same crisp. Every time. It’s fresh, it’s perfect, and nobody ever eats it. |
+| Tom | Sad | She’s looping. Look at the tray. Same apple muffins. Every time. They’re fresh, they’re perfect, and nobody ever eats them. |
 | Tom | Sad | Amber is warmth that got stuck. She’s been giving it to nobody for hours. It needs somewhere to go. |
 | Rose | Surprised | Maybe nobody ate it. |
 | Grace | Surprised | Rose. That is the smartest thing you have said all week. |
 | Rose | Happy | I say smart things every day. They just come out as noise. |
-| Rose | Loving | Deedee. I’m going to eat the crisp now. Okay? Okay. |
+| Rose | Loving | Deedee. I’m going to eat the apple muffins now. Okay? Okay. |
 | Rose | Happy | ...It’s SO good. It’s the best one. Deedee, it’s the best one you ever made. |
 | Deedee | Loving | Oh. Somebody ate it. Oh, Rosie. |
 | Deedee | Sad | Oh. I was making that for a long time, wasn’t I. |
@@ -1611,7 +1611,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Amy | Proud | Personal best. In a moon. In sneakers. Nobody tell Justin I did it without stretching. |
 | Deedee | Loving | Forty years in the same bed. It does not care what is going on. It just grows. |
 | Boppy | Surprised | You could drive a truck over that. |
-| Deedee | Proud | Do not. It is for the crisp. |
+| Deedee | Proud | Do not. It is for the apple muffins. |
 | Boppy | Unimpressed | Legs. Like every doctor I have ever ignored. Hup. |
 | Boppy | Unimpressed | My knees would like a word. |
 | Deedee | Loving | Your knees can talk to me later. |
@@ -1652,7 +1652,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Tom | Unimpressed | Everybody up. He is not going anywhere. That is rather the point of him. |
 | Tom | Loving | Probably. And then she would sit down next to you anyway. |
 | Deedee | Loving | Honey. That is all of it. That is what living is. It hurts a little, every time, and you do it anyway. |
-| Boppy | Happy | And the crisp is excellent. |
+| Boppy | Happy | And the apple muffins are excellent. |
 | Tom | Loving | You do not start them. You stop holding them. |
 | Rose | Surprised | IT MOVED! The clock MOVED! |
 | Grace | Happy | It is five o’clock. It is just five o’clock. It is the best five o’clock I have ever seen. |

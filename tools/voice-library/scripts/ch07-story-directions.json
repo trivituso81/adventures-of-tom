@@ -222,16 +222,16 @@
   {
    "voice": "boppy",
    "speaker": "Boppy",
-   "text": "Gracie, my crisp is under there.",
+   "text": "Gracie, my apple muffins are under there.",
    "ctx": "chapter 7 (new)",
-   "script": "[mild, plaintive] Gracie, my crisp is under THERE."
+   "script": "[mild, plaintive] Gracie, my apple muffins are under THERE."
   },
   {
    "voice": "grace",
    "speaker": "Grace",
-   "text": "Your crisp is under California, Boppy. Don't move. I'm presenting.",
+   "text": "Your apple muffins are under California, Boppy. Don't move. I'm presenting.",
    "ctx": "chapter 7 (new)",
-   "script": "[crisp, presenting, unbothered] Your crisp is under CALIFORNIA, Boppy. [firm] Don't move. [grand] I'm PRESENTING."
+   "script": "[crisp, presenting, unbothered] Your apple muffins are under CALIFORNIA, Boppy. [firm] Don't move. [grand] I'm PRESENTING."
   },
   {
    "voice": "grace",
@@ -495,9 +495,9 @@
   {
    "voice": "boppy",
    "speaker": "Boppy",
-   "text": "I'll stay here and guard the crisp, Deary.",
+   "text": "I'll stay here and guard the apple muffins, Deary.",
    "ctx": "chapter 7 (new)",
-   "script": "[dignified, relieved] I'll stay here and guard the crisp, DEARY."
+   "script": "[dignified, relieved] I'll stay here and guard the apple muffins, DEARY."
   },
   {
    "voice": "deedee",

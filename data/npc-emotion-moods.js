@@ -643,7 +643,7 @@ const NPC_EMOTION_MOODS={
 "larry|I’m blowing leaves. The leaf landed. It LANDED. Thirty years I’ve waited. Thank you.": "happy",
 "marlowe|Love it. Hate it. Love it. Notes withdrawn.": "surprised",
 "marlowe|I’ll be Downtown, at the Movie Palace. Come by. I’ll have notes for the rest of the family.": "happy",
-"marlowe|Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making a crisp.": "proud",
+"marlowe|Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making apple muffins.": "proud",
 "marlowe|She’s been making the same one for hours.": "proud",
 "marlowe|Notes are due at five.": "unimpressed",
 "sol|Tom. Sit. Not that chair. That chair is Sal’s. I keep it warm for him out of spite.": "unimpressed",

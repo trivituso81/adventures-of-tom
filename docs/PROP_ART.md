@@ -24,7 +24,7 @@ Options: `h` or `w` (stage units), `rot`, `flip`, `sx`, `sy`. It returns false u
 | Grace | Squishy Squeeze (squishy_squeeze) | gold dumpling squishy | `dumpling()` in grace-moves.js |
 | Rose | Lamby Hug and every move that shows Lamby held or flying | Lamby, Backup Lamby | `plush()` in rose-moves.js (`o.drawn` forces the drawn one; Tom's hair is drawn onto it in battle2-kind.js) |
 | Amy | Kettlebell Swing (kettlebell_swing) | kettlebell | `bell()` in amy-moves.js |
-| Deedee | Corner Piece (corner_piece) | crisp pan | `bigPan()` and `crispDish()` in deedee-moves.js (the painted pan has its cut corner painted in, so the corner no longer regrows) |
+| Deedee | Corner Piece (corner_piece) | apple muffins pan | `bigPan()` and `crispDish()` in deedee-moves.js (the painted pan has its cut corner painted in, so the corner no longer regrows) |
 | Boppy | Pepper Breath (pepper_breath) | cayenne pepper | `cayenne()` in boppy-moves.js (other pepper colours stay drawn) |
 | TNB | Mug Toss (mug_toss) | stoneware mug (has a steam wisp and the 2ND tag) | `mug()` in tnb-moves.js |
 

@@ -30095,7 +30095,7 @@
    "col": "prog",
    "theme": "Story and Dialogue",
    "title": "Replace every leftover crisp with apple muffins",
-   "next": "Find every spoken line, sign and story note that still says crisp where it means Deedee's dessert, change it to apple muffins, list the changed lines that need re-recording, and hand Tom one voice card.",
+   "next": "Done in crispfix1: 19 spoken lines, signs, scene notes and docs now say apple muffins; dependent keys and indexes updated; 16 old recordings removed; one Tom voice card (t-crispvoices) made for the lines that need recording.",
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
@@ -30116,8 +30116,8 @@
     "rule": "Claude Opus 5.5, medium"
    },
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGJeg44Umrbtk8QCjH",
-    "opening": "pasted by Tom from the board"
+    "url": "",
+    "opening": "Board card c-crispfix. Tom (2026-11-22): the chapter 1 mud monster steals Deedee's apple muffins"
    },
    "history": [
     {
@@ -30132,9 +30132,10 @@
     },
     {
      "d": "2026-11-22",
-     "t": "Started: the conversation claimed this card."
+     "t": "crispfix1: replaced crisp with apple muffins in 19 spoken lines plus on-screen text, comments and docs (Marlowe's second line kept so its recording stays); purged 16 orphaned clips; unused_voice.py reports 0 for all checks; voice card t-crispvoices created. Flagged: painted art and art prompts still show rhubarb crisp; emotion-apply.py and npc-emotion-apply.py fail on the untouched tree, so those two data files were updated by text replace."
     }
-   ]
+   ],
+   "after": "t-crispvoices"
   },
   {
    "id": "b-board-crispcard",
@@ -30395,6 +30396,71 @@
     }
    ],
    "waiting_on": "claude"
+  },
+  {
+   "id": "t-crispvoices",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Voice Clips",
+   "ask": "voice",
+   "fyi": true,
+   "title": "Make 16 apple muffins voices (one tap, then listen)",
+   "voices": [
+    "grace|Tata. At the apple muffins.",
+    "rose|Apple muffins! Deedee brings the teachers APPLE MUFFINS?",
+    "boppy|Gracie, my apple muffins are under there.",
+    "grace|Your apple muffins are under California, Boppy. Don't move. I'm presenting.",
+    "boppy|I'll stay here and guard the apple muffins, Deary.",
+    "deedee|Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring apple muffins.",
+    "kit|Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making apple muffins.",
+    "boppy|Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making apple muffins.",
+    "boppy|Inside. She’s fine. She’s making apple muffins. Don’t look at the porch.",
+    "tom|She’s looping. Look at the tray. Same apple muffins. Every time. They’re fresh, they’re perfect, and nobody ever eats them.",
+    "rose|Deedee. I’m going to eat the apple muffins now. Okay? Okay.",
+    "boppy|And the apple muffins are excellent.",
+    "deedee|Tom! Sit. Eat. I made apple muffins. Yes, I know it's nine in the morning. Do not argue.",
+    "deedee|A layover! Where? Never mind. Take a sweater. Actually, take two. And take the apple muffins.",
+    "tom|Dad’s in his recliner. Mom has the apple muffins. They’re fine. They’re probably fine.",
+    "sal|Besides, you just got here. Go see your mother. She made apple muffins."
+   ],
+   "blocks": [],
+   "next": "Open ADMIN > BOARD, find this card, tap Generate all 16 voices (two taps). When it finishes, open ADMIN > VOICE LIBRARY with the button below, set Show to Built-in clip, and play a few. Tap All good, or Something is wrong and say which line you heard. Note: 3 changed lines (Rose and the tin, Deedee at the bridge, Grace on the map) never had a recording and are not on this card; they play speech synthesis as before.",
+   "links": [
+    {
+     "to": "voice",
+     "ids": [
+      "d|grace|Tata. At the apple muffins.",
+      "d|rose|Apple muffins! Deedee brings the teachers APPLE MUFFINS?",
+      "d|boppy|Gracie, my apple muffins are under there.",
+      "d|grace|Your apple muffins are under California, Boppy. Don't move. I'm presenting.",
+      "d|boppy|I'll stay here and guard the apple muffins, Deary.",
+      "d|deedee|Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring apple muffins.",
+      "d|kit|Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making apple muffins.",
+      "d|boppy|Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making apple muffins.",
+      "d|boppy|Inside. She’s fine. She’s making apple muffins. Don’t look at the porch.",
+      "d|tom|She’s looping. Look at the tray. Same apple muffins. Every time. They’re fresh, they’re perfect, and nobody ever eats them.",
+      "d|rose|Deedee. I’m going to eat the apple muffins now. Okay? Okay.",
+      "d|boppy|And the apple muffins are excellent.",
+      "d|deedee|Tom! Sit. Eat. I made apple muffins. Yes, I know it's nine in the morning. Do not argue.",
+      "d|deedee|A layover! Where? Never mind. Take a sweater. Actually, take two. And take the apple muffins.",
+      "d|tom|Dad’s in his recliner. Mom has the apple muffins. They’re fine. They’re probably fine.",
+      "d|sal|Besides, you just got here. Go see your mother. She made apple muffins."
+     ],
+     "label": "The 16 apple muffins lines"
+    }
+   ],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "Board card c-crispfix. Tom (2026-11-22): the chapter 1 mud monster steals Deedee's apple muffins"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by c-crispfix (crispfix1): 16 spoken lines changed from crisp to apple muffins lost their old recordings (the old clips were removed). List: claude/crispfix1-voice-lines.md."
+    }
+   ]
   }
  ],
  "sessions": [

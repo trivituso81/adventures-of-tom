@@ -8,6 +8,27 @@ Part a of card c-movestage-build. The `wan-gen` Action's bulk run (tools/art-lib
 - 26 jobs in `tools/art-library/wangen-jobs.json`: 12 stage pictures, 8 object videos and `bake`/`wire` on the six new body jobs (tom-suitedoor, tom-porsche, tom-cartridge, tom-controller, tom-shell, tom-konami; the settings are those of `data/clips/tom-loungepass.js`: every 4th picture, 2x, strike). About $6 at the estimates. Started on the board card t-movestage-lab (`board: wan generate t-movestage-lab`).
 - Tests: `python3 tools/art-library/wanbulk_test.py` B17 to B19 (stand-in fal and xAI, no money).
 
+## crispfix1 (2026-11-22): Deedee's dessert is apple muffins in every spoken line, sign note and doc; 16 old recordings removed
+
+Card c-crispfix. Tom (11-22): the chapter 1 mud monster steals Deedee's apple muffins, and crisp was struck from the project.
+
+| What | Where |
+|---|---|
+| 19 spoken lines changed from crisp to apple muffins, same joke and contractions (plural verbs fixed: "my apple muffins are under there", "the apple muffins are excellent", "Same apple muffins. Every time. They're fresh, they're perfect, and nobody ever eats them."). The list with old and new wording is `claude/crispfix1-voice-lines.md` | `data/scenes.js`, `scenes-ch12.js`, `scenes-ch13.js`, `scenes-ch14.js`, `scenes-ch16.js`, `scenes-ch20.js`, `scenes-p2.js`, `data/maps-le.js`, `engine/story.js` |
+| Words on screen: the Deedee path line in the Stampcard menu ("Check-ups, apple muffins, Sunday dinner"), the Tombo battle message ("Wine, gossip and warm apple muffins.") and its effect word (APPLE MUFFINS), the Tombo description | `data/progress.js`, `engine/battle2-kind.js`, `data/battle2-data.js` |
+| Scene and code comments that meant the dessert | `engine/scene-props.js`, `engine/deedee-moves.js`, `data/abilities.js`, `data/maps-le.js`, `data/scenes.js`, `data/scenes-ch14.js`, `engine/battle2-kind.js` |
+| Dependent keys: the reword tool (`tools/voice-library/retext-lines.py`, text only) carried the new words into the mood, talk, listener reaction and NPC mood tables and their tsv sources, the Voice Library lists and recording scripts, and the Script Editor index; `tools/reaction-apply.py 1 2` and `tools/talk-apply.py` were rerun and reproduce `data/emotion-reactions.js` and `data/talk-types.js` exactly; `tools/script-index/build.py` and `tools/voice-library/rebuild.py` were rerun | `data/emotion-moods.js`, `data/npc-emotion-moods.js`, `data/emotion-reactions.js`, `data/talk-types.js`, `docs/*.tsv`, `data/voice-index.json`, `data/script-index.json`, `docs/script-convos.tsv`, `docs/EMOTION_INDEX.md` (no generator writes it, edited by hand) |
+| Docs | `docs/CANON.md`, `docs/C14-DONE.md`, `docs/PROP_ART.md`, `claude/story-bible.md`, `claude/canon-addendum.md`, the story notes the reword tool reached |
+| `python3 tools/clip-audit/unused_voice.py` listed 17 dialogue clips with no live line; 16 were removed (the 17th, Marlowe's "She's been making the same one for hours.", keeps its line and its recording). Record: `docs/PURGED_VOICE.md` | `data/voice/dialog-ch1.js`, `dialog-ch25.js`, `dialog-ch26.js`, `dialog-ch28.js`, `dialog-ch29.js` |
+| Voice card for the 16 changed lines that are in the Voice Library (the other 3 changed lines are map or list lines that are not in the Library and never had a recording) | `t-crispvoices` on the board |
+
+Facts:
+
+- Left as they were on purpose: code names (`D.crisp`, `deedee.crisp`, `P.crisp`, `crisp:true`, `ch3-crisp`, `crispDish()`), the word as an adjective, and dead draft lines kept as history.
+- `emotion-apply.py` and `npc-emotion-apply.py` already stopped with errors before this build (134 chapter 2 rows whose lines are no longer in any scene; one `Now all my grumbling...` row), so those two files were changed by the reword tool instead. Not fixed here.
+- Painted art still shows the old dish: the Tombo pan sheet, the trail crumbs and the chapter 7 plate are described as rhubarb crisp in `tools/art-library/tombo-split/deedee.js`, `trail-prompts.js` and `ch07-prompts.js`. Prompts were not edited, because the pictures would no longer match. Needs a decision.
+- Chapter 20: Deedee says "It is for the apple muffins" at the rhubarb bridge. Reads as a joke about the bridge's use; the rhubarb plant itself is unchanged.
+
 ## movestage1 (2026-11-22): Plan for moves that grow with each rank (body video, stage, set piece), Tom's eight moves written that way, other family moves wait in the Battle Guide
 
 Card c-movestage. Tom (11-22 09:53): "every single animation is just Tom pulling out something from behind his back and that's it" and "each subsequent ability as it gets unlocked to be fun, funny, and visually cool, especially with the final ability being visually stunning". Tom (10:09): longer animations for each rank are fine, as in any JRPG.

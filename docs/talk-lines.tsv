@@ -137,7 +137,7 @@ chapter	file	line	character	mood	talk	text
 2	tools/voice-library/scripts/ch02-story-directions.json	11	TNB	happy		I don't know what it is, babe. But it's pretty grape.
 2	tools/voice-library/scripts/ch02-story-directions.json	12	Tom	happy		Don't make me laugh, it's freaky! ...Okay. It IS a little grape.
 2	tools/voice-library/scripts/ch02-story-directions.json	13	Tom	surprised	tell	Something strange happened on Long Island too. A blob of mud with eyes climbed in my mother's kitchen window and ran off with her apple muffins.
-2	tools/voice-library/scripts/ch02-story-directions.json	14	TNB	surprised	ask	The mud took Deedee's crisp? Is the mud okay?
+2	tools/voice-library/scripts/ch02-story-directions.json	14	TNB	surprised	ask	The mud took Deedee's apple muffins? Is the mud okay?
 2	tools/voice-library/scripts/ch02-story-directions.json	15	Tom	surprised	tell	We chased it to the pond. And there was a talking fish as big as a car, wearing her baking tin like a crown.
 2	tools/voice-library/scripts/ch02-story-directions.json	16	TNB	happy		A talking fish! What did he say?
 2	tools/voice-library/scripts/ch02-story-directions.json	17	Tom	unimpressed		He said "Glub." Then he gave Rose a gold coin.
@@ -240,7 +240,7 @@ chapter	file	line	character	mood	talk	text
 3	data/scenes.js	707	Deedee	unimpressed		Not one pepper for me either. Peppers give me gas.
 3	data/scenes.js	708	Grace	unimpressed		Deedee. EVERYTHING gives you gas.
 3	data/scenes.js	709	Deedee	unimpressed		Who told you that.
-3	data/scenes.js	710	Grace	proud	answer	Tata. At the crisp.
+3	data/scenes.js	710	Grace	proud	answer	Tata. At the apple muffins.
 3	data/scenes.js	711	Deedee	unimpressed		Tata is on thin ice.
 3	data/scenes.js	712	Deedee	loving		I have three pies in, so I'm staying put. Do NOT let him eat peppers on an empty stomach.
 3	data/scenes.js	713	Boppy	happy		I never eat peppers on an empty stomach. I eat them on a full stomach. Then it's empty.
@@ -533,7 +533,7 @@ chapter	file	line	character	mood	talk	text
 5	data/scenes.js	1503	Tom	none	point	Then we clear the monsters out of Art, Music and the Gym. After each room, we set its hallway clock to seven o'clock.
 5	data/scenes.js	1503	Tom	none	tell	When all three are right, the Cafetorium opens.
 5	data/scenes.js	1511	Grace	happy		FOR EVERYONE, LOVE DEEDEE. That's Deedee’s handwriting! Everyone means us!
-5	data/scenes.js	1513	Rose	surprised		Apple muffins! Deedee brings the teachers CRISP?
+5	data/scenes.js	1513	Rose	surprised		Apple muffins! Deedee brings the teachers APPLE MUFFINS?
 5	data/scenes.js	1515	Amy	loving	tell	She never told me that. Of course she never told me that.
 5	data/scenes.js	1516	Tom	loving		To the moon and back. And apparently to the staff room.
 5	data/scenes.js	1529	Amy	proud		I've never been late in my life. Not once. Not even when I was born. I was early.
@@ -1016,7 +1016,7 @@ chapter	file	line	character	mood	talk	text
 9	data/scenes.js	3239	Deedee	loving	point	Up, everybody. Deedee is a nurse.
 9	data/scenes.js	3239	Deedee	none	tell	Tom, whatever kind of move her shiny side is showing bounces right back at us, so use a different kind.
 9	data/scenes.js	3239	Deedee	none	tell	And honey, nobody has asked her to dance since 1971. Ask her three times.
-9	data/scenes.js	3249	Deedee	loving		Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring crisp.
+9	data/scenes.js	3249	Deedee	loving		Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring apple muffins.
 9	data/scenes.js	3253	Deedee	loving		Tom. Dance with your mother.
 9	data/scenes.js	3254	Tom	unimpressed		I mostly sway.
 9	data/scenes.js	3255	Deedee	loving		Then sway with your mother.
@@ -1125,12 +1125,12 @@ chapter	file	line	character	mood	talk	text
 10	data/scenes.js	3705	Tom	loving	answer	Everybody comes next time.
 10	data/scenes.js	3705	Tom	loving		To the moon and back, everybody. Eat. Deedee made everything.
 10	data/scenes.js	3706	Deedee	loving		To the moon and BACK.
-11	data/scenes-p2.js	15	Deedee	loving		Tom! Sit. Eat. I made a crisp. Yes, I know it's nine in the morning. Do not argue.
+11	data/scenes-p2.js	15	Deedee	loving		Tom! Sit. Eat. I made apple muffins. Yes, I know it's nine in the morning. Do not argue.
 11	data/scenes-p2.js	16	Tom	unimpressed		Trust me, I was not going to argue.
 11	data/scenes-p2.js	17	Boppy	unimpressed		A gold card came in the mail, addressed to my recliner. It says Priority Member. It’s junk mail. They send junk mail to furniture now.
 11	data/scenes-p2.js	17	Boppy	surprised	point	Don’t throw it out, though. It feels warm. Even my knee can feel it.
 11	data/scenes-p2.js	19	Tom	surprised		The boarding pass from Gate Zero is buzzing in my pocket. Now it says: YOUR LAYOVER IS NOW BOARDING.
-11	data/scenes-p2.js	20	Deedee	loving		A layover! Where? Never mind. Take a sweater. Actually, take two. And take the crisp.
+11	data/scenes-p2.js	20	Deedee	loving		A layover! Where? Never mind. Take a sweater. Actually, take two. And take the apple muffins.
 11	data/scenes-p2.js	21	Boppy	unimpressed	point	Bring me back a pretzel. A real one. Not the airport kind.
 11	data/scenes-p2.js	22	Deedee	loving		To the moon and back, Tom. Both ways.
 11	data/scenes-p2.js	36	Tom	surprised	tell	Flight Zero was waiting at the gate with one seat made up. A real pod seat. Somebody upgraded me, and nobody told me why.
@@ -1228,7 +1228,7 @@ chapter	file	line	character	mood	talk	text
 11	data/scenes-p2.js	277	Amy	scared		I’m calling her. I’m calling her right now.
 11	data/scenes-p2.js	279	Amy	scared		It’s ringing. It’s just ringing. Mom always picks up. Mom picks up on the FIRST ring. She picks up before it rings.
 11	data/scenes-p2.js	280	Tom	loving	point	Sit down. Everybody. Deep breath.
-11	data/scenes-p2.js	280	Tom	scared		Dad’s in his recliner. Mom has the crisp. They’re fine. They’re probably fine.
+11	data/scenes-p2.js	280	Tom	scared		Dad’s in his recliner. Mom has the apple muffins. They’re fine. They’re probably fine.
 11	data/scenes-p2.js	281	TNB	loving		Hey. We’ll go get them. Whatever he did, we’ll fix it. Things come apart. I fix things.
 11	data/scenes-p2.js	282	Tom	proud		We’ll go get them. We always make our connection.
 11	data/scenes-p2.js	283	Rose	none	ask	Which one is Los Angeles?
@@ -1456,7 +1456,7 @@ chapter	file	line	character	mood	talk	text
 13	data/scenes-ch13.js	261	Boppy	happy		It’s a Warden’s plate. It’s gold armor, and it hums. I like the hum.
 13	data/scenes-ch13.js	262	Boppy	happy		My back doesn’t hurt, Tommy, for the first time in eleven years. I made a deal.
 13	data/scenes-ch13.js	263	Tom	scared		What deal?
-13	data/scenes-ch13.js	264	Boppy	loving	tell	Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making a crisp.
+13	data/scenes-ch13.js	264	Boppy	loving	tell	Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making apple muffins.
 13	data/scenes-ch13.js	265	Boppy	proud	tell	As long as I stand guard here, the glass dome stays up over Long Island. That’s the deal.
 13	data/scenes-ch13.js	266	Tom	scared		Dad, that’s the same deal he gave a mirrorball, an oven and a squirrel. It isn’t safe. It’s a freezer.
 13	data/scenes-ch13.js	267	Boppy	angry		Go home, Tom. Take your friends. Go back to the good coast.
@@ -1493,7 +1493,7 @@ chapter	file	line	character	mood	talk	text
 14	data/scenes-ch14.js	67	Tom	scared		Girls. Stay behind me. He’s not himself.
 14	data/scenes-ch14.js	68	Amy	unimpressed		He’s completely himself. That’s the problem. He’s himself with a gate.
 14	data/scenes-ch14.js	69	Grace	scared		So. Where’s Deedee?
-14	data/scenes-ch14.js	70	Boppy	scared		Inside. She’s fine. She’s making a crisp. Don’t look at the porch.
+14	data/scenes-ch14.js	70	Boppy	scared		Inside. She’s fine. She’s making apple muffins. Don’t look at the porch.
 14	data/scenes-ch14.js	72	Rose	surprised	tell	Boppy. There’s a Deedee on the porch.
 14	data/scenes-ch14.js	73	Boppy	unimpressed		That’s a decoration.
 14	data/scenes-ch14.js	74	Rose	happy	answer	She waved.
@@ -1505,12 +1505,12 @@ chapter	file	line	character	mood	talk	text
 14	data/scenes-ch14.js	87	Deedee	loving		Apple muffins, nine minutes. Apple muffins, nine minutes. Hello, sweetie. Apple muffins, nine minutes.
 14	data/scenes-ch14.js	88	Amy	scared		Mom. It’s Amy. Mom, look at me.
 14	data/scenes-ch14.js	89	Deedee	loving	ask	Hello, Amy. Apple muffins, nine minutes. Do you want a bite? Apple muffins. Nine minutes.
-14	data/scenes-ch14.js	90	Tom	sad		She’s looping. Look at the tray. It’s the same crisp. Every time. It’s fresh, it’s perfect, and nobody ever eats it.
+14	data/scenes-ch14.js	90	Tom	sad		She’s looping. Look at the tray. Same apple muffins. Every time. They’re fresh, they’re perfect, and nobody ever eats them.
 14	data/scenes-ch14.js	91	Tom	sad		Amber is warmth that got stuck. She’s been baking for nobody for hours, so all that warmth has nowhere to go.
 14	data/scenes-ch14.js	92	Rose	surprised	tell	Maybe somebody just has to eat it.
 14	data/scenes-ch14.js	93	Grace	surprised		Rose. That is the smartest thing you have said all week.
 14	data/scenes-ch14.js	94	Rose	happy		I say smart things every day. They just come out as noise.
-14	data/scenes-ch14.js	96	Rose	loving	ask	Deedee. I’m going to eat the crisp now. Okay? Okay.
+14	data/scenes-ch14.js	96	Rose	loving	ask	Deedee. I’m going to eat the apple muffins now. Okay? Okay.
 14	data/scenes-ch14.js	99	Rose	happy		...It’s SO good. It’s the best one. Deedee, it’s the best one you ever made.
 14	data/scenes-ch14.js	102	Deedee	loving		Oh. Somebody ate it. Oh, Rosie.
 14	data/scenes-ch14.js	103	Deedee	sad		Oh. I was making that for a long time, wasn’t I.
@@ -1913,7 +1913,7 @@ chapter	file	line	character	mood	talk	text
 20	data/scenes-ch20.js	67	Amy	proud		Personal best. In a moon. In sneakers. Nobody tell Justin I did it without stretching.
 20	data/scenes-ch20.js	73	Deedee	loving	tell	Forty years in the same bed. It does not care what is going on. It just grows.
 20	data/scenes-ch20.js	75	Boppy	surprised	tell	You could drive a truck over that.
-20	data/scenes-ch20.js	75	Deedee	proud	point	Do not. It is for the crisp.
+20	data/scenes-ch20.js	75	Deedee	proud	point	Do not. It is for the apple muffins.
 20	data/scenes-ch20.js	81	Boppy	unimpressed		Legs. Like every doctor I have ever ignored. Hup.
 20	data/scenes-ch20.js	83	Boppy	unimpressed		My knees would like a word.
 20	data/scenes-ch20.js	83	Deedee	loving		Your knees can talk to me later.
@@ -1954,7 +1954,7 @@ chapter	file	line	character	mood	talk	text
 20	data/scenes-ch20.js	210	Tom	unimpressed		Everybody up. He’s not going anywhere. That’s rather the point of him.
 20	data/scenes-ch20.js	220	Tom	loving		Probably. And then she would sit down next to you anyway.
 20	data/scenes-ch20.js	222	Deedee	loving		Honey. That’s all of it. That’s what living is. It hurts a little, every time, and you do it anyway.
-20	data/scenes-ch20.js	223	Boppy	happy	answer	And the crisp is excellent.
+20	data/scenes-ch20.js	223	Boppy	happy	answer	And the apple muffins are excellent.
 20	data/scenes-ch20.js	225	Tom	loving		You don’t start them. You stop holding them.
 20	data/scenes-ch20.js	228	Rose	surprised		IT MOVED! The clock MOVED!
 20	data/scenes-ch20.js	229	Grace	happy		It’s five o’clock. It’s just five o’clock. It’s the best five o’clock I have ever seen.

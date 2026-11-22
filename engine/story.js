@@ -40,7 +40,7 @@ const CHAPTERS=[
     // No flights in chapter 1 (chapter 2 opens with the flight to LA).
     // After the chapter, the brakes are in: Sal's airport run starts chapter 2 (storyTripSteps).
     noFlight:()=>flag('ch1-done')?null
-      :{lines:['Cab seven needs new brakes. She\'s parked until the part comes in.','Besides, you just got here. Go see your mother. She made crisp.']}},
+      :{lines:['Cab seven needs new brakes. She\'s parked until the part comes in.','Besides, you just got here. Go see your mother. She made apple muffins.']}},
   {n:2,title:'Smog on 2nd Avenue',party:{lock:['tom'],allow:['tnb','nara'],
     decline:{tnb:'Not right now, babe.',nara:'Nara wags, but stays put.'}},
     // Sol stays put until the smog is gone; after the chapter, his airport run starts chapter 3 (storyTripSteps).

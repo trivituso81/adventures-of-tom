@@ -61,7 +61,7 @@ Dialogue:
 - TNB: I don't know what it is, babe. But it's pretty grape. (NEW)
 - Tom: Don't make me laugh, it's freaky! ...Okay. It IS a little grape. (NEW. WORDS: was "Don't make me laugh, I'm scared of it! ...Okay. It's a little grape.")
 - Tom: Something strange happened on Long Island too. A blob of mud with eyes climbed in my mother's kitchen window and ran off with her rhubarb crisp. (NEW)
-- TNB: The mud took Deedee's crisp? Is the mud okay? (NEW)
+- TNB: The mud took Deedee's apple muffins? Is the mud okay? (NEW)
 - Tom: We chased it to the pond. And there was a talking fish as big as a car, wearing her baking tin like a crown. (NEW)
 - TNB: A talking fish! What did he say? (NEW)
 - Tom: He said "Glub." Then he gave Rose a gold coin. (NEW)

@@ -457,7 +457,7 @@ SC.d_pulse=(s,u)=>{ const x=s.x+(s.foe?44:-44),y=s.y-s.h*.5,w=56,fix=cl((u-UI+.0
   if(fix>.95) label('OK',x+w/2-10,y-26,'#8ef0a0',1);
   if(u>UI+.1) { const q=ez((u-UI-.1)/.25),sx=s.x+(s.foe?-1:1)*(14+q*34),sy=s.y-s.h*.8-q*14; gfx.globalAlpha=fade(u,.9)*(1-q); gfx.save(); gfx.translate(sx,sy); gfx.rotate(q*1.2); RO(-8,-6,16,12,'#9aa3c8'); Ln(-4,0,4,0,2,'#2b2a26'); gfx.restore(); } };
 
-// Corner-Piece Privilege: a crisp pan angled to show one golden corner; the corner lifts onto a dish and the empty corner folds into a new one.
+// Corner-Piece Privilege: an apple muffins pan angled to show one golden corner; the corner lifts onto a dish and the empty corner folds into a new one.
 SC.d_cornerpan=(s,u)=>{ const p=hand(),x=p.x-16,y=p.y+6,lift=u<UI-.06?0:ez((u-UI+.06)/.14),regrow=u>UI+.14?ez((u-UI+.14-.2)/.2):0; gfx.globalAlpha=fade(u,.92);
   gfx.save(); gfx.translate(x,y); gfx.rotate(-.12); RO(-30,-12,60,24,'#c9c2b8'); R(-27,-9,54,18,CRUST); for(let k=0;k<6;k++) R(-24+k*9,-6+(k%2)*8,5,4,'#b0683a');
   const cw=14*(1-lift)+14*regrow; R(13,-9,cw,cw,'#f0b860'); if(u<UI-.06) { label('CORNER',22,-20,GOLD,1); } if(regrow>.9) label('AGAIN?',22,-20,GOLD,1); gfx.restore(); };

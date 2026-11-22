@@ -1136,7 +1136,7 @@ const B2_TOMBOS=[
     desc:'Tom says the cloud is a sourdough loaf. Rose says it is Lamby with Tom’s hair. The cloud agrees with Rose, turns into a giant fluffy Lamby and sits on one enemy. No damage: it warms right up, its wind-up is cancelled, its next turn comes later, and Rose stays up on Tom’s shoulders.'},
   {id:'deedee1',partner:'deedee',tier:1,cost:25,flag:'tombo:deedee1',name:'Wine and Gossip',elem:['cozy'],target:'party',weight:'standard',
     fx:[['heal',.60,0,'party'],['cure','amber','party'],['crust',2]],
-    desc:'Tom and Deedee gossip about the monster over a glass of wine until it shrinks with embarrassment, then Deedee brings out the crisp. The party heals 60%, Amber melts away, and 2 Warm Crusts go on the tray.'},
+    desc:'Tom and Deedee gossip about the monster over a glass of wine until it shrinks with embarrassment, then Deedee brings out the apple muffins. The party heals 60%, Amber melts away, and 2 Warm Crusts go on the tray.'},
   {id:'deedee1_dc',dc:'deedee1',partner:'deedee',tier:1,cost:25,flag:'tombo:deedee1',name:'Clean As You Go',elem:['splash'],target:'party',weight:'standard',kindV:250,
     fx:[['heal',.25,0,'party'],['cure','one','party']],
     desc:'Deedee washes faster and faster and Tom cannot keep up: the tower of clean plates in his arms grows to the ceiling and topples onto a monster. No damage: every enemy warms up, the party heals 25%, and each friend shakes off one debuff.'},

@@ -496,7 +496,7 @@ const glass=(x,y,a)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a);
 
 // ---------- Wine and Gossip (Tom + Deedee, tier 1) ----------
 // Deedee and Tom on the porch with a glass of wine each, gossiping loudly about the monster right in front of it.
-// Giant gossip bubbles show its bad hair; it gets so embarrassed it shrinks. Deedee brings out the crisp for everyone.
+// Giant gossip bubbles show its bad hair; it gets so embarrassed it shrinks. Deedee brings out the apple muffins for everyone.
 // Effects unchanged except the cap: party heals 60% (was 65%), Amber melts, 2 Warm Crusts go on the tray.
 B2_TOMBO_ANIM.deedee1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),D=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list);
@@ -511,7 +511,7 @@ B2_TOMBO_ANIM.deedee1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
       else if(ms>P.heal&&ms<P.heal+500) f=sp.celebFlip||sp.flip; }
     else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(F,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; dir=k<1?1:-1; }
     sT.x=x; sT.b=y; sT.f=f; sT.dir=dir; return {cx:x,base:y,frame:f}; });
-  // Deedee: to the porch (facing Tom and the monster), leans in to gossip, turns round to hand out the crisp.
+  // Deedee: to the porch (facing Tom and the monster), leans in to gossip, turns round to hand out the apple muffins.
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=dx,y=F,f=sp.idle,dir=-1;
     if(ms<P.walk+80) { const k=ez(ms/(P.walk+80)); x=lerp(c.origX,dx,k); y=lerp(c.origBase,F,k); f=runFr(sp,c.t,-1); }
     else if(ms<P.home) { const lean=ms>P.b1&&ms<P.b1+500?Math.sin(seg(ms,P.b1,P.b1+500)*Math.PI)*-6:0; x+=lean;
@@ -571,7 +571,7 @@ B2_TOMBO_ANIM.deedee1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [P.heal,()=>{ E2.apply(); for(const p of b2LiveParty()) glowOn(p); S('heal'); word('APPLE MUFFINS!',PX,F-140,GOLD,3,1.2); }],
     ['hf',P.heal],
     [P.grow,()=>{ S('boing'); }],
-    [P.end,'end',()=>{ for(const f of list) { f.fsc=0; f.oy=0; } return 'Wine, gossip and warm crisp. Everyone feels much better.'; }]]);
+    [P.end,'end',()=>{ for(const f of list) { f.fsc=0; f.oy=0; } return 'Wine, gossip and warm apple muffins. Everyone feels much better.'; }]]);
 };
 
 // ---------- Popcorn Jump (Tom + TNB, tier 1) ----------
@@ -2790,7 +2790,7 @@ B2_TOMBO_ANIM.ff4=E2=>{ B2.aim=null;
       gfx.lineTo(tL,tBot); gfx.closePath(); gfx.fillStyle='#c84a4a'; gfx.fill(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke();
       gfx.save(); gfx.clip(); if(!PROPART.draw('tombo/red_striped_family_table',(tL+tR)/2,(tTop-4+tBot)/2,{w:tR-tL+6,h:tBot-tTop+8})) { for(let x=tL;x<tR;x+=18) R(x,tTop+4,9,tBot-tTop,'#e8e0cc'); for(let y=tTop+10;y<tBot;y+=14) { gfx.globalAlpha=tk*.35; R(tL,y,tR-tL,6,'#ffffff'); gfx.globalAlpha=tk; } } gfx.restore();
       if(nara) { gfx.fillStyle='#1a1420'; gfx.beginPath(); gfx.moveTo(ux+27,tBot); gfx.quadraticCurveTo(ux+27,tTop+17,ux,tTop+17); gfx.quadraticCurveTo(ux-27,tTop+17,ux-27,tBot); gfx.closePath(); gfx.fill(); }
-      // plates, the bread and the crisp, a candle
+      // plates, the bread and the apple muffins, a candle
       for(const p of seated) { const x=spot[p.id].x; if(!PROPART.draw('tombo/dinner_plate',x-14,tTop-4,{w:24})) { EO(x-14,tTop-3,9,2.6,'#ffffff'); E(x-14,tTop-3,5,1.4,'#e8e0cc'); } }
       if(!PROPART.draw('tom/sourdough_boule',cx-10,tTop-14,{w:26})) boule(cx-10,tTop-10,.8,false);
       if(!PROPART.draw('tombo/lattice_crust_tin',cx+40,tTop-12,{w:28})) crustTin(cx+40,tTop-8,.7);
@@ -5791,10 +5791,10 @@ const unshrink=f=>{ f.fsc=0; f.oy=0; };
 const bubble=(x,y,txt,sc=1)=>{ const w=(txt.length*4-1)*sc+14; BUBBLE.draw('oval',x,y-3*sc-1,w+26,10*sc+24,x,y+3*sc+16); BUBBLE.text(txt,x,y-7*sc,'#2b2a26',sc); };
 // ---------- Wine and Gossip (Tom + Deedee, tier 1) ----------
 // A bistro table pops up. They sit, clink, lean in and whisper. Both glance at the monster. Gasp. DID YOU SEE WHAT IT
-// WAS WEARING? Every monster shrinks with embarrassment. Deedee brings out the crisp. Effects unchanged.
-// Painted pair (art/tombo/deedee1-pair.webp, six cells in a 3 x 2 grid): the table, the wine glasses and the crisp are painted,
+// WAS WEARING? Every monster shrinks with embarrassment. Deedee brings out the apple muffins. Effects unchanged.
+// Painted pair (art/tombo/deedee1-pair.webp, six cells in a 3 x 2 grid): the table, the wine glasses and the apple muffins are painted,
 // so the code draws none of them. From P.run to P.end-700 Tom's unit draws the pair and Deedee's unit is hidden; before and
-// after, each walks on their own. Cells: 1 sitting, 2 clink, 3 whisper, 4 point and gasp, 5 hands on chests, 6 crisp tray.
+// after, each walks on their own. Cells: 1 sitting, 2 clink, 3 whisper, 4 point and gasp, 5 hands on chests, 6 apple muffins tray.
 B2_TOMBO_ANIM.deedee1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),D=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list);
   const tsp=BATTLE_SPRITES.tom,dsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,DH=dsp.idle.length*dsp.scale;
@@ -5825,8 +5825,8 @@ B2_TOMBO_ANIM.deedee1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     ['hf',P.shrink],
     [P.shrink,()=>{ S('nope'); for(const f of list) { shrinkFoe(f,.72); ST.jolt(f,.3); } word('SO EMBARRASSED',GR.x,Math.max(50,GR.top-60),CREAM,3,1.1); setMessage('Every monster shrinks a little with embarrassment.'); say('tom','tombodeedee'); }],
     [P.crisp,()=>{ S('ding'); setMessage('Deedee brings out the apple muffins. From nowhere. Still warm.'); }],
-    [P.apply,()=>{ E2.apply(); for(const p of b2LiveParty()) glowOn(p); S('heal'); word('WARM CRISP',lx,Math.max(50,by-DH-60),GOLD,3,1.2); }],
-    [P.end,'end',()=>{ for(const f of list) unshrink(f); return 'Wine, gossip and warm crisp. Everyone feels much better.'; }]];
+    [P.apply,()=>{ E2.apply(); for(const p of b2LiveParty()) glowOn(p); S('heal'); word('APPLE MUFFINS',lx,Math.max(50,by-DH-60),GOLD,3,1.2); }],
+    [P.end,'end',()=>{ for(const f of list) unshrink(f); return 'Wine, gossip and warm apple muffins. Everyone feels much better.'; }]];
   ST.play(E2,steps); };
 
 // ---------- Clean As You Go (Tom + Deedee, Director's Cut 1) ----------

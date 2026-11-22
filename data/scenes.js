@@ -979,7 +979,7 @@ SCENES.ch3Fishing=[
   {talk:'Deedee',lines:['Not one pepper for me either. Peppers give me gas.']},
   {talk:'Grace',lines:['Deedee. EVERYTHING gives you gas.']},
   {talk:'Deedee',lines:['Who told you that.']},
-  {talk:'Grace',lines:['Tata. At the crisp.']},
+  {talk:'Grace',lines:['Tata. At the apple muffins.']},
   {talk:'Deedee',lines:['Tata is on thin ice.']},
   {talk:'Deedee',lines:['I have three pies in, so I\'m staying put. Do NOT let him eat peppers on an empty stomach.']},
   {talk:'Boppy',lines:['I never eat peppers on an empty stomach. I eat them on a full stomach. Then it\'s empty.']},
@@ -1235,7 +1235,7 @@ SCENES.ch3AfterBoss=()=>[
   {talk:'Boppy',lines:['Still up there. Somebody ought to let that fish finish his jump.']},
   {toast:'Goal: home to Deedee and Boppy’s house on Rivituso Row.',time:4.5}
 ];
-// 12. Deedee and Boppy's house: Boppy's catch, Rose tells on him, the gold coin, the third flashbulb, Deedee's rule. Crisp.
+// 12. Deedee and Boppy's house: Boppy's catch, Rose tells on him, the gold coin, the third flashbulb, Deedee's rule. Apple muffins.
 SCENES.ch3End=[
   {flag:'ch3-done',value:'pending'},
   {place:'Deedee',at:[7,9],dir:'right'},
@@ -2054,7 +2054,7 @@ SCENES.ch5Snack=[
   {flag:'ch5-snack'},
   {talk:'Grace',lines:['FOR EVERYONE, LOVE DEEDEE. That\'s Deedee’s handwriting! Everyone means us!']},
   {call:()=>sfx.pickup()},
-  {talk:'Rose',lines:['Apple muffins! Deedee brings the teachers CRISP?']},
+  {talk:'Rose',lines:['Apple muffins! Deedee brings the teachers APPLE MUFFINS?']},
   {talk:'Mr. Halverson',lines:['Every conference night. Twelve years. It\'s the only reason Gary shows up.']},
   {talk:'Amy',lines:['She never told me that. Of course she never told me that.']},
   {talk:'Tom',lines:['To the moon and back. And apparently to the staff room.']},
@@ -3319,8 +3319,8 @@ SCENES.ch7Kitchen=[
   {talk:'Tom',lines:['On the plane. Twice.']},
   {talk:'Deedee',lines:['That\'s not eating. That\'s a tray.']},
   {call:()=>{ SCENE_PROPS.chart.show=true; sfx.whoosh&&sfx.whoosh(); }},
-  {talk:'Boppy',lines:['Gracie, my crisp is under there.']},
-  {talk:'Grace',lines:['Your crisp is under California, Boppy. Don\'t move. I\'m presenting.',
+  {talk:'Boppy',lines:['Gracie, my apple muffins are under there.']},
+  {talk:'Grace',lines:['Your apple muffins are under California, Boppy. Don\'t move. I\'m presenting.',
     'Row one, the dragonfly. A flash. A grey patch. An orange block. A round hole. A burnt bulb. And something that woke up, holding a gold coin.',
     'Row two, the lemon. Row three, the fish. Row four, the hat. Row five, the kickball. Row six, the picnic basket. Every row has the same six boxes, and every box is checked.',
     'It\'s not six strange things. It\'s ONE strange thing, six times.']},
@@ -3362,7 +3362,7 @@ SCENES.ch7Kitchen=[
   {talk:'Deedee',lines:['The cookies in the car? I\'ve been vacuuming that car since before Tom was born, hubby. I didn\'t need a book to tell me.']},
   {talk:'Boppy',lines:['...What else does it know?']},
   {talk:'Deedee',lines:['Go and find out.']},
-  {talk:'Boppy',lines:['I\'ll stay here and guard the crisp, Deary.']},
+  {talk:'Boppy',lines:['I\'ll stay here and guard the apple muffins, Deary.']},
   {talk:'Deedee',lines:['You three stay together. Nobody goes anywhere alone. And Tom, this time you see it with your own eyes.']},
   {talk:'Tom',lines:['That\'s why I came home, Mom.']},
   {talk:'Deedee',lines:['One more thing. If a book down there says one word about my pie crust, you didn\'t hear it.']},
@@ -4536,7 +4536,7 @@ SCENES.ch9AfterBoss=()=>[
   ...(flag('kind:mirrorball')?[
     {talk:'The Mirrorball',lines:['...You asked me. Three times. Nobody has asked me to dance since 1971.','I don\'t need the moon. I just needed somebody to ASK.']}]:[
     {talk:'The Mirrorball',lines:['...Fine. The party is over. It was over in 1971. I just didn\'t want to be the one to turn off the lights.']},
-    {talk:'Deedee',lines:['Oh, honey. Nobody has to turn off the lights. We\'ll come back. Every full moon. I\'ll bring crisp.']}]),
+    {talk:'Deedee',lines:['Oh, honey. Nobody has to turn off the lights. We\'ll come back. Every full moon. I\'ll bring apple muffins.']}]),
   {finale:'mirrorball'},
   {call:()=>{ storyWorld(); sfx.whoosh(); }},
   {talk:'The Dome',lines:['The Mirrorball turns once, slowly, and lets go. A great round light rises out of her, up through the glass, and settles in the sky. The moon. Right where it belongs.']},

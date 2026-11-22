@@ -690,6 +690,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | coin-closeup-spec.md | Coin close-up screen: assessment and build spec (2026-11-12, Tom approved the direction 12:54) | 2026-11-12 |
 | comedy-audition-scene5.md | Scene 5 comedy audition: three takes (2026-11-13) | 2026-11-13 |
 | costs-duo-plan.md | AI Costs on the iPhone Duo: assessment and design (costsduoplan, 2026-11-21; BUILT as costsduo1, both parts in | 2026-11-21 |
+| crispfix1-voice-lines.md | crispfix1: spoken lines changed from crisp to apple muffins (2026-11-22) | 2026-11-22 |
 | cutscene-polish-plan.md | Cutscene polish: repo diagnostic and phased patch spec (cutpolish0, 2026-11-19) | 2026-11-19 |
 | damage-balance.md | Damage balance review (25 Oct 2026, artifact v255) | 2026-11-22 |
 | dashboard-plan.md | Admin Dashboard plan (board-dashboard, 2026-11-21) | 2026-11-21 |

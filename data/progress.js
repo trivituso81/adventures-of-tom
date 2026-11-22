@@ -17,7 +17,7 @@ const B6_PATHS={
   grace:[{name:'Influencer Cleric',sub:'Squishies, glitter, ring lights'},{name:'Acro-Star',sub:'Gymnastics and dance battles'}],
   rose:[{name:'Giggle Gremlin',sub:'Peekaboo, spins, dress-up'},{name:'Piggyback Kid',sub:'Lamby and Tom’s shoulders'}],
   amy:[{name:'Head Teacher',sub:'Red pens and pop quizzes'},{name:'Marathon Mom',sub:'Burpees, hills, the finish line'}],
-  deedee:[{name:'Registered Baker',sub:'Check-ups, crisp, Sunday dinner'},{name:'Busy Bee',sub:'Power walks and wine o’clock'}],
+  deedee:[{name:'Registered Baker',sub:'Check-ups, apple muffins, Sunday dinner'},{name:'Busy Bee',sub:'Power walks and wine o’clock'}],
   boppy:[{name:'Rikers Warden',sub:'Fishing, the recliner, headcounts'},{name:'Pepper Champion',sub:'Peppers and the 1970 story'}],
   tnb:[{name:'Set Costumer',sub:'Wardrobe, the Metro, horror'},{name:'Kiln & Longboard',sub:'Pottery and steep LA streets'}],
   nara:[{name:'Goodest Girl',sub:'Fetch, zoomies, tug of war'},{name:'Pack Heart',sub:'Puddles, shakes and howls'}],

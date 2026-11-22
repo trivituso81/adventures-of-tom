@@ -41,7 +41,7 @@ Beneath its cozy 16-bit SNES aesthetic, the villain's weapon is a deeply modern 
 * Chapter 1: The Soup Dumpling Protocol (1.5 Hours)
   * Locations: Little Elsewhere (The Square, Rivituso Row, Grump Hollow).
   * Party Roster: Tom (starts solo); Grace and Rose join outside the taxi; Deedee joins at the Rivituso house (Party: Tom, Grace, Rose, Deedee).
-  * Key Beats: Opening scene as established: Sal's taxi drops Tom off, Grace and Rose shout "TATA!!!" and tackle-hug him, and Grace shows off her sparkling diamond gold soup dumpling squishy. A giant Mudling steals Deedee's rhubarb crisp tin and drags it into Grump Hollow. Tutorial battles teaching Tom's DEFEND, Grace's DANCE, Rose's SILLY, and Deedee's MOON & BACK.
+  * Key Beats: Opening scene as established: Sal's taxi drops Tom off, Grace and Rose shout "TATA!!!" and tackle-hug him, and Grace shows off her sparkling diamond gold soup dumpling squishy. A giant Mudling steals Deedee's apple muffins tin and drags it into Grump Hollow. Tutorial battles teaching Tom's DEFEND, Grace's DANCE, Rose's SILLY, and Deedee's MOON & BACK.
   * Boss: The Big One (a towering, grumpy snapping-turtle bog monster wearing Deedee's pie tin like a crown).
   * Emotional Beat: Pure warmth of arrival; the chaotic joy of being an uncle who shows up.
   * Spotlight: Grace & Rose.
@@ -147,7 +147,7 @@ Beneath its cozy 16-bit SNES aesthetic, the villain's weapon is a deeply modern 
 * Chapter 14: The Rikers Wall of Rivituso Row (2.0 Hours)
   * Locations: Little Elsewhere (Grump Hollow Breach, Rivituso Row Fortress).
   * Party Roster: Tom, Amy, Grace, Rose (with TNB and Nara holding the breach against Auditors).
-  * Key Beats: The party emerges inside a half-frozen Little Elsewhere. Deedee is trapped inside the Rivituso house baking endless rhubarb crisps in a time-loop, while Boppy stands guard at the front gate in glowing amber armor, possessed by the Warden's Anchor after he tried to stop Vance from freezing Deedee's memories.
+  * Key Beats: The party emerges inside a half-frozen Little Elsewhere. Deedee is trapped inside the Rivituso house baking endless apple muffins in a time-loop, while Boppy stands guard at the front gate in glowing amber armor, possessed by the Warden's Anchor after he tried to stop Vance from freezing Deedee's memories.
   * Boss: Warden Boppy (Possessed). Mechanics: You cannot attack Boppy; attacking him heals his armor. Instead, Tom must use DEFEND, Amy must pace him like a cross-country teammate, Grace and Rose must tell him jokes, and the party must free Deedee from the porch so she can join mid-battle and cast MOON & BACK on her husband.
   * Emotional Beat: Boppy breaks down crying as the helmet shatters: "I just didn't want to get too old to keep you all safe." Deedee hugs him: "You big nut, we keep each other safe."
   * Spotlight: Boppy & Deedee (Full Redemption).
@@ -244,7 +244,7 @@ Beneath its cozy 16-bit SNES aesthetic, the villain's weapon is a deeply modern 
    * Loss 1: Deedee and Boppy turn to stone in Rivituso Row, and Little Elsewhere is shrunk into a silent glass globe.
    * Loss 2: Tom uses DEFEND one final time at the top of the Glass Tower and is completely unwritten from history. For two full hours of gameplay, Tom is gone from the party, the menu, and NPC dialogue.
 2. How the Reversal Is Set Up From Hour 1 (The "Living Receipts" System):
-   * Every time the player performs a warm, character-specific interaction across Chapters 1 to 17 (letting Rose ride on Tom's shoulders, feeding the sourdough starter, helping Miss Odette, trading puns with TNB, listening to Boppy's stories, eating Deedee's rhubarb crisp), the game quietly increments a hidden counter called Heart-Traces.
+   * Every time the player performs a warm, character-specific interaction across Chapters 1 to 17 (letting Rose ride on Tom's shoulders, feeding the sourdough starter, helping Miss Odette, trading puns with TNB, listening to Boppy's stories, eating Deedee's apple muffins), the game quietly increments a hidden counter called Heart-Traces.
    * Vance's machine operates on a cold corporate logic: if you delete the central file (Tom), the network collapses. What Vance's algorithm cannot calculate is that love leaves an impression in the people around you, like a mold around clay.
 3. The Cost of the Reversal (Chapter 19):
    * To bring Tom back, the surviving characters cannot just find a Phoenix Down. Grace must sacrifice her prized starting key item (the Sparkling Diamond Gold Soup Dumpling squishy from the opening cutscene; it is gone for the rest of the game and returns only in the epilogue), TNB sacrifices his first pottery piece, Amy sacrifices her stopwatch, and Nara tracks Tom through the dark by scent alone.

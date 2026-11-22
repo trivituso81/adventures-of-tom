@@ -2,7 +2,7 @@
 // data/scenes-ch14.js — Part 2, Chapter 14 "The Rikers Wall of Rivituso Row". Loaded after data/scenes-ch13.js.
 // Chapter 13 ended with Boppy at the Rivituso door in the Warden's gold plate. The girls come up the handcar from the Sub-Rail and rejoin the party
 // (setGirlsAway(false) clears the cab-stand copies); TNB and Nara stay to hold the breach against Vance's Auditors. Deedee is on the porch, half in
-// amber, looping a plate of apple muffins. Rose eats the crisp (amber is warmth that got stuck; it needs somewhere to go). Boppy cannot be hit: the fight is
+// amber, looping a plate of apple muffins. Rose eats the apple muffins (amber is warmth that got stuck; it needs somewhere to go). Boppy cannot be hit: the fight is
 // DEFEND, cheering him up, jokes, and Deedee's MOON & BACK (data/ch14-battle.js). After it: the plate melts, "I just didn't want to get too old to
 // keep you all safe," the Tombo Nobody Gets Past Us (boppy2) unlocks, and Deedee and Boppy go back inside.
 // Flags, in order: ch14-open (the scene played; the girls are back), ch14-deedee (Deedee freed from the loop), ch14-gate (the Warden fight has
@@ -67,7 +67,7 @@ SCENES.ch14Open=[
   {talk:'Tom',lines:['Girls. Stay behind me. He’s not himself.']},
   {talk:'Amy',lines:['He’s completely himself. That’s the problem. He’s himself with a gate.']},
   {talk:'Grace',lines:['So. Where’s Deedee?']},
-  {talk:'Boppy',lines:['Inside. She’s fine. She’s making a crisp. Don’t look at the porch.']},
+  {talk:'Boppy',lines:['Inside. She’s fine. She’s making apple muffins. Don’t look at the porch.']},
   {call:()=>sfx.ding&&sfx.ding()},
   {talk:'Rose',lines:['Boppy. There’s a Deedee on the porch.']},
   {talk:'Boppy',lines:['That’s a decoration.']},
@@ -87,13 +87,13 @@ SCENES.ch14Deedee=[
   {talk:'Deedee',lines:['Apple muffins, nine minutes. Apple muffins, nine minutes. Hello, sweetie. Apple muffins, nine minutes.']},
   {talk:'Amy',lines:['Mom. It’s Amy. Mom, look at me.']},
   {talk:'Deedee',lines:['Hello, Amy. Apple muffins, nine minutes. Do you want a bite? Apple muffins. Nine minutes.']},
-  {talk:'Tom',lines:['She’s looping. Look at the tray. It’s the same crisp. Every time. It’s fresh, it’s perfect, and nobody ever eats it.']},
+  {talk:'Tom',lines:['She’s looping. Look at the tray. Same apple muffins. Every time. They’re fresh, they’re perfect, and nobody ever eats them.']},
   {talk:'Tom',lines:['Amber is warmth that got stuck. She’s been baking for nobody for hours, so all that warmth has nowhere to go.']},
   {talk:'Rose',lines:['Maybe somebody just has to eat it.']},
   {talk:'Grace',lines:['Rose. That is the smartest thing you have said all week.']},
   {talk:'Rose',lines:['I say smart things every day. They just come out as noise.']},
   {walk:'rose',to:[[15,13],[15,12],[16,12],[16,11]],speed:.3}, {face:'rose',dir:'up'},
-  {talk:'Rose',lines:['Deedee. I’m going to eat the crisp now. Okay? Okay.']},
+  {talk:'Rose',lines:['Deedee. I’m going to eat the apple muffins now. Okay? Okay.']},
   {call:()=>sfx.pickup&&sfx.pickup()},
   {wait:1.4},
   {talk:'Rose',lines:['...It’s SO good. It’s the best one. Deedee, it’s the best one you ever made.']},

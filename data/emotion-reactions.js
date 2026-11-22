@@ -108,7 +108,7 @@ const EMOTION_REACTIONS={
 "TNB|That's not a hole. That's where the gumbo goes in.|2": [["tom", "happy", 49]],
 "TNB|That's ten times now. It gets better every time.|2": [["tom", "happy", 16], ["washington", "happy", 47]],
 "TNB|The ground is humming. That's never a good sign. I've seen this movie forty-seven times.|2": [["nara", "scared", 21], ["tom", "unimpressed", 87]],
-"TNB|The mud took Deedee's crisp? Is the mud okay?|2": [["tom", "happy", 44]],
+"TNB|The mud took Deedee's apple muffins? Is the mud okay?|2": [["tom", "happy", 52]],
 "TNB|The smog monsters are gone, but Mr. Washington is still in a daze. Look at him.|2": [["tom", "sad", 65]],
 "TNB|There's a little round hole in the side, like somebody took a bite out of it.|2": [["tom", "surprised", 39]],
 "TNB|Two flashes, two orange blocks and two gold coins. Babe, I don't love that. Let's go check on Mr. Washington.|2": [["tom", "scared", 74]],

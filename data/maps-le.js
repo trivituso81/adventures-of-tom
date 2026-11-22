@@ -142,9 +142,9 @@ const LE_AREAS=[
     border:{kind:'tree',open:[[8,0],[13,25],[14,25],[29,5],[29,6],[0,13],[0,14],[0,15],[0,23],[29,12],[29,13],[29,14],[29,15],[29,16],[29,17],[29,18]]},
     exits:[[7,2,'hollow',6,20,'up'],[7,3,'hollow',7,20,'up'],[8,2,'hollow',6,20,'up'],[8,3,'hollow',7,20,'up'],[13,25,'row',13,2,'down'],[14,25,'row',14,2,'down'],
       [29,5,'schoolyard',1,8,'right'],[29,6,'schoolyard',1,9,'right'],[28,5,'schoolyard',1,8,'right'],[28,6,'schoolyard',1,9,'right']],
-    // Chapter 1: a fallen branch closes the way north until Deedee's crisp is stolen (engine/story.js storyGate).
+    // Chapter 1: a fallen branch closes the way north until Deedee's apple muffins are stolen (engine/story.js storyGate).
     gates:[{at:[[7,2],[7,3],[7,4],[8,2],[8,3],[8,4]],art:'town-hollow',cond:{chapter:1,notFlag:'ch1-theft'},name:'Fallen branch',
-      lines:['A big branch has fallen across the path to Grump Hollow.','Grace pulls on Tom’s sleeve. "Crisp first, Tata. Monsters later."']},
+      lines:['A big branch has fallen across the path to Grump Hollow.','Grace pulls on Tom’s sleeve. "Apple muffins first, Tata. Monsters later."']},
       // The path east to Long Island Elementary (chapter 5) is locked until conference night.
       {at:[[27,8],[28,8],[29,8]],art:'town-school',cond:{test:S=>S.chapter<5||(S.chapter===5&&!S.flags['ch5-goal'])},name:'School gate',
         lines:['The path east goes to Long Island Elementary. The gate is locked.','A sign on it: NO SCHOOL TODAY. Grace says it\'s the best sign in the whole town.'],

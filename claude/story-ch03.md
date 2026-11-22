@@ -59,7 +59,7 @@ Dialogue:
 - Deedee: Not one pepper for me either. Peppers give me gas. (KEEP)
 - Grace: Deedee. EVERYTHING gives you gas. (KEEP)
 - Deedee: Who told you that. (KEEP)
-- Grace: Tata. At the crisp. (KEEP)
+- Grace: Tata. At the apple muffins. (KEEP)
 - Deedee: Tata is on thin ice. (KEEP)
 - Deedee: I have three pies in, so I'm staying put. Do NOT let him eat peppers on an empty stomach. (KEEP)
 - Boppy: I never eat peppers on an empty stomach. I eat them on a full stomach. Then it's empty. (KEEP)
