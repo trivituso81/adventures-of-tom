@@ -1,3 +1,9 @@
+## 2026-11-22 (2): Art Library bake, banner-leave-rose (`artbake1586`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- banner-leave-rose: `bake_party_banner.py ` ran from art/raw/characters/banner-leave-rose-v1.png
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## 2026-11-22 (1): Art Library bake, banner-leave-grace, banner-join-rose (`artbake1583`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
