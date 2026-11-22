@@ -31923,8 +31923,8 @@
     }
    ],
    "wgen": {
-    "want": false,
-    "at": "2026-11-22T05:23:11Z",
+    "want": true,
+    "at": "2026-11-22T06:55:39Z",
     "n": 1,
     "est": 0.79,
     "run": {
@@ -31953,7 +31953,8 @@
      "revs": {
       "tom-rose-giddyup": 1
      }
-    }
+    },
+    "auto": true
    },
    "waiting_on": "claude"
   },
@@ -34688,8 +34689,8 @@
     "opening": "added by movefun2"
    },
    "wgen": {
-    "want": false,
-    "at": "2026-11-22T06:14:39Z",
+    "want": true,
+    "at": "2026-11-22T06:55:39Z",
     "n": 1,
     "est": 0.5,
     "run": {
@@ -34719,7 +34720,8 @@
       "grace-cubepop": 4,
       "deedee-wetfloor": 10
      }
-    }
+    },
+    "auto": true
    },
    "history": [
     {
