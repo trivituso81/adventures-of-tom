@@ -710,6 +710,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | la-areas-qc-2026-11-05.md | Los Angeles area paintings: check of the six approved Library pictures (2026-11-05) | 2026-11-05 |
 | menuux-plan.md | Main menu redesign: the proposal (menuux-plan, 2026-11-21) | 2026-11-21 |
 | missing-baker-tools.md | Missing Baker tools (built 2026-10-27, rebuilt against game v332 the same evening) | 2026-10-27 |
+| move-fun-review.md | Move fun review (movefun1, 2026-11-21) | 2026-11-22 |
 | move-review.md | Move review round 2 (2026-10-24, build 1792878363) | 2026-10-24 |
 | mudling-heist-prompt.md | Mudling pie heist: 16-frame sheet prompt (2026-10-30) | 2026-10-30 |
 | music-library.md | Music Library (BUILT 2026-11-02, `music1`; spec below, with the as-built notes in section 6) | 2026-11-02 |

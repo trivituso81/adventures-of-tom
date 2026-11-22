@@ -1,3 +1,15 @@
+## movefun1 (2026-11-22): which family move videos are fun; 3 flat ones listed for Tom to pick
+
+Card c-movefun. Tom (11-21 20:02): "But what makes it giddy up Tata? These moves need to be fun." I made a contact sheet of each of the 10 family move videos (16 pictures plus the hit picture) and judged it against the move's name, description and the person. No prompt changed, no run started, no game file changed.
+
+| Verdict | Moves |
+|---|---|
+| Fun (6) | Tom Lounge Pass Flex; Grace Soup-Dumpling Squeeze; Rose Lamb-Tuck Ankle Tackle, The Floor Is Lava!; Deedee Windex Spritz, Hand Me My Glasses Scrub |
+| Flat (3) | Tom Zone One Blockade (only "stop" palms, no hip bump); Grace Crunchy Sugar-Cube Pop (a punch); Deedee Wet-Floor Hazard (one quick swipe, nothing says wet floor) |
+| Wrong (1) | Rose Giddyup, Tata! (no Tom in it; already being remade by pairmove1) |
+
+Length is not the cause: every move plays 2.1 to 3.4 s, and the two good signature moves are 2.8 s. Each flat move has one fix (one prompt sentence; Cube Pop and Wet-Floor also play at 1.25x). List and exact wording: claude/move-fun-review.md. Board: t-movefun-pick (Tom decides) blocks c-movefun-fix (Sonnet 5.5 medium, auto, build movefun2).
+
 ## menu2 (2026-11-22): the new menu has its Vibes and Gear pages (still behind the MENU: NEW switch)
 
 Card c-menu2. Tom approved the design on t-menuux-decide (11-21 18:20). Nothing a player sees changes until Tom picks `MENU: NEW` in ADMIN (or `index.html?menu=new`). The Vibes tab no longer opens the old Vibes overlay and the Gear tab no longer opens today's Gear screen in the new menu; both are pages of the book now.

@@ -31836,7 +31836,7 @@
    "theme": "Battle Animations",
    "tag": "movefun1",
    "title": "Does each family move look like its name? List flat ones",
-   "next": "Watch every family move video against its name and the move's idea, and list the ones that fall flat, with one fix each.",
+   "next": "Reviewed all 10 family moves that have a video: 6 Fun, 3 Flat (Zone One Blockade, Crunchy Sugar-Cube Pop, Wet-Floor Hazard), 1 Wrong (Giddyup, already being remade with Tom in it by pairmove1). List: claude/move-fun-review.md. Next: your card Which flat moves to remake.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
@@ -31857,6 +31857,10 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "movefun1: contact sheets of the 10 family move videos judged against name, description and person. Fun 6, Flat 3, Wrong 1 (Giddyup, covered by pairmove1). Length is not the cause: every move is 2.1 to 3.4 s and the two good signature moves are 2.8 s. No prompt changed, no run started. Hands Tom t-movefun-pick."
     }
    ],
    "prompt": {
@@ -31867,7 +31871,8 @@
     "model": "Claude Opus 5.5 (row D: judging moves by eye and by the family's personalities)",
     "effort": "medium",
     "text": "Read CLAUDE.md (sections wanauto1, No painted poses in battle, Fix a miss with the smallest change, Image and video prompts), docs/CANON.md, claude/canon-addendum.md (the 2026-11-21 pairmove1 line), claude/video-battle-plan.md 4.14, then card c-movefun in data/board.json. Tom (2026-11-21 20:02): \"But what makes it giddy up Tata? These moves need to be fun.\" For every family member's move in data/b3-kit-*.js that has a video (data/clips/*.js), make a contact sheet of the clip (its sheet in art/clips/) and judge it against the move's name, its description and the person: would a kid watching say that is the move? Write claude/move-fun-review.md: one table row per move (who, move, what the video shows, verdict Fun / Flat / Wrong, one fix: a prompt change, a two-person video like pairmove1, or a longer length for a signature move, 2 to 3 s for basics and up to 5 s for signature and team moves). Change no prompt and start no run in this session; the list is for Tom. Add one Tom decide card t-movefun-pick that lists the Flat and Wrong moves with your recommended fixes (choices: Fix all of them (Recommended), Fix only the signature moves, Not now) and blocks a Sonnet 5.5 medium card c-movefun-fix (auto) that applies the fixes he picks and starts their runs (wanauto1). Write the CHANGES heading ## movefun1 and push. After: t-movefun-pick. Your first push is the commit board: start c-movefun. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "t-movefun-pick"
   },
   {
    "id": "c-guideuse-fix",
@@ -34137,6 +34142,75 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-pairmove1-gen and t-pairmove1-gen in data/board.json, history included. Your first push is the commit board: start c-fix-pairmove1-gen.\n\nTom tested and found problems:\n1. Card t-pairmove1-gen (Make Rose's Giddyup with Tom in it, ask animations). He was asked: Tap Generate all 1 video (two taps). Rose hops onto Tom's shoulders, rides with a fist up like shouting giddyup, then springs off and lands in front of him. In a fight it plays at Tom's spot while Rose is hidden; if Tom is knocked out or not in the party, her solo jump plays. The Action checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20. He wrote: Says nothing to make migrant lei\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T04:31:47.204Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-pairmove1-gen to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-pairmove1-gen, and give the build fix-pairmove1-gen a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-pairmove1-gen"
+  },
+  {
+   "id": "t-movefun-pick",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "decide",
+   "title": "Which flat moves to remake",
+   "next": "Fact: 6 of the 10 family move videos read as their name. 3 are flat, all signature moves, each with one recommended fix (one sentence of the prompt; the rest kept):\n1. Tom, Zone One Blockade: he only holds up two \"stop\" palms; the hip bump never happens. Fix: the hip bump gets its own sentence.\n2. Grace, Crunchy Sugar-Cube Pop: she punches; a punch is not Grace. Fix: she holds the cube up by her ear and crunches it with both hands; plays a bit slower (about 3.5 s).\n3. Deedee, Wet-Floor Hazard: one quick mop swipe, nothing says wet floor. Fix: after the sweep she sets down a yellow wet-floor sign and wags a finger at it; plays about 4 s.\nRose's Giddyup is the 1 wrong one and is already being remade with Tom in it (your card Make Rose's Giddyup with Tom in it). Full list: claude/move-fun-review.md. Cost: about $1.80 for the first tries, at most $9.60 if the Action has to retry. Tap one answer; your answer starts the remake card c-movefun-fix by itself.",
+   "choices": [
+    "Fix all of them (Recommended)",
+    "Fix only the signature moves",
+    "Not now"
+   ],
+   "leads": [
+    "Card c-movefun-fix writes the 3 new prompts and starts their videos; the Action checks them, retries by itself, puts the ones that pass in the game, and adds them to your watch card.",
+    "Same as fixing all of them today, because all 3 flat moves are signature moves; basics that turn flat later would not be remade.",
+    "Nothing is remade; the 3 moves stay as they are and c-movefun-fix closes."
+   ],
+   "blocks": [
+    "c-movefun-fix"
+   ],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "build": "movefun1",
+   "chat": {
+    "url": "",
+    "opening": "added by movefun1"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by movefun1. Tom (20:02): \"But what makes it giddy up Tata? These moves need to be fun.\""
+    }
+   ]
+  },
+  {
+   "id": "c-movefun-fix",
+   "lane": "claude",
+   "col": "wait",
+   "theme": "Battle Animations",
+   "tag": "movefun2",
+   "title": "Remake the flat move videos Tom picked",
+   "next": "Waits on your card Which flat moves to remake, then starts by itself. It writes the new prompt for each move you picked (one sentence changed each) and starts their videos; the Action checks, retries and puts the passes in the game.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "waiting_on": "tom",
+   "auto": true,
+   "prompt": {
+    "what": "Applies the fixes Tom picked on t-movefun-pick and starts their videos.",
+    "before": [
+     "Answer the card Which flat moves to remake. This card then starts by itself; if it does not, open a NEW conversation, choose Claude Sonnet 5.5 and set effort to medium, then paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: three prompt edits fully written out in claude/move-fun-review.md, plus job entries copied from existing ones)",
+    "effort": "medium (every sentence to change is written word for word in the review)",
+    "text": "Read CLAUDE.md (sections wanauto1, Fix a miss with the smallest change, Image and video prompts), claude/move-fun-review.md, claude/video-battle-plan.md 4.14, then cards t-movefun-pick (Tom's answer and note come first) and c-movefun-fix in data/board.json. Your first push is the commit board: start c-movefun-fix. If Tom answered Not now: write a history line, close this card with the CHANGES heading ## movefun2 saying nothing was remade, and push. Otherwise, for each move he picked: write the next prompt file in tools/art-library/prompts/ as the current one with only the sentence the review names changed (wan-tom-blockade-v3.txt, wan-grace-cubepop-v4.txt, wan-deedee-wetfloor-v6.txt), point its job in tools/art-library/wangen-jobs.json at it, raise rev by one, set auto_from to now, add a why line (the one change and what was kept), and give tom-blockade and grace-cubepop bake and wire settings copied from the header of their current clip file in data/clips/ (tom-blockade.js, grace-cubepop.js); Cube Pop and Wet-Floor bake at speed 1.25. Run python3 tools/art-library/wanbulk_test.py, wangen_test.py and python3 tools/board_wan_test.py. Add one Tom animations card t-movefun-gen (fyi true, wan {jobs: the picked jobs, cap 9.6}) and start the run the wanauto1 way (wgen.want on it, last commit subject board: wan generate t-movefun-gen); never run wangen.py yourself. Write the CHANGES heading ## movefun2 and push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by movefun1. Blocked by t-movefun-pick."
+    }
+   ]
   }
  ],
  "sessions": [
