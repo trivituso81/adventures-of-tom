@@ -918,6 +918,15 @@
    "source": "art-gen run https://github.com/trivituso81/adventures-of-tom/actions/runs/44996782685",
    "at": "2026-11-22T07:08:44Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44996782685"
+  },
+  {
+   "service": "fal",
+   "date": "2026-11-21",
+   "amount": 0.785,
+   "what": "wan-gen Action: tom-rose-giddyup",
+   "source": "wan-gen run",
+   "at": "2026-11-22T07:09:54Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44996404459"
   }
  ],
  "balances": [
