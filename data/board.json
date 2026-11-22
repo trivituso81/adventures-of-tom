@@ -35752,7 +35752,7 @@
    "title": "Generate the 3 gate pictures again",
    "theme": "Tools",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "pictures",
    "fyi": true,
    "next": "Open ADMIN > ART LIBRARY, find prop-gate-town-school-open, prop-gate-backlot-stage7-open and prop-gate-jpark-barn-open, press Generate on each, then Approve or Reject. They now go to WAN (try 3) and should come back with a picture.",
@@ -35775,8 +35775,14 @@
      "d": "2026-11-21",
      "t": "Made by c-fix-artwan.",
      "at": "2026-11-22T06:56:18.000Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good.",
+     "at": "2026-11-22T07:50:24.064Z"
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-wanstop-tom-rose-giddyup-r1",
