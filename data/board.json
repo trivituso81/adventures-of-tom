@@ -31274,7 +31274,7 @@
    "col": "prog",
    "theme": "Game Shell",
    "title": "Main menu redesign: the proposal",
-   "next": "Claude is writing a proposal for a new main menu (the pause menu: Party, Items, Gear, Status, Stamps, Vibes, Load, Options): research on the best modern RPG menus, a new look in the game's painted style, and a layout that fits the new battle system. Nothing in the game changes until Tom approves it in the chat; the build cards are made after that.",
+   "next": "The proposal is written and drawn: 13 drawings (Duo unfolded, phone upright, phone sideways, and today's menu beside them) at https://claude.ai/artifact/RGQDGbWRCFL3awXe7rmChm , the same pictures in claude/menuux-mock/shots/, and the plan in claude/menuux-plan.md. Nothing in the game changed. Tom decides on the card Decide on the new main menu; his answer starts the card Create the menu build cards.",
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
@@ -31299,8 +31299,13 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Proposal done (build menuux-plan). Direction \"Golden Hour\": the paused world goes to dusk and a paper sketchbook opens; the Family screen is a line-up of the hero paintings at real heights; five tabs (Family, Vibes, Gear, Bag, System) instead of nine commands; Vibes is a first-class screen with every skill described; four new stats; the Family Ruckus gauge; painted item pictures. Drawn for Duo unfolded (5 screens), phone upright (5) and phone sideways (1). Build plan: four cards, menu1 to menu4, all Sonnet 5.5 (claude/menuux-plan.md section 5). Open point for Tom at menu1: head sizes in the line-up."
     }
-   ]
+   ],
+   "after": "t-menuux-decide"
   },
   {
    "id": "c-reports-13",
@@ -31964,6 +31969,97 @@
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "started_at": "2026-11-22T02:03:59+00:00"
+  },
+  {
+   "id": "t-menuux-decide",
+   "title": "Decide on the new main menu",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "up",
+   "ask": "decide",
+   "next": "Open the drawings at https://claude.ai/artifact/RGQDGbWRCFL3awXe7rmChm (also in the chat that starts \"The main menu needs a complete overhaul\"). The first row is the Duo unfolded: today's menu, then Family, Vibes, Gear, Bag and System. Press Play on Family, Duo unfolded and tap the five tabs; do the same on Family, phone in the second row. About 5 minutes. Then tap one answer below. Your answer starts the card Create the menu build cards by itself.",
+   "choices": [
+    "Build it as drawn (Recommended)",
+    "Build it with my changes (I wrote them in the note)",
+    "Not this direction"
+   ],
+   "leads": [
+    "Card c-menuux-cards creates four build cards (the look and Family, then Vibes and Gear, then Bag and System, then the switch-over and removing the old menu), all on Sonnet 5.5. The first one starts by itself and ends with one 3 minute look on your Duo.",
+    "Card c-menuux-cards first applies your note to the plan and the drawings. A small change (wording, a moved or removed element) is applied and the four build cards are created. A change to the look itself is redrawn by an Opus session first and comes back to you as this card again.",
+    "Card c-menuux-cards creates no build cards. It writes what you did not like onto a new proposal card for a different direction, and the menu in the game stays as it is."
+   ],
+   "blocks": [
+    "c-menuux-cards"
+   ],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Made by menuux-plan. The proposal is drawings and a plan only; nothing in the game changed. Plan: claude/menuux-plan.md."
+    }
+   ]
+  },
+  {
+   "id": "c-menuux-cards",
+   "tag": "menuux-cards",
+   "title": "Create the menu build cards",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "auto": true,
+   "next": "Waits on your answer on the card Decide on the new main menu, then starts by itself. It creates the four build cards from the plan (menu1 the look and Family, menu2 Vibes and Gear, menu3 Bag and System, menu4 the switch-over and removing the old menu) and starts the first.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Reads your answer on the menu proposal and creates the build cards for the new main menu, each with its model and effort. No game change.",
+    "before": [
+     "Answer the card Decide on the new main menu (tap one of the three answers; write any changes in the note). This card then starts by itself; if it does not, open a NEW conversation, choose Claude Sonnet 5.5 and set effort to medium, then paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the four cards, their order, models and efforts are written in the plan; the board check catches mistakes)",
+    "effort": "medium (the steps are known)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then cards c-menuux-cards and t-menuux-decide in data/board.json: Tom's answer and note on t-menuux-decide come first. Your first push is the commit board: start c-menuux-cards. Read claude/menuux-plan.md, section 5 above all, and look at the pictures in claude/menuux-mock/shots/. If the answer is Build it as drawn: add the four Claude cards c-menu1 (tag menu1), c-menu2 (tag menu2), c-menu3 (tag menu3) and c-menu4 (tag menu4) exactly as section 5 lists them, each with a full prompt (what, before steps, model with its row letter, effort with its reason, the text) that names claude/menuux-plan.md, claude/menuux-mock/gen/kit.py and boards.py as the specification and the shots as the pictures to match; c-menu1 in Up next, the others in Waiting behind the one before; c-menu1 hands Tom a play card with where phone (one look at the Family screen on the Duo and the phone, and a head row of the line-up) and c-menu4 hands him a play card for the whole menu; c-menu2 and c-menu3 are nothing for Tom. Sonnet 5.5 medium cards get auto true, the two high ones do not. If the answer is Build it with my changes: when the note asks only for wording, or for an element to be moved, resized or removed, apply it to claude/menuux-plan.md and to the generator in claude/menuux-mock/gen/ (python3 render.py and shot.py, look at the screenshots, save them into shots/), then create the four cards; when the note changes the look itself (colours, type, the paper and line-up idea, the layout of a screen), do not redraw: add one Claude card for an Opus 5.5 high session that redraws from his note and hands t-menuux-decide back to him, tell Tom in two lines, and stop. If the answer is Not this direction: create no build cards, add one Claude proposal card (Opus 5.5 high) carrying his note, and stop. Run python3 tools/board_check.py before every push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-smokefix1",
+   "tag": "smokefix1",
+   "title": "Make the smoke test pass again on main",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "up",
+   "auto": true,
+   "next": "A Sonnet session makes python3 tools/smoke.py pass again. It fails on main today for reasons that are not in the game: tools/hollow_spot_test.py and tools/voice-library/sparse_files_test.py are missing from tools/night/tests.json, and tools/board_sync_test.py fails three checks that depend on what is on the board today (R5 replay, the unstick card, the card Last night: duplicate card id t-lastnight). Nothing for Tom to do.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Makes the smoke test pass again on main. The failures are in two test lists, not in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the three failing checks are named and each test prints what it expected)",
+    "effort": "medium (the steps are known)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-smokefix1 in data/board.json. Your first push is the commit board: start c-smokefix1. Run python3 tools/smoke.py and python3 tools/board_sync_test.py. Found by the menuux-plan session on 2026-11-21 with main at 6485281: (1) night manifest FAIL, tools/hollow_spot_test.py and tools/voice-library/sparse_files_test.py are not in tools/night/tests.json: add a row for each, or add it to skip with a reason; (2) tools/board_sync_test.py fails R5 (replaying today fires c-night-clean, c-reports-13 and c-takes-9b7e15 where it expects c-reports-2, c-gatezero and c-adminicons1), board_check accepts an unstick card, and board_check accepts the card Last night (duplicate card id t-lastnight): these checks read the real data/board.json, so make each run on a fixed copy or build its own cards, by the smallest change, and do not weaken a rule. Change no game file. Finish with smoke at FAILS: [] and a docs/CHANGES.md entry. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "New card, made by the menuux-plan session: smoke failed the same way with and without that session's changes."
+    }
+   ]
   }
  ],
  "sessions": [
