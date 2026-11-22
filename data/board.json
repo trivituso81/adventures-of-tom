@@ -32786,7 +32786,7 @@
    "where": "phone",
    "fyi": true,
    "first": "Waits on the card New menu: the look and the Family screen. This card opens by itself.",
-   "next": "On the Duo unfolded, held sideways: open the game, tap RELOAD on the title, then ADMIN, Menu, and choose New. Load a game and open the menu. Look at the Family screen, then fold the phone or use the iPhone upright and look again. About 3 minutes. Judge looks only: the paper page, the lettering, the family standing in a row, and whether the heads look the right size next to each other. Claude has already tested every yes or no fact. Tap All good, or Something is wrong and say what to change. Vibes and Gear are being built meanwhile.",
+   "next": "Waits on card c-menu1 (the new menu's look and Family screen). When it ships this card comes back to you with the steps: ADMIN, Menu, choose New. Nothing to do until then.",
    "steps": [
     "Duo unfolded, sideways: RELOAD on the title, then ADMIN, Menu, New.",
     "Load a game and open the menu. Look at the Family screen.",
@@ -32813,6 +32813,11 @@
      "d": "2026-11-21",
      "t": "Tom: something is wrong: There is no menu in the admin Sent to Claude as card c-fix-menu1look; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-22T03:01:23.959Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Your report \"There is no menu in the admin\" was right: the menu is not built yet. Held until c-menu1 ships; the fix card was retired.",
+     "at": "2026-11-22T03:10:00.000Z"
     }
    ],
    "waiting_on": "claude"
@@ -33203,11 +33208,11 @@
    "id": "c-fix-menu1look",
    "tag": "fix-menu1look",
    "lane": "claude",
-   "col": "up",
+   "col": "done",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Look at the new menu's first screen on the Duo and",
-   "next": "You reported a problem on Look at the new menu's first screen on the Duo and phone. Claude starts the fix by itself. Latest: There is no menu in the admin",
+   "next": "Retired: the menu Tom looked for is not built yet (c-menu1 is still in progress), so there is nothing to fix.",
    "blocks": [
     "t-menu1look"
    ],
@@ -33243,6 +33248,11 @@
      "d": "2026-11-21",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-22T03:01:23.959Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Retired: Tom wrote \"There is no menu in the admin\". True today: the new menu (ADMIN > Menu, New or Old) is built by card c-menu1, which has not shipped (only its start commit is on main). t-menu1look opened before the menu existed. No code change made here.",
+     "at": "2026-11-22T03:10:00.000Z"
     }
    ],
    "prompt": {
@@ -33256,7 +33266,7 @@
    },
    "after": "t-menu1look",
    "auto": true,
-   "start": true
+   "done": "2026-11-22"
   }
  ],
  "sessions": [
