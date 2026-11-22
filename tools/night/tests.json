@@ -1396,6 +1396,12 @@
    "cmd": "python3 tools/videohist/videohist_test.py",
    "group": "g4",
    "minutes": 1
+  },
+  {
+   "id": "art-library__startpic_test",
+   "cmd": "python3 -I tools/art-library/startpic_test.py",
+   "group": "g4",
+   "minutes": 1
   }
  ]
 }

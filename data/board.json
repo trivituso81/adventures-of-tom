@@ -29730,38 +29730,6 @@
    "done": "2026-11-22"
   },
   {
-   "id": "c-startpics",
-   "title": "Start pictures for the rest of the cast",
-   "theme": "Battle Animations",
-   "lane": "claude",
-   "col": "prog",
-   "tag": "startpics1",
-   "next": "In progress: adding start-<who> jobs for Amy, Boppy, Justin, Olivia, TNB and Nara (hero picture redrawn facing left on flat magenta, the way Tom, Grace, Rose and Deedee were made) and a Make the start picture button in the Battle Guide, so their videos can be made.",
-   "blocks": [],
-   "created": "2026-11-22",
-   "changed": "2026-11-22",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
-    "opening": "We need to add somewhere the ability for us to turn the hero images"
-   },
-   "history": [
-    {
-     "d": "2026-11-22",
-     "t": "Tom: \"I'm unable to generate any images in the battle guide. I'm unable to generate any animations for characters who don't have that hero image in place, so I need that unblocked.\" Cause: only Tom, Grace, Rose, Deedee have art/clips/start/<who>-hero.png.",
-     "at": "2026-11-22T14:57:05.043Z"
-    }
-   ],
-   "prompt": {
-    "what": "Makes start pictures for the cast that has none, from their hero pictures, and a button in the Battle Guide to make one.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row C: a build where the steps are not written yet)",
-    "effort": "medium (the recipe exists; this repeats it for six more people)",
-    "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics in data/board.json. Your first push is the commit board: start c-startpics. Add start jobs to tools/art-library/wangen-jobs.json for amy, boppy, justin, olivia, tnb and nara from their hero pictures, a request path so the Battle Guide can make a start picture with two taps, and checks for facing and height. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
-  },
-  {
    "id": "c-guidestuck1",
    "lane": "claude",
    "col": "done",
@@ -29801,6 +29769,72 @@
     "text": "Read CLAUDE.md, card c-guidestuck1 in data/board.json and .github/workflows/wan-gen.yml. Battle Guide videos requested through data/wan-requests.json stalled at CHECKING because the wan-gen run lost its runner during the Make the takes step (run 45002823299). Make the takes step bounded and saved piece by piece, and push the results branch before the takes. Write the CHANGES heading ## guidestuck1 and push. Your first push is the commit board: start c-guidestuck1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "done": "2026-11-22"
+  },
+  {
+   "id": "c-startpics",
+   "title": "Start pictures for the rest of the cast",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "startpics1",
+   "next": "Built as startpics1: the Battle Guide now shows Make the start picture ($0.15) for Amy, Boppy, Justin, Olivia, TNB and Nara; the GitHub job makes it from their hero picture, checks it and puts it in the game, which turns on their video buttons. Nothing was paid for in testing. Waits on your card Make the start pictures in the Battle Guide (t-startpics-try).",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+    "opening": "We need to add somewhere the ability for us to turn the hero images"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"I'm unable to generate any images in the battle guide. I'm unable to generate any animations for characters who don't have that hero image in place, so I need that unblocked.\" Cause: only Tom, Grace, Rose, Deedee have art/clips/start/<who>-hero.png.",
+     "at": "2026-11-22T14:57:05.043Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Built startpics1. Found how Tom, Grace, Rose and Deedee were made: the hero picture redrawn facing left on flat magenta by Nano Banana (no cutout; the cutout is done to the finished video in the bake). Added the same jobs for the six others, a Make the start picture button with a facing check and mirror, and each person's sprite height. No money was spent; the first picture is Tom's tap.",
+     "at": "2026-11-22T15:11:46.442Z"
+    }
+   ],
+   "prompt": {
+    "what": "Makes start pictures for the cast that has none, from their hero pictures, and a button in the Battle Guide to make one.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build where the steps are not written yet)",
+    "effort": "medium (the recipe exists; this repeats it for six more people)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics in data/board.json. Your first push is the commit board: start c-startpics. Add start jobs to tools/art-library/wangen-jobs.json for amy, boppy, justin, olivia, tnb and nara from their hero pictures, a request path so the Battle Guide can make a start picture with two taps, and checks for facing and height. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-startpics-try"
+  },
+  {
+   "id": "t-startpics-try",
+   "title": "Make the start pictures in the Battle Guide",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "animations",
+   "fyi": true,
+   "next": "Open ADMIN > BATTLE GUIDE > Family, pick Amy, tap any move, and under Cannot be made yet tap Make the start picture, then Yes, spend $0.15. Do the same for Boppy, Justin, Olivia, TNB and Nara (about $0.90 in all). Then tap All good or Something is wrong. Build startpics1.",
+   "steps": [
+    "Open ADMIN > BATTLE GUIDE > Family > Amy, then tap one of her moves (for example Kettlebell Swing).",
+    "Under the red Cannot be made yet box, tap Make the start picture ($0.15), then Yes, spend $0.15. Keep the page open for about a minute.",
+    "The page says Done when the picture is in the game; it says why in plain words when it is not. After about two minutes reload the page: the Generate this video button appears for Amy.",
+    "Repeat for Boppy, Justin, Olivia, TNB and Nara (each is one tap on any of their moves).",
+    "Open the Amy sheet again: the picture should be Amy facing left on flat magenta, same face and clothes as her hero. Tap All good, or Something is wrong and say who looks wrong."
+   ],
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "build": "startpics1",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Made by startpics1 (card c-startpics). Every test used stand-ins, so the first real paid picture is your tap. A picture costs $0.15 on fal plus a few cents of xAI to check it faces left.",
+     "at": "2026-11-22T15:11:46.442Z"
+    }
+   ]
   }
  ],
  "sessions": [
