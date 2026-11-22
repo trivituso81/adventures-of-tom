@@ -1,0 +1,25 @@
+{
+ "spent": 0.3,
+ "calls": [
+  {
+   "what": "startpic-boppy-t1795382643",
+   "rev": 1,
+   "rid": "01a20526-f948-79b1-bf9e-eae5ff96dd7f",
+   "est": 0.15,
+   "at": "2026-11-22T21:26:10.052362Z",
+   "file": "startpic-boppy-t1795382643-r1.png"
+  },
+  {
+   "what": "startpic-olivia-t1795384911",
+   "rev": 1,
+   "rid": "01a20548-bd9e-7cc2-927c-a423882ffde4",
+   "est": 0.15,
+   "at": "2026-11-22T22:03:03.013102Z",
+   "file": "startpic-olivia-t1795384911-r1.png"
+  }
+ ],
+ "pending": {},
+ "guide_days": {
+  "2026-11-22": 0.3
+ }
+}

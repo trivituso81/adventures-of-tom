@@ -1,0 +1,76 @@
+{
+ "results": [
+  {
+   "startpic": "boppy",
+   "take": 1795382643,
+   "at": "2026-11-22T21:24:03.598Z",
+   "cost": 0.15,
+   "size": [
+    848,
+    1264
+   ],
+   "mirrored": true,
+   "facing": false,
+   "note": "It faced right, so it was mirrored (anything carried on one side, such as a bag, is now on the other side).",
+   "checks": [
+    {
+     "id": "magenta",
+     "ok": true,
+     "say": "the background is flat magenta (FF00FF is asked for)"
+    },
+    {
+     "id": "flat",
+     "ok": true,
+     "say": "the edges are clear (98.6 percent background)"
+    },
+    {
+     "id": "inside",
+     "ok": true,
+     "say": "the whole figure is inside the frame (smallest margin 0.7 percent of the picture)"
+    },
+    {
+     "id": "tall",
+     "ok": true,
+     "say": "the figure is 97 percent of the picture height (at least 60)"
+    }
+   ],
+   "published": true
+  },
+  {
+   "startpic": "olivia",
+   "take": 1795384911,
+   "at": "2026-11-22T22:01:51.186Z",
+   "cost": 0.15,
+   "size": [
+    848,
+    1264
+   ],
+   "mirrored": true,
+   "facing": false,
+   "note": "It faced right, so it was mirrored (anything carried on one side, such as a bag, is now on the other side).",
+   "checks": [
+    {
+     "id": "magenta",
+     "ok": true,
+     "say": "the background is flat magenta (FF00FF is asked for)"
+    },
+    {
+     "id": "flat",
+     "ok": true,
+     "say": "the edges are clear (98.3 percent background)"
+    },
+    {
+     "id": "inside",
+     "ok": true,
+     "say": "the whole figure is inside the frame (smallest margin 0.7 percent of the picture)"
+    },
+    {
+     "id": "tall",
+     "ok": true,
+     "say": "the figure is 97 percent of the picture height (at least 60)"
+    }
+   ],
+   "published": true
+  }
+ ]
+}
