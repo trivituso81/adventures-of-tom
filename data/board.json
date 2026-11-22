@@ -30326,87 +30326,10 @@
     "watch_note": "Tom judges them in the Move Lab (ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB: TOM)."
    },
    "wgen": {
-    "want": false,
-    "at": "2026-11-22T19:23:59Z",
+    "want": true,
+    "at": "2026-11-22T20:35:08Z",
     "n": 26,
-    "est": 6.0,
-    "auto": true,
-    "run": {
-     "state": "done",
-     "at": "2026-11-22T19:31:50Z",
-     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45061033537",
-     "n": 26,
-     "merged": [],
-     "passed_not_baked": [],
-     "retried": [],
-     "stopped": [],
-     "waiting": [
-      "stage-tom-bluebang-vid",
-      "stage-tom-glare-vid",
-      "stage-tom-wingedshell-vid",
-      "stage-tom-runwaylights-vid",
-      "stage-tom-jetwash-vid",
-      "stage-tom-fireball-vid",
-      "stage-tom-starbeam-vid",
-      "stage-tom-meteor-vid"
-     ],
-     "capped": [
-      "stage-tom-bluebang",
-      "stage-tom-glare",
-      "stage-tom-carryon",
-      "stage-tom-suitedoor",
-      "stage-tom-porsche",
-      "stage-tom-controller",
-      "stage-tom-wingedshell",
-      "stage-tom-runwaylights",
-      "stage-tom-jetwash",
-      "stage-tom-fireball",
-      "stage-tom-starbeam",
-      "stage-tom-meteor",
-      "tom-suitedoor",
-      "tom-porsche",
-      "tom-cartridge",
-      "tom-controller",
-      "tom-shell",
-      "tom-konami"
-     ],
-     "unchecked": [],
-     "errors": [],
-     "already": [],
-     "gaveup": [],
-     "bake_failed": {},
-     "spent": 0.0,
-     "build": null,
-     "watch": "",
-     "revs": {
-      "stage-tom-bluebang": 1,
-      "stage-tom-glare": 1,
-      "stage-tom-carryon": 1,
-      "stage-tom-suitedoor": 1,
-      "stage-tom-porsche": 1,
-      "stage-tom-controller": 1,
-      "stage-tom-wingedshell": 1,
-      "stage-tom-runwaylights": 1,
-      "stage-tom-jetwash": 1,
-      "stage-tom-fireball": 1,
-      "stage-tom-starbeam": 1,
-      "stage-tom-meteor": 1,
-      "tom-suitedoor": 1,
-      "tom-porsche": 1,
-      "tom-cartridge": 1,
-      "tom-controller": 1,
-      "tom-shell": 1,
-      "tom-konami": 1,
-      "stage-tom-bluebang-vid": 1,
-      "stage-tom-glare-vid": 1,
-      "stage-tom-wingedshell-vid": 1,
-      "stage-tom-runwaylights-vid": 1,
-      "stage-tom-jetwash-vid": 1,
-      "stage-tom-fireball-vid": 1,
-      "stage-tom-starbeam-vid": 1,
-      "stage-tom-meteor-vid": 1
-     }
-    }
+    "est": 6
    },
    "blocks": [],
    "created": "2026-11-22",
@@ -30428,6 +30351,11 @@
     {
      "d": "2026-11-22",
      "t": "Unblocked: nothing was left for it to wait on."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom approved generating 26 videos (about $6.00).",
+     "at": "2026-11-22T20:35:08.909Z"
     }
    ]
   },
