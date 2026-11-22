@@ -31587,12 +31587,12 @@
   {
    "id": "t-wanauto1-watch",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "ask": "animations",
    "fyi": true,
    "title": "Watch Deedee's new Wet-Floor Hazard",
-   "next": "Open ADMIN > BATTLE GUIDE, choose Animations, Family, Deedee, and play Wet-Floor Hazard once. She brings out a flat mop, sweeps once beside her feet and puts it away. Tap All good, or Something is wrong and say what you saw.",
+   "next": "Answered: it is a broom. Remade on t-wanmop1-gen.",
    "wanwatch": [
     "deedee-wetfloor"
    ],
@@ -31607,17 +31607,84 @@
     {
      "d": "2026-11-21",
      "t": "Made by wanauto1. Wet-Floor r7 baked by hand after a look at every frame; the look check had failed it on the words \"from behind her back\" only."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom (19:48): \"Deedee is using a broom not a mop.\" Remade as a string mop on t-wanmop1-gen."
+    }
+   ],
+   "done": "2026-11-21"
+  },
+  {
+   "id": "t-wanmop1-gen",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "animations",
+   "fyi": true,
+   "title": "Make Deedee's Wet-Floor with a real mop",
+   "next": "Tap Generate all 1 video (two taps). Deedee now holds a string mop with a floppy wet head instead of the flat broom. The Action makes it, checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20 for this video.",
+   "wan": {
+    "jobs": [
+     "deedee-wetfloor"
+    ],
+    "cap": 3.2
+   },
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "build": "wanmop1",
+   "chat": {
+    "url": "",
+    "opening": "added by wanmop1"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by wanmop1. Tom (19:48): \"Deedee is using a broom not a mop.\" One change: \"a short mop\" became \"a short string mop with a floppy wet head\"."
     }
    ]
   },
   {
+   "id": "c-wanmop1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "tag": "wanmop1",
+   "title": "Deedee's Wet-Floor: a string mop, not a broom",
+   "next": "Shipped in wanmop1.",
+   "blocks": [],
+   "after": "t-wanmop1-gen",
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
+    "opening": "Tom: Deedee is using a broom not a mop"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom (19:48): \"I don't understand - Deedee is using a broom not a mop. And what was the visit for the cowgirl thing?\""
+    }
+   ],
+   "prompt": {
+    "what": "One prompt change for Deedee's mop.",
+    "before": [
+     "Nothing."
+    ],
+    "model": "Claude Opus 5.5",
+    "effort": "medium",
+    "text": "Done in the session that made this card."
+   }
+  },
+  {
    "id": "t-giddyup-decide",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "ask": "decide",
    "title": "Rose's Giddyup: drop the jump?",
-   "next": "Four tries in a row turned Rose's jump into a flip or a spin (and the last drew a hoop in her hand). Changing the words is not fixing it. Pick one. Your answer starts c-giddyup-next by itself.",
+   "next": "Settled: Tom picked a Giddyup take in the Battle Guide (19:46).",
    "choices": [
     "No jump: she circles her hand like a cowgirl and points forward, shouting (Recommended)",
     "Keep the jump, try a different video model",
@@ -31641,19 +31708,23 @@
     {
      "d": "2026-11-21",
      "t": "Made by wanauto1 (stop-loss on rose-giddyup: r5 somersault, r6 spin, r7 flip, r8 flip and a hoop)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Closed by wanmop1: Tom chose take 1 in the Battle Guide at 19:46 (guide-use), so it is in the game and no decision is left."
     }
-   ]
+   ],
+   "done": "2026-11-21"
   },
   {
    "id": "c-giddyup-next",
    "lane": "claude",
-   "col": "wait",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "giddyup9",
    "title": "Rose's Giddyup: make the video Tom picked",
-   "next": "Waits on Tom's answer on t-giddyup-decide, then starts by itself.",
+   "next": "Retired: Tom picked a take in the Battle Guide.",
    "blocks": [],
-   "auto": true,
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
@@ -31664,6 +31735,10 @@
     {
      "d": "2026-11-21",
      "t": "Added by wanauto1."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Retired by wanmop1: Tom chose a Giddyup take in the Battle Guide at 19:46."
     }
    ],
    "prompt": {
@@ -31675,7 +31750,7 @@
     "effort": "medium (one job edit from Tom's choice)",
     "text": "Read CLAUDE.md (sections wanauto1, Fix a miss with the smallest change, Image and video prompts), claude/video-battle-plan.md 4.14, then card c-giddyup-next and Tom's answer on t-giddyup-decide in data/board.json, and the job rose-giddyup in tools/art-library/wangen-jobs.json. If he picked No jump: write tools/art-library/prompts/wan-rose-giddyup-v6.txt equal to v5 with the MOTION's jump sentence replaced by one sentence in which she points forward with the other hand and shouts, feet planted; set airborne false, raise rev to 9, set auto_from to now. If he picked a different model: change only the endpoint to the family route named in plan 4.12 (Wan 3.0), raise rev, set auto_from. If he picked Keep without a video: retire this card and change nothing. For a new rev start the run in the same push: set wgen on card t-wanstop-gen to {want: true, at: now, n: 1, est: 0.79, auto: true}, write the CHANGES heading ## giddyup9, run bump_tags, and make the LAST commit's subject exactly board: wan generate t-wanstop-gen. After: nothing for Tom: end. Your first push is the commit board: start c-giddyup-next. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "waiting_on": "tom"
+   "done": "2026-11-21"
   },
   {
    "id": "c-animplan",

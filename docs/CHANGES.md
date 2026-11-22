@@ -1,3 +1,7 @@
+## wanmop1 (2026-11-21): Deedee's Wet-Floor asks for a string mop, not a broom
+
+Card c-wanmop1. Tom (19:48): "Deedee is using a broom not a mop." Right: the r7 video baked in wanauto1 drew a flat push-broom head. One change: deedee-wetfloor rev 8, prompt v5 = v4 with "a short mop" changed to "a short string mop with a floppy wet head"; everything else kept, fresh budget. Tom card t-wanmop1-gen holds the Generate button; the current clip stays until the new one passes and replaces it. Retired: t-giddyup-decide and c-giddyup-next (Tom picked a Giddyup take in the Battle Guide at 19:46), t-wanauto1-watch (answered).
+
 ## menu1 (2026-11-21): the new main menu's look and Family screen are built beside the old menu, behind a switch (default Old)
 
 Card c-menu1. Tom approved the design on t-menuux-decide (11-21 18:20): "looks great now, just remove their heights and we can make the cards for this to be produced". Nothing a player sees changes until Tom picks New: ADMIN, then `MENU: OLD` (tap to flip to `MENU: NEW`, saved on the device as `aot-menu`), or `index.html?menu=new` for one visit.
