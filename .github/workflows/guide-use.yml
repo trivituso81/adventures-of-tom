@@ -37,7 +37,9 @@ jobs:
       - name: Tools
         run: |
           pip install pillow numpy scipy opencv-python-headless
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg || true; fi
           if ! command -v ffmpeg >/dev/null; then pip install imageio-ffmpeg && sudo ln -sf "$(python3 -c 'import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())')" /usr/local/bin/ffmpeg; fi
+          command -v ffmpeg; command -v ffprobe || echo "no ffprobe (the recipe falls back to ffmpeg)"
       - name: Restore the takes from the guidegen branch
         run: |
           mkdir -p "$RUNNER_TEMP/guidegen"
@@ -50,7 +52,8 @@ jobs:
         run: |
           set -o pipefail
           TAG="guideuse-${GITHUB_RUN_ID}"
-          python3 -I tools/guidegen/use_take.py --state "$RUNNER_TEMP/guidegen" --tag "$TAG" 2>&1 | tee "$RUNNER_TEMP/use.log" || true
+          python3 -I tools/guidegen/use_take.py --state "$RUNNER_TEMP/guidegen" --tag "$TAG" 2>&1 | tee "$RUNNER_TEMP/use.log" && rc=0 || rc=$?
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
           { echo '### guide-use'; echo '```'; tail -40 "$RUNNER_TEMP/use.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
       - name: Name the build and move the cache tags
@@ -81,7 +84,13 @@ jobs:
           mkdir -p "$RUNNER_TEMP/keep" && cp "$RUNNER_TEMP/guidegen/use-report.json" "$RUNNER_TEMP/keep/"
           [ -f "$RUNNER_TEMP/guidegen/takes-used.json" ] && cp "$RUNNER_TEMP/guidegen/takes-used.json" "$RUNNER_TEMP/keep/takes.json"
           python3 -I tools/guidegen/keep.py "$RUNNER_TEMP/keep" --msg "guidegen: use report (run ${{ github.run_id }}) [skip ci]"
+      - name: Stop with an error when a take could not be used
+        if: ${{ steps.use.outputs.rc != '0' }}
+        run: |
+          echo "::error::guide-use could not put a take in the game; nothing of it was kept. See the Use the takes step and use-report.json on the guidegen branch."
+          exit 1
       - name: Publish
+        if: ${{ always() }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh api repos/${{ github.repository }}/actions/workflows/publish.yml/dispatches -f ref=main

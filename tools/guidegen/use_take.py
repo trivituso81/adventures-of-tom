@@ -111,7 +111,37 @@ def ensure_script_tag(root, clip_id):
     open(ix, 'w', encoding='utf-8').write(html.replace(tags[-1], tags[-1] + '<script src="data/clips/%s.js?v=clip0"></script>\n' % clip_id)); return True
 
 
+def _snapshot(root):
+    """What a use may touch: the bytes of the files it edits, the names in the folders it adds to."""
+    import glob
+    files = {}
+    for pat in ('data/art-prompts.json', 'tools/art-library/wangen-jobs.json', 'index.html', 'data/b3-clips.js', 'data/b3-kit-*.js', 'data/b3-foes-ch*.js', 'data/guide-prompts.json'):
+        for f in glob.glob(os.path.join(root, pat)): files[f] = open(f, 'rb').read()
+    dirs = {d: set(os.listdir(os.path.join(root, d))) if os.path.isdir(os.path.join(root, d)) else None
+            for d in ('art/raw/clips', 'tools/art-library/prompts', 'data/clips', 'art/clips')}
+    return files, dirs
+
+
+def _rollback(root, snap):
+    files, dirs = snap
+    for f, b in files.items(): open(f, 'wb').write(b)
+    for d, names in dirs.items():
+        full = os.path.join(root, d)
+        if names is None or not os.path.isdir(full): continue
+        for n in set(os.listdir(full)) - names:
+            p = os.path.join(full, n); shutil.rmtree(p) if os.path.isdir(p) else os.remove(p)
+
+
 def use(req, state, root, G, tag):
+    """All or nothing: a use that fails half way (the baker, the wire) puts every file back, so a failed take never leaves a
+    saved video with no clip behind it (guideusefix1: the run committed art/raw/clips/wan-rose-giddyup-v9.mp4 and nothing else)."""
+    snap = _snapshot(root)
+    try: return _use(req, state, root, G, tag)
+    except BaseException:
+        _rollback(root, snap); raise
+
+
+def _use(req, state, root, G, tag):
     a = G['guide']['anims'].get(req['anim'])
     if not a: raise RuntimeError('no animation %s' % req['anim'])
     A = (state.get('anims') or {}).get(req['anim']) or {}
@@ -211,6 +241,7 @@ def main(argv=None):
     if done:   # only the used animations go back to the branch (keep.py merges them by take)
         json.dump({'anims': {d['anim']: {k: v for k, v in state['anims'][d['anim']].items()} for d in done}}, open(os.path.join(a.state, 'takes-used.json'), 'w'), indent=1)
     json.dump({'at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()), 'reqs': [r.get('at') for r in reqs], 'tag': a.tag, 'done': done, 'failed': failed}, open(os.path.join(a.state, 'use-report.json'), 'w'), indent=1)
+    if failed: say('USE FAILED for %d of %d; nothing of them was kept' % (len(failed), len(reqs)))
     if done:
         subprocess.run(['node', os.path.join(root, 'tools', 'guidegen', 'build_map.js')], cwd=root, check=False)
     return 0 if not failed else 2

@@ -192,6 +192,31 @@ gp = json.load(open(root + '/data/guide-prompts.json'))['anims']
 check('T5 guide-prompts.json records the used prompts', gp['move:lounge_pass_flex']['prompt'].startswith('USED PROMPT') and gp['act:skeeter:darting_bite']['source'] == 'used', gp)
 try: use('move:lounge_pass_flex', 9); check('T5 a take that is not on the branch fails with words', False)
 except Exception as x: check('T5 a take that is not on the branch fails with words', 'take 9' in str(x), x)
+# guideusefix1: a Wan job that carries bake and wire fields (rose-giddyup's), used on a runner that has ffmpeg and no ffprobe
+t = MT.process(row('move:giddyup_tata_launch', 1, MOVING), state_json, G2, outdir, gate_fn=gate_ok)
+json.dump(state_json, open(os.path.join(outdir, 'takes.json'), 'w')); state_json['_dir'] = outdir
+ffdir = os.path.join(TMP, 'ffonly'); os.makedirs(ffdir); os.symlink(shutil.which('ffmpeg'), os.path.join(ffdir, 'ffmpeg'))
+path0 = os.environ['PATH']; node_dir = os.path.dirname(shutil.which('node'))
+snap_files = {f: open(root + '/' + f, 'rb').read() for f in ('tools/art-library/wangen-jobs.json', 'data/b3-kit-rose.js', 'index.html')}
+os.environ['PATH'] = ffdir + os.pathsep + node_dir
+try: check('T5 probe_fps works with no ffprobe on the machine', abs(RC.probe_fps(MOVING) - 24) < 1.5 or RC.probe_fps(MOVING) > 0, RC.probe_fps(MOVING))
+finally: os.environ['PATH'] = path0
+real_bake = UT.subprocess.run
+def failing(cmd, *a, **k):
+    if 'bake_clip.py' in ' '.join(map(str, cmd)): raise FileNotFoundError(2, 'No such file or directory', 'ffprobe')
+    return real_bake(cmd, *a, **k)
+UT.subprocess.run = failing
+try: use('move:giddyup_tata_launch', 1, 'GIDDYUP PROMPT, once.'); failed_use = None
+except Exception as x: failed_use = x
+finally: UT.subprocess.run = real_bake
+now = {f: open(root + '/' + f, 'rb').read() for f in snap_files}
+check('T5 a use that fails half way puts every file back (no saved video, no job rev, no prompt file)', failed_use is not None and now == snap_files and not os.path.exists(root + '/art/raw/clips/wan-rose-giddyup-v10.mp4') and not os.path.exists(root + '/tools/art-library/prompts/wan-rose-giddyup-v10.txt'), (failed_use, [f for f in snap_files if now[f] != snap_files[f]]))
+rev0 = json.load(open(root + '/tools/art-library/wangen-jobs.json'))['rose-giddyup']['rev']
+res = use('move:giddyup_tata_launch', 1, 'GIDDYUP PROMPT, once.')
+kit = open(root + '/data/b3-kit-rose.js').read()
+check('T5 rose-giddyup: the clip files, the script tag and the wire are all there', os.path.exists(root + '/data/clips/rose-giddyup.js') and any(f.startswith('rose-giddyup') for f in os.listdir(root + '/art/clips')) and 'data/clips/rose-giddyup.js' in open(root + '/index.html').read() and "clip:'rose_giddyup'" in kit.replace(' ', '') or "clip:'rose-giddyup'" in kit, (res['notes'], [f for f in os.listdir(root + '/art/clips') if 'giddyup' in f]))
+check('T5 rose-giddyup: the job rev went up by one and the video is kept as wan-rose-giddyup-v<rev>', json.load(open(root + '/tools/art-library/wangen-jobs.json'))['rose-giddyup']['rev'] == rev0 + 1 and os.path.exists(root + '/art/raw/clips/wan-rose-giddyup-v%d.mp4' % (rev0 + 1)), res['files'])
+res = use("act:skeeter:darting_bite", 2, "USED MONSTER PROMPT, once.")
 json.dump({'done': [res], 'failed': []}, open(os.path.join(TMP, 'rep.json'), 'w'))
 UT.write_changes(os.path.join(TMP, 'rep.json'), 'guideuse-test', root)
 check('T5 CHANGES.md starts with the build heading', open(root + '/docs/CHANGES.md').read().startswith('## guideuse-test ('), open(root + '/docs/CHANGES.md').read()[:200])

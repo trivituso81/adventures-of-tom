@@ -53,11 +53,17 @@ def entry_for(rec, G, existing=None, root=ROOT):
 
 
 def probe_fps(video):
-    p = subprocess.run(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=r_frame_rate', '-of', 'csv=p=0', video], capture_output=True, text=True)
+    """The video's frame rate. ffprobe when there is one; else the "N fps" line of `ffmpeg -i` (the guide-use runner had ffmpeg
+    from imageio-ffmpeg and no ffprobe, and the whole use failed with "No such file: ffprobe", guideusefix1)."""
     try:
+        p = subprocess.run(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=r_frame_rate', '-of', 'csv=p=0', video], capture_output=True, text=True)
         a, b = p.stdout.strip().split('/'); return float(a) / float(b)
+    except FileNotFoundError:
+        pass
     except Exception:
         return float(FPS)
+    m = re.search(r'(\d+(?:\.\d+)?)\s+fps', subprocess.run(['ffmpeg', '-hide_banner', '-i', video], capture_output=True, text=True).stderr)
+    return float(m.group(1)) if m else float(FPS)
 
 
 def _curve(video):
