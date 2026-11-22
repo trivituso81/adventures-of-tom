@@ -1,3 +1,7 @@
+## board-crispcard (2026-11-22): Board: new card to replace the leftover crisp with apple muffins
+
+Card c-crispfix. Tom (11-22): "I thought we struck the word crisp from our entire project history... her apple muffins", then "Yes" to a cleanup card. Board change only; no game file touched.
+
 ## ch1title1 (2026-11-22): Chapter 1 is now called "Muffin to See Here" (was "The Soup Dumpling Protocol"); every other chapter name is unchanged
 
 Card c-ch1title. Tom (11-22): "I actually think I like the original titles better with the exception of chapter 1." The old name came from the story bible, and the chapter's obstacle is now Deedee's apple muffins, not the crisp. Changed in `engine/story.js` (`CHAPTERS`, shown on the title card, the chapter list and save labels), the `// CHAPTER 1:` heading in `data/scenes.js` (the Voice Library files chapter 1's lines by it) and `docs/ARCHITECTURE.md`. No spoken line changed. Not done: the leftover "crisp" lines in chapters 1, 3, 5, 12 to 14, 16, 20 and the Part 2 intro (a separate cleanup, they need re-recording).

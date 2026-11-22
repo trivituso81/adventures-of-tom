@@ -30058,6 +30058,45 @@
    ],
    "after": "nothing for Tom: end",
    "done": "2026-11-22"
+  },
+  {
+   "id": "c-crispfix",
+   "tag": "crispfix1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Story and Dialogue",
+   "title": "Replace every leftover crisp with apple muffins",
+   "next": "Find every spoken line, sign and story note that still says crisp where it means Deedee's dessert, change it to apple muffins, list the changed lines that need re-recording, and hand Tom one voice card.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "prompt": {
+    "what": "Replaces the leftover crisp with Deedee's apple muffins in story scenes and signs (about 19 lines in data/scenes.js, scenes-ch12/13/14/16/20, scenes-p2.js, maps-le.js, engine/story.js; also check data/npc-emotion-moods.js keys and docs). Changing a spoken line silences its recording, so it ends with one Tom voice card listing the lines to re-record.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5 (row D: game dialogue, Tom judges by taste)",
+    "effort": "medium (the steps are known, the piece is small)",
+    "text": "Board card c-crispfix. Tom (2026-11-22): the chapter 1 mud monster steals Deedee's apple muffins, and crisp was struck from the project. Search every spoken line, sign, scene comment and doc (not the word as an adjective, and not the internal move key D.crisp) for crisp or crisps meaning her dessert, change each to apple muffins keeping the joke and the contractions, check the line rhythm still lands, and update dependent keys (data/npc-emotion-moods.js, docs/script-convos.tsv, docs/EMOTION_INDEX.md) with their generators. Run python3 tools/clip-audit/unused_voice.py. Write the list of changed lines that now have no recording and make one Tom voice card for them. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "idea": {
+    "at": "2026-11-22T17:57:57.146Z",
+    "words": "Yes (replace the leftover crisp lines with apple muffins)",
+    "shot": "",
+    "row": "D",
+    "rule": "Claude Opus 5.5, medium"
+   },
+   "chat": {
+    "url": "",
+    "opening": "\"Yes\" to the crisp cleanup"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"I thought we struck the word crisp from our entire project history\" and then \"Yes\" to a cleanup card. New card, not started.",
+     "at": "2026-11-22T17:57:57.146Z"
+    }
+   ]
   }
  ],
  "sessions": [
