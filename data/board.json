@@ -30092,7 +30092,7 @@
    "id": "c-crispfix",
    "tag": "crispfix1",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Story and Dialogue",
    "title": "Replace every leftover crisp with apple muffins",
    "next": "Find every spoken line, sign and story note that still says crisp where it means Deedee's dessert, change it to apple muffins, list the changed lines that need re-recording, and hand Tom one voice card.",
@@ -30117,13 +30117,18 @@
    },
    "chat": {
     "url": "",
-    "opening": "\"Yes\" to the crisp cleanup"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
      "d": "2026-11-22",
      "t": "Tom: \"I thought we struck the word crisp from our entire project history\" and then \"Yes\" to a cleanup card. New card, not started.",
      "at": "2026-11-22T17:57:57.146Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-22T19:11:31.693Z"
     }
    ]
   },
