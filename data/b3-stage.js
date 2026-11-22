@@ -38,7 +38,7 @@ B3_STAGE.zone_one_blockade={v:1,tier:'s1',budget:3.5,
 
 // Skill 2. New body. Bigger and lasting: a pair of doors around each family member beside him, answering every redirected hit.
 B3_STAGE.suite_door_slide={v:1,tier:'s2',budget:4.5,
-  body:{clip:'tom_suitedoor',job:'tom-suitedoor',keep:false,marks:{open:{f:.25},close:{f:.5},nod:{f:.7}}},
+  body:{clip:'tom_suitedoor',job:'tom-suitedoor',keep:false,marks:{open:{pic:7},close:{pic:17},nod:{pic:21}}},
   hit:'late',late:'close',
   steps:[{at:'close',do:'sfx',sfx:'ding'},{at:'nod',do:'words',text:'DO NOT DISTURB',where:'over:each_ally',size:2,color:'#ffcf8a',hold:1.2}],
   lasting:[{while:'suite_door',on:'carrier',do:'surround',asset:'tom/suitedoor',pair:true,enter:{at:'close',dur:.45},
@@ -49,7 +49,7 @@ B3_STAGE.suite_door_slide={v:1,tier:'s2',budget:4.5,
 
 // Capstone. New body. Set piece: night on the tarmac, his car arrives, high beams, jet wash, and off it goes.
 B3_STAGE.tarmac_porsche_transfer={v:1,tier:'cap',budget:7.5,
-  body:{clip:'tom_porsche',job:'tom-porsche',keep:false,marks:{watch:{f:.2},wave:{f:.5}}},
+  body:{clip:'tom_porsche',job:'tom-porsche',keep:false,marks:{watch:{pic:9},wave:{pic:22}}},
   hit:'beams',
   setpiece:{dur:7.5,dim:.8,steps:[
     {at:0,do:'dim',amount:.8,in:.4},
@@ -77,7 +77,7 @@ B3_STAGE.tarmac_porsche_transfer={v:1,tier:'cap',budget:7.5,
 // ================= Tom: Gamer Geek =================
 // Basic. New body: the gag is the blow and the one-eyed inspection. Accent only.
 B3_STAGE.cartridge_blow={v:1,tier:'basic',budget:2.5,
-  body:{clip:'tom_cartridge',job:'tom-cartridge',keep:false,marks:{blow:{f:.4},squint:{f:.62}}},
+  body:{clip:'tom_cartridge',job:'tom-cartridge',keep:false,marks:{blow:{pic:15},squint:{pic:18}},hand:[12,62]},
   hit:'blow',
   steps:[{at:'blow',do:'words',text:'PFFFFT',where:'over:hand',size:2,color:'#e8ecf4',hold:.8},{at:'blow',do:'sfx',sfx:'whoosh'}],
   assets:{}};
@@ -92,7 +92,7 @@ B3_STAGE.controller_toss={v:1,tier:'s1',budget:3.2,
 
 // Skill 2. New body. Bigger and lasting: the shell locks on, hovers, and slams down if the monster attacks.
 B3_STAGE.winged_shell_lock_on={v:1,tier:'s2',budget:4.5,
-  body:{clip:'tom_shell',job:'tom-shell',keep:false,marks:{circle:{f:.3},point:{f:.55}}},
+  body:{clip:'tom_shell',job:'tom-shell',keep:false,marks:{circle:{pic:8},point:{pic:19}}},
   hit:'bonk',
   steps:[{id:'arrive',at:'circle',do:'drop',asset:'tom/wingedshell',onto:'above_self',dur:.4},
     {id:'go',at:'point',do:'fly',asset:'tom/wingedshell',from:'above_self',to:'above_target',arc:20,dur:.4},
@@ -110,7 +110,7 @@ B3_STAGE.winged_shell_lock_on={v:1,tier:'s2',budget:4.5,
 
 // Capstone. New body. Set piece: the code goes in, the cheat is accepted, the sky falls on every monster.
 B3_STAGE.konami_code={v:1,tier:'cap',budget:7.5,
-  body:{clip:'tom_konami',job:'tom-konami',keep:false,marks:{tap:{f:.12},arms:{f:.6}}},
+  body:{clip:'tom_konami',job:'tom-konami',keep:false,marks:{tap:{pic:6},arms:{pic:24}}},
   hit:'rain',
   setpiece:{dur:7.5,dim:.9,steps:[
     {at:0,do:'dim',amount:.9,in:.3},

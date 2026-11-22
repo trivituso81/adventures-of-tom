@@ -1,3 +1,9 @@
+## movestage2c (2026-11-22): the marks of five staged moves are measured on their baked videos
+
+Part c of card c-movestage-build. Five of Tom's eight moves now have every video and picture baked and play through the stage layer in MOVE LAB: TOM: Frequent Flier (lounge_pass_flex), Zone One (zone_one_blockade), Suite Door (suite_door_slide), Cartridge Blow (cartridge_blow) and Konami Code (konami_code). The marks in `data/b3-stage.js` for those, and for the Shell (circle at picture 8, point at 19) and Porsche (watch 9, wave 22) body videos, are now picture numbers read off the baked clips instead of the plan's guesses; the Cartridge row has its hand point (12, 62).
+- Still waiting: Winged Shell (the blue burst video `stage-tom-bluebang-vid` was given up after 4 tries, Tom's decide card `t-wangaveup-stage-tom-bluebang-vid-r2`), Controller Toss (body video `tom-controller` given up, `t-wangaveup-tom-controller-r2`) and Tarmac Porsche Transfer (the glare and jetwash videos are still in their stop cards). A move with a missing video plays today's version.
+- `python3 tools/movestage_lab_test.py` passes in portrait and landscape with the real baked pictures for these five (3 min 50 s); screenshots in `tools/shots/movestage-lab-*`.
+
 ## guideflow-plan (2026-11-22): a plan and nine build cards for a Battle Guide animation flow that always shows the true status
 
 Card c-guideflow-plan. Tom: "this is like a cruel joke", "i cant sit at the screen staring for minutes on end", "be able to send as many concurrent requests as I want, and they need to queue. And when one is completed, the next one needs to go, and then I need to be notified of the status change for each", "i said use in game and the status doesnt update. i cant even see it when its done". A planning session: no code changed, no paid run.
