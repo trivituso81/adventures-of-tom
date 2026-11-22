@@ -27013,7 +27013,7 @@
    "where": "phone",
    "fyi": true,
    "first": "Waits on the card New menu: switch it on and remove the old one. This card opens by itself.",
-   "next": "Fix shipped (build fix-menu4play-4). On the Duo unfolded, held sideways: tap RELOAD on the title, load a game, open the menu. On the Party tab each person's name, then Level with the green bar, then HP should sit in one block above their picture, for all four, the same on both pages. Then finish the rest of the walk: Vibes, Gear, Bag, System, and once on the iPhone upright. Tap All good, or Something is wrong and say what to change.",
+   "next": "Fix shipped (build fix-menu4play-4). On the Duo unfolded, held sideways: tap RELOAD on the title, load a game, open the menu. On the Party tab each person's name, then Level with the green bar, then HP should sit in one block above their picture, for all four, the same on both pages. Then finish the rest of the walk: Vibes, Gear, Bag, System, and once on the iPhone upright. Tap All good, or Something is wrong and say what to change. New since then (build vibelayout1): on the Vibes tab, Tom's head should sit level with the top of his name, with the name, Lv and XP to go on one line and the bar under it; under the four numbers are the Vibe Loadout cards (tap Primary or Secondary on a card to change it, tap the card to see its abilities on the right) with Row and the Quirk pills; the Descriptions switch is at the right of the abilities title. Say what to change if any of it looks off.",
    "steps": [
     "Duo unfolded, sideways: RELOAD on the title, load a game, open the menu.",
     "Family, Vibes, Gear, Bag, System: change a Main Vibe, wear a piece of gear, use a healing item, save.",
@@ -27089,6 +27089,10 @@
      "d": "2026-11-22",
      "t": "Night QA looked at this card: it needs your eyes. it checks how the Party tab block is laid out on the Duo unfolded; layout on the real device is a look and the Duo's fold, which the test browser cannot judge.",
      "at": "2026-11-22T17:04:27.000Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Vibes page re-laid out as Tom drew it (card c-vibelayout1, build vibelayout1); this card now asks him to look at it too."
     }
    ],
    "machine": {
@@ -31408,7 +31412,7 @@
    "col": "prog",
    "theme": "Game Shell",
    "title": "Vibes page: smaller figure, loadout cards, abilities panel",
-   "next": "Building: smaller figure with its head top level with the name line, name, Lv and XP on one line, the Vibe Loadout cards (Primary, Secondary, Off), Row and Quirk pills, and the abilities panel with the Descriptions switch at its right.",
+   "next": "Built vibelayout1: the Vibes page has a smaller figure with the name, Lv and XP on one line, Vibe Loadout cards with Primary, Secondary and Off, Row and Quirk pills, and an abilities panel with the Descriptions switch at its right. Tested at five sizes (m2_test, b3_test s4 s9c s21). Not looked at on a real phone.",
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
@@ -31421,6 +31425,10 @@
     {
      "d": "2026-11-22",
      "t": "Tom: \"layout changes to the vibe tab of the character menu: shrink the character down so that the top of their head is aligned with the top of Level N, then shift all content up accordingly. Put Level N below the characters name but above the level up bar. redesign the area below the character stats as per the attached screenshot, but keeping your same fonts and color palette. move the descriptions toggle to the right side and mimic the layout in the second image\". Then: \"actually also adjust the level and experience bar and name to a similar layout as this\" (Tom, Lv 2 on one line, XP to go at the right, bar under). The last message wins over \"Level below the name\"."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Pushed vibelayout1 (docs/CHANGES.md has the list). Off on a Vibe in use only explains itself, because the rules have no empty Secondary. The Primes and Detonations link and the speed pill from the drawing were not added."
     }
    ],
    "prompt": {

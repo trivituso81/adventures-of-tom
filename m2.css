@@ -227,15 +227,6 @@
 #m2 .m2-more .m2-ml{font:600 13px var(--text);margin-left:4px;color:var(--soft)}
 #m2 .m2-more[aria-pressed="true"]{background:var(--lamp)}
 /* person, level, XP */
-#m2 .m2-stage{position:relative;flex:1 1 auto;min-height:130px;display:flex;align-items:flex-end;border-bottom:2px solid var(--ink);margin-top:8px}
-#m2 .m2-hero{position:relative;flex:0 0 44%;height:100%;min-height:0}
-#m2 .m2-hfig{position:absolute;left:50%;bottom:0;transform:translateX(-50%);mix-blend-mode:multiply;pointer-events:none;display:block}
-#m2 .m2-who{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:4px;padding:0 0 12px 4px}
-#m2 .m2-lvl{font-size:15px;font-weight:700;color:var(--soft)}
-#m2 .m2-wn{font:800 36px/1 var(--disp);letter-spacing:-.02em;overflow-wrap:normal;word-break:normal;white-space:nowrap}
-#m2 .m2-xb{height:8px;border-radius:8px;background:rgba(43,26,51,.15);overflow:hidden;display:block;margin-top:4px}
-#m2 .m2-xb i{display:block;height:100%;background:var(--gold);border-radius:8px}
-#m2 .m2-xt{font-size:13px;color:var(--soft)}
 #m2 .m2-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;flex:none;padding:8px 0 4px}
 #m2 .m2-st{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 4px;min-width:0}
 #m2 .m2-st span{flex:1 0 100%;font-size:13.5px;font-weight:600;color:var(--soft)}
@@ -245,7 +236,6 @@
 #m2 .m2-st i.dn{color:var(--coral)}
 #m2 .m2-hint{font-size:14px;line-height:1.35;margin:6px 0 0}
 /* the left page, below the header (Vibes) */
-#m2 .m2-lowl{flex:none;display:flex;flex-direction:column;gap:8px;margin-top:6px}
 #m2 .m2-segs{display:flex;border-radius:24px;background:var(--shade);box-shadow:inset 0 0 0 1.5px rgba(43,26,51,.35);padding:3px;gap:3px}
 #m2 .m2-seg{flex:1 1 0;min-height:44px;border-radius:21px;font-size:14.5px;font-weight:700;text-align:center;display:flex;align-items:center;justify-content:center}
 #m2 .m2-seg.on{background:var(--ink);color:var(--cream)}
@@ -256,35 +246,11 @@
 #m2 .m2-tog i{position:absolute;top:9px;left:4px;width:26px;height:26px;border-radius:50%;background:var(--cream);box-shadow:0 1px 3px rgba(0,0,0,.35)}
 #m2 .m2-tog[aria-checked="true"]::before{background:var(--green)}
 #m2 .m2-tog[aria-checked="true"] i{left:34px}
-#m2 .m2-qrow{display:flex;gap:8px}
-#m2 .m2-qs{flex:1 1 0;min-width:0;min-height:56px;padding:8px 10px;border-radius:14px;display:flex;align-items:center;gap:8px;font-size:14px;line-height:1.25;box-shadow:inset 0 0 0 1.5px rgba(43,26,51,.4);background:transparent}
-#m2 .m2-qs small{display:block;font-size:12.5px;color:var(--soft);font-weight:600}
-#m2 .m2-qs b{display:block;font-weight:700}
-#m2 .m2-qs.on{background:var(--lamp);box-shadow:inset 0 0 0 1.5px rgba(43,26,51,.55)}
-#m2 .m2-qs.lock{color:var(--soft);box-shadow:inset 0 0 0 1.5px rgba(43,26,51,.25)}
-#m2 .m2-qs svg{flex:none}
 /* the Vibe chips */
-#m2 .m2-chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;flex:none}
-#m2 .m2-vc{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-height:76px;min-width:0;padding:8px 10px;border-radius:14px;background:var(--shade);box-shadow:inset 0 0 0 1.5px rgba(43,26,51,.18);font-size:14px}
-#m2 .m2-vc b{font:800 17px/1.1 var(--disp);letter-spacing:-.01em}
-#m2 .m2-vc[aria-selected="true"]{background:var(--lamp);box-shadow:inset 0 0 0 2px rgba(168,98,0,.9)}
-#m2 .m2-vc.lock{background:transparent;box-shadow:inset 0 0 0 1.5px rgba(43,26,51,.25);color:var(--soft);justify-content:center}
-#m2 .m2-vc.lock b{font-size:15.5px}
-#m2 .m2-vc.lock span{font-size:12.5px;font-weight:600}
-#m2 .m2-tag{display:inline-block;padding:1px 9px;border-radius:99px;font-size:12.5px;font-weight:700;line-height:1.35;background:transparent;color:var(--soft)}
-#m2 .m2-tag.main{background:var(--dusk);color:var(--cream)}
-#m2 .m2-tag.pocket{background:var(--jac);color:#fff}
 /* one Vibe */
-#m2 .m2-vh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:10px}
-#m2 .m2-vh h2{margin:0;font:800 30px/1.05 var(--disp);letter-spacing:-.02em}
 #m2 .m2-sub{font-size:15px;font-weight:600;color:var(--soft)}
 #m2 .m2-lean{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:15px;font-weight:700}
 #m2 .m2-lean svg{flex:none}
-#m2 .m2-vp{display:flex;align-items:center;gap:12px;margin:8px 0 6px;min-width:0}
-#m2 .m2-vb2{flex:1 1 40%;height:11px;border-radius:11px;background:rgba(43,26,51,.15);overflow:hidden;display:block}
-#m2 .m2-vb2 i{display:block;height:100%;background:var(--gold);border-radius:11px}
-#m2 .m2-vt{flex:1 1 60%;font-size:14px;color:var(--soft);text-align:right;line-height:1.25}
-#m2 .m2-vt b{font:800 19px var(--disp);color:var(--ink)}
 #m2 .m2-kit{border-top:1.5px solid var(--rule)}
 #m2 .m2-kr,#m2 .m2-qo{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1.5px solid var(--rule);width:100%}
 #m2 .m2-kr.lock{align-items:center;padding:8px 0;color:var(--soft)}
@@ -303,8 +269,6 @@
 #m2 .m2-kr p,#m2 .m2-qo p{margin:3px 0 0;font-size:14.5px;line-height:1.35;color:var(--ink)}
 #m2 .m2-newt{background:var(--lamp);border-radius:99px;padding:0 9px;font-size:12.5px;font-weight:700;line-height:1.5}
 #m2 .m2-soon-t{color:var(--coral);font-weight:600}
-#m2 .m2-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
-#m2 .m2-here{font-size:14px;font-weight:700;color:var(--soft)}
 /* Choose a Quirk */
 #m2 .m2-qh{display:flex;align-items:center;gap:12px;flex:none;margin-bottom:6px}
 #m2 .m2-qh h2{margin:0;font:800 22px/1.1 var(--disp);letter-spacing:-.01em}
@@ -361,22 +325,13 @@
 #m2 .m2-hn span{font-size:14px;font-weight:700;color:var(--soft)}
 #m2.m2-tall .m2-hd .m2-stats{border-top:2px solid var(--ink);margin-top:8px}
 #m2.m2-tall .m2-st b{font-size:28px}
-#m2.m2-tall .m2-chips{margin-top:8px}
-#m2.m2-tall .m2-vc{min-height:72px}
-#m2.m2-tall .m2-lowt{display:flex;flex-direction:column;gap:8px;margin-top:10px;padding-bottom:12px}
 #m2.m2-tall .m2-hint{margin:2px 0 4px}
 #m2.m2-tall .m2-gfoot{margin-top:10px;padding-bottom:12px}
-#m2.m2-tall .m2-vh h2{font-size:27px}
 /* the wide left page scrolls when the screen is small (phone sideways) */
 #m2.m2-compact .m2-page.l.m2-vibes,#m2.m2-compact .m2-page.l.m2-gear{overflow-y:auto}
-#m2.m2-compact .m2-stage .m2-hero{display:none}
-#m2.m2-compact .m2-stage{flex:none;border-bottom:0}
-#m2.m2-compact .m2-wn{font-size:30px}
-#m2.m2-compact .m2-who{padding:0}
 #m2.m2-compact .m2-st b{font-size:26px}
 #m2.m2-compact .m2-fc,#m2.m2-compact .m2-more{width:44px;height:44px}
 #m2.m2-compact .m2-more{width:auto;min-width:44px}
-#m2.m2-compact .m2-vh h2{font-size:24px}
 #m2.m2-compact .m2-gh h2{font-size:20px}
 #m2.m2-compact .m2-gs{min-height:68px}
 
@@ -516,4 +471,102 @@
 /* Casual Mode ("Freelancer", stage 21): the Basic and Secondary Vibe pickers wrap on a narrow page. */
 #m2 .m2-frs{flex-wrap:wrap;border-radius:20px}
 #m2 .m2-frs .m2-seg{flex:1 1 30%;min-height:40px;padding:0 8px;font-size:13px;line-height:1.1;border-radius:18px}
-#m2 .m2-vc.free b{font-size:16px}
+/* ======== Vibes page, build vibelayout1: figure, name line, Vibe Loadout, abilities panel ======== */
+/* person, level, XP: the figure is small, its head top meets the top of the name line, the stats come right under */
+#m2 .m2-stage{position:relative;flex:none;height:84px;padding-top:6px;box-sizing:border-box;display:flex;align-items:stretch;gap:10px;border-bottom:2px solid var(--ink);margin-top:4px}
+#m2 .m2-hero{position:relative;flex:0 0 74px;height:100%;min-height:0}
+#m2 .m2-hfig{position:absolute;left:50%;bottom:0;transform:translateX(-50%);mix-blend-mode:multiply;pointer-events:none;display:block}
+#m2 .m2-who{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;align-self:flex-start;gap:6px}
+#m2 .m2-nl{display:flex;align-items:baseline;flex-wrap:wrap;column-gap:8px;row-gap:0;min-width:0}
+#m2 .m2-wn{font:800 34px/1 var(--disp);letter-spacing:-.02em;overflow-wrap:normal;word-break:normal;white-space:nowrap}
+#m2 .m2-lvl{font:800 15px var(--disp);color:var(--soft);white-space:nowrap}
+#m2 .m2-xt{margin-left:auto;font-size:13.5px;font-weight:700;color:var(--soft);white-space:nowrap}
+#m2 .m2-xb{height:12px;border-radius:12px;background:rgba(43,26,51,.15);overflow:hidden;display:block}
+#m2 .m2-xb i{display:block;height:100%;background:var(--gold);border-radius:12px}
+#m2.m2-compact .m2-stage{height:auto;padding-top:0;border-bottom:0}
+#m2.m2-compact .m2-stage .m2-hero{display:none}
+#m2.m2-compact .m2-wn{font-size:30px}
+#m2.m2-compact .m2-who{width:100%}
+/* the left page under the stats */
+#m2 .m2-lowl{flex:none;display:flex;flex-direction:column;gap:6px;margin-top:2px}
+#m2 .m2-lo{display:flex;flex-direction:column;gap:6px}
+#m2 .m2-lh{display:flex;align-items:center;justify-content:space-between;gap:8px}
+#m2 .m2-lh h3{margin:0;font:800 13.5px var(--disp);letter-spacing:.09em;text-transform:uppercase;color:var(--soft)}
+#m2 .m2-fcount{display:inline-flex;align-items:center;gap:4px;font:700 14px var(--text);color:var(--soft)}
+#m2 .m2-fcount.open{color:var(--goldink)}
+#m2 .m2-cards{display:flex;flex-direction:column;gap:6px}
+#m2 .m2-vcard{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:6px;align-items:center;padding:4px 5px 6px 9px;border-radius:14px;background:var(--shade);box-shadow:inset 0 0 0 1.5px rgba(43,26,51,.2)}
+#m2 .m2-vcard.sel{background:var(--lamp);box-shadow:inset 0 0 0 2px rgba(168,98,0,.9)}
+#m2 .m2-vcb{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0;min-height:48px;justify-content:center;text-align:left}
+#m2 .m2-vcb b{font:800 16.5px/1.1 var(--disp);letter-spacing:-.01em}
+#m2 .m2-vm{display:flex;align-items:center;flex-wrap:wrap;column-gap:5px;font-size:12.5px;color:var(--soft);white-space:nowrap}
+#m2 .m2-vm b{font:800 12.5px var(--text);color:var(--ink);letter-spacing:0}
+#m2 .m2-stars{display:inline-flex;gap:1px}
+#m2 .m2-vlean{display:flex;align-items:center;gap:5px;font-size:13px;font-weight:700;line-height:1.2}
+#m2 .m2-vi{flex:none;display:inline-flex;color:var(--soft)}
+#m2 .m2-rs{flex:none;width:auto;gap:2px;padding:2px;background:rgba(255,241,214,.7)}
+#m2 .m2-rs .m2-seg{flex:none;min-width:44px;min-height:44px;padding:0 5px;font-size:12.5px;border-radius:22px}
+#m2 .m2-rs .m2-seg.main.on{background:var(--ink);color:var(--cream)}
+#m2 .m2-rs .m2-seg.pocket.on{background:var(--jac);color:#fff}
+#m2 .m2-rs .m2-seg.off.on{background:var(--deep);color:var(--ink)}
+#m2 .m2-vbar{grid-column:1 / -1;height:6px;border-radius:6px;background:rgba(43,26,51,.15);overflow:hidden;margin-top:3px}
+#m2 .m2-vbar i{display:block;height:100%;background:var(--gold);border-radius:6px}
+#m2 .m2-vcard.main .m2-vbar i{background:var(--goldink)}
+#m2 .m2-vcard.pocket .m2-vbar i{background:var(--jac)}
+#m2 .m2-vcard.none .m2-vbar i{background:rgba(43,26,51,.4)}
+#m2 .m2-rowc{display:flex;align-items:center;gap:10px}
+#m2 .m2-rowc .m2-lab{margin:0}
+#m2 .m2-rowc .m2-segs{flex:1 1 auto;min-width:0;max-width:300px}
+#m2 .m2-lab.m2-sec{font-size:13px;letter-spacing:.09em;text-transform:uppercase;font-weight:800}
+#m2 .m2-qrow{display:flex;gap:8px;flex-wrap:wrap}
+#m2 .m2-qs{flex:1 1 0;min-width:0;min-height:44px;padding:6px 12px;border-radius:22px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:700;line-height:1.2;box-shadow:inset 0 0 0 1.5px rgba(43,26,51,.4);background:transparent;white-space:nowrap}
+#m2 .m2-qs.on{background:var(--lamp);box-shadow:inset 0 0 0 1.5px rgba(43,26,51,.55)}
+#m2 .m2-qs.lock{color:var(--soft);background:var(--shade);box-shadow:inset 0 0 0 1.5px rgba(43,26,51,.25)}
+#m2 .m2-qs svg{flex:none}
+/* the abilities panel: title and Descriptions switch, what is active, then the rows */
+#m2 .m2-ah{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:none;min-height:44px;margin-top:2px}
+#m2 .m2-ah h2{margin:0;font:800 22px/1.1 var(--disp);letter-spacing:-.02em;min-width:0}
+#m2 .m2-dsw{flex:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 6px 0 14px;border-radius:24px;box-shadow:inset 0 0 0 1.5px rgba(43,26,51,.4);font-size:14.5px;font-weight:700}
+#m2 .m2-dsw .m2-tog{width:52px;height:32px;border-radius:16px}
+#m2 .m2-dsw .m2-tog::before{top:0;bottom:0;border-radius:16px}
+#m2 .m2-dsw .m2-tog i{top:3px;left:3px;width:26px;height:26px}
+#m2 .m2-dsw[aria-checked="true"] .m2-tog::before{background:var(--green)}
+#m2 .m2-dsw[aria-checked="true"] .m2-tog i{left:23px}
+#m2 .m2-as{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:none;margin:4px 0 8px;flex-wrap:wrap}
+#m2 .m2-pill{display:inline-flex;align-items:center;padding:3px 11px;border-radius:99px;font-size:13px;font-weight:700;line-height:1.3;white-space:nowrap;background:var(--shade);color:var(--ink)}
+#m2 .m2-pill.ok{background:var(--goodbg);color:var(--goodink)}
+#m2 .m2-pill.pep{background:var(--lamp);color:var(--ink)}
+#m2 .m2-pill.soft{background:var(--shade);color:var(--soft)}
+#m2 .m2-sub{font-size:14px;font-weight:600;color:var(--soft)}
+#m2 .m2-sec{margin-top:6px;color:var(--soft)}
+#m2 .m2-sech{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:10px}
+#m2 .m2-sech .m2-lab{margin:0}
+#m2 .m2-kh small.m2-ch{padding:1px 8px;border-radius:7px;background:var(--shade);color:var(--soft);font-size:12.5px}
+#m2 .m2-sc{padding:0 6px;border-radius:7px;background:var(--shade);font-weight:700;white-space:nowrap}
+#m2 .m2-fut{display:flex;align-items:center;gap:10px;width:100%;min-height:48px;padding:6px 0;border-bottom:1.5px solid var(--rule);text-align:left;color:var(--soft)}
+#m2 .m2-fut .m2-fl{opacity:.75}
+#m2 .m2-fut.on{background:rgba(255,207,110,.28)}
+#m2 .m2-ft{flex:1 1 auto;min-width:0;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+#m2 .m2-ft b{font:700 16.5px/1.15 var(--disp);color:var(--ink)}
+#m2 .m2-ft small{font-size:13px;font-weight:600}
+#m2 .m2-fut .m2-kc{display:inline-flex;align-items:center;gap:8px}
+#m2 .m2-rk{font-style:normal;font-weight:700;color:var(--ink);padding:3px 11px;border-radius:99px;box-shadow:inset 0 0 0 1.5px rgba(43,26,51,.4);font-size:13px}
+#m2 .m2-pp b{font:800 16px var(--disp);color:var(--ink)}
+#m2 .m2-peek{margin:0;padding:2px 0 10px 44px;font-size:14px;line-height:1.35;color:var(--soft);border-bottom:1.5px solid var(--rule)}
+#m2 .m2-shared{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding:10px 0 12px;border-top:1.5px solid var(--ink);font-size:14.5px;line-height:1.3}
+#m2 .m2-shared b{font-weight:800}
+#m2 .m2-ab{display:flex;flex-direction:column;margin-top:10px}
+#m2 .m2-kc .m2-pill{font-size:13px}
+#m2 .m2-vcard:focus-within{outline:none}
+/* a row of a Vibe: icon at the left, name, kind and target, the cost pill at the right, the words under both */
+#m2 .m2-kit .m2-kr{display:grid;grid-template-columns:34px minmax(0,1fr) auto;column-gap:12px;row-gap:3px;align-items:start}
+#m2 .m2-kit .m2-kr>span:first-child{grid-row:1 / span 2}
+#m2 .m2-kit .m2-kr .m2-kh{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;min-width:0;grid-column:2}
+#m2 .m2-kit .m2-kr>.m2-kc{grid-column:3;grid-row:1;margin:0;align-self:start}
+#m2 .m2-kit .m2-kr>p{grid-column:2 / 4;grid-row:2;margin:0}
+/* the card's words: "VP" and "(Primary)" show when the card is wide enough for them */
+#m2 .m2-vcb{container-type:inline-size}
+#m2 .m2-vpw,#m2 .m2-sfx{display:none}
+@container (min-width:128px){ #m2 .m2-vpw{display:inline} }
+@container (min-width:158px){ #m2 .m2-sfx{display:inline} }
+#m2 .m2-vcard:not(.main) .m2-vlean{color:var(--soft)}

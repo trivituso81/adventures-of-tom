@@ -71,11 +71,11 @@ function m2Faces(m0) {
 }
 function m2NameBlock(m,tall) {
   const top=m.level>=B6.maxLevel,xp=top?1:m.xp/B6.xpPerLevel;
-  const fresh=m.level;
   if(tall) return '<div class="m2-hn"><b>'+m2Esc(m.name)+'</b><span>Level '+m.level+'</span></div>';
-  return '<div class="m2-who"><span class="m2-lvl">Level '+fresh+'</span><b class="m2-wn">'+m2Esc(m.name)+'</b>'+
-    '<span class="m2-xb" role="img" aria-label="'+(top?'Top level':(B6.xpPerLevel-m.xp)+' experience to level '+(m.level+1))+'"><i style="width:'+Math.round(xp*100)+'%"></i></span>'+
-    '<span class="m2-xt">'+(top?'Top level':(B6.xpPerLevel-m.xp)+' to Level '+(m.level+1))+'</span></div>';
+  // one line: the name, Lv N beside it and the XP still to go at the right, the bar under it (build vibelayout1)
+  return '<div class="m2-who"><div class="m2-nl"><b class="m2-wn">'+m2Esc(m.name)+'</b><span class="m2-lvl">Lv '+m.level+'</span>'+
+    '<span class="m2-xt">'+(top?'Top level':(B6.xpPerLevel-m.xp)+' XP to Lv '+(m.level+1))+'</span></div>'+
+    '<span class="m2-xb" role="img" aria-label="'+(top?'Top level':(B6.xpPerLevel-m.xp)+' experience to level '+(m.level+1))+'"><i style="width:'+Math.round(xp*100)+'%"></i></span></div>';
 }
 function m2StatRow(m,delta) {
   const s=m2Stats(m);
@@ -90,17 +90,53 @@ function m2Header(m,d,delta) {
 }
 
 // ---------- Vibes ----------
-function m2Chips(m,L) {
-  const ids=B3_CAST[m.id].vibes;
-  let h='<div class="m2-chips" role="tablist" aria-label="Vibes">';
-  for(const v of ids) {
-    const V=B3_VIBES[v],role=L.main===v?'main':(L.pocket===v||L.pocket2===v)?'pocket':'none',rk=b3VibeRank(L,v);
-    h+='<button type="button" role="tab" class="m2-vc '+role+'" data-m2="vibe" data-a="'+v+'" data-k="vc-'+v+'" aria-selected="'+(v===M2.vibe)+'"><span class="m2-tag '+role+'">'+(role==='main'?'Primary':role==='pocket'?'Secondary':'Not in use')+'</span><b>'+m2Esc(V.name)+'</b>'+m2Stars(rk,b3MaxRank(),13)+'</button>';
+// The page (build vibelayout1): the Vibe Loadout on the left under the four numbers (one card per Vibe with its Primary, Secondary and Off
+// control, then the Row and the two Quirk slots), and on the right the abilities of the Vibe whose card is picked.
+Object.assign(M2_ICON,{
+  sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
+  bolt:'<path d="M13 3L5 14h6l-1 7 8-11h-6z"/>'});
+const M2_LEANI={guard:'shield',striker:'sword',tempo:'bolt',support:'spark'};
+const M2_LEANN={hp:'HP',atk:'Attack',def:'Def',spd:'Speed',healGiven:'Heals'};
+// "+15% HP & Def": what the Vibe's Lean gives, short (the full words are B3_LEANS in data/b3-rules.js).
+function m2LeanShort(V) {
+  const l=V.lean&&B3_RULES.leans[V.lean]; if(!l) return 'No stat bonus';
+  const ks=Object.keys(l); return '+'+Math.round(l[ks[0]]*100)+'% '+ks.map(k=>M2_LEANN[k]||k).join(' & ');
+}
+const M2_TGT={foe:'1 Foe',ally:'1 Ally',family:'Family',self:'Self',random_foes:'Random Foes',all_foes:'All Foes',ko_ally:'Downed Ally',adjacent_allies:'Adjacent Allies',field:'Field',ally_pair:'Ally Pair',family_or_ko:'Family',foe_row:'Foe Row',either:'Anyone'};
+// A status named in a description gets a small chip (names come from B3_STATUS; matched exactly as written).
+let m2StNames=null;
+function m2Chipify(text) {
+  if(!m2StNames) { const n=[...new Set(Object.values(B3_STATUS||{}).map(s=>s&&s.name).filter(x=>x&&x.length>=4&&!/['’]/.test(x)).concat(['Composure']))].sort((a,b)=>b.length-a.length);
+    m2StNames=n.length?new RegExp('(^|[^A-Za-z])('+n.map(x=>x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')+')(?![A-Za-z])','g'):/(?!)/; }
+  return m2Esc(text).replace(m2StNames,(a,p,s)=>p+'<span class="m2-sc">'+s+'</span>');
+}
+// Casual Mode (Freelancer) card and count: open once every Vibe is mastered.
+const m2Mastered=(m,L)=>B3_CAST[m.id].vibes.filter(v=>b3Mastered(L,v)).length;
+function m2LoadoutHead(m,L) {
+  const ids=B3_CAST[m.id].vibes,n=m2Mastered(m,L),open=b3CasualOpen(m.id,L);
+  return '<div class="m2-lh"><h3>Vibe Loadout</h3><span class="m2-fcount'+(open?' open':'')+'" role="img" aria-label="'+(open?'Freelancer, Casual Mode, open':'Freelancer, Casual Mode, opens when all '+ids.length+' Vibes are mastered ('+n+' so far)')+'">Freelancer: '+n+'/'+ids.length+' '+
+    '<svg aria-hidden="true" viewBox="0 0 24 24" width="15" height="15"><path d="'+M2_STAR+'" fill="currentColor"/></svg></span></div>';
+}
+function m2VibeCard(m,L,v) {
+  const free=b3IsFree(v),V=b3VibeOf(v),role=L.main===v?'main':(L.pocket===v||L.pocket2===v)?'pocket':'none',sel=v===M2.vibe;
+  const max=b3MaxRank(),rk=free?max:b3VibeRank(L,v),mast=rk>=max;
+  let line2,line3,frac;
+  if(free) { line2='Casual Mode'; line3='<span class="m2-vi">'+m2Icon('spark',14)+'</span>No stat bonus'; frac=1; }
+  else {
+    const vp=L.vp[v]||0,T=B3_RULES.rankVp,next=mast?b3MasterVp():T[rk];
+    line2=(mast?'Mastered':'<b>'+vp+'</b>/'+next+'<span class="m2-vpw"> VP</span>'); frac=mast?1:Math.max(0,Math.min(1,vp/next));
+    line3='<span class="m2-vi">'+m2Icon(M2_LEANI[V.lean]||'spark',14)+'</span>'+m2Esc(m2LeanShort(V))+(role==='main'?'':'<span class="m2-sfx"> (Primary)</span>');
   }
-  if(b3CasualOpen(m.id,L)) {   // Casual Mode (engine/b3-progress.js): open once every Vibe is mastered
-    const role=L.main===B3_FREELANCER?'main':'none';
-    h+='<button type="button" role="tab" class="m2-vc free '+role+'" data-m2="vibe" data-a="'+B3_FREELANCER+'" data-k="vc-'+B3_FREELANCER+'" aria-selected="'+(M2.vibe===B3_FREELANCER)+'"><span class="m2-tag '+role+'">'+(role==='main'?'Primary':'Casual Mode')+'</span><b>Freelancer</b>'+m2Stars(b3MaxRank(),b3MaxRank(),13)+'</button></div>';
-  } else h+='<div class="m2-vc lock" role="img" aria-label="Freelancer, Casual Mode, locked until all Vibes are mastered">'+m2Icon('lock',16)+'<b>Freelancer</b><span>Master all '+Math.max(3,ids.length)+'</span></div></div>';
+  const seg=(act,on,t,extra)=>'<button type="button" class="m2-seg '+act+(on?' on':'')+'" data-m2="'+act+'" data-a="'+v+'" data-k="'+act+'-'+v+'" aria-pressed="'+on+'">'+t+'</button>';
+  return '<div class="m2-vcard '+role+(free?' free':'')+(sel?' sel':'')+'">'+
+    '<button type="button" class="m2-vcb" data-m2="vibe" data-a="'+v+'" data-k="vc-'+v+'" aria-pressed="'+sel+'" aria-label="'+m2Esc(V.name)+', see its abilities">'+
+      '<b>'+m2Esc(V.name)+'</b><span class="m2-vm">'+m2Stars(rk,max,11)+'<span>'+line2+'</span></span><span class="m2-vlean">'+line3+'</span></button>'+
+    '<div class="m2-segs m2-rs" role="group" aria-label="'+m2Esc(V.name)+' is">'+seg('main',role==='main','Primary')+(free?'':seg('pocket',role==='pocket','Secondary'))+seg('off',role==='none','Off')+'</div>'+
+    '<span class="m2-vbar" aria-hidden="true"><i style="width:'+Math.round(frac*100)+'%"></i></span></div>';
+}
+function m2LoadoutHtml(m,L) {
+  const ids=B3_CAST[m.id].vibes.slice(),open=b3CasualOpen(m.id,L);
+  let h='<div class="m2-lo">'+m2LoadoutHead(m,L)+'<div class="m2-cards">'+ids.map(v=>m2VibeCard(m,L,v)).join('')+(open?m2VibeCard(m,L,B3_FREELANCER):'')+'</div></div>';
   return h;
 }
 // What each number would do if the Vibe being looked at became the Primary (the +/- shown on the Gear screen).
@@ -109,61 +145,73 @@ function m2VibeDelta(m,L) {
   const a=m2Stats(m),keep=L.main; L.main=M2.vibe; let b; try { b=m2Stats(m); } finally { L.main=keep; }
   const d={}; for(const [k] of M2_STATN) d[k]=b[k]-a[k]; return d;
 }
-function m2Overflow(m,L) {
-  const ids=B3_CAST[m.id].vibes,done=ids.filter(v=>b3Mastered(L,v));
-  if(!done.length) return '';
-  const low=ids.filter(v=>!b3Mastered(L,v)).sort((a,b)=>(L.vp[a]||0)-(L.vp[b]||0))[0];
-  return '';
-}
 const m2First=s=>String(s||'').split(/(?<=[.!?])\s/)[0];
-function m2KitRow(r,V,L,role,fresh) {
+// One row of a Vibe: its icon, its words, what kind of thing it is and what it costs (r from b3Ladder).
+function m2RowInfo(r,L,role) {
   const S=B3_SKILLS[r.id],Q=B3_QUIRKS[r.id],T=B3_TRAITS[r.id];
-  let icon,tag,desc,right='';
-  if(r.kind==='trait') { icon='<span class="m2-fl t">'+m2Icon('shield',16)+'</span>'; tag='Trait'; desc=T?T.desc:''; right=role==='main'?'Always on':'Primary Vibe only'; }
-  else if(r.kind==='quirk') { icon='<span class="m2-fl q">'+m2Icon('spark',16)+'</span>'; tag='Quirk'; desc=Q?Q.desc:''; right=L.quirks.includes(r.id)?'In a slot':''; }
-  else { icon=m2FlIcon(S&&S.flavor,16); const fn=m2FlName(S&&S.flavor); tag=r.kind==='basic'?fn+' basic':r.kind==='cap'?'Capstone':fn+' skill'; desc=S?S.desc:''; right=r.kind==='basic'?'Free':(S&&S.pep!=null?'<b>'+S.pep+'</b> Pep':''); }
-  if(!r.open) {
-    return '<div class="m2-kr lock"><span class="m2-fl lk">'+m2Icon('lock',16)+'</span><div class="m2-kt"><div class="m2-kh"><b>'+m2Esc(r.name)+'</b><small>'+tag+'</small><span class="m2-kc">'+(r.kind==='cap'&&S&&S.pep?'<b>'+S.pep+'</b> Pep &nbsp;':'')+'<em>Rank '+r.rank+'</em></span></div></div></div>';
-  }
-  const dd=desc,showD=m2Details();
+  if(r.kind==='trait') return {icon:'<span class="m2-fl t">'+m2Icon('shield',16)+'</span>',tag:'Trait',desc:T?T.desc:'',pill:role==='main'?'Passive':'Primary only',pc:'soft'};
+  if(r.kind==='quirk') return {icon:'<span class="m2-fl q">'+m2Icon('spark',16)+'</span>',tag:'Quirk',desc:Q?Q.desc:'',pill:L.quirks.includes(r.id)?'In a slot':'',pc:'soft'};
+  const fn=m2FlName(S&&S.flavor),tag=r.kind==='basic'?fn+' basic':r.kind==='cap'?'Capstone':fn+' skill';
+  return {icon:m2FlIcon(S&&S.flavor,16),tag,desc:S?S.desc:'',target:S&&M2_TGT[S.target],pill:r.kind==='basic'?'Free':(S&&S.pep!=null?S.pep+' Pep':''),pc:r.kind==='basic'?'ok':'pep'};
+}
+function m2KitRow(r,V,L,role,fresh) {
+  const I=m2RowInfo(r,L,role),showD=m2Details();
   const soon=r.built?'':' <small class="m2-soon-t">Not working in this build yet</small>';
-  return '<div class="m2-kr"><span>'+icon+'</span><div class="m2-kt"><div class="m2-kh"><b>'+m2Esc(r.name)+'</b><small>'+tag+'</small>'+(fresh?'<span class="m2-newt">New</span>':'')+'<span class="m2-kc">'+right+'</span></div>'+(showD?'<p>'+m2Esc(dd)+soon+'</p>':'')+'</div></div>';
+  return '<div class="m2-kr"><span>'+I.icon+'</span><div class="m2-kh"><b>'+m2Esc(r.name)+'</b><small class="m2-ch">'+I.tag+'</small>'+(I.target?'<small>· '+I.target+'</small>':'')+(fresh?'<span class="m2-newt">New</span>':'')+'</div>'+
+    (I.pill?'<span class="m2-kc"><span class="m2-pill '+I.pc+'">'+I.pill+'</span></span>':'')+(showD?'<p>'+m2Chipify(I.desc)+soon+'</p>':'')+'</div>';
+}
+// A Rank not reached yet: one tap row, and a tap opens its words under it.
+function m2FutureRow(r,L,role) {
+  const I=m2RowInfo(r,L,role),on=M2.peekRow===r.id;
+  return '<button type="button" class="m2-fut'+(on?' on':'')+'" data-m2="peekrow" data-a="'+r.id+'" data-k="pr-'+r.id+'" aria-expanded="'+on+'"><span>'+I.icon+'</span><span class="m2-ft"><b>'+m2Esc(r.name)+'</b><small>· '+I.tag+'</small></span>'+
+    '<span class="m2-kc">'+(r.kind==='skill'||r.kind==='cap'?(function(){ const S=B3_SKILLS[r.id]; return S&&S.pep!=null?'<span class="m2-pp"><b>'+S.pep+'</b> Pep</span>':''; })():'')+'<em class="m2-rk">Rank '+r.rank+'</em></span></button>'+
+    (on?'<p class="m2-peek">'+(I.desc?m2Chipify(I.desc):'Not working in this build yet.')+'</p>':'');
+}
+// The title row of the abilities panel: its name at the left and the Descriptions switch at the right.
+function m2DetailSwitch() {
+  const on=m2Details();
+  return '<button type="button" class="m2-dsw" role="switch" aria-checked="'+on+'" data-m2="details" data-k="details"><span>Descriptions</span><span class="m2-tog" aria-hidden="true"><i></i></span></button>';
+}
+function m2AbHead(title,role,sub,free) {
+  const st=role==='main'?(free?'All Traits & your Basic Active':'Trait, Basic & Skills Active'):role==='pocket'?'Skills Active':'Not in use';
+  return '<div class="m2-ah"><h2>'+m2Esc(title)+' Abilities</h2>'+m2DetailSwitch()+'</div>'+
+    '<div class="m2-as"><span class="m2-pill '+(role==='none'?'soft':'ok')+'">'+st+'</span>'+(sub?'<span class="m2-sub">'+m2Esc(sub)+'</span>':'')+'</div>';
+}
+function m2SharedCmd() {
+  const P=B3_RULES.pickMeUp;
+  return '<div class="m2-shared"><span><b>Shared Command: Pick-Me-Up</b> · Revives ally at '+Math.round(P.hp*100)+'% HP</span><span class="m2-pill pep">'+P.pep+' Pep</span></div>';
 }
 // Casual Mode's page (spec section 1: "Freelancer"): its Traits, the Basic to use and the two Secondary Vibes. The pickers show only while it is the Primary Vibe.
 function m2FreeDetail(m,L) {
   const ids=B3_CAST[m.id].vibes,main=L.main===B3_FREELANCER,seg=(on,act,a,k,t)=>'<button type="button" class="m2-seg'+(on?' on':'')+'" data-m2="'+act+'" data-a="'+a+'" data-k="'+k+'" aria-pressed="'+on+'">'+m2Esc(t)+'</button>';
-  let h='<div class="m2-vh"><h2>Freelancer</h2><span class="m2-sub">Casual Mode</span></div>'+
-    '<div class="m2-lean">'+m2Icon('shield',17)+'<span>No Lean: Freelancer gives no stat bonus. It earns no Vibe Points, because every Vibe is mastered.</span></div>';
+  let h={head:m2AbHead('Freelancer',main?'main':'none','Casual Mode',true),body:''},b='';
+  b+='<div class="m2-lean">'+m2Icon('shield',17)+'<span>No stat bonus. It earns no Vibe Points, because every Vibe is mastered.</span></div>';
   if(main) {   // the pickers come first, so they are on screen without scrolling past the three Traits
-    h+='<div class="m2-lab">Basic action</div><div class="m2-segs m2-frs" role="group" aria-label="Basic action">'+ids.map(v=>{ const b=B3_VIBES[v].basic,S=B3_SKILLS[b]; return seg(L.basic===b,'fbasic',b,'fb-'+b,S?S.name:b); }).join('')+'</div>';
+    b+='<div class="m2-lab">Basic action</div><div class="m2-segs m2-frs" role="group" aria-label="Basic action">'+ids.map(v=>{ const bs=B3_VIBES[v].basic,S=B3_SKILLS[bs]; return seg(L.basic===bs,'fbasic',bs,'fb-'+bs,S?S.name:bs); }).join('')+'</div>';
     for(const slot of [0,1]) { const cur=slot?L.pocket2:L.pocket;
-      h+='<div class="m2-lab">Secondary Vibe '+(slot+1)+'</div><div class="m2-segs m2-frs" role="group" aria-label="Secondary Vibe '+(slot+1)+'">'+ids.map(v=>seg(cur===v,'fpocket',slot+':'+v,'fp'+slot+'-'+v,B3_VIBES[v].name)).join('')+'</div>'; }
-  } else h+='<p class="m2-note">As the Primary Vibe, Freelancer gives two Secondary Vibes, a Basic action of your choice and all three Traits. Make it Primary, then pick them here.</p>';
-  h+='<div class="m2-acts">'+(main?'<span class="m2-here">This is the Primary Vibe.</span>':'<button type="button" class="m2-btn on" data-m2="main" data-a="'+B3_FREELANCER+'" data-k="make-main">Make it Primary</button><span class="m2-here">Or tap it again at the top.</span>')+'</div><div class="m2-kit">';
+      b+='<div class="m2-lab">Secondary Vibe '+(slot+1)+'</div><div class="m2-segs m2-frs" role="group" aria-label="Secondary Vibe '+(slot+1)+'">'+ids.map(v=>seg(cur===v,'fpocket',slot+':'+v,'fp'+slot+'-'+v,B3_VIBES[v].name)).join('')+'</div>'; }
+  } else b+='<p class="m2-note">As the Primary Vibe, Freelancer gives two Secondary Vibes, a Basic action of your choice and all three Traits. Make it Primary on its card, then pick them here.</p>';
+  b+='<div class="m2-lab m2-sec">Traits</div><div class="m2-kit">';
   for(const v of ids) { const V=B3_VIBES[v],T=B3_TRAITS[V.trait];
-    h+='<div class="m2-kr"><span><span class="m2-fl t">'+m2Icon('shield',16)+'</span></span><div class="m2-kt"><div class="m2-kh"><b>'+m2Esc(T?T.name:V.trait)+'</b><small>Trait · '+m2Esc(V.name)+'</small><span class="m2-kc">'+(main?'Always on':'On as Primary')+'</span></div>'+(m2Details()&&T?'<p>'+m2Esc(T.desc)+'</p>':'')+'</div></div>'; }
-  h+='</div><p class="m2-note">Tap any other Vibe at the top to go back to playing it as the Primary Vibe.</p>';
-  return h;
+    b+='<div class="m2-kr"><span><span class="m2-fl t">'+m2Icon('shield',16)+'</span></span><div class="m2-kh"><b>'+m2Esc(T?T.name:V.trait)+'</b><small class="m2-ch">Trait</small><small>· '+m2Esc(V.name)+'</small></div><span class="m2-kc"><span class="m2-pill soft">'+(main?'Passive':'As Primary')+'</span></span>'+(m2Details()&&T?'<p>'+m2Chipify(T.desc)+'</p>':'')+'</div>'; }
+  b+='</div><p class="m2-note">Make any other Vibe Primary on its card to go back to playing it.</p>';
+  h.body=b; return h;
 }
+// The abilities panel: {head, body} so the title row stays put while the list scrolls.
 function m2VibeDetail(m,L,fresh) {
   if(M2.vibe===B3_FREELANCER) return m2FreeDetail(m,L);
-  const V=B3_VIBES[M2.vibe],rank=b3VibeRank(L,V.id),vp=L.vp[V.id]||0,role=L.main===V.id?'main':(L.pocket===V.id||L.pocket2===V.id)?'pocket':'none',T=B3_RULES.rankVp;
-  const mast=rank>=b3MaxRank(),next=mast?b3MasterVp():T[rank],from=T[rank-1],frac=mast?1:Math.max(0,Math.min(1,(vp-from)/(next-from)));
-  const ln=B3_LEANS[V.lean],lean=ln.name+': '+ln.desc.replace(/Max HP/g,'Health')+(role==='main'?'':' (when Primary)');
-  const unlock=mast?'':b3Ladder(V,rank).filter(r=>r.rank===rank+1).map(r=>r.name);
-  let bar;
-  if(mast) bar='';
-  else bar='<span class="m2-vb2"><i style="width:'+Math.round(frac*100)+'%"></i></span><span class="m2-vt"><b>'+vp+'</b> of '+next+' to Rank '+(rank+1)+(unlock.length?': '+m2Esc(unlock.join(' and ')):'')+'</span>';
-  let h='<div class="m2-vh"><h2>'+m2Esc(V.name)+'</h2><span class="m2-sub">'+m2Esc(b3Subtitle(V,rank))+'</span></div>'+
-    '<div class="m2-lean">'+m2Icon('shield',17)+'<span>'+m2Esc(lean)+'</span></div><div class="m2-vp">'+bar+'</div><div class="m2-kit">';
-  for(const r of b3Ladder(V,rank)) h+=m2KitRow(r,V,L,role,fresh&&r.rank===rank&&rank>1);
-  h+='</div>';
-  const mk=role==='main',pk=role==='pocket';
-  h+='<div class="m2-acts">'+(mk?'<span class="m2-here">This is the Primary Vibe.</span>':'<button type="button" class="m2-btn on" data-m2="main" data-a="'+V.id+'" data-k="make-main">Make it Primary</button><span class="m2-here">Or tap it again at the top.</span>')+
-    (pk?'<span class="m2-here">This is the Secondary Vibe.</span>':'<button type="button" class="m2-btn" data-m2="pocket" data-a="'+V.id+'" data-k="make-pocket">Make it Secondary</button>')+'</div>';
-  h+='<p class="m2-note">The Secondary Vibe adds its Skills only, and earns half the Vibe Points of a fight. Everyone can also use Pick-Me-Up ('+B3_RULES.pickMeUp.pep+' Pep) to get a knocked-out family member back up.</p>';
-  if(!b3sOn()&&!M2.lab) h+='<button type="button" class="m2-link" data-m2="legacy" data-a="stamps" data-k="stampcard">Old Stampcard</button>';
-  return h;
+  const V=B3_VIBES[M2.vibe],rank=b3VibeRank(L,V.id),role=L.main===V.id?'main':(L.pocket===V.id||L.pocket2===V.id)?'pocket':'none';
+  const rows=b3Ladder(V,rank),open=rows.filter(r=>r.open),fut=rows.filter(r=>!r.open);
+  let b='<div class="m2-lab m2-sec">Unlocked abilities</div><div class="m2-kit">';
+  for(const r of open) b+=m2KitRow(r,V,L,role,fresh&&r.rank===rank&&rank>1);
+  b+='</div>';
+  if(fut.length) {
+    const lo=Math.min(...fut.map(r=>r.rank)),hi=Math.max(...fut.map(r=>r.rank));
+    b+='<div class="m2-sech"><span class="m2-lab m2-sec">Future ranks (tap row to peek)</span><span class="m2-lab">'+(lo===hi?'Rank '+lo:'Ranks '+lo+' to '+hi)+'</span></div><div class="m2-kit">'+fut.map(r=>m2FutureRow(r,L,role)).join('')+'</div>';
+  }
+  b+=m2SharedCmd();
+  if(!b3sOn()&&!M2.lab) b+='<button type="button" class="m2-link" data-m2="legacy" data-a="stamps" data-k="stampcard">Old Stampcard</button>';
+  return {head:m2AbHead(V.name,role,b3Subtitle(V,rank)),body:b};
 }
 function m2PoolBlock(m,L) {
   if(!b3PoolOpen(L)) return '';
@@ -173,11 +221,11 @@ function m2PoolBlock(m,L) {
   return h+'</div><button type="button" class="m2-btn on" data-m2="poollock" data-k="poollock">Lock it in</button></div>';
 }
 function m2QuirkSlots(m,L) {
-  const pool=b3QuirkPool(m.id,L);
+  const pool=b3QuirkPool(m.id,L),U=B3_RULES.rankUnlock;
   return '<div class="m2-qrow">'+L.quirks.map((q,i)=>{
     const Q=q&&B3_QUIRKS[q];
-    if(!pool.length) return '<div class="m2-qs lock">'+m2Icon('lock',18)+'<span><b>Quirk '+(i+1)+'</b> opens at Rank '+B3_RULES.rankUnlock.quirkA+'</span></div>';
-    return '<button type="button" class="m2-qs'+(Q?' on':'')+'" data-m2="quirk" data-a="'+i+'" data-k="q-'+i+'" aria-label="Quirk slot '+(i+1)+': '+(Q?m2Esc(Q.name):'empty')+'. Choose a Quirk">'+m2Icon('spark',18)+'<span><small>Quirk '+(i+1)+'</small><b>'+(Q?m2Esc(Q.name):'Empty')+'</b></span></button>'; }).join('')+'</div>';
+    if(!pool.length) return '<div class="m2-qs lock">'+m2Icon('lock',16)+'<span>Quirk '+(i+1)+' (Rank '+(i?U.quirkB:U.quirkA)+')</span></div>';
+    return '<button type="button" class="m2-qs'+(Q?' on':'')+'" data-m2="quirk" data-a="'+i+'" data-k="q-'+i+'" aria-label="Quirk slot '+(i+1)+': '+(Q?m2Esc(Q.name):'empty')+'. Choose a Quirk">'+m2Icon('spark',16)+'<span>'+(Q?m2Esc(Q.name):'Quirk '+(i+1)+': empty')+'</span></button>'; }).join('')+'</div>';
 }
 function m2LastFront(m,L) {
   if(!m2InParty(m)) return false;
@@ -193,11 +241,7 @@ function m2RankCtl() {
 function m2RowCtl(m,L) {
   const cur=b3RowOf(L),lock=m2LastFront(m,L);
   const b=(r,t)=>'<button type="button" class="m2-seg'+(cur===r?' on':'')+'" data-m2="row" data-a="'+r+'" data-k="row-'+r+'" aria-pressed="'+(cur===r)+'"'+(r==='back'&&lock&&cur!=='back'?' disabled':'')+'>'+t+'</button>';
-  return '<div class="m2-lab">Stands in</div><div class="m2-segs">'+b('front','Front row')+b('back','Back row')+'</div>'+(lock&&cur!=='back'?'<p class="m2-note">Someone has to stand in Front. Move another family member to the Front first.</p>':'');
-}
-function m2DetailSwitch() {
-  const on=m2Details();
-  return '<div class="m2-sw"><span id="m2-swl">Show skill descriptions</span><button type="button" class="m2-tog" role="switch" aria-checked="'+on+'" aria-labelledby="m2-swl" data-m2="details" data-k="details"><i></i></button></div>';
+  return '<div class="m2-rowc"><span class="m2-lab m2-sec">Row</span><div class="m2-segs">'+b('front','Front')+b('back','Back (-20%)')+'</div></div>'+(lock&&cur!=='back'?'<p class="m2-note">Someone has to stand in Front. Move another family member to the Front first.</p>':'');
 }
 function m2QuirkPick(m,L) {
   const slot=M2.pick,pool=b3QuirkPool(m.id,L);
@@ -220,12 +264,12 @@ function m2VibesBody(d) {
     const none='<div class="m2-soon"><b>'+m2Esc(m.name)+'’s Vibes are not in this build yet.</b><span>They arrive with a later build of the new battle.</span></div>';
     return d.wide?{l:m2Header(m,d),r:none}:{l:'<div class="m2-hd">'+m2Faces(m)+'</div>'+none,r:'',single:true};
   }
-  const ids=B3_CAST[m.id].vibes; if(!(ids.includes(M2.vibe)||(M2.vibe===B3_FREELANCER&&b3CasualOpen(m.id,L)))||M2.vibeFor!==m.id) { M2.vibe=L.main; M2.vibeFor=m.id; M2.pick=null; }
+  const ids=B3_CAST[m.id].vibes; if(!(ids.includes(M2.vibe)||(M2.vibe===B3_FREELANCER&&b3CasualOpen(m.id,L)))||M2.vibeFor!==m.id) { M2.vibe=L.main; M2.vibeFor=m.id; M2.pick=null; M2.peekRow=null; }
   const fresh=M2.freshNow||(M2.fresh&&M2.fresh[m.id]); if(M2.freshNow) { M2.fresh=M2.fresh||{}; M2.fresh[m.id]=true; }
-  const left=m2RankCtl()+m2PoolBlock(m,L)+m2RowCtl(m,L)+m2DetailSwitch()+m2QuirkSlots(m,L);
-  const right=M2.pick!=null?m2QuirkPick(m,L):m2Chips(m,L)+m2Overflow(m,L)+'<div class="m2-scroll">'+m2VibeDetail(m,L,fresh)+'</div>';
-  if(d.wide) return {l:m2Header(m,d,m2VibeDelta(m,L))+'<div class="m2-lowl">'+left+'</div>',r:right,cls:'m2-vibes'};
-  return {l:m2Header(m,d,m2VibeDelta(m,L))+(M2.pick!=null?'<div class="m2-scroll">'+m2QuirkPick(m,L)+'</div>':'<div class="m2-scroll">'+m2PoolBlock(m,L)+m2Chips(m,L)+m2Overflow(m,L)+m2VibeDetail(m,L,fresh)+'<div class="m2-lowt">'+m2RankCtl()+m2RowCtl(m,L)+m2DetailSwitch()+'<div class="m2-lab">Quirks</div>'+m2QuirkSlots(m,L)+'</div></div>'),r:'',single:true,cls:'m2-vibes'};
+  const left=m2RankCtl()+m2PoolBlock(m,L)+m2LoadoutHtml(m,L)+m2RowCtl(m,L)+m2QuirkSlots(m,L);
+  const det=M2.pick!=null?null:m2VibeDetail(m,L,fresh);
+  if(d.wide) return {l:m2Header(m,d,m2VibeDelta(m,L))+'<div class="m2-lowl">'+left+'</div>',r:M2.pick!=null?m2QuirkPick(m,L):det.head+'<div class="m2-scroll">'+det.body+'</div>',cls:'m2-vibes'};
+  return {l:m2Header(m,d,m2VibeDelta(m,L))+'<div class="m2-scroll">'+(M2.pick!=null?m2QuirkPick(m,L):left+'<div class="m2-ab">'+det.head+det.body+'</div>')+'</div>',r:'',single:true,cls:'m2-vibes'};
 }
 
 // ---------- Gear ----------
@@ -280,9 +324,10 @@ function m2GearBody(d) {
 // ---------- Layout: the person at their real height ----------
 function m2PersonLayout() {
   const img=M2.root.querySelector('.m2-hfig'); if(!img) return;
-  const box=img.parentElement,H=box.clientHeight,m=m2Who(),maxIn=Math.max(...m2People().map(m2Inches).filter(Boolean),1);
+  // Tom is the height baseline (CLAUDE.md "Real heights"): his head top meets the top of the name line, the others stand at their real height beside him.
+  const box=img.parentElement,H=box.clientHeight,m=m2Who(),tom=MEMBERS().tom,ref=(tom&&m2Inches(tom))||Math.max(...m2People().map(m2Inches).filter(Boolean),1);
   if(!H) return;
-  let ih=Math.max(40,H*(m2Inches(m)/maxIn)*.98),iw=ih*M2_ASPECT; const W=box.clientWidth; if(iw>W) { iw=W; ih=iw/M2_ASPECT; }
+  let ih=Math.max(40,H*(m2Inches(m)/ref)),iw=ih*M2_ASPECT; const W=box.clientWidth; if(iw>W) { iw=W; ih=iw/M2_ASPECT; }
   img.style.height=ih.toFixed(1)+'px'; img.style.width=iw.toFixed(1)+'px';
 }
 
@@ -299,13 +344,14 @@ function m2PersonAct(act,a,el) {
   if(act==='bench') { M2.bench=!M2.bench; sfx.tab(); M2.focusNext=M2.keys?'bench':null; m2Render(); return; }
   if(M2.tab==='vibes') {
     if(act==='rank'&&M2.lab) { const B=b3LabBook(); for(const id in B) b3SetRank(id,B[id],+a); b3LabSave(); sfx.select(); showToast('Every Vibe in the Battle Lab is now Rank '+a+'.',2.4); M2.focusNext=M2.keys?'rank-'+a:null; m2Render(); return; }
-    if(act==='vibe'&&a===M2.vibe&&L&&L.main!==a&&b3VibeOf(a)&&L.pocket!==a&&L.pocket2!==a) { const V=b3VibeOf(a); M2.focusNext=M2.keys?'vc-'+a:null; if(b3SetMain(m.id,L,a)) m2Changed(m,m2MainText(m,V)); return; }
-    if(act==='vibe') { M2.vibe=a; sfx.tab(); M2.focusNext=M2.keys?'vc-'+a:null; m2Render(); return; }
+    if(act==='vibe') { M2.vibe=a; M2.peekRow=null; sfx.tab(); M2.focusNext=M2.keys?'vc-'+a:null; m2Render(); return; }
     if(!L) return;
-    if(act==='main') { const V=b3VibeOf(a); M2.focusNext=M2.keys?'vc-'+a:null; if(V&&b3SetMain(m.id,L,a)) m2Changed(m,m2MainText(m,V)); return; }
+    if(act==='main') { const V=b3VibeOf(a); M2.vibe=a; M2.focusNext=M2.keys?'main-'+a:null; if(V&&b3SetMain(m.id,L,a)) m2Changed(m,m2MainText(m,V)); return; }
     if(act==='fbasic') { M2.focusNext=M2.keys?'fb-'+a:null; if(b3SetBasic(m.id,L,a)) m2Changed(m,(B3_SKILLS[a]?B3_SKILLS[a].name:a)+' is '+m.name+'’s Basic action.'); return; }
     if(act==='fpocket') { const [sl,v]=String(a).split(':'); M2.focusNext=M2.keys?'fp'+sl+'-'+v:null; if(b3SetPocket(m.id,L,v,+sl)) m2Changed(m,B3_VIBES[v].name+' is now Secondary Vibe '+(+sl+1)+': it adds its Skills.'); return; }
-    if(act==='pocket') { const V=B3_VIBES[a]; M2.focusNext=M2.keys?'vc-'+a:null; if(b3SetPocket(m.id,L,a)) m2Changed(m,V.name+' is now '+m.name+'’s Secondary Vibe: it adds its Skills.'); return; }
+    if(act==='off') { if(L.main===a||L.pocket===a||L.pocket2===a) { sfx.nope&&sfx.nope(); showToast('A Vibe steps out when another one takes its place. Pick Primary or Secondary on a different Vibe.',3); } return; }
+    if(act==='peekrow') { M2.peekRow=M2.peekRow===a?null:a; sfx.tab(); M2.focusNext=M2.keys?'pr-'+a:null; m2Render(); return; }
+    if(act==='pocket') { const V=B3_VIBES[a]; M2.vibe=a; M2.focusNext=M2.keys?'pocket-'+a:null; if(b3SetPocket(m.id,L,a)) m2Changed(m,V.name+' is now '+m.name+'’s Secondary Vibe: it adds its Skills.'); return; }
     if(act==='row') {
       if(b3RowOf(L)===a) return;
       if(a==='back'&&m2LastFront(m,L)) { sfx.nope&&sfx.nope(); showToast('Someone has to stand in Front.',2.4); return; }
