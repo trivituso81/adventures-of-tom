@@ -35186,7 +35186,7 @@
    "id": "c-fix-pairmove1-gen-2",
    "tag": "fix-pairmove1-gen-2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix: Make Rose's Giddyup with Tom in it",
@@ -35219,7 +35219,7 @@
    ],
    "chat": {
     "url": "",
-    "opening": "Something is wrong on t-pairmove1-gen"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -35236,6 +35236,11 @@
      "d": "2026-11-21",
      "t": "Tom reported on t-movefun-gen: See your message",
      "at": "2026-11-22T06:23:50.671Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-22T06:25:01.966Z"
     }
    ],
    "prompt": {
