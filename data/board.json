@@ -31623,12 +31623,12 @@
   {
    "id": "t-wanmop1-gen",
    "lane": "tom",
-   "col": "wait",
+   "col": "done",
    "theme": "Battle Animations",
    "ask": "animations",
    "fyi": true,
    "title": "Make Deedee's Wet-Floor with a real mop",
-   "next": "Tap Generate all 1 video (two taps). Deedee now holds a string mop with a floppy wet head instead of the flat broom. The Action makes it, checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20 for this video.",
+   "next": "Done: Deedee's string-mop video is in the game; watch it on t-wanstuck1-watch.",
    "wan": {
     "jobs": [
      "deedee-wetfloor"
@@ -31679,15 +31679,19 @@
      "d": "2026-11-21",
      "t": "Tom: something is wrong: Stuck Sent to Claude as card c-fix-wanmop1-gen; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-22T04:52:19.969Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Closed by wanstuck1. Tom (20:53): \"Aaamaaand we're stuck yet again\". The loop made 4 videos (r8, r9), then stopped at its limit; his \"Give it 4 more tries\" was not read and his next tap was cancelled by GitHub. r9 was good by eye (a real string mop) and is baked by hand."
     }
    ],
    "wgen": {
-    "want": true,
+    "want": false,
     "at": "2026-11-22T04:31:37Z",
     "n": 1,
     "est": 0.79
    },
-   "waiting_on": "claude"
+   "done": "2026-11-21"
   },
   {
    "id": "c-wanmop1",
@@ -31808,7 +31812,11 @@
    "ask": "animations",
    "fyi": true,
    "title": "Make Rose's Giddyup with Tom in it",
+<<<<<<< HEAD
    "next": "Open this card on the board. Under Videos on this card it should now say 1 video left to make: tom-rose-giddyup and show a yellow button Generate all 1 video (about $0.79). If the board was already open it can take up to a minute, and it says Getting the job list... meanwhile, never Nothing to make. Tap the button twice. Rose hops onto Tom's shoulders, rides with a fist up like shouting giddyup, then springs off and lands in front of him. In a fight it plays at Tom's spot while Rose is hidden; if Tom is knocked out or not in the party, her solo jump plays. The Action checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20.",
+=======
+   "next": "Reload the board page, then tap Generate all 1 video (two taps). Rose hops onto Tom's shoulders, rides with a fist up like shouting giddyup, springs off and lands in front of him. The Action checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20.",
+>>>>>>> bbd614f (wanstuck1: video runs no longer get lost or stuck; Deedee's Wet-Floor has a string mop)
    "wan": {
     "jobs": [
      "tom-rose-giddyup"
@@ -31834,6 +31842,7 @@
      "at": "2026-11-22T04:31:48.393Z"
     },
     {
+<<<<<<< HEAD
      "d": "2026-11-22",
      "t": "Fixed by fix-pairmove1-gen: the board page read the video job list once when it opened, so this card (added later) counted 0 videos and said Nothing to make right now. It now reads the list again every minute and while the card is open. Generate all 1 video is the next tap."
     },
@@ -31841,6 +31850,69 @@
      "d": "2026-11-21",
      "t": "Unblocked: Fix: Make Rose's Giddyup with Tom in it is done."
     }
+=======
+     "d": "2026-11-21",
+     "t": "Back to Tom after wanstuck1: \"Says nothing to make\" was the board page holding a job list from before the job existed; fixed."
+    }
+   ]
+  },
+  {
+   "id": "c-wanstuck1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "tag": "wanstuck1",
+   "title": "Video runs no longer get lost or stuck",
+   "next": "Shipped in wanstuck1.",
+   "blocks": [],
+   "after": "t-wanstuck1-watch",
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
+    "opening": "Tom: Aaamaaand we're stuck yet again"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom (20:53): \"Aaamaaand we're stuck yet again\""
+    }
+   ],
+   "prompt": {
+    "what": "Fix the three ways video runs got stuck.",
+    "before": [
+     "Nothing."
+    ],
+    "model": "Claude Opus 5.5",
+    "effort": "medium",
+    "text": "Done in the session that made this card."
+   }
+  },
+  {
+   "id": "t-wanstuck1-watch",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "animations",
+   "fyi": true,
+   "title": "Watch Deedee's Wet-Floor with the string mop",
+   "next": "Open ADMIN > BATTLE GUIDE, choose Animations, Family, Deedee, and play Wet-Floor Hazard once. She holds a brown string mop, sweeps twice beside her feet and puts it away. Tap All good, or Something is wrong and say what you saw (for example if it still reads as a broom).",
+   "wanwatch": [
+    "deedee-wetfloor"
+   ],
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "added by wanstuck1"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Made by wanstuck1: deedee-wetfloor r9 baked by hand after a look at every frame."
+    }
+>>>>>>> bbd614f (wanstuck1: video runs no longer get lost or stuck; Deedee's Wet-Floor has a string mop)
    ]
   },
   {
@@ -34134,7 +34206,7 @@
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix: Make Rose's Giddyup with Tom in it",
-   "next": "You reported a problem on Make Rose's Giddyup with Tom in it. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Says nothing to make migrant lei",
+   "next": "Fixed in wanstuck1.",
    "blocks": [
     "t-pairmove1-gen"
    ],
@@ -34176,12 +34248,17 @@
      "t": "Started: the conversation claimed this card."
     },
     {
+<<<<<<< HEAD
      "d": "2026-11-22",
      "t": "Reproduced (the page before the fix shows \"Nothing to make right now.\" when the card arrives after the page opened) and fixed in board.html; new test tools/board_wanstale_test.py. No pencil report filed since 04:31:47Z. Shipped as fix-pairmove1-gen."
     },
     {
      "d": "2026-11-21",
      "t": "Shipped as fix-pairmove1-gen: the board's video button no longer says Nothing to make for a card added after the page opened"
+=======
+     "d": "2026-11-21",
+     "t": "Fixed in wanstuck1 (Tom: \"Says nothing to make\"): the board page loaded the job list once, before pairmove1 added the job; it now loads it again when a card names a job it does not have. Retired here; the conversation that claimed it has nothing left to do."
+>>>>>>> bbd614f (wanstuck1: video runs no longer get lost or stuck; Deedee's Wet-Floor has a string mop)
     }
    ],
    "prompt": {
@@ -34306,11 +34383,11 @@
    "id": "c-fix-wanmop1-gen",
    "tag": "fix-wanmop1-gen",
    "lane": "claude",
-   "col": "up",
+   "col": "done",
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix: Make Deedee's Wet-Floor with a real mop",
-   "next": "You reported a problem on Make Deedee's Wet-Floor with a real mop. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Stuck",
+   "next": "Fixed in wanstuck1.",
    "blocks": [
     "t-wanmop1-gen"
    ],
@@ -34341,6 +34418,10 @@
      "d": "2026-11-21",
      "t": "Tom reported on t-wanmop1-gen: Stuck",
      "at": "2026-11-22T04:52:19.969Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Fixed in wanstuck1 (Tom: \"Stuck\"): answers now reset the count and start the run; runs are no longer cancelled by other pushes; r9 baked."
     }
    ],
    "prompt": {
@@ -34352,7 +34433,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-wanmop1-gen and t-wanmop1-gen in data/board.json, history included. Your first push is the commit board: start c-fix-wanmop1-gen.\n\nTom tested and found problems:\n1. Card t-wanmop1-gen (Make Deedee's Wet-Floor with a real mop, ask animations). He was asked: Tap Generate all 1 video (two taps). Deedee now holds a string mop with a floppy wet head instead of the flat broom. The Action makes it, checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20 for this video. He wrote: Stuck\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T04:52:18.565Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-wanmop1-gen to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-wanmop1-gen, and give the build fix-wanmop1-gen a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-wanmop1-gen"
+   "after": "t-wanmop1-gen",
+   "done": "2026-11-21"
   },
   {
    "id": "t-movefun-gen",

@@ -91,6 +91,8 @@ try:
             pg.screenshot(path=f'{out}/board-wan-revup-{tag}.png'); pg.click('#bclose')
             pg.evaluate("openSheet('t-w-revs')"); pg.wait_for_selector('#sheet .pics')
             ok(pg.inner_text('#sheet button.gen').startswith('Generate all 1 video'), tag + ': run.revs below the job rev lists the job again: ' + pg.inner_text('#sheet button.gen')); pg.click('#bclose')
+            pg.evaluate("async()=>{ WJOBS=Object.assign({},WJOBS); delete WJOBS['rose-cast']; await loadWjobs(); }")
+            ok(pg.evaluate("()=>!!WJOBS['rose-cast']"), tag + ': wanstuck1: a job list loaded before a card\'s job was added is loaded again')
             pg.evaluate("openSheet('t-w-wait')"); pg.wait_for_selector('#sheet .pics')
             ok(pg.is_disabled('#sheet button.gen') and pg.inner_text('#sheet button.gen').startswith('Waiting on'), tag + ': waiting card: ' + pg.inner_text('#sheet button.gen')); pg.click('#bclose')
             sw = pg.evaluate('document.documentElement.scrollWidth')

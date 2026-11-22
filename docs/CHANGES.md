@@ -1,3 +1,15 @@
+## wanstuck1 (2026-11-21): video runs no longer get lost or stuck; Deedee's Wet-Floor has a string mop
+
+Card c-wanstuck1. Tom (20:53): "Aaamaaand we're stuck yet again". Three causes, all fixed:
+
+| Stuck | Cause | Fix |
+|---|---|---|
+| Deedee's card waited forever after a tap | wan-gen, art-gen and voice-gen set "one run at a time" on the whole workflow. Every push to main joins that group and GitHub keeps one waiting run per group, so an unrelated push (whose job is then skipped) cancelled the waiting paid run (run 44985447106, Tom's tap at 04:31 UTC) | The concurrency group moved onto the job in all three workflows, so a skipped job never takes the slot |
+| "Give it 4 more tries" did nothing | Nothing read the answer, so the next run met the used-up count at once (run 44985280855: 0 made) | `more_tries` in wanbulk.py starts the job's count again from the answer time; the answer commit starts wan-gen on the job's card (`wan_card` on the out-of-tries card) |
+| Rose's card said "Nothing to make" | The board page loaded the job list once; a page open since before pairmove1 had no tom-rose-giddyup | `loadWjobs` loads again when an open card names a job the list lacks |
+
+Deedee: the automatic loop made r8 and r9 (4 videos, $3.14) and stopped at its limit, as designed. By eye r9 is a brown string mop, two short sweeps beside her feet, put away, back to her stance; the look check failed it only on "once" and "from behind her back". Baked by hand (data/clips/deedee-wetfloor.js, already wired to wet_floor_hazard). Watch card t-wanstuck1-watch. Retired: t-wanmop1-gen, c-fix-wanmop1-gen, c-fix-pairmove1-gen; t-pairmove1-gen is back for one tap. Tests: wanbulk_test B12, board_wan_test (job list reload), wangen_test.
+
 ## fix-pairmove1-gen (2026-11-22): the board's video button no longer says Nothing to make for a card added after the page opened
 
 Card c-fix-pairmove1-gen, for t-pairmove1-gen. Tom (11-21 20:31): "Says nothing to make migrant lei" (spoken; the same words as his earlier note on fix-wanstop-gen: "the button says nothing to make right now").

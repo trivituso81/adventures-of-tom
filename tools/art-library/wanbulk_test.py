@@ -16,6 +16,7 @@ a local bare git remote plays GitHub. The run is the real script on a depth 1 cl
   B9  wanauto1: a miss that is not only the edge is re-rolled once with the same settings (same start picture) before it stops
   B10 wanauto1: budget() counts one animation's videos since its auto_from (4 tries, $3.20) and every video of the day ($15)
   B11 wanauto1: an animation out of tries gets one Tom decide card instead of a Claude card
+  B12 wanstuck1: Tom's "Give it 4 more tries" answer resets that job's count; the card names the run's card
 Prints ALL PASS."""
 import os, sys, io, json, re, shutil, subprocess, tempfile, threading, base64, time, urllib.request
 import numpy as np
@@ -292,6 +293,15 @@ ok(bd2['tries'] == 4 and not bd2['job_ok'], 'B10 budget: a fifth video of one an
 gc = wanbulk.gaveup_card('j', 3, 'used 4 tries ($3.16)', {'evidence': ['edge: touches the left edge']}, '2026-11-22', 'r1', cfg)
 ok(gc['lane'] == 'tom' and gc['ask'] == 'decide' and gc['fyi'] and len(gc['choices']) == 2 and gc['choices'][0].endswith('(Recommended)') and len(gc['leads']) == 2 and '\u2014' not in json.dumps(gc),
    'B11 an animation out of tries gets one Tom decide card (fyi, two choices, first Recommended)', gc)
+
+jobs_m = {'j': {'rev': 3, 'est': .79, 'auto_from': '2026-11-22T00:00:00Z'}}
+brd = {'cards': [{'id': 't-wangaveup-j-r3', 'answer': 'Give it 4 more tries', 'history': [{'t': 'Tom chose: Give it 4 more tries', 'at': '2026-11-22T04:29:46.570Z'}]},
+                 {'id': 't-wangaveup-k-r1', 'answer': 'Keep the move without a video for now', 'history': [{'t': 'Tom chose: Keep', 'at': '2026-11-22T05:00:00Z'}]}]}
+mt = wanbulk.more_tries(brd, jobs_m, ['j'])
+ok(mt == {'j': '2026-11-22T04:29:46.570Z'} and jobs_m['j']['auto_from'] == '2026-11-22T04:29:46.570Z' and wanbulk.budget('j', jobs_m['j'], {'calls': calls}, cfg, day='2026-11-22')['tries'] == 0,
+   'B12 "Give it 4 more tries" starts that job\'s count again from the answer time; another job or another answer changes nothing', mt)
+gc2 = wanbulk.gaveup_card('j', 3, 'x', None, '2026-11-22', 'r1', cfg, 't-card')
+ok(gc2.get('wan_card') == 't-card', 'B12 the out-of-tries card names the card whose run makes the job (the wan-gen Action runs it on the answer)')
 
 # ------------------------------------------------------------------ B8 the stored r4 videos, if the machine has them
 rv = '/tmp/wb'

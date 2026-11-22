@@ -51,14 +51,15 @@ permissions:
   contents: write
   actions: write
 
-concurrency:
-  group: art-gen
-  cancel-in-progress: false
-
 jobs:
   gen:
     if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'board: generate ') || startsWith(github.event.head_commit.message, 'art: generate ')"
     runs-on: ubuntu-latest
+    # wanstuck1 (2026-11-21): one run at a time, set on the JOB, not the workflow. At workflow level every push to main joined the group, and GitHub
+    # keeps only one waiting run per group, so an unrelated push (whose job is skipped) cancelled a waiting paid run: Tom's tap at 04:31 UTC was lost that way.
+    concurrency:
+      group: art-gen
+      cancel-in-progress: false
     timeout-minutes: 120
     env:
       CI: 'true'

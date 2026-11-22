@@ -728,11 +728,17 @@ const hasWan=c=>!!c&&c.lane==='tom'&&c.col!=='done'&&((c.wan||{}).jobs||[]).leng
 // read again on every board reload, from GitHub (main) when the board is live, and a job the list does not have yet is never counted as nothing to make.
 const WJOBS_PATH='tools/art-library/wangen-jobs.json';
 async function loadWjobs(){
+<<<<<<< HEAD
   if(!B||!B.cards.some(hasWan))return;
   let j=null;const tok=lsGet(TOKEN);
   if(!Q.get('wjobs')&&(tok||Q.get('gh'))){try{const g=await ghFile(WJOBS_PATH,tok);if(g)j=g.doc;}catch(e){}}
   if(!j){try{const r=await fetch((Q.get('wjobs')||WJOBS_PATH)+'?t='+Date.now(),{cache:'no-store'});if(r.ok)j=await r.json();}catch(e){}}
   if(j)WJOBS=j;
+=======
+  // wanstuck1: load again when an open card names a job the loaded list does not have (a board left open since before that job was added said "Nothing to make")
+  if(!B||!B.cards.some(hasWan)||(WJOBS&&!B.cards.some(c=>hasWan(c)&&c.wan.jobs.some(j=>!WJOBS[j]))))return;
+  try{const r=await fetch((Q.get('wjobs')||'tools/art-library/wangen-jobs.json')+'?t='+Date.now(),{cache:'no-store'});if(r.ok)WJOBS=await r.json();}catch(e){}
+>>>>>>> bbd614f (wanstuck1: video runs no longer get lost or stuck; Deedee's Wet-Floor has a string mop)
 }
 const wanUnknown=c=>(c.wan.jobs||[]).filter(j=>WJOBS&&!WJOBS[j]);
 // The minute reload is skipped while a card is open, so an open card that names an unknown job asks for the list itself (at most every 20 seconds).

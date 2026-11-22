@@ -51,14 +51,15 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: wan-gen
-  cancel-in-progress: false
-
 jobs:
   gen:
-    if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'wan: generate ') || startsWith(github.event.head_commit.message, 'board: wan generate ')"
+    if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'wan: generate ') || startsWith(github.event.head_commit.message, 'board: wan generate ') || startsWith(github.event.head_commit.message, 'board: answer t-wangaveup-')"
     runs-on: ubuntu-latest
+    # wanstuck1 (2026-11-21): one run at a time, set on the JOB, not the workflow. At workflow level every push to main joined the group, and GitHub
+    # keeps only one waiting run per group, so an unrelated push (whose job is skipped) cancelled a waiting paid run: Tom's tap at 04:31 UTC was lost that way.
+    concurrency:
+      group: wan-gen
+      cancel-in-progress: false
     timeout-minutes: 170
     env:
       COSTS_LOG_REPO: ${{ github.workspace }}   # costs2: tools/costlog.py writes this run's spend to data/costs.json on main
@@ -81,7 +82,13 @@ jobs:
           mode=jobs; card=""
           if [ "$EVENT" = "push" ]; then
             first="${MSG%%$'\n'*}"
-            if [[ "$first" == "board: wan generate "* ]]; then mode=bulk; card="${first#board: wan generate }"; else mode=guide; fi
+            if [[ "$first" == "board: wan generate "* ]]; then mode=bulk; card="${first#board: wan generate }"
+            elif [[ "$first" == "board: answer t-wangaveup-"* ]]; then
+              # wanstuck1: Tom answered an out-of-tries card. "Give it N more tries" runs the job's card again (wanbulk resets that job's count from the answer time).
+              gid="${first#board: answer }"
+              card=$(python3 -c "import json,sys; c=next((x for x in json.load(open('data/board.json'))['cards'] if x['id']==sys.argv[1]),{}); print(c.get('wan_card','') if str(c.get('answer','')).startswith('Give it') else '')" "$gid")
+              if [ -n "$card" ]; then mode=bulk; else mode=none; fi
+            else mode=guide; fi
           elif [ "$REQ" = "true" ]; then mode=guide
           elif [ -n "$CARD_IN" ]; then mode=bulk; card="$CARD_IN"
           fi
@@ -116,6 +123,7 @@ jobs:
           GUIDE: ${{ steps.mode.outputs.mode == 'guide' }}
         run: |
           set -o pipefail
+          if [ "$MODE" = "none" ]; then echo "nothing to make (an out-of-tries answer that asks for no more tries)"; exit 0; fi
           ARGS=(--what "$WHAT" --cap "${CAP:-2}" --out "$RUNNER_TEMP/wangen")
           [ "$GUIDE" = "true" ] && ARGS=(--requests --out "$RUNNER_TEMP/wangen")
           if [ "$MODE" = "bulk" ]; then

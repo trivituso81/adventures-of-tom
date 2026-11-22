@@ -173,7 +173,7 @@ def stop_card(r, job, card, run, today, bud=None, cfg=None):
                        'model': 'Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)', 'effort': 'medium (one video; the checks say what failed)', 'text': text}}
 
 
-def gaveup_card(w, rev, why, last, today, run, cfg):
+def gaveup_card(w, rev, why, last, today, run, cfg, wan_card=''):
     """wanauto1: an animation that used its tries or dollars. One Tom card per job and rev; it blocks nothing. Tom decides with one tap."""
     cid = 't-wangaveup-%s-r%d' % (w, rev)
     ev = '; '.join(e[:160] for e in (last or {}).get('evidence') or [])[:500]
@@ -183,7 +183,7 @@ def gaveup_card(w, rev, why, last, today, run, cfg):
             'choices': ['Give it %d more tries (Recommended)' % cfg['tries'], 'Keep the move without a video for now'],
             'leads': ['A Claude session changes one thing and the Action tries up to %d more times (at most $%.2f), no tap needed.' % (cfg['tries'], cfg['job_dollars']),
                       'The move plays with its stand-in until a later card picks it up.'],
-            'blocks': [], 'created': today, 'changed': today, 'chat': {'url': '', 'opening': 'added by the wan-gen job'},
+            'blocks': [], 'wan_card': wan_card, 'created': today, 'changed': today, 'chat': {'url': '', 'opening': 'added by the wan-gen job'},
             'history': [{'d': today, 't': 'Added by the wan-gen job (%s): %s %s.' % (run, w, why)}]}
 
 
@@ -255,6 +255,19 @@ def merge(repo, a, items, jobs, out, card, run, build, log):
 
 
 # ------------------------------------------------------------------ the run
+def more_tries(board, jobs, names):
+    """wanstuck1: Tom answered an out-of-tries card (t-wangaveup-<job>-r<rev>) with "Give it N more tries": that job's count starts again at the time
+    of his answer (it moves `auto_from` forward, for this run). Returns {job: new auto_from}."""
+    out = {}
+    for n in names:
+        for c in board.get('cards', []):
+            if not str(c.get('id', '')).startswith('t-wangaveup-%s-r' % n) or not str(c.get('answer', '')).startswith('Give it'): continue
+            at = max([h.get('at', '') for h in c.get('history', []) if str(h.get('t', '')).startswith('Tom chose')] or [''])
+            if at and at > str(jobs[n].get('auto_from') or '') and at > out.get(n, ''): out[n] = at
+    for n, at in out.items(): jobs[n]['auto_from'] = at
+    return out
+
+
 def card_jobs(card, jobs):
     names = [n for n in (card.get('wan') or {}).get('jobs') or [] if n in jobs and not n.startswith('_')]
     return names
@@ -269,6 +282,7 @@ def run(a, jobs, state, lock, save, fal, key, spent0):
     card = next((c for c in board['cards'] if c['id'] == cid), None) if cid else None
     if cid and card is None: say('card %s is not on the board' % cid); return 1
     names = card_jobs(card, jobs) if card else wangen.pick(jobs, a.what)
+    for n, at in more_tries(board, jobs, names).items(): say('%s: Tom asked for more tries at %s, so its count starts again from then' % (n, at))
     if a.what and card: names = [n for n in wangen.pick(jobs, a.what) if n in names] or names
     run_cap = min(float(a.cap_set and a.cap or (card or {}).get('wan', {}).get('cap') or cfg['cap']), cfg['cap'])
     a.cap = round(state['spent'] + run_cap, 4)   # the ledger counts every call ever made; this run may add run_cap
@@ -328,12 +342,12 @@ def run(a, jobs, state, lock, save, fal, key, spent0):
                 if bud['job_ok']:
                     sc = stop_card(r['result'], jobs[r['what']], c, run_id, today, bud, cfg)
                 else:
-                    sc = gaveup_card(r['what'], r['rev'], 'used %d tries ($%.2f)' % (bud['tries'], bud['spent']), r['result']['attempts'][-1], today, run_id, cfg)
+                    sc = gaveup_card(r['what'], r['rev'], 'used %d tries ($%.2f)' % (bud['tries'], bud['spent']), r['result']['attempts'][-1], today, run_id, cfg, c['id'])
                     r['gaveup'] = True
                 if sc['id'] not in have: b['cards'].append(sc); have.add(sc['id']); added.append(sc['id'])
             for r in rows:
                 if r['state'] == 'gaveup':
-                    sc = gaveup_card(r['what'], r['rev'], r['why'], None, today, run_id, cfg)
+                    sc = gaveup_card(r['what'], r['rev'], r['why'], None, today, run_id, cfg, c['id'])
                     if sc['id'] not in have: b['cards'].append(sc); have.add(sc['id']); added.append(sc['id'])
             wid = ''
             if merged:
