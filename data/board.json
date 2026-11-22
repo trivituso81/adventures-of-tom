@@ -31778,7 +31778,7 @@
   {
    "id": "c-pairmove1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "pairmove1",
    "title": "Giddyup, Tata!: one video of Rose riding Tom's shoulders",
@@ -31795,6 +31795,10 @@
     {
      "d": "2026-11-21",
      "t": "Tom (20:02): \"But what makes it giddy up Tata? These moves need to be fun. Are we making them too short?\" Tom (20:07): \"I'm gonna leave it to you to figure out that solution, but it feels like if we're gonna keep the move is this, it needs to be something where she jumps on the shoulders and then jumps off and says giddy up or something like that... the more the advanced move is that more acceptable is for to take longer\""
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as pairmove1: two-person battle videos; Rose's Giddyup will ride Tom's shoulders"
     }
    ],
    "prompt": {
@@ -31805,7 +31809,8 @@
     "model": "Claude Opus 5.5",
     "effort": "medium",
     "text": "Done in the session that made this card."
-   }
+   },
+   "done": "2026-11-21"
   },
   {
    "id": "t-pairmove1-gen",
@@ -34633,6 +34638,26 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
+   "title": "Remake Rose's Giddyup and Deedee's Wet-Floor videos",
+   "first": "2026-11-21T16:32:27-08:00",
+   "last": "2026-11-21T20:28:15-08:00",
+   "tags": [
+    "wanch5",
+    "wanauto1",
+    "wanmop1",
+    "giddyupbake1",
+    "pairmove1"
+   ],
+   "cards": [
+    "c-wanch5",
+    "c-wanauto1",
+    "c-wanmop1",
+    "c-giddyupbake1",
+    "c-pairmove1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEPoSEs3hccRneDav9",
    "title": "Fix: Read a few item banners on your phone",
    "first": "2026-11-21T20:24:44Z",
@@ -34676,24 +34701,6 @@
    "tags": [],
    "cards": [
     "t-milestoned"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
-   "title": "Remake Rose's Giddyup and Deedee's Wet-Floor videos",
-   "first": "2026-11-21T16:32:27-08:00",
-   "last": "2026-11-21T19:59:44-08:00",
-   "tags": [
-    "wanch5",
-    "wanauto1",
-    "wanmop1",
-    "giddyupbake1"
-   ],
-   "cards": [
-    "c-wanch5",
-    "c-wanauto1",
-    "c-wanmop1",
-    "c-giddyupbake1"
    ]
   },
   {
@@ -39130,8 +39137,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "e8805f403467ca468542933fa1492a438dce0bbf",
- "synced_at": "2026-11-22T04:27:31+00:00",
+ "synced": "53519e6cbdd14c022fcbbef5005418c61ed6db5c",
+ "synced_at": "2026-11-22T04:29:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
