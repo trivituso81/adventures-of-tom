@@ -34494,11 +34494,17 @@
     "opening": "added by movefun2"
    },
    "wgen": {
-    "want": true,
+    "want": false,
     "at": "2026-11-22T05:30:00Z",
     "n": 1,
     "est": 0.5,
-    "auto": true
+    "auto": true,
+    "run": {
+     "state": "running",
+     "at": "2026-11-22T05:22:04Z",
+     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44988974716",
+     "n": 3
+    }
    },
    "history": [
     {
