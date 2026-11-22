@@ -1,22 +1,4 @@
 {
- "requests": [
-  {
-   "kind": "tts",
-   "line": "d|grace|Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One again.",
-   "voice_id": "JVVJ6VsnUPJAdfGmEBGP",
-   "fallback_ids": [],
-   "text": "[bossy] Tata, don't walk yet. [proud] I wrote down [emphasized] EVERYTHING that happened since you left. [reading aloud] Number one. Boppy saw the Big One [emphasized]AGAIN!",
-   "model": "eleven_v4",
-   "stability": 0.5,
-   "similarity": 0.85,
-   "speed": null,
-   "seed": true,
-   "tries": 3,
-   "label": "new take",
-   "script": "[bossy] Tata, don't walk yet. [proud] I wrote down [emphasized] EVERYTHING that happened since you left. [reading aloud] Number one. Boppy saw the Big One [emphasized]AGAIN!",
-   "at": 1795378053288,
-   "rid": "r1795378053288-0hl"
-  }
- ],
+ "requests": [],
  "cancel": []
 }
