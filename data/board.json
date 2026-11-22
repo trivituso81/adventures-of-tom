@@ -31438,6 +31438,72 @@
      "t": "Added by battleux-plan. Tom (11-21): \"once approved, id ask you to create the corresponding cards to kick off the work with the appropriate models\"."
     }
    ]
+  },
+  {
+   "id": "c-voicefast1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Voice Clips",
+   "tag": "voicefast1",
+   "title": "Voice takes take 2 to 3 minutes and never arrive",
+   "next": "Found: the voice-take and music-gen Actions crash in 10 seconds because artgen.py now imports falq.py and costlog.py that their sparse checkout lacks. Fixed, page now checks every 4 s and shows a crashed run at once. Hands to you: try one take.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "\"the voice library is now unusable since it takes SO long\""
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: \"the voice library is now unusable since it takes SO long (over 2-3 minutes) to generate one clip from github.\" Board: new card."
+    }
+   ],
+   "after": "t-voicefast1-try",
+   "prompt": {
+    "what": "Finds why Voice Library takes are slow or never arrive and speeds them up.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: cause unknown, found in the session)",
+    "effort": "medium (one failing Action and one page file)",
+    "text": "Read CLAUDE.md, .github/workflows/voice-take.yml and engine/voice-take.js. Tom says Voice Library takes now take over 2 minutes. Find the cause from the voice-take run logs (gh run list, gh run view --log-failed), fix it, keep the ElevenLabs key out of every page, test with tools/voice-library/sparse_files_test.py, keysecrets3_test.py and voicetake_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "t-voicefast1-try",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Voice Clips",
+   "ask": "voice",
+   "fyi": true,
+   "title": "Try New take on one line again (voicefast1)",
+   "next": "Tap Open in the Voice Library below, press New take on the line. A take should appear in about 30 seconds (the job takes about 20 s, the page checks every 4 s). All good if it appears in under a minute. Something is wrong if the line shows an error: it now names the failed GitHub run.",
+   "blocks": [],
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "chat": {
+    "url": "",
+    "opening": "started by c-voicefast1"
+   },
+   "links": [
+    {
+     "to": "voice",
+     "ids": [
+      "d|grace|I've been nine for SIX hours."
+     ],
+     "label": "the line to try"
+    }
+   ],
+   "first": "Wait for the build voicefast1 to be published.",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Created by c-voicefast1."
+    }
+   ],
+   "prompt": ""
   }
  ],
  "sessions": [

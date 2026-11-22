@@ -41,7 +41,8 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /data/music-requests.json
-            /tools/art-library/artgen.py
+            /tools/art-library/
+            /tools/costlog.py
             /tools/music-library/musicgen.py
             /.github/
       - uses: actions/setup-python@v5

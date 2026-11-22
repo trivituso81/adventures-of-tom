@@ -14,6 +14,9 @@ const VT=(function(){
   const GH=()=>(Q.get('gh')||'https://api.github.com').replace(/\/+$/,'');
   const OVER=()=>Q.get('voicetake')?Q.get('voicetake').replace(/\/+$/,'')+'/':'';
   const POLL_MS=(+Q.get('poll')>0?+Q.get('poll'):20)*1000;
+  // voicefast1: a take is made in about 20 s, so a fresh request is checked every 4 s for its first 4 minutes, then every 20 s (?poll= still sets one fixed pace for tests).
+  const FAST_MS=Q.get('poll')?POLL_MS:4000, FAST_FOR=4*60000;
+  const pace=()=>{ const P=pend(); return P.length&&Date.now()-Math.min.apply(null,P.map(p=>p.at))<FAST_FOR?FAST_MS:POLL_MS; };
   const NOTOKEN='Takes are made on GitHub, and the GitHub token is how this page asks. Paste the token once in ADMIN > ART LIBRARY > Setup, then try again.';
   const textToB64=s=>{const u=new TextEncoder().encode(s);let b='';for(let i=0;i<u.length;i+=0x8000)b+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(b);};
   const b64ToText=c=>{const bin=atob(String(c).replace(/\s/g,'')),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new TextDecoder().decode(u);};
@@ -70,7 +73,7 @@ const VT=(function(){
     const ids=new Set(clean.map(r=>r.rid));
     await changeQueue('voice: take '+clean.length+' ('+clean[0].kind+(clean.length>1?' and more':'')+')',d=>{ d.requests=d.requests.filter(x=>!ids.has(x.rid)).concat(clean); });
     setPend(pend().concat(reqs.map(r=>({rid:r.rid,at:r.at,page,kind:r.kind,line:r.line,ctx:r._ctx||null}))));
-    schedule(POLL_MS);
+    schedule(Math.min(pace(),FAST_MS));
     return clean;
   }
   // Stop: the job looks at "cancel" before every line it has not made yet and answers each one with "stopped by you" (the requests stay in the list so every line gets its answer). What it already made still arrives.
@@ -85,6 +88,12 @@ const VT=(function(){
   }
   async function readJSON(file){ try{ return JSON.parse(new TextDecoder().decode(await fetchFile(file))); }catch(e){ return null; } }
   const clock=()=>new Date().toLocaleTimeString();
+  // voicefast1: a run that crashed before it wrote its report leaves nothing on branch voicetake. Ask GitHub for the newest voice-take runs and say so at once.
+  async function crashedRun(p,rep){
+    try{ const g=await gh('GET','/actions/workflows/voice-take.yml/runs?per_page=8&event=push&t='+Date.now()); if(!g.ok||!g.json) return null;
+      const st=rep&&rep.started?Date.parse(rep.started):0;
+      return (g.json.workflow_runs||[]).find(r=>r.conclusion==='failure'&&Date.parse(r.created_at)>=p.at-15000&&!(st>=Date.parse(r.created_at)))||null; }catch(e){ return null; }
+  }
   function schedule(ms){ if(!POLL) POLL=setTimeout(pollNow,ms); }
   async function pollNow(){
     POLL=0; const P=pend(); if(!P.length) return;
@@ -98,12 +107,13 @@ const VT=(function(){
       if(take||bad){}
       else if(Date.now()-p.at>EXPIRE) why='GitHub gave no answer in 8 hours. Ask again.';
       else if(rep&&started===started&&started>=p.at+120000&&!(rep.asked||[]).includes(p.rid)) why='The job ended before it reached this one. Ask again.';
+      else if(Date.now()-p.at>15000){ const cr=await crashedRun(p,rep); if(cr) why='The GitHub job stopped with an error before it made anything, so no take was made ('+cr.html_url+'). Ask again once it is fixed.'; }
       if(!take&&!bad&&!why){ if(h.wait) h.wait(p,'Asked '+mins+' min ago. GitHub is still making it'+(rep?'':' (this phone could not read the job report just now; it tries again)')+'; this line updates by itself (checked '+clock()+').'); continue; }
       setPend(pend().filter(x=>x.rid!==p.rid));   // off the waiting list BEFORE the page redraws, or the redraw still sees it waiting
       if(take){ try{ const buf=await fetchFile(take.file); await h.take(p,buf,take); }catch(e){ h.fail(p,'The take was made but this page could not keep it: '+String(e.message||e)); } }
       else h.fail(p,bad?bad.why:why);
     }
-    if(pend().some(p=>handlers[p.page])) schedule(POLL_MS);
+    if(pend().some(p=>handlers[p.page])) schedule(pace());
   }
   // A page says what to do with an answer: h.take(p, ArrayBuffer, info), h.fail(p, why), h.wait(p, text). Requests asked earlier are picked up again.
   function watch(page,h){ handlers[page]=h; if(pend().some(p=>p.page===page)) schedule(2000); }
