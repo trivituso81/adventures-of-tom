@@ -32206,7 +32206,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukFSLWWLUn4tZta48FX",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -32224,6 +32224,10 @@
      "d": "2026-11-21",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-22T02:14:31.463Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -32266,7 +32270,7 @@
    "id": "c-takes-e45d5a",
    "tag": "takes-2026-11-21",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Voice Clips",
    "count": 2,
    "title": "Merge 2 new voice takes",
@@ -32281,7 +32285,7 @@
     "text": "Read claude/handoff-rules.md and docs/VOICE.md, then merge the new voice takes from branch takes. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukCw2qcisNVtn3BmZ5V",
     "opening": "not started"
    },
    "history": [
@@ -32293,18 +32297,22 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T02:14:25.310Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "start": true
+   "started_at": "2026-11-22T02:16:23+00:00"
   },
   {
    "id": "c-fix-ch2play",
    "tag": "fix-ch2play",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Play chapter 2 on your phone and report",
@@ -32326,7 +32334,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukF3JBA5CK1PfLvyz4j",
     "opening": "Something is wrong on t-ch2play"
    },
    "history": [
@@ -32344,6 +32352,10 @@
      "d": "2026-11-21",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-22T02:15:32.046Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -32357,7 +32369,7 @@
    },
    "after": "t-ch2play",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-22T02:16:23+00:00"
   }
  ],
  "sessions": [
@@ -33071,6 +33083,16 @@
    "cards": [
     "c-artgen3",
     "c-wanch2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFSLWWLUn4tZta48FX",
+   "title": "Fix: Try the auto-approve button on a pictures card",
+   "first": "2026-11-21T18:16:18-08:00",
+   "last": "2026-11-21T18:16:18-08:00",
+   "tags": [],
+   "cards": [
+    "c-fix-artgen3try"
    ]
   },
   {
@@ -37223,8 +37245,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "04be7def86a1ed0f26151ac09b9f14651dfa6b38",
- "synced_at": "2026-11-22T02:13:56+00:00",
+ "synced": "3b61c21cc6106408fea00435d2dc8764e4dea7c6",
+ "synced_at": "2026-11-22T02:16:23+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
