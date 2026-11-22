@@ -29921,7 +29921,7 @@
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
-   "build": "startpics8",
+   "build": "startpics9",
    "history": [
     {
      "d": "2026-11-22",
@@ -31428,6 +31428,40 @@
     "effort": "medium (one page, one stylesheet, tested at five sizes)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-vibelayout1 in data/board.json. Your first push is the commit board: start c-vibelayout1. The Vibes page (engine/m2-vibes.js, m2.css) takes Tom's new layout: see the card history for his words. Test with python3 tools/m2_test.py, look at the screenshots, push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "c-startpics9",
+   "title": "Start pictures get their own line",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics9",
+   "next": "Built as startpics9: start pictures have their own workflow and queue, so videos cannot block or cancel them. Boppy and Nara pictures are done (Boppy's cap lettering is reversed). Waits on your card t-startpics-try.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
+    "opening": "but under Amy, i dont see her standard pose animations listed"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"I just want to generate these images. I've been trying for over a day\". Cause: pictures shared a line with videos and were cancelled by them. Built startpics9.",
+     "at": "2026-11-22T21:27:30.822Z"
+    }
+   ],
+   "prompt": {
+    "what": "Lists the standard pose animations for the six people who have none, each with a starting prompt.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small build, cause already found)",
+    "effort": "medium (one known change plus prompts copied from the proven ones)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics2 in data/board.json. Your first push is the commit board: start c-startpics2. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-startpics-try",
+   "done": "2026-11-22"
   }
  ],
  "sessions": [
