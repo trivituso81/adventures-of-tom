@@ -1,3 +1,10 @@
+## 2026-11-22 (1): Art Library bake, banner-leave-grace, banner-join-rose (`artbake1583`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- banner-leave-grace: `bake_party_banner.py ` ran from art/raw/characters/banner-leave-grace-v1.png
+- banner-join-rose: `bake_party_banner.py ` ran from art/raw/characters/banner-join-rose-v1.png
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## fix-menu4play-2 (2026-11-22): the Family page seats all four people evenly clear of the crease, and the tab says Tom's Party
 
 Card c-fix-menu4play-2 (fix from Tom's report on t-menu4play). Tom: "The family screen should have part members equally spaced apart. That means to not overlap with the crease that rose and Deedee should be shifted to the left in this case. Leaving dead space on the right side we will have to utilize in some new way. Also it should be Dallas's Party not family."
