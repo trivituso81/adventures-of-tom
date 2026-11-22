@@ -29571,8 +29571,7 @@
     "date": "2026-11-21",
     "build": ""
    },
-   "started_at": "2026-11-21T23:20:59+00:00",
-   "quiet": true
+   "started_at": "2026-11-21T23:20:59+00:00"
   },
   {
    "id": "c-bigone25",
@@ -29782,13 +29781,13 @@
    "title": "Night QA: the test browser plays your check cards",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Standing card. Each night a test browser plays up to 4 of your \"play and report\" cards in portrait, landscape and the Duo size. A yes or no check that passes is closed for you with the pictures; one that fails becomes a fix card; a check only a person can judge stays yours and says why. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFNHS7egv29b7fCK1f",
     "opening": "not started"
    },
    "nightly": true,
@@ -29857,6 +29856,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T01:24:54.282Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -29872,7 +29875,7 @@
     "date": "2026-11-21",
     "build": ""
    },
-   "start": true
+   "started_at": "2026-11-22T01:26:21+00:00"
   },
   {
    "id": "b-voices-t-ch2voices-315",
@@ -31013,7 +31016,7 @@
    "id": "c-reports-12",
    "tag": "reports-2026-11-21",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172017-kfe3. First note: the block/bulb/gray grass shouldnt show up until after the log is defeated.",
@@ -31027,7 +31030,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukCcuQnfnZVh5HBEm78",
     "opening": "not started"
    },
    "history": [
@@ -31039,12 +31042,16 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T01:24:56.663Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "start": true
+   "started_at": "2026-11-22T01:26:21+00:00"
   },
   {
    "id": "c-fix-dash3-try",
@@ -31112,6 +31119,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGzkghj5rCZRHTUQAf",
+   "title": "Night cleanup: one bucket of cleanup every night",
+   "first": "2026-11-21T23:22:54Z",
+   "last": "2026-11-22T01:25:48Z",
+   "tags": [
+    "night"
+   ],
+   "cards": [
+    "c-night-clean"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEZdH8UYYeG9RP9wsa",
    "title": "Fix the report backlog (1 open)",
    "first": "2026-11-22T01:16:43Z",
@@ -31169,18 +31188,6 @@
    ],
    "cards": [
     "c-nighttests"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGzkghj5rCZRHTUQAf",
-   "title": "Night cleanup: one bucket of cleanup every night",
-   "first": "2026-11-21T23:22:54Z",
-   "last": "2026-11-21T23:22:54Z",
-   "tags": [
-    "night"
-   ],
-   "cards": [
-    "c-night-clean"
    ]
   },
   {
@@ -35799,8 +35806,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "0d2dd36041a1cfe630f35e10c963984a41268ecf",
- "synced_at": "2026-11-22T01:24:51+00:00",
+ "synced": "ca9e7b69cb73287b8905ba5a8d56a22b4cef4b7f",
+ "synced_at": "2026-11-22T01:26:21+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
