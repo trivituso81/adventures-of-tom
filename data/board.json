@@ -34552,10 +34552,41 @@
     "n": 1,
     "est": 0.5,
     "run": {
-     "state": "running",
-     "at": "2026-11-22T06:16:28Z",
+     "state": "done",
+     "at": "2026-11-22T06:20:20Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44992845017",
-     "n": 3
+     "n": 3,
+     "merged": [],
+     "passed_not_baked": [],
+     "retried": [
+      "tom-blockade"
+     ],
+     "stopped": [
+      {
+       "what": "tom-blockade",
+       "why": "failed twice: edge, p1",
+       "card": "t-wangaveup-tom-blockade-r4"
+      }
+     ],
+     "capped": [],
+     "unchecked": [],
+     "errors": [],
+     "already": [
+      "grace-cubepop",
+      "deedee-wetfloor"
+     ],
+     "gaveup": [
+      "tom-blockade"
+     ],
+     "bake_failed": {},
+     "spent": 1.01,
+     "build": null,
+     "watch": "",
+     "revs": {
+      "tom-blockade": 4,
+      "grace-cubepop": 4,
+      "deedee-wetfloor": 10
+     }
     }
    },
    "history": [
@@ -34630,6 +34661,10 @@
      "d": "2026-11-21",
      "t": "Tom approved generating 1 video (about $0.50).",
      "at": "2026-11-22T06:14:39.409Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "wan-gen bulk run 44992845017: 3 made and checked, 0 passed, 1 stopped, 0 left for the next tap."
     }
    ]
   },
@@ -35300,6 +35335,38 @@
     "effort": "medium",
     "text": "Done in the session that made this card."
    }
+  },
+  {
+   "id": "t-wangaveup-tom-blockade-r4",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "decide",
+   "fyi": true,
+   "title": "The video tom-blockade did not pass in 4 tries",
+   "next": "The Action stopped making tom-blockade: it used 4 tries ($2.00). Last reason: edge: the figure touches the right edge in 1 of 150 pictures (video frames 32); p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Hip bump missi. Pick one.",
+   "choices": [
+    "Give it 4 more tries (Recommended)",
+    "Keep the move without a video for now"
+   ],
+   "leads": [
+    "A Claude session changes one thing and the Action tries up to 4 more times (at most $3.20), no tap needed.",
+    "The move plays with its stand-in until a later card picks it up."
+   ],
+   "blocks": [],
+   "wan_card": "t-movefun-gen",
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Added by the wan-gen job (44992845017): tom-blockade used 4 tries ($2.00)."
+    }
+   ]
   }
  ],
  "sessions": [
