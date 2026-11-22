@@ -88,6 +88,17 @@
    "start": "art/clips/start/tnb-hero.png",
    "cap": 0.6,
    "note": ""
+  },
+  {
+   "anim": "body:amy:guard",
+   "slug": "body-amy-guard",
+   "take": 1,
+   "at": "2026-11-22T21:03:38.223Z",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BRACED GUARD\nFrom her starting relaxed stance, she bends her knees, tucks her chin and raises both arms once, crossing her forearms in an X in front of her face with both fists closed. She holds that braced guard, breathing gently, then lowers her arms and stands back up into her starting stance.",
+   "promptRev": 0,
+   "start": "art/clips/start/amy-hero.png",
+   "cap": 0.6,
+   "note": ""
   }
  ]
 }
