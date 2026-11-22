@@ -29526,7 +29526,7 @@
    "title": "Battle stage 23: purge battle 2 and Kindness",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "next": "Waits on the nine chapter cards c-b3s22ch12 to c-b3s22ch20 (chapters 12 to 20 onto Battle 3). Tom's yes on t-b3s23-confirm is in. Start it when the last of them ships, then run the prompt.",
    "blocks": [],
    "changed": "2026-11-22",
@@ -29568,11 +29568,15 @@
      "d": "2026-11-22",
      "t": "Rescue outcome: nothing to finish, the work is blocked on Claude cards c-b3s22ch12 to c-b3s22ch20 (all still Up next). Card moved to Wait; ch20 now blocks it. Not retired: the work is still wanted.",
      "at": "2026-11-22T21:00:00.000Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "started_at": "2026-11-22T20:42:04+00:00",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukCdg3iThUrSmL1Dbc3",
+    "url": "https://claude.ai/code/session_01RXeukCdg3iThUrSmL1Dbc3",
     "opening": "started by START"
    },
    "rescue": {
@@ -29581,8 +29585,7 @@
     "why": "A session ended without shipping",
     "url": "https://claude.ai/code/cse_01RXeukCdg3iThUrSmL1Dbc3",
     "prev": "https://claude.ai/code/cse_01RXeukDNsLWPpd5nBjmXzvJ"
-   },
-   "waiting_on": "claude"
+   }
   },
   {
    "id": "t-b3s23-confirm",
@@ -31202,6 +31205,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukCdg3iThUrSmL1Dbc3",
+   "title": "Battle stage 23: purge battle 2 and Kindness",
+   "first": "2026-11-22T20:45:36Z",
+   "last": "2026-11-22T20:45:36Z",
+   "tags": [],
+   "cards": [
+    "c-b3s23"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDNsLWPpd5nBjmXzvJ",
    "title": "Battle stage 23: purge battle 2 and Kindness",
@@ -36908,8 +36921,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "d367edca4415a7128fe7bcc4eb8a3cdc1bf802ae",
- "synced_at": "2026-11-22T20:42:06+00:00",
+ "synced": "9455e09ed89947607ce4efb5308bc6c9421628ec",
+ "synced_at": "2026-11-22T20:46:20+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
