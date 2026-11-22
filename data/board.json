@@ -26023,7 +26023,7 @@
    "id": "c-battleux3",
    "tag": "battleux3",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "theme": "Battle System",
    "title": "Add the scene marks and remove the proposal page",
    "created": "2026-11-21",
@@ -26065,9 +26065,12 @@
     {
      "d": "2026-11-22",
      "t": "Parked on purpose, not stuck: it waits on c-b3look, which Tom starts from its card (Copy prompt, Claude Opus 5.5, high). Nothing to rescue here until that ships."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Unblocked: Write the one-line move descriptions, Battle screen: the new menu's look, and only what is needed is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "t-battleuxplay",
@@ -27067,48 +27070,6 @@
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21"
-  },
-  {
-   "id": "svc-voice-gen",
-   "service": "voice-gen",
-   "lane": "elevenlabs",
-   "col": "wait",
-   "theme": "Tools",
-   "title": "voice-gen is running",
-   "next": "voice-gen is running",
-   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44976315782",
-   "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFUnqXV1DXsh3DVPzG",
-    "opening": "service run"
-   },
-   "history": [
-    {
-     "d": "2026-11-21",
-     "t": "voice-gen started."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Stuck twice: The rescue started 12:00 AM and went quiet for 2 hours. Waiting on Tom (card t-stuck-svvoice-gen)."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-21",
-   "changed": "2026-11-22",
-   "reruns": 1,
-   "rerun_at": "2026-11-21T21:31:38+00:00",
-   "rescue": {
-    "at": "2026-11-22T08:00:22+00:00",
-    "n": 1,
-    "why": "Quiet: the conversation may have stopped",
-    "url": "https://claude.ai/code/cse_01RXeukFUnqXV1DXsh3DVPzG",
-    "prev": ""
-   },
-   "started_at": "2026-11-22T08:00:22+00:00",
-   "waiting_on": "tom"
   },
   {
    "id": "c-fix-artgen3try-2",
@@ -29114,7 +29075,7 @@
    "id": "c-b3look",
    "tag": "b3look",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle System",
    "title": "Battle screen: the new menu's look, and only what is needed",
    "next": "Gives the new battle screen the look of the new main menu (colors, backgrounds, lettering) on every control, removes anything shown twice or not needed, and makes the DETAILS switch hide the details everywhere. Start it in a new conversation with Copy prompt (Claude Opus 5.5, effort high). Add the scene marks and remove the proposal page waits on it, then your play card opens.",
@@ -29157,10 +29118,15 @@
     {
      "d": "2026-11-22",
      "t": "Built b3look. Scene marks MARKED, NEXT TARGET and the white turn arrow were found to be repeats and removed; the aim arrow stays; the Pep forecast is in the deck header."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as b3look: the new battle screen takes the new menu's look and shows every fact once; Details hides the details everywhere"
     }
    ],
    "after": "nothing for Tom: c-battleux3",
-   "result": "Built b3look: the battle screen uses the menu's variables, colors and lettering on every control; every fact shows once; DETAILS hides details from moves, strip, party cards and scene. Rules and numbers unchanged (b3-sim check 3863, FAILS []). Plan: claude/b3look-plan.md."
+   "result": "Built b3look: the battle screen uses the menu's variables, colors and lettering on every control; every fact shows once; DETAILS hides details from moves, strip, party cards and scene. Rules and numbers unchanged (b3-sim check 3863, FAILS []). Plan: claude/b3look-plan.md.",
+   "done": "2026-11-22"
   },
   {
    "id": "c-b3s16",
@@ -29468,7 +29434,7 @@
   {
    "id": "t-stuck-svvoice-gen",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "unstick",
    "unstick": {
@@ -29492,11 +29458,16 @@
     {
      "d": "2026-11-22",
      "t": "Made fyi by the board: the work this card blocked is finished, so it no longer holds anything up."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Done by the board: the card is being worked on again."
     }
    ],
    "created": "2026-11-22",
    "changed": "2026-11-22",
-   "fyi": true
+   "fyi": true,
+   "done": "2026-11-22"
   },
   {
    "id": "t-wanwatch-tom-blockade-0522",
@@ -29523,6 +29494,31 @@
      "t": "Added by c-wanstop-tom-blockade-r4: tom-blockade passed every measured check, was baked and wired (build wanstop-tom-blockade-r4). The hip bump is weak; the arms-out gate pose and hold are clear."
     }
    ]
+  },
+  {
+   "id": "svc-voice-gen",
+   "service": "voice-gen",
+   "lane": "elevenlabs",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "voice-gen is running",
+   "next": "voice-gen is running",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45033176945",
+   "chat": {
+    "url": "",
+    "opening": "service run"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "voice-gen started."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "reruns": 1,
+   "rerun_at": "2026-11-21T21:31:38+00:00"
   }
  ],
  "sessions": [
@@ -29600,7 +29596,7 @@
    "url": "https://claude.ai/code/session_01RXeukHEiKeVH4vFayFQNtG",
    "title": "Battle screen: the new menu's look, and only what is needed",
    "first": "2026-11-22T00:46:30-08:00",
-   "last": "2026-11-22T06:28:27-08:00",
+   "last": "2026-11-22T06:30:03-08:00",
    "tags": [
     "b3look"
    ],
@@ -35010,8 +35006,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "1188e665ce812dd9a743b72e7b596a2069cede62",
- "synced_at": "2026-11-22T14:29:11+00:00",
+ "synced": "d5057eff40a7fd05a92710176b53466a3714d65e",
+ "synced_at": "2026-11-22T14:31:14+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
