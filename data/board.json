@@ -31772,7 +31772,7 @@
    "id": "c-battleux1",
    "tag": "battleux1",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle System",
    "title": "Build the new battle screen",
    "created": "2026-11-21",
@@ -31782,7 +31782,7 @@
    ],
    "chat": {
     "url": "",
-    "opening": "not started"
+    "opening": "pasted by Tom from the board"
    },
    "next": "Builds the battle screen you approved, in the new battle only, on all six screen sizes: one list of moves, tap once to read and again to use, tap a monster to aim, the strip under the scene that says what will happen, and the DETAILS switch. The old cross, Skills list, skill card, target list and i icon are removed. Rules and numbers do not change. Then the words card starts.",
    "prompt": {
@@ -31798,6 +31798,11 @@
     {
      "d": "2026-11-21",
      "t": "Added by board-battleux: Tom approved the battle screen redesign as shown (t-battleux-decide). Plan section 5, card battleux1."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-22T02:01:57.956Z"
     }
    ]
   },
