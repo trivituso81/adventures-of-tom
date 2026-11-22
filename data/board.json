@@ -30559,7 +30559,7 @@
    "title": "Remake Rose's Giddyup and Deedee's Wet-Floor videos",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "wanch5",
    "next": "Shipped in wanch5: the two jobs are written with their bake and wire settings, and your card Generate the new videos holds the button. Nothing more for Claude until a video stops (the Action then adds its own card).",
    "blocks": [],
@@ -30590,6 +30590,10 @@
     {
      "d": "2026-11-21",
      "t": "Shipped wanch5: rose-giddyup rev 6 (prompt v3, leaps straight up, pad 0.65, airborne), deedee-wetfloor rev 5 (prompt v2, pad 0.65, limits feet 0.10: r4 replay measured the mop head 9.5 percent below her feet row). Bake from rose-tackle and deedee-windex (neither clip existed yet); wired to giddyup_tata_launch and wet_floor_hazard. Tom card t-wanch5-gen, cap $2 (ledger $53.815)."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanch5: Rose's Giddyup and Deedee's Wet-Floor are ready for one Generate tap"
     }
    ],
    "prompt": {
@@ -30606,7 +30610,8 @@
     "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
     "opening": "\"Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.11 Built wanch4)\""
    },
-   "after": "t-wanch5-gen"
+   "after": "t-wanch5-gen",
+   "done": "2026-11-21"
   },
   {
    "id": "svc-voice-gen",
@@ -31318,8 +31323,10 @@
    "url": "https://claude.ai/code/session_01RXeukEJKXVspWj8C79SgbR",
    "title": "Remake Rose's Giddyup and Deedee's Wet-Floor videos",
    "first": "2026-11-21T16:32:27-08:00",
-   "last": "2026-11-21T16:32:27-08:00",
-   "tags": [],
+   "last": "2026-11-21T16:40:26-08:00",
+   "tags": [
+    "wanch5"
+   ],
    "cards": [
     "c-wanch5"
    ]
@@ -35315,8 +35322,8 @@
    "takes/20261121T015156-llm/state.json"
   ]
  },
- "synced": "0fe6ef19b858a9e5efa6e67d4ff124113d7cd341",
- "synced_at": "2026-11-22T00:33:06+00:00",
+ "synced": "4c89d863d97ac52a47ae412b79de9d2f5020fe06",
+ "synced_at": "2026-11-22T00:41:08+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
