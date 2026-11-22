@@ -22908,13 +22908,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-22",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEx1RuSKPKxbZ98g9u",
+    "url": "",
     "opening": "not started"
    },
    "nightly": true,
@@ -22971,6 +22971,10 @@
     {
      "d": "2026-11-22",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
    "prompt": {
@@ -22985,8 +22989,7 @@
    "last_run": {
     "date": "2026-11-21",
     "build": "nightclean-1122"
-   },
-   "started_at": "2026-11-22T17:03:19+00:00"
+   }
   },
   {
    "id": "c-bigone25",
@@ -29943,7 +29946,7 @@
   {
    "id": "c-fix-guideboot",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle System",
    "tag": "guideboot1",
    "title": "Battle Guide stuck on the loading screen",
@@ -29959,6 +29962,10 @@
     {
      "d": "2026-11-22",
      "t": "Tom: \"The battle guide doesn't seem to be working it's just stuck on a loading screen.\" New card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as guideboot1: the Battle Guide opens again; it was stuck on \"Loading the game's battle data...\""
     }
    ],
    "after": "t-guideboot-try",
@@ -29970,7 +29977,8 @@
     "model": "Claude Sonnet 5.5",
     "effort": "medium (known cause, one small fix)",
     "text": "Read CLAUDE.md and docs/BATTLE_GUIDE.md. Shipped in guideboot1: battle-guide.html declared ownerName twice. Only reopen this card if the Battle Guide still shows the loading line. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-22"
   },
   {
    "id": "t-guideboot-try",
@@ -30128,15 +30136,28 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGhtfUEQq5o5Cd7e6E",
+   "title": "Battle Guide stuck on the loading screen",
+   "first": "2026-11-22T09:33:48-08:00",
+   "last": "2026-11-22T09:44:21-08:00",
+   "tags": [
+    "guideboot1"
+   ],
+   "cards": [
+    "c-fix-guideboot"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGZXdK5UMQdXoN4DJg",
    "title": "Chapter headings in the storybook look of the main menu",
    "first": "2026-11-22T09:11:30-08:00",
-   "last": "2026-11-22T09:20:22-08:00",
+   "last": "2026-11-22T09:40:50-08:00",
    "tags": [
     "chaptercard1"
    ],
    "cards": [
-    "c-chaptercard-storybook"
+    "c-chaptercard-storybook",
+    "c-ch1title"
    ]
   },
   {
@@ -35625,8 +35646,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "aef90663b77ea21c1e4a1c565608ec35a2ea814c",
- "synced_at": "2026-11-22T17:21:07+00:00",
+ "synced": "8d4745eb7c13f19107091754488dc50c1072e608",
+ "synced_at": "2026-11-22T17:45:09+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
