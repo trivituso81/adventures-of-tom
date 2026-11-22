@@ -29571,7 +29571,7 @@
   {
    "id": "t-wanwatch-tom-blockade-0522",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "ask": "animations",
    "fyi": true,
@@ -29591,8 +29591,14 @@
     {
      "d": "2026-11-22",
      "t": "Added by c-wanstop-tom-blockade-r4: tom-blockade passed every measured check, was baked and wired (build wanstop-tom-blockade-r4). The hip bump is weak; the arms-out gate pose and hold are clear."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom: all good.",
+     "at": "2026-11-22T14:56:47.024Z"
     }
-   ]
+   ],
+   "done": "2026-11-22"
   },
   {
    "id": "svc-voice-gen",
