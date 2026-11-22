@@ -31682,7 +31682,7 @@
     },
     {
      "d": "2026-11-21",
-     "t": "Closed by wanstuck1. Tom (20:53): \"Aaamaaand we're stuck yet again\". The loop made 4 videos (r8, r9), then stopped at its limit; his \"Give it 4 more tries\" was not read and his next tap was cancelled by GitHub. r9 was good by eye (a real string mop) and is baked by hand."
+     "t": "Closed by wanstuck1. Tom (20:53): \"Aaamaaand we're stuck yet again\". The loop made 4 videos (r8, r9) and stopped at its limit; his \"Give it 4 more tries\" was not read and his next tap was cancelled by GitHub. r9 was good by eye (a real string mop) and is baked by hand."
     }
    ],
    "wgen": {
@@ -31812,11 +31812,7 @@
    "ask": "animations",
    "fyi": true,
    "title": "Make Rose's Giddyup with Tom in it",
-<<<<<<< HEAD
-   "next": "Open this card on the board. Under Videos on this card it should now say 1 video left to make: tom-rose-giddyup and show a yellow button Generate all 1 video (about $0.79). If the board was already open it can take up to a minute, and it says Getting the job list... meanwhile, never Nothing to make. Tap the button twice. Rose hops onto Tom's shoulders, rides with a fist up like shouting giddyup, then springs off and lands in front of him. In a fight it plays at Tom's spot while Rose is hidden; if Tom is knocked out or not in the party, her solo jump plays. The Action checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20.",
-=======
    "next": "Reload the board page, then tap Generate all 1 video (two taps). Rose hops onto Tom's shoulders, rides with a fist up like shouting giddyup, springs off and lands in front of him. The Action checks it, tries again by itself if it misses, and puts it in the game; a watch card comes when it passes. At most $3.20.",
->>>>>>> bbd614f (wanstuck1: video runs no longer get lost or stuck; Deedee's Wet-Floor has a string mop)
    "wan": {
     "jobs": [
      "tom-rose-giddyup"
@@ -31842,17 +31838,12 @@
      "at": "2026-11-22T04:31:48.393Z"
     },
     {
-<<<<<<< HEAD
      "d": "2026-11-22",
      "t": "Fixed by fix-pairmove1-gen: the board page read the video job list once when it opened, so this card (added later) counted 0 videos and said Nothing to make right now. It now reads the list again every minute and while the card is open. Generate all 1 video is the next tap."
     },
     {
      "d": "2026-11-21",
      "t": "Unblocked: Fix: Make Rose's Giddyup with Tom in it is done."
-    }
-=======
-     "d": "2026-11-21",
-     "t": "Back to Tom after wanstuck1: \"Says nothing to make\" was the board page holding a job list from before the job existed; fixed."
     }
    ]
   },
@@ -31879,7 +31870,7 @@
     }
    ],
    "prompt": {
-    "what": "Fix the three ways video runs got stuck.",
+    "what": "Fix the ways video runs got stuck.",
     "before": [
      "Nothing."
     ],
@@ -31912,7 +31903,6 @@
      "d": "2026-11-21",
      "t": "Made by wanstuck1: deedee-wetfloor r9 baked by hand after a look at every frame."
     }
->>>>>>> bbd614f (wanstuck1: video runs no longer get lost or stuck; Deedee's Wet-Floor has a string mop)
    ]
   },
   {
@@ -34206,7 +34196,7 @@
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix: Make Rose's Giddyup with Tom in it",
-   "next": "Fixed in wanstuck1.",
+   "next": "You reported a problem on Make Rose's Giddyup with Tom in it. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Says nothing to make migrant lei",
    "blocks": [
     "t-pairmove1-gen"
    ],
@@ -34248,17 +34238,12 @@
      "t": "Started: the conversation claimed this card."
     },
     {
-<<<<<<< HEAD
      "d": "2026-11-22",
      "t": "Reproduced (the page before the fix shows \"Nothing to make right now.\" when the card arrives after the page opened) and fixed in board.html; new test tools/board_wanstale_test.py. No pencil report filed since 04:31:47Z. Shipped as fix-pairmove1-gen."
     },
     {
      "d": "2026-11-21",
      "t": "Shipped as fix-pairmove1-gen: the board's video button no longer says Nothing to make for a card added after the page opened"
-=======
-     "d": "2026-11-21",
-     "t": "Fixed in wanstuck1 (Tom: \"Says nothing to make\"): the board page loaded the job list once, before pairmove1 added the job; it now loads it again when a card names a job it does not have. Retired here; the conversation that claimed it has nothing left to do."
->>>>>>> bbd614f (wanstuck1: video runs no longer get lost or stuck; Deedee's Wet-Floor has a string mop)
     }
    ],
    "prompt": {
@@ -34421,7 +34406,7 @@
     },
     {
      "d": "2026-11-21",
-     "t": "Fixed in wanstuck1 (Tom: \"Stuck\"): answers now reset the count and start the run; runs are no longer cancelled by other pushes; r9 baked."
+     "t": "Fixed in wanstuck1 (Tom: \"Stuck\")."
     }
    ],
    "prompt": {
