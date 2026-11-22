@@ -34801,7 +34801,7 @@
   {
    "id": "c-videohist-auto",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "videohist2",
    "title": "Video History rebuilds itself after every video run",
@@ -34830,6 +34830,10 @@
     {
      "d": "2026-11-22",
      "t": "Built the publish step (tools/videohist/publish.py) and the wan-gen step; tested against a local repo with two made-up videos and a refused push. Not run for real until the next wan-gen run."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as videohist2: Video History rebuilds itself after every video run"
     }
    ],
    "prompt": {
@@ -34842,7 +34846,8 @@
     "text": "Read CLAUDE.md (sections wanauto1 and wanstuck1), docs/CHANGES.md \"videohist1\", tools/videohist/build.py and .github/workflows/wan-gen.yml, then card c-videohist-auto in data/board.json. Add a step to the wan-gen job, after \"Keep the results and the ledger on the wangen branch\" and only when a video was made (not a dry run, not mode none): run python3 tools/videohist/build.py --branch-dir \"$RUNNER_TEMP/wangen\" on a fresh checkout of main, then commit data/video-history.json and art/video-history/ with the message \"videohist: rebuilt after wan-gen run followed by the run id, ending in [skip ci]\" and push to main, fetching and rebasing up to 5 times when main moved (take main's copy of every file except those two on a conflict). The build must keep working when the workflow checkout is shallow. Test it with a local branch-dir holding two made-up videos and a result file (extend tools/videohist/videohist_test.py), write the CHANGES heading ## videohist2 and push. After: nothing for Tom: end. Your first push is the commit board: start c-videohist-auto. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "started_at": "2026-11-22T05:29:42+00:00",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-21"
   }
  ],
  "sessions": [
@@ -34850,8 +34855,10 @@
    "url": "https://claude.ai/code/session_01RXeukEfBtn2SmTzAcqk7uA",
    "title": "Video History rebuilds itself after every video run",
    "first": "2026-11-22T05:32:52Z",
-   "last": "2026-11-22T05:32:52Z",
-   "tags": [],
+   "last": "2026-11-22T05:34:52Z",
+   "tags": [
+    "videohist2"
+   ],
    "cards": [
     "c-videohist-auto"
    ]
@@ -40046,8 +40053,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "1c2000ec899480c02f57b84d88f0dc122d02823d",
- "synced_at": "2026-11-22T05:33:37+00:00",
+ "synced": "cc9b8622ff5b42648a2864c7eea56dfcdf477c97",
+ "synced_at": "2026-11-22T05:35:43+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
