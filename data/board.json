@@ -29148,7 +29148,7 @@
    "title": "Battle stage 19: third Vibes, four in a conversation",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Third Vibes for all 10 characters (30 Vibes in all, 120 moves), and up to four characters per conversation on Battle 3. Starts after c-b3s16.",
    "blocks": [],
    "changed": "2026-11-22",
@@ -29167,8 +29167,17 @@
     {
      "d": "2026-11-22",
      "t": "Restored on 2026-11-22: stages 16 and 19 to 23 had no card on the board (claude/battle-build.md lists them as Not started), so the board showed no battle work after stage 18. Card written by the b3restore session."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-22T08:19:55.647Z"
     }
-   ]
+   ],
+   "chat": {
+    "url": "",
+    "opening": "pasted by Tom from the board"
+   }
   },
   {
    "id": "c-b3s20",
