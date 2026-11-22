@@ -31632,7 +31632,7 @@
    },
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "build": "wanmop1",
    "chat": {
     "url": "",
@@ -31650,10 +31650,16 @@
     }
    ],
    "wgen": {
-    "want": true,
+    "want": false,
     "at": "2026-11-22T04:01:13Z",
     "n": 1,
-    "est": 0.79
+    "est": 0.79,
+    "run": {
+     "state": "running",
+     "at": "2026-11-22T04:03:13Z",
+     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44983183373",
+     "n": 1
+    }
    }
   },
   {
