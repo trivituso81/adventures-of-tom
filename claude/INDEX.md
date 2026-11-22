@@ -133,28 +133,28 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | battle-spec-v11.md | We are continuing game design and system architecture for my turn-based JRPG titled **The Adventures of Tom**. | 2026-11-22 |
 | battle-v11-changelog.md | The Adventures of Tom: Battle Spec v10 -> v11 and Bestiary v10.1 -> v11 Change Log | 2026-11-22 |
 | battle-v11-decisions.md | Battle spec v11 and bestiary v11: decisions (2026-11-18 08:00) | 2026-11-18 |
-| battleux-mock/1-duo-unfolded.jpg | ���� JFIF      �� C  |  |
-| battleux-mock/1b-duo-unfolded-details-on.jpg | ���� JFIF      �� C  |  |
-| battleux-mock/1c-duo-unfolded-ruckus-ready.jpg | ���� JFIF      �� C  |  |
-| battleux-mock/1d-duo-unfolded-family-move.jpg | ���� JFIF      �� C  |  |
-| battleux-mock/2-desktop.jpg | ���� JFIF      �� C  |  |
-| battleux-mock/3-duo-folded-upright.jpg | ���� JFIF      �� C  |  |
-| battleux-mock/4-duo-folded-sideways.jpg | ���� JFIF      �� C  |  |
-| battleux-mock/5-iphone-upright.jpg | ���� JFIF      �� C  |  |
-| battleux-mock/6-iphone-sideways.jpg | ���� JFIF      �� C  |  |
-| battleux-mock/src/app.css | /* Battle screen redesign mock (battleux-plan). The app part: one grid, three layouts. */ |  |
-| battleux-mock/src/app.js | // Battle screen redesign mock (battleux-plan). Not the game: sample numbers, real move names and words from d |  |
-| battleux-mock/src/build.py | Builds battle-ux.html (the battle screen redesign proposal, card c-battleux-plan) from the files in this folde |  |
-| battleux-mock/src/deedee.jpg | ���� JFIF      �� C 				 |  |
-| battleux-mock/src/grace.jpg | ���� JFIF      �� C 				 |  |
-| battleux-mock/src/log.jpg | ���� JFIF      �� C 				 |  |
-| battleux-mock/src/rose.jpg | ���� JFIF      �� C 				 |  |
-| battleux-mock/src/shell.html | <!doctype html> |  |
-| battleux-mock/src/skeeter.jpg | ���� JFIF      �� C 				 |  |
-| battleux-mock/src/tom.jpg | ���� JFIF      �� C 				 |  |
-| battleux-mock/src/view.css | /* ---- the proposal page around the mock ---- */ |  |
-| battleux-mock/src/view.html | <div class="vw"> |  |
-| battleux-mock/src/view.js | function startViewer(){ |  |
+| battleux-mock/1-duo-unfolded.jpg | ���� JFIF      �� C  | 2026-11-22 |
+| battleux-mock/1b-duo-unfolded-details-on.jpg | ���� JFIF      �� C  | 2026-11-22 |
+| battleux-mock/1c-duo-unfolded-ruckus-ready.jpg | ���� JFIF      �� C  | 2026-11-22 |
+| battleux-mock/1d-duo-unfolded-family-move.jpg | ���� JFIF      �� C  | 2026-11-22 |
+| battleux-mock/2-desktop.jpg | ���� JFIF      �� C  | 2026-11-22 |
+| battleux-mock/3-duo-folded-upright.jpg | ���� JFIF      �� C  | 2026-11-22 |
+| battleux-mock/4-duo-folded-sideways.jpg | ���� JFIF      �� C  | 2026-11-22 |
+| battleux-mock/5-iphone-upright.jpg | ���� JFIF      �� C  | 2026-11-22 |
+| battleux-mock/6-iphone-sideways.jpg | ���� JFIF      �� C  | 2026-11-22 |
+| battleux-mock/src/app.css | /* Battle screen redesign mock (battleux-plan). The app part: one grid, three layouts. */ | 2026-11-22 |
+| battleux-mock/src/app.js | // Battle screen redesign mock (battleux-plan). Not the game: sample numbers, real move names and words from d | 2026-11-22 |
+| battleux-mock/src/build.py | Builds battle-ux.html (the battle screen redesign proposal, card c-battleux-plan) from the files in this folde | 2026-11-22 |
+| battleux-mock/src/deedee.jpg | ���� JFIF      �� C 				 | 2026-11-22 |
+| battleux-mock/src/grace.jpg | ���� JFIF      �� C 				 | 2026-11-22 |
+| battleux-mock/src/log.jpg | ���� JFIF      �� C 				 | 2026-11-22 |
+| battleux-mock/src/rose.jpg | ���� JFIF      �� C 				 | 2026-11-22 |
+| battleux-mock/src/shell.html | <!doctype html> | 2026-11-22 |
+| battleux-mock/src/skeeter.jpg | ���� JFIF      �� C 				 | 2026-11-22 |
+| battleux-mock/src/tom.jpg | ���� JFIF      �� C 				 | 2026-11-22 |
+| battleux-mock/src/view.css | /* ---- the proposal page around the mock ---- */ | 2026-11-22 |
+| battleux-mock/src/view.html | <div class="vw"> | 2026-11-22 |
+| battleux-mock/src/view.js | function startViewer(){ | 2026-11-22 |
 | battleux-plan.md | Battle screen redesign: the proposal (battleux-plan, 2026-11-21) | 2026-11-21 |
 | bestiary-v10-gemini-draft-part1.md | THE ADVENTURES OF TOM: PURE v10 BESTIARY & ENCOUNTER DIRECTORY (`bestiary-v10.md`) | 2026-11-22 |
 | bestiary-v10-gemini-draft-part2.md | - **Pet Peeves:** `Sizzle`, `Razzle` / **Resists:** `Racket` | 2026-11-22 |

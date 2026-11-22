@@ -31496,7 +31496,7 @@
    "col": "prog",
    "theme": "Battle System",
    "title": "Make the battle screen build cards",
-   "next": "Waits on your card Decide on the battle screen redesign. From your answer it writes the build cards (the new screen, the words, the scene marks) and your one play card for the end, or changes the proposal first if you asked for changes. If you answer in the chat of the proposal instead, that chat does this and closes this card.",
+   "next": "Done. Tom approved as shown, so no change to the plan or the mock. Wrote the build cards in order: Build the new battle screen (battleux1, Sonnet 5.5 high), Write the one-line move descriptions (battleux2, Opus 5.5 medium), Add the scene marks and remove the proposal page (battleux3, Sonnet 5.5 medium), and Tom's one play card at the end.",
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-21",
@@ -31538,8 +31538,13 @@
     {
      "d": "2026-11-21",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Wrote c-battleux1, c-battleux2, c-battleux3 (each waits on the one before) and t-battleuxplay (opens when c-battleux3 ships). No change to the plan or mock: Tom approved as shown."
     }
-   ]
+   ],
+   "after": "nothing for Tom: c-battleux1"
   },
   {
    "id": "c-voicefast1",
@@ -31762,6 +31767,139 @@
    "changed": "2026-11-21",
    "reruns": 1,
    "rerun_at": "2026-11-21T21:31:38+00:00"
+  },
+  {
+   "id": "c-battleux1",
+   "tag": "battleux1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle System",
+   "title": "Build the new battle screen",
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "blocks": [
+    "c-battleux2"
+   ],
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "next": "Builds the battle screen you approved, in the new battle only, on all six screen sizes: one list of moves, tap once to read and again to use, tap a monster to aim, the strip under the scene that says what will happen, and the DETAILS switch. The old cross, Skills list, skill card, target list and i icon are removed. Rules and numbers do not change. Then the words card starts.",
+   "prompt": {
+    "what": "Builds the new battle screen you approved (new battle only) on all six screen sizes and removes the old cross, lists and i icon. Rules and numbers stay the same.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the design is written, but the code path is not, across several engine files)",
+    "effort": "high (a large screen rebuild plus a 1,500 line test file to rewrite, with no code steps written to follow)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-battleux1 in data/board.json. Your first push is the commit board: start c-battleux1. Tom approved the battle screen redesign as shown on 2026-11-21 (card t-battleux-decide). claude/battleux-plan.md is the spec: sections 3.1 to 3.5 and 3.7, the battleux1 row of section 5 and its test list. The mock source in claude/battleux-mock/src/ is the reference: app.css is the layout spec (the parts, the --sidew formula, the @media breakpoints); app.js and view.js show behavior only and are not the implementation. The drawings claude/battleux-mock/1-duo-unfolded.jpg to 6-iphone-sideways.jpg (and 1b, 1c, 1d) show what it must look like. Build the new Battle 3 screen scoped to #battle.v3 (battle 2 and its .b2-* screen untouched): the one-level deck, first tap shows and second tap uses (mouse included), aim on the scene with the default aim of rule 3, the tray as the one sentence and as the battle log in place of the message box, the DETAILS switch kept in localStorage (default on for desktop only), turn bar tools, every B3.ui state mapped as table 3.5 says, keys and gamepad as 3.5 says. Show a move's short line when the B3_SKILLS row has a short field (card c-battleux2 writes them next; until then Details on adds nothing). Put the reach words and the forecast wording in one small table each, so c-battleux2 only edits words. Purge in the same push the cross, the SKILLS list, the skill card, the target list, #b3-pv in the panel, their CSS and the i icon, then grep for zero references. Fit the layout to the game's rotated-stage mode and the Duo --ts scale (docs/DUO.md); do not copy the mock's media queries blindly. Rewrite the parts of tools/b3_test.py that drive the old screen, and add a layout test at the six sizes of plan 3.4 that fails when the highlighted move is off screen, a move name is cut, or the tray overflows. Change no rules or numbers: node tools/b3-sim.js check must pass unchanged. Run python3 tools/b3_test.py, the new layout test and python3 tools/smoke.py, and look at the frames at all six sizes before pushing. Battle animations are out of scope. If the session runs long, ship the screen as build battleux1a and the tests as battleux1. At the end add a section Built: battleux1 to claude/battleux-plan.md with the facts the next cards need (where the short line, reach words and forecast wording live; where the Pet Peeve badges, the aim marker and tag, the Pep forecast and Rose Mode pictures hook in), set this card's after to nothing for Tom: c-battleux2, and write the result on this card. Build name battleux1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-battleux: Tom approved the battle screen redesign as shown (t-battleux-decide). Plan section 5, card battleux1."
+    }
+   ]
+  },
+  {
+   "id": "c-battleux2",
+   "tag": "battleux2",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Battle System",
+   "title": "Write the one-line move descriptions",
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "blocks": [
+    "c-battleux3"
+   ],
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "next": "Waits on Build the new battle screen. Then writes the one plain line (60 characters at most) for every move of the 10 family members, about 120, plus the words for who a move reaches and what will happen, in your plain style. They show with DETAILS on and in the strip under the scene.",
+   "prompt": {
+    "what": "Writes the one plain line for every family move (about 120) and the words for reach and what will happen, shown by the new battle screen.",
+    "before": [
+     "Nothing to do first. This card starts when Build the new battle screen has shipped."
+    ],
+    "model": "Claude Opus 5.5 (row D: short lines you judge by taste)",
+    "effort": "medium (the screen and the 28 first drafts exist; the piece is small lines)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-battleux2 in data/board.json. Your first push is the commit board: start c-battleux2. Read claude/battleux-plan.md (sections 3.1 rule 4, 3.2, 3.6 and the section Built: battleux1, which says where the screen reads the short line, the reach words and the forecast wording). Read docs/CANON.md and docs/tom-edits.tsv for Tom's plain style. Write a short field on every B3_SKILLS row of the 10 family members in data/b3-kit-*.js: one plain line, 60 characters at most, that says what the move does in a kid's words, not a formula and not a joke. Start from the 28 first drafts for Tom, Grace, Rose and Deedee in claude/battleux-mock/src/app.js (field s) and keep the ones that are right. Then edit only the words in the reach and forecast tables battleux1 made, in the same plain style. Add a data check that fails on a family move with no short line or one over 60 characters (in node tools/b3-sim.js check or the existing data check). Change no rules or numbers. These are not spoken lines: nothing to bake. Run node tools/b3-sim.js check, python3 tools/b3_test.py, the battleux layout test and python3 tools/smoke.py, and look at the Duo unfolded with DETAILS on and off, and the iPhone upright, before pushing. Put the full list of lines in docs/CHANGES.md under the build heading. Set this card's after to nothing for Tom: c-battleux3 and write the result on this card. Build name battleux2. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-battleux: plan section 5, card battleux2. Waits on c-battleux1, which builds the tables these words go into."
+    }
+   ]
+  },
+  {
+   "id": "c-battleux3",
+   "tag": "battleux3",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Battle System",
+   "title": "Add the scene marks and remove the proposal page",
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "blocks": [
+    "t-battleuxplay"
+   ],
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "next": "Waits on Write the one-line move descriptions. Then adds the marks on the scene (Pet Peeve badges under each monster, the aim marker and PET PEEVE tag), the Pep forecast on the bar, Rose Mode pictures on the new list, and removes the proposal page and its Admin button. Then your play card opens.",
+   "prompt": {
+    "what": "Adds the Pet Peeve badges, the aim marker and tag, the Pep forecast and Rose Mode pictures to the new battle screen, and removes the proposal page and its Admin button.",
+    "before": [
+     "Nothing to do first. This card starts when Write the one-line move descriptions has shipped."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written by battleux1 in the plan, tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-battleux3 in data/board.json. Your first push is the commit board: start c-battleux3. Read claude/battleux-plan.md (sections 3.1, 3.3, 3.6, the battleux3 row of section 5 and the section Built: battleux1, which names the hooks). The mock source in claude/battleux-mock/src/ shows the look (the flavor symbols IC in app.js, the badge and aim marker styles in app.css) and the drawings claude/battleux-mock/1-duo-unfolded.jpg, 1c and 1d show the result. Add on the scene of the new battle: the Pet Peeve flavor badges under each monster's HP bar and pips, the aim marker and the PET PEEVE tag on the aimed monster; on the deck header: the Pep forecast (striped pips to be spent, green pips to be gained, 4 to 0); Rose Mode's pictures and recommended move (engine/b3-pictures.js, b3Rec) on the new deck. Use b3Preview and b3Matchups (engine/b3-preview.js) for every number; change no rules. Then delete battle-ux.html, the battle-ux/ folder and the Battle screen redesign (proposal) button in admin.html in the same push, and grep for zero references (claude/battleux-plan.md and claude/battleux-mock/ stay). Extend the battleux layout test to check the badges and the aim marker at the six sizes. Run node tools/b3-sim.js check, python3 tools/b3_test.py, the layout test and python3 tools/smoke.py, and look at the frames at all six sizes. Test every yes or no fact yourself and put the frames in docs/CHANGES.md. Then rewrite Tom's card t-battleuxplay: set first to Nothing: build battleux3 is pushed, keep its next unless a step changed, set this card's after to t-battleuxplay, and write the result on this card. Build name battleux3. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-battleux: plan section 5, card battleux3. Waits on c-battleux2."
+    }
+   ]
+  },
+  {
+   "id": "t-battleuxplay",
+   "lane": "tom",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Battle System",
+   "ask": "play",
+   "where": "phone",
+   "fyi": true,
+   "title": "Play the new battle screen on the Duo and iPhone",
+   "created": "2026-11-21",
+   "changed": "2026-11-21",
+   "blocks": [],
+   "first": "Wait for the scene marks build (card Add the scene marks and remove the proposal page). This card opens by itself.",
+   "next": "On the Duo unfolded, held sideways: open the game, tap RELOAD on the title, then ADMIN > BATTLE LAB > NEW BATTLE. Play these three fights to the end: NEW 2: MUDLING AND SKEETER, NEW 6: THE BIG ONE, NEW 10: AMY, JUSTIN AND OLIVIA (BIG ONE). Then on the iPhone held upright, play NEW 2 once. Judge looks and feel only: can you tell what each move does without extra taps, does tap once to read and tap again to use feel right, is tapping a monster to aim clear. Claude has already tested every yes or no fact. Tap All good, or Something is wrong and say what to change.",
+   "steps": [
+    "Duo unfolded, sideways: RELOAD on the title, then ADMIN > BATTLE LAB > NEW BATTLE.",
+    "Play NEW 2: MUDLING AND SKEETER, NEW 6: THE BIG ONE and NEW 10: AMY, JUSTIN AND OLIVIA (BIG ONE).",
+    "iPhone upright: play NEW 2 once.",
+    "Tap All good, or Something is wrong with what to change."
+   ],
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Added by board-battleux: Tom's one play card for the battle screen redesign (plan section 5). Opens when c-battleux3 ships."
+    }
+   ]
   }
  ],
  "sessions": [

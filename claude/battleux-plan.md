@@ -1,6 +1,6 @@
 # Battle screen redesign: the proposal (battleux-plan, 2026-11-21)
 
-Status: PROPOSED. Nothing in the game has changed. Tom decides on card t-battleux-decide (or in the chat of card c-battleux-plan). The build cards are made only after he approves.
+Status: APPROVED as shown by Tom on 2026-11-21 (card t-battleux-decide). Build cards made by board-battleux: c-battleux1, c-battleux2, c-battleux3 in that order, then Tom's play card t-battleuxplay.
 
 Tom, 11-21 16:59, with a picture of the right strip on the Duo unfolded: "i think we need a total overhaul of the UX, especially for the lower half with actions. i think we need to take a step back and think about our battle system and compare the paradigm to similar paradigm in modern RPGs and then completely design the interactions from scratch. a few existing painpoints are the lack of clarity on what each skill does (the i icon isn't working well) without cluttering the space or creating extra taps (maybe a toggle to show/hide descriptions by default). the icons are also a bit confusing. im open to anything, but id like to see a proposal before moving forward." 17:01: "although the viewport i mentioned is most important, i want it to also work well in landscape on a desktop browser, duo folded, and standard iphone viewport".
 
@@ -127,7 +127,7 @@ Rules, numbers, moves, monsters, the simulator. The turn bar's content. Rose Mod
 | Six flat flavor symbols | Emoji are mixed styles and unreadable at 13 px | Keep the emoji, add the words |
 | A mouse click follows rule 2 as well | One rule on every device | Mouse: hover shows, click uses (today) |
 
-## 5. Build, after approval (cards are NOT made yet)
+## 5. Build (cards made 2026-11-21: c-battleux1, c-battleux2, c-battleux3, t-battleuxplay)
 
 | Card | Does | Model, effort |
 |---|---|---|
