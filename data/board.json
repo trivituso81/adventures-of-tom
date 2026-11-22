@@ -29505,13 +29505,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGzkghj5rCZRHTUQAf",
+    "url": "https://claude.ai/code/cse_01RXeukEUFp92RuXhVtRnTbD",
     "opening": "not started"
    },
    "nightly": true,
@@ -29564,6 +29564,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T01:53:01.047Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -29579,8 +29583,7 @@
     "date": "2026-11-21",
     "build": ""
    },
-   "started_at": "2026-11-21T23:20:59+00:00",
-   "start": true
+   "started_at": "2026-11-22T01:53:56+00:00"
   },
   {
    "id": "c-bigone25",
@@ -31286,7 +31289,7 @@
    "id": "c-reports-13",
    "tag": "reports-2026-11-21",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (8 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-172826-9r47, r-20261121-172850-q5km, r-20261121-173524-egdf, r-20261121-173628-97ha, r-20261121-173717-wjou, r-20261121-174051-vxq1 and 2 more. First note: should be zoomed in on Tom - this should be the case at the beginning of every chapter",
@@ -31300,7 +31303,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDVc9XVv6gEcsWPqV3",
     "opening": "not started"
    },
    "history": [
@@ -31324,12 +31327,16 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T01:53:04.697Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "start": true
+   "started_at": "2026-11-22T01:53:56+00:00"
   },
   {
    "id": "c-wanstop-rose-giddyup-r7",
@@ -31619,7 +31626,7 @@
    "id": "c-takes-9b7e15",
    "tag": "takes-2026-11-21",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Voice Clips",
    "count": 2,
    "title": "Merge 2 new voice takes",
@@ -31634,7 +31641,7 @@
     "text": "Read claude/handoff-rules.md and docs/VOICE.md, then merge the new voice takes from branch takes. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDZ8yfH7q7xENyMfFu",
     "opening": "not started"
    },
    "history": [
@@ -31646,12 +31653,16 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T01:53:08.445Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
-   "start": true
+   "started_at": "2026-11-22T01:53:56+00:00"
   }
  ],
  "sessions": [
@@ -36393,8 +36404,8 @@
    "takes/20261122T014818-vsj/state.json"
   ]
  },
- "synced": "41f77b61701619b7dace3e038c2df568b8968a6c",
- "synced_at": "2026-11-22T01:48:46+00:00",
+ "synced": "47d99c3db2e4a72118f4c55fc6ef906b882ae16e",
+ "synced_at": "2026-11-22T01:53:56+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
