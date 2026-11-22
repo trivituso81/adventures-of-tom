@@ -22488,7 +22488,7 @@
   {
    "id": "t-lastnight",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Project Ops",
    "title": "Last night: what the night shift did",
    "ask": "setup",
@@ -22521,6 +22521,10 @@
     {
      "d": "2026-11-22",
      "t": "Needs you lines now carry each card's exact steps (tools/night/lastnight.py)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as t-lastnight: Last night's Needs you lines now say what to do, not only the card's name"
     }
    ],
    "created": "2026-11-21",
@@ -22579,7 +22583,8 @@
     "text": "Read claude/handoff-rules.md. Tom handed you board card t-lastnight with this note: The what to do doesn't tell me what to do. Work out what is needed, rewrite the card, and do it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "started_at": "2026-11-22T17:03:19+00:00",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-22"
   },
   {
    "id": "c-win3skip",
@@ -29858,6 +29863,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGbrHbR5tTUJoJwwSg",
+   "title": "Last night: what the night shift did",
+   "first": "2026-11-22T17:08:41Z",
+   "last": "2026-11-22T17:09:06Z",
+   "tags": [
+    "t-lastnight"
+   ],
+   "cards": [
+    "t-lastnight"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGpS5QYVaShemAAdNg",
    "title": "Night QA: the test browser plays your check cards",
    "first": "2026-11-22T17:04:41Z",
@@ -35416,8 +35433,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "9da28d675ab1e71b99da07d2b717f070573909f5",
- "synced_at": "2026-11-22T17:06:55+00:00",
+ "synced": "666486de47586ea07b9a5866c16ffff205702b60",
+ "synced_at": "2026-11-22T17:09:55+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
