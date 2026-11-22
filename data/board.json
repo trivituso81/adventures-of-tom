@@ -21616,7 +21616,7 @@
    "id": "c-boppy-bigfish",
    "tag": "boppy-bigfish",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Characters",
    "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
    "next": "Waiting on Tom card t-boppy-bigfish-cap2: baked v2 as a test; his unimpressed face got worse (blank cap, head turned and larger) than the face on main, which already reads Paso Robles. Nothing was pushed.",
@@ -21733,14 +21733,18 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T01:54:30.713Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGysMhUJFPz6cDcX1r",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-boppy-bigfish\""
    },
    "after": "t-boppy-bigfish-cap2",
-   "start": true
+   "started_at": "2026-11-22T01:54:37+00:00"
   },
   {
    "id": "c-qa-coh01",
@@ -31644,8 +31648,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Voice Clips",
-   "count": 2,
-   "title": "Merge 2 new voice takes",
+   "count": 3,
+   "title": "Merge 3 new voice takes",
    "next": "New voice takes were saved on branch takes. Merge them into the game.",
    "prompt": {
     "what": "Merges the voice takes you recorded on your phone.",
@@ -31673,6 +31677,10 @@
     {
      "d": "2026-11-21",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "1 more take file(s) arrived."
     }
    ],
    "blocks": [],
@@ -36417,11 +36425,12 @@
    "takes/20261121T015156-llm/part-001.json",
    "takes/20261121T015156-llm/state.json",
    "takes/20261122T014818-vsj/part-001.json",
-   "takes/20261122T014818-vsj/state.json"
+   "takes/20261122T014818-vsj/state.json",
+   "takes/20261122T015428-cdp/part-001.json"
   ]
  },
- "synced": "47d99c3db2e4a72118f4c55fc6ef906b882ae16e",
- "synced_at": "2026-11-22T01:53:56+00:00",
+ "synced": "b9c9c75d3eb6103b2c4578c9f223ffc14b27972b",
+ "synced_at": "2026-11-22T01:54:39+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
