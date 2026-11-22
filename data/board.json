@@ -29746,6 +29746,38 @@
     "effort": "medium (the recipe exists; this repeats it for six more people)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics in data/board.json. Your first push is the commit board: start c-startpics. Add start jobs to tools/art-library/wangen-jobs.json for amy, boppy, justin, olivia, tnb and nara from their hero pictures, a request path so the Battle Guide can make a start picture with two taps, and checks for facing and height. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "c-guidestuck1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "tag": "guidestuck1",
+   "title": "Battle Guide videos stuck at CHECKING all night",
+   "next": "Find why 12 guide videos requested at about 12:20 am sat at CHECKING for hours with no result, fix it so a lost run keeps the paid videos and shows what happened, and clear the stuck badges.",
+   "blocks": [],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukCuaGvB32C87NhKN8e",
+    "opening": "\"Creating animations within the battle guide seems to not be working at all.\""
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom (06:53): \"Creating animations within the battle guide seems to not be working at all. I requested these last night and I hung overnight and nothing happened.\" Evidence: wan-gen run 45002823299 (guide requests) lost its runner at 09:40 UTC after 72 minutes; the Battle Guide status file shows 12 videos at checking since 08:25 to 08:48 UTC."
+    }
+   ],
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Finishes the fix for Battle Guide videos that stall at CHECKING.",
+    "before": [
+     "Nothing."
+    ],
+    "model": "Claude Sonnet 5.5",
+    "effort": "medium (cause found in run 45002823299, steps known)",
+    "text": "Read CLAUDE.md, card c-guidestuck1 in data/board.json and .github/workflows/wan-gen.yml. Battle Guide videos requested through data/wan-requests.json stalled at CHECKING because the wan-gen run lost its runner during the Make the takes step (run 45002823299). Make the takes step bounded and saved piece by piece, and push the results branch before the takes. Write the CHANGES heading ## guidestuck1 and push. Your first push is the commit board: start c-guidestuck1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
