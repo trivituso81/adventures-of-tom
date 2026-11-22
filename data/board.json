@@ -27243,7 +27243,7 @@
   {
    "id": "t-artgen3try",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "pictures",
    "fyi": true,
@@ -27308,6 +27308,10 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Fix: Try the auto-approve button on a pictures card, Fix: Try auto-approve on Grace's and Rose's party, Fix: Try auto-approve on Grace's and Rose's party is done."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Done by the board: you approved banner-join-grace, banner-join-rose, banner-leave-grace, banner-leave-rose in the Art Library."
     }
    ],
    "done_when": {
@@ -27467,7 +27471,8 @@
      }
     }
    },
-   "after": null
+   "after": null,
+   "done": "2026-11-21"
   },
   {
    "id": "t-guidegen-try",
@@ -40941,8 +40946,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "27aeab3399b8f3d4bb5149f04b734e11d66a4109",
- "synced_at": "2026-11-22T06:48:56+00:00",
+ "synced": "cd45363347adadc17755db5472934f649e7afe50",
+ "synced_at": "2026-11-22T06:49:47+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
