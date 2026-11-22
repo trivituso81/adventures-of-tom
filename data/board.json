@@ -29809,13 +29809,13 @@
    "title": "Night QA: the test browser plays your check cards",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Standing card. Each night a test browser plays up to 4 of your \"play and report\" cards in portrait, landscape and the Duo size. A yes or no check that passes is closed for you with the pictures; one that fails becomes a fix card; a check only a person can judge stays yours and says why. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukCYn86YWwjUz2P6FZL",
     "opening": "not started"
    },
    "nightly": true,
@@ -29897,6 +29897,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T01:58:34.349Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -29912,7 +29916,7 @@
     "date": "2026-11-21",
     "build": ""
    },
-   "start": true
+   "started_at": "2026-11-22T01:58:37+00:00"
   },
   {
    "id": "b-voices-t-ch2voices-315",
@@ -31136,7 +31140,7 @@
    "id": "c-fix-dash3-try",
    "tag": "fix-dash3-try",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Try the game strip and Take me there",
@@ -31158,7 +31162,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukCpWRQTkDHBoY79qPj",
     "opening": "Something is wrong on t-dash3-try"
    },
    "history": [
@@ -31189,6 +31193,10 @@
      "d": "2026-11-21",
      "t": "Tom tapped START.",
      "at": "2026-11-22T01:58:30.729Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -31202,7 +31210,7 @@
    },
    "after": "t-dash3-try",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-22T01:58:37+00:00"
   },
   {
    "id": "t-wanstop-gen",
@@ -31694,7 +31702,7 @@
    "id": "c-takes-9b7e15",
    "tag": "takes-2026-11-21",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Voice Clips",
    "count": 4,
    "title": "Merge 4 new voice takes",
@@ -31709,7 +31717,7 @@
     "text": "Read claude/handoff-rules.md and docs/VOICE.md, then merge the new voice takes from branch takes. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDZ8yfH7q7xENyMfFu",
+    "url": "https://claude.ai/code/session_01RXeukDZ8yfH7q7xENyMfFu",
     "opening": "not started"
    },
    "history": [
@@ -31738,16 +31746,37 @@
      "d": "2026-11-22",
      "t": "Merged 3 kept takes (Hello Rose, Deedee Three, I do have news) in build takes-2026-11-21. Not merged: Nine wrappers (line not in the game) and A FISH (words differ from the screen line, Tom's call). unused_voice.py not run (no python playwright here); all 3 replaced existing clips.",
      "at": "2026-11-22T02:00:00Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as takes-2026-11-21: 3 of Tom's new voice takes are in the game (Tom's Hello Rose, Deedee's Three, Tom's I do have news)"
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-21",
    "started_at": "2026-11-22T01:53:56+00:00",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-21"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDZ8yfH7q7xENyMfFu",
+   "title": "Merge 4 new voice takes",
+   "first": "2026-11-22T01:57:20Z",
+   "last": "2026-11-22T01:57:47Z",
+   "tags": [
+    "takes-2026-11-21"
+   ],
+   "cards": [
+    "c-takes-9b7e15"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDVc9XVv6gEcsWPqV3",
    "title": "Fix the report backlog (8 open)",
@@ -36530,8 +36559,8 @@
    "takes/20261122T015428-cdp/state.json"
   ]
  },
- "synced": "b6ac55e8f5da95a61968b6b129271cdf5bd61a9d",
- "synced_at": "2026-11-22T01:57:03+00:00",
+ "synced": "1fb89eb24a78d9bb86b280db865264815494efd6",
+ "synced_at": "2026-11-22T01:58:39+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
