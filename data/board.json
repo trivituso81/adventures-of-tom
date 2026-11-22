@@ -32265,7 +32265,7 @@
   {
    "id": "t-wangaveup-stage-tom-bluebang-vid-r2",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "ask": "decide",
    "fyi": true,
@@ -32291,8 +32291,15 @@
     {
      "d": "2026-11-22",
      "t": "Added by the wan-gen job (45075789998): stage-tom-bluebang-vid used 4 tries ($0.60)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom chose: Give it 4 more tries",
+     "at": "2026-11-22T23:56:13.787Z"
     }
-   ]
+   ],
+   "done": "2026-11-22",
+   "answer": "Give it 4 more tries"
   },
   {
    "id": "c-startpics12",
