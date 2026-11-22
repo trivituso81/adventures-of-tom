@@ -1,3 +1,7 @@
+## boppy-bigfish (2026-11-22): Boppy's unimpressed face stays as it is, Paso Robles cap
+
+Card c-boppy-bigfish. Tom answered t-boppy-bigfish-cap2: "Keep the face in the game now and close the card". The face on main (`portraits/emo/boppy-unimpressed.webp`, Paso Robles cap, mustache) is kept; the v2 picture (blank cap, turned and larger head) was not installed. No art, no rebake. Only the Art Library entry's reference (boppy-bigfisha) changed earlier. The remaining Big Fish text is history notes and a prompt comment.
+
 ## wanch5 (2026-11-21): Rose's Giddyup and Deedee's Wet-Floor are ready for one Generate tap
 
 Card c-wanch5. No video was made and nothing was spent in this session; the first paid bulk run is Tom's tap on t-wanch5-gen (cap $2 above the ledger of $53.815).
