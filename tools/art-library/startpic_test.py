@@ -68,4 +68,11 @@ for who in ('amy', 'boppy', 'justin', 'olivia', 'tnb', 'nara'):
     check('S4 start-%s has its hero picture and prompt' % who, ok, j)
 fr = json.load(open(os.path.join(ROOT, 'tools', 'guidegen', 'figrows.json')))
 check('S5 figrows has the whole cast', all(w in fr for w in ('tom', 'grace', 'rose', 'deedee', 'amy', 'boppy', 'justin', 'olivia', 'tnb', 'nara')), sorted(fr))
+ga = json.load(open(os.path.join(ROOT, 'data', 'guide-anims.json')))['anims']
+for who in ('amy', 'boppy', 'justin', 'olivia', 'tnb', 'nara'):
+    st = sorted(k.split(':')[2] for k in ga if k.startswith('body:%s:' % who))
+    check('S6 %s lists the seven standard pose animations' % who, st == sorted(['idle', 'guard', 'hit', 'dodge', 'ko', 'victory', 'run']), st)
+    ps = [ga['body:%s:%s' % (who, x)]['prompt'] for x in st]
+    check('S6 %s prompts are state prompts, not a lunge' % who, all('lunges forward' not in p and 'MOTION:' in p for p in ps))
+check('S6 a dog prompt never says she, her, hair or outfit', all(not any(w in ga['body:nara:%s' % x]['prompt'].lower().replace('the exact character', '') for w in (' she ', ' her ', 'outfit', ' hair')) for x in ('idle', 'guard', 'hit', 'dodge', 'ko', 'victory', 'run')))
 print('\nstartpic test: %s' % ('FAILED ' + ', '.join(bad) if bad else 'all passed')); sys.exit(1 if bad else 0)

@@ -29841,18 +29841,19 @@
    "col": "up",
    "ask": "animations",
    "fyi": true,
-   "next": "Open ADMIN > BATTLE GUIDE > Family, pick Amy, tap any move, and under Cannot be made yet tap Make the start picture, then Yes, spend $0.15. Do the same for Boppy, Justin, Olivia, TNB and Nara (about $0.90 in all). Then tap All good or Something is wrong. Build startpics1.",
+   "next": "Open ADMIN > BATTLE GUIDE > Family, pick Amy, tap any move, and under Cannot be made yet tap Make the start picture, then Yes, spend $0.15. Do the same for Boppy, Justin, Olivia, TNB and Nara (about $0.90 in all). Each of them now also lists their standard pose animations (Idle, Guard, Hit, Dodge, Knocked out, Victory, Running); those open once the picture is made. Then tap All good or Something is wrong. Build startpics1.",
    "steps": [
     "Open ADMIN > BATTLE GUIDE > Family > Amy, then tap one of her moves (for example Kettlebell Swing).",
     "Under the red Cannot be made yet box, tap Make the start picture ($0.15), then Yes, spend $0.15. Keep the page open for about a minute.",
     "The page says Done when the picture is in the game; it says why in plain words when it is not. After about two minutes reload the page: the Generate this video button appears for Amy.",
     "Repeat for Boppy, Justin, Olivia, TNB and Nara (each is one tap on any of their moves).",
-    "Open the Amy sheet again: the picture should be Amy facing left on flat magenta, same face and clothes as her hero. Tap All good, or Something is wrong and say who looks wrong."
+    "Open the Amy sheet again: the picture should be Amy facing left on flat magenta, same face and clothes as her hero. Tap All good, or Something is wrong and say who looks wrong.",
+    "Open the same person again: under their moves, the seven standard pose animations are listed. Tell me if a Victory pose is wrong for the person."
    ],
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
-   "build": "startpics1",
+   "build": "startpics2",
    "history": [
     {
      "d": "2026-11-22",
@@ -30469,12 +30470,12 @@
    "lane": "claude",
    "col": "prog",
    "tag": "startpics2",
-   "next": "In progress: the Battle Guide lists idle, guard, hit, dodge, knocked out, victory and running for Amy, Boppy, Justin, Olivia, TNB and Nara, each with a starting prompt, the way it lists them for Tom, Grace, Rose and Deedee.",
+   "next": "Built as startpics2: the Battle Guide now lists idle, guard, hit, dodge, knocked out, victory and running for Amy, Boppy, Justin, Olivia, TNB and Nara, each with a starting prompt. No video was made. Waits on your card Make the start pictures in the Battle Guide (t-startpics-try).",
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjjZ5BAsFW",
+    "url": "https://claude.ai/code/session_01RXeukGzdyko1LdjZ5BAsFW",
     "opening": "but under Amy, i dont see her standard pose animations listed"
    },
    "history": [
@@ -30482,6 +30483,11 @@
      "d": "2026-11-22",
      "t": "Tom: \"but under Amy, i dont see her standard pose animations listed\". Cause: the Guide lists the family states only for people who already have a clip or are video-only (Tom, Grace, Rose, Deedee).",
      "at": "2026-11-22T20:03:57.185Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Built startpics2: the six now list the seven standard pose animations, drafted from the proven state prompts. Victory lines are my picks from canon.",
+     "at": "2026-11-22T20:04:33.819Z"
     }
    ],
    "prompt": {
@@ -30492,7 +30498,8 @@
     "model": "Claude Sonnet 5.5 (row C: a small build, cause already found)",
     "effort": "medium (one known change plus prompts copied from the proven ones)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-startpics2 in data/board.json. Your first push is the commit board: start c-startpics2. In tools/guidegen/build_map.js list the family states for any person with a start job and draft each from the proven Tom, Grace and Deedee state prompts. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "t-startpics-try"
   }
  ],
  "sessions": [

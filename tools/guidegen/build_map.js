@@ -42,11 +42,12 @@ const BODY_ALIAS = { die: 'defeated' };   // the game's state name -> the entry 
 const JOB_ALIAS = { 'grace-guard': 'video' };   // the guard proof's job is named video (wanproof, before one job per clip)
 
 // ---------- animations, as battle-guide.html buildAnims lists them ----------
+const WAN_JOBS = jread('tools/art-library/wangen-jobs.json', {});   // startpics2: a person with a start-<id> job lists every family state, like the video-only four, so their standard animations can be made
 const FAMILY_STATES = ['idle', 'guard', 'hit', 'dodge', 'ko', 'victory', 'run'];
 function listAnims(G) {
   const A = [];
   const body = id => {
-    const C = G.BODY_CLIPS[id] || {}, VO = G.VIDEO_ONLY.includes(id);   // wanch2a: a video-only member lists every family state; one with no clip has no video yet
+    const C = G.BODY_CLIPS[id] || {}, VO = G.VIDEO_ONLY.includes(id) || !!(WAN_JOBS['start-' + id] && G.CAST[id]);   // wanch2a: a video-only member lists every family state; one with no clip has no video yet
     const order = ['idle', 'guard', 'hit', 'dodge', 'ko', 'victory', 'run', 'give', 'slip', 'flustered', 'die'];
     order.concat(Object.keys(C).filter(k => !order.includes(k))).forEach(st => {
       if (C[st]) A.push({ id: 'body:' + id + ':' + st, owner: id, kind: 'state', state: st, name: STATE[st] || cap(st), clip: C[st], what: 'body state ' + st });
@@ -142,6 +143,39 @@ function personGesture(shape, name, w) {
   if (shape === 'throw') return `winds one arm back and throws it forward once, as if tossing something small. Without repeating the throw, ${w.s} lowers ${w.h} arm.`;
   return `lunges forward once with one arm in one quick, clear motion, as if making the move "${name}". Without repeating the motion, ${w.s} steps back onto the same spot.`;
 }
+// startpics2: the family states (idle, guard, hit, dodge, ko, victory, run) of a person who has no hand-written prompt yet. These are the proven wording of the Tom, Grace and
+// Deedee state prompts (tools/art-library/prompts/wan-<who>-<state>-v1.txt) with the pronoun filled in; only the victory differs by person (a line each, from the cast's own
+// canon), and Nara, a dog, has her own set. The first one that Tom keeps is saved as a job, so this is only the starting draft he reads and edits.
+const STATE_NAME = { idle: 'BREATHING IDLE', guard: 'BRACED GUARD', hit: 'FLINCH', dodge: 'DODGE', ko: 'TOO TIRED TO GO ON', victory: 'VICTORY', run: 'RUNNING IN PLACE' };
+const VICTORY = {
+  amy: 'raises both fists overhead once with a big proud grin, like crossing a finish line first. She holds that pose and remains completely still in it for the rest of the clip.',
+  boppy: 'gives a pleased, satisfied grin and pumps one fist once at chest height. He holds that fist up with the same grin and remains completely still in that pose for the rest of the clip.',
+  justin: 'gives two big thumbs up once with a proud, warm grin. He holds that pose and remains completely still in it for the rest of the clip.',
+  olivia: 'throws both arms up in a V once with a big proud smile. She holds that arms-up pose and remains completely still in it for the rest of the clip.',
+  tnb: 'gives a relaxed, pleased grin and raises one fist once at chest height. He holds that fist up with the same grin and remains completely still in that pose for the rest of the clip.',
+};
+function stateText(a, w) {
+  const S = w.S, s = w.s, h = w.h, st = a.state, o = a.owner;
+  if (o === 'nara') return {
+    idle: `The dog stands in its starting relaxed stance and breathes slowly and gently, its chest and flanks rising and falling softly, and blinks once. Its head, paws and tail stay where they are for the whole clip.`,
+    guard: `From its starting stance, the dog crouches low once with its chest near the ground, ears pinned back and legs braced, holding that low braced stance, then stands back up into its starting stance.`,
+    hit: `From its starting stance, the dog flinches once as if bumped from the front, ducking its head back with its ears flat while its paws stay planted. Without repeating the flinch, it straightens up and returns to its starting stance, holding it for the rest of the clip.`,
+    dodge: `From its starting stance, the dog quickly ducks and leans its body back and away to the right once, as if something is flying past, while its paws stay planted. Without repeating the dodge, it straightens up and returns to its starting stance, holding it for the rest of the clip.`,
+    ko: `From its starting stance, the dog gets dizzy, wobbles once, and slowly lies down flat on the ground with its eyes closed and its head resting on its paws, as if it has fallen fast asleep. It stays lying there, completely still, for the rest of the clip.`,
+    victory: `From its starting stance, the dog hops up onto its back legs once with its front paws lifted and its tail wagging, mouth open in a happy pant. It lands back in its starting stance, tail still wagging, and holds it for the rest of the clip.`,
+    run: `The dog trots in place facing left, legs pumping in a steady rhythm, without moving forward or backward from its spot. It keeps the same steady pace for the whole clip, then slows and stops in its starting stance at the very end.`,
+  }[st];
+  return {
+    idle: `${S} stands in ${h} starting relaxed stance and breathes slowly and gently, ${h} chest and shoulders rising and falling softly, and blinks once. ${h[0].toUpperCase() + h.slice(1)} arms, head and feet stay where they are for the whole clip.`,
+    guard: `From ${h} starting relaxed stance, ${s} bends ${h} knees, tucks ${h} chin and raises both arms once, crossing ${h} forearms in an X in front of ${h} face with both fists closed. ${S} holds that braced guard, breathing gently, then lowers ${h} arms and stands back up into ${h} starting stance.`,
+    hit: `From ${h} starting relaxed stance, ${s} flinches once as if bumped from the front, leaning ${h} upper body back with a wince and ${h} arms pulled in, while ${h} feet stay planted. Without repeating the flinch, ${s} straightens up and returns to ${h} starting relaxed stance, holding it for the rest of the clip.`,
+    dodge: `From ${h} starting relaxed stance, ${s} quickly ducks and leans ${h} upper body back and away to the right once, as if something is flying past, while ${h} feet stay planted. Without repeating the dodge, ${s} straightens up and returns to ${h} starting relaxed stance, holding it for the rest of the clip.`,
+    ko: `From ${h} starting relaxed stance, ${s} gets dizzy, wobbles once, and slowly sinks down to sit on the ground with ${h} eyes closed and ${h} head drooping, as if ${s} has fallen fast asleep. ${S} stays sitting there, completely still, for the rest of the clip.`,
+    victory: `From ${h} starting relaxed stance, ${s} ` + (VICTORY[o] || 'throws both arms up in a V once with a big proud grin. ' + S + ' holds that arms-up pose and remains completely still in it for the rest of the clip.'),
+    run: `${S} runs in place facing left, arms pumping and knees lifting in a steady jogging rhythm, without moving forward or backward from ${h} spot. ${S} keeps the same steady pace for the whole clip, then slows and stops in ${h} starting stance at the very end.`,
+  }[st];
+}
+function stateDraft(a, head) { return head + 'MOTION: ' + STATE_NAME[a.state] + '\n' + stateText(a, personWords(a.owner)); }
 function personDraft(a, head) {
   const w = personWords(a.owner);
   return head + 'MOTION: ' + a.name.toUpperCase() + `\nFrom ${w.h} starting relaxed stance, ${w.s} ` + personGesture(a.shape || 'strike', a.name, w) + ' ' + BACK(w.S, w.h);
@@ -201,6 +235,7 @@ function build() {
       if (!src) src = S.E['rose-boop'].e.prompt;   // the approved Boop prompt: the generic pattern (her/she)
       head = src.slice(0, src.indexOf('MOTION:'));
       if (!idle) { const w = personWords(o); if (w.s !== 'she') head = head.replace(/\bher\b/g, w.h).replace(/\bhers\b/g, w.h); }
+      if (!idle && o === 'nara') head = head.replace('hair, outfit, accessories', 'fur, collar, markings');   // a dog has no outfit
     } else {
       const idle = S.E[o + '-idle'] || S.E['mudling-idle'];
       const p = idle.e.prompt; head = p.slice(0, p.indexOf('MOTION:')).replace('A short looping animation', 'A short animation');
@@ -259,7 +294,7 @@ function build() {
     } else if (ov && ov.source === 'model-draft' && ov.prompt && (!ov.notForUse || waits)) { prompt = ov.prompt; source = 'model-draft'; rev = ov.rev || 0; }
     else {
       const lr = a.kind === 'move' ? rows[norm(a.name)] : null;
-      prompt = (fam ? personDraft(a, ow.patternHead) : foeDraft(a, ow.patternHead, ow.patternTail)).trim(); source = 'rule-draft'; rev = 0;
+      prompt = (fam && a.kind === 'state' && STATE_NAME[a.state] ? stateDraft(a, ow.patternHead) : fam ? personDraft(a, ow.patternHead) : foeDraft(a, ow.patternHead, ow.patternTail)).trim(); source = 'rule-draft'; rev = 0;
       void lr;
     }
     // 3 price (settings are the same for every animation of a route: see routes)
