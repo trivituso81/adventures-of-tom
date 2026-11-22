@@ -25391,7 +25391,7 @@
    "col": "wait",
    "theme": "Game Shell",
    "title": "Fix the report backlog (2 open)",
-   "next": "Two reports (r-20261121-180439-svqd, r-20261121-180541-ojxd) wait on Tom's answer on card t-reports13-ch2. Then fix them in one small change.",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-180439-svqd, r-20261121-180541-ojxd. First note: this scene has to be triggered before they leagve",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -29410,7 +29410,11 @@
      "d": "2026-11-22",
      "t": "Added by the c-reports-13 rescue: the two open reports are too vague to fix without a guess."
     }
-   ]
+   ],
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGVvpyyr9G81V1EjFt",
+    "opening": "unknown"
+   }
   }
  ],
  "sessions": [
@@ -29418,10 +29422,11 @@
    "url": "https://claude.ai/code/session_01RXeukGVvpyyr9G81V1EjFt",
    "title": "Fix the report backlog (2 open)",
    "first": "2026-11-22T09:08:23Z",
-   "last": "2026-11-22T09:08:23Z",
+   "last": "2026-11-22T09:09:19Z",
    "tags": [],
    "cards": [
-    "c-reports-13"
+    "c-reports-13",
+    "t-reports13-ch2"
    ]
   },
   {
@@ -34858,8 +34863,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "96e096b9a0038b6d351b619dd1034a85b3b61c37",
- "synced_at": "2026-11-22T09:09:04+00:00",
+ "synced": "1921ef50e46303bb1ae0821a51ba71fd6e4dabcc",
+ "synced_at": "2026-11-22T09:09:59+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
