@@ -32967,11 +32967,11 @@
    "id": "c-battleux3",
    "tag": "battleux3",
    "lane": "claude",
-   "col": "up",
+   "col": "wait",
    "theme": "Battle System",
    "title": "Add the scene marks and remove the proposal page",
    "created": "2026-11-21",
-   "changed": "2026-11-21",
+   "changed": "2026-11-22",
    "blocks": [
     "t-battleuxplay"
    ],
@@ -32979,7 +32979,7 @@
     "url": "",
     "opening": "not started"
    },
-   "next": "Waits on Write the one-line move descriptions. Then adds the marks on the scene (Pet Peeve badges under each monster, the aim marker and PET PEEVE tag), the Pep forecast on the bar, Rose Mode pictures on the new list, and removes the proposal page and its Admin button. Then your play card opens.",
+   "next": "Waits on Battle screen: the new menu's look, and only what is needed (Tom asked on 11-21 for the battle screen to take the new menu's look first, so the marks are added once, in that look). Then adds the marks on the scene, the Pep forecast and Rose Mode pictures, and removes the proposal page and its Admin button. Then your play card opens.",
    "prompt": {
     "what": "Adds the Pet Peeve badges, the aim marker and tag, the Pep forecast and Rose Mode pictures to the new battle screen, and removes the proposal page and its Admin button.",
     "before": [
@@ -32997,8 +32997,13 @@
     {
      "d": "2026-11-21",
      "t": "Unblocked: Write the one-line move descriptions is done."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Waits again, on c-b3look: Tom asked (11-21 23:56) for the battle controls to be restyled after the new menu with no repeated information. Doing the marks first would build them in the old look and hand Tom a play card for a screen about to change."
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "t-battleuxplay",
@@ -35981,6 +35986,39 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-movefun-gen and t-movefun-gen in data/board.json, history included. Your first push is the commit board: start c-fix-movefun-gen.\n\nTom tested and found problems:\n1. Card t-movefun-gen (Remaking three flat moves: Blockade, Cube Pop, Wet-Floor, ask animations). He was asked: Nothing to tap. Your Give it 4 more tries on Blockade now goes to a Claude session that changes one thing and starts the next try by itself (it runs right after Rose's). Open this card on the board in about 15 minutes: the yellow Last run line should name each video once and say \"you asked for more tries, so a Claude session changes one thing and starts the next try: tom-blockade\", with no \"see its card\". When Blockade passes, a watch card comes. He wrote: See last run notes\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T07:49:50.162Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-movefun-gen to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-movefun-gen, and give the build fix-movefun-gen a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-movefun-gen"
+  },
+  {
+   "id": "c-b3look",
+   "tag": "b3look",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle System",
+   "title": "Battle screen: the new menu's look, and only what is needed",
+   "next": "Gives the new battle screen the look of the new main menu (colors, backgrounds, lettering) on every control, removes anything shown twice or not needed, and makes the DETAILS switch hide the details everywhere. Start it in a new conversation with Copy prompt (Claude Opus 5.5, effort high). Add the scene marks and remove the proposal page waits on it, then your play card opens.",
+   "blocks": [
+    "c-battleux3"
+   ],
+   "created": "2026-11-22",
+   "changed": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Restyles the new battle screen after the new main menu and cuts it down: one look across all battle controls, no fact shown twice, labels next to their pictures, color only where it means something, and a DETAILS switch that hides the details everywhere. No rule or number changes.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5 (row D: the look and feel of a screen, which you judge by taste)",
+    "effort": "high (a whole screen's look and its information worked out with nothing written to follow)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-b3look in data/board.json, history included: Tom's words are there and they are the brief. Your first push is the commit board: start c-b3look. The job: give the new battle screen (Battle 3) the look of the new main menu, and cut it down to what is needed. STUDY FIRST. (1) The menu as built: m2.css, engine/m2-core.js, m2-family.js, m2-vibes.js, m2-bag.js, claude/menuux-plan.md; take pictures of the menu at 951 x 648 with ?duo=1 (Party, Vibes with skill descriptions on and off, Gear) and at 393 x 852. (2) The battle screen as built: b3-deck.css, engine/b3-deck.js, engine/b3-ui.js, data/b3-ux-words.js, claude/battleux-plan.md with its Built sections; take pictures of a Battle Lab NEW BATTLE fight at every size of tools/b3_layout_test.py, with a move highlighted, with DETAILS on and off, between turns, with Ruckus ready, with a knocked-out member, and the end card. THEN WRITE claude/b3look-plan.md BEFORE CHANGING CODE, short and in tables: (a) the style taken from the menu: colors, backgrounds, lettering, borders, chips, switches, buttons, naming the m2.css rules and variables each comes from; share the menu's variables with the battle screen, do not copy values; (b) an inventory of every piece of information on the battle screen (turn bar, scene marks, party cards, the bar above the moves, each move, the strip under the scene, the member list sheet, the end card): where it shows, how many times the same fact shows, whether it is a label, a picture or a color, and your call: keep, merge, move behind DETAILS, or remove; (c) exactly what DETAILS off hides, in every part of the screen; (d) the rules you used for label against picture against color. TOM'S REQUIREMENTS, each must be visibly met: the menu's look in colors, backgrounds and lettering on ALL battle controls; no extraneous information; the DETAILS switch at the top hides the details from everything, literally (moves, the strip, party cards, marks on the scene), leaving what is needed to choose and use a move; clearly organized and laid out; decide for each fact whether its label or its picture is the prominent one; use color only where it carries a meaning the player acts on, and say which meanings; group like facts together; a picture's label sits next to its picture; above all, no fact shown twice. Likely repeats to check first (from the approved mock, the build may differ): Pet Peeve shown on the move, over the monster, as a chip in the strip and in the forecast; a flavor shown as a picture, a word and a chip; Pep on the party card, in the bar above the moves and as each price; the target's HP on the scene and in the strip; the next turn as words while the turn bar already shows the ghost face. KEEP: every battle rule and number (node tools/b3-sim.js check must report the same count); the way the screen works that Tom approved (one list of moves, the first tap shows, the second tap uses, a tap on a monster aims); the scene's size at each screen size; battle 2 untouched (scope to the new battle). Use the menu's own words for the same things: read them from the menu code as it stands when you start (Tom asked on 11-22 for Combos in place of Family Ruckus as the label, Double Team, Family Ruckus for the full one, Primary and Secondary in place of Main and Pocket, Show skill descriptions; card c-fix-menu4play-3), and keep data/b3-ux-words.js as the one place for the battle screen's words. This is a new look, so it is not a small change, but do not swing: keep the structure and change what Tom named. CHECK: python3 tools/b3_layout_test.py at every size (extend it: DETAILS off shows none of the things the plan says it hides; no fact from the inventory's remove or merge rows shows twice), python3 tools/b3_test.py, node tools/b3-sim.js check, python3 tools/smoke.py. Look at the frames of every size, portrait and landscape, and put before and after frames of the Duo unfolded and the iPhone upright in docs/CHANGES.md. Purge the styles and code the new look replaces. LAST: card c-battleux3 waits on this one. Rewrite its prompt and next step so its scene marks, Pep forecast and Rose Mode pictures follow claude/b3look-plan.md, leaving out any mark the plan found to be a repeat, and so it still removes the proposal page. Rewrite the next step of t-battleuxplay to what Tom should judge now. Set after on this card to nothing for Tom: c-battleux3. Build name b3look. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "New card. Tom (11-21 23:56, in the chat of the battle screen proposal): \"Now that the new status menu and vibe menu and all of that has been done, I want you to use that design as inspiration to update the design of the battle system controls and all of the battle controls, for that matter, and it's overall looking feel everything from colors to backgrounds to font styles, and when you do that, you know, remove any extraneous information, and if you have a toggle at the top to show details, it should hide the details from like everything, literally, and make sure things are really well organized and clearly laid out and that you really evaluate kind of like the labels versus the icons and what should be more prominent, like when we should be using color or not, and grouping similar pieces of information or keeping labels for icons near the labels and avoiding redundant information most of all\". Queued for a new conversation on Opus 5.5 high (the proposal chat is long and on Fable; handoff-rules step 5). The new menu shipped as menu1 to menu4; the new battle screen as battleux1 and battleux2."
+    }
+   ]
   }
  ],
  "sessions": [
