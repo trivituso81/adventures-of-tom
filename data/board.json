@@ -29864,7 +29864,7 @@
    "id": "c-chaptercard-storybook",
    "tag": "chaptercard1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Chapter headings in the storybook look of the main menu",
    "next": "Shipped as build chaptercard1: the chapter title cards (CHAPTER N, Part, COMPLETE and Bonus) are now a cream paper card on the dusk wash in the main menu's fonts and colors, in portrait and landscape. Tom looks at it next (card t-chaptercard-look).",
@@ -29905,9 +29905,14 @@
      "d": "2026-11-22",
      "t": "Built and tested (portrait, landscape, long title); pushed as chaptercard1.",
      "at": "2026-11-22T17:17:01.379Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as chaptercard1: Chapter title cards now look like the main menu (cream paper card on the dusk wash), not 16-bit pixel text"
     }
    ],
-   "after": "t-chaptercard-look"
+   "after": "t-chaptercard-look",
+   "done": "2026-11-22"
   },
   {
    "id": "t-chaptercard-look",
@@ -30026,8 +30031,10 @@
    "url": "https://claude.ai/code/session_01RXeukGZXdK5UMQdXoN4DJg",
    "title": "Chapter headings in the storybook look of the main menu",
    "first": "2026-11-22T09:11:30-08:00",
-   "last": "2026-11-22T09:11:30-08:00",
-   "tags": [],
+   "last": "2026-11-22T09:20:22-08:00",
+   "tags": [
+    "chaptercard1"
+   ],
    "cards": [
     "c-chaptercard-storybook"
    ]
@@ -35518,8 +35525,8 @@
    "takes/20261122T021219-429/state.json"
   ]
  },
- "synced": "f9a1fc0543feeedf6e7f8d7c2cb9fc156ec02f9b",
- "synced_at": "2026-11-22T17:12:13+00:00",
+ "synced": "aef90663b77ea21c1e4a1c565608ec35a2ea814c",
+ "synced_at": "2026-11-22T17:21:07+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
