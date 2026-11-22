@@ -34499,7 +34499,7 @@
   }
  ],
  "night": {
-  "enabled": false,
+  "enabled": true,
   "max": 5,
   "from": 23,
   "to": 3,
