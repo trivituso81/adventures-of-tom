@@ -33011,7 +33011,7 @@
    "id": "c-fix-artgen3try-2",
    "tag": "fix-artgen3try-2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Try auto-approve on Grace's and Rose's party",
@@ -33034,7 +33034,7 @@
    ],
    "chat": {
     "url": "",
-    "opening": "Something is wrong on t-artgen3try"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -33046,6 +33046,11 @@
      "d": "2026-11-21",
      "t": "Tom reported on t-artgen3try: Fix bases on qa",
      "at": "2026-11-22T02:56:45.308Z"
+    },
+    {
+     "d": "2026-11-21",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-22T02:57:17.571Z"
     }
    ],
    "prompt": {
