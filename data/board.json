@@ -30926,7 +30926,7 @@
    "title": "Battle stage 22: chapter 14 on Battle 3",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Built and tested (build b3s22ch14): chapter 14 is on Battle 3 with the bestiary's numbers unchanged. Waiting on Tom's phone play (card t-b3s22ch14, fyi). Left for other cards: a scene that places the 34 returning Part 1 monsters, and the cracked-armor art.",
    "blocks": [],
    "changed": "2026-11-22",
@@ -30966,9 +30966,14 @@
     {
      "d": "2026-11-22",
      "t": "Result (b3s22ch14): chapter 14 is on the BY CHAPTER list (levelFloor 35). data/b3-foes-ch14.js: Boppy's Gold Armor (`warden`, boss, 3160 HP, 8 pips, formation `warden`, 30 Vibe Points) is the Gold Knight's seven motions under their real names (Back Behind the Line!, Walk Slower!, It Was THIS Big!, Pepper Breath, Resting My Eyes, Great Big Gold Hug, The 1970 Cross-Country Story below half HP). The family's hits land on the armor, never on Boppy; the girls can be hit and can go down; two new statuses (back_behind, resting_eyes). The 34 Part 1 monsters that come back have `_r` rows and formations made from the Part 1 rows on the bestiary's chapter 14 stat lines (Lab fights NEW 75 to 86, NEW 74 is the armor); they have no scene (the built chapter places none). Simulator: armor 7.3 rounds (aim 7), returning bosses 2.8 to 4.8, no number changed. Engine: `art` alias and `size` so a returning row draws its Part 1 painting. Gaps: no scene places a returning monster, recorded pre-fight lines still say 'don't hit him' (recorded, not edited), cracked-armor art and brighter palette not built. Tests: sim check green, tools/ch14_b3_test.py portrait and landscape, b3_story_test, battle_guide_test, smoke, unused_voice 0."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as b3s22ch14: Chapter 14 (Long Island under the dome) fights on the new battle: Boppy's Gold Armor, and the Part 1 monsters that come back"
     }
    ],
-   "after": "t-b3s22ch14"
+   "after": "t-b3s22ch14",
+   "done": "2026-11-22"
   },
   {
    "id": "c-b3s22ch15",
@@ -30991,7 +30996,7 @@
     "text": "Read claude/battle-architecture.md section 5 row 22, claude/bestiary-v11.md chapter 15, claude/battle-traits.md if present, and docs/BATTLE3.md (the section \"What stage 22a holds\" is the pattern for a chapter: a foes file, the switch, `B3_CH_ON(15)` wording in the scenes, a Lab fight, tips, one chapter test). Also read Tom's notes on the Milestone cards of the chapters before this one (t-b3s22ch11 for chapter 11, then the next ones as they appear; the notes and answers are on the cards), and any fix card they made. This session builds ONLY chapter 15 (The family dinner): The Windowsill Radio (Boss). Its monsters, bosses (and Julian Vance's fights where the scenes name them), formations and tips, as data in data/b3-foes-ch15.js (and data/b3-*.js where the rows belong), switched on Battle 3 for chapter 15 behind the BY CHAPTER switch (add 15 to `B3_STORY.chapters`, a `levelFloor` entry, tips), with one chapter test tools/ch15_b3_test.py written from tools/ch11_b3_test.py (add it to tools/night/tests.json). The Windowsill Radio calls Hushlings as speaker pods (helper link and feedback, as built for chapter 13). Provisional numbers: the bestiary marks chapters 15 to 20 provisional, so keep the printed numbers and tune only in the simulator. Numbers are the bestiary's printed numbers; change one only if the simulator puts a fight outside its target, and say so in the card history. When chapter 15 is switched on, move the 'first chapter not switched' cases in tools/b3_story_test.py to chapter 16, run `node tools/guidegen/build_map.js`, and fix tools/battle_guide_test.py the way stage 22a did (a planned monster that is now built drops out; the fake-gain case uses a still-planned monster). Tests: node tools/b3-sim.js check, python3 tools/ch15_b3_test.py in portrait and landscape (LAYOUT=landscape), python3 tools/smoke.py, python3 -I tools/clip-audit/unused_voice.py (all 0). Look at the chapter's fights in portrait and landscape. Do not review or build animations. Never edit a recorded line: new Battle 3 wording goes in a `B3_CH_ON(15)` variant. Write the result into this card's history; set `after` to a Tom Milestone card for chapter 15 that this session creates (ask play, `jump` {chapter: 15}, fyi true, `next` naming the screen and what to judge). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGetLbtaFRaRwmppxP",
     "opening": "created by the b3s22 session"
    },
    "history": [
@@ -33172,7 +33177,7 @@
    "changed": "2026-11-22",
    "created": "2026-11-22",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGetLbtaFRaRwmppxP",
     "opening": "created by the b3s22ch14 session"
    },
    "history": [
@@ -33382,6 +33387,20 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGetLbtaFRaRwmppxP",
+   "title": "Battle stage 22: chapter 14 on Battle 3",
+   "first": "2026-11-22T16:36:12-08:00",
+   "last": "2026-11-22T17:48:19-08:00",
+   "tags": [
+    "b3s22ch14"
+   ],
+   "cards": [
+    "c-b3s22ch14",
+    "c-b3s22ch15",
+    "t-b3s22ch14"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCtazS4wFWEhCS3KaM",
    "title": "Plan a Battle Guide animation flow that works",
    "first": "2026-11-22T14:40:47-08:00",
@@ -33416,16 +33435,6 @@
    ],
    "cards": [
     "c-night-qa"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGetLbtaFRaRwmppxP",
-   "title": "Battle stage 22: chapter 14 on Battle 3",
-   "first": "2026-11-22T16:36:12-08:00",
-   "last": "2026-11-22T16:36:12-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s22ch14"
    ]
   },
   {
@@ -39191,8 +39200,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "686773cae7c39443edf2854b761fca3dd7b90033",
- "synced_at": "2026-11-23T01:41:33+00:00",
+ "synced": "f5ea6231fc160e86b43aeb329d930aa2b702609a",
+ "synced_at": "2026-11-23T01:49:15+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
