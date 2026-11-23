@@ -31058,7 +31058,7 @@
     "text": "Read claude/battle-architecture.md section 5 row 22, claude/bestiary-v11.md chapter 16, claude/battle-traits.md if present, and docs/BATTLE3.md (the section \"What stage 22a holds\" is the pattern for a chapter: a foes file, the switch, `B3_CH_ON(16)` wording in the scenes, a Lab fight, tips, one chapter test). Also read Tom's notes on the Milestone cards of the chapters before this one (t-b3s22ch11 for chapter 11, then the next ones as they appear; the notes and answers are on the cards), and any fix card they made. This session builds ONLY chapter 16 (The town square): Citation Slip (Hexer), The Square's Sign (Boss). Its monsters, bosses (and Julian Vance's fights where the scenes name them), formations and tips, as data in data/b3-foes-ch16.js (and data/b3-*.js where the rows belong), switched on Battle 3 for chapter 16 behind the BY CHAPTER switch (add 16 to `B3_STORY.chapters`, a `levelFloor` entry, tips), with one chapter test tools/ch16_b3_test.py written from tools/ch11_b3_test.py (add it to tools/night/tests.json). Citation Slips are helpers of The Square's Sign (Red-Tape Wall: calls up to 2, Guard Stance while they stand). Provisional numbers. Numbers are the bestiary's printed numbers; change one only if the simulator puts a fight outside its target, and say so in the card history. When chapter 16 is switched on, move the 'first chapter not switched' cases in tools/b3_story_test.py to chapter 17, run `node tools/guidegen/build_map.js`, and fix tools/battle_guide_test.py the way stage 22a did (a planned monster that is now built drops out; the fake-gain case uses a still-planned monster). Tests: node tools/b3-sim.js check, python3 tools/ch16_b3_test.py in portrait and landscape (LAYOUT=landscape), python3 tools/smoke.py, python3 -I tools/clip-audit/unused_voice.py (all 0). Look at the chapter's fights in portrait and landscape. Do not review or build animations. Never edit a recorded line: new Battle 3 wording goes in a `B3_CH_ON(16)` variant. Write the result into this card's history; set `after` to a Tom Milestone card for chapter 16 that this session creates (ask play, `jump` {chapter: 16}, fyi true, `next` naming the screen and what to judge). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukF5ozBCBFJDB1Fwtnw",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -31074,6 +31074,10 @@
      "d": "2026-11-22",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-23T04:01:06.381Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -32809,7 +32813,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-22",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFG7bgmaBRtJ8gCpzK",
+    "url": "https://claude.ai/code/session_01RXeukH6v1nJFP8pPYg3sw4",
     "opening": "not started"
    },
    "history": [
@@ -32830,6 +32834,10 @@
     {
      "d": "2026-11-22",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -33344,6 +33352,16 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukH6v1nJFP8pPYg3sw4",
+   "title": "Build the Guide worker and the picture line",
+   "first": "2026-11-23T04:04:05Z",
+   "last": "2026-11-23T04:04:05Z",
+   "tags": [],
+   "cards": [
+    "c-guideflow-3"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCePhzz1CQWD85xeEp",
    "title": "Build the one status file for Guide requests",
    "first": "2026-11-23T03:33:55Z",
@@ -33562,6 +33580,16 @@
    "tags": [],
    "cards": [
     "c-b3s23"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukF5ozBCBFJDB1Fwtnw",
+   "title": "Battle stage 22: chapter 16 on Battle 3",
+   "first": "2026-11-22T20:03:43-08:00",
+   "last": "2026-11-22T20:03:43-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3s22ch16"
    ]
   },
   {
@@ -39403,8 +39431,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "5224d0c49b5eca401177a38bf25f6ba4c31ec4d6",
- "synced_at": "2026-11-23T04:03:33+00:00",
+ "synced": "a6f8fec242994d7c1499d478723422dcbe86fc2c",
+ "synced_at": "2026-11-23T04:04:43+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
