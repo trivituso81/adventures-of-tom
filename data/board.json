@@ -33269,6 +33269,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGetLbtaFRaRwmppxP",
+   "title": "Battle stage 22: chapter 14 on Battle 3",
+   "first": "2026-11-22T16:36:12-08:00",
+   "last": "2026-11-22T16:36:12-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3s22ch14"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDUC51Qv6M77RXaRYL",
    "title": "Battle stage 22: chapter 13 on Battle 3",
    "first": "2026-11-22T14:15:21-08:00",
@@ -39043,8 +39053,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "05637fdc3d675da4d70656bf73d98e9fdb83780a",
- "synced_at": "2026-11-23T00:34:25+00:00",
+ "synced": "15eeb55b8ec9b10a82f7ce852f3861d195f165e4",
+ "synced_at": "2026-11-23T00:36:18+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
