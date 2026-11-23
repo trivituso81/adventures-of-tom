@@ -1,3 +1,30 @@
+## guideflow5 (2026-11-23): The Battle Guide page reads one status file and shows one status line per request
+
+Card c-guideflow-5, plan `claude/guide-flow-plan.md` section 10 step 5 (sections 3.2 D1, D2, D10, D13, all of section 5 except 5.5, rows X1 to X4 and X21, test T8). Only `battle-guide.html`, its test and `docs/BATTLE_GUIDE.md` changed. On screen: a family video or a person's start picture is now ONE tap that adds a row to `queue.json` on the branch `guideq` and pokes the worker; the row's status line (the plan's 5.1 words, with a counting clock) shows on its row in the list, in its sheet and in Activity and changes by itself, with no reload; Cancel (free) while queued; the take plays in the sheet the moment its row is done; a person's video buttons appear the moment their picture row is done; an Activity bar at the top of every screen. Monster videos keep their old button and path (card 8).
+
+Tested with stand-ins only (no paid run, no real fal, xAI or ElevenLabs call, no GitHub write): `tools/battle_guide_test.py` cases G1 to G12 (79 checks: every line of 5.1 in list, sheet and Activity in portrait and landscape; one tap one row and the poke; the slow line and the poke again once; in-place updates with the sheet, scroll, typed text and clip untouched; reload and second tab; the take plays when done; picture rows; Cancel and the refused cancel; two 409s; ETag and 304; X1, X2, X21; no word of reload, refresh or keep this page open). Looked at `tools/shots/guideflow-*.png` (list, Activity, queued, checking and ready sheets, Justin with and without a picture, the X21 bar, the stop box) in portrait and landscape. NOT looked at: a real iPhone, the real branch `guideq`, a real worker run (the first paid run is Tom's tap in card t-guideflow-phone).
+
+Calls made where the plan could not be followed to the letter, closest thing that keeps sections 3.2 and 4.3:
+
+| Plan | What the page does | Why |
+|---|---|---|
+| 5.1 done, video: Use this one, Make another, Keep the old one on the line | In the sheet, as the plan says. In the list and in Activity the same line shows one button, Open it, which opens the sheet | Use this one needs the take playing beside the current one; three decision buttons on a list row would let a tap decide without it |
+| Use this one writes `use: wanted` on the row | The button still goes the old way (`data/guide-use.json`); `qUseWanted` is built but no button calls it yet; the three `use` status lines show if a row carries one | The brief says card 7 turns it on |
+| Upload my own, Make all N missing poses | Not built | 5.5 is out of scope; the bulk button is another card |
+| failure words for X1 and X2 from `data/guide-words.json` | The plan's words in the page (the file has no X1 or X2) | The file starts at X5 |
+| A new Make button after a cancelled, live or left row | Added | Without it a cancelled row left the animation with no way to try again |
+| A monster's "Sent. Take n shows here when it is made." | Lost when the page is reloaded (it was kept in `aot-guide-pend`) | `GPEND` had to go; the take still appears when it is in `takes.json` |
+
+Removed: `loadProgress`, `stageOf`, `stageBadge`, `watchProgress`, `STAGE`, `STALL_MIN`, `PROG`, `queueLine`, `STARTING`, `askStart`, `doStart`, `waitTake`, `GPEND` (`aot-guide-pend`), `GKEPT` (`aot-guide-kept`, replaced by `left` on the row), the STALLED badge, the Yes, spend box for a family video, and every sentence that told Tom to reload. Nothing remains that reads `data/wan-requests.json`, `data/startpic-requests.json`, `status.json` or `startpic-results.json` from the page.
+
+Eight older checks in `tools/battle_guide_test.py` fail on the untouched HEAD as well and still fail (the page lists 670 animations and `data/guide-anims.json` 636, four sizes; What is coming twice; the page loads `engine/clip-ground.js`; the Plan counts 7, 554, 109 against 6, 520, 110). They are not this card's; `build_map.js` still writes 636.
+
+| What | Where |
+|---|---|
+| Reader, writer, status lines, Activity, rows, take, Needs the start picture | `battle-guide.html` |
+| Stand-in `queue.json` (ETag, 304, 409), dispatch, `startpics/` file; G1 to G12; the older flow checks rewritten | `tools/battle_guide_test.py` |
+| What the page does now | `docs/BATTLE_GUIDE.md` "The page and the queue (guideflow5)" |
+
 ## b3s22ch17 (2026-11-23): Chapter 17 (Julian's building) fights on the new battle: the Twin Lenses, the Curator, the Brass Desk Weight and the Pause Sprite
 
 Card c-b3s22ch17. Chapter 17 is on the BY CHAPTER list for Battle 3. One number changed: the boss's HP, printed 2,910 (2,180 for three), is 3,800 (2,850). Evidence: simulator (`--support=4`, Rank 2, level 42, Tom, Grace, Rose and Amy, 24 fights): at the printed HP it won in 4.43 rounds (8 fights), under the 5 to 7 a boss with a helper is aimed at; at 3,800 it averages 5.73 rounds (shortest 5.32, longest 6.22) and won every time. The two normal packs are the printed numbers: Curator with a Pause Sprite 4.7 rounds, Brass Desk Weight with a Pause Sprite 3.5.

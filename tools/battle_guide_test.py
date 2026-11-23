@@ -104,9 +104,40 @@ def action_use(doc):
     for r in doc['requests']:
         (bad if r['anim'] in ACT['fail'] else ok).append({'anim': r['anim'], 'name': 'x', 'rev': 'rev 2', 'notes': []} if r['anim'] not in ACT['fail'] else {'anim': r['anim'], 'why': 'the baker failed: no pictures'})
     ACT['use'] = {'at': 'now', 'reqs': [r['at'] for r in doc['requests']], 'tag': 'guideuse-1', 'done': ok, 'failed': bad}; ACT['usemiss'] = 1
+import datetime as _dt
+def iso(sec_ago=0): return (_dt.datetime.utcnow() - _dt.timedelta(seconds=sec_ago)).strftime('%Y-%m-%dT%H:%M:%SZ')
+# guideflow5: the stand-in for queue.json on the branch guideq (ETag and 304, compare and swap with 409, the repository dispatch). A test plays the worker by changing a row (wset).
+QS = {'doc': {'v': 1, 'items': {}}, 'sha': 'u0', 'etag': 'e0', 'n': 0, 'puts': [], 'reads': [], 'fail_get': False, 'fail_put': 0, 'conflict': 0, 'on_conflict': None, 'present': True}
+DISP = {'posts': [], 'fail': False}
+def q_bump(): QS['n'] += 1; QS['sha'] = 'u%d' % QS['n']; QS['etag'] = 'e%d' % QS['n']
+def qrow(rid, kind, **kw):
+    r = dict(id=rid, kind=kind, lane='', anim='', who='', take=0, route='', prompt='', promptRev=0, start='', note='', cap=0, at=iso(), state='queued', since=iso(), run=0, fal=None, tries=0, cost=0, why='', result=None, use=None, left=False, dry=False, replay='')
+    r['do'] = ''; r.update(kw); return r
 def jfile(doc): return json.dumps({'sha': 'g1', 'content': base64.b64encode(json.dumps(doc).encode()).decode()})
 def github(route):
     rq = route.request; url = rq.url.split('?')[0]; mpath = re.search(r'/contents/(.+)$', url); path = mpath.group(1) if mpath else ''
+    if url.endswith('/dispatches'):
+        DISP['posts'].append(json.loads(rq.post_data or '{}'))
+        return route.fulfill(status=500 if DISP['fail'] else 204, body='')
+    if path == 'queue.json':
+        hdr = {'ETag': QS['etag'], 'Access-Control-Expose-Headers': 'ETag'}
+        if rq.method == 'GET':
+            inm = rq.headers.get('if-none-match'); QS['reads'].append(inm)
+            if QS['fail_get']: return route.fulfill(status=500, body='{}')
+            if not QS['present']: return route.fulfill(status=404, body='{}')
+            if inm and inm == QS['etag']: return route.fulfill(status=304, headers=hdr, body='')
+            return route.fulfill(status=200, content_type='application/json', headers=hdr, body=json.dumps({'sha': QS['sha'], 'content': base64.b64encode(json.dumps(QS['doc']).encode()).decode()}))
+        body = json.loads(rq.post_data)
+        if QS['fail_put'] > 0: QS['fail_put'] -= 1; return route.fulfill(status=500, body='{}')
+        if QS['conflict'] > 0:
+            QS['conflict'] -= 1
+            if QS['on_conflict']: QS['on_conflict']()
+            q_bump(); return route.fulfill(status=409, body='{}')
+        if QS['present'] and body.get('sha') != QS['sha']: return route.fulfill(status=409, body='{}')
+        doc = json.loads(base64.b64decode(body['content']).decode()); QS['doc'] = doc; QS['present'] = True; QS['puts'].append({'msg': body['message'], 'doc': copy.deepcopy(doc)}); q_bump()
+        return route.fulfill(status=200, content_type='application/json', body=json.dumps({'content': {'sha': QS['sha']}}))
+    if path == 'startpics/justin-hero.png':
+        return route.fulfill(status=200, content_type='application/json', body=json.dumps({'sha': 'sp', 'content': base64.b64encode(open(os.path.join(ROOT, 'portraits', 'tom.png'), 'rb').read()).decode()}))
     if path in RQ:
         f = RQ[path]
         if rq.method == 'GET': return route.fulfill(status=200, content_type='application/json', body=json.dumps({'sha': f['sha'], 'content': base64.b64encode(json.dumps(f['doc']).encode()).decode()}))
@@ -223,7 +254,7 @@ with sync_playwright() as p:
         pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail .anim')
         pg.click('#detail [data-anim="move:suite_door_slide"]'); pg.wait_for_selector('#gprompt')
         t1 = pg.locator('#gen').inner_text()
-        check(name + ': a staged move with no video shows its body prompt, its ladder step and the price, and can be made (movestage1)', 'Prompt v1' in t1 and 'Skill 2' in t1 and '$0.50' in t1 and 'Cannot be made' not in t1 and 'Waits for staging' not in t1 and 'MOTION: SUITE DOOR SLIDE' in t1 and pg.locator('#ggen').count() == 1, t1[:300])
+        check(name + ': a staged move with no video shows its body prompt, its ladder step and the price, and can be made (movestage1)', 'Prompt v1' in t1 and 'Skill 2' in t1 and '$0.50' in t1 and 'Cannot be made' not in t1 and 'Waits for staging' not in t1 and 'MOTION: SUITE DOOR SLIDE' in t1 and pg.locator('#gq').count() == 1 and pg.locator('#ggen').count() == 0, t1[:300])
         pg.click('#bclose')
         pg.goto(URL + '#anims/grace'); pg.wait_for_selector('#detail .anim')
         pg.click('#detail [data-anim="move:glitter_brush_flick"]'); pg.wait_for_selector('#gstagewait')
@@ -232,8 +263,8 @@ with sync_playwright() as p:
         if name == 'folded': pg.screenshot(path=os.path.join(out, 'battleguide-%s-waits.png' % name))
         pg.click('#bclose')
         pg.goto(URL + '#anims/justin'); pg.wait_for_selector('#detail .anim')
-        pg.click('#detail .anim .play >> nth=0'); pg.wait_for_selector('#gcant')
-        check(name + ': someone with no start picture cannot be made, and the page says what is missing', 'start picture' in pg.locator('#gcant').inner_text() and 'Justin' in pg.locator('#gcant').inner_text(), pg.locator('#gcant').inner_text())
+        pg.click('#detail .anim .play >> nth=0'); pg.wait_for_selector('#gq .qline')
+        check(name + ': someone with no start picture cannot be made, and the sheet says "Needs the start picture first."', pg.locator('#gq .qline').first.inner_text() == 'Needs the start picture first.' and pg.locator('#gq [data-qa=make]').count() == 0, pg.locator('#gq').inner_text())
         pg.screenshot(path=os.path.join(out, 'battleguide-%s-cannot.png' % name))
         pg.click('#bclose')
         ids = pg.evaluate("[Object.keys(ANIM_BY).sort(), Object.keys(GUIDE.anims).sort()]")
@@ -316,109 +347,282 @@ with sync_playwright() as p:
     pg.fill('#gnote', 'a note'); n_before = len(reqs['puts']); pg.click('#gupd'); pg.wait_for_timeout(300)
     check('no token: nothing is sent and the page says why', 'token' in pg.locator('#gerr').inner_text().lower() and len(reqs['puts']) == n_before)
     pg.click('#bclose')
-    # guidegen1 (part 3): Generate (price first, second tap), the take beside the current video, Use / Try again / Keep
+    # ---- guideflow5: ONE reader and ONE writer of queue.json on the branch guideq (plan claude/guide-flow-plan.md sections 5 and 6, test T8: G1 to G12) ----
     pg.evaluate("localStorage.setItem('aot-gh-token','x')")
-    pg.goto(URL + '#anims/move:lounge_pass_flex'); pg.wait_for_selector('#ggen')
-    check('Generate shows the price on the button', '$0.50' in pg.locator('#ggen').inner_text(), pg.locator('#ggen').inner_text())
-    pg.wait_for_function("document.getElementById('gtk').textContent.indexOf('0')>0", timeout=20000)
-    check('the per-animation line shows takes made and dollars spent', pg.locator('#gtk').inner_text() == 'Takes made: 0' and pg.locator('#gsp').inner_text() == 'Spent: $0.00' and 'Prompt v' in pg.locator('#gmeta').inner_text(), pg.locator('#gmeta').inner_text())
-    pg.click('#ggen'); pg.wait_for_selector('#gconfbox')
-    check('the first tap only asks: it says what it will spend and sends nothing', 'This spends $0.50' in pg.locator('#gconfbox').inner_text() and not RQ['data/wan-requests.json']['puts'], pg.locator('#gconfbox').inner_text())
-    pg.click('#gcan'); check('Cancel sends nothing and clears the question', pg.locator('#gconfbox').count() == 0 and not RQ['data/wan-requests.json']['puts'])
-    pg.click('#ggen'); pg.click('#ggo'); pg.wait_for_selector('#gwait', timeout=20000)
-    wp = RQ['data/wan-requests.json']['puts']; r1 = wp[0]['doc']['requests'][-1] if wp else {}
-    check('the second tap commits one Wan request with the kept prompt, the start picture and a cap', len(wp) == 1 and wp[0]['msg'] == 'wan: generate move:lounge_pass_flex' and r1.get('slug') == 'move-lounge-pass-flex' and r1.get('take') == 1
-          and 'He does not blink.' in r1.get('prompt', '') and r1.get('start') == 'art/clips/start/tom-hero.png' and 0.5 <= r1.get('cap', 0) <= 1 and r1.get('at'), wp)
-    pg.wait_for_selector('#gtakecard', timeout=60000); pg.wait_for_function("(()=>{const n=document.getElementById('cvn'),c=document.getElementById('cvc');const dr=x=>{if(!x||x.width<10)return false;const d=x.getContext('2d').getImageData(0,0,x.width,x.height).data;for(let i=3;i<d.length;i+=4)if(d[i]>0)return true;return false};return dr(n)&&dr(c)})()", timeout=60000)
-    check('the take shows beside the current video and both draw', pg.locator('#cvn').count() == 1 and pg.locator('#cvc').count() == 1 and 'Now in the game' in pg.locator('#gtakecard').inner_text())
-    check('the gate says its result in plain words', 'nothing wrong' in pg.locator('#ggate').inner_text().lower() and 'hold' not in (pg.locator('#ggate').get_attribute('class') or ''), pg.locator('#ggate').inner_text())
-    check('the three buttons are there', [pg.locator(x).count() for x in ('#guse', '#gtry', '#gold')] == [1, 1, 1])
-    check('the line shows 1 take and the money spent so far', pg.locator('#gtk').inner_text() == 'Takes made: 1' and pg.locator('#gsp').inner_text() == 'Spent: $0.50', pg.locator('#gmeta').inner_text())
-    pg.screenshot(path=os.path.join(out, 'battleguide-take.png'))
+    LJ, CB, CT, WS, KC, TP, ZB, SD = 'move:lounge_pass_flex', 'move:cartridge_blow', 'move:controller_toss', 'move:winged_shell_lock_on', 'move:konami_code', 'move:tarmac_porsche_transfer', 'move:zone_one_blockade', 'move:suite_door_slide'
+    RIDS = {CB: 'a', CT: 'b', WS: 'w', KC: 'k', TP: 't', ZB: 'z', SD: 's', LJ: 'l', 'body:tom:idle': 'i', 'body:tom:guard': 'g', 'body:tom:hit': 'h'}
+    def q_reset(): QS['doc'] = {'v': 1, 'items': {}}; QS['present'] = True; q_bump()
+    def seed(rid, anim, **kw):
+        row = qrow(rid, 'video', lane='vid', anim=anim, who='tom', take=1, route='wan', prompt='p', cap=1); row.update(kw); QS['doc']['items'][rid] = row; q_bump(); return row
+    def wset(rid, **kw): QS['doc']['items'][rid].update(kw); q_bump()
+    def take1(anim, n=1):
+        t = [x for x in SNAP[(anim, n)]['takes'] if x['n'] == n][0]; r = {k: t.get(k) for k in ('js', 'img', 'frames', 'kb', 'words', 'gate')}; r['n'] = n; return r
+    LINES = "(sel)=>Object.fromEntries([...document.querySelectorAll(sel+' .qline[data-rid]')].map(e=>[e.dataset.rid,[e.querySelector('.qtext').firstChild.textContent,(e.querySelector('.qclock')||{}).textContent||'',[...e.querySelectorAll('button')].map(b=>b.textContent)]]))"
+    BADW = "(()=>{const t=(document.body.innerText||'').toLowerCase();return /reload|refresh|keep this page open/.test(t)})()"
+    def nowords(label): check('G12 ' + label + ': no "reload", "refresh" or "keep this page open" on the screen', not pg.evaluate(BADW), pg.evaluate("document.body.innerText")[:300])
+    def clock_ok(c, lo, hi): m = re.match(r'^(\d+):(\d\d)$', c or ''); return bool(m) and lo <= int(m.group(1)) * 60 + int(m.group(2)) <= hi
+    q_reset(); DISP['posts'].clear(); DISP['fail'] = False
+    pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail .anim'); pg.reload(); pg.wait_for_selector('#detail [data-qrow]'); pg.wait_for_timeout(600)
+    check('G2 the reader asked for queue.json on its own (no row yet: the file may not exist)', len(QS['reads']) >= 1)
+    # ---- G3 / X3: queued over 90 seconds with no worker: the slow line, and a poke again (once, then not for 2 minutes) ----
+    DISP['posts'].clear(); seed('w', WS, at=iso(100), since=iso(100)); pg.wait_for_function("document.querySelector('#detail .qline[data-rid=w]')", timeout=20000); pg.wait_for_timeout(2600)
+    check('G3 queued over 90 seconds with no worker: "Queued. GitHub is slow to start. It will start by itself."', pg.evaluate(LINES, '#detail')['w'][0] == 'Queued. GitHub is slow to start. It will start by itself.', pg.evaluate(LINES, '#detail'))
+    check('G3 and the page pokes the worker again once (not every second)', len(DISP['posts']) == 1 and DISP['posts'][0] == {'event_type': 'guide-work'}, DISP['posts'])
+    pg.wait_for_timeout(2200); check('G3 it does not poke again within 2 minutes', len(DISP['posts']) == 1, DISP['posts'])
+    QS['doc']['items'].pop('w'); q_bump(); pg.wait_for_function("document.querySelectorAll('#detail .qline[data-rid]').length==0", timeout=20000)
+    # ---- G1: every line of plan 5.1, word for word, in the list, the sheet and Activity ----
+    seed('a', CB, at=iso(40), since=iso(40)); seed('b', CT, at=iso(20), since=iso(20))
+    seed('k', KC, state='making', since=iso(70), at=iso(300)); seed('t', TP, state='checking', since=iso(20), at=iso(300))
+    seed('l', LJ, state='done', result=take1(LJ, 1), at=iso(300), since=iso(200), cost=.5)
+    seed('z', ZB, state='failed', why='The video hardly moves.', **{'do': 'Change the prompt, then tap Make another.'}, at=iso(300), since=iso(200))
+    seed('s', SD, state='cancelled', since=iso(5), at=iso(300))
+    seed('i', 'body:tom:idle', state='done', result=take1(LJ, 1), use={'state': 'applying', 'at': iso(65), 'since': iso(65), 'build': '', 'why': ''}, at=iso(300), since=iso(200))
+    seed('g', 'body:tom:guard', state='done', result=take1(LJ, 1), use={'state': 'live', 'at': iso(65), 'since': iso(65), 'build': 'guideuse-7', 'why': ''}, at=iso(300), since=iso(200))
+    seed('h', 'body:tom:hit', state='done', result=take1(LJ, 1), use={'state': 'failed', 'at': iso(65), 'since': iso(65), 'build': '', 'why': 'the baker failed: no pictures.'}, at=iso(300), since=iso(200))
+    pg.wait_for_function("document.querySelectorAll('#detail .qline[data-rid]').length>=10", timeout=20000)
+    EXPECT = {'a': ('Queued. Starts in under a minute.', None, ['Cancel (free)']), 'b': ('Queued. 1 ahead of it.', None, ['Cancel (free)']),
+              'k': ('Making the video. About 2 minutes. ', (60, 100), []), 't': ('Made. Checking it. About 1 minute. ', (10, 60), []), 'l': ('Ready. Watch it here.', None, ['Open it']),
+              'z': ('Failed: The video hardly moves. Change the prompt, then tap Make another.', None, ['Make another ($0.50)']), 's': ('Cancelled. Nothing was spent.', None, []),
+              'i': ('Putting it in the game. About 4 minutes. ', (60, 100), []), 'g': ('In the game (build guideuse-7). Close and reopen the game to see it.', None, []),
+              'h': ('Not in the game: the baker failed: no pictures. Tap Use this one again.', None, ['Open it'])}
+    def line_checks(where, sel):
+        L = pg.evaluate(LINES, sel); ok = True; bad = {}
+        for rid, (txt, clk, btns) in EXPECT.items():
+            g = L.get(rid)
+            if not g or g[0] != txt or (clk and not clock_ok(g[1], *clk)) or (not clk and g[1]): ok = False; bad[rid] = g
+        check('G1 %s: every line of 5.1 says its words exactly (queued, N ahead, making with a clock, checking, ready, failed, cancelled, putting it in the game, in the game, not in the game)' % where, ok, bad)
+        return L
+    L = line_checks('list (portrait)', '#detail')
+    check('G1 the list row keeps only the one action each state needs (Cancel (free) on queued rows)', L['a'][2] == ['Cancel (free)'] and L['k'][2] == [] and L['z'][2] == ['Make another ($0.50)'], L)
+    pg.screenshot(path=os.path.join(out, 'guideflow-list-portrait.png'))
+    nowords('the list')
+    pg.click('#actbar'); pg.wait_for_selector('#actlist .qline[data-rid]')
+    check('G1 Activity bar says 3 making, 2 queued, 2 ready', pg.locator('#actbar').inner_text() == '3 making, 2 queued, 2 ready', pg.locator('#actbar').inner_text())
+    LA = pg.evaluate(LINES, '#actlist')
+    check('G1 Activity shows the same line, word for word, as the list (all of the last 24 hours, the cancelled one still there)', {k: v[0] for k, v in LA.items()} == {k: v[0] for k, v in L.items()}, {k: v[0] for k, v in LA.items()})
+    names = pg.eval_on_selector_all('#actlist .qname', 'a=>a.map(x=>x.textContent)')
+    check('G1 Activity rows are named "Tom: <animation>" and listed newest first', names[:2] == ['Tom: Controller Toss', 'Tom: Cartridge Blow'] and all(x.startswith('Tom: ') for x in names), names)
+    pg.screenshot(path=os.path.join(out, 'guideflow-activity-portrait.png')); nowords('Activity')
+    pg.set_viewport_size({'width': 678, 'height': 445}); pg.wait_for_timeout(200)
+    LA2 = line_checks('Activity (landscape)', '#actlist')
+    check('G1 Activity fits the sheet in landscape', pg.evaluate("(()=>{const s=document.getElementById('sheet');return s.scrollWidth<=s.clientWidth+1&&document.documentElement.scrollWidth<=innerWidth+1})()"))
+    pg.screenshot(path=os.path.join(out, 'guideflow-activity-landscape.png'))
+    pg.click('#bclose'); pg.wait_for_timeout(150)
+    line_checks('list (landscape)', '#detail'); pg.evaluate("document.getElementById('detail').scrollTop=document.querySelector('#detail .anim').offsetTop-60"); pg.screenshot(path=os.path.join(out, 'guideflow-list-landscape.png'))
+    check('G1 the list fits in landscape', pg.evaluate("document.documentElement.scrollWidth<=innerWidth+1"))
+    pg.set_viewport_size({'width': 466, 'height': 657}); pg.wait_for_timeout(500); pg.wait_for_selector('#detail [data-qrow]')
+    # the same line in the sheet of an animation
+    pg.click('#detail [data-anim="%s"]' % KC); pg.wait_for_selector('#gq .qline[data-rid=k]')
+    LS = pg.evaluate(LINES, '#gq'); check('G1 the sheet shows the same line as the list for a making video', LS['k'][0] == EXPECT['k'][0] and clock_ok(LS['k'][1], 60, 100) and LS['k'][2] == [], LS)
+    pg.click('#bclose'); pg.click('#detail [data-anim="%s"]' % ZB); pg.wait_for_selector('#gq .qline[data-rid=z]')
+    check('G1 the sheet of a failed video: its words and the one button, Make another ($0.50)', pg.evaluate(LINES, '#gq')['z'][0] == EXPECT['z'][0] and pg.evaluate(LINES, '#gq')['z'][2] == ['Make another ($0.50)'])
+    pg.click('#bclose')
+    # 5.1 sheet buttons of a done video and of the three use lines
+    pg.click('#detail [data-anim="body:tom:hit"]'); pg.wait_for_selector('#gq .qline[data-rid=h]')
+    check('G1 not in the game: the sheet offers Use this one', pg.evaluate(LINES, '#gq')['h'][2] == ['Use this one'], pg.evaluate(LINES, '#gq'))
+    pg.click('#bclose')
+    # ---- G2: one tap adds one row and pokes ----
+    q_reset(); DISP['posts'].clear(); QS['puts'].clear()
+    pg.wait_for_function("document.querySelectorAll('#detail .qline[data-rid]').length==0", timeout=20000)
+    pg.click('#detail [data-anim="%s"]' % CB); pg.wait_for_selector('#gq [data-qa=make]')
+    bt = pg.locator('#gq [data-qa=make]').inner_text()
+    check('G2 a video with none yet: the button says Make this video ($0.50) and there is no "Yes, spend" box', bt == 'Make this video ($0.50)' and pg.locator('#gconfbox,#ggo').count() == 0 and 'yes, spend' not in pg.locator('#sheet').inner_text().lower(), bt)
+    prompt_shown = pg.locator('#gprompt').inner_text()
+    pg.click('#gq [data-qa=make]'); pg.wait_for_function("document.querySelector('#gq .qline[data-rid]')", timeout=20000)
+    r = list(QS['doc']['items'].values())[0] if QS['doc']['items'] else {}
+    check('G2 one tap saved ONE row with every field of the plan (id, kind, lane, route, anim, who, take, prompt, promptRev, start, pad, note, cap)',
+          len(QS['puts']) == 1 and r.get('id') == 'v-move-cartridge-blow-t1' and r.get('kind') == 'video' and r.get('lane') == 'vid' and r.get('route') == 'wan' and r.get('anim') == CB and r.get('who') == 'tom' and r.get('take') == 1
+          and r.get('prompt') == prompt_shown and r.get('start') == 'tom' and 0.5 <= r.get('cap', 0) <= 1 and r.get('state') == 'queued' and 'promptRev' in r and 'note' in r and r.get('at') and r.get('since'), (QS['puts'], r))
+    check('G2 the commit says what it is and skips the other workflows', QS['puts'][0]['msg'].startswith('guide: add v-move-cartridge-blow-t1') and '[skip ci]' in QS['puts'][0]['msg'], QS['puts'][0]['msg'])
+    check('G2 the page poked the worker once with the event guide-work', DISP['posts'] == [{'event_type': 'guide-work'}], DISP['posts'])
+    check('G2 the row says "Queued. Starts in under a minute." at once, with Cancel (free)', pg.evaluate(LINES, '#gq')['v-move-cartridge-blow-t1'][0:1] == ['Queued. Starts in under a minute.'] and pg.evaluate(LINES, '#gq')['v-move-cartridge-blow-t1'][2] == ['Cancel (free)'])
+    check('G2 the wan request file on main is no longer used (no commit to data/wan-requests.json)', not RQ['data/wan-requests.json']['puts'])
+    pg.screenshot(path=os.path.join(out, 'guideflow-queued-sheet.png')); nowords('the sheet of a queued video')
+    pg.click('#bclose')
+    # double tap (X4): one row
+    pg.click('#detail [data-anim="%s"]' % CT); pg.wait_for_selector('#gq [data-qa=make]'); QS['puts'].clear()
+    pg.evaluate("(()=>{const b=document.querySelector('#gq [data-qa=make]');b.click();b.click();})()"); pg.wait_for_function("document.querySelector('#gq .qline[data-rid]')", timeout=20000); pg.wait_for_timeout(600)
+    check('G2 two quick taps on the same button make one row (X4)', len(QS['puts']) == 1 and len([k for k in QS['doc']['items'] if 'controller-toss' in k]) == 1, [p['msg'] for p in QS['puts']])
+    # a poke that fails is not an error
+    pg.click('#bclose'); DISP['fail'] = True; pg.click('#detail [data-anim="%s"]' % KC); pg.wait_for_selector('#gq [data-qa=make]'); pg.click('#gq [data-qa=make]'); pg.wait_for_selector('#gq .qline[data-rid]')
+    check('G3 a poke that fails shows no error: the row is saved and queued', 'v-move-konami-code-t1' in QS['doc']['items'] and pg.locator('#gq .qerr').count() == 0, pg.locator('#sheet').inner_text()[:200]); DISP['fail'] = False
+    pg.click('#bclose')
+    # ---- G5: a row survives a reload and another tab ----
+    wset('v-move-cartridge-blow-t1', state='making', since=iso(30)); pg.wait_for_timeout(800)
+    pg.reload(); pg.wait_for_selector('#detail [data-qrow]'); pg.wait_for_function("document.querySelector('#detail [data-qrow=\"%s\"] .qline[data-rid]')" % CB, timeout=20000)
+    t1 = pg.evaluate(LINES, '#detail')['v-move-cartridge-blow-t1']
+    check('G5 after a reload the row says the same line and the clock still counts from the row', t1[0] == 'Making the video. About 2 minutes. ' and clock_ok(t1[1], 28, 80), t1)
+    pg2 = cx.new_page(); pg2.route('**/api.github.com/**', github); pg2.goto(URL + '#anims/tom'); pg2.wait_for_function("document.querySelector('#detail [data-qrow=\"%s\"] .qline[data-rid]')" % CB, timeout=20000)
+    t2 = pg2.evaluate(LINES, '#detail')['v-move-cartridge-blow-t1']
+    check('G5 a second tab shows the same line', t2[0] == t1[0] and clock_ok(t2[1], 28, 90), t2)
+    pg2.close()
+    # ---- G4 and G6: lounge (it has a video): the line changes where it stands, the take plays when done arrives ----
+    pg.click('#detail [data-anim="%s"]' % LJ); pg.wait_for_selector('#gq [data-qa=make]'); pg.wait_for_function("PL.D&&PL.on", timeout=30000)
+    pg.fill('#gnote', 'half typed note')
+    pg.evaluate("window.__m={cv:document.getElementById('cv'),ta:document.getElementById('gnote'),sh:document.getElementById('sheet'),gq:document.getElementById('gq')};document.getElementById('sheet').scrollTop=60;window.__m.top=document.getElementById('sheet').scrollTop;window.__m.t0=PL.t")
+    check('G4 the sheet has Make another ($0.50) for a move that already has a video', pg.locator('#gq [data-qa=make]').inner_text() == 'Make another ($0.50)')
+    pg.click('#gq [data-qa=make]'); pg.wait_for_selector('#gq .qline[data-rid=v-move-lounge-pass-flex-t1]')
+    ROW = 'v-move-lounge-pass-flex-t1'
+    def same_nodes(): return pg.evaluate("(()=>{const m=window.__m;return document.getElementById('cv')===m.cv&&document.getElementById('gnote')===m.ta&&document.getElementById('sheet')===m.sh&&document.getElementById('gq')===m.gq&&m.ta.value==='half typed note'&&m.sh.scrollTop===m.top&&PL.on===true&&PL.a&&PL.a.id==='%s'})()" % LJ)
+    def line_now(): return pg.evaluate(LINES, '#gq').get(ROW)
+    check('G4 queued line shows in the open sheet', line_now()[0].startswith('Queued.'), line_now())
+    wset(ROW, state='making', since=iso(2)); pg.wait_for_function("document.querySelector('#gq .qline[data-state=making]')", timeout=20000)
+    check('G4 queued becomes "Making the video." with no reload: the sheet, the typed text, the scroll and the playing clip are untouched', line_now()[0] == 'Making the video. About 2 minutes. ' and same_nodes())
+    wset(ROW, state='checking', since=iso(1)); pg.wait_for_function("document.querySelector('#gq .qline[data-state=checking]')", timeout=20000)
+    check('G4 making becomes "Made. Checking it." in place, nothing restarted', line_now()[0] == 'Made. Checking it. About 1 minute. ' and same_nodes())
+    t_before = pg.evaluate("PL.t"); pg.wait_for_timeout(500); t_after = pg.evaluate("PL.t")
+    check('G4 the clip in the sheet kept playing while the status changed', t_before != t_after or pg.evaluate("PL.on"))
+    pg.screenshot(path=os.path.join(out, 'guideflow-checking-sheet.png'))
+    wset(ROW, state='done', result=take1(LJ, 1), cost=.5, since=iso(0)); pg.wait_for_selector('#gtakecard', timeout=30000)
+    pg.wait_for_function("(()=>{const n=document.getElementById('cvn'),c=document.getElementById('cvc');const dr=x=>{if(!x||x.width<10)return false;const d=x.getContext('2d').getImageData(0,0,x.width,x.height).data;for(let i=3;i<d.length;i+=4)if(d[i]>0)return true;return false};return dr(n)&&dr(c)})()", timeout=60000)
+    check('G6 the take plays beside the current video the moment its row is done (both canvases draw)', pg.locator('#cvn').count() == 1 and pg.locator('#cvc').count() == 1 and 'take 1' in pg.locator('#gtakecard').inner_text().lower() and same_nodes(), (pg.locator('#cvn').count(), pg.locator('#cvc').count(), pg.locator('#gtakecard').inner_text()[:60], pg.evaluate("(()=>{const m=window.__m;return [document.getElementById('cv')===m.cv,document.getElementById('gnote')===m.ta,document.getElementById('sheet')===m.sh,document.getElementById('gq')===m.gq,m.ta.value,m.sh.scrollTop,m.top,PL.on]})()")))
+    check('G6 the line says "Ready. Watch it here." with Use this one, Make another ($0.50) and Keep the old one', line_now()[0] == 'Ready. Watch it here.' and line_now()[2] == ['Use this one', 'Make another ($0.50)', 'Keep the old one'], line_now())
+    check('G6 the take card has no second set of the three buttons (they are on the line)', pg.locator('#gtakecard #guse,#gtakecard #gold,#gtakecard #gtry').count() == 0)
+    pg.screenshot(path=os.path.join(out, 'guideflow-ready-sheet.png')); nowords('the sheet of a ready video')
     for nm, w, h, two in SIZES:
-        pg.set_viewport_size({'width': w, 'height': h}); pg.wait_for_timeout(120)
-        check(nm + ': the take comparison fits the sheet', pg.evaluate("(()=>{const s=document.getElementById('sheet'),c=document.getElementById('gtakecard').getBoundingClientRect(),r=s.getBoundingClientRect();return s.scrollWidth<=s.clientWidth+1&&c.right<=r.right+1&&c.left>=r.left-1&&document.documentElement.scrollWidth<=innerWidth+1})()"))
-    pg.set_viewport_size({'width': 466, 'height': 657}); pg.wait_for_timeout(600); pg.wait_for_selector('#gtakecard')   # folding the Duo re-draws the page (route)
-    pg.click('#gtry'); check('Try again with a note sends the person to the note box', 'what was wrong' in pg.locator('#gmsg').inner_text().lower() and pg.evaluate("document.activeElement.id==='gnote'"))
-    pg.fill('#gnote', 'He should smile and nod.'); pg.click('#gupd')
-    try: pg.wait_for_selector('#gnew', timeout=20000)
-    except Exception: print('DEBUG', repr(pg.locator('#gres').inner_text()), repr(pg.locator('#gerr').inner_text()), reqs['puts'][-2:], list(answers)); raise
-    pg.click('#gkeep'); pg.wait_for_selector('#gkept')
-    pg.click('#ggen'); pg.click('#ggo'); pg.wait_for_selector('#gwait', timeout=20000)
-    r2 = RQ['data/wan-requests.json']['puts'][-1]['doc']['requests'][-1]
-    check('the second try is take 2 and carries the note', r2['take'] == 2 and r2['note'].startswith('He should smile') and r2['promptRev'] is not None, r2)
-    pg.wait_for_function("document.querySelector('#ggate')&&document.querySelector('#gtakecard h3').textContent.indexOf('Take 2')>=0", timeout=60000)
+        pg.set_viewport_size({'width': w, 'height': h}); pg.wait_for_timeout(150)
+        pg.screenshot(path=os.path.join(out, 'guideflow-ready-%s.png' % nm))
+        check('G6 ' + nm + ': the ready sheet fits', pg.evaluate("(()=>{const s=document.getElementById('sheet'),c=document.getElementById('gtakecard');if(!c)return true;const b=c.getBoundingClientRect(),r=s.getBoundingClientRect();return s.scrollWidth<=s.clientWidth+1&&b.right<=r.right+1&&b.left>=r.left-1&&document.documentElement.scrollWidth<=innerWidth+1})()"))
+    pg.set_viewport_size({'width': 466, 'height': 657}); pg.wait_for_timeout(700); pg.wait_for_selector('#gtakecard')
+    # Keep the old one writes left on the row
+    pg.click('#gq [data-qa=left]'); pg.wait_for_function("document.getElementById('gleft')", timeout=20000)
+    check('G6 Keep the old one writes left on the row (one save) and the sheet says the take is on file', QS['doc']['items'][ROW]['left'] is True and 'is on file' in pg.locator('#gleft').inner_text() and pg.locator('#cvn').count() == 0, QS['doc']['items'][ROW])
+    check('G6 a row that was left is back to a Make another button and no status line', pg.locator('#gq [data-qa=make]').count() == 1 and pg.locator('#gq .qline[data-rid]').count() == 0)
+    pg.click('#bclose')
+    # ---- G8: Cancel ----
+    pg.click('#detail [data-anim="%s"]' % WS); pg.wait_for_selector('#gq [data-qa=make]'); pg.click('#gq [data-qa=make]'); pg.wait_for_selector('#gq [data-qa=cancel]')
+    QS['puts'].clear(); pg.click('#gq [data-qa=cancel]'); pg.wait_for_function("document.querySelector('#gq .qline[data-state=cancelled]')", timeout=20000)
+    cr = [v for k, v in QS['doc']['items'].items() if 'winged-shell' in k][0]
+    check('G8 Cancel (free) on a queued row changes it to cancelled in one save and says "Cancelled. Nothing was spent."', cr['state'] == 'cancelled' and len(QS['puts']) == 1 and pg.evaluate(LINES, '#gq')[cr['id']][0] == 'Cancelled. Nothing was spent.' and pg.evaluate(LINES, '#gq')[cr['id']][2] == [])
+    check('G8 after a cancel the Make button is back', pg.locator('#gq [data-qa=make]').count() == 1)
+    wset(cr['id'], since=iso(90)); pg.wait_for_function("document.querySelector('#gq .qline[data-rid]')===null", timeout=20000)
+    check('G8 a cancelled row leaves the screen after a minute', pg.locator('#gq .qline[data-rid]').count() == 0)
+    # the worker took it first: Cancel is refused, nothing changes
+    pg.click('#gq [data-qa=make]'); pg.wait_for_selector('#gq [data-qa=cancel]'); rid2 = [k for k, v in QS['doc']['items'].items() if 'winged-shell' in k and v['state'] == 'queued'][0]
+    def took():
+        QS['doc']['items'][rid2]['state'] = 'making'
+    QS['conflict'] = 1; QS['on_conflict'] = took; pg.click('#gq [data-qa=cancel]'); pg.wait_for_selector('#gq .qerr', timeout=20000)
+    check('G8 a cancel that comes after the worker started it is refused with a plain line and the row goes on', 'already started' in pg.locator('#gq .qerr').inner_text() and QS['doc']['items'][rid2]['state'] == 'making', pg.locator('#gq .qerr').inner_text())
+    QS['on_conflict'] = None; pg.click('#bclose')
+    # ---- G9: the writer's compare and swap; the reader's ETag ----
+    reads_before = len(QS['reads']); pg.wait_for_timeout(1500)
+    new_reads = QS['reads'][reads_before:]
+    check('G9 the reader sends If-None-Match with the last ETag and the stand-in answers 304 (no change)', len(new_reads) >= 2 and all(x for x in new_reads[-2:]), new_reads[-3:])
+    pg.click('#detail [data-anim="%s"]' % TP); pg.wait_for_selector('#gq [data-qa=make]'); QS['puts'].clear()
+    def other_writer(): QS['doc']['items']['v-other-t9'] = qrow('v-other-t9', 'video', lane='vid', anim='x', who='tom', take=9)
+    QS['conflict'] = 2; QS['on_conflict'] = other_writer; pg.click('#gq [data-qa=make]'); pg.wait_for_function("document.querySelector('#gq .qline[data-rid]')", timeout=20000)
+    check('G9 on two 409s the writer reads again and lands the row, and the other writer\'s row is still there', 'v-move-tarmac-porsche-transfer-t1' in QS['doc']['items'] and 'v-other-t9' in QS['doc']['items'] and len(QS['puts']) == 1, list(QS['doc']['items']))
+    QS['on_conflict'] = None
+    # take numbers: one above the highest in takes.json and in the queue
+    STATE['anims'][TP] = {'takes': [{'n': 3, 'status': 'failed', 'why': 'x', 'cost': .5, 'frames': 0, 'kb': 0, 'js': '', 'img': '', 'words': '', 'gate': None}], 'spent': 1.5, 'stop': False}
+    wset('v-move-tarmac-porsche-transfer-t1', state='failed', why='The video service returned no video. Nothing was spent.', **{'do': 'Tap Try again.'}); pg.wait_for_selector('#gq [data-qa=again],#gq [data-qa=retry]', timeout=20000)
+    check('G9 a failed row offers Try again and the line says why and what to do', pg.evaluate(LINES, '#gq')['v-move-tarmac-porsche-transfer-t1'][0] == 'Failed: The video service returned no video. Nothing was spent. Tap Try again.' and pg.locator('#gq [data-qa=retry]').inner_text() == 'Try again ($0.50)')
+    QS['puts'].clear(); pg.click('#gq [data-qa=retry]'); pg.wait_for_function("document.querySelector('#gq .qline[data-state=queued]')", timeout=20000)
+    check('G9 the new take number is one above the highest in takes.json (3) and in the queue: Try again is take 4 with the same prompt', 'v-move-tarmac-porsche-transfer-t4' in QS['doc']['items'] and QS['doc']['items']['v-move-tarmac-porsche-transfer-t4']['prompt'] == QS['doc']['items']['v-move-tarmac-porsche-transfer-t1']['prompt'], list(QS['doc']['items']))
+    pg.click('#bclose'); del STATE['anims'][TP]
+    # ---- G10: X1 and X2 ----
+    pg.click('#detail [data-anim="%s"]' % ZB); pg.wait_for_selector('#gq [data-qa=make]'); QS['puts'].clear(); QS['fail_put'] = 1; pg.click('#gq [data-qa=make]'); pg.wait_for_selector('#gq .qerr', timeout=20000)
+    check('G10 X1: a save that fails says "Could not send. Nothing was made. Tap again." at the button and queues nothing', pg.locator('#gq .qerr').inner_text() == 'Could not send. Nothing was made. Tap again.' and not [k for k in QS['doc']['items'] if 'zone-one' in k], pg.locator('#gq .qerr').inner_text())
+    pg.click('#gq [data-qa=make]'); pg.wait_for_selector('#gq .qline[data-rid]', timeout=20000)
+    check('G10 X1: Tap again works', any('zone-one' in k for k in QS['doc']['items']))
+    pg.click('#bclose'); pg.evaluate("localStorage.removeItem('aot-gh-token')"); pg.reload(); pg.wait_for_selector('#detail [data-qrow]'); pg.click('#detail [data-anim="body:tom:idle"]'); pg.wait_for_selector('#gq [data-qa=make]')
+    QS['puts'].clear(); pg.click('#gq [data-qa=make]'); pg.wait_for_selector('#gq .qerr', timeout=20000)
+    check('G10 X2: no token says the plan\'s words and saves nothing', pg.locator('#gq .qerr').inner_text() == 'This browser is not signed in to GitHub. Open the Board, tap the three dots, paste the token, then come back.' and not QS['puts'], pg.locator('#gq .qerr').inner_text())
+    pg.click('#bclose'); pg.evaluate("localStorage.setItem('aot-gh-token','x')"); pg.reload(); pg.wait_for_selector('#detail [data-qrow]')
+    # ---- G7: a person with no start picture (Justin): Needs the start picture first, the picture row, the video buttons appear when it is done ----
+    q_reset(); QS['puts'].clear(); DISP['posts'].clear()
+    pg.goto(URL + '#anims/justin'); pg.wait_for_selector('#detail [data-qtop]'); pg.wait_for_selector('#detail [data-qa=pic]', timeout=20000)
+    check('G7 the top of the screen offers Make the start picture ($0.15)', pg.locator('#detail [data-qa=pic]').inner_text() == 'Make the start picture ($0.15)')
+    ntxt = pg.eval_on_selector_all('#detail .anim .qline .qtext', 'a=>a.map(x=>x.textContent)')
+    check('G7 every video row says "Needs the start picture first." and has no video button', len(ntxt) >= 5 and all(x == 'Needs the start picture first.' for x in ntxt) and pg.locator('#detail .anim [data-qa=make]').count() == 0, ntxt[:3])
+    pg.screenshot(path=os.path.join(out, 'guideflow-justin-nopicture.png')); nowords('a person with no start picture')
+    pg.click('#detail [data-qa=pic]'); pg.wait_for_selector('#detail [data-qtop] .qline[data-rid]', timeout=20000)
+    pr = list(QS['doc']['items'].values())[0]
+    check('G7 one tap saved one picture row (id p-justin-<seconds>, kind picture, lane pic, cap 0.3) and poked the worker', len(QS['puts']) == 1 and re.match(r'^p-justin-\d+$', pr['id']) and pr['kind'] == 'picture' and pr['lane'] == 'pic' and pr['who'] == 'justin' and pr['cap'] == 0.3 and DISP['posts'] == [{'event_type': 'guide-work'}], (QS['puts'], DISP['posts']))
+    PID = pr['id']; top = lambda: pg.evaluate(LINES, '#detail [data-qtop]')[PID]
+    check('G7 queued picture line and the video rows still wait', top()[0] == 'Queued. Starts in under a minute.' and top()[2] == ['Cancel (free)'] and pg.locator('#detail .anim [data-qa=make]').count() == 0)
+    wset(PID, state='making', since=iso(42)); pg.wait_for_function("document.querySelector('#detail [data-qtop] .qline[data-state=making]')", timeout=20000)
+    check('G7 making the picture: "Making the picture. About 1 minute." with a clock', top()[0] == 'Making the picture. About 1 minute. ' and clock_ok(top()[1], 40, 90), top())
+    wset(PID, state='checking', since=iso(5)); pg.wait_for_function("document.querySelector('#detail [data-qtop] .qline[data-state=checking]')", timeout=20000)
+    check('G7 the picture is checked: "Made. Checking it. About 1 minute."', top()[0] == 'Made. Checking it. About 1 minute. ')
+    wset(PID, state='done', result={'path': 'startpics/justin-hero.png', 'mirrored': False, 'own': False, 'checks': [], 'main': False}, cost=.15, since=iso(0))
+    pg.wait_for_function("document.querySelectorAll('#detail .anim [data-qa=make]').length>=5", timeout=20000)
+    check('G7 the moment the picture row is done every video row has its button, with no reload', pg.locator('#detail .anim [data-qa=make]').count() >= 5 and 'Needs the start picture first.' not in pg.locator('#detail').inner_text(), pg.locator('#detail .anim').first.inner_text())
+    check('G7 the picture row says "Start picture ready." with Make another ($0.15)', top()[0] == 'Start picture ready.' and top()[2] == ['Make another ($0.15)'], top())
+    pg.wait_for_function("(()=>{const i=document.querySelector('#detail [data-qtop] img');return i&&i.complete&&i.naturalWidth>0})()", timeout=20000)
+    check('G7 the start picture at the top is read from branch guidegen (startpics/justin-hero.png) and shown', 'blob:' in pg.get_attribute('#detail [data-qtop] img', 'src'))
+    pg.screenshot(path=os.path.join(out, 'guideflow-justin-picture-ready.png')); nowords('Justin with a start picture')
+    wset(PID, result={'path': 'startpics/justin-hero.png', 'mirrored': True, 'own': False, 'checks': [], 'main': False}); pg.wait_for_function("document.querySelector('#detail [data-qtop] .qtext').textContent.indexOf('flipped')>0", timeout=20000)
+    check('G7 a mirrored picture says so in the plan\'s words', top()[0] == 'Start picture ready. It faced right, so it was flipped. Lettering and anything worn on one side are now reversed.', top())
+    wset(PID, state='failed', why='The picture faced the wrong way twice.', **{'do': 'Make another.'}); pg.wait_for_function("document.querySelector('#detail [data-qtop] .qline[data-state=failed]')", timeout=20000)
+    check('G7 a failed picture shows Failed: and one button, Make another ($0.15)', top()[0] == 'Failed: The picture faced the wrong way twice. Make another.' and top()[2] == ['Make another ($0.15)'], top())
+    # a person whose picture is on main (Tom): video buttons at once
+    pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail [data-qa=make]')
+    check('G7 a person whose start picture is on main has video buttons at once', pg.locator('#detail [data-qa=make]').count() >= 5 and pg.locator('#detail [data-qa=pic]').count() == 0)
+    # ---- G11: X21 and every tab ----
+    q_reset(); seed('a', CB, state='making', since=iso(10), at=iso(10))
+    pg.goto(URL + '#family'); pg.wait_for_selector('#list .row'); pg.wait_for_function("document.getElementById('actbar')&&!document.getElementById('actbar').hidden&&document.getElementById('actbar').textContent==='1 making'", timeout=20000)
+    check('G11 the Activity bar shows on every screen, not only Animations (here Family): "1 making"', pg.locator('#actbar').inner_text() == '1 making')
+    QS['fail_get'] = True; pg.wait_for_selector('#qbar:not([hidden])', timeout=20000)
+    check('G11 X21: after three failed reads the bar says "Cannot read the status right now. Trying again." and the old rows stay, greyed', pg.locator('#qbar').inner_text() == 'Cannot read the status right now. Trying again.' and 'qgrey' in pg.evaluate("document.body.className") and pg.locator('#actbar').is_visible())
+    pg.screenshot(path=os.path.join(out, 'guideflow-x21.png')); nowords('the X21 bar')
+    QS['fail_get'] = False; pg.wait_for_selector('#qbar', state='hidden', timeout=20000)
+    check('G11 X21: the bar goes away by itself when the read works again', 'qgrey' not in pg.evaluate("document.body.className"))
+    # the page coming back to the front reads at once
+    r0 = len(QS['reads']); pg.evaluate("document.dispatchEvent(new Event('visibilitychange'))"); pg.wait_for_timeout(250)
+    check('G11 the page reads at once when it becomes visible again', len(QS['reads']) > r0)
+    # ---- G12: the old status code and keys are gone, the page never tells him to reload ----
+    src = open(os.path.join(ROOT, 'battle-guide.html'), encoding='utf-8').read()
+    gone = [w for w in ('loadProgress', 'stageOf', 'stageBadge', 'watchProgress', 'STALL_MIN', 'queueLine', 'STARTING', 'GPEND', 'aot-guide-pend', 'aot-guide-kept', 'GKEPT', 'waitTake', 'STALLED') if w in src]
+    check('G12 the old status code is gone (loadProgress, stageOf, stageBadge, watchProgress, STAGE, STALL_MIN, PROG, queueLine, STARTING, waiting loops, GPEND, STALLED, GKEPT)', not gone and not re.search(r'\bSTAGE\b|\bPROG\b', src), gone)
+    check('G12 no word of reload, refresh or keep this page open is in the page text of the file', not re.search(r'[Rr]eload|keep this page open|[Rr]efresh the', re.sub(r"//[^\n]*|/\*.*?\*/", '', src, flags=re.S).replace('RELOAD', '')) , [m for m in re.findall(r'.{30}[Rr]eload.{30}', src)][:3])
+    ls = pg.evaluate("Object.keys(localStorage)")
+    check('G12 the page keeps no pending or kept request in this browser any more', 'aot-guide-pend' not in ls and 'aot-guide-kept' not in ls, ls)
+    # ---- the stop-loss box stays: a third try with nearly the same note stops ----
+    q_reset(); QS['puts'].clear()
+    pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail [data-qa=make]')
+    for k in range(2):
+        pg.click('#detail [data-anim="%s"]' % CT); pg.wait_for_selector('#gnote'); pg.fill('#gnote', 'He should smile and nod.'); pg.click('#gupd'); pg.wait_for_selector('#gnew', timeout=20000); pg.click('#gkeep'); pg.wait_for_selector('#gkept')
+        if k == 0: pg.click('#gq [data-qa=make]'); pg.wait_for_selector('#gq .qline[data-rid]', timeout=20000); rid = [x for x in QS['doc']['items']][-1]; wset(rid, state='done', result=take1(LJ, 1), cost=.5)
+        else:
+            pg.wait_for_selector('#gq [data-qa=again]', timeout=20000); n_puts = len(QS['puts']); pg.click('#gq [data-qa=again]'); pg.wait_for_selector('#gq .qerr', timeout=20000)
+            check('G12 a try with nearly the same note as the last stops: nothing is saved and the line says Stop here', len(QS['puts']) == n_puts and pg.locator('#gq .qerr').inner_text().startswith('Stop here.') and 'nearly the same' in pg.locator('#gq .qerr').inner_text(), pg.locator('#gq .qerr').inner_text())
+            check('G12 the stop box offers Ask Claude with the notes filled in', 'Two tries missed' in pg.locator('#ntxt').input_value())
+        pg.click('#bclose')
+    pg.screenshot(path=os.path.join(out, 'guideflow-stop.png'))
+    # ---- an older take that has no row (takes.json only): the take card keeps its own buttons, Use this one goes the old way until card 7, Keep the old one is remembered in this page ----
+    q_reset(); STATE['anims'][LJ] = copy.deepcopy(SNAP[(LJ, 2)])
+    pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail .anim'); pg.click('#detail [data-anim="%s"]' % LJ); pg.wait_for_selector('#gtakecard', timeout=30000)
+    check('an older take with no row shows its take card with the three buttons', [pg.locator(x).count() for x in ('#guse', '#gtry', '#gold')] == [1, 1, 1] and 'take 2' in pg.locator('#gtakecard h3').inner_text().lower())
     check('a take the gate held says so in the warning colour', 'hold' in (pg.locator('#ggate').get_attribute('class') or '') and 'flags' in pg.locator('#ggate').inner_text(), pg.locator('#ggate').inner_text())
-    pg.click('#gtry'); pg.fill('#gnote', 'He should smile and nod.'); pg.click('#gupd'); pg.wait_for_selector('#gnew', timeout=20000); pg.click('#gkeep'); pg.wait_for_selector('#gkept')
-    n_puts = len(RQ['data/wan-requests.json']['puts']); pg.click('#ggen'); pg.wait_for_selector('#gstop', timeout=20000)
-    check('a third try with nearly the same note stops, sends nothing and offers Ask Claude', len(RQ['data/wan-requests.json']['puts']) == n_puts and 'nearly the same' in pg.locator('#gstop').inner_text() and 'Two tries missed' in pg.locator('#ntxt').input_value(), pg.locator('#gstop').inner_text())
-    pg.screenshot(path=os.path.join(out, 'battleguide-stop.png'))
-    pg.click('#bclose')
-    # two takes held for the same fault: the stop shows by itself, with no Generate possible
-    pg.goto(URL + '#anims/move:suite_door_slide'); pg.wait_for_selector('#gstop', timeout=20000)
-    check('an animation whose last two takes were held for one fault is stopped when opened', 'same fault' in pg.locator('#gstop').inner_text() and pg.locator('#gtk').inner_text() == 'Takes made: 2', pg.locator('#gstop').inner_text())
-    pg.click('#ggen'); pg.wait_for_selector('#gstop'); check('Generate on a stopped animation sends nothing', not [x for x in RQ['data/wan-requests.json']['puts'] if 'suite_door_slide' in x['msg']])
-    pg.click('#bclose')
-    # Use this one: a question first, then a request, then the answer of the job
-    pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail .anim'); pg.click('#detail [data-anim="move:lounge_pass_flex"]'); pg.wait_for_selector('#gtakecard', timeout=30000)
-    pg.wait_for_function("document.querySelector('#gtakecard h3').textContent.indexOf('Take 2')>=0")
-    check('opening the sheet again shows the latest take', 'take 2' in pg.locator('#gtakecard h3').inner_text().lower(), pg.locator('#gtake').inner_text())
     pg.click('#guse'); pg.wait_for_selector('#guseyes')
     check('Use this one asks first and says it changes the game', 'changes the game' in pg.locator('#guseconf').inner_text() and not RQ['data/guide-use.json']['puts'])
     pg.click('#guseyes'); pg.wait_for_selector('#gused', timeout=30000)
     up = RQ['data/guide-use.json']['puts']; ur = up[0]['doc']['requests'][-1] if up else {}
-    check('Use commits the take number and the prompt it was made from', len(up) == 1 and up[0]['msg'] == 'guide: use move:lounge_pass_flex' and ur.get('take') == 2 and ur.get('prompt') == 'the prompt of take 2' and ur.get('at'), up)
-    check('the page says it is in the game and what to do next', 'in the game now' in pg.locator('#gused').inner_text().lower() and 'reload' in pg.locator('#gused').inner_text().lower(), pg.locator('#gused').inner_text())
+    check('Use commits the take number and the prompt it was made from', len(up) == 1 and up[0]['msg'] == 'guide: use ' + LJ and ur.get('take') == 2 and ur.get('prompt') == 'the prompt of take 2' and ur.get('at'), up)
+    check('the page says it is in the game and what to do next, without the word reload', 'in the game now' in pg.locator('#gused').inner_text().lower() and 'close and reopen the game' in pg.locator('#gused').inner_text().lower() and 'reload' not in pg.locator('#gused').inner_text().lower(), pg.locator('#gused').inner_text())
     pg.click('#bclose')
-    ACT['fail'].add('move:lounge_pass_flex'); ACT['use'] = None
-    pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail .anim'); pg.click('#detail [data-anim="move:lounge_pass_flex"]')
-    try: pg.wait_for_selector('#guse', timeout=30000)
-    except Exception: print('DEBUG2', repr(pg.locator('#gtake').inner_text()), pg.locator('#gmeta').inner_text(), GKEPT_DEBUG if False else ''); raise
-    pg.click('#guse'); pg.click('#guseyes')
-    try: pg.wait_for_selector('#gusefail', timeout=30000)
-    except Exception: print('DEBUG', pg.locator('#gtake').inner_text(), ACT['use'], RQ['data/guide-use.json']['puts'][-1:]); raise
+    ACT['fail'].add(LJ); ACT['use'] = None
+    pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail .anim'); pg.click('#detail [data-anim="%s"]' % LJ); pg.wait_for_selector('#guse', timeout=30000)
+    pg.click('#guse'); pg.click('#guseyes'); pg.wait_for_selector('#gusefail', timeout=30000)
     check('a use that failed says why and says nothing changed', 'baker failed' in pg.locator('#gusefail').inner_text() and 'nothing in the game changed' in pg.locator('#gusefail').inner_text().lower(), pg.locator('#gusefail').inner_text())
     pg.click('#bclose')
-    # Keep the old one
-    pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail .anim'); pg.click('#detail [data-anim="move:lounge_pass_flex"]'); pg.wait_for_selector('#gold', timeout=30000); pg.click('#gold')
-    check('Keep the old one leaves the take on file and stops the players', 'Left as it is' in pg.locator('#gleft').inner_text() and pg.locator('#cvn').count() == 0)
+    pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail .anim'); pg.click('#detail [data-anim="%s"]' % LJ); pg.wait_for_selector('#gold', timeout=30000); pg.click('#gold')
+    check('Keep the old one on an older take leaves it on file and stops the players', 'is on file' in pg.locator('#gleft').inner_text() and pg.locator('#cvn').count() == 0)
+    pg.click('#bclose'); del STATE['anims'][LJ]
+    pg.goto(URL + '#anims/' + SD); pg.wait_for_selector('#gstop', timeout=20000)
+    check('an animation whose last two takes were held for one fault is stopped when opened', 'same fault' in pg.locator('#gstop').inner_text() and pg.locator('#gtk').inner_text() == 'Takes made: 2', pg.locator('#gstop').inner_text())
+    n_q = len(QS['puts']); pg.click('#gq [data-qa=make]'); pg.wait_for_selector('#gq .qerr'); check('a stopped animation: Make sends nothing', len(QS['puts']) == n_q and pg.locator('#gq .qerr').inner_text().startswith('Stop here.'))
     pg.click('#bclose')
-    # a monster goes to the other request file
+    # a monster keeps its old button and its old path (card 8 moves it)
     pg.goto(URL + '#anims/act:skeeter:darting_bite'); pg.wait_for_selector('#ggen')
-    check('a monster animation shows its own price', '$0.07' in pg.locator('#ggen').inner_text(), pg.locator('#ggen').inner_text())
-    pg.click('#ggen'); pg.click('#ggo'); pg.wait_for_selector('#gtakecard', timeout=60000)
+    check('a monster animation shows its own price and no start picture block', '$0.07' in pg.locator('#ggen').inner_text() and pg.locator('#gq').count() == 0, pg.locator('#ggen').inner_text())
+    pg.click('#ggen'); pg.wait_for_selector('#gconfbox'); pg.click('#ggo'); pg.wait_for_selector('#gwait', timeout=20000); pg.wait_for_selector('#gtakecard', timeout=60000)
     cp = RQ['data/clip-requests.json']['puts']; cr = cp[0]['doc']['requests'][-1] if cp else {}
     check('a monster request goes to the clip-gen request file with a guide field, not the Library', len(cp) == 1 and cp[0]['msg'] == 'clip: generate guide act:skeeter:darting_bite' and cr.get('id') == 'guide-act-skeeter-darting-bite-t1'
           and cr['guide']['anim'] == 'act:skeeter:darting_bite' and cr['guide']['take'] == 1 and cr['guide']['clip']['owner'] == 'skeeter' and cr['guide']['clip']['model'] == 'grok-imagine-video-1.5-lite' and cr['guide']['clip']['kind'] == 'strike' and cr['cap'] <= 0.5, cp)
     check('a monster with no video has a standard-motion side to compare', 'standard motion' in pg.locator('#gtakecard').inner_text().lower() or 'Now in the game' in pg.locator('#gtakecard').inner_text())
     pg.click('#bclose')
-    # guidestatus1: the list shows where each new video is
-    import datetime as _dt
-    ago = lambda m: (_dt.datetime.utcnow() - _dt.timedelta(minutes=m)).strftime('%Y-%m-%dT%H:%M:%SZ')
-    RQ['data/wan-requests.json']['doc'] = {'requests': [{'anim': 'move:konami_code', 'take': 1, 'at': 'x'}]}; RQ['data/wan-requests.json']['sha'] = 'qq'
-    STATUS['anims'] = {'move:cartridge_blow': {'take': 1, 'stage': 'line', 'at': ago(0)}, 'move:controller_toss': {'take': 1, 'stage': 'making', 'at': ago(3)},
-                       'move:winged_shell_lock_on': {'take': 1, 'stage': 'checking', 'at': ago(1)}, 'move:lounge_pass_flex': {'take': 1, 'stage': 'checking', 'at': ago(9)}}
-    pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail .anim')
-    pg.wait_for_function("document.querySelectorAll('#detail [data-stage]').length>=5", timeout=20000)
-    st = pg.evaluate("Object.fromEntries([...document.querySelectorAll('#detail .anim')].map(r=>[r.querySelector('b').textContent,(r.querySelector('[data-stage]')||{}).textContent||(r.querySelector('.badge')||{}).textContent]))")
-    check('REQUESTED: a request still on main', st.get('Konami Code', '').startswith('REQUESTED'), st)
-    check('IN LINE: the service has it waiting', st.get('Cartridge Blow') == 'IN LINE', st)
-    check('MAKING with the minutes since it started', st.get('Controller Toss') == 'MAKING · 3 MIN', st)
-    check('CHECKING: the video is back', st.get('Winged Shell Lock-On', '').startswith('CHECKING'), st)
-    check('READY TO REVIEW: a take nobody used or kept', st.get('Suite Door Slide') == 'READY TO REVIEW', st)
-    check('a stage older than the newest take does not show (the take is there), a kept take is not ready', st.get('Lounge Pass Flex') == 'VIDEO', st)
-    check('a stage replaces VIDEO / NO VIDEO YET on its row', pg.evaluate("[...document.querySelectorAll('#detail .anim')].every(r=>!(r.querySelector('[data-stage]')&&/VIDEO/.test([...r.querySelectorAll('.badge:not([data-stage])')].map(b=>b.textContent).join(''))))"))
-    pg.click('#detail [data-af=work]'); pg.wait_for_timeout(200)
-    check('In the works lists only animations with a stage', pg.locator('#detail .anim').count() == 5, pg.locator('#detail .anim').count())
-    STATUS['anims']['move:cartridge_blow']['stage'] = 'making'
-    pg.wait_for_function("[...document.querySelectorAll('#detail .anim')].some(r=>r.textContent.indexOf('Cartridge Blow')>=0&&r.querySelector('[data-stage=making]'))", timeout=20000)
-    check('the list updates by itself when a stage moves', True)
-    pg.screenshot(path=os.path.join(out, 'battleguide-stages.png'))
-    for nm, w, h, two in SIZES:
-        pg.set_viewport_size({'width': w, 'height': h}); pg.wait_for_timeout(150)
-        check(nm + ': the stage badges fit', pg.evaluate("document.documentElement.scrollWidth<=innerWidth+1"))
-    pg.set_viewport_size({'width': 466, 'height': 657}); pg.click('#detail [data-af=all]')
-    RQ['data/wan-requests.json']['doc'] = {'requests': []}; STATUS['anims'] = {}
     # no token
     pg.evaluate("localStorage.removeItem('aot-gh-token')"); pg.goto(URL + '#anims/move:suite_door_slide'); pg.reload(); pg.goto(URL + '#anims/act:skeeter:darting_bite'); pg.wait_for_selector('#ggen')
     n_all = sum(len(f['puts']) for f in RQ.values()); pg.click('#ggen'); pg.wait_for_timeout(200)

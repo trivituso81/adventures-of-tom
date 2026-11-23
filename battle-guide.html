@@ -35,6 +35,18 @@ a.bpill{flex:0 1 auto;min-width:0;max-width:100%;overflow:hidden;text-overflow:e
 @media (max-width:480px){header{gap:6px;padding-left:12px}header h1{font-size:18px}header .brand{gap:6px}header a.hb[href="battle-lab.html"]{display:none}header #bsearch{font-size:0;min-width:44px;padding:0}header #bsearch::before{content:"\1F50D";font-size:17px}a.bpill{padding:3px 9px;font-size:12px}}
 a.bpill:active{opacity:.7}a.bpill[hidden]{display:none}
 header a.hb,header button.hb{flex:none;display:flex;align-items:center;justify-content:center;min-width:44px;height:44px;padding:0 10px;border-radius:12px;background:var(--surface);border:1px solid var(--line);font-weight:700;text-decoration:none;font-size:14px}
+#actbar,#qbar{flex:none;display:block;width:100%;text-align:left;border-radius:0;min-height:36px;padding:7px 14px;font-size:14px;font-weight:700}
+#actbar{background:var(--accent);color:var(--on-accent)}
+#qbar{background:#2a1519;color:var(--prob-text);border-bottom:1px solid var(--prob)}
+.qline{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:6px 0;font-size:14px;color:var(--text)}
+.qline.bad .qtext{color:var(--prob-text)}.qline.good .qtext{color:var(--good)}
+.qtext{flex:1 1 170px;min-width:0}.qclock{font-variant-numeric:tabular-nums;font-weight:800}
+.qbtns{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0}.qbtns button,.qline button{min-height:44px;padding:8px 12px;font-size:14px}
+.qerr{font-size:14px;margin:4px 0}.qsub{font-size:12px;color:var(--muted)}
+body.qgrey .qline,body.qgrey .qpic{opacity:.5}
+.qpic{display:flex;gap:12px;align-items:flex-start;margin:8px 0}.qpic img,.qpic .ph{flex:none;width:64px;height:64px;border-radius:12px;object-fit:cover;object-position:top;background:var(--well);display:flex;align-items:center;justify-content:center;font-weight:800}
+.qpb{flex:1 1 auto;min-width:0}.qtop{margin:12px 0}
+.qact .qname{background:none;color:var(--text);padding:0;min-height:36px;font-weight:800;text-align:left;font-size:15px}
 #tabs{flex:none;display:flex;gap:4px;padding:6px 8px calc(6px + env(safe-area-inset-bottom));background:var(--well);border-top:1px solid var(--line);order:9}
 #tabs button{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;min-height:50px;background:none;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.02em;border-radius:10px}
 #tabs button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -179,6 +191,7 @@ a.play.fight{background:var(--surface);border:1px solid var(--accent);color:var(
  <a class="hb" href="battle-lab.html" title="Open the Battle Lab">Lab</a>
  <a class="hb" href="admin.html" title="Back to Admin">Admin</a>
 </header>
+<button type="button" id="actbar" hidden></button><div id="qbar" hidden></div>
 <div id="searchbar" hidden><input type="search" id="q" placeholder="Search moves, monsters, statuses, rules" autocomplete="off"><div id="sflt"><button type="button" class="chip" data-sf="all" aria-pressed="true">All</button><button type="button" class="chip" data-sf="plan" aria-pressed="false">Planned</button></div></div>
 <nav id="tabs" role="tablist"></nav>
 <div id="panes"><div id="list"><div id="boot">Loading the game's battle data...</div></div><div id="detail"></div></div>
@@ -228,9 +241,10 @@ async function boot(){
     fetch('data/notify.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{NOTIFY=j;planRefresh();}).catch(()=>{});   // startpics10: the phone notification topic
     GUIDE_P=fetch('data/guide-anims.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{GUIDE=j;try{if(typeof buildAnims==='function'&&B3_CAST)buildAnims();}catch(e){}planRefresh();try{if(tab==='anims'&&sel&&typeof renderDetailKeep==='function')renderDetailKeep();}catch(e){}}).catch(()=>{});
     fetch('tools/art-library/wangen-jobs.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{JOBS=j;planRefresh();}).catch(()=>{});   // animplan1: the video jobs and their rev, for the Plan view
+    fetch('data/guide-words.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{GWORDS=j;}).catch(()=>{});   // guideflow5: the words of each failure (X1 and X2 are the page's own)
     PLAN_DOC=await fetch('data/guide-planned.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).catch(()=>null);   // battleguide2: everything planned and not built (tools/guide_planned.py)
-    build();route();
-  }catch(e){$('list').innerHTML='<div id="boot" class="err">'+esc(e.message)+'. Reload the page; if it stays, tell Claude.</div>';}
+    build();route();qStart();
+  }catch(e){$('list').innerHTML='<div id="boot" class="err">'+esc(e.message)+'. Open this page again in a minute; if it stays, tell Claude.</div>';}
 }
 
 // ---------- what the data says, in plain words ----------
@@ -485,6 +499,7 @@ function renderDetail(){
   D.innerHTML='<div id="dback"><button type="button" data-back="1">&lsaquo; Back</button><b>'+esc(title)+'</b></div>'+h;
   D.classList.add('open');D.scrollTop=0;
   document.querySelectorAll('#list .row').forEach(b=>b.classList.toggle('on',b.dataset.id===sel));
+  if(typeof qPaint==='function')qPaint();
 }
 
 // ---------- Rules ----------
@@ -668,56 +683,277 @@ function statusHtml(s){
 
 // ---------- Animations ----------
 function openNotes(animId){return ((BOARD_DOC||{}).cards||[]).filter(c=>c.anim&&c.anim.id===animId&&c.col!=='done');}
-// ---------- where a new video is (guidestatus1) ----------
-// Five stages, from what the request files and the services tell: REQUESTED (sent, GitHub has not picked it up), IN LINE (the video service accepted it
-// and has it waiting), MAKING (the service says it is working on it), CHECKING (the video is back: marks, clip gate, preview), READY TO REVIEW (a take
-// waits for Use this one or Keep the old one). xAI (monsters) only says "pending", so a monster goes from REQUESTED straight to MAKING.
-const STAGE={req:['REQUESTED','w'],line:['IN LINE','w'],making:['MAKING','w'],checking:['CHECKING','w'],ready:['READY TO REVIEW','r']};
-const STALL_MIN=90;
-const PROG={status:{},takes:null,reqs:[],at:0,sig:'',timer:0};
-async function loadProgress(){
-  const tok=lsGet(TOKEN),get=(f,ref)=>ghGetJson(f,ref,tok).then(g=>g?g.doc:null).catch(()=>null);
-  const [st,tk,wr,cr]=await Promise.all([get('status.json','guidegen'),get('takes.json','guidegen'),get('data/wan-requests.json','main'),get('data/clip-requests.json','main')]);
-  PROG.status=(st&&st.anims)||{};if(tk){PROG.takes=tk;GT=tk;}
-  PROG.reqs=[].concat(((wr&&wr.requests)||[]).map(r=>({anim:r.anim,take:r.take})),((cr&&cr.requests)||[]).filter(r=>r.guide).map(r=>({anim:r.guide.anim,take:r.guide.take})));
-  PROG.at=Date.now();
+// ---------- the one status file (guideflow5) ----------
+// Plan claude/guide-flow-plan.md. queue.json on the branch guideq holds one row per request and nothing else holds status. The page READS it (qRead: every 5 seconds while a row is
+// queued, making, checking or being put in the game, every 30 seconds otherwise, and at once when the page is shown again) and WRITES it for four things only, through storeUpdate:
+// add a row, cancel a queued row, mark Use this one, mark Keep the old one. Every other change is made by the job that did the work. Nothing on this page waits in a loop.
+const QB='guideq',QF='queue.json';
+const QS={doc:null,etag:'',fails:0,grey:false,busy:false,timer:0,poke:0};
+const QERR={},QBUSY={},LMEM={},MPEND={},PICURL={};   // QERR: the words under a button that failed; LMEM: a take with no row that was kept (memory only); MPEND: a monster request sent from this page (card 8 moves monsters to rows)
+const W_X1='Could not send. Nothing was made. Tap again.';
+const W_X2='This browser is not signed in to GitHub. Open the Board, tap the three dots, paste the token, then come back.';
+let GWORDS=null;
+const W_X21=()=>{const w=GWORDS&&GWORDS.words&&GWORDS.words.X21;return w?w.why+' '+w.do:'Cannot read the status right now. Trying again.';};
+class QRefused extends Error{}
+const tms=t=>{const v=Date.parse(t||'');return isNaN(v)?0:v;};
+const nowIso=()=>new Date().toISOString().replace(/\.\d+Z$/,'Z');
+const qClock=ms=>{const s=Math.max(0,Math.floor(ms/1000));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
+const qItems=()=>Object.values((QS.doc&&QS.doc.items)||{});
+const isPic=i=>i.kind==='picture'||i.kind==='upload';
+const qUseNow=i=>!!(i.use&&(i.use.state==='wanted'||i.use.state==='applying'));
+const qWorking=i=>i.state==='queued'||i.state==='making'||i.state==='checking'||qUseNow(i);
+const qActive=()=>qItems().some(qWorking)||Object.keys(MPEND).length>0;
+const qEvery=()=>qActive()?5000:30000;
+const byTake=(x,y)=>(x.take||0)-(y.take||0)||String(x.at).localeCompare(String(y.at))||String(x.id).localeCompare(String(y.id));
+const qVid=id=>qItems().filter(i=>i.kind==='video'&&i.anim===id).sort(byTake);
+const qPics=who=>qItems().filter(i=>isPic(i)&&i.who===who).sort((x,y)=>String(x.at).localeCompare(String(y.at))||String(x.id).localeCompare(String(y.id)));
+const goneCancel=i=>i.state==='cancelled'&&Date.now()-tms(i.since)>60000;   // a cancelled row leaves the screen after a minute
+function qCur(id){   // the row an animation shows: its newest, unless that one was cancelled a while ago or Tom chose Keep the old one
+  const r=qVid(id).filter(i=>!goneCancel(i)),it=r[r.length-1];
+  return it&&!(it.state==='done'&&it.left)?it:null;
 }
-function stageOf(a){
-  const T=((PROG.takes||GT||{}).anims||{})[a.id]||{takes:[]},have=n=>T.takes.some(t=>t.n>=n);
-  const S=PROG.status[a.id],P=GPEND[a.id];let best=null;
-  const consider=(n,key,at)=>{if(n&&!have(n)&&(!best||n>best.n||(n===best.n&&key!=='req')))best={n,key,at};};
-  PROG.reqs.filter(r=>r.anim===a.id).forEach(r=>consider(r.take,'req'));
-  if(P)consider(P.n,'req',P.at);
-  if(S)consider(S.take,S.stage,S.at);
-  if(best)return best;
-  const L=T.takes[T.takes.length-1];
-  if(L&&!L.used&&!(GKEPT[a.id]||[]).includes(L.n))return {n:L.n,key:'ready'};
-  return null;
-}
-function stageBadge(a){
-  const s=stageOf(a);if(!s)return '';const m=s.at&&s.key!=='req'?Math.max(0,Math.round((Date.now()-Date.parse(s.at))/60000)):null;
-  // guidestuck1: a video that sat at IN LINE, MAKING or CHECKING for 90 minutes is not still being made (a run that is lost never reports back): say STALLED, in red, and Generate this video works again
-  const stalled=m!=null&&m>=STALL_MIN&&s.key!=='ready';
-  return '<span class="badge '+(stalled?'n':STAGE[s.key][1])+'" data-stage="'+(stalled?'stalled':s.key)+'">'+(stalled?'STALLED':STAGE[s.key][0])+(m!=null&&m>=1?' · '+m+' MIN':'')+'</span> ';
-}
-async function watchProgress(){
-  clearTimeout(PROG.timer);
-  const every=Q.get('fast')?400:15000;
-  if(Date.now()-PROG.at>=every){
-    await loadProgress();
-    const sig=JSON.stringify([PROG.status,PROG.reqs,Object.entries(((PROG.takes||{}).anims)||{}).map(([k,v])=>[k,v.takes.map(t=>[t.n,!!t.used])]),GPEND,GKEPT]);
-    if(sig!==PROG.sig){PROG.sig=sig;if(tab==='anims'&&sel){renderDetailKeep();return;}}
+function qPicCur(who){const r=qPics(who).filter(i=>!goneCancel(i));return r[r.length-1]||null;}
+const qBusy=a=>{const c=qCur(a.id);return !!c&&c.state!=='cancelled'&&!(c.state==='done'&&c.use&&c.use.state==='live');};
+function qStartReady(who){const o=(GUIDE&&GUIDE.owners&&GUIDE.owners[who])||{};return !!o.start||qPics(who).some(i=>i.state==='done');}   // D10: usable the moment its row is done
+function qPicSrc(who){   // the start picture to show: the file on main, or the one on branch guidegen when the row says so (read once, kept as a local picture)
+  const o=(GUIDE&&GUIDE.owners&&GUIDE.owners[who])||{},rows=qPics(who).filter(i=>i.state==='done'),r=rows[rows.length-1],res=r&&r.result;
+  if(res&&res.path&&!res.main){
+    const k=res.path+'@'+r.at;if(k in PICURL)return PICURL[k]==='x'?'':PICURL[k];
+    PICURL[k]='';
+    ghGetB64(res.path,'guidegen').then(b=>{const u=atob(b),a=new Uint8Array(u.length);for(let i=0;i<u.length;i++)a[i]=u.charCodeAt(i);PICURL[k]=URL.createObjectURL(new Blob([a],{type:'image/png'}));qPaint();}).catch(()=>{PICURL[k]='x';});
+    return '';
   }
-  if(tab==='anims'&&(lsGet(TOKEN)||Q.get('gh')))PROG.timer=setTimeout(watchProgress,every);   // a browser with no token reads once (GitHub limits reads without one)
+  if(res&&res.main)return 'art/clips/start/'+who+'-hero.png?v='+tms(r.since);
+  return o.start||'';
+}
+// ---- the status line of plan section 5.1, word for word ----
+function qAhead(it){return qItems().filter(x=>x.state==='queued'&&x.lane===it.lane&&(String(x.at)+x.id)<(String(it.at)+it.id)).length;}
+function qLine(it,ctx){   // ctx: sheet (all the buttons), list or act (a decision opens the sheet)
+  const pic=isPic(it),up=it.kind==='upload',U=it.use||null,an=ANIM_BY[it.anim],price=pic?0.15:((an&&G(an))||{}).price||0.5;
+  const o={t:'',since:'',cls:'wait',btns:[]},mk=(a,l)=>({a,l});
+  if(it.state==='queued'){
+    const worker=qItems().some(x=>x.lane===it.lane&&(x.state==='making'||x.state==='checking')),ahead=qAhead(it);
+    o.t=Date.now()-tms(it.since)>90000&&!worker?'Queued. GitHub is slow to start. It will start by itself.':ahead?'Queued. '+ahead+' ahead of it.':'Queued. Starts in under a minute.';
+    o.btns=[mk('cancel','Cancel (free)')];
+  }else if(it.state==='making'){o.t=up?'Checking your picture. About 30 seconds. ':pic?'Making the picture. About 1 minute. ':'Making the video. About 2 minutes. ';o.since=it.since;}
+  else if(it.state==='checking'){o.t=up?'Checking your picture. About 30 seconds. ':'Made. Checking it. About 1 minute. ';o.since=it.since;}
+  else if(it.state==='cancelled'){o.t='Cancelled. Nothing was spent.';}
+  else if(it.state==='failed'){
+    o.cls='bad';o.t='Failed: '+[it.why,it.do].filter(Boolean).join(' ');const d=String(it.do||'');
+    if(/try again/i.test(d))o.btns=[mk('retry','Try again'+(it.fal?' (free)':' ('+money(price)+')'))];
+    else if(/make another|make the start picture/i.test(d)&&!up)o.btns=[mk(pic?'picagain':'again','Make another ('+money(price)+')')];
+  }else if(it.state==='done'){
+    if(pic){
+      o.cls='good';
+      o.t=up?'Your picture is in use, exactly as you made it.':(it.result&&it.result.mirrored)?'Start picture ready. It faced right, so it was flipped. Lettering and anything worn on one side are now reversed.':'Start picture ready.';
+      if(!up)o.btns=[mk('picagain','Make another ('+money(0.15)+')')];
+    }else if(qUseNow(it)){o.t='Putting it in the game. About 4 minutes. ';o.since=U.since||U.at;}
+    else if(U&&U.state==='live'){o.cls='good';o.t='In the game (build '+(U.build||'')+'). Close and reopen the game to see it.';}
+    else if(U&&U.state==='failed'){o.cls='bad';o.t='Not in the game: '+(U.why||'')+' Tap Use this one again.';o.btns=[mk('use','Use this one')];}
+    else{o.cls='good';o.t='Ready. Watch it here.';o.btns=[mk('use','Use this one'),mk('again','Make another ('+money(price)+')'),mk('left','Keep the old one')];}
+  }
+  if(ctx!=='sheet'&&o.btns.some(b=>b.a==='use'))o.btns=[mk('open','Open it')];
+  return o;
+}
+function qLineHtml(it,ctx,key){
+  const L=qLine(it,ctx),btn=b=>'<button type="button"'+(b.a==='again'||b.a==='picagain'||b.a==='use'||b.a==='open'||b.a==='retry'?' class="gold"':'')+' data-qa="'+b.a+'" data-qid="'+esc(it.id)+'" data-qkey="'+esc(key)+'">'+esc(b.l)+'</button>';
+  return '<div class="qline '+L.cls+'" data-rid="'+esc(it.id)+'" data-state="'+esc(it.state)+'"><span class="qtext">'+esc(L.t)+(L.since?'<span class="qclock" data-since="'+esc(L.since)+'"></span>':'')+'</span>'+(L.btns.length?'<span class="qbtns">'+L.btns.map(btn).join('')+'</span>':'')+'</div>';
+}
+const qErrHtml=key=>QERR[key]?'<div class="qerr err">'+esc(QERR[key])+'</div>':'';
+function qErr(key,text){QERR[key]=text;qPaint();setTimeout(()=>{if(QERR[key]===text){delete QERR[key];qPaint();}},9000);}
+function qMakeBtn(a,g,cur){   // the one tap that makes a video (or another one): not while a row of this animation is going, waiting for a decision or failed
+  if(!QS.doc||!g||g.route!=='wan'||g.waits||!qStartReady(a.owner))return '';
+  if(cur&&!(cur.state==='cancelled'||(cur.state==='done'&&cur.use&&cur.use.state==='live')))return '';
+  const again=a.video||qVid(a.id).length>0;
+  return '<span class="qbtns"><button type="button" class="gold" data-qa="make" data-qid="'+esc(a.id)+'" data-qkey="anim:'+esc(a.id)+'">'+(again?'Make another':'Make this video')+' ('+money(g.price)+')</button></span>';
+}
+const KINDW={state:'Body',move:'Move',act:'Attack',wind:'Wind-up'};
+function qRowHtml(a){   // the part of an animation's row under its name: kind, the status line or VIDEO / NO VIDEO YET, and the one button
+  const g=G(a),n=openNotes(a.id).length,cur=qCur(a.id),key='anim:'+a.id;
+  const bd=[cur?'':a.video?'<span class="badge v">VIDEO</span>':'<span class="badge n">NO VIDEO YET</span>',n?'<span class="badge o">NOTE OPEN</span>':'',g&&g.waits==='staging'?'<span class="badge n">WAITS FOR STAGING</span>':''].filter(Boolean);
+  let h='<div class="qsub">'+esc(a.kind==='move'?(a.vibe||'Move'):KINDW[a.kind])+(bd.length?' · '+bd.join(' '):'')+'</div>';
+  if(cur)h+=qLineHtml(cur,'list',key);
+  else if(g&&g.route==='wan'&&!g.waits&&!qStartReady(a.owner))h+='<div class="qline"><span class="qtext">Needs the start picture first.</span></div>';
+  return h+qMakeBtn(a,g,cur)+qErrHtml(key);
+}
+function qPicBlock(who,ctx){   // a person's start picture with its status line and its one action
+  const key='pic:'+who,cur=qPicCur(who),ready=qStartReady(who),src=qPicSrc(who),nm=ownerName(who);
+  let h='<div class="qpic">'+(src?'<img alt="Start picture of '+esc(nm)+'" src="'+esc(src)+'">':'<span class="ph">'+esc(nm.charAt(0))+'</span>')+'<div class="qpb"><b>Start picture</b>';
+  if(cur)h+=qLineHtml(cur,ctx,key);
+  if((!cur||cur.state==='cancelled')&&!ready&&QS.doc)
+    h+='<p class="hint">Every video of '+esc(nm)+' starts from one picture of them facing left on flat magenta. This makes it from their hero picture and checks it.</p><span class="qbtns"><button type="button" class="gold" data-qa="pic" data-qid="'+esc(who)+'" data-qkey="'+esc(key)+'">Make the start picture ('+money(0.15)+')</button></span>';
+  return h+qErrHtml(key)+'</div></div>';
+}
+function qSheetHtml(a,g){   // inside an animation's sheet: the status line and its one action, or what is missing first
+  const key='anim:'+a.id,cur=qCur(a.id);let h='';
+  if(g.route==='wan'&&!g.waits){
+    if(!qStartReady(a.owner))h+='<div class="qline"><span class="qtext">Needs the start picture first.</span></div>'+qPicBlock(a.owner,'sheet');
+    else{if(cur)h+=qLineHtml(cur,'sheet',key);h+=qMakeBtn(a,g,cur);}
+    h+=qErrHtml(key);
+  }
+  return h;
+}
+function qBarText(){
+  let m=0,q=0,r=0;const cut=Date.now()-86400000;
+  qItems().forEach(i=>{
+    if(i.state==='queued')q++;
+    else if(i.state==='making'||i.state==='checking'||qUseNow(i))m++;
+    else if(i.state==='done'&&i.kind==='video'&&!i.left&&tms(i.at)>cut&&!(i.use&&i.use.state==='live'))r++;
+  });
+  return [m?m+' making':'',q?q+' queued':'',r?r+' ready':''].filter(Boolean).join(', ');
+}
+function qActHtml(){
+  const cut=Date.now()-86400000;
+  const rows=qItems().filter(i=>(tms(i.at)>cut||qWorking(i))&&!goneCancel(i)&&!(i.state==='done'&&i.left)).sort((x,y)=>String(y.at).localeCompare(String(x.at))||String(y.id).localeCompare(String(x.id)));
+  if(!rows.length)return '<p class="hint">Nothing is being made.</p>';
+  return rows.map(i=>{
+    const an=ANIM_BY[i.anim],who=i.who||(an&&an.owner)||'',pic=isPic(i),key='act:'+i.id;
+    const nm=pic?ownerName(who)+': start picture':ownerName(who)+': '+(an?an.name:i.anim);
+    return '<div class="card qact"><button type="button" class="qname" '+(pic?'data-go="anims" data-id="'+esc(who)+'"':'data-anim="'+esc(i.anim)+'"')+'>'+esc(nm)+'</button>'+qLineHtml(i,'act',key)+qErrHtml(key)+'</div>';
+  }).join('');
+}
+const qSetH=(el,h)=>{if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h;}};
+function qClocks(){document.querySelectorAll('.qclock').forEach(e=>{e.textContent=qClock(Date.now()-tms(e.dataset.since));});}
+function qPaint(){   // every status line on the screen is changed where it stands: the open sheet, the scroll and a playing clip are not touched
+  document.body.classList.toggle('qgrey',!!QS.grey);
+  const qb=$('qbar');if(qb){qb.hidden=!QS.grey;if(QS.grey)qb.textContent=W_X21();}
+  const t=QS.doc?qBarText():'',ab=$('actbar');if(ab){ab.hidden=!t;if(t)ab.textContent=t;}
+  document.querySelectorAll('[data-qrow]').forEach(el=>{const a=ANIM_BY[el.dataset.qrow];if(a)qSetH(el,qRowHtml(a));});
+  document.querySelectorAll('[data-qtop]').forEach(el=>qSetH(el,qPicBlock(el.dataset.qtop,'list')));
+  const S=$('sheet');
+  if(S&&S.classList.contains('open')){
+    if(S.dataset.mode==='act'){const al=$('actlist');if(al)qSetH(al,qActHtml());}
+    else if(PL.a&&$('gq')){const g=G(PL.a);if(g)qSetH($('gq'),qSheetHtml(PL.a,g));}
+    if(PL.a&&$('gtake'))qTakeSync(PL.a);
+  }
+  qClocks();
+}
+// ---- the one reader ----
+async function qRead(){
+  if(QS.busy)return;QS.busy=true;
+  try{
+    const g=await ghGetJson(QF,QB,lsGet(TOKEN),QS.etag);
+    QS.fails=0;QS.grey=false;
+    if(!(g&&g.same)){QS.doc=g?g.doc:{v:1,items:{}};if(!QS.doc.items)QS.doc.items={};QS.etag=g?g.etag||'':'';}
+    if(Object.keys(MPEND).length)await qMonsterCheck();
+  }catch(e){QS.fails++;if(QS.fails>=3)QS.grey=true;}
+  QS.busy=false;qPaint();
+}
+function qSchedule(){
+  clearTimeout(QS.timer);
+  if(!(lsGet(TOKEN)||Q.get('gh')))return;   // a browser with no token reads once (GitHub limits reads without one)
+  QS.timer=setTimeout(async()=>{await qRead();qSchedule();},Q.get('fast')?(qActive()?300:900):qEvery());
+}
+function qStart(){
+  qRead().then(qSchedule);
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){clearTimeout(QS.timer);qRead().then(qSchedule);}});
+  setInterval(()=>{qClocks();if(QS.doc){qPaint();qRepoke();}},1000);
+}
+// ---- the one writer: a compare and swap on queue.json ----
+async function storeUpdate(fn,msg){
+  const tok=lsGet(TOKEN);if(!tok&&!Q.get('gh'))throw new Error(W_X2);
+  for(let k=0;k<4;k++){
+    const g=(await ghGetJson(QF,QB,tok))||{sha:null,doc:{v:1,items:{}}},doc=g.doc;doc.items=doc.items||{};
+    fn(doc);   // may throw QRefused; the file is then left as it is
+    const body={message:(msg||'guide: queue')+' [skip ci]',content:b64t(JSON.stringify(doc,null,1)+'\n'),branch:QB};if(g.sha)body.sha=g.sha;
+    const w=await fetch(GH()+'/repos/'+REPO+'/contents/'+QF,{method:'PUT',headers:{Authorization:'Bearer '+(tok||'test'),Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify(body)});
+    if(w.ok){QS.doc=doc;QS.etag='';qPaint();return doc;}
+    if(w.status===409||w.status===422)continue;   // somebody saved first: read again
+    throw new Error('GitHub '+w.status);
+  }
+  throw new Error('GitHub kept changing the file');
+}
+async function qPoke(){   // start the worker; a poke that fails is not an error for Tom (the row is saved and the slow line covers it)
+  QS.poke=Date.now();
+  try{await fetch(GH()+'/repos/'+REPO+'/dispatches',{method:'POST',headers:{Authorization:'Bearer '+(lsGet(TOKEN)||'test'),Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify({event_type:'guide-work'})});}catch(e){}
+}
+function qRepoke(){if(qItems().some(i=>i.state==='queued'&&Date.now()-tms(i.since)>90000)&&Date.now()-QS.poke>120000)qPoke();}
+const qRow=o=>Object.assign({lane:'',anim:'',who:'',take:0,route:'',prompt:'',promptRev:0,start:'',note:'',cap:0,at:nowIso(),state:'queued',since:nowIso(),run:0,fal:null,tries:0,cost:0,why:'',do:'',result:null,use:null,left:false,dry:false,replay:''},o);
+async function qAdd(rows,msg){   // add rows (one save for all of them); an id that exists is refused, so a double tap makes one row
+  return storeUpdate(doc=>{rows.forEach(r=>{if(doc.items[r.id])throw new QRefused(r.id+' is already in the queue');doc.items[r.id]=qRow(r);});},msg);
+}
+async function qCancel(it,key){
+  try{await storeUpdate(doc=>{const r=doc.items[it.id];if(!r||r.state!=='queued')throw new QRefused('started');r.state='cancelled';r.since=nowIso();r.why=r.do='';},'guide: cancel '+it.id);}
+  catch(e){if(e instanceof QRefused){qErr(key,'It already started, so it cannot be cancelled.');qRead();}else qErr(key,W_X1);}
+}
+async function qUseWanted(id){   // card 7 turns this on: Use this one marks the row, the apply job does the rest
+  return storeUpdate(doc=>{const r=doc.items[id];if(!r||r.kind!=='video'||r.state!=='done')throw new QRefused('only a done video can be used');
+    if(r.use&&r.use.state!=='failed')throw new QRefused('already asked for');r.use={state:'wanted',at:nowIso(),since:nowIso(),build:'',why:''};},'guide: use '+id);
+}
+async function qMakeVideo(a,retry,key0){
+  const g=G(a);if(!g)return;const key=key0||'anim:'+a.id;
+  if(QBUSY[a.id])return;QBUSY[a.id]=1;
+  try{
+    if(!(lsGet(TOKEN)||Q.get('gh'))){qErr(key,W_X2);return;}
+    const note=retry?(retry.note||''):((GW[a.id]&&GW[a.id].note)||'');
+    if(!retry){const why=stopFor(a,note);if(why){qErr(key,'Stop here. '+why+' Send Claude a note below: it will look at the takes and change the cause, not the wording.');if(PL.a===a)fillStopNote(a);return;}}
+    await loadTakes();
+    const n=nextTake(a),row={id:'v-'+(g.slug||slugOf(a.id))+'-t'+n,kind:'video',lane:'vid',route:'wan',anim:a.id,who:a.owner,take:n,prompt:retry?retry.prompt:workPrompt(a),promptRev:retry?retry.promptRev:(g.promptRev||0),start:a.owner,note,cap:1};
+    if(g.pad)row.pad=g.pad;if(retry&&retry.fal)row.fal=retry.fal;
+    await qAdd([row],'guide: add '+row.id);
+    (GTR[a.id]=GTR[a.id]||[]).push({n,note});saveLS('aot-guide-tries',GTR);if(GW[a.id]&&GW[a.id].note){delete GW[a.id].note;saveGW();}
+    qPoke();
+  }catch(e){if(!(e instanceof QRefused))qErr(key,e.message===W_X2?W_X2:W_X1);else qRead();}
+  finally{QBUSY[a.id]=0;}
+}
+async function qMakePicture(who,retry,key0){
+  const key=key0||'pic:'+who;if(QBUSY['pic:'+who])return;QBUSY['pic:'+who]=1;
+  try{
+    if(!(lsGet(TOKEN)||Q.get('gh'))){qErr(key,W_X2);return;}
+    const row={id:'p-'+who+'-'+Math.floor(Date.now()/1000),kind:'picture',lane:'pic',who,cap:0.3};
+    if(retry&&retry.fal)row.fal=retry.fal;
+    await qAdd([row],'guide: add '+row.id);qPoke();
+  }catch(e){if(!(e instanceof QRefused))qErr(key,e.message===W_X2?W_X2:W_X1);else qRead();}
+  finally{QBUSY['pic:'+who]=0;}
+}
+function qAct(t){
+  const a=t.dataset.qa,id=t.dataset.qid,key=t.dataset.qkey;
+  if(a==='make'){const an=ANIM_BY[id];if(an)qMakeVideo(an,null,key);return;}
+  if(a==='pic'){qMakePicture(id,null,key);return;}
+  const it=((QS.doc||{}).items||{})[id];if(!it)return;
+  if(a==='cancel')qCancel(it,key);
+  else if(a==='again')qMakeVideo(ANIM_BY[it.anim],null,key);
+  else if(a==='picagain')qMakePicture(it.who,null,key);
+  else if(a==='retry'){if(it.kind==='video')qMakeVideo(ANIM_BY[it.anim],it,key);else qMakePicture(it.who,it,key);}
+  else if(a==='use')askUse();
+  else if(a==='left')keepOld();
+  else if(a==='open'){if($('sheet').dataset.mode==='act')closeSheet();if(isPic(it))go('anims',it.who);else openPlayer(it.anim);}
+}
+// ---- the take that belongs to the animation's newest row plays in its sheet as soon as the row is done ----
+const qTake=it=>{const r=it.result||{};return {n:r.n||it.take,js:r.js||'',img:r.img||'',frames:r.frames||0,kb:r.kb||0,words:r.words||'',gate:r.gate||null,cost:it.cost||0,note:it.note||'',prompt:it.prompt||'',status:'new',row:it.id};};
+function qTakeSync(a){
+  const el=$('gtake');if(!el||GUSE[a.id]||el.dataset.key==='use')return;
+  const rows=qVid(a.id).filter(i=>!goneCancel(i)),lr=rows[rows.length-1],A=takesOf(a);let key='',t=null,n=0;
+  if(lr&&lr.state==='done'){n=(lr.result||{}).n||lr.take;key=(lr.left?'left:':'row:')+lr.id;t=qTake(lr);}
+  else if(lr&&(lr.state==='queued'||lr.state==='making'||lr.state==='checking'))key='';
+  else if(MPEND[a.id]&&!A.takes.some(x=>x.n===MPEND[a.id].n))key='mpend';
+  else{const last=A.takes[A.takes.length-1];if(A.stop)key='stop';else if(last){t=last;n=last.n;key=(LMEM[a.id+':'+n]?'left:':'file:')+n;}}
+  if(el.dataset.key===key)return;
+  el.dataset.key=key;
+  if(!key){MP.on=false;el.innerHTML='';GCUR.t=null;return;}
+  if(key==='stop'){el.innerHTML=stopHtml(a,A.stopWhy||'');fillStopNote(a);return;}
+  if(key==='mpend'){el.innerHTML='<p class="hint" id="gwait">Sent. Take '+MPEND[a.id].n+' shows here when it is made.</p>';return;}
+  if(key.indexOf('left:')===0){MP.on=false;GCUR.a=a;GCUR.t=t;el.innerHTML='<p class="hint" id="gleft">Take '+n+' is on file; you chose to leave the current video as it is.</p>';return;}
+  showTake(a,t);
+}
+async function qMonsterCheck(){   // monsters keep their old request path in this card: look in takes.json for the take that was asked for
+  await loadTakes();
+  Object.keys(MPEND).forEach(id=>{if(takesOf({id}).takes.some(x=>x.n===MPEND[id].n))delete MPEND[id];});
+}
+function openActivity(){
+  const S=$('sheet');MP.on=false;GCUR.tok++;PL.on=false;cancelAnimationFrame(PL.raf);PL.a=null;
+  S.dataset.mode='act';S.classList.add('open');$('dim').classList.add('open');S.scrollTop=0;
+  S.innerHTML='<div class="sh-top"><h2>Activity</h2><button type="button" class="ghost" id="bclose">Close</button></div><div id="actlist"></div>';
+  qPaint();
 }
 function animRow(a){
-  const k={state:'Body',move:a.vibe||'Move',act:'Attack',wind:'Wind-up'}[a.kind],n=openNotes(a.id).length;
-  return '<div class="anim"><span class="t"><b>'+esc(a.name)+'</b><span>'+esc(k)+' · '+(stageBadge(a)||'')+(stageOf(a)?'':a.video?'<span class="badge v">VIDEO</span>':'<span class="badge n">NO VIDEO YET</span>')+(n?' <span class="badge o">NOTE OPEN</span>':'')+(GUIDE&&G(a)&&G(a).waits==='staging'?' <span class="badge n">WAITS FOR STAGING</span>':'')+'</span></span>'+playBtn(a.id,true)+'</div>';
+  return '<div class="anim"><span class="t"><b>'+esc(a.name)+'</b><div class="qrow" data-qrow="'+esc(a.id)+'"></div></span>'+playBtn(a.id,true)+'</div>';
 }
 function animsHtml(id){
-  watchProgress();
-  const A=animsOf(id),f=animFilter,show=A.filter(a=>f==='all'||(f==='work'?!!stageOf(a):(f==='video')===a.video));
+  const A=animsOf(id),f=animFilter,show=A.filter(a=>f==='all'||(f==='work'?qBusy(a):(f==='video')===a.video));
+  const o=(GUIDE&&GUIDE.owners&&GUIDE.owners[id])||{};
   let h='<div class="hero"><img alt="" src="'+facePic(id)+'" onerror="this.style.visibility=\'hidden\'"><div><h2>'+esc(ownerName(id))+'</h2><div class="hint">'+A.filter(a=>a.video).length+' of '+A.length+' animations are videos</div></div></div>';
+  if(o.route==='wan')h+='<div class="card qtop" data-qtop="'+esc(id)+'"></div>';
   h+='<div class="seg">'+[['all','All'],['video','Videos'],['none','No video yet'],['work','In the works']].map(x=>'<button type="button" data-af="'+x[0]+'" aria-pressed="'+(f===x[0])+'">'+x[1]+'</button>').join('')+'</div>';
   const grp=[['state','Body'],['move','Moves'],['act','Attacks'],['wind','Wind-ups']];
   grp.forEach(g=>{const r=show.filter(a=>a.kind===g[0]);if(r.length)h+='<h3>'+g[1]+'</h3>'+r.map(animRow).join('');});
@@ -728,7 +964,7 @@ function animsHtml(id){
 // ---------- the player ----------
 // Plays a clip the way the game holds it: one packed picture (D.src) and, per frame, where it sits in the picture (x,y,w,h) and inside the full frame (ox,oy).
 const PL={a:null,D:null,img:null,t:0,last:0,on:false,speed:1,raf:0,hold:0};
-function closeSheet(){MP.on=false;GCUR.tok++;if(tab==='anims'){PROG.at=0;watchProgress();}$('sheet').classList.remove('open');$('dim').classList.remove('open');PL.on=false;cancelAnimationFrame(PL.raf);PL.a=null;}
+function closeSheet(){MP.on=false;GCUR.tok++;delete $('sheet').dataset.mode;$('sheet').classList.remove('open');$('dim').classList.remove('open');PL.on=false;cancelAnimationFrame(PL.raf);PL.a=null;}
 function clipLen(D){return D.kind==='loop'&&!D.wrap?2*D.dur:D.dur+(D.kind==='loop'?0:700);}   // a one-shot holds its last picture a moment, then repeats
 function frameAt(D,t){
   let ms=t;if(D.kind==='loop'){ms=D.wrap?t%D.dur:(t%(2*D.dur));if(!D.wrap&&ms>=D.dur)ms=2*D.dur-ms-1;}else ms=Math.min(t,D.dur-1);
@@ -777,13 +1013,14 @@ let GW={};try{GW=JSON.parse(lsGet('aot-guide-work')||'{}')||{};}catch(e){GW={};}
 const saveGW=()=>{try{localStorage.setItem('aot-guide-work',JSON.stringify(GW));}catch(e){}};
 const workPrompt=a=>(GW[a.id]&&GW[a.id].prompt)||(G(a)&&G(a).prompt)||'';
 const slugOf=id=>id.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-async function ghGetJson(path,ref,tok){
-  const H={Accept:'application/vnd.github+json'};if(tok||Q.get('gh'))H.Authorization='Bearer '+(tok||'test');
+async function ghGetJson(path,ref,tok,etag){   // etag: the last one seen; GitHub answers 304 when nothing changed and the result is {same:true}
+  const H={Accept:'application/vnd.github+json'};if(tok||Q.get('gh'))H.Authorization='Bearer '+(tok||'test');if(etag)H['If-None-Match']=etag;
   const r=await fetch(GH()+'/repos/'+REPO+'/contents/'+path+'?ref='+ref+'&t='+Date.now(),{cache:'no-store',headers:H});
+  if(r.status===304)return {same:true};
   if(r.status===404)return null;if(!r.ok)throw new Error('GitHub '+r.status);
   const j=await r.json();let c=j.content||'';
   if(!c.replace(/\s/g,'')){const b=await fetch(GH()+'/repos/'+REPO+'/git/blobs/'+j.sha+'?t='+Date.now(),{cache:'no-store',headers:H});if(!b.ok)throw new Error('GitHub '+b.status);c=(await b.json()).content||'';}
-  return {sha:j.sha,doc:JSON.parse(t64(c))};
+  return {sha:j.sha,doc:JSON.parse(t64(c)),etag:r.headers.get('ETag')||''};
 }
 // Add a request to a request file on main (the Action that reads it empties it first and does the work; the key stays a repo secret).
 async function ghRequest(path,msg,fn){
@@ -795,11 +1032,6 @@ async function ghRequest(path,msg,fn){
     if(w.status===409&&tries<3)continue;
     if(!w.ok)throw new Error('GitHub '+w.status);return;
   }
-}
-function askStart(){
-  const a=PL.a,g=a&&G(a);if(!g||!g.canStart)return;const m=$('gstartmsg');m.textContent='';
-  if(!(lsGet(TOKEN)||Q.get('gh'))){m.textContent='This browser has no GitHub token. Open the Board, tap the three dots, paste the token there, then come back.';return;}
-  $('gstartconf').innerHTML='<div class="conf"><p><b>This spends '+money(g.startCost||0.15)+'.</b> One picture of '+esc(ownerName(g.startWho))+', checked before it goes in the game. The most it can spend is $0.30.</p><div class="row2"><button type="button" class="gold" id="gstartgo">Yes, spend '+money(g.startCost||0.15)+'</button><button type="button" id="gstartcan">Cancel</button></div></div>';
 }
 let NOTIFY=null;
 function notifyHtml(){   // startpics10: how to get a phone notification for every status change of a picture or video
@@ -813,34 +1045,6 @@ async function sendNotifyTest(){
   try{const r=await fetch((NOTIFY.server||'https://ntfy.sh')+'/'+NOTIFY.topic,{method:'POST',body:'Test from the Battle Guide. Your phone will get a message like this each time a picture or video changes status.',headers:{Title:'Battle Guide test'}});
     m.textContent=r.ok?'Sent. If your phone shows nothing within a few seconds, check that the ntfy app is subscribed to the name above.':'The test did not go through ('+r.status+').';}
   catch(e){m.textContent='The test did not go through: '+e.message;}
-}
-const STARTING={};   // startpics7: a person whose picture was already asked for in this page is not asked for again
-async function queueLine(tok){   // startpics7: what is ahead of a request, from the Actions list (needs the GitHub token the page already uses)
-  try{const H={Accept:'application/vnd.github+json'};if(tok||Q.get('gh'))H.Authorization='Bearer '+(tok||'test');
-    const r=await fetch(GH()+'/repos/'+REPO+'/actions/workflows/startpic-gen.yml/runs?per_page=12&t='+Date.now(),{cache:'no-store',headers:H});if(!r.ok)return '';
-    const runs=((await r.json()).workflow_runs||[]).filter(x=>x.conclusion!=='skipped');
-    const going=runs.filter(x=>x.status==='in_progress').length,wait=runs.filter(x=>x.status==='queued'||x.status==='pending'||x.status==='waiting').length;
-    if(!going&&!wait)return 'Nothing else is running, so yours starts now.';
-    return 'Right now '+going+' picture run'+(going===1?' is':'s are')+' going and '+wait+' waiting. A picture takes about 1 to 2 minutes and only pictures are in this line.';}
-  catch(e){return '';}
-}
-async function doStart(){
-  const a=PL.a,g=a&&G(a);if(!g||!g.canStart)return;if(STARTING[g.startWho]){$('gstartmsg').textContent='Already asked for in this page. It is in line; do not press it again.';return;}STARTING[g.startWho]=1;const who=g.startWho,at=new Date().toISOString(),take=Math.floor(Date.now()/1000),box=$('gstartconf'),st=$('gstartstate');
-  box.innerHTML='<p class="hint">Sending the request...</p>';
-  try{await ghRequest('data/startpic-requests.json','startpic: generate '+who,d=>{d.requests.push({startpic:who,take,at,cap:0.3});});}
-  catch(e){STARTING[who]=0;box.innerHTML='';$('gstartmsg').textContent=e.message+'. Nothing was sent.';return;}
-  box.innerHTML='';const tok=lsGet(TOKEN),t0=Date.now();
-  st.innerHTML='<p class="hint">Sent. The picture itself takes about a minute once its turn comes.</p><p class="hint" id="gstartq"></p>';
-  while($('gstartstate')===st&&Date.now()-t0<30*60000){
-    const ql=await queueLine(tok),qe=$('gstartq');if(qe&&$('gstartstate')===st)qe.textContent=ql;
-    await new Promise(r=>setTimeout(r,Q.get('fast')?300:8000));
-    const r=await ghGetJson('startpic-results.json','startpic',tok).catch(()=>null);
-    const row=r&&r.doc&&(r.doc.results||[]).find(x=>x.at===at);
-    if(!row)continue;
-    if(row.error){st.innerHTML='<div class="cant"><b>No picture was put in the game.</b> '+esc(row.error)+'</div><p class="hint">'+(row.cost?'It cost '+money(row.cost)+'. ':'It cost nothing. ')+'Tap Make the start picture to try again, or send Claude a note below.</p>';STARTING[who]=0;return;}
-    st.innerHTML='<div class="conf"><p><b>Done.</b> The start picture of '+esc(ownerName(who))+' is in the game'+(row.mirrored?' (it faced the wrong way, so it was mirrored)':'')+'. The video button appears after GitHub publishes the page, about two minutes: reload this page then.</p></div>';return;
-  }
-  if($('gstartstate')===st){STARTING[who]=0;st.innerHTML='<p class="hint">No answer yet after 30 minutes. Reload this page: if the video button is there, it worked. If not, tell Claude.</p>';}
 }
 async function waitAnswer(file,at,show){   // the Action keeps its answer on the branch guidegen; look every 5 seconds for up to 5 minutes
   const tok=lsGet(TOKEN),t0=Date.now();
@@ -897,15 +1101,13 @@ const genWords=g=>g.route==='wan'?'Wan 3.0, 5 seconds at 720p':'xAI Grok lite, 3
 const money=v=>'$'+(+v||0).toFixed(2);
 let GT=null;const GCUR={a:null,t:null,tok:0};
 let GTR={};try{GTR=JSON.parse(lsGet('aot-guide-tries')||'{}')||{};}catch(e){GTR={};}      // per animation: the notes of the tries made so far
-let GPEND={};try{GPEND=JSON.parse(lsGet('aot-guide-pend')||'{}')||{};}catch(e){GPEND={};}  // a request sent and not answered yet: {anim:{n,at}}
-let GKEPT={};try{GKEPT=JSON.parse(lsGet('aot-guide-kept')||'{}')||{};}catch(e){GKEPT={};}   // takes Tom decided to leave: {anim:[n,...]}
 const saveLS=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}};
 async function loadTakes(){
   try{const g=await ghGetJson('takes.json','guidegen',lsGet(TOKEN));GT=g?g.doc:{anims:{}};}catch(e){GT=GT||{anims:{}};}
   return GT;
 }
 const takesOf=a=>(GT&&GT.anims&&GT.anims[a.id])||{takes:[],spent:0,stop:false};
-const nextTake=a=>Math.max(0,...takesOf(a).takes.map(t=>t.n),(GPEND[a.id]||{}).n||0)+1;
+const nextTake=a=>Math.max(0,...takesOf(a).takes.map(t=>t.n),...qVid(a.id).map(i=>i.take||0),(MPEND[a.id]||{}).n||0)+1;   // one above the highest take in takes.json and in the queue
 function showStats(a){
   const A=takesOf(a),k=$('gtk'),s=$('gsp');if(k)k.textContent='Takes made: '+A.takes.length;if(s)s.textContent='Spent: '+money(A.spent);
 }
@@ -924,35 +1126,21 @@ function askGen(){
   if(!(lsGet(TOKEN)||Q.get('gh'))){m.textContent='This browser has no GitHub token. Open the Board, tap the three dots, paste the token there, then come back.';return;}
   const why=stopFor(a,(GW[a.id]&&GW[a.id].note)||'');
   if(why){$('gconf').innerHTML=stopHtml(a,why);fillStopNote(a);return;}
-  const cap=g.route==='wan'?1:0.15;
+  const cap=0.15;
   $('gconf').innerHTML='<div class="conf" id="gconfbox"><p><b>This spends '+money(g.price)+'.</b> One video from the prompt above ('+esc(genWords(g))+'). The most this try can spend is '+money(cap)+'.</p><div class="row2"><button type="button" class="gold" id="ggo">Yes, spend '+money(g.price)+'</button><button type="button" id="gcan">Cancel</button></div></div>';
 }
-async function doGen(){
-  const a=PL.a,g=a&&G(a);if(!g)return;const note=(GW[a.id]&&GW[a.id].note)||'',n=nextTake(a),at=new Date().toISOString(),prompt=workPrompt(a);
+async function doGen(){   // monsters only (card 8 moves them to rows); a family video is a row in the queue (qMakeVideo)
+  const a=PL.a,g=a&&G(a);if(!g||g.route==='wan')return;const note=(GW[a.id]&&GW[a.id].note)||'',n=nextTake(a),at=new Date().toISOString(),prompt=workPrompt(a);
   const why=stopFor(a,note);if(why){$('gconf').innerHTML=stopHtml(a,why);fillStopNote(a);return;}
   const box=$('gconf');box.innerHTML='<p class="hint">Sending the request...</p>';
   const slug=g.slug||slugOf(a.id);
   try{
-    if(g.route==='wan')await ghRequest('data/wan-requests.json','wan: generate '+a.id,d=>{d.requests.push({anim:a.id,slug,take:n,at,prompt,promptRev:g.promptRev||0,start:g.start,pad:g.pad||undefined,cap:+(g.price*1.2).toFixed(2),note});});
-    else{
-      const x=GUIDE.routes.xai,rc=(GUIDE.recipes||{})[g.recipe]||{};
-      await ghRequest('data/clip-requests.json','clip: generate guide '+a.id,d=>{d.requests.push({id:'guide-'+slug+'-t'+n,prompt,promptRev:g.promptRev||0,cap:0.15,at,guide:{anim:a.id,take:n,note,clip:{id:(g.clip||g.newClip).replace(/_/g,'-'),owner:a.owner,kind:rc.kind||'strike',start:g.start,model:x.model,res:x.res,dur:x.dur,figRows:g.figRows}}});});
-    }
-  }catch(e){box.innerHTML='';$('gmsg').textContent=e.message+'. Nothing was sent.';return;}
+    const x=GUIDE.routes.xai,rc=(GUIDE.recipes||{})[g.recipe]||{};
+    await ghRequest('data/clip-requests.json','clip: generate guide '+a.id,d=>{d.requests.push({id:'guide-'+slug+'-t'+n,prompt,promptRev:g.promptRev||0,cap:0.15,at,guide:{anim:a.id,take:n,note,clip:{id:(g.clip||g.newClip).replace(/_/g,'-'),owner:a.owner,kind:rc.kind||'strike',start:g.start,model:x.model,res:x.res,dur:x.dur,figRows:g.figRows}}});});
+  }catch(e){box.innerHTML='';$('gmsg').textContent=(/token/.test(e.message)?W_X2:W_X1);return;}
   (GTR[a.id]=GTR[a.id]||[]).push({n,note});saveLS('aot-guide-tries',GTR);
-  GPEND[a.id]={n,at};saveLS('aot-guide-pend',GPEND);if(GW[a.id]){delete GW[a.id].note;saveGW();}
-  box.innerHTML='';waitTake(a,n,at);
-}
-async function waitTake(a,n,at){
-  const tok=++GCUR.tok,t0=Date.parse(at)||Date.now(),el=$('gtake');
-  const alive=()=>GCUR.tok===tok&&PL.a===a&&$('gtake');
-  while(alive()&&Date.now()-t0<30*60000){
-    await loadTakes();const t=takesOf(a).takes.find(x=>x.n===n);
-    if(t){delete GPEND[a.id];saveLS('aot-guide-pend',GPEND);if(alive()){showStats(a);showTake(a,t);}return;}
-    if(alive())$('gtake').innerHTML='<p class="hint" id="gwait">Making take '+n+', '+Math.round((Date.now()-t0)/1000)+' s. A video takes 3 to 8 minutes; you can close this and come back, it keeps going.</p>';
-    await new Promise(r=>setTimeout(r,Q.get('fast')?300:8000));
-  }
-  if(alive())$('gtake').innerHTML='<p class="err">No video after 30 minutes. Open the Actions tab on GitHub is not needed: tell Claude, or send the note below.</p>';
+  MPEND[a.id]={n,at};if(GW[a.id]){delete GW[a.id].note;saveGW();}
+  box.innerHTML='';qPaint();
 }
 // two small players share one clock
 const MP={on:false,items:[],last:0,raf:0};
@@ -979,16 +1167,16 @@ async function loadTakeClip(t){
 }
 async function showTake(a,t){
   GCUR.a=a;GCUR.t=t;const el=$('gtake');if(!el)return;const A=takesOf(a);
-  if((GKEPT[a.id]||[]).includes(t.n)){el.innerHTML='<p class="hint" id="gleft">Take '+t.n+' is on file; you chose to leave the current video as it is.</p>';return;}
+  if(LMEM[a.id+':'+t.n]){el.innerHTML='<p class="hint" id="gleft">Take '+t.n+' is on file; you chose to leave the current video as it is.</p>';return;}
   if(t.status==='failed'){el.innerHTML='<div class="take" id="gtakecard"><h3>Take '+t.n+' did not come back</h3><p>'+esc(t.why||'The generator made no video.')+' Spent '+money(t.cost)+'.</p><p class="hint">Tap Generate this video to try again.</p></div>';return;}
   if(t.status==='still'){el.innerHTML='<div class="take" id="gtakecard"><h3>Take '+t.n+' hardly moves</h3><p>'+esc(t.why)+' It cost '+money(t.cost)+'. Change the prompt (write what to add above, then Update the prompt) and try again.</p></div>';return;}
   const hold=t.gate&&t.gate.hold;
   let h='<div class="take" id="gtakecard"><h3>Take '+t.n+' ('+money(t.cost)+')</h3><div class="cmp"><div><div class="lab">'+(a.clip?'Now in the game':'Now: standard motion')+'</div><div class="box"><canvas id="cvc" width="2" height="2"></canvas></div></div><div><div class="lab">New take</div><div class="box"><canvas id="cvn" width="2" height="2"></canvas></div></div></div>'
     +'<p class="gate'+(hold?' hold':'')+'" id="ggate">'+esc((t.gate&&t.gate.words)||'The clip gate did not run on this take.')+'</p>'
     +'<p class="hint">'+t.frames+' pictures, '+t.kb+' KB, cut as '+esc(t.words)+'. This is exactly how the game would play it.'+(t.note?' Made with your note: '+esc(t.note):'')+'</p>'
-    +'<div class="row3"><button type="button" class="gold" id="guse">Use this one</button><button type="button" id="gtry">Try again with a note</button><button type="button" id="gold">Keep the old one</button></div><div id="guseconf"></div></div>';
+    +(t.row?'':'<div class="row3"><button type="button" class="gold" id="guse">Use this one</button><button type="button" id="gtry">Try again with a note</button><button type="button" id="gold">Keep the old one</button></div>')+'<div id="guseconf"></div></div>';
   el.innerHTML=h;const items=[];
-  try{const r=await loadTakeClip(t);if(GCUR.t!==t||!$('cvn'))return;const cv=$('cvn');cv.width=r.D.w*r.D.k;cv.height=r.D.h*r.D.k;items.push({cv,D:r.D,img:r.img,t:0});}
+  try{if(!t.js)throw new Error('This take has no video file.');const r=await loadTakeClip(t);if(GCUR.t!==t||!$('cvn'))return;const cv=$('cvn');cv.width=r.D.w*r.D.k;cv.height=r.D.h*r.D.k;items.push({cv,D:r.D,img:r.img,t:0});}
   catch(e){const c=$('cvn');if(c)c.parentNode.innerHTML='<div class="hint" style="padding:12px">'+esc(e.message)+'</div>';}
   if(a.clip){try{const r=await loadClip(a.clip);const cv=$('cvc');if(cv){cv.width=r.D.w*r.D.k;cv.height=r.D.h*r.D.k;items.push({cv,D:r.D,img:r.img,t:0});}}catch(e){}}
   else{const c=$('cvc');if(c)c.parentNode.innerHTML='<div class="hint" style="padding:12px;text-align:center">No video yet</div>';}
@@ -1009,13 +1197,14 @@ async function doUse(){
 }
 async function pollUse(a,n,at){
   const tok=++GCUR.tok,t0=Date.now(),alive=()=>GCUR.tok===tok&&PL.a===a&&$('gtake'),box=()=>$('guseconf')||$('gtake');
+  if($('gtake'))$('gtake').dataset.key='use';   // the status line of the queue leaves this part of the sheet alone while the old use runs
   const t00=Math.max(t0-(Date.now()-new Date(at).getTime()),t0-25*60000);
   while(alive()&&Date.now()-t00<25*60000){
     const g=await ghGetJson('use-report.json','guidegen',lsGet(TOKEN)).catch(()=>null);
     if(g&&g.doc&&(g.doc.reqs||[]).includes(at)){
       const ok=(g.doc.done||[]).find(x=>x.anim===a.id),bad=(g.doc.failed||[]).find(x=>x.anim===a.id);
       delete GUSE[a.id];saveLS('aot-guide-use',GUSE);
-      if(alive())$('gtake').innerHTML=ok?'<div class="take" id="gused"><h3>In the game now</h3><p>'+esc(a.name)+' plays take '+n+' ('+esc(ok.rev)+'). The build is named '+esc(g.doc.tag||'')+' and goes live in a few minutes. Then press RELOAD on the title screen and look at it in a fight. Your phone also gets a notification.</p></div>'
+      if(alive())$('gtake').innerHTML=ok?'<div class="take" id="gused"><h3>In the game now</h3><p>'+esc(a.name)+' plays take '+n+' ('+esc(ok.rev)+'). The build is named '+esc(g.doc.tag||'')+' and goes live in a few minutes. Close and reopen the game to see it, then look at it in a fight. Your phone also gets a notification.</p></div>'
         :'<div class="stopbox" id="gusefail"><b>It could not be put in the game.</b> '+esc(bad?bad.why:'The job did not report this animation.')+' Nothing in the game changed. Open the animation and tap Use this one again.</div>';
       return;
     }
@@ -1028,43 +1217,43 @@ function tryAgain(){
   const a=GCUR.a,t=GCUR.t;if(!a||!t)return;const n=$('gnote');if(n){n.scrollIntoView({block:'center'});n.focus();}
   $('gmsg').textContent='Write what was wrong with take '+t.n+' in the box above, tap Update the prompt, keep the new prompt, then Generate again.';
 }
-function keepOld(){
-  const a=GCUR.a,t=GCUR.t;if(!a||!t)return;(GKEPT[a.id]=GKEPT[a.id]||[]).push(t.n);saveLS('aot-guide-kept',GKEPT);MP.on=false;
-  $('gtake').innerHTML='<p class="hint" id="gleft">Left as it is. Take '+t.n+' stays on file ('+money(t.cost)+' spent).</p>';
+async function keepOld(){   // Keep the old one: the row says left (the page shows the take as left alone); a take with no row is remembered in this page only
+  const a=GCUR.a,t=GCUR.t;if(!a||!t)return;
+  if(t.row){
+    try{await storeUpdate(doc=>{const r=doc.items[t.row];if(!r||r.state!=='done')throw new QRefused('not ready');r.left=true;},'guide: left '+t.row);}
+    catch(e){qErr('anim:'+a.id,e instanceof QRefused?'That take is not ready to leave.':W_X1);return;}
+  }else LMEM[a.id+':'+t.n]=1;
+  MP.on=false;const el=$('gtake');if(el)el.dataset.key='';qPaint();
 }
 async function initMake(a){
   GCUR.tok++;MP.on=false;if(!$('gtake'))return;
   const tok=GCUR.tok;await loadTakes();if(GCUR.tok!==tok||PL.a!==a||!$('gtake'))return;showStats(a);
-  const A=takesOf(a),last=A.takes[A.takes.length-1],pend=GPEND[a.id];
-  if(pend&&!A.takes.find(x=>x.n===pend.n)){waitTake(a,pend.n,pend.at);return;}
   if(GUSE[a.id]){pollUse(a,GUSE[a.id].n,GUSE[a.id].at);return;}
-  if(A.stop&&$('ghow')){$('gtake').innerHTML=stopHtml(a,A.stopWhy||'');fillStopNote(a);return;}
-  if(last)showTake(a,last);
+  qPaint();
 }
 const STAGE_TIER={basic:'Basic: a gag in the body',s1:'Skill 1: one stage element',s2:'Skill 2: a bigger, lasting stage',cap:'Capstone: full-screen set piece'};   // movestage1, claude/move-staging-plan.md section 3
 function genBlock(a){
-  if(!GUIDE)return '<div class="gen"><h3>Prompt</h3><p class="hint" id="gstate">The prompt list could not be loaded. Reload the page.</p></div>';
+  if(!GUIDE)return '<div class="gen"><h3>Prompt</h3><p class="hint" id="gstate">The prompt list could not be loaded. Close this and open it again in a minute.</p></div>';
   const g=G(a);if(!g)return '<div class="gen"><h3>Prompt</h3><p class="hint" id="gstate">This animation is not in the prompt list yet. Ask Claude to rebuild it (node tools/guidegen/build_map.js).</p></div>';
-  const src=SRC_WORDS[g.promptSource]||g.promptSource,draft=/draft/.test(g.promptSource);
-  let h='<div class="gen" id="gen"><h3>Prompt</h3>';
+  const src=SRC_WORDS[g.promptSource]||g.promptSource,draft=/draft/.test(g.promptSource),fam=g.route==='wan';
+  let h='<div class="gen" id="gen">'+(fam&&!g.waits?'<div id="gq"></div><div id="gtake"></div>':'')+'<h3>Prompt</h3>';
   h+='<div class="meta" id="gmeta"><span class="chip">'+(g.oldDraft?'OLD DRAFT, NOT FOR USE':draft?'DRAFT':'Prompt v'+(g.promptRev||0))+'</span>'+(g.stage?'<span class="chip" id="gstage">'+esc(STAGE_TIER[g.stage.tier]||g.stage.tier)+', about '+g.stage.budget+' s'+(g.stage.keep?', video kept':'')+'</span>':'')+'<span class="chip">'+esc(g.route==='wan'?'Wan 3.0':'xAI Grok lite')+'</span><span class="chip">$'+g.price.toFixed(2)+' a try</span><span class="chip" id="gtk">Takes made: ...</span><span class="chip" id="gsp">Spent: ...</span></div>';
   h+='<p class="hint" id="gsrc">'+esc(src)+(g.madeBy?' ('+esc(g.madeBy)+')':'')+(g.video?'. It made the video above.':'. This animation has no video yet.')+'</p>';
   if(g.waits==='staging')h+='<div class="cant" id="gstagewait"><b>Waits for staging.</b> '+esc(g.waitsWhy||'')+'</div>';   // movestage1: a family move with no staging row (data/b3-stage.js)
-  if(!g.canMake&&g.missing)h+='<div class="cant" id="gcant"><b>Cannot be made yet.</b> '+esc(g.missing)+'</div>';
-  if(g.canStart)h+='<h3>Start picture</h3><p class="hint">Every video of '+esc(g.startWho)+' starts from one picture of them facing left on flat magenta. This makes it from their hero picture, checks it, and turns the video button on.</p>'
-    +'<p class="err" id="gstartmsg" style="margin:6px 0;font-size:14px"></p><button type="button" class="gold" id="gstart" style="width:100%">Make the start picture ($'+(g.startCost||0.15).toFixed(2)+')</button><div id="gstartconf"></div><div id="gstartstate"></div>';
+  if(!g.canMake&&!g.canStart&&g.missing)h+='<div class="cant" id="gcant"><b>Cannot be made yet.</b> '+esc(g.missing)+'</div>';
   const w=GW[a.id];
   h+='<pre class="prompt" id="gprompt">'+esc(w?w.prompt:g.prompt)+'</pre>';
   if(w)h+='<p class="hint" id="gedited">You changed this prompt here ('+esc(w.at.slice(0,10))+'). The version above is the one a new video would use.</p>';
   if(!g.waits){   // the note box shows even when it cannot be made yet: the prompt can still be worked on (not while a move waits for staging: its old draft is never used)
     const tok=!!(lsGet(TOKEN)||Q.get('gh'));
     h+='<h3>'+(g.video?'What should change':'Anything to add')+'</h3>'
-      +(tok?'':'<p class="err" style="font-size:14px">This browser has no GitHub token, so it cannot send. Open the <a href="board.html">Board</a>, tap the three dots, paste the token there, then come back.</p>')
+      +(tok?'':'<p class="err" style="font-size:14px">'+esc(W_X2)+'</p>')
       +'<textarea id="gnote" placeholder="'+(g.video?'What should change? For example: he should look at the viewer and smile.':'Optional. For example: she holds the card up and smiles at the viewer.')+'"></textarea>'
       +'<p class="err" id="gerr" style="margin:6px 0;font-size:14px"></p><button type="button" class="gold" id="gupd" style="width:100%">Update the prompt</button>'
       +'<p class="hint">'+(g.video?'Your words are folded into the prompt with the smallest change, and you see what was kept and what changed before anything is made.':'Claude folds your words into the draft with the smallest change. Leave it empty to keep the draft as it is.')+'</p><div id="gres"></div>';
   }
-  if(g.canMake){
+  if(fam&&!g.waits)h+='<p class="hint" id="ghow">One tap makes one video from the prompt above ('+esc(genWords(g))+', about $'+g.price.toFixed(2)+'). You see it next to '+(g.video?'the one in the game':'the standard motion')+' before anything changes in the game.</p>';
+  if(!fam&&g.canMake){
     h+='<h3>Make a video</h3><p class="hint" id="ghow">One try makes one video from the prompt above ('+esc(genWords(g))+', about $'+g.price.toFixed(2)+'). You see it next to '+(g.video?'the one in the game':'the standard motion')+' before anything changes in the game.</p>'
       +'<p class="err" id="gmsg" style="margin:6px 0;font-size:14px"></p><button type="button" class="gold" id="ggen" style="width:100%">Generate this video ($'+g.price.toFixed(2)+')</button><div id="gconf"></div><div id="gtake"></div>';
   }
@@ -1075,7 +1264,7 @@ async function openPlayer(animId){
   const a=ANIM_BY[animId];if(!a)return;PL.a=a;PL.on=false;cancelAnimationFrame(PL.raf);PL.D=null;PL.img=null;PL.t=0;PL.speed=1;
   const head='<div class="sh-top"><h2>'+esc(ownerName(a.owner))+': '+esc(a.name)+'</h2><button type="button" class="ghost" id="bclose">Close</button></div>';
   const stage=msg=>'<div id="stage"><canvas id="cv" width="2" height="2"></canvas><div id="hitflag">HIT</div>'+(msg?'<div class="msg">'+msg+'</div>':'')+'</div>';
-  const S=$('sheet');S.classList.add('open');$('dim').classList.add('open');S.scrollTop=0;
+  const S=$('sheet');delete S.dataset.mode;S.classList.add('open');$('dim').classList.add('open');S.scrollTop=0;
   if(!a.clip){
     S.innerHTML=head+stage(a.kind==='state'?'No video yet. In a fight this moment shows one of their other videos until its own is made.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+genBlock(a)+noteForm(a);
     initMake(a);return;
@@ -1200,6 +1389,9 @@ function doSearch(){const q=$('q').value.trim();if(q.length>1||sFilter==='plan')
 document.addEventListener('click',e=>{
   const t=e.target.closest('button,a');if(!t)return;
   if(t.id==='gnotest'){sendNotifyTest();return;}
+  if(t.dataset.qa){e.preventDefault();qAct(t);return;}
+  if(t.id==='actbar'){openActivity();return;}
+  if(t.dataset.go&&$('sheet').dataset.mode==='act')closeSheet();
   if(t.dataset.tab){$('q').value='';$('searchbar').hidden=true;go(t.dataset.tab,'');return;}
   if(t.dataset.anim){e.preventDefault();openPlayer(t.dataset.anim);return;}
   if(t.dataset.go){if(t.dataset.vibePick)vibeSel[t.dataset.id]=t.dataset.vibePick;if($('q').value){$('q').value='';$('searchbar').hidden=true;}go(t.dataset.go,t.dataset.id);return;}
@@ -1218,9 +1410,6 @@ document.addEventListener('click',e=>{
   if(t.id==='gask'){const v=cleanWords(($('gans')||{}).value);if(v&&GASK)updatePrompt(GASK.note+' (Your question: '+GASK.q+' My answer: '+v+')');return;}
   if(t.id==='gkeep'){keepPrompt();return;}
   if(t.id==='gdisc'){$('gres').innerHTML='';return;}
-  if(t.id==='gstart'){askStart();return;}
-  if(t.id==='gstartcan'){$('gstartconf').innerHTML='';return;}
-  if(t.id==='gstartgo'){doStart();return;}
   if(t.id==='ggen'){askGen();return;}
   if(t.id==='gcan'){$('gconf').innerHTML='';return;}
   if(t.id==='ggo'){doGen();return;}

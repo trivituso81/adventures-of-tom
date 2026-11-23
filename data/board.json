@@ -32997,13 +32997,13 @@
    "theme": "Battle Animations",
    "tag": "guideflow5",
    "title": "Switch the Guide page to the one status file",
-   "next": "Waits for card c-guideflow-4. Then tap Copy prompt on this card and paste it into a new conversation in this Project (Claude Sonnet 5.5, effort high). It changes the Battle Guide page: one status line per request that updates by itself on every screen, an Activity bar, one tap to make, Cancel while queued. Nothing to play until the last card.",
+   "next": "Built and pushed as guideflow5: the Battle Guide page reads queue.json on branch guideq (one reader, every 5 s while something is going, every 30 s otherwise) and writes it in one place (one tap makes a row, Cancel while queued). Nothing for Tom: card c-guideflow-6 (upload your own start picture, make all poses) starts by itself. Not looked at: a real phone and a real worker run; the first paid run is Tom's tap in t-guideflow-phone.",
    "blocks": [
     "c-guideflow-6"
    ],
    "after": "nothing for Tom: c-guideflow-6",
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-23",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFYxNDZ5poGu2DEevP",
     "opening": "not started"
@@ -33021,6 +33021,10 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Built guideflow5: the page reads and writes the one status file (queue.json on guideq), one status line per request on the list, in the sheet and in Activity, an Activity bar on every screen, one tap to make, Cancel while queued. G1 to G12 pass; eight older checks of battle_guide_test.py fail the same way on the untouched HEAD. Use this one still goes the old way until card 7."
     }
    ],
    "prompt": {
