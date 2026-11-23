@@ -33373,9 +33373,10 @@
    "url": "https://claude.ai/code/session_01RXeukH6v1nJFP8pPYg3sw4",
    "title": "Build the Guide worker and the picture line",
    "first": "2026-11-23T04:04:05Z",
-   "last": "2026-11-23T04:12:00Z",
+   "last": "2026-11-23T04:18:41Z",
    "tags": [
-    "guideflow3"
+    "guideflow3",
+    "guideflow3b"
    ],
    "cards": [
     "c-guideflow-3"
@@ -39451,8 +39452,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "139f62dc187244462ad45ef6982e65241529fcf9",
- "synced_at": "2026-11-23T04:12:47+00:00",
+ "synced": "d40e7e7a975e4a2ec4690c3d254d1f9e51f03040",
+ "synced_at": "2026-11-23T04:18:45+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
