@@ -33077,7 +33077,7 @@
   {
    "id": "c-wanstop-tom-controller-r2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanstop-tom-controller-r2",
    "title": "Fix the stopped video tom-controller",
@@ -33093,7 +33093,10 @@
     "opening": "added by the wan-gen job"
    },
    "history": [
-   {"d": "2026-11-23", "t": "Looked at both videos. Attempt 2 does the toss and catch by eye (empty hand flings left, same hand raised and closed beside the shoulder); only the strict vision check missed. Accepted per wanpurpose1: baked and wired (build wanstop-tom-controller-r2), no new try."},
+    {
+     "d": "2026-11-23",
+     "t": "Looked at both videos. Attempt 2 does the toss and catch by eye (empty hand flings left, same hand raised and closed beside the shoulder); only the strict vision check missed. Accepted per wanpurpose1: baked and wired (build wanstop-tom-controller-r2), no new try."
+    },
     {
      "d": "2026-11-23",
      "t": "Added by the wan-gen job (45089583637): tom-controller stopped at rev 2. attempt 1 (pad 0.65) edge, p1; attempt 2 (pad 0.65) p1. This animation has used 0 of its 4 tries ($0.00 of $3.20). Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Main throw and catch actions missing; only minor pose "
@@ -33101,6 +33104,10 @@
     {
      "d": "2026-11-22",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-tom-controller-r2: Tom's controller toss body video accepted and baked, no new try"
     }
    ],
    "prompt": {
@@ -33112,10 +33119,23 @@
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-tom-controller-r2 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job tom-controller (rev 2) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1. Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Main throw and catch actions missing; only minor pose . This animation has used 0 of its 4 tries ($0.00 of $3.20). Its files are on branch wangen: tom-controller-r2-result.json (every check with numbers and the look-check answers) and the videos tom-controller-r2.mp4, tom-controller-a2-r2.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-tom-controller-r2` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-tom-controller-r2. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-23T00:37:57+00:00"
+   "started_at": "2026-11-23T00:37:57+00:00",
+   "done": "2026-11-22"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukEzhuFrYnaYCJgvWy7",
+   "title": "Fix the stopped video tom-controller",
+   "first": "2026-11-23T00:42:17Z",
+   "last": "2026-11-23T00:42:17Z",
+   "tags": [
+    "wanstop-tom-controller-r2"
+   ],
+   "cards": [
+    "c-wanstop-tom-controller-r2"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukEs6km3y8SWTEYf91R",
    "title": "Fix the stopped video stage-tom-glare-vid",
@@ -39095,8 +39115,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "e1c180d7f20729c73b43a504864c43b9d688e2ee",
- "synced_at": "2026-11-23T00:37:59+00:00",
+ "synced": "16545f36e22ebc8a838cbdb8fd610ec15ccbfab6",
+ "synced_at": "2026-11-23T00:43:23+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
