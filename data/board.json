@@ -32678,8 +32678,17 @@
     {
      "d": "2026-11-22",
      "t": "Created by the c-b3s22ch12 session: Milestone for chapter 12 on the new battle."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom sent this to the backlog.",
+     "at": "2026-11-23T05:37:59.790Z"
     }
-   ]
+   ],
+   "backlog": {
+    "at": "2026-11-22",
+    "from": "up"
+   }
   },
   {
    "id": "c-guideflow-1",
