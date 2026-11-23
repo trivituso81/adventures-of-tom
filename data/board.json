@@ -18478,7 +18478,7 @@
    "title": "Battle stage 22: chapter 19 on Battle 3",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Build ONLY chapter 19 on Battle 3: Dead Letter (Elite), Rubber Stamp (Elite), Brass Mail-Chute Courier (Mini-boss), The Dead-Letter Censor (Boss). Starts after chapter 18 is switched on.",
    "blocks": [],
    "changed": "2026-11-23",
@@ -18513,9 +18513,14 @@
     {
      "d": "2026-11-23",
      "t": "Built chapter 19 on Battle 3 (b3s22ch19). Dead Letter, Rubber Stamp (Elites alone), the Brass Mail-Chute Courier (Lab only: no scene places it, drawn with the Rubber Stamp sprite) and The Dead-Letter Censor, as data in data/b3-foes-ch19.js; chapters has 19, levelFloor 47 (length 20), tips ch19, Lab fights NEW 94 to 97. New rules fields: REDACTED (`redact` on a foe row, stamp per round divider), the Wax-Seal Ward's `bounceDebuff` flag, Wall Perch (`perch`, `when:{row}`, `row:'swap'`). ONE number moved: the Censor's HP, printed 3,400 (2,550 for three), is 2,300 (1,725). Evidence: the simulator (--support=4, Rank 2, level 47, 24 fights) put the printed HP at 9.83 rounds (6.45 with the stamp off) against a target of 5 to 7; at 2,300 it is 6.22 rounds and won 24 of 24. Elites 2.7 and 2.8 rounds and the Courier fight 6.8 (the bestiary's own estimate) are as printed. Tom's notes read first: t-b3s22ch11 is all good; chapters 12 to 17 are in the backlog with no notes; t-b3s22ch18 had no note. Tests: node tools/b3-sim.js check 5453 checks, no fails; ch19_b3_test.py passes in portrait and landscape; b3_story_test.py passes; unused_voice all 0; battle_guide_test.py fails the same checks as on main before this build (plus the larger animation counts). Fights looked at in portrait and landscape (Censor and Courier Lab fights, and the chapter test frames)."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Shipped as b3s22ch19: Chapter 19 (the lost-mail office) fights on the new battle: Dead Letter, Rubber Stamp, the Courier and the Dead-Letter Censor"
     }
    ],
-   "after": "t-b3s22ch19"
+   "after": "t-b3s22ch19",
+   "done": "2026-11-23"
   },
   {
    "id": "c-b3s22ch20",
@@ -21045,6 +21050,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFbk4NpQHQr8YWTYcb",
+   "title": "Battle stage 22: chapter 19 on Battle 3",
+   "first": "2026-11-23T09:17:53-08:00",
+   "last": "2026-11-23T10:38:25-08:00",
+   "tags": [
+    "b3s22ch19"
+   ],
+   "cards": [
+    "c-b3s22ch19"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDPMNXDGNqnFvZpQod",
    "title": "Guide: upload my own start picture; make all poses",
    "first": "2026-11-23T08:25:35-08:00",
@@ -21054,16 +21071,6 @@
    ],
    "cards": [
     "c-guideflow-6"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFbk4NpQHQr8YWTYcb",
-   "title": "Battle stage 22: chapter 19 on Battle 3",
-   "first": "2026-11-23T09:17:53-08:00",
-   "last": "2026-11-23T09:17:53-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s22ch19"
    ]
   },
   {
@@ -27203,8 +27210,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "d03ac0cf4e075bb73755d7e129e8907aefe7db84",
- "synced_at": "2026-11-23T18:24:53+00:00",
+ "synced": "5b0e554cd24cbf2c7fd1613c201a14ba25324162",
+ "synced_at": "2026-11-23T18:42:29+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
