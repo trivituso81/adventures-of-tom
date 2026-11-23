@@ -1,3 +1,15 @@
+## reports-2026-11-21c (2026-11-23): Chapter 2 scenes start the moment the party arrives, and a third family member sits at the left of the Family page
+
+Card c-reports-13, Tom's answer on t-reports13-ch2: "Start each scene the moment the party arrives, no long walk-in".
+
+| Report | Tom's note | Fix |
+|---|---|---|
+| r-20261121-180541-ojxd | "the cut scene took too long to start" | `ch2End` (data/scenes.js) places Tom, TNB and Nara beside Mr. Washington at once instead of walking 17 tiles first. |
+| r-20261121-180439-svqd | "this scene has to be triggered before they leave" | The grey tree scene (`ch2-lemon`) fires from a larger part of the clearing, `[1,1,14,12]` instead of `[1,1,8,9]`. |
+| r-20261122-064330-9lsh | "When there are three characters, a third one should not be centered on the page. He should be left aligned. Same as when there's four" | `m2Layout` (engine/m2-family.js): on the wide Family page the right page seats its people at the same seat width as the left, packed to the left, for three as for four. |
+
+Not tested in a browser: smoke.py could not run in this session (the preinstalled Chromium does not match the Python Playwright version). Syntax and tag checks pass. Not looked at on a phone.
+
 ## wanstop-tom-controller-r2 (2026-11-23): Tom's controller toss body video accepted and baked, no new try
 
 Card c-wanstop-tom-controller-r2. The bulk run stopped tom-controller after two misses (attempt 1: left edge touched in 5 of 150 pictures and the vision check; attempt 2, pad 0.65: only the vision check, "main action missing"). Looked at both contact sheets. Attempt 1 shows a ball in his hand, which the move forbids (the stage draws the controller). Attempt 2 (`tom-controller-a2-r2.mp4`) shows what the move needs: the open empty hand flings out to the left, then the same hand is raised beside the shoulder and closed in a catch, then back to the relaxed stance. Height, feet, background, edge and ends all passed; only the strict vision question missed, on a small detail (Tom 2026-11-21: it has to complete the purpose, not be perfect). Accepted: baked with the job's own settings (`data/clips/tom-controller.js`, `art/clips/tom-controller.webp`, every 4th picture, 28 frames, 2.3 s, hit at 1.4 s) and its script tag added; the row `controller_toss` already pointed at clip `tom_controller`. No new try, no paid run, no watch card (Tom judges it in the Move Lab). Nothing was pushed to `wangen`.

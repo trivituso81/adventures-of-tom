@@ -25408,12 +25408,12 @@
   },
   {
    "id": "c-reports-13",
-   "tag": "reports-2026-11-21",
+   "tag": "reports-2026-11-21c",
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (3 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-180439-svqd, r-20261121-180541-ojxd, r-20261122-064330-9lsh. First note: this scene has to be triggered before they leagve",
+   "next": "Shipped in reports-2026-11-21c: Chapter 2 end scene starts at once, grey tree scene fires from a larger clearing, third family member left aligned on the Family page. Reports svqd, ojxd and 9lsh fixed.",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -25536,6 +25536,11 @@
     {
      "d": "2026-11-22",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Part 3 shipped in build reports-2026-11-21c: Tom's answer applied (scenes start on arrival), third-person Family layout fixed. Not browser tested (smoke could not run here).",
+     "at": "2026-11-23T01:30:00Z"
     }
    ],
    "blocks": [],

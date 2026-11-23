@@ -105,8 +105,10 @@ function m2FamilyLayout() {
   // Wide book: both pages seat their people in the same width, packed to the left of each page (clear of the crease), so the four are evenly spaced.
   const pls=[...M2.root.querySelectorAll('.m2-plates')];
   for(const e of [...figs,...pls]) { e.style.width=''; e.style.alignSelf=''; }
-  if(M2.dims.wide&&figs.length===2&&figs[0].querySelectorAll('.m2-slot').length===figs[1].querySelectorAll('.m2-slot').length) {
-    const w=Math.min(figs[0].clientWidth,figs[1].clientWidth);
+  const nL=figs.length===2?figs[0].querySelectorAll('.m2-slot').length:0,nR=figs.length===2?figs[1].querySelectorAll('.m2-slot').length:0;
+  if(M2.dims.wide&&nL&&nR&&nR<=nL) {
+    // Three people: the third sits at the left of the right page in the same seat width as the two beside him (Tom 2026-11-22), not centred.
+    const w=Math.min(figs[0].clientWidth,figs[1].clientWidth)*nR/nL;
     for(const e of [figs[1],pls[1]]) if(e) { e.style.width=w+'px'; e.style.alignSelf='flex-start'; }
   }
   if(!figs.length) return;

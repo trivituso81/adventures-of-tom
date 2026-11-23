@@ -649,9 +649,10 @@ SCENES.ch2AfterBoss=[
 SCENES.ch2End=[
   {flag:'ch2-done',value:'pending'},
   {place:'Mr. Washington',at:[12,18],dir:'right'},
-  {all:[{walk:'tom',to:routeTo('tom',14,18),speed:.22},   // TNB and Nara walk down with him
-    {if:()=>{ const a=sceneActor('tnb'); return !!(a&&!a.hidden); },then:[{seq:[{wait:.3},{walk:'tnb',to:routeTo('tnb',16,17),speed:.22},{face:'tnb',dir:'left'}]}]},
-    {if:()=>{ const a=sceneActor('nara'); return !!(a&&!a.hidden); },then:[{seq:[{wait:.6},{walk:'nara',to:routeTo('nara',16,19),speed:.22},{face:'nara',dir:'left'}]}]}]},
+  // c-reports-13 (r-20261121-180541-ojxd, Tom: "the cut scene took too long to start"; answer: start the moment the party arrives): the party is placed beside Mr. Washington at once, no 17 tile walk first.
+  {place:'tom',at:[14,18],dir:'left'},
+  {if:()=>{ const a=sceneActor('tnb'); return !!(a&&!a.hidden); },then:[{place:'tnb',at:[16,17],dir:'left'}]},
+  {if:()=>{ const a=sceneActor('nara'); return !!(a&&!a.hidden); },then:[{place:'nara',at:[16,19],dir:'left'}]},
   {face:'tom',dir:'left'},
   {talk:'Mr. Washington',lines:["Morning, Tom! Back from your folks? How's your mama?"]},
   {talk:'Tom',lines:["She's well, Mr. Washington."]},
@@ -694,7 +695,7 @@ const TRIGGERS=[
   {id:'ch2-odette',map:'jpark',at:[1,6,13,10],when:{...CH2,flag:'ch2-lawn',notFlag:'ch2-source'},scene:'ch2Odette'},
   {id:'ch2-t1',map:'griffith',at:[1,1,22,19],when:{...CH2,flag:'ch2-source',notFlag:'ch2-t1'},scene:'ch2Flurry'},
   {id:'ch2-t2',map:'griffith',at:[1,1,22,12],when:{...CH2,flag:'ch2-t1',notFlag:'ch2-tuts'},scene:'ch2Coyote'},
-  {id:'ch2-lemon',map:'griffith',at:[1,1,8,9],when:{...CH2,flag:'ch2-tuts',notFlag:'ch2-lemon'},scene:'ch2Lemon'},
+  {id:'ch2-lemon',map:'griffith',at:[1,1,14,12],when:{...CH2,flag:'ch2-tuts',notFlag:'ch2-lemon'},scene:'ch2Lemon'},
   {id:'ch2-boss',map:'griffith',at:[1,1,8,7],when:{...CH2,flag:'ch2-lemon',notFlag:'ch2-boss'},scene:'ch2Boss'},
   {id:'ch2-after',map:'griffith',when:{...CH2,flag:{'battle:bigshake':'win'},notFlag:'ch2-clear'},scene:'ch2AfterBoss'},
   {id:'ch2-end',map:'jpark',when:{...CH2,flag:'ch2-clear',notFlag:'ch2-done'},scene:'ch2End'}
