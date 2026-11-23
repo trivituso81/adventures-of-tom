@@ -25410,7 +25410,7 @@
    "id": "c-reports-13",
    "tag": "reports-2026-11-21",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (3 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261121-180439-svqd, r-20261121-180541-ojxd, r-20261122-064330-9lsh. First note: this scene has to be triggered before they leagve",
@@ -25424,7 +25424,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGVvpyyr9G81V1EjFt",
+    "url": "https://claude.ai/code/cse_01RXeukFKevpxsstdftbq2RZ",
     "opening": "not started"
    },
    "history": [
@@ -25532,12 +25532,16 @@
      "d": "2026-11-22",
      "t": "Tom tapped START.",
      "at": "2026-11-23T01:03:41.690Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-22",
-   "started_at": "2026-11-22T09:05:04+00:00",
+   "started_at": "2026-11-23T01:04:36+00:00",
    "after": "nothing for Tom: end",
    "rescue": {
     "at": "2026-11-22T09:05:04+00:00",
@@ -25545,8 +25549,7 @@
     "why": "Quiet: the conversation may have stopped",
     "url": "https://claude.ai/code/cse_01RXeukGVvpyyr9G81V1EjFt",
     "prev": "https://claude.ai/code/session_01RXeukG2FCZpuZRHq4aKwiQ"
-   },
-   "start": true
+   }
   },
   {
    "id": "c-wanstop-rose-giddyup-r7",
@@ -39121,8 +39124,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "16545f36e22ebc8a838cbdb8fd610ec15ccbfab6",
- "synced_at": "2026-11-23T00:43:23+00:00",
+ "synced": "61e83f25bc255ad171232a5cec35017b06d14dc4",
+ "synced_at": "2026-11-23T01:04:37+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
