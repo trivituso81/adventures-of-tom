@@ -9712,7 +9712,7 @@
    "ask": "setup",
    "fyi": true,
    "blocks": [],
-   "next": "Night of 2026-11-22. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: nothing. Starts used: 0 of 5. Limits of the night QA: the test browser is Chromium on a server, not Safari on the iPhone; it cannot hear, cannot judge touch, and cannot see the Duo fold.",
+   "next": "Night of 2026-11-23. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: nothing. Starts used: 0 of 5. Limits of the night QA: the test browser is Chromium on a server, not Safari on the iPhone; it cannot hear, cannot judge touch, and cannot see the Duo fold.",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukGbrHbR5tTUJoJwwSg",
     "opening": "board"
@@ -9791,7 +9791,7 @@
      ]
     ]
    ],
-   "night_key": "2026-11-22",
+   "night_key": "2026-11-23",
    "tag": "t-lastnight",
    "note": "The what to do doesn't tell me what to do",
    "prompt": {
@@ -27210,8 +27210,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "5b0e554cd24cbf2c7fd1613c201a14ba25324162",
- "synced_at": "2026-11-23T18:42:29+00:00",
+ "synced": "814d0ad18c1a38c0792a3eeb56a4d34a253cd089",
+ "synced_at": "2026-11-23T20:17:12+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -27264,6 +27264,6 @@
     }
    ]
   },
-  "reported": "2026-11-22"
+  "reported": "2026-11-23"
  }
 }
