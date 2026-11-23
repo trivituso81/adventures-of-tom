@@ -1,3 +1,11 @@
+## guideflow4b (2026-11-23): The Guide video line installs ffmpeg and ffprobe on the runner
+
+Card c-guideflow-4, part b. The free proof on GitHub (a dry row and two replay rows from stored takes) found that the runner has no `ffprobe`, so the replay rows were all called "hardly moves" (the take note said "No such file: ffprobe"). The Tools step for lane vid now installs ffmpeg from apt, as `clip-gen.yml` does, in place of the imageio-ffmpeg link. No paid video was made.
+
+| What | Where |
+|---|---|
+| ffmpeg and ffprobe from apt for lane vid | `.github/workflows/guide-work.yml` |
+
 ## guideflow4 (2026-11-23): The Guide worker makes family videos (nothing changes on screen yet)
 
 Card c-guideflow-4. The worker's video lane now takes a `video` row from the queue, makes the start picture, sends the `tom-idle` job to fal Wan 3.0 (estimate $0.50, never above the $1 request cap, no daily limit), waits for it, cuts the marks and runs the clip gate through `make_take.py`, keeps the take on branch `guidegen`, and writes the result on the row. Four videos run at a time; a late row is picked up within seconds. A worker that dies mid-video is resumed by the next one from the fal request number, so a video is paid for once. Failures use the X table: X5 out of credit (stops the claims), X6 a second failed try, X7 a rate limit with no fal number (the row goes back in line and the claim is not counted as a try), X9 a still take, X10 a gate hold (the row stays done and says why), X15 a staging wait, X16 files not on the branch, X22 an estimate over the cap. A replay row reads a stored take at cost 0. The notification is held back for the worker's own rows (`--quiet`).
@@ -10,6 +18,7 @@ Tested with stand-ins only (no paid run): `worker_test.py` T6 (about 30 checks),
 | X7 move making to queued (worker, no fal number) | `tools/guidegen/store.py` |
 | `--quiet` | `tools/guidegen/make_take.py` |
 | Checkout and tools for lane vid | `.github/workflows/guide-work.yml` |
+
 ## b3s22ch16 (2026-11-22): Chapter 16 (the town square) fights on the new battle: Marlowe and his Grey Notes
 
 Card c-b3s22ch16. Chapter 16 is on the BY CHAPTER list for Battle 3. One number changed: the boss's HP, printed 2700 (2020 for three), is 1300 (975). Evidence: simulator (`--support=4`, Rank 2, level 40, Tom, Amy, TNB and Nara, 100 fights each), aim 5 to 7 rounds. With the printed 2700 and a wall that comes back every third turn the fight took 18.75 rounds and 9 of 100 were lost. The Grey Notes he keeps calling, not his HP alone, were the length, so the wall is used twice (once above half HP, once below), which is the cadence the card's "calls up to 2" read as; HP sweep with that cadence: 1600 gives 7.32, 1400 gives 6.89, 1300 gives 6.68 (shortest 5.83, longest 7.10, 100 of 100 won), 1000 gives 5.0. 1300 is the middle of the aim. The other numbers are the printed ones (Atk 175, Def 76, Spd 120, 8 pips, Grey Note 1000 HP on its own and 404 as his helper). Two Grey Notes on their own (NEW 88) run 3.3 rounds.

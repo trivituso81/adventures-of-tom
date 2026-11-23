@@ -74,9 +74,10 @@ jobs:
         run: |
           pip install requests pillow numpy
           if [ "$LANE" = "vid" ]; then
-            pip install scipy opencv-python-headless imageio-ffmpeg
-            if ! command -v ffmpeg >/dev/null; then sudo ln -sf "$(python3 -c 'import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())')" /usr/local/bin/ffmpeg; fi
-            command -v ffmpeg; command -v ffprobe || echo "no ffprobe (the recipe falls back to ffmpeg)"
+            pip install scipy opencv-python-headless
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+            command -v ffmpeg ffprobe
           fi
       - name: Work
         if: steps.probe.outputs.go == 'true'
