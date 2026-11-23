@@ -575,3 +575,12 @@ Object.assign(B3_STATUS,{
   gold_guard:{id:'gold_guard',name:'Gold Guard',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
     short:'GUARD',color:'#f0d27a',weight:5,desc:'Knees locked and standing very still: takes 25% less damage. Panic Boil! or a Break ends it.'}
 });
+
+// Stage 22 (chapter 14, Long Island under the dome): the two statuses Boppy's Gold Armor names after Boppy. "Back Behind the Line!" is the Gold Knight's Raised Palm under its real name
+// (15% less Attack for 1 turn); Resting My Eyes is his Gold Guard under its real name (the Guard Stance he naps in). The shared rows (Slow, Fatigue, Toasty, Mend) are above.
+Object.assign(B3_STATUS,{
+  back_behind:{id:'back_behind',name:'Back Behind the Line!',kind:'debuff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'atk',kind:'line',v:-.15}],flags:[],
+    short:'ATK DOWN',color:'#e2c36b',weight:3,desc:'A gold palm up and a voice booming out of the helmet, and you stop short: 15% less Attack.'},
+  resting_eyes:{id:'resting_eyes',name:'Resting My Eyes',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
+    short:'GUARD',color:'#f0d27a',weight:5,desc:'Knees locked and napping standing up: takes 25% less damage. Panic Boil! or a Break ends it.'}
+});

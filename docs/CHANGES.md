@@ -1,3 +1,22 @@
+## b3s22ch14 (2026-11-22): Chapter 14 (Long Island under the dome) fights on the new battle: Boppy's Gold Armor, and the Part 1 monsters that come back
+
+Card c-b3s22ch14. Chapter 14 is on the BY CHAPTER list for Battle 3 with the bestiary's numbers unchanged. Simulator (`--support=4`, Rank 2, level 35): the Gold Armor 7.3 rounds (aim 7), the returning pairs 2.8 to 3.0, the returning Elite packs 3.2 to 5.1, the six returning bosses 2.8 to 4.8; no number was changed.
+
+| What | Where |
+|---|---|
+| Boppy's Gold Armor (boss, 8 pips, 3160 HP): the Gold Knight's seven motions under their real names; the family's hits land on the armor, never on Boppy; the girls can be hit; statuses `back_behind` and `resting_eyes` | `data/b3-foes-ch14.js`, `data/b3-status.js` |
+| 34 returning Part 1 monsters (`_r` rows and formations made from the Part 1 rows on the chapter 14 stat lines; Iron-Gill calls a returning Soggy Sock; no drops) | `data/b3-foes-ch14.js` |
+| Returning monsters drawn on their Part 1 paintings, regular ones 25% larger | `engine/b3-play.js`, `engine/painted.js` |
+| Switch, level floor 35, tips `ch14`, Lab fights NEW 74 to 86 | `data/b3-story.js`, `data/b3-lab.js`, `data/battle-lab-index.json` |
+| Battle 3 wording for the goal toasts, the tip toast, Amy's gate and retry coaching and the Tombo skin toast behind `B3_CH_ON(14)`; recorded lines untouched | `data/scenes-ch14.js` |
+| Chapter 14 test (arrival, Deedee, the gate and the armor fight, the melt; portrait and landscape), night manifest entry, new rule check file | `tools/ch14_b3_test.py`, `tools/night/tests.json`, `tools/b3-check-s22ch14.js` |
+| Checks that counted switched chapters now include 14; chapter 15 is the first unswitched one | `tools/b3-check-s15.js` to `s18bonus.js`, `tools/b3_story_test.py`, `tools/battle_guide_test.py`, `data/guide-anims.json` |
+| Board: Milestone card t-b3s22ch14, a note on c-b3s22ch15 | `data/board.json` |
+
+Gaps found: the built chapter places no Part 1 monster on a map, so the returning fights are data and Lab only; recorded pre-fight lines still say "don't hit him"; the cracked-armor art and brighter palette are not built.
+
+Tests: `node tools/b3-sim.js check`; `python3 tools/ch14_b3_test.py` portrait and landscape; `python3 tools/b3_story_test.py`; `python3 tools/battle_guide_test.py`; `python3 tools/smoke.py`; `python3 -I tools/clip-audit/unused_voice.py`.
+
 ## reports-2026-11-21c (2026-11-23): Chapter 2 scenes start the moment the party arrives, and a third family member sits at the left of the Family page
 
 Card c-reports-13, Tom's answer on t-reports13-ch2: "Start each scene the moment the party arrives, no long walk-in".

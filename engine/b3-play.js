@@ -23,6 +23,8 @@ const B3P={t:0,q:[],body:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer
 // How an enemy stands that is not in its art: flyers hover this many pixels off the ground.
 const B3_BOSS_SIZE=2.5;   // every boss is drawn 2.5 times the usual fit (Tom 2026-11-21, report r-20261121-180138-yorh: "all bosses should be HUGE, at least 2.5x larger")
 const B3_FOE_LOOK={skeeter:{hover:14},bigone:{size:2.5}};   // size: drawn this many times larger than the usual fit (Tom 2026-11-21: the Big One 2.5x)
+// stage 22 chapter 14: a returning Part 1 monster (data/b3-foes-ch14.js, id with `_r`) is drawn with its Part 1 painting (`art`), so it takes that painting's look too, and `size` on its row (1.25: 25% larger) is its own.
+const b3Look=f=>B3_FOE_LOOK[f.id]||B3_FOE_LOOK[f.D&&f.D.art]||{};
 // How long the default move animations take, as a multiple of the first build's pace. Tom, 2026-11-18: they were about 2x too fast.
 // One number: 1 is the old quick pace, 2 is twice as long. The battle speed button (1x / 2x) still halves it for the player.
 const B3_TEMPO=2;
@@ -75,7 +77,7 @@ function b3LayoutFoes() {
   const F=B3.F,fr=F.foes.filter(f=>f.row!=='back'),bk=F.foes.filter(f=>f.row==='back'),n=F.foes.length,want=[0,96,80,68,60][n]||60;
   const fy={1:[264],2:[224,302],3:[218,262,306]},fx={1:[168],2:[184,156],3:[188,158,188]},by={1:[236],2:[214,268]},bx={1:[84],2:[92,70]};
   const place=(f,px,py,k)=>{ const def=b2BattleDef(MONSTERS[f.D.art||f.id]),base=def.scale||3,w=def.sprite[0].length;
-    B3P.foe[f.key]={def,px,py,sc:Math.max(base*.7,Math.min(base*1.3,want/w))*k*(def.shrink||1)*((B3_FOE_LOOK[f.id]||{}).size||(f.D&&f.D.role==='boss'&&!f.add?B3_BOSS_SIZE:1))}; B3P.fa[f.key]={lunge:null,hurtUntil:0,shakeUntil:0,flashUntil:0,die:null,hold:0}; };
+    B3P.foe[f.key]={def,px,py,sc:Math.max(base*.7,Math.min(base*1.3,want/w))*k*(def.shrink||1)*(b3Look(f).size||(f.D&&f.D.size)||(f.D&&f.D.role==='boss'&&!f.add?B3_BOSS_SIZE:1))}; B3P.fa[f.key]={lunge:null,hurtUntil:0,shakeUntil:0,flashUntil:0,die:null,hold:0}; };
   fr.forEach((f,k)=>place(f,(fx[fr.length]||fx[3])[k%3],(fy[fr.length]||fy[3])[k%3],1));
   // A helper of a linked foe (data/b3-foes-ch13.js `helperLink`) stands in the gap between the boss and the family, not behind the boss: the boss is drawn 2.5 times large and would hide it,
   // and knocking the helper out is the point of the fight. Every other Back foe keeps its slot.
@@ -434,7 +436,7 @@ function b3DrawFoe(f,t,picked) {
   const dying=A.die!=null,dc=dying?b3cGet(f.id,'die',9000):null;   // a defeated clip plays out, then the monster fades (engine/b3-clips.js)
   const dq=dying?(dc?Math.max(0,Math.min(1,(t-A.die-dc.dur/1000)/.4)):Math.min(1,(t-A.die)/.9)):0;
   if(dq>=1) return;
-  const look=B3_FOE_LOOK[f.id]||{},hov=look.hover||0;
+  const look=b3Look(f),hov=look.hover||0;
   let lq=0,lp=0; if(A.lunge) { lp=(t-A.lunge.t0)/A.lunge.dur; if(lp>=1) A.lunge=null; else lq=Math.sin(Math.PI*lp); }
   const fl=!dying&&vu.st.includes('flustered');
   const hurt=dying||fl||t<A.hurtUntil,holding=!fl&&t<A.hold;

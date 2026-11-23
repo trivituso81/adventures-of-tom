@@ -77,7 +77,7 @@ SCENES.ch14Open=[
   {talk:'Amy',lines:['Rose.']},
   {talk:'Rose',lines:['A very small boop.']},
   {trace:'ch14-open'},{hearts:'amy'},
-  {toast:'Goal: talk to Deedee on the porch (left of the Rivituso door) first. She is frozen in amber. Do not hit Boppy.',time:7},
+  {if:()=>!B3_CH_ON(14),then:[{toast:'Goal: talk to Deedee on the porch (left of the Rivituso door) first. She is frozen in amber. Do not hit Boppy.',time:7}],else:[{toast:'Goal: talk to Deedee on the porch (left of the Rivituso door) first. She is frozen in amber.',time:7}]},
   {flag:'ch14-open'},
   {save:true}
 ];
@@ -117,7 +117,7 @@ SCENES.ch14Deedee=[
   {talk:'Tom',lines:['We’ll be careful.']},
   {talk:'Deedee',lines:['You were always the careful one. Now be the kind one. Go.']},
   {trace:'ch14-deedee'},{hearts:'tom'},{hearts:'amy'},
-  {toast:'Goal: face Warden Boppy at the Rivituso door. Do not hit him. DEFEND, cheer him up, make him laugh.',time:7},
+  {if:()=>!B3_CH_ON(14),then:[{toast:'Goal: face Warden Boppy at the Rivituso door. Do not hit him. DEFEND, cheer him up, make him laugh.',time:7}],else:[{toast:'Goal: face Boppy at the Rivituso door. You fight his gold armor, never Boppy. When the armor breaks, the fight is over.',time:7}]},
   {flag:'ch14-deedee'},
   {save:true}
 ];
@@ -126,7 +126,7 @@ SCENES.ch14Gate=()=>[
   {flag:'ch14-gate',value:'pending'},
   ...(flag('ch14-gate')==='pending'||flag('ch14-gate')===true?[
     {talk:'Boppy',lines:['Halt. Again. Round two.']},
-    {talk:'Amy',lines:['Slower. Nobody hit him. Guard, cheer him up, make him laugh.']}]:[
+    ...(B3_CH_ON(14)?[{talk:'Amy',lines:['Slower this time. That’s the armor, not your dad. Hit the gold, keep everyone shielded, and let the noise wake him up.']}]:[{talk:'Amy',lines:['Slower. Nobody hit him. Guard, cheer him up, make him laugh.']}])]:[
     {talk:'Tom',lines:['Dad. We’re not here to fight you.']},
     {talk:'Boppy',lines:['Then you’re here to leave.']},
     {talk:'Tom',lines:['Mom’s on the porch. She’s awake.']},
@@ -140,13 +140,16 @@ SCENES.ch14Gate=()=>[
     {talk:'Boppy',lines:['...Last warning.']},
     {talk:'Tom',lines:['Noted.']},
     {trace:'ch14-gate'},
-    {toast:'Tip: hitting him heals his armor. DEFEND (Tom), Amy’s PEP TALK, Grace’s DANCE, Rose’s RASPBERRY and ▼ Bag, MAKE HIM LAUGH, are the way through.',time:7}]),
+    ...(B3_CH_ON(14)?[{toast:'Tip: your hits land on the gold armor, never on Boppy. Pepper Breath leaves the armor Toasty, so a Racket hit wakes him. Sizzle and Racket break it fastest.',time:7}]:[
+    {toast:'Tip: hitting him heals his armor. DEFEND (Tom), Amy’s PEP TALK, Grace’s DANCE, Rose’s RASPBERRY and ▼ Bag, MAKE HIM LAUGH, are the way through.',time:7}])]),
   {flag:'ch14-gate'},
   {battle:()=>{ const b=ch14Boppy(); if(b) Object.assign(b,{monster:'warden',tier:0}); return b; },tut:'ch14'},
   {call:()=>{ const b=ch14Boppy(); if(b) b.monster=null; }},
   {if:()=>flag('battle:warden')!=='win',then:[
     {heal:true},
-    {talk:'Amy',lines:['Everybody okay? He hits like a dad who loves you and is very upset about it.']},
+    {if:()=>B3_CH_ON(14),then:[
+      {talk:'Amy',lines:['Everybody up. He hits like a dad who loves you and is very upset about it.','Break the armor’s pips with Sizzle or Racket, and shield everyone before the Great Big Gold Hug.']}],else:[
+      {talk:'Amy',lines:['Everybody okay? He hits like a dad who loves you and is very upset about it.']}]},
     {toast:'Face Warden Boppy (at the Rivituso door) and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 
@@ -202,7 +205,7 @@ SCENES.ch14After=()=>[
   {call:()=>{ setFlag('tombo:boppy2'); sfx.levelChime&&sfx.levelChime(); }},
   {talk:'Boppy',lines:['Take the Warden’s key, Tommy. It opens the gate, and it opens our front door too. Either way, nobody gets past us.']},
   {talk:'Tom',lines:['Nobody gets past us.']},
-  {toast:'New Tombo: Nobody Gets Past Us (Tom and Boppy). Boppy is back inside with Deedee.',time:8},
+  {if:()=>!B3_CH_ON(14),then:[{toast:'New Tombo: Nobody Gets Past Us (Tom and Boppy). Boppy is back inside with Deedee.',time:8}],else:[{toast:'New Tombo skin: Nobody Gets Past Us (Tom and Boppy). It shows when they fire a Full Family Ruckus. Boppy is back inside with Deedee.',time:8}]},
   {trace:'ch14-wrap'},{hearts:'tom'},{hearts:'amy'},
   {walk:'Deedee',to:[[17,10],[17,9]],speed:.26},
   {walk:'Boppy',to:[[17,10],[17,9]],speed:.26},

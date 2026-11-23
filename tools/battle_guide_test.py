@@ -231,9 +231,9 @@ with sync_playwright() as p:
         check(name + ': a family move with no staging row waits: no Generate, no note box, its draft marked old (movestage1)', 'Waits for staging.' in t2 and 'OLD DRAFT, NOT FOR USE' in t2 and pg.locator('#ggen').count() == 0 and pg.locator('#gnote').count() == 0, t2[:300])
         if name == 'folded': pg.screenshot(path=os.path.join(out, 'battleguide-%s-waits.png' % name))
         pg.click('#bclose')
-        pg.goto(URL + '#anims/tnb'); pg.wait_for_selector('#detail .anim')
+        pg.goto(URL + '#anims/justin'); pg.wait_for_selector('#detail .anim')
         pg.click('#detail .anim .play >> nth=0'); pg.wait_for_selector('#gcant')
-        check(name + ': someone with no start picture cannot be made, and the page says what is missing', 'start picture' in pg.locator('#gcant').inner_text() and 'art/clips/start/tnb-hero.png' in pg.locator('#gcant').inner_text(), pg.locator('#gcant').inner_text())
+        check(name + ': someone with no start picture cannot be made, and the page says what is missing', 'start picture' in pg.locator('#gcant').inner_text() and 'Justin' in pg.locator('#gcant').inner_text(), pg.locator('#gcant').inner_text())
         pg.screenshot(path=os.path.join(out, 'battleguide-%s-cannot.png' % name))
         pg.click('#bclose')
         ids = pg.evaluate("[Object.keys(ANIM_BY).sort(), Object.keys(GUIDE.anims).sort()]")
@@ -442,7 +442,7 @@ vm.runInContext(code,ctx);console.log(JSON.stringify(ctx.OUT));"""
     nrm = lambda x: re.sub(r'[^a-z0-9]+', '', str(x).lower())
     check('generator: the ten third Vibes are built (stage 19), so none is planned and each is in the game', len(pv) == 0 and all(sum(1 for o, n in game['vibes'] if o == ow) == 3 for ow in game['owners']), [(v['owner'], v['name']) for v in pv])
     check('generator: every third Vibe is whole (3 titles, Lean, Trait, Basic, 3 Skills with Rank 1, 2 and 4, 2 Quirks)', all(len(v['subtitles']) == 3 and v['lean'] in ('guard', 'striker', 'tempo', 'support') and v['trait']['desc'] and v['basic']['desc'] and [k['rank'] for k in v['skills']] == [1, 2, 4] and len(v['quirks']) == 2 and v['when'] for v in pv))
-    check('generator: the planned monsters are the plan documents\' whole list (chapters 11, 12 and 13 are built since stage 22 and drop out on the page), and every foe has a when rule', not [f for f in pfoe if f['monster'] in game['foes'] and f.get('ch') not in (11, 12, 13)] and len(pfoe) >= 26 and all(i.get('when') for i in items))
+    check('generator: the planned monsters are the plan documents\' whole list (chapters 11 to 14 are built since stage 22 and drop out on the page), and every foe has a when rule', not [f for f in pfoe if f['monster'] in game['foes'] and f.get('ch') not in (11, 12, 13, 14)] and len(pfoe) >= 26 and all(i.get('when') for i in items))
     check('generator: the stage list is 16, 19 to 21, 22 and 23 in order', [x['n'] for x in pst] == ['16', '19 to 21', '22', '23'], [x['n'] for x in pst])
     check('generator: no em dash anywhere in the file', DASH not in open(os.path.join(ROOT, 'data', 'guide-planned.json'), encoding='utf-8').read())
     r = subprocess.run([sys.executable, os.path.join(HERE, 'guide_planned.py'), '--check'], capture_output=True, text=True, cwd=ROOT)
@@ -489,8 +489,8 @@ vm.runInContext(code,ctx);console.log(JSON.stringify(ctx.OUT));"""
 
     # drop by itself: the game's own data gains the real thing (a monster, a chapter, the BAG rule; the third Vibes went this way in stage 19); the planned item goes and the real one shows
     cx = br.new_context(viewport={'width': 951, 'height': 648}); gains = {
-        'data/b3-foes-ch10.js': "B3_FOES.warden=Object.assign({},B3_FOES.mudling,{id:'warden',name:\"Boppy's Gold Armor\",ch:14});",
-        'data/b3-story.js': "B3_STORY.chapters.push(14);",
+        'data/b3-foes-ch10.js': "B3_FOES.hush9final=Object.assign({},B3_FOES.mudling,{id:'hush9final',name:\"The Windowsill Radio\",ch:15});",
+        'data/b3-story.js': "B3_STORY.chapters.push(15);",
         'data/b3-rules.js': "B3_RULES.bag=true;"}
     def gain(route):
         u = route.request.url.split('?')[0].split('/', 3)[3]; r = route.fetch(); route.fulfill(response=r, body=r.text() + '\n;' + gains[u])
@@ -499,9 +499,9 @@ vm.runInContext(code,ctx);console.log(JSON.stringify(ctx.OUT));"""
     pg.goto(URL + '#family/tom'); pg.wait_for_function("document.querySelectorAll('#list .row').length>3 && document.querySelector('#detail .seg')", timeout=60000)
     check('stage 19: no Family row says planned and Tom shows his three built Vibes', '(planned)' not in pg.locator('#list').inner_text() and pg.locator('#detail .seg button.planbtn').count() == 0 and pg.locator('#detail .seg button:not(.planbtn)').count() == 3 and 'Star Baker' in pg.locator('#detail .seg').inner_text(), pg.locator('#detail .seg').inner_text())
     pg.goto(URL + '#monsters'); pg.wait_for_function("document.querySelectorAll('#list .row').length>3", timeout=60000)
-    check('the game gains a monster: it leaves the planned list and is a normal row', pg.locator('#list .row.plan').count() == len([f for f in pfoe if f['monster'] not in game['foes']]) - 1 and pg.locator('#list .row:not(.plan)').count() == want['foes'] + 1 and "Boppy's Gold Armor" in pg.locator('#list .row:not(.plan)').last.inner_text() + pg.locator('#list').inner_text())
+    check('the game gains a monster: it leaves the planned list and is a normal row', pg.locator('#list .row.plan').count() == len([f for f in pfoe if f['monster'] not in game['foes']]) - 1 and pg.locator('#list .row:not(.plan)').count() == want['foes'] + 1 and "The Windowsill Radio" in pg.locator('#list .row:not(.plan)').last.inner_text() + pg.locator('#list').inner_text())
     pg.goto(URL + '#rules/coming'); pg.wait_for_function("document.querySelector('#detail h2')", timeout=60000); pg.wait_for_timeout(250); dt = pg.locator('#detail').inner_text()
-    check('the game gains chapter 14 and the BAG: What is coming drops both (chapters 11 and 13 are built already) and keeps the rest', 'long island under the dome' not in dt.lower() and 'bag command and run' not in dt.lower() and 'casual mode' in dt.lower() and 'the family dinner' in dt.lower(), dt[:300])
+    check('the game gains chapter 15 and the BAG: What is coming drops both (chapters 11 to 14 are built already) and keeps the rest', 'the family dinner' not in dt.lower() and 'bag command and run' not in dt.lower() and 'casual mode' in dt.lower() and 'the town square' in dt.lower(), dt[:300])
     pg.goto(URL + '#rules/sheet'); pg.wait_for_function("document.querySelector('#detail h2')", timeout=60000); pg.wait_for_timeout(250)
     check('the game gains the BAG rule: the cheat sheet says the BAG opens the bag', 'opens the bag' in pg.locator('#detail').inner_text())
     check('gains: no script errors', not errs, errs); cx.close()
