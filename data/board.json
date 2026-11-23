@@ -22928,13 +22928,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-22",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukEFjkAchKyUy6Aq86f",
     "opening": "not started"
    },
    "nightly": true,
@@ -22995,6 +22995,14 @@
     {
      "d": "2026-11-22",
      "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by the night shift."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -23009,7 +23017,8 @@
    "last_run": {
     "date": "2026-11-21",
     "build": "nightclean-1122"
-   }
+   },
+   "started_at": "2026-11-23T07:04:41+00:00"
   },
   {
    "id": "c-bigone25",
@@ -32993,7 +33002,7 @@
   {
    "id": "c-guideflow-5",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "guideflow5",
    "title": "Switch the Guide page to the one status file",
@@ -33003,7 +33012,7 @@
    ],
    "after": "nothing for Tom: c-guideflow-6",
    "created": "2026-11-22",
-   "changed": "2026-11-23",
+   "changed": "2026-11-22",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFYxNDZ5poGu2DEevP",
     "opening": "not started"
@@ -33025,6 +33034,10 @@
     {
      "d": "2026-11-23",
      "t": "Built guideflow5: the page reads and writes the one status file (queue.json on guideq), one status line per request on the list, in the sheet and in Activity, an Activity bar on every screen, one tap to make, Cancel while queued. G1 to G12 pass; eight older checks of battle_guide_test.py fail the same way on the untouched HEAD. Use this one still goes the old way until card 7."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as guideflow5: The Battle Guide page reads one status file and shows one status line per request"
     }
    ],
    "prompt": {
@@ -33035,12 +33048,13 @@
     "model": "Claude Sonnet 5.5 (row C: the plan gives the design, but the session must work out how it joins code that exists)",
     "effort": "high (it crosses several files with nothing written line by line)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guideflow-5 in data/board.json, then the whole of claude/guide-flow-plan.md. That plan is the design: build what it says and do not redesign it. If a step cannot be done as written, do the closest thing that keeps the plan's rules (sections 3.2 and 4.3), say so in docs/CHANGES.md, and go on. This card is plan section 10 step 5 (sections 3.2 D1, D2, D10, D13, all of section 5 except 5.5, section 6 rows X1 to X4 and X21, test T8). Change battle-guide.html only (plus its test and docs). Add ONE reader: every 5 seconds while any row is queued, making, checking or has use wanted or applying, every 30 seconds otherwise, and at once when the page becomes visible again, GET queue.json from branch guideq through the GitHub contents API with the saved token (the helpers ghGetJson and the ?gh= test address already exist; send If-None-Match with the last ETag and treat 304 as no change). It runs on every tab of the Guide, not only Animations. On a change, update the status lines in place without closing the open sheet, without moving the scroll and without restarting a playing clip. Three failed reads show the X21 bar and keep the old rows greyed. Add ONE writer, storeUpdate(fn), a compare and swap on queue.json (GET with sha, change, PUT, on 409 read again, up to 4 times), used for exactly four things: add a row, cancel a queued row, mark use wanted (card 7 turns that on; build the function now), mark left. After adding a row, poke the worker: POST /repos/REPO/dispatches with {\"event_type\":\"guide-work\"}; a poke that fails is not an error for Tom (the row is saved; the X3 line covers it), and while any row has been queued over 90 seconds the page pokes again at most once every 2 minutes. Replace the old status code with the row: remove loadProgress, stageOf, stageBadge, watchProgress, STAGE, STALL_MIN, PROG, queueLine, STARTING, the waiting loops inside doStart and waitTake, GPEND and its storage key aot-guide-pend, and the STALLED badge; keep GKEPT only until this card writes `left` on the row instead, then remove it and aot-guide-kept. Keep the player, the take comparison (showTake, loadTakeClip, reading the take files from branch guidegen), Update the prompt, Send a note, GW and GTR. Requests: Make the start picture ($0.15) adds {id p-WHO-UNIX_SECONDS, kind picture, lane pic, who, cap 0.3}; Make this video ($0.50) adds {id v-SLUG-tN, kind video, lane vid, route wan, anim, who, take n, prompt, promptRev, start, pad, note, cap} with n one above the highest take in takes.json and in the queue for that animation; one tap, the price on the button, no Yes, spend box; a queued row shows Cancel (free). Monster animations keep their old button and path in this card (card 8 moves them). Keep the stop-loss box (stopFor) as it is. Show the row: the status line of plan section 5.1, word for word, with the counting clock from `since`, on the animation's row in the list, in its sheet and in Activity; the take plays in the sheet as soon as its row is done (use result.js and result.img); a person whose picture row is done (or whose picture is on main) has video buttons at once, with no reload, and the start picture shown at the top of their Animations screen is read from branch guidegen startpics/WHO-hero.png when the row says so; a person with no picture shows \"Needs the start picture first.\" on the video rows. Activity bar and list as plan section 5.4. Read the failure words from data/guide-words.json (card 2) for X1 and X2 too if they are there, else use the plan's words. Nothing on the page may say reload, refresh or keep this page open. Extend tools/battle_guide_test.py with cases G1 to G12 as plan section 7 T8 lists them, using the stand-in GitHub the test already has (add queue.json on guideq and the dispatches call to it; the stand-in changes the row over time to play the worker). Check every line of section 5.1 word for word, in portrait and landscape, and save pictures to tools/shots/guideflow-*.png and look at them. Update docs/BATTLE_GUIDE.md. Bump the page's cache tag the way the repo does for battle-guide.html. Tests to run and pass before pushing: python3 tools/battle_guide_test.py, python3 -I tools/guidegen/store_test.py, python3 tools/admin_hub_test.py, python3 tools/dashboard_test.py, python3 tools/smoke.py, python3 tools/workflow_check.py, python3 tools/board_check.py. You must NOT: make any paid run or call fal, xAI or ElevenLabs for real (every test uses stand-ins; the first paid run is Tom's tap); run wangen.py against the real services; create or change a doc in the claude.ai Project (notes go in the repo folder claude/, then run python3 tools/claude_index.py); make or propose a painted battle pose; touch the bulk video flow (wangen.py --bulk, wanbulk.py, wanqa.py, wanbake.py, the wan-gen-bulk line); hand Tom a yes or no check; write an em dash in anything Tom reads. Before every commit check that no file has git conflict markers (a line that starts with seven less-than signs; CLAUDE.md has the command). Push steps: write the heading \"## guideflow5 (the date of that day as YYYY-MM-DD): one plain line Tom can read\" at the top of docs/CHANGES.md with what was built, what was tested and what was not looked at, run python3 tools/workflow_check.py if it exists, run python3 tools/art-library/bump_tags.py guideflow5 --base origin/main, run python3 tools/board_check.py --push guideflow5, fetch and rebase on origin/main, then push to main. At the end write the result into this card's `next` and history, and check the next card (c-guideflow-6) still has its full prompt. Your first push is the commit board: start c-guideflow-5. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-22"
   },
   {
    "id": "c-guideflow-6",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "theme": "Battle Animations",
    "tag": "guideflow6",
    "title": "Guide: upload my own start picture; make all poses",
@@ -33060,6 +33074,10 @@
      "d": "2026-11-22",
      "t": "Made by the planning session (card c-guideflow-plan, plan claude/guide-flow-plan.md section 10, step 6 of 9).",
      "at": "2026-11-22T22:56:03.000Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Unblocked: Switch the Guide page to the one status file is done."
     }
    ],
    "prompt": {
@@ -33071,7 +33089,6 @@
     "effort": "medium (the steps are known)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guideflow-6 in data/board.json, then the whole of claude/guide-flow-plan.md. That plan is the design: build what it says and do not redesign it. If a step cannot be done as written, do the closest thing that keeps the plan's rules (sections 3.2 and 4.3), say so in docs/CHANGES.md, and go on. This card is plan section 10 step 6 (sections 3.2 D11, D13, 5.2, 5.5, section 6 rows X13 and X14, test T8 additions). Change battle-guide.html (plus its test and docs). (1) Upload my own, on a person's Animations screen beside the start picture and on a picture row that is done or failed: a file input (accept image/png, image/jpeg, image/webp). In the page, refuse at once with the words of plan section 5.5 when the file is not an image, is under 600 pixels tall (read it with an Image element) or is over 8 MB. Show the picture with the confirm words of 5.5. On Use it: save the bytes to branch guidegen at uploads/WHO-UNIX_SECONDS.EXT with the GitHub contents API (PUT, base64, message \"guide: upload WHO [skip ci]\"), then add the row {id u-WHO-UNIX_SECONDS, kind upload, lane pic, who, upload: that path} with storeUpdate and poke the worker. The status lines for kind upload are in plan section 5.1 (checking shows \"Checking your picture. About 30 seconds.\" with the clock). Upload a different one repeats this. Go back to a generated picture adds a kind picture row with force:true after one confirm: \"Replace your own picture of NAME with a generated one ($0.15)?\". (2) Make all N missing poses ($X.XX) above the standard poses of a person who has a start picture: N counts the standard poses (Idle, Guard, Hit, Dodge, Knocked out, Victory, Running) with no video in the game and no row that is queued, making, checking or done and not left; the price is N times the video price. A total of $2 or less adds the rows at once; above $2 it asks once: \"Make N videos for $X.XX?\" with Make them and Cancel. All rows are added in ONE storeUpdate and one poke. The button is hidden when N is 0. Tests in tools/battle_guide_test.py: the three instant refusals word for word; a good PNG is saved to the stand-in under uploads/ and its row added; the stand-in turns the row to done and the page shows \"Your picture is in use, exactly as you made it.\" and the video buttons; X13 and X14 lines shown from a failed row; Make all with 7 missing adds 7 rows in one save after the confirm, with 3 missing ($1.50) adds them with no confirm, and counts a queued row as not missing. Portrait and landscape pictures in tools/shots/guideflow-upload-*.png; look at them. Update docs/BATTLE_GUIDE.md. Tests to run and pass before pushing: python3 tools/battle_guide_test.py, python3 -I tools/guidegen/worker_test.py, python3 tools/smoke.py, python3 tools/board_check.py. You must NOT: make any paid run or call fal, xAI or ElevenLabs for real (every test uses stand-ins; the first paid run is Tom's tap); run wangen.py against the real services; create or change a doc in the claude.ai Project (notes go in the repo folder claude/, then run python3 tools/claude_index.py); make or propose a painted battle pose; touch the bulk video flow (wangen.py --bulk, wanbulk.py, wanqa.py, wanbake.py, the wan-gen-bulk line); hand Tom a yes or no check; write an em dash in anything Tom reads. Before every commit check that no file has git conflict markers (a line that starts with seven less-than signs; CLAUDE.md has the command). Push steps: write the heading \"## guideflow6 (the date of that day as YYYY-MM-DD): one plain line Tom can read\" at the top of docs/CHANGES.md with what was built, what was tested and what was not looked at, run python3 tools/workflow_check.py if it exists, run python3 tools/art-library/bump_tags.py guideflow6 --base origin/main, run python3 tools/board_check.py --push guideflow6, fetch and rebase on origin/main, then push to main. At the end write the result into this card's `next` and history, and check the next card (c-guideflow-7) still has its full prompt. Your first push is the commit board: start c-guideflow-6. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "waiting_on": "claude",
    "auto": true
   },
   {
@@ -33643,6 +33660,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFYxNDZ5poGu2DEevP",
+   "title": "Switch the Guide page to the one status file",
+   "first": "2026-11-22T22:10:02-08:00",
+   "last": "2026-11-22T23:03:34-08:00",
+   "tags": [
+    "guideflow5"
+   ],
+   "cards": [
+    "c-guideflow-5"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukF8N248WLrrogRD17e",
    "title": "Battle stage 22: chapter 17 on Battle 3",
    "first": "2026-11-22T21:15:22-08:00",
@@ -33664,16 +33693,6 @@
    ],
    "cards": [
     "c-b3s22ch12"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFYxNDZ5poGu2DEevP",
-   "title": "Switch the Guide page to the one status file",
-   "first": "2026-11-22T22:10:02-08:00",
-   "last": "2026-11-22T22:10:02-08:00",
-   "tags": [],
-   "cards": [
-    "c-guideflow-5"
    ]
   },
   {
@@ -39663,8 +39682,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "46829394565a596710231fae155c6ee270871dbc",
- "synced_at": "2026-11-23T06:54:28+00:00",
+ "synced": "4b81746a0b16b1a7735b34873e60869318aa801d",
+ "synced_at": "2026-11-23T07:04:42+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -39698,7 +39717,14 @@
   "fixes_until": 6,
   "tz": "America/Los_Angeles",
   "log": {
-   "2026-11-21": []
+   "2026-11-21": [],
+   "2026-11-22": [
+    {
+     "id": "c-night-clean",
+     "at": "2026-11-23T07:04:41+00:00",
+     "kind": "standing"
+    }
+   ]
   },
   "reported": "2026-11-22"
  }
