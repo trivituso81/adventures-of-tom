@@ -36,6 +36,20 @@ before = len(done); wangen.run_guide_requests(a, jobs, state, lock, lambda: None
 res = json.load(open(os.path.join(tmp, 'guide-results.json')))['results']
 check('Q2 capped below the price: nothing sent', len(done) == before and res[-1].get('error') == 'cap', res[-1:])
 
+# Q2b guideflow1: no daily limit. $50 already spent today and day_cap None: still made; a request capped below the price is still refused
+import datetime
+a2 = types.SimpleNamespace(**dict(vars(a), day_cap=None))
+st2 = {'spent': 0.0, 'calls': [], 'pending': {}, 'guide_days': {datetime.datetime.utcnow().strftime('%Y-%m-%d'): 50.0}}
+json.dump({'requests': [dict(reqs[0], slug='nolimit')]}, open(os.path.join(tmp, 'data', 'wan-requests.json'), 'w'))
+before = len(done); wangen.run_guide_requests(a2, jobs, st2, lock, lambda: None, None, 'k')
+res = json.load(open(os.path.join(tmp, 'guide-results.json')))['results']
+check('Q2b $50 already spent today, no day cap: the video is still made', len(done) == before + 1 and res[-1].get('video'), res[-1:])
+json.dump({'requests': [dict(reqs[0], cap=0.01, slug='capped2')]}, open(os.path.join(tmp, 'data', 'wan-requests.json'), 'w'))
+before = len(done); wangen.run_guide_requests(a2, jobs, st2, lock, lambda: None, None, 'k')
+res = json.load(open(os.path.join(tmp, 'guide-results.json')))['results']
+check('Q2b no day cap, still refused when capped below the price', len(done) == before and res[-1].get('error') == 'cap', res[-1:])
+check('Q2b the default of --day-cap is no limit', "'--day-cap', type=float, default=None" in open(os.path.join(ROOT, 'tools', 'art-library', 'wangen.py')).read())
+
 # Q3 notifications: the label, the message goes to the topic, a dead network never raises, the off switch works
 sent = []
 class R:

@@ -23,14 +23,13 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: music-gen
-  cancel-in-progress: false
-
 jobs:
   gen:
     if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'music: make ')"
     runs-on: ubuntu-latest
+    concurrency:
+      group: music-gen
+      cancel-in-progress: false
     timeout-minutes: 120
     env:
       CI: 'true'

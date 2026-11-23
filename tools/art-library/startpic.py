@@ -142,7 +142,7 @@ def run(a, jobs, state, lock, save, fal, key, reqs, run_one, judge, today, publi
         est = float(job['est']); dry = a.dry_run or bool(r.get('dry'))
         with lock:
             day = state.setdefault('guide_days', {}); used = day.get(today, 0.0)
-            if not dry and used + est > a.day_cap + 1e-9:
+            if not dry and a.day_cap is not None and used + est > a.day_cap + 1e-9:
                 row['error'] = 'The guide has spent its $%.2f for today already. Try again tomorrow, or ask Claude.' % a.day_cap; rows.append(row); continue
             ns = types.SimpleNamespace(**vars(a)); ns.cap = state['spent'] + min(float(r.get('cap') or 0.3), 0.3); ns.dry_run = dry; ns.tell = None
         _note(who, 'Making the start picture now (about 1 to 2 minutes).', 'hourglass_flowing_sand')

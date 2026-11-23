@@ -24,14 +24,13 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: voice-take
-  cancel-in-progress: false
-
 jobs:
   take:
     if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'voice: take ')"
     runs-on: ubuntu-latest
+    concurrency:
+      group: voice-take
+      cancel-in-progress: false
     timeout-minutes: 350
     env:
       CI: 'true'

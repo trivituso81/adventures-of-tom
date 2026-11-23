@@ -32453,7 +32453,7 @@
    "theme": "Battle Animations",
    "tag": "guideflow1",
    "title": "Remove the Guide's $10 a day limit; check workflows",
-   "next": "Starts by itself. Removes the Battle Guide's own $10 a day video limit (14 of your requests failed on it today) and adds a check so a broken job file can never be pushed again. Nothing for Tom.",
+   "next": "Built (guideflow1): the Guide's $10 a day limit is gone and a workflow check stops a broken job file from being pushed. Nothing for Tom.",
    "blocks": [
     "c-guideflow-2"
    ],
@@ -32478,6 +32478,11 @@
     {
      "d": "2026-11-22",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Built guideflow1: no daily limit on Guide videos ($1 per request stays); tools/workflow_check.py added and run by bump_tags and the night tests; seven paid workflows had concurrency at the top of the file and it moved onto their job. Pushed to branch claude/magical-planck-gbeqkd only (the session was told to use that branch), not main.",
+     "at": "2026-11-23T00:12:00.000Z"
     }
    ],
    "prompt": {

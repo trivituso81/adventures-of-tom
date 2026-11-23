@@ -30,13 +30,12 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: guidegen
-  cancel-in-progress: false
-
 jobs:
   draft:
     runs-on: ubuntu-latest
+    concurrency:
+      group: guidegen
+      cancel-in-progress: false
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4

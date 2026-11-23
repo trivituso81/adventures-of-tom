@@ -1,3 +1,12 @@
+## guideflow1 (2026-11-23): The Battle Guide no longer stops at $10 a day, and a broken workflow file can no longer be pushed
+
+- Built: `--day-cap` in `tools/art-library/wangen.py` now defaults to none (the check is skipped; `startpic.py` shares it), so the Guide's own $10 a day video limit is gone. The $1 per video request limit is unchanged. Text updated in `docs/BATTLE_GUIDE.md` and `wan-gen.yml`.
+- Built: `tools/workflow_check.py` checks every workflow file (loads, has `on` and `jobs`, every `concurrency` has a text `group`, a paid secret never goes with `concurrency` at the top of the file). `bump_tags.py` stops the push when it fails; it is in `tools/night/tests.json`. CLAUDE.md has the line (guideflow1).
+- Changed beyond the plan, because the new check found it: seven paid or push-started workflows (clip-gate, clip-gen, costs-sync, guide-draft, guide-reconcile, music-gen, voice-take) had `concurrency` at the top of the file. Each has one job, so the same block moved onto that job (same group names; an unrelated push no longer cancels a waiting run, CLAUDE.md wanstuck1). Not run on GitHub yet.
+- Tested, passed: `queue_test.py` (new Q2b: $50 spent today and a request is still made; a request capped below the price is still refused), `startpic_test.py`, `workflow_check.py`, `workflow_check_test.py` (the startpics12 mistake fails, the real folder passes), `board_check.py`.
+- Tested, failed before and after this change: `wangen_test.py` case W13 (runs `wanbulk_test.py`, the bulk flow, which this card must not touch; it fails the same way with my changes stashed, in this container's numpy).
+- Not done or not looked at: no paid run and no call to fal, xAI or ElevenLabs; the bulk video flow; the Battle Guide page itself.
+
 ## wanstop-stage-tom-jetwash-vid-r1 (2026-11-23): the jet wash video is tried again with its start picture shrunk to 80 percent
 
 Card c-wanstop-stage-tom-jetwash-vid-r1. The bulk run stopped `stage-tom-jetwash-vid` twice (bg 94.7 and 93.0 percent against 97, edge: the streaks touched a picture edge in 51 and 48 of 90 pictures). I looked at the frames: the streaks move and fade out as the prompt says, but the start picture is a wide streak that fills almost the whole width, so the video's streaks reach the frame edge and the edge pixels are not flat black.

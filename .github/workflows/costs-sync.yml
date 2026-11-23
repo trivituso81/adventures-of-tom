@@ -19,13 +19,12 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: costs-sync
-  cancel-in-progress: false
-
 jobs:
   sync:
     runs-on: ubuntu-latest
+    concurrency:
+      group: costs-sync
+      cancel-in-progress: false
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4

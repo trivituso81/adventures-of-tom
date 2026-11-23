@@ -34,14 +34,13 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: guidegen
-  cancel-in-progress: false
-
 jobs:
   reconcile:
     if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'guide: reconcile ')"
     runs-on: ubuntu-latest
+    concurrency:
+      group: guidegen
+      cancel-in-progress: false
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4

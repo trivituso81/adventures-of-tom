@@ -37,13 +37,12 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: clip-gate
-  cancel-in-progress: false
-
 jobs:
   vision:
     runs-on: ubuntu-latest
+    concurrency:
+      group: clip-gate
+      cancel-in-progress: false
     timeout-minutes: 90
     env:
       COSTS_LOG_REPO: ${{ github.workspace }}   # costs2: tools/costlog.py writes this run's spend to data/costs.json on main

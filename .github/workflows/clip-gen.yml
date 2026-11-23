@@ -52,14 +52,13 @@ permissions:
   contents: write
   actions: write
 
-concurrency:
-  group: clip-gen
-  cancel-in-progress: false
-
 jobs:
   gen:
     if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'clip: generate ')"
     runs-on: ubuntu-latest
+    concurrency:
+      group: clip-gen
+      cancel-in-progress: false
     timeout-minutes: 240
     env:
       CI: 'true'
