@@ -30927,7 +30927,7 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "prog",
-   "next": "Build ONLY chapter 14 on Battle 3: Boppy's Gold Armor (Boss). Starts after chapter 13 is switched on.",
+   "next": "Built and tested (build b3s22ch14): chapter 14 is on Battle 3 with the bestiary's numbers unchanged. Waiting on Tom's phone play (card t-b3s22ch14, fyi). Left for other cards: a scene that places the 34 returning Part 1 monsters, and the cracked-armor art.",
    "blocks": [],
    "changed": "2026-11-22",
    "created": "2026-11-22",
@@ -30962,8 +30962,13 @@
     {
      "d": "2026-11-22",
      "t": "Session started (Sonnet 5.5): reading the specs, then building chapter 14 only."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Result (b3s22ch14): chapter 14 is on the BY CHAPTER list (levelFloor 35). data/b3-foes-ch14.js: Boppy's Gold Armor (`warden`, boss, 3160 HP, 8 pips, formation `warden`, 30 Vibe Points) is the Gold Knight's seven motions under their real names (Back Behind the Line!, Walk Slower!, It Was THIS Big!, Pepper Breath, Resting My Eyes, Great Big Gold Hug, The 1970 Cross-Country Story below half HP). The family's hits land on the armor, never on Boppy; the girls can be hit and can go down; two new statuses (back_behind, resting_eyes). The 34 Part 1 monsters that come back have `_r` rows and formations made from the Part 1 rows on the bestiary's chapter 14 stat lines (Lab fights NEW 75 to 86, NEW 74 is the armor); they have no scene (the built chapter places none). Simulator: armor 7.3 rounds (aim 7), returning bosses 2.8 to 4.8, no number changed. Engine: `art` alias and `size` so a returning row draws its Part 1 painting. Gaps: no scene places a returning monster, recorded pre-fight lines still say 'don't hit him' (recorded, not edited), cracked-armor art and brighter palette not built. Tests: sim check green, tools/ch14_b3_test.py portrait and landscape, b3_story_test, battle_guide_test, smoke, unused_voice 0."
     }
-   ]
+   ],
+   "after": "t-b3s22ch14"
   },
   {
    "id": "c-b3s22ch15",
@@ -30993,6 +30998,10 @@
     {
      "d": "2026-11-22",
      "t": "Created by the b3s22 session: one card per chapter so no chapter is built in the same conversation as another."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Note from the chapter 14 build (b3s22ch14): chapter 14 is on Battle 3 (levelFloor 35). tools/battle_guide_test.py's fake-gain case now uses the chapter 15 Windowsill Radio (`hush9final`, chapters.push(15)); when you build chapter 15, change it to a still-planned chapter 16 monster (`greynote`, push(16)) and the 'What is coming' text check to chapter 16. tools/b3_story_test.py treats chapter 15 as the first unswitched chapter (pool 1890, floor 35, Grace set to 38); move those cases to chapter 16 (pool 2025, your levelFloor). Several battle_guide_test checks already fail on main without this build (the page and guide-anims.json list different animations, the What is coming stage list, the plan counts, the engine-script check); they are not from a chapter build. The 34 returning Part 1 rows are `<id>_r`, drawn through `art` and `size`, documented in docs/BATTLE3.md 'What stage 22 chapter 14 holds'."
     }
    ]
   },
@@ -33146,6 +33155,32 @@
    },
    "started_at": "2026-11-23T00:37:57+00:00",
    "done": "2026-11-22"
+  },
+  {
+   "id": "t-b3s22ch14",
+   "title": "Milestone: play chapter 14 on the new battle",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s22ch14 or a later name. Then CHAPTERS > Chapter 14 (or Take me there on the dashboard) and play to the end of the chapter: you arrive at the Rivituso door, talk to Deedee on the porch, then face Boppy at the door and fight his Gold Armor (about 10 minutes). Judge the mechanics only: is the Gold Armor fun and 5 to 8 rounds, can you read the screen and the turn bar in portrait and landscape, does it read that your hits land on the armor and not on Boppy (there is a goal toast and a tip), does Pepper Breath plus a Racket hit feel like the way to wake him (Panic Boil), and does Walk Slower or the growing It Was THIS Big feel fair? The Part 1 monsters that come back have no scene yet, so play them in ADMIN > BATTLE LAB > NEW BATTLE, fights NEW 75 to NEW 86 (a pack for each Long Island chapter, then the six old bosses): are they quick, about 3 rounds a pack and about 4 for a boss? They are drawn on their old paintings, 25% larger for the regular ones. Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays chapter 14 on the old battle. The chapter 15 card (c-b3s22ch15) reads your note.",
+   "blocks": [],
+   "fyi": true,
+   "jump": {
+    "chapter": 14
+   },
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "chat": {
+    "url": "",
+    "opening": "created by the b3s22ch14 session"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Created by the b3s22ch14 session: Milestone for chapter 14 on the new battle."
+    }
+   ]
   }
  ],
  "sessions": [
