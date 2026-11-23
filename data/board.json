@@ -31101,9 +31101,9 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "prog",
-   "next": "Build ONLY chapter 17 on Battle 3: Pause Sprite (Hexer), Brass Desk Weight (Elite), Curator (Elite), The Twin Lenses (Boss). Starts after chapter 16 is switched on.",
+   "next": "Shipped as build b3s22ch17. Tom plays the Milestone card t-b3s22ch17; the chapter 18 card (c-b3s22ch18) reads his note.",
    "blocks": [],
-   "changed": "2026-11-22",
+   "changed": "2026-11-23",
    "created": "2026-11-22",
    "tag": "b3s22ch17",
    "prompt": {
@@ -31136,8 +31136,25 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Result (build b3s22ch17): chapter 17 is on Battle 3. The Pause Sprite (Hexer), Brass Desk Weight (Elite), Curator (Elite) and The Twin Lenses (boss) are data in data/b3-foes-ch17.js with the bestiary's printed stats, three formations at 5 Vibe Points and the boss at 30. The Twin Lenses' two stances are engine work: a foe row can list `stances` (Blue: Sizzle and Clobber hated, Drench and Razzle resisted; Orange: Drench and Razzle hated, Sizzle and Racket resisted); the foe swaps at every round divider and on its own Rack Focus (`stance` op), and the stance is the foe's own state, not a status, so a Break, Panic Boil! or a strip cannot take it. `when:{stance}` limits Cold Safelight to Blue and Enlarger Burn to Orange; the card has a Lens row and a beat announces each swap. Switch, level floor 42, tips `ch17`, Lab fights NEW 90 to NEW 92, a `B3_CH_ON(17)` wording for the Vault toast (recorded lines untouched). Tests: b3-sim check (FAILS: []), ch17_b3_test portrait and landscape (all pass: three stairs fights, the shelf hall fight, the boss, the end), b3_story_test (52 ok), smoke (only the tag bump, done by bump_tags), unused_voice (all 0). Looked at the fight frames in portrait and landscape."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Number changed: the Twin Lenses' HP, printed 2,910 (2,180 for three), is 3,800 (2,850). Evidence: simulator (--support=4, Rank 2, level 42, Tom, Grace, Rose and Amy). At the printed HP it won in 4.43 rounds (8 fights), under the 5 to 7 a boss with a helper aims at; at 3,800 it averages 5.73 rounds over 24 fights (shortest 5.32, longest 6.22) and won every time. The two normal packs are the printed numbers: Curator with a Pause Sprite 4.7 rounds, Brass Desk Weight with a Pause Sprite 3.5."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Calls I made: (1) names follow the card and the bestiary (Brass Desk Weight, The Twin Lenses); Battle 2 and the scenes say Paperweight and the Archivist's Twin Lenses, and the foe name and act names are one string each, so they change in one place when the script settles them. (2) Cadence for the boss is mine (the bestiary prints none): printed order with `when` filters, Darkroom Call once at half HP (a Curator joins in Front at half HP, 0 pips, and the boss gains +20% Defense for 2 turns), Contact-Sheet Archive below half HP. (3) White-Glove Protocol is two statuses (+25% Defense, and a seal that blocks the first debuff) so the Defense stays after the seal is spent. (4) The Pause Sprite's Self-Timer Beep goes on a monster in Front. (5) The chapter has no fight with Julian Vance, only his voice. (6) The stairs fights (Tom, Grace, Rose) and the shelf hall fights (Tom, Amy, TNB, Nara) are map monsters that start when one notices you; the Twin Lenses is the one fight a scene places. The chapter test starts one monster of each kind itself."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "battle_guide_test.py: 8 checks fail on main before and after this build (the page lists 685 animations against 651 in data/guide-anims.json, What is coming, no engine script, the plan counts), the same set the chapter 16 note named, then the run stops on a Giddyup timeout. Not caused by this chapter; every check this chapter touches (chapters 11 to 17 drop out, the fake gain is the chapter 18 Studio Rig) is in place."
     }
-   ]
+   ],
+   "after": "t-b3s22ch17"
   },
   {
    "id": "c-b3s22ch18",
@@ -31147,7 +31164,7 @@
    "col": "up",
    "next": "Build ONLY chapter 18 on Battle 3: The Studio Rig (Boss). Starts after chapter 17 is switched on.",
    "blocks": [],
-   "changed": "2026-11-22",
+   "changed": "2026-11-23",
    "created": "2026-11-22",
    "tag": "b3s22ch18",
    "prompt": {
@@ -31167,6 +31184,10 @@
     {
      "d": "2026-11-22",
      "t": "Created by the b3s22 session: one card per chapter so no chapter is built in the same conversation as another."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Note from the chapter 17 build (b3s22ch17): chapter 17 is on Battle 3 (levelFloor 42). tools/b3_story_test.py now treats chapter 18 as the first unswitched chapter (pool 2295, floor 42, Grace set to 44); move those cases to chapter 19 with your levelFloor. tools/battle_guide_test.py's fake-gain case now uses the chapter 18 Studio Rig (`vance`, chapters.push(18)); change it to a still-planned chapter 19 monster (`mailcourier`, the Brass Mail-Chute Courier, is listed under chapter 19 in data/guide-planned.json), and the 'What is coming' check and the 'chapters 11 to 17' counts to chapter 18. Engine pieces you can reuse: the foe `stances` and `stance0` fields, the `stance` op and the act condition `when:{stance}` (engine/b3-core.js `b3SetStance` and `b3SwapStance`, engine/b3-ops.js, engine/b3-foe.js); chapter 20's Blue and Orange Lens can use them. Also in b3-check files: add your own file after b3-check-s22ch17.js in tools/b3-sim.js. The chapter test's helper `begin()` in tools/ch17_b3_test.py starts a map monster's fight and waits out the last victory card (a fight started within a second or two of it is ended by it); reuse it if your test fights two map monsters in a row. The same 8 battle_guide_test checks fail on main before and after."
     }
    ]
   },
@@ -33493,6 +33514,32 @@
     "at": "2026-11-22",
     "from": "up"
    }
+  },
+  {
+   "id": "t-b3s22ch17",
+   "title": "Milestone: play chapter 17 on the new battle",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s22ch17 or a later name. Then CHAPTERS > Chapter 17 (or Take me there on the dashboard) and play up the Glass Tower: the stairs with Tom, Grace and Rose, the shelf hall with Tom, Amy, TNB and Nara, the race, and the Twin Lenses in the Vault with Tom, Grace, Rose and Amy (about 20 minutes). Judge the mechanics only: is the Twin Lenses fight fun and 5 to 7 rounds, can you read the screen and the turn bar in portrait and landscape, does it read that the lens it wears changes every round (tap it to see what it can't stand) and that the right flavor breaks its Composure pips, is the Curator it calls at half HP worth dealing with, and do the charging Long Exposure and Contact-Sheet Archive feel fair and readable? On purpose: its HP was raised from the printed 2,910 to 3,800 because the printed number ended the fight in 4.4 rounds in the simulator, and the Brass Desk Weight and the lenses still look like their old art (new paintings come later). The stairs and shelf hall fights are not forced in the story (they start when a monster notices you), so to try them straight away use ADMIN > BATTLE LAB > NEW BATTLE, fights NEW 90 and NEW 91 (about 4 rounds each). Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays chapter 17 on the old battle. The chapter 18 card (c-b3s22ch18) reads your note.",
+   "blocks": [],
+   "fyi": true,
+   "jump": {
+    "chapter": 17
+   },
+   "changed": "2026-11-23",
+   "created": "2026-11-23",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukF8N248WLrrogRD17e",
+    "opening": "created by the b3s22ch17 session"
+   },
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Created by the b3s22ch17 session: Milestone for chapter 17 on the new battle."
+    }
+   ]
   }
  ],
  "sessions": [
