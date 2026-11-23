@@ -1,6 +1,6 @@
 {
  "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
- "built": "2026-11-23T00:12Z",
+ "built": "2026-11-23T00:22Z",
  "videos": [
   {
    "file": "deedee-cast-r3.mp4",
@@ -1888,6 +1888,39 @@
    "reasons": [],
    "in_game": null,
    "strip": "art/video-history/stage-tom-fireball-vid-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "stage-tom-glare-vid-a2-r2.mp4",
+   "job": "stage-tom-glare-vid",
+   "rev": 2,
+   "attempt": 2,
+   "at": "2026-11-23T00:16:10.098195Z",
+   "price": 0.15,
+   "verdict": "rejected",
+   "reasons": [
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/stage-tom-glare-vid-a2-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "stage-tom-glare-vid-r2.mp4",
+   "job": "stage-tom-glare-vid",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-23T00:15:01.261536Z",
+   "price": 0.15,
+   "verdict": "rejected",
+   "reasons": [
+    "The background is not a flat magenta, so she cannot be cut out cleanly.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/stage-tom-glare-vid-r2.webp",
    "pad": null,
    "model": "alibaba"
   },
