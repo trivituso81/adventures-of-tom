@@ -17622,6 +17622,10 @@
     {
      "d": "2026-11-23",
      "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Rescue chose FINISH: build is complete for the six ready moves; Winged Shell and Tarmac Porsche wait on the give-up cards for jetwash and glare. Shipped as movestage2."
     }
    ],
    "after": "t-movestage-judge",
@@ -17637,7 +17641,7 @@
   {
    "id": "t-movestage-lab",
    "lane": "tom",
-   "col": "wait",
+   "col": "done",
    "theme": "Battle Animations",
    "ask": "animations",
    "fyi": true,
@@ -17857,9 +17861,13 @@
     {
      "d": "2026-11-23",
      "t": "wan-gen bulk run 45089583637: 0 made; already made, nothing sent: stage-tom-bluebang, stage-tom-glare, stage-tom-carryon, stage-tom-suitedoor, stage-tom-porsche, stage-tom-controller, stage-tom-wingedshell, stage-tom-runwaylights, stage-tom-jetwash, stage-tom-fireball, stage-tom-starbeam, stage-tom-meteor, tom-suitedoor, tom-porsche, tom-cartridge, tom-shell, tom-konami, stage-tom-bluebang-vid, stage-tom-glare-vid, stage-tom-wingedshell-vid, stage-tom-runwaylights-vid, stage-tom-jetwash-vid, stage-tom-fireball-vid, stage-tom-starbeam-vid, stage-tom-meteor-vid; you asked for more tries, so a Claude session changes one thing and starts the next try: tom-controller."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Retired by movestage2: t-movestage-judge is the one review of the Move Lab."
     }
    ],
-   "waiting_on": "claude"
+   "done": "2026-11-23"
   },
   {
    "id": "t-crispvoices",
