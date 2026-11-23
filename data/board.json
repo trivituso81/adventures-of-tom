@@ -32528,7 +32528,7 @@
    "theme": "Battle Animations",
    "tag": "guideflow1",
    "title": "Remove the Guide's $10 a day limit; check workflows",
-   "next": "Starts by itself. Removes the Battle Guide's own $10 a day video limit (14 of your requests failed on it today) and adds a check so a broken job file can never be pushed again. Nothing for Tom.",
+   "next": "Built (guideflow1). Next card c-guideflow-2 starts by itself. Nothing for Tom.",
    "blocks": [
     "c-guideflow-2"
    ],
@@ -32549,6 +32549,11 @@
      "d": "2026-11-22",
      "t": "Tom tapped START.",
      "at": "2026-11-22T23:56:53.212Z"
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Built guideflow1: no $10 a day limit in the Guide, workflow_check.py runs before every push. Tests pass (wangen_test B2 and take_test fail the same without this change).",
+     "at": "2026-11-23T00:06:00.000Z"
     }
    ],
    "prompt": {
