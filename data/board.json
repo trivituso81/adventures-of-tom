@@ -32571,7 +32571,7 @@
   {
    "id": "c-guideflow-1",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "theme": "Battle Animations",
    "tag": "guideflow1",
    "title": "Remove the Guide's $10 a day limit; check workflows",
@@ -32583,7 +32583,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-22",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFEHTbD2Nh8NSAcoGy",
+    "url": "",
     "opening": "not started"
    },
    "history": [
@@ -32600,6 +32600,10 @@
     {
      "d": "2026-11-22",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
    "prompt": {
@@ -32611,8 +32615,7 @@
     "effort": "medium (the steps are known)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guideflow-1 in data/board.json, then the whole of claude/guide-flow-plan.md. That plan is the design: build what it says and do not redesign it. If a step cannot be done as written, do the closest thing that keeps the plan's rules (sections 3.2 and 4.3), say so in docs/CHANGES.md, and go on. This card is plan section 10 step 1 (decisions D12 and D16, finding F1 and F13). Two small changes. (1) In tools/art-library/wangen.py the Battle Guide path (run_guide_requests, the argument --day-cap, default 10.0) refuses a video when the guide has spent $10 that UTC day. Tom removed daily limits (CLAUDE.md wannoday1: \"i will manage the limit myself with my balance\"). Make no daily limit the default: --day-cap default None, and None means the check is skipped; keep the per request cap ($1 a video) exactly as it is. Update the text in battle-guide.html or docs/BATTLE_GUIDE.md that mentions $10 a day, if any (git grep \"10 a day\" and \"10.00 for today\"). Add a case to tools/art-library/queue_test.py: with $50 already spent today a request is still made (stand-in run_one), and a request capped below the price is still refused. (2) Write tools/workflow_check.py: for every file in .github/workflows/ it must load with yaml.safe_load, have `on` and `jobs`, every `concurrency` must be a mapping whose `group` is a string, and in a workflow that uses a secret named FAL_KEY, XAI_API_KEY or ELEVENLABS_API_KEY any `concurrency` must be on the job, not at the top of the file (CLAUDE.md wanstuck1), except guide-use.yml which has none of those secrets. It prints one line per problem in plain words and exits 1 on any. Make tools/art-library/bump_tags.py run it and stop the push when it fails, and add it to tools/night/tests.json. Add tools/workflow_check_test.py: a temp folder with the startpics12 mistake (an unquoted colon in a group name) must fail, the real folder must pass. Add one line about it to CLAUDE.md after the wannoday1 paragraph (name it guideflow1). Tests to run and pass before pushing: python3 -I tools/art-library/queue_test.py, python3 -I tools/art-library/startpic_test.py, python3 tools/workflow_check.py, python3 tools/workflow_check_test.py, python3 tools/art-library/wangen_test.py, python3 tools/board_check.py. You must NOT: make any paid run or call fal, xAI or ElevenLabs for real (every test uses stand-ins; the first paid run is Tom's tap); run wangen.py against the real services; create or change a doc in the claude.ai Project (notes go in the repo folder claude/, then run python3 tools/claude_index.py); make or propose a painted battle pose; touch the bulk video flow (wangen.py --bulk, wanbulk.py, wanqa.py, wanbake.py, the wan-gen-bulk line); hand Tom a yes or no check; write an em dash in anything Tom reads. Before every commit check that no file has git conflict markers (a line that starts with seven less-than signs; CLAUDE.md has the command). Push steps: write the heading \"## guideflow1 (the date of that day as YYYY-MM-DD): one plain line Tom can read\" at the top of docs/CHANGES.md with what was built, what was tested and what was not looked at, run python3 tools/workflow_check.py if it exists, run python3 tools/art-library/bump_tags.py guideflow1 --base origin/main, run python3 tools/board_check.py --push guideflow1, fetch and rebase on origin/main, then push to main. At the end write the result into this card's `next` and history, and check the next card (c-guideflow-2) still has its full prompt. Your first push is the commit board: start c-guideflow-1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "auto": true,
-   "started_at": "2026-11-23T00:01:44+00:00"
+   "auto": true
   },
   {
    "id": "c-guideflow-2",
@@ -39029,8 +39032,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "64b5b0350247f5a46166883e567808a7b5176cef",
- "synced_at": "2026-11-23T00:27:24+00:00",
+ "synced": "05637fdc3d675da4d70656bf73d98e9fdb83780a",
+ "synced_at": "2026-11-23T00:34:25+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
