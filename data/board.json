@@ -32805,7 +32805,7 @@
    "theme": "Battle Animations",
    "tag": "guideflow3",
    "title": "Build the Guide worker and the picture line",
-   "next": "Built and tested (build guideflow3): tools/guidegen/worker.py, .github/workflows/guide-work.yml, worker_test.py (T4, T5), store.set_fields. No paid run. The free proof on GitHub itself is in docs/CHANGES.md (guideflow3b). The page still uses the old way until card c-guideflow-5. Nothing for Tom.",
+   "next": "Shipped as guideflow3 and guideflow3b. Free proof on GitHub: dispatch with an empty queue ended both lanes in 2 to 3 seconds (run 45110400003); one dry picture row went done through the real workflow (run 45111014330: 18 s queued, 3 s making, 3 s checking, checkout 3 s after the narrower sparse list). Test rows removed. The page still uses the old way until c-guideflow-5. Nothing for Tom.",
    "blocks": [
     "c-guideflow-4"
    ],
@@ -32847,6 +32847,11 @@
     {
      "d": "2026-11-22",
      "t": "Shipped as guideflow3: The Battle Guide has a worker for start pictures and uploaded pictures (nothing changes on screen yet)"
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Free proof on GitHub done: empty queue ends in 2 to 3 s, a dry row reaches done (runs 45110400003, 45111014330). Narrowed the checkout (guideflow3b) after the first run took 51 s. Test rows removed.",
+     "at": "2026-11-23T04:21:00.000Z"
     }
    ],
    "prompt": {
