@@ -32967,7 +32967,7 @@
   {
    "id": "c-guideflow-5",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "guideflow5",
    "title": "Switch the Guide page to the one status file",
@@ -32979,7 +32979,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-22",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukFYxNDZ5poGu2DEevP",
     "opening": "not started"
    },
    "history": [
@@ -32991,6 +32991,10 @@
     {
      "d": "2026-11-22",
      "t": "Unblocked: Add the video line to the Guide worker is done."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -33592,6 +33596,16 @@
    ],
    "cards": [
     "c-b3s22ch12"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFYxNDZ5poGu2DEevP",
+   "title": "Switch the Guide page to the one status file",
+   "first": "2026-11-22T22:10:02-08:00",
+   "last": "2026-11-22T22:10:02-08:00",
+   "tags": [],
+   "cards": [
+    "c-guideflow-5"
    ]
   },
   {
@@ -39591,8 +39605,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "284af74951dcbb0b21755d6955d289af00f691ed",
- "synced_at": "2026-11-23T05:31:37+00:00",
+ "synced": "2a54cb67859834200ebbe02b91fb211571baf6b0",
+ "synced_at": "2026-11-23T06:10:48+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
