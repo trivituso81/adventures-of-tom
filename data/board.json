@@ -32938,6 +32938,10 @@
     {
      "d": "2026-11-22",
      "t": "Shipped as guideflow4: The Guide worker makes family videos (nothing changes on screen yet)"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Free proof on GitHub (stand-in rows only, nothing paid): dry row done; replay of a stored take ran end to end (marks, clip gate with the look check, cut, kept on guidegen, done); poke to first claim 44 s including the ffmpeg install. The proof found the runner has no ffprobe (every replay was called \"hardly moves\"); fixed in guideflow4b (ffmpeg from apt). Proof rows and take 9 files removed. The keep step takes about 2.7 min for a 10 MB video (card 6 or later may speed it)."
     }
    ],
    "prompt": {
