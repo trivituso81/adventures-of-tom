@@ -65,6 +65,34 @@
    "kind": "video",
    "anim": "body:tnb:idle",
    "id": "proof4-replay"
+  },
+  "proof4-replay2": {
+   "lane": "vid",
+   "who": "tnb",
+   "take": 9,
+   "route": "wan",
+   "prompt": "proof",
+   "promptRev": 1,
+   "start": "tnb",
+   "note": "",
+   "cap": 0,
+   "at": "2026-11-23T05:15:09Z",
+   "state": "queued",
+   "since": "2026-11-23T05:15:09Z",
+   "run": 0,
+   "fal": null,
+   "tries": 0,
+   "cost": 0,
+   "why": "",
+   "do": "Change the prompt, then tap Make another.",
+   "result": null,
+   "use": null,
+   "left": false,
+   "dry": false,
+   "replay": "takes/body-tnb-dodge/t1.mp4",
+   "kind": "video",
+   "anim": "body:tnb:dodge",
+   "id": "proof4-replay2"
   }
  }
 }
