@@ -30989,7 +30989,7 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "prog",
-   "next": "Build ONLY chapter 15 on Battle 3: The Windowsill Radio (Boss). Starts after chapter 14 is switched on.",
+   "next": "Built and tested (build b3s22ch15): chapter 15 is on Battle 3. The boss's HP was raised from the printed 2490 to 3300 (simulator evidence on this card). Waiting on Tom's phone play (card t-b3s22ch15, fyi). Left for other cards: nothing for chapter 15.",
    "blocks": [],
    "changed": "2026-11-22",
    "created": "2026-11-22",
@@ -31024,8 +31024,13 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Result (b3s22ch15): chapter 15 is on the BY CHAPTER list (levelFloor 37, tips ch15). data/b3-foes-ch15.js: HUSH-9 Final Form (`hush9final`, boss, Front, 7 pips, no running, formation `hush9final`, 90 Vibe Points) with Squelch Knob, Cabinet Thump, Mute Button (waits 2 rounds, locks Pocket Vibe Skills), Dead Air, Dead Air Calls (once, below half, calls two pods back) and Total Silence (below half); and the Hushling Pod (`hushpod`, helper, Back, 366 HP, the Hushling's three acts). NUMBER CHANGED: the boss's HP, printed 2490 (1870 with the Hush Chip) is 3300 (2478). Evidence: simulator `--support=4`, Rank 2, level 37, Tom, Grace, Rose and Amy gave 4.2 rounds with the printed HP, under the aim of 5 (held to 5 to 7); with 3300 it gives 5.5 to 5.6 (shortest 4.5 to 4.9, longest 6.1 to 6.6). Attack 163, Defense 71, Speed 118 and the pips are as printed. Helpers: feedback only, no helper link (the bestiary prints feedback only, no damage reduction): a pod knocked out takes 1 Composure pip off the radio and Dazzles it for 2 turns inside the 3-pip cap. Engine: a layout-only foe field `helpers` so the pods stand in the gap in front of the 2.5 times large boss (`b3HelperOf`), checked by `b3CheckData`. The name on screen is HUSH-9 Final Form (the scene's name). Battle 3 wording behind `B3_CH_ON(15)`: opening toast, Amy's retry line, Tombo skin toast; recorded lines untouched; the Battle 2 tip about BENCH CALL is not shown on Battle 3. Found and fixed: the dining room picture was only asked for by Battle 2, so the fight was on the pond picture; `data/ch15-battle.js` now asks for it on Battle 3 too. Looked at portrait and landscape frames of the fight: the radio in Front, two pods in the gap, the family at the table. Tests: sim check green (5004 checks), tools/ch15_b3_test.py portrait and landscape, b3_story_test (first unswitched chapter now 16, pool 2025, floor 37), battle_guide_test (fake gain is the chapter 16 Grey Note; the same 8 checks that fail on main still fail, and its Giddyup crash is on main too), smoke, unused_voice 0. Gaps: the pods wear the Hushling painting (no pod art); the Part 1 recorded pre-fight lines are Battle 2 wording."
     }
-   ]
+   ],
+   "after": "t-b3s22ch15"
   },
   {
    "id": "c-b3s22ch16",
@@ -31055,6 +31060,10 @@
     {
      "d": "2026-11-22",
      "t": "Created by the b3s22 session: one card per chapter so no chapter is built in the same conversation as another."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Note from the chapter 15 build (b3s22ch15): chapter 15 is on Battle 3 (levelFloor 37). tools/battle_guide_test.py's fake-gain case now uses the chapter 16 Grey Note (`greynote`, chapters.push(16)); when you build chapter 16, change it to a still-planned chapter 17 monster and the 'What is coming' text check and the three 'chapters 11 to 15' counts to chapter 17 (tools/battle_guide_test.py lines about 445 and 475, plus the gain block). tools/b3_story_test.py treats chapter 16 as the first unswitched chapter (pool 2025, floor 37, Grace set to 38); move those cases to chapter 17 with your levelFloor. A helper's pods use `helpers: [id]` on the boss row for layout only (docs/BATTLE3.md 'What stage 22 chapter 15 holds'). A story fight on Battle 3 picks its background in `battleBgKey` from the map, so give the Square its own picture the way `data/ch15-battle.js` does. The same 8 battle_guide_test checks (page and guide-anims.json counts, What is coming, the engine-script check, plan counts) already fail on main."
     }
    ]
   },
@@ -33283,6 +33292,32 @@
     {
      "d": "2026-11-23",
      "t": "Added by c-movestage-build (movestage2d): six of the eight staged moves are fully baked and play through the stage layer; the other two wait on video decisions. Same review as t-movestage-lab (the Lab is the only review); Keep and Tweak still write to t-movestage-lab."
+    }
+   ]
+  },
+  {
+   "id": "t-b3s22ch15",
+   "title": "Milestone: play chapter 15 on the new battle",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s22ch15 or a later name. Then CHAPTERS > Chapter 15 (or Take me there on the dashboard) and play the dinner at Deedee and Boppy's table: HUSH-9 Final Form arrives and you fight it with Tom, Grace, Rose and Amy (about 10 minutes). Judge the mechanics only: is the fight fun and 5 to 7 rounds, can you read the screen and the turn bar in portrait and landscape, does it read that knocking out a speaker pod in Back costs HUSH-9 a Composure pip, do Racket and Clobber feel like the way to break it, and do Mute Button (locks Pocket Vibe Skills) and the charging Dead Air and Total Silence feel fair and readable? Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays chapter 15 on the old battle. The chapter 16 card (c-b3s22ch16) reads your note.",
+   "blocks": [],
+   "fyi": true,
+   "jump": {
+    "chapter": 15
+   },
+   "changed": "2026-11-22",
+   "created": "2026-11-22",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEafYMf3zc6pzB4QYi",
+    "opening": "created by the b3s22ch15 session"
+   },
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Created by the b3s22ch15 session: Milestone for chapter 15 on the new battle."
     }
    ]
   }
