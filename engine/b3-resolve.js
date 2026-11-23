@@ -125,6 +125,7 @@ function b3EndTurn(F,u,recovery,beats) {
     u.jumped=0;   // (stage 19) the count of icons leapt past restarts; the pull below counts toward the next turn
     // A pull this turn asked for after its wait was set ("Better Than Bobby!": the next turn comes sooner).
     if(u.nextPull) { const amt=b3Pull(F,u,u.nextPull); u.nextPull=0; if(amt) beats.push({t:'pull',tgt:u.key,n:amt,bar:b3BarSnap(F,null,0),g:'end'}); }
+    if(u.side==='party') b3FrameCheck(F,u,beats);   // chapter 20: Still Frame is judged as a family member's turn ends
     for(const id of Object.keys(u.st)) { const s=u.st[id]; if(!s||s.unit!=='turn') continue;   /* a status an earlier one's end took away: Toasty ending ends Five-Alarm Burn with it (found in stage 11) */
       if(s.skip) { s.skip=false; continue; }
       if(--s.n<=0) { b3EndStatus(F,u,id,'time'); beats.push({t:'statusEnd',tgt:u.key,id,g:'end'}); b3Fire(F,'statusEnded',{src:u,tgt:u,id,g:'end'},beats); } }
@@ -135,6 +136,7 @@ function b3EndTurn(F,u,recovery,beats) {
     u.hitSince=false;
   }
   F.acting=null;
+  b3PhaseCheck(F,u,beats);   // chapter 20: a foe whose HP reached its phase line starts its next phase
   if(u.side==='foe') { u.aimLock=null; u.intent=null; }   // what Cartridge Blow showed was for this turn
   b3IntentRefresh(F);
   beats.push({t:'endTurn',who:u.key,bar:b3BarSnap(F,null,0),g:'end'});
@@ -156,8 +158,10 @@ function b3Hurt(F,c,t,dmg,info) {
     // "Gold Like My Teeth" (Boppy, stage 9c, `custom:'goldTeeth'`): once a battle a lethal hit leaves him on 1 HP, and he gains Pep.
     else if(t.custom&&t.custom.goldTeeth&&!t.used.goldTeeth) { t.used.goldTeeth=true; gold=t.custom.goldTeeth; held='gold_teeth'; left=t.hp-1; } }
   if(t.hpFloor!=null&&left>t.hp-t.hpFloor) left=Math.max(0,t.hp-t.hpFloor);   // a scripted monster's HP never falls below its floor (cfg.setup.midpoint.hold)
+  const pf=b3PhaseFloor(t); if(pf!=null&&left>t.hp-pf) left=Math.max(0,t.hp-pf);   // chapter 20: damage past a phase line is lost
   const hp0=t.hp;
   t.hp=Math.max(0,t.hp-left);
+  if(pf!=null&&t.hp<=pf) t.phaseDue=true;
   if(soak) (c.soak=c.soak||{})[t.key]=(c.soak[t.key]||0)+soak;
   if(left) (c.lost=c.lost||{})[t.key]=(c.lost[t.key]||0)+left;
   if(!(info&&info.tick)) t.hitSince=true;
@@ -181,6 +185,7 @@ function b3KoCheck(F,c) {
     b3Fire(F,'ko',{src:c.actor,tgt:u,g:c.g},c.beats);
     // Helper feedback (bestiary 1.1): a monster with an `onKo` row (the Acorn Cache) answers its own knock-out, unless it was eaten. The ops
     // run as the helper; the pips it takes off a boss go into this action's ledger, so they count inside the 3-pip cap.
+    if(u.side==='foe'&&u.D&&u.D.endsFight) for(const o of F.foes) if(o!==u&&!o.ko) { o.ko=true; o.hp=0; o.st={}; o.charge=null; c.beats.push({t:'ko',tgt:o.key,g:c.g}); }   // chapter 20: the Collector falls and its lenses go dark
     if(u.side==='foe'&&u.D&&u.D.onKo&&!u.eaten) b3RunEffects(F,{F,actor:u,src:u,tgt:null,targets:[u],hit:[],beats:c.beats,g:c.g,detonated:{},reacted:{},tags:['helper'],outExtra:{},ledger:c.ledger||(c.ledger={})},u.D.onKo);
   }
 }
@@ -315,7 +320,7 @@ function b3Hit(F,c,t,per,flavors,e,single) {
     if(stamped) dmg*=t.D.redact.dmg;   // REDACTED: the stamped flavor part does half damage
     dmg=Math.max(1,Math.round(dmg));
     while(det) {
-      c.detonated[t.key]=true; (c.detPrime=c.detPrime||{})[t.key]=det.prime; b3EndStatus(F,t,det.prime,'detonated');
+      c.detonated[t.key]=true; (c.detPrime=c.detPrime||{})[t.key]=det.prime; b3FrameMove(a); { const ps=t.st[det.prime]; if(ps&&ps.src) b3FrameMove(b3Unit(F,ps.src)); } b3EndStatus(F,t,det.prime,'detonated');
       B.push({t:'detonate',src:a.key,tgt:t.key,id:det.id,name:det.name,prime:det.prime,g:c.g});
       b3RunEffects(F,Object.assign({},c,{tgt:t,partDmg:dmg}),det.effects);
       if(!stamped) b3Pips(c,t,det.pips);

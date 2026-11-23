@@ -94,6 +94,10 @@ function b3FoeUnit(F,id,row,slot,o) {
   if(D.redact) { u.stamp=null; u.dmgLog={}; }   // stage 22 (chapter 19): the Dead-Letter Censor's REDACTED stamp (a flavor, or null) and what each flavor did to it this round
   if(D.custom) Object.assign(u.custom,D.custom);
   if(D.helperLink) u.mods.push({stat:'reduce',kind:'helper',v:D.helperLink.reduce,when:{allyStands:D.helperLink.id}});
+  // Stage 22 (chapter 20). `helperLinks` is a list of the same thing with a say over which hits it cuts (`flavors`) and the last phase it holds in (`untilPhase`): the Collector's
+  // Blue Lens cuts Sizzle and Razzle in half, its Orange Lens cuts everything by a quarter, and in phase 3 neither does. `phases` {lines:[.66,.31]}: see engine/b3-last.js.
+  for(const L of (D.helperLinks||[])) u.mods.push({stat:'reduce',kind:'helper',v:L.reduce,when:Object.assign({allyStands:L.id},L.flavors?{flavorAny:L.flavors}:null,L.untilPhase?{phaseAtMost:L.untilPhase}:null)});
+  if(D.phases) { u.phase=1; u.phaseDue=false; }
   return u;
 }
 // Stage 22 (chapter 17): a foe row with `stances` {key:{name,peeves,resists}} can stand in one of them. The stance gives the foe that stance's Pet Peeves and
@@ -145,6 +149,12 @@ const b3Other=side=>side==='party'?'foe':'party';
 //      gear ({id: b3GearSum(worn items)}: what each member wears; left out = bare, as the rule tests were written),
 //      hpPct (tests: the party starts at this share of its HP), hpShare ({id: share}: story fights, one share per member), plain (tests: see b3PartyUnit),
 //      setup (a story fight's scripted extras: foe start HP, statuses to begin with, a scripted midpoint, adds on a timer: engine/b3-script.js).
+// A Quirk that gives the whole family a mod follows whoever is standing in the party: each copy is tagged with the holder's key (`_by`), so a swap
+// at a phase change (engine/b3-last.js) takes a leaver's copies away and gives a newcomer's out.
+function b3AllyModsRefresh(F) {
+  for(const u of F.party) u.mods=u.mods.filter(m=>!m._by);
+  for(const h of F.party) for(const m of (h.allyMods||[])) for(const o of F.party) o.mods.push(Object.assign({},m,{_by:h.key}));
+}
 function b3NewFight(cfg) {
   const seed=cfg.seed==null?Math.floor(Math.random()*2147483647):cfg.seed;
   const F={cfg,seed,rng:seed|0,clock:0,round:1,over:null,acting:null,priSeq:0,stamp:1,turnLog:[],hazards:[],reactions:[],reactSeq:0,later:[],opening:[],
@@ -162,7 +172,7 @@ function b3NewFight(cfg) {
   b3NameFoes(F);
   F.units=[...F.party,...F.foes];
   // A Quirk that gives the whole family a mod (TNB's Coaster Policy) puts it on every family member as the fight begins.
-  for(const h of F.party) for(const m of (h.allyMods||[])) for(const o of F.party) o.mods.push(Object.assign({},m));
+  b3AllyModsRefresh(F);
   for(const u of F.units) u.wait=b3WaitFor(F,u,B3_RULES.startWait[u.side],true);
   for(const f of F.foes) for(const id of f.D.start) b3AddStatus(F,f,id,{src:f});
   b3Fire(F,'battleStart',{g:'pre'},F.opening);
@@ -204,7 +214,7 @@ function b3OverBeats(F,beats,g) {
 //         deals no damage and builds no counter of its own (b3IsSupport).  oncePerRound:key: counts the first time each round (b3Act marks it).
 //         tagsAny:[..]: the act in progress carries one of these tags (Drywall: melee or projectile; Cool-Mist: projectile or aoe), stage 10.
 const B3_TARGETS=['foe','ally','family','self','random_foes','all_foes','ko_ally','adjacent_allies','field','ally_pair','family_or_ko','foe_row','either'];
-const B3_MOD_WHEN=['flavor','notBasic','by','steppingIn','allySkill','peeveOrPrime','skillPep','tgtBelow','basic','shielded','aoe','skillFlavor','oncePerRound','supportSkill','tagsAny','skillId','pepAtLeast','attackerPips','has','attackerDebuffed','tgtWeak','allyStands','jumped','attackerFast'];
+const B3_MOD_WHEN=['flavorAny','phaseAtMost','flavor','notBasic','by','steppingIn','allySkill','peeveOrPrime','skillPep','tgtBelow','basic','shielded','aoe','skillFlavor','oncePerRound','supportSkill','tagsAny','skillId','pepAtLeast','attackerPips','has','attackerDebuffed','tgtWeak','allyStands','jumped','attackerFast'];
 // A foe's Pet Peeves right now: its own, plus any a status forces on it for a while (Masterpiece Portrait Makeover).
 function b3Peeves(u) {
   let out=u.peeves;
@@ -218,6 +228,8 @@ function b3ModWhen(u,m,ctx,putBy) {
   const W=m.when,c=ctx.c;
   for(const k in W) {
     if(k==='flavor') { if(ctx.fl!==W.flavor) return false; }
+    else if(k==='flavorAny') { if(!W.flavorAny.includes(ctx.fl)) return false; }                          // stage 22 (chapter 20): the hit's flavor is one of these (the Blue Lens)
+    else if(k==='phaseAtMost') { if(!((u.phase||1)<=W.phaseAtMost)) return false; }                      // the holder is in this phase or an earlier one (the lenses stop cutting in phase 3)
     else if(k==='notBasic') { if(!ctx.a||(c&&c.skill&&c.skill.slot==='basic')) return false; }
     else if(k==='by') { if(!(W.by==='otherAlly'&&ctx.a&&ctx.a.side==='party'&&ctx.a.key!==putBy)) return false; }
     else if(k==='steppingIn') { const I=c&&c.inter&&c.inter[u.key],p=I&&b3Unit(c.F,I.forKey); if(!p||!(p.hp<=p.maxHp*W.steppingIn)) return false; }

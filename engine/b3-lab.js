@@ -6,7 +6,7 @@
 function b3Lab(i,opt) {
   const L=B3_LAB[i]; if(!L) return;
   const vp=(B3_FORMATIONS[L.formation]||{}).vp||0;
-  const cfg=Object.assign({lab:true,party:L.party.slice(),level:L.level,formation:L.formation,bg:L.bg,rows:L.rows,
+  const cfg=Object.assign({lab:true,party:L.party.slice(),reserve:L.reserve?L.reserve.slice():undefined,level:L.level,formation:L.formation,bg:L.bg,rows:L.rows,
     loadouts:JSON.parse(JSON.stringify(b3LabBook())),award:()=>b3LabAward(vp),onEnd:b3LabBack,ruckus:b3LabRuckus(),onRuckus:b3LabRuckusSave},opt||{});
   if(cfg.first) b3LabFirst(cfg);
   if(L.movelab) { cfg.movelab=true; b3mlPrepare(cfg); }   // movestage2: MOVE LAB: TOM (engine/b3-movelab.js)

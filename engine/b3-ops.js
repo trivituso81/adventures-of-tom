@@ -217,6 +217,7 @@ const B3_OPS={
   interrupt(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)||!t.charge) continue;
       if(e.aoeOnly&&!(t.charge.hits==='all'||t.charge.tags.includes('aoe'))) continue;   // Lights-Out Reset only cancels a wound-up act on the whole family
+      if(t.charge.noInterrupt) continue;   // chapter 20: the Countdown's flash is stopped only by a Break
       const A=b3LoseCharge(F,t);
       c.beats.push({t:'interrupt',src:c.actor.key,tgt:t.key,id:A.id,name:A.name,g:c.g}); }
   },
@@ -243,8 +244,8 @@ const B3_OPS={
   // never enough to knock it out (it stops at 1 HP, like bounced damage).
   hpLoss(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)) continue;
-      const n=Math.min(t.hp-1,Math.round(t.maxHp*e.pct)); if(n<=0) continue;
-      t.hp-=n; c.beats.push({t:'hit',tgt:t.key,dmg:n,hp:t.hp,g:c.g}); }
+      const pf=b3PhaseFloor(t),n=Math.min(t.hp-(pf!=null?pf:1),Math.round(t.maxHp*e.pct)); if(n<=0) continue;
+      t.hp-=n; if(pf!=null&&t.hp<=pf) t.phaseDue=true; c.beats.push({t:'hit',tgt:t.key,dmg:n,hp:t.hp,g:c.g}); }
   },
   // bounce (stage 22 chapter 16, the Square's Sign behind its eclipse; bestiary 1.1 "Bounced damage"): the foe still takes the whole hit, and the one who hit it takes
   // `pct` of that hit as plain damage: no flavor, no Defense, no modifiers, the shield soaks it first, and it never knocks anyone out (it stops at 1 HP). `c.hitDmg` is the
@@ -268,7 +269,7 @@ const B3_OPS={
     const [a,b]=c.targets||[]; if(!a||!b||!b3Alive(a)||!b3Alive(b)||a.side!==b.side||a.side!=='party') return;
     if(b3EffRow(F,a)===b3EffRow(F,b)) return;
     const ra=a.row==='back'?'back':'front',rb=b.row==='back'?'back':'front';
-    a.row=rb; b.row=ra;
+    a.row=rb; b.row=ra; b3FrameMove(a); b3FrameMove(b);
     c.beats.push({t:'rowTrade',a:a.key,b:b.key,rowA:a.row,rowB:b.row,g:c.g});
   },
   row(F,c,e) {
@@ -334,7 +335,7 @@ const B3_OPS={
   // A door nobody used is closed by b3Next.
   grant(F,c,e) {
     const t=b3Who(F,c,e.to)[0]; if(!t||!b3Alive(t)||t.granted>=B3_RULES.grantedPerRound||!b3GrantSkills(F,t,e).length) return;
-    t.granted++; F.grant={key:t.key,by:c.actor.key,maxPep:e.maxPep,free:!!e.free,basic:!!e.basic};
+    t.granted++; b3FrameMove(t); F.grant={key:t.key,by:c.actor.key,maxPep:e.maxPep,free:!!e.free,basic:!!e.basic};
     c.beats.push({t:'grant',src:c.actor.key,tgt:t.key,g:c.g});
   },
   // foresee: each monster this move hit says who it will aim its next attack at, and keeps to that (engine/b3-foe.js b3Foresee).

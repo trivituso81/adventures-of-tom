@@ -653,6 +653,36 @@
   },
   {
    "i": 92,
+   "name": "NEW 93: THE STUDIO RIG",
+   "sub": "Chapter 18 boss. 8 Composure pips, can’t stand Clobber or Racket. Spotlight Lock marks one of you in Back and Big Flash stuns that person next turn: Tom’s Suite Door Slide takes it, a Break cancels it. At half HP it rolls down a backdrop (Guard Stance, Toasty: a Racket hit brings it down), then Every Light On joins its moves."
+  },
+  {
+   "i": 93,
+   "name": "NEW 94: DEAD LETTER",
+   "sub": "Chapter 19 hall fight. One Elite in Front, 5 Composure pips, can’t stand Clobber or Sizzle. It starts with a Wax-Seal Ward: +20% Defense, and the first debuff you put on it goes back on you. Return To Sender is charged first."
+  },
+  {
+   "i": 94,
+   "name": "NEW 95: RUBBER STAMP",
+   "sub": "Chapter 19 hall fight. One Elite in Front, 5 Composure pips, can’t stand Clobber or Razzle, shrugs off Drench. It starts braced on the ink pad (Guard Stance: Panic Boil! or a Break ends it). DENIED! is charged first."
+  },
+  {
+   "i": 95,
+   "name": "NEW 96: THE MAIL-CHUTE COURIER",
+   "sub": "Chapter 19 mini-boss (Lab only: no scene places it yet). A Dead Letter in Front and the Courier perched in Back. It winds up Special Delivery Slam from the Back and lands in Front; Pneumatic Whoosh sends it back with +20% Evasion. A row move or a Break pins it in Front."
+  },
+  {
+   "i": 96,
+   "name": "NEW 97: THE DEAD-LETTER CENSOR",
+   "sub": "Chapter 19 boss. 8 Composure pips, can’t stand Razzle or Sizzle. From round 2 it stamps REDACTED on the flavor that hurt it most: that flavor does half damage, takes no pips and costs 1 Pep. Rotate flavors. At half HP it calls a Dead Letter and UNDELIVERABLE joins."
+  },
+  {
+   "i": 97,
+   "name": "NEW 98: THE COLLECTOR",
+   "sub": "Chapter 20 last boss. Three phases: damage past two thirds and one third of its HP is lost, and the next phase starts at once. You pick your four again at each change (the bench is Deedee, Boppy, TNB and Nara). Phase 1 Still Frame: move on the turn bar or take part in a Mix or Detonation before your next turn. Phase 2 sets the Blue and Orange Lens in Back. Phase 3 is a 200-tick Countdown that only a Break stops."
+  },
+  {
+   "i": 98,
    "name": "MOVE LAB: TOM",
    "sub": "Play Tom’s eight staged moves in a real fight, in ladder order, then Keep, Tweak or Replace each one. The Capstones play against The Big One."
   }

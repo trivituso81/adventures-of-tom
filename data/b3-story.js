@@ -5,7 +5,7 @@
 //   BY CHAPTER  a chapter in `chapters` below uses Battle 3 (the default).
 //   NEW         every fight Battle 3 has a formation for uses it (chapters not listed still have battle 2 tips and flags: for tests).
 const B3_STORY={
-  chapters:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,21],
+  chapters:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],
   maxParty:4,
   // A story fight that is not one of the formations: the foes it names. `vp` is what a win pays the Main Vibe (spec section 1).
   fights:{
@@ -14,7 +14,7 @@ const B3_STORY={
     smoglet2:{foes:[{id:'smoglet',row:'front'},{id:'smoglet',row:'front'}],vp:10}
   },
   // The Character Level every member has at least by the furthest chapter reached (the Lab's levels, bestiary v11). Never lowers a level.
-  levelFloor:[0,1,4,7,9,12,14,17,19,22,25,27,30,32,35,37,40,42,45,47],
+  levelFloor:[0,1,4,7,9,12,14,17,19,22,25,27,30,32,35,37,40,42,45,47,50],
   // Migration for a save that has not met Battle 3: a pool of this many Vibe Points per chapter finished, two thirds to the first
   // Sig Vibe and one third to the second, with overflow (spec section 1, architecture 4.2).
   vpPerChapter:135, split:[2/3,1/3],
@@ -288,6 +288,13 @@ const B3_STORY={
       {id:'redacted',who:'*',text:'REDACTED: at each round it blacks out the flavor that hurt it most last round. Attacks of only that flavor do half damage, take no pips, and cost the attacker 1 Pep. Rotate flavors. A Break tears the blackout down.',when:(F)=>F.foes.some(f=>f.id==='censor'&&f.stamp)},
       {id:'sort',who:'*',text:'Below half HP it calls a Dead Letter into Front. A Dead Letter starts with a Wax-Seal Ward: +20% Defense, and the first debuff you put on it goes back on you.',when:(F)=>F.foes.some(f=>f.id==='deadletter')},
       {id:'strike',who:'*',text:'Strike It Out is charging (!!): it hits everyone and Slows them. Shield the family, or break its pips before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Strike It Out|UNDELIVERABLE/.test(f.charge.name||''))}
+    ],
+    // Stage 22, chapter 20: the last fight. One tip per turn, in this order, each once; the first ones are the way in, the later ones wait for the thing they explain.
+    ch20:[
+      {id:'phases',who:'*',text:'The Collector has three phases. Damage past a phase line is lost: its HP stops at two thirds and at one third, and the next phase starts at once. When one ends you pick your four again.'},
+      {id:'frame',who:'*',text:'Still Frame: before or on your next turn, move on the turn bar or take part in a Mix or a Detonation. Waiting for your turn to come does not count. Anyone who does neither loses 2 Pep and is Slowed.',when:(F)=>F.foes.some(f=>f.id==='leviathan'&&(f.phase||1)===1)&&F.party.some(p=>p.frame)},
+      {id:'lenses',who:'*',text:'The Blue Lens halves Sizzle and Razzle on the Collector. The Orange Lens cuts all damage by a quarter. Knock a lens out and the Collector loses 2 pips and some HP. Pulls and ranged Skills reach the Back.',when:(F)=>F.foes.some(f=>f.id==='bluelens'||f.id==='orangelens')},
+      {id:'countdown',who:'*',text:'The Countdown is on (!!): it counts down 200 ticks, two round dividers, to The Biggest Picture. Only a Break stops it. Interrupts do nothing, and a Full Family Ruckus takes 4 pips in one action.',when:(F)=>F.foes.some(f=>f.id==='leviathan'&&f.charge&&f.charge.id==='the_biggest_picture')}
     ]
   }
 };

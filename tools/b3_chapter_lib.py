@@ -10,6 +10,7 @@ HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.dirname(HERE)
 LAYOUT=os.environ.get('LAYOUT','portrait')
 OUT=None; pg=None; pw=None; br=None; srv=None
 errs=[]; fails=[]; frames=[]; seen=set(); log=[]; fights=[]
+REPICK_SWAPS=[(['amy'],['deedee']),(['rose'],['nara'])]   # chapter 20: who the test taps out and in at the first and the second pick
 WIN_STEPS=400   # one step is about a second of the fight; a long boss (Gridlock Prime, 52 turns) sets a larger number before its fight
 KEY="()=>dialog.active?(dialog.name+'|'+dialog.index+'|'+((dialog.pages&&dialog.pages[dialog.index])||dialog.lines[dialog.index]||'')):''"
 class Q(http.server.SimpleHTTPRequestHandler):
@@ -39,24 +40,34 @@ def win(tag):
     before=vpTotal(); info=pg.evaluate("()=>({foes:B3.F?B3.F.foes.map(f=>f.id):[],party:B3.F?B3.F.party.map(p=>p.id):[],v3:!!battle.v3,tut:(typeof B3S!=='undefined'&&B3S.tut)?B3S.tut.key:null,vp:(typeof B3S!=='undefined'&&B3S.fight)?B3S.fight.plan.vp:null})")
     # (any open menu is played, not only the cross: Amy's Burpee Blitz opens a second menu for its mini turn)
     # not B3.cfg.auto: the fight opens each family turn as the screen does (so the turn's tip shows), and the test then plays the simple player's move
-    carded=False; words=False; b2seen=False; doneSnap=False
+    carded=False; words=False; b2seen=False; doneSnap=False; repicks=[]; everIn=None
     for i in range(WIN_STEPS):
         if not pg.evaluate("()=>battle.active"): break
         st=pg.evaluate("()=>({ui:B3.ui,card:!!(document.getElementById('b7-card')&&!document.getElementById('b7-card').hidden)})")
         bad=pg.evaluate(BAD); words=words or bad['words']; b2seen=b2seen or bad['b2']
+        ei=pg.evaluate("()=>(B3.F&&B3.F.everIn)?B3.F.everIn.slice():null"); everIn=ei or everIn   # who has fought so far (chapter 20)
         if st['card']:
             if not carded: pg.wait_for_timeout(1500); snap(tag+'-card'); carded=True
             pg.keyboard.press('Enter'); pg.wait_for_timeout(600); continue
         if st['ui']=='done':
             if not doneSnap: snap(tag+'-end-'+str(pg.evaluate("()=>B3.F.over"))); doneSnap=True   # the end screen: YOU WIN, KNOCKED OUT, or a scripted end's own word and line
             pg.evaluate("()=>b3Pick(0)"); pg.wait_for_timeout(1500); continue
+        # chapter 20's last fight: the pick-your-four page opens at each phase change. The test looks at it once, then taps like a player: out with one, in with a bench member, CONTINUE.
+        if pg.evaluate("()=>!!document.getElementById('b3-repick')"):
+            k=len(repicks); snap(tag+f'-repick{k+1}')
+            out_in=REPICK_SWAPS[min(k,len(REPICK_SWAPS)-1)]
+            for who in out_in[0]: pg.evaluate("(id)=>{ const e=document.querySelector('#b3-repick .rp-m[data-id=\"'+id+'\"]'); if(e) e.click(); }",who)
+            for who in out_in[1]: pg.evaluate("(id)=>{ const e=document.querySelector('#b3-repick .rp-m[data-id=\"'+id+'\"]'); if(e) e.click(); }",who)
+            snap(tag+f'-repick{k+1}-picked')
+            pg.evaluate("()=>document.querySelector('#b3-repick .rp-go').click()"); pg.wait_for_timeout(2500)
+            repicks.append(pg.evaluate("()=>B3.F.party.map(p=>p.id)")); snap(tag+f'-after-repick{k+1}'); continue
         if st['ui'] not in ('busy','done'): pg.evaluate("()=>{ if(B3.actor){ const p=(window.__rec&&b3Recommend(B3.F,B3.actor))||b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); } }")   # window.__rec (set by a test): Rose Mode's recommended moves, closer to a person than the simple player
         if i==40: snap(tag+'-battle-mid')
         pg.wait_for_timeout(1000)
     ended=not pg.evaluate("()=>battle.active")
     res=pg.evaluate("()=>B3.result")   # 'win', 'lose', or a scripted end ('flee', 'shell': engine/b3-script.js)
     tips=pg.evaluate("()=>{ const t=window.__tips||[]; window.__tips=[]; return t; }")   # the wrapper is installed at page start (start()), cleared after each fight
-    r={'tag':tag,'result':res,'ended':ended,'card':carded,'v3':info['v3'],'words':words,'b2':b2seen,'foes':info['foes'],'party':info['party'],'tut':info['tut'],'vpPlan':info['vp'],'vpPaid':vpTotal()-before,'tips':tips}
+    r={'tag':tag,'result':res,'ended':ended,'card':carded,'v3':info['v3'],'words':words,'b2':b2seen,'foes':info['foes'],'party':info['party'],'tut':info['tut'],'vpPlan':info['vp'],'vpPaid':vpTotal()-before,'tips':tips,'repicks':repicks,'everIn':everIn}
     fights.append(r); return r
 def run(stop,tag,n=900,expect=None):
     """Play scenes with Enter until `stop` is true; every fight that starts is auto-played and checked."""

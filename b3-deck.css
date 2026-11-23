@@ -373,3 +373,20 @@
 #battle.v3 .b7-note.gold{color:var(--goldink)}
 #battle.v3 .b7-foot{font:600 13px var(--text);letter-spacing:0;color:var(--soft)}
 #battle.v3 .b7-tap{color:var(--soft)}
+
+/* ---- stage 22, chapter 20: pick your four again (engine/b3-repick.js). A paper page over the whole battle screen, the menu's colours ---- */
+#battle.v3 #b3-app #b3-repick{position:absolute;inset:0;z-index:60;display:flex;flex-direction:column;gap:10px;padding:14px 12px;overflow:auto;background:var(--dusk);color:var(--cream)}
+#battle.v3 #b3-app #b3-repick .rp-head{display:flex;flex-direction:column;gap:4px}
+#battle.v3 #b3-app #b3-repick .rp-ph{font:800 20px var(--disp);letter-spacing:.04em;color:var(--lamp)}
+#battle.v3 #b3-app #b3-repick .rp-sub{font:13px/1.3 var(--text);opacity:.9}
+#battle.v3 #b3-app #b3-repick .rp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:8px}
+#battle.v3 #b3-app #b3-repick .rp-m{display:flex;flex-direction:column;gap:2px;min-height:64px;padding:8px 10px;border-radius:10px;background:var(--paper);color:var(--ink);box-shadow:inset 0 0 0 2px transparent}
+#battle.v3 #b3-app #b3-repick .rp-m.on{box-shadow:inset 0 0 0 3px var(--lamp);background:var(--cream)}
+#battle.v3 #b3-app #b3-repick .rp-m.ko{opacity:.6}
+#battle.v3 #b3-app #b3-repick .rp-n{font:800 15px var(--disp)}
+#battle.v3 #b3-app #b3-repick .rp-t{font:700 11px var(--text);letter-spacing:.06em;opacity:.8}
+#battle.v3 #b3-app #b3-repick .rp-h,#battle.v3 #b3-app #b3-repick .rp-p{font:12px var(--text)}
+#battle.v3 #b3-app #b3-repick .rp-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto}
+#battle.v3 #b3-app #b3-repick .rp-count{font:700 13px var(--text)}
+#battle.v3 #b3-app #b3-repick .rp-go{min-width:132px;min-height:44px;padding:10px 16px;border-radius:12px;background:var(--lamp);color:var(--ink);font:800 15px var(--disp);text-align:center}
+#battle.v3 #b3-app #b3-repick .rp-go:disabled{opacity:.4;cursor:default}

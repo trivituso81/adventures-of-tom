@@ -38,7 +38,7 @@ function b3sPlan(npc,opts) {
     const form=B3_FORMATIONS[id];
     return {foes:Array.from({length:opts.count},()=>({id,row:B3_FOES[id].row||'front'})),vp:(form?form.vp:10)*opts.count/2};
   }
-  const form=B3_FORMATIONS[id]; return form?{formation:id,vp:form.vp}:null;
+  const form=B3_FORMATIONS[id]; return form?{formation:id,vp:form.vp,repick:!!form.repick}:null;
 }
 const LE_startBattle_b3s=startBattle;
 startBattle=function(npc,opts={}) {
@@ -48,7 +48,9 @@ startBattle=function(npc,opts={}) {
 };
 function b3sBegin(npc,opts,plan) {
   const fighters=b3sFighters(),levels={},hpShare={},loadouts={},gear={};
-  for(const p of fighters) { gear[p.id]=b3GearSum(wearSlots(p).map(s=>items[p.equipment[s]])); levels[p.id]=p.level; hpShare[p.id]=p.maxHp?Math.max(0,Math.min(1,p.hp/p.maxHp)):1; loadouts[p.id]=b3MemberLoadout(p); }
+  // A fight that picks the four again (chapter 20's last fight) also gets the bench: they are the other four at the picker.
+  const reserve=plan.repick?benchIds().map(id=>memberById(id)).filter(m=>m&&!m.noBattle&&b3HasKit(m.id)&&!fighters.includes(m)):[];
+  for(const p of fighters.concat(reserve)) { gear[p.id]=b3GearSum(wearSlots(p).map(s=>items[p.equipment[s]])); levels[p.id]=p.level; hpShare[p.id]=p.maxHp?Math.max(0,Math.min(1,p.hp/p.maxHp)):1; loadouts[p.id]=b3MemberLoadout(p); }
   B3S.tut=opts.tut&&B3_STORY.tips[opts.tut]?{key:opts.tut,done:{}}:null;
   // A scripted story fight (B3_STORY.setup, engine/b3-script.js) carries its extras in `setup`; `vp` is the story's own number and the rules never read it.
   const S0=opts.tut&&B3_STORY.setup&&B3_STORY.setup[opts.tut];
@@ -57,8 +59,8 @@ function b3sBegin(npc,opts,plan) {
   // The Birthday Sash (chapter 21): Grace wears it, so the first two turns of her fight are the Birthday Girl's. The story decides who qualifies; the rules apply what they are given.
   const sashed=fighters.some(p=>p.id==='grace')&&typeof grace!=='undefined'&&grace.equipment&&items[grace.equipment.Sash]&&items[grace.equipment.Sash].sash;
   if(sashed) { setup=setup||{}; setup.start=Object.assign({},setup.start,{grace:[{id:'birthday_girl',n:2}]}); }
-  B3S.fight={npc,plan,ids:fighters.map(p=>p.id)}; B3S.card=null; B3S.levelled={};
-  b3Start({party:fighters.map(p=>p.id),levels,hpShare,loadouts,gear,formation:plan.formation,foes:plan.foes,setup:setup&&Object.keys(setup).length?setup:undefined,bg:typeof battleBgKey==='function'?battleBgKey():'pond',
+  B3S.fight={npc,plan,ids:fighters.map(p=>p.id).concat(reserve.map(p=>p.id))}; B3S.card=null; B3S.levelled={};
+  b3Start({party:fighters.map(p=>p.id),reserve:reserve.length?reserve.map(p=>p.id):undefined,levels,hpShare,loadouts,gear,formation:plan.formation,foes:plan.foes,setup:setup&&Object.keys(setup).length?setup:undefined,bg:typeof battleBgKey==='function'?battleBgKey():'pond',
     ruckus:B3S.ruckus,onRuckus:v=>{ B3S.ruckus=Math.max(0,Math.min(100,Math.round(v||0))); },
     award:b3sAward,beforeEnd:b3sShowCard,onTurn:b3sTip,onEnd:b3sEnd});
 }
@@ -88,7 +90,8 @@ function b3sAward(F) {
   const purse=b2Purse(foes,npc,0);
   npc.tier=(npc.tier||0)+1; npc.maxHp+=d.hpStep||0; npc.defeatedUntil=performance.now()+25000; monsterFall(npc);
   coins+=purse;
-  const members=S.ids.map(id=>{ const r=b3sGainFor(memberById(id),gain); if(r.ups) B3S.levelled[id]=true; return r; });
+  const fought=F.everIn||S.ids.filter(id=>F.party.some(p=>p.id===id));
+  const members=S.ids.filter(id=>fought.includes(id)).map(id=>{ const r=b3sGainFor(memberById(id),gain); if(r.ups) B3S.levelled[id]=true; return r; });
   b6Sync();
   // Vibe Points: the Main Vibe earns the formation's number, the Pocket Vibe half; everyone with a loadout earns, on the bench too.
   const book={}; for(const m of ALL_MEMBERS()) { const L=b3MemberLoadout(m); if(L) book[m.id]=L; }
@@ -127,7 +130,8 @@ function b3sEnd(result) {
   B2.result=win?'win':result==='lose'?'lose':result;   // the story's {battle} step and the boss flag below read it; a scripted end (engine/b3-script.js) is 'flee' or 'shell', as battle 2 wrote them
   // HP goes back to the real members as a share of their own Max HP (a level up refills it, as in battle 2).
   for(const id of S.ids) {
-    const mem=memberById(id),u=F&&F.party.find(p=>p.id===id);
+    const mem=memberById(id),u=F&&(F.party.find(p=>p.id===id)||(F.bench&&F.bench[id]));
+    if(!u&&S.ids.length>4&&!(F&&F.everIn&&F.everIn.includes(id))) continue;   // a bench member who never came in keeps their HP
     if(result==='lose') mem.hp=1;   // battle 2's loss: everyone is left at 1 HP
     else if(u) mem.hp=win&&B3S.levelled&&B3S.levelled[id]?mem.maxHp:u.hp<=0?0:Math.max(1,Math.round(mem.maxHp*u.hp/u.maxHp));
   }

@@ -24,7 +24,7 @@ const DATA=['data/b3-rules.js','data/b3-gear.js','data/b3-status.js',
   ...fs.readdirSync(path.join(ROOT,'data')).filter(f=>/^b3-kit-.*\.js$/.test(f)).sort().map(f=>'data/'+f),
   ...fs.readdirSync(path.join(ROOT,'data')).filter(f=>/^b3-foes-.*\.js$/.test(f)).sort().map(f=>'data/'+f),
   'data/b3-lab.js','data/b3-story.js'];
-const RULES=['engine/b3-core.js','engine/b3-progress.js','engine/b3-timeline.js','engine/b3-hooks.js','engine/b3-ops.js','engine/b3-custom.js','engine/b3-resolve.js','engine/b3-ruckus.js','engine/b3-preview.js','engine/b3-foe.js','engine/b3-script.js'];
+const RULES=['engine/b3-core.js','engine/b3-progress.js','engine/b3-timeline.js','engine/b3-hooks.js','engine/b3-ops.js','engine/b3-last.js','engine/b3-custom.js','engine/b3-resolve.js','engine/b3-ruckus.js','engine/b3-preview.js','engine/b3-foe.js','engine/b3-script.js'];
 function load() {
   const ctx=vm.createContext({Math,JSON,Object,Array,String,Number,Error,console:{log(){},error(){}}});
   for(const f of [...DATA,...RULES]) vm.runInContext(fs.readFileSync(path.join(ROOT,f),'utf8'),ctx,{filename:f});
@@ -42,6 +42,7 @@ function play(cfg,log,opt) {
   let guard=0;
   while(!F.over) {
     if(++guard>2000) throw new Error('fight did not end after 2000 turns');
+    if(F.repick) { const rp=G('b3RepickAuto')(F); if(!rp.ok) throw new Error('auto repick refused: '+rp.why); out.repicks=(out.repicks||0)+1; }   // chapter 20: the four are picked again at a phase change
     const N=b3Next(F); let beats=N.beats; const u=N.unit;
     if(u) {
       out.turns++;
@@ -302,6 +303,7 @@ function check() {
   require('./b3-check-s22ch18.js')({G,ok,near,play,noCrit});
   // Stage 22, chapter 19 (the lost-mail office): the Dead-Letter Censor's REDACTED stamp, the Wax-Seal Ward that bounces, the Courier's Wall Perch.
   require('./b3-check-s22ch19.js')({G,ok,near,play,noCrit});
+  require('./b3-check-s22ch20.js')({G,ok,near,play,noCrit});
   console.log('CHECKS:',checks);
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);

@@ -1,3 +1,17 @@
+## b3s22ch20 (2026-11-23): Chapter 20 (the Forever Engine) fights on the new battle: The Collector with the Blue and Orange Lenses, three phases, and picking your four again
+
+Card c-b3s22ch20. Chapter 20 is on the BY CHAPTER list for Battle 3, the last one: no story chapter is left on Battle 2. No number changed: the Collector is 5,140 HP (3,860 for three) as the bestiary prints. Evidence: simulator (`--support=4`, Rank 2, level 50, 8 fights, the bench picked by the simple player) 8.58 rounds on average, every fight won; the bestiary says about 8.5 with its two lenses.
+
+| What | Where |
+|---|---|
+| The Collector (boss), Blue Lens and Orange Lens (helpers), the one formation (90 Vibe Points), Julian is not a fight | `data/b3-foes-ch20.js` |
+| Phase lines (damage past 66% and 31% is lost, the next phase starts at once and its act comes first), Still Frame, the Countdown that only a Break stops, `endsFight`, `refillPips` | `engine/b3-last.js` (new), `engine/b3-resolve.js`, `b3-foe.js`, `b3-ops.js`, `b3-timeline.js`, `b3-ruckus.js` |
+| Helper links (Blue halves Sizzle and Razzle, Orange cuts a quarter, both end in phase 3) and the lenses' feedback (2 pips and 5% HP) | `engine/b3-core.js` (`helperLinks`, `b3AllyModsRefresh`), `data/b3-foes-ch20.js` |
+| Picking the four again at each phase change: a page of all eight, tap four, CONTINUE | `engine/b3-last.js` (`b3Repick`), `engine/b3-repick.js` (new), `engine/b3-ui.js`, `engine/b3-play.js`, `b3-deck.css` |
+| Bench in the story fight, XP and HP for everyone who fought | `engine/b3-story.js` |
+| Julian: on Battle 3 a short care scene, then the Calm scene (Battle 2 keeps its seven acts of care); the switch, level floor 50, tips, Lab fight NEW 98, status `shutter_cut` | `data/scenes-ch20.js`, `data/b3-story.js`, `data/b3-lab.js`, `data/b3-status.js` |
+| Tests: simulator checks, the chapter test (portrait and landscape), the story and Battle Guide tests moved on (no unswitched chapter left) | `tools/b3-check-s22ch20.js`, `tools/ch20_b3_test.py`, `tools/b3_story_test.py`, `tools/battle_guide_test.py`, `tools/guide_planned.py` |
+
 ## b3s22ch19 (2026-11-23): Chapter 19 (the lost-mail office) fights on the new battle: Dead Letter, Rubber Stamp, the Courier and the Dead-Letter Censor
 
 Card c-b3s22ch19. Chapter 19 is on the BY CHAPTER list for Battle 3. One number changed: the Censor's HP, printed 3,400 (2,550 for three), is 2,300 (1,725). Evidence: simulator (`--support=4`, Rank 2, level 47, Grace, Rose, Amy and TNB, 24 fights): at the printed HP it took 9.83 rounds (6.45 with REDACTED switched off), over the 5 to 7 a boss with a helper is aimed at; at 2,300 it averages 6.22 rounds and won every time. The two Elites (2.7 and 2.8 rounds) and the Courier fight (6.8 rounds, the bestiary's own estimate) are as printed.

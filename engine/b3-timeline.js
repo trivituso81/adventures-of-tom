@@ -57,12 +57,12 @@ function b3Tick(F,beats) {
 // Each further push on the same unit inside one round is halved (35, then 17.5, then 8.75). Pulls halve the same way.
 function b3Push(F,u,n) {
   if(!b3Alive(u)||b3HasFlag(u,'pushImmune')||b3SpeedHold(u)) return 0;
-  const amt=n*Math.pow(B3_RULES.halving,u.pushes); u.pushes++; u.wait+=amt; return amt;
+  const amt=n*Math.pow(B3_RULES.halving,u.pushes); u.pushes++; u.wait+=amt; if(amt>0) b3FrameMove(u); return amt;
 }
 function b3Pull(F,u,n) {
   if(!b3Alive(u)) return 0;
   const i0=b3TurnOrder(F).indexOf(u);
-  const amt=Math.min(u.wait,n*Math.pow(B3_RULES.halving,u.pulls)); u.pulls++; u.wait-=amt;
+  const amt=Math.min(u.wait,n*Math.pow(B3_RULES.halving,u.pulls)); u.pulls++; u.wait-=amt; if(amt>0) b3FrameMove(u);
   // Stage 19: icons leapt past on the turn bar are counted until the unit's next turn ends (Choreographed Momentum).
   const i1=b3TurnOrder(F).indexOf(u); if(i0>=0&&i1>=0&&i1<i0) u.jumped=(u.jumped||0)+(i0-i1);
   return amt;

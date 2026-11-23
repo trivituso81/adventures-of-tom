@@ -198,6 +198,22 @@ function b3Show(b) {
   else if(b.t==='stance') {   // stage 22 (chapter 17): the Twin Lenses swap lens (the Pet Peeve chips under it change with it)
     b3Word(b.name.toUpperCase(),'#9ec9ff'); b3Sfx('intro'); b3Say(b3Name(b.tgt)+' swaps to its '+b.name+'.');
   }
+  else if(b.t==='phase') {   // stage 22 (chapter 20): the Collector's HP reached a phase line; the next phase starts at once
+    vu.hp=b.hp; const nm=b.phase===2?'PHASE 2':b.phase===3?'PHASE 3':'PHASE '+b.phase; b3Word(nm,'#ffd27a'); B3P.flash={color:'#ffd27a',t0:now,dur:.5}; b3Sfx('intro');
+    b3Say(b3Name(b.tgt)+' starts '+nm.toLowerCase()+'. Damage past a phase line is lost.');
+  }
+  else if(b.t==='frame') {   // stage 22 (chapter 20): Still Frame snapshots the family
+    b3Word('STILL FRAME','#9ec9ff'); b3Sfx('intro'); for(const k of b.tgts) b3Pop(k,'FRAMED','#9ec9ff',{sc:2});
+    b3Say('Still Frame! Before or on your next turn, move on the turn bar or take part in a Mix or a Detonation.');
+  }
+  else if(b.t==='frameMiss') {
+    if(vu) vu.pep=b.pep; b3Pop(b.tgt,'STILL: -'+b.lost+' PEP, SLOW','#ffd27a',{sc:2}); b3Say(b3Name(b.tgt)+' held still: -'+b.lost+' Pep and Slowed.');
+  }
+  else if(b.t==='repick') {   // the four are picked again (spec 2.1): the newcomers take the leavers' seats
+    for(const k of b.inn.concat(b.out)) { delete B3P.body[k]; if(typeof B3C!=='undefined'&&B3C.gs) delete B3C.gs[k]; }
+    b3ViewSync(); b3LayoutFoes(); for(const k of b.inn) b3Pop(k,'IN!','#9be39a',{sc:2}); b3Sfx('heal');
+    b3Say('The family changes places: '+b.inn.map(k=>b3Name(k)).join(', ')+' step in.');
+  }
   else if(b.t==='stamp') {   // stage 22 (chapter 19): the Censor stamps a flavor REDACTED
     b3Word('REDACTED','#d85a4a'); b3Sfx('intro'); b3Say(b3Name(b.tgt)+' stamps '+b.name+' REDACTED.');
   }
@@ -272,7 +288,7 @@ function b3Show(b) {
 function b3Play(beats,done) {
   const i=beats.findIndex(b=>b.t==='act'||b.t==='telegraph'),lead=i<0?beats:beats.slice(0,i),rest=i<0?[]:beats.slice(i);
   let wait=0;
-  for(const b of lead) { if(b.t==='over') continue; const w=wait; b3After(w,()=>b3Show(b)); if(b.t==='round') wait+=.55; else if(b.t==='stance'||b.t==='stamp') wait+=.7; else if(b.t==='hit'||b.t==='heal') wait+=.45; else if(b.t==='ko') wait+=.5; else if(b.t==='hazardTrip') wait+=.6; else if(b.t==='skip') wait+=.8; else if(b.t==='script') wait+=1.7; else if(b.t==='ruckusSpend') wait+=.9; }
+  for(const b of lead) { if(b.t==='over') continue; const w=wait; b3After(w,()=>b3Show(b)); if(b.t==='round') wait+=.55; else if(b.t==='stance'||b.t==='stamp'||b.t==='phase'||b.t==='frame') wait+=.7; else if(b.t==='repick') wait+=.6; else if(b.t==='hit'||b.t==='heal') wait+=.45; else if(b.t==='ko') wait+=.5; else if(b.t==='hazardTrip') wait+=.6; else if(b.t==='skip') wait+=.8; else if(b.t==='script') wait+=1.7; else if(b.t==='ruckusSpend') wait+=.9; }
   if(!rest.length) { b3After(wait+.05,done); return; }
   // A Family Ruckus spend is one action with two moves in it: the second move's `act` beat is marked part2 and plays after the first.
   const segs=[]; let cur=[]; for(const b of rest) { if(b.t==='act'&&b.part2&&cur.length) { segs.push(cur); cur=[]; } cur.push(b); } segs.push(cur);

@@ -27,6 +27,7 @@ OUT = os.path.join(ROOT, 'data', 'guide-planned.json')
 SOURCES = ['claude/battle-spec-v11.md', 'claude/bestiary-v11.md', 'claude/battle-architecture.md']
 ALSO_READ = ['docs/BATTLE3.md', 'claude/bestiary-v10.1.md', 'claude/battle-build.md']   # read to build the list; their text is not copied, so they are not hashed
 DASH = chr(8212)   # no em dashes anywhere the page shows
+BUILT_AS = {'lens': 'bluelens'}   # the bestiary's one entry for the two lenses of chapter 20 is built as two rows, `bluelens` and `orangelens` (data/b3-foes-ch20.js); the entry drops out when the first exists
 
 def read(p): return open(os.path.join(ROOT, p), encoding='utf-8').read()
 def clean(s):
@@ -224,7 +225,7 @@ def build():
     for f in foes.values():
         if f['id'] in G['foes']: continue
         f['kind'] = f.get('kind', 'regular'); f['stage'] = '22'; f['plannedId'] = f['id']; f['id'] = 'foe:' + f['id']; f['monster'] = f['plannedId']
-        f['when'] = {'foe': f['monster']}; f['source'] = 'claude/bestiary-v11.md chapter %s' % ('bonus' if f['ch'] == 21 else f['ch'])
+        f['when'] = {'foe': BUILT_AS.get(f['monster'], f['monster'])}; f['source'] = 'claude/bestiary-v11.md chapter %s' % ('bonus' if f['ch'] == 21 else f['ch'])
         items.append(dict(f, kind='foe', foeKind=f.pop('kind')))
     for fe in FEATURES:
         items.append(dict(id=fe['id'], kind='feature', name=fe['name'], plain=fe['plain'], stage=fe['stage'], when=fe['when'], source=fe['source']))

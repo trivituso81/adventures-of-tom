@@ -659,5 +659,8 @@ Object.assign(B3_STATUS,{
   whoosh_eva:{id:'whoosh_eva',name:'Pneumatic Whoosh',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'eva',kind:'whoosh',v:.20}],flags:[],
     short:'EVADE',color:'#b9c7d8',weight:5,desc:'Back in the tube, out of reach: 20% Evasion. It can be stripped.'},
   black_marker:{id:'black_marker',name:'Black Marker',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'blackMarker',v:-.20}],flags:[],
-    short:'ATK DOWN',color:'#4a4a52',weight:5,desc:'Half your move is struck out in black marker: 20% less Attack.'}
+    short:'ATK DOWN',color:'#4a4a52',weight:5,desc:'Half your move is struck out in black marker: 20% less Attack.'},
+  // Stage 22, chapter 20 (The Collector): Shutter Blade Snap.
+  shutter_cut:{id:'shutter_cut',name:'Shutter Cut',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'shutterCut',v:-.25}],flags:[],
+    short:'DEF DOWN',color:'#c8a040',weight:5,desc:'The shutter blade came down across you: 25% less Defense.'}
 });

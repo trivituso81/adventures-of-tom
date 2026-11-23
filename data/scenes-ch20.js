@@ -201,7 +201,13 @@ SCENES.ch20Shatter=()=>[
   {talk:'Tom',lines:['No hitting. He has done enough to everybody else. Do the thing you’re each best at, for him. Everybody. In turn. I’ll be last.']},
   {talk:'Boppy',lines:['The last one is always the hardest. That’s why I put the pepper first.']},
   {flag:'ch20-shatter'},
-  ...SCENES.ch20Fight2()
+  // Battle 3 (chapter 20): Julian is not a fight (bestiary entry 86). The care is the scene's, and the Calm scene follows at once. Battle 2 keeps its seven acts of care.
+  ...(B3_CH_ON(20)?SCENES.ch20Care():SCENES.ch20Fight2())
+];
+SCENES.ch20Care=()=>[
+  {talk:'Forever Engine',lines:['So they do. Amy asks him if he has eaten. Grace shows him a drawing of a clock with a smiley face. Rose climbs onto the arm of the chair. Boppy holds out a pepper, and Deedee says that is not food for a man in his state. Tom goes last. He sits on the glass floor next to the chair and says nothing at all.']},
+  {call:()=>{ const j=ch20Julian(); if(j) { j.hidden=false; j.bossAwait=true; j.bossT=performance.now()+600000; } }},
+  {flag:'battle:julian',value:'win'}
 ];
 SCENES.ch20Fight2=()=>[
   {flag:'ch20-fight2'},
@@ -348,7 +354,7 @@ pressAction=function() {
         return;
       }
       if(n&&n.monster==='leviathan'&&flag('ch20-heart')&&flag('battle:leviathan')!=='win') { playScene('ch20Fight1'); return; }
-      if(n&&n.monster==='julian'&&flag('ch20-shatter')&&flag('battle:julian')!=='win') { playScene('ch20Fight2'); return; }
+      if(n&&n.monster==='julian'&&flag('ch20-shatter')&&flag('battle:julian')!=='win'&&!B3_CH_ON(20)) { playScene('ch20Fight2'); return; }
     }
   }
   return LE_pressAction_ch20();

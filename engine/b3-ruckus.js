@@ -30,7 +30,7 @@ function b3RuckusAdd(F,beats,g,n,src,why) {
 function b3RuckusMix(F,c,a,t,fl,hot) {
   if(a.side!=='party'||t.side!=='foe') return;
   const M=F.mix&&F.mix.round===F.round?F.mix:(F.mix={round:F.round,hits:{},done:{}}),L=M.hits[t.key]||(M.hits[t.key]=[]);
-  if(!M.done[t.key]&&L.some(h=>h.a!==a.key&&h.fl!==fl)) { M.done[t.key]=true; b3RuckusAdd(F,c.beats,c.g,B3_RULES.ruckus.mix,a.key,'mix'); c.beats.push({t:'mix',src:a.key,tgt:t.key,g:c.g});
+  if(!M.done[t.key]&&L.some(h=>h.a!==a.key&&h.fl!==fl)) { M.done[t.key]=true; b3FrameMove(a); for(const h of L) if(h.a!==a.key&&h.fl!==fl) b3FrameMove(b3Unit(F,h.a)); b3RuckusAdd(F,c.beats,c.g,B3_RULES.ruckus.mix,a.key,'mix'); c.beats.push({t:'mix',src:a.key,tgt:t.key,g:c.g});
     b3Fire(F,'mix',{src:a,tgt:t,hot:!!hot||L.some(h=>h.hot),g:c.g,c},c.beats); }
   L.push({a:a.key,fl,hot:!!hot});
 }

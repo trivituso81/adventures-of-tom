@@ -15,7 +15,7 @@ module.exports=function(T) {
 
   // 1. The switch, the floor, the numbers (bestiary entries 80 to 83, printed as they are except the Censor's HP, which the simulator moved: see data/b3-foes-ch19.js and docs/BATTLE3.md)
   ok(S.chapters.includes(19)&&S.chapters.indexOf(19)>S.chapters.indexOf(18)&&S.chapters.indexOf(19)<S.chapters.indexOf(21),'chapter 19 is on Battle 3 after chapter 18 (found '+J(S.chapters)+')');
-  ok(S.levelFloor[19]===47&&S.levelFloor.length===20,'chapter 19 floors the Character Level at the bestiary baseline, 47 (found '+S.levelFloor[19]+')');
+  ok(S.levelFloor[19]===47&&S.levelFloor.length>=20,'chapter 19 floors the Character Level at the bestiary baseline, 47 (found '+S.levelFloor[19]+')');
   const DL=FOES.deadletter,RS=FOES.rubberstamp,CO=FOES.mailcourier,CE=FOES.censor;
   ok(DL&&DL.ch===19&&DL.role==='elite'&&DL.row==='front'&&DL.hp===2142&&DL.atk===193&&DL.def===96&&DL.spd===109&&DL.pips===5&&DL.drop==='pretzels'&&J(DL.peeves)==='["clobber","sizzle"]'&&J(DL.resists)==='[]'&&J(DL.start)==='["wax_ward","wax_seal"]','Dead Letter: Elite, Front, 2,142 HP, Atk 193, Def 96, Spd 109, 5 pips, Pet Peeves Clobber and Sizzle, starts under the Wax-Seal Ward');
   ok(RS&&RS.ch===19&&RS.role==='elite'&&RS.hp===2142&&RS.atk===193&&RS.def===96&&RS.spd===109&&RS.pips===5&&RS.drop==='coldbrew'&&J(RS.peeves)==='["clobber","razzle"]'&&J(RS.resists)==='["drench"]'&&J(RS.start)==='["ink_pad"]','Rubber Stamp: Elite, Front, 2,142 HP, 5 pips, Pet Peeves Clobber and Razzle, resists Drench, starts in the Ink-Pad Stance');

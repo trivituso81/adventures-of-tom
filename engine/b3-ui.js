@@ -25,7 +25,7 @@ function b3Start(cfg) {
     const src=loadouts||{}; loadouts={};
     for(const id of cfg.party) if(typeof b3HasKit==='function'&&b3HasKit(id)) loadouts[id]=(cfg.keepLoadout||[]).includes(id)&&src[id]?src[id]:b3RoseLoadout(id,src[id]||b3NewLoadout(id,cfg.rank));   // keepLoadout: the Battle Guide's "See it in a fight" needs this member's Vibe as set
   }
-  B3.F=b3NewFight({party:cfg.party,level:cfg.level,levels:cfg.levels,formation:cfg.formation,foes:cfg.foes,seed:cfg.seed,hpPct:cfg.hpPct,hpShare:cfg.hpShare,gear:cfg.gear,rows:cfg.rows,setup:cfg.setup,
+  B3.F=b3NewFight({party:cfg.party,level:cfg.level,levels:cfg.levels,formation:cfg.formation,foes:cfg.foes,seed:cfg.seed,hpPct:cfg.hpPct,hpShare:cfg.hpShare,gear:cfg.gear,rows:cfg.rows,setup:cfg.setup,reserve:cfg.reserve,
     loadouts,rank:cfg.rank,plain:cfg.plain,mods,ruckus:cfg.ruckus});
   b3FirstSet();
   b3PlayReset(); b3ViewSync(); b3LayoutFoes();
@@ -51,6 +51,7 @@ function b3ShowUI(on) {
   b3SyncTools();
 }
 function b3End(result) {
+  if(typeof b3RepickClose==='function') b3RepickClose();
   if(B3.F&&B3.cfg&&B3.cfg.onRuckus) B3.cfg.onRuckus(B3.F.ruckus);   // the gauge goes on to the next fight
   B3.active=false; B3.result=result; B3.ui='busy'; B3.actor=null; B3.deck=[]; B3P.q.length=0;
   Object.assign(battle,{active:false,v3:false,state:'idle'});
@@ -91,6 +92,7 @@ const b3Over=()=>!!B3.F.over;
 function b3Flow() {
   if(!B3.active) return;
   if(B3.skipNow) { b3DoSkip(); return; }
+  if(B3.F.repick&&!B3.F.over&&typeof b3RepickStart==='function'&&b3RepickStart()) return;   // chapter 20: a phase ended, the player picks the four again (engine/b3-repick.js)
   const N=b3Next(B3.F);
   b3Play(N.beats,()=>{
     if(!B3.active) return;
