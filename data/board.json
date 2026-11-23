@@ -30397,9 +30397,13 @@
     {
      "d": "2026-11-22",
      "t": "Part shipped as movestage2c: the marks of five staged moves are measured on their baked videos"
+    },
+    {
+     "d": "2026-11-23",
+     "t": "movestage2d pushed: all videos for six moves are baked (Controller Toss body accepted by its stop card), marks measured, Lab test passes. The blue burst, headlight flare and jet wash object videos each failed the edge check four times (15, 36 and 36 of 90 pictures touch the edge): stop-loss, written into claude/move-staging-plan.md; the black plus additive proof was not run because there is no baked video to run it on. Tom judges six moves on t-movestage-judge; Winged Shell and Tarmac Porsche Transfer wait on his Give it 4 more tries cards."
     }
    ],
-   "after": "t-movestage-lab"
+   "after": "t-movestage-judge"
   },
   {
    "id": "t-movestage-lab",
@@ -33221,6 +33225,33 @@
     {
      "d": "2026-11-22",
      "t": "Created by the b3s22ch14 session: Milestone for chapter 14 on the new battle."
+    }
+   ]
+  },
+  {
+   "id": "t-movestage-judge",
+   "title": "Judge six of Tom's staged moves in the Move Lab",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "next": "Open ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB: TOM (or tap Take me there on the dashboard). Play each of the six moves that have their videos: Frequent Flier, Zone One, Suite Door, Cartridge Blow, Controller Toss and Konami Code. For each, tap Keep, or Tweak or Replace and type what you saw (Replace means a new body video). Judge the look and the timing: does the move read as the idea, does the hit land with the picture, do the props and the screen effects belong. Winged Shell and Tarmac Porsche Transfer are still missing a video (blue burst, headlight flare, jet wash each failed the edge check four times) and show their old version; answer the Give it 4 more tries cards for them, or leave them. Then press All good on this card, or Something is wrong and type what you saw.",
+   "blocks": [],
+   "fyi": true,
+   "jump": {
+    "fight": "new",
+    "i": 86
+   },
+   "created": "2026-11-23",
+   "changed": "2026-11-23",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukHG6QtbCtw8Kjp1tPx",
+    "opening": "added by c-movestage-build"
+   },
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Added by c-movestage-build (movestage2d): six of the eight staged moves are fully baked and play through the stage layer; the other two wait on video decisions. Same review as t-movestage-lab (the Lab is the only review); Keep and Tweak still write to t-movestage-lab."
     }
    ]
   }

@@ -84,7 +84,7 @@ B3_STAGE.cartridge_blow={v:1,tier:'basic',budget:2.5,
 
 // Skill 1. New body (an empty-hand throw and a no-look catch). One stage element: the controller out and back.
 B3_STAGE.controller_toss={v:1,tier:'s1',budget:3.2,
-  body:{clip:'tom_controller',job:'tom-controller',keep:false,marks:{release:{f:.3},catch:{f:.68}}},
+  body:{clip:'tom_controller',job:'tom-controller',keep:false,marks:{release:{pic:9},catch:{pic:21}},hand:[33,45]},
   hit:'toss',
   steps:[{id:'toss',at:'release',do:'fly',asset:'tom/controller',from:'hand',to:'target',arc:30,spin:3,dur:.45,hit:true,back:{at:'catch',to:'hand'}},
     {at:{step:'toss',plus:.45},do:'foe',react:'knock',px:14},{at:'release',do:'sfx',sfx:'whoosh'}],
