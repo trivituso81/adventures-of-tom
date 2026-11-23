@@ -1,6 +1,6 @@
 {
  "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
- "built": "2026-11-22T22:37Z",
+ "built": "2026-11-23T00:03Z",
  "videos": [
   {
    "file": "deedee-cast-r3.mp4",
@@ -2677,7 +2677,7 @@
   "stage-tom-glare-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
   "stage-tom-wingedshell-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
   "stage-tom-runwaylights-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
-  "stage-tom-jetwash-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
+  "stage-tom-jetwash-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it. wanstop-r2: the start picture fills the width, so the video touched the edge in about half the pictures (bg 93 to 95 percent, edge 48 and 51 of 90); kept everything, changed only pad: 0.8 (the picture is shrunk to 80 percent on the same black).",
   "stage-tom-fireball-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
   "stage-tom-starbeam-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it. Rev 2: the star hardly moved in rev 1 (motion 0.6 of 255, needs 2.0, both tries). Kept: start picture, resolution, duration, seed, camera and background text. Changed one thing: the motion sentence now says the star pulses brighter and dimmer three times with the trail flickering.",
   "stage-tom-meteor-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it."
