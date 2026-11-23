@@ -30988,7 +30988,7 @@
    "title": "Battle stage 22: chapter 15 on Battle 3",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Built and tested (build b3s22ch15): chapter 15 is on Battle 3. The boss's HP was raised from the printed 2490 to 3300 (simulator evidence on this card). Waiting on Tom's phone play (card t-b3s22ch15, fyi). Left for other cards: nothing for chapter 15.",
    "blocks": [],
    "changed": "2026-11-22",
@@ -31028,9 +31028,14 @@
     {
      "d": "2026-11-22",
      "t": "Result (b3s22ch15): chapter 15 is on the BY CHAPTER list (levelFloor 37, tips ch15). data/b3-foes-ch15.js: HUSH-9 Final Form (`hush9final`, boss, Front, 7 pips, no running, formation `hush9final`, 90 Vibe Points) with Squelch Knob, Cabinet Thump, Mute Button (waits 2 rounds, locks Pocket Vibe Skills), Dead Air, Dead Air Calls (once, below half, calls two pods back) and Total Silence (below half); and the Hushling Pod (`hushpod`, helper, Back, 366 HP, the Hushling's three acts). NUMBER CHANGED: the boss's HP, printed 2490 (1870 with the Hush Chip) is 3300 (2478). Evidence: simulator `--support=4`, Rank 2, level 37, Tom, Grace, Rose and Amy gave 4.2 rounds with the printed HP, under the aim of 5 (held to 5 to 7); with 3300 it gives 5.5 to 5.6 (shortest 4.5 to 4.9, longest 6.1 to 6.6). Attack 163, Defense 71, Speed 118 and the pips are as printed. Helpers: feedback only, no helper link (the bestiary prints feedback only, no damage reduction): a pod knocked out takes 1 Composure pip off the radio and Dazzles it for 2 turns inside the 3-pip cap. Engine: a layout-only foe field `helpers` so the pods stand in the gap in front of the 2.5 times large boss (`b3HelperOf`), checked by `b3CheckData`. The name on screen is HUSH-9 Final Form (the scene's name). Battle 3 wording behind `B3_CH_ON(15)`: opening toast, Amy's retry line, Tombo skin toast; recorded lines untouched; the Battle 2 tip about BENCH CALL is not shown on Battle 3. Found and fixed: the dining room picture was only asked for by Battle 2, so the fight was on the pond picture; `data/ch15-battle.js` now asks for it on Battle 3 too. Looked at portrait and landscape frames of the fight: the radio in Front, two pods in the gap, the family at the table. Tests: sim check green (5004 checks), tools/ch15_b3_test.py portrait and landscape, b3_story_test (first unswitched chapter now 16, pool 2025, floor 37), battle_guide_test (fake gain is the chapter 16 Grey Note; the same 8 checks that fail on main still fail, and its Giddyup crash is on main too), smoke, unused_voice 0. Gaps: the pods wear the Hushling painting (no pod art); the Part 1 recorded pre-fight lines are Battle 2 wording."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as b3s22ch15: Chapter 15 (the family dinner) fights on the new battle: HUSH-9 Final Form and its two speaker pods"
     }
    ],
-   "after": "t-b3s22ch15"
+   "after": "t-b3s22ch15",
+   "done": "2026-11-22"
   },
   {
    "id": "c-b3s22ch16",
@@ -33545,6 +33550,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEafYMf3zc6pzB4QYi",
+   "title": "Battle stage 22: chapter 15 on Battle 3",
+   "first": "2026-11-22T18:31:50-08:00",
+   "last": "2026-11-22T19:57:20-08:00",
+   "tags": [
+    "b3s22ch15"
+   ],
+   "cards": [
+    "c-b3s22ch15",
+    "t-b3s22ch15"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDVzicfuTvNDmrh5zu",
    "title": "Build the one status file for Guide requests",
    "first": "2026-11-22T19:31:52-08:00",
@@ -33568,16 +33586,6 @@
    "cards": [
     "c-movestage-build",
     "t-movestage-lab"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEafYMf3zc6pzB4QYi",
-   "title": "Battle stage 22: chapter 15 on Battle 3",
-   "first": "2026-11-22T18:31:50-08:00",
-   "last": "2026-11-22T18:31:50-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s22ch15"
    ]
   },
   {
@@ -39379,8 +39387,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "1bd46f486e3b9ce15a84df378481767b67bac2c5",
- "synced_at": "2026-11-23T03:38:55+00:00",
+ "synced": "8732ac304ef9b2e05058d3f5c13d9439ae49c0a8",
+ "synced_at": "2026-11-23T03:58:10+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
