@@ -18545,7 +18545,7 @@
     "text": "Read claude/battle-architecture.md section 5 row 22, claude/bestiary-v11.md chapter 20, claude/battle-traits.md if present, and docs/BATTLE3.md (the section \"What stage 22a holds\" is the pattern for a chapter: a foes file, the switch, `B3_CH_ON(20)` wording in the scenes, a Lab fight, tips, one chapter test). Also read Tom's notes on the Milestone cards of the chapters before this one (t-b3s22ch11 for chapter 11, then the next ones as they appear; the notes and answers are on the cards), and any fix card they made. This session builds ONLY chapter 20 (The studio again): Blue Lens and Orange Lens (Special), The Collector (Boss). Its monsters, bosses (and Julian Vance's fights where the scenes name them), formations and tips, as data in data/b3-foes-ch20.js (and data/b3-*.js where the rows belong), switched on Battle 3 for chapter 20 behind the BY CHAPTER switch (add 20 to `B3_STORY.chapters`, a `levelFloor` entry, tips), with one chapter test tools/ch20_b3_test.py written from tools/ch11_b3_test.py (add it to tools/night/tests.json). The last fight: three phases with phase lines (damage past a line is lost), the Blue and Orange Lens helpers, helper links and feedback, and picking the four again at each phase (swapping happens outside battle only, with one exception here). This is the largest chapter of the series. Numbers are the bestiary's printed numbers; change one only if the simulator puts a fight outside its target, and say so in the card history. When chapter 20 is switched on, move the 'first chapter not switched' cases in tools/b3_story_test.py to chapter 21, run `node tools/guidegen/build_map.js`, and fix tools/battle_guide_test.py the way stage 22a did (a planned monster that is now built drops out; the fake-gain case uses a still-planned monster). Tests: node tools/b3-sim.js check, python3 tools/ch20_b3_test.py in portrait and landscape (LAYOUT=landscape), python3 tools/smoke.py, python3 -I tools/clip-audit/unused_voice.py (all 0). Look at the chapter's fights in portrait and landscape. Do not review or build animations. Never edit a recorded line: new Battle 3 wording goes in a `B3_CH_ON(20)` variant. Write the result into this card's history; set `after` to a Tom Milestone card for chapter 20 that this session creates (ask play, `jump` {chapter: 20}, fyi true, `next` naming the screen and what to judge). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukeFgqzZTqRuhJ8gJGVN",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -18565,6 +18565,10 @@
     {
      "d": "2026-11-23",
      "t": "Session started: building chapter 20 on Battle 3. Read t-b3s22ch11 (Tom: all good); chapters 12 to 19 Milestones have no notes yet (in backlog)."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -21056,6 +21060,16 @@
    ],
    "cards": [
     "c-movestage-build"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukeFgqzZTqRuhJ8gJGVN",
+   "title": "Battle stage 22: chapter 20 on Battle 3",
+   "first": "2026-11-23T14:13:11-08:00",
+   "last": "2026-11-23T14:13:11-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3s22ch20"
    ]
   },
   {
@@ -27219,8 +27233,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "814d0ad18c1a38c0792a3eeb56a4d34a253cd089",
- "synced_at": "2026-11-23T20:17:12+00:00",
+ "synced": "825e7f88e9c4656caafe44bd96da848a08c1b000",
+ "synced_at": "2026-11-23T22:14:00+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
