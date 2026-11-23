@@ -31178,7 +31178,7 @@
    "title": "Battle stage 22: chapter 18 on Battle 3",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Build ONLY chapter 18 on Battle 3: The Studio Rig (Boss). Starts after chapter 17 is switched on.",
    "blocks": [],
    "changed": "2026-11-23",
@@ -31195,7 +31195,7 @@
    },
    "chat": {
     "url": "",
-    "opening": "created by the b3s22 session"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -31205,6 +31205,11 @@
     {
      "d": "2026-11-23",
      "t": "Note from the chapter 17 build (b3s22ch17): chapter 17 is on Battle 3 (levelFloor 42). tools/b3_story_test.py now treats chapter 18 as the first unswitched chapter (pool 2295, floor 42, Grace set to 44); move those cases to chapter 19 with your levelFloor. tools/battle_guide_test.py's fake-gain case now uses the chapter 18 Studio Rig (`vance`, chapters.push(18)); change it to a still-planned chapter 19 monster (`mailcourier`, the Brass Mail-Chute Courier, is listed under chapter 19 in data/guide-planned.json), and the 'What is coming' check and the 'chapters 11 to 17' counts to chapter 18. Engine pieces you can reuse: the foe `stances` and `stance0` fields, the `stance` op and the act condition `when:{stance}` (engine/b3-core.js `b3SetStance` and `b3SwapStance`, engine/b3-ops.js, engine/b3-foe.js); chapter 20's Blue and Orange Lens can use them. Also in b3-check files: add your own file after b3-check-s22ch17.js in tools/b3-sim.js. The chapter test's helper `begin()` in tools/ch17_b3_test.py starts a map monster's fight and waits out the last victory card (a fight started within a second or two of it is ended by it); reuse it if your test fights two map monsters in a row. The same 8 battle_guide_test checks fail on main before and after."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-23T16:18:22.594Z"
     }
    ]
   },
