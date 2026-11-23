@@ -20776,7 +20776,7 @@
    "title": "Judge six of Tom's staged moves in the Move Lab",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "next": "Open ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB: TOM (or tap Take me there on the dashboard). Play each of the six moves that have their videos: Frequent Flier, Zone One, Suite Door, Cartridge Blow, Controller Toss and Konami Code. For each, tap Keep, or Tweak or Replace and type what you saw (Replace means a new body video). Judge the look and the timing: does the move read as the idea, does the hit land with the picture, do the props and the screen effects belong. Winged Shell and Tarmac Porsche Transfer are still missing a video (blue burst, headlight flare, jet wash each failed the edge check four times) and show their old version; answer the Give it 4 more tries cards for them, or leave them. Then press All good on this card, or Something is wrong and type what you saw.",
    "blocks": [],
@@ -20795,8 +20795,15 @@
     {
      "d": "2026-11-23",
      "t": "Added by c-movestage-build (movestage2d): six of the eight staged moves are fully baked and play through the stage layer; the other two wait on video decisions. Same review as t-movestage-lab (the Lab is the only review); Keep and Tweak still write to t-movestage-lab."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Not needed: animations are awful",
+     "at": "2026-11-23T17:22:47.105Z"
     }
-   ]
+   ],
+   "done": "2026-11-23",
+   "retired": true
   },
   {
    "id": "t-b3s22ch15",
