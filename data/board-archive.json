@@ -3315,6 +3315,3531 @@
      "t": "Tom did this: he told Claude in chat that the task and both secrets are set. The board page tap did not save (no commit arrived), so Claude marked it done for him."
     }
    ]
+  },
+  {
+   "id": "b-board-b3s15",
+   "title": "board only: stage 15 card and handoff notes added",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-b3s15",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as board-b3s15. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-boppy-bigfish",
+   "title": "board only: Boppy cap card waits on Tom's picture approval",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-boppy-bigfish",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as board-boppy-bigfish. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-builds",
+   "title": "board only: UX audit of the build history screen, a redesign plan and its four cards",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-builds",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as board-builds. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-gemcards",
+   "title": "board only: one card for every issue in Gemini's chapter 1 test report",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-gemcards",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as board-gemcards. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-itemart-refs",
+   "title": "board only: the 3 remade item pictures missed again; stop-loss, card c-itemart-refs waits on 3 reference photos from Tom",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-itemart-refs",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as board-itemart-refs. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-itembanner",
+   "title": "board only: new card for an ITEM GAINED banner",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-itembanner",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as board-itembanner. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-projclean",
+   "title": "board only: a card that moves the Project's notes into the repo, because the Project is 97% full",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-projclean",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as board-projclean. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-qa2",
+   "title": "Board only: cards from the second chapter 1 QA report",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-qa2",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as board-qa2: board only: 19 cards from the second chapter 1 QA report, 5 items not added"
+    }
+   ]
+  },
+  {
+   "id": "b-board-startpause",
+   "title": "the two broken START routes are paused instead of failing silently",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-startpause",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as board-startpause. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-starving4",
+   "title": "board only: your last \"I'm starving!\" report came 40 seconds before the fix was live",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-starving4",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as board-starving4. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-fix-conflictmarks",
+   "title": "the game would not start: merge conflict markers on main removed from engine/main.js and index.html",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-conflictmarks",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-conflictmarks. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-projclean2a",
+   "title": "Project docs move paused at a safe point: progress and next steps written on card c-projclean",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "projclean2a",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as projclean2a. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-projclean2b",
+   "title": "Project docs move: build name 2a put on its card, no files copied",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "projclean2b",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as projclean2b. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "c-adminicons1",
+   "title": "Own favicon and Home Screen icon for BOARD and ADMIN",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "adminicons1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as adminicons1: ADMIN and BOARD each have their own tab icon and Home Screen icon"
+    }
+   ]
+  },
+  {
+   "id": "c-artgen2",
+   "title": "QA for generated pictures, with the results on the card",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "artgen2",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as artgen2: QA for generated pictures is finished: measured on 40 pictures you approved, f_same made advisory"
+    }
+   ]
+  },
+  {
+   "id": "c-attn1",
+   "title": "Needs attention fixes itself or comes back to you",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "tag": "attn1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as attn1: Needs attention fixes itself or comes back to you"
+    }
+   ]
+  },
+  {
+   "id": "c-b3s10",
+   "title": "Battle system stage 10: Amy, Justin and Olivia kits",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "b3s10",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as b3s10: New battle: Amy, Justin and Olivia join the Battle Lab with both of their Vibes"
+    }
+   ]
+  },
+  {
+   "id": "c-b3s11",
+   "title": "Battle system stage 11: bestiary chapters 2 to 4 and bosses",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "b3s11",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as b3s11: New battle: the chapter 2, 3 and 4 monsters and their three bosses join the Battle Lab"
+    }
+   ]
+  },
+  {
+   "id": "c-b3s12",
+   "title": "Battle system stage 12: bestiary chapters 5 to 7 and bosses",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "b3s12",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as b3s12: New battle: the chapter 7 library monsters and The Unread join the Battle Lab (stage 12 complete)"
+    }
+   ]
+  },
+  {
+   "id": "c-b3s13",
+   "title": "Battle system stage 13: bestiary chapters 8 to 10, bonus",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "b3s13",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as b3s13: New battle: the Nine Scoops monsters and Brain Freeze join the Battle Lab (stage 13 complete)"
+    }
+   ]
+  },
+  {
+   "id": "c-b3s14",
+   "title": "Battle system stage 14: balance pass",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "b3s14",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as b3s14: New battle: balance pass on Part 1, eight short bosses lengthened to 5 to 7 rounds (stage 14 complete)"
+    }
+   ]
+  },
+  {
+   "id": "c-b3s14b",
+   "title": "Balance pass follow-up: Rank 2 and Rank 5 check",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "b3s14b",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as b3s14b: New battle: balance pass follow-up, bosses checked at Rank 2 and Rank 5, no numbers changed"
+    }
+   ]
+  },
+  {
+   "id": "c-b3s9c",
+   "title": "Battle system stage 9c: Nara and Boppy kits, late joiners",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "b3s9c",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as b3s9c: New battle: Nara and Boppy join the Battle Lab with both of their Vibes, and late joiners start from a Vibe Point pool"
+    }
+   ]
+  },
+  {
+   "id": "c-backlog1",
+   "title": "Board: Send to backlog and a BACKLOG section with Add to to-do",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "backlog1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as backlog1 (e0989a9); board.html is live. Closed by hand: the sync run that would have read the CHANGES heading was cancelled by the next push."
+    }
+   ]
+  },
+  {
+   "id": "c-backlogtab",
+   "title": "Backlog as its own tab next to Shipped",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "backlogtab",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as backlogtab: Backlog is its own tab next to Shipped on the board"
+    }
+   ]
+  },
+  {
+   "id": "c-battlelabpage",
+   "title": "Battle Lab page with its own address",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "battlelabpage",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as battlelabpage: The Battle Lab has its own page and address"
+    }
+   ]
+  },
+  {
+   "id": "c-bigboard1",
+   "title": "Fix: board saves fail once board.json passes 1 MB",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "bigboard1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as bigboard1: board saves work again; the board reads big files by blob id and old Done cards move to an archive"
+    }
+   ]
+  },
+  {
+   "id": "c-boardbar1",
+   "title": "Board: empty bar at the top in landscape on the Duo",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "boardbar1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as boardbar1: Board has no empty bar above the header in landscape"
+    }
+   ]
+  },
+  {
+   "id": "c-boardux2",
+   "title": "Board redesign 2: cards and the card panel",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "boardux2",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as boardux2: Board cards read without opening them, and the card panel keeps its main button in view"
+    }
+   ]
+  },
+  {
+   "id": "c-boardux3",
+   "title": "Board redesign 3: four views, search and the wide layout",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "boardux3",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as boardux3: The board is four tabs (For you, Claude, Chats, Shipped) with search, the same at every screen size"
+    }
+   ]
+  },
+  {
+   "id": "c-boardwait1",
+   "title": "Unstick your cards that sat in Waiting with nothing left to wait on (boardwait1)",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "boardwait1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as boardwait1: Your cards no longer sit in Waiting when nothing is left to wait on"
+    }
+   ]
+  },
+  {
+   "id": "c-buildname",
+   "title": "Show the build name on Play and report cards",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "buildname1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as buildname1: Play and report cards on the board name the build they are in"
+    }
+   ]
+  },
+  {
+   "id": "c-builds1",
+   "title": "Build history redesign 1: readable rows by day",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "builds1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as builds1: the build history reads by day: sentence first, a marker for this phone, retries folded into one row, a details sheet on a tap"
+    }
+   ]
+  },
+  {
+   "id": "c-builds2",
+   "title": "Build history redesign 2: statuses and what is pending",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "builds2",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as builds2: the build history shows where each build is (publishing, live, your test), names a failed publish, and has an In the works view and Filters"
+    }
+   ]
+  },
+  {
+   "id": "c-builds3",
+   "title": "Build history redesign 3: archive, search and its own page",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "builds3",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as builds3: old builds move to an archive by month, search covers every build, and the build history has its own page with a button in Admin"
+    }
+   ]
+  },
+  {
+   "id": "c-ch1clips8",
+   "title": "Merge 8 Chapter 1 phone clips (Export pending clips)",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "ch1clips8",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as ch1clips8: 8 new phone takes merged (7 Chapter 1 lines, Grace's nine-for-six-hours line); 4 Chapter 1 lines now say what the takes say"
+    }
+   ]
+  },
+  {
+   "id": "c-ch1leftovers",
+   "title": "Chapter 1 staging leftovers: Amy, Aunt Ellie, Gus and Bean",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "ch1leftovers",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as ch1leftovers: Chapter 1 staging leftovers checked: Amy and Aunt Ellie already stand clear and near, Gus and Bean wait for amber pictures"
+    }
+   ]
+  },
+  {
+   "id": "c-ch1starving-sub",
+   "title": "Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub)",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "ch1starving-sub",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as ch1starving-sub: Tom's line \"Thank you for telling me, Rose...\" now ends with \"I'm starving!\" on screen and in his voice"
+    }
+   ]
+  },
+  {
+   "id": "c-clipposesfix",
+   "title": "Apply your notes on the painted poses",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "clipposesfix",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: not needed, replaced by the video route."
+    }
+   ]
+  },
+  {
+   "id": "c-clipstuck1",
+   "title": "GENERATE VIDEO: fix stuck button and let Tom review",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "clipstuck1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as clipstuck1: a single GENERATE VIDEO press waits for Tom's review; every GitHub-made version has REVIEW on the clip's card"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-artgen2look",
+   "title": "Fix: Look at the QA results on a real pictures card",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-artgen2look",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-artgen2look: the board stops asking for pictures already in the game; the six gate pictures are re-prompted; the school gate stands under the SCHOOL sign"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-battlelabpagetry",
+   "title": "Fix: Open the Battle Lab page on your home screen",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-battlelabpagetry",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-battlelabpagetry: The Battle Lab page 404 was the site not yet updated; no code change"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-battlelabpagetry-2",
+   "title": "Fix: Open the Battle Lab page on your home screen",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-battlelabpagetry-2",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-battlelabpagetry-2: The Battle Lab page is a page like Admin: difficulty toggles on top, every fight one tap away"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-battlelabpagetry-3",
+   "title": "Fix: Open the Battle Lab page on your home screen",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-battlelabpagetry-3",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-battlelabpagetry-3: The Battle Lab page has its own icon and its fights sit in collapsed categories and subcategories"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-ch1flight",
+   "title": "Fix: Check chapter 1 ends in the flight",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-ch1flight",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-ch1flight: chapter 1's cab scene goes straight from TNB's text to the flight, with the phone picture up while TNB's text is read"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-ch1starving-3",
+   "title": "Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! ",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-ch1starving-3",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-ch1starving-3: \"I'm starving!\" is back at the end of Tom's \"Thank you for telling me, Rose\" script, ready for you to re-record"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-ch1starving-4",
+   "title": "Fix what you found on: Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-ch1starving-4",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: report crossed with build fix-ch1starving-3."
+    }
+   ]
+  },
+  {
+   "id": "c-fix-clipposes",
+   "title": "Fix what you found on: Watch the painted poses for the family (PAINTED STATES: CHAPTER 1)",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-clipposes",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-clipposes: PAINTED STATES: CHAPTER 1 now shows each fighter on an open spot in front of the family, so no state is hidden behind someone"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-clipposes-2",
+   "title": "Fix: Watch the family's painted battle poses",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-clipposes-2",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-clipposes-2: PAINTED STATES now stops after every pose and waits for your APPROVE or REJECT, with an optional note for Claude"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-clipposes-3",
+   "title": "Fix: Watch the family's painted battle poses",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-clipposes-3",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: answered by the video route card (wanplan)."
+    }
+   ]
+  },
+  {
+   "id": "c-fix-cutpolish5",
+   "title": "Fix what you found on: Watch the chapter 1 scenes for breathing and reactions",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-cutpolish5",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-cutpolish5: People in the overworld and in scenes no longer breathe (breathing is battle only)"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-effectslook",
+   "title": "Fix: Look at the Effects page in Admin",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-effectslook",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-effectslook: The Effects page preview shows the full-body person on a map ground, not the dialogue face"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-effectslook-2",
+   "title": "Fix: Look at the Effects page in Admin",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-effectslook-2",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-effectslook-2: Wince is removed everywhere; the speed difference needs one example"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-effectslook-3",
+   "title": "Fix: Look at the Effects page in Admin",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-effectslook-3",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-effectslook-3: The talking bob no longer shakes the speaker"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-gatelayer-pics",
+   "title": "Fix: Make and approve 6 gate pictures (Amy's door, open",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-gatelayer-pics",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Result: the generator route is dropped. tools/sprite-bake/bake_hollow_trail.py places ONE trail of nine painted wrappers (3, 2, 2, 2 per leg), 34 plate px wide (about 20 px on the phone, narrower than Grace's head), and writes the four stage paintings; stage n shows what is left (9, 6, 4, 2) because Grace picks up each leg; the goals count them. Art Library entries area-hollow-trail1 to 4, their prompts and guides purged. Checked in portrait and landscape; hollow_trail_test passes."
+    }
+   ]
+  },
+  {
+   "id": "c-fix-gatelayer-pics-2",
+   "title": "Fix: Make and approve 6 gate pictures (Amy's door, open",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-gatelayer-pics-2",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-gatelayer-pics-2: gate pictures checked by Claude: three ready for Tom, three rewritten to a method that works"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-gem-canon01play",
+   "title": "Fix: Play the new chapter 1 opening in the taxi office",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-gem-canon01play",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-gem-canon01play: Tom now says \"Thanks for the JFK pickup, Sal.\" before he stretches in the taxi office"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-gem-canon01play-2",
+   "title": "Fix: Play the new chapter 1 opening in the taxi office",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-gem-canon01play-2",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-gem-canon01play-2: In the taxi office, Tom's thank-you comes after his Delta One line and Sal says \"You got it, kid.\""
+    }
+   ]
+  },
+  {
+   "id": "c-fix-gracevoice-distort",
+   "title": "Fix: Re-record Grace's distorted chapter 1 lines",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-gracevoice-distort",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-gracevoice-distort: Grace's lines play at her real speed and pitch again; the merge step that slowed her is gone"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-heist1play",
+   "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-heist1play",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-heist1play: The muffin theft is plainer: the Mudling walks in and straight out, everyone is startled and Rose screams, nobody is on the floor"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-heist1play-2",
+   "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-heist1play-2",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-heist1play-2: The muffin theft knocks the three of you onto the floor again"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-heist1play-3",
+   "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-heist1play-3",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-heist1play-3: the mud blob hops up onto the kitchen counter for the muffins and hops back down, and Deedee gets shoved back a step, shocked, without falling"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-heist1play-4",
+   "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-heist1play-4",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-heist1play-4: The mud blob's held pan matches the counter pan, and it lands clear of the stool when it hops down"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-heist1play-5",
+   "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-heist1play-5",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-heist1play-5: The mud blob's whole path in the muffin theft is rebuilt: hops, stop-off, knock-downs on contact, counter, hop down, a real run out the door"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-hollowtrail-play",
+   "title": "Fix: Play the Grump Hollow wrapper trail",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-hollowtrail-play",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-hollowtrail-play: the Grump Hollow wrappers are bigger and stand out from the stones"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-hollowtrail-play-2",
+   "title": "Fix: Play the Grump Hollow wrapper trail",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-hollowtrail-play-2",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-hollowtrail-play-2: Grump Hollow wrapper trail is now three legs of four wrappers: Mudling to the top left Toad, Toad to the Log, Log to the fishing spot"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-hollowtrail1-pics",
+   "title": "Fix: Generate and approve the 4 Hollow wrapper trail",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-hollowtrail1-pics",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-hollowtrail1-pics: Hollow wrapper trail 1 remade and reviewed before Tom sees it; trails 2 to 4 need his OK for a different method"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-itembannerart-pics",
+   "title": "Fix: Make and approve 18 item picture sheets (288",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-itembannerart-pics",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-itembannerart-pics: item pictures: only the 18 cells that missed are made again, on 2 small redo sheets"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-itembannerart-pics-2",
+   "title": "Fix: Make and approve 18 item picture sheets (288",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-itembannerart-pics-2",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-itembannerart-pics-2: 285 item pictures are in the game; 3 that missed twice are made alone; the cutter no longer drops cells or leaves crimson shadows"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-itembannerart-pics-3",
+   "title": "Fix: Make and approve 18 item picture sheets (288",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-itembannerart-pics-3",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-itembannerart-pics-3: the 3 item pictures that missed get new prompts and are made again"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-keysecrets2-try",
+   "title": "Fix: Try GENERATE VIDEO on one clip",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-keysecrets2-try",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-keysecrets2-try: GENERATE VIDEO now shows it is still working, and reads the job's report on any phone"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-keysecrets2-try-2",
+   "title": "Fix: Try GENERATE VIDEO on one clip",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-keysecrets2-try-2",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-keysecrets2-try-2: GENERATE VIDEO works on a clip that is already approved"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-keysecrets2-try-3",
+   "title": "Fix: Try GENERATE VIDEO on one clip",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-keysecrets2-try-3",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-keysecrets2-try-3: the Art Library page no longer serves a stale video script, and a stalled network ends in a plain line"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-keysecrets2-try-4",
+   "title": "Fix: Try GENERATE VIDEO on one clip",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-keysecrets2-try-4",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-keysecrets2-try-4: the page reads the video job's report through the GitHub API, not the 5 minute cached copy"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-keysecrets2-try-5",
+   "title": "Fix: Try GENERATE VIDEO on one clip",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-keysecrets2-try-5",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Superseded by clipstuck1 (retired for good): its fix was kept; clipstuck1a and clipstuck1 finished the work."
+    }
+   ]
+  },
+  {
+   "id": "c-fix-keysecrets2-try-6",
+   "title": "Fix: Try GENERATE VIDEO on one clip",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-keysecrets2-try-6",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-keysecrets2-try-6: the answer to GENERATE VIDEO stays on the card after the page is closed"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-listen1-play",
+   "title": "Fix: Play chapter 1 and watch people listen",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-listen1-play",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-listen1-play: the listening test steps named \"Grandma's\"; they now say Deedee's kitchen"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-oldchecks",
+   "title": "Fix what you found on: Older phone checks, when you next play (none block anything)",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-oldchecks",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-oldchecks: The old phone checks are six separate cards, one per item"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-oldchecks-voice",
+   "title": "Fix what you found on: Voices: record the old voice gaps",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-oldchecks-voice",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: nothing to fix (Tom: no bugs past chapter 1 for now)."
+    }
+   ]
+  },
+  {
+   "id": "c-fix-wanproof-watch",
+   "title": "Fix: Watch Grace's guard video once (1 minute)",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-wanproof-watch",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-wanproof-watch: PROOF: GRACE'S GUARD (VIDEO) is now the first box on the NEW BATTLE list"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-welcomepage-play",
+   "title": "Fix: Check the new welcome buttons and chapter list top",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-welcomepage-play",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: the request came in as report tr1a and shipped there."
+    }
+   ]
+  },
+  {
+   "id": "c-gem-bug01",
+   "title": "Fix: losing to The Big One leaves the party stuck",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-bug01",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-bug01: losing to The Big One now heals the party and starts the fight again at once, so nobody is stuck on the shore"
+    }
+   ]
+  },
+  {
+   "id": "c-gem-bug02",
+   "title": "Fix: AUTO resets to ON and a tap skips unfinished text",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-bug02",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: already works on current main. Checked: turning AUTO OFF in a scene is saved (le-scene-auto) and the next line opens OFF (tools/linegap_test.py passes that check); tapping a box while text types shows the whole text, a second tap closes it (advanceDialog in engine/overworld.js). The only thing that resets AUTO to ON by design is Rose Mode (CLAUDE.md, engine/dialog-auto.js), and a scene with Rose Mode on turns it on at every conversation; the tester's older build (board-ch1review) may have been in Rose Mode. No code changed."
+    }
+   ]
+  },
+  {
+   "id": "c-gem-bug03",
+   "title": "Fix: closing a banner also walks Tom across the map",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-bug03",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: Already fixed"
+    }
+   ]
+  },
+  {
+   "id": "c-gem-bug04",
+   "title": "Fix: Rose's shoulder sprite glitches in Grump Hollow fights",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-bug04",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: Battle animations out of scope for Gemini bug fixes"
+    }
+   ]
+  },
+  {
+   "id": "c-gem-bug05",
+   "title": "Fix: blank portraits in chapter select, battle and dialogue",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-bug05",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-bug05: Chapter select faces, battle faces and dialogue faces no longer show a blank or wrong picture for a frame"
+    }
+   ]
+  },
+  {
+   "id": "c-gem-bug06",
+   "title": "Fix: quest log 'Go to' prefix and run-on location toasts",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-bug06",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-bug06: the quest log no longer says \"Go to\" in front of a full sentence"
+    }
+   ]
+  },
+  {
+   "id": "c-gem-bug07",
+   "title": "Fix: the stolen muffin pan stays on the kitchen island",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-bug07",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: Already fixed"
+    }
+   ]
+  },
+  {
+   "id": "c-gem-bug08",
+   "title": "Fix: Amy's House can be entered early in chapter 1",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-bug08",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-bug08: Amy's House door is locked in chapter 1, with a note on it"
+    }
+   ]
+  },
+  {
+   "id": "c-gem-bug09",
+   "title": "Fix: sprite and wall clipping glitches in chapter 1 maps",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-bug09",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-bug09: The Big One no longer wears a flat grey plate over its painted pan hat"
+    }
+   ]
+  },
+  {
+   "id": "c-gem-bug10",
+   "title": "Fix: cut-off text and stray bars on battle and map screens",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-bug10",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-bug10: battle text no longer cut off, banner and quest panel stay clear"
+    }
+   ]
+  },
+  {
+   "id": "c-gem-bug11",
+   "title": "Fix: Boppy reacts to the Mudling he should miss",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-bug11",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: Already fixed"
+    }
+   ]
+  },
+  {
+   "id": "c-gem-canon01",
+   "title": "Open chapter 1 inside the taxi office with Sal",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-canon01",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-canon01: chapter 1 opens inside the taxi office: Tom stretches, Sal sends him out to the girls"
+    }
+   ]
+  },
+  {
+   "id": "c-gem-canon02",
+   "title": "Rose jumps out to scare Tom outside the taxi office",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-canon02",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Note from gem-canon01: Tom (11-20) asked that after the taxi office \"the existing sequence continue where the girls say tata, he crouches and they hug\". Any BOO must not replace that greeting."
+    }
+   ]
+  },
+  {
+   "id": "c-gem-canon03",
+   "title": "Rebuild The Big One as a bog turtle; cut the lure and chair",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-canon03",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Retired, nothing changed in the game. Checked main: the fish, Boppy's Lost Lure, the folding chair and the 20-year lines are all still there, but the tester's target contradicts Tom's own canon: (1) Tom, 2026-11-16, story workshop: the Gemini script turning the Big One into a giant turtle \"was not his decision (the Big One stays Boppy's fish)\", and Boppy stays a retired Rikers warden who fishes, \"not a boat fisherman\"; (2) the locked chapter 1 script (claude/story-ch01.md, locked 2026-11-16 19:35) says the Big One is \"Boppy's fish of twenty years, a normal fish until a flash that morning. Not a turtle. It asks after Boppy\", with the cube beside Boppy's folding chair at the pond; (3) canon-addendum 2026-11-13 14:27 and 2026-11-01 fish1 (Boppy's pier spot). The 20 years line does not contradict the flash: it was a normal-size fish until that morning. Leftover noted, not acted on: the old Lure charm drop is not in the locked script (the script has only the coin from its lip); if Tom wants it gone, that is a small new card."
+    }
+   ]
+  },
+  {
+   "id": "c-gem-canon04",
+   "title": "Remove 'camera' and the chair from the flashbulb scene",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-canon04",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-canon04: Nobody says \"camera\" at the flashbulb in chapter 1; the bulb has purple-black sparkles inside"
+    }
+   ]
+  },
+  {
+   "id": "c-gem-canon05",
+   "title": "Fix Grace's canon: squeeze warning, pen not pencil",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-canon05",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: Gemini is referring to old dialogue, disregard this"
+    }
+   ]
+  },
+  {
+   "id": "c-gem-canon06",
+   "title": "Tom walks solo to the taxi; no Rose carry in Grump Hollow",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-canon06",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: battle animations are out of scope for gemini"
+    }
+   ]
+  },
+  {
+   "id": "c-gem-canon07",
+   "title": "Restore the missing grands clues: marks, washer, Gas-X",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-canon07",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Note from the gem-canon03 session for whoever takes this card: two of the tester's six items go against Tom's own decisions. (1) Grace's door frame height marks were cut by Tom on 2026-11-19 17:27 (ch1nodoor). (6) Boppy's Sound boat promise: Tom, 2026-11-16, Boppy fishes but is \"not a boat fisherman\". Skip those two."
+    }
+   ]
+  },
+  {
+   "id": "c-gem-canon08",
+   "title": "Fix the speaker name on Rose's first orange-block line",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-canon08",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-canon08: Pressing A on Boppy's orange block before the family has seen it now shows Rose, not \"Orange block\""
+    }
+   ]
+  },
+  {
+   "id": "c-gem-canon09",
+   "title": "Change the Cookies caption to muffins; settle Amy's check-in",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-canon09",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: toast messages are no longer displayed"
+    }
+   ]
+  },
+  {
+   "id": "c-gem-canon10",
+   "title": "Keep: TNB's smog text and the 51 years line",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-canon10",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: a keeper note, nothing to build."
+    }
+   ]
+  },
+  {
+   "id": "c-gem-pillar-flavors",
+   "title": "Chapter 1 fights: Flavors, Primes, Detonations, Composure",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-pillar-flavors",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: Gemini tested battle 2 against the old v10 spec; the locked v11 system already has this. The 5 Flavors plus Support, the 3 Primes, the Detonations and Composure pips with Flustered are v11 rules already built in Battle 3 (stages 1 and 3). Sparkle, Chatter and STAGGER are battle 2, which is replaced, not fixed. Where the tester's v10 numbers differ (pip counts), v11 wins. Chapter 1 story fights move to Battle 3 at stage 15. Tom asked: \"go through all of the Battle cards created from Gemini feedback and determine if they are still relevant\"."
+    }
+   ]
+  },
+  {
+   "id": "c-gem-pillar-hp",
+   "title": "Chapter 1 fights: HP only, no Warmth bar",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-pillar-hp",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: covered by battle system stage 15."
+    }
+   ]
+  },
+  {
+   "id": "c-gem-pillar-kits",
+   "title": "Chapter 1 kits: full Signature Loadouts, Rose standing",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-pillar-kits",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: Gemini tested battle 2 against the old v10 spec; the locked v11 system already has this. All eight Sig Vibes for Tom, Grace, Rose and Deedee are built in Battle 3 (stages 5a to 5c), Front and Back rows in stage 2, and Rose is her own unit in the party. The kits the tester saw are battle 2, which is replaced, not fixed. Chapter 1 story fights move to Battle 3 at stage 15. Tom asked: \"go through all of the Battle cards created from Gemini feedback and determine if they are still relevant\"."
+    }
+   ]
+  },
+  {
+   "id": "c-gem-pillar-levels",
+   "title": "Chapter 1 levels: Character Level plus Vibe Mastery",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-pillar-levels",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: Gemini tested battle 2 against the old v10 spec; the locked v11 system already has this. Character Level 1 to 50 plus Vibe Mastery (Ranks 1 to 5, Pocket Vibe earns half the VP) is built in Battle 3 (stage 4). Story fights paying VP, the victory card and save migration are already owed to stage 15; the third Vibe per character is stages 19 to 21. Stamp Points are battle 2, which is replaced, not fixed. Tom asked: \"go through all of the Battle cards created from Gemini feedback and determine if they are still relevant\"."
+    }
+   ]
+  },
+  {
+   "id": "c-gem-pillar-pep",
+   "title": "Chapter 1 fights: Pep (starts at 4) replaces VP",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-pillar-pep",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: Gemini tested battle 2 against the old v10 spec; the locked v11 system already has this. Pep 0 to 10, start 4, +2 on a Basic, refund cap 3 a round is already the v11 rule and is built in Battle 3 (data/b3-rules.js, stage 1). The VP meter the tester saw is battle 2, which is replaced, not fixed. Chapter 1 story fights move to Battle 3 at stage 15. Tom asked: \"go through all of the Battle cards created from Gemini feedback and determine if they are still relevant\"."
+    }
+   ]
+  },
+  {
+   "id": "c-gem-pillar-rhubarb",
+   "title": "Purge Rhubarb Crisp from the game everywhere",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-pillar-rhubarb",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-pillar-rhubarb: Rhubarb Crisp is gone from the whole game; Deedee's dish is apple muffins"
+    }
+   ]
+  },
+  {
+   "id": "c-gem-pillar-ruckus",
+   "title": "Chapter 1 fights: Family Ruckus replaces the HEART meter",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-pillar-ruckus",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: Gemini tested battle 2 against the old v10 spec; the locked v11 system already has this. The Family Ruckus gauge with Double Team at 50 and Full Family Ruckus at 100 is built in Battle 3 (stage 6); who can pair follows the v11 rule, not the tester's v10 one. The HEART meter is battle 2 and is deleted at stage 23; the old Tombos go to the Move Lab at Milestone C (stage 16). Chapter 1 story fights move to Battle 3 at stage 15. Tom asked: \"go through all of the Battle cards created from Gemini feedback and determine if they are still relevant\"."
+    }
+   ]
+  },
+  {
+   "id": "c-gem-polish01",
+   "title": "Remove the ;) from the taxi opening line",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-polish01",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-polish01: The taxi opening line no longer shows a text smiley"
+    }
+   ]
+  },
+  {
+   "id": "c-gem-polish02",
+   "title": "Change centre stage to center stage in Rose's battle text",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-polish02",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-polish02: Rose's Raspberry battle text says \"center stage\""
+    }
+   ]
+  },
+  {
+   "id": "c-gem-polish03",
+   "title": "Give Boppy a kitchen portrait without fishing gear",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-polish03",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: no longer relevant - boppy has his fishing pole at all times"
+    }
+   ]
+  },
+  {
+   "id": "c-gem-polish04",
+   "title": "Fix Grace's muffin-heist line so it names the muffins",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-polish04",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: already fixed on main."
+    }
+   ]
+  },
+  {
+   "id": "c-gem-polish05",
+   "title": "Fix Deedee's moods right after the muffin theft",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-polish05",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: muffin theft scene is currently under revision"
+    }
+   ]
+  },
+  {
+   "id": "c-gem-polish06",
+   "title": "Apply your decision on Tom's boss line",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem-polish06",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-polish06: Tom gives Deedee real boss advice before the Big One"
+    }
+   ]
+  },
+  {
+   "id": "c-ghost1",
+   "title": "Board: stop showing START cards as In progress when nothing is running",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "ghost1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: \"many tasks are marked as working that I have a feeling are not actually working. I've been waiting for hours.\" Found: START marks a card In progress when it fires the task, and the Opus medium and Sonnet high tasks never start a conversation. Also board-sync failed on every push from 17:11 to 17:25 PT because a session left an invalid card (board_check refused it)."
+    }
+   ]
+  },
+  {
+   "id": "c-gracevoice-rest",
+   "title": "Rebuild Grace's other slowed lines from your takes",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gracevoice-rest",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gracevoice-rest: Grace's other slowed story lines are back at her real speed, from the takes Tom kept"
+    }
+   ]
+  },
+  {
+   "id": "c-heist1",
+   "title": "Rebuild the muffin theft scene in Deedee's kitchen",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "heist1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as heist1: The muffin theft is rebuilt: the Mudling of the fights rolls in, bowls the three of you over, lifts the pan over its head and sneaks out behind Boppy, who never turns around"
+    }
+   ]
+  },
+  {
+   "id": "c-hollowtrail1",
+   "title": "Grump Hollow muffin wrapper trail",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "done",
+   "tag": "hollowtrail1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as hollowtrail1: Grump Hollow muffin wrapper trail: four paintings to make in the Art Library, monsters moved onto the trail and away from the boss"
+    }
+   ]
+  },
+  {
+   "id": "c-hollowtrail2",
+   "title": "Check the Grump Hollow wrapper trail paintings in the game",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "done",
+   "tag": "hollowtrail2",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: closed by fix-gatelayer-pics."
+    }
+   ]
+  },
+  {
+   "id": "c-idea-checkart",
+   "title": "Clean up the Art Library: approve or delete stale items",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "idea-checkart",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as idea-checkart: Art Library clean-up: 66 entries marked approved because the game already shows them, 71 deleted because they are not needed"
+    }
+   ]
+  },
+  {
+   "id": "c-idea-implementlisteni",
+   "title": "Listening and thinking poses for chapter 1 listeners",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "idea-implementlisteni",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as idea-implementlisteni: In chapter 1, people who are not talking now listen or think, and the listening pictures are in the Art Library"
+    }
+   ]
+  },
+  {
+   "id": "c-idea-madelot",
+   "title": "Chapter 1 subtitles now match your new voice clips",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "idea-madelot",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as idea-madelot: chapter 1 subtitles now say what Tom's new voice clips say (8 lines), and a tool that finds the next ones"
+    }
+   ]
+  },
+  {
+   "id": "c-idea-removeall",
+   "title": "Remove the small popups at the top of the screen",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "idea-removeall",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as idea-removeall: the small popups at the top of the screen are gone"
+    }
+   ]
+  },
+  {
+   "id": "c-idea-reviewwhatever",
+   "title": "Effects Lab: every effect on people in the overworld, what triggers it, and a preview in Admin",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "idea-reviewwhatever",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as idea-reviewwhatever: Admin has an Effects page: every effect on people in the overworld, what sets it off, and a preview"
+    }
+   ]
+  },
+  {
+   "id": "c-idea-searchthrough",
+   "title": "Painted gate layer for locked and open doors and gates",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "idea-searchthrough",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as idea-searchthrough: closed entrances on the outdoor maps are a painted gate layer (locked and open pictures), never drawn over a character"
+    }
+   ]
+  },
+  {
+   "id": "c-idea-skippingcut",
+   "title": "SKIP passes pictures that only show something",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "idea-skippingcut",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as idea-skippingcut: SKIP now passes close-up pictures that only show something (Grace's list and similar); item finds and party joins and leaves still play in full"
+    }
+   ]
+  },
+  {
+   "id": "c-idea-skippingscene",
+   "title": "When skipping a scene, any interstitials that are not item",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "idea-skippingscene",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: duplicate of c-idea-skippingcut."
+    }
+   ]
+  },
+  {
+   "id": "c-idea-welcomepage",
+   "title": "Welcome page buttons and chapter list difficulty bar",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "idea-welcomepage2",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as idea-welcomepage2: Picking a chapter starts it at once, with no Start New warning"
+    }
+   ]
+  },
+  {
+   "id": "c-itembanner1",
+   "title": "An ITEM GAINED banner for items from talks and wins",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "itembanner1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as itembanner1: An ITEM GAINED banner shows when the party gets an item from a talk, a gift or a defeated monster"
+    }
+   ]
+  },
+  {
+   "id": "c-itembannerart1",
+   "title": "Painted pictures for the item gained banners",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "itembannerart1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as itembannerart1: the item gained banner shows a painted picture for each item (18 Art Library sheets, emoji only until a picture is approved)"
+    }
+   ]
+  },
+  {
+   "id": "c-itemdef1",
+   "title": "Item banners as JRPG item definitions",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "itemdef1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as itemdef-css: a rebase during the itemdef1 push dropped the banner's styles and the data/item-defs.js tag from index.html (and the updated tools/itembanner_test.py); this build puts them back."
+    }
+   ]
+  },
+  {
+   "id": "c-keysecrets1",
+   "title": "Art Library makes pictures through repo secrets",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "keysecrets1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as keysecrets1: Art Library GENERATE for pictures no longer calls xAI from the phone; GitHub makes the picture with the repo secret"
+    }
+   ]
+  },
+  {
+   "id": "c-keysecrets2",
+   "title": "Art Library videos through repo secrets",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "keysecrets2",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as keysecrets2: Art Library videos are made by GitHub with the repo secret; the xAI key box and the Relay box are gone"
+    }
+   ]
+  },
+  {
+   "id": "c-keysecrets3",
+   "title": "Voice and Script takes through repo secrets",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "keysecrets3",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as keysecrets3: Voice Library and Script Editor takes are made on GitHub; the ElevenLabs key box and `aot-el-key` are gone"
+    }
+   ]
+  },
+  {
+   "id": "c-keysecrets4",
+   "title": "Music makes through repo secrets",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "keysecrets4",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as keysecrets4: Music Library makes takes on GitHub with the repo secret; the ElevenLabs key box is gone"
+    }
+   ]
+  },
+  {
+   "id": "c-keysecrets5",
+   "title": "Recast and baker pages: key boxes",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "keysecrets5",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as keysecrets5: the recast and baker pages that asked for a pasted key are retired"
+    }
+   ]
+  },
+  {
+   "id": "c-knownwrong",
+   "title": "Clear the known-wrong list from the old next.md",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "tag": "knownwrong",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as knownwrong: The old known-wrong list is cleared: checks fixed, stale rows parked, the rest on cards"
+    }
+   ]
+  },
+  {
+   "id": "c-listen1-install",
+   "title": "Install the listening poses",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "done",
+   "tag": "listen1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as listen1: In chapter 1, people who are not talking now stand in the painted listening pose"
+    }
+   ]
+  },
+  {
+   "id": "c-newcard",
+   "title": "New card button: type an idea, get a sized Claude prompt",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "newcard1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as newcard1: + New card on the board: type an idea, the board sizes it and writes the Claude prompt"
+    }
+   ]
+  },
+  {
+   "id": "c-note-pagessource",
+   "title": "Handle Tom's note on Switch GitHub Pages to publish from Actions (one setting)",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "tag": "note-pagessource",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: nothing to do, answered on t-pagessource."
+    }
+   ]
+  },
+  {
+   "id": "c-permwording1",
+   "title": "Make card prompts use the wording the repo check accepts",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "tag": "permwording1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as permwording1: Every prompt the board writes now ends with the sentence the repo permission check accepts"
+    }
+   ]
+  },
+  {
+   "id": "c-probe-sonnet-high",
+   "title": "Probe: Sonnet high START route",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "tag": "probesonnethigh1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: throwaway probe for c-startfix."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-bug01",
+   "title": "Quest log says Go to it's Sunday after the trip home",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "qa-bug01",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-bug01: quest log no longer says \"Go to it's Sunday\" after the trip home"
+    }
+   ]
+  },
+  {
+   "id": "c-qa-bug02",
+   "title": "Item banner: tiny icon, empty circle, prompt on the border",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "qa-bug02",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "itemdef1 replaced this card's picture ring with the item definition banner's square tile; the pip rule is kept."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-bug03",
+   "title": "People walk on roofs and signs in the Square and the Row",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "done",
+   "tag": "qa-bug03",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-bug03: Townsfolk in the Square and the Row no longer stand on roof edges"
+    }
+   ]
+  },
+  {
+   "id": "c-qa-bug07",
+   "title": "Grace's skill name cut off on her STAMPS card",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "qa-bug07",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: battle issues out of scope"
+    }
+   ]
+  },
+  {
+   "id": "c-qa-bug08",
+   "title": "Map buttons show during cutscenes and the chapter end card",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "qa-bug08",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-bug08: no HOLD + SLIDE, ! Menu or Save over a cutscene or the CHAPTER COMPLETE card"
+    }
+   ]
+  },
+  {
+   "id": "c-qa-bug12",
+   "title": "Menu tap opens the Cookie counter; Boppy blurs in a talk",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "qa-bug12",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-bug12: tapping the Menu or Save button cancels a pending tap-walk, so it can no longer inspect the Cookie counter instead"
+    }
+   ]
+  },
+  {
+   "id": "c-qa-bug12c",
+   "title": "Boppy's cap lettering is mirrored on his shocked art",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "done",
+   "tag": "qa-bug12c",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-bug12c: Boppy's Paso Robles cap reads the right way round when a scene turns him to face left"
+    }
+   ]
+  },
+  {
+   "id": "c-qa-coh01",
+   "title": "The Big One's Inspect text describes a frog",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "qa-coh01",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-coh01: The Big One's Inspect text now describes the pond fish, not a croaking frog"
+    }
+   ]
+  },
+  {
+   "id": "c-qa-coh02",
+   "title": "Big One's win line has it splash away before its talk",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "qa-coh02",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-coh02: The Big One's win line no longer has it splash away before its talk"
+    }
+   ]
+  },
+  {
+   "id": "c-qa-coh03",
+   "title": "Big One asks about a folding chair; the spot has a bench",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "done",
+   "tag": "qa-coh03",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-coh03: Boppy's fishing spot shows his folding chair, not a wooden bench"
+    }
+   ]
+  },
+  {
+   "id": "c-qa-coh04",
+   "title": "Rose asks for a piggyback right after the piggyback scene",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "qa-coh04",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-coh04: Rose no longer asks for a piggyback on the street right after the piggyback scene"
+    }
+   ]
+  },
+  {
+   "id": "c-qa-coh05",
+   "title": "Grump Hollow fights show a town pond with a steeple",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "done",
+   "tag": "qa-coh05",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-coh05: Grump Hollow gets its own woodland battle backdrop in the Art Library; fights there switch to it once Tom approves the picture"
+    }
+   ]
+  },
+  {
+   "id": "c-qa-coh06",
+   "title": "Orange cube replays its first look after the boss",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "qa-coh06",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-coh06: after the Big One, the orange cube answers with one second-look line"
+    }
+   ]
+  },
+  {
+   "id": "c-qa-coh07",
+   "title": "Muffin pan missing from the island before the theft",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "qa-coh07",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-coh07: the twelve-cup muffin pan sits on Deedee's island from the moment Tom walks in"
+    }
+   ]
+  },
+  {
+   "id": "c-qa-txt04",
+   "title": "Inspect prompt says boppy's in lowercase",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "qa-txt04",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as qa-txt04: the Inspect prompt keeps a name's capital letters (Boppy's fishing spot)"
+    }
+   ]
+  },
+  {
+   "id": "c-refresh1",
+   "title": "Builds screen: Refresh button and checking again by itself",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "refresh1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as refresh1: the Builds screen has a Refresh button and checks again by itself"
+    }
+   ]
+  },
+  {
+   "id": "c-reports-2",
+   "title": "Fix the report backlog (7 open)",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "reports-2026-11-20",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as reports-2026-11-20: Grace's list shows after her third item, and the Amy scene zooms in on the party and her window"
+    }
+   ]
+  },
+  {
+   "id": "c-reports-3",
+   "title": "Fix the report backlog (5 open)",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "reports-2026-11-20",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: its fixes shipped under c-reports-2 (reports-2026-11-20); duplicate."
+    }
+   ]
+  },
+  {
+   "id": "c-reports-4",
+   "title": "Fix the report backlog (3 open)",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "reports-2026-11-20",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Done by the board: the backlog is empty."
+    }
+   ]
+  },
+  {
+   "id": "c-reports-5",
+   "title": "Fix the report backlog (1 open)",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "reports-2026-11-20",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Retired by the ghost1 session (Tom: \"fix it now\"): the one report left (missing item banner art) was handed to c-itembannerart1, which is running. Nothing else open here."
+    }
+   ]
+  },
+  {
+   "id": "c-reports-6",
+   "title": "Fix the report backlog (1 open)",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "reports-2026-11-20",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: same report as c-reports-5, which handed it to c-itembannerart1; duplicate."
+    }
+   ]
+  },
+  {
+   "id": "c-reports-7",
+   "title": "Fix the report backlog (1 open)",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "reports-2026-11-20",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Done by the board: the backlog is empty."
+    }
+   ]
+  },
+  {
+   "id": "c-reporttype1",
+   "title": "Fix typing in the REPORT box (keys act like game hotkeys)",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "reporttype1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as reporttype1: Typing in the REPORT box no longer acts like game hotkeys"
+    }
+   ]
+  },
+  {
+   "id": "c-startmore",
+   "title": "Add START for Opus medium and Sonnet high cards",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startmore",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as startmore: START now also runs Opus 5.5 medium and Sonnet 5.5 high cards"
+    }
+   ]
+  },
+  {
+   "id": "c-startmore-opus",
+   "title": "START proof: Opus 5.5 medium",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startmore-opus",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: probe that failed; repair was c-startfix."
+    }
+   ]
+  },
+  {
+   "id": "c-startmore-sonnet",
+   "title": "START proof: Sonnet 5.5 high",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startmore-sonnet",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: probe that failed; repair was c-startfix."
+    }
+   ]
+  },
+  {
+   "id": "c-startmore-test",
+   "title": "Test the new START tasks",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startmore-test",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as startmore-test: Two tiny cards added to prove the Opus 5.5 medium and Sonnet 5.5 high START tasks"
+    }
+   ]
+  },
+  {
+   "id": "c-takes-56fb01",
+   "title": "Merge 2 new voice takes",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "takes-2026-11-20",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: nothing to merge."
+    }
+   ]
+  },
+  {
+   "id": "c-takes-987c82",
+   "title": "Merge 10 new voice takes",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "takes-2026-11-20",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Retired by the ghost1 session (Tom: \"fix it now\"): shipped as takes-2026-11-20b (15 takes merged). The 26 left out have stale words and are not wanted until their lines are rerecorded."
+    }
+   ]
+  },
+  {
+   "id": "c-tapfb1",
+   "title": "Every board button and link shows your tap right away",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "tapfb1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as tapfb1: every board button and link shows your tap right away"
+    }
+   ]
+  },
+  {
+   "id": "c-voiceauto1",
+   "title": "Put new game lines in the Voice Library automatically",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "voiceauto1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as voiceauto1: new game lines now reach the Voice Library by themselves"
+    }
+   ]
+  },
+  {
+   "id": "c-voiceboard",
+   "title": "Make voices from the board and save them to the game",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "voiceboard1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as voiceboard1: Generate all N voices on the board: one tap makes the voices and puts them in the game"
+    }
+   ]
+  },
+  {
+   "id": "c-wanch1",
+   "title": "Make and check every chapter 1 battle video",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanch1",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as wanch1: chapter 1 battles are videos: the whole family idles with breathing, guards, gets hit, falls, cheers and runs on Wan 3.0, plus Rose's knock-out and Deedee's victory; the stop-loss list goes to c-wanch2"
+    }
+   ]
+  },
+  {
+   "id": "c-wanidle",
+   "title": "Grace's idle, hit and one own move as Wan videos",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanidle",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: folded into c-wanch1."
+    }
+   ]
+  },
+  {
+   "id": "c-wanplan",
+   "title": "Battle video route: why WAN was dropped, costs, proof plan",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanplan",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as wanplan: Rule: no painted poses in battle; plan to bring back video (WAN by API) with a proof of Grace's guard. No game change, nothing spent"
+    }
+   ]
+  },
+  {
+   "id": "c-wanproof",
+   "title": "Build the Grace guard video proof",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanproof",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as wanproof: Grace's guard is now a real video (Wan 3.0, made through fal.ai), shown in Battle Lab ) NEW BATTLE ) PROOF: GRACE'S GUARD (VIDEO). 65 cents spent"
+    }
+   ]
+  },
+  {
+   "id": "t-artgen1try",
+   "title": "Try Generate all on the new Mudling sheet card",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-attn-start",
+   "title": "Paste the rescue text into Board START",
+   "theme": "Project Ops",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom did this."
+    }
+   ]
+  },
+  {
+   "id": "t-bannerhold1play",
+   "title": "Join a party member and check the banner holds the game until you dismiss it",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-battlelabpagetry",
+   "title": "Open the Battle Lab page on your home screen",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-bigboard1-tap",
+   "title": "Tap any save on the board to confirm the error is gone",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-boarduxtry",
+   "title": "Try the redesigned board on your phone",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-buildnametry",
+   "title": "Look for the Build line on a Play and report card",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-buildstry",
+   "title": "Try the new build history screen",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-cardlinks1try",
+   "title": "Try the Open in the Library buttons on a card",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-ch1starving",
+   "title": "Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end",
+   "theme": "Voice Clips",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-clipposes",
+   "title": "Watch the family's painted battle poses",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Retired by wanplan. Tom (11-20 12:11): \"NO PAINTED POSES IN BATTLE. No hand-painted or image-generated still frames, poses or sprite sheets for any party member or monster in any battle state.\" Not needed any more: the painted poses are not being reviewed or fixed. Battle animation goes back to video; the plan is claude/video-battle-plan.md and your next step is the card Approve the WAN proof."
+    }
+   ]
+  },
+  {
+   "id": "t-clipstuck1",
+   "title": "Watch the toad idle videos on its card",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-clipstuck1-review",
+   "title": "Review a toad idle version with REVIEW",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-cutpolish5",
+   "title": "Watch the chapter 1 scenes for breathing and reactions",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-effectslook",
+   "title": "Look at the Effects page in Admin",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-gatelayer-play",
+   "title": "Play check: locked gates sit behind Tom and the party",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-gatezero-decide",
+   "title": "Decide how to get a Gate Zero room with the plane removed",
+   "theme": "Areas",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom chose: Keep the current painting and have Claude remove the painted plane by editing it"
+    }
+   ]
+  },
+  {
+   "id": "t-gem-canon01play",
+   "title": "Play the new chapter 1 opening in the taxi office",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-gem-polish03",
+   "title": "Decide: Boppy's fishing rod indoors, keep it or not",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom chose: Keep the rod and creel: they are his look"
+    }
+   ]
+  },
+  {
+   "id": "t-gem-polish06",
+   "title": "Decide: Tom's line before the boss",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom answered: He can say mom - but not \"you don't just walk up to up to boss\" - it doesnt actually mean naything - a joke isnt a joke if it doesnt haven meaning. i like him throwing in boss knowledge, but instead of just trying to clown her maybe he can suggest advice or educate?"
+    }
+   ]
+  },
+  {
+   "id": "t-gracevoice-distort",
+   "title": "Listen to Grace's fixed chapter 1 lines (no re-recording)",
+   "theme": "Voice Clips",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-heist1play",
+   "title": "Watch the new muffin theft in Deedee's kitchen",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-heistart",
+   "title": "Generate and approve the new Mudling sheet (six poses with the muffin pan)",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Done by the board: you approved ch1-mudling-heist2 in the Art Library."
+    }
+   ]
+  },
+  {
+   "id": "t-hollowtrail1-pics",
+   "title": "Generate and approve the 4 Hollow wrapper trail paintings",
+   "theme": "Areas",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Cannot fix without Tom: trails 2, 3 and 4 missed twice the same way (the generator moves and enlarges the wrappers on open dirt; it kept them only where the stone path guides it). A third prompt would waste money. The one thing needed: your OK to place those wrappers in code from trail 1's painted wrappers, at the exact spots."
+    }
+   ]
+  },
+  {
+   "id": "t-hollowtrail2-decide",
+   "title": "Place the Hollow wrapper trails 2 to 4 in code?",
+   "theme": "Areas",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Retired by fix-gatelayer-pics: Tom's note on the next card (\"why are the wrappers half the size of the characters? wny does each trail have 10 wrappers?\") ruled out the generator, so Claude took the recommended answer: the trail is placed by script, no cost."
+    }
+   ]
+  },
+  {
+   "id": "t-itembannerplay",
+   "title": "Try the ITEM GAINED banner on your phone",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-keysecrets1-try",
+   "title": "Try GENERATE on one picture",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-keysecrets3-try",
+   "title": "Try New take on one line",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-listen1-pics",
+   "title": "Generate and approve the 7 listening poses",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-listen1-play",
+   "title": "Play chapter 1 and watch people listen",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-madelot-play",
+   "title": "Check 8 reworded Chapter 1 lines against the voice",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-madelot-rerecord",
+   "title": "Record 2 clips that say a sentence twice",
+   "theme": "Voice Clips",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-newcard",
+   "title": "Make your first card with + New card",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-oldchecks-blocks",
+   "title": "Orange blocks: replay the family lines",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-oldchecks-boppy",
+   "title": "Art to make: Young Boppy Van Cortlandt '70",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Closed by fix-artgen2look: Young Boppy's hero is already in the game (boppy-young-hero, approved 2026-11-12 from the painting you made). Tom: \"you need to like check to see if an image is in the game before you tell me I need to generate it\". The board now closes a pictures card whose pictures are all approved and refuses a card that tells you to generate an approved picture."
+    }
+   ]
+  },
+  {
+   "id": "t-oldchecks-chapters",
+   "title": "Chapters 2, 6 and 7: play them",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Retired by boardwait1: chapters 2, 6 and 7 are past chapter 1. Tom (11-20, on t-oldchecks-voice): \"I don't wanna deal with any bugs past chapter 1 right now\"."
+    }
+   ]
+  },
+  {
+   "id": "t-oldchecks-pencil",
+   "title": "Pencil tab: send a test report",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-oldchecks-voice",
+   "title": "Voices: record the old voice gaps",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Retired by boardwait1: these are chapter 2 lines (Mr. Washington, Narrator). Tom (11-20, on t-oldchecks-voice): \"I don't wanna deal with any bugs past chapter 1 right now\"."
+    }
+   ]
+  },
+  {
+   "id": "t-pagessource",
+   "title": "Switch GitHub Pages to publish from Actions (one setting)",
+   "theme": "Project Ops",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "The note was handed to Claude on card c-note-pagessource."
+    }
+   ]
+  },
+  {
+   "id": "t-qa-bug02-play",
+   "title": "Look at the item banner again",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: itemdef1 replaced the circle and the dark pill this card asks about with the new item definition banner. Its check moves to t-itemdefplay."
+    }
+   ]
+  },
+  {
+   "id": "t-refresh1-try",
+   "title": "Try the Refresh button on the Builds screen",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-reportcheck",
+   "title": "Look at the six fixed report pictures on your phone",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-reports4play",
+   "title": "Play the chapter 1 kitchen scene",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-reports5-play",
+   "title": "Play Chapter 1 from the kitchen to Sal's taxi office",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-reporttype1play",
+   "title": "Type a test note in the REPORT box",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-rhubarb-scope",
+   "title": "Decide how far to cut Rhubarb Crisp",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom chose: Cut Rhubarb Crisp from the whole story (muffins instead)"
+    }
+   ]
+  },
+  {
+   "id": "t-rose-facing",
+   "title": "Which way should Rose face in the kitchen?",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom chose: Toward Tom, who is talking"
+    }
+   ]
+  },
+  {
+   "id": "t-skippingcutplay",
+   "title": "Check SKIP skips Grace's list but not party banners",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-startfix-edit",
+   "title": "Edit the two broken START tasks",
+   "theme": "Project Ops",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom did this."
+    }
+   ]
+  },
+  {
+   "id": "t-startmore-setup",
+   "title": "Set up two more START tasks (Opus medium, Sonnet high)",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom did this."
+    }
+   ]
+  },
+  {
+   "id": "t-stuck-b3s12",
+   "title": "Stuck twice: Battle system stage 12: bestiary chapters 5 to",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped Start again."
+    }
+   ]
+  },
+  {
+   "id": "t-stuck-ch2build",
+   "title": "Stuck twice: Build chapter 2 to the locked script",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped Start again."
+    }
+   ]
+  },
+  {
+   "id": "t-stuck-gatezero",
+   "title": "Stuck twice: Install the Gate Zero pictures (no plane, plane",
+   "theme": "Areas",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped Start again."
+    }
+   ]
+  },
+  {
+   "id": "t-stuck-gem-pillar-rhubarb",
+   "title": "Stuck twice: Purge Rhubarb Crisp from the game everywhere",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped Start again."
+    }
+   ]
+  },
+  {
+   "id": "t-stuck-projclean",
+   "title": "Stuck twice: Move the Project docs into the repo (Project is",
+   "theme": "Project Ops",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped Start again."
+    }
+   ]
+  },
+  {
+   "id": "t-voiceauto1rec",
+   "title": "Record the 3 new lines now in the Voice Library",
+   "theme": "Voice Clips",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-wanch1-fal",
+   "title": "Add $30 to fal.ai for the chapter 1 videos",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom did this."
+    }
+   ]
+  },
+  {
+   "id": "t-wanproof-setup",
+   "title": "Approve the WAN proof: make a fal.ai key (5 minutes)",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom did this."
+    }
+   ]
+  },
+  {
+   "id": "t-wanproof-watch",
+   "title": "Watch Grace's guard video once (1 minute)",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-welcomepage-play",
+   "title": "Check the new welcome buttons and chapter list top bar",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    }
+   ]
   }
  ]
 }
