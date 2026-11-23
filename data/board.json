@@ -33381,8 +33381,17 @@
     {
      "d": "2026-11-22",
      "t": "Created by the b3s22ch14 session: Milestone for chapter 14 on the new battle."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom sent this to the backlog.",
+     "at": "2026-11-23T05:38:17.072Z"
     }
-   ]
+   ],
+   "backlog": {
+    "at": "2026-11-22",
+    "from": "up"
+   }
   },
   {
    "id": "t-movestage-judge",
