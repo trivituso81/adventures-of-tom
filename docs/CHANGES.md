@@ -1,3 +1,9 @@
+## wanstop-stage-tom-glare-vid-r1 (2026-11-23): the headlight flare video is tried again with its start picture shrunk to 80 percent
+
+Card c-wanstop-stage-tom-glare-vid-r1. The bulk run stopped `stage-tom-glare-vid` twice (bg 96.6 percent against 97, edge: the flare touched a picture edge in 40 of 90 pictures). I looked at the frames: the flare brightens, its rays lengthen and it fades as the prompt says, but the long rays run into the frame edge, so the edge is not flat black.
+- Changed ONE thing: `pad: 0.8` on the job (the start picture is shrunk to 80 percent on the same black, the existing pad of `_bulk.pads`), rev 1 to 2. Kept: the prompt file word for word, the model, 480p, 3 s, seed 81. Same fix as the jet wash video.
+- Started the next try: `wgen` on t-movestage-lab (about $0.15). This animation has used 2 of 4 tries ($0.30 of $3.20). Not run by this session.
+
 ## wanstop-stage-tom-jetwash-vid-r1 (2026-11-23): the jet wash video is tried again with its start picture shrunk to 80 percent
 
 Card c-wanstop-stage-tom-jetwash-vid-r1. The bulk run stopped `stage-tom-jetwash-vid` twice (bg 94.7 and 93.0 percent against 97, edge: the streaks touched a picture edge in 51 and 48 of 90 pictures). I looked at the frames: the streaks move and fade out as the prompt says, but the start picture is a wide streak that fills almost the whole width, so the video's streaks reach the frame edge and the edge pixels are not flat black.
