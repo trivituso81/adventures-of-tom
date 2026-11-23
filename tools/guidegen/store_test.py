@@ -289,6 +289,15 @@ check('an empty `content` falls back to the blobs API and is not read as an empt
 S.add(item('y')); check('...and a save after such a read keeps every row', sorted(doc()['items']) == ['x', 'y'])
 gh.empty_content = False
 
+# ---- guideflow3: set_fields and dry rows ----
+row('making'); S.set_fields('x', fal={'endpoint': 'e', 'request_id': 'r1'}, cost=0.15)
+check('set_fields writes the fal number on a making row and leaves its state', doc()['items']['x']['fal']['request_id'] == 'r1' and doc()['items']['x']['state'] == 'making' and doc()['items']['x']['cost'] == 0.15)
+check('set_fields refuses a field outside the list and a row that is not making or checking', raises(lambda: S.set_fields('x', state='done')) is True and (row('queued') or raises(lambda: S.set_fields('x', cost=1)) is True) and (row('done') or raises(lambda: S.set_fields('x', cost=1)) is True))
+del sent[:]
+row('checking', kind='picture', dry=True); S.set_state('x', 'done')
+check('a dry row sends no phone message when it is done', sent == [], sent)
+row('making', dry=True); S.fail('x', 'X6'); check('...or when it fails', sent == [], sent)
+
 # ---- the words table ----
 check('WORDS has X5 to X22, each with a why and a do', sorted(S.WORDS, key=lambda k: int(k[1:])) == ['X%d' % i for i in range(5, 23)] and all('why' in v and 'do' in v for v in S.WORDS.values()))
 check('no em dash in any words', not any('—' in v['why'] + v['do'] + v.get('do_paid', '') for v in S.WORDS.values()))

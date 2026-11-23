@@ -32805,7 +32805,7 @@
    "theme": "Battle Animations",
    "tag": "guideflow3",
    "title": "Build the Guide worker and the picture line",
-   "next": "Waits for card c-guideflow-2, then starts by itself. Builds the worker job and its picture line: start pictures and uploaded pictures go from queued to ready through the new status file. The page still uses the old way until card c-guideflow-5. Nothing for Tom.",
+   "next": "Built and tested (build guideflow3): tools/guidegen/worker.py, .github/workflows/guide-work.yml, worker_test.py (T4, T5), store.set_fields. No paid run. The free proof on GitHub itself is in docs/CHANGES.md (guideflow3b). The page still uses the old way until card c-guideflow-5. Nothing for Tom.",
    "blocks": [
     "c-guideflow-4"
    ],
@@ -32838,6 +32838,11 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Built the worker, its workflow and the picture line (guideflow3). All tests pass; no paid run was made.",
+     "at": "2026-11-23T04:12:00.000Z"
     }
    ],
    "prompt": {

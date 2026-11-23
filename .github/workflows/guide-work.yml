@@ -1,0 +1,74 @@
+name: guide-work
+
+# guideflow3 (plan claude/guide-flow-plan.md 3.2 D6 to D8). The Battle Guide's worker. The page adds a row to queue.json on branch guideq and pokes this workflow
+# (repository dispatch, event type guide-work); a ten minute timer starts a worker anyway. One job per lane: pic (start pictures and uploaded pictures) and vid (videos,
+# they arrive in guideflow4). A run is never tied to one request: tools/guidegen/worker.py works through every queued row of its lane, keeps looking while it works,
+# and stays 2 minutes after the line is empty. The first step looks at queue.json for 5 seconds and ends the job when its lane has nothing to do, so the timer costs seconds.
+# The concurrency sits on the JOB (wanstuck1): a push that has nothing to do with the Guide can never cancel a waiting run, and a waiting run loses nothing anyway
+# because the requests are in the file. Needs the repo secrets FAL_KEY and XAI_API_KEY.
+on:
+  repository_dispatch:
+    types: [guide-work]
+  workflow_dispatch:
+    inputs:
+      lane:
+        description: 'Which line to run: pic, vid or both'
+        default: 'both'
+  schedule:
+    - cron: '*/10 * * * *'
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  work:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        lane: [pic, vid]
+    concurrency:
+      group: "guide-${{ matrix.lane }}"
+      cancel-in-progress: false
+    env:
+      COSTS_LOG_REPO: ${{ github.workspace }}
+      GH_TOKEN: ${{ github.token }}
+      LANE: ${{ matrix.lane }}
+      ASKED: ${{ inputs.lane }}
+    steps:
+      - name: Is there anything for this line?
+        id: probe
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "$ASKED" ] && [ "$ASKED" != "both" ] && [ "$ASKED" != "$LANE" ]; then echo "go=false" >> "$GITHUB_OUTPUT"; echo "this run was asked for the $ASKED line only"; exit 0; fi
+          code=$(curl -s -m 5 -o q.json -w '%{http_code}' -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github.raw+json" "https://api.github.com/repos/$GITHUB_REPOSITORY/contents/queue.json?ref=guideq" || true)
+          if [ "$code" = "404" ]; then echo "go=false" >> "$GITHUB_OUTPUT"; echo "no queue yet: nothing to do"; exit 0; fi
+          if [ "$code" != "200" ]; then echo "go=true" >> "$GITHUB_OUTPUT"; echo "could not read the queue (HTTP $code): starting the worker to look"; exit 0; fi
+          n=$(python3 -c "import json,os; d=json.load(open('q.json')); print(sum(1 for i in d.get('items',{}).values() if i.get('lane')==os.environ['LANE'] and i.get('state') in ('queued','making','checking')))" || echo 1)
+          echo "rows for the $LANE line that are queued, making or checking: $n"
+          if [ "$n" = "0" ]; then echo "go=false" >> "$GITHUB_OUTPUT"; else echo "go=true" >> "$GITHUB_OUTPUT"; fi
+      - uses: actions/checkout@v4
+        if: steps.probe.outputs.go == 'true'
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            tools
+            data
+            art/clips/start
+            art/raw/characters
+      - uses: actions/setup-python@v5
+        if: steps.probe.outputs.go == 'true'
+        with:
+          python-version: '3.12'
+      - name: Tools
+        if: steps.probe.outputs.go == 'true'
+        run: |
+          pip install requests pillow numpy
+          if [ "$LANE" = "vid" ]; then pip install scipy opencv-python-headless imageio-ffmpeg; fi
+      - name: Work
+        if: steps.probe.outputs.go == 'true'
+        env:
+          FAL_KEY: ${{ secrets.FAL_KEY }}
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+        run: python3 -I tools/guidegen/worker.py --lane "$LANE"

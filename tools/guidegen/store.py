@@ -12,12 +12,13 @@ Environment: GUIDE_API (default https://api.github.com), GH_TOKEN, GITHUB_REPOSI
   add(item)                            a new queued row; refuses an id that exists
   claim(lane, run, limit)              the oldest queued rows of a lane become making, in ONE update
   set_state(id, state, actor, **f)     the table of plan 4.3; any other change raises Refused
+  set_fields(id, actor, **f)           fields of a making or checking row (the fal request number), no state change
   set_use(id, state, actor, **f)       the same for the `use` field
   set_left(id, left)                   Keep the old one (page)
   fail(id, code, actor, **f)           failed with the why and do of WORDS[code]
   reap(alive)                          decision D5 for rows whose run is dead
   archive(days)                        finished rows older than that move to queue-archive.json
-A change that matters to Tom (plan 5.6) sends exactly one phone message from the function that made it, after the save went through."""
+A change that matters to Tom (plan 5.6) sends exactly one phone message from the function that made it, after the save went through. A dry row (a free test) sends none."""
 import base64, json, os, sys, time, urllib.error, urllib.request
 from datetime import datetime, timedelta, timezone
 
@@ -230,7 +231,7 @@ def _event(it, what, **x):
 
 
 def _send(ev, it):
-    if ev: notify.send(ev[0], ev[1], tags=ev[2], click=_link(it))
+    if ev and not it.get('dry'): notify.send(ev[0], ev[1], tags=ev[2], click=_link(it))
 
 
 def _get(doc, id):
@@ -296,6 +297,19 @@ def set_state(id, state, actor='worker', code=None, **fields):
     update(fn, 'guide: %s %s' % (id, state))
     _send(out['ev'], out['it'])
     return out['it']
+
+
+def set_fields(id, actor='worker', **fields):
+    """guideflow3: write fields on a row that is making or checking without changing its state (the fal request number the moment fal accepts, before waiting;
+    the cost so far). The same field list as set_state; any other row state is refused."""
+    bad = set(fields) - FIELDS
+    if bad: raise Refused('field not allowed: %s' % ', '.join(sorted(bad)))
+
+    def fn(doc):
+        it = _get(doc, id)
+        if it['state'] not in ('making', 'checking') or actor not in ('worker', 'reaper'): raise Refused('%s cannot write fields on %s in state %s' % (actor, id, it['state']))
+        it.update(fields)
+    update(fn, 'guide: %s fields' % id)
 
 
 def fail(id, code, actor='worker', fmt=None, **fields):

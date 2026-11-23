@@ -545,6 +545,12 @@
    "minutes": 1
   },
   {
+   "id": "guidegen__worker_test",
+   "cmd": "python3 -I tools/guidegen/worker_test.py",
+   "group": "g3",
+   "minutes": 1
+  },
+  {
    "id": "jpark_test",
    "cmd": "python3 -I tools/jpark_test.py",
    "group": "g3",
