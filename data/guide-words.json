@@ -1,0 +1,79 @@
+{
+ "v": 1,
+ "about": "guideflow2: the why and do of every Battle Guide failure; written from WORDS in tools/guidegen/store.py (python3 tools/guidegen/store.py words). Never edit by hand.",
+ "words": {
+  "X5": {
+   "why": "fal is out of credit.",
+   "do": "Add credit at fal, then tap Try again."
+  },
+  "X6": {
+   "why": "The video service returned no video. Nothing was spent.",
+   "do": "Tap Try again."
+  },
+  "X7": {
+   "why": "The video service is busy.",
+   "do": "It stays queued and starts when a place frees up."
+  },
+  "X8": {
+   "why": "The job stopped before it finished.",
+   "do": "Tap Try again.",
+   "do_paid": "The video was paid for and is kept; Try again costs nothing."
+  },
+  "X9": {
+   "why": "The video hardly moves.",
+   "do": "Change the prompt, then tap Make another."
+  },
+  "X10": {
+   "why": "The checks flagged this video.",
+   "do": "It is shown as Ready with the check's words in red above it. You decide."
+  },
+  "X11": {
+   "why": "The picture came back {reason}.",
+   "do": "Tap Make another."
+  },
+  "X12": {
+   "why": "It faced right, so it was flipped. Lettering and anything worn on one side are now reversed.",
+   "do": "Make another or Upload my own."
+  },
+  "X13": {
+   "why": "The background is not one flat magenta.",
+   "do": "Paint the background plain magenta, or send a picture with a see-through background, then tap Upload my own."
+  },
+  "X14": {
+   "why": "The figure touches the edge of the picture.",
+   "do": "Leave a little empty space on every side, then tap Upload my own."
+  },
+  "X15": {
+   "why": "This move is being rebuilt in layers. It cannot be made yet.",
+   "do": ""
+  },
+  "X16": {
+   "why": "It was made but could not be saved.",
+   "do": "Tap Try again; it costs nothing."
+  },
+  "X17": {
+   "why": "GitHub was too busy to save it.",
+   "do": "Tap Use this one again."
+  },
+  "X18": {
+   "why": "The take could not be cut: {reason}.",
+   "do": "Send a note to Claude from this sheet."
+  },
+  "X19": {
+   "why": "It did not reach the game.",
+   "do": "Tap Use this one again."
+  },
+  "X20": {
+   "why": "A workflow file is broken.",
+   "do": "The session fixes it before pushing."
+  },
+  "X21": {
+   "why": "Cannot read the status right now.",
+   "do": "Trying again."
+  },
+  "X22": {
+   "why": "This costs more than its limit.",
+   "do": "Send a note to Claude from this sheet."
+  }
+ }
+}

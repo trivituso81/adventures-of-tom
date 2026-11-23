@@ -128,3 +128,16 @@ The jobs write a stage with `tools/guidegen/progress.py` (`mark`, on only when `
 ## Start pictures (startpics1, 2026-11-22)
 
 An animation of a person with no `art/clips/start/<who>-hero.png` shows Cannot be made yet and, under it, Make the start picture ($0.15, two taps). The tap commits a request to `data/wan-requests.json` (`{startpic, take, at, cap}`, message `wan: generate startpic <who>`); the wan-gen Action makes it from the `start-<who>` job, checks it (`tools/art-library/startpic.py`: flat magenta, whole figure inside the frame, facing left by xAI vision, mirrored when it faces right) and commits it to main with a rebuilt `data/guide-anims.json`. The answer for the page is `startpic-results.json` on branch `wangen`. A person needs a `start-<who>` job in `tools/art-library/wangen-jobs.json` (their hero picture) and a height in `tools/guidegen/figrows.json` (`python3 -I tools/guidegen/figrows.py <id>`). Test: `python3 -I tools/art-library/startpic_test.py`.
+
+## The queue (guideflow2)
+
+Plan: `claude/guide-flow-plan.md`. The one place that holds the status of every Battle Guide picture, upload and video request is the file `queue.json` on the branch `guideq` (never merged into `main`, never served to players). Finished rows older than 7 days move to `queue-archive.json` on the same branch. Nothing on screen reads it yet; the page, worker and apply job arrive in the next cards.
+
+| Who | May change |
+|---|---|
+| The page (`actor` page) | add a row (queued), cancel a queued row, mark Use this one (use wanted, also again after a failed use), mark Keep the old one |
+| The worker (`worker`) | queued to making (claim), making to checking, checking to done, making or checking to failed |
+| The reaper (`reaper`) | a dead run's row back to queued once (needs a fal request number and one try), else failed |
+| The apply job (`apply`) | the `use` field: wanted to applying, then live or failed; applying back to wanted for its one automatic retry |
+
+Code: `tools/guidegen/store.py` (standard library only; every save is a compare and swap on the file's sha, a 409 or 422 reads again, up to 8 tries; a file over 1 MiB is read through the blobs API; every commit message ends with `[skip ci]`). Any other change raises `store.Refused`. Every change Tom hears of (ready, failed, start picture ready, in the game, not in the game) sends exactly one phone message from the function that made it; queued, making, checking and cancelled send none. The `why` and `do` words of every failure live in `WORDS` in `store.py` and are copied to `data/guide-words.json` (`python3 tools/guidegen/store.py words`) for the page. Test: `python3 -I tools/guidegen/store_test.py`.

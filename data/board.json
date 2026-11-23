@@ -32718,7 +32718,7 @@
    "theme": "Battle Animations",
    "tag": "guideflow2",
    "title": "Build the one status file for Guide requests",
-   "next": "Waits for card c-guideflow-1, then starts by itself. Builds the one status file (queue.json on branch guideq) with its rules, the check for dead jobs, and one phone message per change. Nothing changes on screen yet. Nothing for Tom.",
+   "next": "Built and pushed as build guideflow2: tools/guidegen/store.py (queue.json on branch guideq with its rules, the check for dead jobs, one phone message per change) and its test store_test.py, which passes. Nothing changes on screen. Next: card c-guideflow-3, which starts by itself. Nothing for Tom.",
    "blocks": [
     "c-guideflow-3"
    ],
@@ -32751,6 +32751,11 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Shipped build guideflow2: store.py, store_test.py (T1 to T3), data/guide-words.json, docs/BATTLE_GUIDE.md section The queue. Tests: store_test passes (stand-in GitHub, no money); workflow_check and board_check ok. guidegen_test has one failure that is the sandbox missing the requests module (same failure without this change). Next card c-guideflow-3 still has its full prompt.",
+     "at": "2026-11-23T03:45:00.000Z"
     }
    ],
    "prompt": {

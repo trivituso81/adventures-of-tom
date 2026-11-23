@@ -533,6 +533,12 @@
    "minutes": 1
   },
   {
+   "id": "guidegen__store_test",
+   "cmd": "python3 -I tools/guidegen/store_test.py",
+   "group": "g3",
+   "minutes": 1
+  },
+  {
    "id": "guidegen__take_test",
    "cmd": "python3 -I tools/guidegen/take_test.py",
    "group": "g3",
