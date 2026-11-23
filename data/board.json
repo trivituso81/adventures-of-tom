@@ -16812,7 +16812,7 @@
    "title": "Battle stage 23: purge battle 2 and Kindness",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "next": "Waits on the nine chapter cards c-b3s22ch12 to c-b3s22ch20 (chapters 12 to 20 onto Battle 3). Tom's yes on t-b3s23-confirm is in. Start it when the last of them ships, then run the prompt.",
    "blocks": [],
    "changed": "2026-11-23",
@@ -16862,6 +16862,10 @@
     {
      "d": "2026-11-23",
      "t": "Note from the chapter 20 build (b3s22ch20): every chapter 1 to 21 is now on B3_STORY.chapters, so the stage 23 check passes. Battle 2 code that chapter 20 still carries and stage 23 may remove: SCENES.ch20Fight2 and the Julian A-press fight in data/scenes-ch20.js (on Battle 3 the scene uses SCENES.ch20Care and B3_CH_ON(20) picks between them), data/ch20-battle.js. New Battle 3 files: engine/b3-last.js (rules) and engine/b3-repick.js (screen); do not delete them. tools/battle_guide_test.py now serves a copy of the planned list that keeps the Collector planned (rule names a made-up id zzcollector); when stage 23 touches the guide, keep that fixture or retire the planned-monster cases."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Stuck twice: The rescue started 12:42 PM and went quiet for 2 hours. Waiting on Tom (card t-stuck-b3s23)."
     }
    ],
    "started_at": "2026-11-22T20:42:04+00:00",
@@ -16876,7 +16880,7 @@
     "url": "https://claude.ai/code/cse_01RXeukCdg3iThUrSmL1Dbc3",
     "prev": "https://claude.ai/code/cse_01RXeukDNsLWPpd5nBjmXzvJ"
    },
-   "quiet": true
+   "waiting_on": "tom"
   },
   {
    "id": "t-b3s23-confirm",
@@ -18531,7 +18535,7 @@
    "title": "Battle stage 22: chapter 20 on Battle 3",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Build ONLY chapter 20 on Battle 3: Blue Lens and Orange Lens (Special), The Collector (Boss). Starts after chapter 19 is switched on.",
    "blocks": [
     "c-b3s23"
@@ -18577,9 +18581,14 @@
     {
      "d": "2026-11-23",
      "t": "Result: chapter 20 is on Battle 3 (b3s22ch20). The Collector (boss, 5,140 HP, 3,860 for three, as printed) with Blue Lens and Orange Lens (helpers) and three phases; Julian Vance is a scene, not a fight. NO NUMBER CHANGED: simulator (support 4, Rank 2, level 50, 8 fights) averages 8.58 rounds, every fight won; the bestiary table aims at 7 and its text says about 8.5 with the lenses. New rules in engine/b3-last.js: phase lines (damage past 66% and 31% is lost, the phase act comes first), Still Frame, the Countdown (Recovery 200 is about 161 ticks at Speed 124, once only, only a Break stops it), endsFight, and picking the four again at each phase change (engine/b3-repick.js: a page of all eight; newcomers arrive at full HP with 4 Pep, returners keep their HP and Pep). Helper links: Blue halves Sizzle and Razzle, Orange cuts a quarter, both end in phase 3; a lens knocked out costs the Collector 2 pips and 5% HP. The story pays XP and writes HP back for everyone who fought (F.everIn). Julian: on Battle 3 ch20Shatter ends with the short scene ch20Care, then the Calm scene; no recorded line was edited. The foe id stays leviathan (the flags are named for it). Tests: node tools/b3-sim.js check (5,579 checks, none fail), tools/ch20_b3_test.py passes in portrait and landscape, tools/clip-audit/unused_voice.py all 0. tools/b3_story_test.py: the 'first chapter not switched' cases are retired (no unswitched story chapter is left; chapter 20 now says on and floor 50). tools/battle_guide_test.py: every monster is built, so the planned-monster cases run on a copy of the planned list that keeps the Collector as a not-yet-built monster; the bestiary's single `lens` entry now drops when bluelens exists. Pre-existing and not mine: the guide test's 34 body-state animations (page 713 vs file 679) and the board_check copy case."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Shipped as b3s22ch20: Chapter 20 (the Forever Engine) fights on the new battle: The Collector with the Blue and Orange Lenses, three phases, and picking your four again"
     }
    ],
-   "after": "t-b3s22ch20"
+   "after": "t-b3s22ch20",
+   "done": "2026-11-23"
   },
   {
    "id": "c-startpics3",
@@ -21091,6 +21100,34 @@
      "t": "Jump set to the Lab fight NEW 98: the chapter 20 jump lands in the Vault in chapter 19's state (the chapter becomes 20 only when the lift plays), so the dashboard cannot confirm a chapter 20 landing."
     }
    ]
+  },
+  {
+   "id": "t-stuck-b3s23",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle System",
+   "ask": "unstick",
+   "unstick": {
+    "card": "c-b3s23",
+    "kind": "stuck"
+   },
+   "title": "Stuck twice: Battle stage 23: purge battle 2 and Kindness",
+   "next": "Card c-b3s23 (Battle stage 23: purge battle 2 and Kindness) stalled again after its one automatic rescue. The rescue started 12:42 PM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it.",
+   "blocks": [
+    "c-b3s23"
+   ],
+   "chat": {
+    "url": "",
+    "opening": "board"
+   },
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Added by board-sync: card c-b3s23 stalled after its rescue"
+    }
+   ],
+   "created": "2026-11-23",
+   "changed": "2026-11-23"
   }
  ],
  "sessions": [
@@ -21104,6 +21141,18 @@
    ],
    "cards": [
     "c-movestage-build"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFjdpaLbEHxXqoqcgd",
+   "title": "Battle stage 22: chapter 20 on Battle 3",
+   "first": "2026-11-23T15:24:22-08:00",
+   "last": "2026-11-23T15:24:22-08:00",
+   "tags": [
+    "b3s22ch20"
+   ],
+   "cards": [
+    "c-b3s22ch20"
    ]
   },
   {
@@ -27287,8 +27336,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "e6335db839a077e0686ffa8fdf639818ab557b14",
- "synced_at": "2026-11-23T22:27:44+00:00",
+ "synced": "e1c70809dff953e0625cc43ed659b6a599f01bc6",
+ "synced_at": "2026-11-23T23:25:11+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
