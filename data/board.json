@@ -25410,7 +25410,7 @@
    "id": "c-reports-13",
    "tag": "reports-2026-11-21c",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Fix the report backlog (3 open)",
    "next": "Shipped in reports-2026-11-21c: Chapter 2 end scene starts at once, grey tree scene fires from a larger clearing, third family member left aligned on the Family page. Reports svqd, ojxd and 9lsh fixed.",
@@ -25541,6 +25541,10 @@
      "d": "2026-11-23",
      "t": "Part 3 shipped in build reports-2026-11-21c: Tom's answer applied (scenes start on arrival), third-person Family layout fixed. Not browser tested (smoke could not run here).",
      "at": "2026-11-23T01:30:00Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as reports-2026-11-21c: Chapter 2 scenes start the moment the party arrives, and a third family member sits at the left of the Family page"
     }
    ],
    "blocks": [],
@@ -25554,7 +25558,8 @@
     "why": "Quiet: the conversation may have stopped",
     "url": "https://claude.ai/code/cse_01RXeukGVvpyyr9G81V1EjFt",
     "prev": "https://claude.ai/code/session_01RXeukG2FCZpuZRHq4aKwiQ"
-   }
+   },
+   "done": "2026-11-22"
   },
   {
    "id": "c-wanstop-rose-giddyup-r7",
@@ -33139,6 +33144,21 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukFKevpxsstdftbq2RZ",
+   "title": "Fix the report backlog (1 open)",
+   "first": "2026-11-23T01:10:12Z",
+   "last": "2026-11-23T01:10:12Z",
+   "tags": [
+    "reports-2026-11-21c"
+   ],
+   "cards": [
+    "c-reports-10",
+    "c-reports-13",
+    "c-reports-8",
+    "c-reports-9"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEzhuFrYnaYCJgvWy7",
    "title": "Fix the stopped video tom-controller",
    "first": "2026-11-23T00:42:17Z",
@@ -39129,8 +39149,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "61e83f25bc255ad171232a5cec35017b06d14dc4",
- "synced_at": "2026-11-23T01:04:37+00:00",
+ "synced": "7455811450fd932721dd12d1613031ad59aaaf26",
+ "synced_at": "2026-11-23T01:10:56+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
