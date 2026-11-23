@@ -628,3 +628,15 @@ Object.assign(B3_STATUS,{
   darkroom_def:{id:'darkroom_def',name:'Darkroom Call',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'darkroom',v:.20}],flags:[],
     short:'DEF UP',color:'#c8a040',weight:6,desc:'The safelight is on and the shelves are closing in: 20% more Defense. It can be stripped.'}
 });
+
+// Stage 22 (chapter 18, the studio on the top floor: The Studio Rig, bestiary entry 79). Spotlight Lock is the lock's buff (+20% Crit Rate for 1 turn, so Big Flash on the
+// next turn can crit; the Mark itself is not a status). Backdrop Wall is the rolled-down backdrop's Guard Stance (25% less damage, 2 turns): Panic Boil! or a Break ends it.
+// Backdrop Heat is the +20% Attack that comes with it (2 turns, a buff). The Toasty the lamps leave on the rig is the shared prime row, and Stun and Fatigue are shared rows.
+Object.assign(B3_STATUS,{
+  spotlight_lock:{id:'spotlight_lock',name:'Spotlight Lock',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'crit',kind:'spotlight',v:.20}],flags:[],
+    short:'CRIT UP',color:'#ffe27a',weight:5,desc:'Every lamp turned on one of you: 20% more likely to crit for a turn. It can be stripped.'},
+  backdrop_wall:{id:'backdrop_wall',name:'Backdrop Wall',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
+    short:'GUARD',color:'#8a7ab0',weight:5,desc:'A painted backdrop rolled down in front of the rig: takes 25% less damage. Panic Boil! or a Break ends it.'},
+  backdrop_heat:{id:'backdrop_heat',name:'Backdrop Heat',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'backdropHeat',v:.20}],flags:[],
+    short:'ATK UP',color:'#f2a33a',weight:5,desc:'The lamps run hot behind the backdrop: 20% more Attack. It can be stripped.'}
+});

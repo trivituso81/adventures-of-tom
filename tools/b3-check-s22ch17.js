@@ -15,7 +15,7 @@ module.exports=function(T) {
 
   // 1. The switch, the floor, the numbers (bestiary entries 75 to 78, printed as they are)
   ok(S.chapters.includes(17)&&S.chapters.indexOf(17)<S.chapters.indexOf(21),'chapter 17 is on Battle 3 (found '+J(S.chapters)+')');
-  ok(S.levelFloor[17]===42&&S.levelFloor.length===18,'chapter 17 floors the Character Level at the bestiary baseline, 42 (found '+S.levelFloor[17]+')');
+  ok(S.levelFloor[17]===42&&S.levelFloor.length>=18,'chapter 17 floors the Character Level at the bestiary baseline, 42 (found '+S.levelFloor[17]+')');
   const PS=FOES.pausesprite,BW=FOES.paperweight,CU=FOES.curator,TL=FOES.twinlens;
   ok(PS&&PS.ch===17&&PS.hp===884&&PS.atk===143&&PS.def===63&&PS.spd===125&&PS.pips===0&&PS.role==='hexer'&&PS.row==='back'&&PS.drop==='coldbrew','the Pause Sprite is the chapter 17 Hexer: 884 HP, Atk 143, Def 63, Spd 125, 0 pips, Back, drops Cold Brew');
   ok(J(PS.peeves)==='["clobber","racket"]'&&J(PS.resists)==='[]'&&J(PS.acts.map(a=>a.id))==='["shutter_tap","hold_that_pose","self_timer_beep"]','it hates Clobber and Racket and has Shutter Tap, Hold That Pose and Self-Timer Beep');

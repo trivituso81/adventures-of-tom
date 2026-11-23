@@ -6,10 +6,13 @@
 // (engine/tom-gone.js) > ch18-done.
 // The party all chapter: Tom, Grace, Rose, Amy out front, TNB and Nara on the bench (they walk with the party and stand in every scene; the fight is
 // Tom, Grace, Rose and Amy). Nobody but Tom is ever hit.
-// Flags: ch18-open, ch18-pinnacle, ch18-fight, battle:vance ('lose', set by the engine: the fight ends with the result 'erased'), ch18-after, tom-gone, ch18-done.
+// Flags: ch18-open, ch18-pinnacle, ch18-fight, battle:vance (Battle 2: 'lose', set by the engine, the survival fight ends with the result 'erased'; Battle 3: 'win' or
+// 'lose', a real fight against The Studio Rig, so only a win plays ch18After and a loss heals the family and lets them try again), ch18-after, tom-gone, ch18-done.
 const CH18={mode:'full',chapter:18};
 const CH18FX={light:null};   // the column of light where Tom stood (engine/ch18-render.js)
 const ch18Vance=()=>findMonster('vance');
+// The fight is over: on Battle 2 any result (the survival fight always ends 'erased'), on Battle 3 only a win.
+const ch18Over=()=>B3_CH_ON(18)?flag('battle:vance')==='win':!!flag('battle:vance');
 // Tom leaves: the switch, then TNB takes the lead (engine/tom-gone.js does the party and sprite work).
 function ch18TomGone() {
   setFlag('tom-gone');
@@ -63,6 +66,7 @@ SCENES.ch18Pinnacle=()=>[
   {talk:'Nara',lines:['Nara presses herself against the back of Tom’s legs and does not make a sound. She is very good at this.']},
   {talk:'Narrator',lines:['He adjusts his glasses. He has done it before every hard thing, his whole life. Then he raises one hand, palm out, and takes one step forward.']},
   {talk:'Tom',lines:['No touching, please.']},
+  {if:()=>B3_CH_ON(18),then:[{toast:'Tip: tap The Studio Rig to see what it can\u2019t stand. When it locks a spotlight on one of you, that is Big Flash next turn: Tom in front of the lock takes it, or break its Composure first. Below half HP it rolls a backdrop down.',time:10}],else:[]},
   {flag:'ch18-pinnacle'},
   {save:true},
   ...SCENES.ch18Fight()
@@ -74,7 +78,10 @@ SCENES.ch18Fight=()=>[
   {call:()=>{ const v=ch18Vance(); if(v) { v.hidden=false; v.mscale=1.4; } }},
   {flag:'ch18-fight'},
   {battle:()=>{ const m=ch18Vance(); if(m) { m.hidden=false; m.mscale=1.4; m.tier=0; } return m; },tut:'ch18'},
-  ...SCENES.ch18After()
+  {if:()=>ch18Over(),then:[...SCENES.ch18After()],else:[
+    {heal:true},
+    {talk:'Amy',lines:['Up. Everyone up. The lights are only lights. Breathe. Then we go again.']},
+    {toast:'Talk to Julian Vance and press A to try again. Everyone is healed.',time:5}]}
 ];
 
 SCENES.ch18After=()=>[
@@ -129,7 +136,7 @@ SCENES.ch18After=()=>[
 
 TRIGGERS.push(
   {id:'ch18-pinnacle',map:'towerpinnacle',when:{...CH18,flag:'ch18-open',notFlag:'ch18-pinnacle'},scene:'ch18Pinnacle'},
-  {id:'ch18-after',map:'towerpinnacle',when:{...CH18,flag:'battle:vance',notFlag:'ch18-after'},scene:'ch18After'}
+  {id:'ch18-after',map:'towerpinnacle',when:{...CH18,flag:'battle:vance',notFlag:'ch18-after',test:S=>B3_CH_ON(18)?S.flags['battle:vance']==='win':!!S.flags['battle:vance']},scene:'ch18After'}
 );
 
 // ---------- World state ----------
@@ -163,7 +170,7 @@ pressAction=function() {
       return;
     }
     if(n&&n.monster==='vance'&&STORY.chapter===18&&flag('ch18-pinnacle')&&!flag('ch18-after')) {
-      playScene(flag('battle:vance')?'ch18After':'ch18Fight'); return;
+      playScene(ch18Over()?'ch18After':'ch18Fight'); return;
     }
   }
   return LE_pressAction_ch18();

@@ -298,6 +298,8 @@ function check() {
   require('./b3-check-s22ch16.js')({G,ok,near,play,noCrit});
   // Stage 22, chapter 17 (Julian's building): the Pause Sprite, the Brass Desk Weight, the Curator and the Twin Lenses' two stances.
   require('./b3-check-s22ch17.js')({G,ok,near,play,noCrit});
+  // Stage 22, chapter 18 (the studio on the top floor): The Studio Rig, Spotlight Lock then Big Flash, the backdrop that Panic Boil! brings down.
+  require('./b3-check-s22ch18.js')({G,ok,near,play,noCrit});
   console.log('CHECKS:',checks);
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);

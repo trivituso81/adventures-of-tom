@@ -1,3 +1,17 @@
+## b3s22ch18 (2026-11-23): Chapter 18 (the studio on the top floor) fights on the new battle: The Studio Rig
+
+Card c-b3s22ch18. Chapter 18 is on the BY CHAPTER list for Battle 3. One number changed: the boss's HP, printed 3,790 (2,840 for three), is 6,200 (4,650). Evidence: simulator (`--support=4`, Rank 2, level 45, Tom, Grace, Rose and Amy, 24 fights): at the printed HP it won in 3.43 rounds, under the 5 to 7 a boss with no helper is aimed at; at 6,200 it averages 5.88 rounds and won every time.
+
+| What | Where |
+|---|---|
+| The Studio Rig (boss, Front, 8 pips, no running; Tripod Sweep, Hot Bulb Pop, Spotlight Lock then Big Flash, Backdrop Wall once at half HP, Every Light On below half), the formation (90 Vibe Points) | `data/b3-foes-ch18.js` |
+| Three statuses: `spotlight_lock`, `backdrop_wall`, `backdrop_heat` | `data/b3-status.js` |
+| The switch (`chapters` 18, `levelFloor` 45, tips `ch18`) and the Lab fight NEW 93 | `data/b3-story.js`, `data/b3-lab.js` |
+| A loss heals the family and retries; only a win plays the after scene; `B3_CH_ON(18)` pinnacle toast | `data/scenes-ch18.js` (recorded lines untouched) |
+| Checks and the page test | `tools/b3-check-s22ch18.js`, `tools/ch18_b3_test.py` (`tools/night/tests.json`); older checks and tests that counted chapter 18 as unswitched now say 19 (`b3-check-s15/17/18/18bonus/22ch17`, `b3_story_test.py`, `battle_guide_test.py`) |
+| Guide data | `data/guide-anims.json` rebuilt |
+| Docs | `docs/BATTLE3.md` "What stage 22 chapter 18 holds" |
+
 ## guideflow5 (2026-11-23): The Battle Guide page reads one status file and shows one status line per request
 
 Card c-guideflow-5, plan `claude/guide-flow-plan.md` section 10 step 5 (sections 3.2 D1, D2, D10, D13, all of section 5 except 5.5, rows X1 to X4 and X21, test T8). Only `battle-guide.html`, its test and `docs/BATTLE_GUIDE.md` changed. On screen: a family video or a person's start picture is now ONE tap that adds a row to `queue.json` on the branch `guideq` and pokes the worker; the row's status line (the plan's 5.1 words, with a counting clock) shows on its row in the list, in its sheet and in Activity and changes by itself, with no reload; Cancel (free) while queued; the take plays in the sheet the moment its row is done; a person's video buttons appear the moment their picture row is done; an Activity bar at the top of every screen. Monster videos keep their old button and path (card 8).

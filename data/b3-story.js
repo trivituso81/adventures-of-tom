@@ -5,7 +5,7 @@
 //   BY CHAPTER  a chapter in `chapters` below uses Battle 3 (the default).
 //   NEW         every fight Battle 3 has a formation for uses it (chapters not listed still have battle 2 tips and flags: for tests).
 const B3_STORY={
-  chapters:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,21],
+  chapters:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,21],
   maxParty:4,
   // A story fight that is not one of the formations: the foes it names. `vp` is what a win pays the Main Vibe (spec section 1).
   fights:{
@@ -14,7 +14,7 @@ const B3_STORY={
     smoglet2:{foes:[{id:'smoglet',row:'front'},{id:'smoglet',row:'front'}],vp:10}
   },
   // The Character Level every member has at least by the furthest chapter reached (the Lab's levels, bestiary v11). Never lowers a level.
-  levelFloor:[0,1,4,7,9,12,14,17,19,22,25,27,30,32,35,37,40,42],
+  levelFloor:[0,1,4,7,9,12,14,17,19,22,25,27,30,32,35,37,40,42,45],
   // Migration for a save that has not met Battle 3: a pool of this many Vibe Points per chapter finished, two thirds to the first
   // Sig Vibe and one third to the second, with overflow (spec section 1, architecture 4.2).
   vpPerChapter:135, split:[2/3,1/3],
@@ -273,6 +273,14 @@ const B3_STORY={
       {id:'call',who:'*',text:'Below half HP it makes a Darkroom Call: a Curator joins in Front, and the Lenses take 20% less damage for 2 turns. A Curator\u2019s White-Glove Protocol blocks the first debuff you put on it.',when:(F)=>F.foes.some(f=>f.id==='curator')},
       {id:'exposure',who:'*',text:'Long Exposure is charging (!!): it Slows and tires everyone. Shield the family, or break its pips before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Long Exposure/.test(f.charge.name||''))},
       {id:'archive',who:'*',text:'Contact-Sheet Archive is charging (!!) below half HP: it hits everyone. Shield the family, or break its pips before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Contact-Sheet/.test(f.charge.name||''))}
+    ],
+    // ---- Chapter 18 (stage 22 chapter 18): The Studio Rig on the top floor. `ch18` is the scene key (data/scenes-ch18.js). Tom, Grace, Rose and Amy fight it. ----
+    ch18:[
+      {id:'peeve',who:'*',text:'The Studio Rig has 8 Composure pips and can\u2019t stand Clobber or Racket. It shrugs off Razzle, so Clobber and Racket break it fastest.'},
+      {id:'lock',who:'*',text:'Spotlight Lock aims the lights at one of you in Back (it shows as MARKED). Big Flash lands on that person next turn and stuns. Tom\u2019s Suite Door Slide takes it for them, a shield that soaks it stops the stun, and a Break cancels it.',when:(F)=>F.foes.some(f=>f.mark)},
+      {id:'flash',who:'*',text:'Big Flash is charging (!!). Step in with Tom\u2019s Suite Door Slide, shield the marked person, or break its pips before it fires.',when:(F)=>F.foes.some(f=>f.charge&&/Big Flash/.test(f.charge.name||''))},
+      {id:'wall',who:'*',text:'Backdrop Wall: the rig takes 25% less damage and hits 20% harder. Its lamps overheat and leave it Toasty, so a Racket hit sets off Panic Boil! and brings the backdrop down.',when:(F)=>F.foes.some(f=>f.id==='vance'&&f.st&&f.st.backdrop_wall)},
+      {id:'lights',who:'*',text:'Every Light On is charging (!!) below half HP: it hits everyone and tires them. Shield the family, or break its pips before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Every Light/.test(f.charge.name||''))}
     ]
   }
 };

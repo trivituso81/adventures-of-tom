@@ -196,6 +196,9 @@ const B3_LAB=[
     party:['tom','amy','tnb','nara'],level:42,formation:'paperweight',bg:'stacks'},
   {id:'new92',name:'NEW 92: THE TWIN LENSES',sub:'Chapter 17 boss. 8 Composure pips. It swaps lens at every round divider and on Rack Focus: Blue can\u2019t stand Sizzle or Clobber, Orange can\u2019t stand Drench or Razzle. Below half HP it calls a Curator and gains Defense, then Contact-Sheet Archive joins its moves.',
     party:['tom','grace','rose','amy'],level:42,formation:'twinlens',bg:'stacks'},
+  // Stage 22, chapter 18 (the studio on the top floor): The Studio Rig (bestiary entry 79), the chapter's one fight. Tom, Grace, Rose and Amy fight it.
+  {id:'new93',name:'NEW 93: THE STUDIO RIG',sub:'Chapter 18 boss. 8 Composure pips, can\u2019t stand Clobber or Racket. Spotlight Lock marks one of you in Back and Big Flash stuns that person next turn: Tom\u2019s Suite Door Slide takes it, a Break cancels it. At half HP it rolls down a backdrop (Guard Stance, Toasty: a Racket hit brings it down), then Every Light On joins its moves.',
+    party:['tom','grace','rose','amy'],level:45,formation:'vance',bg:'pinnacle'},
   // movestage2: the Move Lab for Tom's eight staged moves (engine/b3-movelab.js). Last in the list so the numbers of the fights above stay; the NEW BATTLE list shows it first.
   {id:'moves-tom',name:'MOVE LAB: TOM',sub:'Play Tom\u2019s eight staged moves in a real fight, in ladder order, then Keep, Tweak or Replace each one. The Capstones play against The Big One.',
     party:['tom','grace','rose','deedee'],level:7,formation:'mudling',bg:'pond',movelab:true},

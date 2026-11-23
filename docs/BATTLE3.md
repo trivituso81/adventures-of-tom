@@ -816,3 +816,21 @@ Card c-b3s22ch17. Chapter 17 only (Julian's building in Los Angeles: the Pause S
 | Tests | `node tools/b3-sim.js check` (`tools/b3-check-s22ch17.js`); `python3 tools/ch17_b3_test.py` portrait and landscape; `python3 tools/b3_story_test.py` (the first unswitched chapter is now 18, pool 2295, floor 42); `python3 tools/battle_guide_test.py` (the fake gain is the chapter 18 Studio Rig); `python3 tools/smoke.py`; `python3 -I tools/clip-audit/unused_voice.py`. |
 | Battle Guide | The four foes leave the planned list by themselves; `data/guide-anims.json` and `data/battle-lab-index.json` rebuilt. |
 | Waits | Chapters 18 to 20, then stage 23. Chapter 20's Blue and Orange Lens can reuse `stances` and `when:{stance}`. |
+
+## What stage 22 chapter 18 holds (build `b3s22ch18`, 2026-11-23)
+
+Card c-b3s22ch18. Chapter 18 only (the studio on the top floor, floor 60 of the Glass Tower: The Studio Rig, bestiary entry 79). Numbers are bestiary v11's printed numbers except one: the boss's HP, printed 3,790 (2,840 for three) and now 6,200 (4,650). At the printed number the simulator (`node tools/b3-sim.js new93 24 --support=4`, Rank 2, Tom, Grace, Rose and Amy at level 45) won in 3.43 rounds, well under the 5 to 7 a boss with no helper aims at (target 6); at 6,200 it averages 5.88 rounds and wins 24 of 24. Atk, Def, Spd, pips, Pet Peeves and resists are as printed.
+
+| Item | Built |
+|---|---|
+| Foe | `data/b3-foes-ch18.js`: `vance` (The Studio Rig, boss, Front, 8 pips, no running; Pet Peeves Clobber and Racket, resists Razzle). Acts: Tripod Sweep (Clobber 0.8x, one ally), Hot Bulb Pop (Sizzle 1.0x on two random allies, Toasty 2 turns), Spotlight Lock (no damage, Marks a Back-row ally, +20% Crit Rate for 1 turn), Big Flash (Razzle 1.5x on the Marked ally next turn, charged, Stun 1 turn), Backdrop Wall (once at half HP: 2-turn Guard Stance, +20% Attack, Toasty 2 turns on itself), Every Light On (Razzle 1.35x on all, charged, Fatigue 2 turns, below half HP). The foe id stays `vance` because the built scenes, the map monster and the Battle 2 fight call it that. |
+| The lock | No new rules field. It is chapter 10's pattern (Boarding Group Nine, then GATE CLOSED): `aim:'back'`, `then`, `after`, the `mark` op and `hits:'marked'`. `stopByIntercept` (chapter 4's CUT!) makes Tom's Suite Door Slide take the flash and keeps the Stun off everyone; a shield that soaks the whole flash stops the Stun too; a Break or interrupt cancels it and drops the Mark. |
+| Cadence | The bestiary prints none, so: printed order with `when` filters; Backdrop Wall is a once act at half HP, Every Light On joins below half HP. |
+| Statuses | `data/b3-status.js`: `spotlight_lock` (buff, +20% crit), `backdrop_wall` (stance, 25% less damage), `backdrop_heat` (buff, +20% Attack). |
+| Look | Battle 3 draws the rig with the built `vance` row (the long-coated man at the Loom) until the Art Library makes the rig painting; the bestiary says its look comes once its script settles. |
+| Lab | NEW 93 (the Studio Rig, Tom, Grace, Rose, Amy, level 45). |
+| The switch | `B3_STORY.chapters` has 18, `levelFloor` has 45 (length 19), tips `ch18`. `data/scenes-ch18.js`: the fight is a real fight on Battle 3, so only a win plays the after scene (`ch18Over`, also the trigger's `test` and Vance's A press); a loss heals the family and Amy says to go again. Battle 2 still ends the fight with `erased` and plays the after scene as before. The pinnacle toast has a `B3_CH_ON(18)` wording. Recorded lines untouched. |
+| Pay | 90 Vibe Points, the chapter's whole pay, from the one fight. |
+| Tests | `node tools/b3-sim.js check` (`tools/b3-check-s22ch18.js`); `python3 tools/ch18_b3_test.py` portrait and landscape (`tools/night/tests.json`, `ch18_b3_test`); `python3 tools/b3_story_test.py` (the first unswitched chapter is now 19, pool 2430, floor 45); `python3 tools/battle_guide_test.py` (the fake gain is the chapter 19 Brass Mail-Chute Courier); `python3 tools/smoke.py`; `python3 -I tools/clip-audit/unused_voice.py`. |
+| Battle Guide | The Studio Rig leaves the planned list by itself; `data/guide-anims.json` rebuilt. |
+| Waits | Chapters 19 and 20, then stage 23. Chapter 19's Brass Mail-Chute Courier (Wall Perch, swaps rows every turn) and the Dead-Letter Censor's REDACTED stamp may need rules fields. |

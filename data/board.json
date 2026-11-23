@@ -18409,7 +18409,7 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "prog",
-   "next": "Build ONLY chapter 18 on Battle 3: The Studio Rig (Boss). Starts after chapter 17 is switched on.",
+   "next": "Built chapter 18 on Battle 3 (b3s22ch18): The Studio Rig is data in data/b3-foes-ch18.js and the chapter is on the BY CHAPTER list. Tom's Milestone card t-b3s22ch18 is next; chapter 19 (c-b3s22ch19) reads his note.",
    "blocks": [],
    "changed": "2026-11-23",
    "created": "2026-11-22",
@@ -18444,8 +18444,29 @@
     {
      "d": "2026-11-23",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Result: chapter 18 (the studio on the top floor) is on Battle 3. data/b3-foes-ch18.js has The Studio Rig (foe id `vance`, boss, Front, 8 pips, no running; Tripod Sweep, Hot Bulb Pop, Spotlight Lock then Big Flash, Backdrop Wall once at half HP, Every Light On below half) and its formation (90 Vibe Points, the chapter's whole pay). data/b3-status.js has spotlight_lock, backdrop_wall and backdrop_heat. B3_STORY.chapters has 18, levelFloor has 45, tips ch18. Lab fight NEW 93. data/scenes-ch18.js: a lost fight heals the family and lets them try again, only a win plays the after scene, and the pinnacle toast has a B3_CH_ON(18) wording. No engine rule changed: the lock is chapter 10's mark, then and after fields and chapter 4's stopByIntercept."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Number changed: the Studio Rig's HP, printed 3,790 (2,840 for three), is 6,200 (4,650). Evidence: simulator (`node tools/b3-sim.js new93 24 --support=4`, Rank 2, level 45, Tom, Grace, Rose and Amy). At the printed HP it won in 3.43 rounds, under the 5 to 7 a boss with no helper aims at (target 6); at 6,200 it averages 5.88 rounds over 24 fights and won every time. Atk, Def, Spd, pips, Pet Peeves and resists are the printed numbers."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Calls I made: (1) the foe id stays `vance` and the name is The Studio Rig (bestiary working name); the foe name and each act name are one string each, so they change in one place when the script settles them. (2) Cadence is mine (the bestiary prints none): printed order with `when` filters, Backdrop Wall is a once act at half HP, Every Light On joins below half HP. (3) Spotlight Lock Marks a Back-row ally (aim back) and gives the rig +20% Crit Rate for 1 turn; Big Flash hits the Marked ally next turn, 1.5x Razzle, charged, Stun 1 turn; Tom's Suite Door Slide takes it and keeps the Stun off everyone, a shield that soaks it stops the Stun, a Break cancels it. (4) Backdrop Wall is a 2-turn Guard Stance (25% less damage), +20% Attack for 2 turns, and leaves the rig Toasty for 2 turns, so a Racket hit (a Pet Peeve) sets off Panic Boil! and brings it down. (5) Battle 2 played this fight as a survival fight that always ended 'erased'; on Battle 3 it is a real fight and the scene reads a win (`ch18Over`), so a loss is retried; Battle 2 still plays as before. (6) The rig has no painting yet: Battle 3 draws it with the built Julian Vance sprite until the Art Library makes one (the bestiary says its look comes with its script). (7) TNB and Nara stay on the bench, as in the scenes; the fight is Tom, Grace, Rose and Amy."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Tests: node tools/b3-sim.js check 5326 checks, FAILS []. tools/ch18_b3_test.py passes in portrait and landscape (the lift, the Loom Chamber scene, the Studio Rig fight won on Battle 3, 90 Vibe Points paid, tips shown, Tom gone, chapter done); I looked at the fight and victory screens in both. python3 -I tools/clip-audit/unused_voice.py: all 0. tools/b3_story_test.py and tools/battle_guide_test.py moved to chapter 19. Not caused by this chapter, the same on a clean checkout of main: battle_guide_test fails 11 checks (the page lists 691 animations against 657 in data/guide-anims.json, board_check, What is coming, no engine script, plan counts, then stops on a Giddyup timeout); b3_story_test fails 1 (a Battle 3 save loaded with the switch on Old, chapter 1); smoke's board_sync_test fails board4 'board_check accepts a Tom card waiting on its fix'."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Notes for chapter 19: levelFloor now has 45 (length 19). b3_story_test.py treats chapter 19 as the first unswitched chapter (pool 2430, floor 45, Grace set to 47): move those cases to chapter 20 with your levelFloor. battle_guide_test.py's fake-gain case now uses the chapter 19 Brass Mail-Chute Courier (`mailcourier`, chapters.push(19)): change it to a still-planned chapter 20 monster and the 'What is coming' check and the 'chapters 11 to 18' counts to chapter 19. Older checks that count chapters (tools/b3-check-s15.js levelFloor length, s17.js and s18.js scenes tut keys and EXPECT, s18bonus.js, s22ch17.js) were updated by this build: do the same with the next number. Add your own check file after b3-check-s22ch18.js in tools/b3-sim.js. When a scene starts the next scene by itself (here the ride up starts the Loom Chamber scene), a page test's stop condition must not wait for a quiet screen: see tools/ch18_b3_test.py."
     }
-   ]
+   ],
+   "after": "t-b3s22ch18"
   },
   {
    "id": "c-b3s22ch19",
@@ -18455,7 +18476,7 @@
    "col": "up",
    "next": "Build ONLY chapter 19 on Battle 3: Dead Letter (Elite), Rubber Stamp (Elite), Brass Mail-Chute Courier (Mini-boss), The Dead-Letter Censor (Boss). Starts after chapter 18 is switched on.",
    "blocks": [],
-   "changed": "2026-11-22",
+   "changed": "2026-11-23",
    "created": "2026-11-22",
    "tag": "b3s22ch19",
    "prompt": {
@@ -18475,6 +18496,10 @@
     {
      "d": "2026-11-22",
      "t": "Created by the b3s22 session: one card per chapter so no chapter is built in the same conversation as another."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Note from the chapter 18 build (b3s22ch18): chapter 18 is on Battle 3 (levelFloor 45, length 19). tools/b3_story_test.py now treats chapter 19 as the first unswitched chapter (pool 2430, floor 45, Grace set to 47); move those cases to chapter 20 with your levelFloor. tools/battle_guide_test.py's fake-gain case now uses the chapter 19 Brass Mail-Chute Courier (`mailcourier`, chapters.push(19)); change it to a still-planned chapter 20 monster, and the 'What is coming' check and the 'chapters 11 to 18' counts to chapter 19. The older chapter checks (tools/b3-check-s15.js, s17.js, s18.js, s18bonus.js, s22ch17.js) count chapters: update them the way this build did. Add your own check file after b3-check-s22ch18.js in tools/b3-sim.js. The lock pattern of the Studio Rig (aim back, then, after, mark, hits marked, stopByIntercept) needs no engine change if the Courier or the Censor want a mark. A page test whose scene starts the next scene by itself must not wait for a quiet screen: see tools/ch18_b3_test.py. battle_guide_test.py fails the same 11 checks on main before and after, b3_story_test.py fails 1 (chapter 1, a Battle 3 save loaded on Old), and smoke's board_sync_test fails board4 'board_check accepts a Tom card waiting on its fix'."
     }
    ]
   },
@@ -20868,6 +20893,32 @@
     "at": "2026-11-23",
     "from": "up"
    }
+  },
+  {
+   "id": "t-b3s22ch18",
+   "title": "Milestone: play chapter 18 on the new battle",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s22ch18 or a later name. Then CHAPTERS > Chapter 18 (or Take me there on the dashboard) and play the lift up to floor 60 and the Studio Rig fight with Tom, Grace, Rose and Amy (about 10 minutes). Judge the mechanics only: is the fight fun and 5 to 7 rounds, can you read the screen and the turn bar in portrait and landscape, does it read that Spotlight Lock marks one of the girls in Back and that Big Flash lands on her next turn (and that Tom's Suite Door Slide can take it), does the backdrop at half HP read as something a Racket hit (it is Toasty) brings down, and does Every Light On below half HP feel fair and readable? On purpose: its HP was raised from the printed 3,790 to 6,200 because the printed number ended the fight in 3.4 rounds in the simulator, and the rig still looks like the long-coated Vance man (its painting comes later). To try it straight away use ADMIN > BATTLE LAB > NEW BATTLE, fight NEW 93. Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays chapter 18 on the old battle. The chapter 19 card (c-b3s22ch19) reads your note.",
+   "blocks": [],
+   "fyi": true,
+   "jump": {
+    "chapter": 18
+   },
+   "changed": "2026-11-23",
+   "created": "2026-11-23",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEtWadrigeJYk6FaD2",
+    "opening": "created by the b3s22ch18 session"
+   },
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Created by the b3s22ch18 session: Milestone for chapter 18 on the new battle."
+    }
+   ]
   }
  ],
  "sessions": [
