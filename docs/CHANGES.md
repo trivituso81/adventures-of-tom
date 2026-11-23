@@ -1,3 +1,9 @@
+## wanstop-stage-tom-jetwash-vid-r1 (2026-11-23): the jet wash video is tried again with its start picture shrunk to 80 percent
+
+Card c-wanstop-stage-tom-jetwash-vid-r1. The bulk run stopped `stage-tom-jetwash-vid` twice (bg 94.7 and 93.0 percent against 97, edge: the streaks touched a picture edge in 51 and 48 of 90 pictures). I looked at the frames: the streaks move and fade out as the prompt says, but the start picture is a wide streak that fills almost the whole width, so the video's streaks reach the frame edge and the edge pixels are not flat black.
+- Changed ONE thing: `pad: 0.8` on the job (the start picture is shrunk to 80 percent on the same black, the existing pad of `_bulk.pads`), rev 1 to 2. Kept: the prompt file word for word, the model, 480p, 3 s, seed 81, bake and wire settings.
+- Started the next try: `wgen` on t-movestage-lab (1 video, about $0.15). This animation has used 2 of 4 tries ($0.30 of $3.20). Not run by this session.
+
 ## movestage2c (2026-11-22): the marks of five staged moves are measured on their baked videos
 
 Part c of card c-movestage-build. Five of Tom's eight moves now have every video and picture baked and play through the stage layer in MOVE LAB: TOM: Frequent Flier (lounge_pass_flex), Zone One (zone_one_blockade), Suite Door (suite_door_slide), Cartridge Blow (cartridge_blow) and Konami Code (konami_code). The marks in `data/b3-stage.js` for those, and for the Shell (circle at picture 8, point at 19) and Porsche (watch 9, wave 22) body videos, are now picture numbers read off the baked clips instead of the plan's guesses; the Cartridge row has its hand point (12, 62).

@@ -2079,7 +2079,8 @@
   "why": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it."
  },
  "stage-tom-jetwash-vid": {
-  "rev": 1,
+  "rev": 2,
+  "pad": 0.8,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -2105,7 +2106,7 @@
    "step": 3,
    "after": "stage-tom-jetwash"
   },
-  "why": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it."
+  "why": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it. wanstop-r2: the start picture fills the width, so the video touched the edge in about half the pictures (bg 93 to 95 percent, edge 48 and 51 of 90); kept everything, changed only pad: 0.8 (the picture is shrunk to 80 percent on the same black)."
  },
  "stage-tom-fireball-vid": {
   "rev": 1,
