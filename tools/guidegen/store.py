@@ -15,6 +15,8 @@ Environment: GUIDE_API (default https://api.github.com), GH_TOKEN, GITHUB_REPOSI
   set_fields(id, actor, **f)           fields of a making or checking row (the fal request number), no state change
   set_use(id, state, actor, **f)       the same for the `use` field
   set_left(id, left)                   Keep the old one (page)
+  begin_apply(run, dry)                guideflow7: every wanted use becomes applying in ONE update; also lists start pictures not on main yet
+  mark_main(ids, build)                guideflow7: start pictures that reached main
   fail(id, code, actor, **f)           failed with the why and do of WORDS[code]
   reap(alive)                          decision D5 for rows whose run is dead
   archive(days)                        finished rows older than that move to queue-archive.json
@@ -352,6 +354,58 @@ def set_left(id, left=True):
         if it['kind'] != 'video' or it['state'] != 'done': raise Refused('only a done video can be left')
         it['left'] = bool(left)
     update(fn, 'guide: keep old %s' % id)
+
+
+def begin_apply(run, dry=False):
+    """Decision D9, the first step of the apply job: in ONE update every row whose use is wanted becomes applying with the run id on it. A row that is already
+    applying belongs to an apply run that died (one apply run at a time, the workflow's concurrency group), so it is taken again. Only done videos count.
+    Also returns the start pictures that are done, are not on main yet (result.main false) and have a file, the newest row of each person (an upload that
+    came later wins by age). dry=True reads and writes nothing. Returns (videos, pictures), each a list of row copies."""
+    vids, pics = [], []
+
+    def pick(doc):
+        vids.clear(); pics.clear()
+        for i in sorted(doc['items'].values(), key=lambda r: (r['at'], r['id'])):
+            u = i.get('use') or {}
+            if i['kind'] == 'video' and i['state'] == 'done' and u.get('state') in ('wanted', 'applying') and not i.get('dry'): vids.append(i)
+        newest = {}
+        for i in doc['items'].values():
+            r = i.get('result') or {}
+            if i['kind'] in ('picture', 'upload') and i['state'] == 'done' and r.get('path') and not i.get('dry') and i.get('who'):
+                if i['who'] not in newest or (i['since'], i['id']) > (newest[i['who']]['since'], newest[i['who']]['id']): newest[i['who']] = i
+        pics.extend(i for i in newest.values() if not (i.get('result') or {}).get('main'))
+    if dry:
+        doc, _ = load(); pick(doc)
+        return [json.loads(json.dumps(i)) for i in vids], [json.loads(json.dumps(i)) for i in pics]
+
+    def fn(doc):
+        pick(doc); t = now()
+        for i in vids:
+            u = i['use']
+            u['state'] = 'applying'; u['run'] = run; u['build'] = ''; u['why'] = ''   # `since` stays the tap: the page's clock counts from there
+            u.setdefault('at', t); u.setdefault('since', u['at'])
+    v0, p0 = begin_apply(run, dry=True)
+    if not v0: return [], p0   # nothing wanted: no write to the store
+    update(fn, 'guide: apply %s begins' % run)
+    doc, _ = load()
+    return [json.loads(json.dumps(doc['items'][i['id']])) for i in vids if i['id'] in doc['items']], [json.loads(json.dumps(i)) for i in pics]
+
+
+def mark_main(ids, build=''):
+    """A start picture that the apply job copied to main (and confirmed there) says so: result.main true. Only a done picture or upload row."""
+    ids = set(ids)
+    if not ids: return []
+    out = []
+
+    def fn(doc):
+        out.clear()
+        for id in ids:
+            it = doc['items'].get(id)
+            if not it: continue
+            if it['kind'] not in ('picture', 'upload') or it['state'] != 'done': raise Refused('only a done picture can be marked as on main')
+            it['result'] = dict(it.get('result') or {}, main=True, build=build); out.append(id)
+    update(fn, 'guide: on main %s' % ', '.join(sorted(ids))[:80])
+    return sorted(out)
 
 
 def reap(alive):

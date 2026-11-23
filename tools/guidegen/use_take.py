@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """guidegen1: USE THIS ONE in the Battle Guide. Puts a take into the game and purges what it replaces.
 
-  python3 -I tools/guidegen/use_take.py --state DIR [--root REPO] [--requests data/guide-use.json] [--no-take] [--tag guideuse-...]
+  python3 -I tools/guidegen/use_take.py --state DIR [--root REPO] --requests FILE [--tag guideuse-...]
 
-Each request {anim, take, at, prompt} (data/guide-use.json, committed by the page with the message "guide: use <animation id>"):
+Each request {anim, take, at, prompt} (guideflow7: tools/guidegen/apply.py writes the list from the rows of queue.json whose use is wanted and passes it with --requests):
   1. the take's video and marks come from DIR (the branch `guidegen`, takes.json); the prompt is the one Tom used (his edits included);
   2. the video is cut into art/clips/<clip>.webp and data/clips/<clip>.js (tools/clip-bake/bake_clip.py, the recipe of its kind) and its <script> tag is added to index.html;
   3. the source and the prompt are kept where the next try starts from: family clips as tools/art-library/prompts/wan-<job>-v<rev>.txt and art/raw/clips/wan-<job>-v<rev>.mp4
@@ -11,7 +11,7 @@ Each request {anim, take, at, prompt} (data/guide-use.json, committed by the pag
   4. the animation points at the clip: B3_BODY_CLIPS for a body state (and the painted row of that state is removed from B3_BODY_PAINT), `anim:{kind:'clip',clip}` on a move or
      act row, `wind:` on a wind-up (data/b3-*.js);
   5. data/guide-prompts.json records the used prompt (source `used`), data/guide-anims.json is rebuilt, and the build is named, tagged and logged (bump_tags.py, docs/CHANGES.md).
-It changes files only; the workflow guide-use commits and pushes them."""
+It changes files only; tools/guidegen/apply.py (workflow guide-apply) commits and pushes them, one build for every take of the batch."""
 import argparse, datetime, json, os, re, shutil, subprocess, sys, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -202,7 +202,8 @@ def _use(req, state, root, G, tag):
     gp = jread(os.path.join(root, 'data', 'guide-prompts.json'), {'anims': {}}); gp.setdefault('anims', {})[req['anim']] = {'prompt': prompt, 'rev': (existing or {}).get('promptRev', 0) if a['route'] == 'xai' else rev, 'source': 'used'}
     open(os.path.join(root, 'data', 'guide-prompts.json'), 'w', encoding='utf-8').write(jdump(gp))
     t['used'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())   # guidestatus1: the list stops showing Ready to review
-    return {'anim': req['anim'], 'name': a['name'], 'owner': a['owner'], 'clip': clip_key, 'rev': rev_label, 'notes': notes, 'files': [rel]}
+    return {'anim': req['anim'], 'name': a['name'], 'owner': a['owner'], 'clip': clip_key, 'rev': rev_label, 'notes': notes, 'files': [rel], 'clip_id': c['id'],
+            'clip_files': ['art/clips/%s.webp' % c['id'], 'data/clips/%s.js' % c['id']]}   # guideflow7: apply.py confirms these on main after the push
 
 
 def write_changes(report, tag, root):
@@ -212,7 +213,7 @@ def write_changes(report, tag, root):
     day = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d')
     names = ', '.join(d['name'] + ' (' + d['owner'] + ')' for d in rep['done'])[:160]
     out = ['## %s (%s): %s now plays a video chosen in the Battle Guide' % (tag, day, names), '',
-           'Card c-guidegen. USE THIS ONE in the Battle Guide (`data/guide-use.json`, Action guide-use). Not seen on the phone yet.']
+           'Card c-guidegen, batched by c-guideflow-7. USE THIS ONE in the Battle Guide (the `use` of a row in queue.json, Action guide-apply). Not seen on the phone yet.']
     for d in rep['done']:
         out.append('- %s (`%s`, %s): %s' % (d['name'], d['anim'], d['rev'], '; '.join(d['notes'])))
     for f in rep.get('failed') or []: out.append('- not used, %s: %s' % (f['anim'], f['why']))
@@ -221,18 +222,15 @@ def write_changes(report, tag, root):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(); ap.add_argument('--state', default=''); ap.add_argument('--root', default=ROOT0); ap.add_argument('--requests', default='data/guide-use.json')
-    ap.add_argument('--no-take', action='store_true'); ap.add_argument('--tag', default=''); ap.add_argument('--changes', default='')
+    ap = argparse.ArgumentParser(); ap.add_argument('--state', default=''); ap.add_argument('--root', default=ROOT0); ap.add_argument('--requests', default='')
+    ap.add_argument('--tag', default=''); ap.add_argument('--changes', default='')
     a = ap.parse_args(argv)
     if a.changes: return write_changes(a.changes, a.tag, a.root)
-    if not a.state: ap.error('--state is required')
+    if not a.state or not a.requests: ap.error('--state and --requests are required')
     root = a.root; sys.path.insert(0, os.path.join(root, 'tools', 'guidegen'))
     doc = jread(os.path.join(root, a.requests), {'requests': []}); reqs = [r for r in doc.get('requests') or [] if r.get('anim') and r.get('take')]
     say('%d use request(s) found' % len(reqs))
     if not reqs: return 0
-    if not a.no_take:
-        import gqueue
-        gqueue.take(a.requests, {r.get('at') for r in doc.get('requests') or []}, root, 'origin', 'guide: use requests taken [skip ci]')
     state = jread(os.path.join(a.state, 'takes.json'), {'anims': {}}); state['_dir'] = a.state
     G = RC.load(root); G['root'] = root
     done, failed = [], []

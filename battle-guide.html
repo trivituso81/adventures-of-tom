@@ -689,7 +689,7 @@ function openNotes(animId){return ((BOARD_DOC||{}).cards||[]).filter(c=>c.anim&&
 // queued, making, checking or being put in the game, every 30 seconds otherwise, and at once when the page is shown again) and WRITES it for four things only, through storeUpdate:
 // add a row, cancel a queued row, mark Use this one, mark Keep the old one. Every other change is made by the job that did the work. Nothing on this page waits in a loop.
 const QB='guideq',QF='queue.json';
-const QS={doc:null,etag:'',fails:0,grey:false,busy:false,timer:0,poke:0};
+const QS={doc:null,etag:'',fails:0,grey:false,busy:false,timer:0,poke:0,pokeApply:0};
 const QERR={},QBUSY={},LMEM={},MPEND={},PICURL={};   // QERR: the words under a button that failed; LMEM: a take with no row that was kept (memory only); MPEND: a monster request sent from this page (card 8 moves monsters to rows)
 const UP={pend:{},back:{},who:'',key:''},ALLC={};   // UP: a picture chosen to upload and waiting for Use it, and a Go back to a generated picture waiting for its confirm; ALLC: a Make all waiting for its confirm
 const W_UP1='That file is not a picture.',W_UP2='That picture is too small. It needs to be at least 600 pixels tall.',W_UP3='That file is over 8 MB.',UP_MAX=8*1024*1024;
@@ -879,11 +879,15 @@ async function storeUpdate(fn,msg){
   }
   throw new Error('GitHub kept changing the file');
 }
-async function qPoke(){   // start the worker; a poke that fails is not an error for Tom (the row is saved and the slow line covers it)
-  QS.poke=Date.now();
-  try{await fetch(GH()+'/repos/'+REPO+'/dispatches',{method:'POST',headers:{Authorization:'Bearer '+(lsGet(TOKEN)||'test'),Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify({event_type:'guide-work'})});}catch(e){}
+async function qPoke(ev){   // start the worker (or, with 'guide-apply', the apply job); a poke that fails is not an error for Tom (the row is saved and the slow line covers it)
+  if(ev)QS.pokeApply=Date.now();else QS.poke=Date.now();
+  try{await fetch(GH()+'/repos/'+REPO+'/dispatches',{method:'POST',headers:{Authorization:'Bearer '+(lsGet(TOKEN)||'test'),Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify({event_type:ev||'guide-work'})});}catch(e){}
 }
-function qRepoke(){if(qItems().some(i=>i.state==='queued'&&Date.now()-tms(i.since)>90000)&&Date.now()-QS.poke>120000)qPoke();}
+const qPokeApply=()=>qPoke('guide-apply');
+function qRepoke(){
+  if(qItems().some(i=>i.state==='queued'&&Date.now()-tms(i.since)>90000)&&Date.now()-QS.poke>120000)qPoke();
+  if(qItems().some(i=>i.use&&i.use.state==='wanted'&&Date.now()-tms(i.use.since||i.use.at)>90000)&&Date.now()-(QS.pokeApply||0)>120000)qPokeApply();   // a wanted use that nothing took: ask for the apply job again
+}
 const qRow=o=>Object.assign({lane:'',anim:'',who:'',take:0,route:'',prompt:'',promptRev:0,start:'',note:'',cap:0,at:nowIso(),state:'queued',since:nowIso(),run:0,fal:null,tries:0,cost:0,why:'',do:'',result:null,use:null,left:false,dry:false,replay:''},o);
 async function qAdd(rows,msg){   // add rows (one save for all of them); an id that exists is refused, so a double tap makes one row
   return storeUpdate(doc=>{rows.forEach(r=>{if(doc.items[r.id])throw new QRefused(r.id+' is already in the queue');doc.items[r.id]=qRow(r);});},msg);
@@ -891,10 +895,6 @@ async function qAdd(rows,msg){   // add rows (one save for all of them); an id t
 async function qCancel(it,key){
   try{await storeUpdate(doc=>{const r=doc.items[it.id];if(!r||r.state!=='queued')throw new QRefused('started');r.state='cancelled';r.since=nowIso();r.why=r.do='';},'guide: cancel '+it.id);}
   catch(e){if(e instanceof QRefused){qErr(key,'It already started, so it cannot be cancelled.');qRead();}else qErr(key,W_X1);}
-}
-async function qUseWanted(id){   // card 7 turns this on: Use this one marks the row, the apply job does the rest
-  return storeUpdate(doc=>{const r=doc.items[id];if(!r||r.kind!=='video'||r.state!=='done')throw new QRefused('only a done video can be used');
-    if(r.use&&r.use.state!=='failed')throw new QRefused('already asked for');r.use={state:'wanted',at:nowIso(),since:nowIso(),build:'',why:''};},'guide: use '+id);
 }
 async function qMakeVideo(a,retry,key0){
   const g=G(a);if(!g)return;const key=key0||'anim:'+a.id;
@@ -1025,7 +1025,7 @@ function qAct(t){
 // ---- the take that belongs to the animation's newest row plays in its sheet as soon as the row is done ----
 const qTake=it=>{const r=it.result||{};return {n:r.n||it.take,js:r.js||'',img:r.img||'',frames:r.frames||0,kb:r.kb||0,words:r.words||'',gate:r.gate||null,cost:it.cost||0,note:it.note||'',prompt:it.prompt||'',status:'new',row:it.id};};
 function qTakeSync(a){
-  const el=$('gtake');if(!el||GUSE[a.id]||el.dataset.key==='use')return;
+  const el=$('gtake');if(!el)return;
   const rows=qVid(a.id).filter(i=>!goneCancel(i)),lr=rows[rows.length-1],A=takesOf(a);let key='',t=null,n=0;
   if(lr&&lr.state==='done'){n=(lr.result||{}).n||lr.take;key=(lr.left?'left:':'row:')+lr.id;t=qTake(lr);}
   else if(lr&&(lr.state==='queued'||lr.state==='making'||lr.state==='checking'))key='';
@@ -1291,31 +1291,21 @@ function askUse(){
   if(!(lsGet(TOKEN)||Q.get('gh'))){$('guseconf').innerHTML='<p class="err">This browser has no GitHub token. Open the Board, tap the three dots, paste the token there, then come back.</p>';return;}
   $('guseconf').innerHTML='<div class="conf"><p><b>This changes the game.</b> '+(a.clip?'Take '+t.n+' replaces the current video of '+esc(a.name)+'; the old one is removed from the game (Git keeps it).':'Take '+t.n+' becomes the video of '+esc(a.name)+'.')+' It costs nothing and takes a few minutes.</p><div class="row2"><button type="button" class="gold" id="guseyes">Yes, use it</button><button type="button" id="gusecan">Cancel</button></div></div>';
 }
-let GUSE={};try{GUSE=JSON.parse(lsGet('aot-guide-use')||'{}')||{};}catch(e){GUSE={};}   // startpics11: a use that was sent and not yet answered, kept so a reload or another screen still shows its status
-async function doUse(){
-  const a=GCUR.a,t=GCUR.t;if(!a||!t)return;const at=new Date().toISOString(),box=$('guseconf');box.innerHTML='<p class="hint">Sending...</p>';
-  try{await ghRequest('data/guide-use.json','guide: use '+a.id,d=>{d.requests.push({anim:a.id,take:t.n,at,prompt:t.prompt||workPrompt(a)});});}
-  catch(e){box.innerHTML='<p class="err">'+esc(e.message)+'. Nothing was changed.</p>';return;}
-  GUSE[a.id]={n:t.n,at};saveLS('aot-guide-use',GUSE);
-  pollUse(a,t.n,at);
-}
-async function pollUse(a,n,at){
-  const tok=++GCUR.tok,t0=Date.now(),alive=()=>GCUR.tok===tok&&PL.a===a&&$('gtake'),box=()=>$('guseconf')||$('gtake');
-  if($('gtake'))$('gtake').dataset.key='use';   // the status line of the queue leaves this part of the sheet alone while the old use runs
-  const t00=Math.max(t0-(Date.now()-new Date(at).getTime()),t0-25*60000);
-  while(alive()&&Date.now()-t00<25*60000){
-    const g=await ghGetJson('use-report.json','guidegen',lsGet(TOKEN)).catch(()=>null);
-    if(g&&g.doc&&(g.doc.reqs||[]).includes(at)){
-      const ok=(g.doc.done||[]).find(x=>x.anim===a.id),bad=(g.doc.failed||[]).find(x=>x.anim===a.id);
-      delete GUSE[a.id];saveLS('aot-guide-use',GUSE);
-      if(alive())$('gtake').innerHTML=ok?'<div class="take" id="gused"><h3>In the game now</h3><p>'+esc(a.name)+' plays take '+n+' ('+esc(ok.rev)+'). The build is named '+esc(g.doc.tag||'')+' and goes live in a few minutes. Close and reopen the game to see it, then look at it in a fight. Your phone also gets a notification.</p></div>'
-        :'<div class="stopbox" id="gusefail"><b>It could not be put in the game.</b> '+esc(bad?bad.why:'The job did not report this animation.')+' Nothing in the game changed. Open the animation and tap Use this one again.</div>';
-      return;
-    }
-    if(alive())box().innerHTML='<div class="take"><h3>Sent to the game</h3><p class="hint" id="guseWait">Take '+n+' of '+esc(a.name)+' is being put in the game, '+Math.round((Date.now()-new Date(at).getTime())/1000)+' s so far. This takes about 3 to 6 minutes. You can leave this screen: the status comes back when you open this animation, and your phone gets a notification.</p></div>';
-    await new Promise(r=>setTimeout(r,Q.get('fast')?300:8000));
-  }
-  if(alive())box().innerHTML='<p class="err">No answer after 25 minutes. Tell Claude, or send the note below.</p>';
+async function doUse(){   // guideflow7: Use this one marks the take's row (use: wanted) in the one status file and starts the apply job; the row's own line shows the rest
+  const a=GCUR.a,t=GCUR.t;if(!a||!t)return;const box=$('guseconf');box.innerHTML='<p class="hint">Sending...</p>';
+  try{
+    if(!(lsGet(TOKEN)||Q.get('gh')))throw new Error(W_X2);
+    const g=G(a)||{},id=t.row||'v-'+(g.slug||slugOf(a.id))+'-t'+t.n;
+    await storeUpdate(doc=>{
+      let r=doc.items[id];
+      if(!r)r=doc.items[id]=qRow({id,kind:'video',lane:'vid',route:g.route||'wan',anim:a.id,who:a.owner,take:t.n,prompt:t.prompt||workPrompt(a),start:a.owner,cost:t.cost||0,state:'done',   // an older take that has no row yet: a finished row is made for it in the same save
+        result:{n:t.n,js:t.js||'',img:t.img||'',frames:t.frames||0,kb:t.kb||0,words:t.words||'',gate:t.gate||null}});
+      if(r.kind!=='video'||r.state!=='done')throw new QRefused('only a done video can be used');
+      if(r.use&&r.use.state!=='failed')throw new QRefused('already asked for');
+      r.use={state:'wanted',at:nowIso(),since:nowIso(),build:'',why:''};
+    },'guide: use '+id);
+  }catch(e){box.innerHTML='<p class="err">'+esc(e instanceof QRefused?'That take is already on its way to the game.':e.message===W_X2?W_X2:'Could not send. Nothing was changed. Tap again.')+'</p>';return;}
+  box.innerHTML='';qPokeApply();qPaint();
 }
 function tryAgain(){
   const a=GCUR.a,t=GCUR.t;if(!a||!t)return;const n=$('gnote');if(n){n.scrollIntoView({block:'center'});n.focus();}
@@ -1332,7 +1322,6 @@ async function keepOld(){   // Keep the old one: the row says left (the page sho
 async function initMake(a){
   GCUR.tok++;MP.on=false;if(!$('gtake'))return;
   const tok=GCUR.tok;await loadTakes();if(GCUR.tok!==tok||PL.a!==a||!$('gtake'))return;showStats(a);
-  if(GUSE[a.id]){pollUse(a,GUSE[a.id].n,GUSE[a.id].at);return;}
   qPaint();
 }
 const STAGE_TIER={basic:'Basic: a gag in the body',s1:'Skill 1: one stage element',s2:'Skill 2: a bigger, lasting stage',cap:'Capstone: full-screen set piece'};   // movestage1, claude/move-staging-plan.md section 3

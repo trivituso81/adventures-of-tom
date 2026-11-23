@@ -94,16 +94,11 @@ prep('act:skeeter:darting_bite', 1, g_ok)
 prep('move:suite_door_slide', 1, g_hold); prep('move:suite_door_slide', 2, g_hold)   # already stopped: two held takes with the same fault
 STATE = {'anims': {'move:suite_door_slide': copy.deepcopy(SNAP[('move:suite_door_slide', 2)])}, 'spent': 1.0}
 STATUS = {'anims': {}}
-RQ = {p: {'sha': 'q0', 'doc': {'requests': []}, 'puts': []} for p in ('data/wan-requests.json', 'data/clip-requests.json', 'data/guide-use.json')}
-ACT = {'pending': [], 'miss': 0, 'use': None, 'usemiss': 0, 'fail': set()}
+RQ = {p: {'sha': 'q0', 'doc': {'requests': []}, 'puts': []} for p in ('data/wan-requests.json', 'data/clip-requests.json')}
+ACT = {'pending': [], 'miss': 0}
 def action_takes(doc):
     for r in doc['requests']:
         a, n = (r['anim'], r['take']) if 'anim' in r else (r['guide']['anim'], r['guide']['take']); ACT['pending'].append((a, n)); ACT['miss'] = 2
-def action_use(doc):
-    ok, bad = [], []
-    for r in doc['requests']:
-        (bad if r['anim'] in ACT['fail'] else ok).append({'anim': r['anim'], 'name': 'x', 'rev': 'rev 2', 'notes': []} if r['anim'] not in ACT['fail'] else {'anim': r['anim'], 'why': 'the baker failed: no pictures'})
-    ACT['use'] = {'at': 'now', 'reqs': [r['at'] for r in doc['requests']], 'tag': 'guideuse-1', 'done': ok, 'failed': bad}; ACT['usemiss'] = 1
 import datetime as _dt
 def iso(sec_ago=0): return (_dt.datetime.utcnow() - _dt.timedelta(seconds=sec_ago)).strftime('%Y-%m-%dT%H:%M:%SZ')
 # guideflow5: the stand-in for queue.json on the branch guideq (ETag and 304, compare and swap with 409, the repository dispatch). A test plays the worker by changing a row (wset).
@@ -148,7 +143,7 @@ def github(route):
         body = json.loads(rq.post_data)
         if body.get('sha') != f['sha']: return route.fulfill(status=409, body='{}')
         doc = json.loads(base64.b64decode(body['content']).decode()); f['puts'].append({'msg': body['message'], 'doc': doc}); f['sha'] = 'q%d' % len(f['puts'])
-        (action_use if path.endswith('guide-use.json') else action_takes)(doc)
+        action_takes(doc)
         return route.fulfill(status=200, content_type='application/json', body=json.dumps({'content': {'sha': 'n'}}))
     if path == 'status.json':
         if not STATUS['anims']: return route.fulfill(status=404, body='{}')
@@ -164,9 +159,6 @@ def github(route):
         fp = os.path.join(BR, path)
         if not os.path.exists(fp): return route.fulfill(status=404, body='{}')
         return route.fulfill(status=200, content_type='application/json', body=json.dumps({'sha': 'f', 'content': base64.b64encode(open(fp, 'rb').read()).decode()}))
-    if path == 'use-report.json':
-        if ACT['usemiss'] > 0 or not ACT['use']: ACT['usemiss'] = max(0, ACT['usemiss'] - 1); return route.fulfill(status=404, body='{}')
-        return route.fulfill(status=200, content_type='application/json', body=jfile(ACT['use']))
     if url.endswith('/contents/data/guide-reconcile.json'):
         if rq.method == 'GET':
             return route.fulfill(status=200, content_type='application/json', body=json.dumps({'sha': reqs['sha'], 'content': base64.b64encode(json.dumps(reqs['doc']).encode()).decode()}))
@@ -725,20 +717,45 @@ with sync_playwright() as p:
     check('an older take with no row shows its take card with the three buttons', [pg.locator(x).count() for x in ('#guse', '#gtry', '#gold')] == [1, 1, 1] and 'take 2' in pg.locator('#gtakecard h3').inner_text().lower())
     check('a take the gate held says so in the warning colour', 'hold' in (pg.locator('#ggate').get_attribute('class') or '') and 'flags' in pg.locator('#ggate').inner_text(), pg.locator('#ggate').inner_text())
     pg.click('#guse'); pg.wait_for_selector('#guseyes')
-    check('Use this one asks first and says it changes the game', 'changes the game' in pg.locator('#guseconf').inner_text() and not RQ['data/guide-use.json']['puts'])
-    pg.click('#guseyes'); pg.wait_for_selector('#gused', timeout=30000)
-    up = RQ['data/guide-use.json']['puts']; ur = up[0]['doc']['requests'][-1] if up else {}
-    check('Use commits the take number and the prompt it was made from', len(up) == 1 and up[0]['msg'] == 'guide: use ' + LJ and ur.get('take') == 2 and ur.get('prompt') == 'the prompt of take 2' and ur.get('at'), up)
-    check('the page says it is in the game and what to do next, without the word reload', 'in the game now' in pg.locator('#gused').inner_text().lower() and 'close and reopen the game' in pg.locator('#gused').inner_text().lower() and 'reload' not in pg.locator('#gused').inner_text().lower(), pg.locator('#gused').inner_text())
+    DISP['posts'].clear(); n0 = len(QS['puts'])
+    check('Use this one asks first and says it changes the game, and saves nothing yet', 'changes the game' in pg.locator('#guseconf').inner_text() and len(QS['puts']) == n0 and not DISP['posts'])
+    pg.click('#guseyes'); pg.wait_for_function("(()=>{const e=document.querySelector('#gq .qline[data-rid]');return e&&/Putting it in the game/.test(e.innerText)})()", timeout=30000)
+    RW = QS['doc']['items'].get('v-move-lounge-pass-flex-t2') or {}
+    check('G14 an older take with no row: ONE save makes a finished row for it with use wanted, the take number and the prompt it was made from', len(QS['puts']) == n0 + 1 and RW.get('state') == 'done' and RW.get('take') == 2 and RW.get('prompt') == 'the prompt of take 2' and (RW.get('use') or {}).get('state') == 'wanted' and (RW.get('use') or {}).get('at') and (RW.get('result') or {}).get('n') == 2 and QS['puts'][-1]['msg'] == 'guide: use v-move-lounge-pass-flex-t2 [skip ci]', (QS['puts'][-1:], RW))
+    check('G14 the page poked the apply job once (event guide-apply) and no request file on main was written', DISP['posts'] == [{'event_type': 'guide-apply'}] and not RQ['data/wan-requests.json']['puts'], DISP['posts'])
     pg.click('#bclose')
-    ACT['fail'].add(LJ); ACT['use'] = None
-    pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail .anim'); pg.click('#detail [data-anim="%s"]' % LJ); pg.wait_for_selector('#guse', timeout=30000)
-    pg.click('#guse'); pg.click('#guseyes'); pg.wait_for_selector('#gusefail', timeout=30000)
-    check('a use that failed says why and says nothing changed', 'baker failed' in pg.locator('#gusefail').inner_text() and 'nothing in the game changed' in pg.locator('#gusefail').inner_text().lower(), pg.locator('#gusefail').inner_text())
-    pg.click('#bclose')
+    q_reset()   # the row that Use made for the older take goes: the next case is an older take with no row
     pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail .anim'); pg.click('#detail [data-anim="%s"]' % LJ); pg.wait_for_selector('#gold', timeout=30000); pg.click('#gold')
     check('Keep the old one on an older take leaves it on file and stops the players', 'is on file' in pg.locator('#gleft').inner_text() and pg.locator('#cvn').count() == 0)
     pg.click('#bclose'); del STATE['anims'][LJ]
+    # ---- G13 to G15 (guideflow7, plan 5.1 and test T9's page side): the three Use lines come from the row, word for word; In the game never shows while the row says applying ----
+    q_reset(); DISP['posts'].clear(); QS['puts'].clear()
+    seed('u1', LJ, state='done', result=take1(LJ, 1), at=iso(300), since=iso(200), cost=.5)
+    pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail .anim'); pg.click('#detail [data-anim="%s"]' % LJ); pg.wait_for_selector('#gtakecard', timeout=30000)
+    def uline(): return pg.evaluate(LINES, '#gq').get('u1')
+    def wait_line(prefix): pg.wait_for_function("(p)=>{const e=document.querySelector('#gq .qline[data-rid=u1] .qtext');return e&&e.firstChild.textContent.indexOf(p)===0}", arg=prefix, timeout=30000)
+    check('G13 a ready video offers Use this one on its line', uline()[0] == 'Ready. Watch it here.' and 'Use this one' in uline()[2], uline())
+    pg.click('#gq [data-qa=use]'); pg.wait_for_selector('#guseyes'); pg.click('#guseyes'); wait_line('Putting it in the game.')
+    U1 = QS['doc']['items']['u1']
+    check('G13 Use this one is ONE save on the take\'s row (use wanted with the time of the tap), commit "guide: use u1"', len(QS['puts']) == 1 and U1['use']['state'] == 'wanted' and U1['use']['at'] and QS['puts'][0]['msg'] == 'guide: use u1 [skip ci]', (QS['puts'], U1.get('use')))
+    check('G13 the page poked the apply job (event guide-apply), not the worker, and wrote no request file', DISP['posts'] == [{'event_type': 'guide-apply'}] and not RQ['data/wan-requests.json']['puts'] and not RQ['data/clip-requests.json']['puts'], DISP['posts'])
+    check('G13 wanted: "Putting it in the game. About 4 minutes. " with a clock and no button', uline()[0] == 'Putting it in the game. About 4 minutes. ' and uline()[2] == [] and clock_ok(uline()[1], 0, 20), uline())
+    wset('u1', use=dict(U1['use'], state='applying', run=77)); pg.wait_for_timeout(700)
+    check('G15 applying: the same line, and "In the game" is nowhere on the screen (list, sheet or bar)', uline()[0] == 'Putting it in the game. About 4 minutes. ' and not pg.evaluate("/In the game/.test(document.body.innerText)"), pg.evaluate("document.body.innerText")[:200])
+    check('G15 applying: the Activity bar counts it as working and the row has no Use this one', pg.locator('#actbar').inner_text().startswith('1 making') and 'Use this one' not in uline()[2], (pg.locator('#actbar').inner_text(), uline()))
+    wset('u1', use=dict(U1['use'], state='live', build='guideuse-9')); wait_line('In the game')
+    check('G13 live: "In the game (build guideuse-9). Close and reopen the game to see it."', uline()[0] == 'In the game (build guideuse-9). Close and reopen the game to see it.', uline())
+    wset('u1', use=dict(U1['use'], state='applying', run=78)); wait_line('Putting it in the game.'); pg.wait_for_timeout(300)
+    check('G15 a row that goes back to applying stops saying In the game at once', not pg.evaluate("/In the game/.test(document.body.innerText)"), pg.evaluate("document.body.innerText")[:200])
+    wset('u1', use=dict(U1['use'], state='failed', why='It did not reach the game.')); wait_line('Not in the game')
+    check('G13 failed: "Not in the game: <why> Tap Use this one again." with the one button Use this one', uline()[0] == 'Not in the game: It did not reach the game. Tap Use this one again.' and uline()[2] == ['Use this one'], uline())
+    n1 = len(QS['puts']); DISP['posts'].clear(); pg.click('#gq [data-qa=use]'); pg.wait_for_selector('#guseyes'); pg.click('#guseyes'); wait_line('Putting it in the game.')
+    check('G13 Use this one again after a failure saves wanted again and pokes the apply job', len(QS['puts']) == n1 + 1 and QS['doc']['items']['u1']['use']['state'] == 'wanted' and DISP['posts'] == [{'event_type': 'guide-apply'}], (QS['puts'][-1:], DISP['posts']))
+    pg.wait_for_timeout(400); nowords('the sheet of a row being put in the game')
+    pg.click('#bclose')
+    # a wanted use that nothing took is asked for again after 90 seconds, not every second
+    wset('u1', use=dict(QS['doc']['items']['u1']['use'], since=iso(120), at=iso(120))); DISP['posts'].clear(); pg.evaluate("QS.pokeApply=0"); pg.wait_for_timeout(2300)
+    check('G14 a wanted use older than 90 seconds pokes the apply job again, once within 2 minutes', DISP['posts'] == [{'event_type': 'guide-apply'}], DISP['posts'])
     pg.goto(URL + '#anims/' + SD); pg.wait_for_selector('#gstop', timeout=20000)
     check('an animation whose last two takes were held for one fault is stopped when opened', 'same fault' in pg.locator('#gstop').inner_text() and pg.locator('#gtk').inner_text() == 'Takes made: 2', pg.locator('#gstop').inner_text())
     n_q = len(QS['puts']); pg.click('#gq [data-qa=make]'); pg.wait_for_selector('#gq .qerr'); check('a stopped animation: Make sends nothing', len(QS['puts']) == n_q and pg.locator('#gq .qerr').inner_text().startswith('Stop here.'))

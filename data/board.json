@@ -20467,7 +20467,7 @@
    "theme": "Battle Animations",
    "tag": "guideflow7",
    "title": "Use this one: one batched job that tells the truth",
-   "next": "Waits for card c-guideflow-6, then starts by itself. Replaces the Use this one job with one that takes every chosen take at once, makes one build, and says In the game only after it checked the files are there. Nothing to play until the last card.",
+   "next": "Built and pushed as guideflow7: Use this one is one batched job (guide-apply) that says In the game only after it checked the files on main. Next card c-guideflow-8 starts by itself. Nothing for Tom.",
    "blocks": [
     "c-guideflow-8"
    ],
@@ -20491,6 +20491,10 @@
     {
      "d": "2026-11-23",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Built by the session: apply.py, guide-apply.yml, the page lines, test apply_test.py (A1 to A9) and G13 to G15. guide-use is gone."
     }
    ],
    "prompt": {

@@ -10,7 +10,7 @@ name: wan-gen
 # guidegen1: GENERATE THIS VIDEO in the Battle Guide commits data/wan-requests.json with the message "wan: generate <animation id>"; that push runs this job with
 # --requests (the same job; $0.50 a video, at most $1 a request, no daily limit). The requests are taken off main before anything is paid,
 # each video is judged by the clip gate and cut as a preview (tools/guidegen/make_take.py, secret XAI_API_KEY for the look check) and kept as a TAKE on the
-# branch `guidegen` for Tom to compare in the Battle Guide. Nothing reaches the game until he presses Use this one (the guide-use Action).
+# branch `guidegen` for Tom to compare in the Battle Guide. Nothing reaches the game until he presses Use this one (the guide-apply Action).
 #
 # wanbulk (claude/video-battle-plan.md 4.12): Generate all N videos on a Tom board card commits data/board.json with the message "board: wan generate <card id>"; that push
 # (or a manual run with `card`) runs wangen.py --bulk: every job of the card is made (3 at once, never past the cap), measured and look-checked (secret XAI_API_KEY),

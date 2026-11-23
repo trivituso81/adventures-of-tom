@@ -77,14 +77,16 @@ check('Q4 the start picture notifies', "_note(who, 'Making the start picture now
 check('Q4 a finished guide run starts the next', 'run_started_at' in src('.github/workflows/wan-gen.yml') and 'nothing new and nothing deferred' in src('.github/workflows/wan-gen.yml'))
 check('Q4 the page has the setup card and test', 'gnotest' in src('battle-guide.html') and 'data/notify.json' in src('battle-guide.html'))
 
-# Q5 startpics11: guide-use push step restarts from the newest main, notifies, and the page keeps a pending use
+# Q5 startpics11, moved by guideflow7 from guide-use.yml into tools/guidegen/apply.py: the push restarts from the newest main, a failed push is X17 and pokes once, the page has no pending use of its own
 import re, yaml
-wf = open(os.path.join(ROOT, '.github', 'workflows', 'guide-use.yml')).read(); yaml.safe_load(wf)
-check('Q5a push step re-applies onto newest main', 'git reset -q --hard origin/main' in wf and 'git apply --3way' in wf and 'git rebase' not in wf.split('name: Commit and push')[1].split('name: Keep the report')[0].replace('rebase loop', ''))
-check('Q5b conflict markers are checked before the commit', wf.index("git grep -q '^<<<<<<<'") < wf.index('git commit -q -m "guide-use:'))
-check('Q5c a failed push turns the report into a failure and a notification is sent', "steps.push.outcome == 'failure'" in wf and 'notify.send' in wf)
+wf = open(os.path.join(ROOT, '.github', 'workflows', 'guide-apply.yml')).read(); yaml.safe_load(wf)
+ap = open(os.path.join(ROOT, 'tools', 'guidegen', 'apply.py')).read(); loop = ap[ap.index('def push_loop'):ap.index('def on_main')]
+check('Q5a push loop re-applies onto the newest main', "'reset', '-q', '--hard'" in loop and "'apply', '--3way'" in loop and "'rebase'" not in loop)
+check('Q5b conflict markers are checked before the commit that is pushed', loop.index("'^<<<<<<<'") < loop.rindex("'commit'") < loop.index("'push', a.remote"))
+check('Q5c a push that failed six times is X17 for the rows, and the job starts itself once more unless it was a retry', "code='X17'" in ap and 'poke(True)' in ap and 'not a.retry' in ap and 'python3 -I tools/guidegen/apply.py' in wf)
+check('Q5c2 the old guide-use files are gone', not os.path.exists(os.path.join(ROOT, '.github', 'workflows', 'guide-use.yml')) and not os.path.exists(os.path.join(ROOT, 'data', 'guide-use.json')))
 pg = open(os.path.join(ROOT, 'battle-guide.html')).read()
-check('Q5d the page keeps a pending use and resumes it', "aot-guide-use" in pg and 'pollUse(a,GUSE[a.id].n,GUSE[a.id].at)' in pg)
+check('Q5d the page keeps no pending use of its own and asks guide-apply', 'aot-guide-use' not in pg and 'pollUse' not in pg and 'GUSE' not in pg and "'guide-apply'" in pg)
 
 print('\nqueue test: ' + ('all passed' if not FAILS else 'FAILED ' + ', '.join(FAILS)))
 sys.exit(1 if FAILS else 0)

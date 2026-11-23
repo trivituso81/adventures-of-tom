@@ -1,3 +1,17 @@
+## guideflow7 (2026-11-23): Use this one in the Battle Guide is now one batched job that only says In the game after it checked the files are on main
+
+Card c-guideflow-7 (plan `claude/guide-flow-plan.md` section 10 step 7: D4, D9, D10, X17 to X19, T9). The old `guide-use` Action and `data/guide-use.json` are deleted. Tapping Use this one now sets `use: wanted` on the take's row in `queue.json` (branch `guideq`) and pokes the new `guide-apply` Action (repository dispatch, plus a 10 minute timer that exits cheaply when nothing is wanted).
+
+| What | Where |
+|---|---|
+| One job for every wanted row: they become `applying` in one save, `use_take.py` cuts all of them, new start pictures are copied to `art/clips/start/<who>-hero.png`, ONE build `guideuse-<run>` is stamped, one push (the startpics11 loop, six tries, every try from the newest main) | `tools/guidegen/apply.py`, `.github/workflows/guide-apply.yml` (job-level concurrency `guide-apply`, no cancel) |
+| After the push it asks the contents API on main for every clip file and picture; only then is a row `live` (and a picture `result.main` true). A missing file is X19; a take that cannot be cut is X18 and the others still ship; six refused pushes are X17 (rows go back to wanted and the job pokes itself once more, a retry run fails them instead) | `apply.py`, `store.begin_apply`, `store.mark_main` |
+| The page shows the three Use lines of plan section 5.1 from the row and never says In the game while the row says applying; Keep the old one writes `left: true` | `battle-guide.html` (`doUse`, `qLine`, `qRepoke`) |
+| A manual run of `guide-apply` is a dry run by default (everything but the push and the store writes) | `guide-apply.yml` input `dry_run` |
+| Removed: `guide-use.yml`, `data/guide-use.json`, the page's old request, `pollUse`, the `aot-guide-*` keys | |
+
+Tested: `python3 -I tools/guidegen/apply_test.py` (A1 to A9: three wanted rows are one commit and one build; main moving during the push still lands with both CHANGES entries; a missing file gives X19; nothing live before the check; six refused pushes give X17; X18; dry run; start pictures; two taps; a dead run's applying row), `take_test.py`, `guidegen_test.py`, `store_test.py`, `worker_test.py`, `tools/art-library/queue_test.py`, `tools/battle_guide_test.py` (new G13 to G15 pass; the other failures in it are the same ones the untouched main has), `buildlog_test.py`, `workflow_check.py`, `board_check.py`. The test found a real bug in my first version (the CHANGES entry was written over the file); fixed. Not looked at: the page on a phone. The dry run on GitHub is recorded below once it has run.
+
 ## b3s22ch20 (2026-11-23): Chapter 20 (the Forever Engine) fights on the new battle: The Collector with the Blue and Orange Lenses, three phases, and picking your four again
 
 Card c-b3s22ch20. Chapter 20 is on the BY CHAPTER list for Battle 3, the last one: no story chapter is left on Battle 2. No number changed: the Collector is 5,140 HP (3,860 for three) as the bestiary prints. Evidence: simulator (`--support=4`, Rank 2, level 50, 8 fights, the bench picked by the simple player) 8.58 rounds on average, every fight won; the bestiary says about 8.5 with its two lenses.

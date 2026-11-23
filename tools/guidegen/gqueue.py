@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""guidegen1: the request files the Battle Guide commits to main (data/guide-reconcile.json, data/wan-requests.json, data/guide-use.json) and how an Action
+"""guidegen1: the request files the Battle Guide commits to main (data/guide-reconcile.json; guideflow7: the use requests moved to queue.json) and how an Action
 takes its requests off them BEFORE it pays (same pattern as clipgen.py take_requests, keysecrets2).
   load(path, root)                       {'requests': [...]} (empty when the file is missing or unreadable)
   take(path, ats, root, remote, msg)     remove the requests with these `at` stamps from the file on main, retried against a main that moved"""

@@ -1,0 +1,109 @@
+name: guide-apply
+
+# guideflow7 (plan claude/guide-flow-plan.md 3.2 D4, D9, D10; replaces guide-use). USE THIS ONE in the Battle Guide marks the take's row in queue.json on branch guideq
+# (use: wanted) and pokes this workflow (repository dispatch, event type guide-apply). One run takes EVERY row that is wanted at once, cuts and wires them with
+# tools/guidegen/use_take.py, copies new start pictures, makes ONE build and pushes it to main with the loop that started in startpics11 (every try starts from the newest
+# main). Only after the files are confirmed on main does tools/guidegen/apply.py set a row to "in the game". Nothing here calls a paid service.
+# A ten minute timer starts the job anyway (the first step looks at queue.json for a few seconds and ends it when nothing is wanted), so a lost poke or a dead run loses nothing.
+# Manual runs (workflow_dispatch) are dry by default: everything except the push and the writes to the store.
+# The concurrency sits on the JOB (wanstuck1): a push that has nothing to do with the Guide can never cancel a waiting run, and a waiting run loses nothing because the
+# wanted rows are in the file, not in the run.
+on:
+  repository_dispatch:
+    types: [guide-apply]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Do everything except the push and the writes to the store'
+        type: boolean
+        default: true
+  schedule:
+    - cron: '*/10 * * * *'
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    concurrency:
+      group: "guide-apply"
+      cancel-in-progress: false
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DRY: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && 'true' || 'false' }}
+      RETRY: ${{ github.event.client_payload.retry == true && 'true' || 'false' }}
+    steps:
+      - name: Is there anything to put in the game?
+        id: probe
+        run: |
+          code=$(curl -s -m 8 -o q.json -w '%{http_code}' -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github.raw+json" "https://api.github.com/repos/$GITHUB_REPOSITORY/contents/queue.json?ref=guideq" || true)
+          if [ "$code" = "404" ]; then echo "go=false" >> "$GITHUB_OUTPUT"; echo "no queue yet: nothing to do"; exit 0; fi
+          if [ "$code" != "200" ]; then echo "go=true" >> "$GITHUB_OUTPUT"; echo "could not read the queue (HTTP $code): starting the job to look"; exit 0; fi
+          n=$(python3 -c "
+          import json
+          d = json.load(open('q.json')); it = d.get('items', {}).values()
+          w = sum(1 for i in it if (i.get('use') or {}).get('state') in ('wanted', 'applying'))
+          p = sum(1 for i in it if i.get('kind') in ('picture', 'upload') and i.get('state') == 'done' and not i.get('dry') and not (i.get('result') or {}).get('main'))
+          print(w + p)" || echo 1)
+          echo "rows to put in the game (wanted takes and start pictures not on main yet): $n"
+          if [ "$n" = "0" ]; then echo "go=false" >> "$GITHUB_OUTPUT"; else echo "go=true" >> "$GITHUB_OUTPUT"; fi
+      - uses: actions/checkout@v4
+        if: steps.probe.outputs.go == 'true'
+        with:
+          fetch-depth: 50
+      - uses: actions/setup-python@v5
+        if: steps.probe.outputs.go == 'true'
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        if: steps.probe.outputs.go == 'true'
+        with:
+          node-version: '22'
+      - name: Tools
+        if: steps.probe.outputs.go == 'true'
+        run: |
+          pip install pillow numpy scipy opencv-python-headless
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg || true; fi
+          if ! command -v ffmpeg >/dev/null; then pip install imageio-ffmpeg && sudo ln -sf "$(python3 -c 'import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())')" /usr/local/bin/ffmpeg; fi
+          command -v ffmpeg; command -v ffprobe || echo "no ffprobe (the recipe falls back to ffmpeg)"
+      - name: Restore the takes from the guidegen branch
+        if: steps.probe.outputs.go == 'true'
+        run: |
+          mkdir -p "$RUNNER_TEMP/guidegen"
+          if git ls-remote --exit-code --heads origin guidegen >/dev/null 2>&1; then
+            git fetch --depth 1 origin guidegen
+            git archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/guidegen"
+          fi
+      - name: Apply
+        id: apply
+        if: steps.probe.outputs.go == 'true'
+        run: |
+          set -o pipefail
+          ARGS=(--state "$RUNNER_TEMP/guidegen" --tmp "$RUNNER_TEMP/apply")
+          [ "$DRY" = "true" ] && ARGS+=(--dry-run)
+          [ "$RETRY" = "true" ] && ARGS+=(--retry)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rc=0
+          python3 -I tools/guidegen/apply.py "${ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/apply.log" || rc=$?
+          { echo '### guide-apply'; echo '```'; tail -40 "$RUNNER_TEMP/apply.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          exit $rc
+      - name: Publish
+        if: ${{ steps.apply.outputs.pushed == 'true' }}
+        run: gh api repos/${{ github.repository }}/actions/workflows/publish.yml/dispatches -f ref=main
+      - name: Rebuild the Video History and push it to main (videohist2)
+        if: ${{ steps.apply.outputs.pushed == 'true' && always() }}
+        continue-on-error: true
+        run: |
+          # the Video History is built from the files on branch wangen; this is after the push and after Publish, so it never holds a Use back
+          mkdir -p "$RUNNER_TEMP/wangen"
+          if git ls-remote --exit-code --heads origin wangen >/dev/null 2>&1; then
+            git fetch --depth 1 origin wangen
+            git archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/wangen"
+          fi
+          pip install pillow numpy >/dev/null 2>&1 || true
+          python3 -I tools/videohist/publish.py --branch-dir "$RUNNER_TEMP/wangen" --run-id "${{ github.run_id }}" \
+            --remote "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
