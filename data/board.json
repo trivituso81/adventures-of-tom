@@ -32714,7 +32714,7 @@
   {
    "id": "c-guideflow-2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "guideflow2",
    "title": "Build the one status file for Guide requests",
@@ -32726,7 +32726,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-22",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukCePhzz1CQWD85xeEp",
     "opening": "not started"
    },
    "history": [
@@ -32743,6 +32743,10 @@
      "d": "2026-11-22",
      "t": "Tom (19:31): \"Can you check that it started\". It had not: a card that waited on a Claude card (not a Tom card) is opened but not auto-started. Start requested by hand.",
      "at": "2026-11-23T03:34:00.000Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -32755,7 +32759,7 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guideflow-2 in data/board.json, then the whole of claude/guide-flow-plan.md. That plan is the design: build what it says and do not redesign it. If a step cannot be done as written, do the closest thing that keeps the plan's rules (sections 3.2 and 4.3), say so in docs/CHANGES.md, and go on. This card is plan section 10 step 2 (sections 3.2 D1 to D5 and D14, 4.1, 4.3, 5.6, tests T1 to T3). Write tools/guidegen/store.py, standard library only, used later by the worker and the apply job. It reads and writes queue.json on branch guideq through the GitHub contents API (GET and PUT /repos/REPO/contents/queue.json?ref=guideq with the file sha; a 409 or 422 on PUT means read again and retry, up to 8 times with a short wait; when `content` comes back empty fall back to the git blobs API as CLAUDE.md bigboard1 says). The API base comes from the env var GUIDE_API (default https://api.github.com), the token from GH_TOKEN, the repo from GITHUB_REPOSITORY, so a test can point it at a stand-in. Every commit message it writes ends with [skip ci]. If the branch does not exist it is created as an orphan with {\"v\":1,\"items\":{}}. Functions: load() returns (doc, sha); update(fn) is the compare and swap loop (fn changes the doc in place and may raise store.Refused); add(item) refuses an id that exists; claim(lane, run, limit) moves up to `limit` oldest queued items of that lane to making with `run`, `since` and tries+1 in ONE update and returns them, pictures before uploads only by age; set_state(id, state, **fields) enforces the table of allowed changes in plan section 4.3 and raises Refused on any other; set_use(id, state, **fields) the same for the use field; reap(alive) where alive(run_id) returns True, False or None (unknown: leave alone) applies decision D5: a making or checking item whose run is not alive goes back to queued when it has a `fal` request id and tries is 1, else to failed with the `why` and `do` of plan section 6 row X8; archive(days=7) moves finished items older than that to queue-archive.json. Notifications: set_state and set_use call tools/notify.py send() exactly once for the changes in plan section 5.6, with those titles and texts and a click link battle-guide.html#anims/WHO/ANIMATION_ID on the site https://trivituso81.github.io/adventures-of-tom/, and never for queued, making, checking or cancelled. Use notify.label for names. The `why` and `do` texts of plan section 6 live in one table WORDS in store.py keyed X5 to X22 so the worker and the page tests use the same words; also write them to data/guide-words.json for the page (card 5 reads it). Write tools/guidegen/store_test.py with a small stand-in GitHub contents server in the test (http.server on a free port; it must return 409 when the sha is stale): cover T1, T2 and T3 of plan section 7, including two threads claiming at once (no item claimed twice, none lost, 50 rounds), every allowed and every refused change, a duplicate add, the archive, and exactly one notification per change (monkeypatch notify.send to record). Add the test to tools/night/tests.json. Add a section \"The queue (guideflow2)\" to docs/BATTLE_GUIDE.md that names the file, the branch and who may write what. Do not change battle-guide.html, any workflow or wangen.py in this card. Tests to run and pass before pushing: python3 -I tools/guidegen/store_test.py, python3 -I tools/guidegen/guidegen_test.py, python3 tools/workflow_check.py, python3 tools/board_check.py. You must NOT: make any paid run or call fal, xAI or ElevenLabs for real (every test uses stand-ins; the first paid run is Tom's tap); run wangen.py against the real services; create or change a doc in the claude.ai Project (notes go in the repo folder claude/, then run python3 tools/claude_index.py); make or propose a painted battle pose; touch the bulk video flow (wangen.py --bulk, wanbulk.py, wanqa.py, wanbake.py, the wan-gen-bulk line); hand Tom a yes or no check; write an em dash in anything Tom reads. Before every commit check that no file has git conflict markers (a line that starts with seven less-than signs; CLAUDE.md has the command). Push steps: write the heading \"## guideflow2 (the date of that day as YYYY-MM-DD): one plain line Tom can read\" at the top of docs/CHANGES.md with what was built, what was tested and what was not looked at, run python3 tools/workflow_check.py if it exists, run python3 tools/art-library/bump_tags.py guideflow2 --base origin/main, run python3 tools/board_check.py --push guideflow2, fetch and rebase on origin/main, then push to main. At the end write the result into this card's `next` and history, and check the next card (c-guideflow-3) still has its full prompt. Your first push is the commit board: start c-guideflow-2. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "auto": true,
-   "start": true
+   "started_at": "2026-11-23T03:32:42+00:00"
   },
   {
    "id": "c-guideflow-3",
@@ -33474,6 +33478,16 @@
    "tags": [],
    "cards": [
     "c-b3s23"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDVzicfuTvNDmrh5zu",
+   "title": "Build the one status file for Guide requests",
+   "first": "2026-11-22T19:31:52-08:00",
+   "last": "2026-11-22T19:31:52-08:00",
+   "tags": [],
+   "cards": [
+    "c-guideflow-2"
    ]
   },
   {
@@ -39301,8 +39315,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "add0ca3586899233226176c095cdc05fa7d937f8",
- "synced_at": "2026-11-23T03:12:56+00:00",
+ "synced": "91ca3b363b4251709be16a739bca70ed40474adb",
+ "synced_at": "2026-11-23T03:32:43+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
