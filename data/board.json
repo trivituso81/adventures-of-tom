@@ -18527,7 +18527,7 @@
    "title": "Battle stage 22: chapter 20 on Battle 3",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Build ONLY chapter 20 on Battle 3: Blue Lens and Orange Lens (Special), The Collector (Boss). Starts after chapter 19 is switched on.",
    "blocks": [
     "c-b3s23"
@@ -18546,7 +18546,7 @@
    },
    "chat": {
     "url": "",
-    "opening": "created by the b3s22 session"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -18556,6 +18556,11 @@
     {
      "d": "2026-11-23",
      "t": "Note from the chapter 19 build (b3s22ch19): chapter 19 is on Battle 3 (levelFloor 47, length 20). tools/b3_story_test.py now treats chapter 20 as the first unswitched chapter (pool 2565, floor 47, Grace set to 49); once chapter 20 is on there is no unswitched story chapter left (chapter 21 is the bonus chapter and is already switched), so those 'first chapter not switched' cases need a different test (for example a chapter that is off because the list has no entry for it) or retire them and say so on the card. tools/battle_guide_test.py's fake-gain case now uses the chapter 20 Collector (`leviathan`, chapters.push(20)); chapter 20's Blue Lens and Orange Lens (`lens`) and the Collector are the last planned monsters, so build the check for 'a planned monster shows its numbers' on whatever planned row remains (it now clicks the Collector row) or retire that case. The older chapter checks (tools/b3-check-s15.js, s17.js, s18.js, s18bonus.js, s22ch18.js) count chapters: update them the way this build did (levelFloor length 21 with chapter 20). Add your own check file after b3-check-s22ch19.js in tools/b3-sim.js. New rules fields from chapter 19 you may reuse: `redact` (per-round flavor stamp), the `bounceDebuff` status flag, `perch`, `when:{row}`, `row:'swap'`. battle_guide_test.py fails the same checks on main before and after, and smoke's board_sync_test fails board4 'board_check accepts a Tom card waiting on its fix'."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-23T22:09:16.093Z"
     }
    ]
   },
