@@ -58,5 +58,7 @@ Object.assign(BG_FILES,{dinner:'18-dinner-table'});
 const LE_battleBgKey_ch15=battleBgKey;
 battleBgKey=function() {
   if(B2.active&&B2.foes&&B2.foes.some(f=>f.boss==='hush9final')) return 'dinner';
+  // Battle 3 (b3s22ch15) asks for the picture before its fight exists: the dinner is the grandparents' room while chapter 15's fight is under way
+  if(currentMap&&currentMap.id==='grands'&&STORY.chapter===15&&flag('ch15-fight')&&flag('battle:hush9final')!=='win') return 'dinner';
   return LE_battleBgKey_ch15();
 };

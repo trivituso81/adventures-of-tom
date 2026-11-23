@@ -645,6 +645,7 @@ function b3CheckData() {
       effects(wa,A.effects); }
     if(D.onKo) effects(w+' onKo',D.onKo);
     if(D.helperLink&&!(B3_FOES[D.helperLink.id]&&D.helperLink.reduce>0&&D.helperLink.reduce<=B3_RULES.caps.reduction)) bad.push(w+': helperLink needs a foe id that exists and a reduce share up to the cap');
+    if(D.helpers&&!D.helpers.every(h=>B3_FOES[h])) bad.push(w+': helpers names a foe id that does not exist');
     if(D.custom&&D.custom.boppySpeed&&!(D.custom.boppySpeed.above>0)) bad.push(w+': boppySpeed needs an `above` share'); }
   for(const id in B3_FORMATIONS) for(const f of B3_FORMATIONS[id].foes) if(!B3_FOES[f.id]) bad.push('formation '+id+': unknown foe '+f.id);
   return bad;

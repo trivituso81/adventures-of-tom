@@ -85,7 +85,8 @@ function b3LayoutFoes() {
 }
 // The spots of a linked helper (the Drill Worm's Wired Relay Hushling): right of the boss, in front of it (a lower y draws later), left of the family.
 const B3_GAP_SPOTS=[[322,300],[312,236]];
-function b3HelperOf(F,f) { return F.foes.some(o=>o!==f&&o.D&&o.D.helperLink&&o.D.helperLink.id===f.id&&b3Alive(o)); }
+// Stage 22 chapter 15: `helpers:[id]` on a boss row says the same thing for layout only (HUSH-9's speaker pods stand in the gap, no damage reduction comes with it).
+function b3HelperOf(F,f) { return F.foes.some(o=>o!==f&&o.D&&((o.D.helperLink&&o.D.helperLink.id===f.id)||(o.D.helpers&&o.D.helpers.includes(f.id)))&&b3Alive(o)); }
 // An add walks in mid-fight: it takes the free spot of its row that is furthest from everyone standing. Nobody else moves.
 // Front adds stand between the caller and the family (they are its blockers); Back adds stand behind it.
 const B3_ADD_SPOTS={front:[[246,230],[240,304],[262,267]],back:[[92,214],[70,268],[58,236]]};

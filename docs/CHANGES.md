@@ -1,3 +1,17 @@
+## b3s22ch15 (2026-11-22): Chapter 15 (the family dinner) fights on the new battle: HUSH-9 Final Form and its two speaker pods
+
+Card c-b3s22ch15. Chapter 15 is on the BY CHAPTER list for Battle 3. One number changed: the boss's HP, printed 2490 (1870 with the Hush Chip at half), is 3300 (2478). Evidence: simulator (`--support=4`, Rank 2, level 37, Tom, Grace, Rose and Amy) gave 4.2 rounds with the printed HP against an aim of 5 held to 5 to 7; with 3300 it gives 5.5 to 5.6 (shortest 4.5 to 4.9, longest 6.1 to 6.6). Attack, Defense and Speed are the printed ones.
+
+| What | Where |
+|---|---|
+| HUSH-9 Final Form (boss, 7 pips, Front, no running; Squelch Knob, Cabinet Thump, Mute Button, Dead Air, Total Silence below half) and the Hushling Pod (helper, Back, 366 HP; Static Drift, Tinny Shush, Dead Channel Hum) | `data/b3-foes-ch15.js` |
+| Helper feedback only, no helper link: knocking out a pod takes 1 Composure pip off the radio and Dazzles it for 2 turns (the 3-pip cap counts it); below half it calls two pods back once (Dead Air Calls) | `data/b3-foes-ch15.js` |
+| New layout-only foe field `helpers` so pods stand in the gap in front of a 2.5 times large boss; `b3CheckData` checks it | `engine/b3-play.js`, `engine/b3-core.js` |
+| Switch, level floor 37, tips `ch15` (pods, peeve, Mute Button, Dead Air, Total Silence), Lab fight NEW 87 | `data/b3-story.js`, `data/b3-lab.js`, `data/battle-lab-index.json` |
+| Battle 3 wording for the opening toast, Amy's retry line and the Tombo skin toast behind `B3_CH_ON(15)`; recorded lines untouched | `data/scenes-ch15.js` |
+| The dining room picture behind the fight on Battle 3 (only Battle 2 asked for it before) | `data/ch15-battle.js` |
+| Chapter 15 test (the table, HUSH-9, the one fight, the kind ending, the Hush Chip; portrait and landscape), night manifest entry, new rule check file | `tools/ch15_b3_test.py`, `tools/night/tests.json`, `tools/b3-check-s22ch15.js` |
+| Checks that counted switched chapters now include 15; chapter 16 is the first unswitched one | `tools/b3-check-s15.js` to `s22ch14.js`, `tools/b3_story_test.py`, `tools/battle_guide_test.py`, `data/guide-anims.json` |
 ## guideflow2 (2026-11-23): The Battle Guide has one status file for its requests (nothing changes on screen yet)
 
 Card c-guideflow-2 (plan claude/guide-flow-plan.md section 10 step 2). Built `tools/guidegen/store.py`: `queue.json` on the branch `guideq` with add, claim (several workers can never take the same row), the table of allowed changes of plan 4.3 (any other change is refused), the same for the use field, the reaper for dead jobs, the 7 day archive, and one phone message per change of plan 5.6 (none for queued, making, checking or cancelled). The why and do words of plan section 6 are the `WORDS` table, copied to `data/guide-words.json` for the page. Tested without any network or money by `tools/guidegen/store_test.py` against a stand-in GitHub that answers 409 for a stale save: 50 rounds of two workers claiming at once, every allowed and every refused change, duplicate add, reaper, notifications, archive, a file over 1 MiB. Added to the night test list. Not looked at: the page, the workflows and `wangen.py` (not touched in this card); the real branch `guideq` does not exist yet and is created by the first real write.

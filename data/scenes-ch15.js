@@ -127,7 +127,7 @@ SCENES.ch15Open=()=>[
   {talk:'Grace',lines:['A bench call. We have a bench. I have been waiting my whole life to say bench call.']},
   {talk:'Rose',lines:['Can I raspberry the train?']},
   {talk:'Tom',lines:['You may raspberry the train.']},
-  {toast:'Tip: ▼ Bag, BENCH CALL swaps Amy for Deedee, Boppy, TNB or Nara. Or ▼ Bag, PULL UP A CHAIR (free, three times) and it just might sit down.',time:8},
+  {if:()=>!B3_CH_ON(15),then:[{toast:'Tip: ▼ Bag, BENCH CALL swaps Amy for Deedee, Boppy, TNB or Nara. Or ▼ Bag, PULL UP A CHAIR (free, three times) and it just might sit down.',time:8}],else:[{toast:'Tip: knock out the two speaker pods in Back and HUSH-9 loses a Composure pip for each one. Racket and Clobber break it fastest. Deedee, Boppy, TNB and Nara stay at the table.',time:8}]},
   {flag:'ch15-open'},
   {save:true},
   ...SCENES.ch15Fight()   // the fight starts right away
@@ -137,7 +137,7 @@ SCENES.ch15Fight=()=>[
   {flag:'ch15-fight',value:'pending'},
   ...(flag('ch15-fight')==='pending'||flag('ch15-fight')===true?[
     {talk:'HUSH-9',lines:['Shh. Again. Round two.']},
-    {talk:'Amy',lines:['Slower. Chair or chatter. Tag in a friend if you need one.']}]:[]),
+    ...(B3_CH_ON(15)?[{talk:'Amy',lines:['Slower this time. Take out the speaker pods first, break it with Racket or Clobber, and shield everyone before Dead Air.']}]:[{talk:'Amy',lines:['Slower. Chair or chatter. Tag in a friend if you need one.']}])]:[]),
   {flag:'ch15-fight'},
   {battle:()=>{ const n=ch15Hush(); if(n) Object.assign(n,{monster:'hush9final',tier:0}); return n; },tut:'ch15'},
   {call:()=>{ const n=ch15Hush(); if(n) n.monster=null; }},
@@ -185,7 +185,7 @@ SCENES.ch15After=()=>[
   {hearts:'tom'},{hearts:'amy'},
   {talk:'Boppy',lines:['Don’t make it weird.']},
   {call:()=>{ setFlag('tombo:ff3'); sfx.levelChime&&sfx.levelChime(); }},
-  {toast:'New Family Finish: Fifty-One Years & Counting (Deedee, Boppy and Tom).',time:8},
+  {if:()=>!B3_CH_ON(15),then:[{toast:'New Family Finish: Fifty-One Years & Counting (Deedee, Boppy and Tom).',time:8}],else:[{toast:'New Tombo skin: Fifty-One Years & Counting (Deedee and Boppy). It shows when they fire a Full Family Ruckus.',time:8}]},
   {trace:'ch15-wrap'},{hearts:'tom'},{hearts:'tnb'},
   {call:()=>{ ch15RemoveTable(); for(const id of ['deedee','boppy']) { const m=MEMBERS()[id]; if(m&&typeof onBench==='function'&&onBench(m)) benchRemove(m); } }},
   {flag:'ch15-after'},

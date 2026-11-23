@@ -181,6 +181,9 @@ const B3_LAB=[
     party:['tom','grace','rose','amy'],level:35,formation:'mirrorball_r',bg:'pond'},
   {id:'new86',name:'NEW 86: THE LAST CALL, BACK',sub:'Chapter 14 returning boss. The Last Call with its Part 1 acts on the gate stat line: 4 Composure pips, about 4 rounds.',
     party:['tom','grace','rose','amy'],level:35,formation:'lastcall_r',bg:'pond'},
+  // Stage 22, chapter 15 (the family dinner): HUSH-9 Final Form, the radio (bestiary entry 72). Tom, Grace, Rose and Amy.
+  {id:'new87',name:'NEW 87: HUSH-9 FINAL FORM',sub:'Chapter 15 boss, the Windowsill Radio. 7 Composure pips. Two Hushling pods in Back: each one you knock out costs it a pip and leaves it Dazzled. Mute Button locks a Skill list. At half HP Dead Air calls the pods back, then Total Silence.',
+    party:['tom','grace','rose','amy'],level:37,formation:'hush9final',bg:'dinner'},
   // movestage2: the Move Lab for Tom's eight staged moves (engine/b3-movelab.js). Last in the list so the numbers of the fights above stay; the NEW BATTLE list shows it first.
   {id:'moves-tom',name:'MOVE LAB: TOM',sub:'Play Tom\u2019s eight staged moves in a real fight, in ladder order, then Keep, Tweak or Replace each one. The Capstones play against The Big One.',
     party:['tom','grace','rose','deedee'],level:7,formation:'mudling',bg:'pond',movelab:true},

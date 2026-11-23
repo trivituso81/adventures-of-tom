@@ -15,7 +15,7 @@ module.exports=function(T) {
 
   // 1. The switch, the floor, the armor's numbers
   ok(S.chapters.includes(14)&&S.chapters.indexOf(14)<S.chapters.indexOf(21),'chapter 14 is on Battle 3 (found '+J(S.chapters)+')');
-  ok(S.levelFloor[14]===35&&S.levelFloor.length===15,'chapter 14 floors the Character Level at the bestiary baseline, 35 (found '+S.levelFloor[14]+')');
+  ok(S.levelFloor[14]===35&&S.levelFloor.length>=15,'chapter 14 floors the Character Level at the bestiary baseline, 35 (found '+S.levelFloor[14]+')');
   const W=FOES.warden;
   ok(W&&W.ch===14&&W.hp===3160&&W.hp3===2370&&W.atk===148&&W.def===67&&W.spd===103&&W.pips===8&&W.role==='boss'&&W.row==='front'&&W.noRun,'Boppy’s Gold Armor has the bestiary stat line: HP 3160 (2370 for three), Atk 148, Def 67, Spd 103, 8 pips, Front, no running');
   ok(J(W.peeves)==='["sizzle","racket"]'&&J(W.resists)==='["clobber"]'&&W.custom.boppySpeed.above===.5,'it can’t stand Sizzle or Racket, shrugs off Clobber, and nothing pushes it back above half HP (Boppy Speed)');

@@ -765,3 +765,19 @@ Card c-b3s22ch14. Chapter 14 only (Long Island under the dome: Boppy's Gold Armo
 | Tests | `node tools/b3-sim.js check` (`tools/b3-check-s22ch14.js`); `python3 tools/ch14_b3_test.py` in portrait and landscape; `python3 tools/b3_story_test.py` (the first unswitched chapter is now 15, pool 1890, floor 35); `python3 tools/battle_guide_test.py` (the fake gain is the chapter 15 Windowsill Radio). |
 | Battle Guide | The armor leaves the planned list by itself; `data/guide-anims.json` and `data/battle-lab-index.json` rebuilt. |
 | Waits | Chapters 15 to 20, then stage 23. |
+
+## What stage 22 chapter 15 holds (build `b3s22ch15`, 2026-11-22)
+
+Card c-b3s22ch15. Chapter 15 only (the family dinner: HUSH-9 Final Form, the Windowsill Radio, with two speaker pods). Numbers are bestiary v11's printed numbers except one: the boss's HP. Printed 2490 (1870 with the Hush Chip at half) put the simulator (`--support=4`, Rank 2, Tom, Grace, Rose and Amy at level 37) at 4.2 rounds, under the aim of 5 (held to 5 to 7); 3300 (2478) gives 5.5 to 5.6 rounds (shortest 4.5 to 4.9, longest 6.1 to 6.6). Attack 163, Defense 71, Speed 118 and the pips are as printed. The numbers are provisional (chapters 15 to 20) and change only in the simulator.
+
+| Item | Built |
+|---|---|
+| HUSH-9 Final Form | `data/b3-foes-ch15.js`: `hush9final`, boss, Front, 3300 HP (`hp3` 2478), 7 pips, no running, Racket and Clobber Pet Peeves, resists Razzle. Squelch Knob, Cabinet Thump, Mute Button (waits 2 rounds, locks Pocket Vibe Skills for 2 turns), Dead Air (charges, hits all), Dead Air Calls (once, below half, summons two pods) and Total Silence (below half, charges, hits all). The name on screen is the scene's name, HUSH-9 Final Form; the bestiary calls the entry the Windowsill Radio. |
+| Speaker pods | `hushpod`, helper, Back, 366 HP, drawn with the Hushling art. Their three acts are the Hushling's. Feedback only (the bestiary prints no helper link): a pod that is knocked out takes 1 Composure pip off the radio and Dazzles it for 2 turns, inside the 3-pip cap of the action that did it. |
+| Layout | New foe field `helpers` (a list of foe ids) is read by `b3HelperOf` in `engine/b3-play.js`, so the pods use the gap spots in front of a 2.5 times large boss. It is layout only; `b3CheckData` rejects an unknown id. |
+| Look | A Battle 3 fight in chapter 15 is drawn on the dining room picture (`data/ch15-battle.js`; before, only Battle 2 asked for it). The pods wear the Hushling painting. |
+| Lab | NEW 87 (the radio and two pods), level 37, Tom, Grace, Rose and Amy. |
+| The switch | `B3_STORY.chapters` has 15, `levelFloor` has 37, tips `ch15` (pods, Pet Peeve, Mute Button, Dead Air, Total Silence). `data/scenes-ch15.js`: the opening toast, Amy's retry line and the Tombo skin toast have a `B3_CH_ON(15)` wording. Recorded lines untouched. The Battle 2 tip about BENCH CALL is not in the Battle 3 wording (there is no bench on Battle 3). |
+| Tests | `node tools/b3-sim.js check` (`tools/b3-check-s22ch15.js`); `python3 tools/ch15_b3_test.py` portrait and landscape; `python3 tools/b3_story_test.py` (the first unswitched chapter is now 16, pool 2025, floor 37); `python3 tools/battle_guide_test.py` (the fake gain is the chapter 16 Grey Note); `python3 tools/smoke.py`; `python3 -I tools/clip-audit/unused_voice.py`. |
+| Battle Guide | The radio and the pod leave the planned list by themselves; `data/guide-anims.json` and `data/battle-lab-index.json` rebuilt. |
+| Waits | Chapters 16 to 20, then stage 23. |

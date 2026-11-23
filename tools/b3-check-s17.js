@@ -39,6 +39,8 @@ module.exports=function(T) {
   if(S.chapters.includes(13)) { for(const m of read('data/scenes-ch13.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]); keys.add('goldknight'); }
   // Chapter 14 (stage 22 chapter 14) has its scenes in data/scenes-ch14.js (its one fight, Boppy's Gold Armor, is `tut:'ch14'`).
   if(S.chapters.includes(14)) for(const m of read('data/scenes-ch14.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]);
+  // Chapter 15 (stage 22 chapter 15) has its scenes in data/scenes-ch15.js (its one fight, HUSH-9 Final Form, is `tut:'ch15'`).
+  if(S.chapters.includes(15)) for(const m of read('data/scenes-ch15.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]);
   for(const k of Object.keys(S.tips)) ok(keys.has(k),'tips key '+k+' is used by a switched chapter\'s scene step');
 
   // 2. Map monsters of the switched chapters all have a formation (the one door routes them)
