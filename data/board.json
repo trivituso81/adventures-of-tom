@@ -33443,8 +33443,17 @@
     {
      "d": "2026-11-22",
      "t": "Created by the b3s22ch15 session: Milestone for chapter 15 on the new battle."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom sent this to the backlog.",
+     "at": "2026-11-23T05:40:09.205Z"
     }
-   ]
+   ],
+   "backlog": {
+    "at": "2026-11-22",
+    "from": "up"
+   }
   },
   {
    "id": "t-b3s22ch16",
