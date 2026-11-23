@@ -1225,6 +1225,10 @@ Tom approved the battle screen redesign as shown (card t-battleux-decide). No ch
 
 - The cards run in order because battleux2 writes words into tables battleux1 builds, and battleux3 hooks into both. `claude/battleux-plan.md` status is now APPROVED.
 
+## takes-2026-11-23 (2026-11-23): 1 of Tom's new voice takes is in the game (Grace's Tata, don't walk yet)
+
+Merged from branch `takes` with `merge-local.js` (the kept take of session 20261122T201002-4hq; the other take of that session, Boppy's "Hold the net STILL", was not kept). The take replaced the clip the line already had (dialog-ch1.js), the words match the screen line, so no new line and no unused voice; the kept script went into `ch01-story-directions.json`. `unused_voice.py` not run here (no Python playwright); the voice index rebuilds by the voice-index Action.
+
 ## takes-2026-11-22 (2026-11-22): 1 of Tom's new voice takes is in the game (Grace's I've been nine for SIX hours)
 
 Merged from branch `takes` with `merge-local.js` (kept take of session 20261122T021219-429). It replaced the clip the line already had (dialog-ch22.js), so no new line and no unused voice; the kept script went into `zzzz-kept-takes.json`. NOT merged, left on the branch for Tom: TNB's "Huh. That'd tip the scales." (session 20261122T015924-pqq): the kept take says "A massive fish, huh? Sounds like he tipped the scales.", which differs from the screen line, and rewording a scene line is Tom's call. `unused_voice.py` could not run here (no Python playwright); the voice index rebuilds by the voice-index Action.

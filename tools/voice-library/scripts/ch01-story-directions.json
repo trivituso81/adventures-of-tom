@@ -6,8 +6,8 @@
    "speaker": "Grace",
    "text": "Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One again.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[bossy] Tata, don't walk yet. [proud] I wrote down [emphasized] EVERYTHING that happened since you left. [reading aloud] Number one. Boppy saw the Big One again!",
-   "takeId": "tmwo5ax6ttscw"
+   "script": "[bossy] Tata, don't walk yet. [proud] I wrote down [emphasized] EVERYTHING that happened since you left. [reading aloud] Number one. Boppy saw the Big One [emphasized]AGAIN!",
+   "takeId": "tmws9r6au6weo"
   },
   {
    "voice": "rose",

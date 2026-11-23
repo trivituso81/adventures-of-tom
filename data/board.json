@@ -31450,12 +31450,12 @@
   },
   {
    "id": "c-takes-38383a",
-   "tag": "takes-2026-11-22",
+   "tag": "takes-2026-11-23",
    "lane": "claude",
    "col": "prog",
    "theme": "Voice Clips",
-   "count": 2,
-   "title": "Merge 2 new voice takes",
+   "count": 1,
+   "title": "Merge 1 new voice take",
    "next": "New voice takes were saved on branch takes. Merge them into the game.",
    "prompt": {
     "what": "Merges the voice takes you recorded on your phone.",
@@ -31486,12 +31486,17 @@
     {
      "d": "2026-11-22",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Merged the kept take of session 20261122T201002-4hq (Grace, Tata don't walk yet) as takes-2026-11-23; the card said 2 takes, the branch held 1 kept one."
     }
    ],
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
-   "started_at": "2026-11-23T07:42:47+00:00"
+   "started_at": "2026-11-23T07:42:47+00:00",
+   "after": "nothing for Tom: end"
   },
   {
    "id": "c-standingfix",
