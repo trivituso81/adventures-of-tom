@@ -33081,7 +33081,7 @@
    "theme": "Battle Animations",
    "tag": "wanstop-tom-controller-r2",
    "title": "Fix the stopped video tom-controller",
-   "next": "The bulk run stopped tom-controller (failed twice: p1) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "next": "Accepted attempt 2 and baked it; no new try. Nothing for Tom (he judges it in the Move Lab).",
    "blocks": [],
    "after": "nothing for Tom: end",
    "auto": true,
@@ -33093,6 +33093,7 @@
     "opening": "added by the wan-gen job"
    },
    "history": [
+   {"d": "2026-11-23", "t": "Looked at both videos. Attempt 2 does the toss and catch by eye (empty hand flings left, same hand raised and closed beside the shoulder); only the strict vision check missed. Accepted per wanpurpose1: baked and wired (build wanstop-tom-controller-r2), no new try."},
     {
      "d": "2026-11-23",
      "t": "Added by the wan-gen job (45089583637): tom-controller stopped at rev 2. attempt 1 (pad 0.65) edge, p1; attempt 2 (pad 0.65) p1. This animation has used 0 of its 4 tries ($0.00 of $3.20). Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Main throw and catch actions missing; only minor pose "
