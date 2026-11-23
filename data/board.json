@@ -31972,7 +31972,7 @@
   {
    "id": "c-wanstop-stage-tom-jetwash-vid-r1",
    "lane": "claude",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanstop-stage-tom-jetwash-vid-r1",
    "title": "Fix the stopped video stage-tom-jetwash-vid",
@@ -31984,7 +31984,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-22",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDiQM8dKt49W5BSMDf",
     "opening": "added by the wan-gen job"
    },
    "history": [
@@ -32008,6 +32008,14 @@
     {
      "d": "2026-11-23",
      "t": "Changed one thing: pad 0.8 (start picture fills the frame width), rev 2; started the next try."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-stage-tom-jetwash-vid-r1: the jet wash video is tried again with its start picture shrunk to 80 percent"
     }
    ],
    "prompt": {
@@ -32019,7 +32027,7 @@
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-stage-tom-jetwash-vid-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job stage-tom-jetwash-vid (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: bg, edge. Evidence: bg: the edge of the picture is at least 93.0 percent the flat black in every picture (needs 97); edge: the object touches an edge of the picture in 48 of 90 pictures (limit 5 percent). This animation has used 2 of its 4 tries ($0.30 of $3.20). Its files are on branch wangen: stage-tom-jetwash-vid-r1-result.json (every check with numbers and the look-check answers) and the videos stage-tom-jetwash-vid-r1.mp4, stage-tom-jetwash-vid-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-movestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.15, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-stage-tom-jetwash-vid-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-movestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-stage-tom-jetwash-vid-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "start": true
+   "done": "2026-11-22"
   },
   {
    "id": "c-wanstop-stage-tom-starbeam-vid-r1",
@@ -32441,7 +32449,7 @@
   {
    "id": "c-guideflow-1",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "guideflow1",
    "title": "Remove the Guide's $10 a day limit; check workflows",
@@ -32453,7 +32461,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-22",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFEHTbD2Nh8NSAcoGy",
     "opening": "not started"
    },
    "history": [
@@ -32466,6 +32474,10 @@
      "d": "2026-11-22",
      "t": "Tom tapped START.",
      "at": "2026-11-22T23:56:53.212Z"
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -32478,7 +32490,7 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guideflow-1 in data/board.json, then the whole of claude/guide-flow-plan.md. That plan is the design: build what it says and do not redesign it. If a step cannot be done as written, do the closest thing that keeps the plan's rules (sections 3.2 and 4.3), say so in docs/CHANGES.md, and go on. This card is plan section 10 step 1 (decisions D12 and D16, finding F1 and F13). Two small changes. (1) In tools/art-library/wangen.py the Battle Guide path (run_guide_requests, the argument --day-cap, default 10.0) refuses a video when the guide has spent $10 that UTC day. Tom removed daily limits (CLAUDE.md wannoday1: \"i will manage the limit myself with my balance\"). Make no daily limit the default: --day-cap default None, and None means the check is skipped; keep the per request cap ($1 a video) exactly as it is. Update the text in battle-guide.html or docs/BATTLE_GUIDE.md that mentions $10 a day, if any (git grep \"10 a day\" and \"10.00 for today\"). Add a case to tools/art-library/queue_test.py: with $50 already spent today a request is still made (stand-in run_one), and a request capped below the price is still refused. (2) Write tools/workflow_check.py: for every file in .github/workflows/ it must load with yaml.safe_load, have `on` and `jobs`, every `concurrency` must be a mapping whose `group` is a string, and in a workflow that uses a secret named FAL_KEY, XAI_API_KEY or ELEVENLABS_API_KEY any `concurrency` must be on the job, not at the top of the file (CLAUDE.md wanstuck1), except guide-use.yml which has none of those secrets. It prints one line per problem in plain words and exits 1 on any. Make tools/art-library/bump_tags.py run it and stop the push when it fails, and add it to tools/night/tests.json. Add tools/workflow_check_test.py: a temp folder with the startpics12 mistake (an unquoted colon in a group name) must fail, the real folder must pass. Add one line about it to CLAUDE.md after the wannoday1 paragraph (name it guideflow1). Tests to run and pass before pushing: python3 -I tools/art-library/queue_test.py, python3 -I tools/art-library/startpic_test.py, python3 tools/workflow_check.py, python3 tools/workflow_check_test.py, python3 tools/art-library/wangen_test.py, python3 tools/board_check.py. You must NOT: make any paid run or call fal, xAI or ElevenLabs for real (every test uses stand-ins; the first paid run is Tom's tap); run wangen.py against the real services; create or change a doc in the claude.ai Project (notes go in the repo folder claude/, then run python3 tools/claude_index.py); make or propose a painted battle pose; touch the bulk video flow (wangen.py --bulk, wanbulk.py, wanqa.py, wanbake.py, the wan-gen-bulk line); hand Tom a yes or no check; write an em dash in anything Tom reads. Before every commit check that no file has git conflict markers (a line that starts with seven less-than signs; CLAUDE.md has the command). Push steps: write the heading \"## guideflow1 (the date of that day as YYYY-MM-DD): one plain line Tom can read\" at the top of docs/CHANGES.md with what was built, what was tested and what was not looked at, run python3 tools/workflow_check.py if it exists, run python3 tools/art-library/bump_tags.py guideflow1 --base origin/main, run python3 tools/board_check.py --push guideflow1, fetch and rebase on origin/main, then push to main. At the end write the result into this card's `next` and history, and check the next card (c-guideflow-2) still has its full prompt. Your first push is the commit board: start c-guideflow-1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "auto": true,
-   "start": true
+   "started_at": "2026-11-23T00:01:44+00:00"
   },
   {
    "id": "c-guideflow-2",
@@ -32811,6 +32823,19 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDiQM8dKt49W5BSMDf",
+   "title": "Fix the stopped video stage-tom-jetwash-vid",
+   "first": "2026-11-23T00:00:00Z",
+   "last": "2026-11-23T00:00:59Z",
+   "tags": [
+    "wanstop-stage-tom-jetwash-vid-r1"
+   ],
+   "cards": [
+    "c-wanstop-stage-tom-jetwash-vid-r1",
+    "t-movestage-lab"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGhKSapgz3YahmvbdS",
    "title": "Battle stage 22: chapter 12 on Battle 3",
@@ -38752,8 +38777,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "f7afda8c037faca86d8987edacaa50f92fbc7f41",
- "synced_at": "2026-11-22T23:39:08+00:00",
+ "synced": "178c91abc1e120917a4beaae50666e648081acdb",
+ "synced_at": "2026-11-23T00:01:45+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
