@@ -273,7 +273,7 @@ def run_guide_requests(a, jobs, state, lock, save, fal, key):
     """guidegen1: what UPDATE/GENERATE in the Battle Guide asked for (data/wan-requests.json: {anim, slug, take, at, prompt, promptRev, start, pad?, cap?}).
     The requests are taken off main first (before any spend), each one is one Wan video made with the proven settings of the `tom-idle` job (720p, 5 s,
     seed 81, first and last frame = the start picture), capped by its own `cap` (at most $1) and by the day cap shared by every guide request
-    (state['guide_days'], default $10 a day). Writes guide-results.json in OUT for tools/guidegen/make_take.py."""
+    (state['guide_days'], none by default: guideflow1, Tom manages the limit with his balance; --day-cap sets one). Writes guide-results.json in OUT for tools/guidegen/make_take.py."""
     import copy, types
     sys.path.insert(0, os.path.join(a.repo, 'tools', 'guidegen')); import gqueue, progress
     qf = 'data/startpic-requests.json' if getattr(a, 'startpics', False) else 'data/wan-requests.json'   # startpics9: pictures have their own queue file and their own workflow
@@ -310,7 +310,7 @@ def run_guide_requests(a, jobs, state, lock, save, fal, key):
         est = estimate(job); dry = a.dry_run or bool(r.get('dry'))      # a request with dry:true asks for the plan only (a session never pays)
         with lock:
             day = state.setdefault('guide_days', {}); used = day.get(today, 0.0)
-            if not dry and used + est > a.day_cap + 1e-9:
+            if not dry and a.day_cap is not None and used + est > a.day_cap + 1e-9:
                 rows.append({'anim': r['anim'], 'take': r['take'], 'at': r.get('at'), 'prompt': r['prompt'], 'promptRev': r.get('promptRev', 0), 'route': 'wan', 'cost': 0, 'error': 'The guide has spent its $%.2f for today already. Try again tomorrow, or ask Claude.' % a.day_cap}); return
             ns = types.SimpleNamespace(**vars(a)); ns.cap = state['spent'] + min(float(r.get('cap') or 1.0), 1.0) + max(1, getattr(a, 'pool', 4)) * 1.0; ns.dry_run = dry   # startpics10: up to a.pool videos book at once, so the cap leaves room for the others
             ns.tell = (lambda s, _r=r: progress.mark(_r['anim'], _r['take'], 'checking' if s == 'DOWNLOADED' else progress.fal_stage(s))) if not dry else None
@@ -395,7 +395,7 @@ def main():
     ap.add_argument('--startpics', action='store_true', help='startpics9: work through data/startpic-requests.json only (start pictures; no videos)')
     ap.add_argument('--template', default='tom-idle', help='--requests: the job whose settings every request copies')
     ap.add_argument('--no-take', action='store_true', help='--requests: leave the request list as it is (tests)')
-    ap.add_argument('--day-cap', type=float, default=10.0, help='--requests: most dollars of guide videos a day')
+    ap.add_argument('--day-cap', type=float, default=None, help='--requests: most dollars of guide videos a day (default none)')
     ap.add_argument('--cap', type=float, default=2.0); ap.add_argument('--dry-run', action='store_true')
     ap.add_argument('--parallel', type=int, default=3, help='jobs sent at once (1 to 3)')
     ap.add_argument('--out', default=os.path.join(os.getcwd(), 'wangen-out')); ap.add_argument('--repo', default=ROOT)

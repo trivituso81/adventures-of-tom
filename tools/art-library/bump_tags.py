@@ -75,6 +75,9 @@ def main():
     base = 'HEAD'
     if '--base' in sys.argv: base = sys.argv[sys.argv.index('--base') + 1]
     if not re.fullmatch(r'[A-Za-z0-9_.-]+', new): print('bad tag', new); return 2
+    # guideflow1: a broken workflow file stops the push before anything is stamped.
+    wc = subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'workflow_check.py')], capture_output=True, text=True, cwd=ROOT)
+    if wc.returncode != 0: print(wc.stdout.strip()); print('STOP: fix the workflow file(s) above, then run this again.'); return 1
     log = []
     if set_stamp(new): log.append(f'stamp -> build {new}')
     # The build history Tom opens from the build label (welcome screen and menu): stamp this build with the time now.
