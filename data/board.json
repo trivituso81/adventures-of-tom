@@ -31042,7 +31042,7 @@
    "title": "Battle stage 22: chapter 16 on Battle 3",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as build b3s22ch16. Tom plays the Milestone card t-b3s22ch16; the chapter 17 card (c-b3s22ch17) reads his note.",
    "blocks": [],
    "changed": "2026-11-22",
@@ -31086,9 +31086,14 @@
     {
      "d": "2026-11-22",
      "t": "Calls I made: (1) names follow the built scenes (Marlowe, Grey Note, and the Battle 2 act names Strike Through, Marginal Note, Overexposure, Total Eclipse) because the bestiary calls its names working names from a draft Tom has not seen; the bestiary names are in the foes file header. (2) The card said Guard Stance while the slips stand; the bestiary's wall is a 2-turn stance, so that is what is built, with a cadence of twice per fight (the bestiary gives none). (3) The tragedy chapter ends silent: a new foe field quietEnd turns the win sound off and titles the card with dots (the aftermath scene switches sound back on). Gaps: no Square battle picture exists, so the fight is on the pond (Battle 2 used it too; a Square picture would be an Art Library entry and a pictures card); the two normal Grey Note fights (15 VP each) are data and Lab only, because the built chapter places only the boss fight; the win screen still shows its YOU WIN banner and cheer; no art for the new names; no helper link or feedback for the Grey Notes (the bestiary prints none). Pre-existing: 8 checks in tools/battle_guide_test.py fail on main the same way before and after this build (page vs guide-anims.json counts, What is coming, engine-script check, plan counts); the chapter 16 changes added none and the monster-drop case passes."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as b3s22ch16: Chapter 16 (the town square) fights on the new battle: Marlowe and his Grey Notes"
     }
    ],
-   "after": "t-b3s22ch16"
+   "after": "t-b3s22ch16",
+   "done": "2026-11-22"
   },
   {
    "id": "c-b3s22ch17",
@@ -33636,6 +33641,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukF5ozBCBFJDB1Fwtnw",
+   "title": "Battle stage 22: chapter 16 on Battle 3",
+   "first": "2026-11-22T20:03:43-08:00",
+   "last": "2026-11-22T21:08:25-08:00",
+   "tags": [
+    "b3s22ch16"
+   ],
+   "cards": [
+    "c-b3s22ch16"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCdg3iThUrSmL1Dbc3",
    "title": "Battle stage 23: purge battle 2 and Kindness",
    "first": "2026-11-22T20:45:36Z",
@@ -33665,16 +33682,6 @@
     "c-guideflow-2",
     "c-guideflow-3",
     "c-guideflow-4"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukF5ozBCBFJDB1Fwtnw",
-   "title": "Battle stage 22: chapter 16 on Battle 3",
-   "first": "2026-11-22T20:03:43-08:00",
-   "last": "2026-11-22T20:03:43-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s22ch16"
    ]
   },
   {
@@ -39505,8 +39512,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "673b4f9a141eb66e7e1868bd2aa4fff65222ebf0",
- "synced_at": "2026-11-23T04:40:44+00:00",
+ "synced": "17fdc334ae2b68b9fb29560fc83dc3e22e76e4e0",
+ "synced_at": "2026-11-23T05:09:25+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
