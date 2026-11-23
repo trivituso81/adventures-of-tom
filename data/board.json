@@ -18478,7 +18478,7 @@
    "title": "Battle stage 22: chapter 19 on Battle 3",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Build ONLY chapter 19 on Battle 3: Dead Letter (Elite), Rubber Stamp (Elite), Brass Mail-Chute Courier (Mini-boss), The Dead-Letter Censor (Boss). Starts after chapter 18 is switched on.",
    "blocks": [],
    "changed": "2026-11-23",
@@ -18494,7 +18494,7 @@
     "text": "Read claude/battle-architecture.md section 5 row 22, claude/bestiary-v11.md chapter 19, claude/battle-traits.md if present, and docs/BATTLE3.md (the section \"What stage 22a holds\" is the pattern for a chapter: a foes file, the switch, `B3_CH_ON(19)` wording in the scenes, a Lab fight, tips, one chapter test). Also read Tom's notes on the Milestone cards of the chapters before this one (t-b3s22ch11 for chapter 11, then the next ones as they appear; the notes and answers are on the cards), and any fix card they made. This session builds ONLY chapter 19 (The lost-mail office): Dead Letter (Elite), Rubber Stamp (Elite), Brass Mail-Chute Courier (Mini-boss), The Dead-Letter Censor (Boss). Its monsters, bosses (and Julian Vance's fights where the scenes name them), formations and tips, as data in data/b3-foes-ch19.js (and data/b3-*.js where the rows belong), switched on Battle 3 for chapter 19 behind the BY CHAPTER switch (add 19 to `B3_STORY.chapters`, a `levelFloor` entry, tips), with one chapter test tools/ch19_b3_test.py written from tools/ch11_b3_test.py (add it to tools/night/tests.json). The Dead-Letter Censor stamps a flavor at each round divider from round 2 (REDACTED). The Courier is a mini-boss with Elite stats. Provisional numbers. Numbers are the bestiary's printed numbers; change one only if the simulator puts a fight outside its target, and say so in the card history. When chapter 19 is switched on, move the 'first chapter not switched' cases in tools/b3_story_test.py to chapter 20, run `node tools/guidegen/build_map.js`, and fix tools/battle_guide_test.py the way stage 22a did (a planned monster that is now built drops out; the fake-gain case uses a still-planned monster). Tests: node tools/b3-sim.js check, python3 tools/ch19_b3_test.py in portrait and landscape (LAYOUT=landscape), python3 tools/smoke.py, python3 -I tools/clip-audit/unused_voice.py (all 0). Look at the chapter's fights in portrait and landscape. Do not review or build animations. Never edit a recorded line: new Battle 3 wording goes in a `B3_CH_ON(19)` variant. Write the result into this card's history; set `after` to a Tom Milestone card for chapter 19 that this session creates (ask play, `jump` {chapter: 19}, fyi true, `next` naming the screen and what to judge). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukFbk4NpQHQr8YWTYcb",
     "opening": "created by the b3s22 session"
    },
    "history": [
@@ -18505,6 +18505,10 @@
     {
      "d": "2026-11-23",
      "t": "Note from the chapter 18 build (b3s22ch18): chapter 18 is on Battle 3 (levelFloor 45, length 19). tools/b3_story_test.py now treats chapter 19 as the first unswitched chapter (pool 2430, floor 45, Grace set to 47); move those cases to chapter 20 with your levelFloor. tools/battle_guide_test.py's fake-gain case now uses the chapter 19 Brass Mail-Chute Courier (`mailcourier`, chapters.push(19)); change it to a still-planned chapter 20 monster, and the 'What is coming' check and the 'chapters 11 to 18' counts to chapter 19. The older chapter checks (tools/b3-check-s15.js, s17.js, s18.js, s18bonus.js, s22ch17.js) count chapters: update them the way this build did. Add your own check file after b3-check-s22ch18.js in tools/b3-sim.js. The lock pattern of the Studio Rig (aim back, then, after, mark, hits marked, stopByIntercept) needs no engine change if the Courier or the Censor want a mark. A page test whose scene starts the next scene by itself must not wait for a quiet screen: see tools/ch18_b3_test.py. battle_guide_test.py fails the same 11 checks on main before and after, b3_story_test.py fails 1 (chapter 1, a Battle 3 save loaded on Old), and smoke's board_sync_test fails board4 'board_check accepts a Tom card waiting on its fix'."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -20937,6 +20941,16 @@
    ],
    "cards": [
     "c-movestage-build"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFbk4NpQHQr8YWTYcb",
+   "title": "Battle stage 22: chapter 19 on Battle 3",
+   "first": "2026-11-23T09:17:53-08:00",
+   "last": "2026-11-23T09:17:53-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3s22ch19"
    ]
   },
   {
@@ -27086,8 +27100,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "87f074dd96009d1d198a2099d3c3d3366aecf612",
- "synced_at": "2026-11-23T17:08:12+00:00",
+ "synced": "93e2e3d53d875e4001e03461f437bdad6e764d42",
+ "synced_at": "2026-11-23T17:18:41+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
