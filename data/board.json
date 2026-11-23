@@ -18408,7 +18408,7 @@
    "title": "Battle stage 22: chapter 18 on Battle 3",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Built chapter 18 on Battle 3 (b3s22ch18): The Studio Rig is data in data/b3-foes-ch18.js and the chapter is on the BY CHAPTER list. Tom's Milestone card t-b3s22ch18 is next; chapter 19 (c-b3s22ch19) reads his note.",
    "blocks": [],
    "changed": "2026-11-23",
@@ -18464,9 +18464,14 @@
     {
      "d": "2026-11-23",
      "t": "Notes for chapter 19: levelFloor now has 45 (length 19). b3_story_test.py treats chapter 19 as the first unswitched chapter (pool 2430, floor 45, Grace set to 47): move those cases to chapter 20 with your levelFloor. battle_guide_test.py's fake-gain case now uses the chapter 19 Brass Mail-Chute Courier (`mailcourier`, chapters.push(19)): change it to a still-planned chapter 20 monster and the 'What is coming' check and the 'chapters 11 to 18' counts to chapter 19. Older checks that count chapters (tools/b3-check-s15.js levelFloor length, s17.js and s18.js scenes tut keys and EXPECT, s18bonus.js, s22ch17.js) were updated by this build: do the same with the next number. Add your own check file after b3-check-s22ch18.js in tools/b3-sim.js. When a scene starts the next scene by itself (here the ride up starts the Loom Chamber scene), a page test's stop condition must not wait for a quiet screen: see tools/ch18_b3_test.py."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Shipped as b3s22ch18: Chapter 18 (the studio on the top floor) fights on the new battle: The Studio Rig"
     }
    ],
-   "after": "t-b3s22ch18"
+   "after": "t-b3s22ch18",
+   "done": "2026-11-23"
   },
   {
    "id": "c-b3s22ch19",
@@ -20938,8 +20943,10 @@
    "url": "https://claude.ai/code/session_01RXeukEtWadrigeJYk6FaD2",
    "title": "Battle stage 22: chapter 18 on Battle 3",
    "first": "2026-11-23T08:29:12-08:00",
-   "last": "2026-11-23T08:29:12-08:00",
-   "tags": [],
+   "last": "2026-11-23T09:07:19-08:00",
+   "tags": [
+    "b3s22ch18"
+   ],
    "cards": [
     "c-b3s22ch18"
    ]
@@ -27079,8 +27086,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "cedff8132f1e28c7b9794fe4c5a3bf6a90dfcc52",
- "synced_at": "2026-11-23T16:30:18+00:00",
+ "synced": "87f074dd96009d1d198a2099d3c3d3366aecf612",
+ "synced_at": "2026-11-23T17:08:12+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
