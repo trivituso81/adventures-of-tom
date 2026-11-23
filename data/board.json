@@ -20353,7 +20353,7 @@
   {
    "id": "c-guideflow-6",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "guideflow6",
    "title": "Guide: upload my own start picture; make all poses",
@@ -20397,6 +20397,10 @@
     {
      "d": "2026-11-23",
      "t": "Built by Claude Sonnet 5.5 as guideflow6 (plan section 10 step 6): Upload my own with its three instant refusals and confirm, Use it saving to guidegen/uploads and adding the upload row, Go back to a generated picture, Make all N missing poses. Page cases U1 to U9 and M1 to M7 pass; worker_test and board_check pass. Checks that already fail on main before this build (guide-anims count, What is coming, plan counts, board4 in smoke) are named in docs/CHANGES.md."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Shipped as guideflow6: In the Battle Guide you can upload your own start picture, and one button makes all of a person's missing standard poses"
     }
    ],
    "prompt": {
@@ -20408,12 +20412,13 @@
     "effort": "medium (the steps are known)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guideflow-6 in data/board.json, then the whole of claude/guide-flow-plan.md. That plan is the design: build what it says and do not redesign it. If a step cannot be done as written, do the closest thing that keeps the plan's rules (sections 3.2 and 4.3), say so in docs/CHANGES.md, and go on. This card is plan section 10 step 6 (sections 3.2 D11, D13, 5.2, 5.5, section 6 rows X13 and X14, test T8 additions). Change battle-guide.html (plus its test and docs). (1) Upload my own, on a person's Animations screen beside the start picture and on a picture row that is done or failed: a file input (accept image/png, image/jpeg, image/webp). In the page, refuse at once with the words of plan section 5.5 when the file is not an image, is under 600 pixels tall (read it with an Image element) or is over 8 MB. Show the picture with the confirm words of 5.5. On Use it: save the bytes to branch guidegen at uploads/WHO-UNIX_SECONDS.EXT with the GitHub contents API (PUT, base64, message \"guide: upload WHO [skip ci]\"), then add the row {id u-WHO-UNIX_SECONDS, kind upload, lane pic, who, upload: that path} with storeUpdate and poke the worker. The status lines for kind upload are in plan section 5.1 (checking shows \"Checking your picture. About 30 seconds.\" with the clock). Upload a different one repeats this. Go back to a generated picture adds a kind picture row with force:true after one confirm: \"Replace your own picture of NAME with a generated one ($0.15)?\". (2) Make all N missing poses ($X.XX) above the standard poses of a person who has a start picture: N counts the standard poses (Idle, Guard, Hit, Dodge, Knocked out, Victory, Running) with no video in the game and no row that is queued, making, checking or done and not left; the price is N times the video price. A total of $2 or less adds the rows at once; above $2 it asks once: \"Make N videos for $X.XX?\" with Make them and Cancel. All rows are added in ONE storeUpdate and one poke. The button is hidden when N is 0. Tests in tools/battle_guide_test.py: the three instant refusals word for word; a good PNG is saved to the stand-in under uploads/ and its row added; the stand-in turns the row to done and the page shows \"Your picture is in use, exactly as you made it.\" and the video buttons; X13 and X14 lines shown from a failed row; Make all with 7 missing adds 7 rows in one save after the confirm, with 3 missing ($1.50) adds them with no confirm, and counts a queued row as not missing. Portrait and landscape pictures in tools/shots/guideflow-upload-*.png; look at them. Update docs/BATTLE_GUIDE.md. Tests to run and pass before pushing: python3 tools/battle_guide_test.py, python3 -I tools/guidegen/worker_test.py, python3 tools/smoke.py, python3 tools/board_check.py. You must NOT: make any paid run or call fal, xAI or ElevenLabs for real (every test uses stand-ins; the first paid run is Tom's tap); run wangen.py against the real services; create or change a doc in the claude.ai Project (notes go in the repo folder claude/, then run python3 tools/claude_index.py); make or propose a painted battle pose; touch the bulk video flow (wangen.py --bulk, wanbulk.py, wanqa.py, wanbake.py, the wan-gen-bulk line); hand Tom a yes or no check; write an em dash in anything Tom reads. Before every commit check that no file has git conflict markers (a line that starts with seven less-than signs; CLAUDE.md has the command). Push steps: write the heading \"## guideflow6 (the date of that day as YYYY-MM-DD): one plain line Tom can read\" at the top of docs/CHANGES.md with what was built, what was tested and what was not looked at, run python3 tools/workflow_check.py if it exists, run python3 tools/art-library/bump_tags.py guideflow6 --base origin/main, run python3 tools/board_check.py --push guideflow6, fetch and rebase on origin/main, then push to main. At the end write the result into this card's `next` and history, and check the next card (c-guideflow-7) still has its full prompt. Your first push is the commit board: start c-guideflow-6. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "auto": true
+   "auto": true,
+   "done": "2026-11-23"
   },
   {
    "id": "c-guideflow-7",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "theme": "Battle Animations",
    "tag": "guideflow7",
    "title": "Use this one: one batched job that tells the truth",
@@ -20423,7 +20428,7 @@
    ],
    "after": "nothing for Tom: c-guideflow-8",
    "created": "2026-11-22",
-   "changed": "2026-11-22",
+   "changed": "2026-11-23",
    "chat": {
     "url": "",
     "opening": "not started"
@@ -20433,6 +20438,10 @@
      "d": "2026-11-22",
      "t": "Made by the planning session (card c-guideflow-plan, plan claude/guide-flow-plan.md section 10, step 7 of 9).",
      "at": "2026-11-22T22:56:03.000Z"
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Unblocked: Guide: upload my own start picture; make all poses is done."
     }
    ],
    "prompt": {
@@ -20444,7 +20453,6 @@
     "effort": "medium (the steps are known)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guideflow-7 in data/board.json, then the whole of claude/guide-flow-plan.md. That plan is the design: build what it says and do not redesign it. If a step cannot be done as written, do the closest thing that keeps the plan's rules (sections 3.2 and 4.3), say so in docs/CHANGES.md, and go on. This card is plan section 10 step 7 (sections 3.2 D4, D9, D10, section 6 rows X17 to X19, test T9). Write tools/guidegen/apply.py and .github/workflows/guide-apply.yml. The workflow: triggers repository_dispatch (types: [guide-apply]) and workflow_dispatch (input dry_run, default true); concurrency on the job, group \"guide-apply\", cancel-in-progress false; permissions contents: write, actions: write. Steps: checkout main (start from what guide-use.yml does today and keep what use_take.py and bump_tags.py need; try fetch-depth 50 instead of 0 and keep it only if the tests and a dry run pass), python, node, the tools guide-use.yml installs, restore branch guidegen; then python3 -I tools/guidegen/apply.py. apply.py: with the store, move every item whose use.state is wanted to applying in one update (run id on it); also collect picture items that are done with result.main false. If there is nothing, exit 0. Write the list as the request file use_take.py reads (look at how it reads data/guide-use.json and call its functions with that list instead; change use_take.py as little as possible and keep tools/guidegen/take_test.py passing), run it for all of them with ONE tag guideuse-RUN_ID, copy each new start picture to art/clips/start/WHO-hero.png and rebuild data/guide-anims.json with node tools/guidegen/build_map.js, write the CHANGES entry (use_take.py --changes), stamp once with bump_tags.py, and push with the SAME loop guide-use.yml has now (startpics11: start every try from the newest main, re-apply the payload, put the entry back on top, stamp again, check for conflict markers, six tries); move that loop out of the YAML into apply.py or a shell script it calls, word for word in behaviour. After the push, confirm with the contents API on main that every clip file and picture of the batch is there; only then set use live with the build name (and result.main true for pictures); anything missing is use failed with X19; a take use_take could not cut is use failed with X18 and the others still ship; six failed pushes is X17 for all and the job pokes itself once more (repository_dispatch guide-apply) unless this run was itself a retry. Then start publish.yml as guide-use.yml does and rebuild the Video History once (the step wan-gen.yml uses, continue on error). With dry_run true do everything except the push and the store writes. The store sends the notifications. Page (battle-guide.html): Use this one calls storeUpdate to set use {state: wanted, at} on the take's row and pokes with event_type guide-apply; show the three Use lines of plan section 5.1 from the row; Keep the old one writes left:true. Remove doUse's old request, pollUse, data/guide-use.json reading and the aot-guide-* keys they used. Delete .github/workflows/guide-use.yml and data/guide-use.json and every reference (git grep guide-use, guideuse stays as the build name prefix); update tools/art-library/queue_test.py case Q5 to the new files; update CLAUDE.md where it names guide-use and docs/BATTLE_GUIDE.md. Write tools/guidegen/apply_test.py (local git repos as main and guidegen, the stand-in GitHub for the store): the T9 cases of plan section 7. Add G13 to G15 to tools/battle_guide_test.py: the three Use lines word for word, and that In the game never shows while the row says applying. Prove it free on GitHub: run guide-apply by hand with dry_run true and put the run id and step times in docs/CHANGES.md. Tests to run and pass before pushing: python3 -I tools/guidegen/apply_test.py, python3 -I tools/guidegen/take_test.py, python3 -I tools/guidegen/guidegen_test.py, python3 -I tools/art-library/queue_test.py, python3 tools/battle_guide_test.py, python3 tools/buildlog_test.py, python3 tools/workflow_check.py, python3 tools/smoke.py, python3 tools/board_check.py. You must NOT: make any paid run or call fal, xAI or ElevenLabs for real (every test uses stand-ins; the first paid run is Tom's tap); run wangen.py against the real services; create or change a doc in the claude.ai Project (notes go in the repo folder claude/, then run python3 tools/claude_index.py); make or propose a painted battle pose; touch the bulk video flow (wangen.py --bulk, wanbulk.py, wanqa.py, wanbake.py, the wan-gen-bulk line); hand Tom a yes or no check; write an em dash in anything Tom reads. Before every commit check that no file has git conflict markers (a line that starts with seven less-than signs; CLAUDE.md has the command). Push steps: write the heading \"## guideflow7 (the date of that day as YYYY-MM-DD): one plain line Tom can read\" at the top of docs/CHANGES.md with what was built, what was tested and what was not looked at, run python3 tools/workflow_check.py if it exists, run python3 tools/art-library/bump_tags.py guideflow7 --base origin/main, run python3 tools/board_check.py --push guideflow7, fetch and rebase on origin/main, then push to main. At the end write the result into this card's `next` and history, and check the next card (c-guideflow-8) still has its full prompt. Your first push is the commit board: start c-guideflow-7. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "waiting_on": "claude",
    "auto": true
   },
   {
@@ -20592,7 +20600,7 @@
    "id": "svc-voice-gen",
    "service": "voice-gen",
    "lane": "elevenlabs",
-   "col": "prog",
+   "col": "wait",
    "theme": "Tools",
    "title": "voice-gen is running",
    "next": "voice-gen is running",
@@ -20609,6 +20617,10 @@
     {
      "d": "2026-11-23",
      "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Stuck twice: The rescue started 8:18 AM and went quiet for 2 hours. Waiting on Tom (card t-stuck-svvoice-gen)."
     }
    ],
    "blocks": [],
@@ -20623,7 +20635,8 @@
     "url": "https://claude.ai/code/cse_01RXeukHBwsjvxw8Cni8T7TE",
     "prev": ""
    },
-   "started_at": "2026-11-23T16:18:33+00:00"
+   "started_at": "2026-11-23T16:18:33+00:00",
+   "waiting_on": "tom"
   },
   {
    "id": "t-wangaveup-stage-tom-glare-vid-r2",
@@ -20948,6 +20961,39 @@
     "at": "2026-11-23",
     "from": "up"
    }
+  },
+  {
+   "id": "t-stuck-svvoice-gen-2",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Tools",
+   "ask": "unstick",
+   "unstick": {
+    "card": "svc-voice-gen",
+    "kind": "stuck"
+   },
+   "title": "Stuck twice: voice-gen is running",
+   "next": "Card svc-voice-gen (voice-gen is running) stalled again after its one automatic rescue. The rescue started 8:18 AM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it.",
+   "blocks": [
+    "svc-voice-gen"
+   ],
+   "chat": {
+    "url": "",
+    "opening": "board"
+   },
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Added by board-sync: card svc-voice-gen stalled after its rescue"
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Made fyi by the board: the work this card blocked is finished, so it no longer holds anything up."
+    }
+   ],
+   "created": "2026-11-23",
+   "changed": "2026-11-23",
+   "fyi": true
   }
  ],
  "sessions": [
@@ -20961,6 +21007,18 @@
    ],
    "cards": [
     "c-movestage-build"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDPMNXDGNqnFvZpQod",
+   "title": "Guide: upload my own start picture; make all poses",
+   "first": "2026-11-23T08:25:35-08:00",
+   "last": "2026-11-23T10:23:59-08:00",
+   "tags": [
+    "guideflow6"
+   ],
+   "cards": [
+    "c-guideflow-6"
    ]
   },
   {
@@ -20983,16 +21041,6 @@
    ],
    "cards": [
     "c-b3s22ch18"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDPMNXDGNqnFvZpQod",
-   "title": "Guide: upload my own start picture; make all poses",
-   "first": "2026-11-23T08:25:35-08:00",
-   "last": "2026-11-23T08:25:35-08:00",
-   "tags": [],
-   "cards": [
-    "c-guideflow-6"
    ]
   },
   {
@@ -27120,8 +27168,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "93e2e3d53d875e4001e03461f437bdad6e764d42",
- "synced_at": "2026-11-23T17:18:41+00:00",
+ "synced": "d03ac0cf4e075bb73755d7e129e8907aefe7db84",
+ "synced_at": "2026-11-23T18:24:53+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
