@@ -33658,6 +33658,21 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDVzicfuTvNDmrh5zu",
+   "title": "Build the one status file for Guide requests",
+   "first": "2026-11-22T19:31:52-08:00",
+   "last": "2026-11-22T21:24:39-08:00",
+   "tags": [
+    "guideflow4",
+    "guideflow4b"
+   ],
+   "cards": [
+    "c-guideflow-2",
+    "c-guideflow-3",
+    "c-guideflow-4"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukF8N248WLrrogRD17e",
    "title": "Battle stage 22: chapter 17 on Battle 3",
    "first": "2026-11-22T21:15:22-08:00",
@@ -33665,20 +33680,6 @@
    "tags": [],
    "cards": [
     "c-b3s22ch17"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDVzicfuTvNDmrh5zu",
-   "title": "Build the one status file for Guide requests",
-   "first": "2026-11-22T19:31:52-08:00",
-   "last": "2026-11-22T21:14:05-08:00",
-   "tags": [
-    "guideflow4"
-   ],
-   "cards": [
-    "c-guideflow-2",
-    "c-guideflow-3",
-    "c-guideflow-4"
    ]
   },
   {
@@ -39541,8 +39542,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "ef74f0a2365f396ae21cb8efc025a4f36389acbd",
- "synced_at": "2026-11-23T05:16:07+00:00",
+ "synced": "f2187dd4666c78ca4f45df485471bdc495ee796f",
+ "synced_at": "2026-11-23T05:25:21+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
