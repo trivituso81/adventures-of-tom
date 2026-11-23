@@ -242,7 +242,7 @@ SCENES.ch17Vault=()=>[
   {talk:'Archivist',lines:['Thirty-one. He was very happy. I made sure of it.']},
   {talk:'TNB',lines:['That’s the single saddest thing I have ever heard a lens say.']},
   {talk:'Archivist',lines:['Please hold still. This will not hurt. Nothing will, ever again.']},
-  {toast:'Tip: it calls LONG EXPOSURE every third turn. Under half HP it braces for TOTAL ARCHIVE: break the amber lens with 2 Kinetic or Sparkle hits, or a Tombo (try Tom + Amy).',time:10},
+  {if:()=>!B3_CH_ON(17),then:[{toast:'Tip: it calls LONG EXPOSURE every third turn. Under half HP it braces for TOTAL ARCHIVE: break the amber lens with 2 Kinetic or Sparkle hits, or a Tombo (try Tom + Amy).',time:10}],else:[{toast:'Tip: the lens it wears changes every round. Tap it to see what it can\u2019t stand right now, and hit it with that. Below half HP it calls a Curator.',time:10}]},
   {flag:'ch17-vault'},
   {save:true},
   ...SCENES.ch17Fight()

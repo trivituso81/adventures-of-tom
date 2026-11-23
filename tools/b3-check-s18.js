@@ -9,7 +9,7 @@ module.exports=function(T) {
   const {G,ok}=T;
   const S=G('B3_STORY'),FOES=G('B3_FOES'),FORMS=G('B3_FORMATIONS'),CAST=G('B3_CAST'),J=x=>JSON.stringify(x);
   const ROOT=path.dirname(__dirname),read=f=>fs.readFileSync(path.join(ROOT,f),'utf8');
-  const EXPECT=[6,7,8,9,10,11,12,13,14,15,16,21];   // stage 18's chapters (21 is the bonus chapter Nine Scoops); each stage 18 part adds one. 11 is stage 22a (tools/b3-check-s22.js); 12 to 16 are the stage 22 chapter builds.
+  const EXPECT=[6,7,8,9,10,11,12,13,14,15,16,17,21];   // stage 18's chapters (21 is the bonus chapter Nine Scoops); each stage 18 part adds one. 11 is stage 22a (tools/b3-check-s22.js); 12 to 17 are the stage 22 chapter builds.
   ok(J(S.chapters.slice(5))===J(EXPECT.filter(n=>S.chapters.includes(n))),'stage 18 chapters sit in order after chapter 5 (found '+J(S.chapters)+')');
   const MINE=c=>c>=6&&c<=10;   // the bonus chapter has its own section at the end
   const scenes=read('data/scenes.js');
@@ -44,6 +44,7 @@ module.exports=function(T) {
   if(S.chapters.includes(15)) for(const m of read('data/scenes-ch15.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]);
   // Chapter 16 (stage 22 chapter 16) has its scenes in data/scenes-ch16.js (its one fight, Marlowe, is `tut:'ch16'`).
   if(S.chapters.includes(16)) for(const m of read('data/scenes-ch16.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]);
+  if(S.chapters.includes(17)) for(const m of read('data/scenes-ch17.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]);
   for(const k of Object.keys(S.tips)) ok(keys.has(k),'tips key '+k+' is used by a switched chapter\'s scene step');
 
   // 2. Map monsters of the switched chapters all have a formation (the one door routes them)

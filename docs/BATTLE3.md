@@ -799,3 +799,20 @@ Card c-b3s22ch16. Chapter 16 only (the town square: Marlowe, the bestiary's Squa
 | Battle Guide | Marlowe and the Grey Note leave the planned list by themselves; `data/guide-anims.json` and `data/battle-lab-index.json` rebuilt. |
 | Waits | Chapters 17 to 20, then stage 23. |
 
+
+## What stage 22 chapter 17 holds (build `b3s22ch17`, 2026-11-23)
+
+Card c-b3s22ch17. Chapter 17 only (Julian's building in Los Angeles: the Pause Sprite, the Brass Desk Weight, the Curator and the Twin Lenses, bestiary entries 75 to 78). Numbers are bestiary v11's printed numbers except one: the boss's HP, printed 2,910 (2,180 for three) and now 3,800 (2,850). At the printed number the simulator (`--support=4`, Rank 2, Tom, Grace, Rose and Amy at level 42) won in 4.43 rounds, under the 5 to 7 a boss with a helper aims at; at 3,800 it averages 5.73 rounds over 24 fights and wins every time.
+
+| Item | Built |
+|---|---|
+| Foes | `data/b3-foes-ch17.js`: `pausesprite` (Hexer, Back, 884 HP; Shutter Tap, Hold That Pose pushes 25 and Slows, Self-Timer Beep puts +20% Speed on a monster in Front), `paperweight` (Brass Desk Weight, Elite, 1,872 HP, 5 pips, starts in a 2-turn Guard Stance; Brass Roll, Magnifier Glare Blinds, Hold The Stack charges), `curator` (Elite, 1,872 HP, 5 pips, starts +25% Defense with a seal that blocks the first debuff; Label-Gun Tag, Frame Straighten, Do Not Touch The Proofs charges and locks a Pocket Vibe), `twinlens` (boss, Front, 8 pips, no running). The formations pay 5 Vibe Points, the boss 30. No fight with Julian Vance: the scenes only give him a voice. |
+| Stances | A foe row with `stances` {key:{name,peeves,resists}} and `stance0`. `b3SetStance` copies the stance's Pet Peeves and Resists onto the unit (`u.peeves`, `u.resists`, which every rule already reads), `b3SwapStance` moves to the other one. `b3RoundStart` swaps every foe with stances at each round divider before anyone acts; the `stance` op (Rack Focus) swaps on the act; two swaps in one round cancel. It is the foe's own state, not a status, so a Break, Panic Boil!, a buff strip or a cleanse cannot take it away; Composure and Primes carry through a swap. `when:{stance:'blue'}` limits an act to one lens (Cold Safelight Blue, Enlarger Burn Orange). The card has a Lens row (`kind:'lens'`) and a `stance` beat announces each swap. |
+| Cadence | The bestiary prints no order, so: printed order with `when` filters. Rack Focus, then the lens's own act, Long Exposure; Darkroom Call is a once act at half HP (a Curator joins in Front at half its HP, 0 pips, and the boss gains +20% Defense for 2 turns); Contact-Sheet Archive joins below half HP. |
+| Statuses | `data/b3-status.js`: `heavy_brass_base`, `white_glove` and `glove_seal` (two rows so the +25% Defense stays after the seal is spent), `self_timer`, `label_tag`, `held_stack`, `rack_focus`, `darkroom_def`. |
+| Look | Built sprites draw all four (the Brass Desk Weight is still the Battle 2 paperweight; the bestiary's snow-globe painting waits for the Art Library). |
+| Lab | NEW 90 (Curator and Pause Sprite, Tom, Grace, Rose), NEW 91 (Brass Desk Weight, Tom, Amy, TNB, Nara), NEW 92 (the Twin Lenses, Tom, Grace, Rose, Amy), level 42. |
+| The switch | `B3_STORY.chapters` has 17, `levelFloor` has 42, tips `ch17`. `data/scenes-ch17.js`: the Vault toast has a `B3_CH_ON(17)` wording. Recorded lines untouched. |
+| Tests | `node tools/b3-sim.js check` (`tools/b3-check-s22ch17.js`); `python3 tools/ch17_b3_test.py` portrait and landscape; `python3 tools/b3_story_test.py` (the first unswitched chapter is now 18, pool 2295, floor 42); `python3 tools/battle_guide_test.py` (the fake gain is the chapter 18 Studio Rig); `python3 tools/smoke.py`; `python3 -I tools/clip-audit/unused_voice.py`. |
+| Battle Guide | The four foes leave the planned list by themselves; `data/guide-anims.json` and `data/battle-lab-index.json` rebuilt. |
+| Waits | Chapters 18 to 20, then stage 23. Chapter 20's Blue and Orange Lens can reuse `stances` and `when:{stance}`. |

@@ -1,3 +1,19 @@
+## b3s22ch17 (2026-11-23): Chapter 17 (Julian's building) fights on the new battle: the Twin Lenses, the Curator, the Brass Desk Weight and the Pause Sprite
+
+Card c-b3s22ch17. Chapter 17 is on the BY CHAPTER list for Battle 3. One number changed: the boss's HP, printed 2,910 (2,180 for three), is 3,800 (2,850). Evidence: simulator (`--support=4`, Rank 2, level 42, Tom, Grace, Rose and Amy, 24 fights): at the printed HP it won in 4.43 rounds (8 fights), under the 5 to 7 a boss with a helper is aimed at; at 3,800 it averages 5.73 rounds (shortest 5.32, longest 6.22) and won every time. The two normal packs are the printed numbers: Curator with a Pause Sprite 4.7 rounds, Brass Desk Weight with a Pause Sprite 3.5.
+
+| What | Where |
+|---|---|
+| The Pause Sprite (Hexer, Back, 884 HP), the Brass Desk Weight (Elite, 1,872 HP, starts on its heavy brass base), the Curator (Elite, 1,872 HP, starts with White-Glove Protocol) and the Twin Lenses (boss, Front, 8 pips, no running; Rack Focus, Cold Safelight, Enlarger Burn, Darkroom Call once at half HP, Long Exposure, Contact-Sheet Archive below half), the three formations (5 Vibe Points each) and the boss (30) | `data/b3-foes-ch17.js` |
+| New rule: two stances. A foe row can list `stances` and a `stance0`; the foe wears one stance's Pet Peeves and Resists, swaps at every round divider and on its own Rack Focus (`stance` op), and no Break, Panic Boil!, strip or cleanse can take the stance away because it is not a status. Blue: Sizzle and Clobber hated, Drench and Razzle resisted. Orange: Drench and Razzle hated, Sizzle and Racket resisted. Cold Safelight is Blue only, Enlarger Burn Orange only (`when:{stance}`). The card has a Lens row and a beat shows each swap | `engine/b3-core.js` (`b3SetStance`, `b3SwapStance`, `b3Carried`), `engine/b3-timeline.js`, `engine/b3-ops.js`, `engine/b3-foe.js`, `engine/b3-play.js`, `engine/b3-deck.js` |
+| Statuses: Heavy Brass Base (2-turn Guard Stance, 25% less), White-Glove Protocol (+25% Defense) and its seal (blocks the first debuff), Self-Timer (+20% Speed), Label Tag (+20% damage taken), Held Stack (-20% Defense), Rack Focus (+15% Attack), Darkroom Def (+20% Defense). White-Glove is two rows so the Defense stays after the seal is spent | `data/b3-status.js` |
+| Switch, level floor 42, tips `ch17` (the lens, the Pet Peeves, the Curator call, Long Exposure, Contact-Sheet Archive), Lab fights NEW 90 (Curator and Pause Sprite), NEW 91 (Brass Desk Weight) and NEW 92 (the Twin Lenses) | `data/b3-story.js`, `data/b3-lab.js`, `data/battle-lab-index.json` |
+| Battle 3 wording for the Vault toast behind `B3_CH_ON(17)`; recorded lines untouched | `data/scenes-ch17.js` |
+| Chapter 17 test (Sol, the lobby, three stairs fights, the hatch, a shelf hall fight, six shelves, the race, the Vault and the boss, the end; portrait and landscape), night manifest entry, new rule check file | `tools/ch17_b3_test.py`, `tools/night/tests.json`, `tools/b3-check-s22ch17.js` |
+| Checks that counted switched chapters now include 17; chapter 18 is the first unswitched one | `tools/b3-check-s15.js` to `s22ch16.js`, `tools/b3_story_test.py`, `tools/battle_guide_test.py`, `data/guide-anims.json` |
+
+Not done: art for the Brass Desk Weight's snow-globe look and the lenses (the built sprites draw them); the stairs and shelf hall fights are checked in the chapter test by starting each map monster, not by walking into them; no new battle picture (the fight uses its map's picture). Names follow the card and the bestiary (Brass Desk Weight, The Twin Lenses); Battle 2 and the scenes still say Paperweight and the Archivist's Twin Lenses, a change in one place when the script settles them. No animation was reviewed or built.
+
 ## guideflow4b (2026-11-23): The Guide video line installs ffmpeg and ffprobe on the runner
 
 Card c-guideflow-4, part b. The free proof on GitHub (a dry row and two replay rows from stored takes) found that the runner has no `ffprobe`, so the replay rows were all called "hardly moves" (the take note said "No such file: ffprobe"). The Tools step for lane vid now installs ffmpeg from apt, as `clip-gen.yml` does, in place of the imageio-ffmpeg link. No paid video was made.
@@ -5,6 +21,7 @@ Card c-guideflow-4, part b. The free proof on GitHub (a dry row and two replay r
 | What | Where |
 |---|---|
 | ffmpeg and ffprobe from apt for lane vid | `.github/workflows/guide-work.yml` |
+
 
 ## guideflow4 (2026-11-23): The Guide worker makes family videos (nothing changes on screen yet)
 

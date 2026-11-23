@@ -5,7 +5,7 @@
 //   BY CHAPTER  a chapter in `chapters` below uses Battle 3 (the default).
 //   NEW         every fight Battle 3 has a formation for uses it (chapters not listed still have battle 2 tips and flags: for tests).
 const B3_STORY={
-  chapters:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,21],
+  chapters:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,21],
   maxParty:4,
   // A story fight that is not one of the formations: the foes it names. `vp` is what a win pays the Main Vibe (spec section 1).
   fights:{
@@ -14,7 +14,7 @@ const B3_STORY={
     smoglet2:{foes:[{id:'smoglet',row:'front'},{id:'smoglet',row:'front'}],vp:10}
   },
   // The Character Level every member has at least by the furthest chapter reached (the Lab's levels, bestiary v11). Never lowers a level.
-  levelFloor:[0,1,4,7,9,12,14,17,19,22,25,27,30,32,35,37,40],
+  levelFloor:[0,1,4,7,9,12,14,17,19,22,25,27,30,32,35,37,40,42],
   // Migration for a save that has not met Battle 3: a pool of this many Vibe Points per chapter finished, two thirds to the first
   // Sig Vibe and one third to the second, with overflow (spec section 1, architecture 4.2).
   vpPerChapter:135, split:[2/3,1/3],
@@ -265,6 +265,14 @@ const B3_STORY={
       {id:'wall',who:'*',text:'Behind the Eclipse: he takes 30% less damage, and 15% of any hit that is not Racket or Drench bounces back at you (never a knock-out). A Break or Panic Boil! drops the eclipse.',when:(F)=>F.foes.some(f=>f.id==='marlowe16'&&f.st&&f.st.eclipse_wall)},
       {id:'over',who:'*',text:'Overexposure is charging (!!): it Blinds and Slows everyone. Shield the family, or break his pips before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Overexposure/.test(f.charge.name||''))},
       {id:'total',who:'*',text:'Total Eclipse is charging (!!) below half HP: it hits everyone. Shield the family, or break his pips before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Total Eclipse/.test(f.charge.name||''))}
+    ],
+    // ---- Chapter 17 (stage 22 chapter 17): the Twin Lenses in the Vault. `ch17` is the scene key (data/scenes-ch17.js). Tom, Grace, Rose and Amy fight it. ----
+    ch17:[
+      {id:'lens',who:'*',text:'The Twin Lenses swap lens at every round. Tap it (or press I) to see its Pet Peeves right now: the Blue lens can\u2019t stand Sizzle or Clobber, the Orange lens can\u2019t stand Drench or Razzle.',when:(F)=>F.foes.some(f=>f.id==='twinlens')},
+      {id:'peeve',who:'*',text:'It has 8 Composure pips. Hit the lens it is wearing with the flavor it can\u2019t stand and the pips come off fast. It shrugs off the other lens\u2019s flavors.',when:(F)=>F.foes.some(f=>f.id==='twinlens')},
+      {id:'call',who:'*',text:'Below half HP it makes a Darkroom Call: a Curator joins in Front, and the Lenses take 20% less damage for 2 turns. A Curator\u2019s White-Glove Protocol blocks the first debuff you put on it.',when:(F)=>F.foes.some(f=>f.id==='curator')},
+      {id:'exposure',who:'*',text:'Long Exposure is charging (!!): it Slows and tires everyone. Shield the family, or break its pips before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Long Exposure/.test(f.charge.name||''))},
+      {id:'archive',who:'*',text:'Contact-Sheet Archive is charging (!!) below half HP: it hits everyone. Shield the family, or break its pips before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Contact-Sheet/.test(f.charge.name||''))}
     ]
   }
 };

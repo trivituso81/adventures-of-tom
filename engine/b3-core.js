@@ -90,9 +90,21 @@ function b3FoeUnit(F,id,row,slot,o) {
   // Stage 22 (chapter 13). `custom` on a foe row switches on a one-off rule the family's Traits also use (the Gold Knight's `boppySpeed`: above half HP a push
   // does nothing to him). `helperLink` {id, reduce}: while a monster of that id stands on its side the foe takes `reduce` less damage (bestiary 1.1
   // "Helper links": it adds to Guard Stance and any other reduction, inside the 60% cap, because it is an ordinary `reduce` mod).
+  if(D.stances) b3SetStance(u,D.stance0||Object.keys(D.stances)[0]);   // stage 22 (chapter 17): the Twin Lenses start in one stance
   if(D.custom) Object.assign(u.custom,D.custom);
   if(D.helperLink) u.mods.push({stat:'reduce',kind:'helper',v:D.helperLink.reduce,when:{allyStands:D.helperLink.id}});
   return u;
+}
+// Stage 22 (chapter 17): a foe row with `stances` {key:{name,peeves,resists}} can stand in one of them. The stance gives the foe that stance's Pet Peeves and
+// Resists (u.peeves and u.resists, which every rule already reads). It is the foe's own state, not a status: a Break, Panic Boil!, a strip or a cleanse cannot take it away.
+function b3SetStance(u,key) {
+  const S=u.D&&u.D.stances&&u.D.stances[key]; if(!S) return false;
+  u.stance=key; u.peeves=S.peeves; u.resists=S.resists; return true;
+}
+// Swap to the other stance (two stances: the one it is not in). Returns the new key, or null for a foe with no stances.
+function b3SwapStance(u) {
+  const keys=u.D&&u.D.stances&&Object.keys(u.D.stances); if(!keys||keys.length<2) return null;
+  const to=keys[(keys.indexOf(u.stance)+1)%keys.length]; b3SetStance(u,to); return to;
 }
 // Slot numbers run left to right along one line, Front row first, then Back (spec 2.1 "Adjacent"). A newcomer stands last in its row.
 function b3Reslot(F) {
@@ -331,6 +343,9 @@ function b3Carried(F,u) {
       desc:'It lands on its next turn'+(m?', aimed at '+m.name:'')+'. A Break cancels it, and so does a Skill that interrupts.'}); }
   for(const f of F.foes) if(f.mark===u.key&&b3Alive(f)) rows.push({name:'Marked',short:'MARKED',color:'#ff8f80',kind:'marked',left:'next turn',
     desc:f.name+(f.charge?' will use '+f.charge.name+' on '+u.name:' is aiming at '+u.name)+' on its next turn. A Mark cannot be cleansed.'});
+  if(u.stance&&u.D&&u.D.stances) { const S=u.D.stances[u.stance],fl=a=>a.map(x=>(B3_FLAVORS[x]&&B3_FLAVORS[x].name)||x).join(' and ');
+    rows.push({name:S.name,short:'LENS',color:'#9ec9ff',kind:'lens',left:'swaps next round',
+      desc:'Pet Peeves '+fl(S.peeves)+'. Resists '+fl(S.resists)+'. It swaps lens at every round divider and on Rack Focus. A Break or a cleanse cannot hold it.'}); }
   // A family member's Vibes come next: the Main Vibe with its Rank and Lean, and the Pocket Vibe.
   if(u.side==='party'&&u.vibe===B3_FREELANCER) {   // Casual Mode (engine/b3-progress.js): no Lean, two Secondary Vibes, every Trait
     const Ps=[u.pocket,u.pocket2].filter(x=>x&&B3_VIBES[x]).map(x=>B3_VIBES[x].name);

@@ -189,6 +189,13 @@ const B3_LAB=[
     party:['tom','amy','tnb','nara'],level:40,formation:'greynote',bg:'pond'},
   {id:'new89',name:'NEW 89: MARLOWE',sub:'Chapter 16 boss (the bestiary\u2019s Square\u2019s Sign). 8 Composure pips, two Grey Notes in Back. Behind the Eclipse takes 30% less damage and bounces 15% of any hit that is not Racket or Drench back at you; Panic Boil! or a Break drops it. Overexposure and, below half HP, Total Eclipse are charged first.',
     party:['tom','amy','tnb','nara'],level:40,formation:'marlowe16',bg:'pond'},
+  // Stage 22, chapter 17 (Julian's building): the stairs and shelf fights and the Twin Lenses (bestiary entries 75 to 78). The stairs team is Tom, Grace and Rose; the shelf hall is Tom, Amy, TNB and Nara; the Vault is Tom, Grace, Rose and Amy.
+  {id:'new90',name:'NEW 90: CURATOR AND PAUSE SPRITE',sub:'Chapter 17 stairs fight. A Curator in Front, a Pause Sprite behind it. The Curator starts with White-Glove Protocol: +25% Defense and a seal that blocks the first debuff you put on it. The Pause Sprite speeds the Curator up.',
+    party:['tom','grace','rose'],level:42,formation:'curator',bg:'subtunnel'},
+  {id:'new91',name:'NEW 91: BRASS DESK WEIGHT',sub:'Chapter 17 shelf hall fight. A Brass Desk Weight in Front sitting on its heavy brass base (Guard Stance), a Pause Sprite behind it. Hold The Stack is charged first. Clobber and Razzle are its Pet Peeves, Drench washes off.',
+    party:['tom','amy','tnb','nara'],level:42,formation:'paperweight',bg:'stacks'},
+  {id:'new92',name:'NEW 92: THE TWIN LENSES',sub:'Chapter 17 boss. 8 Composure pips. It swaps lens at every round divider and on Rack Focus: Blue can\u2019t stand Sizzle or Clobber, Orange can\u2019t stand Drench or Razzle. Below half HP it calls a Curator and gains Defense, then Contact-Sheet Archive joins its moves.',
+    party:['tom','grace','rose','amy'],level:42,formation:'twinlens',bg:'stacks'},
   // movestage2: the Move Lab for Tom's eight staged moves (engine/b3-movelab.js). Last in the list so the numbers of the fights above stay; the NEW BATTLE list shows it first.
   {id:'moves-tom',name:'MOVE LAB: TOM',sub:'Play Tom\u2019s eight staged moves in a real fight, in ladder order, then Keep, Tweak or Replace each one. The Capstones play against The Big One.',
     party:['tom','grace','rose','deedee'],level:7,formation:'mudling',bg:'pond',movelab:true},

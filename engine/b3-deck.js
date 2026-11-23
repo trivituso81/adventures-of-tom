@@ -236,7 +236,7 @@ function bxCarry(t) {
   return c.join('');
 }
 function bxLookHtml(t,why) {
-  const rows=b3Carried(B3.F,t).filter(r=>['debuff','buff','stance','prime','mark','shield','hazard','counter','marked','charge'].includes(r.kind)||r.kind==='pips'),W=B3_FORECAST;
+  const rows=b3Carried(B3.F,t).filter(r=>['debuff','buff','stance','prime','mark','shield','hazard','counter','marked','charge','lens'].includes(r.kind)||r.kind==='pips'),W=B3_FORECAST;
   return bxWho(t)+(why?'<div class="note"><b>'+b2Esc(why)+'</b></div>':'')+'<div class="k info">'+bxCarry(t)+'</div>'+
     '<div class="note">'+(rows.length?rows.slice(0,2).map(r=>'<b>'+b2Esc(r.name)+':</b> '+b2Esc(r.desc)).join(' '):bxW(W.nothingOn,{name:b2Esc(t.name)}))+'</div>'+
     '<div class="k"><button type="button" class="bx-chip btn" data-sheet="'+t.key+'">'+W.fullList+'</button></div>';

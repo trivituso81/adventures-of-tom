@@ -14,7 +14,7 @@ module.exports=function(T) {
 
   // 1. The switch, the floor, the numbers
   ok(S.chapters.includes(16)&&S.chapters.indexOf(16)<S.chapters.indexOf(21),'chapter 16 is on Battle 3 (found '+J(S.chapters)+')');
-  ok(S.levelFloor[16]===40&&S.levelFloor.length===17,'chapter 16 floors the Character Level at the bestiary baseline, 40 (found '+S.levelFloor[16]+')');
+  ok(S.levelFloor[16]===40&&S.levelFloor.length>=17,'chapter 16 floors the Character Level at the bestiary baseline, 40 (found '+S.levelFloor[16]+')');
   const R=FOES.marlowe16,D=FOES.greynoteh,N=FOES.greynote;
   // Bestiary entry 74: Atk 175, Def 76, Spd 120, 8 pips, Front, no running, Racket and Drench hated, Clobber resisted. HP is the one number the simulator moved (1,300 and 975 for three, printed 2,700 and 2,020).
   ok(R&&R.ch===16&&R.hp===1300&&R.hp3===975&&R.atk===175&&R.def===76&&R.spd===120&&R.pips===8&&R.role==='boss'&&R.row==='front'&&R.noRun,'Marlowe has the bestiary stat line: Atk 175, Def 76, Spd 120, 8 pips, Front, no running (HP 1300, 975 for three: lowered from the printed 2700 and 2020 by the simulator)');

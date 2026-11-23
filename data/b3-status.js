@@ -599,3 +599,32 @@ Object.assign(B3_STATUS,{
   marginal_note:{id:'marginal_note',name:'Marginal Note',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'marginalNote',v:-.20}],flags:[],
     short:'ATK DOWN',color:'#a8a8b4',weight:4,desc:'Something small and final was written about you in the margin: 20% less Attack.'}
 });
+
+// Stage 22 (chapter 17, Julian's building: the Pause Sprite, the Brass Desk Weight, the Curator and the Twin Lenses; bestiary entries 75 to 78). The Twin Lenses' two
+// stances are NOT statuses: they live on the boss itself (engine/b3-core.js b3SetStance), so a Break, Panic Boil!, a buff strip or a cleanse cannot take one away. Only
+// the pieces below are statuses.
+//   heavy_brass_base  the Desk Weight's Guard Stance (25% less damage, 2 turns): Panic Boil! or a Break ends it.
+//   white_glove       the Curator's +25% Defense (2 turns, a buff). glove_seal blocks the next debuff the family puts on it (the block is used up; the Defense stays). The bestiary
+//                     prints both in one line, "+25% Def and blocks 1 debuff (2t, buff)"; two rows are how the block can be used up while the Defense holds.
+//   self_timer        the Pause Sprite's +20% Speed on one Front monster (2 turns, a buff).
+//   label_tag         the Curator's sticker: the target takes +20% damage (2 turns).
+//   held_stack        the Desk Weight's -20% Defense (2 turns); Slow is the shared row.
+//   rack_focus        the Twin Lenses' +15% Attack (1 turn, a buff).   darkroom_def  its +20% Defense after the Darkroom Call (2 turns, a buff).
+Object.assign(B3_STATUS,{
+  heavy_brass_base:{id:'heavy_brass_base',name:'Heavy Brass Base',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
+    short:'GUARD',color:'#c8a040',weight:5,desc:'Sitting square on its heavy brass base: takes 25% less damage. Panic Boil! or a Break ends it.'},
+  white_glove:{id:'white_glove',name:'White-Glove Protocol',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'whiteGlove',v:.25}],flags:[],
+    short:'DEF UP',color:'#e8e4da',weight:6,desc:'Every exhibit handled with clean white gloves: 25% more Defense. It can be stripped.'},
+  glove_seal:{id:'glove_seal',name:'White-Glove Seal',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[],flags:['blockDebuff'],
+    short:'SEALED',color:'#d8d4cc',weight:5,desc:'Nothing sticks to a clean glove: the next debuff the family puts on it bounces off, and then the seal is used up. Primes and lost Composure still get through.'},
+  self_timer:{id:'self_timer',name:'Self-Timer Beep',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'spd',kind:'selfTimer',v:.20}],flags:[],
+    short:'SPEED UP',color:'#7aa4d8',weight:5,desc:'Three beeps and the timer is off: 20% more Speed. It can be stripped.'},
+  label_tag:{id:'label_tag',name:'Label-Gun Tag',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'taken',kind:'labelTag',v:.20}],flags:[],
+    short:'TAGGED',color:'#e8c8a8',weight:5,desc:'A sticker on the sleeve says NOT FOR SALE: takes 20% more damage.'},
+  held_stack:{id:'held_stack',name:'Hold The Stack',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'heldStack',v:-.20}],flags:[],
+    short:'DEF DOWN',color:'#b8a07a',weight:4,desc:'A whole stack of paper pinned under a brass weight, and you are in the stack: 20% less Defense.'},
+  rack_focus:{id:'rack_focus',name:'Rack Focus',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'atk',kind:'rackFocus',v:.15}],flags:[],
+    short:'ATK UP',color:'#f2a33a',weight:5,desc:'Sharp on its target: 15% more Attack for one turn. It can be stripped.'},
+  darkroom_def:{id:'darkroom_def',name:'Darkroom Call',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'darkroom',v:.20}],flags:[],
+    short:'DEF UP',color:'#c8a040',weight:6,desc:'The safelight is on and the shelves are closing in: 20% more Defense. It can be stripped.'}
+});

@@ -5,7 +5,7 @@
 // "not built yet", so the simulator names any kit line that is ahead of the engine.
 const B3_OP_LIST=['damage','heal','shield','status','prime','cleanse','strip','steal','invert','push','pull','swapBar','place','pep','ruckus',
   'composure','revive','counter','ward','intercept','mark','hazard','grant','aggro','taunt','pullForward','interrupt','detonateAll','splash',
-  'crack','later','summon','row','foresee','vitrify','double','rebalance','tick','upgrade','treasure','goldBall','refresh','prybar','eat','hpLoss','extend','swapGap','replay','tradeRows','bounce'];
+  'crack','later','summon','row','foresee','vitrify','double','rebalance','tick','upgrade','treasure','goldBall','refresh','prybar','eat','hpLoss','extend','swapGap','replay','tradeRows','bounce','stance'];
 // c is the action in progress: {F, actor, src, skill, rec, targets (chosen), hit (units a damage op landed on), beats, g (which
 // part of the move the beats belong to), detonated, tgt (set while a Detonation's, a hook's or a hazard's effects run), partDmg,
 // tags (the act's tags), outExtra ({kind: amount} damage modifiers for this action only), stripped and cleansed (counts so far),
@@ -250,6 +250,12 @@ const B3_OPS={
     for(const t of b3Who(F,c,e.to||'attacker')) { if(!b3Alive(t)) continue;
       const n=Math.min(Math.max(1,Math.round(base*e.pct)),b3ShieldTotal(t)+t.hp-1); if(n<=0) continue;
       b3Hurt(F,c,t,n,{bounce:true}); }
+  },
+  // stance (stage 22 chapter 17, the Twin Lenses' Rack Focus): the actor swaps to its other stance (b3SwapStance in engine/b3-core.js). `e.to` can name a stance key to go to
+  // instead of swapping. Nothing happens for a foe with no stances.
+  stance(F,c,e) {
+    const u=c.actor,from=u.stance,to=e.to&&u.D&&u.D.stances&&u.D.stances[e.to]?(b3SetStance(u,e.to),e.to):b3SwapStance(u);
+    if(to&&to!==from) c.beats.push({t:'stance',tgt:u.key,stance:to,name:u.D.stances[to].name,why:'act',g:c.g});
   },
   // tradeRows (stage 22, FINAL CALL's Gate Change): the first two units the act hit swap rows, one Front for one Back (spec 2.1). If they
   // already stand in the same row nothing changes, so an act that could only reach one row still hits and pushes both. Only the rows

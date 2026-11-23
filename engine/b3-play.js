@@ -195,6 +195,9 @@ function b3Show(b) {
     V.u[b.tgt]={hp:b.hp,maxHp:b.hp,pep:undefined,st:[],ko:false,sh:0,pips:0,maxPips:0};
     b3LayoutAdd(b.tgt); V.bar=b.bar; b3RenderBar(b.tgt); b3Sfx('intro'); b3Say(b.name+' joins the fight!');
   }
+  else if(b.t==='stance') {   // stage 22 (chapter 17): the Twin Lenses swap lens (the Pet Peeve chips under it change with it)
+    b3Word(b.name.toUpperCase(),'#9ec9ff'); b3Sfx('intro'); b3Say(b3Name(b.tgt)+' swaps to its '+b.name+'.');
+  }
   else if(b.t==='row') {
     // A monster changes its own row (Old Iron-Gill dives to the Back and comes up again): it keeps its size (a Back-row monster is
     // drawn a tenth smaller) and walks to the free spot of that row furthest from everyone standing. Nobody else moves.
@@ -266,7 +269,7 @@ function b3Show(b) {
 function b3Play(beats,done) {
   const i=beats.findIndex(b=>b.t==='act'||b.t==='telegraph'),lead=i<0?beats:beats.slice(0,i),rest=i<0?[]:beats.slice(i);
   let wait=0;
-  for(const b of lead) { if(b.t==='over') continue; const w=wait; b3After(w,()=>b3Show(b)); if(b.t==='round') wait+=.55; else if(b.t==='hit'||b.t==='heal') wait+=.45; else if(b.t==='ko') wait+=.5; else if(b.t==='hazardTrip') wait+=.6; else if(b.t==='skip') wait+=.8; else if(b.t==='script') wait+=1.7; else if(b.t==='ruckusSpend') wait+=.9; }
+  for(const b of lead) { if(b.t==='over') continue; const w=wait; b3After(w,()=>b3Show(b)); if(b.t==='round') wait+=.55; else if(b.t==='stance') wait+=.7; else if(b.t==='hit'||b.t==='heal') wait+=.45; else if(b.t==='ko') wait+=.5; else if(b.t==='hazardTrip') wait+=.6; else if(b.t==='skip') wait+=.8; else if(b.t==='script') wait+=1.7; else if(b.t==='ruckusSpend') wait+=.9; }
   if(!rest.length) { b3After(wait+.05,done); return; }
   // A Family Ruckus spend is one action with two moves in it: the second move's `act` beat is marked part2 and plays after the first.
   const segs=[]; let cur=[]; for(const b of rest) { if(b.t==='act'&&b.part2&&cur.length) { segs.push(cur); cur=[]; } cur.push(b); } segs.push(cur);

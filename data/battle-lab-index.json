@@ -638,6 +638,21 @@
   },
   {
    "i": 89,
+   "name": "NEW 90: CURATOR AND PAUSE SPRITE",
+   "sub": "Chapter 17 stairs fight. A Curator in Front, a Pause Sprite behind it. The Curator starts with White-Glove Protocol: +25% Defense and a seal that blocks the first debuff you put on it. The Pause Sprite speeds the Curator up."
+  },
+  {
+   "i": 90,
+   "name": "NEW 91: BRASS DESK WEIGHT",
+   "sub": "Chapter 17 shelf hall fight. A Brass Desk Weight in Front sitting on its heavy brass base (Guard Stance), a Pause Sprite behind it. Hold The Stack is charged first. Clobber and Razzle are its Pet Peeves, Drench washes off."
+  },
+  {
+   "i": 91,
+   "name": "NEW 92: THE TWIN LENSES",
+   "sub": "Chapter 17 boss. 8 Composure pips. It swaps lens at every round divider and on Rack Focus: Blue can’t stand Sizzle or Clobber, Orange can’t stand Drench or Razzle. Below half HP it calls a Curator and gains Defense, then Contact-Sheet Archive joins its moves."
+  },
+  {
+   "i": 92,
    "name": "MOVE LAB: TOM",
    "sub": "Play Tom’s eight staged moves in a real fight, in ladder order, then Keep, Tweak or Replace each one. The Capstones play against The Big One."
   }

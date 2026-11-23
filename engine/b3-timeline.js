@@ -30,6 +30,8 @@ function b3RoundStart(F,beats) {
   // Hazards dry up after their rounds.
   // (A vessel, TNB's Grand Amphora, breaks when its rounds run out: engine/b3-custom.js b3VesselExpire.)
   for(const hz of F.hazards.slice()) if(--hz.rounds<=0) { F.hazards.splice(F.hazards.indexOf(hz),1); beats.push({t:'hazardEnd',id:hz.id,side:hz.side}); if(B3_HAZARDS[hz.id].vessel) b3VesselExpire(F,hz,beats); }
+  // Stage 22 (chapter 17): a foe with two stances (the Twin Lenses) swaps at every round divider, before the round's first turn.
+  for(const u of F.foes) if(b3Alive(u)&&u.D&&u.D.stances&&b3SwapStance(u)) beats.push({t:'stance',tgt:u.key,stance:u.stance,name:u.D.stances[u.stance].name,why:'round'});
   b3Fire(F,'roundStart',{},beats);
   b3ScriptRound(F,beats);   // adds out of the freezer (engine/b3-script.js)
 }

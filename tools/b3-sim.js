@@ -296,6 +296,8 @@ function check() {
   require('./b3-check-s22ch15.js')({G,ok,near,play,noCrit});
   // Stage 22, chapter 16 (the town square): Marlowe, the Grey Notes and the Eclipse wall that bounces.
   require('./b3-check-s22ch16.js')({G,ok,near,play,noCrit});
+  // Stage 22, chapter 17 (Julian's building): the Pause Sprite, the Brass Desk Weight, the Curator and the Twin Lenses' two stances.
+  require('./b3-check-s22ch17.js')({G,ok,near,play,noCrit});
   console.log('CHECKS:',checks);
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);

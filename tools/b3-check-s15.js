@@ -20,7 +20,7 @@ module.exports=function(T) {
 
   // 2. Migration numbers: the pool per chapter and its split, and the level floors
   ok(S.vpPerChapter===135&&Math.abs(S.split[0]+S.split[1]-1)<1e-9,'135 VP a chapter, split in two thirds and one third');
-  ok(S.levelFloor.length===17&&S.levelFloor.every((v,i,a)=>i===0||v>=a[i-1]),'one level floor per chapter 1 to 16, never going down');   // 11: stage 22a, 12 to 16: stage 22 chapters 12 to 16
+  ok(S.levelFloor.length===18&&S.levelFloor.every((v,i,a)=>i===0||v>=a[i-1]),'one level floor per chapter 1 to 17, never going down');   // 11: stage 22a, 12 to 17: stage 22 chapters 12 to 17
   ok(S.levelFloor[1]===1,'chapter 1 raises nobody (a new game starts at Level 1)');
 
   // 3. The tips: Battle 3 words only
