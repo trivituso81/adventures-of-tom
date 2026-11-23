@@ -144,6 +144,7 @@ SCENES.ch19Claim=()=>[
 ];
 SCENES.ch19Fight=()=>[
   {flag:'ch19-fight'},
+  {if:()=>B3_CH_ON(19),then:[{toast:'Tip: tap the Censor to see what it can\u2019t stand. From round 2 it blacks out whichever flavor hurt it most (REDACTED): that flavor does half damage and costs the attacker 1 Pep. Rotate your flavors, and a Break tears the blackout down.',time:10}],else:[]},
   {battle:()=>{ const m=ch19Censor(); if(m) { m.hidden=false; m.mscale=1.3; m.tier=0; } return m; },tut:'ch19'},
   {if:()=>flag('battle:censor')==='win',then:[],else:[
     {heal:true},

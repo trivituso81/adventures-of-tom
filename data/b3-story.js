@@ -5,7 +5,7 @@
 //   BY CHAPTER  a chapter in `chapters` below uses Battle 3 (the default).
 //   NEW         every fight Battle 3 has a formation for uses it (chapters not listed still have battle 2 tips and flags: for tests).
 const B3_STORY={
-  chapters:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,21],
+  chapters:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,21],
   maxParty:4,
   // A story fight that is not one of the formations: the foes it names. `vp` is what a win pays the Main Vibe (spec section 1).
   fights:{
@@ -14,7 +14,7 @@ const B3_STORY={
     smoglet2:{foes:[{id:'smoglet',row:'front'},{id:'smoglet',row:'front'}],vp:10}
   },
   // The Character Level every member has at least by the furthest chapter reached (the Lab's levels, bestiary v11). Never lowers a level.
-  levelFloor:[0,1,4,7,9,12,14,17,19,22,25,27,30,32,35,37,40,42,45],
+  levelFloor:[0,1,4,7,9,12,14,17,19,22,25,27,30,32,35,37,40,42,45,47],
   // Migration for a save that has not met Battle 3: a pool of this many Vibe Points per chapter finished, two thirds to the first
   // Sig Vibe and one third to the second, with overflow (spec section 1, architecture 4.2).
   vpPerChapter:135, split:[2/3,1/3],
@@ -281,6 +281,13 @@ const B3_STORY={
       {id:'flash',who:'*',text:'Big Flash is charging (!!). Step in with Tom\u2019s Suite Door Slide, shield the marked person, or break its pips before it fires.',when:(F)=>F.foes.some(f=>f.charge&&/Big Flash/.test(f.charge.name||''))},
       {id:'wall',who:'*',text:'Backdrop Wall: the rig takes 25% less damage and hits 20% harder. Its lamps overheat and leave it Toasty, so a Racket hit sets off Panic Boil! and brings the backdrop down.',when:(F)=>F.foes.some(f=>f.id==='vance'&&f.st&&f.st.backdrop_wall)},
       {id:'lights',who:'*',text:'Every Light On is charging (!!) below half HP: it hits everyone and tires them. Shield the family, or break its pips before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Every Light/.test(f.charge.name||''))}
+    ],
+    // ---- Chapter 19 (stage 22 chapter 19): the lost-mail office. `ch19` is the scene key (data/scenes-ch19.js). Tom is frozen; Grace, Rose, Amy, TNB and Nara fight the Censor. ----
+    ch19:[
+      {id:'peeve',who:'*',text:'The Censor has 8 Composure pips and can\u2019t stand Razzle or Sizzle. It shrugs off Racket, so Razzle and Sizzle break it fastest.'},
+      {id:'redacted',who:'*',text:'REDACTED: at each round it blacks out the flavor that hurt it most last round. Attacks of only that flavor do half damage, take no pips, and cost the attacker 1 Pep. Rotate flavors. A Break tears the blackout down.',when:(F)=>F.foes.some(f=>f.id==='censor'&&f.stamp)},
+      {id:'sort',who:'*',text:'Below half HP it calls a Dead Letter into Front. A Dead Letter starts with a Wax-Seal Ward: +20% Defense, and the first debuff you put on it goes back on you.',when:(F)=>F.foes.some(f=>f.id==='deadletter')},
+      {id:'strike',who:'*',text:'Strike It Out is charging (!!): it hits everyone and Slows them. Shield the family, or break its pips before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Strike It Out|UNDELIVERABLE/.test(f.charge.name||''))}
     ]
   }
 };

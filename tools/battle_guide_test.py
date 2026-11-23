@@ -775,7 +775,7 @@ vm.runInContext(code,ctx);console.log(JSON.stringify(ctx.OUT));"""
     nrm = lambda x: re.sub(r'[^a-z0-9]+', '', str(x).lower())
     check('generator: the ten third Vibes are built (stage 19), so none is planned and each is in the game', len(pv) == 0 and all(sum(1 for o, n in game['vibes'] if o == ow) == 3 for ow in game['owners']), [(v['owner'], v['name']) for v in pv])
     check('generator: every third Vibe is whole (3 titles, Lean, Trait, Basic, 3 Skills with Rank 1, 2 and 4, 2 Quirks)', all(len(v['subtitles']) == 3 and v['lean'] in ('guard', 'striker', 'tempo', 'support') and v['trait']['desc'] and v['basic']['desc'] and [k['rank'] for k in v['skills']] == [1, 2, 4] and len(v['quirks']) == 2 and v['when'] for v in pv))
-    check('generator: the planned monsters are the plan documents\' whole list (chapters 11 to 18 are built since stage 22 and drop out on the page), and every foe has a when rule', not [f for f in pfoe if f['monster'] in game['foes'] and f.get('ch') not in (11, 12, 13, 14, 15, 16, 17, 18)] and len(pfoe) >= 26 and all(i.get('when') for i in items))
+    check('generator: the planned monsters are the plan documents\' whole list (chapters 11 to 19 are built since stage 22 and drop out on the page), and every foe has a when rule', not [f for f in pfoe if f['monster'] in game['foes'] and f.get('ch') not in (11, 12, 13, 14, 15, 16, 17, 18, 19)] and len(pfoe) >= 26 and all(i.get('when') for i in items))
     check('generator: the stage list is 16, 19 to 21, 22 and 23 in order', [x['n'] for x in pst] == ['16', '19 to 21', '22', '23'], [x['n'] for x in pst])
     check('generator: no em dash anywhere in the file', DASH not in open(os.path.join(ROOT, 'data', 'guide-planned.json'), encoding='utf-8').read())
     r = subprocess.run([sys.executable, os.path.join(HERE, 'guide_planned.py'), '--check'], capture_output=True, text=True, cwd=ROOT)
@@ -792,7 +792,7 @@ vm.runInContext(code,ctx);console.log(JSON.stringify(ctx.OUT));"""
     pg.goto(URL + '#monsters'); pg.wait_for_function("document.querySelectorAll('#list .row').length>3", timeout=60000)
     check('monsters: the planned monsters are listed after the built ones, each with the PLANNED badge', pg.locator('#list .row.plan').count() == len([f for f in pfoe if f['monster'] not in game['foes']]) and all('PLANNED' in t for t in pg.eval_on_selector_all('#list .row.plan', 'e=>e.map(x=>x.innerText)')))
     check('monsters: chapters 11 to 20 each have a PLANNED heading', all(('chapter %d' % n) in pg.locator('#list').inner_text().lower() for n in range(11, 21)))
-    pg.click('#list .row.plan >> nth=0'); pg.wait_for_timeout(250); dt = pg.locator('#detail').inner_text()
+    pg.click('#list .row.plan >> text=Collector'); pg.wait_for_timeout(250); dt = pg.locator('#detail').inner_text()
     check('a planned monster shows its numbers and acts as the bestiary words them, with no Play and no fight button', 'Not in the game yet' in dt and 'HP' in dt and 'WHAT IT DOES' in dt.upper() and pg.locator('#detail .play').count() == 0 and pg.locator('#detail a.fight').count() == 0, dt[:300])
     pg.screenshot(path=os.path.join(out, 'battleguide-planned-monster.png'))
     at('rules/coming'); dt = pg.locator('#detail').inner_text()
@@ -822,8 +822,8 @@ vm.runInContext(code,ctx);console.log(JSON.stringify(ctx.OUT));"""
 
     # drop by itself: the game's own data gains the real thing (a monster, a chapter, the BAG rule; the third Vibes went this way in stage 19); the planned item goes and the real one shows
     cx = br.new_context(viewport={'width': 951, 'height': 648}); gains = {
-        'data/b3-foes-ch10.js': "B3_FOES.mailcourier=Object.assign({},B3_FOES.mudling,{id:'mailcourier',name:\"Brass Mail-Chute Courier\",ch:19});",
-        'data/b3-story.js': "B3_STORY.chapters.push(19);",
+        'data/b3-foes-ch10.js': "B3_FOES.leviathan=Object.assign({},B3_FOES.mudling,{id:'leviathan',name:\"The Collector\",ch:20});",
+        'data/b3-story.js': "B3_STORY.chapters.push(20);",
         'data/b3-rules.js': "B3_RULES.bag=true;"}
     def gain(route):
         u = route.request.url.split('?')[0].split('/', 3)[3]; r = route.fetch(); route.fulfill(response=r, body=r.text() + '\n;' + gains[u])
@@ -832,9 +832,9 @@ vm.runInContext(code,ctx);console.log(JSON.stringify(ctx.OUT));"""
     pg.goto(URL + '#family/tom'); pg.wait_for_function("document.querySelectorAll('#list .row').length>3 && document.querySelector('#detail .seg')", timeout=60000)
     check('stage 19: no Family row says planned and Tom shows his three built Vibes', '(planned)' not in pg.locator('#list').inner_text() and pg.locator('#detail .seg button.planbtn').count() == 0 and pg.locator('#detail .seg button:not(.planbtn)').count() == 3 and 'Star Baker' in pg.locator('#detail .seg').inner_text(), pg.locator('#detail .seg').inner_text())
     pg.goto(URL + '#monsters'); pg.wait_for_function("document.querySelectorAll('#list .row').length>3", timeout=60000)
-    check('the game gains a monster: it leaves the planned list and is a normal row', pg.locator('#list .row.plan').count() == len([f for f in pfoe if f['monster'] not in game['foes']]) - 1 and pg.locator('#list .row:not(.plan)').count() == want['foes'] + 1 and "Brass Mail-Chute Courier" in pg.locator('#list .row:not(.plan)').last.inner_text() + pg.locator('#list').inner_text())
+    check('the game gains a monster: it leaves the planned list and is a normal row', pg.locator('#list .row.plan').count() == len([f for f in pfoe if f['monster'] not in game['foes']]) - 1 and pg.locator('#list .row:not(.plan)').count() == want['foes'] + 1 and "The Collector" in pg.locator('#list .row:not(.plan)').last.inner_text() + pg.locator('#list').inner_text())
     pg.goto(URL + '#rules/coming'); pg.wait_for_function("document.querySelector('#detail h2')", timeout=60000); pg.wait_for_timeout(250); dt = pg.locator('#detail').inner_text()
-    check('the game gains chapter 19 and the BAG: What is coming drops both (chapters 11 to 18 are built already) and keeps the rest', 'the family dinner' not in dt.lower() and 'bag command and run' not in dt.lower() and 'casual mode' in dt.lower() and 'the lost-mail office' not in dt.lower() and 'julian\'s building' not in dt.lower(), dt[:300])
+    check('the game gains chapter 20 and the BAG: What is coming drops both (chapters 11 to 19 are built already) and keeps the rest', 'the family dinner' not in dt.lower() and 'bag command and run' not in dt.lower() and 'casual mode' in dt.lower() and 'the studio again' not in dt.lower() and 'the lost-mail office' not in dt.lower() and 'julian\'s building' not in dt.lower(), dt[:300])
     pg.goto(URL + '#rules/sheet'); pg.wait_for_function("document.querySelector('#detail h2')", timeout=60000); pg.wait_for_timeout(250)
     check('the game gains the BAG rule: the cheat sheet says the BAG opens the bag', 'opens the bag' in pg.locator('#detail').inner_text())
     check('gains: no script errors', not errs, errs); cx.close()

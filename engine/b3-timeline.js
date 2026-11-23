@@ -32,6 +32,13 @@ function b3RoundStart(F,beats) {
   for(const hz of F.hazards.slice()) if(--hz.rounds<=0) { F.hazards.splice(F.hazards.indexOf(hz),1); beats.push({t:'hazardEnd',id:hz.id,side:hz.side}); if(B3_HAZARDS[hz.id].vessel) b3VesselExpire(F,hz,beats); }
   // Stage 22 (chapter 17): a foe with two stances (the Twin Lenses) swaps at every round divider, before the round's first turn.
   for(const u of F.foes) if(b3Alive(u)&&u.D&&u.D.stances&&b3SwapStance(u)) beats.push({t:'stance',tgt:u.key,stance:u.stance,name:u.D.stances[u.stance].name,why:'round'});
+  // Stage 22 (chapter 19): the Censor stamps the flavor that did the most damage to it in the round before (a tie, or no damage, stamps nothing).
+  for(const u of F.foes) if(b3Alive(u)&&u.D&&u.D.redact) {
+    let top=null,best=0,tie=false;
+    for(const fl of Object.keys(u.dmgLog||{})) { const v=u.dmgLog[fl]; if(v>best) { top=fl; best=v; tie=false; } else if(v===best&&v>0) tie=true; }
+    u.stamp=F.round>=2&&top&&!tie?top:null; u.dmgLog={};
+    if(u.stamp) beats.push({t:'stamp',tgt:u.key,flavor:u.stamp,name:(B3_FLAVORS[u.stamp]&&B3_FLAVORS[u.stamp].name)||u.stamp});
+  }
   b3Fire(F,'roundStart',{},beats);
   b3ScriptRound(F,beats);   // adds out of the freezer (engine/b3-script.js)
 }

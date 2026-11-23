@@ -1,3 +1,19 @@
+## b3s22ch19 (2026-11-23): Chapter 19 (the lost-mail office) fights on the new battle: Dead Letter, Rubber Stamp, the Courier and the Dead-Letter Censor
+
+Card c-b3s22ch19. Chapter 19 is on the BY CHAPTER list for Battle 3. One number changed: the Censor's HP, printed 3,400 (2,550 for three), is 2,300 (1,725). Evidence: simulator (`--support=4`, Rank 2, level 47, Grace, Rose, Amy and TNB, 24 fights): at the printed HP it took 9.83 rounds (6.45 with REDACTED switched off), over the 5 to 7 a boss with a helper is aimed at; at 2,300 it averages 6.22 rounds and won every time. The two Elites (2.7 and 2.8 rounds) and the Courier fight (6.8 rounds, the bestiary's own estimate) are as printed.
+
+| What | Where |
+|---|---|
+| Dead Letter and Rubber Stamp (Elites, one at a time), the Brass Mail-Chute Courier (mini-boss with Elite stats, Lab only: no scene places it), The Dead-Letter Censor (boss), four formations (10, 10, 20 and 30 Vibe Points) | `data/b3-foes-ch19.js` |
+| Six statuses: `wax_ward`, `wax_seal`, `ink_pad`, `denied`, `whoosh_eva`, `black_marker` | `data/b3-status.js` |
+| REDACTED (`redact` on a foe row): at each round divider from round 2 the Censor stamps the flavor that hurt it most; that flavor's damage is halved, takes no pips, and costs the attacker 1 Pep; a Break clears it | `engine/b3-timeline.js`, `b3-resolve.js`, `b3-core.js` (carried row, simple player), `b3-play.js` (a `stamp` beat) |
+| Wax-Seal Ward (`bounceDebuff` flag): the first debuff aimed at a Dead Letter goes back on whoever sent it, the seal is used up | `engine/b3-ops.js` (`b3PutStatus`) |
+| Wall Perch (`perch` on a foe row): the Courier stays Back with nothing in Front; new act condition `when:{row}` and `row:'swap'`; a Break pins it in Front | `engine/b3-core.js` (`b3EffRow`), `b3-foe.js`, `b3-ops.js`, `b3-resolve.js` |
+| The switch (`chapters` 19, `levelFloor` 47, tips `ch19`) and the Lab fights NEW 94 to 97 | `data/b3-story.js`, `data/b3-lab.js` |
+| `B3_CH_ON(19)` tip toast before the Censor fight (a loss already heals and retries) | `data/scenes-ch19.js` (recorded lines untouched) |
+| Checks and the page test | `tools/b3-check-s22ch19.js`, `tools/ch19_b3_test.py` (`tools/night/tests.json`); older checks and tests that counted chapter 19 as unswitched now say 20 (`b3-check-s15/17/18/18bonus/22ch18`, `b3_story_test.py`, `battle_guide_test.py`) |
+| Guide data | `data/guide-anims.json` rebuilt |
+| Docs | `docs/BATTLE3.md` "What stage 22 chapter 19 holds" |
 ## guideflow6 (2026-11-23): In the Battle Guide you can upload your own start picture, and one button makes all of a person's missing standard poses
 
 Card c-guideflow-6, plan `claude/guide-flow-plan.md` section 10 step 6 (3.2 D11 and D13, 5.2, 5.5, rows X13 and X14 of section 6, the T8 additions). Changed: `battle-guide.html`, `tools/battle_guide_test.py`, `docs/BATTLE_GUIDE.md`. The plan was built as written; no step needed a different way. Nothing was paid for and no service was called (every test uses the stand-in GitHub).

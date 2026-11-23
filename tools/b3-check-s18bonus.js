@@ -20,7 +20,7 @@ module.exports=function(T) {
   ok(S.setup.nsGremlin.vp+S.setup.nsSlug.vp+S.setup.nsCone.vp+S.setup.nsGarden.vp+S.setup.nsBoss2.vp===90,'the bonus chapter pays 90 Vibe Points in all (4 fights and the boss win)');
   ok(!S.setup.nsBoss1.vp&&!S.setup.nsBoss1b.vp,'the two runs that end in a flee and a shell pay nothing');
   ok(S.bonus&&S.bonus[21]&&S.bonus[21].level===5&&S.bonus[21].finished===1,'chapter 21 has its own level floor (5) and Vibe Point pool, not the 20 finished chapters of the story');
-  ok(!S.levelFloor[21]&&S.levelFloor.length<=19,'the story level floor table stops at chapter 18 (so the bonus table is needed)');
+  ok(!S.levelFloor[21]&&S.levelFloor.length<=20,'the story level floor table stops at chapter 19 (so the bonus table is needed)');
   ok(ST.frozen&&ST.frozen.flags.includes('frozen')&&ST.frozen.dur.unit==='turn','the Frozen status exists and ends by turns');
   ok(ST.birthday_girl&&ST.birthday_girl.dur.n===2&&ST.birthday_girl.dur.unit==='turn','the Birthday Girl status lasts two turns');
 

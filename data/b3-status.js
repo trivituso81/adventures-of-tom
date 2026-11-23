@@ -640,3 +640,24 @@ Object.assign(B3_STATUS,{
   backdrop_heat:{id:'backdrop_heat',name:'Backdrop Heat',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'backdropHeat',v:.20}],flags:[],
     short:'ATK UP',color:'#f2a33a',weight:5,desc:'The lamps run hot behind the backdrop: 20% more Attack. It can be stripped.'}
 });
+
+// ---------- Stage 22 (chapter 19): the lost-mail office ----------
+//   wax_ward / wax_seal  the Dead Letter's Wax-Seal Ward: +20% Defense, and the seal sends the next debuff back on whoever aimed it (the seal is used up)
+//   ink_pad              the Rubber Stamp's Guard Stance (25% less damage, 2 turns): Panic Boil! or a Break ends it
+//   denied               DENIED!: 20% less Defense
+//   whoosh_eva           the Courier's Pneumatic Whoosh: 20% Evasion for 1 turn
+//   black_marker         Black-Marker Strike: 20% less Attack
+Object.assign(B3_STATUS,{
+  wax_ward:{id:'wax_ward',name:'Wax-Seal Ward',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'waxWard',v:.20}],flags:[],
+    short:'DEF UP',color:'#c9473a',weight:5,desc:'A thick red wax seal over the flap: 20% more Defense. It can be stripped.'},
+  wax_seal:{id:'wax_seal',name:'Wax Seal',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[],flags:['bounceDebuff'],
+    short:'RETURNS',color:'#e07a6a',weight:5,desc:'RETURN TO SENDER: the next debuff aimed at it does not land. It goes back on whoever sent it, and the seal is used up.'},
+  ink_pad:{id:'ink_pad',name:'Ink-Pad Stance',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
+    short:'GUARD',color:'#7a6aa8',weight:5,desc:'Braced on the ink pad: takes 25% less damage. Panic Boil! or a Break ends it.'},
+  denied:{id:'denied',name:'DENIED!',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'denied',v:-.20}],flags:[],
+    short:'DEF DOWN',color:'#d85a4a',weight:5,desc:'Stamped DENIED in red: 20% less Defense.'},
+  whoosh_eva:{id:'whoosh_eva',name:'Pneumatic Whoosh',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'eva',kind:'whoosh',v:.20}],flags:[],
+    short:'EVADE',color:'#b9c7d8',weight:5,desc:'Back in the tube, out of reach: 20% Evasion. It can be stripped.'},
+  black_marker:{id:'black_marker',name:'Black Marker',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'blackMarker',v:-.20}],flags:[],
+    short:'ATK DOWN',color:'#4a4a52',weight:5,desc:'Half your move is struck out in black marker: 20% less Attack.'}
+});

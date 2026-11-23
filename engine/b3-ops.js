@@ -77,6 +77,10 @@ function b3PutStatus(F,c,t,e) {
   // Fresh Ride: a family member who wears it is not given the next debuff the other side aims at them; the lock is used up.
   if(S.kind==='debuff'&&c.actor.side!==t.side) { const fr=Object.keys(t.st).find(i=>B3_STATUS[i].flags.includes('blockDebuff'));
     if(fr) { b3EndStatus(F,t,fr,'used'); c.beats.push({t:'soak',tgt:t.key,id:e.id,g:c.g},{t:'statusEnd',tgt:t.key,id:fr,g:c.g}); return; } }
+  // Wax-Seal Ward (`bounceDebuff`, chapter 19): the debuff does not land; the seal is used up and the same debuff goes back on whoever sent it.
+  if(S.kind==='debuff'&&c.actor.side!==t.side) { const wx=Object.keys(t.st).find(i=>B3_STATUS[i].flags.includes('bounceDebuff'));
+    if(wx) { b3EndStatus(F,t,wx,'used'); c.beats.push({t:'soak',tgt:t.key,id:e.id,g:c.g},{t:'statusEnd',tgt:t.key,id:wx,g:c.g});
+      if(b3Alive(c.actor)) b3PutStatus(F,Object.assign({},c,{actor:t}),c.actor,Object.assign({},e,{bounced:true})); return; } }
   // Pace-Partner Run: the status carries Amy's Speed as it is right now (b3Stat in engine/b3-core.js reads it).
   b3AddStatus(F,t,e.id,{src:c.actor,n:e.n,v:S.flags.includes('paceRun')?b3Stat(c.actor,'spd'):e.v}); c.beats.push({t:'status',tgt:t.key,id:e.id,g:c.g});
   // TAP-Card Transfer: a buff TNB puts on lasts longer.
@@ -268,9 +272,9 @@ const B3_OPS={
     c.beats.push({t:'rowTrade',a:a.key,b:b.key,rowA:a.row,rowB:b.row,g:c.g});
   },
   row(F,c,e) {
-    for(const t of b3Who(F,c,e.to)) { if(t.side!=='foe'||t.row===e.row) continue;
-      t.row=e.row; b3Reslot(F);
-      c.beats.push({t:'row',tgt:t.key,row:e.row,g:c.g}); b3Fire(F,'rowMoved',{src:c.actor,tgt:t,g:c.g,c},c.beats); }   // (stage 19: 2006 Lucky Boat Lure listens)
+    for(const t of b3Who(F,c,e.to)) { const to=e.row==='swap'?(t.row==='back'?'front':'back'):e.row; if(t.side!=='foe'||t.row===to) continue;   // row:'swap' (chapter 19): the other row
+      t.row=to; b3Reslot(F);
+      c.beats.push({t:'row',tgt:t.key,row:to,g:c.g}); b3Fire(F,'rowMoved',{src:c.actor,tgt:t,g:c.g,c},c.beats); }   // (stage 19: 2006 Lucky Boat Lure listens)
   },
   // hazard: lays a B3_HAZARDS row on one side's floor. Laying the same one again replaces it.
   hazard(F,c,e) {

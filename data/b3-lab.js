@@ -199,6 +199,15 @@ const B3_LAB=[
   // Stage 22, chapter 18 (the studio on the top floor): The Studio Rig (bestiary entry 79), the chapter's one fight. Tom, Grace, Rose and Amy fight it.
   {id:'new93',name:'NEW 93: THE STUDIO RIG',sub:'Chapter 18 boss. 8 Composure pips, can\u2019t stand Clobber or Racket. Spotlight Lock marks one of you in Back and Big Flash stuns that person next turn: Tom\u2019s Suite Door Slide takes it, a Break cancels it. At half HP it rolls down a backdrop (Guard Stance, Toasty: a Racket hit brings it down), then Every Light On joins its moves.',
     party:['tom','grace','rose','amy'],level:45,formation:'vance',bg:'pinnacle'},
+  // Stage 22, chapter 19 (the lost-mail office): Tom is frozen, so Grace, Rose, Amy and TNB fight (Nara is on the bench in the scenes; the Censor fight in the story brings her).
+  {id:'new94',name:'NEW 94: DEAD LETTER',sub:'Chapter 19 hall fight. One Elite in Front, 5 Composure pips, can\u2019t stand Clobber or Sizzle. It starts with a Wax-Seal Ward: +20% Defense, and the first debuff you put on it goes back on you. Return To Sender is charged first.',
+    party:['grace','rose','amy','tnb'],level:47,formation:'deadletter',bg:'sorting'},
+  {id:'new95',name:'NEW 95: RUBBER STAMP',sub:'Chapter 19 hall fight. One Elite in Front, 5 Composure pips, can\u2019t stand Clobber or Razzle, shrugs off Drench. It starts braced on the ink pad (Guard Stance: Panic Boil! or a Break ends it). DENIED! is charged first.',
+    party:['grace','rose','amy','tnb'],level:47,formation:'rubberstamp',bg:'sorting'},
+  {id:'new96',name:'NEW 96: THE MAIL-CHUTE COURIER',sub:'Chapter 19 mini-boss (Lab only: no scene places it yet). A Dead Letter in Front and the Courier perched in Back. It winds up Special Delivery Slam from the Back and lands in Front; Pneumatic Whoosh sends it back with +20% Evasion. A row move or a Break pins it in Front.',
+    party:['grace','rose','amy','tnb'],level:47,formation:'mailcourier',bg:'sorting'},
+  {id:'new97',name:'NEW 97: THE DEAD-LETTER CENSOR',sub:'Chapter 19 boss. 8 Composure pips, can\u2019t stand Razzle or Sizzle. From round 2 it stamps REDACTED on the flavor that hurt it most: that flavor does half damage, takes no pips and costs 1 Pep. Rotate flavors. At half HP it calls a Dead Letter and UNDELIVERABLE joins.',
+    party:['grace','rose','amy','tnb'],level:47,formation:'censor',bg:'sorting'},
   // movestage2: the Move Lab for Tom's eight staged moves (engine/b3-movelab.js). Last in the list so the numbers of the fights above stay; the NEW BATTLE list shows it first.
   {id:'moves-tom',name:'MOVE LAB: TOM',sub:'Play Tom\u2019s eight staged moves in a real fight, in ladder order, then Keep, Tweak or Replace each one. The Capstones play against The Big One.',
     party:['tom','grace','rose','deedee'],level:7,formation:'mudling',bg:'pond',movelab:true},

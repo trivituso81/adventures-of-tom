@@ -16,7 +16,7 @@ module.exports=function(T) {
   // 1. The switch, the floor, the numbers (bestiary entry 79, printed as they are except the HP, which the simulator moved: see data/b3-foes-ch18.js and docs/BATTLE3.md)
   const R=FOES.vance;
   ok(S.chapters.includes(18)&&S.chapters.indexOf(18)<S.chapters.indexOf(21)&&S.chapters.indexOf(18)>S.chapters.indexOf(17),'chapter 18 is on Battle 3 after chapter 17 (found '+J(S.chapters)+')');
-  ok(S.levelFloor[18]===45&&S.levelFloor.length===19,'chapter 18 floors the Character Level at the bestiary baseline, 45 (found '+S.levelFloor[18]+')');
+  ok(S.levelFloor[18]===45&&S.levelFloor.length>=19,'chapter 18 floors the Character Level at the bestiary baseline, 45 (found '+S.levelFloor[18]+')');
   ok(R&&R.ch===18&&R.name==='The Studio Rig'&&R.role==='boss'&&R.row==='front'&&R.noRun&&R.drop===null&&R.atk===203&&R.def===85&&R.spd===122&&R.pips===8,'the Studio Rig is the chapter 18 boss under the id `vance`: Atk 203, Def 85, Spd 122, 8 pips, Front, no running');
   ok(R.hp===6200&&R.hp3===4650&&Math.round(R.hp*.75)===R.hp3,'its HP is 6,200 (4,650 for three; printed 3,790 and 2,840: the one number the simulator moved) and the three-party HP stays three quarters of it');
   ok(J(R.peeves)==='["clobber","racket"]'&&J(R.resists)==='["razzle"]'&&J(R.start)==='[]','Pet Peeves Clobber and Racket, resists Razzle, starts with nothing on');

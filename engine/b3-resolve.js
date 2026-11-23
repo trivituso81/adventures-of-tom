@@ -189,6 +189,7 @@ function b3KoCheck(F,c) {
 // A Pet Peeve is worth 1 pip per action however many hits landed. Only Elites and Bosses have pips.
 function b3Pips(c,t,n,peeve) {
   if(!t||t.side!=='foe'||!t.maxPips) return;
+  if(c.stampNoPip&&c.stampNoPip[t.key]) return;   // REDACTED (chapter 19): a move of only the stamped flavor takes no pips
   const LG=c.ledger||(c.ledger={}),L=LG[t.key]||(LG[t.key]={n:0,peeve:false});
   if(peeve) L.peeve=true; else L.n+=n;
 }
@@ -226,6 +227,8 @@ function b3Break(F,c,t) {
   if(lost) c.beats.push({t:'interrupt',src:null,tgt:t.key,id:lost.id,name:lost.name,why:'break',g:c.g});
   for(const id of Object.keys(t.st)) if(B3_STATUS[id].kind==='stance') { b3EndStatus(F,t,id,'break'); c.beats.push({t:'statusEnd',tgt:t.key,id,why:'strip',g:c.g}); }
   b3AddStatus(F,t,'flustered',{src:c.actor}); c.beats.push({t:'status',tgt:t.key,id:'flustered',g:c.g});
+  if(t.stamp) { t.stamp=null; c.beats.push({t:'statusEnd',tgt:t.key,id:'stamp',why:'break',g:c.g}); }   // chapter 19: a Break tears the REDACTED stamp down
+  if(t.D&&t.D.perch&&t.row==='back') B3_OPS.row(F,Object.assign({},c,{actor:t}),{row:'front',to:'self'});   // chapter 19: a Break pins the Courier in Front until it next acts
   // During its own turn its wait is not set yet, so it falls back when that turn ends (b3EndTurn).
   if(F.acting===t) t.flusterMove=true; else b3FlusterMove(F,t,c.actor===F.acting?c.rec:0);
   c.beats.push({t:'break',src:c.actor.key,tgt:t.key,bar:b3BarSnap(F,F.acting,c.rec),g:c.g});
@@ -284,6 +287,9 @@ function b3Hit(F,c,t,per,flavors,e,single) {
   if(crit) b3Fire(F,'crit',{src:a,tgt:t,g:c.g},B);
   // An intercepted hit lands that much weaker on the one who stepped in.
   const red=c.inter&&c.inter[t.key]?c.inter[t.key].reduce:0;
+  // REDACTED: a move whose every flavor is the stamped one takes no pips from this monster, and its user loses 1 Pep when the action ends.
+  const whole=a.side==='party'&&t.side==='foe'&&!!t.stamp&&flavors.every(x=>x===t.stamp);
+  if(whole) { (c.stampNoPip=c.stampNoPip||{})[t.key]=true; c.stampPep=true; }
   for(let fi=0;fi<flavors.length;fi++) {
     const fl=flavors[fi];
     if(t.hp<=0) break;
@@ -305,12 +311,14 @@ function b3Hit(F,c,t,per,flavors,e,single) {
     let dmg=b3Stat(a,'atk')*per*100/(100+b3Stat(t,'def'))*b3OutMult(a,bonus,mx)*(pv?B3_RULES.peeve:1)*(rs?B3_RULES.resist:1)*(crit?B3_RULES.crit.dmg*(1+b3Sum(a,'critDmg',mx)):1)*b3TakenMult(t,red,mx);
     if(single&&fl==='clobber'&&b3EffRow(F,t)==='back') dmg*=1-B3_RULES.backRowClobber;
     if(t.side==='party') dmg*=F.mods.taken;
+    const stamped=a.side==='party'&&t.side==='foe'&&t.stamp===fl;
+    if(stamped) dmg*=t.D.redact.dmg;   // REDACTED: the stamped flavor part does half damage
     dmg=Math.max(1,Math.round(dmg));
     while(det) {
       c.detonated[t.key]=true; (c.detPrime=c.detPrime||{})[t.key]=det.prime; b3EndStatus(F,t,det.prime,'detonated');
       B.push({t:'detonate',src:a.key,tgt:t.key,id:det.id,name:det.name,prime:det.prime,g:c.g});
       b3RunEffects(F,Object.assign({},c,{tgt:t,partDmg:dmg}),det.effects);
-      b3Pips(c,t,det.pips);
+      if(!stamped) b3Pips(c,t,det.pips);
       const got=b3Pep(F,a,B3_RULES.pep.detonation,'detonation'); if(got) B.push({t:'pep',tgt:a.key,n:got,pep:a.pep,g:c.g});
       b3RuckusAdd(F,B,c.g,B3_RULES.ruckus.detonation,a.key,'detonation');   // the gauge's own Detonation gain; a Trait's extra comes with the hook
       b3Fire(F,'detonation',{src:a,tgt:t,id:det.id,g:c.g,c},B);
@@ -319,8 +327,9 @@ function b3Hit(F,c,t,per,flavors,e,single) {
     b3Hurt(F,c,t,dmg,Object.assign({src:a.key,flavor:fl,crit,peeve:pv,resist:rs},pierce?{pierce:true}:null));
     b3RuckusMix(F,c,a,t,fl,pv||!!c.detonated[t.key]);
     if(!c.hit.includes(t)) c.hit.push(t);
+    if(t.dmgLog&&a.side==='party'&&!F.preview) t.dmgLog[fl]=(t.dmgLog[fl]||0)+dmg;   // the Censor reads this at the next round divider
     if(a.side==='party'&&t.side==='foe') {
-      if(pv) b3Pips(c,t,0,true);          // a Pet Peeve hit: 1 pip per action, not per hit (spec 2.7)
+      if(pv&&!stamped) b3Pips(c,t,0,true);          // a Pet Peeve hit: 1 pip per action, not per hit (spec 2.7)
       b3QueueCounters(F,c,t,a);           // an enemy's counter act answers, once per action (engine/b3-foe.js)
     }
     // The Prime of the move's first flavor, unless this action detonated on this target (spec 2.5).
@@ -413,6 +422,7 @@ function b3Act(F,u,skillId,optKey) {
   b3RunReactions(F,beats);
   b3Fire(F,'actionEnd',{src:u,g:'post',c},beats);
   b3PayLedger(F,c);   // pips a Trait or Quirk added as the action ended
+  if(c.stampPep&&u.side==='party') { const lost=-b3Pep(F,u,-1,'stamp'); if(lost) beats.push({t:'pep',tgt:u.key,n:-lost,pep:u.pep,g:'post'}); }   // REDACTED: -1 Pep (never below 0)
   b3KoCheck(F,c);
   b3IntentRefresh(F); // a monster's shown aim is only kept while it still holds (engine/b3-foe.js)
   if(G) { beats.push({t:'grantEnd',who:u.key,bar:b3BarSnap(F,null,0),g:'end'}); if(b3CheckOver(F)) b3OverBeats(F,beats,'end'); }

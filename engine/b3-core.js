@@ -91,6 +91,7 @@ function b3FoeUnit(F,id,row,slot,o) {
   // does nothing to him). `helperLink` {id, reduce}: while a monster of that id stands on its side the foe takes `reduce` less damage (bestiary 1.1
   // "Helper links": it adds to Guard Stance and any other reduction, inside the 60% cap, because it is an ordinary `reduce` mod).
   if(D.stances) b3SetStance(u,D.stance0||Object.keys(D.stances)[0]);   // stage 22 (chapter 17): the Twin Lenses start in one stance
+  if(D.redact) { u.stamp=null; u.dmgLog={}; }   // stage 22 (chapter 19): the Dead-Letter Censor's REDACTED stamp (a flavor, or null) and what each flavor did to it this round
   if(D.custom) Object.assign(u.custom,D.custom);
   if(D.helperLink) u.mods.push({stat:'reduce',kind:'helper',v:D.helperLink.reduce,when:{allyStands:D.helperLink.id}});
   return u;
@@ -295,7 +296,8 @@ const b3Evasion=(u,wide,ctx)=>{ let e=b3Sum(u,'eva',ctx); const n=u.custom&&u.cu
 const b3MissChance=u=>Math.min(1,Math.max(0,-b3Sum(u,'acc')));
 const b3HasFlag=(u,flag)=>Object.keys(u.st).some(id=>B3_STATUS[id].flags.includes(flag));
 // Front or Back as the rules see it: a Back-row unit with nobody standing in Front counts as Front (bestiary 1.1).
-function b3EffRow(F,u) { return u.row==='back'&&b3Live(F,u.side).some(o=>o.row!=='back')?'back':'front'; }
+// Stage 22 (chapter 19) Wall Perch (`D.perch`): the Mail-Chute Courier stays in the Back row even with no monster in Front.
+function b3EffRow(F,u) { return u.row==='back'&&((u.D&&u.D.perch)||b3Live(F,u.side).some(o=>o.row!=='back'))?'back':'front'; }
 // Neighbouring slots on the same side.
 const b3Adjacent=(F,u)=>b3Live(F,u.side).filter(o=>Math.abs(o.slot-u.slot)===1);
 
@@ -346,6 +348,9 @@ function b3Carried(F,u) {
   if(u.stance&&u.D&&u.D.stances) { const S=u.D.stances[u.stance],fl=a=>a.map(x=>(B3_FLAVORS[x]&&B3_FLAVORS[x].name)||x).join(' and ');
     rows.push({name:S.name,short:'LENS',color:'#9ec9ff',kind:'lens',left:'swaps next round',
       desc:'Pet Peeves '+fl(S.peeves)+'. Resists '+fl(S.resists)+'. It swaps lens at every round divider and on Rack Focus. A Break or a cleanse cannot hold it.'}); }
+  if(u.stamp&&u.D&&u.D.redact) { const nm=(B3_FLAVORS[u.stamp]&&B3_FLAVORS[u.stamp].name)||u.stamp;
+    rows.push({name:'REDACTED: '+nm,short:'REDACTED',color:'#d85a4a',kind:'lens',left:'until the next round',
+      desc:'Attacks of only '+nm+' do half damage and take no Composure pips, and the attacker loses 1 Pep after the action. A move with two flavors loses only its '+nm+' half. A Break tears the stamp down. Rotate flavors.'}); }
   // A family member's Vibes come next: the Main Vibe with its Rank and Lean, and the Pocket Vibe.
   if(u.side==='party'&&u.vibe===B3_FREELANCER) {   // Casual Mode (engine/b3-progress.js): no Lean, two Secondary Vibes, every Trait
     const Ps=[u.pocket,u.pocket2].filter(x=>x&&B3_VIBES[x]).map(x=>B3_VIBES[x].name);
@@ -500,7 +505,7 @@ function b3AutoScore(F,u,S,O) {
     sc+=best+3;
   } else if(tier>0) {
     const per=t=>{ let d=std(t)*tier/S.flavor.length,sum=0;
-      for(const fl of S.flavor) sum+=d*(b3Peeves(t).includes(fl)?R.peeve:1)*(t.resists.includes(fl)?R.resist:1);
+      for(const fl of S.flavor) sum+=d*(b3Peeves(t).includes(fl)?R.peeve:1)*(t.resists.includes(fl)?R.resist:1)*(t.stamp===fl?.5:1);
       return sum; };
     if(O.units.length===1) {
       const t=O.units[0],strip=has('strip'),nb=strip&&strip.all?Object.keys(t.st).filter(id=>B3_STATUS[id].kind===strip.kind).length:0;

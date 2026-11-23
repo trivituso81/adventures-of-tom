@@ -18509,8 +18509,13 @@
     {
      "d": "2026-11-23",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Built chapter 19 on Battle 3 (b3s22ch19). Dead Letter, Rubber Stamp (Elites alone), the Brass Mail-Chute Courier (Lab only: no scene places it, drawn with the Rubber Stamp sprite) and The Dead-Letter Censor, as data in data/b3-foes-ch19.js; chapters has 19, levelFloor 47 (length 20), tips ch19, Lab fights NEW 94 to 97. New rules fields: REDACTED (`redact` on a foe row, stamp per round divider), the Wax-Seal Ward's `bounceDebuff` flag, Wall Perch (`perch`, `when:{row}`, `row:'swap'`). ONE number moved: the Censor's HP, printed 3,400 (2,550 for three), is 2,300 (1,725). Evidence: the simulator (--support=4, Rank 2, level 47, 24 fights) put the printed HP at 9.83 rounds (6.45 with the stamp off) against a target of 5 to 7; at 2,300 it is 6.22 rounds and won 24 of 24. Elites 2.7 and 2.8 rounds and the Courier fight 6.8 (the bestiary's own estimate) are as printed. Tom's notes read first: t-b3s22ch11 is all good; chapters 12 to 17 are in the backlog with no notes; t-b3s22ch18 had no note. Tests: node tools/b3-sim.js check 5453 checks, no fails; ch19_b3_test.py passes in portrait and landscape; b3_story_test.py passes; unused_voice all 0; battle_guide_test.py fails the same checks as on main before this build (plus the larger animation counts). Fights looked at in portrait and landscape (Censor and Courier Lab fights, and the chapter test frames)."
     }
-   ]
+   ],
+   "after": "t-b3s22ch19"
   },
   {
    "id": "c-b3s22ch20",
@@ -18522,7 +18527,7 @@
    "blocks": [
     "c-b3s23"
    ],
-   "changed": "2026-11-22",
+   "changed": "2026-11-23",
    "created": "2026-11-22",
    "tag": "b3s22ch20",
    "prompt": {
@@ -18542,6 +18547,10 @@
     {
      "d": "2026-11-22",
      "t": "Created by the b3s22 session: one card per chapter so no chapter is built in the same conversation as another."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Note from the chapter 19 build (b3s22ch19): chapter 19 is on Battle 3 (levelFloor 47, length 20). tools/b3_story_test.py now treats chapter 20 as the first unswitched chapter (pool 2565, floor 47, Grace set to 49); once chapter 20 is on there is no unswitched story chapter left (chapter 21 is the bonus chapter and is already switched), so those 'first chapter not switched' cases need a different test (for example a chapter that is off because the list has no entry for it) or retire them and say so on the card. tools/battle_guide_test.py's fake-gain case now uses the chapter 20 Collector (`leviathan`, chapters.push(20)); chapter 20's Blue Lens and Orange Lens (`lens`) and the Collector are the last planned monsters, so build the check for 'a planned monster shows its numbers' on whatever planned row remains (it now clicks the Collector row) or retire that case. The older chapter checks (tools/b3-check-s15.js, s17.js, s18.js, s18bonus.js, s22ch18.js) count chapters: update them the way this build did (levelFloor length 21 with chapter 20). Add your own check file after b3-check-s22ch19.js in tools/b3-sim.js. New rules fields from chapter 19 you may reuse: `redact` (per-round flavor stamp), the `bounceDebuff` status flag, `perch`, `when:{row}`, `row:'swap'`. battle_guide_test.py fails the same checks on main before and after, and smoke's board_sync_test fails board4 'board_check accepts a Tom card waiting on its fix'."
     }
    ]
   },
@@ -20994,6 +21003,32 @@
    "created": "2026-11-23",
    "changed": "2026-11-23",
    "fyi": true
+  },
+  {
+   "id": "t-b3s22ch19",
+   "title": "Milestone: play chapter 19 on the new battle",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s22ch19 or a later name. Then CHAPTERS > Chapter 19 (or Take me there on the dashboard) and play to the Claim Desk and the Censor fight with Grace, Rose, Amy and TNB (about 10 minutes; Tom is frozen all chapter). Judge the mechanics only: is the fight fun and 5 to 7 rounds, can you read the screen and the turn bar in portrait and landscape, does it read that at each round the Censor blacks out (REDACTED) the flavor that hurt it most so that flavor does half damage and costs 1 Pep (tap the Censor to see it), and that rotating flavors beats it, does the Dead Letter it calls at half HP read as a Wax-Seal Ward that sends your first debuff back, and does Strike It Out / UNDELIVERABLE feel fair and readable? On purpose: the Censor's HP was lowered from the printed 3,400 to 2,300 because the printed number made the fight 9.8 rounds in the simulator, and the Brass Mail-Chute Courier is only in the Battle Lab (no scene places it yet) and looks like a Rubber Stamp for now. To try it straight away use ADMIN > BATTLE LAB > NEW BATTLE, fights NEW 94 (Dead Letter), NEW 95 (Rubber Stamp), NEW 96 (Courier) and NEW 97 (the Censor). Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays chapter 19 on the old battle. The chapter 20 card (c-b3s22ch20) reads your note.",
+   "blocks": [],
+   "fyi": true,
+   "jump": {
+    "chapter": 19
+   },
+   "changed": "2026-11-23",
+   "created": "2026-11-23",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFbk4NpQHQr8YWTYcb",
+    "opening": "created by the b3s22ch19 session"
+   },
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Created by the b3s22ch19 session: Milestone for chapter 19 on the new battle."
+    }
+   ]
   }
  ],
  "sessions": [

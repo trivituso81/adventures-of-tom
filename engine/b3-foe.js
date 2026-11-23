@@ -14,7 +14,7 @@
 // Counter acts (hits:'attacker') and follow-ups (after:'...') are never picked from the list.
 const B3_FOE_HITS=['one','all','self','marked','attacker','two_random','two_adjacent','front_back','fastest','foes','field'];
 // Stage 13: allyHurt:true (another monster on its side is below full HP; Cone Head's Scoop Pass). Stage 12: allyId / noAllyId (a monster of that id stands on its side / none does), allyAge:N (with allyId: the one this monster called has stood for N of its turns).
-const B3_FOE_WHEN=['everyTurn','everyRound','waitRounds','once','hpBelow','hpAbove','stripped','has','lacks','notSameAllyTurns','allyId','noAllyId','allyAge','allyHurt','stance'];
+const B3_FOE_WHEN=['everyTurn','everyRound','waitRounds','once','hpBelow','hpAbove','stripped','has','lacks','notSameAllyTurns','allyId','noAllyId','allyAge','allyHurt','stance','row'];
 function b3ActOk(F,e,A) {
   const W=A.when||{};
   // Classroom Lights-Out Reset (`noAoe`): for a while it cannot use an act that reaches every family member.
@@ -28,6 +28,7 @@ function b3ActOk(F,e,A) {
   if(W.hpAbove!=null&&!(e.hp>e.maxHp*W.hpAbove)) return false;
   if(W.once&&e.uses[A.id]) return false;
   if(W.stance&&e.stance!==W.stance) return false;   // stage 22 (chapter 17): the Twin Lenses' acts that belong to one lens
+  if(W.row&&e.row!==W.row) return false;   // stage 22 (chapter 19): the Courier's cadence follows the row it sits in
   if(W.allyHurt&&!b3Live(F,e.side).some(o=>o!==e&&o.hp<o.maxHp)) return false;
   if(W.allyId&&!b3Live(F,e.side).some(o=>o.id===W.allyId&&o!==e)) return false;
   if(W.noAllyId&&b3Live(F,e.side).some(o=>o.id===W.noAllyId)) return false;
