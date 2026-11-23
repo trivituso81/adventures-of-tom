@@ -52,11 +52,15 @@ jobs:
         if: steps.probe.outputs.go == 'true'
         with:
           fetch-depth: 1
+          sparse-checkout-cone-mode: false
           sparse-checkout: |
-            tools
-            data
-            art/clips/start
-            art/raw/characters
+            /tools/*.py
+            /tools/art-library/
+            /tools/guidegen/
+            /tools/clip-gate/
+            /data/notify.json
+            /art/clips/start/
+            /art/raw/characters/*-hero-v*.png
       - uses: actions/setup-python@v5
         if: steps.probe.outputs.go == 'true'
         with:

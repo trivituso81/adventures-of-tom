@@ -1,3 +1,13 @@
+## guideflow3b (2026-11-23): The Guide worker checks out only what it needs, and its free proof on GitHub is recorded
+
+Card c-guideflow-3, part b. First proof run: the dispatch found the queue empty and both lanes ended in 2 to 3 seconds (run 45110400003: pic job 04:12:12 to 04:12:14, vid job 04:12:12 to 04:12:15, every step after the look at `queue.json` skipped). Then ONE dry picture row (`p-test-flow3`, who test) was put on branch `guideq` (this session's token cannot write through the contents API, so the branch and the row were pushed with git; the worker's own writes use the contents API with the Action's token) and the line was poked again (run 45110542104). The row went queued at 04:13:32, claimed (making) at 04:14:42, checking at 04:14:45 and done at 04:14:48: 70 seconds queued (of which 51 were the checkout, below), 3 seconds making, 3 seconds checking, with no fal call, no vision call and no file saved, and no phone message (a dry row sends none). The worker then stayed its 2 minute linger and the run succeeded. The vid job ended at once with its look at the queue.
+
+Found by that proof: the sparse checkout in guideflow3 still took 51 seconds, because `art/raw/characters` holds 531 MB (the 20 hero pictures the recipes use are 64 MB), `tools` 288 MB and `data` 244 MB. The workflow now uses a pattern list instead of whole folders: `tools/*.py`, `tools/art-library`, `tools/guidegen`, `tools/clip-gate`, `data/notify.json`, `art/clips/start` and the hero files `art/raw/characters/*-hero-v*.png`. Card c-guideflow-4 adds what the video checks need. The test row was removed afterwards.
+
+| What | Where |
+|---|---|
+| Narrower sparse checkout | `.github/workflows/guide-work.yml` |
+
 ## guideflow3 (2026-11-23): The Battle Guide has a worker for start pictures and uploaded pictures (nothing changes on screen yet)
 
 Card c-guideflow-3, step 3 of 9 of `claude/guide-flow-plan.md`. The page still uses the old way until card c-guideflow-5, so nothing Tom sees has changed. No paid run was made and fal, xAI and ElevenLabs were not called for real (every test uses stand-ins).
