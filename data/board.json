@@ -32286,7 +32286,7 @@
   {
    "id": "t-wangaveup-tom-controller-r2",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "ask": "decide",
    "fyi": true,
@@ -32312,8 +32312,15 @@
     {
      "d": "2026-11-22",
      "t": "Added by the wan-gen job (45075789998): tom-controller used 4 tries ($2.00)."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom chose: Give it 4 more tries",
+     "at": "2026-11-23T00:34:37.317Z"
     }
-   ]
+   ],
+   "done": "2026-11-22",
+   "answer": "Give it 4 more tries"
   },
   {
    "id": "t-wangaveup-stage-tom-bluebang-vid-r2",
