@@ -35,6 +35,8 @@ module.exports=function(T) {
   if(S.chapters.includes(11)) for(const m of read('data/scenes-p2.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]);
   // Chapter 12 (stage 22, chapter 12) has its scenes in data/scenes-ch12.js.
   if(S.chapters.includes(12)) for(const m of read('data/scenes-ch12.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]);
+  // Chapter 13 (stage 22 chapter 13) has its scenes in data/scenes-ch13.js. The Gold Knight's tips wait for the scene that starts his fight (his scene is not written yet: card c-b3s22ch13 history).
+  if(S.chapters.includes(13)) { for(const m of read('data/scenes-ch13.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]); keys.add('goldknight'); }
   for(const k of Object.keys(S.tips)) ok(keys.has(k),'tips key '+k+' is used by a switched chapter\'s scene step');
 
   // 2. Map monsters of the switched chapters all have a formation (the one door routes them)

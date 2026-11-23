@@ -152,7 +152,7 @@ SCENES.ch13Hush=[
   {talk:'Tom',lines:['The chip makes the Drill dig toward noise. So we make a lot of noise, all together, and it’ll come to us.']},
   {talk:'Amy',lines:['I’ve been trying to get Rose to use her indoor voice for six years. I’m glad somebody finally wants her outdoor one.']},
   {trace:'hush-debut'}, {hearts:'amy'}, {hearts:'tnb'},
-  {toast:'Goal: find the Drill Worm at the end of the tunnel (east). Chatter and Kinetic hits break its hush chip.',time:7},
+  {if:()=>!B3_CH_ON(13),then:[{toast:'Goal: find the Drill Worm at the end of the tunnel (east). Chatter and Kinetic hits break its hush chip.',time:7}],else:[{toast:'Goal: find the Drill Worm at the end of the tunnel (east). A Wired Relay Hushling in Back shields it, so knock that one out first.',time:7}]},
   {flag:'ch13-hush'}
 ];
 
@@ -167,11 +167,13 @@ SCENES.ch13Worm=[
   {talk:'TNB',lines:['It’s been drilling at that wall for years. Nobody told it to stop.']},
   {talk:'Nara',lines:['Nara sits very still. She has never seen anything so large that wanted so little.']},
   {talk:'Tom',lines:['Be kind to it first, and only hit it if it hits back. Amy, you heal. TNB, I’ll go for the hush chip. Everybody else, make some noise.']},
-  {toast:'Tip: Chatter and Kinetic hits break its hush chip. ▼ Bag, TAKE FIVE, is the kind way to win.',time:6},
+  {if:()=>!B3_CH_ON(13),then:[{toast:'Tip: Chatter and Kinetic hits break its hush chip. ▼ Bag, TAKE FIVE, is the kind way to win.',time:6}],else:[{toast:'Tip: the Drill Worm takes 25% less damage while a Wired Relay Hushling stands. Knock the Hushling out and the Worm loses 2 Composure pips.',time:6}]},
   {battle:'drillworm',tut:'ch13'},
   {if:()=>flag('battle:drillworm')!=='win',then:[
     {heal:true},
-    {talk:'Amy',lines:['Everybody okay? Good. It brings the roof down every third turn, so we heal before, not after.']},
+    {if:()=>B3_CH_ON(13),then:[
+      {talk:'Amy',lines:['Up, everybody. Walk it off.','The little Hushling in the back is wired to it. Knock that out first, and shield everyone before Full Bore Cave-In.']}],else:[
+      {talk:'Amy',lines:['Everybody okay? Good. It brings the roof down every third turn, so we heal before, not after.']}]},
     {toast:'Face the Drill Worm (the cavern, east of the tracks) and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 

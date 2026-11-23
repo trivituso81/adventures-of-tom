@@ -148,7 +148,13 @@ const B3_LAB=[
     party:['tom','grace','rose','amy'],level:27,formation:'finalcall',bg:'infinity'},
   {id:'new70',name:'NEW 70: GRIDLOCK PRIME',sub:'Chapter 12 boss. 7 Composure pips. Four-Way Red Light is a Guard Stance and two buffs and calls a Gridlock, once above and once below half HP. Exhaust Heatwave leaves it Toasty too.',
     party:['tom','grace','rose','amy'],level:30,formation:'gridlockprime',bg:'griffith'},
+  {id:'new71',name:'NEW 71: THE TUNNEL REGULARS',sub:'Chapter 13 Elite. The Turnstile Grump or the Signal Fault in Front has 4 Composure pips and starts braced. A Hushling in Back shushes and tires. Tom, Amy, TNB and Nara.',
+    party:['tom','amy','tnb','nara'],level:32,formation:'signalfault',bg:'subtunnel'},
+  {id:'new72',name:'NEW 72: THE DUAL-COAST DRILL WORM',sub:'Chapter 13 tunnel boss. 7 Composure pips. A Wired Relay Hushling in Back takes 25% off the Worm while it stands and costs the Worm 2 pips when it falls. At half HP a second one arrives.',
+    party:['tom','amy','tnb','nara'],level:32,formation:'drillworm',bg:'subtunnel'},
+  {id:'new73',name:'NEW 73: THE GOLD KNIGHT',sub:'Chapter 13 boss. 7 Composure pips. Slow, and nothing pushes him back above half HP. Visor Heat leaves him Toasty. Wide Arms grows from two of you to everyone. Below half HP, Helmet Hum.',
+    party:['tom','amy','tnb','nara'],level:32,formation:'goldknight',bg:'subtunnel'},
   // movestage2: the Move Lab for Tom's eight staged moves (engine/b3-movelab.js). Last in the list so the numbers of the fights above stay; the NEW BATTLE list shows it first.
   {id:'moves-tom',name:'MOVE LAB: TOM',sub:'Play Tom\u2019s eight staged moves in a real fight, in ladder order, then Keep, Tweak or Replace each one. The Capstones play against The Big One.',
-    party:['tom','grace','rose','deedee'],level:7,formation:'mudling',bg:'pond',movelab:true}
+    party:['tom','grace','rose','deedee'],level:7,formation:'mudling',bg:'pond',movelab:true},
 ];

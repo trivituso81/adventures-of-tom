@@ -290,6 +290,8 @@ function check() {
   require('./b3-check-s22.js')({G,ok,near,play,noCrit});
   // Stage 22, chapter 12 (Tom's street): Gridlock Prime, the Gridlock it calls and the Four-Way Red Light.
   require('./b3-check-s22ch12.js')({G,ok,near,play,noCrit});
+  // Stage 22, chapter 13 (the tunnel and the dent in the dome wall): the Drill Worm's helper link and feedback, the Gold Knight.
+  require('./b3-check-s22ch13.js')({G,ok,near,play,noCrit});
   console.log('CHECKS:',checks);
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);

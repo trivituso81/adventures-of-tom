@@ -538,6 +538,26 @@
   },
   {
    "i": 69,
+   "name": "NEW 70: GRIDLOCK PRIME",
+   "sub": "Chapter 12 boss. 7 Composure pips. Four-Way Red Light is a Guard Stance and two buffs and calls a Gridlock, once above and once below half HP. Exhaust Heatwave leaves it Toasty too."
+  },
+  {
+   "i": 70,
+   "name": "NEW 71: THE TUNNEL REGULARS",
+   "sub": "Chapter 13 Elite. The Turnstile Grump or the Signal Fault in Front has 4 Composure pips and starts braced. A Hushling in Back shushes and tires. Tom, Amy, TNB and Nara."
+  },
+  {
+   "i": 71,
+   "name": "NEW 72: THE DUAL-COAST DRILL WORM",
+   "sub": "Chapter 13 tunnel boss. 7 Composure pips. A Wired Relay Hushling in Back takes 25% off the Worm while it stands and costs the Worm 2 pips when it falls. At half HP a second one arrives."
+  },
+  {
+   "i": 72,
+   "name": "NEW 73: THE GOLD KNIGHT",
+   "sub": "Chapter 13 boss. 7 Composure pips. Slow, and nothing pushes him back above half HP. Visor Heat leaves him Toasty. Wide Arms grows from two of you to everyone. Below half HP, Helmet Hum."
+  },
+  {
+   "i": 73,
    "name": "MOVE LAB: TOM",
    "sub": "Play Tom’s eight staged moves in a real fight, in ladder order, then Keep, Tweak or Replace each one. The Capstones play against The Big One."
   }

@@ -9,7 +9,7 @@ module.exports=function(T) {
   const {G,ok}=T;
   const S=G('B3_STORY'),FOES=G('B3_FOES'),FORMS=G('B3_FORMATIONS'),CAST=G('B3_CAST'),J=x=>JSON.stringify(x);
   const ROOT=path.dirname(__dirname),read=f=>fs.readFileSync(path.join(ROOT,f),'utf8');
-  const EXPECT=[6,7,8,9,10,11,12,21];   // stage 18's chapters (21 is the bonus chapter Nine Scoops); each stage 18 part adds one. 11 is stage 22a (tools/b3-check-s22.js).
+  const EXPECT=[6,7,8,9,10,11,12,13,21];   // stage 18's chapters (21 is the bonus chapter Nine Scoops); each stage 18 part adds one. 11 is stage 22a (tools/b3-check-s22.js).
   ok(J(S.chapters.slice(5))===J(EXPECT.filter(n=>S.chapters.includes(n))),'stage 18 chapters sit in order after chapter 5 (found '+J(S.chapters)+')');
   const MINE=c=>c>=6&&c<=10;   // the bonus chapter has its own section at the end
   const scenes=read('data/scenes.js');
@@ -36,6 +36,8 @@ module.exports=function(T) {
   if(S.chapters.includes(11)) for(const m of read('data/scenes-p2.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]);
   // Chapter 12 (stage 22, chapter 12) has its scenes in data/scenes-ch12.js.
   if(S.chapters.includes(12)) for(const m of read('data/scenes-ch12.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]);
+  // Chapter 13 (stage 22 chapter 13) has its scenes in data/scenes-ch13.js. The Gold Knight's tips wait for the scene that starts his fight (his scene is not written yet: card c-b3s22ch13 history).
+  if(S.chapters.includes(13)) { for(const m of read('data/scenes-ch13.js').matchAll(/tut:'([a-zA-Z0-9]+)'/g)) keys.add(m[1]); keys.add('goldknight'); }
   for(const k of Object.keys(S.tips)) ok(keys.has(k),'tips key '+k+' is used by a switched chapter\'s scene step');
 
   // 2. Map monsters of the switched chapters all have a formation (the one door routes them)

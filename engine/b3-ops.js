@@ -48,6 +48,8 @@ function b3Who(F,c,to) {
   // Stage 11. otherAllies: every other monster on the actor's side.  randomOtherAlly: one of them picked by the fight's own dice
   // (Scene One, Marker! pulls one other monster forward).
   if(to==='otherAllies') return b3Live(F,c.actor.side).filter(o=>o!==c.actor);
+  // Stage 22 (chapter 13). allyBoss: the Boss on the actor's own side other than the actor (the Wired Relay Hushling's feedback lands on the Drill Worm only).
+  if(to==='allyBoss') return b3Live(F,c.actor.side).filter(o=>o!==c.actor&&o.D&&o.D.role==='boss');
   if(to==='randomOtherAlly') { const L=b3Live(F,c.actor.side).filter(o=>o!==c.actor); return L.length?[L[Math.floor(b3Rand(F)*L.length)]]:[]; }
   // Stage 12. randomFrontAlly: one monster standing in Front, picked by the fight's own dice, the actor included (Code Red!).
   // unshielded: every family member with no shield on (THE END pushes only those).

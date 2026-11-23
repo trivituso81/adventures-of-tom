@@ -5,7 +5,7 @@
 //   BY CHAPTER  a chapter in `chapters` below uses Battle 3 (the default).
 //   NEW         every fight Battle 3 has a formation for uses it (chapters not listed still have battle 2 tips and flags: for tests).
 const B3_STORY={
-  chapters:[1,2,3,4,5,6,7,8,9,10,11,12,21],
+  chapters:[1,2,3,4,5,6,7,8,9,10,11,12,13,21],
   maxParty:4,
   // A story fight that is not one of the formations: the foes it names. `vp` is what a win pays the Main Vibe (spec section 1).
   fights:{
@@ -14,7 +14,7 @@ const B3_STORY={
     smoglet2:{foes:[{id:'smoglet',row:'front'},{id:'smoglet',row:'front'}],vp:10}
   },
   // The Character Level every member has at least by the furthest chapter reached (the Lab's levels, bestiary v11). Never lowers a level.
-  levelFloor:[0,1,4,7,9,12,14,17,19,22,25,27,30],
+  levelFloor:[0,1,4,7,9,12,14,17,19,22,25,27,30,32],
   // Migration for a save that has not met Battle 3: a pool of this many Vibe Points per chapter finished, two thirds to the first
   // Sig Vibe and one third to the second, with overflow (spec section 1, architecture 4.2).
   vpPerChapter:135, split:[2/3,1/3],
@@ -227,6 +227,19 @@ const B3_STORY={
       {id:'gate',who:'*',text:'Gate Change trades one Front and one Back person and pushes both down the bar. It leaves FINAL CALL Dazzled, so a Razzle or Sizzle hit sets off a Detonation on it.',when:(F)=>F.foes.some(f=>f.st&&f.st.dazzled)},
       {id:'stampede',who:'*',text:'Rebooking Stampede is charging (!!): Lost Luggage joins the Front and every monster gets 20% more Speed. A Skill that strips buffs ends the speed-up. Then a floor sweep hits everyone.',when:(F)=>F.foes.some(f=>f.charge&&/Stampede|Avalanche/.test(f.charge.name||''))},
       {id:'final',who:'*',text:'ALL FLIGHTS CANCELLED is charging (!!) below half HP: it hits everyone, takes a Pep from each and tires them. Break its pips or shield the family before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/CANCELLED/.test(f.charge.name||''))}
+    ],
+    // ---- Chapter 13 (stage 22 chapter 13): Tom, Amy, TNB and Nara in the tunnel under the dome. `ch13` is the Drill Worm's scene key (data/scenes-ch13.js). ----
+    ch13:[
+      {id:'relay',who:'*',text:'The Drill Worm takes 25% less damage while a Wired Relay Hushling stands. Knock the Hushling in Back out first: it also costs the Worm 2 Composure pips.',when:(F)=>F.foes.some(f=>f.id==='relayhushling')},
+      {id:'peeve',who:'*',text:'The Drill Worm has 7 Composure pips and can’t stand Racket or Clobber. It shrugs off Drench, so Racket and Clobber break it fastest.'},
+      {id:'spark',who:'*',text:'Tunnel Friction Spark leaves the Worm itself Toasty. A Racket hit on a Toasty Worm sets off Panic Boil! and drops its guard.',when:(F)=>F.foes.some(f=>f.id==='drillworm'&&f.st&&f.st.toasty)},
+      {id:'cavein',who:'*',text:'Full Bore Cave-In is charging (!!) below half HP: it hits everyone. Shield the family, or break its pips before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Cave-In/.test(f.charge.name||''))}
+    ],
+    goldknight:[
+      {id:'peeve',who:'*',text:'The Gold Knight has 7 Composure pips and can’t stand Sizzle or Racket. He shrugs off Clobber, so Sizzle and Racket break him fastest.'},
+      {id:'slow',who:'*',text:'Nothing pushes him back on the turn bar above half HP. Visor Heat leaves him Toasty, so a Racket hit sets off Panic Boil! and drops his Gold Guard.',when:(F)=>F.foes.some(f=>f.id==='goldknight'&&f.st&&f.st.toasty)},
+      {id:'squeeze',who:'*',text:'Gold Squeeze is charging (!!): a big hug on one of you. Break his pips to stop it, or let Tom’s Suite Door Slide take it for them.',when:(F)=>F.foes.some(f=>f.charge&&/Squeeze/.test(f.charge.name||''))},
+      {id:'hum',who:'*',text:'Helmet Hum is charging (!!) below half HP: it slows and tires everyone. Shield the family, or break his pips before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Hum/.test(f.charge.name||''))}
     ]
   }
 };

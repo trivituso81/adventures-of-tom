@@ -87,6 +87,11 @@ function b3FoeUnit(F,id,row,slot,o) {
   // A boss prints its HP for the party size its chapter expects, and a second number for the other size (bestiary 1.1 "Party of 3").
   const n=F.party.length,base=add?(o.hp||D.hp*B3_RULES.add.hp):(n===3&&D.hp3)||(n===4&&D.hp4)||D.hp;
   u.hp=u.maxHp=Math.max(1,Math.round(base*F.mods.foeHp));
+  // Stage 22 (chapter 13). `custom` on a foe row switches on a one-off rule the family's Traits also use (the Gold Knight's `boppySpeed`: above half HP a push
+  // does nothing to him). `helperLink` {id, reduce}: while a monster of that id stands on its side the foe takes `reduce` less damage (bestiary 1.1
+  // "Helper links": it adds to Guard Stance and any other reduction, inside the 60% cap, because it is an ordinary `reduce` mod).
+  if(D.custom) Object.assign(u.custom,D.custom);
+  if(D.helperLink) u.mods.push({stat:'reduce',kind:'helper',v:D.helperLink.reduce,when:{allyStands:D.helperLink.id}});
   return u;
 }
 // Slot numbers run left to right along one line, Front row first, then Back (spec 2.1 "Adjacent"). A newcomer stands last in its row.
@@ -186,7 +191,7 @@ function b3OverBeats(F,beats,g) {
 //         deals no damage and builds no counter of its own (b3IsSupport).  oncePerRound:key: counts the first time each round (b3Act marks it).
 //         tagsAny:[..]: the act in progress carries one of these tags (Drywall: melee or projectile; Cool-Mist: projectile or aoe), stage 10.
 const B3_TARGETS=['foe','ally','family','self','random_foes','all_foes','ko_ally','adjacent_allies','field','ally_pair','family_or_ko','foe_row','either'];
-const B3_MOD_WHEN=['flavor','notBasic','by','steppingIn','allySkill','peeveOrPrime','skillPep','tgtBelow','basic','shielded','aoe','skillFlavor','oncePerRound','supportSkill','tagsAny','skillId','pepAtLeast','attackerPips','has','attackerDebuffed','tgtWeak','jumped','attackerFast'];
+const B3_MOD_WHEN=['flavor','notBasic','by','steppingIn','allySkill','peeveOrPrime','skillPep','tgtBelow','basic','shielded','aoe','skillFlavor','oncePerRound','supportSkill','tagsAny','skillId','pepAtLeast','attackerPips','has','attackerDebuffed','tgtWeak','allyStands','jumped','attackerFast'];
 // A foe's Pet Peeves right now: its own, plus any a status forces on it for a while (Masterpiece Portrait Makeover).
 function b3Peeves(u) {
   let out=u.peeves;
@@ -221,6 +226,7 @@ function b3ModWhen(u,m,ctx,putBy) {
     else if(k==='tgtWeak') { if(!b3TgtWeak(u,ctx.t)) return false; }                                          // the target is slower than the holder or carries a debuff (Don't Look Behind You)
     else if(k==='attackerFast') { const a=ctx.a; if(!a||!(b3Stat(a,'spd')>b3Stat(u,'spd')||b3HasFlag(a,'airborne'))) return false; }   // the attacker is faster than the holder, or Airborne (Spooked)
     else if(k==='jumped') { if(!((u.jumped||0)>=W.jumped)) return false; }                                   // the holder has leapt past this many icons on the turn bar since its last turn (Choreographed Momentum)
+    else if(k==='allyStands') { const F=ctx.F; if(!F||!b3Live(F,u.side).some(o=>o!==u&&o.id===W.allyStands)) return false; }   // stage 22: a monster of this id stands on the holder's side (a boss's helper link)
     else if(k==='tgtBelow') { const t=ctx.tgt; if(!t||t.side!==u.side||t.ko||!(t.hp<t.maxHp*W.tgtBelow)) return false; }
     else throw new Error('Battle 3 mod condition not built yet: '+k);
   }
@@ -637,7 +643,9 @@ function b3CheckData() {
       if(A.hits==='marked'&&!D.acts.some(x=>x.then===A.id&&x.effects.some(e=>e.op==='mark'))) bad.push(wa+': hits the Marked ally, but no act Marks for it');
       if(A.hits==='attacker'&&A.recovery!==0) bad.push(wa+': a counter act has Recovery 0');
       effects(wa,A.effects); }
-    if(D.onKo) effects(w+' onKo',D.onKo); }
+    if(D.onKo) effects(w+' onKo',D.onKo);
+    if(D.helperLink&&!(B3_FOES[D.helperLink.id]&&D.helperLink.reduce>0&&D.helperLink.reduce<=B3_RULES.caps.reduction)) bad.push(w+': helperLink needs a foe id that exists and a reduce share up to the cap');
+    if(D.custom&&D.custom.boppySpeed&&!(D.custom.boppySpeed.above>0)) bad.push(w+': boppySpeed needs an `above` share'); }
   for(const id in B3_FORMATIONS) for(const f of B3_FORMATIONS[id].foes) if(!B3_FOES[f.id]) bad.push('formation '+id+': unknown foe '+f.id);
   return bad;
 }

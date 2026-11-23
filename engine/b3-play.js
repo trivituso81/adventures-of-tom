@@ -77,15 +77,20 @@ function b3LayoutFoes() {
   const place=(f,px,py,k)=>{ const def=b2BattleDef(MONSTERS[f.D.art||f.id]),base=def.scale||3,w=def.sprite[0].length;
     B3P.foe[f.key]={def,px,py,sc:Math.max(base*.7,Math.min(base*1.3,want/w))*k*(def.shrink||1)*((B3_FOE_LOOK[f.id]||{}).size||(f.D&&f.D.role==='boss'&&!f.add?B3_BOSS_SIZE:1))}; B3P.fa[f.key]={lunge:null,hurtUntil:0,shakeUntil:0,flashUntil:0,die:null,hold:0}; };
   fr.forEach((f,k)=>place(f,(fx[fr.length]||fx[3])[k%3],(fy[fr.length]||fy[3])[k%3],1));
-  bk.forEach((f,k)=>place(f,(bx[bk.length]||bx[2])[k%2],(by[bk.length]||by[2])[k%2],.9));
+  // A helper of a linked foe (data/b3-foes-ch13.js `helperLink`) stands in the gap between the boss and the family, not behind the boss: the boss is drawn 2.5 times large and would hide it,
+  // and knocking the helper out is the point of the fight. Every other Back foe keeps its slot.
+  let hk=0; bk.forEach((f,k)=>{ const g=b3HelperOf(F,f)?B3_GAP_SPOTS[hk++%2]:null; place(f,g?g[0]:(bx[bk.length]||bx[2])[k%2],g?g[1]:(by[bk.length]||by[2])[k%2],.9); });
 }
+// The spots of a linked helper (the Drill Worm's Wired Relay Hushling): right of the boss, in front of it (a lower y draws later), left of the family.
+const B3_GAP_SPOTS=[[322,300],[312,236]];
+function b3HelperOf(F,f) { return F.foes.some(o=>o!==f&&o.D&&o.D.helperLink&&o.D.helperLink.id===f.id&&b3Alive(o)); }
 // An add walks in mid-fight: it takes the free spot of its row that is furthest from everyone standing. Nobody else moves.
 // Front adds stand between the caller and the family (they are its blockers); Back adds stand behind it.
 const B3_ADD_SPOTS={front:[[246,230],[240,304],[262,267]],back:[[92,214],[70,268],[58,236]]};
 function b3FreeSpot(f,back) {
   const taken=B3.F.foes.filter(o=>o!==f&&B3P.foe[o.key]&&b3Alive(o)).map(o=>B3P.foe[o.key]);
   let best=null,bd=-1;
-  for(const s of B3_ADD_SPOTS[back?'back':'front']) { const d=taken.reduce((m,o)=>Math.min(m,Math.hypot((o.px-s[0])*.6,o.py-s[1])),1e9); if(d>bd) { bd=d; best=s; } }
+  for(const s of (back&&b3HelperOf(B3.F,f)?B3_GAP_SPOTS:B3_ADD_SPOTS[back?'back':'front'])) { const d=taken.reduce((m,o)=>Math.min(m,Math.hypot((o.px-s[0])*.6,o.py-s[1])),1e9); if(d>bd) { bd=d; best=s; } }
   return best;
 }
 function b3LayoutAdd(key) {

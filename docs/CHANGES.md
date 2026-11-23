@@ -1,14 +1,33 @@
+## b3s22ch13 (2026-11-22): Chapter 13 (the tunnel under the dome) fights on the new battle: the Drill Worm with its Wired Relay Hushling, and the Gold Knight
+
+Card c-b3s22ch13. Chapter 13 is on the BY CHAPTER list for Battle 3 with the bestiary's numbers unchanged. Simulator (`--support=4`, Rank 2, level 32): the Elite fight 2.9 rounds, the Drill Worm 5.5, the Gold Knight 6.7 (longest 7.7); no number was changed. The Gold Knight has no scene in the chapter as built (data and Lab only), and the returning Part 1 monsters are chapter 14's, so both are on the chapter 14 card.
+
+| What | Where |
+|---|---|
+| Hushling, Signal Fault, Turnstile Grump (two Elites, 4 pips), Wired Relay Hushling, the Dual-Coast Drill Worm (7 pips) and The Gold Knight (boss, 7 pips); five formations, Vibe Points 90 for the chapter, Lab fights NEW 71 to 73, tips `ch13` and `goldknight` | `data/b3-foes-ch13.js`, `data/b3-lab.js`, `data/b3-story.js` |
+| Helper link: the Drill Worm takes 25% less damage while a Wired Relay Hushling stands (stacks with a Guard Stance, inside the 60% cap); when the Hushling falls the Worm loses 2 Composure pips and is Dazzled for 2 turns (new target `allyBoss`, inside the 3-pip cap) | `engine/b3-core.js` (`helperLink`, mod condition `allyStands`), `engine/b3-ops.js` |
+| Gold Knight: Boppy Speed above half HP on a foe row, Wide Arms growing 2, 3, all, Visor Heat plus a Racket hit sets off Panic Boil! and drops Gold Guard; six new statuses | `data/b3-status.js`, `data/b3-foes-ch13.js` |
+| Stand-in battle art for the two new foes (the Hushling's and Warden Boppy's rows) until their own sheets exist | `data/b3-foes-ch13.js` (last block) |
+| Battle 3 wording for the goal toast, the tip toast and Amy's retry coaching behind `B3_CH_ON(13)`; recorded lines untouched | `data/scenes-ch13.js` |
+| Chapter 13 test (cab stand to the melt, one tunnel fight and the Drill Worm boss, portrait and landscape) and its place in the night manifest; new rule check file | `tools/ch13_b3_test.py`, `tools/night/tests.json`, `tools/b3-check-s22ch13.js` |
+| Checks that counted the switched chapters now include 13; chapter 14 is the first unswitched one in the story and guide tests | `tools/b3-check-s15.js` to `s18bonus.js`, `tools/b3-check-s22.js`, `tools/b3_story_test.py`, `tools/battle_guide_test.py`, `data/guide-anims.json` |
+| Board: Milestone card t-b3s22ch13, a note on c-b3s22ch14 | `data/board.json` |
+
+Tests: `node tools/b3-sim.js check` (4677 checks, FAILS: []); `python3 tools/ch13_b3_test.py` portrait and landscape; `python3 tools/smoke.py`; `python3 -I tools/clip-audit/unused_voice.py`.
+
 ## wanstop-stage-tom-glare-vid-r1 (2026-11-23): the headlight flare video is tried again with its start picture shrunk to 80 percent
 
 Card c-wanstop-stage-tom-glare-vid-r1. The bulk run stopped `stage-tom-glare-vid` twice (bg 96.6 percent against 97, edge: the flare touched a picture edge in 40 of 90 pictures). I looked at the frames: the flare brightens, its rays lengthen and it fades as the prompt says, but the long rays run into the frame edge, so the edge is not flat black.
 - Changed ONE thing: `pad: 0.8` on the job (the start picture is shrunk to 80 percent on the same black, the existing pad of `_bulk.pads`), rev 1 to 2. Kept: the prompt file word for word, the model, 480p, 3 s, seed 81. Same fix as the jet wash video.
 - Started the next try: `wgen` on t-movestage-lab (about $0.15). This animation has used 2 of 4 tries ($0.30 of $3.20). Not run by this session.
 
+
 ## wanstop-stage-tom-jetwash-vid-r1 (2026-11-23): the jet wash video is tried again with its start picture shrunk to 80 percent
 
 Card c-wanstop-stage-tom-jetwash-vid-r1. The bulk run stopped `stage-tom-jetwash-vid` twice (bg 94.7 and 93.0 percent against 97, edge: the streaks touched a picture edge in 51 and 48 of 90 pictures). I looked at the frames: the streaks move and fade out as the prompt says, but the start picture is a wide streak that fills almost the whole width, so the video's streaks reach the frame edge and the edge pixels are not flat black.
 - Changed ONE thing: `pad: 0.8` on the job (the start picture is shrunk to 80 percent on the same black, the existing pad of `_bulk.pads`), rev 1 to 2. Kept: the prompt file word for word, the model, 480p, 3 s, seed 81, bake and wire settings.
 - Started the next try: `wgen` on t-movestage-lab (1 video, about $0.15). This animation has used 2 of 4 tries ($0.30 of $3.20). Not run by this session.
+
 
 ## movestage2c (2026-11-22): the marks of five staged moves are measured on their baked videos
 

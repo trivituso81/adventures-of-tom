@@ -557,3 +557,21 @@ Object.assign(B3_STATUS,{
   red_light_atk:{id:'red_light_atk',name:'Red Light Rage',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'redLightAtk',v:.25}],flags:[],
     short:'ATK UP',color:'#f08a6a',weight:5,desc:'Stuck so long it is furious: 25% more Attack. It can be stripped.'}
 });
+
+// Stage 22 (chapter 13, the tunnel and the dent in the dome wall): the statuses its monsters use. The Signal Fault's Track-Block Arm and the Turnstile Grump's Locked
+// Tripod are the Guard Stance they start in; Tap Out! and Deep Bore lower Defense 20%; the Gold Knight's Raised Palm lowers Attack 15% for one turn and his Gold Guard is
+// the Guard Stance he takes when he Stands Still. (Slow, Fatigue, Blind, Bleed, Toasty, Dazzled, Skill Lock and Mend are the shared rows above.)
+Object.assign(B3_STATUS,{
+  track_block_arm:{id:'track_block_arm',name:'Track-Block Arm',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
+    short:'GUARD',color:'#d9a441',weight:5,desc:'A striped crossing arm held down across the track: takes 25% less damage. Panic Boil! or a Break ends it.'},
+  locked_tripod:{id:'locked_tripod',name:'Locked Tripod',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
+    short:'GUARD',color:'#aab3bd',weight:5,desc:'The three steel bars locked in place: takes 25% less damage. Panic Boil! or a Break ends it.'},
+  tap_out:{id:'tap_out',name:'Tap Out!',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'tapout',v:-.20}],flags:[],
+    short:'DEF DOWN',color:'#9fb0c4',weight:4,desc:'Your card was rejected and a turnstile is sitting on your pockets: 20% less Defense.'},
+  deep_bore:{id:'deep_bore',name:'Deep Bore',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'deepbore',v:-.20}],flags:[],
+    short:'DEF DOWN',color:'#a8896a',weight:4,desc:'The drill went straight through your guard: 20% less Defense.'},
+  raised_palm:{id:'raised_palm',name:'Raised Palm',kind:'debuff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'atk',kind:'palm',v:-.15}],flags:[],
+    short:'ATK DOWN',color:'#e2c36b',weight:3,desc:'One gold palm held up, and you stop short: 15% less Attack.'},
+  gold_guard:{id:'gold_guard',name:'Gold Guard',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
+    short:'GUARD',color:'#f0d27a',weight:5,desc:'Knees locked and standing very still: takes 25% less damage. Panic Boil! or a Break ends it.'}
+});
