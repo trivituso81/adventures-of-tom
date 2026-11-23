@@ -1,8 +1,8 @@
 {
  "v": 1,
  "items": {
-  "p-test-flow3": {
-   "id": "p-test-flow3",
+  "p-test-flow3b": {
+   "id": "p-test-flow3b",
    "kind": "picture",
    "lane": "pic",
    "anim": "test",
@@ -14,23 +14,16 @@
    "start": "",
    "note": "",
    "cap": 0,
-   "at": "2026-11-23T04:13:32Z",
-   "state": "done",
-   "since": "2026-11-23T04:14:48Z",
-   "run": 45110542104,
+   "at": "2026-11-23T04:18:00Z",
+   "state": "queued",
+   "since": "2026-11-23T04:18:00Z",
+   "run": 0,
    "fal": null,
-   "tries": 1,
+   "tries": 0,
    "cost": 0,
    "why": "",
    "do": "",
-   "result": {
-    "path": "",
-    "mirrored": false,
-    "own": false,
-    "checks": [],
-    "main": false,
-    "dry": true
-   },
+   "result": null,
    "use": null,
    "left": false,
    "dry": true,
