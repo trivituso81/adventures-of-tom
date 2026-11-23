@@ -584,3 +584,18 @@ Object.assign(B3_STATUS,{
   resting_eyes:{id:'resting_eyes',name:'Resting My Eyes',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
     short:'GUARD',color:'#f0d27a',weight:5,desc:'Knees locked and napping standing up: takes 25% less damage. Panic Boil! or a Break ends it.'}
 });
+
+// Stage 22 (chapter 16, the town square): the statuses Marlowe, the Square's boss, puts on himself and on the family (bestiary entry 74, "Red-Tape Wall"; the fight
+// uses the scene's names). Behind the Eclipse is the Guard Stance (30% less damage) and it bounces back 15% of any hit whose flavor is not one of his Pet Peeves as plain
+// damage on whoever threw it (bestiary 1.1 "Bounced damage": no Defense, the shield soaks it first, it never knocks anyone out): the `bounce` op, run by an `afterHit` listener.
+// Panic Boil! or a Break ends the stance, and the bounce goes with it. Eclipse Plating is the +20% Defense buff (the heavier one, so a buff strip or a Fact-Check goes after it).
+// Marginal Note is Zoning Fine's 20% Attack penalty. (Blind, Slow, Bleed and Fatigue are the shared rows above.)
+Object.assign(B3_STATUS,{
+  eclipse_wall:{id:'eclipse_wall',name:'Behind the Eclipse',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.30}],flags:[],
+    on:{afterHit:{carrier:'target',from:'foe',notPeeveHit:true,effects:[{op:'bounce',pct:.15,to:'attacker'}]}},
+    short:'GUARD',color:'#9a9aa6',weight:5,desc:'Standing behind the black disc: takes 30% less damage, and 15% of any hit that is not Racket or Drench bounces back at whoever threw it, as plain damage that can’t knock anyone out. Panic Boil! or a Break ends it.'},
+  eclipse_plating:{id:'eclipse_plating',name:'Eclipse Plating',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'def',kind:'eclipsePlating',v:.20}],flags:[],
+    short:'DEF UP',color:'#c9a24a',weight:6,desc:'The black disc is a lot of Defense: 20% more. It can be stripped, and a Fact-Check turns it against him.'},
+  marginal_note:{id:'marginal_note',name:'Marginal Note',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'marginalNote',v:-.20}],flags:[],
+    short:'ATK DOWN',color:'#a8a8b4',weight:4,desc:'Something small and final was written about you in the margin: 20% less Attack.'}
+});

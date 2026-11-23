@@ -15,7 +15,7 @@ module.exports=function(T) {
 
   // 1. The switch, the floor, the numbers
   ok(S.chapters.includes(15)&&S.chapters.indexOf(15)<S.chapters.indexOf(21),'chapter 15 is on Battle 3 (found '+J(S.chapters)+')');
-  ok(S.levelFloor[15]===37&&S.levelFloor.length===16,'chapter 15 floors the Character Level at the bestiary baseline, 37 (found '+S.levelFloor[15]+')');
+  ok(S.levelFloor[15]===37&&S.levelFloor.length>=16,'chapter 15 floors the Character Level at the bestiary baseline, 37 (found '+S.levelFloor[15]+')');
   const R=FOES.hush9final,D=FOES.hushpod;
   // Bestiary entry 72: Atk 163, Def 71, Spd 118, 7 pips, Front, no running, Racket and Clobber hated, Razzle resisted. HP is the one number the simulator moved (3,300 and 2,478 for three, printed 2,490 and 1,870).
   ok(R&&R.ch===15&&R.hp===3300&&R.hp3===2478&&R.atk===163&&R.def===71&&R.spd===118&&R.pips===7&&R.role==='boss'&&R.row==='front'&&R.noRun,'HUSH-9 has the bestiary stat line: Atk 163, Def 71, Spd 118, 7 pips, Front, no running (HP 3300, 2478 for three: raised from the printed 2490 and 1870 by the simulator)');

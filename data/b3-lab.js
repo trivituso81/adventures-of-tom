@@ -184,6 +184,11 @@ const B3_LAB=[
   // Stage 22, chapter 15 (the family dinner): HUSH-9 Final Form, the radio (bestiary entry 72). Tom, Grace, Rose and Amy.
   {id:'new87',name:'NEW 87: HUSH-9 FINAL FORM',sub:'Chapter 15 boss, the Windowsill Radio. 7 Composure pips. Two Hushling pods in Back: each one you knock out costs it a pip and leaves it Dazzled. Mute Button locks a Skill list. At half HP Dead Air calls the pods back, then Total Silence.',
     party:['tom','grace','rose','amy'],level:37,formation:'hush9final',bg:'dinner'},
+  // Stage 22, chapter 16 (the town square): the Grey Notes and Marlowe (bestiary entries 73 and 74). Tom, Amy, TNB and Nara, the four who fight there.
+  {id:'new88',name:'NEW 88: TWO GREY NOTES',sub:'Chapter 16 normal fight. Two Grey Notes, one in Front and one in Back, 1,000 HP each. Stick Blinds, Flutter makes you Bleed, Fade tires you and strips a buff. Racket and Drench are their Pet Peeves.',
+    party:['tom','amy','tnb','nara'],level:40,formation:'greynote',bg:'pond'},
+  {id:'new89',name:'NEW 89: MARLOWE',sub:'Chapter 16 boss (the bestiary\u2019s Square\u2019s Sign). 8 Composure pips, two Grey Notes in Back. Behind the Eclipse takes 30% less damage and bounces 15% of any hit that is not Racket or Drench back at you; Panic Boil! or a Break drops it. Overexposure and, below half HP, Total Eclipse are charged first.',
+    party:['tom','amy','tnb','nara'],level:40,formation:'marlowe16',bg:'pond'},
   // movestage2: the Move Lab for Tom's eight staged moves (engine/b3-movelab.js). Last in the list so the numbers of the fights above stay; the NEW BATTLE list shows it first.
   {id:'moves-tom',name:'MOVE LAB: TOM',sub:'Play Tom\u2019s eight staged moves in a real fight, in ladder order, then Keep, Tweak or Replace each one. The Capstones play against The Big One.',
     party:['tom','grace','rose','deedee'],level:7,formation:'mudling',bg:'pond',movelab:true},

@@ -628,6 +628,16 @@
   },
   {
    "i": 87,
+   "name": "NEW 88: TWO GREY NOTES",
+   "sub": "Chapter 16 normal fight. Two Grey Notes, one in Front and one in Back, 1,000 HP each. Stick Blinds, Flutter makes you Bleed, Fade tires you and strips a buff. Racket and Drench are their Pet Peeves."
+  },
+  {
+   "i": 88,
+   "name": "NEW 89: MARLOWE",
+   "sub": "Chapter 16 boss (the bestiary’s Square’s Sign). 8 Composure pips, two Grey Notes in Back. Behind the Eclipse takes 30% less damage and bounces 15% of any hit that is not Racket or Drench back at you; Panic Boil! or a Break drops it. Overexposure and, below half HP, Total Eclipse are charged first."
+  },
+  {
+   "i": 89,
    "name": "MOVE LAB: TOM",
    "sub": "Play Tom’s eight staged moves in a real fight, in ladder order, then Keep, Tweak or Replace each one. The Capstones play against The Big One."
   }

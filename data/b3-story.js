@@ -5,7 +5,7 @@
 //   BY CHAPTER  a chapter in `chapters` below uses Battle 3 (the default).
 //   NEW         every fight Battle 3 has a formation for uses it (chapters not listed still have battle 2 tips and flags: for tests).
 const B3_STORY={
-  chapters:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,21],
+  chapters:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,21],
   maxParty:4,
   // A story fight that is not one of the formations: the foes it names. `vp` is what a win pays the Main Vibe (spec section 1).
   fights:{
@@ -14,7 +14,7 @@ const B3_STORY={
     smoglet2:{foes:[{id:'smoglet',row:'front'},{id:'smoglet',row:'front'}],vp:10}
   },
   // The Character Level every member has at least by the furthest chapter reached (the Lab's levels, bestiary v11). Never lowers a level.
-  levelFloor:[0,1,4,7,9,12,14,17,19,22,25,27,30,32,35,37],
+  levelFloor:[0,1,4,7,9,12,14,17,19,22,25,27,30,32,35,37,40],
   // Migration for a save that has not met Battle 3: a pool of this many Vibe Points per chapter finished, two thirds to the first
   // Sig Vibe and one third to the second, with overflow (spec section 1, architecture 4.2).
   vpPerChapter:135, split:[2/3,1/3],
@@ -257,6 +257,14 @@ const B3_STORY={
       {id:'mute',who:'*',text:'Mute Button takes a Pep and locks one person\u2019s Pocket Vibe Skills for 2 turns. Their Basic and Main Vibe Skills still work. It waits 2 rounds between uses.',when:(F)=>F.party.some(p=>p.st&&p.st.skill_lock)},
       {id:'air',who:'*',text:'Dead Air is charging (!!): it tires everyone, and at half HP it calls the pods back. Shield the family, or break its pips before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Dead Air/.test(f.charge.name||''))},
       {id:'silence',who:'*',text:'Total Silence is charging (!!) below half HP: it hits everyone. Shield the family, or break its pips before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Silence/.test(f.charge.name||''))}
+    ],
+    // ---- Chapter 16 (stage 22 chapter 16): Tom, Amy, TNB and Nara on the Square. `ch16` is Marlowe's scene key (data/scenes-ch16.js). There is no kind route in this chapter. ----
+    ch16:[
+      {id:'notes',who:'*',text:'Marlowe has two Grey Notes in Back. They stick, flutter and fade people, and he calls them back every time he braces behind the eclipse.',when:(F)=>F.foes.some(f=>f.id==='greynoteh')},
+      {id:'peeve',who:'*',text:'Marlowe has 8 Composure pips and can\u2019t stand Racket or Drench. He shrugs off Clobber, so Racket and Drench break him fastest.'},
+      {id:'wall',who:'*',text:'Behind the Eclipse: he takes 30% less damage, and 15% of any hit that is not Racket or Drench bounces back at you (never a knock-out). A Break or Panic Boil! drops the eclipse.',when:(F)=>F.foes.some(f=>f.id==='marlowe16'&&f.st&&f.st.eclipse_wall)},
+      {id:'over',who:'*',text:'Overexposure is charging (!!): it Blinds and Slows everyone. Shield the family, or break his pips before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Overexposure/.test(f.charge.name||''))},
+      {id:'total',who:'*',text:'Total Eclipse is charging (!!) below half HP: it hits everyone. Shield the family, or break his pips before it lands.',when:(F)=>F.foes.some(f=>f.charge&&/Total Eclipse/.test(f.charge.name||''))}
     ]
   }
 };

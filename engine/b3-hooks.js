@@ -55,11 +55,11 @@ const B3_HOOKS=['battleStart','roundStart','turnStart','actionDeclared','beforeH
 // Stage 19 (third Vibes): B3_LOW_HP is the share of Max HP under which a family member is "low" (`allyBelowHp` fires once as they cross it).
 //   tgtOther     the event's target is not the holder.  hurtOver:X  the hit took X of the target's Max HP or more and no shield soaked any of it (with
 //   orCrit:true a crit counts too: The Rivituso Rule).  skillVibe:'<id>'  the move in progress belongs to that Vibe (Whopper Tally builds on every Angler move).
-//   peeveHit  the hit's flavor is one of the target's Pet Peeves (Inverted Pyramid).  tgtWeak  the target is slower than the holder or carries a debuff (Scream King).
+//   peeveHit  the hit's flavor is one of the target's Pet Peeves (Inverted Pyramid).  notPeeveHit  it is not (a hit with no flavor does not count).  tgtWeak  the target is slower than the holder or carries a debuff (Scream King).
 //   cooldown:N  once it has gone off it cannot go off again for N rounds (Eyes in the Back of Her Head).  crossed  the bar move carried the unit past a round divider (Home-Field Advantage).
 const B3_LOW_HP=.35;
 const B3_LISTEN_IF=['pushed','crossed','srcCrit','fromParty','tgtOther','hurtOver','orCrit','skillVibe','peeveHit','tgtWeak','cooldown','crossed','ids','flavor','multiHit','landed','targetPrime','pepAtLeast','kinds','tgtFoe','attacks','every','shieldBy','tgtAlly','pushed','byAlly','tgtBoss',
-  'notBasic','supportTurn','partySkill','lacksCustom','everyOwnTurn','tgtGuarded','tgtHasStatus','tgtPrimeAny','tgtDebuffedBy'];
+  'notBasic','supportTurn','partySkill','lacksCustom','everyOwnTurn','tgtGuarded','tgtHasStatus','tgtPrimeAny','tgtDebuffedBy','notPeeveHit'];
 function b3ListenOk(F,u,L,ev,putBy,useKey) {
   if(L.limitKey) useKey='lk:'+L.limitKey;
   if(L.carrier==='target'&&ev.tgt!==u) return false;
@@ -98,6 +98,7 @@ function b3ListenOk(F,u,L,ev,putBy,useKey) {
   if(L.hurtOver!=null) { const t=ev.tgt,soaked=!!(ev.c&&ev.c.soak&&t&&ev.c.soak[t.key]>0); if(!(t&&((ev.dmg>=t.maxHp*L.hurtOver&&!soaked)||(L.orCrit&&ev.crit)))) return false; }
   if(L.skillVibe&&!(ev.c&&ev.c.skill&&ev.c.skill.vibe===L.skillVibe)) return false;
   if(L.peeveHit&&!(ev.tgt&&ev.flavor&&b3Peeves(ev.tgt).includes(ev.flavor))) return false;
+  if(L.notPeeveHit&&!(ev.tgt&&ev.flavor&&!b3Peeves(ev.tgt).includes(ev.flavor))) return false;   // the hit's flavor is NOT one of the target's Pet Peeves (the Square's Sign bounces those)
   if(L.tgtWeak&&!b3TgtWeak(u,ev.tgt)) return false;
   if(L.crossed&&!ev.crossed) return false;
   if(L.cooldown&&u.used[useKey]!=null&&F.round-u.used[useKey]<L.cooldown) return false;
@@ -135,7 +136,7 @@ function b3Listen(F,u,L,ev,beats,useKey,statusId,name) {
   // Composure they shave is written into the ledger of the action that set them off, inside its 3-pip cap (spec 2.7).
   // `dealt` is what the action has taken off the event's target so far, soaked or not (Creative Mess splashes a share of it).
   const dealt=ev.c&&ev.tgt&&ev.c.lost?(ev.c.lost[ev.tgt.key]||0)+((ev.c.soak&&ev.c.soak[ev.tgt.key])||0):0;
-  b3RunEffects(F,{F,actor:statusId?(ev.src||u):u,src:ev.src||null,tgt:ev.tgt||u,carrier:u,targets:[ev.tgt||u],hit:[],beats,g:ev.g,detonated:{},dealt,act:ev.c,
+  b3RunEffects(F,{F,actor:statusId?(ev.src||u):u,src:ev.src||null,tgt:ev.tgt||u,carrier:u,targets:[ev.tgt||u],hit:[],beats,g:ev.g,detonated:{},dealt,hitDmg:ev.dmg,act:ev.c,
     reacted:(ev.c&&ev.c.reacted)||{},ledger:(ev.c&&ev.c.ledger)||{},scale:relay?relay.scale:1,mixHot:ev.hot?1:0},L.effects);
   if(L.consume&&statusId&&!relay&&b3EndStatus(F,u,statusId,'used')) beats.push({t:'statusEnd',tgt:u.key,id:statusId,g:ev.g});
 }

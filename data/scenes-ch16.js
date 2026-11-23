@@ -179,7 +179,7 @@ SCENES.ch16Open=()=>[
   {talk:'Tom',lines:['Then it doesn’t get past us. Dad said so.']},
   {talk:'TNB',lines:['I’m here, babe.']},
   {talk:'Nara',lines:['Nara plants her feet in the grass and growls at a grey man with a sun behind his head.']},
-  {toast:'Tip: this is a hard one. Heal after OVEREXPOSURE. Break the eclipse with Chatter, Splash or Kinetic hits, or a Tombo. There is no kind route.',time:9},
+  {if:()=>!B3_CH_ON(16),then:[{toast:'Tip: this is a hard one. Heal after OVEREXPOSURE. Break the eclipse with Chatter, Splash or Kinetic hits, or a Tombo. There is no kind route.',time:9}],else:[{toast:'Tip: this is a hard one. Racket and Drench hits are the ones that don’t bounce back off the eclipse. Shield everyone before Overexposure. There is no kind route.',time:9}]},
   {flag:'ch16-open'},
   {save:true},
   ...SCENES.ch16Fight()
@@ -198,7 +198,7 @@ SCENES.ch16Fight=()=>[
   {flag:'ch16-fight',value:'pending'},
   ...(flag('ch16-fight')==='pending'||flag('ch16-fight')===true?[
     {talk:'Marlowe',lines:['Less. Round two.']},
-    {talk:'Amy',lines:['Slow down. Break the eclipse and heal after the flash. Together.']}]:[]),
+    ...(B3_CH_ON(16)?[{talk:'Amy',lines:['Slow down. Racket and Drench don’t bounce back. Shield us before the flash and heal after. Together.']}]:[{talk:'Amy',lines:['Slow down. Break the eclipse and heal after the flash. Together.']}])]:[]),
   {flag:'ch16-fight'},
   {battle:()=>{ const n=ch16Marlowe(); if(n) Object.assign(n,{monster:'marlowe16',mscale:1.6,tier:0}); return n; },tut:'ch16'},
   {if:()=>flag('battle:marlowe16')==='win',then:[

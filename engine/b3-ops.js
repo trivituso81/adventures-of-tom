@@ -5,7 +5,7 @@
 // "not built yet", so the simulator names any kit line that is ahead of the engine.
 const B3_OP_LIST=['damage','heal','shield','status','prime','cleanse','strip','steal','invert','push','pull','swapBar','place','pep','ruckus',
   'composure','revive','counter','ward','intercept','mark','hazard','grant','aggro','taunt','pullForward','interrupt','detonateAll','splash',
-  'crack','later','summon','row','foresee','vitrify','double','rebalance','tick','upgrade','treasure','goldBall','refresh','prybar','eat','hpLoss','extend','swapGap','replay','tradeRows'];
+  'crack','later','summon','row','foresee','vitrify','double','rebalance','tick','upgrade','treasure','goldBall','refresh','prybar','eat','hpLoss','extend','swapGap','replay','tradeRows','bounce'];
 // c is the action in progress: {F, actor, src, skill, rec, targets (chosen), hit (units a damage op landed on), beats, g (which
 // part of the move the beats belong to), detonated, tgt (set while a Detonation's, a hook's or a hazard's effects run), partDmg,
 // tags (the act's tags), outExtra ({kind: amount} damage modifiers for this action only), stripped and cleansed (counts so far),
@@ -241,6 +241,15 @@ const B3_OPS={
     for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)) continue;
       const n=Math.min(t.hp-1,Math.round(t.maxHp*e.pct)); if(n<=0) continue;
       t.hp-=n; c.beats.push({t:'hit',tgt:t.key,dmg:n,hp:t.hp,g:c.g}); }
+  },
+  // bounce (stage 22 chapter 16, the Square's Sign behind its eclipse; bestiary 1.1 "Bounced damage"): the foe still takes the whole hit, and the one who hit it takes
+  // `pct` of that hit as plain damage: no flavor, no Defense, no modifiers, the shield soaks it first, and it never knocks anyone out (it stops at 1 HP). `c.hitDmg` is the
+  // hit that set it off (engine/b3-hooks.js b3Listen); with no hit in hand it does nothing.
+  bounce(F,c,e) {
+    const base=c.hitDmg||0; if(!(base>0)) return;
+    for(const t of b3Who(F,c,e.to||'attacker')) { if(!b3Alive(t)) continue;
+      const n=Math.min(Math.max(1,Math.round(base*e.pct)),b3ShieldTotal(t)+t.hp-1); if(n<=0) continue;
+      b3Hurt(F,c,t,n,{bounce:true}); }
   },
   // tradeRows (stage 22, FINAL CALL's Gate Change): the first two units the act hit swap rows, one Front for one Back (spec 2.1). If they
   // already stand in the same row nothing changes, so an act that could only reach one row still hits and pushes both. Only the rows

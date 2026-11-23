@@ -781,3 +781,21 @@ Card c-b3s22ch15. Chapter 15 only (the family dinner: HUSH-9 Final Form, the Win
 | Tests | `node tools/b3-sim.js check` (`tools/b3-check-s22ch15.js`); `python3 tools/ch15_b3_test.py` portrait and landscape; `python3 tools/b3_story_test.py` (the first unswitched chapter is now 16, pool 2025, floor 37); `python3 tools/battle_guide_test.py` (the fake gain is the chapter 16 Grey Note); `python3 tools/smoke.py`; `python3 -I tools/clip-audit/unused_voice.py`. |
 | Battle Guide | The radio and the pod leave the planned list by themselves; `data/guide-anims.json` and `data/battle-lab-index.json` rebuilt. |
 | Waits | Chapters 16 to 20, then stage 23. |
+
+## What stage 22 chapter 16 holds (build `b3s22ch16`, 2026-11-22)
+
+Card c-b3s22ch16. Chapter 16 only (the town square: Marlowe, the bestiary's Square's Sign, with the Grey Notes, its Citation Slips). Numbers are bestiary v11's printed numbers except one: the boss's HP. Printed 2700 (2020 for three) with the wall coming back every third turn put the simulator (`--support=4`, Rank 2, Tom, Amy, TNB and Nara at level 40) at 18.75 rounds with 9 of 100 fights lost, against an aim of 5 to 7; the Grey Notes he keeps calling were most of that length (a boss alone, no wall, ran 5.87). With the wall used twice and 1300 HP (975 for three) it gives 6.68 rounds (5.83 to 7.10), 100 of 100 won. Attack, Defense, Speed and pips are the printed ones.
+
+| Item | Built |
+|---|---|
+| Marlowe | `data/b3-foes-ch16.js`: `marlowe16`, boss, Front, 1300 HP (`hp3` 975), 8 pips, no running, Racket and Drench Pet Peeves, resists Clobber, `quietEnd`. Strike Through, Marginal Note (Racket, -1 Pep, -20% Attack), Brace Behind the Eclipse (twice: above half HP, then below half HP), Overexposure (charges, hits all, Blind and Slow) and Total Eclipse (below half, charges, floor sweep, hits all). Names follow the built scenes (Marlowe, Grey Note); the bestiary names are in the file header. |
+| Grey Notes | `greynote` (Hexer, Back, 1000 HP, drops pretzels) for the two-note fight, `greynoteh` (helper, 404 HP, no drop, draws as a Grey Note) for the ones he calls. Stick (Blind), Flutter (Bleed), Fade (Fatigue and a stripped buff). No helper link or feedback: the bestiary prints neither. |
+| The wall | `eclipse_wall` is a 2-turn Guard Stance at 30% less damage; `eclipse_plating` is +20% Defense; while the stance lasts, 15% of a hit whose flavor is not a Pet Peeve bounces back at the attacker (`bounce` op: plain damage, no Defense, shield first, never a knock-out). A Break, Panic Boil! or a stance-breaking Skill ends the stance. Each use calls Grey Notes up to the Back row's two places. |
+| Quiet end | `quietEnd` makes `b3sAward` switch the sound off and title the card with dots, so the tragedy chapter has no fanfare on Battle 3; the aftermath scene turns sound back on. |
+| Look | The fight is drawn on the pond picture (no Square battle picture exists yet; Battle 2 used it too). Grey Notes stand in the gap in front of the 2.5 times large boss (`helpers`). |
+| Lab | NEW 88 (two Grey Notes) and NEW 89 (Marlowe), level 40, Tom, Amy, TNB and Nara. |
+| The switch | `B3_STORY.chapters` has 16, `levelFloor` has 40, tips `ch16`. `data/scenes-ch16.js`: the opening toast and Amy's retry line have a `B3_CH_ON(16)` wording. Recorded lines untouched. |
+| Tests | `node tools/b3-sim.js check` (`tools/b3-check-s22ch16.js`); `python3 tools/ch16_b3_test.py` portrait and landscape; `python3 tools/b3_story_test.py` (the first unswitched chapter is now 17, pool 2160, floor 40); `python3 tools/battle_guide_test.py` (the fake gain is the chapter 17 Pause Sprite); `python3 tools/smoke.py`; `python3 -I tools/clip-audit/unused_voice.py`. |
+| Battle Guide | Marlowe and the Grey Note leave the planned list by themselves; `data/guide-anims.json` and `data/battle-lab-index.json` rebuilt. |
+| Waits | Chapters 17 to 20, then stage 23. |
+

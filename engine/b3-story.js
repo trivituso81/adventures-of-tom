@@ -104,6 +104,9 @@ function b3sAward(F) {
   const many=F.foes.length>1&&F.foes.every(f=>f.id===F.foes[0].id),def=MONSTERS[F.foes[0].id]||{};
   const line=many?'The '+(def.name||F.foes[0].D.name)+'s melt back into the mud. Politely.':(def.die||F.foes[0].D.name+' goes down.');
   B3S.card={title:'VICTORY',line,xp:gain,purse,calm:0,drop,members,heart:null,puddle:false,foot:B3_FORECAST.combos+' '+Math.round(F.ruckus||0)+'%'};
+  // A boss whose fall is quiet (`quietEnd` on its row: chapter 16's Marlowe, the tragedy chapter, as Battle 2's win does in data/ch16-battle.js): the sound goes off before the win
+  // sound plays (b3Finish calls this award first), and the card has no title. The story's aftermath scene switches the sound back on (ch16QuietOff).
+  if(F.foes.some(f=>f.D&&f.D.quietEnd)&&typeof ch16QuietOn==='function') { ch16QuietOn(); B3S.card.title='...'; }
   return '+'+(plan.vp||0)+' Vibe Points.';
 }
 // What one family member gets from a win on Battle 3: shared XP and levels only. Vibe Points (b3AwardAll, engine/b3-progress.js) are the one
