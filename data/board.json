@@ -20445,7 +20445,7 @@
   {
    "id": "c-guideflow-7",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "guideflow7",
    "title": "Use this one: one batched job that tells the truth",
@@ -20469,6 +20469,10 @@
     {
      "d": "2026-11-23",
      "t": "Unblocked: Guide: upload my own start picture; make all poses is done."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -21060,6 +21064,16 @@
    ],
    "cards": [
     "c-movestage-build"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGZLxZREfsCLURqeTW",
+   "title": "Use this one: one batched job that tells the truth",
+   "first": "2026-11-23T14:26:47-08:00",
+   "last": "2026-11-23T14:26:47-08:00",
+   "tags": [],
+   "cards": [
+    "c-guideflow-7"
    ]
   },
   {
@@ -27233,8 +27247,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "825e7f88e9c4656caafe44bd96da848a08c1b000",
- "synced_at": "2026-11-23T22:14:00+00:00",
+ "synced": "e6335db839a077e0686ffa8fdf639818ab557b14",
+ "synced_at": "2026-11-23T22:27:44+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
