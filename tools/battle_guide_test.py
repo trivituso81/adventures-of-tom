@@ -109,6 +109,7 @@ def iso(sec_ago=0): return (_dt.datetime.utcnow() - _dt.timedelta(seconds=sec_ag
 # guideflow5: the stand-in for queue.json on the branch guideq (ETag and 304, compare and swap with 409, the repository dispatch). A test plays the worker by changing a row (wset).
 QS = {'doc': {'v': 1, 'items': {}}, 'sha': 'u0', 'etag': 'e0', 'n': 0, 'puts': [], 'reads': [], 'fail_get': False, 'fail_put': 0, 'conflict': 0, 'on_conflict': None, 'present': True}
 DISP = {'posts': [], 'fail': False}
+UPS = []   # guideflow6: files the page saved to branch guidegen under uploads/
 def q_bump(): QS['n'] += 1; QS['sha'] = 'u%d' % QS['n']; QS['etag'] = 'e%d' % QS['n']
 def qrow(rid, kind, **kw):
     r = dict(id=rid, kind=kind, lane='', anim='', who='', take=0, route='', prompt='', promptRev=0, start='', note='', cap=0, at=iso(), state='queued', since=iso(), run=0, fal=None, tries=0, cost=0, why='', result=None, use=None, left=False, dry=False, replay='')
@@ -136,6 +137,9 @@ def github(route):
         if QS['present'] and body.get('sha') != QS['sha']: return route.fulfill(status=409, body='{}')
         doc = json.loads(base64.b64decode(body['content']).decode()); QS['doc'] = doc; QS['present'] = True; QS['puts'].append({'msg': body['message'], 'doc': copy.deepcopy(doc)}); q_bump()
         return route.fulfill(status=200, content_type='application/json', body=json.dumps({'content': {'sha': QS['sha']}}))
+    if path.startswith('uploads/') and rq.method == 'PUT':
+        body = json.loads(rq.post_data); UPS.append({'path': path, 'msg': body.get('message'), 'branch': body.get('branch'), 'bytes': base64.b64decode(body['content'])})
+        return route.fulfill(status=200, content_type='application/json', body=json.dumps({'content': {'sha': 'up%d' % len(UPS)}}))
     if path == 'startpics/justin-hero.png':
         return route.fulfill(status=200, content_type='application/json', body=json.dumps({'sha': 'sp', 'content': base64.b64encode(open(os.path.join(ROOT, 'portraits', 'tom.png'), 'rb').read()).decode()}))
     if path in RQ:
@@ -548,17 +552,112 @@ with sync_playwright() as p:
     wset(PID, state='done', result={'path': 'startpics/justin-hero.png', 'mirrored': False, 'own': False, 'checks': [], 'main': False}, cost=.15, since=iso(0))
     pg.wait_for_function("document.querySelectorAll('#detail .anim [data-qa=make]').length>=5", timeout=20000)
     check('G7 the moment the picture row is done every video row has its button, with no reload', pg.locator('#detail .anim [data-qa=make]').count() >= 5 and 'Needs the start picture first.' not in pg.locator('#detail').inner_text(), pg.locator('#detail .anim').first.inner_text())
-    check('G7 the picture row says "Start picture ready." with Make another ($0.15)', top()[0] == 'Start picture ready.' and top()[2] == ['Make another ($0.15)'], top())
+    check('G7 the picture row says "Start picture ready." with Make another ($0.15)', top()[0] == 'Start picture ready.' and top()[2] == ['Make another ($0.15)', 'Upload my own'], top())
     pg.wait_for_function("(()=>{const i=document.querySelector('#detail [data-qtop] img');return i&&i.complete&&i.naturalWidth>0})()", timeout=20000)
     check('G7 the start picture at the top is read from branch guidegen (startpics/justin-hero.png) and shown', 'blob:' in pg.get_attribute('#detail [data-qtop] img', 'src'))
     pg.screenshot(path=os.path.join(out, 'guideflow-justin-picture-ready.png')); nowords('Justin with a start picture')
     wset(PID, result={'path': 'startpics/justin-hero.png', 'mirrored': True, 'own': False, 'checks': [], 'main': False}); pg.wait_for_function("document.querySelector('#detail [data-qtop] .qtext').textContent.indexOf('flipped')>0", timeout=20000)
     check('G7 a mirrored picture says so in the plan\'s words', top()[0] == 'Start picture ready. It faced right, so it was flipped. Lettering and anything worn on one side are now reversed.', top())
     wset(PID, state='failed', why='The picture faced the wrong way twice.', **{'do': 'Make another.'}); pg.wait_for_function("document.querySelector('#detail [data-qtop] .qline[data-state=failed]')", timeout=20000)
-    check('G7 a failed picture shows Failed: and one button, Make another ($0.15)', top()[0] == 'Failed: The picture faced the wrong way twice. Make another.' and top()[2] == ['Make another ($0.15)'], top())
+    check('G7 a failed picture shows Failed: with Make another ($0.15) and Upload my own', top()[0] == 'Failed: The picture faced the wrong way twice. Make another.' and top()[2] == ['Make another ($0.15)', 'Upload my own'], top())
     # a person whose picture is on main (Tom): video buttons at once
     pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail [data-qa=make]')
     check('G7 a person whose start picture is on main has video buttons at once', pg.locator('#detail [data-qa=make]').count() >= 5 and pg.locator('#detail [data-qa=pic]').count() == 0)
+    # ---- guideflow6, G13 to G15: Upload my own and Make all missing poses (plan 3.2 D11 and D13, 5.2, 5.5, rows X13 and X14) ----
+    import io
+    GWD = json.load(open(os.path.join(ROOT, 'data', 'guide-words.json')))['words']
+    def png_bytes(w, h, big=0):
+        im = Image.new('RGB', (w, h), (255, 0, 255)); ImageDraw.Draw(im).ellipse([w // 4, h // 6, 3 * w // 4, 5 * h // 6], fill=(60, 90, 200)); b = io.BytesIO(); im.save(b, 'PNG'); d = b.getvalue()
+        return d + b'\0' * big
+    GOOD = png_bytes(700, 900)
+    def pick(who_sel, name, mime, data):
+        with pg.expect_file_chooser() as fc: pg.click(who_sel)
+        fc.value.set_files({'name': name, 'mimeType': mime, 'buffer': data})
+    q_reset(); UPS.clear(); DISP['posts'].clear(); DISP['fail'] = False; QS['puts'].clear()
+    seed_pic = lambda rid, **kw: QS['doc']['items'].__setitem__(rid, qrow(rid, 'picture', lane='pic', who='justin', cap=0.3, **kw)) or q_bump()
+    seed_pic('p-justin-1', state='done', result={'path': 'startpics/justin-hero.png', 'mirrored': False, 'own': False, 'checks': [], 'main': False}, cost=.15)
+    pg.set_viewport_size({'width': 466, 'height': 657})
+    pg.goto(URL + '#anims/justin'); pg.wait_for_selector('#detail [data-qtop] .qline[data-rid]'); pg.wait_for_selector('#detail .anim [data-qa=make]', timeout=20000)
+    check('G13 a picture that is done offers Upload my own beside Make another', pg.evaluate(LINES, '#detail [data-qtop]')['p-justin-1'][2] == ['Make another ($0.15)', 'Upload my own'])
+    # the three instant refusals, word for word, and nothing sent
+    errtext = lambda: pg.locator('#detail [data-qtop] .qerr').inner_text()
+    pick('#detail [data-qtop] [data-qa=upload]', 'notes.txt', 'text/plain', b'hello'); pg.wait_for_selector('#detail [data-qtop] .qerr')
+    check('G13 not an image: "That file is not a picture."', errtext() == 'That file is not a picture.', errtext())
+    pick('#detail [data-qtop] [data-qa=upload]', 'broken.png', 'image/png', b'this is not really a png'); pg.wait_for_function("document.querySelector('#detail [data-qtop] .qerr')&&document.querySelector('#detail [data-qtop] .qerr').textContent==='That file is not a picture.'", timeout=10000)
+    check('G13 an image type that does not open is refused with the same words', errtext() == 'That file is not a picture.')
+    pick('#detail [data-qtop] [data-qa=upload]', 'small.png', 'image/png', png_bytes(400, 500)); pg.wait_for_function("document.querySelector('#detail [data-qtop] .qerr')&&document.querySelector('#detail [data-qtop] .qerr').textContent.indexOf('too small')>0", timeout=10000)
+    check('G13 under 600 pixels tall: "That picture is too small. It needs to be at least 600 pixels tall."', errtext() == 'That picture is too small. It needs to be at least 600 pixels tall.', errtext())
+    pick('#detail [data-qtop] [data-qa=upload]', 'huge.png', 'image/png', png_bytes(700, 900, 8 * 1024 * 1024 + 10)); pg.wait_for_function("document.querySelector('#detail [data-qtop] .qerr')&&document.querySelector('#detail [data-qtop] .qerr').textContent.indexOf('8 MB')>0", timeout=10000)
+    check('G13 over 8 MB: "That file is over 8 MB."', errtext() == 'That file is over 8 MB.', errtext())
+    check('G13 a refused file saves nothing and queues nothing', not UPS and len(QS['puts']) == 0 and not DISP['posts'] and pg.locator('#detail .qconf').count() == 0)
+    # a good picture: confirm with the picture shown, Cancel changes nothing
+    pick('#detail [data-qtop] [data-qa=upload]', 'justin.png', 'image/png', GOOD); pg.wait_for_selector('#detail [data-qtop] .qconf img')
+    check('G13 a good picture asks "Use this picture for every video of Justin? It is used exactly as it is." with Use it and Cancel', pg.locator('#detail [data-qtop] .qconf p').inner_text() == 'Use this picture for every video of Justin? It is used exactly as it is.' and pg.eval_on_selector_all('#detail [data-qtop] .qconf button', 'b=>b.map(x=>x.textContent)') == ['Use it', 'Cancel'])
+    pg.screenshot(path=os.path.join(out, 'guideflow-upload-portrait.png'))
+    pg.click('#detail [data-qa=upno]'); pg.wait_for_timeout(300)
+    check('G13 Cancel closes the question and sends nothing', pg.locator('#detail .qconf').count() == 0 and not UPS and len(QS['puts']) == 0)
+    pick('#detail [data-qtop] [data-qa=upload]', 'justin.png', 'image/png', GOOD); pg.wait_for_selector('#detail [data-qtop] .qconf img')
+    pg.set_viewport_size({'width': 678, 'height': 445}); pg.wait_for_timeout(300); pg.screenshot(path=os.path.join(out, 'guideflow-upload-landscape.png')); pg.set_viewport_size({'width': 466, 'height': 657}); pg.wait_for_timeout(300)
+    pg.click('#detail [data-qa=upuse]'); pg.wait_for_function("document.querySelector('#detail [data-qtop] .qline[data-state=queued]')", timeout=20000)
+    ur = [r for r in QS['doc']['items'].values() if r['kind'] == 'upload'][0]
+    check('G13 Use it saved the bytes to branch guidegen under uploads/justin-<seconds>.png with the plan\'s message', len(UPS) == 1 and re.match(r'^uploads/justin-\d+\.png$', UPS[0]['path']) and UPS[0]['branch'] == 'guidegen' and UPS[0]['msg'] == 'guide: upload justin [skip ci]' and UPS[0]['bytes'] == GOOD, UPS and UPS[0]['path'])
+    check('G13 then one row u-justin-<seconds> (kind upload, lane pic, who, upload: that path) was added in one save and the worker poked', re.match(r'^u-justin-\d+$', ur['id']) and ur['lane'] == 'pic' and ur['who'] == 'justin' and ur['upload'] == UPS[0]['path'] and ur['id'].split('-')[-1] == UPS[0]['path'].split('-')[-1].split('.')[0] and len(QS['puts']) == 1 and QS['puts'][0]['msg'] == 'guide: add ' + ur['id'] + ' [skip ci]' and len(DISP['posts']) == 1, (ur['id'], QS['puts'][0]['msg'] if QS['puts'] else ''))
+    UID = ur['id']; ultop = lambda: pg.evaluate(LINES, '#detail [data-qtop]')[UID]
+    check('G14 the upload row is queued like any other', ultop()[0] == 'Queued. Starts in under a minute.' and ultop()[2] == ['Cancel (free)'], ultop())
+    wset(UID, state='making', since=iso(12)); pg.wait_for_function("document.querySelector('#detail [data-qtop] .qline[data-state=making]')", timeout=20000)
+    check('G14 while checked: "Checking your picture. About 30 seconds." with a clock', ultop()[0] == 'Checking your picture. About 30 seconds. ' and clock_ok(ultop()[1], 10, 60), ultop())
+    wset(UID, state='done', result={'path': 'startpics/justin-hero.png', 'mirrored': False, 'own': True, 'checks': [], 'main': False}, since=iso(0)); pg.wait_for_function("document.querySelector('#detail [data-qtop] .qline[data-state=done]')", timeout=20000)
+    check('G14 done: "Your picture is in use, exactly as you made it." with Upload a different one and Go back to a generated picture', ultop()[0] == 'Your picture is in use, exactly as you made it.' and ultop()[2] == ['Upload a different one', 'Go back to a generated picture'], ultop())
+    check('G14 the video buttons are there', pg.locator('#detail .anim [data-qa=make]').count() >= 5 and 'Needs the start picture first.' not in pg.locator('#detail').inner_text())
+    nowords('an uploaded picture in use')
+    # X13 and X14 from a failed row: the lines from the words file, one button that names the way out
+    for code in ('X13', 'X14'):
+        wset(UID, state='failed', why=GWD[code]['why'], **{'do': GWD[code]['do']}); pg.wait_for_function("document.querySelector('#detail [data-qtop] .qline[data-state=failed]')", timeout=20000); pg.wait_for_timeout(200)
+        check('G14 ' + code + ' shows its words and Upload my own', ultop()[0] == 'Failed: ' + GWD[code]['why'] + ' ' + GWD[code]['do'] and ultop()[2] == ['Upload my own'], ultop())
+        wset(UID, state='done'); pg.wait_for_function("document.querySelector('#detail [data-qtop] .qline[data-state=done]')", timeout=20000)
+    # Go back to a generated picture: one confirm, then a picture row with force
+    n_put = len(QS['puts']); pg.click('#detail [data-qtop] [data-qa=gogen]'); pg.wait_for_selector('#detail [data-qtop] .qconf')
+    check('G14 Go back asks "Replace your own picture of Justin with a generated one ($0.15)?" and saves nothing yet', pg.locator('#detail [data-qtop] .qconf p').inner_text() == 'Replace your own picture of Justin with a generated one ($0.15)?' and len(QS['puts']) == n_put)
+    pg.click('#detail [data-qa=gono]'); pg.wait_for_timeout(250)
+    check('G14 Cancel keeps the picture and saves nothing', pg.locator('#detail .qconf').count() == 0 and len(QS['puts']) == n_put)
+    pg.click('#detail [data-qtop] [data-qa=gogen]'); pg.wait_for_selector('#detail [data-qa=gogo]'); pg.click('#detail [data-qa=gogo]')
+    pg.wait_for_function("[...document.querySelectorAll('#detail [data-qtop] .qline[data-rid]')].some(e=>e.dataset.rid.indexOf('p-justin-')===0&&e.dataset.rid!=='p-justin-1')", timeout=20000)
+    gr = [r for r in QS['doc']['items'].values() if r['kind'] == 'picture' and r['id'] != 'p-justin-1'][0]
+    check('G14 the confirmed Go back added a picture row with force true (cap 0.3) and poked the worker', gr['force'] is True and gr['lane'] == 'pic' and gr['who'] == 'justin' and gr['cap'] == 0.3 and len(DISP['posts']) == 2, gr)
+    # ---- G15: Make all missing poses ----
+    def poses_missing(): return pg.evaluate("[...document.querySelectorAll('#detail [data-qrow^=\"body:justin:\"]')].filter(e=>e.querySelector('[data-qa=make]')).map(e=>e.dataset.qrow)")
+    q_reset(); seed_pic('p-justin-1', state='done', result={'path': 'startpics/justin-hero.png', 'mirrored': False, 'own': False, 'checks': [], 'main': False}, cost=.15)
+    QS['puts'].clear(); DISP['posts'].clear()
+    pg.goto(URL + '#anims/justin'); pg.wait_for_selector('#detail [data-qall] [data-qa=all]', timeout=20000)
+    base = [x for x in poses_missing() if x.split(':')[2] in ('idle', 'guard', 'hit', 'dodge', 'ko', 'victory', 'run')]
+    check('G15 Justin has all 7 standard poses missing', len(base) == 7, base)
+    check('G15 the button says "Make all 7 missing poses ($3.50)"', pg.locator('#detail [data-qall] [data-qa=all]').inner_text() == 'Make all 7 missing poses ($3.50)', pg.locator('#detail [data-qall]').inner_text())
+    pg.click('#detail [data-qall] [data-qa=all]'); pg.wait_for_selector('#detail [data-qall] [data-qa=allgo]')
+    check('G15 over $2 it asks once: "Make 7 videos for $3.50?" with Make them and Cancel, and nothing is saved yet', pg.locator('#detail [data-qall] p').inner_text() == 'Make 7 videos for $3.50?' and pg.eval_on_selector_all('#detail [data-qall] button', 'b=>b.map(x=>x.textContent)') == ['Make them', 'Cancel'] and len(QS['puts']) == 0)
+    pg.click('#detail [data-qall] [data-qa=allno]'); pg.wait_for_timeout(250)
+    check('G15 Cancel saves nothing and the button comes back', len(QS['puts']) == 0 and pg.locator('#detail [data-qall] [data-qa=all]').count() == 1)
+    pg.click('#detail [data-qall] [data-qa=all]'); pg.wait_for_selector('#detail [data-qall] [data-qa=allgo]'); pg.click('#detail [data-qall] [data-qa=allgo]')
+    pg.wait_for_function("!document.querySelector('#detail [data-qall] button')&&document.querySelectorAll('#detail [data-qrow^=\"body:justin:\"] .qline[data-state=queued]').length>=7", timeout=20000)
+    vrows = [r for r in QS['doc']['items'].values() if r['kind'] == 'video']
+    check('G15 Make them added 7 video rows in ONE save and one poke', len(vrows) == 7 and len(QS['puts']) == 1 and len(DISP['posts']) == 1 and sorted(r['anim'] for r in vrows) == sorted(base), (len(vrows), len(QS['puts']), len(DISP['posts'])))
+    check('G15 every row is a normal video row (lane vid, route wan, take 1, start justin, cap 1, a prompt)', all(r['lane'] == 'vid' and r['route'] == 'wan' and r['take'] == 1 and r['start'] == 'justin' and r['cap'] == 1 and r['prompt'] for r in vrows))
+    check('G15 queued rows are not missing: the button is gone', pg.locator('#detail [data-qall] button').count() == 0)
+    pg.screenshot(path=os.path.join(out, 'guideflow-upload-makeall.png')); nowords('after Make all')
+    # 3 missing ($1.50): no confirm. Four of the seven are a queued, a making, a checking and a done row.
+    q_reset(); seed_pic('p-justin-1', state='done', result={'path': 'startpics/justin-hero.png', 'mirrored': False, 'own': False, 'checks': [], 'main': False}, cost=.15)
+    for st, an, rid in (('queued', 'idle', 'q1'), ('making', 'guard', 'q2'), ('checking', 'hit', 'q3'), ('done', 'dodge', 'q4')):
+        r = qrow(rid, 'video', lane='vid', anim='body:justin:' + an, who='justin', take=1, route='wan', prompt='p', cap=1, state=st); QS['doc']['items'][rid] = r
+    q_bump(); QS['puts'].clear(); DISP['posts'].clear()
+    pg.goto(URL + '#anims/justin'); pg.wait_for_selector('#detail [data-qall] [data-qa=all]', timeout=20000)
+    check('G15 a queued, a making, a checking and a done row are not missing: "Make all 3 missing poses ($1.50)"', pg.locator('#detail [data-qall] [data-qa=all]').inner_text() == 'Make all 3 missing poses ($1.50)', pg.locator('#detail [data-qall]').inner_text())
+    pg.click('#detail [data-qall] [data-qa=all]'); pg.wait_for_function("!document.querySelector('#detail [data-qall] [data-qa=all]')", timeout=20000)
+    check('G15 $2 or less: no question, 3 rows added at once in one save and one poke', pg.locator('#detail [data-qa=allgo]').count() == 0 and len(QS['puts']) == 1 and len([r for r in QS['doc']['items'].values() if r['kind'] == 'video']) == 7 and len(DISP['posts']) == 1)
+    # a person with no start picture, and a person with nothing missing: no button
+    q_reset(); pg.goto(URL + '#anims/justin'); pg.wait_for_selector('#detail [data-qtop] [data-qa=pic]', timeout=20000)
+    check('G15 no start picture: no Make all button', pg.locator('#detail [data-qall] button').count() == 0)
+    pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail [data-qa=make]')
+    tm = [x for x in poses_missing() if x.split(':')[2] in ('idle', 'guard', 'hit', 'dodge', 'ko', 'victory', 'run')]
+    check('G15 the button counts only poses that have no video: Tom\'s button (if shown) matches the rows that offer a make button', (pg.locator('#detail [data-qall] [data-qa=all]').count() == 0) == (len(tm) == 0), tm)
     # ---- G11: X21 and every tab ----
     q_reset(); seed('a', CB, state='making', since=iso(10), at=iso(10))
     pg.goto(URL + '#family'); pg.wait_for_selector('#list .row'); pg.wait_for_function("document.getElementById('actbar')&&!document.getElementById('actbar').hidden&&document.getElementById('actbar').textContent==='1 making'", timeout=20000)

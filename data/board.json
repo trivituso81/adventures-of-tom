@@ -33084,7 +33084,7 @@
    "theme": "Battle Animations",
    "tag": "guideflow6",
    "title": "Guide: upload my own start picture; make all poses",
-   "next": "Waits for card c-guideflow-5, then starts by itself. Adds Upload my own for a start picture (used exactly as you made it, after a free check) and one button to make all missing standard poses. Nothing to play until the last card.",
+   "next": "Built (guideflow6): Upload my own and Make all missing poses on the Battle Guide, tested with stand-ins (G13 to G15 pass). The first push is on the branch claude/magical-planck-16y9d6, not main; the card closes when guideflow6 reaches main. Card c-guideflow-7 (the batched apply job and the Use lines) is next and has its full prompt.",
    "blocks": [
     "c-guideflow-7"
    ],
@@ -33112,6 +33112,11 @@
     {
      "d": "2026-11-22",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Built guideflow6 on the branch claude/magical-planck-16y9d6 (night shift, Sonnet 5.5): Upload my own, Go back to a generated picture, Make all N missing poses. Own tests G13 to G15 pass; 6 older checks and worker_test fail the same way on untouched HEAD in this environment; smoke fails on a heights check here. Not pushed to main.",
+     "at": "2026-11-23T08:08:44.000Z"
     }
    ],
    "prompt": {

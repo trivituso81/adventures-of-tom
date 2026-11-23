@@ -46,6 +46,7 @@ header a.hb,header button.hb{flex:none;display:flex;align-items:center;justify-c
 body.qgrey .qline,body.qgrey .qpic{opacity:.5}
 .qpic{display:flex;gap:12px;align-items:flex-start;margin:8px 0}.qpic img,.qpic .ph{flex:none;width:64px;height:64px;border-radius:12px;object-fit:cover;object-position:top;background:var(--well);display:flex;align-items:center;justify-content:center;font-weight:800}
 .qpb{flex:1 1 auto;min-width:0}.qtop{margin:12px 0}
+.qconf{margin:8px 0;padding:10px;border:1px solid var(--line,#444);border-radius:12px}.qconf img{display:block;max-width:100%;max-height:220px;margin:0 auto 8px;border-radius:8px;background:#ff00ff}.qconf p{margin:0 0 6px}.qall{margin:4px 0 8px}
 .qact .qname{background:none;color:var(--text);padding:0;min-height:36px;font-weight:800;text-align:left;font-size:15px}
 #tabs{flex:none;display:flex;gap:4px;padding:6px 8px calc(6px + env(safe-area-inset-bottom));background:var(--well);border-top:1px solid var(--line);order:9}
 #tabs button{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;min-height:50px;background:none;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.02em;border-radius:10px}
@@ -191,7 +192,7 @@ a.play.fight{background:var(--surface);border:1px solid var(--accent);color:var(
  <a class="hb" href="battle-lab.html" title="Open the Battle Lab">Lab</a>
  <a class="hb" href="admin.html" title="Back to Admin">Admin</a>
 </header>
-<button type="button" id="actbar" hidden></button><div id="qbar" hidden></div>
+<input type="file" id="upfile" accept="image/png,image/jpeg,image/webp" hidden><button type="button" id="actbar" hidden></button><div id="qbar" hidden></div>
 <div id="searchbar" hidden><input type="search" id="q" placeholder="Search moves, monsters, statuses, rules" autocomplete="off"><div id="sflt"><button type="button" class="chip" data-sf="all" aria-pressed="true">All</button><button type="button" class="chip" data-sf="plan" aria-pressed="false">Planned</button></div></div>
 <nav id="tabs" role="tablist"></nav>
 <div id="panes"><div id="list"><div id="boot">Loading the game's battle data...</div></div><div id="detail"></div></div>
@@ -742,17 +743,19 @@ function qLine(it,ctx){   // ctx: sheet (all the buttons), list or act (a decisi
     o.cls='bad';o.t='Failed: '+[it.why,it.do].filter(Boolean).join(' ');const d=String(it.do||'');
     if(/try again/i.test(d))o.btns=[mk('retry','Try again'+(it.fal?' (free)':' ('+money(price)+')'))];
     else if(/make another|make the start picture/i.test(d)&&!up)o.btns=[mk(pic?'picagain':'again','Make another ('+money(price)+')')];
+    if(pic)o.btns.push(mk('upload','Upload my own'));   // guideflow6: a failed picture row offers Upload my own (X13, X14 say so in their words)
   }else if(it.state==='done'){
     if(pic){
       o.cls='good';
       o.t=up?'Your picture is in use, exactly as you made it.':(it.result&&it.result.mirrored)?'Start picture ready. It faced right, so it was flipped. Lettering and anything worn on one side are now reversed.':'Start picture ready.';
-      if(!up)o.btns=[mk('picagain','Make another ('+money(0.15)+')')];
+      o.btns=up?[mk('upload','Upload a different one'),mk('gogen','Go back to a generated picture')]:[mk('picagain','Make another ('+money(0.15)+')'),mk('upload','Upload my own')];
     }else if(qUseNow(it)){o.t='Putting it in the game. About 4 minutes. ';o.since=U.since||U.at;}
     else if(U&&U.state==='live'){o.cls='good';o.t='In the game (build '+(U.build||'')+'). Close and reopen the game to see it.';}
     else if(U&&U.state==='failed'){o.cls='bad';o.t='Not in the game: '+(U.why||'')+' Tap Use this one again.';o.btns=[mk('use','Use this one')];}
     else{o.cls='good';o.t='Ready. Watch it here.';o.btns=[mk('use','Use this one'),mk('again','Make another ('+money(price)+')'),mk('left','Keep the old one')];}
   }
   if(ctx!=='sheet'&&o.btns.some(b=>b.a==='use'))o.btns=[mk('open','Open it')];
+  if(ctx==='act'&&pic)o.btns=o.btns.map(b=>b.a==='upload'||b.a==='gogen'?mk('open','Open it'):b).filter((b,i,a)=>b.a!=='open'||a.findIndex(x=>x.a==='open')===i);   // the picture and its upload box are on the person's screen
   return o;
 }
 function qLineHtml(it,ctx,key){
@@ -782,7 +785,66 @@ function qPicBlock(who,ctx){   // a person's start picture with its status line 
   if(cur)h+=qLineHtml(cur,ctx,key);
   if((!cur||cur.state==='cancelled')&&!ready&&QS.doc)
     h+='<p class="hint">Every video of '+esc(nm)+' starts from one picture of them facing left on flat magenta. This makes it from their hero picture and checks it.</p><span class="qbtns"><button type="button" class="gold" data-qa="pic" data-qid="'+esc(who)+'" data-qkey="'+esc(key)+'">Make the start picture ('+money(0.15)+')</button></span>';
+  if(UPL[who])h+='<div class="qconf"><img alt="The picture you chose" src="'+esc(UPL[who].url)+'"><p>Use this picture for every video of '+esc(nm)+'? It is used exactly as it is.</p><span class="qbtns"><button type="button" class="gold" data-qa="upuse" data-qid="'+esc(who)+'" data-qkey="'+esc(key)+'">Use it</button><button type="button" data-qa="upno" data-qid="'+esc(who)+'" data-qkey="'+esc(key)+'">Cancel</button></span></div>';
+  else if(UPGO[who])h+='<div class="qconf"><p>Replace your own picture of '+esc(nm)+' with a generated one ('+money(0.15)+')?</p><span class="qbtns"><button type="button" class="gold" data-qa="gogo" data-qid="'+esc(who)+'" data-qkey="'+esc(key)+'">Replace it ('+money(0.15)+')</button><button type="button" data-qa="gono" data-qid="'+esc(who)+'" data-qkey="'+esc(key)+'">Cancel</button></span></div>';
+  else if(QS.doc&&(!cur||cur.state==='cancelled')&&!(cur&&qWorking(cur)))h+='<span class="qbtns"><button type="button" data-qa="upload" data-qid="'+esc(who)+'" data-qkey="'+esc(key)+'">Upload my own</button></span>';
   return h+qErrHtml(key)+'</div></div>';
+}
+// ---- guideflow6: Upload my own (plan 3.2 D11, 5.5) and Make all missing poses (D13) ----
+const UPL={},UPGO={},QALL={},POSES=['idle','guard','hit','dodge','ko','victory','run'];
+const EXTOF={'image/png':'png','image/jpeg':'jpg','image/webp':'webp'};
+function qMissing(who){   // the standard poses with no video in the game and no row that is queued, making, checking or done and not left
+  return POSES.map(st=>ANIM_BY['body:'+who+':'+st]).filter(a=>{if(!a)return false;const g=G(a);if(!g||g.route!=='wan'||g.waits||a.video)return false;
+    const c=qCur(a.id);return !c||c.state==='cancelled'||c.state==='failed';});
+}
+const qAllTotal=m=>m.reduce((t,a)=>t+((G(a)||{}).price||0.5),0);
+function qAllHtml(who){
+  if(!QS.doc||!qStartReady(who))return '';
+  const m=qMissing(who);if(!m.length)return '';
+  const tot=qAllTotal(m),key='all:'+who;
+  if(QALL[who])return '<div class="qconf"><p>Make '+m.length+' videos for '+money(tot)+'?</p><span class="qbtns"><button type="button" class="gold" data-qa="allgo" data-qid="'+esc(who)+'" data-qkey="'+esc(key)+'">Make them</button><button type="button" data-qa="allno" data-qid="'+esc(who)+'" data-qkey="'+esc(key)+'">Cancel</button></span></div>'+qErrHtml(key);
+  return '<span class="qbtns"><button type="button" class="gold" data-qa="all" data-qid="'+esc(who)+'" data-qkey="'+esc(key)+'">Make all '+m.length+' missing poses ('+money(tot)+')</button></span>'+qErrHtml(key);
+}
+async function qMakeAll(who,key){
+  if(QBUSY['all:'+who])return;QBUSY['all:'+who]=1;delete QALL[who];
+  try{
+    if(!(lsGet(TOKEN)||Q.get('gh'))){qErr(key,W_X2);return;}
+    const ms=qMissing(who);if(!ms.length){qPaint();return;}
+    await loadTakes();
+    const rows=ms.map(a=>qVideoRow(a)).filter(Boolean);
+    await qAdd(rows,'guide: add '+rows.length+' videos of '+who);
+    rows.forEach(r=>{(GTR[r.anim]=GTR[r.anim]||[]).push({n:r.take,note:''});});saveLS('aot-guide-tries',GTR);
+    qPoke();
+  }catch(e){if(!(e instanceof QRefused))qErr(key,e.message===W_X2?W_X2:W_X1);else qRead();}
+  finally{QBUSY['all:'+who]=0;qPaint();}
+}
+function qUpPick(who){const f=$('upfile');if(!f)return;f.dataset.who=who;f.value='';f.click();}
+function qUpChosen(f){
+  const who=f.dataset.who,file=f.files&&f.files[0],key='pic:'+who;f.value='';if(!file||!who)return;
+  const bad=m=>qErr(key,m);
+  if(!EXTOF[file.type])return bad('That file is not a picture.');
+  if(file.size>8*1024*1024)return bad('That file is over 8 MB.');
+  const url=URL.createObjectURL(file),im=new Image();
+  im.onerror=()=>{URL.revokeObjectURL(url);bad('That file is not a picture.');};
+  im.onload=()=>{
+    if(im.naturalHeight<600){URL.revokeObjectURL(url);return bad('That picture is too small. It needs to be at least 600 pixels tall.');}
+    if(UPL[who])URL.revokeObjectURL(UPL[who].url);
+    delete QERR[key];delete UPGO[who];UPL[who]={url,file,ext:EXTOF[file.type]};qPaint();
+  };
+  im.src=url;
+}
+function fileB64(file){return new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(String(r.result).split(',')[1]||'');r.onerror=()=>no(new Error('read'));r.readAsDataURL(file);});}
+async function qUpUse(who,key){
+  const u=UPL[who];if(!u||QBUSY['up:'+who])return;QBUSY['up:'+who]=1;
+  try{
+    const tok=lsGet(TOKEN);if(!tok&&!Q.get('gh')){qErr(key,W_X2);return;}
+    const secs=Math.floor(Date.now()/1000),path='uploads/'+who+'-'+secs+'.'+u.ext;
+    const w=await fetch(GH()+'/repos/'+REPO+'/contents/'+path,{method:'PUT',headers:{Authorization:'Bearer '+(tok||'test'),Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify({message:'guide: upload '+who+' [skip ci]',content:await fileB64(u.file),branch:'guidegen'})});
+    if(!w.ok)throw new Error('GitHub '+w.status);
+    await qAdd([{id:'u-'+who+'-'+secs,kind:'upload',lane:'pic',who,upload:path,cap:0}],'guide: add u-'+who+'-'+secs);
+    URL.revokeObjectURL(u.url);delete UPL[who];qPoke();
+  }catch(e){if(!(e instanceof QRefused))qErr(key,e.message===W_X2?W_X2:W_X1);else qRead();}
+  finally{QBUSY['up:'+who]=0;qPaint();}
 }
 function qSheetHtml(a,g){   // inside an animation's sheet: the status line and its one action, or what is missing first
   const key='anim:'+a.id,cur=qCur(a.id);let h='';
@@ -820,6 +882,7 @@ function qPaint(){   // every status line on the screen is changed where it stan
   const t=QS.doc?qBarText():'',ab=$('actbar');if(ab){ab.hidden=!t;if(t)ab.textContent=t;}
   document.querySelectorAll('[data-qrow]').forEach(el=>{const a=ANIM_BY[el.dataset.qrow];if(a)qSetH(el,qRowHtml(a));});
   document.querySelectorAll('[data-qtop]').forEach(el=>qSetH(el,qPicBlock(el.dataset.qtop,'list')));
+  document.querySelectorAll('[data-qall]').forEach(el=>qSetH(el,qAllHtml(el.dataset.qall)));
   const S=$('sheet');
   if(S&&S.classList.contains('open')){
     if(S.dataset.mode==='act'){const al=$('actlist');if(al)qSetH(al,qActHtml());}
@@ -880,6 +943,11 @@ async function qUseWanted(id){   // card 7 turns this on: Use this one marks the
   return storeUpdate(doc=>{const r=doc.items[id];if(!r||r.kind!=='video'||r.state!=='done')throw new QRefused('only a done video can be used');
     if(r.use&&r.use.state!=='failed')throw new QRefused('already asked for');r.use={state:'wanted',at:nowIso(),since:nowIso(),build:'',why:''};},'guide: use '+id);
 }
+function qVideoRow(a,retry,note0){
+  const g=G(a);if(!g)return null;const n=nextTake(a),note=note0!=null?note0:((GW[a.id]&&GW[a.id].note)||'');
+  const row={id:'v-'+(g.slug||slugOf(a.id))+'-t'+n,kind:'video',lane:'vid',route:'wan',anim:a.id,who:a.owner,take:n,prompt:retry?retry.prompt:workPrompt(a),promptRev:retry?retry.promptRev:(g.promptRev||0),start:a.owner,note,cap:1};
+  if(g.pad)row.pad=g.pad;if(retry&&retry.fal)row.fal=retry.fal;return row;
+}
 async function qMakeVideo(a,retry,key0){
   const g=G(a);if(!g)return;const key=key0||'anim:'+a.id;
   if(QBUSY[a.id])return;QBUSY[a.id]=1;
@@ -888,20 +956,19 @@ async function qMakeVideo(a,retry,key0){
     const note=retry?(retry.note||''):((GW[a.id]&&GW[a.id].note)||'');
     if(!retry){const why=stopFor(a,note);if(why){qErr(key,'Stop here. '+why+' Send Claude a note below: it will look at the takes and change the cause, not the wording.');if(PL.a===a)fillStopNote(a);return;}}
     await loadTakes();
-    const n=nextTake(a),row={id:'v-'+(g.slug||slugOf(a.id))+'-t'+n,kind:'video',lane:'vid',route:'wan',anim:a.id,who:a.owner,take:n,prompt:retry?retry.prompt:workPrompt(a),promptRev:retry?retry.promptRev:(g.promptRev||0),start:a.owner,note,cap:1};
-    if(g.pad)row.pad=g.pad;if(retry&&retry.fal)row.fal=retry.fal;
+    const row=qVideoRow(a,retry,note),n=row.take;
     await qAdd([row],'guide: add '+row.id);
     (GTR[a.id]=GTR[a.id]||[]).push({n,note});saveLS('aot-guide-tries',GTR);if(GW[a.id]&&GW[a.id].note){delete GW[a.id].note;saveGW();}
     qPoke();
   }catch(e){if(!(e instanceof QRefused))qErr(key,e.message===W_X2?W_X2:W_X1);else qRead();}
   finally{QBUSY[a.id]=0;}
 }
-async function qMakePicture(who,retry,key0){
+async function qMakePicture(who,retry,key0,force){
   const key=key0||'pic:'+who;if(QBUSY['pic:'+who])return;QBUSY['pic:'+who]=1;
   try{
     if(!(lsGet(TOKEN)||Q.get('gh'))){qErr(key,W_X2);return;}
     const row={id:'p-'+who+'-'+Math.floor(Date.now()/1000),kind:'picture',lane:'pic',who,cap:0.3};
-    if(retry&&retry.fal)row.fal=retry.fal;
+    if(retry&&retry.fal)row.fal=retry.fal;if(force)row.force=true;
     await qAdd([row],'guide: add '+row.id);qPoke();
   }catch(e){if(!(e instanceof QRefused))qErr(key,e.message===W_X2?W_X2:W_X1);else qRead();}
   finally{QBUSY['pic:'+who]=0;}
@@ -910,7 +977,16 @@ function qAct(t){
   const a=t.dataset.qa,id=t.dataset.qid,key=t.dataset.qkey;
   if(a==='make'){const an=ANIM_BY[id];if(an)qMakeVideo(an,null,key);return;}
   if(a==='pic'){qMakePicture(id,null,key);return;}
+  if(a==='all'){const m=qMissing(id);if(qAllTotal(m)>2){QALL[id]=true;qPaint();}else qMakeAll(id,key);return;}
+  if(a==='allgo'){qMakeAll(id,key);return;}
+  if(a==='allno'){delete QALL[id];qPaint();return;}
+  if(a==='upuse'){qUpUse(id,key);return;}
+  if(a==='upno'){if(UPL[id])URL.revokeObjectURL(UPL[id].url);delete UPL[id];qPaint();return;}
+  if(a==='gogo'){delete UPGO[id];qMakePicture(id,null,key,true);return;}
+  if(a==='gono'){delete UPGO[id];qPaint();return;}
   const it=((QS.doc||{}).items||{})[id];if(!it)return;
+  if(a==='upload'){qUpPick(it.who);return;}
+  if(a==='gogen'){delete UPL[it.who];UPGO[it.who]=true;qPaint();return;}
   if(a==='cancel')qCancel(it,key);
   else if(a==='again')qMakeVideo(ANIM_BY[it.anim],null,key);
   else if(a==='picagain')qMakePicture(it.who,null,key);
@@ -953,7 +1029,7 @@ function animsHtml(id){
   const A=animsOf(id),f=animFilter,show=A.filter(a=>f==='all'||(f==='work'?qBusy(a):(f==='video')===a.video));
   const o=(GUIDE&&GUIDE.owners&&GUIDE.owners[id])||{};
   let h='<div class="hero"><img alt="" src="'+facePic(id)+'" onerror="this.style.visibility=\'hidden\'"><div><h2>'+esc(ownerName(id))+'</h2><div class="hint">'+A.filter(a=>a.video).length+' of '+A.length+' animations are videos</div></div></div>';
-  if(o.route==='wan')h+='<div class="card qtop" data-qtop="'+esc(id)+'"></div>';
+  if(o.route==='wan')h+='<div class="card qtop" data-qtop="'+esc(id)+'"></div><div class="qall" data-qall="'+esc(id)+'"></div>';
   h+='<div class="seg">'+[['all','All'],['video','Videos'],['none','No video yet'],['work','In the works']].map(x=>'<button type="button" data-af="'+x[0]+'" aria-pressed="'+(f===x[0])+'">'+x[1]+'</button>').join('')+'</div>';
   const grp=[['state','Body'],['move','Moves'],['act','Attacks'],['wind','Wind-ups']];
   grp.forEach(g=>{const r=show.filter(a=>a.kind===g[0]);if(r.length)h+='<h3>'+g[1]+'</h3>'+r.map(animRow).join('');});
@@ -1386,6 +1462,7 @@ function renderSearch(q){
 function doSearch(){const q=$('q').value.trim();if(q.length>1||sFilter==='plan')renderSearch(q);else renderList();}
 
 // ---------- taps ----------
+document.addEventListener('change',e=>{if(e.target&&e.target.id==='upfile')qUpChosen(e.target);});
 document.addEventListener('click',e=>{
   const t=e.target.closest('button,a');if(!t)return;
   if(t.id==='gnotest'){sendNotifyTest();return;}
