@@ -1,6 +1,6 @@
 {
  "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
- "built": "2026-11-23T00:03Z",
+ "built": "2026-11-23T00:12Z",
  "videos": [
   {
    "file": "deedee-cast-r3.mp4",
@@ -1926,6 +1926,39 @@
    "model": "alibaba"
   },
   {
+   "file": "stage-tom-jetwash-vid-a2-r2.mp4",
+   "job": "stage-tom-jetwash-vid",
+   "rev": 2,
+   "attempt": 2,
+   "at": "2026-11-23T00:06:25.382442Z",
+   "price": 0.15,
+   "verdict": "rejected",
+   "reasons": [
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/stage-tom-jetwash-vid-a2-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "stage-tom-jetwash-vid-r2.mp4",
+   "job": "stage-tom-jetwash-vid",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-23T00:05:11.750590Z",
+   "price": 0.15,
+   "verdict": "rejected",
+   "reasons": [
+    "The background is not a flat magenta, so she cannot be cut out cleanly.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/stage-tom-jetwash-vid-r2.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
    "file": "stage-tom-jetwash-vid-a2-r1.mp4",
    "job": "stage-tom-jetwash-vid",
    "rev": 1,
@@ -2674,7 +2707,7 @@
   "tom-porsche": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
   "tom-cartridge": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
   "stage-tom-bluebang-vid": "movestage2 r2: wanstop fix, ONE change: pad 0.65 (start picture shrunk inside the frame). Evidence r1: the burst grows to fill the frame and its sparks touch the edge (bg 96.8 and 92.8 percent, edge 43 and 62 of 90 pictures); the move itself is right (flares once, shrinks, fades out). Kept: prompt file, 480p, 3 s, seed, bake settings. Changed: pad only.",
-  "stage-tom-glare-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
+  "stage-tom-glare-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it. wanstop-r2: the flare's rays reach the frame edge (bg 96.6 percent, edge 40 of 90 pictures, both tries); kept everything, changed only pad: 0.8 (the picture is shrunk to 80 percent on the same black).",
   "stage-tom-wingedshell-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
   "stage-tom-runwaylights-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
   "stage-tom-jetwash-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it. wanstop-r2: the start picture fills the width, so the video touched the edge in about half the pictures (bg 93 to 95 percent, edge 48 and 51 of 90); kept everything, changed only pad: 0.8 (the picture is shrunk to 80 percent on the same black).",
