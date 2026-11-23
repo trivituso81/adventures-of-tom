@@ -30847,7 +30847,7 @@
    "title": "Battle stage 22: chapter 13 on Battle 3",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Built and tested (build b3s22ch13): chapter 13 is on Battle 3 with the bestiary's numbers unchanged, the helper link and the Gold Knight in. Waiting on Tom's phone play (card t-b3s22ch13, fyi). Left for other cards: the Gold Knight has no scene in chapter 13 as built, so his fight is data plus the Lab only, and the returning Part 1 monsters belong to chapter 14 (c-b3s22ch14).",
    "blocks": [],
    "changed": "2026-11-22",
@@ -30891,9 +30891,14 @@
     {
      "d": "2026-11-22",
      "t": "Gaps found, not filled: (1) The bestiary ends chapter 13 with the Gold Knight, but the built scenes end it with the Drill Worm, the melt and Boppy at the gate, so the Gold Knight has no scene. His rows and Lab fight (NEW 73) exist; his `goldknight` tips key waits for a scene that starts the fight (tools/b3-check-s17.js and s18.js allow that one key by name). In the built story Boppy's Gold Armor is chapter 14's boss, and the bestiary says chapter 14 uses the same seven motions, so chapter 14's card is where the scene question belongs. (2) The bestiary's returning Part 1 monsters (Mudling and the rest in the frozen town) are fought in chapter 14 as built. (3) The Wired Relay Hushling and the Gold Knight have no battle art of their own; they are drawn with the Hushling's and Warden Boppy's Battle 2 rows. (4) Chapter 12 landed on main while this was built (b3s22ch12); this build is rebased on it, the chapters list is [...,11,12,13,21], and the story and guide test cases point at chapter 14."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as b3s22ch13: Chapter 13 (the tunnel under the dome) fights on the new battle: the Drill Worm with its Wired Relay Hushling, and the Gold Knight"
     }
    ],
-   "after": "t-b3s22ch13"
+   "after": "t-b3s22ch13",
+   "done": "2026-11-22"
   },
   {
    "id": "c-b3s22ch14",
@@ -33245,6 +33250,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDUC51Qv6M77RXaRYL",
+   "title": "Battle stage 22: chapter 13 on Battle 3",
+   "first": "2026-11-22T14:15:21-08:00",
+   "last": "2026-11-22T16:26:28-08:00",
+   "tags": [
+    "b3s22ch13"
+   ],
+   "cards": [
+    "c-b3s22ch13"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukHG6QtbCtw8Kjp1tPx",
    "title": "Build the move stage and Move Lab for Tom's eight moves",
    "first": "2026-11-22T10:55:40-08:00",
@@ -33392,16 +33409,6 @@
    "cards": [
     "c-wanstop-tom-rose-giddyup-r1",
     "t-pairmove1-gen"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDUC51Qv6M77RXaRYL",
-   "title": "Battle stage 22: chapter 13 on Battle 3",
-   "first": "2026-11-22T14:15:21-08:00",
-   "last": "2026-11-22T14:15:21-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s22ch13"
    ]
   },
   {
@@ -39017,8 +39024,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "ad356f8fa0d05f3bba5cb30e9c79c716207ce591",
- "synced_at": "2026-11-23T00:11:27+00:00",
+ "synced": "64b5b0350247f5a46166883e567808a7b5176cef",
+ "synced_at": "2026-11-23T00:27:24+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
