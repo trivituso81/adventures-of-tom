@@ -30401,6 +30401,10 @@
     {
      "d": "2026-11-23",
      "t": "movestage2d pushed: all videos for six moves are baked (Controller Toss body accepted by its stop card), marks measured, Lab test passes. The blue burst, headlight flare and jet wash object videos each failed the edge check four times (15, 36 and 36 of 90 pictures touch the edge): stop-loss, written into claude/move-staging-plan.md; the black plus additive proof was not run because there is no baked video to run it on. Tom judges six moves on t-movestage-judge; Winged Shell and Tarmac Porsche Transfer wait on his Give it 4 more tries cards."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Part shipped as movestage2d: six of Tom's eight staged moves are ready to judge in the Move Lab"
     }
    ],
    "after": "t-movestage-judge"
@@ -33467,6 +33471,22 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukHG6QtbCtw8Kjp1tPx",
+   "title": "Build the move stage and Move Lab for Tom's eight moves",
+   "first": "2026-11-22T10:55:40-08:00",
+   "last": "2026-11-22T19:11:50-08:00",
+   "tags": [
+    "movestage2a",
+    "movestage2b",
+    "movestage2c",
+    "movestage2d"
+   ],
+   "cards": [
+    "c-movestage-build",
+    "t-movestage-lab"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEafYMf3zc6pzB4QYi",
    "title": "Battle stage 22: chapter 15 on Battle 3",
    "first": "2026-11-22T18:31:50-08:00",
@@ -33537,21 +33557,6 @@
    ],
    "cards": [
     "c-b3s22ch13"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukHG6QtbCtw8Kjp1tPx",
-   "title": "Build the move stage and Move Lab for Tom's eight moves",
-   "first": "2026-11-22T10:55:40-08:00",
-   "last": "2026-11-22T15:38:01-08:00",
-   "tags": [
-    "movestage2a",
-    "movestage2b",
-    "movestage2c"
-   ],
-   "cards": [
-    "c-movestage-build",
-    "t-movestage-lab"
    ]
   },
   {
@@ -39290,8 +39295,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "d7c138571f4706bcda58c78c4a27e9ea4b0049c2",
- "synced_at": "2026-11-23T02:32:41+00:00",
+ "synced": "add0ca3586899233226176c095cdc05fa7d937f8",
+ "synced_at": "2026-11-23T03:12:56+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
