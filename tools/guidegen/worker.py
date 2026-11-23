@@ -9,7 +9,10 @@ It exits 0 even when rows failed: a failed row is a row, not a failed run.
 
 --once   work through what is queued and leave at once (tests).   --dry-run   treat every row as a dry row (nothing is called, nothing is saved).
 Lane pic: kind picture (a start picture made on fal from the hero, measured, facing checked, mirrored when it faces left to right, kept on branch guidegen
-as startpics/<who>-hero.png) and kind upload (a picture Tom painted: only the measured checks, used exactly as painted). Lane vid arrives in guideflow4.
+as startpics/<who>-hero.png) and kind upload (a picture Tom painted: only the measured checks, used exactly as painted).
+Lane vid (guideflow4): kind video, route wan: one family video on fal from the start picture, then at once tools/guidegen/make_take.py for that one video (marks, clip gate,
+preview), the take and the mp4 kept on branch guidegen with keep.py and confirmed there, then the row is done. A row with `replay` (a stored mp4 on branch guidegen or wangen)
+skips fal and runs the same checks for nothing. No daily limit; the limits that stay are the row's own cap (at most $1) and the price.
 Environment: FAL_KEY, XAI_API_KEY, GH_TOKEN, GITHUB_REPOSITORY, GITHUB_RUN_ID, COSTS_LOG_REPO. Tests: python3 -I tools/guidegen/worker_test.py"""
 import argparse, base64, copy, io, json, os, re, sys, tempfile, threading, time
 from concurrent.futures import ThreadPoolExecutor
@@ -27,18 +30,24 @@ NO_JUDGE = ('The picture was made but its facing could not be checked.', 'Tap Ma
 TOO_SMALL = ('The figure is too small in the picture.', 'Make the figure fill more of the picture, then tap Upload my own.')
 NO_HERO = ('There is no start picture recipe for this person yet.', 'Send a note to Claude from this sheet.')
 BAD_PICTURE = ('That file could not be read as a picture.', 'Send a PNG or a JPEG, then tap Upload my own.')
+NO_START = ('There is no start picture for this person yet.', 'Make the start picture first.')
+NOT_YET = ('Monster videos are not made by this line yet.', 'Send a note to Claude from this sheet.')
+NO_REPLAY = ('The stored video for this free test was not found.', '')
+VID_TEMPLATE = 'tom-idle'      # the proven Wan settings every Guide video copies (720p, 5 s, seed 81, first and last frame the start picture)
+VID_CAP = 1.0
 CREDIT = re.compile(r'balance|credit|locked|payment|billing|exhausted', re.I)
 
 
 def say(*a): print(time.strftime('%H:%M:%S'), *a, flush=True)
 def poll(): return float(os.environ.get('WORKER_POLL', '5'))
 def dry_wait(): return float(os.environ.get('WORKER_DRYWAIT', '2'))
+def backoff(): return float(os.environ.get('WORKER_BACKOFF', '30'))
 
 
 # ---- reading and saving files on branch guidegen ----
-def read_guidegen(path):
-    """The bytes of a file on branch guidegen (through the blobs API when the contents answer is empty), or None when it is not there."""
-    st, j = store._call('GET', 'contents/%s?ref=%s' % (path, BRANCH))
+def read_guidegen(path, branch=BRANCH):
+    """The bytes of a file on branch guidegen (or another branch; through the blobs API when the contents answer is empty), or None when it is not there."""
+    st, j = store._call('GET', 'contents/%s?ref=%s' % (path, branch))
     if st == 404: return None
     if st != 200: raise store.StoreError('read of %s failed: HTTP %s' % (path, st))
     c = j.get('content') or ''
@@ -110,6 +119,8 @@ class Worker:
         self.judge_factory = judge_factory
         self._judge = None
         self.stop_claim = False
+        self.pause_until = 0.0   # X7: fal said it is busy; no new claim until then
+        self.no_gate = bool(os.environ.get('GUIDE_NO_GATE'))   # tests: take checks without the clip gate
         self.lock = threading.RLock()
         self.spent = {'fal': 0.0, 'xai': 0.0}
         self.tmp = tempfile.mkdtemp(prefix='guidework-')
@@ -161,6 +172,7 @@ class Worker:
             if it.get('dry') or self.dry_run: return self.run_dry(it)
             if it['kind'] == 'upload': return self.run_upload(it)
             if it['kind'] == 'picture': return self.run_picture(it)
+            if it['kind'] == 'video': return self.run_video(it)
             self.fail_row(it, ('This kind of request is not made by this line.', 'Send a note to Claude from this sheet.'))
         except Exception as x:   # a row that crashes the worker would hang as "making": it fails with the reason instead
             say('%s crashed: %r' % (it['id'], x))
@@ -171,7 +183,9 @@ class Worker:
         say('%s dry run' % it['id'])
         time.sleep(dry_wait()); store.set_state(it['id'], 'checking', actor='worker')
         time.sleep(dry_wait())
-        store.set_state(it['id'], 'done', actor='worker', result={'path': '', 'mirrored': False, 'own': False, 'checks': [], 'main': False, 'dry': True}, cost=0)
+        res = ({'n': it.get('take', 0), 'js': '', 'img': '', 'frames': 0, 'kb': 0, 'words': '', 'gate': None, 'dry': True} if it['kind'] == 'video'
+               else {'path': '', 'mirrored': False, 'own': False, 'checks': [], 'main': False, 'dry': True})
+        store.set_state(it['id'], 'done', actor='worker', result=res, cost=0)
 
     # ---- an uploaded picture: measured checks only ----
     def run_upload(self, it):
@@ -195,25 +209,30 @@ class Worker:
         store.set_state(it['id'], 'done', actor='worker', result={'path': out, 'mirrored': False, 'own': True, 'checks': checks, 'main': False, 'note': note}, cost=0)
 
     # ---- a generated picture ----
-    def row_fal(self, it, what, state):
+    def row_fal(self, it, what, state, endpoint='google/nano-banana-2.1/edit'):
         """Write the fal request number on the row the moment fal accepts it (called from the ledger's save, before anything waits)."""
         p = state['pending'].get(what)
         if p and not state.get('_told'):
             state['_told'] = True
-            store.set_fields(it['id'], actor='worker', fal={'endpoint': 'google/nano-banana-2.1/edit', 'request_id': p['rid'], 'status_url': p['status_url'], 'response_url': p['response_url'], 'est': p.get('est')})
+            store.set_fields(it['id'], actor='worker', fal={'endpoint': endpoint, 'request_id': p['rid'], 'status_url': p['status_url'], 'response_url': p['response_url'], 'est': p.get('est')})
 
-    def make_once(self, it, job, what, state, cap):
-        """One fal call (or the pick-up of the request the row already holds). Returns (png bytes or None, error text, code)."""
+    def run_fal(self, it, job, what, state, cap, resume):
+        """One fal call (or the pick-up of the request the row already holds, no new charge). Returns (code, report, folder the file is in)."""
         import types, wangen
         out = os.path.join(self.tmp, it['id']); os.makedirs(out, exist_ok=True)
         ns = types.SimpleNamespace(out=out, repo=self.repo, dry_run=False, cap=cap, tell=None)
         state['_told'] = False
         old = it.get('fal') or {}
-        if old.get('request_id') and what.endswith('-a'):   # picking the request up again, no new charge
+        if old.get('request_id') and resume and what not in state['pending']:
             state['pending'][what] = {'rid': old['request_id'], 'status_url': old['status_url'], 'response_url': old['response_url'], 'rev': job['rev'], 'est': old.get('est') or 0.15,
                                       'at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}
             state['_told'] = True
-        code, rep = wangen.run_one(what, job, ns, state, self.lock, lambda: self.row_fal(it, what, state), self.get_fal(), self.key, say)
+        code, rep = wangen.run_one(what, job, ns, state, self.lock, lambda: self.row_fal(it, what, state, job.get('endpoint') or 'google/nano-banana-2.1/edit'), self.get_fal(), self.key, say)
+        return code, rep, out
+
+    def make_once(self, it, job, what, state, cap):
+        """One fal picture call. Returns (png bytes or None, error text, code)."""
+        code, rep, out = self.run_fal(it, job, what, state, cap, what.endswith('-a'))
         if rep.get('file'): return open(os.path.join(out, rep['file']), 'rb').read(), '', 0
         return None, rep.get('error') or 'no picture', code
 
@@ -261,13 +280,114 @@ class Worker:
         if pair is not None: self.fail_row(it, pair, cost=round(cost, 4))
         else: self.fail_code(it, code[0], fmt=code[1] if len(code) > 1 else None, cost=round(cost, 4))
 
+    # ---- a family video (guideflow4) ----
+    def start_picture(self, who):
+        """The path of the start picture to hand to fal: the newest one on branch guidegen (D10: usable the moment its row is done), else the one committed on main."""
+        data = read_guidegen('startpics/%s-hero.png' % who) if who else None
+        if data:
+            p = os.path.join(self.tmp, 'start-%s.png' % who); open(p, 'wb').write(data); return p
+        p = os.path.join(self.repo, 'art', 'clips', 'start', '%s-hero.png' % who)
+        return p if who and os.path.exists(p) else None
+
+    def run_video(self, it):
+        import wangen
+        rid = re.sub(r'[^A-Za-z0-9_-]', '-', it['id'])
+        if it.get('route') not in ('wan', '', None): return self.fail_row(it, NOT_YET)
+        if it.get('replay'):
+            rel = it['replay']
+            data = None
+            for br in ('guidegen', 'wangen'):
+                data = read_guidegen(rel, br)
+                if data: break
+            if not data: return self.fail_row(it, NO_REPLAY)
+            p = os.path.join(self.tmp, rid + '-replay.mp4'); open(p, 'wb').write(data)
+            store.set_state(it['id'], 'checking', actor='worker', cost=0)
+            return self.finish_video(it, p, 0.0)
+        if it['anim'] in wangen.staging_waits(self.repo): return self.fail_code(it, 'X15')   # X15: a move still being rebuilt in layers is never made
+        who = it.get('start') or it.get('who') or ''
+        frame = self.start_picture(who)
+        if not frame: return self.fail_row(it, NO_START)
+        base = self.get_jobs().get(VID_TEMPLATE)
+        if not base: return self.fail_row(it, ('There is no video recipe for this line yet.', 'Send a note to Claude from this sheet.'))
+        job = copy.deepcopy(base); job.update(rev=1, frame=frame); job.pop('pad', None)
+        pf = os.path.join(self.tmp, rid + '-prompt.txt'); open(pf, 'w', encoding='utf-8').write((it.get('prompt') or '').strip() + '\n')
+        if not (it.get('prompt') or '').strip(): return self.fail_row(it, ('This request has no prompt.', 'Send a note to Claude from this sheet.'))
+        job['prompt_file'] = pf
+        cap = min(float(it.get('cap') or VID_CAP), VID_CAP)
+        est = wangen.estimate(job)
+        if est > cap + 1e-9: return self.fail_code(it, 'X22')   # X22
+        state = {'spent': 0.0, 'calls': [], 'pending': {}}
+        what = 'vid-' + rid
+        rep = {}
+        for attempt in (1, 2):
+            code, rep, out = self.run_fal(it, job, what, state, cap, attempt == 1)
+            if rep.get('file'): break
+            err = rep.get('error') or ''
+            if code == 3: return self.finish_failed_vid(it, state, 'X22')
+            if CREDIT.search(err):   # X5
+                self.stop_claim = True
+                return self.finish_failed_vid(it, state, 'X5')
+            if re.search(r'\b429\b', err) and not (it.get('fal') or state['pending']):   # X7: too busy, nothing accepted: back in line, no try counted, wait a little
+                try:
+                    store.set_state(it['id'], 'queued', actor='worker')
+                    self.pause_until = time.time() + backoff(); say('%s: fal is busy, back in line' % it['id'])
+                    return
+                except (store.Refused, store.StoreError) as x: say('could not put %s back in line: %s' % (it['id'], x))
+            if attempt == 2: return self.finish_failed_vid(it, state, 'X6')   # X6: one automatic retry, then the words
+            say('%s: no video (%s), one more try' % (it['id'], err[:120]))
+        spent = float(state['spent'])
+        store.set_state(it['id'], 'checking', actor='worker', cost=round(spent, 4))
+        with self.lock: self.spent['fal'] += spent
+        self.finish_video(it, os.path.join(out, rep['file']), spent)
+
+    def finish_failed_vid(self, it, state, code):
+        with self.lock: self.spent['fal'] += state['spent']
+        self.fail_code(it, code, cost=round(state['spent'], 4))
+
+    def finish_video(self, it, path, spent):
+        """The checks and the save for ONE video, right away: make_take (marks, clip gate with its 7 minute limit, preview), then the take and the mp4 are kept on guidegen and
+        confirmed there. X9 when it hardly moves, X16 when the save fails twice, X10 (the gate holds it) is still done."""
+        import make_take
+        rid = re.sub(r'[^A-Za-z0-9_-]', '-', it['id'])
+        rd = os.path.join(self.tmp, 'res-' + rid); sd = os.path.join(self.tmp, 'take-' + rid); os.makedirs(rd, exist_ok=True); os.makedirs(sd, exist_ok=True)
+        row = {'anim': it['anim'], 'take': int(it.get('take') or 0), 'video': os.path.abspath(path), 'prompt': it.get('prompt') or '', 'promptRev': it.get('promptRev', 0), 'route': 'wan',
+               'cost': round(spent, 4), 'at': it.get('at'), 'note': it.get('note') or ''}
+        rf = os.path.join(rd, 'guide-results.json'); json.dump({'results': [row]}, open(rf, 'w'))
+        args = ['--results', rf, '--state', sd, '--quiet'] + (['--no-gate'] if self.no_gate else [])
+        make_take.main(args)
+        tk = os.path.join(sd, 'takes.json')
+        take = None
+        if os.path.exists(tk):
+            A = (json.load(open(tk, encoding='utf-8')).get('anims') or {}).get(it['anim']) or {}
+            take = next((t for t in A.get('takes', []) if t['n'] == row['take']), None)
+        if not take: return self.fail_row(it, ('The video came back but checking it did not finish.', 'Tap Try again.'), cost=round(spent, 4))
+        files = [take.get(k) for k in ('video', 'js', 'img') if take.get(k)]
+        ok = False
+        for _ in range(2):
+            try: rc = self.keep_dir(sd, 'guidegen: %s take [skip ci]' % it['id'])
+            except Exception as x: say('keep failed: %s' % str(x)[:200].replace(os.environ.get('GH_TOKEN', '\0'), '***')); rc = 1
+            if rc == 0 and all(self.on_branch(f, os.path.join(sd, f)) for f in files): ok = True; break
+        if not ok: return self.fail_code(it, 'X16', cost=round(spent, 4))
+        if take['status'] == 'still': return self.fail_code(it, 'X9', cost=round(spent, 4))   # X9: the video is kept, the row says it hardly moves
+        if take['status'] != 'new': return self.fail_row(it, ((take.get('why') or 'The video could not be checked.')[:160], 'Tap Try again.'), cost=round(spent, 4))
+        res = {k: take.get(k) for k in ('js', 'img', 'frames', 'kb', 'words', 'gate')}; res['n'] = take['n']
+        store.set_state(it['id'], 'done', actor='worker', result=res, cost=round(spent, 4))
+
+    def keep_dir(self, d, msg):
+        import keep
+        url = os.environ.get('GUIDE_KEEP_URL', '')
+        return keep.main([d, '--msg', msg] + (['--url', url] if url else []))
+
+    def on_branch(self, rel, local):
+        try: got = read_guidegen(rel)
+        except store.StoreError: return False
+        return got is not None and got == open(local, 'rb').read()
+
     # ---- the loop ----
     def lane_rows(self, doc, state):
         return [i for i in doc['items'].values() if i['lane'] == self.lane and i['state'] == state]
 
     def run(self):
-        if self.lane == 'vid':
-            say('video line arrives in guideflow4'); return 0
         res = store.reap(self.alive)
         if res['requeued'] or res['failed']: say('reaper: back in line %s, failed %s' % (res['requeued'], res['failed']))
         last_reap = time.time(); futs = []; idle_since = None
@@ -277,13 +397,13 @@ class Worker:
                 doc, _ = store.load()
                 queued = self.lane_rows(doc, 'queued')
                 free = self.pool - len(futs)
-                if queued and free > 0 and not self.stop_claim:
+                if queued and free > 0 and not self.stop_claim and time.time() >= self.pause_until:
                     got = store.claim(self.lane, self.run_id, free)
                     for it in got: futs.append(ex.submit(self.handle, it)); say('claimed %s' % it['id'])
                     queued = [q for q in queued if q['id'] not in {g['id'] for g in got}]
                 if time.time() - last_reap > 600:
                     store.reap(self.alive); last_reap = time.time()
-                waiting = bool(queued) and not self.stop_claim
+                waiting = bool(queued) and not self.stop_claim   # (a row waiting out the X7 pause keeps the worker here)
                 if futs or waiting: idle_since = None
                 else:
                     if idle_since is None: idle_since = time.time()
@@ -299,7 +419,7 @@ class Worker:
     def log_cost(self):
         rows = []
         if self._judge is not None: self.spent['xai'] = float(getattr(self._judge, 'spent', 0) or 0)   # one judge shared by the rows: its own total is the run's, counted once
-        if self.spent['fal'] > 0: rows.append({'service': 'fal', 'amount': round(self.spent['fal'], 4), 'what': 'guide-work: start pictures', 'source': 'guide-work run'})
+        if self.spent['fal'] > 0: rows.append({'service': 'fal', 'amount': round(self.spent['fal'], 4), 'what': 'guide-work: ' + ('family videos' if self.lane == 'vid' else 'start pictures'), 'source': 'guide-work run'})
         if self.spent['xai'] > 0: rows.append({'service': 'xai', 'amount': round(self.spent['xai'], 4), 'what': 'guide-work: start picture facing check', 'source': 'guide-work run'})
         if not rows: return
         try:

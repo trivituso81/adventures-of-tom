@@ -46,7 +46,7 @@ def default_gate(entry, video, marks, key, cap):
     return {'hold': g['hold'], 'reasons': g['reasons'][:8], 'faults': sorted(set(g['measured']) | set(g['vision'])), 'vision_ran': g.get('vision_ran', False), 'spent': g.get('spent', 0.0), 'error': g.get('vision_error')}
 
 
-def process(row, state, G, outdir, key=None, gate_fn=None, cap=0.08, use_gate=True):
+def process(row, state, G, outdir, key=None, gate_fn=None, cap=0.08, use_gate=True, quiet=False):
     """One generator row -> one take in state['anims'][anim]. Returns the take."""
     a = G['guide']['anims'].get(row['anim'])
     if not a: raise ValueError('no animation %s in data/guide-anims.json' % row['anim'])
@@ -88,7 +88,8 @@ def process(row, state, G, outdir, key=None, gate_fn=None, cap=0.08, use_gate=Tr
         if (p['gate'] or {}).get('hold') and (q['gate'] or {}).get('hold') and f:
             A['stop'], A['stopWhy'] = True, 'Takes %d and %d were held by the clip gate for the same fault (%s).' % (p['n'], q['n'], ', '.join(sorted(f)))
     state['spent'] = round(sum(v['spent'] for v in state['anims'].values()), 4)
-    try:   # startpics10: the final outcome goes to the phone
+    try:   # startpics10: the final outcome goes to the phone (guideflow4: not when the Guide worker runs this, the queue store sends the one message)
+        if quiet: raise RuntimeError('quiet')
         import notify
         ok = take['status'] == 'new'
         notify.send(notify.label(row.get('anim')), ('Ready to review in the Battle Guide. ' + ((take.get('gate') or {}).get('words') or '')) if ok else ('Did not work: ' + str(take.get('why') or take['status'])[:160]), tags='white_check_mark' if ok else 'x')
@@ -96,12 +97,12 @@ def process(row, state, G, outdir, key=None, gate_fn=None, cap=0.08, use_gate=Tr
     return take
 
 
-def _run_child(row, results_dir, state, no_gate, cap, seconds):
+def _run_child(row, results_dir, state, no_gate, cap, seconds, quiet=False):
     """guidestuck1: ONE row in its own process with a time limit. Returns (ok, why). A hung look check, a stuck baker or a process the runner kills for memory
     costs that one row, never the whole step (run 45002823299 lost its runner during this step and every paid video of the run with it)."""
     import subprocess
     one = os.path.join(results_dir, '_one.json'); json.dump([row], open(one, 'w'))
-    cmd = [sys.executable, '-I', os.path.abspath(__file__), '--results', one, '--state', state, '--child', '--cap', str(cap)] + (['--no-gate'] if no_gate else [])
+    cmd = [sys.executable, '-I', os.path.abspath(__file__), '--results', one, '--state', state, '--child', '--cap', str(cap)] + (['--no-gate'] if no_gate else []) + (['--quiet'] if quiet else [])
     try:
         r = subprocess.run(cmd, timeout=seconds, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
     except subprocess.TimeoutExpired as x:
@@ -114,6 +115,7 @@ def _run_child(row, results_dir, state, no_gate, cap, seconds):
 def main(argv=None):
     ap = argparse.ArgumentParser(); ap.add_argument('--results', required=True); ap.add_argument('--state', required=True)
     ap.add_argument('--no-gate', action='store_true'); ap.add_argument('--cap', type=float, default=0.08)
+    ap.add_argument('--quiet', action='store_true', help='guideflow4: no phone message from here (the queue store sends it)')
     ap.add_argument('--child', action='store_true', help='guidestuck1: internal, one row in this process (no time limit here, the parent holds it)')
     ap.add_argument('--seconds', type=int, default=int(os.environ.get('TAKE_SECONDS', '420')), help='guidestuck1: most seconds one take may use before it is dropped to the measured checks only')
     a = ap.parse_args(argv)
@@ -128,14 +130,14 @@ def main(argv=None):
         # guidestuck1: every row in its own process. First try with the gate; if that hangs or dies, the same video again with the measured checks only; if that
         # fails too, the take is recorded as failed with the reason (the page then says so and offers Generate again, instead of sitting at CHECKING).
         for r in rows:
-            ok, why = _run_child(r, base, a.state, a.no_gate, a.cap, a.seconds)
+            ok, why = _run_child(r, base, a.state, a.no_gate, a.cap, a.seconds, a.quiet)
             if not ok and not a.no_gate:
                 say('%s take %s: the look check %s; making the take again without it' % (r['anim'], r['take'], why))
-                ok, why = _run_child(r, base, a.state, True, a.cap, max(120, a.seconds // 2))
+                ok, why = _run_child(r, base, a.state, True, a.cap, max(120, a.seconds // 2), a.quiet)
             if not ok:
                 say('%s take %s: could not be checked (%s)' % (r['anim'], r['take'], why))
                 state = json.load(open(sf, encoding='utf-8')) if os.path.exists(sf) else {'anims': {}, 'spent': 0.0}
-                process(dict(r, error='The video came back but checking it %s. Tap Generate this video to try again.' % why), state, RC.load(), a.state, use_gate=False)
+                process(dict(r, error='The video came back but checking it %s. Tap Generate this video to try again.' % why), state, RC.load(), a.state, use_gate=False, quiet=a.quiet)
                 open(sf, 'w', encoding='utf-8').write(jdump(state))
         state = json.load(open(sf, encoding='utf-8')) if os.path.exists(sf) else {'anims': {}}
         want = {(r['anim'], int(r['take'])) for r in rows}
@@ -146,7 +148,7 @@ def main(argv=None):
     G = RC.load()
     key = os.environ.get('XAI_API_KEY') or None
     for r in rows:
-        t = process(r, state, G, a.state, key=key, cap=a.cap, use_gate=not a.no_gate)
+        t = process(r, state, G, a.state, key=key, cap=a.cap, use_gate=not a.no_gate, quiet=a.quiet)
         say('%s take %d: %s%s' % (r['anim'], t['n'], t['status'], ' | ' + t['gate']['words'] if t['gate'] else ''))
         open(sf, 'w', encoding='utf-8').write(jdump(state))
     return 0

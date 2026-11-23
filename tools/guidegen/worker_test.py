@@ -6,7 +6,11 @@ T4 pictures: queued to done; mirrored; a failed measured check retried once (and
 a row added while the worker works is picked up; a row that already holds a fal request number picks it up with no second call; dry rows walk every state
 and call nothing; an own picture blocks a generated one unless force; a save that fails is X16; no judge fails the row; the run cost is logged once.
 T5 uploads: a good picture is used byte for byte; a see-through background is filled with magenta and the figure is untouched; X13 and X14 give their lines;
-no fal call and no vision call. Plus the lanes: vid exits at once, a failed row never makes the run fail, the linger ends the run. Prints FAILS: []."""
+no fal call and no vision call. Plus the lanes: an empty vid line exits at once, a failed row never makes the run fail, the linger ends the run.
+T6 videos (guideflow4): queued to done through the REAL make_take.py on a stored test video (marks, preview, the take and the mp4 kept on guidegen and confirmed there);
+four at a time with a fifth waiting; a row added while working; the worker dying after the fal number is written and a second worker picking the request up (one paid send);
+X5, X6 (one automatic retry), X7 (429: back in line, no try counted), X9, X10 (a gate hold is still done), X15, X16, X22; replay (free, real checks); dry; no start picture; monsters not yet.
+Prints FAILS: []."""
 import base64, hashlib, http.server, io, json, os, re, socketserver, sys, threading, time
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(ROOT, 'tools')); sys.path.insert(0, os.path.join(ROOT, 'tools', 'art-library'))
@@ -88,7 +92,11 @@ def fake_keep(argv):
     d = argv[0]
     for root, _, files in os.walk(d):
         for f in files:
-            src = os.path.join(root, f); gh.branches['guidegen'][os.path.relpath(src, d)] = open(src, 'rb').read()
+            src = os.path.join(root, f); rel = os.path.relpath(src, d); data = open(src, 'rb').read()
+            if rel == 'takes.json':   # the real keep.py merges takes by animation and take number
+                with gh.lock: theirs = json.loads(gh.branches['guidegen'][rel]) if rel in gh.branches['guidegen'] else None
+                data = json.dumps(keep.merge_takes(json.loads(data), theirs)).encode()
+            gh.branches['guidegen'][rel] = data
     return 0
 keep.main = fake_keep
 
@@ -96,9 +104,16 @@ keep.main = fake_keep
 class Fal:
     """The stand-in fal. `pics` is the list of PNGs it returns in turn; `block` holds every wait until it is set (to count the calls at once)."""
     def __init__(self, pics=None): self.pics = list(pics or [GOOD] * 20); self.sent = 0; self.waited = []; self.priced = 0; self.on_send = None; self.refuse = None; self.live = 0; self.peak = 0; self.hold = 0; self.on_wait = None; self.mu = threading.Lock()
-    def price(self, endpoint): self.priced += 1; return (0.15, 'image')
+    refuse_n = None   # a number: refuse only that many sends, then accept
+    vids = None       # the list of mp4 bytes `wait` returns in turn (video rows); None means pictures
+    def price(self, endpoint): self.priced += 1; return (0.1, 'seconds') if self.vids is not None else (0.15, 'image')
     def send(self, endpoint, body):
-        if self.refuse: raise self.refuse
+        if self.refuse:
+            if self.refuse_n is None: raise self.refuse
+            with self.mu:
+                n_left = self.refuse_n
+                if n_left > 0: self.refuse_n -= 1
+            if n_left > 0: raise self.refuse
         with self.mu: self.sent += 1; n = self.sent
         return {'rid': 'req-%d' % n, 'status_url': 's%d' % n, 'response_url': 'r%d' % n}
     def wait(self, pend, tell=None):
@@ -106,6 +121,9 @@ class Fal:
         try:
             if self.on_wait: self.on_wait()
             time.sleep(self.hold)
+            if self.vids is not None:
+                with self.mu: p = self.vids.pop(0) if len(self.vids) > 1 else self.vids[0]
+                return {'video': {'url': 'mp4:%d' % len(p)}, '_png': p}
             with self.mu: p = self.pics.pop(0)
             return {'images': [{'url': 'png:%d' % len(p)}], '_png': p}
         finally:
@@ -136,9 +154,9 @@ def run_one(what, job, a, state, lock, save, fal, key, log):
     """The real run_one with the stand-in fal; the picture that `wait` returned is written where run_one downloads it."""
     class F2:
         def __getattr__(s, n): return getattr(fal, n)
-        def download(s, url): return fal.last
+        def download(s, url): return s.last
         def wait(s, pend, tell=None):
-            r = fal.wait(pend, tell); fal.last = r['_png']; return {'images': r['images']}
+            r = fal.wait(pend, tell); s.last = r['_png']; return {'video': r['video']} if 'video' in r else {'images': r['images']}
     return _orig_run_one(what, job, a, state, lock, save, F2(), key, log)
 wangen.run_one = run_one
 
@@ -272,7 +290,8 @@ go(worker(NoCall(), NoCall()))
 check('T5 an upload for a person who already has an own picture is allowed', doc()['items']['u-second']['state'] == 'done')
 
 # ---------------- lanes, exit codes, the reaper, the linger ----------------
-check('lane vid exits 0 at once and touches nothing', (lambda n: W.Worker('vid', alive=lambda r: True).run() == 0 and len(gh.puts) == n)(len(gh.puts)))
+reset(); n0 = len(gh.puts)
+check('an empty video line exits 0 at once and touches nothing', (lambda: W.Worker('vid', linger=0.1, once=True, alive=lambda r: True).run() == 0 and len(gh.puts) == n0)())
 reset(); S.add(row('p-tom-x1')); S.add(row('u-bad', 'upload', upload='uploads/none.png')); rc = go(worker(Fal(), Judge()))
 check('a run with a failed row still exits 0', rc == 0 and doc()['items']['u-bad']['state'] == 'failed')
 reset(); S.add(row('v-dead', 'video', anim='body:tnb:run', who='tnb')); d0 = doc()
@@ -286,4 +305,169 @@ a = W.Worker('pic', alive=lambda r: True); check('github_alive reads completed a
 os.environ['GUIDE_API'] = 'http://127.0.0.1:1'; check('...and an unreachable GitHub is None (the row is left alone)', W.Worker.github_alive(1) is None)
 src = open(os.path.join(HERE, 'worker.py'), encoding='utf-8').read()
 check('worker.py never copies falq: it imports wangen and startpic', 'import types, wangen' in src and 'falq' in src and 'def wait(' not in src and '—' not in src)
+
+# ---------------- T6: videos (guideflow4) ----------------
+os.environ['GUIDE_API'] = 'http://127.0.0.1:%d' % srv.server_address[1]   # (the unreachable address above was only for one check)
+import math, shutil, subprocess, tempfile
+VT = tempfile.mkdtemp(prefix='guide4-')
+def make_video(path, still=False, w=720, h=1280):
+    d = os.path.join(VT, 'frames'); os.makedirs(d, exist_ok=True)
+    for i in range(120):
+        im = Image.new('RGB', (w, h), (255, 0, 255)); g = ImageDraw.Draw(im)
+        ext = 0 if still or i < 20 or i >= 60 else int(300 * math.sin(math.pi * (i - 20) / 40))
+        g.ellipse((300, 200, 420, 340), fill=(224, 172, 140)); g.rectangle((290, 340, 430, 800), fill=(60, 90, 160))
+        g.rectangle((290, 800, 355, 1100), fill=(40, 40, 60)); g.rectangle((365, 800, 430, 1100), fill=(40, 40, 60)); g.rectangle((430, 380, 440 + ext, 480 + ext // 3), fill=(224, 172, 140))
+        im.save('%s/%03d.png' % (d, i))
+    r = subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-framerate', '24', '-i', d + '/%03d.png', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', path], capture_output=True, text=True); assert r.returncode == 0, r.stderr
+    shutil.rmtree(d)
+MOVING_P, STILL_P = os.path.join(VT, 'moving.mp4'), os.path.join(VT, 'still.mp4')
+make_video(MOVING_P); make_video(STILL_P, still=True)
+MV, SV = open(MOVING_P, 'rb').read(), open(STILL_P, 'rb').read()
+SLUG = 'body-tnb-idle'
+import make_take as MT, wangen as WG
+
+def vrow(id, take=1, **k):
+    d = dict(anim='body:tnb:idle', who='tnb', take=take, start='tnb', prompt='A test prompt for the idle video.', promptRev=1, route='wan'); d.update(k); return row(id, 'video', **d)
+def vfal(vids=None): f = Fal(); f.vids = list(vids or [MV]); return f
+def vworker(fal=None, pool=4, **k):
+    w = W.Worker('vid', pool=pool, linger=0.3, once=True, alive=lambda r: True, fal=fal or NoCall(), judge_factory=Judge, run_id=4242, **k); w.key = 'k'; return w
+def vreset(items=None):
+    reset(items); gh.branches['guidegen']['startpics/tnb-hero.png'] = GOOD
+os.environ['WORKER_BACKOFF'] = '0.3'
+NoCall.calls = 0
+
+vreset(); S.add(vrow('v-tnb-idle-t1')); fal = vfal(); t0 = time.time(); rc = vworker(fal).run(); dt = time.time() - t0
+r = doc()['items']['v-tnb-idle-t1']; G = gh.branches['guidegen']
+tk = json.loads(G['takes.json']) if 'takes.json' in G else {}
+tt = ((tk.get('anims') or {}).get('body:tnb:idle') or {}).get('takes') or [{}]
+check('T6 a queued video row goes to done and the run exits 0 (real make_take on a stored video)', rc == 0 and r['state'] == 'done', r)
+check('T6 the result is {n, js, img, frames, kb, words, gate} and the take files are the ones on guidegen', r['state'] == 'done' and set(r['result']) >= {'n', 'js', 'img', 'frames', 'kb', 'words', 'gate'} and r['result']['n'] == 1
+      and all(f in G for f in ('takes/%s/t1.mp4' % SLUG, r['result']['js'], r['result']['img'])) and G['takes/%s/t1.mp4' % SLUG] == MV and tt[0].get('n') == 1 and tt[0].get('status') == 'new', (r.get('result'), sorted(G)))
+check('T6 the fal number and the wan endpoint are on the row, cost $0.50, exactly one fal send', r['fal'] and r['fal']['request_id'] == 'req-1' and r['fal']['endpoint'] == 'alibaba/wan-3.0/image-to-video' and abs(r['cost'] - .5) < 1e-9 and fal.sent == 1, (r.get('fal'), r.get('cost'), fal.sent))
+check('T6 the row went making, checking, done (the fal number was written before the wait)', [m for p_, m, _ in gh.puts if m.startswith('guide: v-tnb-idle-t1')][-3:] == ['guide: v-tnb-idle-t1 fields [skip ci]', 'guide: v-tnb-idle-t1 checking [skip ci]', 'guide: v-tnb-idle-t1 done [skip ci]'], [m for p_, m, _ in gh.puts if 'v-tnb' in m])
+check('T6 no daily limit: no cost ledger check on the row, the only limits are its cap and the price', 'day' not in open(os.path.join(HERE, 'worker.py'), encoding='utf-8').read().lower().replace('daily limit', ''), 'worker mentions a day')
+print('     (one video through fal stand-in, make_take, keep and confirm took %.1f s)' % dt)
+
+# the take step is made for THIS video right away, quietly (the store sends the one phone message), with the 7 minute limit of make_take
+seen_args = []; _real_main = MT.main
+def spy_main(argv=None): seen_args.append(list(argv)); return _real_main(argv)
+MT.main = spy_main
+vreset(); S.add(vrow('v-tnb-idle-t2', take=2)); vworker(vfal()).run(); MT.main = _real_main
+check('T6 make_take is called for the one video with --quiet and its default 7 minute limit', len(seen_args) == 1 and '--quiet' in seen_args[0] and "'420'" in open(os.path.join(HERE, 'make_take.py'), encoding='utf-8').read(), seen_args)
+
+# four at a time, a fifth waits and starts when one ends
+os.environ['GUIDE_NO_GATE'] = '1'
+vreset()
+for k in range(6): S.add(vrow('v-tnb-idle-m%d' % k, take=10 + k, at='2026-11-23T01:00:0%dZ' % k))
+fal = vfal(); fal.hold = 0.5; vworker(fal, pool=4).run()
+d = doc()['items']
+check('T6 four at a time: six rows all done, never more than four at once at fal, the fifth and sixth started when slots freed', all(i['state'] == 'done' for i in d.values()) and fal.peak == 4 and fal.sent == 6, (fal.peak, fal.sent, {k: v['state'] for k, v in d.items()}))
+tk = json.loads(gh.branches['guidegen']['takes.json'])['anims']['body:tnb:idle']['takes']
+check('T6 the six takes are all in takes.json (kept together, none lost)', sorted(t['n'] for t in tk) == [10, 11, 12, 13, 14, 15], [t['n'] for t in tk])
+
+# a row added while working is picked up within 10 seconds of test time
+vreset(); S.add(vrow('v-tnb-idle-n0', take=20, at='2026-11-23T01:00:00Z')); fal = vfal(); added = []; t_add = [0]
+def add_late():
+    if not added: added.append(1); t_add[0] = time.time(); S.add(vrow('v-tnb-idle-n1', take=21, at='2026-11-23T01:00:09Z'))
+fal.on_wait = add_late; fal.hold = 0.2; w = vworker(fal, pool=2); w.run()
+ms = [t for p_, m, t in gh.puts if m.startswith('guide: v-tnb-idle-n1 fields')]   # the fal number is written the moment the late row is being made
+d = doc()['items']
+check('T6 a row added while the worker works is picked up within 10 seconds', d['v-tnb-idle-n0']['state'] == 'done' and d['v-tnb-idle-n1']['state'] == 'done' and ms and ms[0] - t_add[0] < 10, (ms, t_add, {k: v['state'] for k, v in d.items()}))
+
+# the worker dies after the fal number is written; a second worker picks the request up: exactly one paid send
+class Die(BaseException): pass
+vreset(); S.add(vrow('v-tnb-idle-d1', take=30)); fal1 = vfal()
+def die(): raise Die()
+fal1.on_wait = die; vworker(fal1).run()
+r = doc()['items']['v-tnb-idle-d1']
+check('T6 a worker that dies after fal accepted leaves the row making with the fal number on it', r['state'] == 'making' and r['fal'] and r['fal']['request_id'] == 'req-1' and fal1.sent == 1, r)
+fal2 = vfal(); w2 = W.Worker('vid', pool=2, linger=0.3, once=True, alive=lambda run: run != 4242, fal=fal2, judge_factory=Judge, run_id=4343); w2.key = 'k'; w2.run()
+r = doc()['items']['v-tnb-idle-d1']
+check('T6 the reaper puts it back once and the second worker resumes by the fal number: done, one paid send in all, no second send', r['state'] == 'done' and fal1.sent + fal2.sent == 1 and fal2.sent == 0 and fal2.waited == ['req-1'] and r['cost'] == 0, (r, fal1.sent, fal2.sent, fal2.waited))
+
+# X6: one automatic retry, then the words
+vreset(); S.add(vrow('v-tnb-idle-e1', take=40)); fal = vfal(); fal.refuse = falq.Stop('fal said 500: boom'); fal.refuse_n = 1; vworker(fal).run()
+r = doc()['items']['v-tnb-idle-e1']
+check('T6 X6: the first send is refused, one automatic retry, the row is done', r['state'] == 'done' and fal.sent == 1, r)
+vreset(); S.add(vrow('v-tnb-idle-e2', take=41)); fal = vfal(); fal.refuse = falq.Stop('fal said 500: boom'); vworker(fal).run()
+r = doc()['items']['v-tnb-idle-e2']
+check('T6 X6: two refusals fail the row with the X6 words, nothing sent or spent', r['state'] == 'failed' and r['why'] == S.WORDS['X6']['why'] and r['do'] == S.WORDS['X6']['do'] and fal.sent == 0 and r['cost'] == 0, r)
+
+# X5: out of credit stops claiming
+vreset()
+for k in range(3): S.add(vrow('v-tnb-idle-c%d' % k, take=50 + k, at='2026-11-23T01:00:0%dZ' % k))
+fal = vfal(); fal.refuse = falq.Stop('fal said 403: User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.'); vworker(fal, pool=1).run()
+d = doc()['items']
+check('T6 X5: out of credit fails the first row with the X5 words and the others stay queued', d['v-tnb-idle-c0']['state'] == 'failed' and d['v-tnb-idle-c0']['why'] == S.WORDS['X5']['why'] and d['v-tnb-idle-c1']['state'] == 'queued' and d['v-tnb-idle-c2']['state'] == 'queued', {k: v['state'] for k, v in d.items()})
+
+# X7: fal too busy: back in line, no try counted, started again when the pause ends
+vreset(); S.add(vrow('v-tnb-idle-b1', take=60)); fal = vfal(); fal.refuse = falq.Stop('fal said 429: too many requests'); fal.refuse_n = 1; t0 = time.time(); vworker(fal, pool=1).run()
+r = doc()['items']['v-tnb-idle-b1']; msgs = [m for p_, m, _ in gh.puts if m.startswith('guide: v-tnb-idle-b1')]
+check('T6 X7: a 429 puts the row back in line (never failed) and it is made after the pause, with one try counted', r['state'] == 'done' and r['tries'] == 1 and any(m.startswith('guide: v-tnb-idle-b1 queued') for m in msgs) and not any('failed' in m for m in msgs) and fal.sent == 1, (r, msgs))
+vreset(); S.add(vrow('v-tnb-idle-b2', take=61, fal={'endpoint': 'x', 'request_id': 'old-1', 'status_url': 's', 'response_url': 'r', 'est': .5}))
+d0 = doc(); d0['items']['v-tnb-idle-b2'].update(state='making', run=4242, tries=1); gh.branches['guideq']['queue.json'] = json.dumps(d0).encode()
+try: S.set_state('v-tnb-idle-b2', 'queued', actor='worker'); refused = False
+except S.Refused: refused = True
+check('T6 X7 rule in store.py: the worker may not put a row that holds a fal number back in line', refused and doc()['items']['v-tnb-idle-b2']['state'] == 'making')
+
+# X9: the video hardly moves: the video is kept, the row says so
+vreset(); S.add(vrow('v-tnb-move-s1', anim='move:suite_door_slide', take=70, who='tnb')); fal = vfal([SV]); vworker(fal).run()
+r = doc()['items']['v-tnb-move-s1']; G = gh.branches['guidegen']
+check('T6 X9: a strike video that hardly moves fails with the X9 words, is paid ($0.50) and the video is kept on guidegen', r['state'] == 'failed' and r['why'] == S.WORDS['X9']['why'] and r['do'] == S.WORDS['X9']['do'] and abs(r['cost'] - .5) < 1e-9 and any(k.endswith('/t70.mp4') for k in G), (r, sorted(G)))
+
+# X10: a gate hold is still done, with the gate's words in the result
+def hold_main(argv):
+    rf = argv[argv.index('--results') + 1]; sd = argv[argv.index('--state') + 1]; row_ = json.load(open(rf))['results'][0]
+    shutil.copyfile(row_['video'], os.path.join(sd, 't.mp4')); os.makedirs(os.path.join(sd, 'takes', SLUG), exist_ok=True)
+    for ext in ('mp4', 'js', 'webp'): open(os.path.join(sd, 'takes', SLUG, 't%d.%s' % (row_['take'], ext)), 'wb').write(b'x' + ext.encode())
+    os.remove(os.path.join(sd, 't.mp4'))
+    t = {'n': row_['take'], 'status': 'new', 'video': 'takes/%s/t%d.mp4' % (SLUG, row_['take']), 'js': 'takes/%s/t%d.js' % (SLUG, row_['take']), 'img': 'takes/%s/t%d.webp' % (SLUG, row_['take']), 'frames': 3, 'kb': 1, 'words': 'w',
+         'cost': row_['cost'], 'gate': {'hold': True, 'reasons': ['the figure leaves its spot'], 'faults': ['drift'], 'words': 'The clip gate flags this take: the figure leaves its spot.', 'spent': 0.0}}
+    json.dump({'anims': {row_['anim']: {'takes': [t], 'spent': 0.5}}, 'spent': 0.5}, open(os.path.join(sd, 'takes.json'), 'w')); return 0
+MT.main = hold_main
+vreset(); S.add(vrow('v-tnb-idle-h1', take=80)); vworker(vfal()).run(); MT.main = _real_main
+r = doc()['items']['v-tnb-idle-h1']
+check('T6 X10: a take the clip gate holds is still done, and the gate\'s words are on the result', r['state'] == 'done' and r['result']['gate']['hold'] is True and 'flags this take' in r['result']['gate']['words'], r)
+
+# X16: the save fails twice
+vreset(); S.add(vrow('v-tnb-idle-k1', take=90)); keep_fail[0] = 2; fal = vfal(); vworker(fal).run(); keep_fail[0] = 0
+r = doc()['items']['v-tnb-idle-k1']
+check('T6 X16: a save that fails twice fails the row with the X16 words and keeps the fal number', r['state'] == 'failed' and r['why'] == S.WORDS['X16']['why'] and r['fal'] and r['fal']['request_id'] == 'req-1', r)
+vreset(); S.add(vrow('v-tnb-idle-k2', take=91)); keep_fail[0] = 1; fal = vfal(); vworker(fal).run(); keep_fail[0] = 0
+check('T6 ...and a save that fails once is tried again (one paid send)', doc()['items']['v-tnb-idle-k2']['state'] == 'done' and fal.sent == 1)
+
+# X15, X22, no start picture, monsters, no prompt
+vreset(); S.add(vrow('v-tnb-wait', anim='move:starter_splash', take=1)); fal = vfal(); vworker(fal).run(); r = doc()['items']['v-tnb-wait']
+check('T6 X15: a move that waits for staging fails with the X15 words and nothing is sent', r['state'] == 'failed' and r['why'] == S.WORDS['X15']['why'] and fal.sent == 0, r)
+vreset(); S.add(vrow('v-tnb-cap', take=2, cap=0.3)); fal = vfal(); vworker(fal).run(); r = doc()['items']['v-tnb-cap']
+check('T6 X22: a request whose cap is below the price ($0.50) fails with the X22 words and nothing is sent', r['state'] == 'failed' and r['why'] == S.WORDS['X22']['why'] and fal.sent == 0, r)
+vreset(); S.add(vrow('v-tnb-cap2', take=3, cap=5)); fal = vfal(); vworker(fal).run(); r = doc()['items']['v-tnb-cap2']
+check('T6 a cap above $1 is held to $1: the video is still made ($0.50)', r['state'] == 'done' and abs(r['cost'] - .5) < 1e-9, r)
+reset(); S.add(vrow('v-tnb-nostart', take=4, who='zed', start='zed')); fal = vfal(); vworker(fal).run(); r = doc()['items']['v-tnb-nostart']
+check('T6 no start picture (not on guidegen, not on main): fails in plain words and nothing is sent', r['state'] == 'failed' and 'no start picture' in r['why'] and fal.sent == 0, r)
+vreset(); S.add(vrow('v-tnb-xai', take=5, route='xai')); fal = vfal(); vworker(fal).run(); r = doc()['items']['v-tnb-xai']
+check('T6 a monster (xai) video is not made by this line yet: failed in plain words, nothing sent', r['state'] == 'failed' and 'not made by this line' in r['why'] and fal.sent == 0, r)
+vreset(); S.add(vrow('v-tnb-noprompt', take=6, prompt='')); fal = vfal(); vworker(fal).run(); r = doc()['items']['v-tnb-noprompt']
+check('T6 a request with no prompt fails in plain words and nothing is sent', r['state'] == 'failed' and 'no prompt' in r['why'] and fal.sent == 0, r)
+
+# replay: a stored video, the real checks, no fal, cost 0
+vreset(); gh.branches['guidegen']['takes/stored/t1.mp4'] = MV; S.add(vrow('v-tnb-replay', take=7, replay='takes/stored/t1.mp4'))
+fal = NoCall(); NoCall.calls = 0; vworker(fal).run(); r = doc()['items']['v-tnb-replay']
+check('T6 replay: the stored video goes through the real checks and is saved, cost 0, no fal call', r['state'] == 'done' and r['cost'] == 0 and NoCall.calls == 0 and 'takes/%s/t7.mp4' % SLUG in gh.branches['guidegen'] and not r.get('fal'), (r, NoCall.calls))
+gh.branches['wangen'] = {'old/x.mp4': MV}; S.add(vrow('v-tnb-replay2', take=8, replay='old/x.mp4')); vworker(NoCall()).run()
+check('T6 replay: a video stored on branch wangen is found too', doc()['items']['v-tnb-replay2']['state'] == 'done', doc()['items']['v-tnb-replay2'])
+S.add(vrow('v-tnb-replay3', take=9, replay='missing.mp4')); vworker(NoCall()).run(); r = doc()['items']['v-tnb-replay3']
+check('T6 replay: a missing stored video fails in plain words', r['state'] == 'failed' and 'not found' in r['why'], r)
+
+# dry: every state, no call, nothing saved
+vreset(); S.add(vrow('v-tnb-dry', take=12, dry=True)); fal = NoCall(); NoCall.calls = 0; before = dict(gh.branches['guidegen']); vworker(fal).run(); r = doc()['items']['v-tnb-dry']
+check('T6 a dry video row walks every state, calls nothing and saves nothing', r['state'] == 'done' and r['result']['dry'] is True and NoCall.calls == 0 and gh.branches['guidegen'] == before, r)
+
+# the cost of the run is logged once, as videos
+logged.clear(); vreset(); S.add(vrow('v-tnb-l1', take=13)); S.add(vrow('v-tnb-l2', take=14)); vworker(vfal()).run()
+falrows = [r for batch in logged for r in batch if r['service'] == 'fal']
+check('T6 the run cost is logged once at the end: fal $1.00 for two videos, named as videos', len(falrows) == 1 and falrows[0]['amount'] == 1.0 and 'family videos' in falrows[0]['what'], (logged, {k: (v['state'], v.get('why')) for k, v in doc()['items'].items()}))
+os.environ.pop('GUIDE_NO_GATE', None)
+check('T6 worker.py has no daily limit, never copies falq, and no em dash', 'day_cap' not in open(os.path.join(HERE, 'worker.py'), encoding='utf-8').read() and '—' not in open(os.path.join(HERE, 'worker.py'), encoding='utf-8').read())
+
 print('\nFAILS:', fails); sys.exit(1 if fails else 0)

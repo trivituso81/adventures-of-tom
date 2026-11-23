@@ -191,7 +191,7 @@ ALLOWED = {
     ('checking', 'done'): {'worker'},
     ('making', 'failed'): {'worker', 'reaper'},
     ('checking', 'failed'): {'worker', 'reaper'},
-    ('making', 'queued'): {'reaper'},
+    ('making', 'queued'): {'reaper', 'worker'},   # guideflow4 (X7): the worker may put a row back only when fal never accepted it (no fal number on the row), see set_state
     ('checking', 'queued'): {'reaper'},
 }
 USE_ALLOWED = {
@@ -287,6 +287,9 @@ def set_state(id, state, actor='worker', code=None, **fields):
         who = ALLOWED.get((a, state))
         if who is None or actor not in who: raise Refused('%s cannot move %s from %s to %s' % (actor, id, a, state))
         if state == 'queued' and actor == 'reaper' and not (it.get('fal') and int(it.get('tries') or 0) == 1): raise Refused('only a row with a fal number and one try goes back in line')
+        if state == 'queued' and actor == 'worker':   # guideflow4 (X7): fal said it is too busy; nothing was accepted or paid, so the claim does not count as a try
+            if it.get('fal'): raise Refused('a row that holds a fal number is never put back in line by the worker')
+            it['tries'] = max(0, int(it.get('tries') or 0) - 1)
         for k, v in fields.items(): it[k] = v
         if code:
             it['why'], it['do'] = words(code, paid=bool(it.get('fal')), **fmt)

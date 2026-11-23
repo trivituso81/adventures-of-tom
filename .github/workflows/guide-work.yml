@@ -1,8 +1,8 @@
 name: guide-work
 
 # guideflow3 (plan claude/guide-flow-plan.md 3.2 D6 to D8). The Battle Guide's worker. The page adds a row to queue.json on branch guideq and pokes this workflow
-# (repository dispatch, event type guide-work); a ten minute timer starts a worker anyway. One job per lane: pic (start pictures and uploaded pictures) and vid (videos,
-# they arrive in guideflow4). A run is never tied to one request: tools/guidegen/worker.py works through every queued row of its lane, keeps looking while it works,
+# (repository dispatch, event type guide-work); a ten minute timer starts a worker anyway. One job per lane: pic (start pictures and uploaded pictures) and vid (family videos,
+# guideflow4: each video is made on fal, then checked and saved on its own, four at a time). A run is never tied to one request: tools/guidegen/worker.py works through every queued row of its lane, keeps looking while it works,
 # and stays 2 minutes after the line is empty. The first step looks at queue.json for 5 seconds and ends the job when its lane has nothing to do, so the timer costs seconds.
 # The concurrency sits on the JOB (wanstuck1): a push that has nothing to do with the Guide can never cancel a waiting run, and a waiting run loses nothing anyway
 # because the requests are in the file. Needs the repo secrets FAL_KEY and XAI_API_KEY.
@@ -59,6 +59,10 @@ jobs:
             /tools/guidegen/
             /tools/clip-gate/
             /data/notify.json
+            /data/guide-anims.json
+            /data/art-prompts.json
+            /data/clips/
+            /tools/clip-bake/
             /art/clips/start/
             /art/raw/characters/*-hero-v*.png
       - uses: actions/setup-python@v5
@@ -69,7 +73,11 @@ jobs:
         if: steps.probe.outputs.go == 'true'
         run: |
           pip install requests pillow numpy
-          if [ "$LANE" = "vid" ]; then pip install scipy opencv-python-headless imageio-ffmpeg; fi
+          if [ "$LANE" = "vid" ]; then
+            pip install scipy opencv-python-headless imageio-ffmpeg
+            if ! command -v ffmpeg >/dev/null; then sudo ln -sf "$(python3 -c 'import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())')" /usr/local/bin/ffmpeg; fi
+            command -v ffmpeg; command -v ffprobe || echo "no ffprobe (the recipe falls back to ffmpeg)"
+          fi
       - name: Work
         if: steps.probe.outputs.go == 'true'
         env:

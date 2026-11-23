@@ -167,13 +167,18 @@ row('making', fal={'request_id': 'r'}, tries=1); S.set_state('x', 'queued', acto
 check('making to queued by the reaper works for a row with a fal number and one try, and clears the run', doc()['items']['x']['state'] == 'queued' and doc()['items']['x']['run'] == 0)
 row('making', tries=1); check('...and is refused without a fal number', raises(lambda: S.set_state('x', 'queued', actor='reaper')) is True)
 row('making', fal={'request_id': 'r'}, tries=2); check('...and is refused on a second try', raises(lambda: S.set_state('x', 'queued', actor='reaper')) is True)
+row('making', tries=1); S.set_state('x', 'queued', actor='worker'); it_ = doc()['items']['x']
+check('guideflow4 (X7): the worker may put a making row with no fal number back in line; the claim is not counted as a try and the run is cleared', it_['state'] == 'queued' and it_['tries'] == 0 and it_['run'] == 0, it_)
+row('making', fal={'request_id': 'r'}, tries=1); check('...and is refused for a row that holds a fal number (it was paid for)', raises(lambda: S.set_state('x', 'queued', actor='worker')) is True and doc()['items']['x']['state'] == 'making')
+row('checking', tries=1); check('...and is refused for a row that is checking (only the reaper may do that)', raises(lambda: S.set_state('x', 'queued', actor='worker')) is True)
+row('making', tries=1); check('...and the page may not do it', raises(lambda: S.set_state('x', 'queued', actor='page')) is True)
 allowed = {(a, b): w for a, b, w in [(m[0], m[1], None) for m in ok_moves]}
 allowed.update({('making', 'queued'): None, ('checking', 'queued'): None})
 refused_bad = []
 for a in S.STATES:
     for b in S.STATES:
         for who in ('page', 'worker', 'reaper', 'apply', 'nobody'):
-            legit = (a, b) in allowed and ((a, b, who) in ok_moves or (b == 'queued' and who == 'reaper'))
+            legit = (a, b) in allowed and ((a, b, who) in ok_moves or (b == 'queued' and who == 'reaper'))   # (the worker's making to queued has no fal number, tested above; here every row has one)
             if legit: continue
             row(a, fal={'request_id': 'r'}); before = json.dumps(doc(), sort_keys=True); sent.clear()
             r_ = raises(lambda: S.set_state('x', b, actor=who))
