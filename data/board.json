@@ -30905,7 +30905,7 @@
    "title": "Battle stage 22: chapter 14 on Battle 3",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Build ONLY chapter 14 on Battle 3: Boppy's Gold Armor (Boss). Starts after chapter 13 is switched on.",
    "blocks": [],
    "changed": "2026-11-22",
@@ -30922,7 +30922,7 @@
    },
    "chat": {
     "url": "",
-    "opening": "created by the b3s22 session"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -30932,6 +30932,11 @@
     {
      "d": "2026-11-22",
      "t": "Note from the chapter 13 build (b3s22ch13): the returning Part 1 monsters of the frozen town are fought in chapter 14 as built, so they are this card's, not chapter 13's. The Gold Knight (bestiary 70, data and Lab fight NEW 73 already in data/b3-foes-ch13.js, the seven motions under silent names) has no scene in chapter 13; the bestiary says chapter 14 uses the same seven motions under their real names, so decide here whether Boppy's Gold Armor reuses his rows. The helper-link engine (`helperLink`, `allyBoss`) is built and documented in docs/BATTLE3.md."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-23T00:33:38.479Z"
     }
    ]
   },
