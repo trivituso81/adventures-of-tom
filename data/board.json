@@ -20457,8 +20457,8 @@
    "created": "2026-11-22",
    "changed": "2026-11-23",
    "chat": {
-    "url": "",
-    "opening": "not started"
+    "url": "https://claude.ai/code/session_01RXeukGZLxZREfsCLURqeTW",
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md, then card c-guideflow-7 in data/board.json\""
    },
    "history": [
     {
