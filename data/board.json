@@ -20315,7 +20315,7 @@
   {
    "id": "c-guideflow-6",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "guideflow6",
    "title": "Guide: upload my own start picture; make all poses",
@@ -20327,7 +20327,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-23",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDPMNXDGNqnFvZpQod",
     "opening": "not started"
    },
    "history": [
@@ -20351,6 +20351,10 @@
     {
      "d": "2026-11-23",
      "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -20873,6 +20877,16 @@
    ],
    "cards": [
     "c-movestage-build"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDPMNXDGNqnFvZpQod",
+   "title": "Guide: upload my own start picture; make all poses",
+   "first": "2026-11-23T08:25:35-08:00",
+   "last": "2026-11-23T08:25:35-08:00",
+   "tags": [],
+   "cards": [
+    "c-guideflow-6"
    ]
   },
   {
@@ -27000,8 +27014,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "98444d636768c80178cb163b328bc2e4173bf095",
- "synced_at": "2026-11-23T16:21:05+00:00",
+ "synced": "a78ecf6885b35dde8a11ef95ca56e401b991b39d",
+ "synced_at": "2026-11-23T16:26:27+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
