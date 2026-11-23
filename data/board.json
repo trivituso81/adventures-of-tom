@@ -32726,7 +32726,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-22",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukCePhzz1CQWD85xeEp",
+    "url": "https://claude.ai/code/session_01RXeukCePhzz1CQWD85xeEp",
     "opening": "not started"
    },
    "history": [
@@ -32747,6 +32747,10 @@
     {
      "d": "2026-11-22",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -33271,6 +33275,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukCePhzz1CQWD85xeEp",
+   "title": "Build the one status file for Guide requests",
+   "first": "2026-11-23T03:33:55Z",
+   "last": "2026-11-23T03:33:55Z",
+   "tags": [],
+   "cards": [
+    "c-guideflow-2"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGgiU34ac3oUD1d61w",
    "title": "Remove the Guide's $10 a day limit; check workflows",
@@ -39315,8 +39329,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "91ca3b363b4251709be16a739bca70ed40474adb",
- "synced_at": "2026-11-23T03:32:43+00:00",
+ "synced": "032a14337300521c676247687da2f9cd7d774f45",
+ "synced_at": "2026-11-23T03:34:42+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
