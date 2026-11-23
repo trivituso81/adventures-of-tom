@@ -31100,10 +31100,10 @@
    "title": "Battle stage 22: chapter 17 on Battle 3",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as build b3s22ch17. Tom plays the Milestone card t-b3s22ch17; the chapter 18 card (c-b3s22ch18) reads his note.",
    "blocks": [],
-   "changed": "2026-11-23",
+   "changed": "2026-11-22",
    "created": "2026-11-22",
    "tag": "b3s22ch17",
    "prompt": {
@@ -31152,9 +31152,14 @@
     {
      "d": "2026-11-23",
      "t": "battle_guide_test.py: 8 checks fail on main before and after this build (the page lists 685 animations against 651 in data/guide-anims.json, What is coming, no engine script, the plan counts), the same set the chapter 16 note named, then the run stops on a Giddyup timeout. Not caused by this chapter; every check this chapter touches (chapters 11 to 17 drop out, the fake gain is the chapter 18 Studio Rig) is in place."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as b3s22ch17: Chapter 17 (Julian's building) fights on the new battle: the Twin Lenses, the Curator, the Brass Desk Weight and the Pause Sprite"
     }
    ],
-   "after": "t-b3s22ch17"
+   "after": "t-b3s22ch17",
+   "done": "2026-11-22"
   },
   {
    "id": "c-b3s22ch18",
@@ -33634,6 +33639,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukF8N248WLrrogRD17e",
+   "title": "Battle stage 22: chapter 17 on Battle 3",
+   "first": "2026-11-22T21:15:22-08:00",
+   "last": "2026-11-22T22:53:41-08:00",
+   "tags": [
+    "b3s22ch17"
+   ],
+   "cards": [
+    "c-b3s22ch17"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGhKSapgz3YahmvbdS",
    "title": "Battle stage 22: chapter 12 on Battle 3",
    "first": "2026-11-22T21:27:58Z",
@@ -33780,16 +33797,6 @@
     "c-guideflow-2",
     "c-guideflow-3",
     "c-guideflow-4"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukF8N248WLrrogRD17e",
-   "title": "Battle stage 22: chapter 17 on Battle 3",
-   "first": "2026-11-22T21:15:22-08:00",
-   "last": "2026-11-22T21:15:22-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s22ch17"
    ]
   },
   {
@@ -39652,8 +39659,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "2a54cb67859834200ebbe02b91fb211571baf6b0",
- "synced_at": "2026-11-23T06:10:48+00:00",
+ "synced": "46829394565a596710231fae155c6ee270871dbc",
+ "synced_at": "2026-11-23T06:54:28+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
