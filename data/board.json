@@ -33298,8 +33298,17 @@
     {
      "d": "2026-11-22",
      "t": "Created by the b3s22ch13 session: Milestone for chapter 13 on the new battle."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom sent this to the backlog.",
+     "at": "2026-11-23T05:38:09.999Z"
     }
-   ]
+   ],
+   "backlog": {
+    "at": "2026-11-22",
+    "from": "up"
+   }
   },
   {
    "id": "c-wanstop-tom-controller-r2",
