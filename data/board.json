@@ -31100,7 +31100,7 @@
    "title": "Battle stage 22: chapter 17 on Battle 3",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Build ONLY chapter 17 on Battle 3: Pause Sprite (Hexer), Brass Desk Weight (Elite), Curator (Elite), The Twin Lenses (Boss). Starts after chapter 16 is switched on.",
    "blocks": [],
    "changed": "2026-11-22",
@@ -31117,7 +31117,7 @@
    },
    "chat": {
     "url": "",
-    "opening": "created by the b3s22 session"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -31127,6 +31127,11 @@
     {
      "d": "2026-11-22",
      "t": "Note from the chapter 16 build (b3s22ch16): chapter 16 is on Battle 3 (levelFloor 40). tools/b3_story_test.py now treats chapter 17 as the first unswitched chapter (pool 2160, floor 40, Grace set to 42); move those cases to chapter 18 with your levelFloor. tools/battle_guide_test.py's fake-gain case now uses the chapter 17 Pause Sprite (`pausesprite`, chapters.push(17)); change it to a still-planned chapter 18 monster, and the 'What is coming' check and the 'chapters 11 to 16' counts to chapter 17. Engine pieces you can reuse: the `bounce` op and `notPeeveHit` listener condition (engine/b3-ops.js, engine/b3-hooks.js), the `helpers` layout field, `quietEnd` (chapter 16 only). A story fight's picture comes from `battleBgKey` by map; chapter 16 has no picture of its own yet. The same 8 battle_guide_test checks fail on main before and after."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-23T05:13:41.079Z"
     }
    ]
   },
