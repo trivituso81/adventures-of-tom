@@ -12,15 +12,41 @@
    "note": "",
    "cap": 0,
    "at": "2026-11-23T05:15:09Z",
-   "state": "checking",
-   "since": "2026-11-23T05:25:35Z",
+   "state": "done",
+   "since": "2026-11-23T05:26:57Z",
    "run": 45117613695,
    "fal": null,
    "tries": 1,
-   "cost": 0,
+   "cost": 0.0,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-tnb-dodge/t9.js",
+    "img": "takes/body-tnb-dodge/t9.webp",
+    "frames": 38,
+    "kb": 786,
+    "words": "0 to 74 step 2",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "edge: 15 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)",
+      "vision p_same: Facial expression, hair position, and body pose change across frames.; Facial expressions, hair flow, and body angles change across frames, not identical to start picture.",
+      "vision p_parts: Hand shapes, eye positions, and skin shading vary between frames.; Eyes change shape and direction; hands and skin vary slightly in pose and shading.",
+      "vision d_back: Mostly stationary with crouch and idle shifts; no clear backward or sideways dodge movement.; Mostly idle poses and side crouch; includes forward leans, no consistent backward movement."
+     ],
+     "faults": [
+      "d_back",
+      "edge",
+      "p_parts",
+      "p_same"
+     ],
+     "vision_ran": true,
+     "spent": 0.0074,
+     "error": null,
+     "words": "The clip gate flags this take: edge: 15 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground); vision p_same: Facial expression, hair position, and body pose change across frames.; Facial expressions, hair flow, and body angles change across frames, not identical to start picture.; vision p_parts: Hand shapes, eye positions, and skin shading vary between frames.; Eyes change shape and direction; hands and skin vary slightly in pose and shading.; vision d_back: Mostly stationary with crouch and idle shifts; no clear backward or sideways dodge movement.; Mostly idle poses and side crouch; includes forward leans, no consistent backward movement.."
+    },
+    "n": 9
+   },
    "use": null,
    "left": false,
    "dry": false,
