@@ -22928,13 +22928,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-22",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEFjkAchKyUy6Aq86f",
+    "url": "",
     "opening": "not started"
    },
    "nightly": true,
@@ -23003,6 +23003,10 @@
     {
      "d": "2026-11-22",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
    "prompt": {
@@ -23017,8 +23021,7 @@
    "last_run": {
     "date": "2026-11-21",
     "build": "nightclean-1122"
-   },
-   "started_at": "2026-11-23T07:04:41+00:00"
+   }
   },
   {
    "id": "c-bigone25",
@@ -31449,7 +31452,7 @@
    "id": "c-takes-38383a",
    "tag": "takes-2026-11-22",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Voice Clips",
    "count": 2,
    "title": "Merge 2 new voice takes",
@@ -31464,18 +31467,27 @@
     "text": "Read claude/handoff-rules.md and docs/VOICE.md, then merge the new voice takes from branch takes. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDnTfUvQ6vBDjG5Rpt",
     "opening": "not started"
    },
    "history": [
     {
      "d": "2026-11-22",
      "t": "Added by board-sync: new files on branch takes."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by the night shift."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-22",
-   "changed": "2026-11-22"
+   "changed": "2026-11-22",
+   "started_at": "2026-11-23T07:42:47+00:00"
   },
   {
    "id": "c-standingfix",
@@ -39682,8 +39694,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "4b81746a0b16b1a7735b34873e60869318aa801d",
- "synced_at": "2026-11-23T07:04:42+00:00",
+ "synced": "a247a9af9017e79d7771f861c8f217ae2031b8d9",
+ "synced_at": "2026-11-23T07:42:48+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -39723,6 +39735,11 @@
      "id": "c-night-clean",
      "at": "2026-11-23T07:04:41+00:00",
      "kind": "standing"
+    },
+    {
+     "id": "c-takes-38383a",
+     "at": "2026-11-23T07:42:47+00:00",
+     "kind": "queued"
     }
    ]
   },
