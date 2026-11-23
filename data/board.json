@@ -33347,6 +33347,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCtazS4wFWEhCS3KaM",
+   "title": "Plan a Battle Guide animation flow that works",
+   "first": "2026-11-22T14:40:47-08:00",
+   "last": "2026-11-22T17:40:48-08:00",
+   "tags": [
+    "guideflow-plan"
+   ],
+   "cards": [
+    "c-guideflow-plan",
+    "c-guideflow-1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGbrHbR5tTUJoJwwSg",
    "title": "Last night: what the night shift did",
    "first": "2026-11-22T17:08:41Z",
@@ -33417,18 +33430,6 @@
    ],
    "cards": [
     "c-battleux3"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCtazS4wFWEhCS3KaM",
-   "title": "Plan a Battle Guide animation flow that works",
-   "first": "2026-11-22T14:40:47-08:00",
-   "last": "2026-11-22T14:58:20-08:00",
-   "tags": [
-    "guideflow-plan"
-   ],
-   "cards": [
-    "c-guideflow-plan"
    ]
   },
   {
@@ -39155,8 +39156,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "7455811450fd932721dd12d1613031ad59aaaf26",
- "synced_at": "2026-11-23T01:10:56+00:00",
+ "synced": "686773cae7c39443edf2854b761fca3dd7b90033",
+ "synced_at": "2026-11-23T01:41:33+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
