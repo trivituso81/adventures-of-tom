@@ -1444,6 +1444,18 @@
    "cmd": "python3 -I tools/art-library/queue_test.py",
    "group": "g4",
    "minutes": 1
+  },
+  {
+   "id": "tools__workflow_check_test",
+   "cmd": "python3 tools/workflow_check_test.py",
+   "group": "g4",
+   "minutes": 1
+  },
+  {
+   "id": "tools__workflow_check",
+   "cmd": "python3 tools/workflow_check.py",
+   "group": "g4",
+   "minutes": 1
   }
  ]
 }
