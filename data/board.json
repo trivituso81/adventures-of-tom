@@ -31452,7 +31452,7 @@
    "id": "c-takes-38383a",
    "tag": "takes-2026-11-23",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Voice Clips",
    "count": 1,
    "title": "Merge 1 new voice take",
@@ -31490,13 +31490,18 @@
     {
      "d": "2026-11-23",
      "t": "Merged the kept take of session 20261122T201002-4hq (Grace, Tata don't walk yet) as takes-2026-11-23; the card said 2 takes, the branch held 1 kept one."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as takes-2026-11-23: 1 of Tom's new voice takes is in the game (Grace's Tata, don't walk yet)"
     }
    ],
    "blocks": [],
    "created": "2026-11-22",
    "changed": "2026-11-22",
    "started_at": "2026-11-23T07:42:47+00:00",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-22"
   },
   {
    "id": "c-standingfix",
@@ -33075,7 +33080,7 @@
   {
    "id": "c-guideflow-6",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "guideflow6",
    "title": "Guide: upload my own start picture; make all poses",
@@ -33087,7 +33092,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-22",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDaqfoz9iAgTM2bcHG",
     "opening": "not started"
    },
    "history": [
@@ -33099,6 +33104,14 @@
     {
      "d": "2026-11-22",
      "t": "Unblocked: Switch the Guide page to the one status file is done."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by the night shift."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -33110,7 +33123,8 @@
     "effort": "medium (the steps are known)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guideflow-6 in data/board.json, then the whole of claude/guide-flow-plan.md. That plan is the design: build what it says and do not redesign it. If a step cannot be done as written, do the closest thing that keeps the plan's rules (sections 3.2 and 4.3), say so in docs/CHANGES.md, and go on. This card is plan section 10 step 6 (sections 3.2 D11, D13, 5.2, 5.5, section 6 rows X13 and X14, test T8 additions). Change battle-guide.html (plus its test and docs). (1) Upload my own, on a person's Animations screen beside the start picture and on a picture row that is done or failed: a file input (accept image/png, image/jpeg, image/webp). In the page, refuse at once with the words of plan section 5.5 when the file is not an image, is under 600 pixels tall (read it with an Image element) or is over 8 MB. Show the picture with the confirm words of 5.5. On Use it: save the bytes to branch guidegen at uploads/WHO-UNIX_SECONDS.EXT with the GitHub contents API (PUT, base64, message \"guide: upload WHO [skip ci]\"), then add the row {id u-WHO-UNIX_SECONDS, kind upload, lane pic, who, upload: that path} with storeUpdate and poke the worker. The status lines for kind upload are in plan section 5.1 (checking shows \"Checking your picture. About 30 seconds.\" with the clock). Upload a different one repeats this. Go back to a generated picture adds a kind picture row with force:true after one confirm: \"Replace your own picture of NAME with a generated one ($0.15)?\". (2) Make all N missing poses ($X.XX) above the standard poses of a person who has a start picture: N counts the standard poses (Idle, Guard, Hit, Dodge, Knocked out, Victory, Running) with no video in the game and no row that is queued, making, checking or done and not left; the price is N times the video price. A total of $2 or less adds the rows at once; above $2 it asks once: \"Make N videos for $X.XX?\" with Make them and Cancel. All rows are added in ONE storeUpdate and one poke. The button is hidden when N is 0. Tests in tools/battle_guide_test.py: the three instant refusals word for word; a good PNG is saved to the stand-in under uploads/ and its row added; the stand-in turns the row to done and the page shows \"Your picture is in use, exactly as you made it.\" and the video buttons; X13 and X14 lines shown from a failed row; Make all with 7 missing adds 7 rows in one save after the confirm, with 3 missing ($1.50) adds them with no confirm, and counts a queued row as not missing. Portrait and landscape pictures in tools/shots/guideflow-upload-*.png; look at them. Update docs/BATTLE_GUIDE.md. Tests to run and pass before pushing: python3 tools/battle_guide_test.py, python3 -I tools/guidegen/worker_test.py, python3 tools/smoke.py, python3 tools/board_check.py. You must NOT: make any paid run or call fal, xAI or ElevenLabs for real (every test uses stand-ins; the first paid run is Tom's tap); run wangen.py against the real services; create or change a doc in the claude.ai Project (notes go in the repo folder claude/, then run python3 tools/claude_index.py); make or propose a painted battle pose; touch the bulk video flow (wangen.py --bulk, wanbulk.py, wanqa.py, wanbake.py, the wan-gen-bulk line); hand Tom a yes or no check; write an em dash in anything Tom reads. Before every commit check that no file has git conflict markers (a line that starts with seven less-than signs; CLAUDE.md has the command). Push steps: write the heading \"## guideflow6 (the date of that day as YYYY-MM-DD): one plain line Tom can read\" at the top of docs/CHANGES.md with what was built, what was tested and what was not looked at, run python3 tools/workflow_check.py if it exists, run python3 tools/art-library/bump_tags.py guideflow6 --base origin/main, run python3 tools/board_check.py --push guideflow6, fetch and rebase on origin/main, then push to main. At the end write the result into this card's `next` and history, and check the next card (c-guideflow-7) still has its full prompt. Your first push is the commit board: start c-guideflow-6. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "auto": true
+   "auto": true,
+   "started_at": "2026-11-23T07:48:41+00:00"
   },
   {
    "id": "c-guideflow-7",
@@ -33592,10 +33606,12 @@
  "sessions": [
   {
    "url": "https://claude.ai/code/session_01RXeukDnTfUvQ6vBDjG5Rpt",
-   "title": "Merge 2 new voice takes",
+   "title": "Merge 1 new voice take",
    "first": "2026-11-23T07:46:40Z",
-   "last": "2026-11-23T07:46:40Z",
-   "tags": [],
+   "last": "2026-11-23T07:47:56Z",
+   "tags": [
+    "takes-2026-11-23"
+   ],
    "cards": [
     "c-takes-38383a"
    ]
@@ -39713,8 +39729,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "de55411859bbace760ff18098bbc28cb6b56d1cd",
- "synced_at": "2026-11-23T07:47:30+00:00",
+ "synced": "f2d94bfe41ebffe01f112c83d911866e94fc60f0",
+ "synced_at": "2026-11-23T07:48:43+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -39758,6 +39774,11 @@
     {
      "id": "c-takes-38383a",
      "at": "2026-11-23T07:42:47+00:00",
+     "kind": "queued"
+    },
+    {
+     "id": "c-guideflow-6",
+     "at": "2026-11-23T07:48:41+00:00",
      "kind": "queued"
     }
    ]
