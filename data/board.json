@@ -17557,7 +17557,7 @@
   {
    "id": "c-movestage-build",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "movestage2",
    "title": "Build the move stage and Move Lab for Tom's eight moves",
@@ -17566,7 +17566,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-23",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukHFArSRw6d9FDNzjut",
+    "url": "https://claude.ai/code/session_01RXeukHFArSRw6d9FDNzjut",
     "opening": "added by c-movestage"
    },
    "prompt": {
@@ -17626,6 +17626,14 @@
     {
      "d": "2026-11-23",
      "t": "Rescue chose FINISH: build is complete for the six ready moves; Winged Shell and Tarmac Porsche wait on the give-up cards for jetwash and glare. Shipped as movestage2."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Shipped as movestage2: the move stage and Move Lab are finished for Tom's eight moves; six play now, two wait on Tom's give-up cards"
     }
    ],
    "after": "t-movestage-judge",
@@ -17636,7 +17644,8 @@
     "url": "https://claude.ai/code/cse_01RXeukHFArSRw6d9FDNzjut",
     "prev": "https://claude.ai/code/session_01RXeukHG6QtbCtw8Kjp1tPx"
    },
-   "started_at": "2026-11-23T16:18:33+00:00"
+   "started_at": "2026-11-23T16:18:33+00:00",
+   "done": "2026-11-23"
   },
   {
    "id": "t-movestage-lab",
@@ -20854,6 +20863,18 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukHFArSRw6d9FDNzjut",
+   "title": "Build the move stage and Move Lab for Tom's eight moves",
+   "first": "2026-11-23T16:20:12Z",
+   "last": "2026-11-23T16:21:01Z",
+   "tags": [
+    "movestage2"
+   ],
+   "cards": [
+    "c-movestage-build"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDnTfUvQ6vBDjG5Rpt",
    "title": "Merge 1 new voice take",
@@ -26979,8 +27000,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "2c574167c04994697275033aaee33de946cc02d2",
- "synced_at": "2026-11-23T16:18:33+00:00",
+ "synced": "98444d636768c80178cb163b328bc2e4173bf095",
+ "synced_at": "2026-11-23T16:21:05+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
