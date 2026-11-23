@@ -31042,7 +31042,7 @@
    "title": "Battle stage 22: chapter 16 on Battle 3",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Build ONLY chapter 16 on Battle 3: Citation Slip (Hexer), The Square's Sign (Boss). Starts after chapter 15 is switched on.",
    "blocks": [],
    "changed": "2026-11-22",
@@ -31059,7 +31059,7 @@
    },
    "chat": {
     "url": "",
-    "opening": "created by the b3s22 session"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -31069,6 +31069,11 @@
     {
      "d": "2026-11-22",
      "t": "Note from the chapter 15 build (b3s22ch15): chapter 15 is on Battle 3 (levelFloor 37). tools/battle_guide_test.py's fake-gain case now uses the chapter 16 Grey Note (`greynote`, chapters.push(16)); when you build chapter 16, change it to a still-planned chapter 17 monster and the 'What is coming' text check and the three 'chapters 11 to 15' counts to chapter 17 (tools/battle_guide_test.py lines about 445 and 475, plus the gain block). tools/b3_story_test.py treats chapter 16 as the first unswitched chapter (pool 2025, floor 37, Grace set to 38); move those cases to chapter 17 with your levelFloor. A helper's pods use `helpers: [id]` on the boss row for layout only (docs/BATTLE3.md 'What stage 22 chapter 15 holds'). A story fight on Battle 3 picks its background in `battleBgKey` from the map, so give the Square its own picture the way `data/ch15-battle.js` does. The same 8 battle_guide_test checks (page and guide-anims.json counts, What is coming, the engine-script check, plan counts) already fail on main."
+    },
+    {
+     "d": "2026-11-22",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-23T04:01:06.381Z"
     }
    ]
   },
