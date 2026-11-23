@@ -306,18 +306,23 @@ def chk(mut, want, label):
     open('/tmp/board_bad.json', 'w').write(json.dumps(d))
     r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '/tmp/board_bad.json'], capture_output=True, text=True)
     check(label, r.returncode == 1 and want in r.stdout, r.stdout[-200:])
+def cardx(d, cid):   # guideflow1: the live board moves old Done cards to the archive, so a card this test names may be gone; make a stand-in from one that is here
+    for c in d['cards']:
+        if c['id'] == cid: return c
+    c = dict(next(x for x in d['cards'] if x['id'] == 'c-ch2build'), id=cid, tag=cid[2:], after='nothing for Tom: end', col='done'); c['prompt'] = dict(c['prompt'])
+    d['cards'].append(c); return c
 tom1 = lambda d: next(c for c in d['cards'] if c['lane'] == 'tom' and c['col'] in ('up', 'prog'))   # not a card waiting on its fix (board4 exempts those)
 chk(lambda d: tom1(d).pop('ask'), 'needs an ask', 'board_check refuses an open Tom card with no ask')
 chk(lambda d: tom1(d).update(ask='whatever'), 'needs an ask', 'board_check refuses an unknown ask')
 chk(lambda d: tom1(d).update(ask='decide'), 'decide card', 'board_check refuses a decide card with no choices')
 chk(lambda d: tom1(d).update(ask='decide', choices=['A', 'B'], leads=['a', 'b']), 'Recommended', 'board_check wants the recommendation first and marked')
 chk(lambda d: (tom1(d).update(blocks=[]), tom1(d).pop('fyi', None)), 'must block', 'board_check refuses a Tom card that blocks nothing and is not fyi')
-chk(lambda d: next(c for c in d['cards'] if c['id'] == 'c-board3').update(after='t-nope'), 'after', 'board_check refuses an after that names no Tom card')
-chk(lambda d: next(c for c in d['cards'] if c['id'] == 'c-ch2build').update(auto=True, prompt=dict(next(c for c in d['cards'] if c['id'] == 'c-b3s9')['prompt'])), 'auto', 'board_check refuses auto on an Opus card')
-chk(lambda d: next(c for c in d['cards'] if c['id'] == 'c-ch2build').update(auto=True, prompt=dict(next(c for c in d['cards'] if c['id'] == 'c-b3s9')['prompt'], model='Claude Sonnet 5.5 (row C)', effort='high (x)')), 'auto', 'board_check refuses auto on a Sonnet 5.5 high card')
+chk(lambda d: cardx(d, 'c-board3').update(after='t-nope'), 'after', 'board_check refuses an after that names no Tom card')
+chk(lambda d: next(c for c in d['cards'] if c['id'] == 'c-ch2build').update(auto=True, prompt=dict(cardx(d, 'c-b3s9')['prompt'], model='Claude Opus 5.5 (row A)')), 'auto', 'board_check refuses auto on an Opus card')
+chk(lambda d: next(c for c in d['cards'] if c['id'] == 'c-ch2build').update(auto=True, prompt=dict(cardx(d, 'c-b3s9')['prompt'], model='Claude Sonnet 5.5 (row C)', effort='high (x)')), 'auto', 'board_check refuses auto on a Sonnet 5.5 high card')
 r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '--push', 'board3'], capture_output=True, text=True)
 check('board_check --push accepts board3 once its card has after', r.returncode == 0, r.stdout)
-d = json.load(open(os.path.join(HERE, '..', 'data', 'board.json'), encoding='utf-8')); _c3 = next(c for c in d['cards'] if c['id'] == 'c-board3'); _c3.pop('after'); _c3['col'] = 'prog'   # open again, so the test does not depend on the live card's column
+d = json.load(open(os.path.join(HERE, '..', 'data', 'board.json'), encoding='utf-8')); _c3 = cardx(d, 'c-board3'); _c3.pop('after'); _c3['col'] = 'prog'   # open again, so the test does not depend on the live card's column
 open('/tmp/board_bad.json', 'w').write(json.dumps(d))
 r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '--push', 'board3', '/tmp/board_bad.json'], capture_output=True, text=True)
 check('board_check --push refuses a build whose card has no after', r.returncode == 1 and 'no `after`' in r.stdout, r.stdout)

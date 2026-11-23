@@ -8,7 +8,7 @@ name: wan-gen
 # A Claude session checks the result and commits what passes to main itself.
 #
 # guidegen1: GENERATE THIS VIDEO in the Battle Guide commits data/wan-requests.json with the message "wan: generate <animation id>"; that push runs this job with
-# --requests (the same job; $0.50 a video, at most $1 a request, at most $10 a day for the guide). The requests are taken off main before anything is paid,
+# --requests (the same job; $0.50 a video, at most $1 a request, no daily limit). The requests are taken off main before anything is paid,
 # each video is judged by the clip gate and cut as a preview (tools/guidegen/make_take.py, secret XAI_API_KEY for the look check) and kept as a TAKE on the
 # branch `guidegen` for Tom to compare in the Battle Guide. Nothing reaches the game until he presses Use this one (the guide-use Action).
 #
