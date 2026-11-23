@@ -20357,7 +20357,7 @@
    "theme": "Battle Animations",
    "tag": "guideflow6",
    "title": "Guide: upload my own start picture; make all poses",
-   "next": "Waits for card c-guideflow-5, then starts by itself. Adds Upload my own for a start picture (used exactly as you made it, after a free check) and one button to make all missing standard poses. Nothing to play until the last card.",
+   "next": "Built as guideflow6: Upload my own start picture (refused at once for a non-picture, under 600 pixels tall or over 8 MB; a good one is shown, saved to branch guidegen on Use it, then one upload row and the poke), Go back to a generated picture (one confirm, force), and Make all N missing poses (one save, one poke, a confirm only above $2). 38 new page checks pass, pictures looked at in portrait and landscape. Nothing to play until the last card. Nothing for Tom: c-guideflow-7 starts by itself.",
    "blocks": [
     "c-guideflow-7"
    ],
@@ -20393,6 +20393,10 @@
     {
      "d": "2026-11-23",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Built by Claude Sonnet 5.5 as guideflow6 (plan section 10 step 6): Upload my own with its three instant refusals and confirm, Use it saving to guidegen/uploads and adding the upload row, Go back to a generated picture, Make all N missing poses. Page cases U1 to U9 and M1 to M7 pass; worker_test and board_check pass. Checks that already fail on main before this build (guide-anims count, What is coming, plan counts, board4 in smoke) are named in docs/CHANGES.md."
     }
    ],
    "prompt": {
