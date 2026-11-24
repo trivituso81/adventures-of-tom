@@ -147,12 +147,12 @@ def run_video(stage, char, cfg, move_id, feedback, queue):
     img_url = fal_client.upload_file(str(clean_src))
     prompt = build_prompt(stage, char, cfg, move_id=move_id, feedback=feedback)
     if stage == "battle_idle":
-        print(f"[video] calling {cfg['models']['video_idle']}", flush=True)
+        print(f"[video] calling {cfg['models']['video_idle']} (audio off)", flush=True)
         try:
-            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "start_image_url": img_url, "end_image_url": img_url, "duration": "5"})
+            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "start_image_url": img_url, "end_image_url": img_url, "duration": "5", "generate_audio": False})
         except Exception as e1:
             print(f"[video] kling start/end retry: {e1}", flush=True)
-            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "start_image_url": img_url, "duration": "5"})
+            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "start_image_url": img_url, "duration": "5", "generate_audio": False})
     else:
         res_tag = "480p" if stage == "battle_move_draft" else "1080p"
         print(f"[video] calling {cfg['models']['video_move']} ({res_tag})", flush=True)

@@ -37,7 +37,13 @@ def build_prompt(stage, char, cfg, move_id="", feedback="", extra_hint=""):
         poses = ", ".join(cfg["talking_poses"])
         p = f"4K character animation sheet for {base} Row 1: 8-frame side walk cycle. Row 2: 8 expression portraits ({moods}). Row 3: 4 talking poses ({poses}). Bold dark contour lines and chunky brushed shading matching the style reference, flat {cfg['bg_hex']} background."
     elif stage == "battle_idle":
-        p = f"Gentle breathing battle idle loop of {char['name']}, subtle weight shift, exact matching start and end pose, feet planted, {cfg['style_lock']}"
+        p = (
+            f"Silent 2D RPG battle idle loop of {char['name']}. "
+            f"Keep the exact starting facial expression and smile completely consistent from start to finish: mouth stays closed and relaxed, no sighing, no pursing lips, no deep inhale, no speaking. "
+            f"One quick, natural eye blink halfway through the loop. "
+            f"Very subtle, calm chest rise and gentle weight shift in the shoulders and arms while both feet stay firmly planted on the ground. "
+            f"Static locked camera, exact matching start and end pose for a seamless loop. {cfg['style_lock']}"
+        )
     else:
         pitch_note = f" Move ID: {move_id}." if move_id else ""
         p = f"Expressive turn-based battle animation for {char['name']}.{pitch_note} {cfg['style_lock']} Clean silhouette, no glowing rings or aura halo."
