@@ -133,31 +133,40 @@ def run_video(stage, char, cfg, move_id, feedback, queue):
     out_dir = Path(cfg["staging_dir"]) / char["id"] / slug
     out_dir.mkdir(parents=True, exist_ok=True)
     hero_src = Path(cfg["output_dir"]) / char["id"] / "hero" / "approved_rgba.png"
-    if not hero_src.exists() and char["id"] == "tom" and Path(cfg["tom_hero_path"]).exists():
-        hero_src = Path(cfg["tom_hero_path"])
     if not hero_src.exists():
-        hero_src = Path(cfg["staging_dir"]) / char["id"] / "hero" / "cand_0_rgba.png"
-    if not hero_src.exists():
-        hero_src = Path(cfg["tom_hero_path"])
+        if char["id"] == "tom" and Path(cfg["tom_hero_path"]).exists():
+            hero_src = Path(cfg["tom_hero_path"])
+        elif (Path(cfg["refs_dir"]) / f"{char['id']}.png").exists():
+            hero_src = Path(cfg["refs_dir"]) / f"{char['id']}.png"
+        elif (Path(cfg["staging_dir"]) / char["id"] / "hero" / "cand_0_rgba.png").exists():
+            hero_src = Path(cfg["staging_dir"]) / char["id"] / "hero" / "cand_0_rgba.png"
+        else:
+            hero_src = Path(cfg["tom_hero_path"])
     print(f"[video] source hero={hero_src}", flush=True)
     clean_src = prep_video_source(hero_src, out_dir, cfg)
     img_url = fal_client.upload_file(str(clean_src))
     prompt = build_prompt(stage, char, cfg, move_id=move_id, feedback=feedback)
     if stage == "battle_idle":
+        print(f"[video] calling {cfg['models']['video_idle']}", flush=True)
         try:
-            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "image_url": img_url, "tail_image_url": img_url, "duration": "5"})
-        except Exception:
-            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "image_url": img_url, "duration": "5"})
+            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "start_image_url": img_url, "end_image_url": img_url, "duration": "5"})
+        except Exception as e1:
+            print(f"[video] kling start/end retry: {e1}", flush=True)
+            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "start_image_url": img_url, "duration": "5"})
     else:
         res_tag = "480p" if stage == "battle_move_draft" else "1080p"
-        res = fal_client.subscribe(cfg["models"]["video_move"], arguments={"prompt": prompt, "negative_prompt": ANTI_RING_NEG, "image_url": img_url, "resolution": res_tag})
+        print(f"[video] calling {cfg['models']['video_move']} ({res_tag})", flush=True)
+        res = fal_client.subscribe(cfg["models"]["video_move"], arguments={"prompt": prompt, "negative_prompt": ANTI_RING_NEG, "start_image_url": img_url, "resolution": res_tag})
     vid_url = res.get("video", {}).get("url") or res.get("url")
+    print(f"[video] generated raw video={vid_url}", flush=True)
     try:
-        bg_res = fal_client.subscribe(cfg["models"]["cutout_video"], arguments={"video_url": vid_url})
-    except Exception:
+        bg_res = fal_client.subscribe(cfg["models"]["cutout_video"], arguments={"video_url": vid_url, "background_color": "Transparent", "output_container_and_codec": "webm_vp9"})
+    except Exception as e2:
+        print(f"[video] bria fallback: {e2}", flush=True)
         bg_res = fal_client.subscribe(cfg["models"]["cutout_video_fallback"], arguments={"video_url": vid_url})
     alpha_url = bg_res.get("video", {}).get("url") or bg_res.get("url")
-    raw_vid = out_dir / "raw_alpha.mov"
+    print(f"[video] alpha video={alpha_url}", flush=True)
+    raw_vid = out_dir / "raw_alpha.webm"
     download_file(alpha_url, raw_vid)
     item = {
         "id": f"{char['id']}_{slug}",

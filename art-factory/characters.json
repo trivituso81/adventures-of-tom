@@ -20,9 +20,9 @@
       "flash_bridge": "gemini-3-flash",
       "flux_fallback": "fal-ai/flux-3-image",
       "cutout_still": "fal-ai/birefnet/v2",
-      "video_idle": "fal-ai/kling/v4/image-to-video",
-      "video_move": "fal-ai/wan/v3.0/image-to-video",
-      "cutout_video": "fal-ai/bria/video/background-removal",
+      "video_idle": "kling/v4/image-to-video",
+      "video_move": "alibaba/wan-3.0/image-to-video",
+      "cutout_video": "bria/video/background-removal",
       "cutout_video_fallback": "fal-ai/birefnet/v2/video"
     }
   },
