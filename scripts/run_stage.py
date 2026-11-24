@@ -13,6 +13,39 @@ from PIL import Image
 from art_director_agent import ANTI_RING_NEG, IDLE_NEG, build_prompt, describe_child_geometry, get_character, list_character_move_ids, load_manifest, resolve_move_prompts
 from qa_judge_agent import judge_candidate
 
+BATTLE_STATES = ("dodge", "cast", "hit", "ko")
+
+BATTLE_STATE_PROMPTS = {
+    "dodge": (
+        "Deadpan 2D hand-painted storybook JRPG battle sprite animation on solid #808080 mid-grey studio background. "
+        "The character performs a crisp, nimble sidestep and lean-back dodge, briefly evading an incoming attack, "
+        "then settles smoothly back into their exact starting neutral battle stance. "
+        "Keep exact character proportions, outfit, props, bold dark ink outlines, and flat #808080 background. "
+        "No camera movement, no text, no extra characters."
+    ),
+    "cast": (
+        "Deadpan 2D hand-painted storybook JRPG battle sprite animation on solid #808080 mid-grey studio background. "
+        "The character raises a hand or signature prop in a focused, poised channel pose as subtle golden-white energy gathers briefly around them, "
+        "then returns cleanly to their exact starting neutral battle stance. "
+        "Keep exact character proportions, outfit, props, bold dark ink outlines, and flat #808080 background. "
+        "No camera movement, no text, no extra characters."
+    ),
+    "hit": (
+        "Deadpan 2D hand-painted storybook JRPG battle sprite animation on solid #808080 mid-grey studio background. "
+        "The character recoils backward with a sharp, comedic wince and braced shoulders as if struck by an impact, "
+        "then recovers steadily back into their exact starting neutral battle stance. "
+        "Keep exact character proportions, outfit, props, bold dark ink outlines, and flat #808080 background. "
+        "No camera movement, no text, no extra characters."
+    ),
+    "ko": (
+        "Deadpan 2D hand-painted storybook JRPG battle sprite animation on solid #808080 mid-grey studio background. "
+        "The character slumps downward dramatically in comical exhaustion and sits or lies dazed on the ground with drooped shoulders, "
+        "staying down at the end of the clip. "
+        "Keep exact character proportions, outfit, props, bold dark ink outlines, and flat #808080 background. "
+        "No blood, no gore, no camera movement, no text, no extra characters."
+    ),
+}
+
 def load_queue(path):
     p = Path(path)
     if p.exists():
@@ -178,6 +211,21 @@ def generate_video_item(stage, char, cfg, move_id, feedback, hero_src):
         except Exception as e1:
             print(f"[video:{char['id']}] kling start/end retry: {e1}", flush=True)
             res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "negative_prompt": IDLE_NEG, "start_image_url": img_url, "duration": "4", "generate_audio": False})
+    elif stage in ("battle_state_draft", "battle_state_final"):
+        res_tag = "480p" if stage == "battle_state_draft" else "1080p"
+        state_key = (move_id or "dodge").strip().lower()
+        base_p = BATTLE_STATE_PROMPTS.get(state_key, BATTLE_STATE_PROMPTS["dodge"])
+        prompt = f"{base_p} Character: {char['name']}. {feedback}".strip()
+        if state_key == "ko":
+            neg_prompt = f"{ANTI_RING_NEG}, blood, gore, violence, camera pan, zoom, background scenery, text, watermark"
+        else:
+            neg_prompt = f"{ANTI_RING_NEG}, hurt, knocked out, lying down, camera pan, zoom, background scenery, text, watermark"
+        print(f"[video:{char['id']}] calling {cfg['models']['video_move']} ({res_tag}, state={state_key})", flush=True)
+        try:
+            res = fal_client.subscribe(cfg["models"]["video_move"], arguments={"prompt": prompt, "negative_prompt": neg_prompt, "start_image_url": img_url, "resolution": res_tag})
+        except Exception as e1:
+            print(f"[video:{char['id']}] wan state image_url retry: {e1}", flush=True)
+            res = fal_client.subscribe(cfg["models"]["video_move"], arguments={"prompt": prompt, "negative_prompt": neg_prompt, "image_url": img_url, "resolution": res_tag})
     else:
         res_tag = "480p" if stage == "battle_move_draft" else "1080p"
         prompt, neg_prompt = resolve_move_prompts(stage, char, cfg, move_id=move_id, feedback=feedback)
@@ -217,10 +265,13 @@ def run_video(stage, char, cfg, move_id, feedback, queue):
 
 def run_batch_character_moves(stage, char, cfg, feedback, queue):
     hero_src = resolve_hero_source(char, cfg, allow_fallback=True)
-    include_univ = (char["id"] == "tom")
-    move_ids = list_character_move_ids(char["name"], include_universal=include_univ)
+    if stage in ("battle_state_draft", "battle_state_final"):
+        candidate_ids = list(BATTLE_STATES)
+    else:
+        include_univ = (char["id"] == "tom")
+        candidate_ids = list_character_move_ids(char["name"], include_universal=include_univ)
     targets = []
-    for mid in move_ids:
+    for mid in candidate_ids:
         slug = f"{stage}_{mid}"
         approved_vid = Path(cfg["output_dir"]) / char["id"] / slug / "approved.webm"
         if approved_vid.exists():
@@ -228,9 +279,9 @@ def run_batch_character_moves(stage, char, cfg, feedback, queue):
             continue
         targets.append(mid)
     if not targets:
-        print(f"[batch-moves] no unapproved moves found for {char['name']} in art-factory/*.json.", flush=True)
+        print(f"[batch-moves] no unapproved items found for {char['name']}.", flush=True)
         return
-    print(f"[batch-moves] starting {stage} for {char['id']} ({len(targets)} moves): {targets}", flush=True)
+    print(f"[batch-moves] starting {stage} for {char['id']} ({len(targets)} items): {targets}", flush=True)
     def worker(mid):
         try:
             return generate_video_item(stage, char, cfg, mid, feedback, hero_src)
@@ -242,7 +293,7 @@ def run_batch_character_moves(stage, char, cfg, feedback, queue):
     for item in results:
         queue["items"] = [i for i in queue["items"] if i["id"] != item["id"]] + [item]
     save_queue(cfg["queue_path"], queue)
-    print(f"[batch-moves] queued {len(results)}/{len(targets)} move(s) for Safari/WebM alpha encoding.", flush=True)
+    print(f"[batch-moves] queued {len(results)}/{len(targets)} item(s) for Safari/WebM alpha encoding.", flush=True)
 
 def run_batch_all_cast_moves(stage, manifest, cfg, feedback, queue):
     tasks = []
@@ -253,8 +304,12 @@ def run_batch_all_cast_moves(stage, manifest, cfg, feedback, queue):
         if not hero_src:
             print(f"[batch-all-moves] skipping {c['id']} (no Hero PNG in art-factory/refs/{c['id']}.png)", flush=True)
             continue
-        include_univ = (c["id"] == "tom")
-        for mid in list_character_move_ids(c["name"], include_universal=include_univ):
+        if stage in ("battle_state_draft", "battle_state_final"):
+            candidate_ids = list(BATTLE_STATES)
+        else:
+            include_univ = (c["id"] == "tom")
+            candidate_ids = list_character_move_ids(c["name"], include_universal=include_univ)
+        for mid in candidate_ids:
             slug = f"{stage}_{mid}"
             approved_vid = Path(cfg["output_dir"]) / c["id"] / slug / "approved.webm"
             if approved_vid.exists():
@@ -262,9 +317,9 @@ def run_batch_all_cast_moves(stage, manifest, cfg, feedback, queue):
                 continue
             tasks.append((c, hero_src, mid))
     if not tasks:
-        print("[batch-all-moves] no unapproved character moves found across uploaded cast.", flush=True)
+        print("[batch-all-moves] no unapproved items found across uploaded cast.", flush=True)
         return
-    print(f"[batch-all-moves] starting {stage} for {len(tasks)} total move(s) across cast", flush=True)
+    print(f"[batch-all-moves] starting {stage} for {len(tasks)} total item(s) across cast", flush=True)
     def worker(triple):
         c, src, mid = triple
         try:
@@ -272,15 +327,20 @@ def run_batch_all_cast_moves(stage, manifest, cfg, feedback, queue):
         except Exception as exc:
             print(f"[batch-all-moves] FAILED {c['id']}/{mid}: {exc}", flush=True)
             return None
-    with ThreadPoolExecutor(max_workers=min(3, len(tasks))) as ex:
-        results = [r for r in ex.map(worker, tasks) if r is not None]
-    for item in results:
-        queue["items"] = [i for i in queue["items"] if i["id"] != item["id"]] + [item]
-    save_queue(cfg["queue_path"], queue)
-    print(f"[batch-all-moves] queued {len(results)}/{len(tasks)} move(s) for Safari/WebM alpha encoding.", flush=True)
+    total_queued = 0
+    for offset in range(0, len(tasks), 12):
+        chunk = tasks[offset:offset + 12]
+        with ThreadPoolExecutor(max_workers=min(3, len(chunk))) as ex:
+            results = [r for r in ex.map(worker, chunk) if r is not None]
+        for item in results:
+            queue["items"] = [i for i in queue["items"] if i["id"] != item["id"]] + [item]
+        save_queue(cfg["queue_path"], queue)
+        total_queued += len(results)
+        print(f"[batch-all-moves] checkpointed {total_queued}/{len(tasks)} item(s) to queue.json", flush=True)
+    print(f"[batch-all-moves] queued {total_queued}/{len(tasks)} item(s) for Safari/WebM alpha encoding.", flush=True)
 
 def run_batch_video(stage, manifest, cfg, move_id, feedback, queue):
-    if stage in ("battle_move_draft", "battle_move_final") and (not move_id.strip() or move_id.strip() == "all_moves"):
+    if stage in ("battle_move_draft", "battle_move_final", "battle_state_draft", "battle_state_final") and (not move_id.strip() or move_id.strip() in ("all_moves", "all_states")):
         run_batch_all_cast_moves(stage, manifest, cfg, feedback, queue)
         return
     slug = f"{stage}_{move_id}" if move_id else stage
@@ -345,10 +405,10 @@ def main():
         run_approve(char_id, cand_idx, feedback, cfg, queue)
         return
     if char_id == "all_uploaded":
-        if stage in ("battle_idle", "battle_move_draft", "battle_move_final"):
+        if stage in ("battle_idle", "battle_move_draft", "battle_move_final", "battle_state_draft", "battle_state_final"):
             run_batch_video(stage, manifest, cfg, move_id, feedback, queue)
             return
-        raise RuntimeError("Batch mode supports video stages only (battle_idle, battle_move_draft, battle_move_final).")
+        raise RuntimeError("Batch mode supports video stages only.")
     char = get_character(manifest, char_id)
     if stage == "revise":
         stage = "hero"
@@ -356,8 +416,8 @@ def main():
         run_stills(stage, char, cfg, feedback, queue)
     elif stage == "battle_idle":
         run_video(stage, char, cfg, move_id, feedback, queue)
-    elif stage in ("battle_move_draft", "battle_move_final"):
-        if not move_id.strip() or move_id.strip() == "all_moves":
+    elif stage in ("battle_move_draft", "battle_move_final", "battle_state_draft", "battle_state_final"):
+        if not move_id.strip() or move_id.strip() in ("all_moves", "all_states"):
             run_batch_character_moves(stage, char, cfg, feedback, queue)
         else:
             run_video(stage, char, cfg, move_id, feedback, queue)

@@ -15,6 +15,8 @@ on:
           - battle_idle
           - battle_move_draft
           - battle_move_final
+          - battle_state_draft
+          - battle_state_final
           - approve
           - revise
           - encode_alpha
@@ -24,7 +26,7 @@ on:
         default: tom
         type: string
       move_id:
-        description: Move ID (for battle_move_draft/final)
+        description: Move ID or battle state (dodge, cast, hit, ko)
         required: false
         default: ""
         type: string
@@ -100,7 +102,7 @@ jobs:
   encode_safari_alpha:
     runs-on: macos-latest
     needs: generate
-    if: ${{ always() && (inputs.stage == 'battle_idle' || inputs.stage == 'battle_move_draft' || inputs.stage == 'battle_move_final' || inputs.stage == 'encode_alpha') && (needs.generate.result == 'success' || needs.generate.result == 'skipped') }}
+    if: ${{ always() && (inputs.stage == 'battle_idle' || inputs.stage == 'battle_move_draft' || inputs.stage == 'battle_move_final' || inputs.stage == 'battle_state_draft' || inputs.stage == 'battle_state_final' || inputs.stage == 'encode_alpha') && (needs.generate.result == 'success' || needs.generate.result == 'skipped') }}
     steps:
       - uses: actions/checkout@v4
         with:
