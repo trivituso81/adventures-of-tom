@@ -3,6 +3,7 @@ import re
 from pathlib import Path
 
 ANTI_RING_NEG = "glowing ring, neon halo, aura outline, rim glow, muted desaturated sketch, photorealistic 3D, 16-bit, 32-bit, 8-bit, pixel art, retro, sprite, SNES, Final Fantasy, hurt, knocked out"
+IDLE_NEG = "frozen start, static pause, motionless opening, delayed animation, repeated blinking, double blink, fluttering eyelids, mouth opening, sighing, pursing lips, speaking, camera movement, blur, distort"
 
 def load_manifest(path="art-factory/characters.json"):
     return json.loads(Path(path).read_text(encoding="utf-8"))
@@ -38,11 +39,11 @@ def build_prompt(stage, char, cfg, move_id="", feedback="", extra_hint=""):
         p = f"4K character animation sheet for {base} Row 1: 8-frame side walk cycle. Row 2: 8 expression portraits ({moods}). Row 3: 4 talking poses ({poses}). Bold dark contour lines and chunky brushed shading matching the style reference, flat {cfg['bg_hex']} background."
     elif stage == "battle_idle":
         p = (
-            f"Silent 2D RPG battle idle loop of {char['name']}. "
-            f"Keep the exact starting facial expression and smile completely consistent from start to finish: mouth stays closed and relaxed, no sighing, no pursing lips, no deep inhale, no speaking. "
-            f"Complete only one single slow, calm, barely perceptible breath across the entire 5 seconds: very slight chest and shoulder rise over the first 2.5 seconds, then gently settling back to the exact starting pose over the remaining 2.5 seconds. "
-            f"One quick, natural eye blink once near the midpoint. "
-            f"Both feet stay firmly planted on the ground with a relaxed posture and static locked camera for a seamless loop. {cfg['style_lock']}"
+            f"Seamless 2D RPG battle idle loop of {char['name']}. "
+            f"Motion begins immediately on frame one with no static pause: smooth, continuous, relaxed idle cycle where the chest, shoulders, and arms gently rise in one calm breath and smoothly settle back into the exact starting pose. "
+            f"Keep the starting smile and facial expression completely steady and consistent throughout with a closed, relaxed mouth. "
+            f"Just one single quick natural eye blink during the loop, then eyes stay steadily open. "
+            f"Both feet stay firmly planted on the ground, static locked camera. {cfg['style_lock']}"
         )
     else:
         pitch_note = f" Move ID: {move_id}." if move_id else ""

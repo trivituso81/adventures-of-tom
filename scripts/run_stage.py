@@ -10,7 +10,7 @@ import fal_client
 from google import genai
 from google.genai import types
 from PIL import Image
-from art_director_agent import ANTI_RING_NEG, build_prompt, describe_child_geometry, get_character, load_manifest
+from art_director_agent import ANTI_RING_NEG, IDLE_NEG, build_prompt, describe_child_geometry, get_character, load_manifest
 from qa_judge_agent import judge_candidate
 
 def load_queue(path):
@@ -172,12 +172,12 @@ def generate_video_item(stage, char, cfg, move_id, feedback, hero_src):
     img_url = fal_client.upload_file(str(clean_src))
     prompt = build_prompt(stage, char, cfg, move_id=move_id, feedback=feedback)
     if stage == "battle_idle":
-        print(f"[video:{char['id']}] calling {cfg['models']['video_idle']} (audio off)", flush=True)
+        print(f"[video:{char['id']}] calling {cfg['models']['video_idle']} (4s, audio off)", flush=True)
         try:
-            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "start_image_url": img_url, "end_image_url": img_url, "duration": "5", "generate_audio": False})
+            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "negative_prompt": IDLE_NEG, "start_image_url": img_url, "end_image_url": img_url, "duration": "4", "generate_audio": False})
         except Exception as e1:
             print(f"[video:{char['id']}] kling start/end retry: {e1}", flush=True)
-            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "start_image_url": img_url, "duration": "5", "generate_audio": False})
+            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "negative_prompt": IDLE_NEG, "start_image_url": img_url, "duration": "4", "generate_audio": False})
     else:
         res_tag = "480p" if stage == "battle_move_draft" else "1080p"
         print(f"[video:{char['id']}] calling {cfg['models']['video_move']} ({res_tag})", flush=True)
