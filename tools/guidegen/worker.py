@@ -31,7 +31,10 @@ TOO_SMALL = ('The figure is too small in the picture.', 'Make the figure fill mo
 NO_HERO = ('There is no start picture recipe for this person yet.', 'Send a note to Claude from this sheet.')
 BAD_PICTURE = ('That file could not be read as a picture.', 'Send a PNG or a JPEG, then tap Upload my own.')
 NO_START = ('There is no start picture for this person yet.', 'Make the start picture first.')
-NOT_YET = ('Monster videos are not made by this line yet.', 'Send a note to Claude from this sheet.')
+NOT_YET = ('This kind of video is not made by this line.', 'Send a note to Claude from this sheet.')
+NO_XAI_RECIPE = ('There is no recipe for this monster video yet.', 'Send a note to Claude from this sheet.')
+XAI_STOP = ('The video service refused the request.', 'Check the key and the balance at xAI, then tap Try again.')
+XAI_CAP = 0.15                 # guideflow8 (D17): the most one monster video may cost
 NO_REPLAY = ('The stored video for this free test was not found.', '')
 VID_TEMPLATE = 'tom-idle'      # the proven Wan settings every Guide video copies (720p, 5 s, seed 81, first and last frame the start picture)
 VID_CAP = 1.0
@@ -108,7 +111,7 @@ def own_active(doc, who):
 
 
 class Worker:
-    def __init__(self, lane, pool=4, linger=120, once=False, dry_run=False, alive=None, fal=None, judge_factory=None, jobs=None, repo=ROOT, run_id=None):
+    def __init__(self, lane, pool=4, linger=120, once=False, dry_run=False, alive=None, fal=None, judge_factory=None, jobs=None, repo=ROOT, run_id=None, xai=None):
         self.lane, self.pool, self.linger, self.once, self.dry_run = lane, pool, linger, once, dry_run
         self.run_id = int(run_id if run_id is not None else (os.environ.get('GITHUB_RUN_ID') or 0))
         self.alive = alive or self.github_alive
@@ -116,13 +119,14 @@ class Worker:
         self.jobs = jobs
         self.key = os.environ.get('FAL_KEY', '')
         self.fal = fal
+        self.xai = xai
         self.judge_factory = judge_factory
         self._judge = None
         self.stop_claim = False
         self.pause_until = 0.0   # X7: fal said it is busy; no new claim until then
         self.no_gate = bool(os.environ.get('GUIDE_NO_GATE'))   # tests: take checks without the clip gate
         self.lock = threading.RLock()
-        self.spent = {'fal': 0.0, 'xai': 0.0}
+        self.spent = {'fal': 0.0, 'xai': 0.0, 'xaivid': 0.0}
         self.tmp = tempfile.mkdtemp(prefix='guidework-')
 
     # ---- GitHub: is a run still going? ----
@@ -142,6 +146,14 @@ class Worker:
                 from falq import Fal
                 self.fal = Fal(self.key, os.environ.get('FAL_QUEUE', 'https://queue.fal.run'), os.environ.get('FAL_API', 'https://api.fal.ai'))
             return self.fal
+
+    def get_xai(self):
+        """guideflow8: the same xAI client the clip-gen Action uses (tools/art-library/clipgen.py, class Xai: send, wait, download)."""
+        with self.lock:
+            if self.xai is None:
+                import clipgen
+                self.xai = clipgen.Xai(os.environ.get('XAI_API_KEY', ''), os.environ.get('XAI_BASE', 'https://api.x.ai'))
+            return self.xai
 
     def get_judge(self):
         with self.lock:
@@ -292,7 +304,8 @@ class Worker:
     def run_video(self, it):
         import wangen
         rid = re.sub(r'[^A-Za-z0-9_-]', '-', it['id'])
-        if it.get('route') not in ('wan', '', None): return self.fail_row(it, NOT_YET)
+        route = it.get('route') or 'wan'
+        if route not in ('wan', 'xai'): return self.fail_row(it, NOT_YET)
         if it.get('replay'):
             rel = it['replay']
             data = None
@@ -303,6 +316,7 @@ class Worker:
             p = os.path.join(self.tmp, rid + '-replay.mp4'); open(p, 'wb').write(data)
             store.set_state(it['id'], 'checking', actor='worker', cost=0)
             return self.finish_video(it, p, 0.0)
+        if route == 'xai': return self.run_xai(it)
         if it['anim'] in wangen.staging_waits(self.repo): return self.fail_code(it, 'X15')   # X15: a move still being rebuilt in layers is never made
         who = it.get('start') or it.get('who') or ''
         frame = self.start_picture(who)
@@ -340,17 +354,72 @@ class Worker:
         with self.lock: self.spent['fal'] += spent
         self.finish_video(it, os.path.join(out, rep['file']), spent)
 
+    # ---- a monster video (guideflow8, D17): the same row, states and checks as a family video; only the call that makes the video differs ----
+    def run_xai(self, it):
+        """One monster video on xAI from the recipe on the row (`clip`: model, res, dur, start picture, figRows), through clipgen's own Xai client. xAI only says pending, so the
+        request number is written on the row (`svc`) the moment xAI accepts it, before anything waits; a dead run is picked up from it with no second paid submit. One automatic retry,
+        then X6. The most a try may cost is 0.15."""
+        import clipgen
+        c = it.get('clip') or {}
+        if not (c.get('model') and c.get('res') and c.get('dur') and c.get('start')): return self.fail_row(it, NO_XAI_RECIPE)
+        prompt = (it.get('prompt') or '').strip()
+        if not prompt: return self.fail_row(it, ('This request has no prompt.', 'Send a note to Claude from this sheet.'))
+        e = {'id': it['id'], 'clip': {k: c.get(k) for k in ('id', 'owner', 'kind', 'start', 'model', 'res', 'dur')}, 'prompt': prompt}
+        est = clipgen.cost(e); cap = min(float(it.get('cap') or XAI_CAP), XAI_CAP)
+        if est > cap + 1e-9: return self.fail_code(it, 'X22')
+        sp = os.path.join(self.repo, c['start'])
+        if not os.path.exists(sp): return self.fail_row(it, NO_START)
+        png = open(sp, 'rb').read()
+        xai = self.get_xai()
+        rid = ((it.get('svc') or {}).get('request_id')) or None   # a request xAI already accepted (a dead run): wait for it, never send again
+        spent = 0.0; data = None
+        for attempt in (1, 2):
+            try:
+                if not rid:
+                    rid = xai.send(e, prompt, png); spent += est
+                    store.set_fields(it['id'], actor='worker', svc={'name': 'xai', 'request_id': rid}, cost=round(spent, 4))
+                data = xai.download(xai.wait(rid, None))
+                break
+            except clipgen.Stop as x:   # the key was refused or the balance is gone: nothing more is claimed this run
+                self.stop_claim = True
+                with self.lock: self.spent['xaivid'] += spent
+                say('%s: xAI refused: %s' % (it['id'], str(x)[:160]))
+                return self.fail_row(it, XAI_STOP, cost=round(spent, 4))
+            except clipgen.Gone:   # xAI could not make this one: the number is dead, the retry sends again
+                say('%s: xAI could not make it (attempt %d)' % (it['id'], attempt))
+                rid = None
+                try: store.set_fields(it['id'], actor='worker', svc=None)
+                except (store.Refused, store.StoreError) as x: say('could not clear the request number on %s: %s' % (it['id'], x))
+                spent = 0.0 if attempt == 1 else spent
+                if attempt == 2: return self.finish_failed_xai(it, spent, 'X6')
+            except Exception as x:
+                err = str(x)
+                if CREDIT.search(err):
+                    self.stop_claim = True; return self.finish_failed_xai(it, spent, None, pair=XAI_STOP)
+                say('%s: xAI call failed (%s), attempt %d' % (it['id'], err[:120], attempt))
+                if attempt == 2: return self.finish_failed_xai(it, spent, 'X6')   # a request number, if xAI gave one, stays on the row: Try again picks it up for nothing
+        if data is None: return self.finish_failed_xai(it, spent, 'X6')
+        rd = re.sub(r'[^A-Za-z0-9_-]', '-', it['id']); path = os.path.join(self.tmp, rd + '-xai.mp4'); open(path, 'wb').write(data)
+        store.set_state(it['id'], 'checking', actor='worker', cost=round(spent, 4))
+        with self.lock: self.spent['xaivid'] += spent
+        self.finish_video(it, path, spent, route='xai')
+
+    def finish_failed_xai(self, it, spent, code, pair=None):
+        with self.lock: self.spent['xaivid'] += spent
+        if pair is not None: self.fail_row(it, pair, cost=round(spent, 4))
+        else: self.fail_code(it, code, cost=round(spent, 4))
+
     def finish_failed_vid(self, it, state, code):
         with self.lock: self.spent['fal'] += state['spent']
         self.fail_code(it, code, cost=round(state['spent'], 4))
 
-    def finish_video(self, it, path, spent):
+    def finish_video(self, it, path, spent, route=None):
         """The checks and the save for ONE video, right away: make_take (marks, clip gate with its 7 minute limit, preview), then the take and the mp4 are kept on guidegen and
         confirmed there. X9 when it hardly moves, X16 when the save fails twice, X10 (the gate holds it) is still done."""
         import make_take
         rid = re.sub(r'[^A-Za-z0-9_-]', '-', it['id'])
         rd = os.path.join(self.tmp, 'res-' + rid); sd = os.path.join(self.tmp, 'take-' + rid); os.makedirs(rd, exist_ok=True); os.makedirs(sd, exist_ok=True)
-        row = {'anim': it['anim'], 'take': int(it.get('take') or 0), 'video': os.path.abspath(path), 'prompt': it.get('prompt') or '', 'promptRev': it.get('promptRev', 0), 'route': 'wan',
+        row = {'anim': it['anim'], 'take': int(it.get('take') or 0), 'video': os.path.abspath(path), 'prompt': it.get('prompt') or '', 'promptRev': it.get('promptRev', 0), 'route': route or it.get('route') or 'wan',
                'cost': round(spent, 4), 'at': it.get('at'), 'note': it.get('note') or ''}
         rf = os.path.join(rd, 'guide-results.json'); json.dump({'results': [row]}, open(rf, 'w'))
         args = ['--results', rf, '--state', sd, '--quiet'] + (['--no-gate'] if self.no_gate else [])
@@ -420,6 +489,7 @@ class Worker:
         rows = []
         if self._judge is not None: self.spent['xai'] = float(getattr(self._judge, 'spent', 0) or 0)   # one judge shared by the rows: its own total is the run's, counted once
         if self.spent['fal'] > 0: rows.append({'service': 'fal', 'amount': round(self.spent['fal'], 4), 'what': 'guide-work: ' + ('family videos' if self.lane == 'vid' else 'start pictures'), 'source': 'guide-work run'})
+        if self.spent['xaivid'] > 0: rows.append({'service': 'xai', 'amount': round(self.spent['xaivid'], 4), 'what': 'guide-work: monster videos', 'source': 'guide-work run'})
         if self.spent['xai'] > 0: rows.append({'service': 'xai', 'amount': round(self.spent['xai'], 4), 'what': 'guide-work: start picture facing check', 'source': 'guide-work run'})
         if not rows: return
         try:

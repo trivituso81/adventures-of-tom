@@ -1,3 +1,16 @@
+## guideflow8 (2026-11-23): Monster videos in the Battle Guide now go through the same queue, worker and status lines as the family videos
+
+Card c-guideflow-8 (plan `claude/guide-flow-plan.md` section 10 step 8, D17). Started by hand in the c-guideflow-7 conversation because the board's START fired and pushed nothing for 30 minutes. A monster animation is now a row in `queue.json` (`route: xai`, `cap 0.15`, `clip` with the recipe) and shows the same lines, Cancel and Activity as a family video. Nothing was sent to xAI for real; every test uses stand-ins.
+
+| What | Where |
+|---|---|
+| Lane vid route xai: builds the entry from the row's `clip`, sends it with clipgen's own `Xai` client, writes `svc {name: xai, request_id}` on the row before waiting, one automatic retry then X6, then the same make_take, keep and done steps. A dead run is picked up by the request id (one paid submit). A refused key or a spent balance fails the row in plain words and stops claiming | `tools/guidegen/worker.py` (`run_xai`) |
+| `store._paid`: the reaper and the X7 rule treat `svc` like `fal`; `svc` is an allowed row field | `tools/guidegen/store.py` |
+| The monster button is Make this video ($0.07), adds the row and pokes the worker; the old Generate box, `doGen`, `askGen`, `qMonsterCheck` and the pending-request memory are gone | `battle-guide.html` |
+| Removed from clipgen: the `guide` request path, its `progress.mark` calls and `guide-results.json`; the guide step is gone from `clip-gen.yml`. Every Art Library path is kept | `tools/art-library/clipgen.py`, `.github/workflows/clip-gen.yml` |
+
+Tested: `worker_test.py` T10 (queued to done; svc on the row; X6 after two failed sends; xAI failing the video once then done; a dead run picked up by request id with one paid send; caps; missing recipe; refused key; cost logged as monster videos), `clipgen_test.py`, `clip_batch_test.py`, `keysecrets2_test.py`, `take_test.py` (T2 now checks clipgen makes nothing for a `guide` request), `queue_test.py`, `battle_guide_test.py` (new D17-1 to D17-8 pass; the same other failures as the untouched main), `workflow_check.py`, `smoke.py` (only the board_sync_test case the untouched main also fails). Not looked at: the page on a phone. Known and not mine: `worker_test.py` "four at a time" fails the same way on the untouched main (one of six parallel rows hits an image read error).
+
 ## board-b3s23split (2026-11-23): the battle 2 purge is split into five ordered cards
 
 Card c-b3s23. Tom (11-22): "Yes, delete battle 2 and its leftovers as the plan lists". Fact: the gate checks passed (chapters 1 to 21 are on B3_STORY.chapters, c-b3s22ch12 to c-b3s22ch20 are Done), but the purge touches about 1 MB of battle 2 code and about 3,000 references in 266 files, and Battle 3 still reads battle 2 names (b2Esc, b2Thumb, b2Portrait, b2CanvasPt, b2Meter, b2BattleDef, b2Purse, startBattle, B2.result), so one change would leave the live game broken. Nothing was deleted. New cards c-b3s23a (Battle 3 shell), c-b3s23b (tables), c-b3s23c (story path), c-b3s23d (engine delete), c-b3s23e (voice, files, final check, Milestone card), each Sonnet 5.5, in order; c-b3s23 and the stuck card t-stuck-b3s23 are retired. Facts and rules: claude/next-addendum-b3s23.md. Smoke fact: board_sync_test board4 'board_check accepts a Tom card waiting on its fix' already fails on main.

@@ -204,7 +204,7 @@ USE_ALLOWED = {
     ('applying', 'failed'): {'apply'},
     ('applying', 'wanted'): {'apply'},         # the job stopped, its row goes back to the list
 }
-FIELDS = {'run', 'fal', 'tries', 'cost', 'why', 'do', 'result', 'note', 'prompt', 'promptRev', 'start', 'cap', 'replay', 'dry'}
+FIELDS = {'run', 'fal', 'svc', 'tries', 'cost', 'why', 'do', 'result', 'note', 'prompt', 'promptRev', 'start', 'cap', 'replay', 'dry'}
 KINDS = {'picture': 'pic', 'upload': 'pic', 'video': 'vid'}
 FINISHED = ('done', 'failed', 'cancelled')
 
@@ -236,6 +236,11 @@ def _send(ev, it):
     if ev and not it.get('dry'): notify.send(ev[0], ev[1], tags=ev[2], click=_link(it))
 
 
+def _paid(it):
+    """guideflow8: the service's request number a row holds once the service accepted it: `fal` (a family video on Wan) or `svc` ({name: 'xai', request_id}, a monster video)."""
+    return it.get('fal') or it.get('svc')
+
+
 def _get(doc, id):
     it = doc['items'].get(id)
     if it is None: raise Refused('no row %s' % id)
@@ -248,7 +253,7 @@ def add(item):
         if not item.get(k): raise Refused('a row needs %s' % k)
     if item['kind'] not in KINDS: raise Refused('kind %s' % item['kind'])
     it = {'lane': KINDS[item['kind']], 'who': '', 'take': 0, 'route': '', 'prompt': '', 'promptRev': 0, 'start': '', 'note': '', 'cap': 0, 'at': now(),
-          'state': 'queued', 'since': '', 'run': 0, 'fal': None, 'tries': 0, 'cost': 0, 'why': '', 'do': '', 'result': None, 'use': None, 'left': False, 'dry': False, 'replay': ''}
+          'state': 'queued', 'since': '', 'run': 0, 'fal': None, 'svc': None, 'tries': 0, 'cost': 0, 'why': '', 'do': '', 'result': None, 'use': None, 'left': False, 'dry': False, 'replay': ''}
     it.update(item)
     it['state'] = 'queued'; it['since'] = it['since'] or it['at']; it['use'] = None; it['lane'] = KINDS[it['kind']]
 
@@ -288,13 +293,13 @@ def set_state(id, state, actor='worker', code=None, **fields):
         a = it['state']
         who = ALLOWED.get((a, state))
         if who is None or actor not in who: raise Refused('%s cannot move %s from %s to %s' % (actor, id, a, state))
-        if state == 'queued' and actor == 'reaper' and not (it.get('fal') and int(it.get('tries') or 0) == 1): raise Refused('only a row with a fal number and one try goes back in line')
+        if state == 'queued' and actor == 'reaper' and not (_paid(it) and int(it.get('tries') or 0) == 1): raise Refused('only a row with a service request number and one try goes back in line')
         if state == 'queued' and actor == 'worker':   # guideflow4 (X7): fal said it is too busy; nothing was accepted or paid, so the claim does not count as a try
-            if it.get('fal'): raise Refused('a row that holds a fal number is never put back in line by the worker')
+            if _paid(it): raise Refused('a row that holds a service request number is never put back in line by the worker')
             it['tries'] = max(0, int(it.get('tries') or 0) - 1)
         for k, v in fields.items(): it[k] = v
         if code:
-            it['why'], it['do'] = words(code, paid=bool(it.get('fal')), **fmt)
+            it['why'], it['do'] = words(code, paid=bool(_paid(it)), **fmt)
         if state == 'queued': it['run'] = 0
         if state in ('done', 'cancelled'): it['why'] = it['do'] = ''
         it['state'] = state; it['since'] = now()
@@ -426,10 +431,10 @@ def reap(alive):
         t = now()
         for i in d['items'].values():
             if i['state'] in ('making', 'checking') and i.get('run') in gone:
-                if i.get('fal') and int(i.get('tries') or 0) == 1:
+                if _paid(i) and int(i.get('tries') or 0) == 1:
                     i['state'] = 'queued'; i['run'] = 0; i['since'] = t; res['requeued'].append(i['id'])
                 else:
-                    i['why'], i['do'] = words('X8', paid=bool(i.get('fal'))); i['state'] = 'failed'; i['since'] = t
+                    i['why'], i['do'] = words('X8', paid=bool(_paid(i))); i['state'] = 'failed'; i['since'] = t
                     res['failed'].append(i['id']); events.append((_event(i, 'failed'), json.loads(json.dumps(i))))
     update(fn, 'guide: reaper')
     for ev, it in events: _send(ev, it)

@@ -98,7 +98,6 @@ jobs:
       - name: Make the clips
         env:
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
-          GUIDE_STATUS: '1'   # guidestatus1: tools/guidegen/progress.py writes status.json on branch guidegen
           GH_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GROUP: ${{ inputs.group }}
@@ -120,24 +119,6 @@ jobs:
           if [ "$DRY" != "true" ] && [ -z "$XAI_API_KEY" ]; then echo "Repo secret XAI_API_KEY is empty or missing."; exit 2; fi
           python3 -I tools/art-library/clipgen.py "${ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/run.log"
           { echo '### clip-gen'; echo '```'; tail -60 "$RUNNER_TEMP/run.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-      - name: Make the Battle Guide takes (clip gate and preview)
-        if: ${{ inputs.dry_run != 'true' && always() }}
-        env:
-          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          # guidegen1: a request with a `guide` field (GENERATE THIS VIDEO in the Battle Guide, monsters) is kept as a take, not approved
-          [ -f "$RUNNER_TEMP/clipgen/guide-results.json" ] || { echo "no guide results"; exit 0; }
-          pip install scipy >/dev/null
-          mkdir -p "$RUNNER_TEMP/guidegen"
-          if git ls-remote --exit-code --heads origin guidegen >/dev/null 2>&1; then
-            git fetch --depth 1 origin guidegen
-            git archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/guidegen"
-          fi
-          python3 -I tools/guidegen/make_take.py --results "$RUNNER_TEMP/clipgen/guide-results.json" --state "$RUNNER_TEMP/guidegen" 2>&1 | tee "$RUNNER_TEMP/take.log"
-          { echo '### guide takes'; echo '```'; tail -30 "$RUNNER_TEMP/take.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-          rm -rf "$RUNNER_TEMP/guidegen/reconcile" "$RUNNER_TEMP/guidegen/replay.json"
-          python3 -I tools/guidegen/keep.py "$RUNNER_TEMP/guidegen" --msg "guidegen: takes (run ${{ github.run_id }}) [skip ci]"
       - name: Keep the job's state on the clipgen branch
         if: ${{ inputs.dry_run != 'true' && always() }}
         env:

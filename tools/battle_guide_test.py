@@ -760,19 +760,32 @@ with sync_playwright() as p:
     check('an animation whose last two takes were held for one fault is stopped when opened', 'same fault' in pg.locator('#gstop').inner_text() and pg.locator('#gtk').inner_text() == 'Takes made: 2', pg.locator('#gstop').inner_text())
     n_q = len(QS['puts']); pg.click('#gq [data-qa=make]'); pg.wait_for_selector('#gq .qerr'); check('a stopped animation: Make sends nothing', len(QS['puts']) == n_q and pg.locator('#gq .qerr').inner_text().startswith('Stop here.'))
     pg.click('#bclose')
-    # a monster keeps its old button and its old path (card 8 moves it)
-    pg.goto(URL + '#anims/act:skeeter:darting_bite'); pg.wait_for_selector('#ggen')
-    check('a monster animation shows its own price and no start picture block', '$0.07' in pg.locator('#ggen').inner_text() and pg.locator('#gq').count() == 0, pg.locator('#ggen').inner_text())
-    pg.click('#ggen'); pg.wait_for_selector('#gconfbox'); pg.click('#ggo'); pg.wait_for_selector('#gwait', timeout=20000); pg.wait_for_selector('#gtakecard', timeout=60000)
-    cp = RQ['data/clip-requests.json']['puts']; cr = cp[0]['doc']['requests'][-1] if cp else {}
-    check('a monster request goes to the clip-gen request file with a guide field, not the Library', len(cp) == 1 and cp[0]['msg'] == 'clip: generate guide act:skeeter:darting_bite' and cr.get('id') == 'guide-act-skeeter-darting-bite-t1'
-          and cr['guide']['anim'] == 'act:skeeter:darting_bite' and cr['guide']['take'] == 1 and cr['guide']['clip']['owner'] == 'skeeter' and cr['guide']['clip']['model'] == 'grok-imagine-video-1.5-lite' and cr['guide']['clip']['kind'] == 'strike' and cr['cap'] <= 0.5, cp)
-    check('a monster with no video has a standard-motion side to compare', 'standard motion' in pg.locator('#gtakecard').inner_text().lower() or 'Now in the game' in pg.locator('#gtakecard').inner_text())
+    # ---- guideflow8 (D17): a monster is a row in the same queue, with the same lines, Cancel and Activity ----
+    MON = 'act:skeeter:darting_bite'
+    q_reset(); DISP['posts'].clear(); QS['puts'].clear(); RQ['data/clip-requests.json']['puts'].clear()
+    pg.goto(URL + '#anims/' + MON); pg.wait_for_selector('#gq [data-qa=make]')
+    bt = pg.locator('#gq [data-qa=make]').inner_text()
+    check('D17-1 a monster animation: the button is Make this video ($0.07) (Make another when it has one) like a family one, with no start picture block and no old Generate box', bt in ('Make this video ($0.07)', 'Make another ($0.07)') and pg.locator('#ggen,#gconf,#gconfbox,.qpic').count() == 0, bt)
+    prompt_shown = pg.locator('#gprompt').inner_text()
+    pg.click('#gq [data-qa=make]'); pg.wait_for_function("document.querySelector('#gq .qline[data-rid]')", timeout=20000)
+    rows = [x for x in QS['doc']['items'].values() if x.get('anim') == MON]; r = rows[0] if rows else {}; cl = r.get('clip') or {}
+    check('D17-2 one tap saved ONE row: kind video, lane vid, route xai, cap 0.15, the prompt shown, take 1, and the recipe in `clip` (id, owner, kind, start, model, res, dur, figRows)',
+          len(QS['puts']) == 1 and len(rows) == 1 and r.get('kind') == 'video' and r.get('lane') == 'vid' and r.get('route') == 'xai' and r.get('cap') == 0.15 and r.get('take') == 1 and r.get('prompt') == prompt_shown and r.get('who') == 'skeeter'
+          and r.get('state') == 'queued' and cl.get('owner') == 'skeeter' and cl.get('kind') == 'strike' and cl.get('model') == 'grok-imagine-video-1.5-lite' and cl.get('start', '').startswith('art/clips/start/') and cl.get('id') and 'figRows' in cl and cl.get('res') and cl.get('dur'), (QS['puts'], r))
+    check('D17-3 the commit is guide: add <id> [skip ci], the page poked the worker once, and nothing went to the old clip request file', QS['puts'][0]['msg'].startswith('guide: add ' + r.get('id', '?')) and '[skip ci]' in QS['puts'][0]['msg'] and DISP['posts'] == [{'event_type': 'guide-work'}] and not RQ['data/clip-requests.json']['puts'], (QS['puts'][0]['msg'], DISP['posts']))
+    check('D17-4 the row says "Queued. Starts in under a minute." with Cancel (free), the same lines as a family video', pg.evaluate(LINES, '#gq')[r['id']][0:1] == ['Queued. Starts in under a minute.'] and pg.evaluate(LINES, '#gq')[r['id']][2] == ['Cancel (free)'], pg.evaluate(LINES, '#gq'))
+    wset(r['id'], state='making', since=iso(10)); pg.wait_for_function("document.querySelector('#gq .qline[data-state=making]')", timeout=20000)
+    check('D17-5 making shows the making line and no button', pg.evaluate(LINES, '#gq')[r['id']][2] == [] and 'Making the video' in pg.evaluate(LINES, '#gq')[r['id']][0], pg.evaluate(LINES, '#gq'))
     pg.click('#bclose')
+    html_src = open(os.path.join(ROOT, 'battle-guide.html'), encoding='utf-8').read()
+    for fn in ('askGen', 'doGen', 'qMonsterCheck'):
+        check('D17-7 the old monster path is gone from the page: ' + fn, fn not in html_src)
+    check('D17-7 ...and so are the clip request file, the Generate box and the pending-request memory', 'clip-requests.json' not in html_src and 'id="ggen"' not in html_src and 'MPEND' not in html_src)
     # no token
-    pg.evaluate("localStorage.removeItem('aot-gh-token')"); pg.goto(URL + '#anims/move:suite_door_slide'); pg.reload(); pg.goto(URL + '#anims/act:skeeter:darting_bite'); pg.wait_for_selector('#ggen')
-    n_all = sum(len(f['puts']) for f in RQ.values()); pg.click('#ggen'); pg.wait_for_timeout(200)
-    check('no token: Generate sends nothing and says why', 'token' in pg.locator('#gmsg').inner_text().lower() and sum(len(f['puts']) for f in RQ.values()) == n_all)
+    q_reset(); QS['puts'].clear()
+    pg.evaluate("localStorage.removeItem('aot-gh-token')"); pg.goto(URL + '#anims/move:suite_door_slide'); pg.reload(); pg.goto(URL + '#anims/' + MON); pg.wait_for_selector('#gq [data-qa=make]')
+    n_all = sum(len(f['puts']) for f in RQ.values()) + len(QS['puts']); pg.click('#gq [data-qa=make]'); pg.wait_for_timeout(300)
+    check('D17-8 no token: Make sends nothing and says why', 'token' in pg.locator('#gq .qerr').inner_text().lower() and sum(len(f['puts']) for f in RQ.values()) + len(QS['puts']) == n_all, pg.locator('#gq').inner_text())
     pg.click('#bclose')
     # search
     pg.click('#bsearch')

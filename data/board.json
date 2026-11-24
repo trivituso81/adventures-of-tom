@@ -20529,7 +20529,7 @@
    "theme": "Battle Animations",
    "tag": "guideflow8",
    "title": "Monster videos through the same Guide queue",
-   "next": "Waits for card c-guideflow-7, then starts by itself. Moves monster videos (xAI) into the same queue and status lines as the family videos. Nothing to play until the last card.",
+   "next": "Built and pushed as guideflow8: monster videos are rows in the Guide queue (route xai) made by the worker. Next card c-guideflow-9. Nothing for Tom.",
    "blocks": [
     "c-guideflow-9"
    ],
@@ -20566,6 +20566,10 @@
     {
      "d": "2026-11-23",
      "t": "Started by hand: START pushed nothing, so the c-guideflow-7 conversation took this card."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Built by the session that shipped c-guideflow-7 (START had pushed nothing): run_xai in worker.py, the page button, clipgen guide path removed, tests T10 and D17-1 to D17-8."
     }
    ],
    "prompt": {

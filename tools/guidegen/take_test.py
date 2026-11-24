@@ -94,7 +94,7 @@ check('T1 a request past the day cap is refused in words and sends nothing', len
 r, rows = wan([req(take=3, at=102, cap=0.2)])
 check('T1 a request capped below the price pays nothing', len(SENT) == n0 and rows and rows[0].get('error'), (rows, r.stdout[-300:]))
 
-# ---------------------------------------------------------------- T2 clipgen --requests with a guide field
+# ---------------------------------------------------------------- T2 clipgen --requests no longer takes a guide field (guideflow8)
 port = 8847
 stub = subprocess.Popen([sys.executable, os.path.join(ROOT, 'tools/art-library/stub.py'), str(port)], env=dict(os.environ, STUB_VIDEO=MOVING), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 import urllib.request
@@ -115,8 +115,10 @@ sh('git', 'push', '-q', 'origin', 'main', cwd=work)
 cout = os.path.join(TMP, 'cout')
 try:
     r = sh(sys.executable, '-I', ROOT + '/tools/art-library/clipgen.py', '--repo', work, '--out', cout, '--requests', env=dict(os.environ, XAI_API_KEY='test', XAI_BASE='http://127.0.0.1:%d' % port, CLIPGEN_POLL='0.05'))
-    gr = json.load(open(cout + '/guide-results.json'))['results'] if os.path.exists(cout + '/guide-results.json') else []
-    check('T2 the monster video is kept as a take row, not approved', len(gr) == 1 and gr[0]['anim'] == 'act:skeeter:darting_bite' and gr[0]['take'] == 1 and os.path.exists(gr[0].get('video', '')) and gr[0]['route'] == 'xai' and gr[0]['prompt'] == 'A monster prompt, once.', (r.stdout[-700:], gr))
+    csrc = open(ROOT + '/tools/art-library/clipgen.py', encoding='utf-8').read()
+    log = urllib.request.urlopen('http://127.0.0.1:%d/log' % port).read().decode()
+    check('T2 guideflow8: clipgen no longer has a Battle Guide request path (monsters are rows in the guide queue now): a request with a `guide` field makes nothing and spends nothing',
+          not os.path.exists(cout + '/guide-results.json') and '_guide' not in csrc and 'guide-results' not in csrc and 'progress' not in csrc and 'nothing to make' in r.stdout and '/v1/videos/generations' not in log, (r.stdout[-400:], log[-200:]))
     after = sh('git', '--git-dir', remote, 'show', 'main:data/art-prompts.json').stdout
     check('T2 the Art Library entries are untouched (nothing approved)', json.dumps(json.loads(after), sort_keys=True) == before)
     q = json.loads(sh('git', '--git-dir', remote, 'show', 'main:data/clip-requests.json').stdout)['requests']
