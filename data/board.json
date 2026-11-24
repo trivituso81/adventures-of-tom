@@ -10428,19 +10428,6 @@
      "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     },
     {
-     "d": "2026-11-21",
-     "t": "Tom tapped START.",
-     "at": "2026-11-22T02:55:18.765Z"
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Started by START on Claude Sonnet 5.5, effort medium."
-    },
-    {
-     "d": "2026-11-21",
-     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
-    },
-    {
      "d": "2026-11-22",
      "t": "Tom tapped START.",
      "at": "2026-11-22T17:02:58.127Z"
@@ -10469,6 +10456,10 @@
     {
      "d": "2026-11-23",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-24",
+     "t": "Ran: looked at 4 play cards, none a yes or no fact; all 4 marked yours. No build: bump_tags stopped on art-factory.yml (paid secret, concurrency at top of file), a fault already on main."
     }
    ],
    "prompt": {
@@ -10481,7 +10472,7 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/night-plan.md (sections 1 to 4, then section 8), then card c-night-qa in data/board.json with its history. This is the standing card Night QA: it runs every night and never goes to Done. 1. Take up to 4 open Tom cards with ask play and no `machine` field, oldest first, backlog included (checking a parked card moves nothing of Tom's except closing it on a pass). 2. For each card: read `next`, `first` and the history, and sort it. YES OR NO (a fact a test browser can see: a button is or is not on screen, a scene ends, a person stands on a roof, a fight restarts) or YOURS (how something looks, sounds or feels, timing of a joke, anything about the real phone, the Duo's fold, touch, or audio). When in doubt it is YOURS. 3. YES OR NO: reproduce the exact path with tools/reaction_test.py or a small Playwright script in portrait, landscape and the Duo size (\"vp\":[951,648]), with no SKIP or FAST when the card is about a scene, and LOOK at the frames. Pictures go to branch night under qa/CARDID/DATE/. Pass: the card goes to Done with machine: {at, verdict: \"pass\", saw, shots} and the history line \"Checked by the night QA: WHAT WAS SEEN\". It is listed under Closed for you on the Last night card. Fail: what Something is wrong does today: a Claude fix card (fix: true, reports holds what the browser showed and the picture links, Sonnet 5.5 medium), and Tom's card waits behind it. 4. YOURS: machine: {at, verdict: \"yours\", why: WHY} so it is not looked at again; the card stays Tom's and its details show \"Needs your eyes: WHY\". Limits (also printed on the Last night card): the test browser is Chromium on a server, not Safari on the iPhone. It cannot hear, cannot judge touch, and cannot see the Duo's fold. Never close a card about how something looks, sounds or feels. Never touched: voice clips and takes (Tom, 2026-11-05), art/raw/, demo/, Tom's saved files (data/welcome-layout.json, data/pose-requests.json, data/script-edits.json, data/script-review.json, data/portrait-frame.json), the branches inbox, takes, generated, clipgen, artgen, voicetake, guidegen. No paid run of any service. Push a build named nightqa-MMDD (MM and DD are today's month and day) (write its ## heading in docs/CHANGES.md first, then python3 tools/art-library/bump_tags.py nightqa-MMDD --base origin/main). If there is nothing to check tonight, push only the commit night: ran c-night-qa. Your first push is the commit board: start c-night-qa. Keep this card's newest 10 history lines. Two misses the same way: stop and write ended without shipping with the reason. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "last_run": {
-    "date": "2026-11-22",
+    "date": "2026-11-24",
     "build": ""
    },
    "started_at": "2026-11-24T07:08:19+00:00"
@@ -20059,6 +20050,11 @@
    "backlog": {
     "at": "2026-11-22",
     "from": "up"
+   },
+   "machine": {
+    "at": "2026-11-24T07:12:49+00:00",
+    "verdict": "yours",
+    "why": "a milestone: fun, pace and how the fights feel are your call"
    }
   },
   {
@@ -20681,7 +20677,12 @@
      "t": "Unblocked: Remove the old Guide path; free test run on GitHub is done."
     }
    ],
-   "build": "guideflow9"
+   "build": "guideflow9",
+   "machine": {
+    "at": "2026-11-24T07:12:49+00:00",
+    "verdict": "yours",
+    "why": "needs the real phone: touch and how the animation flow feels"
+   }
   },
   {
    "id": "t-wangaveup-stage-tom-jetwash-vid-r2",
@@ -20822,6 +20823,11 @@
    "backlog": {
     "at": "2026-11-22",
     "from": "up"
+   },
+   "machine": {
+    "at": "2026-11-24T07:12:49+00:00",
+    "verdict": "yours",
+    "why": "a milestone: fun, pace and how the fights feel are your call"
    }
   },
   {
@@ -20905,6 +20911,11 @@
    "backlog": {
     "at": "2026-11-22",
     "from": "up"
+   },
+   "machine": {
+    "at": "2026-11-24T07:12:49+00:00",
+    "verdict": "yours",
+    "why": "a milestone: fun, pace and how the fights feel are your call"
    }
   },
   {
