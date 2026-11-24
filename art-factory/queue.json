@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-24T04:03:45Z",
+  "updated_at": "2026-11-24T04:07:54Z",
   "items": [
     {
       "id": "tom_hero_0",
@@ -170,8 +170,10 @@
       "stage": "battle_move_draft",
       "move_id": "tom-ff-basic",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-ff-basic/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-ff-basic/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-basic/battle_alpha_safari_hvc1.mp4"
     }
   ]
 }
