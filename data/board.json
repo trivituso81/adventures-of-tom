@@ -21283,7 +21283,7 @@
    "title": "Battle stage 23b: Re-home the tables other systems borrow",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Slice 23b of the battle 2 purge: re-home the tables other systems borrow. 23a is shipped (engine/bt-shell.js); its history lists the leftover names. Ready to start.",
    "blocks": [
     "c-b3s23c"
@@ -21293,8 +21293,8 @@
    "tag": "b3s23b",
    "after": "nothing for Tom: c-b3s23c",
    "chat": {
-    "url": "",
-    "opening": "created by the b3s23 split"
+    "url": "https://claude.ai/code/session_01RXeukGZLxZREfsCLURqeTW",
+    "opening": "Tom (19:45): \"start c-b3s23b\""
    },
    "history": [
     {
@@ -21308,6 +21308,10 @@
     {
      "d": "2026-11-23",
      "t": "Unblocked: Stage 23a: Battle 3 gets its own shell (no battle 2 names) is done."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Started by Tom's \"start c-b3s23b\" in the conversation that shipped the Guide flow."
     }
    ],
    "prompt": {
