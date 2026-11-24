@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-24T06:27:16Z",
+  "updated_at": "2026-11-24T06:34:10Z",
   "items": [
     {
       "id": "tom_hero_0",
@@ -456,8 +456,10 @@
       "stage": "battle_move_draft",
       "move_id": "grace-sc-basic",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sc-basic/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sc-basic/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sc-basic/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "grace_battle_move_draft_grace-sc-s1",
@@ -465,8 +467,10 @@
       "stage": "battle_move_draft",
       "move_id": "grace-sc-s1",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s1/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s1/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s1/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "grace_battle_move_draft_grace-sc-s2",
@@ -474,8 +478,10 @@
       "stage": "battle_move_draft",
       "move_id": "grace-sc-s2",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s2/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s2/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s2/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "grace_battle_move_draft_grace-sc-cap",
@@ -483,8 +489,10 @@
       "stage": "battle_move_draft",
       "move_id": "grace-sc-cap",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sc-cap/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sc-cap/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sc-cap/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "grace_battle_move_draft_univ-pick-me-up",
@@ -492,8 +500,10 @@
       "stage": "battle_move_draft",
       "move_id": "univ-pick-me-up",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_univ-pick-me-up/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/grace/battle_move_draft_univ-pick-me-up/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_univ-pick-me-up/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "grace_battle_move_draft_univ-double-team",
@@ -501,8 +511,10 @@
       "stage": "battle_move_draft",
       "move_id": "univ-double-team",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_univ-double-team/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/grace/battle_move_draft_univ-double-team/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_univ-double-team/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "grace_battle_move_draft_univ-full-ruckus",
@@ -510,8 +522,10 @@
       "stage": "battle_move_draft",
       "move_id": "univ-full-ruckus",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_univ-full-ruckus/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/grace/battle_move_draft_univ-full-ruckus/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_univ-full-ruckus/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "grace_battle_move_draft_grace-ca-basic",
@@ -519,8 +533,10 @@
       "stage": "battle_move_draft",
       "move_id": "grace-ca-basic",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-ca-basic/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-ca-basic/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-basic/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "grace_battle_move_draft_grace-ca-s1",
@@ -528,8 +544,10 @@
       "stage": "battle_move_draft",
       "move_id": "grace-ca-s1",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s1/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s1/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s1/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "grace_battle_move_draft_grace-ca-s2",
@@ -537,8 +555,10 @@
       "stage": "battle_move_draft",
       "move_id": "grace-ca-s2",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "grace_battle_move_draft_grace-ca-s2_counter",
@@ -546,8 +566,10 @@
       "stage": "battle_move_draft",
       "move_id": "grace-ca-s2_counter",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2_counter/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2_counter/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2_counter/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "grace_battle_move_draft_grace-ca-cap",
@@ -555,8 +577,10 @@
       "stage": "battle_move_draft",
       "move_id": "grace-ca-cap",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-ca-cap/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-ca-cap/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-cap/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "grace_battle_move_draft_grace-sp-basic",
@@ -564,8 +588,10 @@
       "stage": "battle_move_draft",
       "move_id": "grace-sp-basic",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sp-basic/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sp-basic/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sp-basic/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "grace_battle_move_draft_grace-sp-s1",
@@ -573,8 +599,10 @@
       "stage": "battle_move_draft",
       "move_id": "grace-sp-s1",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s1/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s1/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s1/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "grace_battle_move_draft_grace-sp-s2",
@@ -582,8 +610,10 @@
       "stage": "battle_move_draft",
       "move_id": "grace-sp-s2",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s2/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s2/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s2/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "grace_battle_move_draft_grace-sp-cap",
@@ -591,8 +621,10 @@
       "stage": "battle_move_draft",
       "move_id": "grace-sp-cap",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sp-cap/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sp-cap/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sp-cap/battle_alpha_safari_hvc1.mp4"
     }
   ]
 }
