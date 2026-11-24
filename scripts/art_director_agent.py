@@ -20,6 +20,68 @@ def sanitize_prompt(text, banned_words):
         cleaned = re.sub(re.escape(w), "", cleaned, flags=re.IGNORECASE)
     return re.sub(r"\s+", " ", cleaned).strip()
 
+def normalize_backdrop_for_grey(text, bg_hex="#808080"):
+    if not text:
+        return ""
+    out = re.sub(
+        r"solid chroma-key green \(#00FF00\) background",
+        f"solid {bg_hex} mid-grey studio background",
+        text,
+        flags=re.IGNORECASE,
+    )
+    out = re.sub(r"chroma-key green", f"{bg_hex} mid-grey", out, flags=re.IGNORECASE)
+    out = re.sub(r"#00FF00", bg_hex, out, flags=re.IGNORECASE)
+    return out
+
+def load_move_manifest():
+    for candidate in (
+        Path("art-factory/aot-stage2-pass1-manifest-24fps.json"),
+        Path("art-factory/move-pitches.json"),
+    ):
+        if candidate.exists():
+            return json.loads(candidate.read_text(encoding="utf-8"))
+    return None
+
+def lookup_move_clip(move_id):
+    if not move_id:
+        return None
+    data = load_move_manifest()
+    if not data:
+        return None
+    is_counter = move_id.endswith("_counter")
+    base_id = move_id[:-8] if is_counter else move_id
+    for m in data.get("moves", []):
+        if m.get("id") == base_id:
+            clip = m.get("reactiveCounterClip") if is_counter else m.get("wanClip")
+            if clip:
+                return {
+                    "move": m,
+                    "clip": clip,
+                    "defaults": data.get("wanDefaults", {}),
+                }
+    return None
+
+def resolve_move_prompts(stage, char, cfg, move_id="", feedback=""):
+    bg_hex = cfg.get("bg_hex", "#808080")
+    found = lookup_move_clip(move_id)
+    if found:
+        clip = found["clip"]
+        defaults = found["defaults"]
+        pos = clip.get("positivePrompt", "")
+        pos = normalize_backdrop_for_grey(pos, bg_hex)
+        pos = pos.replace("Acting party member (swap per character reference image)", char["name"])
+        pos = pos.replace("Single acting character", char["name"])
+        if feedback and feedback.strip() and feedback.strip() not in pos:
+            clean_fb = normalize_backdrop_for_grey(feedback.strip(), bg_hex)
+            pos = f"{pos} Director notes: {clean_fb}"
+        pos = sanitize_prompt(pos, cfg["banned_words"])
+        neg_base = clip.get("negativePrompt") or defaults.get("negativePrompt") or ""
+        neg = f"{neg_base}, {ANTI_RING_NEG}".strip(", ")
+        return pos, neg
+    clean_fb = normalize_backdrop_for_grey(feedback, bg_hex)
+    pos = build_prompt(stage, char, cfg, move_id=move_id, feedback=clean_fb)
+    return pos, ANTI_RING_NEG
+
 def build_prompt(stage, char, cfg, move_id="", feedback="", extra_hint=""):
     lo, hi = [int(round(x * 100)) for x in char["head_ratio"]]
     base = f"{char['name']} ({char['height_in']} inches tall, head-to-body ratio {lo}%-{hi}%). {char.get('notes', '')} {cfg['style_lock']}"

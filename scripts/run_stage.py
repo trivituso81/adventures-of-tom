@@ -10,7 +10,7 @@ import fal_client
 from google import genai
 from google.genai import types
 from PIL import Image
-from art_director_agent import ANTI_RING_NEG, IDLE_NEG, build_prompt, describe_child_geometry, get_character, load_manifest
+from art_director_agent import ANTI_RING_NEG, IDLE_NEG, build_prompt, describe_child_geometry, get_character, load_manifest, resolve_move_prompts
 from qa_judge_agent import judge_candidate
 
 def load_queue(path):
@@ -170,8 +170,8 @@ def generate_video_item(stage, char, cfg, move_id, feedback, hero_src):
     print(f"[video:{char['id']}] source hero={hero_src}", flush=True)
     clean_src = prep_video_source(hero_src, out_dir, cfg)
     img_url = fal_client.upload_file(str(clean_src))
-    prompt = build_prompt(stage, char, cfg, move_id=move_id, feedback=feedback)
     if stage == "battle_idle":
+        prompt = build_prompt(stage, char, cfg, move_id=move_id, feedback=feedback)
         print(f"[video:{char['id']}] calling {cfg['models']['video_idle']} (4s, audio off)", flush=True)
         try:
             res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "negative_prompt": IDLE_NEG, "start_image_url": img_url, "end_image_url": img_url, "duration": "4", "generate_audio": False})
@@ -180,8 +180,13 @@ def generate_video_item(stage, char, cfg, move_id, feedback, hero_src):
             res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "negative_prompt": IDLE_NEG, "start_image_url": img_url, "duration": "4", "generate_audio": False})
     else:
         res_tag = "480p" if stage == "battle_move_draft" else "1080p"
-        print(f"[video:{char['id']}] calling {cfg['models']['video_move']} ({res_tag})", flush=True)
-        res = fal_client.subscribe(cfg["models"]["video_move"], arguments={"prompt": prompt, "negative_prompt": ANTI_RING_NEG, "start_image_url": img_url, "resolution": res_tag})
+        prompt, neg_prompt = resolve_move_prompts(stage, char, cfg, move_id=move_id, feedback=feedback)
+        print(f"[video:{char['id']}] calling {cfg['models']['video_move']} ({res_tag}, move={move_id or 'custom'})", flush=True)
+        try:
+            res = fal_client.subscribe(cfg["models"]["video_move"], arguments={"prompt": prompt, "negative_prompt": neg_prompt, "start_image_url": img_url, "resolution": res_tag})
+        except Exception as e1:
+            print(f"[video:{char['id']}] wan image_url retry: {e1}", flush=True)
+            res = fal_client.subscribe(cfg["models"]["video_move"], arguments={"prompt": prompt, "negative_prompt": neg_prompt, "image_url": img_url, "resolution": res_tag})
     vid_url = res.get("video", {}).get("url") or res.get("url")
     print(f"[video:{char['id']}] generated raw video={vid_url}", flush=True)
     try:
@@ -247,9 +252,12 @@ def run_approve(char_id, cand_idx, feedback, cfg, queue):
     target_stage = feedback.strip() or "hero"
     matches = [i for i in queue["items"] if i["character_id"] == char_id and i["stage"] == target_stage and str(i.get("candidate_index", 0)) == str(cand_idx)]
     if not matches:
+        matches = [i for i in queue["items"] if i["character_id"] == char_id and i["id"].endswith(target_stage)]
+    if not matches:
         raise RuntimeError(f"No queued candidate for {char_id}/{target_stage} idx={cand_idx}")
     it = matches[0]
-    dst_dir = Path(cfg["output_dir"]) / char_id / target_stage
+    slug = f"{it['stage']}_{it['move_id']}" if it.get("move_id") else it["stage"]
+    dst_dir = Path(cfg["output_dir"]) / char_id / slug
     dst_dir.mkdir(parents=True, exist_ok=True)
     for k, name in [("rgba_path", "approved_rgba.png"), ("raw_path", "approved_raw.png"), ("webm_path", "approved.webm"), ("safari_mp4_path", "approved_safari_hvc1.mp4")]:
         if it.get(k) and Path(it[k]).exists():
