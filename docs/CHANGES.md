@@ -1,3 +1,7 @@
+## board-b3s23split (2026-11-23): the battle 2 purge is split into five ordered cards
+
+Card c-b3s23. Tom (11-22): "Yes, delete battle 2 and its leftovers as the plan lists". Fact: the gate checks passed (chapters 1 to 21 are on B3_STORY.chapters, c-b3s22ch12 to c-b3s22ch20 are Done), but the purge touches about 1 MB of battle 2 code and about 3,000 references in 266 files, and Battle 3 still reads battle 2 names (b2Esc, b2Thumb, b2Portrait, b2CanvasPt, b2Meter, b2BattleDef, b2Purse, startBattle, B2.result), so one change would leave the live game broken. Nothing was deleted. New cards c-b3s23a (Battle 3 shell), c-b3s23b (tables), c-b3s23c (story path), c-b3s23d (engine delete), c-b3s23e (voice, files, final check, Milestone card), each Sonnet 5.5, in order; c-b3s23 and the stuck card t-stuck-b3s23 are retired. Facts and rules: claude/next-addendum-b3s23.md. Smoke fact: board_sync_test board4 'board_check accepts a Tom card waiting on its fix' already fails on main.
+
 ## guideflow7 (2026-11-23): Use this one in the Battle Guide is now one batched job that only says In the game after it checked the files are on main
 
 Card c-guideflow-7 (plan `claude/guide-flow-plan.md` section 10 step 7: D4, D9, D10, X17 to X19, T9). The old `guide-use` Action and `data/guide-use.json` are deleted. Tapping Use this one now sets `use: wanted` on the take's row in `queue.json` (branch `guideq`) and pokes the new `guide-apply` Action (repository dispatch, plus a 10 minute timer that exits cheaply when nothing is wanted).

@@ -16812,8 +16812,8 @@
    "title": "Battle stage 23: purge battle 2 and Kindness",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
-   "next": "Waits on the nine chapter cards c-b3s22ch12 to c-b3s22ch20 (chapters 12 to 20 onto Battle 3). Tom's yes on t-b3s23-confirm is in. Start it when the last of them ships, then run the prompt.",
+   "col": "done",
+   "next": "Split into c-b3s23a to c-b3s23e (ordered slices). Retired: this card ended without shipping as one change.",
    "blocks": [],
    "changed": "2026-11-23",
    "created": "2026-11-22",
@@ -16870,6 +16870,11 @@
     {
      "d": "2026-11-23",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "ended without shipping as one change: the gate checks passed (chapters 1 to 21 on B3_STORY.chapters, c-b3s22ch12 to ch20 Done, Tom's yes on t-b3s23-confirm is in), but the purge touches about 1 MB of battle 2 code and 3,000 references in 266 files, and Battle 3 still reads battle 2 names (b2Esc, b2Thumb, b2Portrait, b2CanvasPt, b2Meter, b2BattleDef, b2Purse, startBattle, B2.result). One change would leave the live game broken. Split into c-b3s23a to c-b3s23e (shell, tables, story path, engine delete, voice and files with the final check); facts in claude/next-addendum-b3s23.md. This session's start commit was labelled with a mistyped Claude-Session id, so the chat link may be missing: https://claude.ai/code/session_01RXeukSjhwv6A84RqoDUvYS",
+     "at": "2026-11-23T17:30:00.000Z"
     }
    ],
    "started_at": "2026-11-22T20:42:04+00:00",
@@ -16883,7 +16888,8 @@
     "why": "A session ended without shipping",
     "url": "https://claude.ai/code/cse_01RXeukCdg3iThUrSmL1Dbc3",
     "prev": "https://claude.ai/code/cse_01RXeukDNsLWPpd5nBjmXzvJ"
-   }
+   },
+   "done": "2026-11-23"
   },
   {
    "id": "t-b3s23-confirm",
@@ -16902,7 +16908,7 @@
    ],
    "next": "Tap one answer. Yes lets the card Battle stage 23 (c-b3s23) start once the Part 2 chapters are built. No keeps the old battle 2 files until you say otherwise.",
    "blocks": [
-    "c-b3s23"
+    "c-b3s23a"
    ],
    "changed": "2026-11-22",
    "created": "2026-11-22",
@@ -18541,7 +18547,7 @@
    "col": "done",
    "next": "Build ONLY chapter 20 on Battle 3: Blue Lens and Orange Lens (Special), The Collector (Boss). Starts after chapter 19 is switched on.",
    "blocks": [
-    "c-b3s23"
+    "c-b3s23a"
    ],
    "changed": "2026-11-23",
    "created": "2026-11-22",
@@ -21139,7 +21145,7 @@
    "title": "Stuck twice: Battle stage 23: purge battle 2 and Kindness",
    "next": "Card c-b3s23 (Battle stage 23: purge battle 2 and Kindness) stalled again after its one automatic rescue. The rescue started 12:42 PM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it.",
    "blocks": [
-    "c-b3s23"
+    "c-b3s23a"
    ],
    "chat": {
     "url": "",
@@ -21158,6 +21164,178 @@
    "created": "2026-11-23",
    "changed": "2026-11-23",
    "done": "2026-11-23"
+  },
+  {
+   "id": "c-b3s23a",
+   "title": "Stage 23a: Battle 3 gets its own shell (no battle 2 names)",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Slice 23a of the battle 2 purge: Battle 3 gets its own shell (no battle 2 names). Ready to start: the gate checks passed and Tom's yes is in.",
+   "blocks": [
+    "c-b3s23b"
+   ],
+   "changed": "2026-11-23",
+   "created": "2026-11-23",
+   "tag": "b3s23a",
+   "after": "nothing for Tom: c-b3s23b",
+   "chat": {
+    "url": "",
+    "opening": "created by the b3s23 split"
+   },
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Created by the session that took c-b3s23: the purge is too large for one change (about 1 MB of battle 2 code, 3,000 references in 266 files, and Battle 3 still borrows a dozen battle 2 helpers), so it is five ordered slices. Facts and rules: claude/next-addendum-b3s23.md."
+    }
+   ],
+   "prompt": {
+    "what": "Slice 23a of the battle 2 purge (Battle 3 gets its own shell (no battle 2 names))",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a refactor across about 40 files with the list not yet written, tests catch mistakes)",
+    "effort": "high (many files with no written list of callers)",
+    "text": "Read claude/battle-architecture.md section 5 row 23, claude/next-addendum-b3s23.md (the facts, the five slices and the rules for every slice) and the history of cards c-b3s23 and the card before this one. Tom's yes on t-b3s23-confirm is in: do not ask again. Rules: purge completely (CLAUDE.md), never edit demo/, never edit a recorded voice line, no animation work, add a docs/CHANGES.md heading for the build tag and run python3 tools/art-library/bump_tags.py b3s23a --base origin/main on every push. Verify by loading the page (python3 tools/serve.py, headless Chromium, no ReferenceError or pageerror) as well as by grep. Every push ends green: node tools/b3-sim.js check, python3 tools/b3_test.py, python3 tools/b3_story_test.py, python3 tools/smoke.py (its one known failure on main before this work is board_sync_test board4 'board_check accepts a Tom card waiting on its fix'; do not fix it here, name it), python3 -I tools/clip-audit/unused_voice.py (all 0). Slice 23a. Create engine/bt-shell.js with what Battle 3 really borrows from battle 2 under neutral names (btEsc, btThumb, btPortrait, btCanvasPt, btMeter, btMeterTag, BT_METER, btBattleDef, btPurse, the one fight door `startBattle`'s Battle 3 part, BT.result) by moving the code, not copying it. Change every engine/b3-*.js and data/b3-*.js file, engine/battle-draw.js, engine/battle-pictures.js and engine/clips.js to the new names, load bt-shell.js before the Battle 3 files in index.html, and find any other borrowed name by running the page. Find the full list first with the dependency script described in claude/next-addendum-b3s23.md (names defined in engine/battle2*.js and data/battle2-data.js, read by a b3 file or by a shared engine file the Battle 3 screen loads). Delete nothing yet. Battle 2 must still work (Settings OLD on a save). Result: a list of every name moved, and the proof that `git grep -I -E 'b2|B2|battle2' -- 'engine/b3-*.js' 'data/b3-*.js'` is empty apart from prose comments you also reworded. Write the result into this card's history, and if the next slice's work is already done by this one, say so on the next card. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-b3s23b",
+   "title": "Battle stage 23b: Re-home the tables other systems borrow",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "wait",
+   "next": "Slice 23b of the battle 2 purge: Re-home the tables other systems borrow. Starts after c-b3s23a ships.",
+   "blocks": [
+    "c-b3s23c"
+   ],
+   "changed": "2026-11-23",
+   "created": "2026-11-23",
+   "tag": "b3s23b",
+   "after": "nothing for Tom: c-b3s23c",
+   "chat": {
+    "url": "",
+    "opening": "created by the b3s23 split"
+   },
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Created by the session that took c-b3s23: the purge is too large for one change (about 1 MB of battle 2 code, 3,000 references in 266 files, and Battle 3 still borrows a dozen battle 2 helpers), so it is five ordered slices. Facts and rules: claude/next-addendum-b3s23.md."
+    }
+   ],
+   "prompt": {
+    "what": "Slice 23b of the battle 2 purge (Re-home the tables other systems borrow)",
+    "before": [
+     "Card c-b3s23a must have shipped. Nothing else."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: written steps in the slice list, tests and a save-load check catch mistakes)",
+    "effort": "medium (the steps are written)",
+    "text": "Read claude/battle-architecture.md section 5 row 23, claude/next-addendum-b3s23.md (the facts, the five slices and the rules for every slice) and the history of cards c-b3s23 and the card before this one. Tom's yes on t-b3s23-confirm is in: do not ask again. Rules: purge completely (CLAUDE.md), never edit demo/, never edit a recorded voice line, no animation work, add a docs/CHANGES.md heading for the build tag and run python3 tools/art-library/bump_tags.py b3s23b --base origin/main on every push. Verify by loading the page (python3 tools/serve.py, headless Chromium, no ReferenceError or pageerror) as well as by grep. Every push ends green: node tools/b3-sim.js check, python3 tools/b3_test.py, python3 tools/b3_story_test.py, python3 tools/smoke.py (its one known failure on main before this work is board_sync_test board4 'board_check accepts a Tom card waiting on its fix'; do not fix it here, name it), python3 -I tools/clip-audit/unused_voice.py (all 0). Slice 23b. Move to Battle 3 or neutral homes everything that data/party.js, data/progress.js, data/abilities.js, data/lines.js, data/battle-sprites.js, data/battle-emoji.js, data/battle-icons.js, engine/progress.js, engine/m2-*.js, engine/stage.js, engine/town-render.js, engine/painted.js and data/b3-tombo-skins.js read from battle 2 (B2_STATS, B2_STAT_KEYS, B2_SKILLS, B2_ELEMS, B2_FLYERS, B2_TOMBOS ids, b2Stat, b2FoeDef, b2Kit and the like). Keep every Tombo id and story flag name `tombo:the id` unchanged. Old save fields (stamps, ranks, remix, loadouts, HEART, Tombo flags) are ignored on load, never erased from a save. Delete nothing that the Old path still calls. Result: the list of names moved and a save-load test (an old save and a new save both load, nothing is erased). Write the result into this card's history, and if the next slice's work is already done by this one, say so on the next card. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "waiting_on": "claude"
+  },
+  {
+   "id": "c-b3s23c",
+   "title": "Battle stage 23c: Remove the Old battle path from the story",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "wait",
+   "next": "Slice 23c of the battle 2 purge: Remove the Old battle path from the story. Starts after c-b3s23b ships.",
+   "blocks": [
+    "c-b3s23d"
+   ],
+   "changed": "2026-11-23",
+   "created": "2026-11-23",
+   "tag": "b3s23c",
+   "after": "nothing for Tom: c-b3s23d",
+   "chat": {
+    "url": "",
+    "opening": "created by the b3s23 split"
+   },
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Created by the session that took c-b3s23: the purge is too large for one change (about 1 MB of battle 2 code, 3,000 references in 266 files, and Battle 3 still borrows a dozen battle 2 helpers), so it is five ordered slices. Facts and rules: claude/next-addendum-b3s23.md."
+    }
+   ],
+   "prompt": {
+    "what": "Slice 23c of the battle 2 purge (Remove the Old battle path from the story)",
+    "before": [
+     "Card c-b3s23b must have shipped. Nothing else."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a change that crosses many scene and engine files, the branch list is not written)",
+    "effort": "high (many files with no written list of callers)",
+    "text": "Read claude/battle-architecture.md section 5 row 23, claude/next-addendum-b3s23.md (the facts, the five slices and the rules for every slice) and the history of cards c-b3s23 and the card before this one. Tom's yes on t-b3s23-confirm is in: do not ask again. Rules: purge completely (CLAUDE.md), never edit demo/, never edit a recorded voice line, no animation work, add a docs/CHANGES.md heading for the build tag and run python3 tools/art-library/bump_tags.py b3s23c --base origin/main on every push. Verify by loading the page (python3 tools/serve.py, headless Chromium, no ReferenceError or pageerror) as well as by grep. Every push ends green: node tools/b3-sim.js check, python3 tools/b3_test.py, python3 tools/b3_story_test.py, python3 tools/smoke.py (its one known failure on main before this work is board_sync_test board4 'board_check accepts a Tom card waiting on its fix'; do not fix it here, name it), python3 -I tools/clip-audit/unused_voice.py (all 0). Slice 23c. Make Battle 3 the only battle. Remove the BY CHAPTER switch (`B3_STORY`, `B3_CH_ON`) as a switch: every `B3_CH_ON(n)` wording becomes the Battle 3 wording alone, every Old branch in data/scenes*.js, engine/story.js, engine/main.js, engine/splash.js, engine/feel.js, engine/benchcall.js, engine/ch20-render.js and data/bonus-nine-scoops.js is deleted, SCENES.ch20Fight2 and the Julian A-press fight go (SCENES.ch20Care stays), the OLD choice and Story battles section in ADMIN go, the old fight data files (data/ch12-battle.js to data/ch20-battle.js, data/p2-battle.js and any other file that only holds Old fight data) and the old Battle Lab fights and the b2Lab screen go, and their script tags in index.html. Recorded lines are never edited: a line only Old played becomes unused and 23e purges it. Chapters 1 to 20 and the bonus chapter must each play from Chapter Select (tools/ch11_b3_test.py to ch20_b3_test.py, the chapter 1 to 10 tests, the bonus test) in portrait and landscape. engine/battle2*.js stays loaded but nothing calls it from the story. Write the result into this card's history, and if the next slice's work is already done by this one, say so on the next card. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "waiting_on": "claude"
+  },
+  {
+   "id": "c-b3s23d",
+   "title": "Stage 23d: Delete the battle 2 engine and its leftovers",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "wait",
+   "next": "Slice 23d of the battle 2 purge: Delete the battle 2 engine and its leftovers. Starts after c-b3s23c ships.",
+   "blocks": [
+    "c-b3s23e"
+   ],
+   "changed": "2026-11-23",
+   "created": "2026-11-23",
+   "tag": "b3s23d",
+   "after": "nothing for Tom: c-b3s23e",
+   "chat": {
+    "url": "",
+    "opening": "created by the b3s23 split"
+   },
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Created by the session that took c-b3s23: the purge is too large for one change (about 1 MB of battle 2 code, 3,000 references in 266 files, and Battle 3 still borrows a dozen battle 2 helpers), so it is five ordered slices. Facts and rules: claude/next-addendum-b3s23.md."
+    }
+   ],
+   "prompt": {
+    "what": "Slice 23d of the battle 2 purge (Delete the battle 2 engine and its leftovers)",
+    "before": [
+     "Card c-b3s23c must have shipped. Nothing else."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: wide deletion where the leftover callers are found by running the page)",
+    "effort": "high (many files with no written list of callers)",
+    "text": "Read claude/battle-architecture.md section 5 row 23, claude/next-addendum-b3s23.md (the facts, the five slices and the rules for every slice) and the history of cards c-b3s23 and the card before this one. Tom's yes on t-b3s23-confirm is in: do not ask again. Rules: purge completely (CLAUDE.md), never edit demo/, never edit a recorded voice line, no animation work, add a docs/CHANGES.md heading for the build tag and run python3 tools/art-library/bump_tags.py b3s23d --base origin/main on every push. Verify by loading the page (python3 tools/serve.py, headless Chromium, no ReferenceError or pageerror) as well as by grep. Every push ends green: node tools/b3-sim.js check, python3 tools/b3_test.py, python3 tools/b3_story_test.py, python3 tools/smoke.py (its one known failure on main before this work is board_sync_test board4 'board_check accepts a Tom card waiting on its fix'; do not fix it here, name it), python3 -I tools/clip-audit/unused_voice.py (all 0). Slice 23d. Delete engine/battle2.js, battle2-ui.js, battle2-kind.js, battle2-moves.js, battle2-traits.js, battle2-effects.js and data/battle2-data.js, the old per-character move animation files (engine/tom-moves.js, grace-moves.js, rose-moves.js, amy-moves.js, deedee-moves.js, boppy-moves.js, tnb-moves.js, justin-moves.js, olivia-moves.js, recruit-moves.js, nara.js and any other file only the Old battle drew), Stampcards (the shell in engine/progress.js and the old pages), Kindness in battle (Warmth bars, likes, HEART, praise, calm wins, Kindness Scrapbook flags; engine/boss-finale.js boss ending scenes stay as the scene after 0 HP), Director's Cuts, Family Finishes, the Tombo rows and animations of battle 2 (the Tombo ids, story flags and the Battle 3 skins stay), and their script tags in index.html, the service worker list and tag checks. Check by loading the page and by grep: `git grep -I -E 'b2|B2|B8|battle2' -- engine data index.html` must return nothing (excluding data/board*.json, data/build-archive, data/build-history.js, data/voice-index.json and prose you reword). Old saves still load (old fields ignored). Every chapter test passes in portrait and landscape. Do not delete the files in `art/raw/` or Tom's saved-data files. Write the result into this card's history, and if the next slice's work is already done by this one, say so on the next card. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "waiting_on": "claude"
+  },
+  {
+   "id": "c-b3s23e",
+   "title": "Stage 23e: Purge lines, clips, tools and docs; final check",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "wait",
+   "next": "Slice 23e of the battle 2 purge: Purge lines, clips, tools and docs; final check. Starts after c-b3s23d ships.",
+   "blocks": [],
+   "changed": "2026-11-23",
+   "created": "2026-11-23",
+   "tag": "b3s23e",
+   "after": "nothing for Tom: end",
+   "chat": {
+    "url": "",
+    "opening": "created by the b3s23 split"
+   },
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Created by the session that took c-b3s23: the purge is too large for one change (about 1 MB of battle 2 code, 3,000 references in 266 files, and Battle 3 still borrows a dozen battle 2 helpers), so it is five ordered slices. Facts and rules: claude/next-addendum-b3s23.md."
+    }
+   ],
+   "prompt": {
+    "what": "Slice 23e of the battle 2 purge (Purge lines, clips, tools and docs; final check)",
+    "before": [
+     "Card c-b3s23d must have shipped. Nothing else."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps and checks are written, tests catch mistakes)",
+    "effort": "medium (the steps are written)",
+    "text": "Read claude/battle-architecture.md section 5 row 23, claude/next-addendum-b3s23.md (the facts, the five slices and the rules for every slice) and the history of cards c-b3s23 and the card before this one. Tom's yes on t-b3s23-confirm is in: do not ask again. Rules: purge completely (CLAUDE.md), never edit demo/, never edit a recorded voice line, no animation work, add a docs/CHANGES.md heading for the build tag and run python3 tools/art-library/bump_tags.py b3s23e --base origin/main on every push. Verify by loading the page (python3 tools/serve.py, headless Chromium, no ReferenceError or pageerror) as well as by grep. Every push ends green: node tools/b3-sim.js check, python3 tools/b3_test.py, python3 tools/b3_story_test.py, python3 tools/smoke.py (its one known failure on main before this work is board_sync_test board4 'board_check accepts a Tom card waiting on its fix'; do not fix it here, name it), python3 -I tools/clip-audit/unused_voice.py (all 0). Slice 23e. Run python3 tools/clip-audit/unused_voice.py and purge every unused line and clip it lists (node tools/clip-audit/purge_unused.js with the spec file unused_voice.py names, using --apply, remove the lines from data/lines.js, python3 tools/voice-library/battle-scripts.py and node tools/voice-library/make-index.js, bump the ?v= tags, record in docs/PURGED_VOICE.md and docs/CHANGES.md); then delete the tests, tools, Art Library prompt files (tools/art-library/tombo-prompts.js and tombo-split, dc-prompts.js and the like only when no Library entry still needs them), docs and claude/ notes that only describe battle 2, rebuild claude/INDEX.md (python3 tools/claude_index.py) and the Voice Library index. Then run: python3 tools/clip-audit/unused_voice.py (all checks 0), git grep -I for B2, b2 and B8 (zero outside demo/; state the exact excluded paths), node tools/b3-sim.js check, python3 tools/smoke.py. Look at Chapter Select in portrait and landscape and say what you saw. Write the result into this card's history and into c-b3s23's history, then end the battle system card series with a Tom Milestone card: the whole game on Battle 3 (ask play, fyi true, jump {chapter: 1}, next naming the screen and what to judge: fun, pace, readable screen and turn bar, fight length, kits that feel like the family; no animations; `after` of this card points to it). Write the result into this card's history, and if the next slice's work is already done by this one, say so on the next card. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "waiting_on": "claude"
   }
  ],
  "sessions": [
