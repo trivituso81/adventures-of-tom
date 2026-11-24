@@ -1,4 +1,34 @@
 {
  "v": 1,
- "items": {}
+ "items": {
+  "p-test-1795488907": {
+   "lane": "pic",
+   "who": "test",
+   "take": 0,
+   "route": "",
+   "prompt": "",
+   "promptRev": 0,
+   "start": "",
+   "note": "",
+   "cap": 0.3,
+   "at": "2026-11-24T02:55:07Z",
+   "state": "queued",
+   "since": "2026-11-24T02:55:07Z",
+   "run": 0,
+   "fal": null,
+   "svc": null,
+   "tries": 0,
+   "cost": 0,
+   "why": "",
+   "do": "",
+   "result": null,
+   "use": null,
+   "left": false,
+   "dry": true,
+   "replay": "",
+   "id": "p-test-1795488907",
+   "kind": "picture",
+   "anim": "start:test"
+  }
+ }
 }
