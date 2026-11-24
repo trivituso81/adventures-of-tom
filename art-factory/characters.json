@@ -8,7 +8,7 @@
     "tom_hero_path": "art-factory/refs/tom-hero.png",
     "queue_path": "art-factory/queue.json",
     "import_move_pitch_json": true,
-    "style_lock": "Hand-drawn storybook RPG character concept art: large head (about 4 heads tall), small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm matching the character's age. Illustrated painting with dark ink and sketchy pencil contour lines, hatching, chunky brushed shading in a few clear tones, mottled colored-pencil shading, visible paper grain, rich warm jewel-toned colors, warm golden light from upper-left. Not clean digital art, no smooth airbrushed 3D shading. Flat #808080 mid-grey studio background.",
+    "style_lock": "Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background.",
     "banned_words": ["16-bit","32-bit","8-bit","SNES","Final Fantasy","pixel art","retro","sprite","hurt","knocked out"],
     "adult_face_height_tolerance": 0.04,
     "max_self_heal_retries": 3,
@@ -27,11 +27,11 @@
     }
   },
   "cast": [
-    { "id":"tom", "name":"Tom", "group":"adult", "height_in":71, "head_ratio":[0.21,0.24], "anchor":true, "notes":"Baseline adult face height reference; beard, horizontal left-to-right hair." },
+    { "id":"tom", "name":"Tom", "group":"adult", "height_in":71, "head_ratio":[0.21,0.24], "anchor":true, "notes":"Baseline adult face height reference; short trimmed beard, hair combed horizontally left to right. Outfit: dark indigo-purple short-sleeve t-shirt with small classic game controller graphic on chest, brown leather belt, olive-brown utility pants, dark wristwatch on left wrist, sturdy cream sneakers." },
     { "id":"tnb", "name":"TNB", "group":"adult", "height_in":70, "head_ratio":[0.21,0.24], "notes":"Spring Street ceramicist and LA longboarder." },
     { "id":"amy", "name":"Amy", "group":"adult", "height_in":65, "head_ratio":[0.21,0.24], "notes":"Fitness Queen and elementary Special Ed teacher." },
-    { "id":"justin", "name":"Justin", "group":"adult", "height_in":76, "head_ratio":[0.21,0.24], "notes":"6'4\" lineman and DIY renovator." },
-    { "id":"michael", "name":"Michael", "group":"adult", "height_in":76, "head_ratio":[0.21,0.24], "notes":"6'4\" holding 2 toddlers (Lachlan and Isla) as 1 unified figure." },
+    { "id":"justin", "name":"Justin", "group":"adult", "height_in":76, "head_ratio":[0.21,0.24], "notes":"6 ft 4 in lineman and DIY renovator." },
+    { "id":"michael", "name":"Michael", "group":"adult", "height_in":76, "head_ratio":[0.21,0.24], "notes":"6 ft 4 in holding 2 toddlers (Lachlan and Isla) as 1 unified figure." },
     { "id":"olivia", "name":"Olivia", "group":"adult", "height_in":68, "head_ratio":[0.21,0.24], "notes":"News anchor, working mom, jump-rope champ." },
     { "id":"deedee", "name":"Deedee", "group":"adult", "height_in":65, "head_ratio":[0.21,0.24], "notes":"Retired nurse matriarch; warm apple muffins." },
     { "id":"boppy", "name":"Boppy", "group":"adult", "height_in":67, "head_ratio":[0.21,0.24], "notes":"Always wearing fishing rod and creel at all times, indoors and outdoors." },

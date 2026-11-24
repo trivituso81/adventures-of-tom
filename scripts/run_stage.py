@@ -35,13 +35,13 @@ def build_ref_contents(prompt, char, cfg):
     tom_p = Path(cfg["tom_hero_path"])
     char_p = Path(cfg["refs_dir"]) / f"{char['id']}.png"
     if style_p.exists():
-        contents.append("GAME STYLE REFERENCE (paint by this exact hand: sketchy pencil and ink contour lines, hatching, chunky brushed shading, mottled colored-pencil texture, visible paper grain. Do NOT copy the background color):")
+        contents.append("GAME STYLE REFERENCE (replicate this EXACT hand-painted art style: bold dark ink contour lines, chunky brushed shading in clear tones, warm golden top-left light, rich saturated colors, large gentle simplified eyes, and ~4-heads-tall storybook proportions. Ignore its magenta background; use flat #808080 mid-grey):")
         contents.append(Image.open(style_p))
     if tom_p.exists() and (not style_p.exists() or tom_p.read_bytes() != style_p.read_bytes()):
-        contents.append("PROPORTION ANCHOR CHARACTER (match head scale and hand-drawn finish; do NOT copy face, hair, clothes, or background color):")
+        contents.append("PROPORTION ANCHOR CHARACTER (match head scale and painted finish; do NOT copy face, hair, clothes, or background color):")
         contents.append(Image.open(tom_p))
     if char_p.exists():
-        contents.append("SUBJECT PHOTO OF THE CHARACTER TO PAINT (translate key facial features, hair, age, and vibe into the hand-drawn concept art style above):")
+        contents.append("SUBJECT PHOTO OF THE PERSON TO PAINT (extract only facial likeness, hair, and age; translate into the exact bold-outline chunky painted style above, and follow the specified outfit):")
         contents.append(Image.open(char_p))
     contents.append(prompt)
     return contents
