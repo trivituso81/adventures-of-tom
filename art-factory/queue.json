@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-24T04:21:17Z",
+  "updated_at": "2026-11-24T04:53:21Z",
   "items": [
     {
       "id": "tom_hero_0",
@@ -170,10 +170,89 @@
       "stage": "battle_idle",
       "move_id": "",
       "raw_video_path": "art-factory/staging/tom/battle_idle/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/tom/battle_idle/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_idle/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "tnb_battle_idle",
+      "character_id": "tnb",
+      "stage": "battle_idle",
+      "move_id": "",
+      "raw_video_path": "art-factory/staging/tnb/battle_idle/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "amy_battle_idle",
+      "character_id": "amy",
+      "stage": "battle_idle",
+      "move_id": "",
+      "raw_video_path": "art-factory/staging/amy/battle_idle/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "justin_battle_idle",
+      "character_id": "justin",
+      "stage": "battle_idle",
+      "move_id": "",
+      "raw_video_path": "art-factory/staging/justin/battle_idle/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "olivia_battle_idle",
+      "character_id": "olivia",
+      "stage": "battle_idle",
+      "move_id": "",
+      "raw_video_path": "art-factory/staging/olivia/battle_idle/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "deedee_battle_idle",
+      "character_id": "deedee",
+      "stage": "battle_idle",
+      "move_id": "",
+      "raw_video_path": "art-factory/staging/deedee/battle_idle/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "boppy_battle_idle",
+      "character_id": "boppy",
+      "stage": "battle_idle",
+      "move_id": "",
+      "raw_video_path": "art-factory/staging/boppy/battle_idle/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "grace_battle_idle",
+      "character_id": "grace",
+      "stage": "battle_idle",
+      "move_id": "",
+      "raw_video_path": "art-factory/staging/grace/battle_idle/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "rose_battle_idle",
+      "character_id": "rose",
+      "stage": "battle_idle",
+      "move_id": "",
+      "raw_video_path": "art-factory/staging/rose/battle_idle/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "nara_battle_idle",
+      "character_id": "nara",
+      "stage": "battle_idle",
+      "move_id": "",
+      "raw_video_path": "art-factory/staging/nara/battle_idle/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
     }
   ]
 }
