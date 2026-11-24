@@ -21336,9 +21336,44 @@
     "text": "Read claude/battle-architecture.md section 5 row 23, claude/next-addendum-b3s23.md (the facts, the five slices and the rules for every slice) and the history of cards c-b3s23 and the card before this one. Tom's yes on t-b3s23-confirm is in: do not ask again. Rules: purge completely (CLAUDE.md), never edit demo/, never edit a recorded voice line, no animation work, add a docs/CHANGES.md heading for the build tag and run python3 tools/art-library/bump_tags.py b3s23e --base origin/main on every push. Verify by loading the page (python3 tools/serve.py, headless Chromium, no ReferenceError or pageerror) as well as by grep. Every push ends green: node tools/b3-sim.js check, python3 tools/b3_test.py, python3 tools/b3_story_test.py, python3 tools/smoke.py (its one known failure on main before this work is board_sync_test board4 'board_check accepts a Tom card waiting on its fix'; do not fix it here, name it), python3 -I tools/clip-audit/unused_voice.py (all 0). Slice 23e. Run python3 tools/clip-audit/unused_voice.py and purge every unused line and clip it lists (node tools/clip-audit/purge_unused.js with the spec file unused_voice.py names, using --apply, remove the lines from data/lines.js, python3 tools/voice-library/battle-scripts.py and node tools/voice-library/make-index.js, bump the ?v= tags, record in docs/PURGED_VOICE.md and docs/CHANGES.md); then delete the tests, tools, Art Library prompt files (tools/art-library/tombo-prompts.js and tombo-split, dc-prompts.js and the like only when no Library entry still needs them), docs and claude/ notes that only describe battle 2, rebuild claude/INDEX.md (python3 tools/claude_index.py) and the Voice Library index. Then run: python3 tools/clip-audit/unused_voice.py (all checks 0), git grep -I for B2, b2 and B8 (zero outside demo/; state the exact excluded paths), node tools/b3-sim.js check, python3 tools/smoke.py. Look at Chapter Select in portrait and landscape and say what you saw. Write the result into this card's history and into c-b3s23's history, then end the battle system card series with a Tom Milestone card: the whole game on Battle 3 (ask play, fyi true, jump {chapter: 1}, next naming the screen and what to judge: fun, pace, readable screen and turn bar, fight length, kits that feel like the family; no animations; `after` of this card points to it). Write the result into this card's history, and if the next slice's work is already done by this one, say so on the next card. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "waiting_on": "claude"
+  },
+  {
+   "id": "b-board-b3s23split",
+   "tag": "board-b3s23split",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-23",
+   "theme": "Battle System",
+   "title": "the battle 2 purge is split into five ordered cards",
+   "next": "Done: the battle 2 purge is split into five ordered cards",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukSjhwv6A84RqoDUvYS",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Shipped as board-b3s23split. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-23",
+   "changed": "2026-11-23"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukSjhwv6A84RqoDUvYS",
+   "title": "Battle stage 23: purge battle 2 and Kindness",
+   "first": "2026-11-23T16:21:39-08:00",
+   "last": "2026-11-23T16:21:39-08:00",
+   "tags": [
+    "board-b3s23split"
+   ],
+   "cards": [
+    "c-b3s23"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukHFArSRw6d9FDNzjut",
    "title": "Build the move stage and Move Lab for Tom's eight moves",
@@ -27557,8 +27592,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "c5f883105d07cee72a5da81d91850cfe9a44fc14",
- "synced_at": "2026-11-24T00:08:52+00:00",
+ "synced": "4ea02df001e104d8e47456498b47ea1d88451ebb",
+ "synced_at": "2026-11-24T00:22:27+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
