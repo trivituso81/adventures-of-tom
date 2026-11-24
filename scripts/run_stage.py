@@ -217,7 +217,8 @@ def run_video(stage, char, cfg, move_id, feedback, queue):
 
 def run_batch_character_moves(stage, char, cfg, feedback, queue):
     hero_src = resolve_hero_source(char, cfg, allow_fallback=True)
-    move_ids = list_character_move_ids(char["name"], include_universal=True)
+    include_univ = (char["id"] == "tom")
+    move_ids = list_character_move_ids(char["name"], include_universal=include_univ)
     targets = []
     for mid in move_ids:
         slug = f"{stage}_{mid}"
@@ -243,7 +244,45 @@ def run_batch_character_moves(stage, char, cfg, feedback, queue):
     save_queue(cfg["queue_path"], queue)
     print(f"[batch-moves] queued {len(results)}/{len(targets)} move(s) for Safari/WebM alpha encoding.", flush=True)
 
+def run_batch_all_cast_moves(stage, manifest, cfg, feedback, queue):
+    tasks = []
+    for c in manifest["cast"]:
+        if c["id"] in ("all_uploaded", "npcs", "dogs"):
+            continue
+        hero_src = resolve_hero_source(c, cfg, allow_fallback=False)
+        if not hero_src:
+            print(f"[batch-all-moves] skipping {c['id']} (no Hero PNG in art-factory/refs/{c['id']}.png)", flush=True)
+            continue
+        include_univ = (c["id"] == "tom")
+        for mid in list_character_move_ids(c["name"], include_universal=include_univ):
+            slug = f"{stage}_{mid}"
+            approved_vid = Path(cfg["output_dir"]) / c["id"] / slug / "approved.webm"
+            if approved_vid.exists():
+                print(f"[batch-all-moves] skipping {c['id']}/{mid} (already approved)", flush=True)
+                continue
+            tasks.append((c, hero_src, mid))
+    if not tasks:
+        print("[batch-all-moves] no unapproved character moves found across uploaded cast.", flush=True)
+        return
+    print(f"[batch-all-moves] starting {stage} for {len(tasks)} total move(s) across cast", flush=True)
+    def worker(triple):
+        c, src, mid = triple
+        try:
+            return generate_video_item(stage, c, cfg, mid, feedback, src)
+        except Exception as exc:
+            print(f"[batch-all-moves] FAILED {c['id']}/{mid}: {exc}", flush=True)
+            return None
+    with ThreadPoolExecutor(max_workers=min(3, len(tasks))) as ex:
+        results = [r for r in ex.map(worker, tasks) if r is not None]
+    for item in results:
+        queue["items"] = [i for i in queue["items"] if i["id"] != item["id"]] + [item]
+    save_queue(cfg["queue_path"], queue)
+    print(f"[batch-all-moves] queued {len(results)}/{len(tasks)} move(s) for Safari/WebM alpha encoding.", flush=True)
+
 def run_batch_video(stage, manifest, cfg, move_id, feedback, queue):
+    if stage in ("battle_move_draft", "battle_move_final") and (not move_id.strip() or move_id.strip() == "all_moves"):
+        run_batch_all_cast_moves(stage, manifest, cfg, feedback, queue)
+        return
     slug = f"{stage}_{move_id}" if move_id else stage
     targets = []
     for c in manifest["cast"]:
