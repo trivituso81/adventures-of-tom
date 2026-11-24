@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-23",
+ "updated": "2026-11-24",
  "timezone": "America/Los_Angeles",
  "about": "Every charge is taken from a receipt in email. Dates and times are Pacific time. Amounts are US dollars.",
  "services": [
@@ -1258,6 +1258,25 @@
    "source": "Read from fal by the costs-sync job (FAL_ADMIN_KEY).",
    "date": "2026-11-23",
    "at": "2026-11-24T01:43:56Z",
+   "read": true
+  },
+  {
+   "service": "elevenlabs",
+   "left": 400262,
+   "limit": 600000,
+   "unit": "credits",
+   "source": "Read from ElevenLabs by the costs-sync job (pro plan, 199,738 credits used).",
+   "date": "2026-11-24",
+   "at": "2026-11-24T23:31:03Z",
+   "read": true
+  },
+  {
+   "service": "fal",
+   "left": -3.25,
+   "unit": "usd",
+   "source": "Read from fal by the costs-sync job (FAL_ADMIN_KEY).",
+   "date": "2026-11-24",
+   "at": "2026-11-24T23:31:03Z",
    "read": true
   }
  ]
