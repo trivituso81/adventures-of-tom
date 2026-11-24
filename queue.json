@@ -143,6 +143,58 @@
    "id": "v-test-replay-t99",
    "kind": "video",
    "anim": "body:tnb:idle"
+  },
+  "v-test-use-t99": {
+   "lane": "vid",
+   "who": "tnb",
+   "take": 99,
+   "route": "wan",
+   "prompt": "guideflow9 free replay",
+   "promptRev": 0,
+   "start": "tnb",
+   "note": "",
+   "cap": 1,
+   "at": "2026-11-24T02:55:11Z",
+   "state": "done",
+   "since": "2026-11-24T02:57:22Z",
+   "run": 45315842112,
+   "fal": null,
+   "svc": null,
+   "tries": 1,
+   "cost": 0.0,
+   "why": "",
+   "do": "",
+   "result": {
+    "js": "takes/body-tnb-idle/t99.js",
+    "img": "takes/body-tnb-idle/t99.webp",
+    "frames": 50,
+    "kb": 1036,
+    "words": "0 to 147 step 3, loop wrap",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "blink_none: no blink in the stretch the game loops (blinks in the whole video: none)"
+     ],
+     "faults": [
+      "blink_none"
+     ],
+     "vision_ran": false,
+     "spent": 0.0,
+     "error": null,
+     "words": "The clip gate flags this take: blink_none: no blink in the stretch the game loops (blinks in the whole video: none)."
+    },
+    "n": 99
+   },
+   "use": {
+    "state": "wanted",
+    "at": "2026-11-24T02:58:13Z"
+   },
+   "left": false,
+   "dry": false,
+   "replay": "takes/body-tnb-idle/t1.mp4",
+   "id": "v-test-use-t99",
+   "kind": "video",
+   "anim": "body:tnb:idle"
   }
  }
 }
