@@ -1,3 +1,7 @@
+## guideflow9b (2026-11-23): A replay row in the Battle Guide queue never makes the xAI look check call
+
+Card c-guideflow-9, part two of three, found while planning the free run on GitHub (plan test T11): the worker passed a replay row (a stored video, cost 0) through `make_take.py`, whose clip gate asks xAI for a look check when `XAI_API_KEY` is set, a few cents, which the free run must not spend. The row now carries `free` and `make_take.py` runs the gate's measured checks for it without the look check (the take says so in its gate words). Changed: `tools/guidegen/worker.py` (`finish_video` sets `free` for a row with `replay`), `tools/guidegen/make_take.py` (a `free` row gets no xAI key). New test T3c in `tools/guidegen/take_test.py`: a free row makes no connection to the xAI stand-in and is still a take. Nothing paid was run.
+
 ## guideflow9a (2026-11-23): The old Battle Guide request path is deleted; the free test run on GitHub comes next
 
 Card c-guideflow-9 (plan `claude/guide-flow-plan.md` section 10 step 9, section 9 for the delete list, test T10). Started by hand in the c-guideflow-7 and 8 conversation. Part one of two: this build removes what the queue replaced and proves it with `tools/guidegen/purge_test.py`. Part two (guideflow9) adds the free run on GitHub (T11) and hands Tom the phone check. Nothing paid was run.

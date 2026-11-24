@@ -112,6 +112,13 @@ r = subprocess.run([sys.executable, '-I', HERE + '/make_take.py', '--results', h
 hs = json.load(open(hstate + '/takes.json'))['anims']['move:lounge_pass_flex']['takes']
 check('T3b a look check that never answers is dropped after the time limit and both takes are still made without it', r.returncode == 0 and [x['n'] for x in hs] == [7, 8] and all(x['status'] == 'new' and 'did not run' in x['gate']['words'] for x in hs) and _time.time() - t0 < 90, (r.returncode, r.stdout[-600:], hs))
 check('T3b the run says the look check was skipped', 'making the take again without it' in r.stdout, r.stdout[-600:])
+# guideflow9 T3c: a replay row is free: the measured checks run and the xAI look check is never asked (the server counts connections)
+n0 = len(_conns); fd = os.path.join(TMP, 'free'); os.makedirs(fd + '/res'); shutil.copyfile(MOVING, fd + '/res/a.mp4')
+json.dump({'results': [dict(row('move:lounge_pass_flex', 9, 'a.mp4'), free=True)]}, open(fd + '/res/guide-results.json', 'w'))
+t0 = _time.time()
+r = subprocess.run([sys.executable, '-I', HERE + '/make_take.py', '--results', fd + '/res/guide-results.json', '--state', fd + '/state', '--seconds', '60'], env=env, capture_output=True, text=True, timeout=120)
+ft = json.load(open(fd + '/state/takes.json'))['anims']['move:lounge_pass_flex']['takes'][0]
+check('T3c a free (replay) row asks the xAI look check nothing and is still a take', r.returncode == 0 and len(_conns) == n0 and ft['status'] == 'new' and not ft['gate'].get('vision_ran') and _time.time() - t0 < 50, (r.returncode, len(_conns) - n0, ft.get('status'), ft.get('gate')))
 hang.close()
 
 # ---------------------------------------------------------------- T4 keep.py

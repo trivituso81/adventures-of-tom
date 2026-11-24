@@ -148,7 +148,7 @@ def main(argv=None):
     G = RC.load()
     key = os.environ.get('XAI_API_KEY') or None
     for r in rows:
-        t = process(r, state, G, a.state, key=key, cap=a.cap, use_gate=not a.no_gate, quiet=a.quiet)
+        t = process(r, state, G, a.state, key=(None if r.get('free') else key), cap=a.cap, use_gate=not a.no_gate, quiet=a.quiet)   # guideflow9: a free replay row never makes the xAI look check call
         say('%s take %d: %s%s' % (r['anim'], t['n'], t['status'], ' | ' + t['gate']['words'] if t['gate'] else ''))
         open(sf, 'w', encoding='utf-8').write(jdump(state))
     return 0

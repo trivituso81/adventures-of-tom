@@ -420,7 +420,7 @@ class Worker:
         rid = re.sub(r'[^A-Za-z0-9_-]', '-', it['id'])
         rd = os.path.join(self.tmp, 'res-' + rid); sd = os.path.join(self.tmp, 'take-' + rid); os.makedirs(rd, exist_ok=True); os.makedirs(sd, exist_ok=True)
         row = {'anim': it['anim'], 'take': int(it.get('take') or 0), 'video': os.path.abspath(path), 'prompt': it.get('prompt') or '', 'promptRev': it.get('promptRev', 0), 'route': route or it.get('route') or 'wan',
-               'cost': round(spent, 4), 'at': it.get('at'), 'note': it.get('note') or ''}
+               'cost': round(spent, 4), 'at': it.get('at'), 'note': it.get('note') or '', 'free': bool(it.get('replay'))}   # a replay (a stored video) is a free test: the clip gate's measured checks run, its xAI look check does not
         rf = os.path.join(rd, 'guide-results.json'); json.dump({'results': [row]}, open(rf, 'w'))
         args = ['--results', rf, '--state', sd, '--quiet'] + (['--no-gate'] if self.no_gate else [])
         make_take.main(args)
