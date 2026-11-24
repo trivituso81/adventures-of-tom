@@ -21375,6 +21375,20 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGZLxZREfsCLURqeTW",
+   "title": "Use this one: one batched job that tells the truth",
+   "first": "2026-11-23T14:26:47-08:00",
+   "last": "2026-11-23T17:10:00-08:00",
+   "tags": [
+    "guideflow7",
+    "guideflow7a"
+   ],
+   "cards": [
+    "c-guideflow-7",
+    "c-guideflow-8"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCY8BBw577QYm3s41d",
    "title": "Stage 23a: Battle 3 gets its own shell (no battle 2 names)",
    "first": "2026-11-23T16:43:15-08:00",
@@ -21416,19 +21430,6 @@
    "tags": [],
    "cards": [
     "c-b3s23"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGZLxZREfsCLURqeTW",
-   "title": "Use this one: one batched job that tells the truth",
-   "first": "2026-11-23T14:26:47-08:00",
-   "last": "2026-11-23T15:28:39-08:00",
-   "tags": [
-    "guideflow7",
-    "guideflow7a"
-   ],
-   "cards": [
-    "c-guideflow-7"
    ]
   },
   {
@@ -27614,8 +27615,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "ea9a2321d3be51b91d3e129774321a1293d4f1ab",
- "synced_at": "2026-11-24T00:44:02+00:00",
+ "synced": "c11dd3840b5d2e290ef55209d4f5e8abd836e08f",
+ "synced_at": "2026-11-24T01:10:47+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
