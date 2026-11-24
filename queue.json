@@ -59,6 +59,35 @@
    "kind": "upload",
    "anim": "start:test",
    "upload": "uploads/test-1795488890.png"
+  },
+  "v-test-replay-t99": {
+   "lane": "vid",
+   "who": "tnb",
+   "take": 99,
+   "route": "wan",
+   "prompt": "guideflow9 free replay",
+   "promptRev": 0,
+   "start": "tnb",
+   "note": "",
+   "cap": 1,
+   "at": "2026-11-24T02:55:11Z",
+   "state": "queued",
+   "since": "2026-11-24T02:55:11Z",
+   "run": 0,
+   "fal": null,
+   "svc": null,
+   "tries": 0,
+   "cost": 0,
+   "why": "",
+   "do": "",
+   "result": null,
+   "use": null,
+   "left": false,
+   "dry": false,
+   "replay": "takes/body-tnb-idle/t1.mp4",
+   "id": "v-test-replay-t99",
+   "kind": "video",
+   "anim": "body:tnb:idle"
   }
  }
 }
