@@ -16812,7 +16812,7 @@
    "title": "Battle stage 23: purge battle 2 and Kindness",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "next": "Waits on the nine chapter cards c-b3s22ch12 to c-b3s22ch20 (chapters 12 to 20 onto Battle 3). Tom's yes on t-b3s23-confirm is in. Start it when the last of them ships, then run the prompt.",
    "blocks": [],
    "changed": "2026-11-23",
@@ -16866,11 +16866,15 @@
     {
      "d": "2026-11-23",
      "t": "Stuck twice: The rescue started 12:42 PM and went quiet for 2 hours. Waiting on Tom (card t-stuck-b3s23)."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "started_at": "2026-11-22T20:42:04+00:00",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukCdg3iThUrSmL1Dbc3",
+    "url": "https://claude.ai/code/session_01RXeukeSjhwv6A84RqoDUvYS",
     "opening": "started by START"
    },
    "rescue": {
@@ -16879,8 +16883,7 @@
     "why": "A session ended without shipping",
     "url": "https://claude.ai/code/cse_01RXeukCdg3iThUrSmL1Dbc3",
     "prev": "https://claude.ai/code/cse_01RXeukDNsLWPpd5nBjmXzvJ"
-   },
-   "waiting_on": "tom"
+   }
   },
   {
    "id": "t-b3s23-confirm",
@@ -21126,7 +21129,7 @@
   {
    "id": "t-stuck-b3s23",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Battle System",
    "ask": "unstick",
    "unstick": {
@@ -21146,10 +21149,15 @@
     {
      "d": "2026-11-23",
      "t": "Added by board-sync: card c-b3s23 stalled after its rescue"
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Done by the board: the card is being worked on again."
     }
    ],
    "created": "2026-11-23",
-   "changed": "2026-11-23"
+   "changed": "2026-11-23",
+   "done": "2026-11-23"
   }
  ],
  "sessions": [
@@ -21163,6 +21171,16 @@
    ],
    "cards": [
     "c-movestage-build"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukeSjhwv6A84RqoDUvYS",
+   "title": "Battle stage 23: purge battle 2 and Kindness",
+   "first": "2026-11-23T16:07:49-08:00",
+   "last": "2026-11-23T16:07:49-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3s23"
    ]
   },
   {
@@ -27361,8 +27379,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "c67979770117dfba1b60701b3597853e64a85bfe",
- "synced_at": "2026-11-24T00:05:59+00:00",
+ "synced": "c5f883105d07cee72a5da81d91850cfe9a44fc14",
+ "synced_at": "2026-11-24T00:08:52+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
