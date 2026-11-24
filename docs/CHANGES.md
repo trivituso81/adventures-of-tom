@@ -1,3 +1,7 @@
+## guideflow8a (2026-11-23): put back the Art Factory files and the costs data that the guideflow8 push removed by mistake
+
+My guideflow8 push was cut from an older copy of main, so it deleted `art-factory.html`, `art-factory/`, `.github/workflows/art-factory.yml`, `scripts/` and an update to `data/costs.json` made by other sessions. This build restores all of them exactly as they were; nothing else changed. The guideflow8 work itself (monster videos in the Guide queue) is untouched.
+
 ## guideflow8 (2026-11-23): Monster videos in the Battle Guide now go through the same queue, worker and status lines as the family videos
 
 Card c-guideflow-8 (plan `claude/guide-flow-plan.md` section 10 step 8, D17). Started by hand in the c-guideflow-7 conversation because the board's START fired and pushed nothing for 30 minutes. A monster animation is now a row in `queue.json` (`route: xai`, `cap 0.15`, `clip` with the recipe) and shows the same lines, Cancel and Activity as a family video. Nothing was sent to xAI for real; every test uses stand-ins.
