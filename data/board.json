@@ -20631,6 +20631,10 @@
     {
      "d": "2026-11-23",
      "t": "Part shipped as guideflow9b: A replay row in the Battle Guide queue never makes the xAI look check call"
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Part shipped as guideflow9c: The free run on GitHub found that every build stamp made on GitHub stopped for a missing PyYAML; fixed"
     }
    ],
    "prompt": {
@@ -21431,14 +21435,15 @@
    "url": "https://claude.ai/code/session_01RXeukGZLxZREfsCLURqeTW",
    "title": "Use this one: one batched job that tells the truth",
    "first": "2026-11-23T14:26:47-08:00",
-   "last": "2026-11-23T18:53:34-08:00",
+   "last": "2026-11-23T19:04:08-08:00",
    "tags": [
     "guideflow7",
     "guideflow7a",
     "guideflow8",
     "guideflow8a",
     "guideflow9a",
-    "guideflow9b"
+    "guideflow9b",
+    "guideflow9c"
    ],
    "cards": [
     "c-guideflow-7",
@@ -27676,8 +27681,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "047df3315b20263ff0c18c71c661ecc8cbe56d0d",
- "synced_at": "2026-11-24T02:54:39+00:00",
+ "synced": "a7a899f26c91b31b90340fd4b4e758949561b1a8",
+ "synced_at": "2026-11-24T03:04:59+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
