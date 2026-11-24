@@ -2,7 +2,7 @@ import json
 import re
 from pathlib import Path
 
-ANTI_RING_NEG = "glowing ring, neon halo, aura outline, rim glow, muted desaturated sketch, photorealistic 3D, 16-bit, 32-bit, 8-bit, pixel art, retro, sprite, SNES, Final Fantasy, hurt, knocked out"
+ANTI_RING_NEG = "glowing ring, neon halo, aura outline, rim glow, spotlight, stage lighting, light beam, light cone, floor glow, lens flare, muted desaturated sketch, photorealistic 3D, 16-bit, 32-bit, 8-bit, pixel art, retro, sprite, SNES, Final Fantasy, hurt, knocked out"
 IDLE_NEG = "frozen start, static pause, motionless opening, delayed animation, repeated blinking, double blink, fluttering eyelids, mouth opening, sighing, pursing lips, speaking, camera movement, blur, distort"
 
 def load_manifest(path="art-factory/characters.json"):
@@ -49,6 +49,26 @@ def load_all_move_manifests():
         except Exception:
             continue
     return manifests
+
+def list_character_move_ids(char_name, include_universal=True):
+    move_ids = []
+    seen = set()
+    target = (char_name or "").strip().lower()
+    for data in load_all_move_manifests():
+        for m in data.get("moves", []):
+            m_char = (m.get("character") or "").strip().lower()
+            if m_char != target and not (include_universal and m_char == "universal"):
+                continue
+            mid = m.get("id")
+            if mid and mid not in seen and m.get("wanClip"):
+                seen.add(mid)
+                move_ids.append(mid)
+            if mid and m.get("reactiveCounterClip"):
+                cid = f"{mid}_counter"
+                if cid not in seen:
+                    seen.add(cid)
+                    move_ids.append(cid)
+    return move_ids
 
 def lookup_move_clip(move_id):
     if not move_id:

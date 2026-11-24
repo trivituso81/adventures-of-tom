@@ -10,7 +10,7 @@ import fal_client
 from google import genai
 from google.genai import types
 from PIL import Image
-from art_director_agent import ANTI_RING_NEG, IDLE_NEG, build_prompt, describe_child_geometry, get_character, load_manifest, resolve_move_prompts
+from art_director_agent import ANTI_RING_NEG, IDLE_NEG, build_prompt, describe_child_geometry, get_character, list_character_move_ids, load_manifest, resolve_move_prompts
 from qa_judge_agent import judge_candidate
 
 def load_queue(path):
@@ -215,6 +215,34 @@ def run_video(stage, char, cfg, move_id, feedback, queue):
     queue["items"] = [i for i in queue["items"] if i["id"] != item["id"]] + [item]
     save_queue(cfg["queue_path"], queue)
 
+def run_batch_character_moves(stage, char, cfg, feedback, queue):
+    hero_src = resolve_hero_source(char, cfg, allow_fallback=True)
+    move_ids = list_character_move_ids(char["name"], include_universal=True)
+    targets = []
+    for mid in move_ids:
+        slug = f"{stage}_{mid}"
+        approved_vid = Path(cfg["output_dir"]) / char["id"] / slug / "approved.webm"
+        if approved_vid.exists():
+            print(f"[batch-moves] skipping {char['id']}/{mid} (already approved)", flush=True)
+            continue
+        targets.append(mid)
+    if not targets:
+        print(f"[batch-moves] no unapproved moves found for {char['name']} in art-factory/*.json.", flush=True)
+        return
+    print(f"[batch-moves] starting {stage} for {char['id']} ({len(targets)} moves): {targets}", flush=True)
+    def worker(mid):
+        try:
+            return generate_video_item(stage, char, cfg, mid, feedback, hero_src)
+        except Exception as exc:
+            print(f"[batch-moves] FAILED {char['id']}/{mid}: {exc}", flush=True)
+            return None
+    with ThreadPoolExecutor(max_workers=min(3, len(targets))) as ex:
+        results = [r for r in ex.map(worker, targets) if r is not None]
+    for item in results:
+        queue["items"] = [i for i in queue["items"] if i["id"] != item["id"]] + [item]
+    save_queue(cfg["queue_path"], queue)
+    print(f"[batch-moves] queued {len(results)}/{len(targets)} move(s) for Safari/WebM alpha encoding.", flush=True)
+
 def run_batch_video(stage, manifest, cfg, move_id, feedback, queue):
     slug = f"{stage}_{move_id}" if move_id else stage
     targets = []
@@ -287,8 +315,13 @@ def main():
         stage = "hero"
     if stage in ("hero", "turnaround", "sheets"):
         run_stills(stage, char, cfg, feedback, queue)
-    elif stage in ("battle_idle", "battle_move_draft", "battle_move_final"):
+    elif stage == "battle_idle":
         run_video(stage, char, cfg, move_id, feedback, queue)
+    elif stage in ("battle_move_draft", "battle_move_final"):
+        if not move_id.strip() or move_id.strip() == "all_moves":
+            run_batch_character_moves(stage, char, cfg, feedback, queue)
+        else:
+            run_video(stage, char, cfg, move_id, feedback, queue)
 
 if __name__ == "__main__":
     main()
