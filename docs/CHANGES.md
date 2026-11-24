@@ -1,3 +1,22 @@
+## guideflow9 (2026-11-23): The old Battle Guide path is gone, the whole new flow ran free on GitHub, and Tom's phone check is ready
+
+Card c-guideflow-9 (plan `claude/guide-flow-plan.md` section 10 step 9, test T11), the last card of the guide flow. Shipped in four builds: guideflow9a (the old path deleted), guideflow9b (a replay row makes no xAI look check call), guideflow9c (build stamps no longer stop on GitHub for a missing PyYAML), and this one (the free run recorded, the notes, the phone card). Nothing paid was run by any of it: no fal, xAI or ElevenLabs call was made for real.
+
+Free run on GitHub (T11). Times count from the end of the adds; the rows were written to `guideq` by git push because the session's proxy refuses the contents API.
+
+| Row | queued | making | checking | done at | Notes |
+|---|---|---|---|---|---|
+| Picture, dry (who test) | 23 s | 9 s | none (a dry row walks making only) | 32 s | worker run 45315842112 |
+| Upload (the tom hero picture as my own) | 23 s | none (an upload goes straight to checking) | 34 s | 57 s | the picture passed all measured checks and was kept on `guidegen` |
+| Replay video (stored take of TNB Idle) | 48 s | none | 83 s | 131 s | the real take cutting and the save to `guidegen`; the clip gate held it for no blink (a gate hold is still done, X10); the look check did not run |
+| Use wanted on a copy of the replay row, `guide-apply` dry | | | | 3 min 38 s | run 45316174490 stopped at the stamp (PyYAML, fixed in 9c); run 45316932429 succeeded: `used body:tnb:idle take 99`, `would push on try 1`, build guideuse-45316932429, nothing pushed |
+
+The live Guide page (portrait, Playwright, no sign-in) showed the build chip guideflow9b, the bar `1 ready`, and TNB Idle as `Ready. Watch it here.` with Open it. Test rows and files were removed from `guideq` and `guidegen` afterwards.
+
+What Tom may have seen: the upload and replay rows were not dry rows, so each may have sent its phone message to the Guide topic at about 6:55 pm Pacific on 2026-11-23. They were tests.
+
+Not done: branch `startpic` still exists (the session's proxy refuses deleting a branch); its two pictures are on main byte for byte and nothing writes to it. `t-guideflow-phone` steps were checked against the page word for word and need no change; its build is set to guideflow9.
+
 ## guideflow9c (2026-11-23): The free run on GitHub found that every build stamp made on GitHub stopped for a missing PyYAML; fixed
 
 Card c-guideflow-9, part three of four (plan test T11). The first free run of `guide-apply` on GitHub (run 45316174490, dry) cut the take (`used body:tnb:idle take 99`) and then stopped at the stamp: `bump_tags.py` runs `tools/workflow_check.py` (guideflow1), which needs PyYAML, and a GitHub runner's Python has none. Six tries failed the same way and the job ended `push failed 6 times`. The same would have stopped any other Action that stamps a build (`art-bake`, the bulk videos of `wan-gen`, `voice-gen`); none of them has run since guideflow1, so none had shown it. `tools/art-library/bump_tags.py` now asks `workflows_ok()`: on GitHub (`GITHUB_ACTIONS` set) a missing PyYAML skips the check with a note, because the session that pushed the workflow files already ran it (smoke); in a session it still stops. Test W8 in `tools/workflow_check_test.py`. Nothing paid was run.

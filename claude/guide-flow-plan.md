@@ -390,3 +390,18 @@ The old flow keeps working until card 5 switches the page for pictures and famil
 | The Art Library's pictures and clips | Untouched. |
 | A server of our own | Section 3.4: under a minute saved for a new account and a second home for keys. |
 | A kept prompt living only on one device (`GW`) | The prompt travels with the request, so a made video is never wrong. Moving the draft to the queue is a later card. |
+
+## Built (notes by the sessions that built cards 7 to 9; where the build differs from the plan, and why)
+
+| Card | What differs | Why |
+|---|---|---|
+| 7 `guideflow7` | `guide-apply` also runs on a 10 minute timer, and a manual run is a dry run by default. `store.begin_apply` writes nothing when no row is wanted. | A poke can be lost like any other; a dry default keeps a hand run free. |
+| 8 `guideflow8` | A monster row uses clipgen's own `Xai` client inside the worker and writes `svc {name: xai, request_id}` before waiting; `store._paid` treats `svc` like `fal`. | One recovery rule for both services, no second paid submit after a dead run. |
+| 9 `guideflow9a` | Branch `startpic` could not be deleted from the session (the proxy refuses ref deletes). Its two pictures are on main byte for byte; nothing writes to it any more. | The proxy allows git pushes and reads only. |
+| 9 `guideflow9a` | `startpic_test.py` cases S7 to S11 sat after the final `sys.exit`, so they had never run; they were removed with the old path (S8 now runs). | Purge. |
+| 9 `guideflow9b` | A replay row (a stored video) skips the clip gate's xAI look check (`free` on the row). | The plan says the free run spends nothing; the look check is an xAI call. |
+| 9 `guideflow9c` | `bump_tags.py` skips the workflow check on GitHub when PyYAML is missing. | The first free run of `guide-apply` stopped at the stamp for that reason, six tries in a row. It would have stopped Tom's first Use, and any Action that stamps a build. Found only because T11 was run for real. |
+| 9 T11 | The session cannot write through the contents API (the proxy refuses it), so the test rows went onto branch `guideq` and the test picture onto `guidegen` with git pushes. The rows have the same shape the page writes. Everything after that was the real workflows on GitHub. | Sandbox limit. |
+
+T11 result (2026-11-23, nothing paid): worker run 45315842112, three rows, done in 32 s (dry picture), 57 s (upload) and 131 s (replay video, with the real checks and the save to `guidegen`), counted from the end of the adds; first state change 23 s after the last add. `guide-apply` dry runs 45316174490 (stopped at the stamp, see 9c) and 45316932429 (success in 3 min 38 s, `would push on try 1`, build guideuse-45316932429, nothing pushed). The live Guide page showed `1 ready` and TNB Idle as `Ready. Watch it here.` with Open it. Test rows and files were removed afterwards.
+

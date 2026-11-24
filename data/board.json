@@ -20595,7 +20595,7 @@
    "theme": "Battle Animations",
    "tag": "guideflow9",
    "title": "Remove the old Guide path; free test run on GitHub",
-   "next": "Part one pushed (guideflow9a): the old Guide path is deleted and purge_test passes. Part two in this conversation: the free run on GitHub (T11), then guideflow9 and the phone check for Tom.",
+   "next": "Shipped as guideflow9 (with guideflow9a, 9b, 9c): the old Guide path is deleted, the free run on GitHub passed (and found and fixed a build-stamp stop on GitHub), and Tom's phone check t-guideflow-phone is ready. Nothing more for Claude on this plan.",
    "blocks": [
     "t-guideflow-phone"
    ],
@@ -20635,6 +20635,10 @@
     {
      "d": "2026-11-23",
      "t": "Part shipped as guideflow9c: The free run on GitHub found that every build stamp made on GitHub stopped for a missing PyYAML; fixed"
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Built by the c-guideflow-7 and 8 conversation. 9a deleted the old request path (purge_test passes); 9b made a replay row skip the xAI look check; 9c fixed bump_tags stopping on GitHub for a missing PyYAML, which the first free run of guide-apply found. T11 free run: worker run 45315842112 (three rows done in 32, 57 and 131 seconds), guide-apply dry run 45316932429 (would push on try 1). Branch startpic could not be deleted from the session (the proxy refuses it); its pictures are on main and nothing writes to it."
     }
    ],
    "prompt": {
@@ -20680,8 +20684,13 @@
      "d": "2026-11-22",
      "t": "Made by the planning session (plan claude/guide-flow-plan.md). This is the first paid run of the new flow: one picture and one video, about $0.65. Everything before it is tested without spending.",
      "at": "2026-11-22T22:56:03.000Z"
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Steps checked against the page word for word (Make the start picture, Make this video, Use this one, Upload my own, Queued, Making the picture, Making the video, Checking, In the game, Phone notifications): they match. Build set to guideflow9."
     }
-   ]
+   ],
+   "build": "guideflow9"
   },
   {
    "id": "t-wangaveup-stage-tom-jetwash-vid-r2",
