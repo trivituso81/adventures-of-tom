@@ -6,7 +6,7 @@ const APPR_SLIDE=.18;
 // ---------- Battle backdrops ----------
 // The painted battle backgrounds live in bgs/ (1152x648 WebP, one per place; repainted 2026-11-01 to the layout in
 // claude/battle-background-spec.md: the floor starts about 65% down and is flat, matte and empty so characters stand ON it).
-// battleBgKey picks the picture from the map's ground (or, in the Battle Lab, from the B2.lab* flags). If a picture has not
+// battleBgKey picks the picture from the map's ground (or, in the old Battle Lab, from the BT.lab flags). If a picture has not
 // loaded yet a plain dark fill shows. BG_V is the cache tag: bump it whenever a picture in bgs/ changes, or phones keep the old one.
 const BG_V='bgs4';
 const BG_FILES={pond:'01-pond-town',griffith:'02-griffith-park',classroom:'03-school-classroom',cafe:'04-school-cafetorium',
@@ -32,7 +32,7 @@ function feetOf(rows) {
 }
 
 function battleBgKey() {
-  const g=currentMap&&currentMap.style&&currentMap.style.ground,L=B2.active?B2:{};
+  const g=currentMap&&currentMap.style&&currentMap.style.ground,L=BT.lab||{};
   // Story places that used to be code-drawn only (no picture): the Glass Tower, the Forever Engine, the sorting hall, the
   // subway, Terminal Infinity and the Flight Zero cabin. Chosen by ground and map id.
   if(g==='glass') {

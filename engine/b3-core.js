@@ -2,7 +2,7 @@
 // engine/b3-core.js — Battle 3 core: the fight state, its units, start and end, the stat maths (stacking and caps),
 // who a move can aim at, and the simple player that the simulator uses.
 // RULES FILE: no drawing, no page, no timers. tools/b3-sim.js loads it in node, so it must not touch the canvas,
-// the document, the old battle (B2) or the game's party and monster objects. Everything it knows comes from data/b3-*.js.
+// the document, the old battle engine or the game's party and monster objects. Everything it knows comes from data/b3-*.js.
 //
 // A fight is one plain object F (b3NewFight). Every rules function takes F, so many fights can run side by side.
 //   F.units   every unit; F.party and F.foes are the two sides. A unit's `key` (p0..p3, f0..f4) names it in beats.

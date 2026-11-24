@@ -332,7 +332,7 @@ const SCENE_OPS={
     update(dt){ this.t+=dt; intro.card.t=this.t; if(this.t>=(o.time||3)) { intro.card=null; return true; } return false; }}),
   battle:o=>({start(){ this.m=typeof o.battle==='function'?o.battle():typeof o.battle==='object'?o.battle:findMonster(o.battle); this.go=false; if(this.m) { startBattle(this.m,{tut:o.tut,count:o.count,level:o.level}); this.go=true; } },
     update(){ if(!this.go) return true; if(battle.active) return false;
-      setFlag('battle:'+(this.m.monster||o.battle),B2.result==='win'?'win':'lose'); return true; }}),
+      setFlag('battle:'+(this.m.monster||o.battle),BT.result==='win'?'win':'lose'); return true; }}),
   give:o=>S.call(()=>grantItem(o.give)),
   join:o=>S.call(()=>{ const m=MEMBERS()[o.join]; if(m) forceJoin(m,!!o.quiet); }),
   leave:o=>S.call(()=>{ const m=MEMBERS()[o.leave]; if(m) forceLeave(m,o.quiet!==false); }),

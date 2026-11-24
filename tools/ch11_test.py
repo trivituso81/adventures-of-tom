@@ -38,7 +38,7 @@ with sync_playwright() as pw:
         if pg.evaluate("()=>window.__LE.battle.state==='command'&&window.__LE.B2.actor&&window.__LE.B2.actor.side==='party'"):
             pg.evaluate("()=>{ window.__LE.b2Dir('right'); }"); pg.wait_for_timeout(250); pg.evaluate("()=>window.__LE.b2A()"); pg.wait_for_timeout(250); pg.evaluate("()=>window.__LE.b2A()")
         pg.wait_for_timeout(1500)
-    print('battle over',not pg.evaluate("()=>window.__LE.battle.active"), pg.evaluate("()=>window.__LE.B2.result"))
+    print('battle over',not pg.evaluate("()=>window.__LE.battle.active"), pg.evaluate("()=>window.__LE.BT.result"))
     adv(pg,200,"()=>window.__LE.flag('ch11-stby')===true&&!window.__LE.intro.active")
     print('stby',pg.evaluate("()=>window.__LE.flag('ch11-stby')"),errs[-3:])
     pg.evaluate("()=>{ const P=window.__LE.player; P.x=33; P.y=10; P.move=null; }"); pg.wait_for_timeout(1500)

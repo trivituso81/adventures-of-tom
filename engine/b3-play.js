@@ -6,7 +6,7 @@
 //
 // Drawing: Battle 3 has its own draw function (b3Draw) for the party and the enemies. It reuses the shared stage: the battle
 // canvas and its 576 x 324 coordinates, the painted backdrops (BG_IMG), drawSprite and the painted sheets, the party's battle
-// frames (BATTLE_SPRITES), the monsters' art (MONSTERS), the painted meter (b2Meter) and the pixel font (label).
+// frames (BATTLE_SPRITES), the monsters' art (MONSTERS), the painted meter (btMeter) and the pixel font (label).
 // engine/battle.js calls b3Update and engine/battle-draw.js calls b3Draw while battle.v3 is set.
 //
 // Reactions (a ward's answer) play after the move that set them off, one at a time; what a turn's end writes comes last.
@@ -76,7 +76,7 @@ function b3PartyHome(u) { const T=[null,BATTLE_POS1,BATTLE_POS2,BATTLE_POS3][B3.
 function b3LayoutFoes() {
   const F=B3.F,fr=F.foes.filter(f=>f.row!=='back'),bk=F.foes.filter(f=>f.row==='back'),n=F.foes.length,want=[0,96,80,68,60][n]||60;
   const fy={1:[264],2:[224,302],3:[218,262,306]},fx={1:[168],2:[184,156],3:[188,158,188]},by={1:[236],2:[214,268]},bx={1:[84],2:[92,70]};
-  const place=(f,px,py,k)=>{ const def=b2BattleDef(MONSTERS[f.D.art||f.id]),base=def.scale||3,w=def.sprite[0].length;
+  const place=(f,px,py,k)=>{ const def=btBattleDef(MONSTERS[f.D.art||f.id]),base=def.scale||3,w=def.sprite[0].length;
     B3P.foe[f.key]={def,px,py,sc:Math.max(base*.7,Math.min(base*1.3,want/w))*k*(def.shrink||1)*(b3Look(f).size||(f.D&&f.D.size)||(f.D&&f.D.role==='boss'&&!f.add?B3_BOSS_SIZE:1))}; B3P.fa[f.key]={lunge:null,hurtUntil:0,shakeUntil:0,flashUntil:0,die:null,hold:0}; };
   fr.forEach((f,k)=>place(f,(fx[fr.length]||fx[3])[k%3],(fy[fr.length]||fy[3])[k%3],1));
   // A helper of a linked foe (data/b3-foes-ch13.js `helperLink`) stands in the gap between the boss and the family, not behind the boss: the boss is drawn 2.5 times large and would hide it,
@@ -97,7 +97,7 @@ function b3FreeSpot(f,back) {
   return best;
 }
 function b3LayoutAdd(key) {
-  const F=B3.F,f=b3Unit(F,key),def=b2BattleDef(MONSTERS[f.D.art||f.id]),base=def.scale||3,w=def.sprite[0].length,back=f.row==='back';
+  const F=B3.F,f=b3Unit(F,key),def=btBattleDef(MONSTERS[f.D.art||f.id]),base=def.scale||3,w=def.sprite[0].length,back=f.row==='back';
   const best=b3FreeSpot(f,back);
   B3P.foe[key]={def,px:best[0],py:best[1],sc:Math.max(base*.7,Math.min(base*1.3,58/w))*(back?.9:1)*(def.shrink||1)};   // an add is drawn small: 58 wide
   B3P.fa[key]={lunge:null,hurtUntil:0,shakeUntil:0,flashUntil:0,die:null,hold:0,born:B3P.t};
@@ -481,8 +481,8 @@ function b3DrawFoe(f,t,picked) {
   if(dying) return;
   // HP meter and letter under the feet; the wind-up and (DETAILS on) statuses over the head.
   const np=vu.maxPips||0,bw=Math.max(40,Math.min(64,sw*.7)),bx=Math.round(L.px-bw/2),byy=Math.min(L.py+9,324-12-(np?9:0)-(b3Peeves(f).length?13:0)),r=vu.hp/vu.maxHp;
-  b2Meter(bx,byy,bw,7,r,r<=.25?B2_METER.crit:r<=.5?B2_METER.low:B2_METER.hp);
-  if(f.letter) b2MeterTag(bx-10,byy+5,f.letter);
+  btMeter(bx,byy,bw,7,r,r<=.25?BT_METER.crit:r<=.5?BT_METER.low:BT_METER.hp);
+  if(f.letter) btMeterTag(bx-10,byy+5,f.letter);
   // Composure pips under the HP meter: gold while it holds, empty as they are knocked off, all red-rimmed while it is Flustered.
   if(np) { const pw=Math.max(5,Math.min(10,Math.floor((bw-(np-1)*2)/np))),x0=Math.round(L.px-(np*pw+(np-1)*2)/2),py=byy+10,pop=A.pipAt!=null&&t-A.pipAt<.35;
     for(let i=0;i<np;i++) { const on=i<vu.pips,px=x0+i*(pw+2);

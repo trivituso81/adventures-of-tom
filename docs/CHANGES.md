@@ -1,3 +1,23 @@
+## b3s23a (2026-11-23): Battle 3 has its own shell, engine/bt-shell.js, and no longer reads a battle 2 name
+
+Card c-b3s23a, slice 23a of the battle 2 purge (claude/next-addendum-b3s23.md). Tom (11-22): "Yes, delete battle 2 and its leftovers as the plan lists". Nothing is deleted: battle 2 still plays under Settings OLD.
+
+| Moved into engine/bt-shell.js (code moved, not copied) | Was |
+|---|---|
+| `startBattle` (the one fight door; asks `b3sStart` in engine/b3-story.js first, then `BT.oldFight`) | `startBattle` in battle2.js, wrapped by b3-story.js |
+| `BT.result` (read by the story's {battle} step, the boss flag, the bonus chapter scenes) | `B2.result` |
+| `BT.lab` (Lab scenery flags the backdrop reads, set while an old Lab fight plays) | `B2.active ? B2 : {}` in `battleBgKey` |
+| `btEsc`, `btThumb` (and `btThumbs`), `btPortrait`, `btCanvasPt` | `b2Esc`, `b2Thumb`, `b2Portrait`, `b2CanvasPt` |
+| `BT_METER`, `btMeter`, `btMeterPath`, `btMeterTag` | `B2_METER`, `b2Meter`, `b2MeterPath`, `b2MeterTag` |
+| `btBattleDef`, `BT_FLIPPED`, `btPurse` | `b2BattleDef`, `B2_FLIPPED`, `b2Purse` |
+| `bpOn`, `bpIcon`, `bpWord` (Rose Mode picture helpers Battle 3's menus use; names unchanged) | engine/battle-pictures.js |
+
+Also renamed (CSS and markup both sides): `.b2-tk`, `.b2-rib-lbl`, `.b2-int` are now `.bt-tk`, `.bt-rib-lbl`, `.bt-int` (index.html, b3-deck.css, the old ribbon in battle2-ui.js, the tests). Battle 3's `b3ShowUI` no longer hides the old `b2-ui` and `b2-ribbon` (the old path hides its own). Old battle files call the new names; engine/battle2.js now registers `BT.oldFight`.
+
+Proof: `git grep -I -nE '(^|[^A-Za-z0-9_$])([bB]2|battle2)' -- 'engine/b3-*.js' 'data/b3-*.js'` is empty. The literal `b2|B2|battle2` still matches 4 hex colours in data/b3-status.js (`#d9b27a`, `#9fb2c4`, `#ffb27a`) and the Tombo id `tnb2` with its voice key `tombotnb2` in data/b3-tombo-skins.js; those are not battle 2 names and the story flag `tombo:tnb2` must not change. A chapter 1 Battle 3 fight was played with every battle 2 file replaced by an empty script (only load-time stand-ins for the old path): no error from Battle 3 code.
+
+Not changed on purpose: the reads of the `B2` object in engine/battle-draw.js (inside `drawBattle` after the Battle 3 return), engine/battle-pictures.js (the old menu), engine/clips.js (old Lab clip fights, guarded by `typeof B2`), engine/painted.js (guarded), engine/report.js; they only run on the old path and 23c and 23d delete them with it.
+
 ## guideflow8a (2026-11-23): put back the Art Factory files and the costs data that the guideflow8 push removed by mistake
 
 My guideflow8 push was cut from an older copy of main, so it deleted `art-factory.html`, `art-factory/`, `.github/workflows/art-factory.yml`, `scripts/` and an update to `data/costs.json` made by other sessions. This build restores all of them exactly as they were; nothing else changed. The guideflow8 work itself (monster videos in the Guide queue) is untouched.

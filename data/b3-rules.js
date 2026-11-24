@@ -2,7 +2,7 @@
 // data/b3-rules.js — Battle 3 (the v11 battle system): every rule number from spec sections 1 and 2.
 // Design: claude/battle-architecture.md (Project). Spec: claude/battle-spec-v11.md. Bestiary: claude/bestiary-v11.md.
 // Data only. To tune the game, change a number here; no engine file needs to change.
-// Battle 3 loads beside battle 2 (engine/battle2*.js). Every Battle 3 global starts with B3 or b3.
+// Battle 3 loads beside the old battle engine. Every Battle 3 global starts with B3 or b3.
 const B3_RULES={
   // Timeline (spec 2.2). A wait is in ticks. Recovery Ticks = Base Recovery x 100 / Speed.
   round:100,                                  // a round is a 100-tick window; a divider sits at every multiple

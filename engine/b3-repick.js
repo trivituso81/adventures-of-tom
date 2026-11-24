@@ -20,7 +20,7 @@ function b3RepickOpen() {
   const box=document.createElement('div'); box.id='b3-repick'; box.setAttribute('role','dialog'); box.setAttribute('aria-label','Pick your four');
   const seats=F.party.length,ph=F.repick.phase;
   const sayPhase=ph===2?'PHASE 2: THE LENSES':ph===3?'PHASE 3: THE COUNTDOWN':'PHASE '+ph;
-  box.innerHTML='<div class="rp-head"><b class="rp-ph">'+b2Esc(sayPhase)+'</b><span class="rp-sub">Pick your four. Someone new comes in at full HP and 4 Pep. Someone who was in before comes back with the HP and Pep they left with.</span></div>'
+  box.innerHTML='<div class="rp-head"><b class="rp-ph">'+btEsc(sayPhase)+'</b><span class="rp-sub">Pick your four. Someone new comes in at full HP and 4 Pep. Someone who was in before comes back with the HP and Pep they left with.</span></div>'
     +'<div class="rp-grid"></div><div class="rp-foot"><span class="rp-count"></span><button type="button" class="rp-go">CONTINUE</button></div>';
   app.appendChild(box); B3R.box=box;
   box.querySelector('.rp-go').addEventListener('click',b3RepickDone);
@@ -32,7 +32,7 @@ function b3RepickRender(seats) {
   const grid=box.querySelector('.rp-grid'),L=b3RepickList(F);
   grid.innerHTML=L.map(r=>{
     const on=B3R.pick.includes(r.id),hp=r.fresh?'FULL HP':r.ko?'KNOCKED OUT':r.hp+' / '+r.maxHp+' HP',tag=r.fresh?'FRESH':r.here?'IN NOW':'BENCH';
-    return '<button type="button" class="rp-m'+(on?' on':'')+(r.ko?' ko':'')+'" data-id="'+b2Esc(r.id)+'" aria-pressed="'+on+'"><b class="rp-n">'+b2Esc(r.name)+'</b>'
+    return '<button type="button" class="rp-m'+(on?' on':'')+(r.ko?' ko':'')+'" data-id="'+btEsc(r.id)+'" aria-pressed="'+on+'"><b class="rp-n">'+btEsc(r.name)+'</b>'
       +'<span class="rp-t">'+tag+'</span><span class="rp-h">'+hp+'</span><span class="rp-p">'+r.pep+' Pep</span></button>'; }).join('');
   for(const el of grid.querySelectorAll('.rp-m')) el.addEventListener('click',()=>{ const id=el.dataset.id,i=B3R.pick.indexOf(id);
     if(i>=0) B3R.pick.splice(i,1); else if(B3R.pick.length<seats) B3R.pick.push(id); else { b3Sfx('nope'); return; }

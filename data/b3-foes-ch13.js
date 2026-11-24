@@ -89,7 +89,7 @@ B3_FORMATIONS.signalfault={id:'signalfault',ch:13,foes:[{id:'signalfault',row:'f
 B3_FORMATIONS.drillworm={id:'drillworm',ch:13,foes:[{id:'drillworm',row:'front'},{id:'relayhushling',row:'back'}],vp:18};
 B3_FORMATIONS.goldknight={id:'goldknight',ch:13,foes:[{id:'goldknight',row:'front'}],vp:30};
 
-// Art stand-ins (page only; the simulator has no MONSTERS). Battle 3 draws a foe from its Battle 2 monster row (`b2BattleDef(MONSTERS[f.id])`, engine/b3-play.js), and the
+// Art stand-ins (page only; the simulator has no MONSTERS). Battle 3 draws a foe from its monster row (`btBattleDef(MONSTERS[f.id])`, engine/b3-play.js), and the
 // Wired Relay Hushling and the Gold Knight are new, so they have none. Until the Art Library makes their sheets (bestiary section 6: the Hushling with its wire, the helmet-closed
 // armor) they are drawn with the Hushling's and Warden Boppy's rows, under their own names. A real row of the same id (`MONSTERS.relayhushling`) replaces the stand-in.
 if(typeof MONSTERS!=='undefined') {

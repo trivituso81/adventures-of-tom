@@ -6,7 +6,7 @@
 // UI, input and enemy drawing live in engine/battle2-ui.js; move animations in engine/battle2-moves.js.
 
 const B2={active:false,units:[],party:[],foes:[],actor:null,ui:'busy',sel:0,opts:[],pending:null,
-  lastSkill:{},lastTarget:null,bag:[],fx:[],onEnd:null,cfg:null,result:null,round:0,move:null,aim:null,prev:null,coinsWon:0};
+  lastSkill:{},lastTarget:null,bag:[],fx:[],onEnd:null,cfg:null,round:0,move:null,aim:null,prev:null,coinsWon:0};
 
 // ---------- Units ----------
 function b2PartyUnit(id,lvl,i,carry) {
@@ -20,17 +20,8 @@ function b2PartyUnit(id,lvl,i,carry) {
   if(carry&&mem.maxHp) u.hp=mem.hp<=0?0:Math.max(1,Math.round(u.maxHp*mem.hp/mem.maxHp));
   return u;
 }
-// A monster drawn facing the wrong way in battle sets flipBattle on its def: the battle gets a cached mirrored copy
-// (sprite rows reversed, eye and mouth x mirrored) so every move that aims at eyes or mouth still lands. The town keeps the original.
-const B2_FLIPPED={};
-function b2BattleDef(d) {
-  if(!d||!d.flipBattle) return d;
-  if(!B2_FLIPPED[d.id]) { const W=d.sprite[0].length; B2_FLIPPED[d.id]=Object.assign({},d,{sprite:d.sprite.map(r=>Array.from(r).reverse().join('')),
-    eyes:d.eyes&&d.eyes.map(e=>[W-1-e[0],e[1]]),mouth:d.mouth&&[W-1-d.mouth[0],d.mouth[1]]}); }
-  return B2_FLIPPED[d.id];
-}
 function b2FoeUnit(id,row,i,lvl) {
-  const D=b2FoeDef(id),def=b2BattleDef(MONSTERS[id]||MONSTERS.mudling),L=Math.max(D.level,lvl||D.level),up=L-D.level;
+  const D=b2FoeDef(id),def=btBattleDef(MONSTERS[id]||MONSTERS.mudling),L=Math.max(D.level,lvl||D.level),up=L-D.level;
   const u={side:'foe',id,def,D,name:def.name,lvl:L,idx:i,row,st:{},turns:0,acts:D.acts,weak:D.weak,resist:D.resist,
     shake:0,flash:0,lunge:0,hold:0,dying:-1,dead:false,parts:[],boss:D.boss||null,phase:1,intent:null,shield:null,step:0};
   for(const k of B2_STAT_KEYS) u[k]=D[k]+up*(k==='hp'?D.step*6:D.step);
@@ -66,7 +57,7 @@ function battlePartyList() { return battle.v2?B2.party:party; }
 // bag in the full game), npc (the overworld monster, for rewards), carry (HP carries over), onEnd(result).
 function b2Start(cfg) {
   B7.skipNow=false;
-  B2.cfg=cfg; B2.onEnd=cfg.onEnd||null; B2.result=null; B2.stolen=[]; B2.round=0; B2.coinsWon=0; B2.prev=null; B2.move=null; B2.aim=null;
+  B2.cfg=cfg; B2.onEnd=cfg.onEnd||null; BT.result=null; B2.stolen=[]; B2.round=0; B2.coinsWon=0; B2.prev=null; B2.move=null; B2.aim=null;
   B2.pieUsed=false; B2.snackWait=null; b7BattleStart();   // engine/feel.js
   B2.party=cfg.party.map((id,i)=>b2PartyUnit(id,(cfg.levels&&cfg.levels[id])||cfg.level||1,i,cfg.carry));
   // Front row first (up to 3), then back row (up to 2); 4 at most in all.
@@ -86,7 +77,7 @@ function b2Start(cfg) {
   for(const f of B2.foes) if(f.D.first) f.ct=-1-f.idx;
   b2ResetStage();
   battle.active=true; battle.v2=true; battle.enemy=null; battle.monster=cfg.npc||null; battle.state='busy';
-  B2.active=true;
+  B2.active=true; BT.lab=B2;
   b2ShowUI(true); b2Render();
   sfx.intro();
   const first=B2.foes[0].def,n=B2.foes.length;
@@ -123,7 +114,7 @@ function b2ResetStage() {
 function b2End(result) {
   clearBattleQueue();
   b2HeartSave();   // engine/battle2-kind.js
-  B2.active=false; B2.result=result; B2.aim=null; B2.move=null;
+  B2.active=false; BT.lab=null; BT.result=result; B2.aim=null; B2.move=null;
   battle.active=false; battle.v2=false; battle.state='idle'; battle.enemy=null;
   b2ShowUI(false);
   $('battle').hidden=true;
@@ -1444,15 +1435,6 @@ function b2WriteBack() {
   if(!B2.cfg.carry) return;
   for(const p of B2.party) { const mem=memberById(p.id); mem.hp=p.hp<=0?0:Math.max(1,Math.round(mem.maxHp*p.hp/p.maxHp)); }
 }
-// A fight's purse: each monster's coins (the one Tom walked into, or the boss, in full; the rest of its formation and
-// summoned adds half), +50% for each one Un-Grumped, then charm coin perks. foes: [{id, boss, calm}].
-function b2Purse(foes,npc,coinPerk) {
-  const d=monsterDef(npc),tier=npc.tier||0;
-  let purse=0,lead=false;
-  for(const f of foes) { const md=MONSTERS[f.id]||d,main=!!f.boss||(!lead&&f.id===npc.monster); if(main) lead=true;
-    purse+=((md.coins||5)+tier*(md.coinStep||2))*(main?1:.5)*(f.calm?1.5:1); }
-  return Math.round(purse*(1+(coinPerk||0)));
-}
 // XP for one member, applied now; returns what the victory card shows.
 function b2GainFor(p,gain) {
   const sp0=b6SpEarned(p),lvl0=p.level,xp0=p.xp;
@@ -1471,7 +1453,7 @@ function b2RewardsData() {
   const calm=B2.foes.filter(f=>f.calm);
   for(const f of calm) setFlag('kind:'+f.id,(flag('kind:'+f.id)||0)+1);   // Grace's Kindness Scrapbook
   const coinPerk=B2.party.reduce((a,u)=>a+((u.perk&&u.perk.coins)||0),0);
-  const purse=b2Purse(B2.foes,npc,coinPerk)+B2.coinsWon;
+  const purse=btPurse(B2.foes,npc,coinPerk)+B2.coinsWon;
   npc.tier++; npc.maxHp+=d.hpStep; npc.defeatedUntil=performance.now()+25000; monsterFall(npc);
   coins+=purse;
   b2WriteBack();
@@ -1490,7 +1472,7 @@ function b2RewardsData() {
 
 // ---------- The full game: walking into a monster on the map ----------
 // opts (story fights, engine/story.js): tut (a TUTORIALS key: tips and a setup for the fight), level (the monster's level).
-function startBattle(npc,opts={}) {
+function b2StartMapFight(npc,opts={}) {
   const id=npc.monster,d=monsterDef(npc),lvl=opts.level||b7MonLevel(npc);   // opts.count: a story fight of that many of the same monster (chapter 1: three Mudlings)   // base level plus wins; Director mode keeps it near Tom's level (engine/feel.js)
   const F=B2_FORMATIONS[id],form=(opts.count?Array.from({length:opts.count},()=>[id,'front']):((typeof F==='function'?F():F)||[[id,'front']])).map(f=>[f[0],f[1],lvl]);   // a function: crowds of a random size
   // noBattle members (Justin, until his kit is built) follow Tom on the map but sit fights out.
@@ -1498,6 +1480,7 @@ function startBattle(npc,opts={}) {
   const levels={}; for(const p of fighters) levels[p.id]=p.level;
   b2Start({party:fighters.map(p=>p.id),levels,foes:form,bag,npc,carry:true,onEnd:null,tut:opts.tut||null});
 }
+BT.oldFight=b2StartMapFight;   // engine/bt-shell.js startBattle sends every fight Battle 3 does not take to this (removed with battle 2)
 
 // ---------- Battle Lab (title screen) ----------
 function b2Lab(i,who) {

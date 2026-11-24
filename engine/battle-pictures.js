@@ -6,13 +6,6 @@
 // Icons come from data/battle-icons.js.
 const bpText=b2RenderCmd;
 const BP_ELEM={kinetic:'e_kinetic',cozy:'e_cozy',splash:'e_splash',sparkle:'e_sparkle',chatter:'e_chatter',amber:'e_amber'};
-const bpOn=()=>{ try { return !!b7Diff().pictures; } catch(e) { return false; } };
-const bpIcon=(id,px,cls,grey)=>{
-  // Big, sharp pictures (data/battle-emoji.js) first; the old 16x16 pixel pictures (data/battle-icons.js) only for ids without one.
-  const be=typeof BE_MAP!=='undefined'&&BE_MAP[id];
-  if(be) return '<img class="bi be '+(cls||'')+(grey?' grey':'')+'" alt="" src="'+BE_SVG[be]+'" width="'+px+'" height="'+px+'">';
-  const u=biIcon(id,grey?'grey':''); return u?'<img class="bi '+(cls||'')+'" alt="" src="'+u+'" width="'+px+'" height="'+px+'">':''; };
-const bpWord=s=>{ const w=String(s||'').replace(/[^A-Za-z0-9' ]/g,' ').trim().split(/\s+/)[0].slice(0,9); return w.charAt(0).toUpperCase()+w.slice(1).toLowerCase(); };
 // Strength: 1, 2 or 3 fists from the move's damage multiplier.
 function bpFists(a) {
   if(!(a&&a.stat&&a.mult)) return '';
@@ -39,7 +32,7 @@ function bpMarks(a) {
 const bpElems=a=>((a&&a.elem)||[]).map(e=>bpIcon(BP_ELEM[e]||'e_sparkle',14)).join('');
 function bpMoveIcon(u,a,px,grey) { return bpIcon(u.id+'.'+a.key,px,'',grey)||bpIcon('x_moves',px,'',grey); }
 function bpBack() { return '<button type="button" class="b2-btn b2-back bp-back" data-back="1" aria-label="Back">'+bpIcon('x_back',28)+'</button>'; }
-function bpFace(f) { const im=f.side==='foe'?b2Thumb(f.id):b2Portrait(f.id); return im?'<img class="bp-face" alt="" src="'+im+'">':'<b class="b2-ph">'+b2Esc((f.name||'?')[0])+'</b>'; }
+function bpFace(f) { const im=f.side==='foe'?btThumb(f.id):btPortrait(f.id); return im?'<img class="bp-face" alt="" src="'+im+'">':'<b class="b2-ph">'+btEsc((f.name||'?')[0])+'</b>'; }
 function bpHp(f) { const r=Math.max(0,f.hp)/f.maxHp; return '<span class="bp-hp"><i class="'+(r<=.25?'crit':r<=.5?'low':'')+'" style="width:'+Math.round(r*100)+'%"></i></span>'; }
 
 function bpCross(u,cmdOn,off) {
@@ -56,11 +49,11 @@ function bpCross(u,cmdOn,off) {
 // Move and bag buttons: the picture fills the box, a small caption sits under it.
 function bpBtn(i,sel,no,basic,ic,word) {
   return '<button type="button" class="b2-btn bp-btn'+(basic?' b2-basic':'')+(sel?' sel':'')+(no?' no':'')+'" data-i="'+i+'">'+
-    '<span class="bp-ic">'+ic+'</span><span class="bp-w">'+b2Esc(word)+'</span></button>';
+    '<span class="bp-ic">'+ic+'</span><span class="bp-w">'+btEsc(word)+'</span></button>';
 }
 // Tombo button badge: the faces of the team-up (the one acting, then the partners) in a pink ring along the bottom of the picture.
 function bpPair(u,r) {
-  const f=p=>{ const im=b2Portrait(p.id); return im?'<img alt="" src="'+im+'">':'<b class="b2-ph">'+b2Esc((p.name||'?')[0])+'</b>'; };
+  const f=p=>{ const im=btPortrait(p.id); return im?'<img alt="" src="'+im+'">':'<b class="b2-ph">'+btEsc((p.name||'?')[0])+'</b>'; };
   return '<span class="bp-pair">'+[u].concat(r.with||[]).map(f).join('')+'</span>';
 }
 function bpSkills(u) {

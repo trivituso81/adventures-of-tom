@@ -106,43 +106,6 @@ function b2FoeFrame(f,R0) {
   const L=typeof bclipFor==='function'?bclipFor(f.id,'loop'):null;   // a video-made idle loop (engine/clips.js); each monster starts at its own point
   return L?bclipLoopFrame(L,now+f.idx*900):R0;
 }
-// ---------- Painted meters (Tom, 2026-11-05) ----------
-// One look for every battle meter, on the canvas (enemies) and in the party window (index.html, .b2-bar): a rounded well with the
-// window frame's bronze rim, and a fill shaded like the paintings (lit from the top left, deeper underneath, a soft sheen).
-// Colors are taken from the painted areas: meadow green, honey, terracotta, rose. Each entry is [light, mid, deep].
-const B2_METER={hp:['#cfe89a','#8cc063','#4f8a48'],low:['#ffe6a0','#eeb651','#bd7f2a'],crit:['#ffc0a2','#e57f62','#ad4636'],
-  warm:['#ffd3e0','#f58fb0','#c9537c'],warmFlash:['#ffffff','#ffe3ee','#f7a6c2'],rim:'#b8914a',rimLo:'#6d5629',ink:'#0a0e18',well:['#080a14','#1d2132']};
-function b2MeterPath(x,y,w,h) { const r=h/2; gfx.beginPath(); gfx.moveTo(x+r,y); gfx.lineTo(x+w-r,y); gfx.arc(x+w-r,y+r,r,-Math.PI/2,Math.PI/2); gfx.lineTo(x+r,y+h); gfx.arc(x+r,y+r,r,Math.PI/2,Math.PI*1.5); gfx.closePath(); }
-function b2Meter(x,y,w,h,q,C) {
-  q=Math.max(0,Math.min(1,q)); gfx.save();
-  // Soft shadow on the ground, dark ring, bronze rim, then the well.
-  gfx.globalAlpha*=.35; b2MeterPath(x-1.5,y-.5,w+3,h+3); gfx.fillStyle='#1b140c'; gfx.fill(); gfx.globalAlpha/=.35;
-  b2MeterPath(x-2,y-2,w+4,h+4); gfx.fillStyle=B2_METER.ink; gfx.fill();
-  const rg=gfx.createLinearGradient(0,y-1.2,0,y+h+1.2); rg.addColorStop(0,'#e6c988'); rg.addColorStop(.5,B2_METER.rim); rg.addColorStop(1,B2_METER.rimLo);
-  b2MeterPath(x-1.2,y-1.2,w+2.4,h+2.4); gfx.fillStyle=rg; gfx.fill();
-  const wg=gfx.createLinearGradient(0,y,0,y+h); wg.addColorStop(0,B2_METER.well[0]); wg.addColorStop(1,B2_METER.well[1]);
-  b2MeterPath(x,y,w,h); gfx.fillStyle=wg; gfx.fill();
-  if(q>0) {
-    const fw=Math.max(h,w*q);
-    b2MeterPath(x,y,w,h); gfx.clip();
-    const fg=gfx.createLinearGradient(0,y,0,y+h); fg.addColorStop(0,C[0]); fg.addColorStop(.42,C[1]); fg.addColorStop(1,C[2]);
-    b2MeterPath(x,y,fw,h); gfx.fillStyle=fg; gfx.fill();
-    // Sheen along the top and a lit leading edge.
-    gfx.globalAlpha*=.5; b2MeterPath(x+h*.35,y+h*.14,Math.max(1,fw-h*.7),h*.26); gfx.fillStyle='#fffaf0'; gfx.fill();
-  }
-  gfx.restore();
-}
-// The enemy's letter (A, B, C): a small bronze-rimmed medallion in the window type.
-function b2MeterTag(cx,cy,ch) {
-  gfx.save();
-  gfx.beginPath(); gfx.arc(cx,cy,8.5,0,Math.PI*2); gfx.fillStyle=B2_METER.ink; gfx.fill();
-  const rg=gfx.createLinearGradient(0,cy-7.5,0,cy+7.5); rg.addColorStop(0,'#e6c988'); rg.addColorStop(.5,B2_METER.rim); rg.addColorStop(1,B2_METER.rimLo);
-  gfx.beginPath(); gfx.arc(cx,cy,7.5,0,Math.PI*2); gfx.fillStyle=rg; gfx.fill();
-  const wg=gfx.createLinearGradient(0,cy-6,0,cy+6); wg.addColorStop(0,'#232a3b'); wg.addColorStop(1,'#141924');
-  gfx.beginPath(); gfx.arc(cx,cy,6.2,0,Math.PI*2); gfx.fillStyle=wg; gfx.fill();
-  gfx.font="bold 10px Georgia,'Palatino Linotype',Palatino,serif"; gfx.textAlign='center'; gfx.textBaseline='middle'; gfx.fillStyle='#f2e6cc'; gfx.fillText(ch,cx,cy+.6);
-  gfx.restore();
-}
 // Enemies that fly or float (Tom, 2026-11-05): the only ones raised off the ground, bobbing at the old pace. Add an id here to make another enemy hover.
 const B2_FLYERS=new Set(['skeeter','tickets','boommoth','fogwisp','hushling','pausesprite','greynote','jetlag','redeye']);
 const B2_HOVER=14;
@@ -210,12 +173,12 @@ function b2DrawEnemies(t) {
     }
     // Megaphone wind-up over a boss that is about to hit everyone.
     if(f.intent&&f.intent.kind==='all') { const yy=top-30-Math.round(Math.abs(Math.sin(t*6))*5); label('!!',x+w/2+2,yy+2,'#1b2d27',4); label('!!',x+w/2,yy,'#ff8f80',4); }
-    // Painted HP and Warmth meters and the letter medallion under the feet (b2Meter); status tags over the head.
+    // Painted HP and Warmth meters and the letter medallion under the feet (btMeter); status tags over the head.
     const bw=Math.max(40,Math.min(64,w*.7)),bx=Math.round(f.px-bw/2),byy=Math.min(f.py+9,324-18),r=f.hp/f.maxHp;   // kept on the stage for an enemy at the very bottom
-    b2Meter(bx,byy,bw,7,r,r<=.25?B2_METER.crit:r<=.5?B2_METER.low:B2_METER.hp);
+    btMeter(bx,byy,bw,7,r,r<=.25?BT_METER.crit:r<=.5?BT_METER.low:BT_METER.hp);
     // Warmth (Kindness): fills toward Un-Grumping.
-    b2Meter(bx+3,byy+9,bw-6,5,f.warm/f.warmGoal,f.warmFlash>0&&Math.floor(t*14)%2?B2_METER.warmFlash:B2_METER.warm);
-    if(f.letter) b2MeterTag(bx-10,byy+5,f.letter);
+    btMeter(bx+3,byy+9,bw-6,5,f.warm/f.warmGoal,f.warmFlash>0&&Math.floor(t*14)%2?BT_METER.warmFlash:BT_METER.warm);
+    if(f.letter) btMeterTag(bx-10,byy+5,f.letter);
     let syy=top-(f.st.pietin?30:16);
     for(const k in f.st) { const s=B2_STATUS[k]; if(!s||k==='pietin') continue; label(s.short,f.px+1,syy+1,'#0b0d12',2); label(s.short,f.px,syy,s.color,2); syy-=13; }
   }
@@ -334,17 +297,6 @@ function b2Update(dt) {
 }
 
 // ---------- DOM: ribbon, party cards, command area ----------
-const b2Thumbs={};
-function b2Thumb(id) {
-  if(b2Thumbs[id]) return b2Thumbs[id];
-  const d=MONSTERS[id],R=d.sprite,c=document.createElement('canvas'),n=Math.max(R.length,R[0].length);
-  c.width=c.height=n; const g=c.getContext('2d');
-  const ox=Math.floor((n-R[0].length)/2),oy=n-R.length;
-  for(let r=0;r<R.length;r++) for(let k=0;k<R[r].length;k++) { const ch=R[r][k]; if(ch==='.') continue; g.fillStyle=d.pal[ch]; g.fillRect(ox+k,oy+r,1,1); }
-  return b2Thumbs[id]=c.toDataURL();
-}
-const b2Esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-function b2Portrait(id) { return (typeof PORTRAITS!=='undefined'&&PORTRAITS[id])||''; }
 
 // The weight to preview on the ribbon for what the cursor is on right now.
 function b2PreviewWeight() {
@@ -356,21 +308,21 @@ function b2PreviewWeight() {
 function b2RenderRibbon() {
   const box=$('b2-ribbon'); if(!box) return;
   const list=b2Forecast(b2PreviewWeight());
-  box.innerHTML='<span class="b2-rib-lbl">TURN</span>'+list.map(e=>{
-    const u=e.u,cls='b2-tk '+(u.side==='foe'?'foe':'pty')+(e.now?' now':'')+(e.ghost?' ghost':'')+(e.intent?' tel':'');
-    const img=u.side==='foe'?b2Thumb(u.id):b2Portrait(u.id);
+  box.innerHTML='<span class="bt-rib-lbl">TURN</span>'+list.map(e=>{
+    const u=e.u,cls='bt-tk '+(u.side==='foe'?'foe':'pty')+(e.now?' now':'')+(e.ghost?' ghost':'')+(e.intent?' tel':'');
+    const img=u.side==='foe'?btThumb(u.id):btPortrait(u.id);
     // Boss telegraphs on its next turn: lock-on (who), megaphone (everyone), shield count, or stagger.
     let badge='';
     if(e.intent) {
-      if(u.st.staggered) badge='<i class="b2-int stg" title="Staggered">ZZ</i>';
-      else if(u.intent.kind==='cut') badge='<i class="b2-int lock" title="CUT! The next person loses their turn">CUT</i>';
-      else if(u.intent.kind==='heal') badge='<i class="b2-int stg" title="Take Two: it heals">+HP</i>';
-      else if(u.intent.kind==='broil') badge='<i class="b2-int all" title="BROIL: hits everyone. Splash calls it off">HOT</i>';
-      else if(u.intent.kind==='dig') badge='<i class="b2-int stg" title="Dig Up: it eats its buried acorn">DIG</i>';
-      else if(u.intent.kind==='lock') badge='<i class="b2-int lock" title="Lock-on: '+b2Esc(u.intent.target.name)+'">◎'+b2Esc(u.intent.target.name.charAt(0))+'</i>';
-      else badge='<i class="b2-int all" title="Hits everyone">!!'+(u.shield?'<s>'+(u.shield.need-u.shield.hits)+'</s>':'')+'</i>';
+      if(u.st.staggered) badge='<i class="bt-int stg" title="Staggered">ZZ</i>';
+      else if(u.intent.kind==='cut') badge='<i class="bt-int lock" title="CUT! The next person loses their turn">CUT</i>';
+      else if(u.intent.kind==='heal') badge='<i class="bt-int stg" title="Take Two: it heals">+HP</i>';
+      else if(u.intent.kind==='broil') badge='<i class="bt-int all" title="BROIL: hits everyone. Splash calls it off">HOT</i>';
+      else if(u.intent.kind==='dig') badge='<i class="bt-int stg" title="Dig Up: it eats its buried acorn">DIG</i>';
+      else if(u.intent.kind==='lock') badge='<i class="bt-int lock" title="Lock-on: '+btEsc(u.intent.target.name)+'">◎'+btEsc(u.intent.target.name.charAt(0))+'</i>';
+      else badge='<i class="bt-int all" title="Hits everyone">!!'+(u.shield?'<s>'+(u.shield.need-u.shield.hits)+'</s>':'')+'</i>';
     }
-    return '<div class="'+cls+'" title="'+b2Esc(u.name)+'">'+(img?'<img alt="" src="'+img+'">':'<span>'+b2Esc(u.name.charAt(0))+'</span>')+(u.letter?'<b>'+u.letter+'</b>':'')+badge+'</div>';
+    return '<div class="'+cls+'" title="'+btEsc(u.name)+'">'+(img?'<img alt="" src="'+img+'">':'<span>'+btEsc(u.name.charAt(0))+'</span>')+(u.letter?'<b>'+u.letter+'</b>':'')+badge+'</div>';
   }).join('');
 }
 function b2RenderParty() {
@@ -381,10 +333,10 @@ function b2RenderParty() {
     const pips=Array.from({length:B2_VP.cap},(_,k)=>'<i'+(k<u.vp?' class="on"':'')+'></i>').join('');
     const sk=Object.keys(u.st).filter(k=>B2_STATUS[k]&&!B2_STATUS[k].hide);
     const st=sk.slice(0,2).map(k=>'<span class="b2-st" style="color:'+B2_STATUS[k].color+'">'+B2_STATUS[k].short+'</span>').join('')+(sk.length>2?'<span class="b2-st">+'+(sk.length-2)+'</span>':'');
-    const img=b2Portrait(u.id),tb=b2TraitBadge(u);   // engine/battle2-traits.js
-    const badge=tb.txt&&u.hp>0?'<b class="b2-tr'+(tb.on?' on':'')+(tb.cls?' '+tb.cls:'')+'" title="'+b2Esc(tb.title)+'">'+b2Esc(tb.txt)+'</b>':'';
+    const img=btPortrait(u.id),tb=b2TraitBadge(u);   // engine/battle2-traits.js
+    const badge=tb.txt&&u.hp>0?'<b class="b2-tr'+(tb.on?' on':'')+(tb.cls?' '+tb.cls:'')+'" title="'+btEsc(tb.title)+'">'+btEsc(tb.txt)+'</b>':'';
     return '<div class="'+cls+'" data-i="'+i+'"><span class="b2-pt">'+(img?'<img alt="" src="'+img+'">':'<span class="b2-ph">'+u.name.charAt(0)+'</span>')+badge+'</span>'+
-      '<div><div class="b2-nm">'+b2Esc(u.name)+st+'<em>Lv'+u.lvl+'</em></div>'+
+      '<div><div class="b2-nm">'+btEsc(u.name)+st+'<em>Lv'+u.lvl+'</em></div>'+
       '<div class="b2-bar"><i class="'+(u.light?'light':r<=.25?'crit':r<=.5?'low':'')+'" style="width:'+Math.round(r*100)+'%"></i></div>'+
       '<div class="b2-sub"><span>'+(u.light?'HP \u2726 LIGHT \u2726':u.hp<=0?'KNOCKED OUT':'HP '+Math.max(0,u.hp)+'/'+u.maxHp)+'</span><span class="b2-vp" aria-label="VP '+u.vp+'">'+pips+'</span></div></div></div>';
   }).join('');
@@ -562,9 +514,9 @@ function b2RenderCmd() {
   const cmdOn=battle.state==='command';
   if(!cmdOn||B2.ui==='cross'||B2.ui==='busy'||!u||u.side!=='party') {
     const pu=u&&u.side==='party'?u:B2.party[0],off=!cmdOn?' off':'';
-    const img=b2Portrait(pu.id);
+    const img=btPortrait(pu.id);
     // One button per list. The small word is the first move in it (or NONE); ATTACK shows VP.
-    const tabBtn=(tab,d)=>{ const f=b2TabRows(pu,tab)[0],nm=f?b2Esc(b2Title(b2RowName(f))):'NONE';
+    const tabBtn=(tab,d)=>{ const f=b2TabRows(pu,tab)[0],nm=f?btEsc(b2Title(b2RowName(f))):'NONE';
       return '<button type="button" class="b2-x '+d+(tab==='attack'?off:(cmdOn&&b2TabOn(pu,tab)?'':' off'))+'" data-d="'+d+'"><span class="ar"></span>'+B2_TAB_NAME[tab]+'<small'+(tab!=='attack'&&f&&b2RowName(f).length>9?' class="long"':'')+'>'+(tab==='attack'?pu.vp+' VP':nm)+'</small></button>'; };
     box.innerHTML='<div class="b2-cross">'+tabBtn('attack','up')+tabBtn('warmth','left')+
       '<button type="button" class="b2-mid'+off+'" data-insp="1" aria-label="Inspect enemies">'+(img?'<img alt="" src="'+img+'">':'')+'<small>INSPECT</small></button>'+
@@ -575,21 +527,21 @@ function b2RenderCmd() {
   const back='<button type="button" class="b2-btn b2-back" data-back="1"><span>Back</span><em>B / Esc</em></button>';
   if(B2.ui==='skills') {
     // A Tombo row shows the faces of who the actor teams up with and its HEART price; greyed until the meter and the team are ready.
-    const faces=r=>'<i class="b2-tbp">'+(r.with||[]).map(p=>{ const im=b2Portrait(p.id); return im?'<img alt="'+b2Esc(p.name)+'" src="'+im+'">':'<b class="b2-ph">'+b2Esc(p.name[0])+'</b>'; }).join('')+'</i>';
+    const faces=r=>'<i class="b2-tbp">'+(r.with||[]).map(p=>{ const im=btPortrait(p.id); return im?'<img alt="'+btEsc(p.name)+'" src="'+im+'">':'<b class="b2-ph">'+btEsc(p.name[0])+'</b>'; }).join('')+'</i>';
     const rows=b2SkillRows(u);
     box.innerHTML='<div class="b2-grid">'+(rows.length?rows.map((s,i)=>{
-      if(s.T) return '<button type="button" class="b2-btn b2-tb'+(i===B2.sel?' sel':'')+(s.why?' no':'')+'" data-i="'+i+'">'+faces(s)+'<div class="b2-tbt"><span class="b2-sn">'+b2Esc(b2Title(s.T.name))+b2RoleIcons(s.T)+'</span><em>'+b2Esc(s.label)+' · '+s.T.cost+'% HEART'+((s.T.elem||[]).length?' <span class="b2-els">'+b2ElemIcons(s.T.elem)+'</span>':'')+'</em></div></button>';
+      if(s.T) return '<button type="button" class="b2-btn b2-tb'+(i===B2.sel?' sel':'')+(s.why?' no':'')+'" data-i="'+i+'">'+faces(s)+'<div class="b2-tbt"><span class="b2-sn">'+btEsc(b2Title(s.T.name))+b2RoleIcons(s.T)+'</span><em>'+btEsc(s.label)+' · '+s.T.cost+'% HEART'+((s.T.elem||[]).length?' <span class="b2-els">'+b2ElemIcons(s.T.elem)+'</span>':'')+'</em></div></button>';
       const c=b2Cost(u,s);
-      return '<button type="button" class="b2-btn'+(s===u.kit.basic?' b2-basic':'')+(i===B2.sel?' sel':'')+(u.vp<c||b2Shushed(u,s)?' no':'')+'" data-i="'+i+'"><div class="b2-top"><span class="b2-sn">'+b2Esc(b2Title(s.name))+b2RoleIcons(s)+'</span><i class="b2-cost">'+b2CostTag(u,s)+'</i></div>'+((s.elem||[]).length?'<em class="b2-els">'+b2ElemIcons(s.elem)+'</em>':'')+'</button>'; }).join(''):'<p class="b2-empty">Nothing here yet.</p>')+back+'</div>';
+      return '<button type="button" class="b2-btn'+(s===u.kit.basic?' b2-basic':'')+(i===B2.sel?' sel':'')+(u.vp<c||b2Shushed(u,s)?' no':'')+'" data-i="'+i+'"><div class="b2-top"><span class="b2-sn">'+btEsc(b2Title(s.name))+b2RoleIcons(s)+'</span><i class="b2-cost">'+b2CostTag(u,s)+'</i></div>'+((s.elem||[]).length?'<em class="b2-els">'+b2ElemIcons(s.elem)+'</em>':'')+'</button>'; }).join(''):'<p class="b2-empty">Nothing here yet.</p>')+back+'</div>';
   } else if(B2.ui==='bag') {
     const rows=b2BagList(u);
-    box.innerHTML='<div class="b2-grid">'+rows.map((r,i)=>'<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+(r.no?' no':'')+'" data-i="'+i+'"><span>'+b2Esc(r.name)+'</span><em>'+(r.role?'<span class="b2-role" style="background:'+B2_ROLES[r.role].color+'">'+B2_ROLES[r.role].tag+'</span>':'')+b2Esc(r.sub)+'</em></button>').join('')+back+'</div>';
+    box.innerHTML='<div class="b2-grid">'+rows.map((r,i)=>'<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+(r.no?' no':'')+'" data-i="'+i+'"><span>'+btEsc(r.name)+'</span><em>'+(r.role?'<span class="b2-role" style="background:'+B2_ROLES[r.role].color+'">'+B2_ROLES[r.role].tag+'</span>':'')+btEsc(r.sub)+'</em></button>').join('')+back+'</div>';
   } else if(B2.ui==='inspect') {
-    box.innerHTML='<div class="b2-list">'+b2LiveFoes().map((f,i)=>'<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+'" data-i="'+i+'"><span>'+b2Esc(f.name.toUpperCase())+'</span><em>HP '+f.hp+'/'+f.maxHp+' · <b class="b2-warm">WARMTH '+f.warm+'/'+f.warmGoal+'</b>'+(f.revealed&&f.weak.length?' · '+b2ElemChip(f.weak):'')+'</em></button>').join('')+back+'</div>';
+    box.innerHTML='<div class="b2-list">'+b2LiveFoes().map((f,i)=>'<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+'" data-i="'+i+'"><span>'+btEsc(f.name.toUpperCase())+'</span><em>HP '+f.hp+'/'+f.maxHp+' · <b class="b2-warm">WARMTH '+f.warm+'/'+f.warmGoal+'</b>'+(f.revealed&&f.weak.length?' · '+b2ElemChip(f.weak):'')+'</em></button>').join('')+back+'</div>';
   } else if(B2.ui==='target') {
     box.innerHTML='<div class="b2-list">'+B2.opts.map((o,i)=>{ const t1=o.targets.length===1?o.targets[0]:null;
       const sub=t1?(t1.hp<=0?'KNOCKED OUT':'HP '+t1.hp+'/'+t1.maxHp)+(t1.side==='foe'&&t1.revealed&&t1.weak.length?' · '+b2ElemChip(t1.weak).replace(/<span/g,'<span title="weak"'):''):o.targets.length+' targets';
-      return '<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+'" data-i="'+i+'"><span>'+b2Esc(o.label.toUpperCase())+'</span><em>'+sub+'</em></button>'; }).join('')+back+'</div>';
+      return '<button type="button" class="b2-btn'+(i===B2.sel?' sel':'')+'" data-i="'+i+'"><span>'+btEsc(o.label.toUpperCase())+'</span><em>'+sub+'</em></button>'; }).join('')+back+'</div>';
   }
 }
 // The ▼ Bag: the kind word a monster wants (COMPLIMENT, GREAT TAKE!...), Deedee's Warm Crust, every pocket item, then RUN.
@@ -776,15 +728,6 @@ function b2Pad(dir,dirEdge,A,B) {
   if(A) b2A(); else if(B) b2Back();
 }
 // ---------- Tap an enemy to target it ----------
-// A screen point to canvas pixels (576x324). The forced-landscape layout turns the whole stage a quarter turn,
-// so the canvas' x runs down the screen and its y runs toward the left (same swap as the D-pad in engine/draw.js).
-function b2CanvasPt(cx,cy) {
-  const cv=$('battle-canvas'); if(!cv) return null;
-  const r=cv.getBoundingClientRect(); if(!r.width||!r.height) return null;
-  const rot=typeof layout!=='undefined'&&layout.rotated;
-  const u=rot?(cy-r.top)/r.height:(cx-r.left)/r.width,v=rot?(r.right-cx)/r.width:(cy-r.top)/r.height;
-  return {x:u*576,y:v*324,inside:u>=0&&u<=1&&v>=0&&v<=1};
-}
 // The living enemy under a canvas point: its sprite plus a little slack, and the HP bars under its feet.
 function b2FoeAt(x,y) {
   let best=null,bd=1e9;
@@ -799,7 +742,7 @@ function b2FoeAt(x,y) {
 // Which target option a tap at (cx,cy) means, or -1. One enemy: its own option. A row: the option holding it.
 function b2TargetAt(cx,cy) {
   if(!B2.active||battle.state!=='command'||B2.ui!=='target'||!B2.opts) return -1;
-  const q=b2CanvasPt(cx,cy); if(!q||!q.inside) return -1;
+  const q=btCanvasPt(cx,cy); if(!q||!q.inside) return -1;
   const f=b2FoeAt(q.x,q.y); if(!f) return -1;
   const k=B2.opts.findIndex(o=>o.targets.length===1&&o.targets[0]===f);
   return k>=0?k:B2.opts.findIndex(o=>o.targets.includes(f));

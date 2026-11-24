@@ -75,7 +75,7 @@ def sheet(frames,cols,path,scale=.5):
 def wait_cmd(pg,t=40000): pg.wait_for_function("()=>window.__LE.battle.state==='command'&&(B3.actor||B3.ui==='done')",timeout=t)
 def state(pg): return pg.evaluate("""()=>({ui:B3.ui,actor:B3.actor&&B3.actor.id,key:B3.actor&&B3.actor.key,pep:B3.actor&&B3.actor.pep,over:B3.F.over,
   foes:B3.F.foes.map(f=>({key:f.key,id:f.id,alive:!f.ko&&f.hp>0,hp:f.hp,drenched:!!f.st.drenched})),
-  bar:[...document.querySelectorAll('#b3-bar .b2-tk')].map(e=>e.dataset.k+(e.classList.contains('now')?'!':'')+(e.classList.contains('ghost')?'?':'')),
+  bar:[...document.querySelectorAll('#b3-bar .bt-tk')].map(e=>e.dataset.k+(e.classList.contains('now')?'!':'')+(e.classList.contains('ghost')?'?':'')),
   placed:B3.F.party.map(p=>p.placed),turns:B3.F.turnLog.length})""")
 # Every test fight starts from the Lab's fresh loadouts (every Vibe at Rank 2), so Vibe Points won by an earlier test fight never
 # change what the next one starts with. keep=True: use the Lab's book as it stands (the stage 4 section sets it up first).
@@ -334,7 +334,7 @@ def stage3_fight(pg,idx):
     pg.evaluate("()=>{ window.__s3.keep=true; }")
     glare_at_rose(pg,S,fr,1); m=marked(pg); fr.append(shot(pg)); shot(pg).save(os.path.join(OUT,'b3-s3-marked.png'))
     if m!={'mark':'p2','charge':'Swamp Chomp','chip':True,'real':'p2','rc':'swamp_chomp'}: fails.append(S+f'after Big Glare the screen should show Rose Marked for Swamp Chomp: {m}')
-    if not pg.evaluate("()=>!!document.querySelector('#b3-bar .b2-tk.foe .b2-int')"): fails.append(S+'the boss has no wind-up badge on the turn bar')
+    if not pg.evaluate("()=>!!document.querySelector('#b3-bar .bt-tk.foe .bt-int')"): fails.append(S+'the boss has no wind-up badge on the turn bar')
     hold(pg)
     pg.click('#b3-party .bx-pc[data-i="2"]'); pg.wait_for_timeout(300); info.append(shot(pg)); T=tray_full(pg,'p2')
     if 'marked' not in T or 'swamp chomp' not in T: fails.append(S+"Rose's tray does not say who Marked her: "+T[:200])
@@ -370,7 +370,7 @@ def stage3_fight(pg,idx):
         if breaks(pg)>n0: break
         basic(pg); brk+=burst(pg,10,220); wait_cmd(pg)
     shot(pg).save(os.path.join(OUT,'b3-s3-flustered.png'))
-    L=log(pg,14); v=pg.evaluate("()=>({fl:B3.view.u.f0.st.includes('flustered'),pips:B3.view.u.f0.pips,bar:!!document.querySelector('#b3-bar .b2-tk.b3-flus'),badge:(document.querySelector('#b3-bar .b2-tk.b3-flus .b2-int')||{}).textContent,lock:B3.F.foes[0].pipLock,guard:B3.F.foes[0].st.flustered&&true})")
+    L=log(pg,14); v=pg.evaluate("()=>({fl:B3.view.u.f0.st.includes('flustered'),pips:B3.view.u.f0.pips,bar:!!document.querySelector('#b3-bar .bt-tk.b3-flus'),badge:(document.querySelector('#b3-bar .bt-tk.b3-flus .bt-int')||{}).textContent,lock:B3.F.foes[0].pipLock,guard:B3.F.foes[0].st.flustered&&true})")
     if breaks(pg)!=n0+1 or 'BREAK!' not in L or 'loses Swamp Chomp' not in L: fails.append(S+'the Break did not show, or did not cancel the wind-up: '+L[-300:])
     if not(v['fl'] and v['pips']==0 and v['bar'] and v['badge']=='BREAK' and v['lock']): fails.append(S+f'after the Break the screen should show a Flustered boss with empty pips and a tipped face on the bar: {v}')
     m=marked(pg)
@@ -384,7 +384,7 @@ def stage3_fight(pg,idx):
     for turn in range(6):
         if pg.evaluate("()=>B3.view.u.f0.pips")==6: break
         basic(pg); brk+=burst(pg,8,250); wait_cmd(pg)
-    v=pg.evaluate("()=>[B3.view.u.f0.pips,B3.view.u.f0.st.includes('flustered'),!!document.querySelector('#b3-bar .b2-tk.b3-flus')]")
+    v=pg.evaluate("()=>[B3.view.u.f0.pips,B3.view.u.f0.st.includes('flustered'),!!document.querySelector('#b3-bar .bt-tk.b3-flus')]")
     if v!=[6,False,False]: fails.append(S+f'on its next turn the pips should be back and Flustered gone: {v}')
     # Adds walk in (a poke: no chapter 1 monster calls any)
     pg.evaluate("""()=>{ const F=B3.F,c={F,actor:F.foes[0],beats:[],g:'pre',rec:0,targets:[],hit:[],detonated:{}};
@@ -423,7 +423,7 @@ def stage3_land(pg,idx):
         if breaks(pg): break
         basic(pg); fr+=burst(pg,5,300,rot=rot); wait_cmd(pg)
     R(shot(pg)).save(os.path.join(OUT,'b3-s3-land-break.png'))
-    if not breaks(pg) or not pg.evaluate("()=>!!document.querySelector('#b3-bar .b2-tk.b3-flus')"): fails.append(S+'no Break on screen')
+    if not breaks(pg) or not pg.evaluate("()=>!!document.querySelector('#b3-bar .bt-tk.b3-flus')"): fails.append(S+'no Break on screen')
     fr.append(R(shot(pg)))
     tap_foe(pg,'f0'); pg.wait_for_timeout(300); fr.append(R(shot(pg)))
     if pg.evaluate("()=>B3.look||b3AimOpt().key")!='f0': fails.append(S+'tapping the boss did not show or aim at it')
@@ -596,7 +596,7 @@ def s5(pg): return pg.evaluate("""()=>{ const F=B3.F,P={}; for(const p of F.part
     ctr:(document.querySelector('#b3-party .bx-pc[data-i="1"] .ctr')||{}).textContent||'',
     rows:[...document.querySelectorAll('#b3-rows .bx-mv .nm')].map(e=>e.textContent.replace(/^\\d+/,'').replace(/^★ /,'')),costs:[...document.querySelectorAll('#b3-rows .bx-mv .cost')].map(e=>e.textContent),
     free:(document.querySelector('#b3-rows .bx-free')||{}).textContent||'',back:!!document.querySelector('#b3-app [data-back]'),msg:document.getElementById('b3-msg').textContent,
-    bar:[...document.querySelectorAll('#b3-bar .b2-tk')].map(e=>e.dataset.k+(e.classList.contains('now')?'!':'')+(e.classList.contains('ghost')?'?':''))}; }""")
+    bar:[...document.querySelectorAll('#b3-bar .bt-tk')].map(e=>e.dataset.k+(e.classList.contains('now')?'!':'')+(e.classList.contains('ghost')?'?':''))}; }""")
 def pick_row(pg,name):
     """With a free Skill's deck open: highlight a row and use it (Enter)."""
     names=select_row(pg,name)

@@ -56,7 +56,7 @@ with sync_playwright() as pw:
             pg.evaluate("()=>{ for(const f of window.__LE.B2.foes) if(f.boss) f.hp=Math.min(f.hp,5); }")
             pg.evaluate("()=>{ window.__LE.b2Dir('up'); }"); pg.wait_for_timeout(250); pg.evaluate("()=>window.__LE.b2A()"); pg.wait_for_timeout(250); pg.evaluate("()=>window.__LE.b2A()")
         pg.wait_for_timeout(1500)
-    print('battle over',not pg.evaluate("()=>window.__LE.battle.active"),pg.evaluate("()=>window.__LE.B2.result"),errs[-3:])
+    print('battle over',not pg.evaluate("()=>window.__LE.battle.active"),pg.evaluate("()=>window.__LE.BT.result"),errs[-3:])
     pg.wait_for_timeout(2500); shot(pg,'after-win')
     print('state',pg.evaluate("()=>({bf:window.__LE.flag('battle:finalcall'),after:window.__LE.flag('ch11-after'),vance:window.__LE.flag('ch11-vance'),intro:window.__LE.intro.active,dlg:window.__LE.dialog&&window.__LE.dialog.active,map:window.__LE.map.id})"))
     for k in range(14):

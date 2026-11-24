@@ -569,19 +569,19 @@ html.landscape #splash .sp-head .sp-choice .sp-sub{font-size:10px}
 #battle.v2 .battle-stage{display:flex;flex-direction:column;align-items:stretch;justify-content:center}
 #battle.v2 #battle-canvas{margin:0 auto}
 .b2-ribbon{display:flex;gap:4px;align-items:center;justify-content:center;padding:5px 8px;background:var(--w-deep);border-bottom:1px solid var(--line);min-height:44px}
-.b2-rib-lbl{font-size:9px;font-weight:800;letter-spacing:1.2px;color:var(--label);margin-right:3px}
-.b2-tk{position:relative;flex:0 0 auto;width:28px;height:28px;border-radius:4px;background:var(--raise);box-shadow:0 0 0 1px var(--edge-ink),inset 0 0 0 1px var(--edge-hi);overflow:hidden;display:grid;place-items:center;color:var(--ink);font-size:11px;font-weight:800}
-.b2-tk img{width:100%;height:100%;display:block;object-fit:contain}
-.b2-tk.foe{background:#4a2f2f;box-shadow:0 0 0 1px var(--edge-ink),inset 0 0 0 1px #8a5050}
-.b2-tk.foe img{width:84%;height:84%}
-.b2-tk.now{width:34px;height:34px;box-shadow:0 0 0 2px var(--gold),0 0 0 3px var(--edge-ink)}
-.b2-tk.ghost{outline:2px dashed var(--gold);outline-offset:1px}
-.b2-tk b{position:absolute;right:1px;bottom:0;font-size:9px;line-height:1;color:#fff;text-shadow:0 1px 0 #000,1px 0 0 #000}
-.b2-tk{overflow:visible}.b2-tk img{border-radius:4px}
-.b2-tk.tel{box-shadow:0 0 0 2px #ff6a5c,0 0 0 3px var(--edge-ink)}
-.b2-int{position:absolute;left:50%;top:-7px;transform:translateX(-50%);font-style:normal;font-size:8px;font-weight:900;line-height:1;padding:1px 3px;border-radius:3px;white-space:nowrap;color:#1a1e26;background:#ff8f80;box-shadow:0 0 0 1px #000a}
-.b2-int.all{background:#ffb070}.b2-int.stg{background:#ffe27a}
-.b2-int s{text-decoration:none;margin-left:2px;padding:0 2px;border-radius:2px;background:#ffe27a}
+.bt-rib-lbl{font-size:9px;font-weight:800;letter-spacing:1.2px;color:var(--label);margin-right:3px}
+.bt-tk{position:relative;flex:0 0 auto;width:28px;height:28px;border-radius:4px;background:var(--raise);box-shadow:0 0 0 1px var(--edge-ink),inset 0 0 0 1px var(--edge-hi);overflow:hidden;display:grid;place-items:center;color:var(--ink);font-size:11px;font-weight:800}
+.bt-tk img{width:100%;height:100%;display:block;object-fit:contain}
+.bt-tk.foe{background:#4a2f2f;box-shadow:0 0 0 1px var(--edge-ink),inset 0 0 0 1px #8a5050}
+.bt-tk.foe img{width:84%;height:84%}
+.bt-tk.now{width:34px;height:34px;box-shadow:0 0 0 2px var(--gold),0 0 0 3px var(--edge-ink)}
+.bt-tk.ghost{outline:2px dashed var(--gold);outline-offset:1px}
+.bt-tk b{position:absolute;right:1px;bottom:0;font-size:9px;line-height:1;color:#fff;text-shadow:0 1px 0 #000,1px 0 0 #000}
+.bt-tk{overflow:visible}.bt-tk img{border-radius:4px}
+.bt-tk.tel{box-shadow:0 0 0 2px #ff6a5c,0 0 0 3px var(--edge-ink)}
+.bt-int{position:absolute;left:50%;top:-7px;transform:translateX(-50%);font-style:normal;font-size:8px;font-weight:900;line-height:1;padding:1px 3px;border-radius:3px;white-space:nowrap;color:#1a1e26;background:#ff8f80;box-shadow:0 0 0 1px #000a}
+.bt-int.all{background:#ffb070}.bt-int.stg{background:#ffe27a}
+.bt-int s{text-decoration:none;margin-left:2px;padding:0 2px;border-radius:2px;background:#ffe27a}
 .b2-cmd{justify-content:flex-start}.b2-cmd>.b2-grid,.b2-cmd>.b2-list,.b2-cmd>.b2-cross{margin-top:auto;margin-bottom:auto}
 html.landscape .b2-btn{gap:2px}html.landscape .b2-btn em{flex-wrap:nowrap}html.landscape .b2-el{font-size:7.5px;padding:0 2px}html.landscape .b2-role{font-size:7.5px;padding:1px 3px}
 .b2-ui{flex:1;display:flex;flex-direction:column;gap:6px;width:100%;max-width:960px;margin:0 auto;padding:8px 10px calc(10px + env(safe-area-inset-bottom));min-height:0}
@@ -596,7 +596,7 @@ html.landscape .b2-btn{gap:2px}html.landscape .b2-btn em{flex-wrap:nowrap}html.l
 .b2-nm{display:flex;align-items:center;font-size:14px;font-weight:800;letter-spacing:.5px}
 .b2-nm em{margin-left:auto;font-style:normal;color:var(--ink-dim);font-weight:600}
 .b2-st{font-size:8px;font-weight:800;padding:1px 3px;margin-left:5px;border-radius:2px;background:#0007;color:var(--gold)}
-/* Painted meters (2026-11-05, same look as b2Meter in engine/battle2-ui.js): a rounded well with the window's bronze rim, a fill shaded like the paintings. */
+/* Painted meters (2026-11-05, same look as btMeter in engine/battle2-ui.js): a rounded well with the window's bronze rim, a fill shaded like the paintings. */
 .b2-bar,.bp-hp{--m1:#cfe89a;--m2:#8cc063;--m3:#4f8a48;display:block;height:8px;border-radius:99px;margin:4px 1px 0;overflow:hidden;background:linear-gradient(#080a14,#1d2132);box-shadow:0 0 0 1px #b8914a,0 0 0 2px #0a0e18,inset 0 1px 2px #000c}
 .b2-bar i,.bp-hp i{display:block;height:100%;min-width:8px;border-radius:99px;background:linear-gradient(#fffaf099,#fffaf000) 3px 1px/calc(100% - 6px) 28% no-repeat,linear-gradient(var(--m1),var(--m2) 42%,var(--m3))}
 .b2-bar i[style*=":0%"],.bp-hp i[style*=":0%"]{display:none}
@@ -668,9 +668,9 @@ html.landscape #battle.v2{--b2pw:clamp(176px,23vw,224px)}
 html.landscape #battle.v2 .battle-stage{flex:1 1 0;width:auto;min-width:0;container-type:size;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom) env(safe-area-inset-left)}
 html.landscape #battle.v2 #battle-canvas{width:min(100cqw,calc((100cqh - 30px) * 16 / 9));height:auto;aspect-ratio:16/9;max-width:none;max-height:none}
 html.landscape #battle.v2 .b2-ribbon{min-height:0;padding:2px 6px;gap:3px;border-bottom:0;background:transparent}
-html.landscape #battle.v2 .b2-rib-lbl{font-size:8px;margin-right:2px}
-html.landscape #battle.v2 .b2-tk{width:22px;height:22px;font-size:9px}html.landscape #battle.v2 .b2-tk.now{width:26px;height:26px}
-html.landscape #battle.v2 .b2-tk b{font-size:8px}
+html.landscape #battle.v2 .bt-rib-lbl{font-size:8px;margin-right:2px}
+html.landscape #battle.v2 .bt-tk{width:22px;height:22px;font-size:9px}html.landscape #battle.v2 .bt-tk.now{width:26px;height:26px}
+html.landscape #battle.v2 .bt-tk b{font-size:8px}
 html.landscape #battle.v2 .b2-ui{flex:0 0 var(--b2pw);width:var(--b2pw);gap:3px;padding:calc(3px + env(safe-area-inset-top)) calc(4px + env(safe-area-inset-right)) calc(3px + env(safe-area-inset-bottom)) 3px}
 html.landscape #battle.v2 .b2-low{gap:3px}
 html.landscape #battle.v2 .b2-msg{font-size:9px;line-height:1.25;padding:3px 6px;max-height:6.4em;overflow-y:auto;-webkit-overflow-scrolling:touch}
@@ -1114,8 +1114,8 @@ html.tablet.landscape .sp-choice{padding:calc(8px*var(--ts)) calc(10px*var(--ts)
 html.tablet.landscape #battle.v2{--b2pw:clamp(280px,calc(224px*var(--ts)),360px)}
 html.tablet.landscape #battle.v2 .b2-ui{gap:calc(3px*var(--ts));padding:calc(calc(3px*var(--ts)) + env(safe-area-inset-top)) calc(calc(4px*var(--ts)) + env(safe-area-inset-right)) calc(calc(3px*var(--ts)) + env(safe-area-inset-bottom)) calc(3px*var(--ts))}
 html.tablet.landscape #battle.v2 .b2-low{gap:calc(3px*var(--ts))}
-html.tablet.landscape #battle.v2 .b2-ribbon{padding:calc(2px*var(--ts)) calc(6px*var(--ts));gap:calc(3px*var(--ts))}html.tablet.landscape #battle.v2 .b2-rib-lbl{font-size:calc(8px*var(--ts));margin-right:calc(2px*var(--ts))}
-html.tablet.landscape #battle.v2 .b2-tk{width:calc(22px*var(--ts));height:calc(22px*var(--ts));font-size:calc(9px*var(--ts))}html.tablet.landscape #battle.v2 .b2-tk.now{width:calc(26px*var(--ts));height:calc(26px*var(--ts))}html.tablet.landscape #battle.v2 .b2-tk b{font-size:calc(8px*var(--ts))}
+html.tablet.landscape #battle.v2 .b2-ribbon{padding:calc(2px*var(--ts)) calc(6px*var(--ts));gap:calc(3px*var(--ts))}html.tablet.landscape #battle.v2 .bt-rib-lbl{font-size:calc(8px*var(--ts));margin-right:calc(2px*var(--ts))}
+html.tablet.landscape #battle.v2 .bt-tk{width:calc(22px*var(--ts));height:calc(22px*var(--ts));font-size:calc(9px*var(--ts))}html.tablet.landscape #battle.v2 .bt-tk.now{width:calc(26px*var(--ts));height:calc(26px*var(--ts))}html.tablet.landscape #battle.v2 .bt-tk b{font-size:calc(8px*var(--ts))}
 html.tablet.landscape #battle.v2 .b2-msg{font-size:calc(9px*var(--ts));padding:calc(3px*var(--ts)) calc(6px*var(--ts))}
 html.tablet.landscape #battle.v2 .b2-party{padding:calc(3px*var(--ts));gap:calc(1px*var(--ts)) calc(3px*var(--ts))}
 html.tablet.landscape #battle.v2 .b2-heart{padding:0 calc(2px*var(--ts)) calc(2px*var(--ts));gap:calc(3px*var(--ts))}html.tablet.landscape #battle.v2 .b2-heart .lbl{font-size:calc(7px*var(--ts))}html.tablet.landscape #battle.v2 .b2-heart svg{width:calc(10px*var(--ts));height:calc(9px*var(--ts))}html.tablet.landscape #battle.v2 .b2-heart b{font-size:calc(8px*var(--ts))}
@@ -1157,9 +1157,9 @@ html.duo.landscape #battle.v2{--b2pw:188px}
 html.duo.landscape #battle.v2 .b2-party{grid-template-columns:minmax(0,1fr);gap:calc(3px*var(--ts)) 0}
 html.duo.landscape #battle.v2 .b2-pc{grid-template-columns:30px minmax(0,1fr);gap:6px;padding:2px 3px}
 html.duo.landscape #battle.v2 .b2-pc img,html.duo.landscape #battle.v2 .b2-ph{width:30px;height:30px}
-html.duo.landscape #battle.v2 .b2-tk{width:calc(44px*var(--ts));height:calc(44px*var(--ts));font-size:calc(16px*var(--ts));border-radius:7px}html.duo.landscape #battle.v2 .b2-tk img{border-radius:7px}
-html.duo.landscape #battle.v2 .b2-tk.now{width:calc(52px*var(--ts));height:calc(52px*var(--ts))}html.duo.landscape #battle.v2 .b2-tk b{font-size:calc(14px*var(--ts))}
-html.duo.landscape #battle.v2 .b2-ribbon{gap:calc(6px*var(--ts));padding:calc(4px*var(--ts)) calc(6px*var(--ts))}html.duo.landscape #battle.v2 .b2-rib-lbl{font-size:calc(11px*var(--ts))}
+html.duo.landscape #battle.v2 .bt-tk{width:calc(44px*var(--ts));height:calc(44px*var(--ts));font-size:calc(16px*var(--ts));border-radius:7px}html.duo.landscape #battle.v2 .bt-tk img{border-radius:7px}
+html.duo.landscape #battle.v2 .bt-tk.now{width:calc(52px*var(--ts));height:calc(52px*var(--ts))}html.duo.landscape #battle.v2 .bt-tk b{font-size:calc(14px*var(--ts))}
+html.duo.landscape #battle.v2 .b2-ribbon{gap:calc(6px*var(--ts));padding:calc(4px*var(--ts)) calc(6px*var(--ts))}html.duo.landscape #battle.v2 .bt-rib-lbl{font-size:calc(11px*var(--ts))}
 html.duo.landscape #battle.v2 .b2-x{font-size:11px;letter-spacing:0}
 html.duo.landscape #battle.v2 .b2-x small{font-size:9.5px}
 html.duofold:not(.landscape) #splash-art,html.duo:not(.landscape) #splash-art{background-size:auto 29%,auto,cover;background-position:center calc(12px + env(safe-area-inset-top)),0 0,center top}
@@ -1198,10 +1198,10 @@ html.landscape .mbuild{padding:4px 10px;gap:1px}
 html.landscape:not(.tablet):not(.duo) #battle.v2{--b2pw:clamp(320px,25vw,420px)}
 html.landscape:not(.tablet):not(.duo) #battle.v2 #battle-canvas{width:min(100cqw,calc((100cqh - 96px) * 16 / 9))}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-ribbon{min-height:0;padding:6px 10px;gap:8px}
-html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-rib-lbl{font-size:20px;letter-spacing:2px;margin-right:8px}
-html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-tk{width:55px;height:55px;font-size:22px;border-radius:8px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-tk img{border-radius:8px}
-html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-tk.now{width:65px;height:65px}
-html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-tk b{font-size:20px;right:3px;bottom:1px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .bt-rib-lbl{font-size:20px;letter-spacing:2px;margin-right:8px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .bt-tk{width:55px;height:55px;font-size:22px;border-radius:8px}html.landscape:not(.tablet):not(.duo) #battle.v2 .bt-tk img{border-radius:8px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .bt-tk.now{width:65px;height:65px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .bt-tk b{font-size:20px;right:3px;bottom:1px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-ui{gap:8px;padding:calc(8px + env(safe-area-inset-top)) calc(10px + env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) 8px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-low{gap:8px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-msg{font-size:16px;line-height:1.3;padding:8px 11px;max-height:8em;overflow-y:auto;-webkit-overflow-scrolling:touch}
@@ -1415,6 +1415,7 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="data/battle-sprites.js?v=foepaint2"></script>
 <script src="data/ko-sprites.js"></script>
 <script src="engine/battle.js"></script>
+<script src="engine/bt-shell.js?v=b3s23a"></script>
 <script src="engine/battle-draw.js?v=qa-coh05"></script>
 <script src="engine/recruit-fx.js"></script>
 <script src="engine/stage.js"></script>

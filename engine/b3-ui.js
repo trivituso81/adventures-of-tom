@@ -46,7 +46,7 @@ function b3Start(cfg) {
 function b3ShowUI(on) {
   const B=$('battle');
   B.classList.toggle('v3',on); B.classList.remove('v2');   // v3 marks Battle 3's own screen (b3-deck.css); battle 2 keeps v2
-  $('b2-ui').hidden=true; $('b2-ribbon').hidden=true; $('b3-bar').hidden=!on;
+  $('b3-bar').hidden=!on;
   if(on) B.hidden=false;
   b3SyncTools();
 }
@@ -162,19 +162,19 @@ function b3RenderBar(moved) {
   else if(B3.active&&battle.state==='command'&&B3.actor&&B3.ui!=='done') list=b3Forecast(B3.F,9,{actor:B3.actor,recovery:b3PreviewRecovery(),ghost:true}).map(e=>({k:e.u.key,now:e.now,div:e.div,ghost:e.ghost}));
   else list=B3.view.bar||[];
   // Remember where each face was, so a face that changes place slides there (a push visibly moves the monster back).
-  const was={}; box.querySelectorAll('.b2-tk[data-k]').forEach(el=>{ was[el.dataset.k]=[el.offsetLeft,el.offsetTop]; });
+  const was={}; box.querySelectorAll('.bt-tk[data-k]').forEach(el=>{ was[el.dataset.k]=[el.offsetLeft,el.offsetTop]; });
   const seen={};
-  box.innerHTML='<span class="b2-rib-lbl">'+B3_FORECAST.turns+'</span>'+list.map(e=>{
+  box.innerHTML='<span class="bt-rib-lbl">'+B3_FORECAST.turns+'</span>'+list.map(e=>{
     const u=b3Unit(B3.F,e.k),n=seen[e.k]=(seen[e.k]||0)+1,key=e.k+'#'+n,foe=u.side==='foe';
     const flus=foe&&n===1&&((B3.view.u[e.k]||{}).st||[]).includes('flustered');
     const pm=n===1&&B3.pvNow&&B3.pvNow.P&&battle.state==='command'?B3.pvNow.moved[e.k]:null;
-    const cls='b2-tk '+(foe?'foe':'pty')+(e.now?' now':'')+(e.ghost?' ghost':'')+(moved===e.k&&n===1?' b3-moved':'')+(pm?' b3-pvm':'')+(flus?' b3-flus':'');
-    const img=foe?b2Thumb(u.D&&u.D.art||u.id):b2Portrait(u.id);
-    const badge=pm?'<i class="b2-int b3-pvb" title="'+(pm.kind==='push'?'Pushed back ':'Pulled forward ')+pm.n+' ticks">'+(pm.kind==='push'?'\u25B6':'\u25C0')+'</i>':flus?'<i class="b2-int b3-brk" title="Flustered">BREAK</i>':foe&&n===1&&B3.view.charge[e.k]?'<i class="b2-int all" title="Winding up '+b2Esc(B3.view.charge[e.k])+'">!!</i>':'';
+    const cls='bt-tk '+(foe?'foe':'pty')+(e.now?' now':'')+(e.ghost?' ghost':'')+(moved===e.k&&n===1?' b3-moved':'')+(pm?' b3-pvm':'')+(flus?' b3-flus':'');
+    const img=foe?btThumb(u.D&&u.D.art||u.id):btPortrait(u.id);
+    const badge=pm?'<i class="bt-int b3-pvb" title="'+(pm.kind==='push'?'Pushed back ':'Pulled forward ')+pm.n+' ticks">'+(pm.kind==='push'?'\u25B6':'\u25C0')+'</i>':flus?'<i class="bt-int b3-brk" title="Flustered">BREAK</i>':foe&&n===1&&B3.view.charge[e.k]?'<i class="bt-int all" title="Winding up '+btEsc(B3.view.charge[e.k])+'">!!</i>':'';
     return (e.div?'<i class="b3-div" title="Round '+e.div+' starts here"><b>'+e.div+'</b></i>':'')+
-      '<div class="'+cls+'" data-k="'+key+'" title="'+b2Esc(u.name)+'">'+(img?'<img alt="" src="'+img+'">':'<span>'+b2Esc(u.name.charAt(0))+'</span>')+(u.letter?'<b>'+u.letter+'</b>':'')+badge+'</div>';
+      '<div class="'+cls+'" data-k="'+key+'" title="'+btEsc(u.name)+'">'+(img?'<img alt="" src="'+img+'">':'<span>'+btEsc(u.name.charAt(0))+'</span>')+(u.letter?'<b>'+u.letter+'</b>':'')+badge+'</div>';
   }).join('');
-  box.querySelectorAll('.b2-tk[data-k]').forEach(el=>{
+  box.querySelectorAll('.bt-tk[data-k]').forEach(el=>{
     const p=was[el.dataset.k]; if(!p) return;
     const dx=p[0]-el.offsetLeft,dy=p[1]-el.offsetTop; if(Math.abs(dx)<1&&Math.abs(dy)<1) return;
     el.style.transition='none'; el.style.transform='translate('+dx+'px,'+dy+'px)';

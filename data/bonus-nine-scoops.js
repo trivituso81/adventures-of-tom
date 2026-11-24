@@ -737,7 +737,7 @@ SCENES.nsPond=[
   {talk:'Rose',lines:['A bad guy! On a Saturday!'],voice:[['rose','badguy']]},
   {talk:'Tom',lines:['We get the scoops, we get the sundae, we\'re home by four. Everybody ready?']},
   {battle:()=>sceneActor('Brain Freeze'),tut:'nsBoss1'},
-  {if:()=>B2.result==='flee',then:[
+  {if:()=>BT.result==='flee',then:[
     {flag:'ns-rosefrozen'}, {flag:'ns-fled'},
     {call:()=>{ const r=sceneActor('rose'); if(r) r.facing='left'; }},
     {talk:'Grace',lines:['Tata, nothing WORKS.'],voice:[['grace','nothing_works']]},
@@ -892,7 +892,7 @@ SCENES.nsPond2=[
   {talk:'Rose',lines:['I have a pepper in my pocket and I\'m not afraid to use it.']},
   {talk:'Tom',lines:['Nobody\'s afraid of the pepper, Rose. Everybody ready? Warm things out.']},
   {battle:()=>sceneActor('Brain Freeze'),tut:'nsBoss1b'},
-  {if:()=>B2.result==='shell',then:[
+  {if:()=>BT.result==='shell',then:[
     {talk:'Grace',lines:['Tata, nothing WORKS.'],voice:[['grace','nothing_works']]},
     {talk:'Rose',lines:['He tried to freeze me AGAIN. I\'m spicy now. He can\'t.']},
     {talk:'Brain Freeze',lines:['Good. Nothing changes. Nobody leaves. Nobody grows up. Nobody forgets a birthday.']},

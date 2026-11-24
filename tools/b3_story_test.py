@@ -130,13 +130,13 @@ with sync_playwright() as pw:
     check('the victory card shows, with XP, coins, a VP line per person and the Ruckus',all(w in card for w in('VICTORY','XP','Pocket Coins','+15 VP','Combos')) and card.count('+15 VP')==3,card)
     check('the card has no HEART line',('HEART' not in card.upper()),card)
     ev(pg,"()=>b7CloseCard(true)"); pg.wait_for_timeout(800)
-    r=ev(pg,"""()=>({active:battle.active,v3:battle.v3,result:B2.result,flag:flag('battle:mudling'),
+    r=ev(pg,"""()=>({active:battle.active,v3:battle.v3,result:BT.result,flag:flag('battle:mudling'),
       xp:party.map((p,i)=>b6Total(p)-window.__xp[i]),coins:coins-window.__coins,gone:!currentMap.npcs.includes(window.__m),
       vp:Object.fromEntries(ALL_MEMBERS().filter(m=>m.vibes).map(m=>[m.id,Object.values(m.vibes.vp).reduce((a,b)=>a+b,0)])),
       main:Object.fromEntries(ALL_MEMBERS().filter(m=>m.vibes).map(m=>[m.id,m.vibes.vp[m.vibes.main]])),ruck:B3S.ruckus,
       rose:(()=>{const m=memberById('rose');return m.hp/m.maxHp;})()})""")
     check('the fight is closed and battle 2 is not running',not r['active'] and not r['v3'])
-    check('the story step read the result: B2.result win and flag battle:mudling win',r['result']=='win' and r['flag']=='win',r)
+    check('the story step read the result: BT.result win and flag battle:mudling win',r['result']=='win' and r['flag']=='win',r)
     check('everyone in the party got XP and coins were paid',all(x>0 for x in r['xp']) and r['coins']>0,r)
     check('the monster left the map',r['gone'])
     check('everyone with a loadout earned Vibe Points, the bench too (Main +15, Pocket +8)',len(r['vp'])>=7 and all(v==23 for v in r['vp'].values()) and all(v==15 for v in r['main'].values()),r)
@@ -158,7 +158,7 @@ with sync_playwright() as pw:
     vp0=0
     ev(pg,"()=>{ B3.F.over='lose'; b3Finish(); }"); pg.wait_for_timeout(300)
     ev(pg,"()=>b3Pick(0)"); pg.wait_for_timeout(500)
-    r=ev(pg,"()=>({result:B2.result,flag:flag('battle:bigone'),hp:party.map(p=>p.hp),vp:ALL_MEMBERS().filter(m=>m.vibes).reduce((a,m)=>a+Object.values(m.vibes.vp).reduce((x,y)=>x+y,0),0),active:battle.active})")
+    r=ev(pg,"()=>({result:BT.result,flag:flag('battle:bigone'),hp:party.map(p=>p.hp),vp:ALL_MEMBERS().filter(m=>m.vibes).reduce((a,m)=>a+Object.values(m.vibes.vp).reduce((x,y)=>x+y,0),0),active:battle.active})")
     check('a loss: result lose, boss flag lose, everyone at 1 HP, no Vibe Points, fight closed',r['result']=='lose' and r['flag']=='lose' and all(h==1 for h in r['hp']) and r['vp']==vp0 and not r['active'],r)
 
     # ---- 5. migration
@@ -202,7 +202,7 @@ with sync_playwright() as pw:
     k=kinds(pg); k.update(ev(pg,"()=>({m:!!window.__m,intro:intro.active,dlg:dialog.active,mode:STORY.mode,ch:STORY.chapter,bm:b3sMode(),mp:currentMap.id})")); check('a save made on Battle 3 loads with the switch on Old, and chapter 1\'s scene fight plays on battle 2',k['b2'] and not k['v3'] and ev(pg,"()=>B2.foes.length")==3,k)
     shot(pg,'old-fight')
     stop_all(pg)
-    ev(pg,"()=>{ B2.result='win'; }")
+    ev(pg,"()=>{ BT.result='win'; }")
 
     # ---- landscape frames
     fresh(pg,1,'chapter'); mon(pg,'bigone'); ev(pg,"()=>{ toggleLayout(); startBattle(window.__m); }"); pg.wait_for_timeout(4000)

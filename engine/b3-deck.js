@@ -25,8 +25,8 @@ const bxW=(s,o)=>String(s).replace(/\{(\w+)\}/g,(m,k)=>o&&o[k]!=null?o[k]:'');
 // A chip: tone '' (plain), 'good', 'bad' or 'gold'; dx true marks it a detail. A flavor chip is its circle and its word.
 const bxChip=(t,tone,dx)=>'<span class="bx-chip'+(tone?' '+tone:'')+(dx?' dx':'')+'">'+t+'</span>';
 const bxFlIcon=f=>'<span class="fc" style="--c:'+B3_FLAVORS[f].color+'">'+BX_IC[f]+'</span>';
-const bxFl=f=>'<span class="bx-chip fl">'+bxFlIcon(f)+b2Esc(B3_FLAVORS[f].name)+'</span>';
-const bxFace=u=>{ const im=u.side==='foe'?b2Thumb(u.D&&u.D.art||u.id):b2Portrait(u.id); return im?'<img alt="" src="'+im+'">':'<b class="bx-ph">'+b2Esc(u.name.charAt(0))+'</b>'; };
+const bxFl=f=>'<span class="bx-chip fl">'+bxFlIcon(f)+btEsc(B3_FLAVORS[f].name)+'</span>';
+const bxFace=u=>{ const im=u.side==='foe'?btThumb(u.D&&u.D.art||u.id):btPortrait(u.id); return im?'<img alt="" src="'+im+'">':'<b class="bx-ph">'+btEsc(u.name.charAt(0))+'</b>'; };
 const bxShare=u=>{ const v=B3.view&&B3.view.u[u.key]; return v?Math.max(0,v.hp)/v.maxHp:u.hp/u.maxHp; };
 
 // ---------- The DETAILS switch (plan 3.2): kept on the device, on for a wide desktop window, off elsewhere ----------
@@ -136,12 +136,12 @@ function b3FcChips(P,t) {
   const pp=P.pips.filter(x=>x.tgt===k);
   if(pp.length) { const n=pp.reduce((a,x)=>a+x.n,0),last=pp[pp.length-1];
     if(P.breaks.includes(k)) c.push(bxChip(W.brk,'gold')); else if(n>0) c.push(bxChip(bxW(W.pips,{n,left:last.left,max:last.max}),'',1)); }
-  for(const d of P.dets.filter(x=>x.tgt===k)) c.push(bxChip(bxW(W.det,{name:b2Esc(d.name)}),'gold'));
-  if(P.interrupts.includes(k)) c.push(bxChip(bxW(W.cancels,{name:b2Esc((B3.view.charge[k])||'its wind-up')}),'good'));
+  for(const d of P.dets.filter(x=>x.tgt===k)) c.push(bxChip(bxW(W.det,{name:btEsc(d.name)}),'gold'));
+  if(P.interrupts.includes(k)) c.push(bxChip(bxW(W.cancels,{name:btEsc((B3.view.charge[k])||'its wind-up')}),'good'));
   for(const h of P.heals.filter(x=>x.tgt===k)) c.push(h.n>0?bxChip(bxW(W.heal,{n:h.n}),'good'):bxChip(W.fullHp));
   for(const s of P.shields.filter(x=>x.tgt===k)) c.push(bxChip(bxW(W.shield,{n:s.n}),'good'));
   if(P.revives.includes(k)) c.push(bxChip(W.revive,'good'));
-  const seen={}; for(const a of P.adds.filter(x=>x.tgt===k)) { const S=B3_STATUS[a.id]; if(S&&!seen[a.id]) { seen[a.id]=1; c.push(bxChip(b2Esc(S.name),'',1)); } }
+  const seen={}; for(const a of P.adds.filter(x=>x.tgt===k)) { const S=B3_STATUS[a.id]; if(S&&!seen[a.id]) { seen[a.id]=1; c.push(bxChip(btEsc(S.name),'',1)); } }
   return c;
 }
 // Does the highlighted move hit a Pet Peeve where it is aimed? Other rows: does any monster have it as a Pet Peeve (b3Matchups).
@@ -169,12 +169,12 @@ function b3RenderDeck() {
   head.innerHTML='<div class="bx-meter" id="b3-pepm"><span class="lab">'+W.pepWord+'</span><span class="pips">'+pips+'</span><b>'+(spend?pep+' → '+(pep-spend):gain?pep+' → '+Math.min(B3_RULES.pep.max,pep+gain):pep)+'</b></div>'+
     '<div class="bx-meter rk" id="b3-rkm"><span class="lab">'+W.combos+'</span><span class="track"><i style="width:'+Math.min(100,rk)+'%"></i></span><b>'+rk+'%</b></div>'+bxSwitch(det);
   const free=b3Granted()===u;
-  let h=free?'<div class="bx-grp bx-free">'+bxW(W.freeFor,{who:b2Esc(u.name)})+'</div>':'',grp='';
-  const has=g=>B3.deck.some(x=>x.grp===g),vn=id=>B3_VIBES[id]?'<span class="dx">· '+b2Esc(B3_VIBES[id].name)+'</span>':'';
+  let h=free?'<div class="bx-grp bx-free">'+bxW(W.freeFor,{who:btEsc(u.name)})+'</div>':'',grp='';
+  const has=g=>B3.deck.some(x=>x.grp===g),vn=id=>B3_VIBES[id]?'<span class="dx">· '+btEsc(B3_VIBES[id].name)+'</span>':'';
   const gname={ruckus:W.group.ruckus,main:W.group.main+vn(u.vibe),pocket:W.group.pocket+vn(u.pocket)+vn(u.pocket2),any:W.group.any};
   (B3.ui==='done'?[]:B3.deck).forEach((x,i)=>{   // the fight is over: no moves, only Continue in the tray
     if(x.grp!==grp) { grp=x.grp; if(x.grp!=='basic'&&!free&&(x.grp!=='main'||has('pocket')||has('ruckus')||has('any'))) h+='<div class="bx-grp">'+gname[x.grp]+'</div>'; }
-    const S=x.S,sel=cmd&&i===B3.sel,lack=!x.can.ok&&S&&x.cost>pep&&B3.actor,need=S?x.cost-pep:0,why=b2Esc(lack?bxW(W.needMore,{n:need}):x.can.why);
+    const S=x.S,sel=cmd&&i===B3.sel,lack=!x.can.ok&&S&&x.cost>pep&&B3.actor,need=S?x.cost-pep:0,why=btEsc(lack?bxW(W.needMore,{n:need}):x.can.why);
     const rose=b3pOn();   // Rose Mode (engine/b3-pictures.js): the flavor is its emoji picture, the price is drops, the recommended move says so with a star
     const fl=x.ruckus?(rose?bpIcon('b3_ruckus',28):'<span class="fc gold">'+BX_IC.razzle+'</span>'):rose?S.flavor.map(f=>bpIcon(B3P_FLAV[f],28)).join(''):S.flavor.map(bxFlIcon).join('');
     const pv=x.can.ok&&bxPeeve(x,sel,u)?'<i class="tag pv">'+W.peeveTag+'</i>':'';
@@ -183,10 +183,10 @@ function b3RenderDeck() {
     const rt=rose&&x.rec?'<i class="tag rt">'+bpIcon('b3_star',14)+W.recTag+'</i>':'';
     const short=x.ruckus?B3_RUCKUS[x.ruckus].short:(S.short||'');
     const useTxt=x.can.ok?W.use+'<small>'+(B3.keys?W.useKey:W.useTap)+'</small>':why;
-    h+='<button type="button" class="bx-mv'+(sel?' sel':'')+(x.can.ok?'':' no')+(x.ruckus?' ruck':'')+(x.rec?' rec':'')+'" data-i="'+i+'" data-id="'+b2Esc(x.id)+'">'+
-      '<span class="fl">'+fl+'</span><span class="nm"><i class="kb">'+(i+1)+'</i>'+b2Esc(x.name)+'</span>'+cost+
-      '<span class="sub"><span class="kd">'+b2Esc(bxKind(x))+'</span>'+dr+pv+rt+(x.can.ok?'':'<span class="need">'+why+'</span>')+'</span>'+
-      (det&&short?'<span class="short dx">'+b2Esc(short)+'</span>':'')+'<span class="use">'+useTxt+'</span></button>';
+    h+='<button type="button" class="bx-mv'+(sel?' sel':'')+(x.can.ok?'':' no')+(x.ruckus?' ruck':'')+(x.rec?' rec':'')+'" data-i="'+i+'" data-id="'+btEsc(x.id)+'">'+
+      '<span class="fl">'+fl+'</span><span class="nm"><i class="kb">'+(i+1)+'</i>'+btEsc(x.name)+'</span>'+cost+
+      '<span class="sub"><span class="kd">'+btEsc(bxKind(x))+'</span>'+dr+pv+rt+(x.can.ok?'':'<span class="need">'+why+'</span>')+'</span>'+
+      (det&&short?'<span class="short dx">'+btEsc(short)+'</span>':'')+'<span class="use">'+useTxt+'</span></button>';
   });
   box.innerHTML=h; $('b3-deck').classList.toggle('busy',!cmd);
   $('b3-app').classList.toggle('keys',!!B3.keys); $('b3-app').classList.toggle('det',det);
@@ -215,10 +215,10 @@ function b3RenderParty() {
     // A Mark is not a status, but the card says it first, always: it is a threat to act on. It takes the third icon's place so a card never shows more than 3.
     const mk=b3ViewMarked(u.key)&&!ko,nx=!mk&&b3ViewAimed(u.key)&&!ko;
     const st=(mk?'<i class="st mk" title="A monster’s wound-up attack is aimed here">'+W.marked+'</i>':nx?'<i class="st nx" title="A monster’s next attack is aimed here (Cartridge Blow)">'+W.nextTarget+'</i>':'')+
-      b3ViewIcons(u.key).slice(0,mk||nx?2:3).map(id=>'<i class="st dx" title="'+b2Esc(B3_STATUS[id].name)+'">'+B3_STATUS[id].short+'</i>').join('');
-    const ctr=v.ctr?'<b class="ctr dx" title="'+b2Esc(Object.values(u.counterInfo)[0].name)+' '+v.ctr+'">'+v.ctr+'</b>':'';
+      b3ViewIcons(u.key).slice(0,mk||nx?2:3).map(id=>'<i class="st dx" title="'+btEsc(B3_STATUS[id].name)+'">'+B3_STATUS[id].short+'</i>').join('');
+    const ctr=v.ctr?'<b class="ctr dx" title="'+btEsc(Object.values(u.counterInfo)[0].name)+' '+v.ctr+'">'+v.ctr+'</b>':'';
     return '<button type="button" class="'+cls+'" data-i="'+i+'" data-key="'+u.key+'"><span class="pt">'+bxFace(u)+ctr+'</span>'+
-      '<span class="l1"><b class="nm">'+b2Esc(u.name)+'</b>'+(u.row==='back'?'<i class="rt dx" title="'+W.backRow+'">'+W.back+'</i>':'')+st+
+      '<span class="l1"><b class="nm">'+btEsc(u.name)+'</b>'+(u.row==='back'?'<i class="rt dx" title="'+W.backRow+'">'+W.back+'</i>':'')+st+
       '<i class="hpn">'+(ko?W.ko0:Math.max(0,v.hp)+'<span class="dx">/'+v.maxHp+'</span>')+(v.sh&&!ko?'<em class="dx" title="Shield '+v.sh+'">+'+v.sh+'</em>':'')+'</i></span>'+
       '<span class="l2"><span class="bx-hp'+(r<=.25?' low':'')+'"><i style="width:'+Math.round(r*100)+'%"></i></span>'+pips+'</span></button>';
   }).join('');
@@ -227,18 +227,18 @@ function b3RenderParty() {
 // ---------- The tray: what the highlighted move does (left), who it is aimed at and what it does there (right) ----------
 // The move's name, price, flavor and kind are on its row, the target's HP, Composure, statuses and wind-up on the scene, a member's on their card,
 // the turn order on the bar: none of them is said again here (claude/b3look-plan.md, inventory).
-const bxWho=t=>'<div class="h">'+bxFace(t)+'<b>'+b2Esc(t.name)+'</b></div>';
+const bxWho=t=>'<div class="h">'+bxFace(t)+'<b>'+btEsc(t.name)+'</b></div>';
 // What a unit carries, as chips (a monster's Pet Peeves first, then each status, a wind-up and a Mark), for a unit the player tapped to look at.
 function bxCarry(t) {
   const W=B3_FORECAST,rows=b3Carried(B3.F,t).filter(r=>!['pips','vibe','trait','quirk'].includes(r.kind)&&r.kind!=='charge'&&r.kind!=='marked'),c=[];
   if(t.side==='foe') { const pv=b3Peeves(t); c.push('<span class="lab">'+W.peeves+'</span>'+(pv.length?pv.map(bxFl).join(''):bxChip(W.noPeeves))); }
-  for(const r of rows) c.push(bxChip(b2Esc(r.name)));
+  for(const r of rows) c.push(bxChip(btEsc(r.name)));
   return c.join('');
 }
 function bxLookHtml(t,why) {
   const rows=b3Carried(B3.F,t).filter(r=>['debuff','buff','stance','prime','mark','shield','hazard','counter','marked','charge','lens'].includes(r.kind)||r.kind==='pips'),W=B3_FORECAST;
-  return bxWho(t)+(why?'<div class="note"><b>'+b2Esc(why)+'</b></div>':'')+'<div class="k info">'+bxCarry(t)+'</div>'+
-    '<div class="note">'+(rows.length?rows.slice(0,2).map(r=>'<b>'+b2Esc(r.name)+':</b> '+b2Esc(r.desc)).join(' '):bxW(W.nothingOn,{name:b2Esc(t.name)}))+'</div>'+
+  return bxWho(t)+(why?'<div class="note"><b>'+btEsc(why)+'</b></div>':'')+'<div class="k info">'+bxCarry(t)+'</div>'+
+    '<div class="note">'+(rows.length?rows.slice(0,2).map(r=>'<b>'+btEsc(r.name)+':</b> '+btEsc(r.desc)).join(' '):bxW(W.nothingOn,{name:btEsc(t.name)}))+'</div>'+
     '<div class="k"><button type="button" class="bx-chip btn" data-sheet="'+t.key+'">'+W.fullList+'</button></div>';
 }
 function b3RenderTray() {
@@ -247,30 +247,30 @@ function b3RenderTray() {
   if(B3.ui==='done') {
     // The scene already says YOU WIN! or KNOCKED OUT: the tray adds only what the win paid, or a scripted end's line, and Continue.
     const over=B3.F.over,line=over==='win'?B3.won:over==='lose'?'':(B3.F.endLine||'');
-    T.className='log done'; T.innerHTML='<div class="logline">'+(line?'<small>'+b2Esc(line)+'</small>':'')+'</div><button type="button" class="bx-go" data-done="1">'+W.cont+'</button>'; return;
+    T.className='log done'; T.innerHTML='<div class="logline">'+(line?'<small>'+btEsc(line)+'</small>':'')+'</div><button type="button" class="bx-go" data-done="1">'+W.cont+'</button>'; return;
   }
   const e=b3Entry();
-  if(battle.state!=='command'||B3.ui!=='deck'||!u||!e) { T.className='log'; T.innerHTML='<div class="logline">'+b2Esc(B3.say||'')+'</div>'; return; }
+  if(battle.state!=='command'||B3.ui!=='deck'||!u||!e) { T.className='log'; T.innerHTML='<div class="logline">'+btEsc(B3.say||'')+'</div>'; return; }
   const open=T.classList.contains('open')&&T.dataset.m===B3.sel+'|'+B3.aimK;
   T.className=open?'open':''; T.dataset.m=B3.sel+'|'+B3.aimK;
   const S=e.S,pv=B3.pvNow,P=pv&&pv.P,o=b3AimOpt();
   const size=!S||!S.power?'':S.hits>1?bxW(B3_SIZE.hits,{n:S.hits}):B3_SIZE[S.power];
-  const desc=e.ruckus?bxW(B3_RUCKUS[e.ruckus].desc,{a:b2Esc(u.name),p:b2Esc(e.P.partner.name)}):(S.desc||'');
+  const desc=e.ruckus?bxW(B3_RUCKUS[e.ruckus].desc,{a:btEsc(u.name),p:btEsc(e.P.partner.name)}):(S.desc||'');
   const brief=e.ruckus?B3_RUCKUS[e.ruckus].short:(S.short||desc);
-  const a='<div class="act">'+(B3.note?'<p class="top">'+b2Esc(B3.note)+'</p>':'')+(size?'<p class="size dx">'+b2Esc(size)+'</p>':'')+
-    '<p class="full dx">'+b2Esc(desc)+'</p><p class="brief nd">'+b2Esc(brief)+'</p></div>';
+  const a='<div class="act">'+(B3.note?'<p class="top">'+btEsc(B3.note)+'</p>':'')+(size?'<p class="size dx">'+btEsc(size)+'</p>':'')+
+    '<p class="full dx">'+btEsc(desc)+'</p><p class="brief nd">'+btEsc(brief)+'</p></div>';
   const hint=b3AimOpts(e).length>1?'<div class="note">'+(o&&o.units[0]&&o.units[0].side!=='foe'?W.aimAlly:W.aimHint)+'</div>':'';
-  const bad=pv&&!pv.ok?bxChip(b2Esc(pv.why),'bad'):'';
+  const bad=pv&&!pv.ok?bxChip(btEsc(pv.why),'bad'):'';
   let t='';
   const lookU=B3.look&&b3Unit(B3.F,B3.look);
   if(lookU) t=bxLookHtml(lookU,B3.lookNo||W.noAim);
-  else if(!o||!o.units.length) t='<div class="h"><b>'+b2Esc(e.ruckus?W.family:u.name)+'</b></div>'+(bad?'<div class="k">'+bad+'</div>':'');
+  else if(!o||!o.units.length) t='<div class="h"><b>'+btEsc(e.ruckus?W.family:u.name)+'</b></div>'+(bad?'<div class="k">'+bad+'</div>':'');
   else if(o.units.length===1) {
     const x=o.units[0];
     t=bxWho(x)+'<div class="k">'+(P?b3FcChips(P,x).join(''):'')+bad+'</div>'+hint;   // a monster's Pet Peeves are badges under it on the scene (battleux3), not said again here
 
   } else {
-    t='<div class="h"><b>'+b2Esc(o.label)+'</b></div>'+o.units.map(x=>'<div class="k"><span class="bx-chip nm">'+b2Esc(x.name)+'</span>'+(P?b3FcChips(P,x).join(''):'')+'</div>').join('')+(bad?'<div class="k">'+bad+'</div>':'')+hint;
+    t='<div class="h"><b>'+btEsc(o.label)+'</b></div>'+o.units.map(x=>'<div class="k"><span class="bx-chip nm">'+btEsc(x.name)+'</span>'+(P?b3FcChips(P,x).join(''):'')+'</div>').join('')+(bad?'<div class="k">'+bad+'</div>':'')+hint;
   }
   T.innerHTML=a+'<div class="arr" aria-hidden="true">→</div><div class="tgt'+(lookU?' look':'')+'">'+t+'</div>';
 }
@@ -281,8 +281,8 @@ function b3RenderSheet() {
   const t=B3.sheet&&B3.F&&b3Unit(B3.F,B3.sheet);
   box.hidden=!t; if(!t) { box.innerHTML=''; return; }
   const v=B3.view.u[t.key],rows=b3Carried(B3.F,t),W=B3_FORECAST;
-  box.innerHTML='<div class="bx-sheet-in"><div class="sh-h"><b>'+b2Esc(t.name)+'</b><span>'+(v.ko?W.knockedOut:'HP '+Math.max(0,v.hp)+' of '+v.maxHp+(v.sh?', shield '+v.sh:''))+'</span><button type="button" class="bx-chip btn" data-close="1">'+W.close+'</button></div>'+
-    (rows.length?rows.map(r=>'<div class="sh-r"><div class="sh-t"><span class="bx-chip">'+b2Esc(r.short)+'</span><b>'+b2Esc(r.name)+'</b>'+(r.left?'<i>'+b2Esc(r.left)+'</i>':'')+'</div><p>'+b2Esc(r.desc)+'</p></div>').join(''):'<div class="sh-r"><p>'+bxW(W.nothingOn,{name:b2Esc(t.name)})+'</p></div>')+'</div>';
+  box.innerHTML='<div class="bx-sheet-in"><div class="sh-h"><b>'+btEsc(t.name)+'</b><span>'+(v.ko?W.knockedOut:'HP '+Math.max(0,v.hp)+' of '+v.maxHp+(v.sh?', shield '+v.sh:''))+'</span><button type="button" class="bx-chip btn" data-close="1">'+W.close+'</button></div>'+
+    (rows.length?rows.map(r=>'<div class="sh-r"><div class="sh-t"><span class="bx-chip">'+btEsc(r.short)+'</span><b>'+btEsc(r.name)+'</b>'+(r.left?'<i>'+btEsc(r.left)+'</i>':'')+'</div><p>'+btEsc(r.desc)+'</p></div>').join(''):'<div class="sh-r"><p>'+bxW(W.nothingOn,{name:btEsc(t.name)})+'</p></div>')+'</div>';
 }
 function b3OpenSheet(key) {
   if(!B3.active||battle.state!=='command'||B3.ui!=='deck'||!b3Unit(B3.F,key)) return false;
@@ -396,7 +396,7 @@ function b3MemberAt(x,y) {
   }
   return best;
 }
-const b3UnitAt=(cx,cy)=>{ const q=b2CanvasPt(cx,cy); if(!q||!q.inside) return null; return b3FoeAt(q.x,q.y)||b3MemberAt(q.x,q.y); };
+const b3UnitAt=(cx,cy)=>{ const q=btCanvasPt(cx,cy); if(!q||!q.inside) return null; return b3FoeAt(q.x,q.y)||b3MemberAt(q.x,q.y); };
 
 (function b3Wire() {
   const app=$('b3-app'),cv=$('battle-canvas'); if(!app||!cv) return;

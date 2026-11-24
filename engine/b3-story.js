@@ -1,10 +1,10 @@
 'use strict';
 // engine/b3-story.js — Battle 3 in the story (stage 15). Data and words: data/b3-story.js. The rules are not touched here.
 //
-// ONE DOOR. `startBattle(npc,opts)` (engine/battle2.js) is the one function the map monsters and the story's {battle} step both call.
-// This file wraps it: when the switch says Battle 3 plays this chapter, the fight starts in Battle 3 and comes back to the story through
-// the same two doors battle 2 uses, B2.result (the story step and the boss flag read it) and `battle.active` (the step waits on it).
-// Otherwise the call goes to battle 2 untouched. The ADMIN switch has three settings, kept on the phone in localStorage 'aot-b3-story':
+// ONE DOOR. `startBattle(npc,opts)` (engine/bt-shell.js) is the one function the map monsters and the story's {battle} step both call.
+// It asks b3sStart below first: when the switch says Battle 3 plays this chapter, the fight starts in Battle 3 and comes back to the story through
+// two values, BT.result (the story step and the boss flag read it) and `battle.active` (the step waits on it).
+// Otherwise the call goes to the old path untouched. The ADMIN switch has three settings, kept on the phone in localStorage 'aot-b3-story':
 //   old        battle 2 everywhere.
 //   chapter    chapters in B3_STORY.chapters use Battle 3 (the default).
 //   new        every fight Battle 3 has a formation for.
@@ -40,12 +40,12 @@ function b3sPlan(npc,opts) {
   }
   const form=B3_FORMATIONS[id]; return form?{formation:id,vp:form.vp,repick:!!form.repick}:null;
 }
-const LE_startBattle_b3s=startBattle;
-startBattle=function(npc,opts={}) {
+// The fight door (engine/bt-shell.js startBattle) asks this first: true when Battle 3 took the fight, false when the old path plays it.
+function b3sStart(npc,opts={}) {
   const plan=b3sOn()&&b3sFighters().length?b3sPlan(npc,opts):null;
-  if(!plan) return LE_startBattle_b3s(npc,opts);
-  b3sBegin(npc,opts,plan);
-};
+  if(!plan) return false;
+  b3sBegin(npc,opts,plan); return true;
+}
 function b3sBegin(npc,opts,plan) {
   const fighters=b3sFighters(),levels={},hpShare={},loadouts={},gear={};
   // A fight that picks the four again (chapter 20's last fight) also gets the bench: they are the other four at the picker.
@@ -87,7 +87,7 @@ function b3sAward(F) {
   const npc=S.npc,d=monsterDef(npc),plan=S.plan;
   const foes=F.foes.filter(f=>!f.add).map(f=>({id:f.id,boss:f.D.role==='boss',lvl:F.party[0]?F.party[0].level:1,calm:false}));
   const gain=b6BattleXp(foes,npc);
-  const purse=b2Purse(foes,npc,0);
+  const purse=btPurse(foes,npc,0);
   npc.tier=(npc.tier||0)+1; npc.maxHp+=d.hpStep||0; npc.defeatedUntil=performance.now()+25000; monsterFall(npc);
   coins+=purse;
   const fought=F.everIn||S.ids.filter(id=>F.party.some(p=>p.id===id));
@@ -127,7 +127,7 @@ function b3sShowCard(result,go) { const R=B3S.card; if(!R||typeof b7ShowCard!=='
 function b3sEnd(result) {
   const S=B3S.fight; B3S.fight=null; B3S.tut=null; if(!S) return;
   const npc=S.npc,F=B3.F,win=result==='win';
-  B2.result=win?'win':result==='lose'?'lose':result;   // the story's {battle} step and the boss flag below read it; a scripted end (engine/b3-script.js) is 'flee' or 'shell', as battle 2 wrote them
+  BT.result=win?'win':result==='lose'?'lose':result;   // the story's {battle} step and the boss flag below read it; a scripted end (engine/b3-script.js) is 'flee' or 'shell', as battle 2 wrote them
   // HP goes back to the real members as a share of their own Max HP (a level up refills it, as in battle 2).
   for(const id of S.ids) {
     const mem=memberById(id),u=F&&(F.party.find(p=>p.id===id)||(F.bench&&F.bench[id]));
@@ -136,7 +136,7 @@ function b3sEnd(result) {
     else if(u) mem.hp=win&&B3S.levelled&&B3S.levelled[id]?mem.maxHp:u.hp<=0?0:Math.max(1,Math.round(mem.maxHp*u.hp/u.maxHp));
   }
   if(result==='lose'&&typeof showToast==='function') showToast(regionOf(currentMap)==='la'?'Ouch. The taco truck downtown fixes everything.':'Ouch. Visit the wish fountain to recover.',3.2);
-  if(npc&&npc.monster&&STORY.mode==='full'&&typeof b7IsBoss==='function'&&b7IsBoss(npc)) setFlag('battle:'+npc.monster,win?'win':'lose');   // (the story's battle op sets this too, from B2.result)
+  if(npc&&npc.monster&&STORY.mode==='full'&&typeof b7IsBoss==='function'&&b7IsBoss(npc)) setFlag('battle:'+npc.monster,win?'win':'lose');   // (the story's battle op sets this too, from BT.result)
   // Battle 3 has no Warmth bar, so the kind ending is not earned in the fight: a boss that reaches 0 HP gets the kind ending in the scene after
   // (retired card c-gem-pillar-hp). Chapter 1 is left as Milestone B has it (its scene is kind already). Battle 2 sets this flag when the Warmth bar sends a boss home; the after-boss scenes of chapters 3 to 5
   // (data/scenes.js) and the boss finales (engine/boss-finale.js bossKind) read it, so a win here sets it and the plain ending stays for OLD.

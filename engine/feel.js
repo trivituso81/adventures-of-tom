@@ -286,7 +286,7 @@ function b7SyncTools() {
 function b7RewardCards(rw) {
   const seen={},out=[];
   for(const r of rw) { if(seen[r.k]) { seen[r.k].n++; continue; } seen[r.k]={r,n:1}; out.push(seen[r.k]); }
-  return out.map(o=>'<span class="b7-rcard '+o.r.k+'">'+b2Esc(o.n>1?o.r.txt.replace('+1','+'+o.n).replace(/Point$/,'Points').replace(/Ticket$/,'Tickets'):o.r.txt)+'</span>').join('');
+  return out.map(o=>'<span class="b7-rcard '+o.r.k+'">'+btEsc(o.n>1?o.r.txt.replace('+1','+'+o.n).replace(/Point$/,'Points').replace(/Ticket$/,'Tickets'):o.r.txt)+'</span>').join('');
 }
 // R from b2RewardsData (engine/battle2.js) or b3sAward (engine/b3-story.js): title, line, xp, purse, calm, drop, members (each may carry vp, a text line), stamp, heart or foot (a text), puddle.
 function b7ShowCard(R,done) {
@@ -294,20 +294,20 @@ function b7ShowCard(R,done) {
   battle.state='busy'; B2.ui='busy';
   const pct=(lvl,xp)=>lvl>=B6.maxLevel?100:Math.round(xp/B6.xpPerLevel*100);
   const rows=R.members.map((m,i)=>{
-    const img=b2Portrait(m.id);
-    return '<div class="b7-row" data-i="'+i+'">'+(img?'<img alt="" src="'+img+'">':'<span class="b7-ph">'+b2Esc(m.name.charAt(0))+'</span>')+
-      '<div class="b7-who"><div class="b7-top"><b>'+b2Esc(m.name.toUpperCase())+'</b><span class="b7-lv">Lv '+m.lvl0+'</span><span class="b7-up" hidden>LEVEL UP!</span>'+''+'<em>+'+R.xp+' XP</em></div>'+
+    const img=btPortrait(m.id);
+    return '<div class="b7-row" data-i="'+i+'">'+(img?'<img alt="" src="'+img+'">':'<span class="b7-ph">'+btEsc(m.name.charAt(0))+'</span>')+
+      '<div class="b7-who"><div class="b7-top"><b>'+btEsc(m.name.toUpperCase())+'</b><span class="b7-lv">Lv '+m.lvl0+'</span><span class="b7-up" hidden>LEVEL UP!</span>'+''+'<em>+'+R.xp+' XP</em></div>'+
       '<div class="b7-xp"><i style="width:'+pct(m.lvl0,m.xp0)+'%"></i></div>'+
-      (m.vp?'<div class="b7-vp">'+b2Esc(m.vp)+'</div>':'')+   // Battle 3 story fights: the Vibe Points this person earned (engine/b3-story.js)
+      (m.vp?'<div class="b7-vp">'+btEsc(m.vp)+'</div>':'')+   // Battle 3 story fights: the Vibe Points this person earned (engine/b3-story.js)
       ((m.rw&&m.rw.length)?'<div class="b7-rw" hidden>'+b7RewardCards(m.rw)+'</div>':'')+'</div></div>';
   }).join('');
   const loot=['<div class="b7-coins"><span class="b7-coin"></span>+'+R.purse+' Pocket Coins'+(R.calm?' <small>Kindness bonus</small>':'')+'</div>'];
-  if(R.drop) loot.push('<div class="b7-drop">'+b2Esc(((items[R.drop.id]||{}).icon||'')+' Found: '+R.drop.name)+'</div>');
+  if(R.drop) loot.push('<div class="b7-drop">'+btEsc(((items[R.drop.id]||{}).icon||'')+' Found: '+R.drop.name)+'</div>');
   if(R.puddle) loot.push('<div class="b7-note">Nara left a happy puddle. Good girl. Mostly.</div>');
   if(R.stamp) loot.push('<div class="b7-note gold">★ New rewards to spend! Menu, then STAMPS.</div>');
-  c.innerHTML='<div class="b7-cbox" role="dialog" aria-label="Victory"><div class="b7-ttl'+(R.calm&&/KIND/.test(R.title)?' kind':'')+'">'+b2Esc(R.title)+'</div>'+
-    '<div class="b7-line">'+b2Esc(R.line||'')+'</div><div class="b7-rows">'+rows+'</div><div class="b7-loot">'+loot.join('')+'</div>'+
-    '<div class="b7-foot"><span>'+b2Esc(R.foot||'HEART '+R.heart+'%')+'</span><span class="b7-tap">Tap to continue</span></div></div>';
+  c.innerHTML='<div class="b7-cbox" role="dialog" aria-label="Victory"><div class="b7-ttl'+(R.calm&&/KIND/.test(R.title)?' kind':'')+'">'+btEsc(R.title)+'</div>'+
+    '<div class="b7-line">'+btEsc(R.line||'')+'</div><div class="b7-rows">'+rows+'</div><div class="b7-loot">'+loot.join('')+'</div>'+
+    '<div class="b7-foot"><span>'+btEsc(R.foot||'HEART '+R.heart+'%')+'</span><span class="b7-tap">Tap to continue</span></div></div>';
   c.hidden=false;
   B7.card={done,t0:performance.now()};
   // XP bars tick up; a level up fills the bar, chimes, then carries on from empty.
@@ -411,7 +411,7 @@ function b7InstantWin(n) {
   const F=B2_FORMATIONS[id],foes=((typeof F==='function'?F():F)||[[id,'front']]).map(f=>({id:f[0],lvl,boss:false}));   // a function: crowds of a random size
   const xp=Math.max(1,Math.round(b6BattleXp(foes,n)*B7_MON.popXp));   // reduced: no fight, so less reward
   const coinPerk=party.reduce((a,m)=>a+((b6Perks(m).coins)||0),0);
-  const purse=b2Purse(foes,n,coinPerk);
+  const purse=btPurse(foes,n,coinPerk);
   n.tier++; n.maxHp+=d.hpStep; n.defeatedUntil=performance.now()+25000; n.chasing=false; monsterFall(n);
   coins+=purse;
   const ups=[];

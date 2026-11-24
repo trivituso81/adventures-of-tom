@@ -36,7 +36,7 @@ with sync_playwright() as pw:
         if 'EXIT LAB' not in names: fails.append(f'{label}: bag has no EXIT LAB row: {names}')
         if 'RUN' in names: fails.append(f'{label}: lab bag still shows RUN')
         pg.wait_for_function("()=>!window.__LE.B2.active",timeout=15000); pg.wait_for_timeout(700)
-        st=pg.evaluate("()=>({splashActive:splash.active,hidden:document.getElementById('splash').hidden,mode:splash.mode,battleHidden:document.getElementById('battle').hidden,labFlags:[B2.labLA,B2.labStudio,B2.labGate].some(Boolean),result:B2.result,tab:document.querySelector('#splash .sp-tab').textContent})")
+        st=pg.evaluate("()=>({splashActive:splash.active,hidden:document.getElementById('splash').hidden,mode:splash.mode,battleHidden:document.getElementById('battle').hidden,labFlags:[B2.labLA,B2.labStudio,B2.labGate].some(Boolean),result:BT.result,tab:document.querySelector('#splash .sp-tab').textContent})")
         print(' after exit:',st)
         if not(st['splashActive'] and not st['hidden'] and st['mode']=='lab'): fails.append(f'{label}: did not land on the lab list: {st}')
         if not st['battleHidden']: fails.append(f'{label}: battle UI still showing')

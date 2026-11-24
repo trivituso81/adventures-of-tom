@@ -5,7 +5,7 @@
 // is still the rule's (both top Skills, engine/b3-ruckus.js). The two moves play their own videos or the default animation; a skin has no
 // animation of its own (Tom, 2026-11-19: animation review is out of scope for the battle system).
 //
-//   id     the battle 2 Tombo id (data/battle2-data.js B2_TOMBOS), kept so the story flag name stays `tombo:<id>`
+//   id     the old battle's Tombo id, kept so the story flag name stays `tombo:<id>`
 //   name   what the screen calls it
 //   pairs  the two family ids that may fire it (Primaries: Tom and the partner; Family Finishes and Birthday Wish: the pairs who speak in them)
 //   flag   the story flag that unlocks it (the Battle Lab has them all, cfg.lab)
