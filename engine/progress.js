@@ -18,7 +18,7 @@ function b6SetTotal(m,total) {
   m.level=1+Math.floor(total/B6.xpPerLevel); m.xp=m.level>=B6.maxLevel?0:total%B6.xpPerLevel; m.next=B6.xpPerLevel;
 }
 // Max HP: the level line plus Outfit HP. HP keeps its share when max HP changes (full: heal to full).
-const b6MaxHp=m=>b2Stat(m.id,'hp',m.level)+statBonus(m,'hp');
+const b6MaxHp=m=>btStat(m.id,'hp',m.level)+statBonus(m,'hp');
 function b6Refresh(m,full) {
   const old=m.maxHp||1,frac=Math.max(0,Math.min(1,(m.hp==null?old:m.hp)/old));
   m.maxHp=b6MaxHp(m);
@@ -353,7 +353,7 @@ const scCore=slot=>slot==='basic'||slot==='sig';
 function scInfo(m,slot,v) {
   const node=b8Node(m.id,slot),rank=b8Rank(m,slot),cur=node[v],live=b8Move(m.id,slot,v)||cur;
   const vp=live.vp?Math.max(1,live.vp-(rank>=3&&live.vp>1?1:0)):0;
-  const elems=[].concat(live.elem||[]).filter(e=>B2_ELEMS[e]).map(e=>B2_ELEMS[e].name);
+  const elems=[].concat(live.elem||[]).filter(e=>BT_ELEMS[e]).map(e=>BT_ELEMS[e].name);
   return {cur,live,rank,vp,elems,plays:b8Move(m.id,slot,v)};
 }
 function scChipFact(m,slot,st,inf) {

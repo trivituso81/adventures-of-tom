@@ -9,7 +9,7 @@ const SLOT_LABEL={Tool:'Signature Tool',Outfit:'Outfit',Charm:'Keepsake Charm',S
 const SLOT_SHORT={Tool:'TOOL',Outfit:'OUTFIT',Charm:'CHARM',Sash:'SASH'};
 // A member can carry extra slots (m.extraSlots, e.g. Grace's Birthday Sash after the Nine Scoops bonus chapter).
 const wearSlots=m=>m&&m.extraSlots&&m.extraSlots.length?SLOTS.concat(m.extraSlots):SLOTS;
-// The six battle stats (B2_STAT_KEYS in data/battle2-data.js, which loads later).
+// The six battle stats (BT_STAT_KEYS in data/bt-tables.js).
 const STAT_NAMES=['hp','pow','grit','warmth','cool','pep'];
 const STAT_LABEL={hp:'HP',pow:'POW',grit:'GRIT',warmth:'WARMTH',cool:'COOL',pep:'PEP'};
 const items={
@@ -359,8 +359,8 @@ function statBonus(m,stat) {
   for(const slot of wearSlots(m)) { const id=m.equipment[slot],it=id&&items[id]; if(it&&it.stats&&it.stats[stat]) total+=it.stats[stat]; }
   return total;
 }
-// A member's battle stat outside a fight: the level line (B2_STATS) plus gear. Percent perks apply in battle.
-const statTotal=(m,s)=>(typeof b2Stat==='function'?b2Stat(m.id,s,m.level):0)+statBonus(m,s);
+// A member's battle stat outside a fight: the level line (BT_STATS) plus gear. Percent perks apply in battle.
+const statTotal=(m,s)=>(btStat(m.id,s,m.level))+statBonus(m,s);
 // "+2 POW, +3 WARMTH" for stats, or the perk in words.
 function bonusText(item) {
   const parts=item.stats?STAT_NAMES.filter(k=>item.stats[k]).map(k=>'+'+item.stats[k]+' '+STAT_LABEL[k]):[];

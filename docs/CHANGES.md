@@ -1,3 +1,13 @@
+## b3s23b (2026-11-23): Stats, elements and flying monsters have a home that is not Battle 2
+
+Card c-b3s23b (slice 23b of the battle 2 purge). New `data/bt-tables.js` (loads right after data/party.js) holds `BT_STAT_KEYS`, `BT_STAT_NAMES`, `BT_STATS`, `btStat`, `BT_ELEMS` and `BT_FLYERS`. Readers outside battle 2 now use those names: data/party.js (`statTotal` no longer guards on `b2Stat`), engine/progress.js (`b6MaxHp`, element names) and engine/town-render.js (flyers hover). data/battle2-data.js and engine/battle2-ui.js keep `B2_STATS`, `B2_STAT_KEYS`, `B2_STAT_NAMES`, `b2Stat`, `B2_ELEMS`, `B2_FLYERS` as one-line aliases of the new names for the Old path only; slice 23d deletes them. Values are byte for byte the old ones. No save field was touched (old stamps, ranks, HEART and Tombo flags stay in saves and are simply not read by anything new).
+
+Left for later slices, found by the map: `b2FoeDef` (engine/feel.js, engine/progress.js; it builds Old foes from `B2_FOES`), `B2_SKILLS` readers in engine/progress.js (the Old Stampcard), and `B2_TOMBOS.push` in data/bonus-nine-scoops.js (Old fight data). All three are Old path and go in 23c and 23d. `B2_TOMBOS` ids in data/b3-tombo-skins.js were already re-homed by 23a (no read left).
+
+Also: `.github/workflows/art-factory.yml` (added by commit bfc76c7, not this card) had `concurrency` at the top of a paid-secret workflow, which `workflow_check.py` stops (wanstuck1); moved it onto the `generate` job with the same group and no cancel, so `bump_tags.py` can run.
+
+Checked: `node tools/b3-sim.js check` 5579 checks, no fails; the page loads with no pageerror. `tools/b3_test.py` ran 35 minutes without finishing in this sandbox and was stopped.
+
 ## guideflow9 (2026-11-23): The old Battle Guide path is gone, the whole new flow ran free on GitHub, and Tom's phone check is ready
 
 Card c-guideflow-9 (plan `claude/guide-flow-plan.md` section 10 step 9, test T11), the last card of the guide flow. Shipped in four builds: guideflow9a (the old path deleted), guideflow9b (a replay row makes no xAI look check call), guideflow9c (build stamps no longer stop on GitHub for a missing PyYAML), and this one (the free run recorded, the notes, the phone card). Nothing paid was run by any of it: no fal, xAI or ElevenLabs call was made for real.

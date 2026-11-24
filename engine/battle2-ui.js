@@ -106,8 +106,7 @@ function b2FoeFrame(f,R0) {
   const L=typeof bclipFor==='function'?bclipFor(f.id,'loop'):null;   // a video-made idle loop (engine/clips.js); each monster starts at its own point
   return L?bclipLoopFrame(L,now+f.idx*900):R0;
 }
-// Enemies that fly or float (Tom, 2026-11-05): the only ones raised off the ground, bobbing at the old pace. Add an id here to make another enemy hover.
-const B2_FLYERS=new Set(['skeeter','tickets','boommoth','fogwisp','hushling','pausesprite','greynote','jetlag','redeye']);
+const B2_FLYERS=BT_FLYERS;   // the list lives in data/bt-tables.js
 const B2_HOVER=14;
 function b2DrawEnemies(t) {
   const list=B2.foes.slice().sort((a,b)=>a.py-b.py);

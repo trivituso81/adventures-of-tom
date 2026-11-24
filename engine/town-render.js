@@ -622,8 +622,8 @@ function drawActor(a) {
     if(a.scenePose&&typeof mudlingHeistDraw==='function'&&mudlingHeistDraw(a,cx,base)) return;   // painted heist frames (engine/story.js)
     const d=monsterDef(a),s=monScale(a),rows=bossFacing(a,(a.scenePose&&a.scenePose.foe&&typeof foePoseRows==='function'&&foePoseRows(a,d))||d.sprite),w=rows[0].length*s,h=rows.length*s;   // mscale: drawn bigger (a story monster); rows: a painted frame picked by a scene (foePoseRows)
     // Same rule as battle (Tom, 2026-11-05): grounded monsters never leave the ground (a tiny stretch anchored at the feet, shadow under the
-    // feet); flyers (B2_FLYERS, engine/battle2-ui.js) hover off the ground and bob at the original pace, their shadow stays down.
-    const fly=typeof B2_FLYERS!=='undefined'&&B2_FLYERS.has(a.monster);
+    // feet); flyers (BT_FLYERS, data/bt-tables.js) hover off the ground and bob at the original pace, their shadow stays down.
+    const fly=typeof BT_FLYERS!=='undefined'&&BT_FLYERS.has(a.monster);
     const hover=fly?Math.round(h*.1)-Math.round(Math.sin(elapsedTime*3)):0;
     const breath=fly?0:(.5+.5*Math.sin(elapsedTime*1.7+(a.x||0)+(a.y||0)))*.008;
     const ft=feetOf(rows);

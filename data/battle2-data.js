@@ -4,21 +4,8 @@
 // engine/battle2.js runs the fight, engine/battle2-ui.js draws it, engine/battle2-moves.js plays the animations.
 
 // ---- Stats: [level 1, level 50] for each of the six stats. Values in between are a straight line. ----
-const B2_STAT_KEYS=['hp','pow','grit','warmth','cool','pep'];
-const B2_STAT_NAMES={hp:'HP',pow:'POW',grit:'GRIT',warmth:'WARMTH',cool:'COOL',pep:'PEP'};
-const B2_STATS={
-  tom:   {hp:[110,950],pow:[14,90],grit:[13,88],warmth:[12,80],cool:[13,86],pep:[11,70]},
-  grace: {hp:[ 90,780],pow:[11,74],grit:[10,66],warmth:[14,92],cool:[11,72],pep:[14,90]},
-  rose:  {hp:[ 84,740],pow:[10,72],grit:[ 9,62],warmth:[13,88],cool:[10,70],pep:[15,92]},
-  amy:   {hp:[104,900],pow:[15,96],grit:[11,74],warmth:[11,76],cool:[11,74],pep:[15,94]},
-  deedee:{hp:[ 96,860],pow:[10,68],grit:[13,86],warmth:[16,99],cool:[13,88],pep:[11,72]},
-  boppy: {hp:[120,999],pow:[15,94],grit:[16,99],warmth:[10,70],cool:[11,76],pep:[ 9,60]},
-  tnb:   {hp:[100,880],pow:[12,80],grit:[11,76],warmth:[15,94],cool:[16,99],pep:[12,78]},
-  nara:  {hp:[ 92,800],pow:[15,94],grit:[10,68],warmth:[11,74],cool:[10,66],pep:[17,99]},
-  justin:{hp:[112,960],pow:[15,96],grit:[12,78],warmth:[10,72],cool:[11,74],pep:[13,86]},
-  olivia:{hp:[100,880],pow:[12,80],grit:[11,74],warmth:[14,90],cool:[13,86],pep:[16,96]}
-};
-function b2Stat(id,key,lvl) { const r=(B2_STATS[id]||B2_STATS.tom)[key]; return Math.round(r[0]+(r[1]-r[0])*(Math.max(1,Math.min(50,lvl))-1)/49); }
+// Stats, stat names, elements: moved to data/bt-tables.js (b3s23b); these names stay for the Old path until it is deleted.
+const B2_STAT_KEYS=BT_STAT_KEYS,B2_STAT_NAMES=BT_STAT_NAMES,B2_STATS=BT_STATS,b2Stat=btStat;
 
 // ---- Resources (section 2) ----
 const B2_VP={cap:10,start:5,regen:2,basic:1};
@@ -26,14 +13,7 @@ const B2_VP={cap:10,start:5,regen:2,basic:1};
 const B2_WEIGHT={quick:.7,standard:1,heavy:1.3,instant:.01};   // instant: Tom's Diamond Medallion (engine/battle2-traits.js)
 
 // ---- Six everyday elements (section 3). Weak hits x1.5, resisted hits x0.5. ----
-const B2_ELEMS={
-  kinetic:{name:'Kinetic',color:'#f1e2c0',dark:'#8a7650',icon:'K'},
-  cozy:   {name:'Cozy',   color:'#ff9a4a',dark:'#a8401c',icon:'C'},
-  splash: {name:'Splash', color:'#6cc4f0',dark:'#1f6a9a',icon:'S'},
-  sparkle:{name:'Sparkle',color:'#ffe27a',dark:'#b08a1c',icon:'*'},
-  chatter:{name:'Chatter',color:'#d2b8f0',dark:'#6a4a9a',icon:'~'},
-  amber:  {name:'Amber',  color:'#e8b048',dark:'#7a5010',icon:'A'}
-};
+const B2_ELEMS=BT_ELEMS;
 const B2_WEAK=1.5,B2_RESIST=.5;
 
 // ---- Statuses (section 3 plus the stat ups and downs the path skills need) ----

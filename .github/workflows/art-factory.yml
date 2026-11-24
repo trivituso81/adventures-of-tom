@@ -42,13 +42,12 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: aot-art-factory
-  cancel-in-progress: false
-
 jobs:
   generate:
     runs-on: ubuntu-latest
+    concurrency:
+      group: aot-art-factory
+      cancel-in-progress: false
     if: ${{ inputs.stage != 'encode_alpha' }}
     steps:
       - uses: actions/checkout@v4

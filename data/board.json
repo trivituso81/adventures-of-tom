@@ -21312,6 +21312,10 @@
     {
      "d": "2026-11-23",
      "t": "Started by Tom's \"start c-b3s23b\" in the conversation that shipped the Guide flow."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Shipped b3s23b. Moved to data/bt-tables.js (loads after data/party.js): BT_STAT_KEYS, BT_STAT_NAMES, BT_STATS, btStat, BT_ELEMS, BT_FLYERS. Readers switched: data/party.js, engine/progress.js, engine/town-render.js. Battle 2 keeps B2_STATS, B2_STAT_KEYS, B2_STAT_NAMES, b2Stat, B2_ELEMS, B2_FLYERS as one-line aliases (Old path only, delete in 23d). Not moved because they are Old path: b2FoeDef (feel.js, progress.js), B2_SKILLS readers in engine/progress.js, B2_TOMBOS.push in data/bonus-nine-scoops.js; c-b3s23c and c-b3s23d own them. b3-tombo-skins.js already had no battle 2 read (23a). Tests: b3-sim 5579 ok, b3_story_test ok (one timing flake on the first run, passed on rerun), smoke only the known board_sync_test board4 fail, unused_voice all 0, page load no errors. b3_test.py ran 35 minutes without ending in this sandbox, stopped. Also moved concurrency onto the generate job in art-factory.yml (bfc76c7 broke the workflow check)."
     }
    ],
    "prompt": {
