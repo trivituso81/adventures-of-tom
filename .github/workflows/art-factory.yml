@@ -42,12 +42,13 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: aot-art-factory
+  cancel-in-progress: false
+
 jobs:
   generate:
     runs-on: ubuntu-latest
-    concurrency:
-      group: aot-art-factory
-      cancel-in-progress: false
     if: ${{ inputs.stage != 'encode_alpha' }}
     steps:
       - uses: actions/checkout@v4
@@ -70,10 +71,29 @@ jobs:
         run: |
           git config user.name "aot-art-factory[bot]"
           git config user.email "aot-art-factory@users.noreply.github.com"
+          git fetch origin main
+          python3 -c '
+          import json, subprocess
+          from pathlib import Path
+          p = Path("art-factory/queue.json")
+          if p.exists():
+              local = json.loads(p.read_text(encoding="utf-8"))
+              try:
+                  raw = subprocess.check_output(["git", "show", "origin/main:art-factory/queue.json"], text=True)
+                  remote = json.loads(raw)
+              except Exception:
+                  remote = {"items": []}
+              merged = {it["id"]: it for it in remote.get("items", []) if "id" in it}
+              for it in local.get("items", []):
+                  if "id" in it:
+                      merged[it["id"]] = it
+              local["items"] = list(merged.values())
+              p.write_text(json.dumps(local, indent=2) + "\n", encoding="utf-8")
+          '
           git add art-factory/
           if ! git diff --cached --quiet; then
             git commit -m "art-factory: ${{ inputs.stage }} (${{ inputs.character_id }})"
-            git pull --rebase origin main
+            git pull --rebase -X theirs origin main
             git push origin main
           fi
 
@@ -97,9 +117,28 @@ jobs:
         run: |
           git config user.name "aot-art-factory[bot]"
           git config user.email "aot-art-factory@users.noreply.github.com"
+          git fetch origin main
+          python3 -c '
+          import json, subprocess
+          from pathlib import Path
+          p = Path("art-factory/queue.json")
+          if p.exists():
+              local = json.loads(p.read_text(encoding="utf-8"))
+              try:
+                  raw = subprocess.check_output(["git", "show", "origin/main:art-factory/queue.json"], text=True)
+                  remote = json.loads(raw)
+              except Exception:
+                  remote = {"items": []}
+              merged = {it["id"]: it for it in remote.get("items", []) if "id" in it}
+              for it in local.get("items", []):
+                  if "id" in it:
+                      merged[it["id"]] = it
+              local["items"] = list(merged.values())
+              p.write_text(json.dumps(local, indent=2) + "\n", encoding="utf-8")
+          '
           git add art-factory/
           if ! git diff --cached --quiet; then
             git commit -m "art-factory: alpha video ${{ inputs.character_id }} ${{ inputs.move_id }}"
-            git pull --rebase origin main
+            git pull --rebase -X theirs origin main
             git push origin main
           fi
