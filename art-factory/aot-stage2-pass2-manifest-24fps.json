@@ -1,0 +1,1331 @@
+{
+  "game": "The Adventures of Tom",
+  "specVersion": "v11",
+  "stage": "Stage 2A - Pass 2 (40 Moves + 3 Reactive Counters)",
+  "exportedAt": "2026-11-24T03:51:21.677Z",
+  "wanDefaults": {
+    "fps": 24,
+    "backdropMode": "chroma",
+    "stylePrefix": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames.",
+    "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+  },
+  "moves": [
+    {
+      "id": "tom-gg-basic",
+      "character": "Tom",
+      "vibe": "Gamer Geek",
+      "tier": "Basic Action",
+      "name": "Cartridge Blow",
+      "flavor": "Racket",
+      "wanClip": {
+        "filename": "tom-gg-basic.mp4",
+        "durationSec": 2.6,
+        "fps": 24,
+        "numFrames": 61,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tom-gg-basic | 2.6s | 61 frames @ 24fps] Tom stays in-place, raises a classic gray retro game cartridge horizontally to his lips with solemn collector focus, puffs his cheeks slightly to blow a sharp brisk burst of air straight left across the bottom pins, then slips the cartridge neatly back into his pocket.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.7,
+          1.1,
+          0.8
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 1.1,
+        "hitStopFrames": 2,
+        "vfxPrimitives": [
+          "vfx_racket_dust_air_cone",
+          "vfx_target_intel_reticle"
+        ],
+        "v11Hook": "0.5x Racket chip + reveals target foe's next intended ally target"
+      }
+    },
+    {
+      "id": "tom-gg-s1",
+      "character": "Tom",
+      "vibe": "Gamer Geek",
+      "tier": "Skill 1",
+      "name": "Controller Toss",
+      "flavor": "Clobber",
+      "wanClip": {
+        "filename": "tom-gg-s1.mp4",
+        "durationSec": 3.3,
+        "fps": 24,
+        "numFrames": 81,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tom-gg-s1 | 3.3s | 81 frames @ 24fps] Tom stays in-place, loops a gamepad safety wrist-strap securely around his knuckles, leans back into a crisp deadpan sidearm boomerang throw left, then raises his hand to catch the returning controller cleanly and resets to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.8,
+          1.6,
+          0.9
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 1.45,
+        "hitStopFrames": 4,
+        "vfxPrimitives": [
+          "vfx_proj_controller_boomerang",
+          "vfx_clobber_revenge_spark"
+        ],
+        "v11Hook": "1.0x Clobber; +40% bonus dmg if Tom took or blocked a hit since last turn"
+      }
+    },
+    {
+      "id": "tom-gg-s2",
+      "character": "Tom",
+      "vibe": "Gamer Geek",
+      "tier": "Skill 2",
+      "name": "Winged Shell Lock-On",
+      "flavor": "Clobber",
+      "wanClip": {
+        "filename": "tom-gg-s2.mp4",
+        "durationSec": 4.2,
+        "fps": 24,
+        "numFrames": 101,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tom-gg-s2 | 4.2s | 101 frames @ 24fps] Tom taps a brisk button sequence on his handheld gamepad, strides forward in-place to deliver a sharp single-hand Clobber smack left, then steps cleanly back watching calmly with controller poised.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": {
+        "filename": "tom-gg-s2_counter.mp4",
+        "durationSec": 2.3,
+        "fps": 24,
+        "numFrames": 57,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tom-gg-s2_counter | 2.3s | 57 frames @ 24fps] Tom stays in-place, presses one decisive button on his controller with a calm deadpan nod, and settles smoothly back to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "engineSpec": {
+        "beatsSec": [
+          1,
+          2.1,
+          1.1
+        ],
+        "translationPath": "approach_enemy (0.5s-1.0s step to foe; 1.0s-2.4s smack; 2.4s-4.2s return)",
+        "contactTriggerSec": 1.5,
+        "hitStopFrames": 4,
+        "vfxPrimitives": [
+          "vfx_clobber_smack",
+          "vfx_hovering_blue_winged_shell (counter: vfx_razzle_shell_slam_boom)"
+        ],
+        "v11Hook": "Clobber hit + hovers winged shell; if foe attacks before Tom's next turn, free Razzle boom"
+      }
+    },
+    {
+      "id": "tom-gg-cap",
+      "character": "Tom",
+      "vibe": "Gamer Geek",
+      "tier": "Grand Capstone",
+      "name": "Konami Code",
+      "flavor": "Razzle",
+      "wanClip": {
+        "filename": "tom-gg-cap.mp4",
+        "durationSec": 7.2,
+        "fps": 24,
+        "numFrames": 173,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tom-gg-cap | 7.2s | 173 frames @ 24fps] Tom stays in-place, raises one hand calmly skyward, then executes a crisp rapid sequence of earnest rhythmic in-place hops tapping imaginary oversized floor buttons beneath his sneakers (Up-Up-Down-Down-Left-Right-Left-Right-B-A), snaps upright into a proud 1-second rainbow-lit hero pose, and lowers his arms cleanly to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          2.2,
+          3.5,
+          1.5
+        ],
+        "translationPath": "in_place (Tom hops directly atop Engine-rendered giant sky-dropped floor controller)",
+        "contactTriggerSec": 3.1,
+        "hitStopFrames": 7,
+        "vfxPrimitives": [
+          "vfx_setpiece_giant_sky_controller",
+          "vfx_rainbow_invincible_aura",
+          "vfx_razzle_retro_meteor_rain"
+        ],
+        "v11Hook": "2.2x AoE (70%) Razzle barrage, -2 Composure, +15% Crit Rate per Prime on each foe"
+      }
+    },
+    {
+      "id": "grace-ca-basic",
+      "character": "Grace",
+      "vibe": "Craft Artist",
+      "tier": "Basic Action",
+      "name": "Glitter-Brush Flick",
+      "flavor": "Razzle",
+      "wanClip": {
+        "filename": "grace-ca-basic.mp4",
+        "durationSec": 2.5,
+        "fps": 24,
+        "numFrames": 61,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: grace-ca-basic | 2.5s | 61 frames @ 24fps] Grace darts briskly forward in-place holding a wooden watercolor palette and chunky craft paintbrush, dips the bristles quickly, executes one crisp point-blank wrist-flick straight left, and hops lightly back to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.6,
+          1.1,
+          0.8
+        ],
+        "translationPath": "approach_enemy (0.0s-0.6s dart to foe; 0.6s-1.7s point-blank flick; 1.7s-2.5s hop back)",
+        "contactTriggerSec": 1,
+        "hitStopFrames": 3,
+        "vfxPrimitives": [
+          "vfx_razzle_neon_glitter_ribbon",
+          "vfx_creative_mess_neighbor_splatter"
+        ],
+        "v11Hook": "0.5x Razzle (Dazzled 2t) + 25% Razzle glitter splash to adjacent foes via Trait"
+      }
+    },
+    {
+      "id": "grace-ca-s1",
+      "character": "Grace",
+      "vibe": "Craft Artist",
+      "tier": "Skill 1",
+      "name": "Open-String Violin Screech",
+      "flavor": "Racket",
+      "wanClip": {
+        "filename": "grace-ca-s1.mp4",
+        "durationSec": 3.4,
+        "fps": 24,
+        "numFrames": 81,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: grace-ca-s1 | 3.4s | 81 frames @ 24fps] Grace stays in-place, tucks a beginner wooden violin solemnly under her chin with textbook recital posture, raises her bow high, drags it fiercely across all four strings in one committed screeching stroke, and lowers the violin proudly to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.9,
+          1.6,
+          0.9
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 1.45,
+        "hitStopFrames": 4,
+        "vfxPrimitives": [
+          "vfx_racket_jagged_rosin_waves",
+          "vfx_atk_down_20pct_arrows"
+        ],
+        "v11Hook": "AoE Racket (detonates Dazzled) + cuts enemy Attack by 20% for 2 turns"
+      }
+    },
+    {
+      "id": "grace-ca-s2",
+      "character": "Grace",
+      "vibe": "Craft Artist",
+      "tier": "Skill 2",
+      "name": "Bedazzle-Gun Glue Trap",
+      "flavor": "Sizzle",
+      "wanClip": {
+        "filename": "grace-ca-s2.mp4",
+        "durationSec": 4.2,
+        "fps": 24,
+        "numFrames": 101,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: grace-ca-s2 | 4.2s | 101 frames @ 24fps] Grace stays in-place, crouches slightly gripping a craft hot-glue gun in her right hand and a rhinestone pouch in her left, sweeps a brisk zigzagging aim left while tossing a pinch of sparkles, blows a tiny wisp off the nozzle, and stands back to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": {
+        "filename": "grace-ca-s2_counter.mp4",
+        "durationSec": 2,
+        "fps": 24,
+        "numFrames": 49,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: grace-ca-s2_counter | 2.0s | 49 frames @ 24fps] Grace stands in-place with hands on hips giving a crisp satisfied artist nod as her craft trap triggers.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "engineSpec": {
+        "beatsSec": [
+          1.1,
+          2.1,
+          1
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 1.85,
+        "hitStopFrames": 0,
+        "vfxPrimitives": [
+          "vfx_ground_hotglue_rhinestone_mat (counter: vfx_sizzle_razzle_chip_pop)"
+        ],
+        "v11Hook": "2-round enemy floor hazard: acting foes take Sizzle/Razzle chip + +20% Recovery Ticks"
+      }
+    },
+    {
+      "id": "grace-ca-cap",
+      "character": "Grace",
+      "vibe": "Craft Artist",
+      "tier": "Grand Capstone",
+      "name": "Masterpiece Portrait Makeover",
+      "flavor": "Razzle",
+      "wanClip": {
+        "filename": "grace-ca-cap.mp4",
+        "durationSec": 6.9,
+        "fps": 24,
+        "numFrames": 165,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: grace-ca-cap | 6.9s | 165 frames @ 24fps] Grace stays in-place, grips an imaginary velvet drape with theatrical flourish, whips it dramatically aside, sweeps a large craft brush left in a grand signature arc, holds a beaming 1-second gallery-master hero pose, and resets to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          2,
+          3.4,
+          1.5
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 3.15,
+        "hitStopFrames": 6,
+        "vfxPrimitives": [
+          "vfx_setpiece_giant_easel_portrait",
+          "vfx_razzle_watercolor_gem_blast",
+          "vfx_forced_razzle_peeve_badge"
+        ],
+        "v11Hook": "2.2x Razzle blast forcing temporary Razzle Pet Peeve weakness (2t)"
+      }
+    },
+    {
+      "id": "rose-cr-basic",
+      "character": "Rose",
+      "vibe": "Cozy Rosie",
+      "tier": "Basic Action",
+      "name": "Pocket Pretzel & Pat",
+      "flavor": "Clobber",
+      "wanClip": {
+        "filename": "rose-cr-basic.mp4",
+        "durationSec": 2.7,
+        "fps": 24,
+        "numFrames": 65,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: rose-cr-basic | 2.7s | 65 frames @ 24fps] Rose darts briskly forward in-place clutching tattered worn Lamby, delivers one earnest plushie bonk straight left, pivots neatly toward her ally side fishing a tiny pretzel from her pocket to press forward with a gentle comforting pat, and settles to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.7,
+          1.2,
+          0.8
+        ],
+        "translationPath": "approach_enemy_then_ally (0.0s-0.7s foe bonk; 0.7s-1.9s return past lowest-HP ally; 1.9s-2.7s slot)",
+        "contactTriggerSec": 0.95,
+        "hitStopFrames": 3,
+        "vfxPrimitives": [
+          "vfx_clobber_plush_pop",
+          "vfx_emerald_tiny_heal_5pct"
+        ],
+        "v11Hook": "0.5x Clobber on foe + tiny heal (5% HP) on lowest-HP ally"
+      }
+    },
+    {
+      "id": "rose-cr-s1",
+      "character": "Rose",
+      "vibe": "Cozy Rosie",
+      "tier": "Skill 1",
+      "name": "Tattered Lamby Boomerang",
+      "flavor": "Clobber",
+      "wanClip": {
+        "filename": "rose-cr-s1.mp4",
+        "durationSec": 3.5,
+        "fps": 24,
+        "numFrames": 85,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: rose-cr-s1 | 3.5s | 85 frames @ 24fps] Rose hurls worn tattered Lamby straight left while immediately pulling spotless white Backup Lamby from her backpack to hug tight, then lowers her shoulder into a fierce rapid 2-hit retrieval tackle in-place and snatches tattered Lamby back home.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.8,
+          1.8,
+          0.9
+        ],
+        "translationPath": "in_place_throw_then_lunge_enemy (0.0s-0.8s throw; 0.8s-2.6s 2-hit dash tackle; 2.6s-3.5s return)",
+        "contactTriggerSec": 1.55,
+        "hitStopFrames": 4,
+        "vfxPrimitives": [
+          "vfx_proj_tattered_lamby_mark",
+          "vfx_clobber_2hit_tackle",
+          "vfx_plush_self_shield"
+        ],
+        "v11Hook": "Marks foe -> fast 2x Clobber tackle + self-shield on Rose"
+      }
+    },
+    {
+      "id": "rose-cr-s2",
+      "character": "Rose",
+      "vibe": "Cozy Rosie",
+      "tier": "Skill 2",
+      "name": "Sofa-Cushion Citadel",
+      "flavor": "Support",
+      "wanClip": {
+        "filename": "rose-cr-s2.mp4",
+        "durationSec": 4.3,
+        "fps": 24,
+        "numFrames": 105,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: rose-cr-s2 | 4.3s | 105 frames @ 24fps] Rose stays in-place holding tattered Lamby in her left hand and spotless Backup Lamby in her right, lifts both plushies high like fort architects, sweeps both arms outward to frame a wide protective wall, and settles happily into idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          1.1,
+          2.2,
+          1
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 1.95,
+        "hitStopFrames": 0,
+        "vfxPrimitives": [
+          "vfx_setpiece_sofa_cushion_fort",
+          "vfx_twin_lamby_lookouts",
+          "vfx_pushback_immune_anchor"
+        ],
+        "v11Hook": "25% Max HP party pillow-fort shield + blocks timeline pushback (3-rd CD)"
+      }
+    },
+    {
+      "id": "rose-cr-cap",
+      "character": "Rose",
+      "vibe": "Cozy Rosie",
+      "tier": "Grand Capstone",
+      "name": "Kingdom of Ten-Thousand Blankets",
+      "flavor": "Sizzle",
+      "wanClip": {
+        "filename": "rose-cr-cap.mp4",
+        "durationSec": 7.1,
+        "fps": 24,
+        "numFrames": 169,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: rose-cr-cap | 7.1s | 169 frames @ 24fps] Rose stays in-place hugging both tattered Lamby and spotless Backup Lamby closely to her chest, looks up with wide earnest wonder, lifts both plushies skyward in sovereign command, holds a regal 1-second pajama-monarch hero pose, and lowers them gently to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          2,
+          3.6,
+          1.5
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 3.3,
+        "hitStopFrames": 0,
+        "vfxPrimitives": [
+          "vfx_setpiece_starlit_blanket_castle",
+          "vfx_heal_60pct_cleanse",
+          "vfx_sizzle_warmth_wave_telegraph"
+        ],
+        "v11Hook": "Heals ally 60% HP, cleanses all debuffs, erupts in AoE Sizzle warmth wave next turn"
+      }
+    },
+    {
+      "id": "amy-cb-basic",
+      "character": "Amy",
+      "vibe": "Classroom Boss",
+      "tier": "Basic Action",
+      "name": "\"Eyes on Me\" Clap",
+      "flavor": "Racket",
+      "wanClip": {
+        "filename": "amy-cb-basic.mp4",
+        "durationSec": 2.6,
+        "fps": 24,
+        "numFrames": 61,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: amy-cb-basic | 2.6s | 61 frames @ 24fps] Amy stays in-place, squares her shoulders with calm elementary-teacher poise, executes a crisp unmistakable five-beat hand clap (clap-clap, clap-clap-clap!), then folds her hands neatly waiting for quiet.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.6,
+          1.2,
+          0.8
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 1.05,
+        "hitStopFrames": 2,
+        "vfxPrimitives": [
+          "vfx_racket_5beat_clap_rings",
+          "vfx_minor_buff_pop"
+        ],
+        "v11Hook": "0.5x Racket chip that strips 1 minor Speed or Evasion buff"
+      }
+    },
+    {
+      "id": "amy-cb-s1",
+      "character": "Amy",
+      "vibe": "Classroom Boss",
+      "tier": "Skill 1",
+      "name": "Four-Tab Binder",
+      "flavor": "Racket",
+      "wanClip": {
+        "filename": "amy-cb-s1.mp4",
+        "durationSec": 3.4,
+        "fps": 24,
+        "numFrames": 81,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: amy-cb-s1 | 3.4s | 81 frames @ 24fps] Amy strides briskly forward in-place holding a thick 3-inch color-coded classroom binder, slams the binder wide open straight forward with authoritative precision, and steps cleanly back to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.9,
+          1.6,
+          0.9
+        ],
+        "translationPath": "approach_enemy (0.0s-0.9s stride to foe; 0.9s-2.5s binder slam; 2.5s-3.4s return)",
+        "contactTriggerSec": 1.5,
+        "hitStopFrames": 4,
+        "vfxPrimitives": [
+          "vfx_racket_binder_snap",
+          "vfx_4color_mix_tab_mark"
+        ],
+        "v11Hook": "Marks foe 2t: first 2-flavor Mix shaves 1 Comp (2 on Pet Peeve/Detonation) & +1 Pep party"
+      }
+    },
+    {
+      "id": "amy-cb-s2",
+      "character": "Amy",
+      "vibe": "Classroom Boss",
+      "tier": "Skill 2",
+      "name": "Gold-Star Sticker",
+      "flavor": "Razzle",
+      "wanClip": {
+        "filename": "amy-cb-s2.mp4",
+        "durationSec": 4.1,
+        "fps": 24,
+        "numFrames": 97,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: amy-cb-s2 | 4.1s | 97 frames @ 24fps] Amy stays in-place, peels a large shiny gold-star sticker carefully off a sticker sheet, turns toward her teammate reaching smoothly forward to press it onto their shoulder, and gives a warm approving teacher nod.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          1,
+          2.1,
+          1
+        ],
+        "translationPath": "step_beside_ally (Engine shifts Amy beside target ally slot during Beat 2)",
+        "contactTriggerSec": 1.9,
+        "hitStopFrames": 0,
+        "vfxPrimitives": [
+          "vfx_razzle_giant_gold_star_stamp",
+          "vfx_guaranteed_accuracy_lock"
+        ],
+        "v11Hook": "Target ally gains +35% potency & guaranteed accuracy"
+      }
+    },
+    {
+      "id": "amy-cb-cap",
+      "character": "Amy",
+      "vibe": "Classroom Boss",
+      "tier": "Grand Capstone",
+      "name": "Classroom Lights-Out Reset",
+      "flavor": "Racket",
+      "wanClip": {
+        "filename": "amy-cb-cap.mp4",
+        "durationSec": 6.9,
+        "fps": 24,
+        "numFrames": 165,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: amy-cb-cap | 6.9s | 165 frames @ 24fps] Amy stays in-place, reaches calmly upward to flick an imaginary wall light switch downward, raises one serene finger to her lips in total quiet authority, holds a poised 1-second teacher-of-the-year stance, and relaxes cleanly to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          2,
+          3.4,
+          1.5
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 3.1,
+        "hitStopFrames": 5,
+        "vfxPrimitives": [
+          "vfx_clearing_lights_dim",
+          "vfx_racket_aoe_lock_icons",
+          "vfx_ally_buff_refresh_halos"
+        ],
+        "v11Hook": "2.2x AoE (70%) Racket, locks foes out of AoEs (1t) & refreshes ally buffs"
+      }
+    },
+    {
+      "id": "deedee-rn-basic",
+      "character": "Deedee",
+      "vibe": "Registered Nut",
+      "tier": "Basic Action",
+      "name": "\"Little Pinch!\" Syringe Poke",
+      "flavor": "Clobber",
+      "wanClip": {
+        "filename": "deedee-rn-basic.mp4",
+        "durationSec": 2.6,
+        "fps": 24,
+        "numFrames": 61,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: deedee-rn-basic | 2.6s | 61 frames @ 24fps] Deedee marches briskly forward in-place with floor-nurse focus, dabs forward once with a tiny white alcohol wipe, executes one swift clinical forward poke with a small nurse syringe, and steps neatly back to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.7,
+          1.1,
+          0.8
+        ],
+        "translationPath": "approach_enemy (0.0s-0.7s brisk march; 0.7s-1.8s swab & poke; 1.8s-2.6s return)",
+        "contactTriggerSec": 1.15,
+        "hitStopFrames": 3,
+        "vfxPrimitives": [
+          "vfx_alcohol_swab_glint",
+          "vfx_clobber_pinch_star",
+          "vfx_crit_taken_bullseye"
+        ],
+        "v11Hook": "0.5x Clobber poke exposing foe to +15% Crit Rate taken (1t)"
+      }
+    },
+    {
+      "id": "deedee-rn-s1",
+      "character": "Deedee",
+      "vibe": "Registered Nut",
+      "tier": "Skill 1",
+      "name": "Deedee Makes It Better",
+      "flavor": "Support",
+      "wanClip": {
+        "filename": "deedee-rn-s1.mp4",
+        "durationSec": 3.3,
+        "fps": 24,
+        "numFrames": 81,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: deedee-rn-s1 | 3.3s | 81 frames @ 24fps] Deedee turns warmly toward an adjacent teammate holding a small Band-Aid and cool cloth, reaches smoothly forward to smooth their forehead and give one gentle reassuring pat, then resets to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.8,
+          1.6,
+          0.9
+        ],
+        "translationPath": "step_beside_ally (Engine shifts Deedee beside target ally slot)",
+        "contactTriggerSec": 1.55,
+        "hitStopFrames": 0,
+        "vfxPrimitives": [
+          "vfx_emerald_clinical_heal_20pct",
+          "vfx_full_cleanse_sparks",
+          "vfx_atk_up_20pct_crest"
+        ],
+        "v11Hook": "Snappy heal (overheal->Clean Bill Shield) + full cleanse (+20% Atk if debuff cleared)"
+      }
+    },
+    {
+      "id": "deedee-rn-s2",
+      "character": "Deedee",
+      "vibe": "Registered Nut",
+      "tier": "Skill 2",
+      "name": "\"Bring a Jacket!\" Ward",
+      "flavor": "Support",
+      "wanClip": {
+        "filename": "deedee-rn-s2.mp4",
+        "durationSec": 4.3,
+        "fps": 24,
+        "numFrames": 105,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: deedee-rn-s2 | 4.3s | 105 frames @ 24fps] Deedee stays in-place, shakes out two folded zip-up jackets draped over her forearm with firm loving insistence, mimes zipping a collar right up to the chin, and gives an approving nod before settling to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          1.1,
+          2.2,
+          1
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 1.9,
+        "hitStopFrames": 0,
+        "vfxPrimitives": [
+          "vfx_cozy_jacket_wrap (2 allies)",
+          "vfx_regen_hearts_3t",
+          "vfx_guts_1hp_safety_pin"
+        ],
+        "v11Hook": "2 allies get 20% HP regen (3t) + once-per-cast 1 HP fatal KO save (3-rd CD)"
+      }
+    },
+    {
+      "id": "deedee-rn-cap",
+      "character": "Deedee",
+      "vibe": "Registered Nut",
+      "tier": "Grand Capstone",
+      "name": "To the Moon & Back",
+      "flavor": "Sizzle",
+      "wanClip": {
+        "filename": "deedee-rn-cap.mp4",
+        "durationSec": 7.2,
+        "fps": 24,
+        "numFrames": 173,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: deedee-rn-cap | 7.2s | 173 frames @ 24fps] Deedee stays in-place, opens both arms wide in a serene heartfelt embrace looking warmly upward, extends one radiant palm gently left to release a soothing warmth wave, holds a luminous 1-second matriarch hero pose, and lowers her arms cleanly to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          2.1,
+          3.6,
+          1.5
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 3.35,
+        "hitStopFrames": 6,
+        "vfxPrimitives": [
+          "vfx_setpiece_rising_full_moon",
+          "vfx_moonlight_revive_beam",
+          "vfx_sizzle_warmth_shockwave_2comp"
+        ],
+        "v11Hook": "80% revive or 100% heal on ally + warm AoE Sizzle shockwave shaving -2 Composure"
+      }
+    },
+    {
+      "id": "boppy-pb-basic",
+      "character": "Boppy",
+      "vibe": "Pepper Boss",
+      "tier": "Basic Action",
+      "name": "Seeds of Trouble",
+      "flavor": "Sizzle",
+      "wanClip": {
+        "filename": "boppy-pb-basic.mp4",
+        "durationSec": 2.6,
+        "fps": 24,
+        "numFrames": 61,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: boppy-pb-basic | 2.6s | 61 frames @ 24fps] Boppy (wearing his fishing rod and wicker creel strapped securely across his back) pinches a few tiny red chili seeds from his shirt pocket, flicks them casually left with thumb and forefinger, and wipes his fingers cleanly on his trousers.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.7,
+          1.1,
+          0.8
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 1.25,
+        "hitStopFrames": 2,
+        "vfxPrimitives": [
+          "vfx_proj_glowing_chili_seeds",
+          "vfx_sizzle_toasty_embers"
+        ],
+        "v11Hook": "0.5x Sizzle applying Toasty (burn DoT, 2t)"
+      }
+    },
+    {
+      "id": "boppy-pb-s1",
+      "character": "Boppy",
+      "vibe": "Pepper Boss",
+      "tier": "Skill 1",
+      "name": "\"It's Nothing, It's Fine\" Chomp",
+      "flavor": "Sizzle",
+      "wanClip": {
+        "filename": "boppy-pb-s1.mp4",
+        "durationSec": 3.4,
+        "fps": 24,
+        "numFrames": 81,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: boppy-pb-s1 | 3.4s | 81 frames @ 24fps] Boppy (wearing his fishing rod and wicker creel on his back) pops a bright red raw garden pepper straight into his mouth, chews completely stoically without flinching, dabs one tiny drop of sweat, and waves dismissively with one hand.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": {
+        "filename": "boppy-pb-s1_counter.mp4",
+        "durationSec": 2,
+        "fps": 24,
+        "numFrames": 49,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: boppy-pb-s1_counter | 2.0s | 49 frames @ 24fps] Boppy (fishing rod and creel strapped on his back) stands completely unmoved as heat shimmers off his shoulders, giving one deadpan shrug.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "engineSpec": {
+        "beatsSec": [
+          0.9,
+          1.6,
+          0.9
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 1.55,
+        "hitStopFrames": 0,
+        "vfxPrimitives": [
+          "vfx_emerald_self_heal_20pct",
+          "vfx_sizzle_spiced_up_burn_aura"
+        ],
+        "v11Hook": "Heals Boppy 20% HP + Spiced Up (+30% Sizzle & melee burn aura 3t)"
+      }
+    },
+    {
+      "id": "boppy-pb-s2",
+      "character": "Boppy",
+      "vibe": "Pepper Boss",
+      "tier": "Skill 2",
+      "name": "1989 Pickle-Jar Bomb",
+      "flavor": "Sizzle",
+      "wanClip": {
+        "filename": "boppy-pb-s2.mp4",
+        "durationSec": 4.3,
+        "fps": 24,
+        "numFrames": 105,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: boppy-pb-s2 | 4.3s | 105 frames @ 24fps] Boppy (wearing his fishing rod and wicker creel on his back) hefts a vintage glass Mason jar packed with pickled red peppers proudly in one hand, leans back smoothly, lobs a sturdy overhand arc left, and nods with quiet pride.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          1.1,
+          2.2,
+          1
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 2.15,
+        "hitStopFrames": 5,
+        "vfxPrimitives": [
+          "vfx_proj_1989_mason_jar",
+          "vfx_sizzle_five_alarm_fireball"
+        ],
+        "v11Hook": "AoE Sizzle upgrading Toasty into Five-Alarm Burn (2x burn & -20% Def)"
+      }
+    },
+    {
+      "id": "boppy-pb-cap",
+      "character": "Boppy",
+      "vibe": "Pepper Boss",
+      "tier": "Grand Capstone",
+      "name": "The Ghost One That Looks Back",
+      "flavor": "Sizzle",
+      "wanClip": {
+        "filename": "boppy-pb-cap.mp4",
+        "durationSec": 7.2,
+        "fps": 24,
+        "numFrames": 173,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: boppy-pb-cap | 7.2s | 173 frames @ 24fps] Boppy (wearing his fishing rod and wicker creel strapped across his back) slowly lifts a small brass garden cloche off his open left palm, extends his palm stoically toward the left as fierce heat ripples his collar, holds an unflinching 1-second five-alarm iron-gut pose, and lowers his hand calmly to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          2.1,
+          3.6,
+          1.5
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 3.3,
+        "hitStopFrames": 7,
+        "vfxPrimitives": [
+          "vfx_setpiece_sentient_ghost_pepper",
+          "vfx_sizzle_roaring_cone",
+          "vfx_double_burn_tick_bursts"
+        ],
+        "v11Hook": "2.2x AoE (70%) Sizzle cone; instantly triggers 2 full burn ticks without removing burns"
+      }
+    },
+    {
+      "id": "tnb-lb-basic",
+      "character": "TNB",
+      "vibe": "Longboarder",
+      "tier": "Basic Action",
+      "name": "Longboard Push & Carve",
+      "flavor": "Clobber",
+      "wanClip": {
+        "filename": "tnb-lb-basic.mp4",
+        "durationSec": 2.6,
+        "fps": 24,
+        "numFrames": 61,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tnb-lb-basic | 2.6s | 61 frames @ 24fps] TNB (calm, relaxed stance holding a hot paper coffee cup completely level in his right hand) drops his wooden longboard smoothly, pushes once effortlessly with his back foot, leans into a silky carve-tail bump left, and coasts smoothly back into idle without spilling a drop.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.6,
+          1.2,
+          0.8
+        ],
+        "translationPath": "approach_enemy (0.0s-0.6s smooth glide to foe; 0.6s-1.8s carve clip; 1.8s-2.6s coast back)",
+        "contactTriggerSec": 1.05,
+        "hitStopFrames": 3,
+        "vfxPrimitives": [
+          "vfx_clobber_board_clip",
+          "vfx_stat_scan_card",
+          "vfx_tempo_glide_trail"
+        ],
+        "v11Hook": "0.5x Clobber, scans foe stats, -10% own Recovery Ticks (-10% more via Trait)"
+      }
+    },
+    {
+      "id": "tnb-lb-s1",
+      "character": "TNB",
+      "vibe": "Longboarder",
+      "tier": "Skill 1",
+      "name": "E-Bike Tag-Along",
+      "flavor": "Support",
+      "wanClip": {
+        "filename": "tnb-lb-s1.mp4",
+        "durationSec": 3.4,
+        "fps": 24,
+        "numFrames": 81,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tnb-lb-s1 | 3.4s | 81 frames @ 24fps] TNB stays in-place standing relaxed beside his longboard, holds up his smartphone calmly to scan an imaginary handlebar QR code toward an ally, gives a chill two-finger salute, and pockets his phone.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.9,
+          1.6,
+          0.9
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 1.6,
+        "hitStopFrames": 0,
+        "vfxPrimitives": [
+          "vfx_rental_ebike_unlock_chirp",
+          "vfx_fresh_ride_shield",
+          "vfx_triple_stat_chevrons"
+        ],
+        "v11Hook": "Cleanses ally, Fresh Ride (blocks 1 debuff), +15% Spd/Atk/Def for 2 turns"
+      }
+    },
+    {
+      "id": "tnb-lb-s2",
+      "character": "TNB",
+      "vibe": "Longboarder",
+      "tier": "Skill 2",
+      "name": "Waymo Tailgate Rescue",
+      "flavor": "Razzle",
+      "wanClip": {
+        "filename": "tnb-lb-s2.mp4",
+        "durationSec": 4.4,
+        "fps": 24,
+        "numFrames": 105,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tnb-lb-s2 | 4.4s | 105 frames @ 24fps] TNB stays in-place with unhurried composure, taps his smartphone screen once, lifts a relaxed hand to hail the curb, takes a calm sip of his coffee as rescue arrives, and returns to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          1.1,
+          2.3,
+          1
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 2.05,
+        "hitStopFrames": 4,
+        "vfxPrimitives": [
+          "vfx_setpiece_white_waymo_suv",
+          "vfx_razzle_lidar_blind_flash",
+          "vfx_revive_40pct_door_glow"
+        ],
+        "v11Hook": "AoE Razzle blind flash on foes + 40% HP ally revive (or safe HP rebalance)"
+      }
+    },
+    {
+      "id": "tnb-lb-cap",
+      "character": "TNB",
+      "vibe": "Longboarder",
+      "tier": "Grand Capstone",
+      "name": "Baxter Hill Longboard Express",
+      "flavor": "Razzle",
+      "wanClip": {
+        "filename": "tnb-lb-cap.mp4",
+        "durationSec": 7,
+        "fps": 24,
+        "numFrames": 169,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tnb-lb-cap | 7.0s | 169 frames @ 24fps] TNB stays in-place, taps his wooden longboard down calmly with one sneaker, sinks into an effortless low downhill-carving tuck with mellow focus and zero panic, rises smoothly into a cool 1-second hands-in-pockets hero pose, and resets to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          2,
+          3.5,
+          1.5
+        ],
+        "translationPath": "in_place (Engine sweeps Baxter Street slope lines & LA Metro train across field)",
+        "contactTriggerSec": 3.15,
+        "hitStopFrames": 6,
+        "vfxPrimitives": [
+          "vfx_setpiece_la_metro_train",
+          "vfx_razzle_headlight_dazzle",
+          "vfx_ebike_buff_double",
+          "vfx_ruckus_20pct_surge"
+        ],
+        "v11Hook": "2.2x AoE (70%) Razzle (Dazzled all), doubles active E-Bike buffs (2t), +20% Ruckus"
+      }
+    },
+    {
+      "id": "nara-gd-basic",
+      "character": "Nara",
+      "vibe": "Guard Dog",
+      "tier": "Basic Action",
+      "name": "Grip-Chicken Snap",
+      "flavor": "Clobber",
+      "wanClip": {
+        "filename": "nara-gd-basic.mp4",
+        "durationSec": 2.5,
+        "fps": 24,
+        "numFrames": 61,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: nara-gd-basic | 2.5s | 61 frames @ 24fps] Nara (real 40-lb black curly-coated labradoodle strictly on all four paws, zero upright posture) drops into an alert play-bow crouch, darts forward on all fours delivering one crisp snappy canine chomp left, and trots neatly back into ready quadruped stance.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.6,
+          1.1,
+          0.8
+        ],
+        "translationPath": "approach_enemy (0.0s-0.6s dart to foe; 0.6s-1.7s snap bite; 1.7s-2.5s trot back)",
+        "contactTriggerSec": 1,
+        "hitStopFrames": 3,
+        "vfxPrimitives": [
+          "vfx_clobber_fang_spark",
+          "vfx_chicken_snack_5pct_heal"
+        ],
+        "v11Hook": "0.5x Clobber bite (builds My Toy); 5% HP plain-chicken heal if foe debuffed"
+      }
+    },
+    {
+      "id": "nara-gd-s1",
+      "character": "Nara",
+      "vibe": "Guard Dog",
+      "tier": "Skill 1",
+      "name": "Relentless Tug-of-War",
+      "flavor": "Clobber",
+      "wanClip": {
+        "filename": "nara-gd-s1.mp4",
+        "durationSec": 3.5,
+        "fps": 24,
+        "numFrames": 85,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: nara-gd-s1 | 3.5s | 85 frames @ 24fps] Nara (real 40-lb black curly labradoodle strictly on all four paws) charges briskly forward in-place, clamps her jaws firmly forward, digs all four paws hard into the ground leaning backward with two fierce side-to-side tug shakes, then bounds back to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.7,
+          1.9,
+          0.9
+        ],
+        "translationPath": "approach_enemy (0.0s-0.7s charge to foe; 0.7s-2.6s 40-lb tug yank; 2.6s-3.5s bound back)",
+        "contactTriggerSec": 1.65,
+        "hitStopFrames": 5,
+        "vfxPrimitives": [
+          "vfx_guard_stance_rip",
+          "vfx_dual_atk_def_down_25pct"
+        ],
+        "v11Hook": "1.0x Clobber, yanks foe out of Guard Stance, -25% Atk & Def (2t)"
+      }
+    },
+    {
+      "id": "nara-gd-s2",
+      "character": "Nara",
+      "vibe": "Guard Dog",
+      "tier": "Skill 2",
+      "name": "\"No Take, Only Throw!\"",
+      "flavor": "Clobber",
+      "wanClip": {
+        "filename": "nara-gd-s2.mp4",
+        "durationSec": 4.1,
+        "fps": 24,
+        "numFrames": 97,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: nara-gd-s2 | 4.1s | 97 frames @ 24fps] Nara (real 40-lb black curly labradoodle strictly on all four paws) clenches a bright gold tennis ball tightly in her jaws, sprints forward delivering a sturdy quadruped shoulder-check left, then prances proudly back with tail held high refusing to drop the ball.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.9,
+          2.2,
+          1
+        ],
+        "translationPath": "approach_enemy (0.0s-0.9s sprint to foe; 0.9s-2.6s shoulder check; 2.6s-4.1s proud prance back)",
+        "contactTriggerSec": 1.75,
+        "hitStopFrames": 4,
+        "vfxPrimitives": [
+          "vfx_clobber_gold_burst",
+          "vfx_stolen_buff_orb_arc"
+        ],
+        "v11Hook": "1.0x Clobber; steals 1 foe buff onto Nara (or +35% Atk vs unstealable boss buff)"
+      }
+    },
+    {
+      "id": "nara-gd-cap",
+      "character": "Nara",
+      "vibe": "Guard Dog",
+      "tier": "Grand Capstone",
+      "name": "Stunt-Double Squirrel Intercept",
+      "flavor": "Clobber",
+      "wanClip": {
+        "filename": "nara-gd-cap.mp4",
+        "durationSec": 7,
+        "fps": 24,
+        "numFrames": 169,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: nara-gd-cap | 7.0s | 169 frames @ 24fps] Nara (real 40-lb black curly labradoodle strictly on all four paws wearing a Sunset Gold lanyard and small Watch vest) coils low on all fours with intense focus, springs into a soaring athletic quadruped pounce cycle for three rapid strikes, and lands cleanly in a regal 1-second tail-wagging hero sit.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          2,
+          3.5,
+          1.5
+        ],
+        "translationPath": "approach_enemy (1.8s-2.4s soaring leap to foe; 2.4s-5.5s 3-hit pounce; 5.5s-7.0s sit & return)",
+        "contactTriggerSec": 2.55,
+        "hitStopFrames": 6,
+        "vfxPrimitives": [
+          "vfx_sunset_gold_stunt_lines",
+          "vfx_clobber_3hit_shield_pierce"
+        ],
+        "v11Hook": "2.2x 3-hit Clobber pounce ignoring shields/evasion (+40% vs My Toy or Flustered)"
+      }
+    },
+    {
+      "id": "justin-lw-basic",
+      "character": "Justin",
+      "vibe": "Live Wire",
+      "tier": "Basic Action",
+      "name": "Voltage-Tester Poke",
+      "flavor": "Razzle",
+      "wanClip": {
+        "filename": "justin-lw-basic.mp4",
+        "durationSec": 2.6,
+        "fps": 24,
+        "numFrames": 61,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: justin-lw-basic | 2.6s | 61 frames @ 24fps] Justin strides casually forward in-place clicking a yellow pocket voltage tester, pokes it crisply forward left while flicking two tiny plastic wire nuts with his other hand, and tucks the tester back into his pocket.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.7,
+          1.1,
+          0.8
+        ],
+        "translationPath": "approach_enemy (0.0s-0.7s walk to foe; 0.7s-1.8s tester zap poke; 1.8s-2.6s return)",
+        "contactTriggerSec": 1.15,
+        "hitStopFrames": 3,
+        "vfxPrimitives": [
+          "vfx_razzle_tester_spark",
+          "vfx_wired_circuit_tag"
+        ],
+        "v11Hook": "0.5x Razzle (Dazzled 2t + marks Wired via Live Circuit)"
+      }
+    },
+    {
+      "id": "justin-lw-s1",
+      "character": "Justin",
+      "vibe": "Live Wire",
+      "tier": "Skill 1",
+      "name": "\"Don't Touch the Copper!\" Banner",
+      "flavor": "Razzle",
+      "wanClip": {
+        "filename": "justin-lw-s1.mp4",
+        "durationSec": 3.5,
+        "fps": 24,
+        "numFrames": 85,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: justin-lw-s1 | 3.5s | 85 frames @ 24fps] Justin stays in-place, swiftly unspools a short length of gleaming copper wire between both hands with practiced lineman rhythm, tosses twin clips briskly left, and wipes his palms clean.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.9,
+          1.7,
+          0.9
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 1.65,
+        "hitStopFrames": 3,
+        "vfxPrimitives": [
+          "vfx_razzle_copper_banner_link (2 foes)",
+          "vfx_shared_composure_arc"
+        ],
+        "v11Hook": "Strings glowing copper link between 2 foes (2t): Composure dmg on one shaves 1 on other (1/rd)"
+      }
+    },
+    {
+      "id": "justin-lw-s2",
+      "character": "Justin",
+      "vibe": "Live Wire",
+      "tier": "Skill 2",
+      "name": "Main Breaker Flip",
+      "flavor": "Razzle",
+      "wanClip": {
+        "filename": "justin-lw-s2.mp4",
+        "durationSec": 4.2,
+        "fps": 24,
+        "numFrames": 101,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: justin-lw-s2 | 4.2s | 101 frames @ 24fps] Justin stays in-place, reaches out to swing open an imaginary steel breaker-box door, grips a heavy main switch with his right hand, throws it firmly downward with decisive force, and shuts the door cleanly.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          1.1,
+          2.1,
+          1
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 1.95,
+        "hitStopFrames": 5,
+        "vfxPrimitives": [
+          "vfx_razzle_blackout_flash",
+          "vfx_passive_power_cut_icons"
+        ],
+        "v11Hook": "1.0x Razzle; strips charge-ups, disables passives (1t), -1 boss Comp (-2 on Peeve/Detonation)"
+      }
+    },
+    {
+      "id": "justin-lw-cap",
+      "character": "Justin",
+      "vibe": "Live Wire",
+      "tier": "Grand Capstone",
+      "name": "Flashlight Block Rewire",
+      "flavor": "Razzle",
+      "wanClip": {
+        "filename": "justin-lw-cap.mp4",
+        "durationSec": 7.3,
+        "fps": 24,
+        "numFrames": 177,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: justin-lw-cap | 7.3s | 177 frames @ 24fps] Justin stays in-place, clamps a heavy work flashlight calmly between his teeth, pulls on thick insulated lineman gloves, cross-wires two live copper leads in front of his chest with intense focus, then clicks the flashlight off in a stoic 1-second grid-wizard pose.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          2.1,
+          3.7,
+          1.5
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 3.3,
+        "hitStopFrames": 7,
+        "vfxPrimitives": [
+          "vfx_blackout_flashlight_beam",
+          "vfx_razzle_240v_substation_chain_75pct"
+        ],
+        "v11Hook": "2.2x Razzle chaining at 75% splash voltage to all Wired or Drenched foes"
+      }
+    },
+    {
+      "id": "olivia-wm-basic",
+      "character": "Olivia",
+      "vibe": "Working Mom",
+      "tier": "Basic Action",
+      "name": "Baby-Wipe Swipe",
+      "flavor": "Drench",
+      "wanClip": {
+        "filename": "olivia-wm-basic.mp4",
+        "durationSec": 2.6,
+        "fps": 24,
+        "numFrames": 61,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: olivia-wm-basic | 2.6s | 61 frames @ 24fps] Olivia holds her smartphone steadily in her left hand typing one-handed, snaps a fresh white wet wipe out with her right hand, steps forward executing one crisp swat-wipe motion, and steps smoothly back without looking away from her phone.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.6,
+          1.2,
+          0.8
+        ],
+        "translationPath": "approach_target (Enemy: 0.0s-0.6s swat foe; Ally: step beside ally for dab cleanse)",
+        "contactTriggerSec": 1.05,
+        "hitStopFrames": 3,
+        "vfxPrimitives": [
+          "vfx_drench_cold_wipe_splash OR vfx_cleanse_small_heal_10pct"
+        ],
+        "v11Hook": "Cleanses 1 minor debuff + 10% heal on ally OR 0.5x Drench on foe (+1 Mom Prep/turn)"
+      }
+    },
+    {
+      "id": "olivia-wm-s1",
+      "character": "Olivia",
+      "vibe": "Working Mom",
+      "tier": "Skill 1",
+      "name": "Diaper-Bag Snack Drop",
+      "flavor": "Support",
+      "wanClip": {
+        "filename": "olivia-wm-s1.mp4",
+        "durationSec": 3.4,
+        "fps": 24,
+        "numFrames": 81,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: olivia-wm-s1 | 3.4s | 81 frames @ 24fps] Olivia stays in-place, swings a large overstuffed canvas diaper-bag tote onto her hip, reaches inside without looking to toss four crisp underhand snack pouches smoothly to her teammates, and zips the tote shut.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          0.9,
+          1.6,
+          0.9
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 1.65,
+        "hitStopFrames": 0,
+        "vfxPrimitives": [
+          "vfx_proj_snack_pouches_party",
+          "vfx_emerald_party_heal",
+          "vfx_pep_bonus_star_at3"
+        ],
+        "v11Hook": "Spends Mom Prep stacks for scaling party heal (+1 bonus Pep to lowest-Pep ally at 3 stacks)"
+      }
+    },
+    {
+      "id": "olivia-wm-s2",
+      "character": "Olivia",
+      "vibe": "Working Mom",
+      "tier": "Skill 2",
+      "name": "Cool-Mist Humidifier",
+      "flavor": "Drench",
+      "wanClip": {
+        "filename": "olivia-wm-s2.mp4",
+        "durationSec": 4.3,
+        "fps": 24,
+        "numFrames": 105,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: olivia-wm-s2 | 4.3s | 105 frames @ 24fps] Olivia stays in-place, crouches gracefully to set a compact rounded nursery cool-mist humidifier onto the ground in front of her feet, clicks the dial firmly to max, and rises calmly back to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          1,
+          2.3,
+          1
+        ],
+        "translationPath": "in_place",
+        "contactTriggerSec": 1.95,
+        "hitStopFrames": 0,
+        "vfxPrimitives": [
+          "vfx_party_cool_mist_blanket_25pct",
+          "vfx_enemy_aoe_drenched_cloud"
+        ],
+        "v11Hook": "Cloaks allies in -25% ranged/AoE dmg taken (2t) + leaves all enemies Drenched"
+      }
+    },
+    {
+      "id": "olivia-wm-cap",
+      "character": "Olivia",
+      "vibe": "Working Mom",
+      "tier": "Grand Capstone",
+      "name": "\"Michael, Grab the Kids!\"",
+      "flavor": "Racket",
+      "wanClip": {
+        "filename": "olivia-wm-cap.mp4",
+        "durationSec": 7.2,
+        "fps": 24,
+        "numFrames": 173,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: olivia-wm-cap | 7.2s | 173 frames @ 24fps] Olivia stays in-place, plants her heels firmly, cups one hand beside her mouth delivering a sharp commanding CEO-of-Bedtime callout, points decisively across the field directing traffic, and holds a composed 1-second family-commander hero pose.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [
+          2,
+          3.7,
+          1.5
+        ],
+        "translationPath": "in_place (Engine animates 6'4\" Michael sprinting across field + sliding dinner tray)",
+        "contactTriggerSec": 3.1,
+        "hitStopFrames": 5,
+        "vfxPrimitives": [
+          "vfx_setpiece_michael_toddler_sprint",
+          "vfx_racket_25pct_pushback",
+          "vfx_hot_dinner_tray_heal_cleanse"
+        ],
+        "v11Hook": "AoE Racket startle (-25% foe timeline) + moderate 15% party heal & mental/stun cleanse"
+      }
+    }
+  ]
+}
