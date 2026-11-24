@@ -106,16 +106,36 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-24T02:55:11Z",
-   "state": "checking",
-   "since": "2026-11-24T02:55:59Z",
+   "state": "done",
+   "since": "2026-11-24T02:57:22Z",
    "run": 45315842112,
    "fal": null,
    "svc": null,
    "tries": 1,
-   "cost": 0,
+   "cost": 0.0,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-tnb-idle/t99.js",
+    "img": "takes/body-tnb-idle/t99.webp",
+    "frames": 50,
+    "kb": 1036,
+    "words": "0 to 147 step 3, loop wrap",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "blink_none: no blink in the stretch the game loops (blinks in the whole video: none)"
+     ],
+     "faults": [
+      "blink_none"
+     ],
+     "vision_ran": false,
+     "spent": 0.0,
+     "error": null,
+     "words": "The clip gate flags this take: blink_none: no blink in the stretch the game loops (blinks in the whole video: none)."
+    },
+    "n": 99
+   },
    "use": null,
    "left": false,
    "dry": false,
