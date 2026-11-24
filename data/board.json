@@ -20525,7 +20525,7 @@
   {
    "id": "c-guideflow-8",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "theme": "Battle Animations",
    "tag": "guideflow8",
    "title": "Monster videos through the same Guide queue",
@@ -20537,7 +20537,7 @@
    "created": "2026-11-22",
    "changed": "2026-11-23",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFhremMo3VsYZRzZeR",
+    "url": "",
     "opening": "not started"
    },
    "history": [
@@ -20558,6 +20558,10 @@
     {
      "d": "2026-11-23",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
    "prompt": {
@@ -20569,8 +20573,7 @@
     "effort": "medium (the steps are known)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guideflow-8 in data/board.json, then the whole of claude/guide-flow-plan.md. That plan is the design: build what it says and do not redesign it. If a step cannot be done as written, do the closest thing that keeps the plan's rules (sections 3.2 and 4.3), say so in docs/CHANGES.md, and go on. This card is plan section 10 step 8 (decision D17). Today a monster video asked for in the Battle Guide is a request in data/clip-requests.json with a `guide` field, made by tools/art-library/clipgen.py (search it for _guide and guide_rows) in the clip-gen Action, and kept as a take by tools/guidegen/make_take.py. In tools/guidegen/worker.py add route xai to lane vid: build the same entry clipgen builds for a guide request (model, res, dur, start picture, figRows from the row's `clip` field) and call clipgen's own functions to send it to xAI and download the video (add the smallest hook to clipgen.py if its guide path cannot be called for one entry; python3 tools/art-library/clipgen_test.py, clip_batch_test.py and keysecrets2_test.py must still pass). xAI only says pending, so the row goes queued, making, checking, done exactly like a family video, with the xAI request id written on the row as `fal` is for Wan (field name `svc` {name: \"xai\", request_id}); the reaper treats it the same. The per request cap is 0.15. Then the same make_take, keep and done steps as card 4. guide-work.yml already passes XAI_API_KEY. Page (battle-guide.html): the monster button becomes Make this video ($0.15) and adds a row {kind video, lane vid, route xai, anim, who, take, prompt, promptRev, cap 0.15, clip: {id, owner, kind, start, model, res, dur, figRows}} (the same values doGen puts in the old request today), with the same lines, Cancel and Activity. Remove the old monster branch of doGen and the reading of data/clip-requests.json for guide rows. In clipgen.py remove the guide request path that is now unused, and its progress.mark calls, keeping every Art Library path. Tests: worker_test.py with a stand-in xAI (queued to done, an error retried once then X6 words, picked up by request id after a dead run with one paid submit); battle_guide_test.py: a monster row shows the same lines. Tests to run and pass before pushing: python3 -I tools/guidegen/worker_test.py, python3 tools/art-library/clipgen_test.py, python3 tools/art-library/clip_batch_test.py, python3 tools/art-library/keysecrets2_test.py, python3 tools/battle_guide_test.py, python3 tools/workflow_check.py, python3 tools/smoke.py, python3 tools/board_check.py. You must NOT: make any paid run or call fal, xAI or ElevenLabs for real (every test uses stand-ins; the first paid run is Tom's tap); run wangen.py against the real services; create or change a doc in the claude.ai Project (notes go in the repo folder claude/, then run python3 tools/claude_index.py); make or propose a painted battle pose; touch the bulk video flow (wangen.py --bulk, wanbulk.py, wanqa.py, wanbake.py, the wan-gen-bulk line); hand Tom a yes or no check; write an em dash in anything Tom reads. Before every commit check that no file has git conflict markers (a line that starts with seven less-than signs; CLAUDE.md has the command). Push steps: write the heading \"## guideflow8 (the date of that day as YYYY-MM-DD): one plain line Tom can read\" at the top of docs/CHANGES.md with what was built, what was tested and what was not looked at, run python3 tools/workflow_check.py if it exists, run python3 tools/art-library/bump_tags.py guideflow8 --base origin/main, run python3 tools/board_check.py --push guideflow8, fetch and rebase on origin/main, then push to main. At the end write the result into this card's `next` and history, and check the next card (c-guideflow-9) still has its full prompt. Your first push is the commit board: start c-guideflow-8. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "auto": true,
-   "started_at": "2026-11-24T00:05:57+00:00"
+   "auto": true
   },
   {
    "id": "c-guideflow-9",
@@ -27597,8 +27600,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "4ea02df001e104d8e47456498b47ea1d88451ebb",
- "synced_at": "2026-11-24T00:22:27+00:00",
+ "synced": "a348240739c2eee1789bbd1cdc7909741c3744a1",
+ "synced_at": "2026-11-24T00:41:48+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
