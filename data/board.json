@@ -21170,7 +21170,7 @@
    "title": "Stage 23a: Battle 3 gets its own shell (no battle 2 names)",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Slice 23a of the battle 2 purge: Battle 3 gets its own shell (no battle 2 names). Ready to start: the gate checks passed and Tom's yes is in.",
    "blocks": [
     "c-b3s23b"
@@ -21181,12 +21181,17 @@
    "after": "nothing for Tom: c-b3s23b",
    "chat": {
     "url": "",
-    "opening": "created by the b3s23 split"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
      "d": "2026-11-23",
      "t": "Created by the session that took c-b3s23: the purge is too large for one change (about 1 MB of battle 2 code, 3,000 references in 266 files, and Battle 3 still borrows a dozen battle 2 helpers), so it is five ordered slices. Facts and rules: claude/next-addendum-b3s23.md."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-24T00:40:59.729Z"
     }
    ],
    "prompt": {
