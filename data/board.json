@@ -10129,13 +10129,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-22",
+   "changed": "2026-11-23",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFoD8LJrgKmNyNyV4Y",
     "opening": "not started"
    },
    "nightly": true,
@@ -10208,6 +10208,14 @@
     {
      "d": "2026-11-22",
      "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Started by the night shift."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -10222,7 +10230,8 @@
    "last_run": {
     "date": "2026-11-21",
     "build": "nightclean-1122"
-   }
+   },
+   "started_at": "2026-11-24T07:05:36+00:00"
   },
   {
    "id": "c-bigone25",
@@ -27718,8 +27727,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "3b8a3359d2a07be983ba2bdbcdff4a098c904386",
- "synced_at": "2026-11-24T04:47:03+00:00",
+ "synced": "59fd6eb37b0fe894f9f8b0b55eb8b6552244b1f3",
+ "synced_at": "2026-11-24T07:05:38+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -27769,6 +27778,13 @@
      "id": "c-guideflow-6",
      "at": "2026-11-23T07:48:41+00:00",
      "kind": "queued"
+    }
+   ],
+   "2026-11-23": [
+    {
+     "id": "c-night-clean",
+     "at": "2026-11-24T07:05:36+00:00",
+     "kind": "standing"
     }
    ]
   },
