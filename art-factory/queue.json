@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-24T02:01:45Z",
+  "updated_at": "2026-11-24T02:08:57Z",
   "items": [
     {
       "id": "tom_hero_0",
@@ -10,11 +10,11 @@
       "qa_passed": true,
       "attempts": 1,
       "metrics": {
-        "body_h_px": 2582,
+        "body_h_px": 1706,
         "face_h_px": null,
         "head_ratio": null,
-        "bg_error": 4.47,
-        "halo_score": 0.0016
+        "bg_error": 0.95,
+        "halo_score": 0.0
       },
       "raw_path": "art-factory/staging/tom/hero/cand_0_raw.png",
       "rgba_path": "art-factory/staging/tom/hero/cand_0_rgba.png",
@@ -29,10 +29,10 @@
       "qa_passed": true,
       "attempts": 1,
       "metrics": {
-        "body_h_px": 1730,
+        "body_h_px": 1788,
         "face_h_px": null,
         "head_ratio": null,
-        "bg_error": 5.37,
+        "bg_error": 3.35,
         "halo_score": 0.0
       },
       "raw_path": "art-factory/staging/tom/hero/cand_1_raw.png",
@@ -48,11 +48,11 @@
       "qa_passed": true,
       "attempts": 1,
       "metrics": {
-        "body_h_px": 2584,
+        "body_h_px": 1722,
         "face_h_px": null,
         "head_ratio": null,
-        "bg_error": 1.53,
-        "halo_score": 0.0029
+        "bg_error": 1.66,
+        "halo_score": 0.0
       },
       "raw_path": "art-factory/staging/tom/hero/cand_2_raw.png",
       "rgba_path": "art-factory/staging/tom/hero/cand_2_rgba.png",
@@ -67,11 +67,11 @@
       "qa_passed": true,
       "attempts": 1,
       "metrics": {
-        "body_h_px": 2582,
+        "body_h_px": 1766,
         "face_h_px": null,
         "head_ratio": null,
-        "bg_error": 3.68,
-        "halo_score": 0.0012
+        "bg_error": 2.67,
+        "halo_score": 0.0
       },
       "raw_path": "art-factory/staging/tom/hero/cand_3_raw.png",
       "rgba_path": "art-factory/staging/tom/hero/cand_3_rgba.png",
@@ -86,11 +86,11 @@
       "qa_passed": true,
       "attempts": 1,
       "metrics": {
-        "body_h_px": 2582,
+        "body_h_px": 1795,
         "face_h_px": null,
         "head_ratio": null,
-        "bg_error": 4.07,
-        "halo_score": 0.0042
+        "bg_error": 2.68,
+        "halo_score": 0.0
       },
       "raw_path": "art-factory/staging/tom/hero/cand_4_raw.png",
       "rgba_path": "art-factory/staging/tom/hero/cand_4_rgba.png",
@@ -105,11 +105,11 @@
       "qa_passed": true,
       "attempts": 1,
       "metrics": {
-        "body_h_px": 2566,
+        "body_h_px": 1785,
         "face_h_px": null,
         "head_ratio": null,
-        "bg_error": 4.04,
-        "halo_score": 0.0035
+        "bg_error": 1.73,
+        "halo_score": 0.0
       },
       "raw_path": "art-factory/staging/tom/hero/cand_5_raw.png",
       "rgba_path": "art-factory/staging/tom/hero/cand_5_rgba.png",
@@ -124,11 +124,11 @@
       "qa_passed": true,
       "attempts": 1,
       "metrics": {
-        "body_h_px": 2567,
+        "body_h_px": 1774,
         "face_h_px": null,
         "head_ratio": null,
-        "bg_error": 3.43,
-        "halo_score": 0.0015
+        "bg_error": 3.16,
+        "halo_score": 0.0
       },
       "raw_path": "art-factory/staging/tom/hero/cand_6_raw.png",
       "rgba_path": "art-factory/staging/tom/hero/cand_6_rgba.png",
@@ -143,11 +143,11 @@
       "qa_passed": true,
       "attempts": 1,
       "metrics": {
-        "body_h_px": 2584,
+        "body_h_px": 2585,
         "face_h_px": null,
         "head_ratio": null,
-        "bg_error": 1.76,
-        "halo_score": 0.0003
+        "bg_error": 4.94,
+        "halo_score": 0.0004
       },
       "raw_path": "art-factory/staging/tom/hero/cand_7_raw.png",
       "rgba_path": "art-factory/staging/tom/hero/cand_7_rgba.png",
