@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-24T05:26:29Z",
+  "updated_at": "2026-11-24T05:34:20Z",
   "items": [
     {
       "id": "tom_hero_0",
@@ -159,8 +159,10 @@
       "stage": "battle_move_draft",
       "move_id": "tom-ff-basic",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-ff-basic/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-ff-basic/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-basic/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "tom_battle_idle",
@@ -278,8 +280,10 @@
       "stage": "battle_move_draft",
       "move_id": "tom-ff-s1",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "tom_battle_move_draft_tom-ff-s1_counter",
@@ -287,8 +291,10 @@
       "stage": "battle_move_draft",
       "move_id": "tom-ff-s1_counter",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1_counter/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1_counter/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1_counter/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "tom_battle_move_draft_tom-ff-s2",
@@ -296,8 +302,10 @@
       "stage": "battle_move_draft",
       "move_id": "tom-ff-s2",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s2/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s2/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s2/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "tom_battle_move_draft_tom-ff-cap",
@@ -305,8 +313,10 @@
       "stage": "battle_move_draft",
       "move_id": "tom-ff-cap",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-ff-cap/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-ff-cap/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-cap/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "tom_battle_move_draft_univ-pick-me-up",
@@ -314,8 +324,10 @@
       "stage": "battle_move_draft",
       "move_id": "univ-pick-me-up",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_univ-pick-me-up/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_move_draft_univ-pick-me-up/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_univ-pick-me-up/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "tom_battle_move_draft_univ-double-team",
@@ -323,8 +335,10 @@
       "stage": "battle_move_draft",
       "move_id": "univ-double-team",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_univ-double-team/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_move_draft_univ-double-team/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_univ-double-team/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "tom_battle_move_draft_univ-full-ruckus",
@@ -332,8 +346,10 @@
       "stage": "battle_move_draft",
       "move_id": "univ-full-ruckus",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_univ-full-ruckus/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_move_draft_univ-full-ruckus/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_univ-full-ruckus/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "tom_battle_move_draft_tom-gg-basic",
@@ -341,8 +357,10 @@
       "stage": "battle_move_draft",
       "move_id": "tom-gg-basic",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-gg-basic/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-gg-basic/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-basic/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "tom_battle_move_draft_tom-gg-s1",
@@ -350,8 +368,10 @@
       "stage": "battle_move_draft",
       "move_id": "tom-gg-s1",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s1/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s1/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s1/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "tom_battle_move_draft_tom-gg-s2",
@@ -359,8 +379,10 @@
       "stage": "battle_move_draft",
       "move_id": "tom-gg-s2",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "tom_battle_move_draft_tom-gg-s2_counter",
@@ -368,8 +390,10 @@
       "stage": "battle_move_draft",
       "move_id": "tom-gg-s2_counter",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2_counter/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2_counter/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2_counter/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "tom_battle_move_draft_tom-gg-cap",
@@ -377,8 +401,10 @@
       "stage": "battle_move_draft",
       "move_id": "tom-gg-cap",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-gg-cap/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-gg-cap/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-cap/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "tom_battle_move_draft_tom-sb-basic",
@@ -386,8 +412,10 @@
       "stage": "battle_move_draft",
       "move_id": "tom-sb-basic",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-sb-basic/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-sb-basic/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-sb-basic/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "tom_battle_move_draft_tom-sb-s1",
@@ -395,8 +423,10 @@
       "stage": "battle_move_draft",
       "move_id": "tom-sb-s1",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s1/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s1/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s1/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "tom_battle_move_draft_tom-sb-s2",
@@ -404,8 +434,10 @@
       "stage": "battle_move_draft",
       "move_id": "tom-sb-s2",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s2/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s2/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s2/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "tom_battle_move_draft_tom-sb-cap",
@@ -413,8 +445,10 @@
       "stage": "battle_move_draft",
       "move_id": "tom-sb-cap",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-sb-cap/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-sb-cap/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-sb-cap/battle_alpha_safari_hvc1.mp4"
     }
   ]
 }
