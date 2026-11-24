@@ -20525,7 +20525,7 @@
   {
    "id": "c-guideflow-8",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "guideflow8",
    "title": "Monster videos through the same Guide queue",
@@ -20537,8 +20537,8 @@
    "created": "2026-11-22",
    "changed": "2026-11-23",
    "chat": {
-    "url": "",
-    "opening": "not started"
+    "url": "https://claude.ai/code/session_01RXeukGZLxZREfsCLURqeTW",
+    "opening": "Tom (17:09): \"Why can't you just kick off the next task?\" Started by hand in the conversation that shipped c-guideflow-7."
    },
    "history": [
     {
@@ -20562,6 +20562,10 @@
     {
      "d": "2026-11-23",
      "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Started by hand: START pushed nothing, so the c-guideflow-7 conversation took this card."
     }
    ],
    "prompt": {
