@@ -1,0 +1,236 @@
+{
+  "config": {
+    "repo_visibility": "public",
+    "output_dir": "art-factory/approved",
+    "staging_dir": "art-factory/staging",
+    "refs_dir": "art-factory/refs",
+    "style_key_path": "art-factory/refs/style-key.png",
+    "tom_hero_path": "art-factory/refs/tom-hero.png",
+    "queue_path": "art-factory/queue.json",
+    "import_move_pitch_json": true,
+    "style_lock": "Illustrated whimsical realism, dense jewel-toned brushwork, warm upper-left golden light, no thick outlines, flat #808080 mid-grey studio background.",
+    "banned_words": [
+      "16-bit",
+      "32-bit",
+      "8-bit",
+      "SNES",
+      "Final Fantasy",
+      "pixel art",
+      "retro",
+      "sprite",
+      "hurt",
+      "knocked out"
+    ],
+    "adult_face_height_tolerance": 0.04,
+    "max_self_heal_retries": 3,
+    "bg_hex": "#808080",
+    "moods": [
+      "happy",
+      "loving",
+      "sad",
+      "angry",
+      "scared",
+      "surprised",
+      "proud",
+      "unimpressed"
+    ],
+    "talking_poses": [
+      "tell",
+      "point",
+      "ask",
+      "answer"
+    ],
+    "models": {
+      "stills": "gemini-3-pro-image",
+      "flash_bridge": "gemini-3-flash",
+      "flux_fallback": "fal-ai/flux-3-image",
+      "cutout_still": "fal-ai/birefnet/v2",
+      "video_idle": "fal-ai/kling/v4/image-to-video",
+      "video_move": "fal-ai/wan/v3.0/image-to-video",
+      "cutout_video": "fal-ai/bria/video/background-removal",
+      "cutout_video_fallback": "fal-ai/birefnet/v2/video"
+    }
+  },
+  "cast": [
+    {
+      "id": "tom",
+      "name": "Tom",
+      "group": "adult",
+      "height_in": 71,
+      "head_ratio": [
+        0.21,
+        0.24
+      ],
+      "anchor": true,
+      "notes": "Baseline adult face height reference; beard, horizontal left-to-right hair."
+    },
+    {
+      "id": "tnb",
+      "name": "TNB",
+      "group": "adult",
+      "height_in": 70,
+      "head_ratio": [
+        0.21,
+        0.24
+      ],
+      "notes": "Spring Street ceramicist and LA longboarder."
+    },
+    {
+      "id": "amy",
+      "name": "Amy",
+      "group": "adult",
+      "height_in": 65,
+      "head_ratio": [
+        0.21,
+        0.24
+      ],
+      "notes": "Fitness Queen and elementary Special Ed teacher."
+    },
+    {
+      "id": "justin",
+      "name": "Justin",
+      "group": "adult",
+      "height_in": 76,
+      "head_ratio": [
+        0.21,
+        0.24
+      ],
+      "notes": "6'4\" lineman and DIY renovator."
+    },
+    {
+      "id": "michael",
+      "name": "Michael",
+      "group": "adult",
+      "height_in": 76,
+      "head_ratio": [
+        0.21,
+        0.24
+      ],
+      "notes": "6'4\" holding 2 toddlers (Lachlan and Isla) as 1 unified figure."
+    },
+    {
+      "id": "olivia",
+      "name": "Olivia",
+      "group": "adult",
+      "height_in": 68,
+      "head_ratio": [
+        0.21,
+        0.24
+      ],
+      "notes": "News anchor, working mom, jump-rope champ."
+    },
+    {
+      "id": "deedee",
+      "name": "Deedee",
+      "group": "adult",
+      "height_in": 65,
+      "head_ratio": [
+        0.21,
+        0.24
+      ],
+      "notes": "Retired nurse matriarch; warm apple muffins."
+    },
+    {
+      "id": "boppy",
+      "name": "Boppy",
+      "group": "adult",
+      "height_in": 67,
+      "head_ratio": [
+        0.21,
+        0.24
+      ],
+      "notes": "Always wearing fishing rod and creel at all times, indoors and outdoors."
+    },
+    {
+      "id": "jojo",
+      "name": "Jojo",
+      "group": "adult",
+      "height_in": 66,
+      "head_ratio": [
+        0.21,
+        0.24
+      ],
+      "notes": "Family cast adult."
+    },
+    {
+      "id": "aunt_ellie",
+      "name": "Aunt Ellie",
+      "group": "adult",
+      "height_in": 62,
+      "head_ratio": [
+        0.21,
+        0.24
+      ],
+      "notes": "Elegant, sharp-witted aunt on Rivituso Row."
+    },
+    {
+      "id": "ms_cathy",
+      "name": "Ms. Cathy",
+      "group": "adult",
+      "height_in": 64,
+      "head_ratio": [
+        0.21,
+        0.24
+      ],
+      "notes": "Family cast adult."
+    },
+    {
+      "id": "grace",
+      "name": "Grace",
+      "group": "child",
+      "height_in": 50,
+      "head_ratio": [
+        0.28,
+        0.3
+      ],
+      "child_bridge": true,
+      "notes": "Carries Sparkling Diamond Gold Soup Dumpling Squishy."
+    },
+    {
+      "id": "rose",
+      "name": "Rose",
+      "group": "child",
+      "height_in": 40,
+      "head_ratio": [
+        0.29,
+        0.3
+      ],
+      "child_bridge": true,
+      "notes": "Carries tattered Lamby plush."
+    },
+    {
+      "id": "nara",
+      "name": "Nara",
+      "group": "dog",
+      "height_in": 24,
+      "head_ratio": [
+        0.24,
+        0.34
+      ],
+      "notes": "40-lb black Labradoodle; non-speaking."
+    },
+    {
+      "id": "dogs",
+      "name": "Neighborhood Dogs",
+      "group": "dog",
+      "height_in": 22,
+      "head_ratio": [
+        0.24,
+        0.34
+      ],
+      "notes": "Additional neighborhood dogs pack."
+    },
+    {
+      "id": "npcs",
+      "name": "Town & LA NPCs (50)",
+      "group": "npc",
+      "height_in": 67,
+      "head_ratio": [
+        0.21,
+        0.24
+      ],
+      "count": 50,
+      "notes": "50 supporting Long Island and Los Angeles NPCs."
+    }
+  ]
+}

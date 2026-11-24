@@ -1,0 +1,101 @@
+name: AoT Art Factory
+
+on:
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: Pipeline stage
+        required: true
+        type: choice
+        options:
+          - hero
+          - turnaround
+          - sheets
+          - battle_idle
+          - battle_move_draft
+          - battle_move_final
+          - approve
+          - revise
+          - encode_alpha
+      character_id:
+        description: Character ID from art-factory/characters.json
+        required: true
+        default: tom
+        type: string
+      move_id:
+        description: Move ID (for battle_move_draft/final)
+        required: false
+        default: ""
+        type: string
+      feedback:
+        description: Revision notes or pitch override JSON
+        required: false
+        default: ""
+        type: string
+      candidate_index:
+        description: Candidate index to approve (0-7)
+        required: false
+        default: "0"
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.stage != 'encode_alpha' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install pipeline dependencies
+        run: pip install --quiet google-genai fal-client pillow mediapipe opencv-python-headless numpy requests
+      - name: Run Art Factory stage
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          FAL_KEY: ${{ secrets.FAL_KEY }}
+          STAGE: ${{ inputs.stage }}
+          CHARACTER_ID: ${{ inputs.character_id }}
+          MOVE_ID: ${{ inputs.move_id }}
+          FEEDBACK: ${{ inputs.feedback }}
+          CANDIDATE_INDEX: ${{ inputs.candidate_index }}
+        run: python scripts/run_stage.py
+      - name: Commit generated artifacts
+        run: |
+          git config user.name "aot-art-factory[bot]"
+          git config user.email "aot-art-factory@users.noreply.github.com"
+          git add art-factory/
+          if ! git diff --cached --quiet; then
+            git commit -m "art-factory: ${{ inputs.stage }} (${{ inputs.character_id }})"
+            git pull --rebase origin main
+            git push origin main
+          fi
+
+  encode_safari_alpha:
+    runs-on: macos-latest
+    needs: generate
+    if: ${{ always() && (inputs.stage == 'battle_idle' || inputs.stage == 'battle_move_draft' || inputs.stage == 'battle_move_final' || inputs.stage == 'encode_alpha') && (needs.generate.result == 'success' || needs.generate.result == 'skipped') }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Ensure ffmpeg
+        run: command -v ffmpeg >/dev/null || brew install ffmpeg
+      - name: Encode WebM VP9 + Safari HEVC hvc1 alpha
+        env:
+          STAGE: ${{ inputs.stage }}
+          CHARACTER_ID: ${{ inputs.character_id }}
+          MOVE_ID: ${{ inputs.move_id }}
+        run: python3 scripts/encode_safari_alpha.py
+      - name: Commit encoded battle videos
+        run: |
+          git config user.name "aot-art-factory[bot]"
+          git config user.email "aot-art-factory@users.noreply.github.com"
+          git add art-factory/
+          if ! git diff --cached --quiet; then
+            git commit -m "art-factory: alpha video ${{ inputs.character_id }} ${{ inputs.move_id }}"
+            git pull --rebase origin main
+            git push origin main
+          fi
