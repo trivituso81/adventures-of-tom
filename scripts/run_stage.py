@@ -74,6 +74,19 @@ def cutout_still(raw_path, rgba_path, cfg):
     img_url = res.get("image", {}).get("url") or res.get("url")
     download_file(img_url, rgba_path)
 
+def prep_video_source(src_path, out_dir, cfg):
+    rgba_p = out_dir / "source_rgba.png"
+    cutout_still(src_path, rgba_p, cfg)
+    fg = Image.open(rgba_p).convert("RGBA")
+    pad_x = max(48, int(fg.width * 0.25))
+    pad_top = max(32, int(fg.height * 0.12))
+    pad_bot = max(24, int(fg.height * 0.08))
+    canvas = Image.new("RGBA", (fg.width + pad_x * 2, fg.height + pad_top + pad_bot), (128, 128, 128, 255))
+    canvas.alpha_composite(fg, (pad_x, pad_top))
+    clean_p = out_dir / "source_grey.png"
+    canvas.convert("RGB").save(clean_p)
+    return clean_p
+
 def run_stills(stage, char, cfg, feedback, queue):
     count = 8 if stage == "hero" else 1
     size_label = "2K" if stage == "hero" else "4K"
@@ -120,14 +133,21 @@ def run_video(stage, char, cfg, move_id, feedback, queue):
     out_dir = Path(cfg["staging_dir"]) / char["id"] / slug
     out_dir.mkdir(parents=True, exist_ok=True)
     hero_src = Path(cfg["output_dir"]) / char["id"] / "hero" / "approved_rgba.png"
+    if not hero_src.exists() and char["id"] == "tom" and Path(cfg["tom_hero_path"]).exists():
+        hero_src = Path(cfg["tom_hero_path"])
     if not hero_src.exists():
         hero_src = Path(cfg["staging_dir"]) / char["id"] / "hero" / "cand_0_rgba.png"
     if not hero_src.exists():
         hero_src = Path(cfg["tom_hero_path"])
-    img_url = fal_client.upload_file(str(hero_src))
+    print(f"[video] source hero={hero_src}", flush=True)
+    clean_src = prep_video_source(hero_src, out_dir, cfg)
+    img_url = fal_client.upload_file(str(clean_src))
     prompt = build_prompt(stage, char, cfg, move_id=move_id, feedback=feedback)
     if stage == "battle_idle":
-        res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "image_url": img_url, "tail_image_url": img_url, "duration": "5"})
+        try:
+            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "image_url": img_url, "tail_image_url": img_url, "duration": "5"})
+        except Exception:
+            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "image_url": img_url, "duration": "5"})
     else:
         res_tag = "480p" if stage == "battle_move_draft" else "1080p"
         res = fal_client.subscribe(cfg["models"]["video_move"], arguments={"prompt": prompt, "negative_prompt": ANTI_RING_NEG, "image_url": img_url, "resolution": res_tag})
