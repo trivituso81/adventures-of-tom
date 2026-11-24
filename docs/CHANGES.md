@@ -1,3 +1,17 @@
+## guideflow8 (2026-11-24): Monster videos in the Battle Guide now go through the same queue and status lines as the family videos
+
+Card c-guideflow-8 (plan `claude/guide-flow-plan.md` section 10 step 8, decision D17). Nothing was paid or called for real; every test uses a stand-in xAI.
+
+| What | Where |
+|---|---|
+| The worker's video lane takes route `xai`: it builds the same request clipgen built (model, resolution, seconds from the row's `clip`), calls clipgen's own `Xai` class to send, wait and download (no copy of the xAI calls), writes the request id on the row as `svc` {name xai, request_id} the moment xAI accepts, then runs the same make_take, keep and done steps as a family video. The row goes queued, making, checking, done. A send that fails or a request xAI drops is tried once more, then the X6 words. A refused key or spent balance fails the row in plain words and stops claiming. A request the row already holds is picked up by its id after a dead run, never sent twice. The per request cap is 0.15 (a dearer setting is refused with X22) | `tools/guidegen/worker.py` (`run_xai`, `get_xai`) |
+| The store counts `svc` like `fal`: the worker may not put such a row back in line, the reaper requeues it once | `tools/guidegen/store.py` (`_req`, `FIELDS`) |
+| The page: the monster button is Make this video or Make another (the real price, $0.07 for skeeter's bite, with the $0.15 cap on the row) and adds a row {kind video, lane vid, route xai, cap 0.15, clip {id, owner, kind, start, model, res, dur, figRows}}; same status lines, Cancel and Activity. The old monster branch (Generate this video, the confirm box, `doGen`, `askGen`, `MPEND`, the reading of `data/clip-requests.json` for guide rows) is removed. Try again with a note used a box only monsters had; it now writes under the Make button | `battle-guide.html` (`qVidRow`, `qRoute`, `qReady`) |
+| Removed from clipgen: the guide request path, its `progress.mark` calls and the `guide-results.json` file; the `clip-gen` workflow's Battle Guide takes step. Every Art Library path is as before | `tools/art-library/clipgen.py`, `.github/workflows/clip-gen.yml` |
+| Fixed on the way: four rows of the same person running at once wrote the same temporary start picture file and one could crash reading it half written; each call has its own file now | `tools/guidegen/worker.py` (`start_picture`) |
+
+Tested: `worker_test.py` (new T7: queued to done, an error retried once then the X6 words, a dead run picked up by request id with one paid send, key refused, caps, no prompt, no picture, still video, dry row, store rules, cost log), `clipgen_test.py`, `clip_batch_test.py`, `keysecrets2_test.py`, `battle_guide_test.py` (new G16: a monster row has the same lines). Not looked at: a real xAI video (the first paid run is Tom's tap); the card text said the button shows $0.15, but the page shows the real price and the cap stays 0.15.
+
 ## guideflow7 (2026-11-23): Use this one in the Battle Guide is now one batched job that only says In the game after it checked the files are on main
 
 Card c-guideflow-7 (plan `claude/guide-flow-plan.md` section 10 step 7: D4, D9, D10, X17 to X19, T9). The old `guide-use` Action and `data/guide-use.json` are deleted. Tapping Use this one now sets `use: wanted` on the take's row in `queue.json` (branch `guideq`) and pokes the new `guide-apply` Action (repository dispatch, plus a 10 minute timer that exits cheaply when nothing is wanted).

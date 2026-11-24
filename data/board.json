@@ -20520,13 +20520,13 @@
    "theme": "Battle Animations",
    "tag": "guideflow8",
    "title": "Monster videos through the same Guide queue",
-   "next": "Waits for card c-guideflow-7, then starts by itself. Moves monster videos (xAI) into the same queue and status lines as the family videos. Nothing to play until the last card.",
+   "next": "Shipped as build guideflow8: monster videos use the same Guide queue, worker and status lines as family videos (route xai, request id on the row as svc). Nothing paid was run. Next: c-guideflow-9.",
    "blocks": [
     "c-guideflow-9"
    ],
    "after": "nothing for Tom: c-guideflow-9",
    "created": "2026-11-22",
-   "changed": "2026-11-23",
+   "changed": "2026-11-24",
    "chat": {
     "url": "",
     "opening": "not started"
@@ -20545,6 +20545,11 @@
      "d": "2026-11-23",
      "t": "Tom tapped START.",
      "at": "2026-11-24T00:05:08.524Z"
+    },
+    {
+     "d": "2026-11-24",
+     "t": "Built and tested with stand-in xAI (worker_test T7, battle_guide_test G16, clipgen, clip_batch, keysecrets2). Pushed to branch claude/magical-planck-m9xdcr (the session rules named that branch, not main). Not looked at: a real xAI video.",
+     "at": "2026-11-24T00:45:00.000Z"
     }
    ],
    "prompt": {

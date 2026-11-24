@@ -204,7 +204,7 @@ USE_ALLOWED = {
     ('applying', 'failed'): {'apply'},
     ('applying', 'wanted'): {'apply'},         # the job stopped, its row goes back to the list
 }
-FIELDS = {'run', 'fal', 'tries', 'cost', 'why', 'do', 'result', 'note', 'prompt', 'promptRev', 'start', 'cap', 'replay', 'dry'}
+FIELDS = {'run', 'fal', 'svc', 'tries', 'cost', 'why', 'do', 'result', 'note', 'prompt', 'promptRev', 'start', 'cap', 'replay', 'dry'}
 KINDS = {'picture': 'pic', 'upload': 'pic', 'video': 'vid'}
 FINISHED = ('done', 'failed', 'cancelled')
 
@@ -288,13 +288,13 @@ def set_state(id, state, actor='worker', code=None, **fields):
         a = it['state']
         who = ALLOWED.get((a, state))
         if who is None or actor not in who: raise Refused('%s cannot move %s from %s to %s' % (actor, id, a, state))
-        if state == 'queued' and actor == 'reaper' and not (it.get('fal') and int(it.get('tries') or 0) == 1): raise Refused('only a row with a fal number and one try goes back in line')
+        if state == 'queued' and actor == 'reaper' and not (_req(it) and int(it.get('tries') or 0) == 1): raise Refused('only a row with a fal number and one try goes back in line')
         if state == 'queued' and actor == 'worker':   # guideflow4 (X7): fal said it is too busy; nothing was accepted or paid, so the claim does not count as a try
-            if it.get('fal'): raise Refused('a row that holds a fal number is never put back in line by the worker')
+            if _req(it): raise Refused('a row that holds a fal number is never put back in line by the worker')
             it['tries'] = max(0, int(it.get('tries') or 0) - 1)
         for k, v in fields.items(): it[k] = v
         if code:
-            it['why'], it['do'] = words(code, paid=bool(it.get('fal')), **fmt)
+            it['why'], it['do'] = words(code, paid=bool(_req(it)), **fmt)
         if state == 'queued': it['run'] = 0
         if state in ('done', 'cancelled'): it['why'] = it['do'] = ''
         it['state'] = state; it['since'] = now()
@@ -302,6 +302,11 @@ def set_state(id, state, actor='worker', code=None, **fields):
     update(fn, 'guide: %s %s' % (id, state))
     _send(out['ev'], out['it'])
     return out['it']
+
+
+def _req(it):
+    """guideflow8: the service's request number on a row: `fal` (Wan on fal) or `svc` {name: xai, request_id} (a monster video on xAI). Either one means the service has the job."""
+    return it.get('fal') or it.get('svc')
 
 
 def set_fields(id, actor='worker', **fields):
@@ -426,10 +431,10 @@ def reap(alive):
         t = now()
         for i in d['items'].values():
             if i['state'] in ('making', 'checking') and i.get('run') in gone:
-                if i.get('fal') and int(i.get('tries') or 0) == 1:
+                if _req(i) and int(i.get('tries') or 0) == 1:
                     i['state'] = 'queued'; i['run'] = 0; i['since'] = t; res['requeued'].append(i['id'])
                 else:
-                    i['why'], i['do'] = words('X8', paid=bool(i.get('fal'))); i['state'] = 'failed'; i['since'] = t
+                    i['why'], i['do'] = words('X8', paid=bool(_req(i))); i['state'] = 'failed'; i['since'] = t
                     res['failed'].append(i['id']); events.append((_event(i, 'failed'), json.loads(json.dumps(i))))
     update(fn, 'guide: reaper')
     for ev, it in events: _send(ev, it)

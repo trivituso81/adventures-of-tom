@@ -690,7 +690,7 @@ function openNotes(animId){return ((BOARD_DOC||{}).cards||[]).filter(c=>c.anim&&
 // add a row, cancel a queued row, mark Use this one, mark Keep the old one. Every other change is made by the job that did the work. Nothing on this page waits in a loop.
 const QB='guideq',QF='queue.json';
 const QS={doc:null,etag:'',fails:0,grey:false,busy:false,timer:0,poke:0,pokeApply:0};
-const QERR={},QBUSY={},LMEM={},MPEND={},PICURL={};   // QERR: the words under a button that failed; LMEM: a take with no row that was kept (memory only); MPEND: a monster request sent from this page (card 8 moves monsters to rows)
+const QERR={},QBUSY={},LMEM={},PICURL={};   // QERR: the words under a button that failed; LMEM: a take with no row that was kept (memory only)
 const UP={pend:{},back:{},who:'',key:''},ALLC={};   // UP: a picture chosen to upload and waiting for Use it, and a Go back to a generated picture waiting for its confirm; ALLC: a Make all waiting for its confirm
 const W_UP1='That file is not a picture.',W_UP2='That picture is too small. It needs to be at least 600 pixels tall.',W_UP3='That file is over 8 MB.',UP_MAX=8*1024*1024;
 const W_X1='Could not send. Nothing was made. Tap again.';
@@ -705,7 +705,7 @@ const qItems=()=>Object.values((QS.doc&&QS.doc.items)||{});
 const isPic=i=>i.kind==='picture'||i.kind==='upload';
 const qUseNow=i=>!!(i.use&&(i.use.state==='wanted'||i.use.state==='applying'));
 const qWorking=i=>i.state==='queued'||i.state==='making'||i.state==='checking'||qUseNow(i);
-const qActive=()=>qItems().some(qWorking)||Object.keys(MPEND).length>0;
+const qActive=()=>qItems().some(qWorking);
 const qEvery=()=>qActive()?5000:30000;
 const byTake=(x,y)=>(x.take||0)-(y.take||0)||String(x.at).localeCompare(String(y.at))||String(x.id).localeCompare(String(y.id));
 const qVid=id=>qItems().filter(i=>i.kind==='video'&&i.anim===id).sort(byTake);
@@ -717,6 +717,8 @@ function qCur(id){   // the row an animation shows: its newest, unless that one 
 }
 function qPicCur(who){const r=qPics(who).filter(i=>!goneCancel(i));return r[r.length-1]||null;}
 const qBusy=a=>{const c=qCur(a.id);return !!c&&c.state!=='cancelled'&&!(c.state==='done'&&c.use&&c.use.state==='live');};
+const qRoute=g=>!!g&&(g.route==='wan'||g.route==='xai');   // guideflow8: a family video (Wan) and a monster video (xAI) are both rows in the queue
+const qReady=(a,g)=>g.route==='xai'?!!g.canMake:qStartReady(a.owner);   // a monster needs its start picture and sprite height (canMake); a family video needs its person's start picture
 function qStartReady(who){const o=(GUIDE&&GUIDE.owners&&GUIDE.owners[who])||{};return !!o.start||qPics(who).some(i=>i.state==='done');}   // D10: usable the moment its row is done
 function qPicSrc(who){   // the start picture to show: the file on main, or the one on branch guidegen when the row says so (read once, kept as a local picture)
   const o=(GUIDE&&GUIDE.owners&&GUIDE.owners[who])||{},rows=qPics(who).filter(i=>i.state==='done'),r=rows[rows.length-1],res=r&&r.result;
@@ -743,7 +745,7 @@ function qLine(it,ctx){   // ctx: sheet (all the buttons), list or act (a decisi
   else if(it.state==='cancelled'){o.t='Cancelled. Nothing was spent.';}
   else if(it.state==='failed'){
     o.cls='bad';o.t='Failed: '+[it.why,it.do].filter(Boolean).join(' ');const d=String(it.do||'');
-    if(/try again/i.test(d))o.btns=[mk('retry','Try again'+(it.fal?' (free)':' ('+money(price)+')'))];
+    if(/try again/i.test(d))o.btns=[mk('retry','Try again'+(it.fal||it.svc?' (free)':' ('+money(price)+')'))];
     else if(/go back to a generated picture/i.test(d))o.btns=[mk('goback','Go back to a generated picture')];
     else if(/make another|make the start picture/i.test(d)&&!up)o.btns=[mk(pic?'picagain':'again','Make another ('+money(price)+')')];
     if(pic&&!o.btns.some(b=>b.a==='upload'||b.a==='goback')&&!(up&&o.btns.length))o.btns.push(mk('upload','Upload my own'));   // guideflow6: an upload that failed says what to fix and offers Upload my own; a picture that failed offers it beside Make another
@@ -768,7 +770,7 @@ function qLineHtml(it,ctx,key){
 const qErrHtml=key=>QERR[key]?'<div class="qerr err">'+esc(QERR[key])+'</div>':'';
 function qErr(key,text){QERR[key]=text;qPaint();setTimeout(()=>{if(QERR[key]===text){delete QERR[key];qPaint();}},9000);}
 function qMakeBtn(a,g,cur){   // the one tap that makes a video (or another one): not while a row of this animation is going, waiting for a decision or failed
-  if(!QS.doc||!g||g.route!=='wan'||g.waits||!qStartReady(a.owner))return '';
+  if(!QS.doc||!qRoute(g)||g.waits||!qReady(a,g))return '';
   if(cur&&!(cur.state==='cancelled'||(cur.state==='done'&&cur.use&&cur.use.state==='live')))return '';
   const again=a.video||qVid(a.id).length>0;
   return '<span class="qbtns"><button type="button" class="gold" data-qa="make" data-qid="'+esc(a.id)+'" data-qkey="anim:'+esc(a.id)+'">'+(again?'Make another':'Make this video')+' ('+money(g.price)+')</button></span>';
@@ -800,6 +802,10 @@ function qUpConfirm(who,nm,P,key){
 }
 function qSheetHtml(a,g){   // inside an animation's sheet: the status line and its one action, or what is missing first
   const key='anim:'+a.id,cur=qCur(a.id);let h='';
+  if(g.route==='xai'){
+    if(g.canMake){if(cur)h+=qLineHtml(cur,'sheet',key);h+=qMakeBtn(a,g,cur);}
+    h+=qErrHtml(key);
+  }
   if(g.route==='wan'&&!g.waits){
     if(!qStartReady(a.owner))h+='<div class="qline"><span class="qtext">Needs the start picture first.</span></div>'+qPicBlock(a.owner,'sheet');
     else{if(cur)h+=qLineHtml(cur,'sheet',key);h+=qMakeBtn(a,g,cur);}
@@ -850,7 +856,6 @@ async function qRead(){
     const g=await ghGetJson(QF,QB,lsGet(TOKEN),QS.etag);
     QS.fails=0;QS.grey=false;
     if(!(g&&g.same)){QS.doc=g?g.doc:{v:1,items:{}};if(!QS.doc.items)QS.doc.items={};QS.etag=g?g.etag||'':'';}
-    if(Object.keys(MPEND).length)await qMonsterCheck();
   }catch(e){QS.fails++;if(QS.fails>=3)QS.grey=true;}
   QS.busy=false;qPaint();
 }
@@ -896,6 +901,12 @@ async function qCancel(it,key){
   try{await storeUpdate(doc=>{const r=doc.items[it.id];if(!r||r.state!=='queued')throw new QRefused('started');r.state='cancelled';r.since=nowIso();r.why=r.do='';},'guide: cancel '+it.id);}
   catch(e){if(e instanceof QRefused){qErr(key,'It already started, so it cannot be cancelled.');qRead();}else qErr(key,W_X1);}
 }
+function qVidRow(a,g,n,note,prompt,promptRev){   // the row of one video: a family video (Wan on fal, cap $1) or a monster video (xAI, cap $0.15, with the clip settings the worker hands to xAI)
+  const row={id:'v-'+(g.slug||slugOf(a.id))+'-t'+n,kind:'video',lane:'vid',route:g.route,anim:a.id,who:a.owner,take:n,prompt,promptRev,start:a.owner,note,cap:g.route==='xai'?0.15:1};
+  if(g.route==='xai'){const x=GUIDE.routes.xai,rc=(GUIDE.recipes||{})[g.recipe]||{};row.clip={id:(g.clip||g.newClip).replace(/_/g,'-'),owner:a.owner,kind:rc.kind||'strike',start:g.start,model:x.model,res:x.res,dur:x.dur,figRows:g.figRows};}
+  else if(g.pad)row.pad=g.pad;
+  return row;
+}
 async function qMakeVideo(a,retry,key0){
   const g=G(a);if(!g)return;const key=key0||'anim:'+a.id;
   if(QBUSY[a.id])return;QBUSY[a.id]=1;
@@ -904,8 +915,8 @@ async function qMakeVideo(a,retry,key0){
     const note=retry?(retry.note||''):((GW[a.id]&&GW[a.id].note)||'');
     if(!retry){const why=stopFor(a,note);if(why){qErr(key,'Stop here. '+why+' Send Claude a note below: it will look at the takes and change the cause, not the wording.');if(PL.a===a)fillStopNote(a);return;}}
     await loadTakes();
-    const n=nextTake(a),row={id:'v-'+(g.slug||slugOf(a.id))+'-t'+n,kind:'video',lane:'vid',route:'wan',anim:a.id,who:a.owner,take:n,prompt:retry?retry.prompt:workPrompt(a),promptRev:retry?retry.promptRev:(g.promptRev||0),start:a.owner,note,cap:1};
-    if(g.pad)row.pad=g.pad;if(retry&&retry.fal)row.fal=retry.fal;
+    const n=nextTake(a),row=qVidRow(a,g,n,note,retry?retry.prompt:workPrompt(a),retry?retry.promptRev:(g.promptRev||0));
+    if(retry&&retry.fal)row.fal=retry.fal;if(retry&&retry.svc)row.svc=retry.svc;
     await qAdd([row],'guide: add '+row.id);
     (GTR[a.id]=GTR[a.id]||[]).push({n,note});saveLS('aot-guide-tries',GTR);if(GW[a.id]&&GW[a.id].note){delete GW[a.id].note;saveGW();}
     qPoke();
@@ -989,8 +1000,8 @@ async function qMakeAll(who,confirmed,key){   // $2 or less adds the rows at onc
     m.forEach(a=>{
       const g=G(a),note=(GW[a.id]&&GW[a.id].note)||'';
       if(stopFor(a,note)){left.push(a);return;}   // two takes missed the same way: a third is not made here (the stop rule)
-      const n=nextTake(a),row={id:'v-'+(g.slug||slugOf(a.id))+'-t'+n,kind:'video',lane:'vid',route:'wan',anim:a.id,who:a.owner,take:n,prompt:workPrompt(a),promptRev:g.promptRev||0,start:a.owner,note,cap:1};
-      if(g.pad)row.pad=g.pad;rows.push(row);notes[a.id]={n,note};
+      const n=nextTake(a),row=qVidRow(a,g,n,note,workPrompt(a),g.promptRev||0);
+      rows.push(row);notes[a.id]={n,note};
     });
     if(!rows.length){qErr(key,'Nothing was made. Each of these missed twice the same way. Open one and send Claude a note.');return;}
     await qAdd(rows,'guide: add '+rows.length+' videos of '+ownerName(who));
@@ -1029,19 +1040,13 @@ function qTakeSync(a){
   const rows=qVid(a.id).filter(i=>!goneCancel(i)),lr=rows[rows.length-1],A=takesOf(a);let key='',t=null,n=0;
   if(lr&&lr.state==='done'){n=(lr.result||{}).n||lr.take;key=(lr.left?'left:':'row:')+lr.id;t=qTake(lr);}
   else if(lr&&(lr.state==='queued'||lr.state==='making'||lr.state==='checking'))key='';
-  else if(MPEND[a.id]&&!A.takes.some(x=>x.n===MPEND[a.id].n))key='mpend';
   else{const last=A.takes[A.takes.length-1];if(A.stop)key='stop';else if(last){t=last;n=last.n;key=(LMEM[a.id+':'+n]?'left:':'file:')+n;}}
   if(el.dataset.key===key)return;
   el.dataset.key=key;
   if(!key){MP.on=false;el.innerHTML='';GCUR.t=null;return;}
   if(key==='stop'){el.innerHTML=stopHtml(a,A.stopWhy||'');fillStopNote(a);return;}
-  if(key==='mpend'){el.innerHTML='<p class="hint" id="gwait">Sent. Take '+MPEND[a.id].n+' shows here when it is made.</p>';return;}
   if(key.indexOf('left:')===0){MP.on=false;GCUR.a=a;GCUR.t=t;el.innerHTML='<p class="hint" id="gleft">Take '+n+' is on file; you chose to leave the current video as it is.</p>';return;}
   showTake(a,t);
-}
-async function qMonsterCheck(){   // monsters keep their old request path in this card: look in takes.json for the take that was asked for
-  await loadTakes();
-  Object.keys(MPEND).forEach(id=>{if(takesOf({id}).takes.some(x=>x.n===MPEND[id].n))delete MPEND[id];});
 }
 function openActivity(){
   const S=$('sheet');MP.on=false;GCUR.tok++;PL.on=false;cancelAnimationFrame(PL.raf);PL.a=null;
@@ -1211,7 +1216,7 @@ async function loadTakes(){
   return GT;
 }
 const takesOf=a=>(GT&&GT.anims&&GT.anims[a.id])||{takes:[],spent:0,stop:false};
-const nextTake=a=>Math.max(0,...takesOf(a).takes.map(t=>t.n),...qVid(a.id).map(i=>i.take||0),(MPEND[a.id]||{}).n||0)+1;   // one above the highest take in takes.json and in the queue
+const nextTake=a=>Math.max(0,...takesOf(a).takes.map(t=>t.n),...qVid(a.id).map(i=>i.take||0))+1;   // one above the highest take in takes.json and in the queue
 function showStats(a){
   const A=takesOf(a),k=$('gtk'),s=$('gsp');if(k)k.textContent='Takes made: '+A.takes.length;if(s)s.textContent='Spent: '+money(A.spent);
 }
@@ -1225,27 +1230,6 @@ function stopFor(a,note){   // two misses the same way: the gate held the last t
 }
 function stopHtml(a,why){return '<div class="stopbox" id="gstop"><b>Stop here.</b> '+esc(why)+' Making another one will cost money and probably miss again. Send Claude a note below: it will look at the takes and change the cause, not the wording.</div>';}
 function fillStopNote(a){const el=$('ntxt');if(!el||el.value)return;const tr=GTR[a.id]||[];el.value='Two tries missed the same way.'+tr.slice(-2).map((x,i)=>' Try '+x.n+' note: '+x.note+'.').join('');}
-function askGen(){
-  const a=PL.a,g=a&&G(a);if(!g)return;const m=$('gmsg');m.textContent='';
-  if(!(lsGet(TOKEN)||Q.get('gh'))){m.textContent='This browser has no GitHub token. Open the Board, tap the three dots, paste the token there, then come back.';return;}
-  const why=stopFor(a,(GW[a.id]&&GW[a.id].note)||'');
-  if(why){$('gconf').innerHTML=stopHtml(a,why);fillStopNote(a);return;}
-  const cap=0.15;
-  $('gconf').innerHTML='<div class="conf" id="gconfbox"><p><b>This spends '+money(g.price)+'.</b> One video from the prompt above ('+esc(genWords(g))+'). The most this try can spend is '+money(cap)+'.</p><div class="row2"><button type="button" class="gold" id="ggo">Yes, spend '+money(g.price)+'</button><button type="button" id="gcan">Cancel</button></div></div>';
-}
-async function doGen(){   // monsters only (card 8 moves them to rows); a family video is a row in the queue (qMakeVideo)
-  const a=PL.a,g=a&&G(a);if(!g||g.route==='wan')return;const note=(GW[a.id]&&GW[a.id].note)||'',n=nextTake(a),at=new Date().toISOString(),prompt=workPrompt(a);
-  const why=stopFor(a,note);if(why){$('gconf').innerHTML=stopHtml(a,why);fillStopNote(a);return;}
-  const box=$('gconf');box.innerHTML='<p class="hint">Sending the request...</p>';
-  const slug=g.slug||slugOf(a.id);
-  try{
-    const x=GUIDE.routes.xai,rc=(GUIDE.recipes||{})[g.recipe]||{};
-    await ghRequest('data/clip-requests.json','clip: generate guide '+a.id,d=>{d.requests.push({id:'guide-'+slug+'-t'+n,prompt,promptRev:g.promptRev||0,cap:0.15,at,guide:{anim:a.id,take:n,note,clip:{id:(g.clip||g.newClip).replace(/_/g,'-'),owner:a.owner,kind:rc.kind||'strike',start:g.start,model:x.model,res:x.res,dur:x.dur,figRows:g.figRows}}});});
-  }catch(e){box.innerHTML='';$('gmsg').textContent=(/token/.test(e.message)?W_X2:W_X1);return;}
-  (GTR[a.id]=GTR[a.id]||[]).push({n,note});saveLS('aot-guide-tries',GTR);
-  MPEND[a.id]={n,at};if(GW[a.id]){delete GW[a.id].note;saveGW();}
-  box.innerHTML='';qPaint();
-}
 // two small players share one clock
 const MP={on:false,items:[],last:0,raf:0};
 function mpStart(items){MP.items=items;MP.on=true;MP.last=performance.now();cancelAnimationFrame(MP.raf);MP.raf=requestAnimationFrame(mpTick);}
@@ -1309,7 +1293,7 @@ async function doUse(){   // guideflow7: Use this one marks the take's row (use:
 }
 function tryAgain(){
   const a=GCUR.a,t=GCUR.t;if(!a||!t)return;const n=$('gnote');if(n){n.scrollIntoView({block:'center'});n.focus();}
-  $('gmsg').textContent='Write what was wrong with take '+t.n+' in the box above, tap Update the prompt, keep the new prompt, then Generate again.';
+  qErr('anim:'+a.id,'Write what was wrong with take '+t.n+' in the box above, tap Update the prompt, keep the new prompt, then tap Make another.');
 }
 async function keepOld(){   // Keep the old one: the row says left (the page shows the take as left alone); a take with no row is remembered in this page only
   const a=GCUR.a,t=GCUR.t;if(!a||!t)return;
@@ -1329,7 +1313,7 @@ function genBlock(a){
   if(!GUIDE)return '<div class="gen"><h3>Prompt</h3><p class="hint" id="gstate">The prompt list could not be loaded. Close this and open it again in a minute.</p></div>';
   const g=G(a);if(!g)return '<div class="gen"><h3>Prompt</h3><p class="hint" id="gstate">This animation is not in the prompt list yet. Ask Claude to rebuild it (node tools/guidegen/build_map.js).</p></div>';
   const src=SRC_WORDS[g.promptSource]||g.promptSource,draft=/draft/.test(g.promptSource),fam=g.route==='wan';
-  let h='<div class="gen" id="gen">'+(fam&&!g.waits?'<div id="gq"></div><div id="gtake"></div>':'')+'<h3>Prompt</h3>';
+  let h='<div class="gen" id="gen">'+(qRoute(g)&&!g.waits&&(fam||g.canMake)?'<div id="gq"></div><div id="gtake"></div>':'')+'<h3>Prompt</h3>';
   h+='<div class="meta" id="gmeta"><span class="chip">'+(g.oldDraft?'OLD DRAFT, NOT FOR USE':draft?'DRAFT':'Prompt v'+(g.promptRev||0))+'</span>'+(g.stage?'<span class="chip" id="gstage">'+esc(STAGE_TIER[g.stage.tier]||g.stage.tier)+', about '+g.stage.budget+' s'+(g.stage.keep?', video kept':'')+'</span>':'')+'<span class="chip">'+esc(g.route==='wan'?'Wan 3.0':'xAI Grok lite')+'</span><span class="chip">$'+g.price.toFixed(2)+' a try</span><span class="chip" id="gtk">Takes made: ...</span><span class="chip" id="gsp">Spent: ...</span></div>';
   h+='<p class="hint" id="gsrc">'+esc(src)+(g.madeBy?' ('+esc(g.madeBy)+')':'')+(g.video?'. It made the video above.':'. This animation has no video yet.')+'</p>';
   if(g.waits==='staging')h+='<div class="cant" id="gstagewait"><b>Waits for staging.</b> '+esc(g.waitsWhy||'')+'</div>';   // movestage1: a family move with no staging row (data/b3-stage.js)
@@ -1345,11 +1329,7 @@ function genBlock(a){
       +'<p class="err" id="gerr" style="margin:6px 0;font-size:14px"></p><button type="button" class="gold" id="gupd" style="width:100%">Update the prompt</button>'
       +'<p class="hint">'+(g.video?'Your words are folded into the prompt with the smallest change, and you see what was kept and what changed before anything is made.':'Claude folds your words into the draft with the smallest change. Leave it empty to keep the draft as it is.')+'</p><div id="gres"></div>';
   }
-  if(fam&&!g.waits)h+='<p class="hint" id="ghow">One tap makes one video from the prompt above ('+esc(genWords(g))+', about $'+g.price.toFixed(2)+'). You see it next to '+(g.video?'the one in the game':'the standard motion')+' before anything changes in the game.</p>';
-  if(!fam&&g.canMake){
-    h+='<h3>Make a video</h3><p class="hint" id="ghow">One try makes one video from the prompt above ('+esc(genWords(g))+', about $'+g.price.toFixed(2)+'). You see it next to '+(g.video?'the one in the game':'the standard motion')+' before anything changes in the game.</p>'
-      +'<p class="err" id="gmsg" style="margin:6px 0;font-size:14px"></p><button type="button" class="gold" id="ggen" style="width:100%">Generate this video ($'+g.price.toFixed(2)+')</button><div id="gconf"></div><div id="gtake"></div>';
-  }
+  if(qRoute(g)&&!g.waits&&(fam||g.canMake))h+='<p class="hint" id="ghow">One tap makes one video from the prompt above ('+esc(genWords(g))+', about $'+g.price.toFixed(2)+'). You see it next to '+(g.video?'the one in the game':'the standard motion')+' before anything changes in the game.</p>';
   return h+'</div>';
 }
 async function openPlayer(animId){
@@ -1503,9 +1483,6 @@ document.addEventListener('click',e=>{
   if(t.id==='gask'){const v=cleanWords(($('gans')||{}).value);if(v&&GASK)updatePrompt(GASK.note+' (Your question: '+GASK.q+' My answer: '+v+')');return;}
   if(t.id==='gkeep'){keepPrompt();return;}
   if(t.id==='gdisc'){$('gres').innerHTML='';return;}
-  if(t.id==='ggen'){askGen();return;}
-  if(t.id==='gcan'){$('gconf').innerHTML='';return;}
-  if(t.id==='ggo'){doGen();return;}
   if(t.id==='guse'){askUse();return;}
   if(t.id==='gusecan'){$('guseconf').innerHTML='';return;}
   if(t.id==='guseyes'){doUse();return;}

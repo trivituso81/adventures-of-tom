@@ -760,19 +760,29 @@ with sync_playwright() as p:
     check('an animation whose last two takes were held for one fault is stopped when opened', 'same fault' in pg.locator('#gstop').inner_text() and pg.locator('#gtk').inner_text() == 'Takes made: 2', pg.locator('#gstop').inner_text())
     n_q = len(QS['puts']); pg.click('#gq [data-qa=make]'); pg.wait_for_selector('#gq .qerr'); check('a stopped animation: Make sends nothing', len(QS['puts']) == n_q and pg.locator('#gq .qerr').inner_text().startswith('Stop here.'))
     pg.click('#bclose')
-    # a monster keeps its old button and its old path (card 8 moves it)
-    pg.goto(URL + '#anims/act:skeeter:darting_bite'); pg.wait_for_selector('#ggen')
-    check('a monster animation shows its own price and no start picture block', '$0.07' in pg.locator('#ggen').inner_text() and pg.locator('#gq').count() == 0, pg.locator('#ggen').inner_text())
-    pg.click('#ggen'); pg.wait_for_selector('#gconfbox'); pg.click('#ggo'); pg.wait_for_selector('#gwait', timeout=20000); pg.wait_for_selector('#gtakecard', timeout=60000)
-    cp = RQ['data/clip-requests.json']['puts']; cr = cp[0]['doc']['requests'][-1] if cp else {}
-    check('a monster request goes to the clip-gen request file with a guide field, not the Library', len(cp) == 1 and cp[0]['msg'] == 'clip: generate guide act:skeeter:darting_bite' and cr.get('id') == 'guide-act-skeeter-darting-bite-t1'
-          and cr['guide']['anim'] == 'act:skeeter:darting_bite' and cr['guide']['take'] == 1 and cr['guide']['clip']['owner'] == 'skeeter' and cr['guide']['clip']['model'] == 'grok-imagine-video-1.5-lite' and cr['guide']['clip']['kind'] == 'strike' and cr['cap'] <= 0.5, cp)
-    check('a monster with no video has a standard-motion side to compare', 'standard motion' in pg.locator('#gtakecard').inner_text().lower() or 'Now in the game' in pg.locator('#gtakecard').inner_text())
+    # guideflow8: a monster video is a row in the same queue, with the same status lines
+    pg.goto(URL + '#anims/act:skeeter:darting_bite'); pg.wait_for_selector('#gq [data-qa=make]')
+    bt = pg.locator('#gq [data-qa=make]').inner_text()
+    check('G16 a monster animation shows Make (this video, or another when it has one) with its own price, the same queue block as a family one, and no start picture block', bt.startswith('Make') and '$0.07' in bt and pg.locator('#gq .qpic').count() == 0 and pg.locator('#ggen').count() == 0, bt)
+    n_q = len(QS['puts']); n_rq = len(RQ['data/clip-requests.json']['puts'])
+    pg.click('#gq [data-qa=make]'); pg.wait_for_function("document.querySelector('#gq .qline[data-rid]')", timeout=20000)
+    mid = 'v-act-skeeter-darting-bite-t1'; mr = QS['doc']['items'].get(mid) or {}
+    mc = mr.get('clip') or {}
+    check('G16 the row is kind video, lane vid, route xai, cap 0.15, with the clip settings and the prompt, and nothing went to the old request file', len(QS['puts']) == n_q + 1 and mr.get('kind') == 'video' and mr.get('lane') == 'vid' and mr.get('route') == 'xai' and mr.get('cap') == 0.15
+          and mr.get('anim') == 'act:skeeter:darting_bite' and mr.get('take') == 1 and mr.get('promptRev') is not None and (mr.get('prompt') or '').strip() and mc.get('owner') == 'skeeter' and mc.get('model') == 'grok-imagine-video-1.5-lite'
+          and mc.get('kind') == 'strike' and mc.get('res') and mc.get('dur') and mc.get('start') and len(RQ['data/clip-requests.json']['puts']) == n_rq, (mr, len(QS['puts']) - n_q))
+    check('G16 its status line is the same as a family video\'s: Queued', pg.locator('#gq .qline').first.inner_text().startswith('Queued'), pg.locator('#gq .qline').first.inner_text())
+    wset(mid, state='making', since=iso(5)); pg.evaluate("qRead()"); pg.wait_for_function("document.querySelector('#gq .qline').innerText.startsWith('Making the video')", timeout=20000)
+    wset(mid, state='failed', why='The video service returned no video. Nothing was spent.', **{'do': 'Tap Try again.'}); pg.evaluate("qRead()"); pg.wait_for_function("document.querySelector('#gq .qline').innerText.startsWith('Failed:')", timeout=20000)
+    check('G16 a failed monster row says why and offers Try again with its price', 'Try again' in pg.locator('#gq .qline').first.inner_text(), pg.locator('#gq .qline').first.inner_text())
+    pg.click('#bclose')
+    pg.click('#actbar'); pg.wait_for_selector('#actlist .qline[data-rid]')
+    check('G16 Activity lists the monster row like any other, named by its owner and animation', pg.evaluate("ownerName('skeeter')+': '+ANIM_BY['act:skeeter:darting_bite'].name") in pg.eval_on_selector_all('#actlist .qname', 'a=>a.map(x=>x.textContent)'))
     pg.click('#bclose')
     # no token
-    pg.evaluate("localStorage.removeItem('aot-gh-token')"); pg.goto(URL + '#anims/move:suite_door_slide'); pg.reload(); pg.goto(URL + '#anims/act:skeeter:darting_bite'); pg.wait_for_selector('#ggen')
-    n_all = sum(len(f['puts']) for f in RQ.values()); pg.click('#ggen'); pg.wait_for_timeout(200)
-    check('no token: Generate sends nothing and says why', 'token' in pg.locator('#gmsg').inner_text().lower() and sum(len(f['puts']) for f in RQ.values()) == n_all)
+    pg.evaluate("localStorage.removeItem('aot-gh-token')"); pg.goto(URL + '#anims/skeeter'); pg.reload(); pg.wait_for_selector('#detail [data-qrow]'); pg.click('#detail [data-anim="act:skeeter:darting_bite"]'); pg.wait_for_selector('#gq [data-qa=make]')
+    n_all = sum(len(f['puts']) for f in RQ.values()) + len(QS['puts']); pg.click('#gq [data-qa=make]'); pg.wait_for_selector('#gq .qerr')
+    check('no token: Make sends nothing and says why', 'token' in pg.locator('#gq .qerr').inner_text().lower() and sum(len(f['puts']) for f in RQ.values()) + len(QS['puts']) == n_all)
     pg.click('#bclose')
     # search
     pg.click('#bsearch')

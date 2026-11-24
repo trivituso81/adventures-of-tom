@@ -445,8 +445,6 @@ vreset(); S.add(vrow('v-tnb-cap2', take=3, cap=5)); fal = vfal(); vworker(fal).r
 check('T6 a cap above $1 is held to $1: the video is still made ($0.50)', r['state'] == 'done' and abs(r['cost'] - .5) < 1e-9, r)
 reset(); S.add(vrow('v-tnb-nostart', take=4, who='zed', start='zed')); fal = vfal(); vworker(fal).run(); r = doc()['items']['v-tnb-nostart']
 check('T6 no start picture (not on guidegen, not on main): fails in plain words and nothing is sent', r['state'] == 'failed' and 'no start picture' in r['why'] and fal.sent == 0, r)
-vreset(); S.add(vrow('v-tnb-xai', take=5, route='xai')); fal = vfal(); vworker(fal).run(); r = doc()['items']['v-tnb-xai']
-check('T6 a monster (xai) video is not made by this line yet: failed in plain words, nothing sent', r['state'] == 'failed' and 'not made by this line' in r['why'] and fal.sent == 0, r)
 vreset(); S.add(vrow('v-tnb-noprompt', take=6, prompt='')); fal = vfal(); vworker(fal).run(); r = doc()['items']['v-tnb-noprompt']
 check('T6 a request with no prompt fails in plain words and nothing is sent', r['state'] == 'failed' and 'no prompt' in r['why'] and fal.sent == 0, r)
 
@@ -469,5 +467,110 @@ falrows = [r for batch in logged for r in batch if r['service'] == 'fal']
 check('T6 the run cost is logged once at the end: fal $1.00 for two videos, named as videos', len(falrows) == 1 and falrows[0]['amount'] == 1.0 and 'family videos' in falrows[0]['what'], (logged, {k: (v['state'], v.get('why')) for k, v in doc()['items'].items()}))
 os.environ.pop('GUIDE_NO_GATE', None)
 check('T6 worker.py has no daily limit, never copies falq, and no em dash', 'day_cap' not in open(os.path.join(HERE, 'worker.py'), encoding='utf-8').read() and '—' not in open(os.path.join(HERE, 'worker.py'), encoding='utf-8').read())
+
+# ---------------- T7: monster videos on xAI (guideflow8) ----------------
+import clipgen
+os.environ['GUIDE_NO_GATE'] = '1'
+XREPO = tempfile.mkdtemp(prefix='guide8-'); os.makedirs(os.path.join(XREPO, 'art', 'clips', 'start')); open(os.path.join(XREPO, 'art', 'clips', 'start', 'skeeter.png'), 'wb').write(GOOD)
+MAN = 'act:skeeter:darting_bite'; MSLUG = 'act-skeeter-darting-bite'
+XCLIP = {'id': 'skeeter-darting-bite', 'owner': 'skeeter', 'kind': 'strike', 'start': 'art/clips/start/skeeter.png', 'model': 'grok-imagine-video-1.5-lite', 'res': '480p', 'dur': 3, 'figRows': 400}
+XCOST = round(clipgen.cost({'clip': XCLIP}), 4)
+
+class Xai:
+    """The stand-in xAI: send gives a request id (xai-1, xai-2 ...), wait gives a url, download gives the video. Nothing is called."""
+    def __init__(self, vids=None): self.vids = list(vids or [MV]); self.sent = 0; self.waited = []; self.refuse = None; self.refuse_n = None; self.on_wait = None; self.dead = None; self.mu = threading.Lock(); self.prompts = []
+    def send(self, e, prompt, png):
+        if self.refuse:
+            if self.refuse_n is None: raise self.refuse
+            with self.mu:
+                n_left = self.refuse_n
+                if n_left > 0: self.refuse_n -= 1
+            if n_left > 0: raise self.refuse
+        with self.mu: self.sent += 1; n = self.sent; self.prompts.append((prompt, len(png), e['clip']['model']))
+        return 'xai-%d' % n
+    def wait(self, rid, tell):
+        with self.mu: self.waited.append(rid)
+        if self.on_wait: self.on_wait()
+        if self.dead: raise self.dead
+        return 'mp4:' + rid
+    def download(self, url):
+        with self.mu: return self.vids.pop(0) if len(self.vids) > 1 else self.vids[0]
+
+def xrow(id, take=1, **k):
+    d = dict(anim=MAN, who='skeeter', take=take, start='skeeter', prompt='A test prompt for the bite.', promptRev=1, route='xai', cap=0.15, clip=dict(XCLIP)); d.update(k); return row(id, 'video', **d)
+def xworker(xai=None, pool=4, **k):
+    w = W.Worker('vid', pool=pool, linger=0.3, once=True, alive=lambda r: True, fal=NoCall(), xai=xai or Xai(), judge_factory=Judge, run_id=5252, repo=XREPO, **k); w.key = 'k'; return w
+def xreset(items=None): reset(items)
+
+xreset(); S.add(xrow('v-%s-t1' % MSLUG)); xai = Xai(); rc = xworker(xai).run()
+r = doc()['items']['v-%s-t1' % MSLUG]; G = gh.branches['guidegen']
+tk = ((json.loads(G['takes.json']).get('anims') or {}).get(MAN) or {}).get('takes') or [{}] if 'takes.json' in G else [{}]
+check('T7 a queued monster row goes queued to done on the stand-in xAI, the run exits 0', rc == 0 and r['state'] == 'done', r)
+check('T7 the result is {n, js, img, frames, kb, words, gate} and the take files are the ones on guidegen', r['state'] == 'done' and set(r['result']) >= {'n', 'js', 'img', 'frames', 'kb', 'words', 'gate'} and G.get('takes/%s/t1.mp4' % MSLUG) == MV and tk[0].get('n') == 1 and tk[0].get('status') == 'new', (r.get('result'), sorted(G)))
+check('T7 the xAI request id is on the row as svc, exactly one paid send, the cost is the clip price, the prompt and the start picture were sent', r['svc'] == {'name': 'xai', 'request_id': 'xai-1'} and xai.sent == 1 and abs(r['cost'] - XCOST) < 1e-9 and xai.prompts[0][0] == 'A test prompt for the bite.' and xai.prompts[0][1] == len(GOOD) and xai.prompts[0][2] == 'grok-imagine-video-1.5-lite' and not r.get('fal'), (r.get('svc'), r.get('cost'), xai.sent))
+check('T7 the row went making, checking, done (the xAI id was written before the wait)', [m for p_, m, _ in gh.puts if m.startswith('guide: v-%s-t1' % MSLUG)][-3:] == ['guide: v-%s-t1 fields [skip ci]' % MSLUG, 'guide: v-%s-t1 checking [skip ci]' % MSLUG, 'guide: v-%s-t1 done [skip ci]' % MSLUG], [m for p_, m, _ in gh.puts if MSLUG in m])
+
+# the worker dies after xAI accepted; the reaper puts the row back once and a second worker picks it up by its request id: one paid send in all
+xreset(); S.add(xrow('v-%s-t2' % MSLUG, take=2)); x1 = Xai()
+def xdie(): raise Die()
+x1.on_wait = xdie; xworker(x1).run()
+r = doc()['items']['v-%s-t2' % MSLUG]
+check('T7 a worker that dies after xAI accepted leaves the row making with the svc number on it', r['state'] == 'making' and r['svc'] and r['svc']['request_id'] == 'xai-1' and x1.sent == 1, r)
+x2 = Xai(); w2 = W.Worker('vid', pool=2, linger=0.3, once=True, alive=lambda run: run != 5252, fal=NoCall(), xai=x2, judge_factory=Judge, run_id=5353, repo=XREPO); w2.key = 'k'; w2.run()
+r = doc()['items']['v-%s-t2' % MSLUG]
+check('T7 the reaper puts it back once and the second worker resumes by the request id: done, one paid send in all, no second send', r['state'] == 'done' and x1.sent + x2.sent == 1 and x2.sent == 0 and x2.waited == ['xai-1'], (r, x1.sent, x2.sent, x2.waited))
+
+# an error is retried once, then the X6 words
+xreset(); S.add(xrow('v-%s-t3' % MSLUG, take=3)); xai = Xai(); xai.refuse = RuntimeError('xAI said 500: boom'); xai.refuse_n = 1; xworker(xai).run()
+check('T7 X6: the first send is refused, one automatic retry, the row is done', doc()['items']['v-%s-t3' % MSLUG]['state'] == 'done' and xai.sent == 1, doc()['items']['v-%s-t3' % MSLUG])
+xreset(); S.add(xrow('v-%s-t4' % MSLUG, take=4)); xai = Xai(); xai.refuse = RuntimeError('xAI said 500: boom'); xworker(xai).run()
+r = doc()['items']['v-%s-t4' % MSLUG]
+check('T7 X6: two refusals fail the row with the X6 words, nothing sent or spent', r['state'] == 'failed' and r['why'] == S.WORDS['X6']['why'] and r['do'] == S.WORDS['X6']['do'] and xai.sent == 0 and r['cost'] == 0, r)
+xreset(); S.add(xrow('v-%s-t5' % MSLUG, take=5)); xai = Xai(); xai.dead = clipgen.Gone('xAI could not make this video (failed)'); xworker(xai).run()
+r = doc()['items']['v-%s-t5' % MSLUG]
+check('T7 a request xAI dropped is sent once more, then fails with the X6 words (two sends charged)', r['state'] == 'failed' and r['why'] == S.WORDS['X6']['why'] and xai.sent == 2 and abs(r['cost'] - 2 * XCOST) < 1e-9, (r, xai.sent))
+
+# a refused key or a spent balance stops claiming
+xreset()
+for k in range(3): S.add(xrow('v-%s-c%d' % (MSLUG, k), take=50 + k, at='2026-11-23T01:00:0%dZ' % k))
+xai = Xai(); xai.refuse = clipgen.Stop('xAI refused the key (401): no'); xworker(xai, pool=1).run()
+d = doc()['items']
+check('T7 a refused key fails the first row in plain words and the others stay queued', d['v-%s-c0' % MSLUG]['state'] == 'failed' and 'xAI' in d['v-%s-c0' % MSLUG]['why'] and d['v-%s-c1' % MSLUG]['state'] == 'queued' and d['v-%s-c2' % MSLUG]['state'] == 'queued', {k: v['state'] for k, v in d.items()})
+
+# the cap, the prompt, the start picture, the clip settings
+xreset(); S.add(xrow('v-%s-cap' % MSLUG, take=6, cap=0.05)); xai = Xai(); xworker(xai).run(); r = doc()['items']['v-%s-cap' % MSLUG]
+check('T7 X22: a cap below the price fails with the X22 words and nothing is sent', r['state'] == 'failed' and r['why'] == S.WORDS['X22']['why'] and xai.sent == 0, r)
+xreset(); S.add(xrow('v-%s-cap2' % MSLUG, take=7, cap=5)); xai = Xai(); xworker(xai).run(); r = doc()['items']['v-%s-cap2' % MSLUG]
+check('T7 a cap above $0.15 is held to $0.15: the video is still made', r['state'] == 'done' and xai.sent == 1, r)
+xreset(); S.add(xrow('v-%s-big' % MSLUG, take=8, clip=dict(XCLIP, model='grok-imagine-video-1.5', res='720p'))); xai = Xai(); xworker(xai).run(); r = doc()['items']['v-%s-big' % MSLUG]
+check('T7 X22: settings that cost more than $0.15 (a dearer model) are refused and nothing is sent', r['state'] == 'failed' and r['why'] == S.WORDS['X22']['why'] and xai.sent == 0, r)
+xreset(); S.add(xrow('v-%s-np' % MSLUG, take=9, prompt='')); xai = Xai(); xworker(xai).run(); r = doc()['items']['v-%s-np' % MSLUG]
+check('T7 a request with no prompt fails in plain words and nothing is sent', r['state'] == 'failed' and 'no prompt' in r['why'] and xai.sent == 0, r)
+xreset(); S.add(xrow('v-%s-ns' % MSLUG, take=10, clip=dict(XCLIP, start='art/clips/start/none.png'))); xai = Xai(); xworker(xai).run(); r = doc()['items']['v-%s-ns' % MSLUG]
+check('T7 no start picture file: fails in plain words and nothing is sent', r['state'] == 'failed' and 'no start picture' in r['why'] and xai.sent == 0, r)
+xreset(); S.add(xrow('v-%s-nc' % MSLUG, take=11, clip=None)); xai = Xai(); xworker(xai).run(); r = doc()['items']['v-%s-nc' % MSLUG]
+check('T7 a row with no clip settings fails in plain words and nothing is sent', r['state'] == 'failed' and 'settings' in r['why'] and xai.sent == 0, r)
+xreset(); S.add(xrow('v-%s-still' % MSLUG, take=12)); xai = Xai([SV]); xworker(xai).run(); r = doc()['items']['v-%s-still' % MSLUG]
+check('T7 X9: a monster video that hardly moves fails with the X9 words, is paid and the video is kept', r['state'] == 'failed' and r['why'] == S.WORDS['X9']['why'] and abs(r['cost'] - XCOST) < 1e-9 and any(k.endswith('/t12.mp4') for k in gh.branches['guidegen']), r)
+
+# dry: no call at all
+xreset(); S.add(xrow('v-%s-dry' % MSLUG, take=13, dry=True)); xai = Xai(); xworker(xai).run(); r = doc()['items']['v-%s-dry' % MSLUG]
+check('T7 a dry monster row walks every state and sends nothing', r['state'] == 'done' and r['result']['dry'] is True and xai.sent == 0, r)
+
+# the store: a row holding an xAI request id is never put back in line by the worker, and the reaper counts it like a fal number
+xreset(); S.add(xrow('v-%s-st' % MSLUG, take=14)); d0 = doc(); d0['items']['v-%s-st' % MSLUG].update(state='making', run=5252, tries=1, svc={'name': 'xai', 'request_id': 'old-9'}); gh.branches['guideq']['queue.json'] = json.dumps(d0).encode()
+try: S.set_state('v-%s-st' % MSLUG, 'queued', actor='worker'); refused = False
+except S.Refused: refused = True
+check('T7 store: the worker may not put a row that holds an xAI request id back in line', refused and doc()['items']['v-%s-st' % MSLUG]['state'] == 'making')
+res = S.reap(lambda run: False if run == 5252 else None)
+check('T7 store: the reaper puts a row with an xAI request id and one try back in line', res['requeued'] == ['v-%s-st' % MSLUG] and doc()['items']['v-%s-st' % MSLUG]['state'] == 'queued', res)
+
+# the cost of the run is logged once, as monster videos on xAI
+logged.clear(); xreset(); S.add(xrow('v-%s-l1' % MSLUG, take=15)); S.add(xrow('v-%s-l2' % MSLUG, take=16)); xworker(Xai()).run()
+xrows = [r for batch in logged for r in batch if r['service'] == 'xai' and r['source'] == 'guide-work run']
+check('T7 the run cost is logged once at the end: xAI two videos, named as monster videos, no fal row', len(xrows) == 1 and abs(xrows[0]['amount'] - 2 * XCOST) < 1e-9 and 'monster videos' in xrows[0]['what'] and not [r for batch in logged for r in batch if r['service'] == 'fal'], logged)
+os.environ.pop('GUIDE_NO_GATE', None)
+_src = open(os.path.join(HERE, 'worker.py'), encoding='utf-8').read()
+check('T7 worker.py calls clipgen\'s own Xai (never a copy of the xAI calls) and has no em dash', 'clipgen.Xai(' in _src and '/v1/videos' not in _src and '\u2014' not in _src)
 
 print('\nFAILS:', fails); sys.exit(1 if fails else 0)
