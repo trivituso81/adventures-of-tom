@@ -6840,6 +6840,3311 @@
      "t": "Tom: all good."
     }
    ]
+  },
+  {
+   "id": "b-board-artfallback",
+   "title": "new card to build the picture fallback rule (xAI first, WAN after 2 misses, stop after 4)",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-artfallback",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-artfallback. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-ch1voices",
+   "title": "a board card makes chapter 1's 10 missing voices with one tap",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-ch1voices",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-ch1voices. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-dashboard",
+   "title": "seven cards to build the Admin Dashboard for your wide monitor, with the plan and the two drawings you approved",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-dashboard",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-dashboard. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-deedee-dodge-r4",
+   "title": "Deedee's Dodge try with her figure at 80% missed (arms off the frame again), not shown to you; the duck wording is staged next",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-deedee-dodge-r4",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-deedee-dodge-r4. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-guidegen",
+   "title": "new card to make and remake battle videos from the Battle Guide",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-guidegen",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-guidegen. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-guideplanned",
+   "title": "the Battle Guide's next card now shows everything planned but not built, marked PLANNED",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-guideplanned",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-guideplanned. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-guidevibe3",
+   "title": "the Battle Guide's next card now also shows each person's third Vibe, marked as planned",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-guidevibe3",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-guidevibe3. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-menuux2",
+   "title": "the menu proposal's skill rows name the flavor in words, like the approved battle screen",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-menuux2",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-menuux2. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-menuux3",
+   "title": "the menu proposal now covers the full v11 battle design, not only what is built",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-menuux3",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-menuux3. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-menuux4",
+   "title": "the new main menu is approved; its four build cards are on the board",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-menuux4",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-menuux4. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-night",
+   "title": "board only: six cards for the night jobs (night shift, night tests, nightly cleanup, night QA, the 13 failing tests, nightly refactoring)",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-night",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-night. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-nightgreen1",
+   "title": "nightgreen handoff, 4 of 12 failing tests fixed, notes for the other 8",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-nightgreen1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-nightgreen1. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-nightgreen2",
+   "title": "nightgreen handoff 2, 11 of 12 tests fixed or retired, the last one is ch20_test",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-nightgreen2",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-nightgreen2. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-nightgreen3",
+   "title": "next.md no longer says the two clip tests fail",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-nightgreen3",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-nightgreen3. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-nightqa2",
+   "title": "the night QA closed one more of your play cards, t-gem-bug01play, with pictures",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-nightqa2",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-nightqa2. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-guidestatus1-restore",
+   "title": "housekeeping: puts back three change notes and the Grace squeeze cleanup that the guidestatus1 push undid by mistake",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guidestatus1-restore",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as guidestatus1-restore. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-guidestatus1-restore2",
+   "title": "housekeeping: undoes the guidestatus1-restore push, which reverted other sessions' work, and puts back three change notes",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guidestatus1-restore2",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as guidestatus1-restore2. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-guideusefix2",
+   "title": "Use this one now writes its build heading",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guideusefix2",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as guideusefix2. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-portraits2",
+   "title": "Portraits baked from your saved crops: rose (made by the portrait-bake Action)",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "portraits2",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as portraits2. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-voices-t-ch1voices-334",
+   "title": "10 voice takes made from board card t-ch1voices and merged into the game",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "voices-t-ch1voices-334",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as voices-t-ch1voices-334. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-voices-t-ch2voices-315",
+   "title": "70 voice takes made from board card t-ch2voices and merged into the game",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "voices-t-ch2voices-315",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as voices-t-ch2voices-315. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "c-anim-deedee-dodge-y4m3",
+   "title": "Animation note: Deedee, Dodge",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "anim-deedee-dodge-y4m3",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-deedee-dodge-y4m3: Deedee's Dodge is a Wan 3.0 video now: she ducks straight down with both hands on her head and stands back up"
+    }
+   ]
+  },
+  {
+   "id": "c-anim-deedee-give-yy1o",
+   "title": "Animation note: Deedee, Giving (support moves)",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "anim-deedee-give-yy1o",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-deedee-give-yy1o: Deedee's Giving (support moves) is a Wan 3.0 video now, made from the same prompt"
+    }
+   ]
+  },
+  {
+   "id": "c-anim-deedee-ko-yes1",
+   "title": "Animation note: Deedee, Knocked out",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "anim-deedee-ko-yes1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-deedee-ko-yes1: Deedee's knock-out is a video now: she wobbles and sits down on the ground"
+    }
+   ]
+  },
+  {
+   "id": "c-anim-deedee-scrub-1irj",
+   "title": "Animation note: Deedee, \"Hand Me My Glasses\" Scrub",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "anim-deedee-scrub-1irj",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-deedee-scrub-1irj: Deedee's \"Hand Me My Glasses\" Scrub brushes longer, arm out toward the monster"
+    }
+   ]
+  },
+  {
+   "id": "c-anim-deedee-windex-z9p8",
+   "title": "Animation note: Deedee, Windex Spritz",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "anim-deedee-windex-z9p8",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-deedee-windex-z9p8: Deedee's Windex Spritz is a Wan 3.0 video now, made from the same prompt"
+    }
+   ]
+  },
+  {
+   "id": "c-anim-grace-cubepop-tvik",
+   "title": "Animation note: Grace, Crunchy Sugar-Cube Pop",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "anim-grace-cubepop-tvik",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-grace-cubepop-tvik: Grace's Crunchy Sugar-Cube Pop is a punch now, with a neon blue cube"
+    }
+   ]
+  },
+  {
+   "id": "c-anim-grace-dodge-p7wh",
+   "title": "Animation note: Grace, Dodge",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "anim-grace-dodge-p7wh",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Ended without shipping, spent $0: Wan 3.0 missed Grace's dodge twice the same way in wanch1 (feet leave the ground; prompts wan-grace-dodge-v1 and v2), so this is past the stop-loss on Wan. Covered by c-wanch2 (dodge on Kling 4); Tom's note \"Make\" moved there. Retired."
+    }
+   ]
+  },
+  {
+   "id": "c-anim-grace-give-q4es",
+   "title": "Animation note: Grace, Giving (support moves)",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "anim-grace-give-q4es",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-grace-give-q4es: Grace's Giving (support moves) is a Wan 3.0 video now, made from the same prompt"
+    }
+   ]
+  },
+  {
+   "id": "c-anim-grace-squeeze-qxim",
+   "title": "Animation note: Grace, Soup-Dumpling Squeeze",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "anim-grace-squeeze-qxim",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-grace-squeeze-qxim: Grace's Soup-Dumpling Squeeze is an attack now: she pushes the dumpling at the monster with both hands and squeezes it"
+    }
+   ]
+  },
+  {
+   "id": "c-anim-rose-dodge-v89r",
+   "title": "Animation note: Rose, Dodge",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "anim-rose-dodge-v89r",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-rose-dodge-v89r: Rose's Dodge is a Wan 3.0 video now: she ducks straight down with her hands on her head and pops back up"
+    }
+   ]
+  },
+  {
+   "id": "c-anim-rose-give-w5ws",
+   "title": "Animation note: Rose, Giving (support moves)",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "anim-rose-give-w5ws",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-rose-give-w5ws: Rose's Giving (support moves) is a Wan 3.0 video now, made from the same prompt"
+    }
+   ]
+  },
+  {
+   "id": "c-anim-rose-hit-uy5r",
+   "title": "Animation note: Rose, Getting hit",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "anim-rose-hit-uy5r",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-rose-hit-uy5r: Rose's Getting hit is a Wan 3.0 video that stumbles back and steps into place, with room in the frame so she stays on screen"
+    }
+   ]
+  },
+  {
+   "id": "c-anim-rose-lava-xftr",
+   "title": "Animation note: Rose, The Floor Is Lava!",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "anim-rose-lava-xftr",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-rose-lava-xftr: Rose's The Floor Is Lava! is a new Kling video (cushion toss, hop, two bounces) and the game draws the lava under her"
+    }
+   ]
+  },
+  {
+   "id": "c-anim-rose-victory-vqjc",
+   "title": "Animation note: Rose, Victory",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "anim-rose-victory-vqjc",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-rose-victory-vqjc: Rose's Victory is a Wan 3.0 video now, made from the same prompt"
+    }
+   ]
+  },
+  {
+   "id": "c-anim-tom-dodge-ner3",
+   "title": "Animation note: Tom, Dodge",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "anim-tom-dodge-ner3",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-tom-dodge-ner3: Tom's Dodge is a Wan 3.0 video now: he ducks straight down with both hands on his head and pops back up"
+    }
+   ]
+  },
+  {
+   "id": "c-anim-tom-loungepass-ding",
+   "title": "Ding sound on the Lounge Pass sparkle",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "anim-tom-loungepass-ding",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as anim-tom-loungepass-ding: a short ding plays on the sparkle of Tom's Lounge Pass Flex"
+    }
+   ]
+  },
+  {
+   "id": "c-anim-tom-loungepass-fix1",
+   "title": "Fix: Tom, Lounge Pass Flex (quick take-out, long swat)",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "anim-tom-loungepass-fix1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom (11:27): \"yes\" to the recommended try. Shipped anim-tom-loungepass-fix1: one change, the figure placed right of centre (wangen shift 0.2); prompt v3 and pad 0.8 kept. Passed plan 4.4 (no edge touched) and the measured gate. Bake runs the take-out at 2x and the arm and swat at 1x. $0.50."
+    }
+   ]
+  },
+  {
+   "id": "c-anim-tom-loungepass-lf2z",
+   "title": "Animation note: Tom, Lounge Pass Flex",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "anim-tom-loungepass-lf2z",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped anim-tom-loungepass-lf2z. Prompt v2 changed only MOTION (hold up, look at the viewer, smile, sparkle on the top right corner, snooty swat) and allowed the card's sparkle in the camera line; start picture, settings and the rest kept. Wan run 44929359366, $0.50. Plan 4.4 passed except the card corner touching the video's left edge for pictures 93 to 95, which the bake (every 4th from 12) skips; measured gate no flags. A pad retry was refused by the shared cap and a higher cap was not allowed in this session. The ding sound is a game sound, card c-anim-tom-loungepass-ding."
+    }
+   ]
+  },
+  {
+   "id": "c-animplan",
+   "title": "Battle Guide: one Plan view of every battle animation",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "animplan1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as animplan1: the Battle Guide has a Plan view of every battle animation"
+    }
+   ]
+  },
+  {
+   "id": "c-artfallback",
+   "title": "Pictures: xAI first, WAN after 2 misses, stop after 4",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "artfallback1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as artfallback1: Art Library pictures go to xAI first, to WAN after 2 misses, and stop after 4"
+    }
+   ]
+  },
+  {
+   "id": "c-artgen3",
+   "title": "Auto-approve pictures that pass QA",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "artgen3",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as artgen3: a second button on a pictures card approves what passes QA for you"
+    }
+   ]
+  },
+  {
+   "id": "c-b3s15",
+   "title": "Battle system stage 15: chapter 1 story switch",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "b3s15",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as b3s15: chapter 1's story fights now play on the new battle system, with a switch in ADMIN to go back to the old one"
+    }
+   ]
+  },
+  {
+   "id": "c-battleguide",
+   "title": "Battle Guide page for the Duo, with animation notes",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "battleguide1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as battleguide1: Battle Guide, a reference page for the new battle system that fits the Duo folded and unfolded, with a player for every battle video and a note to Claude on any animation"
+    }
+   ]
+  },
+  {
+   "id": "c-battleguide2",
+   "title": "Battle Guide: real-fight button and everything planned",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "battleguide2",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as battleguide2: the Battle Guide opens a real fight for any move or attack, and shows everything planned but not built, marked PLANNED"
+    }
+   ]
+  },
+  {
+   "id": "c-battleux-cards",
+   "title": "Make the battle screen build cards",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-battleux",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as board-battleux: the battle screen redesign is approved; its three build cards and your play card are on the board"
+    }
+   ]
+  },
+  {
+   "id": "c-battleux-plan",
+   "title": "Battle screen redesign: the proposal",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "battleux-plan",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as battleux-plan: a proposal for a new battle screen, with a mock you can tap (nothing in the game changed)"
+    }
+   ]
+  },
+  {
+   "id": "c-battleux1",
+   "title": "Build the new battle screen",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "battleux1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as battleux1: the new Battle 3 screen: one list of moves, tap once to read and again to use, the strip under the scene says what will happen"
+    }
+   ]
+  },
+  {
+   "id": "c-battleux2",
+   "title": "Write the one-line move descriptions",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "battleux2",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as battleux2: every family move now has one plain line that says what it does"
+    }
+   ]
+  },
+  {
+   "id": "c-bigone25",
+   "title": "The Big One is drawn 2.5 times bigger in battle (bigone25)",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "bigone25",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as bigone25: Big One drawn 2.5x in Battle 3. b3_test new6 passes; looked at portrait and landscape frames."
+    }
+   ]
+  },
+  {
+   "id": "c-boardsubfold1",
+   "title": "Board: fold and unfold the groups inside For you",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "boardsubfold1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as boardsubfold1: on the board, each group under For you folds and unfolds with a tap, all open by default"
+    }
+   ]
+  },
+  {
+   "id": "c-boardwedge1",
+   "title": "Board sync can no longer be wedged by a bad board file",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "tag": "boardwedge1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as boardwedge1: board sync can no longer be stalled by a Tom card that blocks only finished work, or by merge-conflict markers in the board files"
+    }
+   ]
+  },
+  {
+   "id": "c-buildpill1",
+   "title": "Builds screen: the build name is a status-colored pill",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "buildpill1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as buildpill1: the build name on the Builds screen is a status-colored pill"
+    }
+   ]
+  },
+  {
+   "id": "c-buildpill2",
+   "title": "Build name pill: Battle Guide header and Board cards",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "buildpill2",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as buildpill2: the build name is a tappable pill in the Battle Guide header and on the Board cards and card details"
+    }
+   ]
+  },
+  {
+   "id": "c-costs1",
+   "title": "AI Costs page: plans, balances, every charge, the total",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "costs1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as costs1: ADMIN ) AI COSTS, a desktop page for what every AI service costs"
+    }
+   ]
+  },
+  {
+   "id": "c-costs1icon",
+   "title": "AI Costs page gets its own browser tab icon",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "costs1icon",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as costs1icon: the AI Costs page has its own browser tab icon"
+    }
+   ]
+  },
+  {
+   "id": "c-costs2",
+   "title": "AI Costs fills itself in: balances and job spend",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "costs2",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as costs2: AI Costs fills itself in: a daily balance read and every paying job writing what its run cost"
+    }
+   ]
+  },
+  {
+   "id": "c-costsduo1",
+   "title": "AI Costs on the Duo: folded and unfolded layouts",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "costsduo1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as costsduo1: AI Costs has a folded and an unfolded iPhone Duo layout"
+    }
+   ]
+  },
+  {
+   "id": "c-costsduoplan",
+   "title": "Plan the AI Costs layout for the iPhone Duo",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "costsduoplan",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as costsduoplan: AI Costs on the iPhone Duo: assessment, design and a drawing to open on the phone"
+    }
+   ]
+  },
+  {
+   "id": "c-dash1",
+   "title": "Admin Dashboard: the wide page with four panes",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "dash1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as dash1: the Admin Dashboard page for the wide monitor: Board, game, Battle Guide and Admin side by side"
+    }
+   ]
+  },
+  {
+   "id": "c-dash2",
+   "title": "Admin Dashboard: the strip under the game",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "dash2",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as dash2: the Admin Dashboard has its strip under the game: a bar that says when a newer build is live, five screen sizes, chapter and test fight jumps, Story battles, Difficulty, Mute and Report"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-anim-grace-squeeze-qxim",
+   "title": "Fix: Watch Grace, Soup-Dumpling Squeeze",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-anim-grace-squeeze-qxim",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-anim-grace-squeeze-qxim: Grace's Soup-Dumpling Squeeze: the dumpling has a cute face and bursts into fluff on the hit"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-artgen3try",
+   "title": "Fix: Try the auto-approve button on a pictures card",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-artgen3try",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-artgen3try: the auto-approve test card now holds real pictures to try it on: Grace's and Rose's party banners"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-artgen3try-2",
+   "title": "Fix: Try auto-approve on Grace's and Rose's party",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-artgen3try-2",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-artgen3try-2: QA no longer faults cropped pictures, and the JOIN banners keep their hands inside the picture"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-artgen3try-3",
+   "title": "Fix: Try auto-approve on Grace's and Rose's party",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-artgen3try-3",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-artgen3try-3: QA no longer holds a picture for \"cut off at the edge\" when nothing is cut off"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-artwan",
+   "title": "Fix: Art Library WAN fallback fails on long prompts",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "artwan2",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as artwan2: Art Library pictures on WAN no longer fail on long prompts"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-ch1flight-2",
+   "title": "Fix: Check chapter 1 ends in the flight",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-ch1flight-2",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-ch1flight-2: the chapter 1 cab scene edit of fix-ch1flight is back in data/scenes.js"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-ch1flight-3",
+   "title": "Fix: Check chapter 1 ends in the flight",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-ch1flight-3",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-ch1flight-3: no flash of the taxi company between the phone on the seat and the flight"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-hollowtrail-play-3",
+   "title": "Fix: Play the Grump Hollow wrapper trail",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-hollowtrail-play-3",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-hollowtrail-play-3: Grump Hollow: the fishing-spot scene no longer starts before the Log Lump is beaten"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-itembannerart-pics-4",
+   "title": "Fix: Make and approve 18 item picture sheets (288",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-itembannerart-pics-4",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-itembannerart-pics-4: the last 2 item pictures (racing flats, birthday sash) remade with one phrase changed each; all 3 are ready for your review"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-itemdefplay",
+   "title": "Fix: Read a few item banners on your phone",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-itemdefplay",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-itemdefplay: item banners no longer name old battle stats, and a banner can't close half faded in"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-keysecrets2-try-7",
+   "title": "Fix: Try GENERATE VIDEO on one clip",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-keysecrets2-try-7",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: Tom asked to close it."
+    }
+   ]
+  },
+  {
+   "id": "c-fix-qa-bug03-look",
+   "title": "Fix: Look for people on roofs in the Square and the Row",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-qa-bug03-look",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-qa-bug03-look: Townsfolk in the Square and the Row stay off every roof, sign, weathervane and house edge, checked by a 5 minute watch"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-wanmop1-gen",
+   "title": "Fix: Make Deedee's Wet-Floor with a real mop",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-wanmop1-gen",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Fixed in wanstuck1 (Tom: \"Stuck\")."
+    }
+   ]
+  },
+  {
+   "id": "c-fix-wanstop-gen",
+   "title": "Fix: Generate the two fixed videos",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-wanstop-gen",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as fix-wanstop-gen: the Generate videos button comes back after a stopped video is fixed, and the card says why nothing was made"
+    }
+   ]
+  },
+  {
+   "id": "c-gem1v",
+   "title": "Apply Gemini's chapter 1 report to the board",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "tag": "gem1v",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as gem1v: Gemini's chapter 1 test applied to the board: 8 cards closed, 4 fix cards written"
+    }
+   ]
+  },
+  {
+   "id": "c-giddyup-next",
+   "title": "Rose's Giddyup: make the video Tom picked",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "giddyup9",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Retired by wanmop1: Tom chose a Giddyup take in the Battle Guide at 19:46."
+    }
+   ]
+  },
+  {
+   "id": "c-giddyupbake1",
+   "title": "Rose's Giddyup: the video Tom picked now plays in fights",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "giddyupbake1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as giddyupbake1: Rose's Giddyup plays the video Tom picked"
+    }
+   ]
+  },
+  {
+   "id": "c-guardwin1",
+   "title": "Tom celebrates after a win even if he was guarding",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guardwin1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as guardwin1: Tom now does the victory celebration when a fight is won while his guard is up, instead of staying in the guard pose"
+    }
+   ]
+  },
+  {
+   "id": "c-guidegen",
+   "title": "Battle Guide: make and remake battle videos from the page",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guidegen1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as guidegen1: the Battle Guide can make a video, show it next to the one in the game, and put it in the game"
+    }
+   ]
+  },
+  {
+   "id": "c-guideprompts",
+   "title": "Write real prompts for 267 starter-draft battle animations",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guideprompts1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as guideprompts1: every battle animation in the Battle Guide now has a prompt written for that move"
+    }
+   ]
+  },
+  {
+   "id": "c-guidestatus",
+   "title": "Battle Guide: show where each new video is in the list",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guidestatus1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "guidestatus1-restore2: undid guidestatus1-restore (it reverted 19 files of other sessions by a bad rebase) and put back the three CHANGES notes and the v3 purge."
+    }
+   ]
+  },
+  {
+   "id": "c-guideuse-fix",
+   "title": "Use this one saves the video but does not put it in the game",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guideusefix1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as guideusefix1: Use this one in the Battle Guide never saves a video without putting it in the game"
+    }
+   ]
+  },
+  {
+   "id": "c-hitspeed1",
+   "title": "Hit animations in a fight match the Battle Guide speed",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "hitspeed1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as hitspeed1: getting-hit animations in a fight keep real-time speed on a slow phone"
+    }
+   ]
+  },
+  {
+   "id": "c-hollowfence",
+   "title": "Grump Hollow monsters sometimes slip past the boss fence",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "done",
+   "tag": "hollowfence",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as hollowfence: Grump Hollow monsters no longer slip past the boss fence after a story scene"
+    }
+   ]
+  },
+  {
+   "id": "c-idea-savedportraits",
+   "title": "Saved portrait crops reach every screen, automatically",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "idea-savedportraits",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as idea-savedportraits: Your saved portrait crops now reach the Party, Status, turn order, battle panels and Battle Guide, and every future save does it by itself"
+    }
+   ]
+  },
+  {
+   "id": "c-idea-tomgrace",
+   "title": "No painted frames in battle for Tom, Grace, Rose, Deedee",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "idea-tomgrace",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as idea-tomgrace: Tom, Grace, Rose and Deedee never show an old painted frame in the new battle; a moment with no video of its own shows one of their videos"
+    }
+   ]
+  },
+  {
+   "id": "c-itemart-refs",
+   "title": "Item pictures: remake 3 items from Tom's reference photos",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "itemart-refs",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Retired by fix-itembannerart-pics-4: Tom asked to adjust the prompt instead (\"We're getting close\"), and the remade flats and sash came back right, so no reference photos are needed."
+    }
+   ]
+  },
+  {
+   "id": "c-menu1",
+   "title": "New menu: the look and the Family screen",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "menu1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as menu1: the new main menu's look and Family screen are built beside the old menu, behind a switch (default Old)"
+    }
+   ]
+  },
+  {
+   "id": "c-menu2",
+   "title": "New menu: Vibes and Gear",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "menu2",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as menu2: the new menu has its Vibes and Gear pages (still behind the MENU: NEW switch)"
+    }
+   ]
+  },
+  {
+   "id": "c-menu3",
+   "title": "New menu: Bag and System",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "menu3",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as menu3: the new menu has its Bag and System pages (still behind the MENU: NEW switch)"
+    }
+   ]
+  },
+  {
+   "id": "c-menuux-plan",
+   "title": "Main menu redesign: the proposal",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "menuux-plan",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "board-menuux2: the skill rows now say the flavor in words (Racket basic, Clobber skill), matching rule 5 of the battle screen proposal Tom approved the same day; the plan says how the two looks sit together (section 4)."
+    }
+   ]
+  },
+  {
+   "id": "c-movefun",
+   "title": "Does each family move look like its name? List flat ones",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "movefun1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as movefun1: which family move videos are fun; 3 flat ones listed for Tom to pick"
+    }
+   ]
+  },
+  {
+   "id": "c-nightclean",
+   "title": "Nightly cleanup: files, notes and the working agreement",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "tag": "nightclean",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as nightclean: the nightly cleanup is built: a report of unused files, a check that no standing rule is dropped, Done cards leave the board after 2 days, and the first night's pass removed 14 dead scripts"
+    }
+   ]
+  },
+  {
+   "id": "c-nightqa",
+   "title": "Night QA: the test browser plays your check cards",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "tag": "nightqa",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as nightqa: the night QA exists: a standing card that sorts Tom's play cards each night, two detail lines on the board page, and the rule that stops yes or no checks reaching Tom"
+    }
+   ]
+  },
+  {
+   "id": "c-nightshift",
+   "title": "Night shift: queued cards start by themselves overnight",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "tag": "nightshift",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as nightshift: queued cards start by themselves between 11 pm and 3 am, and Tom reads one card each morning"
+    }
+   ]
+  },
+  {
+   "id": "c-nighttests",
+   "title": "Night test run: every test, every night, on GitHub",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "tag": "nighttests",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Built and pushed (build nighttests). First real run 44942942208: 197 of 210 rows ran in 306 measured minutes; g3 crashed on a folder (fixed), g1 with b3_test hit the 4 hour limit (b3_test moved to its own estimate of 70 minutes and the groups rebalanced). 79 rows fail on main today, saved as the baseline: a fix card is made only for a test that passed the night before. Build nighttestsb pushes the fix; the next night run is the second real run."
+    }
+   ]
+  },
+  {
+   "id": "c-probe-opus",
+   "title": "Probe: Opus medium START route",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "tag": "probeopus1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: throwaway probe for c-startfix."
+    }
+   ]
+  },
+  {
+   "id": "c-probe-sonnet-high2",
+   "title": "Probe: Sonnet high START route, second",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "tag": "probesonnethigh2",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: throwaway probe for c-startfix."
+    }
+   ]
+  },
+  {
+   "id": "c-projclean",
+   "title": "Move the Project docs into the repo (Project is 97% full)",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "tag": "projclean1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as projclean1: Project docs move finished: working notes live in the repo's claude/ folder, the Project keeps four mirrors"
+    }
+   ]
+  },
+  {
+   "id": "c-qa-battle2",
+   "title": "Old battle screen problems: check them in the new battle",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "qa-battle2",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Retired, nothing to fix: ran tools/ch1_b3_test.py (portrait and landscape, no failures) and looked at the victory card shots. New battle: BAG is greyed out (no 8 ITEMS count, BUG-05); at most 3 status icons per party card, no stacked pills (BUG-06); the victory card has no scrollbar and nothing past its border (BUG-09); no RASPBERRY arrow, DEFEND tap text or Inspect hint (BUG-10); no Inspect text naming Flashcard Flurry or Red Pen (COH-09). The old screen only plays chapter 1 if Tom picks OLD in ADMIN > Battle system > Story battles; it is being replaced, not fixed."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-bug04",
+   "title": "Stray bar pictures on Rivituso Row in the departure scene",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "done",
+   "tag": "qa-bug04",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Retired without a code change. Checked current main: played ch1Amy on Rivituso Row in portrait and landscape; no green or brown bar pictures at the GREGORI steps or under the CATTAIL PIER sign (the row plate paints those; the only planter and bench props sit where drawn). The pan part is gone: the after-boss scene was rewritten and the pan now leaves at Rose's BOO."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-bug11",
+   "title": "Signs cut off at the top and under the skip buttons",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "done",
+   "tag": "qa-bug11",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Retired, no code change. On main the top signs (HOLLOW, LONG ISLAND SQUARE) show whole with a margin in portrait and landscape; the \"slider\" over SCHOOL was the locked fence picture, already moved under the sign (fix-artgen2look); there is no zoom slider in the game; FAST and SKIP are hidden while the ! panel is open (gem-bug10) and the ! Menu Save buttons are hidden in cutscenes (qa-bug08). Not confirmed: FAST and SKIP over a sign in a zoomed cutscene (the cutscene camera moves, so any picture can sit under them); a pencil report from that screen reopens it."
+    }
+   ]
+  },
+  {
+   "id": "c-qa-txt03",
+   "title": "Speaker names switch from capitals mid-scene",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "qa-txt03",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Ended without a code change: played ch1AfterBoss on current main in portrait (Rose, The Big One, Tom, Grace, Deedee). Every speaker name goes through one path ($('speaker').textContent in openDialog) with the same style (small-caps, no text-transform), so the case never changes mid-scene. The report's all-caps versus title case most likely came from reading small caps on screen. Retired as not reproducible; if Tom sees it again, a pencil report with a picture will show the exact line."
+    }
+   ]
+  },
+  {
+   "id": "c-reports-10",
+   "title": "Fix the report backlog (1 open)",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "reports-2026-11-21",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Done by the board: the backlog is empty."
+    }
+   ]
+  },
+  {
+   "id": "c-reports-11",
+   "title": "Fix the report backlog (1 open)",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "reports-2026-11-22",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as reports-2026-11-22: in the chapter 1 mud scene Grace now jumps in first with \"Tata, look! There's the mud blob holding the muffins!\""
+    }
+   ]
+  },
+  {
+   "id": "c-reports-12",
+   "title": "Fix the report backlog (3 open)",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "reports-2026-11-22b",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as reports-2026-11-22b: Boppy's fishing spot in chapter 1 (grey grass, orange block, bulb) now shows only after the Log is beaten"
+    }
+   ]
+  },
+  {
+   "id": "c-reports-8",
+   "title": "Fix the report backlog (1 open)",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "reports-2026-11-21",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as reports-2026-11-21: the Hollow's toad is drawn in front of the foliage, not behind it"
+    }
+   ]
+  },
+  {
+   "id": "c-reports-9",
+   "title": "Fix the report backlog (1 open)",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "reports-2026-11-21",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Done by the board: the backlog is empty."
+    }
+   ]
+  },
+  {
+   "id": "c-smokefix1",
+   "title": "Make the smoke test pass again on main",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "tag": "smokefix1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as smokefix1: the smoke test passes again; two tests listed for the night run, three board checks no longer read today's board"
+    }
+   ]
+  },
+  {
+   "id": "c-stale-tests",
+   "title": "Repair three tests that already failed on main",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "staletests1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as staletests1: three tests that failed on main now follow the data that changed under them"
+    }
+   ]
+  },
+  {
+   "id": "c-startfix",
+   "title": "Fix the START tasks for Opus medium and Sonnet high",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startfix1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Closed by t-startfix-look session: Decision by Claude (Tom: steps are unclear): no look at the task pages is needed. START Opus and START Sonnet High stay paused for good. Board START (Sonnet 5.5 medium) is proven and takes every auto card. A card that needs Opus or high effort is started by pasting its prompt (Copy prompt on the card), which has worked every time. Reversible: unpause a route later if wanted."
+    }
+   ]
+  },
+  {
+   "id": "c-takes-9b7e15",
+   "title": "Merge 4 new voice takes",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "takes-2026-11-21",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as takes-2026-11-21: 3 of Tom's new voice takes are in the game (Tom's Hello Rose, Deedee's Three, Tom's I do have news)"
+    }
+   ]
+  },
+  {
+   "id": "c-takes-ae5d7d",
+   "title": "Merge 2 new voice takes",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "takes-2026-11-20",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Marked retired by the board audit (Tom: \"search through every change today and make sure it has a corresponding card on the board... make sure for no duplicates\"): it shipped no build of its own, so it leaves the Shipped list. Reason: already merged by ch1clips8; duplicate."
+    }
+   ]
+  },
+  {
+   "id": "c-takes-e45d5a",
+   "title": "Merge 2 new voice takes",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "takes-2026-11-22",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as takes-2026-11-22: 1 of Tom's new voice takes is in the game (Grace's I've been nine for SIX hours)"
+    }
+   ]
+  },
+  {
+   "id": "c-videohist-auto",
+   "title": "Video History rebuilds itself after every video run",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "videohist2",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as videohist2: Video History rebuilds itself after every video run"
+    }
+   ]
+  },
+  {
+   "id": "c-videohist1",
+   "title": "Video History page: every video and why it was rejected",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "videohist1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as videohist1: ADMIN ) VIDEO HISTORY shows every battle video, whether it is in the game, and why the checks rejected the rest"
+    }
+   ]
+  },
+  {
+   "id": "c-voicefast1",
+   "title": "Voice takes take 2 to 3 minutes and never arrive",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "voicefast1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as voicefast1: Voice Library takes arrive in about 30 seconds again, and a crashed job now says so"
+    }
+   ]
+  },
+  {
+   "id": "c-voicepurge221",
+   "title": "Purge the 221 old dialogue clips nothing plays",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "voicepurge221",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as voicepurge221: 221 old dialogue clips that nothing plays were purged"
+    }
+   ]
+  },
+  {
+   "id": "c-wanauto1",
+   "title": "Battle videos finish without Tom (re-roll, auto fix, caps)",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanauto1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanauto1: battle videos finish without Tom; Deedee's Wet-Floor is in the game"
+    }
+   ]
+  },
+  {
+   "id": "c-wanbulk",
+   "title": "Battle videos in bulk: checks and retries inside the Action",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanbulk",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanbulk: battle videos are made, checked and put in the game by one board button"
+    }
+   ]
+  },
+  {
+   "id": "c-wanch2",
+   "title": "Dodge, cast and the stop-loss battle videos (chapter 1)",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanch2",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanch2: new battle videos: every family member casts a spell, Grace ducks, Rose tackles; three that missed are listed"
+    }
+   ]
+  },
+  {
+   "id": "c-wanch3",
+   "title": "Remake Wet-Floor, Giddyup and Skeeter Bite videos",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanch3",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanch3: the Skeeter Swarm's Darting Bite is a video; Rose's Giddyup and Deedee's Wet-Floor missed again and are listed"
+    }
+   ]
+  },
+  {
+   "id": "c-wanch4",
+   "title": "Remake Rose's Giddyup video; ask about the Wet-Floor mop",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanch4",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanch4: Rose's Giddyup missed again (a somersault into the left edge); Deedee's Wet-Floor goes to Tom as a question"
+    }
+   ]
+  },
+  {
+   "id": "c-wanch5",
+   "title": "Remake Rose's Giddyup and Deedee's Wet-Floor videos",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanch5",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanch5: Rose's Giddyup and Deedee's Wet-Floor are ready for one Generate tap"
+    }
+   ]
+  },
+  {
+   "id": "c-wanfeedback1",
+   "title": "Video cards say what their last run did",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanfeedback1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanfeedback1: every video card says in one plain line what its last run did, and a dropped tap says so"
+    }
+   ]
+  },
+  {
+   "id": "c-wanmop1",
+   "title": "Deedee's Wet-Floor: a string mop, not a broom",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanmop1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanmop1: Deedee's Wet-Floor asks for a string mop, not a broom"
+    }
+   ]
+  },
+  {
+   "id": "c-wanpurpose1",
+   "title": "Video check judges the move's purpose, not every word",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanpurpose1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanpurpose1: the video check judges the move's purpose, not every word; Deedee's Wet-Floor uses the take with the wet-floor sign"
+    }
+   ]
+  },
+  {
+   "id": "c-wanqueue1",
+   "title": "A video run also makes every other waiting card",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanqueue1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanqueue1: a video run also makes every other card still waiting; fal.ai is out of credit"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-deedee-wetfloor-r10",
+   "title": "Fix the stopped video deedee-wetfloor",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-deedee-wetfloor-r10",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Retired by wanpurpose1: the r10 second take was accepted by eye and baked."
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-deedee-wetfloor-r5",
+   "title": "Fix the stopped video deedee-wetfloor",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-deedee-wetfloor-r5",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanstop-deedee-wetfloor-r5: Deedee's Wet-Floor asks for one short sweep instead of one wide sweep"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-deedee-wetfloor-r6",
+   "title": "Fix the stopped video deedee-wetfloor",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-deedee-wetfloor-r6",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanstop-deedee-wetfloor-r6: Deedee's Wet-Floor drops the line that kept the mop on the floor the whole time"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-deedee-wetfloor-r7",
+   "title": "Fix the stopped video deedee-wetfloor",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-deedee-wetfloor-r7",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Retired by wanauto1. By eye, r7 is a clean single mop sweep beside her feet and a return; the look check failed it only because the mop came from her side, not \"from behind her back\". Baked and wired by hand (build wanauto1), no new video."
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-deedee-wetfloor-r8",
+   "title": "Fix the stopped video deedee-wetfloor",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-deedee-wetfloor-r8",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanstop-deedee-wetfloor-r8: Deedee's Wet-Floor shrinks the start picture to 55 percent so the mop clears the left edge"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-grace-cubepop-r4",
+   "title": "Fix the stopped video grace-cubepop",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-grace-cubepop-r4",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanstop-grace-cubepop-r4: Grace's Crunchy Sugar-Cube Pop video (rev 4) is baked into the game by hand"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-rose-giddyup-r6",
+   "title": "Fix the stopped video rose-giddyup",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-rose-giddyup-r6",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanstop-rose-giddyup-r6: Rose's Giddyup asks her to circle her hand instead of twirl"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-rose-giddyup-r7",
+   "title": "Fix the stopped video rose-giddyup",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-rose-giddyup-r7",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanstop-rose-giddyup-r7: Rose's Giddyup asks for an upright cannonball, because the last one flipped upside down"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-rose-giddyup-r8",
+   "title": "Fix the stopped video rose-giddyup",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-rose-giddyup-r8",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Retired by wanauto1. Stop-loss: r5 somersault, r6 spin, r7 flip, r8 flip plus a hoop drawn in her hand. Four wording fixes missed the same way, so no fifth one. Tom decides on t-giddyup-decide."
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-tom-blockade-r3",
+   "title": "Fix the stopped video tom-blockade",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-tom-blockade-r3",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanstop-tom-blockade-r3: Tom's Blockade shrinks the start picture to 80 percent so his right hand clears the edge"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstuck1",
+   "title": "Video runs no longer get lost or stuck",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstuck1",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as wanstuck1: video runs no longer get lost or stuck; Deedee's Wet-Floor has a string mop"
+    }
+   ]
+  },
+  {
+   "id": "c-win3skip",
+   "title": "WIN NOW button in the new battle screen (win3skip)",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "win3skip",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Shipped as win3skip: the WIN NOW button is back in battle screens"
+    }
+   ]
+  },
+  {
+   "id": "t-anim-deedee-dodge-y4m3",
+   "title": "Watch Deedee, Dodge",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-anim-deedee-give-yy1o",
+   "title": "Watch Deedee, Giving (support moves)",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-anim-deedee-ko-yes1",
+   "title": "Watch Deedee, Knocked out",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-anim-deedee-scrub-1irj",
+   "title": "Watch Deedee, \"Hand Me My Glasses\" Scrub",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-anim-deedee-windex-z9p8",
+   "title": "Watch Deedee, Windex Spritz",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-anim-grace-cubepop-tvik",
+   "title": "Watch Grace, Crunchy Sugar-Cube Pop",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-anim-grace-give-q4es",
+   "title": "Watch Grace, Giving (support moves)",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-anim-grace-squeeze-qxim",
+   "title": "Watch Grace, Soup-Dumpling Squeeze",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-anim-rose-dodge-v89r",
+   "title": "Watch Rose, Dodge",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-anim-rose-give-w5ws",
+   "title": "Watch Rose, Giving (support moves)",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-anim-rose-hit-uy5r",
+   "title": "Watch Rose, Getting hit",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-anim-rose-lava-xftr-watch",
+   "title": "Watch Rose's new The Floor Is Lava!",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-anim-rose-victory-vqjc",
+   "title": "Watch Rose, Victory",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-anim-tom-dodge-ner3-watch",
+   "title": "Watch Tom, Dodge",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-anim-tom-loungepass-ding-hear",
+   "title": "Listen to the ding on Tom's Lounge Pass Flex",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-anim-tom-loungepass-lf2z-watch",
+   "title": "Watch Tom's new Lounge Pass Flex",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-artfallback-seen",
+   "title": "Look for made by xAI or WAN in the Art Library",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Done by the board: already in the game (prop-gate-town-school-open, prop-gate-jpark-barn-open, prop-gate-blvd-studio-open, prop-gate-backlot-stage7-open approved in the Art Library), nothing to make."
+    }
+   ]
+  },
+  {
+   "id": "t-artgen2look",
+   "title": "Look at the QA results on a real pictures card",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-artgen3try",
+   "title": "Try auto-approve on Grace's and Rose's party banners",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Done by the board: you approved banner-join-grace, banner-join-rose, banner-leave-grace, banner-leave-rose in the Art Library."
+    }
+   ]
+  },
+  {
+   "id": "t-artwan2-regen",
+   "title": "Generate the 3 gate pictures again",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-battleguide-try",
+   "title": "Try the Battle Guide on the Duo",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-battleguide2-try",
+   "title": "Try In a fight and the PLANNED items in the Battle Guide",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-battleux-decide",
+   "title": "Decide on the battle screen redesign",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom chose: Approve as shown: make the build cards"
+    }
+   ]
+  },
+  {
+   "id": "t-bigone25play",
+   "title": "Look at the bigger Big One in battle, say if 2.5x is right",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-boppy-bigfish-cap",
+   "title": "Boppy's new pose has a blank cap: install or redo?",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom chose: Install the blank cap as it is"
+    }
+   ]
+  },
+  {
+   "id": "t-boppy-bigfish-cap2",
+   "title": "Boppy's unimpressed face: keep current or redo?",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom chose: Keep the face in the game now and close the card"
+    }
+   ]
+  },
+  {
+   "id": "t-boppy-bigfish-pic",
+   "title": "Approve Boppy's unimpressed pose in his Paso Robles cap",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-boppy-bigfish-pic2",
+   "title": "Generate Boppy's unimpressed pose in his Paso Robles cap",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-bug12play",
+   "title": "Check the Menu button near the Cookie counter",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Closed from Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221): PASS. Gemini: Tapping the Cookie counter from ~4 steps away and clicking Menu before Tom arrived opened Menu, stopped Tom's walk immediately, and opened no \"A cookie jar labeled DO NOT...\" box before or after closing; Save behaved identically. Screenshots: c6_menu_walk_cancel, c6_save_walk_cancel."
+    }
+   ]
+  },
+  {
+   "id": "t-buildpill-try",
+   "title": "Look at the build name pills on the Builds screen",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-buildpill2-try",
+   "title": "Look at the build pill in the Battle Guide and on the Board",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-cap-deedee-dodge-y4m3",
+   "title": "Allow one $0.50 Wan try for Deedee's Dodge (cap $53.10)",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom answered: Make the cap $75"
+    }
+   ]
+  },
+  {
+   "id": "t-ch1flight",
+   "title": "Check chapter 1 ends in the flight",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-ch1voices",
+   "title": "Make chapter 1's 10 missing voices (one tap, then listen)",
+   "theme": "Voice Clips",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-ch2voices",
+   "title": "Make chapter 2's voices (one tap, then listen)",
+   "theme": "Voice Clips",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-costs1look",
+   "title": "Look at the AI Costs page on your desktop",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-costs2keys",
+   "title": "Optional: add fal and xAI keys for balance reads",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom did this."
+    }
+   ]
+  },
+  {
+   "id": "t-costsduo-go",
+   "title": "Approve the AI Costs layout for the Duo",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom chose: Build it as drawn"
+    }
+   ]
+  },
+  {
+   "id": "t-costsduo-try",
+   "title": "Try AI Costs on your Duo, folded and unfolded",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-cubepop-checkdecide-r4",
+   "title": "Grace cube pop: checks fail, video looks right to me",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom chose: Bake the latest video as it is"
+    }
+   ]
+  },
+  {
+   "id": "t-dash1-try",
+   "title": "Try the Admin Dashboard on the wide monitor",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-fal-topup",
+   "title": "Add money to fal.ai: the video service is out of credit",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom did this."
+    }
+   ]
+  },
+  {
+   "id": "t-gatelayer-pics",
+   "title": "Make and approve 6 gate pictures (Amy's door, open states)",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-gem-bug01play",
+   "title": "Lose to The Big One on purpose and check you are not stuck",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Checked by the night QA: after a lost fight Deedee heals everyone and speaks, the Big One fight restarts by itself, and the third try (a win) plays the after-boss scene, in portrait, landscape and the Duo size. Pictures on branch night."
+    }
+   ]
+  },
+  {
+   "id": "t-gem1v",
+   "title": "Run Gemini's chapter 1 test and save its report",
+   "theme": "Project Ops",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom attached Gemini's report; c-gem1v applied it (claude/ch1-gemini-report.md)."
+    }
+   ]
+  },
+  {
+   "id": "t-giddyup-decide",
+   "title": "Rose's Giddyup: drop the jump?",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Closed by wanmop1: Tom chose take 1 in the Battle Guide at 19:46 (guide-use), so it is in the game and no decision is left."
+    }
+   ]
+  },
+  {
+   "id": "t-guardwinplay",
+   "title": "Win a fight while Tom is guarding and check he celebrates",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-guidegen-try",
+   "title": "Try making a battle video in the Battle Guide",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-hitspeed1-try",
+   "title": "Watch a getting-hit animation in a fight",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-hollowtrail-play",
+   "title": "Play the Grump Hollow wrapper trail",
+   "theme": "Areas",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-itembannerart-pics",
+   "title": "Make and approve 18 item picture sheets (288 items)",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Pictures job: skipped 3. Spent about $0.00."
+    }
+   ]
+  },
+  {
+   "id": "t-itemdefplay",
+   "title": "Read a few item banners on your phone",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-keysecrets2-try",
+   "title": "Try GENERATE VIDEO on one clip",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Superseded by clipstuck1 (retired for good): six rounds of fixes read the wrong thing; the button fix is clipstuck1a and a single press now waits for Tom's review."
+    }
+   ]
+  },
+  {
+   "id": "t-menu1look",
+   "title": "Look at the new menu's first screen on the Duo and phone",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-milestoneb",
+   "title": "Milestone B: play chapter 1 on the new battle",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-movefun-pick",
+   "title": "Which flat moves to remake",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom chose: Fix all of them"
+    }
+   ]
+  },
+  {
+   "id": "t-projdelete",
+   "title": "Delete two copied docs from the Project",
+   "theme": "Project Ops",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom did this."
+    }
+   ]
+  },
+  {
+   "id": "t-projinstr2",
+   "title": "Replace two lines in this Project's instructions",
+   "theme": "Project Ops",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom did this."
+    }
+   ]
+  },
+  {
+   "id": "t-qa-bug01play",
+   "title": "Check the quest log after the trip home",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Closed from Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221): PASS. Gemini: After the Stop 11 home scene (\"Alright, time for me to head back to LA. Let's head to Sal's!\"), ! read \"It's Sunday. Head out the front door. Cab 7 is waiting at the Square.\" (did not start with \"Go to\"). Screenshots: c8_stop11_questlog."
+    }
+   ]
+  },
+  {
+   "id": "t-qa-bug03-look",
+   "title": "Look for people on roofs in the Square and the Row",
+   "theme": "Areas",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-qa-bug08play",
+   "title": "Check the buttons are gone during cutscenes",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Closed from Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221): PASS. Gemini: Throughout the entire after-boss scene (including between dialogue lines after Rose's \"BOO!\"), no \"HOLD + SLIDE\" label flashed and top-left !, Menu, and Save stayed off screen, returning immediately when free movement resumed. Screenshots: c4_mid1_coin_float, c4_mid2_between_lines, c4_mid3_coin_overlay, c4_post_scene_hud."
+    }
+   ]
+  },
+  {
+   "id": "t-qa-bug12c-play",
+   "title": "Look at Boppy's cap when he turns left",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Closed from Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221): PASS. Gemini: Whenever Boppy faced left, looked shocked, or pointed during the kitchen theft scene, his cap read \"Paso Robles\" left-to-right (not mirrored) on both his map sprite and dialogue portrait, with crisp talk-start frames. Screenshots: c3_boppy_left, c3_boppy_shocked, c3_boppy_pointing."
+    }
+   ]
+  },
+  {
+   "id": "t-qa-coh03play",
+   "title": "Look at Boppy's folding chair at the pond",
+   "theme": "Areas",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Closed from Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221): PASS. Gemini: Grey metal folding chair stood cleanly with no wooden bench or pond-edge smear, thermos on seat, bucket on ground to the left, fishing rod leaning on chair back, natural scale and shading next to characters, and THE BIG ONE said \"The man in the folding chair. Will he be back?\" Screenshots: c10_pre_boss_spot, c10_post_boss_spot, c10_bigone_chair_line."
+    }
+   ]
+  },
+  {
+   "id": "t-qa-coh05-pic",
+   "title": "Make and approve the Grump Hollow battle backdrop",
+   "theme": "Areas",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Done by the board: you approved bg-29-grump-hollow in the Art Library."
+    }
+   ]
+  },
+  {
+   "id": "t-qa-coh06play",
+   "title": "Check the orange cube after the boss",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Closed from Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221): PASS. Gemini: Facing the orange cube after the boss (A · Inspect Orange block) and pressing A showed only one box spoken by TOM: \"Still stuck. The fish got the pan out, but the cube won't budge.\" with no other speaker or second box. Screenshots: c5_orange_cube_tom."
+    }
+   ]
+  },
+  {
+   "id": "t-qa-coh07play",
+   "title": "Look at the muffin pan when you walk into Deedee's house",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Closed from Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221): PASS. Gemini: portrait: 12-cup (3x4) muffin pan with 12 muffins was on the kitchen island on frame 1 before dialogue, lifted over the Big Mudling's head leaving two crumbs, with no pan/muffins left afterward; landscape: same 12-cup pan on frame 1, clean lift leaving crumbs and empty island afterward, with Deedee's head and the island fully visible without edge clipping. Screenshots: c9_portrait_frame1, c9_portrait_lift, c9_portrait_after, c9_landscape_frame1, c9_landscape_after."
+    }
+   ]
+  },
+  {
+   "id": "t-qa-txt04-play",
+   "title": "Check the Inspect prompt at Boppy's pond",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Closed from Gemini's chapter 1 run (claude/ch1-gemini-report.md, build voicepurge221): PASS. Gemini: Boppy's spot prompt read \"A · Inspect Boppy's fishing spot\" (capital B) and pressing A showed \"A folding chair with a thermos on the seat, a bucket, one bass. Boppy will tell you it was two feet long. It was not.\"; \"the\" prompts stayed lowercase (\"A · Inspect the oven\" in Crumb Bakery; \"A · Inspect the other bench\" on Rivituso Row). Screenshots: c7_boppys_spot_prompt, c7_boppys_spot_text, c7_the_oven_prompt, c7_the_other_bench_prompt."
+    }
+   ]
+  },
+  {
+   "id": "t-savedportraits-look",
+   "title": "Check your new portraits on the menu and turn bar",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-stuck-anim-deedee-dodge-y4m3",
+   "title": "Stuck twice: Animation note: Deedee, Dodge",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom tapped Start again."
+    }
+   ]
+  },
+  {
+   "id": "t-stuck-anim-deedee-dodge-y4m3-2",
+   "title": "Stuck twice: Animation note: Deedee, Dodge",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom tapped Start again."
+    }
+   ]
+  },
+  {
+   "id": "t-stuck-anim-rose-lava-xftr",
+   "title": "Stuck twice: Animation note: Rose, The Floor Is Lava!",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom tapped Start again."
+    }
+   ]
+  },
+  {
+   "id": "t-voicefast1-try",
+   "title": "Try New take on one line again (voicefast1)",
+   "theme": "Voice Clips",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-wanauto1-watch",
+   "title": "Watch Deedee's new Wet-Floor Hazard",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom (19:48): \"Deedee is using a broom not a mop.\" Remade as a string mop on t-wanmop1-gen."
+    }
+   ]
+  },
+  {
+   "id": "t-wanch1-watch",
+   "title": "Watch the chapter 1 fights in videos (NEW 1 to NEW 6)",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Gemini did not run A1 (NOT RUN: clicking ADMIN on the live game was blocked by its browser safety check). Nothing to apply; Tom had already marked this card all good."
+    }
+   ]
+  },
+  {
+   "id": "t-wanch2-watch",
+   "title": "Watch 7 new chapter 1 battle videos",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-wanch3-watch",
+   "title": "Watch the Skeeter Swarm's new Darting Bite video",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-wanch4-wetfloor",
+   "title": "Deedee's Wet-Floor mop: is a lower mop fine?",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom chose: Yes, a mop drawn lower than her feet is fine if she sweeps once"
+    }
+   ]
+  },
+  {
+   "id": "t-wanch5-gen",
+   "title": "Generate the new videos",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-wangaveup-deedee-wetfloor-r9",
+   "title": "The video deedee-wetfloor did not pass in 4 tries",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom chose: Give it 4 more tries"
+    }
+   ]
+  },
+  {
+   "id": "t-wangaveup-tom-blockade-r4",
+   "title": "The video tom-blockade did not pass in 4 tries",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom chose: Give it 4 more tries"
+    }
+   ]
+  },
+  {
+   "id": "t-wanmop1-gen",
+   "title": "Make Deedee's Wet-Floor with a real mop",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Closed by wanstuck1. Tom (20:53): \"Aaamaaand we're stuck yet again\". The loop made 4 videos (r8, r9) and stopped at its limit; his \"Give it 4 more tries\" was not read and his next tap was cancelled by GitHub. r9 was good by eye (a real string mop) and is baked by hand."
+    }
+   ]
+  },
+  {
+   "id": "t-wanstop-gen",
+   "title": "Generate the two fixed videos",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Closed by wanauto1. Tom 19:02: \"Argh it happened again!!!!\""
+    }
+   ]
+  },
+  {
+   "id": "t-wanstuck1-watch",
+   "title": "Watch Deedee's Wet-Floor with the mop and sign",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-wanwatch-cubepop-0522",
+   "title": "Watch the new Grace Cube Pop video",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-wetfloor-check",
+   "title": "Deedee's Wet-Floor video: accept it or try again",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-21",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Closed by wanpurpose1. Tom (21:36): \"it doesn't have to be perfect in every single way, but it does have to complete the overall purpose and theme\". Claude put deedee-wetfloor-a2-r10 in the game (mop sweep, wet-floor sign, finger wag); no new video."
+    }
+   ]
   }
  ]
 }
