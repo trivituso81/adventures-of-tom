@@ -21371,6 +21371,16 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukCY8BBw577QYm3s41d",
+   "title": "Stage 23a: Battle 3 gets its own shell (no battle 2 names)",
+   "first": "2026-11-23T16:43:15-08:00",
+   "last": "2026-11-23T16:43:15-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3s23a"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukSjhwv6A84RqoDUvYS",
    "title": "Battle stage 23: purge battle 2 and Kindness",
    "first": "2026-11-23T16:21:39-08:00",
@@ -27600,8 +27610,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "a348240739c2eee1789bbd1cdc7909741c3744a1",
- "synced_at": "2026-11-24T00:41:48+00:00",
+ "synced": "ea9a2321d3be51b91d3e129774321a1293d4f1ab",
+ "synced_at": "2026-11-24T00:44:02+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
