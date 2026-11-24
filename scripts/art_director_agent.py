@@ -1,0 +1,53 @@
+import json
+import re
+from pathlib import Path
+
+ANTI_RING_NEG = "glowing ring, neon halo, aura outline, rim glow, thick black outline, 16-bit, 32-bit, 8-bit, pixel art, retro, sprite, SNES, Final Fantasy, hurt, knocked out"
+
+def load_manifest(path="art-factory/characters.json"):
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+
+def get_character(manifest, char_id):
+    for c in manifest["cast"]:
+        if c["id"] == char_id:
+            return c
+    raise ValueError(f"Unknown character_id: {char_id}")
+
+def sanitize_prompt(text, banned_words):
+    cleaned = text
+    for w in banned_words:
+        cleaned = re.sub(re.escape(w), "", cleaned, flags=re.IGNORECASE)
+    return re.sub(r"\s+", " ", cleaned).strip()
+
+def build_prompt(stage, char, cfg, move_id="", feedback="", extra_hint=""):
+    lo, hi = [int(round(x * 100)) for x in char["head_ratio"]]
+    base = f"{char['name']} ({char['height_in']} inches tall, head-to-body ratio {lo}%-{hi}%). {char.get('notes', '')} {cfg['style_lock']}"
+    if stage == "hero":
+        p = f"Full-body standing front-3/4 hero portrait of {base} Centered on flat {cfg['bg_hex']} studio background, crisp feet-to-head framing, zero glowing halo or rim ring."
+    elif stage == "turnaround":
+        p = f"4K 4-view orthographic turnaround sheet (front, left profile, back, right profile) of {base} Identical outfit, exact shared baseline, flat {cfg['bg_hex']} background."
+    elif stage == "sheets":
+        moods = ", ".join(cfg["moods"])
+        poses = ", ".join(cfg["talking_poses"])
+        p = f"4K character animation sheet for {base} Row 1: 8-frame side walk cycle. Row 2: 8 expression portraits ({moods}). Row 3: 4 talking poses ({poses}). Flat {cfg['bg_hex']} background."
+    elif stage == "battle_idle":
+        p = f"Gentle breathing battle idle loop of {char['name']}, subtle weight shift, exact matching start and end pose, feet planted, {cfg['style_lock']}"
+    else:
+        pitch_note = f" Move ID: {move_id}." if move_id else ""
+        p = f"Expressive turn-based battle animation for {char['name']}.{pitch_note} {cfg['style_lock']} Clean silhouette, no glowing rings or aura halo."
+    if feedback:
+        p = f"{p} Director notes: {feedback}"
+    if extra_hint:
+        p = f"{p} Fix required: {extra_hint}"
+    return sanitize_prompt(p, cfg["banned_words"])
+
+def describe_child_geometry(genai_client, photo_path, flash_model):
+    from PIL import Image
+    prompt = (
+        "Describe only artistic illustration geometry from this reference photo for a storybook painter: "
+        "approximate age group, hair silhouette and color, eye and brow proportions, clothing colors and textures, "
+        "and signature plush prop. Avoid personal identity details."
+    )
+    img = Image.open(photo_path)
+    resp = genai_client.models.generate_content(model=flash_model, contents=[prompt, img])
+    return (resp.text or "").strip()
