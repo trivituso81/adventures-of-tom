@@ -899,6 +899,12 @@
    "minutes": 6
   },
   {
+   "id": "bt_alone_test",
+   "cmd": "python3 -I tools/bt_alone_test.py",
+   "group": "g5",
+   "minutes": 2
+  },
+  {
    "id": "backlot_test",
    "cmd": "python3 -I tools/backlot_test.py",
    "group": "g5",

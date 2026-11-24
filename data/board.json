@@ -21224,6 +21224,10 @@
      "d": "2026-11-23",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-24T00:40:59.729Z"
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Shipped b3s23a (engine/bt-shell.js). Moved, not copied: startBattle (the fight door; asks b3sStart, then BT.oldFight), B2.result to BT.result, B2.active-as-lab to BT.lab, b2Esc/b2Thumb(s)/b2Portrait/b2CanvasPt to btEsc/btThumb(s)/btPortrait/btCanvasPt, B2_METER/b2Meter/b2MeterPath/b2MeterTag to BT_METER/btMeter/btMeterPath/btMeterTag, b2BattleDef/B2_FLIPPED/b2Purse to btBattleDef/BT_FLIPPED/btPurse, bpOn/bpIcon/bpWord from battle-pictures.js; CSS classes .b2-tk/.b2-rib-lbl/.b2-int to .bt-*. Proof: the word-boundary grep for b2/B2/battle2 over engine/b3-*.js and data/b3-*.js is empty; the literal grep still matches 4 hex colours in data/b3-status.js and the Tombo id tnb2 (a story flag, left alone). New test tools/bt_alone_test.py plays a chapter 1 story fight with every battle 2 file empty: passes (also in the night manifest). Passed: b3-sim check (5579), unused_voice all 0, b3_test subsets new1 s8 s7 s4 s16 s21, ch11_b3_test, smoke except the known board_sync_test board4. Fails the same way on unchanged main, so not from this slice: b3_story_test 'a save made on Battle 3 loads with the switch on Old, and chapter 1's scene fight plays on battle 2' (the scene intro is still active), and ch1_b3_test steps 6 spot, 7 boss, 8 after the boss, dragonfly coin. NOT run: the full b3_test.py over all 98 Lab fights (hours), ch20_b3_test. Battle 2 still plays under Settings OLD."
     }
    ],
    "prompt": {
@@ -21242,7 +21246,7 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "wait",
-   "next": "Slice 23b of the battle 2 purge: Re-home the tables other systems borrow. Starts after c-b3s23a ships.",
+   "next": "Slice 23b of the battle 2 purge: re-home the tables other systems borrow. 23a is shipped (engine/bt-shell.js); its history lists the leftover names. Ready to start.",
    "blocks": [
     "c-b3s23c"
    ],
@@ -21258,6 +21262,10 @@
     {
      "d": "2026-11-23",
      "t": "Created by the session that took c-b3s23: the purge is too large for one change (about 1 MB of battle 2 code, 3,000 references in 266 files, and Battle 3 still borrows a dozen battle 2 helpers), so it is five ordered slices. Facts and rules: claude/next-addendum-b3s23.md."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Found by c-b3s23a, for this slice or 23c/23d: B2_FLYERS (engine/town-render.js) and B2_TOMBOS.push are read at load; B2.active is read in data/ch15-battle.js:60 (unguarded) and engine/music-clips.js:121-122 (in try); engine/report.js reads B2; engine/feel.js uses b2Cost/b2Shushed/b2TabRows; engine/story.js uses b2TabRows/b2BagList; engine/painted.js and engine/clips.js read B2 guarded; btPurse in engine/bt-shell.js keeps the f.calm?1.5:1 factor until 23d. tools/bt_alone_test.py lists the B2 reads it allows; the list should shrink as these go. Two tests already fail on unchanged main (b3_story_test Old-switch scene fight, ch1_b3_test steps 6 to 8): name them, do not chase them here."
     }
    ],
    "prompt": {
