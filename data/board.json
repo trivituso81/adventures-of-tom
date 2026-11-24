@@ -21390,11 +21390,12 @@
    "url": "https://claude.ai/code/session_01RXeukGZLxZREfsCLURqeTW",
    "title": "Use this one: one batched job that tells the truth",
    "first": "2026-11-23T14:26:47-08:00",
-   "last": "2026-11-23T17:54:12-08:00",
+   "last": "2026-11-23T17:57:10-08:00",
    "tags": [
     "guideflow7",
     "guideflow7a",
-    "guideflow8"
+    "guideflow8",
+    "guideflow8a"
    ],
    "cards": [
     "c-guideflow-7",
@@ -27628,8 +27629,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "334d9833f6e2ff530477b74c69b11cc53259e00e",
- "synced_at": "2026-11-24T01:56:17+00:00",
+ "synced": "a48226471bb3122831fe44ef8a637cd261bf49a6",
+ "synced_at": "2026-11-24T01:57:57+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
