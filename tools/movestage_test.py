@@ -84,8 +84,8 @@ sys.path.insert(0, os.path.join(ROOT, 'tools', 'art-library'))
 import wangen
 W = wangen.staging_waits(ROOT)
 check('S4 the wan-gen Action sees which moves wait', 'move:glitter_brush_flick' in W and 'move:cartridge_blow' not in W and 'body:tom:idle' not in W, len(W))
-src = rd('tools/art-library/wangen.py'); src = src[src.index('def run_guide_requests'):]
-check('S4 run_guide_requests refuses a request for a move that waits, before any spend', 'if r[\'anim\'] in waiting' in src and src.index('if r[\'anim\'] in waiting') < src.index('est = estimate(job)'))
+wk = rd('tools/guidegen/worker.py')
+check('S4 the guide worker refuses a move that waits (X15) before it sends anything', "wangen.staging_waits(self.repo)" in wk and wk.index('X15') < wk.index('self.run_wan') if 'self.run_wan' in wk else 'X15' in wk)
 html = rd('battle-guide.html')
 check('S4 the Guide page shows Waits for staging and hides Generate and the note box for it', 'Waits for staging.' in html and "if(!g.waits){" in html and 'WAITS FOR STAGING' in html)
 dash = [f for f in ('claude/move-staging-plan.md', 'data/b3-stage.js') + tuple('tools/art-library/prompts/' + x for x in os.listdir(os.path.join(ROOT, 'tools/art-library/prompts')) if x.startswith('stage-tom-') or re.match(r'wan-tom-(suitedoor|porsche|cartridge|controller|shell|konami)-v1\.txt', x)) if '—' in rd(f)]

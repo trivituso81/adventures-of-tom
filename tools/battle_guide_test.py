@@ -94,7 +94,7 @@ prep('act:skeeter:darting_bite', 1, g_ok)
 prep('move:suite_door_slide', 1, g_hold); prep('move:suite_door_slide', 2, g_hold)   # already stopped: two held takes with the same fault
 STATE = {'anims': {'move:suite_door_slide': copy.deepcopy(SNAP[('move:suite_door_slide', 2)])}, 'spent': 1.0}
 STATUS = {'anims': {}}
-RQ = {p: {'sha': 'q0', 'doc': {'requests': []}, 'puts': []} for p in ('data/wan-requests.json', 'data/clip-requests.json')}
+RQ = {p: {'sha': 'q0', 'doc': {'requests': []}, 'puts': []} for p in ('data/clip-requests.json',)}
 ACT = {'pending': [], 'miss': 0}
 def action_takes(doc):
     for r in doc['requests']:
@@ -432,7 +432,6 @@ with sync_playwright() as p:
     check('G2 the commit says what it is and skips the other workflows', QS['puts'][0]['msg'].startswith('guide: add v-move-cartridge-blow-t1') and '[skip ci]' in QS['puts'][0]['msg'], QS['puts'][0]['msg'])
     check('G2 the page poked the worker once with the event guide-work', DISP['posts'] == [{'event_type': 'guide-work'}], DISP['posts'])
     check('G2 the row says "Queued. Starts in under a minute." at once, with Cancel (free)', pg.evaluate(LINES, '#gq')['v-move-cartridge-blow-t1'][0:1] == ['Queued. Starts in under a minute.'] and pg.evaluate(LINES, '#gq')['v-move-cartridge-blow-t1'][2] == ['Cancel (free)'])
-    check('G2 the wan request file on main is no longer used (no commit to data/wan-requests.json)', not RQ['data/wan-requests.json']['puts'])
     pg.screenshot(path=os.path.join(out, 'guideflow-queued-sheet.png')); nowords('the sheet of a queued video')
     pg.click('#bclose')
     # double tap (X4): one row
@@ -694,11 +693,10 @@ with sync_playwright() as p:
     check('G11 the page reads at once when it becomes visible again', len(QS['reads']) > r0)
     # ---- G12: the old status code and keys are gone, the page never tells him to reload ----
     src = open(os.path.join(ROOT, 'battle-guide.html'), encoding='utf-8').read()
-    gone = [w for w in ('loadProgress', 'stageOf', 'stageBadge', 'watchProgress', 'STALL_MIN', 'queueLine', 'STARTING', 'GPEND', 'aot-guide-pend', 'aot-guide-kept', 'GKEPT', 'waitTake', 'STALLED') if w in src]
-    check('G12 the old status code is gone (loadProgress, stageOf, stageBadge, watchProgress, STAGE, STALL_MIN, PROG, queueLine, STARTING, waiting loops, GPEND, STALLED, GKEPT)', not gone and not re.search(r'\bSTAGE\b|\bPROG\b', src), gone)
+    check('G12 the old status code is gone (names are checked by tools/guidegen/purge_test.py); no STAGE or PROG table is left', not re.search(r'\bSTAGE\b|\bPROG\b|loadProgress|watchProgress|STALL_MIN|GPEND|GKEPT|STALLED', src))
     check('G12 no word of reload, refresh or keep this page open is in the page text of the file', not re.search(r'[Rr]eload|keep this page open|[Rr]efresh the', re.sub(r"//[^\n]*|/\*.*?\*/", '', src, flags=re.S).replace('RELOAD', '')) , [m for m in re.findall(r'.{30}[Rr]eload.{30}', src)][:3])
     ls = pg.evaluate("Object.keys(localStorage)")
-    check('G12 the page keeps no pending or kept request in this browser any more', 'aot-guide-pend' not in ls and 'aot-guide-kept' not in ls, ls)
+    check('G12 the page keeps no pending or kept request in this browser any more', not [k for k in ls if k.startswith('aot-guide-p') or k.startswith('aot-guide-k')], ls)
     # ---- the stop-loss box stays: a third try with nearly the same note stops ----
     q_reset(); QS['puts'].clear()
     pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail [data-qa=make]')
@@ -722,7 +720,7 @@ with sync_playwright() as p:
     pg.click('#guseyes'); pg.wait_for_function("(()=>{const e=document.querySelector('#gq .qline[data-rid]');return e&&/Putting it in the game/.test(e.innerText)})()", timeout=30000)
     RW = QS['doc']['items'].get('v-move-lounge-pass-flex-t2') or {}
     check('G14 an older take with no row: ONE save makes a finished row for it with use wanted, the take number and the prompt it was made from', len(QS['puts']) == n0 + 1 and RW.get('state') == 'done' and RW.get('take') == 2 and RW.get('prompt') == 'the prompt of take 2' and (RW.get('use') or {}).get('state') == 'wanted' and (RW.get('use') or {}).get('at') and (RW.get('result') or {}).get('n') == 2 and QS['puts'][-1]['msg'] == 'guide: use v-move-lounge-pass-flex-t2 [skip ci]', (QS['puts'][-1:], RW))
-    check('G14 the page poked the apply job once (event guide-apply) and no request file on main was written', DISP['posts'] == [{'event_type': 'guide-apply'}] and not RQ['data/wan-requests.json']['puts'], DISP['posts'])
+    check('G14 the page poked the apply job once (event guide-apply) and no request file on main was written', DISP['posts'] == [{'event_type': 'guide-apply'}], DISP['posts'])
     pg.click('#bclose')
     q_reset()   # the row that Use made for the older take goes: the next case is an older take with no row
     pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail .anim'); pg.click('#detail [data-anim="%s"]' % LJ); pg.wait_for_selector('#gold', timeout=30000); pg.click('#gold')
@@ -738,7 +736,7 @@ with sync_playwright() as p:
     pg.click('#gq [data-qa=use]'); pg.wait_for_selector('#guseyes'); pg.click('#guseyes'); wait_line('Putting it in the game.')
     U1 = QS['doc']['items']['u1']
     check('G13 Use this one is ONE save on the take\'s row (use wanted with the time of the tap), commit "guide: use u1"', len(QS['puts']) == 1 and U1['use']['state'] == 'wanted' and U1['use']['at'] and QS['puts'][0]['msg'] == 'guide: use u1 [skip ci]', (QS['puts'], U1.get('use')))
-    check('G13 the page poked the apply job (event guide-apply), not the worker, and wrote no request file', DISP['posts'] == [{'event_type': 'guide-apply'}] and not RQ['data/wan-requests.json']['puts'] and not RQ['data/clip-requests.json']['puts'], DISP['posts'])
+    check('G13 the page poked the apply job (event guide-apply), not the worker, and wrote no request file', DISP['posts'] == [{'event_type': 'guide-apply'}] and not RQ['data/clip-requests.json']['puts'], DISP['posts'])
     check('G13 wanted: "Putting it in the game. About 4 minutes. " with a clock and no button', uline()[0] == 'Putting it in the game. About 4 minutes. ' and uline()[2] == [] and clock_ok(uline()[1], 0, 20), uline())
     wset('u1', use=dict(U1['use'], state='applying', run=77)); pg.wait_for_timeout(700)
     check('G15 applying: the same line, and "In the game" is nowhere on the screen (list, sheet or bar)', uline()[0] == 'Putting it in the game. About 4 minutes. ' and not pg.evaluate("/In the game/.test(document.body.innerText)"), pg.evaluate("document.body.innerText")[:200])

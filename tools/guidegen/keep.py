@@ -46,20 +46,13 @@ def main(argv=None):
             theirs = {}
             tf = os.path.join(work, 'takes.json')
             if os.path.exists(tf): theirs = json.load(open(tf, encoding='utf-8'))
-            ours_tk = None; ours_st = None
+            ours_tk = None
             for root, _, files in os.walk(a.dir):
                 if '.git' in root.split(os.sep): continue
                 for f in files:
                     src = os.path.join(root, f); rel = os.path.relpath(src, a.dir); dst = os.path.join(work, rel)
                     if rel == 'takes.json': ours_tk = json.load(open(src, encoding='utf-8')); continue
-                    if rel == 'status.json': ours_st = json.load(open(src, encoding='utf-8')); continue
                     os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copyfile(src, dst)
-            if ours_st is not None:
-                sf = os.path.join(work, 'status.json'); have = json.load(open(sf, encoding='utf-8')) if os.path.exists(sf) else {'anims': {}}
-                for k, v in (ours_st.get('anims') or {}).items():
-                    o = have.setdefault('anims', {}).get(k)
-                    if not o or (int(v.get('take', 0)), v.get('at', '')) >= (int(o.get('take', 0)), o.get('at', '')): have['anims'][k] = v
-                open(sf, 'w', encoding='utf-8').write(json.dumps(have, indent=1, ensure_ascii=False) + '\n')
             if ours_tk is not None: open(tf, 'w', encoding='utf-8').write(json.dumps(merge_takes(ours_tk, theirs), indent=1, ensure_ascii=False) + '\n')
             git('init', '-q', '-b', a.branch, cwd=work); git('config', 'user.name', 'github-actions[bot]', cwd=work); git('config', 'user.email', '41898282+github-actions[bot]@users.noreply.github.com', cwd=work)
             git('add', '-A', cwd=work); git('commit', '-q', '-m', a.msg, cwd=work)

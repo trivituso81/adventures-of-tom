@@ -521,6 +521,12 @@
    "minutes": 5
   },
   {
+   "id": "guidegen__purge_test",
+   "cmd": "python3 -I tools/guidegen/purge_test.py",
+   "group": "g3",
+   "minutes": 1
+  },
+  {
    "id": "guidegen__build_map_test",
    "cmd": "python3 -I tools/guidegen/build_map_test.py",
    "group": "g3",

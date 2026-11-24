@@ -2,7 +2,7 @@
 """startpics1 test: python3 -I tools/art-library/startpic_test.py  (free, no network)
 S1 measure: a good picture passes; cut off, wrong background, empty and short figures each fail with a plain reason
 S2 facing: left stays, right is mirrored, an unjudgeable picture is not published
-S3 run(): one request makes one job `startpic-<who>-t<take>` at rev 1, books $0.15 against the day cap, publishes only a passing picture
+(guideflow9: the run() and publish cases S3 and the old-queue cases S9 to S11 went with the old path; tools/guidegen/worker_test.py covers the picture line)
 S4 every start-<who> job has its hero picture in the repo and its prompt file; the cast with a kit but no start picture is covered by a job
 S5 figrows.json has a height for each person of the cast"""
 import io, json, os, sys, types, threading, tempfile
@@ -43,24 +43,6 @@ o, r = startpic.judge_picture(good, None); check('S2 no judge, no publish', o is
 o, r = startpic.judge_picture(png(pic(bg=(240, 230, 200))), J([True])); check('S2 a failed measurement is not sent to the judge', o is None and 'did not pass' in r['error'], r)
 
 jobs = json.load(open(os.path.join(ROOT, 'tools', 'art-library', 'wangen-jobs.json')))
-tmp = tempfile.mkdtemp(); sent = []; pub = []
-def fake_run_one(what, job, ns, state, lock, save, fal, key, log):
-    sent.append((what, job['rev'], ns.dry_run))
-    open(os.path.join(ns.out, what + '-r1.png'), 'wb').write(PICS.pop(0)); 
-    with lock: state['spent'] += .15
-    return 0, {'what': what, 'file': what + '-r1.png'}
-PICS = [good, png(pic(bg=(240, 230, 200))), good]
-a = types.SimpleNamespace(out=tmp, repo=ROOT, dry_run=False, day_cap=0.40)
-state = {'spent': 0.0}
-reqs = [{'startpic': 'amy', 'take': 11, 'at': 'a1', 'cap': .3}, {'startpic': 'tnb', 'take': 12, 'at': 'a2'}, {'startpic': 'nara', 'take': 13, 'at': 'a3'}, {'startpic': 'zed', 'take': 14, 'at': 'a4'}]
-rows, code = startpic.run(a, jobs, state, threading.RLock(), lambda: None, None, 'k', reqs, fake_run_one, J([True]), '2026-11-22', lambda repo, who, out: pub.append(who) or True)
-check('S3 jobs are named by take and sent at rev 1', sent[:2] == [('startpic-amy-t11', 1, False), ('startpic-tnb-t12', 1, False)], sent)
-check('S3 only a passing picture is published', pub == ['amy'], pub)
-check('S3 the failing picture says why and costs $0.15', rows[1].get('error', '').startswith('The picture did not pass') and rows[1]['cost'] == .15, rows[1])
-check('S3 the day cap stops the third paid call', 'spent its $0.40' in rows[2].get('error', '') and len(sent) == 2, (rows[2], sent))
-check('S3 an unknown person is refused before any spend', 'no start-zed job' in rows[3]['error'], rows[3])
-check('S3 exit code is 2 when any row failed', code == 2, code)
-check('S3 the day total is booked', abs(state['guide_days']['2026-11-22'] - .30) < 1e-9, state)
 
 for who in ('amy', 'boppy', 'justin', 'olivia', 'tnb', 'nara'):
     j = jobs.get('start-' + who)
@@ -75,12 +57,6 @@ for who in ('amy', 'boppy', 'justin', 'olivia', 'tnb', 'nara'):
     ps = [ga['body:%s:%s' % (who, x)]['prompt'] for x in st]
     check('S6 %s prompts are state prompts, not a lunge' % who, all('lunges forward' not in p and 'MOTION:' in p for p in ps))
 check('S6 a dog prompt never says she, her, hair or outfit', all(not any(w in ga['body:nara:%s' % x]['prompt'].lower().replace('the exact character', '') for w in (' she ', ' her ', 'outfit', ' hair')) for x in ('idle', 'guard', 'hit', 'dodge', 'ko', 'victory', 'run')))
-print('\nstartpic test: %s' % ('FAILED ' + ', '.join(bad) if bad else 'all passed')); sys.exit(1 if bad else 0)
-
-# S7 (startpics5): the Guide page lists the family states of a person the data file lists them for, not only the video-only four
-_h = open('battle-guide.html').read()
-check('S7 page follows guide-anims.json for body states', "GUIDE.anims['body:'+id+':idle']" in _h and 'buildAnims();' in _h.split('GUIDE=j;')[1][:120], 'battle-guide.html')
-
 # S8 (startpics6): the checks pass the four start pictures already approved and a result row is JSON safe
 import sys as _s, json as _j
 _s.path.insert(0, 'tools/art-library')
@@ -90,17 +66,4 @@ for _n in ('tom', 'grace', 'rose', 'deedee'):
     check('S8 approved %s start picture passes the measure' % _n, _r['ok'], [c['say'] for c in _r['checks'] if not c['ok']])
     _j.dumps(_r)
 
-# S9 (startpics7): a lost run cannot lose a request, a double tap cannot double the charge, the page says what is ahead
-_w = open('.github/workflows/wan-gen.yml').read(); _g = open('tools/art-library/wangen.py').read(); _p = open('battle-guide.html').read()
-check('S9 non-guide runs sweep the request file and start a guide run', 'Sweep what is still asked' in _w and 'actions: write' in _w and 'stay queued for the next run' in _w, 'wan-gen.yml')
-check('S9 duplicate start picture requests are dropped', 'duplicate start picture request' in _g, 'wangen.py')
-check('S9 page blocks a second tap and shows the queue', "STARTING[g.startWho]" in _p and 'queueLine(tok)' in _p, 'battle-guide.html')
-
-# S10 (startpics8): pictures first, videos wait for the next run
-check('S10 a run with pictures and videos makes the pictures only and starts the next run', 'start pictures first' in _g and 'def next_guide_run' in _g and 'if defer: next_guide_run()' in _g, 'wangen.py')
-
-# S11 (startpics9): pictures have their own workflow, queue file and branch; nothing else enters their line
-_s = open('.github/workflows/startpic-gen.yml').read()
-check('S11 startpic-gen has its own group and queue file', 'group: startpic-gen' in _s and 'data/startpic-requests.json' in _s and '--startpics' in _s, 'startpic-gen.yml')
-check('S11 the page asks the picture line, not the video line', "'data/startpic-requests.json','startpic: generate '" in _p and "'startpic-results.json','startpic'" in _p, 'battle-guide.html')
-check('S11 --startpics makes pictures only', "getattr(a, 'startpics', False): reqs = []" in _g and 'already exists, request dropped' in _g, 'wangen.py')
+print('\nstartpic test: %s' % ('FAILED ' + ', '.join(bad) if bad else 'all passed')); sys.exit(1 if bad else 0)

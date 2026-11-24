@@ -20595,7 +20595,7 @@
    "theme": "Battle Animations",
    "tag": "guideflow9",
    "title": "Remove the old Guide path; free test run on GitHub",
-   "next": "Waits for card c-guideflow-8, then starts by itself. Deletes the old request files and jobs, runs the whole new flow on GitHub with nothing paid, and hands you one phone check (card Try the new animation flow on your phone).",
+   "next": "Part one pushed (guideflow9a): the old Guide path is deleted and purge_test passes. Part two in this conversation: the free run on GitHub (T11), then guideflow9 and the phone check for Tom.",
    "blocks": [
     "t-guideflow-phone"
    ],
@@ -20619,6 +20619,10 @@
     {
      "d": "2026-11-23",
      "t": "Started by hand: the c-guideflow-7 and 8 conversation took this card."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Part one shipped as guideflow9a: old request files, picture workflow, guide mode of wan-gen, progress.py and the old functions deleted; purge_test passes. Next: the free run on GitHub (T11), then guideflow9."
     }
    ],
    "prompt": {

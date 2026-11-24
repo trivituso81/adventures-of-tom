@@ -7,10 +7,8 @@ name: wan-gen
 # restores that branch first, so the $ cap counts every call ever made and a finished or pending call is never paid for twice.
 # A Claude session checks the result and commits what passes to main itself.
 #
-# guidegen1: GENERATE THIS VIDEO in the Battle Guide commits data/wan-requests.json with the message "wan: generate <animation id>"; that push runs this job with
-# --requests (the same job; $0.50 a video, at most $1 a request, no daily limit). The requests are taken off main before anything is paid,
-# each video is judged by the clip gate and cut as a preview (tools/guidegen/make_take.py, secret XAI_API_KEY for the look check) and kept as a TAKE on the
-# branch `guidegen` for Tom to compare in the Battle Guide. Nothing reaches the game until he presses Use this one (the guide-apply Action).
+# guideflow9 (2026-11-23): the Battle Guide's videos and pictures no longer come through this workflow. They are rows in queue.json (branch guideq) made by guide-work.yml
+# (tools/guidegen/worker.py) and put in the game by guide-apply.yml. This file keeps the manual jobs and the board cards' bulk videos.
 #
 # wanbulk (claude/video-battle-plan.md 4.12): Generate all N videos on a Tom board card commits data/board.json with the message "board: wan generate <card id>"; that push
 # (or a manual run with `card`) runs wangen.py --bulk: every job of the card is made (3 at once, never past the cap), measured and look-checked (secret XAI_API_KEY),
@@ -20,7 +18,7 @@ name: wan-gen
 on:
   push:
     branches: [main]
-    paths: ['data/wan-requests.json', 'data/board.json']
+    paths: ['data/board.json']
   workflow_dispatch:
     inputs:
       card:
@@ -43,24 +41,19 @@ on:
         description: 'true: show the request and the cost, check the key (free), send nothing, spend nothing.'
         required: false
         default: 'true'
-      requests:
-        description: 'guidegen1: true = work through data/wan-requests.json (what the Battle Guide asked for) instead of the jobs in `what`.'
-        required: false
-        default: 'false'
 
 permissions:
   contents: write
-  actions: write   # startpics7: the sweep step below starts the next run
+  actions: write
 
 jobs:
   gen:
-    if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'wan: generate ') || startsWith(github.event.head_commit.message, 'board: wan generate ') || startsWith(github.event.head_commit.message, 'board: answer t-wangaveup-')"
+    if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'board: wan generate ') || startsWith(github.event.head_commit.message, 'board: answer t-wangaveup-')"
     runs-on: ubuntu-latest
     # wanstuck1 (2026-11-21): one run at a time, set on the JOB, not the workflow. At workflow level every push to main joined the group, and GitHub
     # keeps only one waiting run per group, so an unrelated push (whose job is skipped) cancelled a waiting paid run: Tom's tap at 04:31 UTC was lost that way.
     concurrency:
-      # startpics12 (2026-11-22): a video asked for in the Battle Guide has its own lane. It waited 10+ minutes behind a bulk card run (up to 170 min) in the same group.
-      group: "wan-gen-${{ ((github.event_name == 'workflow_dispatch' && inputs.requests == 'true') || startsWith(github.event.head_commit.message, 'wan: generate ')) && 'guide' || 'bulk' }}"
+      group: wan-gen-bulk
       cancel-in-progress: false
     timeout-minutes: 170
     env:
@@ -73,12 +66,11 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install requests pillow numpy
-      - name: Work out what this run is (jobs, guide requests, or a bulk card)
+      - name: Work out what this run is (jobs, or a bulk card)
         id: mode
         env:
           MSG: ${{ github.event.head_commit.message }}
           EVENT: ${{ github.event_name }}
-          REQ: ${{ inputs.requests }}
           CARD_IN: ${{ inputs.card }}
         run: |
           mode=jobs; card=""
@@ -90,13 +82,12 @@ jobs:
               gid="${first#board: answer }"
               card=$(python3 -c "import json,sys; c=next((x for x in json.load(open('data/board.json'))['cards'] if x['id']==sys.argv[1]),{}); print(c.get('wan_card','') if str(c.get('answer','')).startswith('Give it') else '')" "$gid")
               if [ -n "$card" ]; then mode=bulk; else mode=none; fi
-            else mode=guide; fi
-          elif [ "$REQ" = "true" ]; then mode=guide
+            else mode=none; fi
           elif [ -n "$CARD_IN" ]; then mode=bulk; card="$CARD_IN"
           fi
           echo "mode=$mode" >> "$GITHUB_OUTPUT"; echo "card=$card" >> "$GITHUB_OUTPUT"; echo "mode: $mode card: $card"
-      - name: Install the video tools for guide takes and bulk checks (the runner has no ffmpeg)
-        if: ${{ steps.mode.outputs.mode != 'jobs' }}
+      - name: Install the video tools for the bulk checks (the runner has no ffmpeg)
+        if: ${{ steps.mode.outputs.mode == 'bulk' }}
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq ffmpeg
@@ -112,7 +103,6 @@ jobs:
       - name: Make it
         env:
           FAL_KEY: ${{ secrets.FAL_KEY }}
-          GUIDE_STATUS: '1'   # guidestatus1: tools/guidegen/progress.py writes status.json on branch guidegen
           GH_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}   # wanbulk: the look checks (never printed)
@@ -122,12 +112,10 @@ jobs:
           MODE: ${{ steps.mode.outputs.mode }}
           CARD: ${{ steps.mode.outputs.card }}
           BULK_CAP: ${{ inputs.bulk_cap }}
-          GUIDE: ${{ steps.mode.outputs.mode == 'guide' }}
         run: |
           set -o pipefail
-          if [ "$MODE" = "none" ]; then echo "nothing to make (an out-of-tries answer that asks for no more tries)"; exit 0; fi
+          if [ "$MODE" = "none" ]; then echo "nothing to make (a board push that asks for no video)"; exit 0; fi
           ARGS=(--what "$WHAT" --cap "${CAP:-2}" --out "$RUNNER_TEMP/wangen")
-          [ "$GUIDE" = "true" ] && ARGS=(--requests --out "$RUNNER_TEMP/wangen")
           if [ "$MODE" = "bulk" ]; then
             ARGS=(--bulk --card "$CARD" --out "$RUNNER_TEMP/wangen")
             [ -n "$BULK_CAP" ] && ARGS+=(--cap "$BULK_CAP")
@@ -163,29 +151,6 @@ jobs:
           git commit -q -m "wangen: results and ledger, checkpoint (run ${{ github.run_id }}) [skip ci]"
           git push --force "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" wangen
           rm -rf .git   # the last step starts its own commit
-      - name: Make the takes (clip gate and preview) for the Battle Guide
-        if: ${{ steps.mode.outputs.mode == 'guide' && inputs.dry_run != 'true' && always() }}
-        timeout-minutes: 40   # guidestuck1: a step that hangs is stopped here and the steps after it (always) still keep what it finished; each take also has its own 7 minute limit
-        env:
-          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
-        run: |
-          set -o pipefail
-          mkdir -p "$RUNNER_TEMP/guidegen"
-          if git ls-remote --exit-code --heads origin guidegen >/dev/null 2>&1; then
-            git fetch --depth 1 origin guidegen
-            git archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/guidegen"
-          fi
-          [ -f "$RUNNER_TEMP/wangen/guide-results.json" ] || { echo "no guide results"; exit 0; }
-          python3 -I tools/guidegen/make_take.py --results "$RUNNER_TEMP/wangen/guide-results.json" --state "$RUNNER_TEMP/guidegen" 2>&1 | tee "$RUNNER_TEMP/take.log"
-          { echo '### guide takes'; echo '```'; tail -30 "$RUNNER_TEMP/take.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-      - name: Keep the takes on the guidegen branch
-        if: ${{ steps.mode.outputs.mode == 'guide' && inputs.dry_run != 'true' && always() }}
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          [ -f "$RUNNER_TEMP/guidegen/takes.json" ] || { echo "no takes to keep"; exit 0; }
-          rm -rf "$RUNNER_TEMP/guidegen/reconcile" "$RUNNER_TEMP/guidegen/replay.json"   # other jobs own these; only takes go back
-          python3 -I tools/guidegen/keep.py "$RUNNER_TEMP/guidegen" --msg "guidegen: takes (run ${{ github.run_id }}) [skip ci]"
       - name: Tell the card when the run failed before it wrote a result (wanfeedback1)
         if: ${{ always() && steps.mode.outputs.mode == 'bulk' && inputs.dry_run != 'true' && steps.mode.outputs.card != '' }}
         env:
@@ -219,32 +184,3 @@ jobs:
           # fresh clone of main inside publish.py (this checkout is shallow and main may have moved); needs ffmpeg for the strips (installed above)
           python3 -I tools/videohist/publish.py --branch-dir "$RUNNER_TEMP/wangen" --run-id "${{ github.run_id }}" \
             --remote "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
-      - name: Sweep what is still asked (startpics7)
-        if: ${{ inputs.dry_run != 'true' && always() }}
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ github.token }}
-          MODE: ${{ steps.mode.outputs.mode }}
-        # GitHub keeps ONE waiting run per group, and a card's video batch ("board: wan generate ...") waiting in the group cancels a waiting guide run: Tom's TNB tap and then
-        # his Amy video and Nara picture taps were lost or delayed that way (the request stayed in data/wan-requests.json with no run to make it). A run that is not a guide run
-        # therefore looks at data/wan-requests.json on the newest main when it ends and, if anything is still asked, starts one guide run. A guide run never starts another (no loop).
-        run: |
-          # startpics10: a guide run starts the next run when requests were tapped WHILE it was working (their `at` is later than this run's start) or it left videos behind its pictures
-          # (startpics8). A guide run takes everything that was there when it began, so what is left is new and the run cannot loop on its own leftovers. One line, one run at a time:
-          # that is the queue, and the next request starts the moment this run ends.
-          git fetch -q --depth 1 origin main
-          START=$(curl -sS -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}" | python3 -c "import json,sys; print(json.load(sys.stdin).get('run_started_at',''))")
-          if [ "$MODE" = guide ]; then
-            n=$(git show FETCH_HEAD:data/wan-requests.json | python3 -c "import json,sys; s=sys.argv[1]; print(len([r for r in (json.load(sys.stdin).get('requests') or []) if (r.get('at') or '') > s]))" "$START")
-            if ! grep -q 'stay queued for the next run' "$RUNNER_TEMP/run.log" 2>/dev/null && [ "$n" -eq 0 ]; then echo "guide run, nothing new and nothing deferred"; exit 0; fi
-            [ "$n" -eq 0 ] && n=1
-          else
-            n=$(git show FETCH_HEAD:data/wan-requests.json | python3 -c "import json,sys; print(len(json.load(sys.stdin).get('requests') or []))")
-          fi
-          echo "requests still asked: $n"
-          if [ "$n" -gt 0 ]; then
-            curl -sS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
-              "https://api.github.com/repos/${{ github.repository }}/actions/workflows/wan-gen.yml/dispatches" \
-              -d '{"ref":"main","inputs":{"requests":"true","dry_run":"false"}}'
-            echo "started a guide run for them"
-          fi

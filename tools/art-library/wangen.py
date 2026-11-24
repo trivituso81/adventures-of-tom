@@ -257,105 +257,6 @@ def staging_waits(repo):
     return {k for k, v in A.items() if v.get('waits') == 'staging'}
 
 
-def next_guide_run():
-    """startpics8: start the guide run that makes the videos a pictures-first run left in data/wan-requests.json (GITHUB_TOKEN may dispatch a workflow)."""
-    import urllib.request
-    tok, repo = os.environ.get('GH_TOKEN', ''), os.environ.get('GITHUB_REPOSITORY', '')
-    if not tok or not repo: say('no token here: the sweep step at the end of the run starts the next one'); return
-    try:
-        rq = urllib.request.Request('https://api.github.com/repos/%s/actions/workflows/wan-gen.yml/dispatches' % repo, data=json.dumps({'ref': 'main', 'inputs': {'requests': 'true', 'dry_run': 'false'}}).encode(),
-                                    headers={'Authorization': 'Bearer ' + tok, 'Accept': 'application/vnd.github+json'}, method='POST')
-        urllib.request.urlopen(rq, timeout=30); say('started the next guide run for the queued videos')
-    except Exception as e: say('could not start the next run (%s); the sweep step will' % e)
-
-
-def run_guide_requests(a, jobs, state, lock, save, fal, key):
-    """guidegen1: what UPDATE/GENERATE in the Battle Guide asked for (data/wan-requests.json: {anim, slug, take, at, prompt, promptRev, start, pad?, cap?}).
-    The requests are taken off main first (before any spend), each one is one Wan video made with the proven settings of the `tom-idle` job (720p, 5 s,
-    seed 81, first and last frame = the start picture), capped by its own `cap` (at most $1) and by the day cap shared by every guide request
-    (no daily limit since guideflow1: --day-cap None skips the check). Writes guide-results.json in OUT for tools/guidegen/make_take.py."""
-    import copy, types
-    sys.path.insert(0, os.path.join(a.repo, 'tools', 'guidegen')); import gqueue, progress
-    qf = 'data/startpic-requests.json' if getattr(a, 'startpics', False) else 'data/wan-requests.json'   # startpics9: pictures have their own queue file and their own workflow
-    doc = gqueue.load(qf, a.repo)
-    reqs = [r for r in doc.get('requests') or [] if r.get('anim') and r.get('slug') and r.get('prompt') and r.get('start') and isinstance(r.get('take'), int)]
-    sps = [r for r in doc.get('requests') or [] if r.get('startpic') and isinstance(r.get('take'), int)]   # startpics1: Make the start picture
-    # startpics7: one picture per person per run. A second tap on the same person (the page said "sent" and nothing showed yet) is dropped here, before any money is spent.
-    if getattr(a, 'startpics', False): reqs = []
-    uniq, seen = [], set()
-    for r in sps:
-        w = str(r.get('startpic'))
-        if os.path.exists(os.path.join(a.repo, 'art', 'clips', 'start', w + '-hero.png')): say('start picture for %s already exists, request dropped (nothing spent)' % w); continue
-        if w in seen: say('duplicate start picture request for %s dropped (nothing spent)' % w); continue
-        seen.add(w); uniq.append(r)
-    sps = uniq
-    say('%d guide request(s) found, %d start picture request(s)' % (len(reqs), len(sps)))
-    # startpics8: pictures first. A run used to make every queued video before the first picture, so a picture waited behind an hour of videos. Now a run that finds both makes the
-    # pictures only (about a minute), leaves the videos in the file and starts the next run for them when it ends.
-    defer = bool(sps and reqs and not a.dry_run and not a.no_take)
-    if defer: say('start pictures first: %d video request(s) stay queued for the next run' % len(reqs)); reqs = []
-    if (reqs or sps) and not a.dry_run and not a.no_take: gqueue.take(qf, ({r.get('at') for r in sps} if defer else {r.get('at') for r in doc.get('requests') or []}), a.repo, 'origin', 'guide: wan requests taken [skip ci]')
-    rows, today = [], datetime.datetime.utcnow().strftime('%Y-%m-%d')
-    waiting = staging_waits(a.repo)
-    def make_one(r):   # startpics10: one request, start to finish; a.pool of these run at once, and each one that ends lets the next begin
-        what = 'guide-%s-t%d' % (r['slug'], r['take'])
-        if r['anim'] in waiting:   # movestage1: a family move with no staging row is never made (a page cached before the gate could still ask)
-            rows.append({'anim': r['anim'], 'take': r['take'], 'at': r.get('at'), 'prompt': r['prompt'], 'promptRev': r.get('promptRev', 0), 'route': 'wan', 'cost': 0,
-                         'error': 'Waits for staging: this move is made in three layers now (claude/move-staging-plan.md) and its staging row is not written yet. Nothing was made or spent.'}); return
-        job = copy.deepcopy(jobs[a.template]); job.update(rev=1, frame=r['start'])
-        job.pop('pad', None)
-        if r.get('pad'): job['pad'] = float(r['pad'])
-        pdir = os.path.join(a.out, 'prompts'); os.makedirs(pdir, exist_ok=True)
-        pf = os.path.join(pdir, what + '.txt'); open(pf, 'w', encoding='utf-8').write(r['prompt'].strip() + '\n'); job['prompt_file'] = pf
-        est = estimate(job); dry = a.dry_run or bool(r.get('dry'))      # a request with dry:true asks for the plan only (a session never pays)
-        with lock:
-            day = state.setdefault('guide_days', {}); used = day.get(today, 0.0)
-            if not dry and getattr(a, 'day_cap', None) is not None and used + est > a.day_cap + 1e-9:
-                rows.append({'anim': r['anim'], 'take': r['take'], 'at': r.get('at'), 'prompt': r['prompt'], 'promptRev': r.get('promptRev', 0), 'route': 'wan', 'cost': 0, 'error': 'The guide has spent its $%.2f for today already. Try again tomorrow, or ask Claude.' % a.day_cap}); return
-            ns = types.SimpleNamespace(**vars(a)); ns.cap = state['spent'] + min(float(r.get('cap') or 1.0), 1.0) + max(1, getattr(a, 'pool', 4)) * 1.0; ns.dry_run = dry   # startpics10: up to a.pool videos book at once, so the cap leaves room for the others
-            ns.tell = (lambda s, _r=r: progress.mark(_r['anim'], _r['take'], 'checking' if s == 'DOWNLOADED' else progress.fal_stage(s))) if not dry else None
-        rcap = min(float(r.get('cap') or 1.0), 1.0)
-        if not dry and est > rcap + 1e-9:   # the request's own cap is checked here, since the run's cap leaves room for the videos made at the same time
-            say('REFUSED: $%.2f estimate is over this request\'s $%.2f cap. Nothing sent.' % (est, rcap))
-            with lock: rows.append({'anim': r['anim'], 'take': r['take'], 'at': r.get('at'), 'prompt': r['prompt'], 'promptRev': r.get('promptRev', 0), 'route': 'wan', 'cost': 0, 'error': 'cap'})
-            return
-        code, rep = run_one(what, job, ns, state, lock, save, fal, key, say)
-        row = {'anim': r['anim'], 'take': r['take'], 'at': r.get('at'), 'prompt': r['prompt'], 'promptRev': r.get('promptRev', 0), 'route': 'wan', 'note': r.get('note', ''), 'cost': est if rep.get('file') else 0}
-        if rep.get('file'):
-            row['video'] = os.path.join(a.out, rep['file'])
-            with lock: day[today] = round(day.get(today, 0.0) + est, 4); save()
-        elif not dry: row['error'] = rep.get('error') or 'the video was not made'
-        else: return
-        with lock:
-            rows.append(row)
-            json.dump({'results': list(rows)}, open(os.path.join(a.out, 'guide-results.json'), 'w'), indent=1)   # guidestuck1: after EVERY video, so a run that dies keeps what it made
-
-    from concurrent.futures import ThreadPoolExecutor
-    with ThreadPoolExecutor(max_workers=max(1, getattr(a, 'pool', 4))) as ex:
-        list(ex.map(make_one, reqs))
-    json.dump({'results': rows}, open(os.path.join(a.out, 'guide-results.json'), 'w'), indent=1)
-    code = 0 if all(not r.get('error') for r in rows) else 2
-    if sps:
-        import startpic
-        judge = None
-        if os.environ.get('XAI_API_KEY') and not a.dry_run:
-            import artqa
-            judge = artqa.Judge(os.environ['XAI_API_KEY'], os.environ.get('XAI_BASE', 'https://api.x.ai')); judge.pick()
-        srows, scode = startpic.run(a, jobs, state, lock, save, fal, key, sps, run_one, judge, today, startpic.publish if not a.no_take else (lambda *x, **k: True))
-        old = []
-        try: old = json.load(open(os.path.join(a.out, 'startpic-results.json')))['results']
-        except Exception: pass
-        json.dump({'results': (old + srows)[-40:]}, open(os.path.join(a.out, 'startpic-results.json'), 'w'), indent=1, default=lambda o: o.item() if hasattr(o, 'item') else str(o))
-        if defer: next_guide_run()
-        code = code or scode
-        if judge is not None and judge.spent and not a.dry_run:
-            try:
-                import costlog
-                costlog.log_from_env([{'service': 'xai', 'amount': round(judge.spent, 4), 'what': 'wan-gen Action: start picture facing check', 'source': 'wan-gen run'}])
-            except Exception as x: say('warning: could not log the xAI spend: ' + str(x)[:200])
-    return code
-
-
 def log_run_spend(state, spent0, a, names, extra=None):
     """costs2: what this run booked on fal (the estimate, or fal's live unit price when that is higher) goes to usage in data/costs.json.
     wanbulk: `extra` rows (the xAI money of the vision checks) go with it."""
@@ -390,23 +291,16 @@ def main():
     ap.add_argument('--no-vision', action='store_true', help='--bulk: tests only, the look checks are skipped and count as passed')
     ap.add_argument('--replay-checks', default='', help='measure videos already in --out (names like rose-giddyup-r4, comma list); free')
     ap.add_argument('--what', default='', help='a job name, a comma list of names, or wildcards (tom-*)')
-    ap.add_argument('--requests', action='store_true', help='guidegen1: work through data/wan-requests.json (what the Battle Guide asked for) instead of --what')
-    ap.add_argument('--pool', type=int, default=4, help='--requests: videos made at the same time; the rest wait and start as each one ends (startpics10)')
-    ap.add_argument('--startpics', action='store_true', help='startpics9: work through data/startpic-requests.json only (start pictures; no videos)')
-    ap.add_argument('--template', default='tom-idle', help='--requests: the job whose settings every request copies')
-    ap.add_argument('--no-take', action='store_true', help='--requests: leave the request list as it is (tests)')
-    ap.add_argument('--day-cap', type=float, default=None, help='--requests: most dollars of guide videos a day (default none: no daily limit)')
     ap.add_argument('--cap', type=float, default=2.0); ap.add_argument('--dry-run', action='store_true')
     ap.add_argument('--parallel', type=int, default=3, help='jobs sent at once (1 to 3)')
     ap.add_argument('--out', default=os.path.join(os.getcwd(), 'wangen-out')); ap.add_argument('--repo', default=ROOT)
     a = ap.parse_args()
     a.cap_set = any(x.startswith('--cap') for x in sys.argv[1:])
-    if a.startpics: a.requests = True
     jobs = load_jobs(a.repo)
     if a.replay_checks: return replay_checks(a, jobs)
     if a.bulk and not a.card and not a.what: ap.error('--bulk needs --card or --what')
-    if not a.bulk and not a.requests and not a.what: ap.error('give --what or --requests')
-    names = [] if (a.requests or a.bulk) else pick(jobs, a.what)
+    if not a.bulk and not a.what: ap.error('give --what or --bulk')
+    names = [] if a.bulk else pick(jobs, a.what)
     os.makedirs(a.out, exist_ok=True)
     stf = os.path.join(a.out, 'state.json')
     state = json.load(open(stf)) if os.path.exists(stf) else {'spent': 0.0, 'calls': [], 'pending': {}}
@@ -420,12 +314,6 @@ def main():
 
     key = os.environ.get('FAL_KEY', '')
     fal = Fal(key, os.environ.get('FAL_QUEUE', 'https://queue.fal.run'), os.environ.get('FAL_API', 'https://api.fal.ai'))
-    if a.requests:
-        fal = Fal(os.environ.get('FAL_KEY', ''), os.environ.get('FAL_QUEUE', 'https://queue.fal.run'), os.environ.get('FAL_API', 'https://api.fal.ai'))
-        say('guide requests; ledger $%.2f' % state['spent'])
-        rc = run_guide_requests(a, jobs, state, lock, save, fal, os.environ.get('FAL_KEY', ''))
-        log_run_spend(state, spent0, a, ['guide requests'])
-        return rc
     if a.bulk:
         import wanbulk
         rc = wanbulk.run(a, jobs, state, lock, save, fal, key, spent0)

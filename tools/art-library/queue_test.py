@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """startpics10: the guide queue. Many requests at once run a few at a time, each one that ends lets the next begin; every status change reaches the phone.
 Run: python3 -I tools/art-library/queue_test.py"""
-import os, sys, json, time, tempfile, threading, types
+import os, sys, json
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path[:0] = [HERE, os.path.join(ROOT, 'tools'), os.path.join(ROOT, 'tools', 'guidegen')]
 os.environ['NOTIFY_OFF'] = '1'
@@ -9,44 +9,9 @@ FAILS = []
 def check(n, ok, d=''):
     print(('ok   ' if ok else 'FAIL ') + n + ('' if ok else '  ' + str(d))); (FAILS.append(n) if not ok else None)
 
-import wangen, notify
+import notify
 
-# Q1 six requests, a pool of 3: never more than 3 at once, more than 1 at once, all six made, each result kept
-tmp = tempfile.mkdtemp(); os.makedirs(os.path.join(tmp, 'data'))
-reqs = [{'anim': 'body:amy:s%d' % i, 'slug': 'body-amy-s%d' % i, 'take': 1, 'at': '2026-11-22T20:00:0%dZ' % i, 'prompt': 'p%d' % i, 'start': 'art/clips/start/amy-hero.png', 'cap': 0.6} for i in range(6)]
-json.dump({'requests': reqs}, open(os.path.join(tmp, 'data', 'wan-requests.json'), 'w'))
-live, peak, done, lk = [0], [0], [], threading.Lock()
-def fake_run_one(what, job, a, state, lock, save, fal, key, log):
-    with lk: live[0] += 1; peak[0] = max(peak[0], live[0])
-    time.sleep(0.15)
-    with lk: live[0] -= 1; done.append(what)
-    return 0, {'file': what + '.mp4'}
-wangen.run_one = fake_run_one
-jobs = wangen.load_jobs(ROOT)
-a = types.SimpleNamespace(repo=tmp, out=tmp, dry_run=False, no_take=True, template='tom-idle', day_cap=100.0, cap=100.0, pool=3, startpics=False)
-state = {'spent': 0.0, 'calls': [], 'pending': {}}; lock = threading.RLock()
-wangen.run_guide_requests(a, jobs, state, lock, lambda: None, None, 'k')
-res = json.load(open(os.path.join(tmp, 'guide-results.json')))['results']
-check('Q1 all six made', len(done) == 6 and len(res) == 6 and all(r.get('video') for r in res), (done, res[:1]))
-check('Q1 never more than the pool at once, and really in parallel', 1 < peak[0] <= 3, peak)
-
-# Q2 a request capped below the price pays nothing, even with a pool
-json.dump({'requests': [dict(reqs[0], cap=0.01, slug='capped')]}, open(os.path.join(tmp, 'data', 'wan-requests.json'), 'w'))
-before = len(done); wangen.run_guide_requests(a, jobs, state, lock, lambda: None, None, 'k')
-res = json.load(open(os.path.join(tmp, 'guide-results.json')))['results']
-check('Q2 capped below the price: nothing sent', len(done) == before and res[-1].get('error') == 'cap', res[-1:])
-
-# Q2b guideflow1: no daily limit. $50 already spent today, day_cap None: a request is still made; a request capped below the price is still refused
-import datetime
-state['guide_days'] = {datetime.datetime.utcnow().strftime('%Y-%m-%d'): 50.0}
-a2 = types.SimpleNamespace(**dict(vars(a), day_cap=None))
-json.dump({'requests': [dict(reqs[0], slug='rich')]}, open(os.path.join(tmp, 'data', 'wan-requests.json'), 'w'))
-before = len(done); wangen.run_guide_requests(a2, jobs, state, lock, lambda: None, None, 'k')
-check('Q2b $50 spent today and no daily limit: still made', len(done) == before + 1, done[-2:])
-json.dump({'requests': [dict(reqs[0], cap=0.01, slug='rich2')]}, open(os.path.join(tmp, 'data', 'wan-requests.json'), 'w'))
-before = len(done); wangen.run_guide_requests(a2, jobs, state, lock, lambda: None, None, 'k')
-res = json.load(open(os.path.join(tmp, 'guide-results.json')))['results']
-check('Q2b still refused when capped below the price', len(done) == before and res[-1].get('error') == 'cap', res[-1:])
+# guideflow9: Q1, Q2 and Q2b (the pool and caps of the old wangen guide mode) went with the old path; tools/guidegen/worker_test.py T4 to T10 cover the queue.
 
 # Q3 notifications: the label, the message goes to the topic, a dead network never raises, the off switch works
 sent = []
@@ -68,13 +33,9 @@ os.environ.pop('NTFY_TOPIC')
 c = json.load(open(os.path.join(ROOT, 'data', 'notify.json')))
 check('Q3 the repo has a topic', c.get('topic', '').startswith('aot-') and len(c['topic']) >= 16, c)
 
-# Q4 every status change is wired: the stages, the final take outcome, the start picture
-import progress  # noqa
+# Q4 the take outcome notifies, and the page has the setup card
 src = lambda p: open(os.path.join(ROOT, p)).read()
-check('Q4 progress.mark notifies', 'notify.send(notify.label(anim)' in src('tools/guidegen/progress.py'))
 check('Q4 the take outcome notifies', 'Ready to review in the Battle Guide' in src('tools/guidegen/make_take.py') and 'Did not work' in src('tools/guidegen/make_take.py'))
-check('Q4 the start picture notifies', "_note(who, 'Making the start picture now" in src('tools/art-library/startpic.py') and 'is in the game' in src('tools/art-library/startpic.py'))
-check('Q4 a finished guide run starts the next', 'run_started_at' in src('.github/workflows/wan-gen.yml') and 'nothing new and nothing deferred' in src('.github/workflows/wan-gen.yml'))
 check('Q4 the page has the setup card and test', 'gnotest' in src('battle-guide.html') and 'data/notify.json' in src('battle-guide.html'))
 
 # Q5 startpics11, moved by guideflow7 from guide-use.yml into tools/guidegen/apply.py: the push restarts from the newest main, a failed push is X17 and pokes once, the page has no pending use of its own
@@ -84,9 +45,8 @@ ap = open(os.path.join(ROOT, 'tools', 'guidegen', 'apply.py')).read(); loop = ap
 check('Q5a push loop re-applies onto the newest main', "'reset', '-q', '--hard'" in loop and "'apply', '--3way'" in loop and "'rebase'" not in loop)
 check('Q5b conflict markers are checked before the commit that is pushed', loop.index("'^<<<<<<<'") < loop.rindex("'commit'") < loop.index("'push', a.remote"))
 check('Q5c a push that failed six times is X17 for the rows, and the job starts itself once more unless it was a retry', "code='X17'" in ap and 'poke(True)' in ap and 'not a.retry' in ap and 'python3 -I tools/guidegen/apply.py' in wf)
-check('Q5c2 the old guide-use files are gone', not os.path.exists(os.path.join(ROOT, '.github', 'workflows', 'guide-use.yml')) and not os.path.exists(os.path.join(ROOT, 'data', 'guide-use.json')))
 pg = open(os.path.join(ROOT, 'battle-guide.html')).read()
-check('Q5d the page keeps no pending use of its own and asks guide-apply', 'aot-guide-use' not in pg and 'pollUse' not in pg and 'GUSE' not in pg and "'guide-apply'" in pg)
+check('Q5d the page keeps no pending use of its own and asks guide-apply', 'aot-guide-use' not in pg and 'GUSE' not in pg and "'guide-apply'" in pg)
 
 print('\nqueue test: ' + ('all passed' if not FAILS else 'FAILED ' + ', '.join(FAILS)))
 sys.exit(1 if FAILS else 0)

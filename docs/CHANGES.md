@@ -1,3 +1,18 @@
+## guideflow9a (2026-11-23): The old Battle Guide request path is deleted; the free test run on GitHub comes next
+
+Card c-guideflow-9 (plan `claude/guide-flow-plan.md` section 10 step 9, section 9 for the delete list, test T10). Started by hand in the c-guideflow-7 and 8 conversation. Part one of two: this build removes what the queue replaced and proves it with `tools/guidegen/purge_test.py`. Part two (guideflow9) adds the free run on GitHub (T11) and hands Tom the phone check. Nothing paid was run.
+
+| Deleted or cut | What changed |
+|---|---|
+| `.github/workflows/startpic-gen.yml`, `data/startpic-requests.json`, `data/wan-requests.json`, `tools/guidegen/progress.py` | Files removed. |
+| `.github/workflows/wan-gen.yml` | Guide mode removed: the push trigger path for the video request file, the `requests` input, mode guide, the guide lane (the group is now `wan-gen-bulk`), the steps Make the takes, Keep the takes on the guidegen branch and Sweep what is still asked, and GUIDE_STATUS. Kept: bulk, the manual jobs, the checkpoint, the ledger and Video History. A push that is not a board wan push now does nothing (mode none). |
+| `tools/art-library/wangen.py` | `run_guide_requests`, `next_guide_run` and the options `--requests`, `--startpics`, `--pool`, `--template`, `--no-take`, `--day-cap` removed. `run_one`, `estimate`, `staging_waits` and everything bulk uses stay. |
+| `tools/art-library/startpic.py` | `publish`, `run`, `git` and `_note` removed. `measure`, `judge_picture`, `facing` and `mirror` stay (the worker calls them). |
+| `tools/guidegen/keep.py`, `.github/workflows/publish.yml` | The `status.json` merge and the video request file in the ignore list removed. |
+| `CLAUDE.md`, `docs/BATTLE_GUIDE.md` | The guideflow7 and guideflow8 paragraphs became one paragraph "guideflow" (who may write what, the files, the tests, the first paid run is Tom's tap); branch `guideq` added to the Night runs "Never touched" row. |
+
+Tests changed: `take_test.py` lost T1 (the old wangen request path) and the progress marks of T6; `queue_test.py` lost Q1, Q2, Q2b (the pool and caps of the old path) and three checks of removed code; `startpic_test.py` lost S3 (`run`) and the S7 to S11 cases (they sat after the final `sys.exit`, so they had never run; S8 now runs); `battle_guide_test.py` and `movestage_test.py` no longer look for the deleted names. New: `tools/guidegen/purge_test.py` (in `tools/night/tests.json`). Run and passing: purge_test, store_test, take_test, apply_test, queue_test, startpic_test, movestage_test, wangen_test, wanbulk_test, workflow_check. Failing the same way on untouched main: worker_test "four at a time" (a flaky image read), battle_guide_test animation and plan counts (713 vs 679, 7 and 597 and 109), "guide still loads no game engine", board_check cases (card t-welcomepage-request names a card that does not exist), artgen_test and board_wan_test (same board_check line).
+
 ## b3s23a (2026-11-23): Battle 3 has its own shell, engine/bt-shell.js, and no longer reads a battle 2 name
 
 Card c-b3s23a, slice 23a of the battle 2 purge (claude/next-addendum-b3s23.md). Tom (11-22): "Yes, delete battle 2 and its leftovers as the plan lists". Nothing is deleted: battle 2 still plays under Settings OLD.

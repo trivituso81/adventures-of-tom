@@ -39,60 +39,7 @@ MOVING, STILL = os.path.join(TMP, 'moving.mp4'), os.path.join(TMP, 'still.mp4')
 make_video(MOVING); make_video(STILL, still=True)
 MV = open(MOVING, 'rb').read()
 
-# ---------------------------------------------------------------- T1 wangen --requests
-KEY = 'fal-test-KEY'; SENT = []
-class Fal(BaseHTTPRequestHandler):
-    def log_message(self, *a): pass
-    def j(self, code, doc):
-        b = json.dumps(doc).encode(); self.send_response(code); self.send_header('Content-Type', 'application/json'); self.send_header('Content-Length', str(len(b))); self.end_headers(); self.wfile.write(b)
-    def do_GET(self):
-        base = 'http://127.0.0.1:%d' % self.server.server_port
-        if self.path.startswith('/v1/models/pricing'): return self.j(200, {'prices': [{'endpoint_id': 'x', 'unit_price': .1, 'unit': 'seconds', 'currency': 'USD'}]})
-        if self.path.endswith('/status'): return self.j(200, {'status': 'COMPLETED'})
-        if '/requests/' in self.path: return self.j(200, {'video': {'url': base + '/files/%s.mp4' % self.path.rsplit('/', 1)[1]}, 'seed': 81, 'duration': 5})
-        if self.path.startswith('/files/'):
-            self.send_response(200); self.send_header('Content-Length', str(len(MV))); self.end_headers(); self.wfile.write(MV); return
-        self.j(404, {})
-    def do_POST(self):
-        base = 'http://127.0.0.1:%d' % self.server.server_port
-        body = json.loads(self.rfile.read(int(self.headers.get('Content-Length') or 0)) or b'{}')
-        rid = 'r%d' % (len(SENT) + 1); SENT.append({'ep': self.path.strip('/'), 'body': body})
-        self.j(200, {'request_id': rid, 'status': 'IN_QUEUE', 'status_url': base + '/alibaba/wan-3.0/requests/%s/status' % rid, 'response_url': base + '/alibaba/wan-3.0/requests/%s' % rid})
-srv = ThreadingHTTPServer(('127.0.0.1', 0), Fal); FURL = 'http://127.0.0.1:%d' % srv.server_port
-threading.Thread(target=srv.serve_forever, daemon=True).start()
-
-repo = os.path.join(TMP, 'wrepo'); out = os.path.join(TMP, 'wout')
-for rel in ['tools/art-library/wangen.py', 'tools/art-library/wangen-jobs.json', 'tools/art-library/prompts/wan-tom-idle-v1.txt', 'tools/guidegen/gqueue.py', 'tools/guidegen/progress.py', 'tools/guidegen/keep.py']:
-    os.makedirs(os.path.dirname(os.path.join(repo, rel)), exist_ok=True); shutil.copy(os.path.join(ROOT, rel), os.path.join(repo, rel))
-for f in os.listdir(os.path.join(ROOT, 'tools/art-library')):   # wangen imports the shared fal queue code (falq.py) and friends
-    if f.endswith('.py') and not f.endswith('_test.py'): shutil.copy(os.path.join(ROOT, 'tools/art-library', f), os.path.join(repo, 'tools/art-library', f))
-os.makedirs(os.path.join(repo, 'art/clips/start'), exist_ok=True)
-im = Image.new('RGB', (848, 1264), (255, 0, 255)); ImageDraw.Draw(im).rectangle((330, 120, 520, 1180), fill=(90, 60, 40)); im.save(os.path.join(repo, 'art/clips/start/tom-hero.png'))
-def req(**k):
-    r = {'anim': 'move:lounge_pass_flex', 'slug': 'move-lounge-pass-flex', 'take': 1, 'at': 100, 'prompt': 'MY OWN PROMPT, once.', 'promptRev': 2, 'start': 'art/clips/start/tom-hero.png', 'cap': 0.6}; r.update(k); return r
-def wan(reqs, *extra):
-    os.makedirs(os.path.join(repo, 'data'), exist_ok=True); json.dump({'requests': reqs}, open(os.path.join(repo, 'data/wan-requests.json'), 'w'))
-    env = dict(os.environ, FAL_KEY=KEY, FAL_QUEUE=FURL, FAL_API=FURL, WANGEN_POLL='0.05')
-    r = sh(sys.executable, '-I', os.path.join(repo, 'tools/art-library/wangen.py'), '--requests', '--no-take', '--out', out, '--repo', repo, *extra, env=env)
-    rows = json.load(open(os.path.join(out, 'guide-results.json')))['results'] if os.path.exists(os.path.join(out, 'guide-results.json')) else []
-    return r, rows
-r, rows = wan([req(dry=True)], '--dry-run')
-check('T1 a dry run sends nothing', r.returncode == 0 and not SENT, r.stdout[-400:])
-r, rows = wan([req(dry=True)])
-check('T1 a request with dry:true sends nothing even in a live run', not SENT, r.stdout[-400:])
-r, rows = wan([req()])
-b = SENT[-1]['body'] if SENT else {}
-check('T1 one request, one Wan video, prompt word for word', len(SENT) == 1 and SENT[0]['ep'] == 'alibaba/wan-3.0/image-to-video' and b.get('prompt') == 'MY OWN PROMPT, once.', (r.stdout[-500:], SENT[-1:]))
-check('T1 the proven settings and first = last frame', {k: b.get(k) for k in ('resolution', 'duration', 'seed', 'audio')} == {'resolution': '720p', 'duration': 5, 'seed': 81, 'audio': False} and b.get('start_image_url') == b.get('end_image_url'), b)
-fr = Image.open(io.BytesIO(base64.b64decode(b['start_image_url'].split(',', 1)[1]))) if b.get('start_image_url', '').startswith('data:') else None
-check('T1 the frame is 720x1280', fr is not None and fr.size == (720, 1280), fr and fr.size)
-check('T1 a result row with the video, take, prompt and the booked price', len(rows) == 1 and rows[0]['anim'] == 'move:lounge_pass_flex' and rows[0]['take'] == 1 and os.path.exists(rows[0].get('video', '')) and abs(rows[0]['cost'] - .5) < 1e-6 and rows[0]['prompt'] == 'MY OWN PROMPT, once.', rows)
-st = json.load(open(os.path.join(out, 'state.json')))
-check('T1 booked on the ledger and the day cap', abs(st['spent'] - .5) < 1e-6 and abs(sum(st['guide_days'].values()) - .5) < 1e-6, st.get('guide_days'))
-n0 = len(SENT); r, rows = wan([req(take=2, at=101)], '--day-cap', '0.6')
-check('T1 a request past the day cap is refused in words and sends nothing', len(SENT) == n0 and rows and 'today' in rows[0].get('error', ''), rows)
-r, rows = wan([req(take=3, at=102, cap=0.2)])
-check('T1 a request capped below the price pays nothing', len(SENT) == n0 and rows and rows[0].get('error'), (rows, r.stdout[-300:]))
+# guideflow9: T1 (wangen --requests) and the progress marks of T6 went with the old path (tools/guidegen/worker_test.py covers the queue)
 
 # ---------------------------------------------------------------- T2 clipgen --requests no longer takes a guide field (guideflow8)
 port = 8847
@@ -248,17 +195,7 @@ check('T5 every file the job touched is still valid JavaScript', not bad, bad)
 
 check('T5 Use marks the take used (the list stops showing Ready to review)', state_json['anims']['act:skeeter:darting_bite']['takes'][1].get('used'), state_json['anims']['act:skeeter:darting_bite']['takes'][1])
 
-# ---------------------------------------------------------------- T6 progress marks (guidestatus1)
-import progress as PG
-check('T6 off unless GUIDE_STATUS=1', PG.mark('a', 1, 'line') is False)
-sremote = os.path.join(TMP, 's.git'); sh('git', 'init', '-q', '--bare', '-b', 'guidegen', sremote)
-os.environ.update(GUIDE_STATUS='1', GUIDE_STATUS_URL=sremote)
-PG.mark('move:x', 1, 'line'); PG.mark('move:x', 1, 'line'); PG.mark('act:y', 2, 'making'); PG.mark('move:x', 1, 'making'); PG.mark('move:x', 1, 'bogus')
-sc = os.path.join(TMP, 'scheck'); sh('git', 'clone', '-q', '-b', 'guidegen', sremote, sc); S = json.load(open(sc + '/status.json'))['anims']
-check('T6 one entry per animation, the newest stage wins, two jobs both kept', S['move:x']['stage'] == 'making' and S['act:y']['stage'] == 'making' and S['act:y']['take'] == 2, S)
-check('T6 a repeated stage is not pushed again', int(sh('git', 'rev-list', '--count', 'guidegen', cwd=sc).stdout) == 1 and len([l for l in sh('git', '--git-dir', sremote, 'log', '--oneline', '-g', 'guidegen').stdout.splitlines()]) <= 3)
-check('T6 fal statuses map to IN LINE and MAKING', PG.fal_stage('IN_QUEUE') == 'line' and PG.fal_stage('IN_PROGRESS') == 'making' and PG.fal_stage('COMPLETED') is None)
-os.environ.pop('GUIDE_STATUS'); os.environ.pop('GUIDE_STATUS_URL')
+# ---------------------------------------------------------------- T6 the fal wait reports each status
 import falq
 seen = []
 class _R:

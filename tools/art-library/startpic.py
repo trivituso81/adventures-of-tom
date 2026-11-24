@@ -5,15 +5,13 @@ A start picture is the approved hero picture redrawn by Nano Banana 2.1 on fal (
 magenta, the whole figure inside the frame. Wan 3.0 takes it as the first and last frame of every battle video of that person (claude/video-battle-plan.md 4.3).
 It is an input to the video model and is never drawn in a fight; the cutout of the finished video happens later, in the bake.
 
-The Battle Guide's "Make the start picture" button commits {"startpic": "<who>", "take": <int>, "at": <iso>, "cap": 0.3} to data/wan-requests.json with the
-commit message "wan: generate startpic <who>"; the wan-gen Action (--requests) calls run() below, once per request:
-  1. the job start-<who> is copied as `startpic-<who>-t<take>` (rev 1, so a second tap is a new call, never a skipped one) and made on fal ($0.15);
-  2. measured (free): background flat magenta, the whole figure inside the frame with margin, the figure tall enough to give the video room;
-  3. facing looked at (xAI vision, three runs, majority): a picture that faces right is MIRRORED (free), as Grace's was (plan 4.7). A picture that cannot be
-     judged (no xAI key, vision failed) is kept in the results and NOT put in the game;
-  4. a picture that passes is committed to main as art/clips/start/<who>-hero.png together with a rebuilt data/guide-anims.json (node tools/guidegen/build_map.js),
-     which is what turns "Cannot be made yet" into a Generate button.
-A picture that fails a check is kept on the wangen branch and never published; the request row says why in plain words (the page shows it).
+The Battle Guide's start picture is a row in queue.json (branch guideq); tools/guidegen/worker.py makes it on fal ($0.15) and calls the measured checks, the facing
+check and the mirror below:
+  1. measured (free): background flat magenta, the whole figure inside the frame with margin, the figure tall enough to give the video room;
+  2. facing looked at (xAI vision, three runs, majority): a picture that faces right is MIRRORED (free), as Grace's was (plan 4.7). A picture that cannot be
+     judged (no xAI key, vision failed) is kept and NOT put in the game;
+  3. a picture that passes is kept on branch guidegen (startpics/); guide-apply copies it to main as art/clips/start/<who>-hero.png.
+A picture that fails a check is never put in the game; the row says why in plain words (the page shows it).
 Tests: python3 tools/art-library/startpic_test.py"""
 import io, json, os, subprocess, sys, time
 
@@ -95,73 +93,3 @@ def judge_picture(png, judge):
         png = mirror(png); rec['mirrored'] = True
         rec['note'] = 'It faced right, so it was mirrored (anything carried on one side, such as a bag, is now on the other side).'
     return png, rec
-
-
-def git(root, *a, check=True):
-    p = subprocess.run(['git', '-C', root] + list(a), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-    if check and p.returncode: raise RuntimeError('git %s failed: %s' % (' '.join(a[:2]), p.stdout[-300:]))
-    return p
-
-
-def publish(root, who, png, remote='origin', rebuild=True):
-    """Commit art/clips/start/<who>-hero.png (and the rebuilt data/guide-anims.json) to main, retried against a main that moved. Returns True when pushed."""
-    rel = 'art/clips/start/%s-hero.png' % who
-    for k in range(8):
-        git(root, 'fetch', '--depth', '1', remote, 'main'); git(root, 'checkout', '-q', '-B', 'main', 'FETCH_HEAD'); git(root, 'reset', '-q', '--hard', 'FETCH_HEAD')
-        os.makedirs(os.path.dirname(os.path.join(root, rel)), exist_ok=True)
-        open(os.path.join(root, rel), 'wb').write(png)
-        if rebuild:
-            p = subprocess.run(['node', os.path.join(root, 'tools', 'guidegen', 'build_map.js')], cwd=root, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-            if p.returncode: say('could not rebuild data/guide-anims.json: ' + p.stdout[-300:]); rebuild = False
-        git(root, 'add', rel, 'data/guide-anims.json')
-        if not git(root, 'status', '--porcelain', check=False).stdout.strip(): return True
-        git(root, '-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com', 'commit', '-q', '-m',
-            'startpics1: start picture for %s from the Battle Guide\n\nAdds %s and rebuilds data/guide-anims.json.' % (who, rel))
-        if git(root, 'push', remote, 'HEAD:main', check=False).returncode == 0: return True
-        say('push refused, trying again (%d)' % (k + 1)); time.sleep(3 + 2 * k)
-    return False
-
-
-def _note(who, msg, tags):   # startpics10: a phone notification (tools/notify.py never raises)
-    try:
-        sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))); import notify
-        notify.send('Start picture: ' + notify.label(who), msg, tags=tags)
-    except Exception: pass
-
-
-def run(a, jobs, state, lock, save, fal, key, reqs, run_one, judge, today, publisher=publish):
-    """Every startpic request, one after the other. Returns (rows, exit code). `run_one` is wangen.run_one (a parameter so tests can stand in for fal)."""
-    import copy, types
-    rows = []
-    for r in reqs:
-        who = str(r.get('startpic') or '')
-        base = jobs.get('start-' + who)
-        row = {'startpic': who, 'take': r.get('take'), 'at': r.get('at'), 'cost': 0}
-        if not base: row['error'] = 'There is no start-%s job in tools/art-library/wangen-jobs.json (no hero picture is registered for %s).' % (who, who); rows.append(row); continue
-        what = 'startpic-%s-t%s' % (who, r['take']); job = copy.deepcopy(base); job['rev'] = 1
-        est = float(job['est']); dry = a.dry_run or bool(r.get('dry'))
-        with lock:
-            day = state.setdefault('guide_days', {}); used = day.get(today, 0.0)
-            if not dry and getattr(a, 'day_cap', None) is not None and used + est > a.day_cap + 1e-9:
-                row['error'] = 'The guide has spent its $%.2f for today already. Try again tomorrow, or ask Claude.' % a.day_cap; rows.append(row); continue
-            ns = types.SimpleNamespace(**vars(a)); ns.cap = state['spent'] + min(float(r.get('cap') or 0.3), 0.3); ns.dry_run = dry; ns.tell = None
-        _note(who, 'Making the start picture now (about 1 to 2 minutes).', 'hourglass_flowing_sand')
-        code, rep = run_one(what, job, ns, state, lock, save, fal, key, say)
-        if not rep.get('file'):
-            if not dry: row['error'] = rep.get('error') or 'the picture was not made'
-            else: continue
-            rows.append(row); continue
-        with lock: day[today] = round(day.get(today, 0.0) + est, 4); save()
-        row['cost'] = est
-        png = open(os.path.join(a.out, rep['file']), 'rb').read()
-        out, rec = judge_picture(png, judge)
-        row.update({k: v for k, v in rec.items() if k != 'checks'}); row['checks'] = [dict(id=c['id'], ok=c['ok'], say=c['say']) for c in rec['checks']]
-        if out is None: rows.append(row); continue
-        open(os.path.join(a.out, '%s-final.png' % what), 'wb').write(out)
-        row['published'] = bool(publisher(a.repo, who, out))
-        if not row['published']: row['error'] = 'The picture passed but could not be pushed to main. It is kept on the wangen branch.'
-        rows.append(row)
-    for r in rows:
-        if r.get('error'): _note(r.get('startpic'), 'No picture was put in the game: ' + str(r['error'])[:150], 'x')
-        elif r.get('published'): _note(r.get('startpic'), 'The start picture is in the game' + (' (it faced the wrong way, so it was mirrored)' if r.get('mirrored') else '') + '. Generate this video now works for them.', 'white_check_mark')
-    return rows, (0 if all(not r.get('error') for r in rows) else 2)
