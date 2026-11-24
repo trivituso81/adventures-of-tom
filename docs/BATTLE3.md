@@ -88,7 +88,7 @@ A fight is one plain object `F` from `b3NewFight(cfg)`. `b3Next(F)` moves the cl
 | `localStorage` `aot-b3-lab` | The Battle Lab's book of loadouts (`b3LabBook`, `b3LabSave`, `b3LabReset`). Not part of any save. |
 | `index.html` | `#b3-bar` and `#b3-app` (scene, tray, deck, party cards, sheet). `#battle.v3` is a CSS size container and `b3-deck.css` lays the screen out with `@container` queries, so portrait, landscape, the rotated stage and the Duo sizes follow the stage's own size. `#battle` carries both `v2` (the shared layout) and `v3` during a Battle 3 fight. |
 
-Helpers Battle 3 borrows from battle 2 files (the purge stage must move or rename them, not delete them): `btMeter`, `BT_METER`, `btMeterTag`, `btBattleDef`, `btCanvasPt`, `btEsc`, `btPortrait`, `btThumb`, the `.b2-*` layout classes and `.b7-tools`, `b7FoeHp`, `b7Taken`, `b7FoeSpeed`, `b7ToggleSpeed`, `B7.speed`.
+Shared shell (b3s23a): `engine/bt-shell.js` holds what Battle 3 shares with the rest of the game, under bt names: the fight door `startBattle` (it asks `b3sStart` in `engine/b3-story.js`, then the old path through `BT.oldFight`), `BT.result` (how the last fight ended; the story's {battle} step reads it), `BT.lab`, `btMeter`, `BT_METER`, `btMeterTag`, `btBattleDef`, `btCanvasPt`, `btEsc`, `btPortrait`, `btThumb`, `btPurse`, and the Rose Mode picture helpers `bpOn`, `bpIcon`, `bpWord`. The turn bar uses the classes `.bt-tk`, `.bt-rib-lbl` and `.bt-int`. No `engine/b3-*.js` or `data/b3-*.js` file names a battle 2 value. Still borrowed from `engine/feel.js`: `.b7-tools`, `b7FoeHp`, `b7Taken`, `b7FoeSpeed`, `b7ToggleSpeed`, `B7.speed`.
 
 ## Testing
 

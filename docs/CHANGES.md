@@ -18,6 +18,8 @@ Proof: `git grep -I -nE '(^|[^A-Za-z0-9_$])([bB]2|battle2)' -- 'engine/b3-*.js' 
 
 Not changed on purpose: the reads of the `B2` object in engine/battle-draw.js (inside `drawBattle` after the Battle 3 return), engine/battle-pictures.js (the old menu), engine/clips.js (old Lab clip fights, guarded by `typeof B2`), engine/painted.js (guarded), engine/report.js; they only run on the old path and 23c and 23d delete them with it.
 
+Test added: `python3 tools/bt_alone_test.py` loads the page with every battle 2 file (engine/battle2*.js, data/battle2-data.js) replaced by an empty script, plays a chapter 1 story fight on Battle 3 from the real {battle} door to its win screen, and fails on any error from a b3 or bt-shell file or any read of the `B2` object outside the four known `B2.active` reads (engine/painted.js, engine/clips.js, data/ch15-battle.js, engine/music-clips.js). Result: no error, 0 old path errors. Slices 23b to 23d make the old path load without battle 2 too; the test then drops its stand-ins. The "dependency script" the addendum names does not exist in the repo, so the list of borrowed names was found with a parser scan of every b3 file plus this run.
+
 ## guideflow8a (2026-11-23): put back the Art Factory files and the costs data that the guideflow8 push removed by mistake
 
 My guideflow8 push was cut from an older copy of main, so it deleted `art-factory.html`, `art-factory/`, `.github/workflows/art-factory.yml`, `scripts/` and an update to `data/costs.json` made by other sessions. This build restores all of them exactly as they were; nothing else changed. The guideflow8 work itself (monster videos in the Guide queue) is untouched.
