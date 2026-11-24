@@ -1,4 +1,5 @@
 name: AoT Art Factory
+run-name: "AoT Art Factory: ${{ inputs.stage }} / ${{ inputs.character_id }}${{ inputs.move_id != '' && format(' / {0}', inputs.move_id) || '' }}"
 
 on:
   workflow_dispatch:
@@ -40,6 +41,10 @@ on:
 
 permissions:
   contents: write
+
+concurrency:
+  group: aot-art-factory
+  cancel-in-progress: false
 
 jobs:
   generate:

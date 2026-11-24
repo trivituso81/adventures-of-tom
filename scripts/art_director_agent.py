@@ -33,32 +33,38 @@ def normalize_backdrop_for_grey(text, bg_hex="#808080"):
     out = re.sub(r"#00FF00", bg_hex, out, flags=re.IGNORECASE)
     return out
 
-def load_move_manifest():
-    for candidate in (
-        Path("art-factory/aot-stage2-pass1-manifest-24fps.json"),
-        Path("art-factory/move-pitches.json"),
-    ):
-        if candidate.exists():
-            return json.loads(candidate.read_text(encoding="utf-8"))
-    return None
+def load_all_move_manifests():
+    manifests = []
+    art_dir = Path("art-factory")
+    if not art_dir.exists():
+        return manifests
+    skip = {"characters.json", "queue.json"}
+    for p in sorted(art_dir.glob("*.json")):
+        if p.name in skip:
+            continue
+        try:
+            data = json.loads(p.read_text(encoding="utf-8"))
+            if isinstance(data, dict) and isinstance(data.get("moves"), list):
+                manifests.append(data)
+        except Exception:
+            continue
+    return manifests
 
 def lookup_move_clip(move_id):
     if not move_id:
         return None
-    data = load_move_manifest()
-    if not data:
-        return None
     is_counter = move_id.endswith("_counter")
     base_id = move_id[:-8] if is_counter else move_id
-    for m in data.get("moves", []):
-        if m.get("id") == base_id:
-            clip = m.get("reactiveCounterClip") if is_counter else m.get("wanClip")
-            if clip:
-                return {
-                    "move": m,
-                    "clip": clip,
-                    "defaults": data.get("wanDefaults", {}),
-                }
+    for data in load_all_move_manifests():
+        for m in data.get("moves", []):
+            if m.get("id") == base_id:
+                clip = m.get("reactiveCounterClip") if is_counter else m.get("wanClip")
+                if clip:
+                    return {
+                        "move": m,
+                        "clip": clip,
+                        "defaults": data.get("wanDefaults", {}),
+                    }
     return None
 
 def resolve_move_prompts(stage, char, cfg, move_id="", feedback=""):
