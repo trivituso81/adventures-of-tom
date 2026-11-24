@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-24T03:02:32Z",
+  "updated_at": "2026-11-24T03:05:45Z",
   "items": [
     {
       "id": "tom_hero_0",
@@ -159,8 +159,10 @@
       "stage": "battle_idle",
       "move_id": "",
       "raw_video_path": "art-factory/staging/tom/battle_idle/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_idle/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_idle/battle_alpha_safari_hvc1.mp4"
     }
   ]
 }
