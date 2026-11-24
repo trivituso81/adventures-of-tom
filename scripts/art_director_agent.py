@@ -40,9 +40,9 @@ def build_prompt(stage, char, cfg, move_id="", feedback="", extra_hint=""):
         p = (
             f"Silent 2D RPG battle idle loop of {char['name']}. "
             f"Keep the exact starting facial expression and smile completely consistent from start to finish: mouth stays closed and relaxed, no sighing, no pursing lips, no deep inhale, no speaking. "
-            f"One quick, natural eye blink halfway through the loop. "
-            f"Very subtle, calm chest rise and gentle weight shift in the shoulders and arms while both feet stay firmly planted on the ground. "
-            f"Static locked camera, exact matching start and end pose for a seamless loop. {cfg['style_lock']}"
+            f"Complete only one single slow, calm, barely perceptible breath across the entire 5 seconds: very slight chest and shoulder rise over the first 2.5 seconds, then gently settling back to the exact starting pose over the remaining 2.5 seconds. "
+            f"One quick, natural eye blink once near the midpoint. "
+            f"Both feet stay firmly planted on the ground with a relaxed posture and static locked camera for a seamless loop. {cfg['style_lock']}"
         )
     else:
         pitch_note = f" Move ID: {move_id}." if move_id else ""

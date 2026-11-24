@@ -1,6 +1,7 @@
 import json
 import os
 import shutil
+import subprocess
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -28,6 +29,24 @@ def download_file(url, dest):
     r = requests.get(url, timeout=180)
     r.raise_for_status()
     Path(dest).write_bytes(r.content)
+
+def strip_audio_if_present(video_path):
+    p = Path(video_path)
+    tmp = p.with_name(p.stem + "_silent" + p.suffix)
+    try:
+        r = subprocess.run(
+            ["ffmpeg", "-y", "-i", str(p), "-c:v", "copy", "-an", str(tmp)],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+        )
+        if r.returncode == 0 and tmp.exists() and tmp.stat().st_size > 0:
+            tmp.replace(p)
+            print(f"[video] stripped audio track -> {p.name}", flush=True)
+        elif tmp.exists():
+            tmp.unlink()
+    except Exception as exc:
+        print(f"[video] ffmpeg audio strip skipped: {exc}", flush=True)
 
 def build_ref_contents(prompt, char, cfg):
     contents = []
@@ -87,6 +106,22 @@ def prep_video_source(src_path, out_dir, cfg):
     canvas.convert("RGB").save(clean_p)
     return clean_p
 
+def resolve_hero_source(char, cfg, allow_fallback=True):
+    approved = Path(cfg["output_dir"]) / char["id"] / "hero" / "approved_rgba.png"
+    if approved.exists():
+        return approved
+    if char["id"] == "tom" and Path(cfg["tom_hero_path"]).exists():
+        return Path(cfg["tom_hero_path"])
+    ref_p = Path(cfg["refs_dir"]) / f"{char['id']}.png"
+    if ref_p.exists():
+        return ref_p
+    staged = Path(cfg["staging_dir"]) / char["id"] / "hero" / "cand_0_rgba.png"
+    if staged.exists():
+        return staged
+    if allow_fallback:
+        return Path(cfg["tom_hero_path"])
+    return None
+
 def run_stills(stage, char, cfg, feedback, queue):
     count = 8 if stage == "hero" else 1
     size_label = "2K" if stage == "hero" else "4K"
@@ -128,47 +163,38 @@ def run_stills(stage, char, cfg, feedback, queue):
     queue["items"] = [i for i in queue["items"] if not (i["character_id"] == char["id"] and i["stage"] == stage)] + survivors
     save_queue(cfg["queue_path"], queue)
 
-def run_video(stage, char, cfg, move_id, feedback, queue):
+def generate_video_item(stage, char, cfg, move_id, feedback, hero_src):
     slug = f"{stage}_{move_id}" if move_id else stage
     out_dir = Path(cfg["staging_dir"]) / char["id"] / slug
     out_dir.mkdir(parents=True, exist_ok=True)
-    hero_src = Path(cfg["output_dir"]) / char["id"] / "hero" / "approved_rgba.png"
-    if not hero_src.exists():
-        if char["id"] == "tom" and Path(cfg["tom_hero_path"]).exists():
-            hero_src = Path(cfg["tom_hero_path"])
-        elif (Path(cfg["refs_dir"]) / f"{char['id']}.png").exists():
-            hero_src = Path(cfg["refs_dir"]) / f"{char['id']}.png"
-        elif (Path(cfg["staging_dir"]) / char["id"] / "hero" / "cand_0_rgba.png").exists():
-            hero_src = Path(cfg["staging_dir"]) / char["id"] / "hero" / "cand_0_rgba.png"
-        else:
-            hero_src = Path(cfg["tom_hero_path"])
-    print(f"[video] source hero={hero_src}", flush=True)
+    print(f"[video:{char['id']}] source hero={hero_src}", flush=True)
     clean_src = prep_video_source(hero_src, out_dir, cfg)
     img_url = fal_client.upload_file(str(clean_src))
     prompt = build_prompt(stage, char, cfg, move_id=move_id, feedback=feedback)
     if stage == "battle_idle":
-        print(f"[video] calling {cfg['models']['video_idle']} (audio off)", flush=True)
+        print(f"[video:{char['id']}] calling {cfg['models']['video_idle']} (audio off)", flush=True)
         try:
             res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "start_image_url": img_url, "end_image_url": img_url, "duration": "5", "generate_audio": False})
         except Exception as e1:
-            print(f"[video] kling start/end retry: {e1}", flush=True)
+            print(f"[video:{char['id']}] kling start/end retry: {e1}", flush=True)
             res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "start_image_url": img_url, "duration": "5", "generate_audio": False})
     else:
         res_tag = "480p" if stage == "battle_move_draft" else "1080p"
-        print(f"[video] calling {cfg['models']['video_move']} ({res_tag})", flush=True)
+        print(f"[video:{char['id']}] calling {cfg['models']['video_move']} ({res_tag})", flush=True)
         res = fal_client.subscribe(cfg["models"]["video_move"], arguments={"prompt": prompt, "negative_prompt": ANTI_RING_NEG, "start_image_url": img_url, "resolution": res_tag})
     vid_url = res.get("video", {}).get("url") or res.get("url")
-    print(f"[video] generated raw video={vid_url}", flush=True)
+    print(f"[video:{char['id']}] generated raw video={vid_url}", flush=True)
     try:
         bg_res = fal_client.subscribe(cfg["models"]["cutout_video"], arguments={"video_url": vid_url, "background_color": "Transparent", "output_container_and_codec": "webm_vp9"})
     except Exception as e2:
-        print(f"[video] bria fallback: {e2}", flush=True)
+        print(f"[video:{char['id']}] bria fallback: {e2}", flush=True)
         bg_res = fal_client.subscribe(cfg["models"]["cutout_video_fallback"], arguments={"video_url": vid_url})
     alpha_url = bg_res.get("video", {}).get("url") or bg_res.get("url")
-    print(f"[video] alpha video={alpha_url}", flush=True)
+    print(f"[video:{char['id']}] alpha video={alpha_url}", flush=True)
     raw_vid = out_dir / "raw_alpha.webm"
     download_file(alpha_url, raw_vid)
-    item = {
+    strip_audio_if_present(raw_vid)
+    return {
         "id": f"{char['id']}_{slug}",
         "character_id": char["id"],
         "stage": stage,
@@ -177,8 +203,45 @@ def run_video(stage, char, cfg, move_id, feedback, queue):
         "needs_encode": True,
         "status": "encoding"
     }
+
+def run_video(stage, char, cfg, move_id, feedback, queue):
+    hero_src = resolve_hero_source(char, cfg, allow_fallback=True)
+    item = generate_video_item(stage, char, cfg, move_id, feedback, hero_src)
     queue["items"] = [i for i in queue["items"] if i["id"] != item["id"]] + [item]
     save_queue(cfg["queue_path"], queue)
+
+def run_batch_video(stage, manifest, cfg, move_id, feedback, queue):
+    slug = f"{stage}_{move_id}" if move_id else stage
+    targets = []
+    for c in manifest["cast"]:
+        if c["id"] in ("all_uploaded", "npcs", "dogs"):
+            continue
+        approved_vid = Path(cfg["output_dir"]) / c["id"] / slug / "approved.webm"
+        if approved_vid.exists():
+            print(f"[batch] skipping {c['id']} (already approved)", flush=True)
+            continue
+        hero_src = resolve_hero_source(c, cfg, allow_fallback=False)
+        if not hero_src:
+            print(f"[batch] skipping {c['id']} (no Hero PNG in art-factory/refs/{c['id']}.png)", flush=True)
+            continue
+        targets.append((c, hero_src))
+    if not targets:
+        print("[batch] no unapproved characters with uploaded Hero PNGs found.", flush=True)
+        return
+    print(f"[batch] starting {stage} for {len(targets)} character(s): {[c['id'] for c, _ in targets]}", flush=True)
+    def worker(pair):
+        c, src = pair
+        try:
+            return generate_video_item(stage, c, cfg, move_id, feedback, src)
+        except Exception as exc:
+            print(f"[batch] FAILED {c['id']}: {exc}", flush=True)
+            return None
+    with ThreadPoolExecutor(max_workers=min(3, len(targets))) as ex:
+        results = [r for r in ex.map(worker, targets) if r is not None]
+    for item in results:
+        queue["items"] = [i for i in queue["items"] if i["id"] != item["id"]] + [item]
+    save_queue(cfg["queue_path"], queue)
+    print(f"[batch] queued {len(results)}/{len(targets)} character(s) for Safari/WebM alpha encoding.", flush=True)
 
 def run_approve(char_id, cand_idx, feedback, cfg, queue):
     target_stage = feedback.strip() or "hero"
@@ -206,6 +269,11 @@ def main():
     if stage == "approve":
         run_approve(char_id, cand_idx, feedback, cfg, queue)
         return
+    if char_id == "all_uploaded":
+        if stage in ("battle_idle", "battle_move_draft", "battle_move_final"):
+            run_batch_video(stage, manifest, cfg, move_id, feedback, queue)
+            return
+        raise RuntimeError("Batch mode supports video stages only (battle_idle, battle_move_draft, battle_move_final).")
     char = get_character(manifest, char_id)
     if stage == "revise":
         stage = "hero"

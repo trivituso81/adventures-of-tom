@@ -20,7 +20,7 @@
       "flash_bridge": "gemini-3-flash",
       "flux_fallback": "fal-ai/flux-3-image",
       "cutout_still": "fal-ai/birefnet/v2",
-      "video_idle": "kling/v4/image-to-video",
+      "video_idle": "fal-ai/kling-video/v3/pro/image-to-video",
       "video_move": "alibaba/wan-3.0/image-to-video",
       "cutout_video": "bria/video/background-removal",
       "cutout_video_fallback": "fal-ai/birefnet/v2/video"
@@ -42,6 +42,7 @@
     { "id":"rose", "name":"Rose", "group":"child", "height_in":40, "head_ratio":[0.29,0.30], "child_bridge":true, "notes":"Carries tattered Lamby plush." },
     { "id":"nara", "name":"Nara", "group":"dog", "height_in":24, "head_ratio":[0.24,0.34], "notes":"40-lb black Labradoodle; non-speaking." },
     { "id":"dogs", "name":"Neighborhood Dogs", "group":"dog", "height_in":22, "head_ratio":[0.24,0.34], "notes":"Additional neighborhood dogs pack." },
-    { "id":"npcs", "name":"Town & LA NPCs (50)", "group":"npc", "height_in":67, "head_ratio":[0.21,0.24], "count":50, "notes":"50 supporting Long Island and Los Angeles NPCs." }
+    { "id":"npcs", "name":"Town & LA NPCs (50)", "group":"npc", "height_in":67, "head_ratio":[0.21,0.24], "count":50, "notes":"50 supporting Long Island and Los Angeles NPCs." },
+    { "id":"all_uploaded", "name":"ALL UPLOADED CAST (Batch)", "group":"batch", "height_in":71, "head_ratio":[0.21,0.24], "notes":"Runs every cast member with an uploaded Hero PNG who is not yet approved for this stage." }
   ]
 }
