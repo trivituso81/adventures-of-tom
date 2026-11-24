@@ -20623,6 +20623,10 @@
     {
      "d": "2026-11-23",
      "t": "Part one shipped as guideflow9a: old request files, picture workflow, guide mode of wan-gen, progress.py and the old functions deleted; purge_test passes. Next: the free run on GitHub (T11), then guideflow9."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Part shipped as guideflow9a: The old Battle Guide request path is deleted; the free test run on GitHub comes next"
     }
    ],
    "prompt": {
@@ -21420,6 +21424,24 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGZLxZREfsCLURqeTW",
+   "title": "Use this one: one batched job that tells the truth",
+   "first": "2026-11-23T14:26:47-08:00",
+   "last": "2026-11-23T18:40:58-08:00",
+   "tags": [
+    "guideflow7",
+    "guideflow7a",
+    "guideflow8",
+    "guideflow8a",
+    "guideflow9a"
+   ],
+   "cards": [
+    "c-guideflow-7",
+    "c-guideflow-8",
+    "c-guideflow-9"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCY8BBw577QYm3s41d",
    "title": "Stage 23a: Battle 3 gets its own shell (no battle 2 names)",
    "first": "2026-11-23T16:43:15-08:00",
@@ -21430,23 +21452,6 @@
    "cards": [
     "c-b3s23a",
     "c-b3s23"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGZLxZREfsCLURqeTW",
-   "title": "Use this one: one batched job that tells the truth",
-   "first": "2026-11-23T14:26:47-08:00",
-   "last": "2026-11-23T18:02:40-08:00",
-   "tags": [
-    "guideflow7",
-    "guideflow7a",
-    "guideflow8",
-    "guideflow8a"
-   ],
-   "cards": [
-    "c-guideflow-7",
-    "c-guideflow-8",
-    "c-guideflow-9"
    ]
   },
   {
@@ -27666,8 +27671,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "018729477c829f6f07ddb4f96522d9d8271cfe67",
- "synced_at": "2026-11-24T02:34:08+00:00",
+ "synced": "775fe62f0f3668de913dfce996904c1469328958",
+ "synced_at": "2026-11-24T02:41:48+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
