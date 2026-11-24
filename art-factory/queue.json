@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-24T06:34:10Z",
+  "updated_at": "2026-11-24T08:28:59Z",
   "items": [
     {
       "id": "tom_hero_0",
@@ -159,10 +159,8 @@
       "stage": "battle_move_draft",
       "move_id": "tom-ff-basic",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-ff-basic/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-ff-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-basic/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "tom_battle_idle",
@@ -280,10 +278,8 @@
       "stage": "battle_move_draft",
       "move_id": "tom-ff-s1",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "tom_battle_move_draft_tom-ff-s1_counter",
@@ -291,10 +287,8 @@
       "stage": "battle_move_draft",
       "move_id": "tom-ff-s1_counter",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1_counter/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1_counter/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1_counter/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "tom_battle_move_draft_tom-ff-s2",
@@ -302,10 +296,8 @@
       "stage": "battle_move_draft",
       "move_id": "tom-ff-s2",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s2/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s2/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "tom_battle_move_draft_tom-ff-cap",
@@ -313,10 +305,8 @@
       "stage": "battle_move_draft",
       "move_id": "tom-ff-cap",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-ff-cap/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-ff-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-cap/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "tom_battle_move_draft_univ-pick-me-up",
@@ -324,10 +314,8 @@
       "stage": "battle_move_draft",
       "move_id": "univ-pick-me-up",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_univ-pick-me-up/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/tom/battle_move_draft_univ-pick-me-up/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_univ-pick-me-up/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "tom_battle_move_draft_univ-double-team",
@@ -335,10 +323,8 @@
       "stage": "battle_move_draft",
       "move_id": "univ-double-team",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_univ-double-team/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/tom/battle_move_draft_univ-double-team/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_univ-double-team/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "tom_battle_move_draft_univ-full-ruckus",
@@ -346,10 +332,8 @@
       "stage": "battle_move_draft",
       "move_id": "univ-full-ruckus",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_univ-full-ruckus/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/tom/battle_move_draft_univ-full-ruckus/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_univ-full-ruckus/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "tom_battle_move_draft_tom-gg-basic",
@@ -357,10 +341,8 @@
       "stage": "battle_move_draft",
       "move_id": "tom-gg-basic",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-gg-basic/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-gg-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-basic/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "tom_battle_move_draft_tom-gg-s1",
@@ -368,10 +350,8 @@
       "stage": "battle_move_draft",
       "move_id": "tom-gg-s1",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s1/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s1/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "tom_battle_move_draft_tom-gg-s2",
@@ -379,10 +359,8 @@
       "stage": "battle_move_draft",
       "move_id": "tom-gg-s2",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "tom_battle_move_draft_tom-gg-s2_counter",
@@ -390,10 +368,8 @@
       "stage": "battle_move_draft",
       "move_id": "tom-gg-s2_counter",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2_counter/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2_counter/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2_counter/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "tom_battle_move_draft_tom-gg-cap",
@@ -401,10 +377,8 @@
       "stage": "battle_move_draft",
       "move_id": "tom-gg-cap",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-gg-cap/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-gg-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-cap/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "tom_battle_move_draft_tom-sb-basic",
@@ -412,10 +386,8 @@
       "stage": "battle_move_draft",
       "move_id": "tom-sb-basic",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-sb-basic/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-sb-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-sb-basic/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "tom_battle_move_draft_tom-sb-s1",
@@ -423,10 +395,8 @@
       "stage": "battle_move_draft",
       "move_id": "tom-sb-s1",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s1/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s1/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "tom_battle_move_draft_tom-sb-s2",
@@ -434,10 +404,8 @@
       "stage": "battle_move_draft",
       "move_id": "tom-sb-s2",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s2/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s2/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "tom_battle_move_draft_tom-sb-cap",
@@ -445,10 +413,8 @@
       "stage": "battle_move_draft",
       "move_id": "tom-sb-cap",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-sb-cap/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/tom/battle_move_draft_tom-sb-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-sb-cap/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "grace_battle_move_draft_grace-sc-basic",
@@ -456,10 +422,8 @@
       "stage": "battle_move_draft",
       "move_id": "grace-sc-basic",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sc-basic/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sc-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sc-basic/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "grace_battle_move_draft_grace-sc-s1",
@@ -467,10 +431,8 @@
       "stage": "battle_move_draft",
       "move_id": "grace-sc-s1",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s1/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s1/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "grace_battle_move_draft_grace-sc-s2",
@@ -478,10 +440,8 @@
       "stage": "battle_move_draft",
       "move_id": "grace-sc-s2",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s2/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s2/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "grace_battle_move_draft_grace-sc-cap",
@@ -489,10 +449,8 @@
       "stage": "battle_move_draft",
       "move_id": "grace-sc-cap",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sc-cap/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sc-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sc-cap/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "grace_battle_move_draft_univ-pick-me-up",
@@ -533,10 +491,8 @@
       "stage": "battle_move_draft",
       "move_id": "grace-ca-basic",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-ca-basic/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-ca-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-basic/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "grace_battle_move_draft_grace-ca-s1",
@@ -544,10 +500,8 @@
       "stage": "battle_move_draft",
       "move_id": "grace-ca-s1",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s1/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s1/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "grace_battle_move_draft_grace-ca-s2",
@@ -555,10 +509,8 @@
       "stage": "battle_move_draft",
       "move_id": "grace-ca-s2",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "grace_battle_move_draft_grace-ca-s2_counter",
@@ -566,10 +518,8 @@
       "stage": "battle_move_draft",
       "move_id": "grace-ca-s2_counter",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2_counter/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2_counter/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2_counter/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "grace_battle_move_draft_grace-ca-cap",
@@ -577,10 +527,8 @@
       "stage": "battle_move_draft",
       "move_id": "grace-ca-cap",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-ca-cap/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-ca-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-cap/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "grace_battle_move_draft_grace-sp-basic",
@@ -588,10 +536,8 @@
       "stage": "battle_move_draft",
       "move_id": "grace-sp-basic",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sp-basic/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sp-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sp-basic/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "grace_battle_move_draft_grace-sp-s1",
@@ -599,10 +545,8 @@
       "stage": "battle_move_draft",
       "move_id": "grace-sp-s1",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s1/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s1/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "grace_battle_move_draft_grace-sp-s2",
@@ -610,10 +554,8 @@
       "stage": "battle_move_draft",
       "move_id": "grace-sp-s2",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s2/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s2/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
     },
     {
       "id": "grace_battle_move_draft_grace-sp-cap",
@@ -621,10 +563,755 @@
       "stage": "battle_move_draft",
       "move_id": "grace-sp-cap",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sp-cap/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "review",
-      "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sp-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sp-cap/battle_alpha_safari_hvc1.mp4"
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "tnb_battle_move_draft_tnb-cer-basic",
+      "character_id": "tnb",
+      "stage": "battle_move_draft",
+      "move_id": "tnb-cer-basic",
+      "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "tnb_battle_move_draft_tnb-cer-s1",
+      "character_id": "tnb",
+      "stage": "battle_move_draft",
+      "move_id": "tnb-cer-s1",
+      "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "tnb_battle_move_draft_tnb-cer-s2",
+      "character_id": "tnb",
+      "stage": "battle_move_draft",
+      "move_id": "tnb-cer-s2",
+      "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "tnb_battle_move_draft_tnb-cer-cap",
+      "character_id": "tnb",
+      "stage": "battle_move_draft",
+      "move_id": "tnb-cer-cap",
+      "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "tnb_battle_move_draft_tnb-lb-basic",
+      "character_id": "tnb",
+      "stage": "battle_move_draft",
+      "move_id": "tnb-lb-basic",
+      "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "tnb_battle_move_draft_tnb-lb-s1",
+      "character_id": "tnb",
+      "stage": "battle_move_draft",
+      "move_id": "tnb-lb-s1",
+      "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "tnb_battle_move_draft_tnb-lb-s2",
+      "character_id": "tnb",
+      "stage": "battle_move_draft",
+      "move_id": "tnb-lb-s2",
+      "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "tnb_battle_move_draft_tnb-lb-cap",
+      "character_id": "tnb",
+      "stage": "battle_move_draft",
+      "move_id": "tnb-lb-cap",
+      "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "tnb_battle_move_draft_tnb-sk-basic",
+      "character_id": "tnb",
+      "stage": "battle_move_draft",
+      "move_id": "tnb-sk-basic",
+      "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "tnb_battle_move_draft_tnb-sk-s1",
+      "character_id": "tnb",
+      "stage": "battle_move_draft",
+      "move_id": "tnb-sk-s1",
+      "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "tnb_battle_move_draft_tnb-sk-s2",
+      "character_id": "tnb",
+      "stage": "battle_move_draft",
+      "move_id": "tnb-sk-s2",
+      "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "tnb_battle_move_draft_tnb-sk-cap",
+      "character_id": "tnb",
+      "stage": "battle_move_draft",
+      "move_id": "tnb-sk-cap",
+      "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "amy_battle_move_draft_amy-fq-basic",
+      "character_id": "amy",
+      "stage": "battle_move_draft",
+      "move_id": "amy-fq-basic",
+      "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-fq-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "amy_battle_move_draft_amy-fq-s1",
+      "character_id": "amy",
+      "stage": "battle_move_draft",
+      "move_id": "amy-fq-s1",
+      "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-fq-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "amy_battle_move_draft_amy-fq-s2",
+      "character_id": "amy",
+      "stage": "battle_move_draft",
+      "move_id": "amy-fq-s2",
+      "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-fq-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "amy_battle_move_draft_amy-fq-cap",
+      "character_id": "amy",
+      "stage": "battle_move_draft",
+      "move_id": "amy-fq-cap",
+      "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-fq-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "amy_battle_move_draft_amy-cb-basic",
+      "character_id": "amy",
+      "stage": "battle_move_draft",
+      "move_id": "amy-cb-basic",
+      "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-cb-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "amy_battle_move_draft_amy-cb-s1",
+      "character_id": "amy",
+      "stage": "battle_move_draft",
+      "move_id": "amy-cb-s1",
+      "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-cb-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "amy_battle_move_draft_amy-cb-s2",
+      "character_id": "amy",
+      "stage": "battle_move_draft",
+      "move_id": "amy-cb-s2",
+      "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-cb-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "amy_battle_move_draft_amy-cb-cap",
+      "character_id": "amy",
+      "stage": "battle_move_draft",
+      "move_id": "amy-cb-cap",
+      "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-cb-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "amy_battle_move_draft_amy-sm-basic",
+      "character_id": "amy",
+      "stage": "battle_move_draft",
+      "move_id": "amy-sm-basic",
+      "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-sm-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "amy_battle_move_draft_amy-sm-s1",
+      "character_id": "amy",
+      "stage": "battle_move_draft",
+      "move_id": "amy-sm-s1",
+      "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-sm-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "amy_battle_move_draft_amy-sm-s2",
+      "character_id": "amy",
+      "stage": "battle_move_draft",
+      "move_id": "amy-sm-s2",
+      "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-sm-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "amy_battle_move_draft_amy-sm-cap",
+      "character_id": "amy",
+      "stage": "battle_move_draft",
+      "move_id": "amy-sm-cap",
+      "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-sm-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "justin_battle_move_draft_justin-bb-basic",
+      "character_id": "justin",
+      "stage": "battle_move_draft",
+      "move_id": "justin-bb-basic",
+      "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "justin_battle_move_draft_justin-bb-s1",
+      "character_id": "justin",
+      "stage": "battle_move_draft",
+      "move_id": "justin-bb-s1",
+      "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-bb-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "justin_battle_move_draft_justin-bb-s2",
+      "character_id": "justin",
+      "stage": "battle_move_draft",
+      "move_id": "justin-bb-s2",
+      "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-bb-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "justin_battle_move_draft_justin-bb-cap",
+      "character_id": "justin",
+      "stage": "battle_move_draft",
+      "move_id": "justin-bb-cap",
+      "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-bb-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "justin_battle_move_draft_justin-lw-basic",
+      "character_id": "justin",
+      "stage": "battle_move_draft",
+      "move_id": "justin-lw-basic",
+      "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-lw-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "justin_battle_move_draft_justin-lw-s1",
+      "character_id": "justin",
+      "stage": "battle_move_draft",
+      "move_id": "justin-lw-s1",
+      "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-lw-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "justin_battle_move_draft_justin-lw-s2",
+      "character_id": "justin",
+      "stage": "battle_move_draft",
+      "move_id": "justin-lw-s2",
+      "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-lw-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "justin_battle_move_draft_justin-lw-cap",
+      "character_id": "justin",
+      "stage": "battle_move_draft",
+      "move_id": "justin-lw-cap",
+      "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-lw-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "justin_battle_move_draft_justin-ar-basic",
+      "character_id": "justin",
+      "stage": "battle_move_draft",
+      "move_id": "justin-ar-basic",
+      "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-ar-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "justin_battle_move_draft_justin-ar-s1",
+      "character_id": "justin",
+      "stage": "battle_move_draft",
+      "move_id": "justin-ar-s1",
+      "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-ar-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "justin_battle_move_draft_justin-ar-s2",
+      "character_id": "justin",
+      "stage": "battle_move_draft",
+      "move_id": "justin-ar-s2",
+      "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-ar-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "justin_battle_move_draft_justin-ar-cap",
+      "character_id": "justin",
+      "stage": "battle_move_draft",
+      "move_id": "justin-ar-cap",
+      "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-ar-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "olivia_battle_move_draft_olivia-rc-basic",
+      "character_id": "olivia",
+      "stage": "battle_move_draft",
+      "move_id": "olivia-rc-basic",
+      "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "olivia_battle_move_draft_olivia-rc-s1",
+      "character_id": "olivia",
+      "stage": "battle_move_draft",
+      "move_id": "olivia-rc-s1",
+      "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "olivia_battle_move_draft_olivia-rc-s2",
+      "character_id": "olivia",
+      "stage": "battle_move_draft",
+      "move_id": "olivia-rc-s2",
+      "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "olivia_battle_move_draft_olivia-rc-cap",
+      "character_id": "olivia",
+      "stage": "battle_move_draft",
+      "move_id": "olivia-rc-cap",
+      "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "olivia_battle_move_draft_olivia-wm-basic",
+      "character_id": "olivia",
+      "stage": "battle_move_draft",
+      "move_id": "olivia-wm-basic",
+      "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "olivia_battle_move_draft_olivia-wm-s1",
+      "character_id": "olivia",
+      "stage": "battle_move_draft",
+      "move_id": "olivia-wm-s1",
+      "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "olivia_battle_move_draft_olivia-wm-s2",
+      "character_id": "olivia",
+      "stage": "battle_move_draft",
+      "move_id": "olivia-wm-s2",
+      "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "olivia_battle_move_draft_olivia-wm-cap",
+      "character_id": "olivia",
+      "stage": "battle_move_draft",
+      "move_id": "olivia-wm-cap",
+      "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "olivia_battle_move_draft_olivia-na-basic",
+      "character_id": "olivia",
+      "stage": "battle_move_draft",
+      "move_id": "olivia-na-basic",
+      "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "olivia_battle_move_draft_olivia-na-s1",
+      "character_id": "olivia",
+      "stage": "battle_move_draft",
+      "move_id": "olivia-na-s1",
+      "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "olivia_battle_move_draft_olivia-na-s2",
+      "character_id": "olivia",
+      "stage": "battle_move_draft",
+      "move_id": "olivia-na-s2",
+      "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "olivia_battle_move_draft_olivia-na-cap",
+      "character_id": "olivia",
+      "stage": "battle_move_draft",
+      "move_id": "olivia-na-cap",
+      "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "deedee_battle_move_draft_deedee-nf-basic",
+      "character_id": "deedee",
+      "stage": "battle_move_draft",
+      "move_id": "deedee-nf-basic",
+      "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "deedee_battle_move_draft_deedee-nf-s1",
+      "character_id": "deedee",
+      "stage": "battle_move_draft",
+      "move_id": "deedee-nf-s1",
+      "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "deedee_battle_move_draft_deedee-nf-s1_counter",
+      "character_id": "deedee",
+      "stage": "battle_move_draft",
+      "move_id": "deedee-nf-s1_counter",
+      "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-s1_counter/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "deedee_battle_move_draft_deedee-nf-s2",
+      "character_id": "deedee",
+      "stage": "battle_move_draft",
+      "move_id": "deedee-nf-s2",
+      "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "deedee_battle_move_draft_deedee-nf-cap",
+      "character_id": "deedee",
+      "stage": "battle_move_draft",
+      "move_id": "deedee-nf-cap",
+      "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "deedee_battle_move_draft_deedee-rn-basic",
+      "character_id": "deedee",
+      "stage": "battle_move_draft",
+      "move_id": "deedee-rn-basic",
+      "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "deedee_battle_move_draft_deedee-rn-s1",
+      "character_id": "deedee",
+      "stage": "battle_move_draft",
+      "move_id": "deedee-rn-s1",
+      "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "deedee_battle_move_draft_deedee-rn-s2",
+      "character_id": "deedee",
+      "stage": "battle_move_draft",
+      "move_id": "deedee-rn-s2",
+      "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "deedee_battle_move_draft_deedee-rn-cap",
+      "character_id": "deedee",
+      "stage": "battle_move_draft",
+      "move_id": "deedee-rn-cap",
+      "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "deedee_battle_move_draft_deedee-hc-basic",
+      "character_id": "deedee",
+      "stage": "battle_move_draft",
+      "move_id": "deedee-hc-basic",
+      "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "deedee_battle_move_draft_deedee-hc-s1",
+      "character_id": "deedee",
+      "stage": "battle_move_draft",
+      "move_id": "deedee-hc-s1",
+      "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "deedee_battle_move_draft_deedee-hc-s2",
+      "character_id": "deedee",
+      "stage": "battle_move_draft",
+      "move_id": "deedee-hc-s2",
+      "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "deedee_battle_move_draft_deedee-hc-cap",
+      "character_id": "deedee",
+      "stage": "battle_move_draft",
+      "move_id": "deedee-hc-cap",
+      "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "boppy_battle_move_draft_boppy-dep-basic",
+      "character_id": "boppy",
+      "stage": "battle_move_draft",
+      "move_id": "boppy-dep-basic",
+      "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "boppy_battle_move_draft_boppy-dep-s1",
+      "character_id": "boppy",
+      "stage": "battle_move_draft",
+      "move_id": "boppy-dep-s1",
+      "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "boppy_battle_move_draft_boppy-dep-s1_counter",
+      "character_id": "boppy",
+      "stage": "battle_move_draft",
+      "move_id": "boppy-dep-s1_counter",
+      "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-s1_counter/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "boppy_battle_move_draft_boppy-dep-s2",
+      "character_id": "boppy",
+      "stage": "battle_move_draft",
+      "move_id": "boppy-dep-s2",
+      "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "boppy_battle_move_draft_boppy-dep-cap",
+      "character_id": "boppy",
+      "stage": "battle_move_draft",
+      "move_id": "boppy-dep-cap",
+      "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "boppy_battle_move_draft_boppy-pb-basic",
+      "character_id": "boppy",
+      "stage": "battle_move_draft",
+      "move_id": "boppy-pb-basic",
+      "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "boppy_battle_move_draft_boppy-pb-s1",
+      "character_id": "boppy",
+      "stage": "battle_move_draft",
+      "move_id": "boppy-pb-s1",
+      "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "boppy_battle_move_draft_boppy-pb-s1_counter",
+      "character_id": "boppy",
+      "stage": "battle_move_draft",
+      "move_id": "boppy-pb-s1_counter",
+      "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-s1_counter/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "boppy_battle_move_draft_boppy-pb-s2",
+      "character_id": "boppy",
+      "stage": "battle_move_draft",
+      "move_id": "boppy-pb-s2",
+      "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "boppy_battle_move_draft_boppy-pb-cap",
+      "character_id": "boppy",
+      "stage": "battle_move_draft",
+      "move_id": "boppy-pb-cap",
+      "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "boppy_battle_move_draft_boppy-ba-basic",
+      "character_id": "boppy",
+      "stage": "battle_move_draft",
+      "move_id": "boppy-ba-basic",
+      "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "boppy_battle_move_draft_boppy-ba-s1",
+      "character_id": "boppy",
+      "stage": "battle_move_draft",
+      "move_id": "boppy-ba-s1",
+      "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "boppy_battle_move_draft_boppy-ba-s2",
+      "character_id": "boppy",
+      "stage": "battle_move_draft",
+      "move_id": "boppy-ba-s2",
+      "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "boppy_battle_move_draft_boppy-ba-cap",
+      "character_id": "boppy",
+      "stage": "battle_move_draft",
+      "move_id": "boppy-ba-cap",
+      "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "rose_battle_move_draft_rose-sr-basic",
+      "character_id": "rose",
+      "stage": "battle_move_draft",
+      "move_id": "rose-sr-basic",
+      "raw_video_path": "art-factory/staging/rose/battle_move_draft_rose-sr-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "rose_battle_move_draft_rose-sr-s1",
+      "character_id": "rose",
+      "stage": "battle_move_draft",
+      "move_id": "rose-sr-s1",
+      "raw_video_path": "art-factory/staging/rose/battle_move_draft_rose-sr-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "rose_battle_move_draft_rose-sr-s2",
+      "character_id": "rose",
+      "stage": "battle_move_draft",
+      "move_id": "rose-sr-s2",
+      "raw_video_path": "art-factory/staging/rose/battle_move_draft_rose-sr-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "rose_battle_move_draft_rose-sr-cap",
+      "character_id": "rose",
+      "stage": "battle_move_draft",
+      "move_id": "rose-sr-cap",
+      "raw_video_path": "art-factory/staging/rose/battle_move_draft_rose-sr-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "rose_battle_move_draft_rose-cr-basic",
+      "character_id": "rose",
+      "stage": "battle_move_draft",
+      "move_id": "rose-cr-basic",
+      "raw_video_path": "art-factory/staging/rose/battle_move_draft_rose-cr-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "rose_battle_move_draft_rose-cr-s1",
+      "character_id": "rose",
+      "stage": "battle_move_draft",
+      "move_id": "rose-cr-s1",
+      "raw_video_path": "art-factory/staging/rose/battle_move_draft_rose-cr-s1/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "rose_battle_move_draft_rose-cr-s2",
+      "character_id": "rose",
+      "stage": "battle_move_draft",
+      "move_id": "rose-cr-s2",
+      "raw_video_path": "art-factory/staging/rose/battle_move_draft_rose-cr-s2/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
+    },
+    {
+      "id": "rose_battle_move_draft_rose-cr-cap",
+      "character_id": "rose",
+      "stage": "battle_move_draft",
+      "move_id": "rose-cr-cap",
+      "raw_video_path": "art-factory/staging/rose/battle_move_draft_rose-cr-cap/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
     }
   ]
 }
