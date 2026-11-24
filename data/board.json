@@ -20627,6 +20627,10 @@
     {
      "d": "2026-11-23",
      "t": "Part shipped as guideflow9a: The old Battle Guide request path is deleted; the free test run on GitHub comes next"
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Part shipped as guideflow9b: A replay row in the Battle Guide queue never makes the xAI look check call"
     }
    ],
    "prompt": {
@@ -21427,13 +21431,14 @@
    "url": "https://claude.ai/code/session_01RXeukGZLxZREfsCLURqeTW",
    "title": "Use this one: one batched job that tells the truth",
    "first": "2026-11-23T14:26:47-08:00",
-   "last": "2026-11-23T18:40:58-08:00",
+   "last": "2026-11-23T18:53:34-08:00",
    "tags": [
     "guideflow7",
     "guideflow7a",
     "guideflow8",
     "guideflow8a",
-    "guideflow9a"
+    "guideflow9a",
+    "guideflow9b"
    ],
    "cards": [
     "c-guideflow-7",
@@ -27671,8 +27676,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "775fe62f0f3668de913dfce996904c1469328958",
- "synced_at": "2026-11-24T02:41:48+00:00",
+ "synced": "047df3315b20263ff0c18c71c661ecc8cbe56d0d",
+ "synced_at": "2026-11-24T02:54:39+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
