@@ -21202,7 +21202,7 @@
    "title": "Stage 23a: Battle 3 gets its own shell (no battle 2 names)",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Slice 23a of the battle 2 purge: Battle 3 gets its own shell (no battle 2 names). Ready to start: the gate checks passed and Tom's yes is in.",
    "blocks": [
     "c-b3s23b"
@@ -21228,6 +21228,10 @@
     {
      "d": "2026-11-23",
      "t": "Shipped b3s23a (engine/bt-shell.js). Moved, not copied: startBattle (the fight door; asks b3sStart, then BT.oldFight), B2.result to BT.result, B2.active-as-lab to BT.lab, b2Esc/b2Thumb(s)/b2Portrait/b2CanvasPt to btEsc/btThumb(s)/btPortrait/btCanvasPt, B2_METER/b2Meter/b2MeterPath/b2MeterTag to BT_METER/btMeter/btMeterPath/btMeterTag, b2BattleDef/B2_FLIPPED/b2Purse to btBattleDef/BT_FLIPPED/btPurse, bpOn/bpIcon/bpWord from battle-pictures.js; CSS classes .b2-tk/.b2-rib-lbl/.b2-int to .bt-*. Proof: the word-boundary grep for b2/B2/battle2 over engine/b3-*.js and data/b3-*.js is empty; the literal grep still matches 4 hex colours in data/b3-status.js and the Tombo id tnb2 (a story flag, left alone). New test tools/bt_alone_test.py plays a chapter 1 story fight with every battle 2 file empty: passes (also in the night manifest). Passed: b3-sim check (5579), unused_voice all 0, b3_test subsets new1 s8 s7 s4 s16 s21, ch11_b3_test, smoke except the known board_sync_test board4. Fails the same way on unchanged main, so not from this slice: b3_story_test 'a save made on Battle 3 loads with the switch on Old, and chapter 1's scene fight plays on battle 2' (the scene intro is still active), and ch1_b3_test steps 6 spot, 7 boss, 8 after the boss, dragonfly coin. NOT run: the full b3_test.py over all 98 Lab fights (hours), ch20_b3_test. Battle 2 still plays under Settings OLD."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Shipped as b3s23a: Battle 3 has its own shell, engine/bt-shell.js, and no longer reads a battle 2 name"
     }
    ],
    "prompt": {
@@ -21238,14 +21242,15 @@
     "model": "Claude Sonnet 5.5 (row C: a refactor across about 40 files with the list not yet written, tests catch mistakes)",
     "effort": "high (many files with no written list of callers)",
     "text": "Read claude/battle-architecture.md section 5 row 23, claude/next-addendum-b3s23.md (the facts, the five slices and the rules for every slice) and the history of cards c-b3s23 and the card before this one. Tom's yes on t-b3s23-confirm is in: do not ask again. Rules: purge completely (CLAUDE.md), never edit demo/, never edit a recorded voice line, no animation work, add a docs/CHANGES.md heading for the build tag and run python3 tools/art-library/bump_tags.py b3s23a --base origin/main on every push. Verify by loading the page (python3 tools/serve.py, headless Chromium, no ReferenceError or pageerror) as well as by grep. Every push ends green: node tools/b3-sim.js check, python3 tools/b3_test.py, python3 tools/b3_story_test.py, python3 tools/smoke.py (its one known failure on main before this work is board_sync_test board4 'board_check accepts a Tom card waiting on its fix'; do not fix it here, name it), python3 -I tools/clip-audit/unused_voice.py (all 0). Slice 23a. Create engine/bt-shell.js with what Battle 3 really borrows from battle 2 under neutral names (btEsc, btThumb, btPortrait, btCanvasPt, btMeter, btMeterTag, BT_METER, btBattleDef, btPurse, the one fight door `startBattle`'s Battle 3 part, BT.result) by moving the code, not copying it. Change every engine/b3-*.js and data/b3-*.js file, engine/battle-draw.js, engine/battle-pictures.js and engine/clips.js to the new names, load bt-shell.js before the Battle 3 files in index.html, and find any other borrowed name by running the page. Find the full list first with the dependency script described in claude/next-addendum-b3s23.md (names defined in engine/battle2*.js and data/battle2-data.js, read by a b3 file or by a shared engine file the Battle 3 screen loads). Delete nothing yet. Battle 2 must still work (Settings OLD on a save). Result: a list of every name moved, and the proof that `git grep -I -E 'b2|B2|battle2' -- 'engine/b3-*.js' 'data/b3-*.js'` is empty apart from prose comments you also reworded. Write the result into this card's history, and if the next slice's work is already done by this one, say so on the next card. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-23"
   },
   {
    "id": "c-b3s23b",
    "title": "Battle stage 23b: Re-home the tables other systems borrow",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "next": "Slice 23b of the battle 2 purge: re-home the tables other systems borrow. 23a is shipped (engine/bt-shell.js); its history lists the leftover names. Ready to start.",
    "blocks": [
     "c-b3s23c"
@@ -21266,6 +21271,10 @@
     {
      "d": "2026-11-23",
      "t": "Found by c-b3s23a, for this slice or 23c/23d: B2_FLYERS (engine/town-render.js) and B2_TOMBOS.push are read at load; B2.active is read in data/ch15-battle.js:60 (unguarded) and engine/music-clips.js:121-122 (in try); engine/report.js reads B2; engine/feel.js uses b2Cost/b2Shushed/b2TabRows; engine/story.js uses b2TabRows/b2BagList; engine/painted.js and engine/clips.js read B2 guarded; btPurse in engine/bt-shell.js keeps the f.calm?1.5:1 factor until 23d. tools/bt_alone_test.py lists the B2 reads it allows; the list should shrink as these go. Two tests already fail on unchanged main (b3_story_test Old-switch scene fight, ch1_b3_test steps 6 to 8): name them, do not chase them here."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Unblocked: Stage 23a: Battle 3 gets its own shell (no battle 2 names) is done."
     }
    ],
    "prompt": {
@@ -21276,8 +21285,7 @@
     "model": "Claude Sonnet 5.5 (row B: written steps in the slice list, tests and a save-load check catch mistakes)",
     "effort": "medium (the steps are written)",
     "text": "Read claude/battle-architecture.md section 5 row 23, claude/next-addendum-b3s23.md (the facts, the five slices and the rules for every slice) and the history of cards c-b3s23 and the card before this one. Tom's yes on t-b3s23-confirm is in: do not ask again. Rules: purge completely (CLAUDE.md), never edit demo/, never edit a recorded voice line, no animation work, add a docs/CHANGES.md heading for the build tag and run python3 tools/art-library/bump_tags.py b3s23b --base origin/main on every push. Verify by loading the page (python3 tools/serve.py, headless Chromium, no ReferenceError or pageerror) as well as by grep. Every push ends green: node tools/b3-sim.js check, python3 tools/b3_test.py, python3 tools/b3_story_test.py, python3 tools/smoke.py (its one known failure on main before this work is board_sync_test board4 'board_check accepts a Tom card waiting on its fix'; do not fix it here, name it), python3 -I tools/clip-audit/unused_voice.py (all 0). Slice 23b. Move to Battle 3 or neutral homes everything that data/party.js, data/progress.js, data/abilities.js, data/lines.js, data/battle-sprites.js, data/battle-emoji.js, data/battle-icons.js, engine/progress.js, engine/m2-*.js, engine/stage.js, engine/town-render.js, engine/painted.js and data/b3-tombo-skins.js read from battle 2 (B2_STATS, B2_STAT_KEYS, B2_SKILLS, B2_ELEMS, B2_FLYERS, B2_TOMBOS ids, b2Stat, b2FoeDef, b2Kit and the like). Keep every Tombo id and story flag name `tombo:the id` unchanged. Old save fields (stamps, ranks, remix, loadouts, HEART, Tombo flags) are ignored on load, never erased from a save. Delete nothing that the Old path still calls. Result: the list of names moved and a save-load test (an old save and a new save both load, nothing is erased). Write the result into this card's history, and if the next slice's work is already done by this one, say so on the next card. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "waiting_on": "claude"
+   }
   },
   {
    "id": "c-b3s23c",
@@ -21408,6 +21416,19 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukCY8BBw577QYm3s41d",
+   "title": "Stage 23a: Battle 3 gets its own shell (no battle 2 names)",
+   "first": "2026-11-23T16:43:15-08:00",
+   "last": "2026-11-23T18:33:10-08:00",
+   "tags": [
+    "b3s23a"
+   ],
+   "cards": [
+    "c-b3s23a",
+    "c-b3s23"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGZLxZREfsCLURqeTW",
    "title": "Use this one: one batched job that tells the truth",
    "first": "2026-11-23T14:26:47-08:00",
@@ -21422,16 +21443,6 @@
     "c-guideflow-7",
     "c-guideflow-8",
     "c-guideflow-9"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCY8BBw577QYm3s41d",
-   "title": "Stage 23a: Battle 3 gets its own shell (no battle 2 names)",
-   "first": "2026-11-23T16:43:15-08:00",
-   "last": "2026-11-23T16:43:15-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s23a"
    ]
   },
   {
@@ -27651,8 +27662,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "d870da13e2182bcacf0a571ba8fb37b579a45670",
- "synced_at": "2026-11-24T02:03:28+00:00",
+ "synced": "018729477c829f6f07ddb4f96522d9d8271cfe67",
+ "synced_at": "2026-11-24T02:34:08+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
