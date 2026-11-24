@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-24T02:15:27Z",
+  "updated_at": "2026-11-24T02:30:56Z",
   "items": [
     {
       "id": "tom_hero_0",
@@ -152,6 +152,15 @@
       "raw_path": "art-factory/staging/tom/hero/cand_7_raw.png",
       "rgba_path": "art-factory/staging/tom/hero/cand_7_rgba.png",
       "status": "review"
+    },
+    {
+      "id": "tom_battle_idle",
+      "character_id": "tom",
+      "stage": "battle_idle",
+      "move_id": "",
+      "raw_video_path": "art-factory/staging/tom/battle_idle/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "encoding"
     }
   ]
 }
