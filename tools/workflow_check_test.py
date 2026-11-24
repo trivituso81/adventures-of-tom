@@ -23,4 +23,12 @@ r = w.check(folder({'d.yml': "on: [push]\njobs:\n  a:\n    runs-on: x\n    concu
 check('W5 the same concurrency on the job passes', r == [], r)
 check('W6 no jobs fails', len(w.check(folder({'e.yml': 'on: push\n'}))) == 1)
 check('W7 broken yaml fails', len(w.check(folder({'f.yml': 'a: [\n'}))) == 1)
+# guideflow9 W8: a GitHub runner has no PyYAML, so bump_tags skips the check there with a note; in a session it still stops
+sys.path.insert(0, os.path.join(HERE, 'art-library')); import bump_tags as bt
+nd = tempfile.mkdtemp(); open(os.path.join(nd, 'yaml.py'), 'w').write("raise ImportError('no yaml here')\n")
+env = dict(os.environ, PYTHONPATH=nd)
+ok1, t1 = bt.workflows_ok(dict(env, GITHUB_ACTIONS='true')); ok2, t2 = bt.workflows_ok(dict(env, GITHUB_ACTIONS=''))
+check('W8 on GitHub with no PyYAML the stamp goes on, with a note', ok1 and 'skipped' in t1, (ok1, t1))
+check('W8 in a session with no PyYAML it still stops', not ok2 and 'PyYAML is missing' in t2, (ok2, t2))
+check('W8 the real folder passes on GitHub', bt.workflows_ok(dict(os.environ, GITHUB_ACTIONS='true'))[0])
 sys.exit(1 if F else 0)
