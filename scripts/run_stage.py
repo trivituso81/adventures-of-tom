@@ -2,6 +2,7 @@ import json
 import os
 import shutil
 import time
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import requests
 import fal_client
@@ -28,8 +29,25 @@ def download_file(url, dest):
     r.raise_for_status()
     Path(dest).write_bytes(r.content)
 
-def generate_still(client, prompt, refs, model, size_label, char, cfg):
-    contents = [prompt] + [Image.open(r) for r in refs if Path(r).exists()]
+def build_ref_contents(prompt, char, cfg):
+    contents = []
+    style_p = Path(cfg["style_key_path"])
+    tom_p = Path(cfg["tom_hero_path"])
+    char_p = Path(cfg["refs_dir"]) / f"{char['id']}.png"
+    if style_p.exists():
+        contents.append("GAME STYLE REFERENCE (paint by this exact hand: sketchy pencil and ink contour lines, hatching, chunky brushed shading, mottled colored-pencil texture, visible paper grain. Do NOT copy the background color):")
+        contents.append(Image.open(style_p))
+    if tom_p.exists() and (not style_p.exists() or tom_p.read_bytes() != style_p.read_bytes()):
+        contents.append("PROPORTION ANCHOR CHARACTER (match head scale and hand-drawn finish; do NOT copy face, hair, clothes, or background color):")
+        contents.append(Image.open(tom_p))
+    if char_p.exists():
+        contents.append("SUBJECT PHOTO OF THE CHARACTER TO PAINT (translate key facial features, hair, age, and vibe into the hand-drawn concept art style above):")
+        contents.append(Image.open(char_p))
+    contents.append(prompt)
+    return contents
+
+def generate_still(client, prompt, model, size_label, char, cfg):
+    contents = build_ref_contents(prompt, char, cfg)
     try:
         resp = client.models.generate_content(
             model=model,
@@ -57,29 +75,28 @@ def cutout_still(raw_path, rgba_path, cfg):
     download_file(img_url, rgba_path)
 
 def run_stills(stage, char, cfg, feedback, queue):
-    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
     count = 8 if stage == "hero" else 1
     size_label = "2K" if stage == "hero" else "4K"
     out_dir = Path(cfg["staging_dir"]) / char["id"] / stage
     out_dir.mkdir(parents=True, exist_ok=True)
-    refs = [cfg["style_key_path"], cfg["tom_hero_path"], f"{cfg['refs_dir']}/{char['id']}.png"]
     tom_face_px = None
     for it in queue["items"]:
         if it.get("character_id") == "tom" and it.get("metrics", {}).get("face_h_px"):
             tom_face_px = it["metrics"]["face_h_px"]
-    survivors = []
-    for idx in range(count):
+    def make_one(idx):
+        client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
         hint = ""
         for attempt in range(1, cfg["max_self_heal_retries"] + 1):
             prompt = build_prompt(stage, char, cfg, feedback=feedback, extra_hint=hint)
             raw_p = out_dir / f"cand_{idx}_raw.png"
             rgba_p = out_dir / f"cand_{idx}_rgba.png"
-            img_bytes, engine = generate_still(client, prompt, refs, cfg["models"]["stills"], size_label, char, cfg)
+            img_bytes, engine = generate_still(client, prompt, cfg["models"]["stills"], size_label, char, cfg)
             raw_p.write_bytes(img_bytes)
             cutout_still(raw_p, rgba_p, cfg)
             ok, metrics, repair = judge_candidate(raw_p, rgba_p, char, cfg, tom_face_px, client)
+            print(f"[cand {idx} attempt {attempt}] ok={ok} metrics={metrics}", flush=True)
             if ok or attempt == cfg["max_self_heal_retries"]:
-                survivors.append({
+                return {
                     "id": f"{char['id']}_{stage}_{idx}",
                     "character_id": char["id"],
                     "stage": stage,
@@ -91,9 +108,10 @@ def run_stills(stage, char, cfg, feedback, queue):
                     "raw_path": str(raw_p),
                     "rgba_path": str(rgba_p),
                     "status": "review"
-                })
-                break
+                }
             hint = repair
+    with ThreadPoolExecutor(max_workers=min(4, count)) as ex:
+        survivors = list(ex.map(make_one, range(count)))
     queue["items"] = [i for i in queue["items"] if not (i["character_id"] == char["id"] and i["stage"] == stage)] + survivors
     save_queue(cfg["queue_path"], queue)
 

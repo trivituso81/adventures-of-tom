@@ -2,7 +2,7 @@ import json
 import re
 from pathlib import Path
 
-ANTI_RING_NEG = "glowing ring, neon halo, aura outline, rim glow, thick black outline, 16-bit, 32-bit, 8-bit, pixel art, retro, sprite, SNES, Final Fantasy, hurt, knocked out"
+ANTI_RING_NEG = "glowing ring, neon halo, aura outline, rim glow, smooth airbrushed 3D, clean vector digital art, 16-bit, 32-bit, 8-bit, pixel art, retro, sprite, SNES, Final Fantasy, hurt, knocked out"
 
 def load_manifest(path="art-factory/characters.json"):
     return json.loads(Path(path).read_text(encoding="utf-8"))
@@ -23,13 +23,18 @@ def build_prompt(stage, char, cfg, move_id="", feedback="", extra_hint=""):
     lo, hi = [int(round(x * 100)) for x in char["head_ratio"]]
     base = f"{char['name']} ({char['height_in']} inches tall, head-to-body ratio {lo}%-{hi}%). {char.get('notes', '')} {cfg['style_lock']}"
     if stage == "hero":
-        p = f"Full-body standing front-3/4 hero portrait of {base} Centered on flat {cfg['bg_hex']} studio background, crisp feet-to-head framing, zero glowing halo or rim ring."
+        p = (
+            f"Paint {base} Translate the key physical facial attributes and age from the subject photo into this exact hand-drawn concept art style. "
+            f"Pose: full body from top of hair to sturdy shoes, standing ready, facing the viewer, arms loose, both feet planted on the ground. "
+            f"Paint only this single character alone on a flat {cfg['bg_hex']} mid-grey studio background with zero glowing halo or rim ring. "
+            f"Match the attached game style reference's sketchy pencil and ink contour lines, hatching, chunky brushed shading, mottled colored-pencil shading, and visible paper grain. Not clean digital art."
+        )
     elif stage == "turnaround":
-        p = f"4K 4-view orthographic turnaround sheet (front, left profile, back, right profile) of {base} Identical outfit, exact shared baseline, flat {cfg['bg_hex']} background."
+        p = f"4K 4-view orthographic turnaround sheet (front, left profile, back, right profile) of {base} Identical outfit, exact shared baseline, sketchy pencil and ink contour lines, mottled colored-pencil shading, flat {cfg['bg_hex']} background."
     elif stage == "sheets":
         moods = ", ".join(cfg["moods"])
         poses = ", ".join(cfg["talking_poses"])
-        p = f"4K character animation sheet for {base} Row 1: 8-frame side walk cycle. Row 2: 8 expression portraits ({moods}). Row 3: 4 talking poses ({poses}). Flat {cfg['bg_hex']} background."
+        p = f"4K character animation sheet for {base} Row 1: 8-frame side walk cycle. Row 2: 8 expression portraits ({moods}). Row 3: 4 talking poses ({poses}). Sketchy pencil and ink contour lines, mottled colored-pencil shading, flat {cfg['bg_hex']} background."
     elif stage == "battle_idle":
         p = f"Gentle breathing battle idle loop of {char['name']}, subtle weight shift, exact matching start and end pose, feet planted, {cfg['style_lock']}"
     else:
