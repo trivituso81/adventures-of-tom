@@ -20591,7 +20591,7 @@
   {
    "id": "c-guideflow-9",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "guideflow9",
    "title": "Remove the old Guide path; free test run on GitHub",
@@ -20603,8 +20603,8 @@
    "created": "2026-11-22",
    "changed": "2026-11-23",
    "chat": {
-    "url": "",
-    "opening": "not started"
+    "url": "https://claude.ai/code/session_01RXeukGZLxZREfsCLURqeTW",
+    "opening": "Tom (17:09): \"Why can't you just kick off the next task?\" Started by hand in the conversation that shipped c-guideflow-7 and c-guideflow-8."
    },
    "history": [
     {
@@ -20615,6 +20615,10 @@
     {
      "d": "2026-11-23",
      "t": "Unblocked: Monster videos through the same Guide queue is done."
+    },
+    {
+     "d": "2026-11-23",
+     "t": "Started by hand: the c-guideflow-7 and 8 conversation took this card."
     }
    ],
    "prompt": {
