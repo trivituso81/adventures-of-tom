@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-24T04:53:21Z",
+  "updated_at": "2026-11-24T04:58:26Z",
   "items": [
     {
       "id": "tom_hero_0",
@@ -170,8 +170,10 @@
       "stage": "battle_idle",
       "move_id": "",
       "raw_video_path": "art-factory/staging/tom/battle_idle/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tom/battle_idle/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tom/battle_idle/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "tnb_battle_idle",
@@ -179,8 +181,10 @@
       "stage": "battle_idle",
       "move_id": "",
       "raw_video_path": "art-factory/staging/tnb/battle_idle/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/tnb/battle_idle/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/tnb/battle_idle/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "amy_battle_idle",
@@ -188,8 +192,10 @@
       "stage": "battle_idle",
       "move_id": "",
       "raw_video_path": "art-factory/staging/amy/battle_idle/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/amy/battle_idle/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/amy/battle_idle/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "justin_battle_idle",
@@ -197,8 +203,10 @@
       "stage": "battle_idle",
       "move_id": "",
       "raw_video_path": "art-factory/staging/justin/battle_idle/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/justin/battle_idle/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/justin/battle_idle/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "olivia_battle_idle",
@@ -206,8 +214,10 @@
       "stage": "battle_idle",
       "move_id": "",
       "raw_video_path": "art-factory/staging/olivia/battle_idle/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/olivia/battle_idle/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/olivia/battle_idle/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "deedee_battle_idle",
@@ -215,8 +225,10 @@
       "stage": "battle_idle",
       "move_id": "",
       "raw_video_path": "art-factory/staging/deedee/battle_idle/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/deedee/battle_idle/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/deedee/battle_idle/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "boppy_battle_idle",
@@ -224,8 +236,10 @@
       "stage": "battle_idle",
       "move_id": "",
       "raw_video_path": "art-factory/staging/boppy/battle_idle/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/boppy/battle_idle/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/boppy/battle_idle/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "grace_battle_idle",
@@ -233,8 +247,10 @@
       "stage": "battle_idle",
       "move_id": "",
       "raw_video_path": "art-factory/staging/grace/battle_idle/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/grace/battle_idle/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/grace/battle_idle/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "rose_battle_idle",
@@ -242,8 +258,10 @@
       "stage": "battle_idle",
       "move_id": "",
       "raw_video_path": "art-factory/staging/rose/battle_idle/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/rose/battle_idle/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/rose/battle_idle/battle_alpha_safari_hvc1.mp4"
     },
     {
       "id": "nara_battle_idle",
@@ -251,8 +269,10 @@
       "stage": "battle_idle",
       "move_id": "",
       "raw_video_path": "art-factory/staging/nara/battle_idle/raw_alpha.webm",
-      "needs_encode": true,
-      "status": "encoding"
+      "needs_encode": false,
+      "status": "review",
+      "webm_path": "art-factory/staging/nara/battle_idle/battle_alpha.webm",
+      "safari_mp4_path": "art-factory/staging/nara/battle_idle/battle_alpha_safari_hvc1.mp4"
     }
   ]
 }
