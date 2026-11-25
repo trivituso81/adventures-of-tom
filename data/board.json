@@ -2284,7 +2284,7 @@
    "ask": "setup",
    "fyi": true,
    "blocks": [],
-   "next": "Night of 2026-11-23. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: nothing. Starts used: 0 of 5. Limits of the night QA: the test browser is Chromium on a server, not Safari on the iPhone; it cannot hear, cannot judge touch, and cannot see the Duo fold.",
+   "next": "Night of 2026-11-24. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: nothing. Starts used: 0 of 5. Limits of the night QA: the test browser is Chromium on a server, not Safari on the iPhone; it cannot hear, cannot judge touch, and cannot see the Duo fold.",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukGbrHbR5tTUJoJwwSg",
     "opening": "board"
@@ -2363,7 +2363,7 @@
      ]
     ]
    ],
-   "night_key": "2026-11-23",
+   "night_key": "2026-11-24",
    "tag": "t-lastnight",
    "note": "The what to do doesn't tell me what to do",
    "prompt": {
@@ -9421,7 +9421,7 @@
    "tag": "b3s23c",
    "after": "nothing for Tom: c-b3s23d",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukDDAC9uzYqrva7TFNX",
+    "url": "https://claude.ai/code/cse_01RXeukGb2fFVJCawCEPprf1",
     "opening": "created by the b3s23 split"
    },
    "history": [
@@ -9436,6 +9436,10 @@
     {
      "d": "2026-11-24",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-24",
+     "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
     }
    ],
    "prompt": {
@@ -9446,7 +9450,15 @@
     "model": "Claude Sonnet 5.5 (row C: a change that crosses many scene and engine files, the branch list is not written)",
     "effort": "high (many files with no written list of callers)",
     "text": "Read claude/battle-architecture.md section 5 row 23, claude/next-addendum-b3s23.md (the facts, the five slices and the rules for every slice) and the history of cards c-b3s23 and the card before this one. Tom's yes on t-b3s23-confirm is in: do not ask again. Rules: purge completely (CLAUDE.md), never edit demo/, never edit a recorded voice line, no animation work, add a docs/CHANGES.md heading for the build tag and run python3 tools/art-library/bump_tags.py b3s23c --base origin/main on every push. Verify by loading the page (python3 tools/serve.py, headless Chromium, no ReferenceError or pageerror) as well as by grep. Every push ends green: node tools/b3-sim.js check, python3 tools/b3_test.py, python3 tools/b3_story_test.py, python3 tools/smoke.py (its one known failure on main before this work is board_sync_test board4 'board_check accepts a Tom card waiting on its fix'; do not fix it here, name it), python3 -I tools/clip-audit/unused_voice.py (all 0). Slice 23c. Make Battle 3 the only battle. Remove the BY CHAPTER switch (`B3_STORY`, `B3_CH_ON`) as a switch: every `B3_CH_ON(n)` wording becomes the Battle 3 wording alone, every Old branch in data/scenes*.js, engine/story.js, engine/main.js, engine/splash.js, engine/feel.js, engine/benchcall.js, engine/ch20-render.js and data/bonus-nine-scoops.js is deleted, SCENES.ch20Fight2 and the Julian A-press fight go (SCENES.ch20Care stays), the OLD choice and Story battles section in ADMIN go, the old fight data files (data/ch12-battle.js to data/ch20-battle.js, data/p2-battle.js and any other file that only holds Old fight data) and the old Battle Lab fights and the b2Lab screen go, and their script tags in index.html. Recorded lines are never edited: a line only Old played becomes unused and 23e purges it. Chapters 1 to 20 and the bonus chapter must each play from Chapter Select (tools/ch11_b3_test.py to ch20_b3_test.py, the chapter 1 to 10 tests, the bonus test) in portrait and landscape. engine/battle2*.js stays loaded but nothing calls it from the story. Write the result into this card's history, and if the next slice's work is already done by this one, say so on the next card. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "rescue": {
+    "at": "2026-11-25T00:47:03+00:00",
+    "n": 1,
+    "why": "Quiet: the conversation may have stopped",
+    "url": "https://claude.ai/code/cse_01RXeukGb2fFVJCawCEPprf1",
+    "prev": "https://claude.ai/code/session_01RXeukDDAC9uzYqrva7TFNX"
+   },
+   "started_at": "2026-11-25T00:47:03+00:00"
   },
   {
    "id": "c-b3s23d",
@@ -15829,8 +15841,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "2221a932ceefceed4b322ec7bf4259d67cedbcaa",
- "synced_at": "2026-11-24T15:38:58+00:00",
+ "synced": "b166e1974d311052a2272aa5cf830ef462f7066a",
+ "synced_at": "2026-11-25T00:47:05+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -15895,6 +15907,6 @@
     }
    ]
   },
-  "reported": "2026-11-23"
+  "reported": "2026-11-24"
  }
 }
