@@ -9749,7 +9749,7 @@
    "id": "c-scriptstudio4",
    "tag": "scriptstudio4",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Script Studio: chapter coherence and cross-chapter tie-in audits, Gemini 4 presets",
    "next": "Shipped: both audits upgraded, Gemini 4 presets in. Next: run them on a real chapter with your key; if a model id is rejected, use Custom Model ID.",
@@ -9765,6 +9765,10 @@
     {
      "d": "2026-11-24",
      "t": "Shipped as scriptstudio4."
+    },
+    {
+     "d": "2026-11-24",
+     "t": "Shipped as scriptstudio4: Script Studio audits upgraded (chapter coherence report card, cross-chapter tie-in ledger) and Gemini 4 model presets"
     }
    ],
    "blocks": [],
@@ -9779,7 +9783,8 @@
     "model": "Claude Sonnet 5.5 (row C: a build with the design in the card)",
     "effort": "medium (the audits are specified in the card)",
     "text": "Read the c-scriptstudio4 card and tools/script-studio/README.md, then finish the Script Studio audits in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/audit_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-24"
   }
  ],
  "sessions": [
@@ -9787,12 +9792,14 @@
    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
    "title": "Script Studio: auto QA and rewrite inside Generate Scene",
    "first": "2026-11-24T23:29:09-08:00",
-   "last": "2026-11-24T23:32:53-08:00",
+   "last": "2026-11-24T23:49:56-08:00",
    "tags": [
-    "scriptstudio3"
+    "scriptstudio3",
+    "scriptstudio4"
    ],
    "cards": [
-    "c-scriptstudio3"
+    "c-scriptstudio3",
+    "c-scriptstudio4"
    ]
   },
   {
@@ -16099,8 +16106,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "b406eacb2a5eadc6ba56c7b2f23015b93ecb6b14",
- "synced_at": "2026-11-25T07:33:40+00:00",
+ "synced": "98ed7d69f1391b16eae4537264dc6aded8094439",
+ "synced_at": "2026-11-25T07:50:58+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
