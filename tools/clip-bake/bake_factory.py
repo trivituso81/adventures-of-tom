@@ -32,6 +32,7 @@ PREVIEW = {
     'deedee-nf-cap':   ('deedee', 'deedee', 'fifty_year_dust_tsunami', 'cast', 1.25),
 }
 STEP = 3
+SLOW = 1.5                                          # pass1slow1 (Tom 2026-11-25): every preview plays 1.5 times longer than its speed above
 
 
 def clip_id(packet):
@@ -80,7 +81,7 @@ def main():
             m = marks(fs)
             m['hit'] = m['first'] + round((m['hit'] - m['first']) / STEP) * STEP    # a kept picture
             mkv = magenta(fs, tmp)
-            job = {'bake': {'id': clip_id(p), 'owner': owner, 'kind': 'strike', 'fps': FPS, 'step': STEP, 'speed': speed,
+            job = {'bake': {'id': clip_id(p), 'owner': owner, 'kind': 'strike', 'fps': FPS, 'step': STEP, 'speed': speed / SLOW,
                             'fig_rows': FIG[owner], 'marks': m},
                    'wire': {'move': {'file': 'data/b3-kit-%s.js' % kit, 'id': move, 'shape': shape}}}
             bad = wanbake.check_spec(job)

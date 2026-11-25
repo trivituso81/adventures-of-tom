@@ -1546,6 +1546,12 @@
    "cmd": "python3 -I tools/pass1_preview_test.py",
    "group": "g1",
    "minutes": 2
+  },
+  {
+   "id": "pass1_review_test",
+   "cmd": "python3 -I tools/pass1_review_test.py",
+   "group": "g1",
+   "minutes": 2
   }
  ]
 }
