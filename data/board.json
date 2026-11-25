@@ -6981,6 +6981,19 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEM2jz8QayJemqru3D",
+   "title": "Justin proof clip: stricter prompt and two-stage QA gate",
+   "first": "2026-11-25T13:20:40-08:00",
+   "last": "2026-11-25T13:48:52-08:00",
+   "tags": [
+    "justinpoc1a",
+    "art-factory"
+   ],
+   "cards": [
+    "c-justinpoc1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukD9yD14UyHFztUqyXd",
    "title": "sandbox: justin stud-finder test (isolated, manual workflow, no existing file touched)",
    "first": "2026-11-25T13:47:43-08:00",
@@ -6989,19 +7002,6 @@
     "sandbox"
    ],
    "cards": []
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEM2jz8QayJemqru3D",
-   "title": "Justin proof clip: stricter prompt and two-stage QA gate",
-   "first": "2026-11-25T13:20:40-08:00",
-   "last": "2026-11-25T13:45:15-08:00",
-   "tags": [
-    "justinpoc1a",
-    "art-factory"
-   ],
-   "cards": [
-    "c-justinpoc1"
-   ]
   },
   {
    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
@@ -13347,8 +13347,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "4567ea7c2bb2d102c7d1d5f0b511b4bd7df92b89",
- "synced_at": "2026-11-25T21:48:32+00:00",
+ "synced": "6e5ee0900c32ce56446507d5eb89463ee8d935c2",
+ "synced_at": "2026-11-25T21:49:38+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
