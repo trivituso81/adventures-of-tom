@@ -35,4 +35,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add art-factory/queue.json art-factory/move-packets-pass1.json art-factory/qa-report-pass1-drafts.json
           git diff --staged --quiet || git commit -m "Automated QA report for Pass-1 draft videos"
+          git pull --rebase origin main
           git push
