@@ -1,0 +1,66 @@
+{
+  "run_id": "justin-poc-2-regate2",
+  "resolution": "480p",
+  "duration_multiplier": 1.5,
+  "max_retries": 1,
+  "started_at": "2026-11-25T21:47:55Z",
+  "moves": [
+    {
+      "move_id": "justin-bb-basic",
+      "clip_id": "pf-justin-bb-basic",
+      "passed": false,
+      "renders": 0,
+      "baked": "",
+      "attempts": [
+        {
+          "attempt": 0,
+          "regate_of": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/attempt_2_raw_alpha.webm",
+          "feedback": "",
+          "video": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/attempt_2_raw_alpha.webm",
+          "gate": {
+            "stage1": {
+              "frames_sampled": 10,
+              "thresholds": {
+                "min_peak_mask_churn": 0.22,
+                "min_left_reach_ratio": 0.12,
+                "max_foot_retreat_ratio": 0.15
+              },
+              "peak_mask_churn": 0.753,
+              "left_reach_ratio": 0.452,
+              "foot_retreat_ratio": 0.1423,
+              "failures": [],
+              "passed": true
+            },
+            "stage2": {
+              "pass": false,
+              "prop_visible_frame1": false,
+              "prop_visible_at_sprite_scale": true,
+              "action_reads_leftward": true,
+              "feet_planted": true,
+              "failure_reason": "The hammer is not gripped in the first frame.",
+              "hard_rejected_on": [
+                "prop_visible_frame1"
+              ],
+              "passed": false,
+              "contact_sheet_frames": [
+                0,
+                30,
+                60,
+                89,
+                119,
+                149
+              ],
+              "contact_sheet": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/regate_contact_sheet_200px.png"
+            },
+            "passed": false,
+            "failure_reason": "Stage 2 sprite-scale check: The hammer is not gripped in the first frame.",
+            "failure_tags": [
+              "gate2_prop_visible_frame1"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "finished_at": "2026-11-25T21:48:04Z"
+}

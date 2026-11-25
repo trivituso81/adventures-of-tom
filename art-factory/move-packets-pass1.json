@@ -2526,7 +2526,7 @@
         "overall": 9.75
       },
       "failure_tags": [
-        "gate2_feet_planted"
+        "gate2_prop_visible_frame1"
       ],
       "wanClip": {
         "filename": "justin-bb-basic.mp4",
@@ -2568,13 +2568,13 @@
         },
         "stage2": {
           "pass": false,
-          "prop_visible_frame1": true,
+          "prop_visible_frame1": false,
           "prop_visible_at_sprite_scale": true,
           "action_reads_leftward": true,
-          "feet_planted": false,
-          "failure_reason": "The character's left foot lifts and shifts position during the animation.",
+          "feet_planted": true,
+          "failure_reason": "The hammer is not gripped in the first frame.",
           "hard_rejected_on": [
-            "feet_planted"
+            "prop_visible_frame1"
           ],
           "passed": false,
           "contact_sheet_frames": [
@@ -2588,9 +2588,9 @@
           "contact_sheet": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/regate_contact_sheet_200px.png"
         },
         "passed": false,
-        "failure_reason": "Stage 2 sprite-scale check: The character's left foot lifts and shifts position during the animation.",
+        "failure_reason": "Stage 2 sprite-scale check: The hammer is not gripped in the first frame.",
         "failure_tags": [
-          "gate2_feet_planted"
+          "gate2_prop_visible_frame1"
         ]
       }
     },

@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-25T21:42:30Z",
+  "updated_at": "2026-11-25T21:48:04Z",
   "items": [
     {
       "id": "tom_hero_0",
@@ -3495,13 +3495,13 @@
         },
         "stage2": {
           "pass": false,
-          "prop_visible_frame1": true,
+          "prop_visible_frame1": false,
           "prop_visible_at_sprite_scale": true,
           "action_reads_leftward": true,
-          "feet_planted": false,
-          "failure_reason": "The character's left foot lifts and shifts position during the animation.",
+          "feet_planted": true,
+          "failure_reason": "The hammer is not gripped in the first frame.",
           "hard_rejected_on": [
-            "feet_planted"
+            "prop_visible_frame1"
           ],
           "passed": false,
           "contact_sheet_frames": [
@@ -3515,15 +3515,15 @@
           "contact_sheet": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/regate_contact_sheet_200px.png"
         },
         "passed": false,
-        "failure_reason": "Stage 2 sprite-scale check: The character's left foot lifts and shifts position during the animation.",
+        "failure_reason": "Stage 2 sprite-scale check: The hammer is not gripped in the first frame.",
         "failure_tags": [
-          "gate2_feet_planted"
+          "gate2_prop_visible_frame1"
         ]
       },
       "qa_failure_tags": [
-        "gate2_feet_planted"
+        "gate2_prop_visible_frame1"
       ],
-      "qa_notes": "Stage 2 sprite-scale check: The character's left foot lifts and shifts position during the animation."
+      "qa_notes": "Stage 2 sprite-scale check: The hammer is not gripped in the first frame."
     }
   ]
 }
