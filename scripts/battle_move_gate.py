@@ -181,22 +181,44 @@ def stage2_prompt(prop, action):
     )
 
 
-def stage2(sheet, prop, action, client, model):
-    prompt = stage2_prompt(prop, action)
+def stage2_once(sheet, prompt, client, model):
+    """One vision answer, validated; None when the response is unusable (a second ask is made once)."""
     last_err = ""
     for _ in range(2):
         try:
             resp = client.models.generate_content(model=model, contents=[prompt, sheet])   # no JSON mode: the v1 API refuses it (poc-2); parse_json strips fences
             data = parse_json(resp.text)
             if validate_stage2(data):
-                bad = [k for k in STAGE2_BOOLS if not data[k]]
-                data["hard_rejected_on"] = bad
-                data["passed"] = (not bad) and data["pass"]
-                return data
+                return data, ""
             last_err = "invalid_json_shape"
         except Exception as exc:
             last_err = f"{type(exc).__name__}: {exc}"
-    return {"passed": False, "pass": False, "failure_reason": f"stage2_unusable_response ({last_err})", "hard_rejected_on": ["invalid_response"]}
+    return None, last_err
+
+
+def stage2(sheet, prop, action, client, model, runs=3):
+    """Three runs, majority per boolean (the repo's QA convention: one noisy vision call must not decide a clip).
+    A boolean false in the majority hard-rejects in code, whatever `pass` says."""
+    prompt = stage2_prompt(prop, action)
+    answers, err = [], ""
+    for _ in range(runs):
+        a, e = stage2_once(sheet, prompt, client, model)
+        if a is not None:
+            answers.append(a)
+        else:
+            err = e
+    if len(answers) < 2:
+        return {"passed": False, "pass": False, "failure_reason": f"stage2_unusable_response ({err})", "hard_rejected_on": ["invalid_response"], "runs": len(answers)}
+    need = len(answers) // 2 + 1
+    out = {k: sum(1 for a in answers if a[k]) >= need for k in STAGE2_BOOLS + ("pass",)}
+    out["votes"] = {k: [bool(a[k]) for a in answers] for k in STAGE2_BOOLS + ("pass",)}
+    bad = [k for k in STAGE2_BOOLS if not out[k]]
+    reasons = [a.get("failure_reason", "") for a in answers if a.get("failure_reason")]
+    out["failure_reason"] = "" if not bad else (reasons[0] if reasons else ", ".join(bad))
+    out["hard_rejected_on"] = bad
+    out["passed"] = (not bad) and out["pass"]
+    out["runs"] = len(answers)
+    return out
 
 
 def run_gate(video, move_meta, client, model, sheet_path=None):
