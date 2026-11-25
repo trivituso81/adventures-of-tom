@@ -51,7 +51,7 @@ def merge_json_list(items, new, key="id"):
 def main():
     from google import genai
     import bake_factory
-    from art_director_agent import get_character, load_manifest, load_all_move_manifests
+    from art_director_agent import get_character, load_manifest
     from battle_move_gate import retry_feedback, run_gate
     from qa_videos import QA_MODEL
     from run_stage import generate_video_item, load_queue, resolve_hero_source, save_queue
@@ -63,9 +63,9 @@ def main():
     manifest = load_manifest()
     cfg = manifest["config"]
     client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
-    moves = {m["id"]: m for d in load_all_move_manifests() for m in d.get("moves", [])}
     queue = load_queue(cfg["queue_path"])
     packets = json.loads(PACKETS.read_text(encoding="utf-8"))
+    moves = {m["id"]: m for m in packets["moves"]}   # the Pass-1 packets only: other manifests reuse these ids without a character_id
     report_all = json.loads(REPORT.read_text(encoding="utf-8")) if REPORT.exists() else {"results": []}
     run_report = {"run_id": trig["run_id"], "resolution": ALLOWED_RESOLUTION, "duration_multiplier": trig["duration_multiplier"],
                   "max_retries": trig["max_retries"], "started_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "moves": []}
