@@ -9624,6 +9624,38 @@
     "text": "Read the c-scriptstudio1 card and tools/script-studio/README.md, then continue the Script Studio build. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "done": "2026-11-24"
+  },
+  {
+   "id": "c-scriptstudio2",
+   "tag": "scriptstudio2",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "Script Studio v2: replace app, keep hosted vault",
+   "next": "Swap in v2 of the app, re-apply the auto-load and Sync Hosted Defaults patch, rebuild, test, push.",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDiptdfSViWowh4C6s",
+    "opening": "Here is an updated aot-script-studio.jsx (v2)"
+   },
+   "history": [
+    {
+     "d": "2026-11-24",
+     "t": "Tom: \"Please replace the previous Script Studio component with this updated file, and re-apply the same auto-loading hook for my 6 hosted Reference Vault .md files\". New card; started."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-24",
+   "changed": "2026-11-24",
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Replaces Script Studio with v2 and re-applies the vault auto-load.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the same patch as scriptstudio1, tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Replace tools/script-studio/src/App.jsx with Tom's v2, re-apply the vault auto-load patch, rebuild and run tools/script-studio/e2e_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
