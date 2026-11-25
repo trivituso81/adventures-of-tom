@@ -9739,6 +9739,16 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
+   "title": "Script Studio: auto QA and rewrite inside Generate Scene",
+   "first": "2026-11-24T23:29:09-08:00",
+   "last": "2026-11-24T23:29:09-08:00",
+   "tags": [],
+   "cards": [
+    "c-scriptstudio3"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDiptdfSViWowh4C6s",
    "title": "Host the Art Factory GitHub pusher page on the site",
    "first": "2026-11-24T18:16:07-08:00",
@@ -16042,8 +16052,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "5397c27cfcff5d984fbe33439c34f2459eab4ba7",
- "synced_at": "2026-11-25T07:28:28+00:00",
+ "synced": "10a70a73b91db223e32e8b60b5ab30651e510232",
+ "synced_at": "2026-11-25T07:29:53+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
