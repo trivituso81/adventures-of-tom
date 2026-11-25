@@ -6872,10 +6872,10 @@
    "id": "c-justinpoc1",
    "tag": "justinpoc1",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "theme": "Battle Animations",
    "title": "Justin proof clip: stricter prompt and two-stage QA gate",
-   "next": "The push of art-factory/single-clip-trigger.json starts the Art Factory single-clip run (480p, at most 2 renders). When it ends, read art-factory/qa-single-clip-justin-poc-1.json: if it passed, the clip is baked 1.5x long into PASS-1 DRAFT REVIEW for Tom to watch; if both renders failed the gate, the report says which check and the next card is a prompt or start-frame change, not a batch.",
+   "next": "Waiting on Tom: fal.ai refused the repo FAL_KEY (403) at the first call of the Justin proof run. Once the key or balance is fixed, change run_id in art-factory/single-clip-trigger.json to a new value and push: that starts the one 480p clip (max 2 renders).",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukEM2jz8QayJemqru3D",
     "opening": "You are the Technical Director and Pipeline Engineer for trivituso81/adventures-of-tom"
@@ -6888,6 +6888,10 @@
     {
      "d": "2026-11-25",
      "t": "Part shipped as justinpoc1a: Justin's Stud-Finder Beep & Knock gets stricter draft rules, a two-stage QA gate and one 480p proof run"
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Pushed justinpoc1a (prompt rules, two-stage gate, single-clip trigger). Run 1 crashed before any render (packet lookup, fixed). Run 2 (justin-poc-1b) stopped at the first fal call: 403 Forbidden from fal storage auth. No render happened, nothing spent. Ended without shipping the clip: fal refuses the repo key, which needs Tom."
     }
    ],
    "blocks": [],
@@ -6895,14 +6899,36 @@
    "changed": "2026-11-25",
    "after": "t-pass1draftplay",
    "prompt": {
-    "what": "Check the Justin proof clip run and report.",
+    "what": "Re-run the Justin proof clip after Tom fixes fal.",
     "before": [
-     "Nothing to do first."
+     "Do the card 'Fix the fal key or balance' first."
     ],
-    "model": "Claude Sonnet 5.5 (row A: read one QA report)",
-    "effort": "low (one report to read)",
-    "text": "Read the c-justinpoc1 card, docs/CHANGES.md justinpoc1 and art-factory/qa-single-clip-justin-poc-1.json, then say whether the Justin clip passed the gate and what to change if not. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+    "model": "Claude Sonnet 5.5 (row A: one value change and a report)",
+    "effort": "low (change one field, read one report)",
+    "text": "Read the c-justinpoc1 card and docs/CHANGES.md justinpoc1a. Change run_id in art-factory/single-clip-trigger.json to justin-poc-1c (nothing else) and push it; the push starts the single 480p clip. When the run ends read art-factory/qa-single-clip-justin-poc-1c.json and report whether it passed the gate. Do not run anything else. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "waiting_on": "tom"
+  },
+  {
+   "id": "t-fixfalkey",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "setup",
+   "title": "Fix the fal key or balance",
+   "next": "Open fal.ai, sign in, and check Billing for credit left, then check that the key saved as repo secret FAL_KEY is still active. The Justin proof run got 403 Forbidden from fal on its first call (no render, nothing spent). When it is fixed, tap I did this and write on the card what you changed. That unblocks the Claude card c-justinpoc1 (Justin proof clip: stricter prompt and two-stage QA gate), which re-runs the one clip.",
+   "blocks": [
+    "c-justinpoc1"
+   ],
+   "fyi": false,
+   "created": "2026-11-25",
+   "changed": "2026-11-25",
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Made by justinpoc1a: the Justin proof run was refused by fal (403)."
+    }
+   ]
   }
  ],
  "sessions": [
