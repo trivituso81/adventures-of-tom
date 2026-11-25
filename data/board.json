@@ -9744,6 +9744,42 @@
     "text": "Read the c-scriptstudio3 card and tools/script-studio/README.md, then finish the Script Studio QA pipeline in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/e2e_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "done": "2026-11-24"
+  },
+  {
+   "id": "c-scriptstudio4",
+   "tag": "scriptstudio4",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "Script Studio: chapter coherence and cross-chapter tie-in audits, Gemini 4 presets",
+   "next": "Shipped: both audits upgraded, Gemini 4 presets in. Next: run them on a real chapter with your key; if a model id is rejected, use Custom Model ID.",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
+    "opening": "Upgrade the Storyline Audit and Trajectory Audit inside AoT Script Studio"
+   },
+   "history": [
+    {
+     "d": "2026-11-24",
+     "t": "Tom: \"Upgrade the Storyline Audit and Trajectory Audit ... update the default model presets to Gemini 4\". New card; started."
+    },
+    {
+     "d": "2026-11-24",
+     "t": "Shipped as scriptstudio4."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-24",
+   "changed": "2026-11-24",
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Upgrades Script Studio's two audits and switches the model presets to Gemini 4.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build with the design in the card)",
+    "effort": "medium (the audits are specified in the card)",
+    "text": "Read the c-scriptstudio4 card and tools/script-studio/README.md, then finish the Script Studio audits in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/audit_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [

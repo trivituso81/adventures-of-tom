@@ -111,7 +111,9 @@ function resetCoreToHosted(vaultDocs, hosted) {
 }
 
 const MODEL_PRESETS = [
-  { id: 'gemini-2.5-pro', label: 'Gemini 2.5 Pro (Best Writing & Reasoning)' },
+  { id: 'gemini-4-neon', label: 'Gemini 4 Neon (Generation default)' },
+  { id: 'gemini-4-carbon', label: 'Gemini 4 Carbon (Audit / Critic default)' },
+  { id: 'gemini-4-hydrogen', label: 'Gemini 4 Hydrogen (Fast / Budget)' },
   { id: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash (Fast & Balanced)' },
   { id: 'gemini-2.5-flash-lite', label: 'Gemini 2.5 Flash-Lite (Ultra Fast)' },
   { id: 'gemini-2.0-flash', label: 'Gemini 2.0 Flash' },
@@ -241,9 +243,9 @@ function createInitialState() {
     activeSceneId: '',
     settings: {
       apiKey: '',
-      genModelPreset: 'gemini-2.5-pro',
+      genModelPreset: 'gemini-4-neon',
       genCustomModel: '',
-      auditModelPreset: 'gemini-2.5-pro',
+      auditModelPreset: 'gemini-4-carbon',
       auditCustomModel: '',
       bannedWords: [...DEFAULT_BANNED_WORDS],
     },
@@ -267,7 +269,7 @@ function loadStateSafe() {
     return {
       ...base,
       ...parsed,
-      settings: { ...base.settings, ...(parsed.settings || {}) },
+      settings: { ...base.settings, ...migrateModelSettings(parsed.settings) },
       auditReports: {
         trajectory: parsed.auditReports?.trajectory || {},
         storyline: parsed.auditReports?.storyline || {},
@@ -734,105 +736,40 @@ const SURGICAL_REGEN_SCHEMA = {
   required: ['patches'],
 };
 
-const TRAJECTORY_AUDIT_SCHEMA = {
-  type: 'OBJECT',
-  properties: {
-    overallStatus: { type: 'STRING', enum: ['PASS', 'WARN', 'FAIL'] },
-    summary: { type: 'STRING' },
-    pacingScore: { type: 'NUMBER' },
-    pacingNotes: { type: 'STRING' },
-    comedyRhythmScore: { type: 'NUMBER' },
-    comedyNotes: { type: 'STRING' },
-    beatCoverage: {
-      type: 'ARRAY',
-      items: {
-        type: 'OBJECT',
-        properties: {
-          sceneId: { type: 'STRING' },
-          beat: { type: 'STRING' },
-          covered: { type: 'BOOLEAN' },
-          note: { type: 'STRING' },
-        },
-        required: ['sceneId', 'beat', 'covered', 'note'],
-      },
-    },
-    physicalSegueAudit: {
-      type: 'ARRAY',
-      items: {
-        type: 'OBJECT',
-        properties: {
-          fromSceneId: { type: 'STRING' },
-          toSceneId: { type: 'STRING' },
-          status: { type: 'STRING', enum: ['PASS', 'WARN', 'FAIL'] },
-          note: { type: 'STRING' },
-        },
-        required: ['fromSceneId', 'toSceneId', 'status', 'note'],
-      },
-    },
-    issues: {
-      type: 'ARRAY',
-      items: {
-        type: 'OBJECT',
-        properties: {
-          sceneId: { type: 'STRING' },
-          lineNumber: { type: 'INTEGER' },
-          severity: { type: 'STRING', enum: ['high', 'medium', 'low'] },
-          problem: { type: 'STRING' },
-          suggestedFix: { type: 'STRING' },
-        },
-        required: ['sceneId', 'lineNumber', 'severity', 'problem', 'suggestedFix'],
-      },
-    },
-  },
-  required: [
-    'overallStatus',
-    'summary',
-    'pacingScore',
-    'pacingNotes',
-    'comedyRhythmScore',
-    'comedyNotes',
-    'beatCoverage',
-    'physicalSegueAudit',
-    'issues',
-  ],
-};
+const STATUS_ENUM = ['PASS', 'WARN', 'FAIL'];
+const AUDIT_SCHEMA_VERSION = 2;
 
 const STORYLINE_AUDIT_SCHEMA = {
   type: 'OBJECT',
   properties: {
-    overallStatus: { type: 'STRING', enum: ['PASS', 'WARN', 'FAIL'] },
+    overallStatus: { type: 'STRING', enum: STATUS_ENUM },
+    coherenceScore: { type: 'NUMBER' },
     summary: { type: 'STRING' },
-    storylineAlignment: {
+    checks: {
       type: 'OBJECT',
       properties: {
-        status: { type: 'STRING', enum: ['PASS', 'WARN', 'FAIL'] },
-        analysis: { type: 'STRING' },
+        mythologyAlignment: {
+          type: 'OBJECT',
+          properties: { status: { type: 'STRING', enum: STATUS_ENUM }, score: { type: 'NUMBER' }, analysis: { type: 'STRING' } },
+          required: ['status', 'score', 'analysis'],
+        },
+        causeAndEffect: {
+          type: 'OBJECT',
+          properties: { status: { type: 'STRING', enum: STATUS_ENUM }, score: { type: 'NUMBER' }, analysis: { type: 'STRING' } },
+          required: ['status', 'score', 'analysis'],
+        },
+        tieInValue: {
+          type: 'OBJECT',
+          properties: { status: { type: 'STRING', enum: STATUS_ENUM }, score: { type: 'NUMBER' }, analysis: { type: 'STRING' } },
+          required: ['status', 'score', 'analysis'],
+        },
+        knowledgeGate: {
+          type: 'OBJECT',
+          properties: { status: { type: 'STRING', enum: STATUS_ENUM }, score: { type: 'NUMBER' }, analysis: { type: 'STRING' } },
+          required: ['status', 'score', 'analysis'],
+        },
       },
-      required: ['status', 'analysis'],
-    },
-    mysteryScalingIntegrity: {
-      type: 'OBJECT',
-      properties: {
-        status: { type: 'STRING', enum: ['PASS', 'WARN', 'FAIL'] },
-        analysis: { type: 'STRING' },
-      },
-      required: ['status', 'analysis'],
-    },
-    castKnowledgeGates: {
-      type: 'OBJECT',
-      properties: {
-        status: { type: 'STRING', enum: ['PASS', 'WARN', 'FAIL'] },
-        analysis: { type: 'STRING' },
-      },
-      required: ['status', 'analysis'],
-    },
-    characterVoiceArc: {
-      type: 'OBJECT',
-      properties: {
-        status: { type: 'STRING', enum: ['PASS', 'WARN', 'FAIL'] },
-        analysis: { type: 'STRING' },
-      },
-      required: ['status', 'analysis'],
+      required: ['mythologyAlignment', 'causeAndEffect', 'tieInValue', 'knowledgeGate'],
     },
     issues: {
       type: 'ARRAY',
@@ -841,25 +778,119 @@ const STORYLINE_AUDIT_SCHEMA = {
         properties: {
           sceneId: { type: 'STRING' },
           lineNumber: { type: 'INTEGER' },
-          category: { type: 'STRING' },
+          check: { type: 'STRING', enum: ['Mythology', 'CauseAndEffect', 'TieIn', 'KnowledgeGate'] },
           severity: { type: 'STRING', enum: ['high', 'medium', 'low'] },
-          problem: { type: 'STRING' },
-          suggestedFix: { type: 'STRING' },
+          whatFeelsBroken: { type: 'STRING' },
+          concreteFix: { type: 'STRING' },
         },
-        required: ['sceneId', 'lineNumber', 'category', 'severity', 'problem', 'suggestedFix'],
+        required: ['sceneId', 'lineNumber', 'check', 'severity', 'whatFeelsBroken', 'concreteFix'],
       },
     },
   },
-  required: [
-    'overallStatus',
-    'summary',
-    'storylineAlignment',
-    'mysteryScalingIntegrity',
-    'castKnowledgeGates',
-    'characterVoiceArc',
-    'issues',
-  ],
+  required: ['overallStatus', 'coherenceScore', 'summary', 'checks', 'issues'],
 };
+
+const TRAJECTORY_AUDIT_SCHEMA = {
+  type: 'OBJECT',
+  properties: {
+    overallStatus: { type: 'STRING', enum: STATUS_ENUM },
+    summary: { type: 'STRING' },
+    escalationCurve: {
+      type: 'OBJECT',
+      properties: {
+        status: { type: 'STRING', enum: STATUS_ENUM },
+        analysis: { type: 'STRING' },
+        chapters: {
+          type: 'ARRAY',
+          items: {
+            type: 'OBJECT',
+            properties: {
+              chapterNumber: { type: 'INTEGER' },
+              source: { type: 'STRING', enum: ['built', 'story-thread'] },
+              objectSize: { type: 'STRING' },
+              biggerThanPrevious: { type: 'BOOLEAN' },
+              note: { type: 'STRING' },
+            },
+            required: ['chapterNumber', 'source', 'objectSize', 'biggerThanPrevious', 'note'],
+          },
+        },
+      },
+      required: ['status', 'analysis', 'chapters'],
+    },
+    setupPayoffLedger: {
+      type: 'ARRAY',
+      items: {
+        type: 'OBJECT',
+        properties: {
+          clue: { type: 'STRING' },
+          plantedIn: { type: 'STRING' },
+          paidOffIn: { type: 'STRING' },
+          status: { type: 'STRING', enum: ['PAID_OFF', 'OPEN', 'DANGLING', 'UNEARNED'] },
+          note: { type: 'STRING' },
+          fix: { type: 'STRING' },
+        },
+        required: ['clue', 'plantedIn', 'paidOffIn', 'status', 'note', 'fix'],
+      },
+    },
+    contradictions: {
+      type: 'ARRAY',
+      items: {
+        type: 'OBJECT',
+        properties: {
+          kind: { type: 'STRING', enum: ['Coast', 'PartyRoster', 'BossBlockRules', 'Other'] },
+          chapterNumbers: { type: 'ARRAY', items: { type: 'INTEGER' } },
+          sceneId: { type: 'STRING' },
+          problem: { type: 'STRING' },
+          fix: { type: 'STRING' },
+        },
+        required: ['kind', 'chapterNumbers', 'sceneId', 'problem', 'fix'],
+      },
+    },
+  },
+  required: ['overallStatus', 'summary', 'escalationCurve', 'setupPayoffLedger', 'contradictions'],
+};
+
+const STATUS_RANK = { PASS: 0, WARN: 1, FAIL: 2 };
+function worstStatus(...list) {
+  return list.reduce((a, b) => (STATUS_RANK[b] > STATUS_RANK[a] ? b : a), 'PASS');
+}
+function normStatus(s) {
+  const u = String(s || '').toUpperCase();
+  return STATUS_RANK[u] != null ? u : 'WARN';
+}
+
+// The badge is never kinder than the checks underneath it.
+function finalizeStorylineReport(r) {
+  const checks = r.checks || {};
+  const statuses = Object.values(checks).map((c) => normStatus(c?.status));
+  const score = Math.max(1, Math.min(10, Number(r.coherenceScore) || 0));
+  const fromScore = score < 5 ? 'FAIL' : score < 8 ? 'WARN' : 'PASS';
+  const highIssues = (r.issues || []).some((i) => i.severity === 'high') ? 'WARN' : 'PASS';
+  return {
+    ...r,
+    coherenceScore: score,
+    overallStatus: worstStatus(normStatus(r.overallStatus), fromScore, highIssues, ...statuses),
+    schema: AUDIT_SCHEMA_VERSION,
+  };
+}
+
+function finalizeTrajectoryReport(r) {
+  const ledger = r.setupPayoffLedger || [];
+  const bad = ledger.some((l) => l.status === 'DANGLING' || l.status === 'UNEARNED');
+  const derived = worstStatus(
+    normStatus(r.escalationCurve?.status),
+    bad || (r.contradictions || []).length ? 'WARN' : 'PASS'
+  );
+  return { ...r, overallStatus: worstStatus(normStatus(r.overallStatus), derived), schema: AUDIT_SCHEMA_VERSION };
+}
+
+// Settings saved before the Gemini 4 presets used the removed gemini-2.5-pro id.
+function migrateModelSettings(settings) {
+  const s = { ...(settings || {}) };
+  if (s.genModelPreset === 'gemini-2.5-pro') s.genModelPreset = 'gemini-4-neon';
+  if (s.auditModelPreset === 'gemini-2.5-pro') s.auditModelPreset = 'gemini-4-carbon';
+  return s;
+}
 
 // ============================================================================
 // EXPORT FORMATTERS
@@ -1638,7 +1669,7 @@ export default function App() {
           ...parsed,
           settings: {
             ...createInitialState().settings,
-            ...(parsed.settings || {}),
+            ...migrateModelSettings(parsed.settings),
             apiKey: parsed.settings?.apiKey || prev.settings.apiKey,
           },
         }));
@@ -2143,7 +2174,7 @@ export default function App() {
   // DUAL NARRATIVE CHECKERS
   // ==========================================================================
 
-  const serializeChapterForAudit = (chapter) => {
+  const serializeChapterForAudit = (chapter, { withScripts = true } = {}) => {
     const scenesText = chapter.scenes
       .map((sc, idx) => {
         const bp = compileBlueprintPrompt(chapter, sc);
@@ -2157,100 +2188,134 @@ export default function App() {
                     }: ${l.text}`
                 )
                 .join('\n')
-            : '  (No lines written yet)';
-        return `--- SCENE ${idx + 1}: ${sc.sceneId} ---\n${bp}\nSCRIPT:\n${script}`;
+            : '  (No lines written yet; judge from the beats and knowledge gate)';
+        return `--- SCENE ${idx + 1}: ${sc.sceneId} ---\n${bp}${withScripts ? `\nSCRIPT:\n${script}` : ''}`;
       })
       .join('\n\n');
-    return `CHAPTER: ${chapter.label} — ${chapter.title}\nPURPOSE: ${
+    return `CHAPTER ${chapter.number}: ${chapter.label} | ${chapter.title}\nPURPOSE: ${
       chapter.purpose || '(None)'
     }\n\n${scenesText}`;
   };
 
+  const auditDocs = () => {
+    const get = (n) => state.vaultDocs.find((d) => d.name.toLowerCase() === n)?.content?.trim() || '';
+    return { thread: get('story-thread.md'), canon: get('canon-and-characters.md') };
+  };
+
+  // CROSS-CHAPTER TIE-IN AUDIT (auditReports.trajectory.all)
   const handleRunTrajectoryAudit = async () => {
-    if (!activeChapter || activeChapter.scenes.length === 0) {
-      setErrorBanner('Add or Auto-Fill at least one scene in this chapter before auditing.');
+    const populated = state.chapters.filter((c) => c.scenes.length > 0);
+    if (populated.length === 0) {
+      setErrorBanner('Add or Auto-Fill scenes in at least one chapter before running the Cross-Chapter Tie-In Audit.');
+      return;
+    }
+    const { thread, canon } = auditDocs();
+    if (!thread) {
+      setErrorBanner('story-thread.md is not loaded. Open Tab 1 > Sync Hosted Defaults first.');
       return;
     }
     setErrorBanner('');
-    setLoadingStatus('Compiling Reference Vault & Chapter Scenes...');
+    setLoadingStatus('Compiling every populated chapter...');
     try {
-      const vaultText = compileVaultPrompt(state.vaultDocs);
-      const chapterDump = serializeChapterForAudit(activeChapter);
-
+      const unbuilt = state.chapters.filter((c) => c.scenes.length === 0 && c.number <= 20).map((c) => c.number);
       const prompt = [
-        'You are the Showrunner auditing ONE chapter of "The Adventures of Tom".',
-        'Run a strict CHAPTER TRAJECTORY AUDIT evaluating Overall Status, Pacing & Balance (0-10), Comedy Rhythm (0-10), Beat Coverage, Physical Segues, and specific clickable Issue Cards.',
+        'You are the Lead Story Editor of the family comedy JRPG "The Adventures of Tom" (20 chapters + 1 bonus). Run a strict CROSS-CHAPTER TIE-IN AUDIT.',
+        'Sources: the BUILT CHAPTERS below are what exists. For chapters with no scenes yet, story-thread.md is the plan. canon-and-characters.md is canon. Treat story-thread.md as the authority on the mystery, the frozen object and the camera rules.',
         '',
-        vaultText,
+        'CHECK 1, ESCALATION CURVE: Does the frozen object get physically bigger in every chapter through Chapter 11? Give one entry per chapter 1 to 11 with the object size in that chapter, whether it is bigger than the previous chapter, and the source (built or story-thread). Flag any chapter where it stays the same, shrinks or is not stated.',
+        'CHECK 2, SETUP AND PAYOFF LEDGER: track every planted clue (at minimum: flashbulbs, gold teeth, Clara at school, Penny\'s roof hole, Tom\'s foil beats, plus any other plant you find). For each: where it is planted, where it pays off, and a status. PAID_OFF = planted and resolved. OPEN = planted, payoff is in a later chapter per the story thread. DANGLING = planted with no payoff anywhere in the plan. UNEARNED = a payoff with no plant. Give a concrete fix for DANGLING and UNEARNED.',
+        'CHECK 3, CONTRADICTIONS: flag cross-chapter mismatches: wrong coast (Long Island vs Los Angeles), wrong party roster for a chapter, contradictory boss or block rules, or anything else that contradicts another chapter or canon. Use the exact scene id when you can, else an empty string.',
+        'Be specific and unsentimental. Do not invent problems; an empty list is correct when there are none.',
         '',
-        '=== CHAPTER TO AUDIT ===',
-        chapterDump,
-        '=== END CHAPTER ===',
+        `=== story-thread.md ===\n${thread}\n=== END story-thread.md ===`,
+        '',
+        `=== canon-and-characters.md ===\n${canon || '(not loaded)'}\n=== END canon-and-characters.md ===`,
+        '',
+        `=== BUILT CHAPTERS (${populated.map((c) => c.number).join(', ')}) ===`,
+        populated.map((c) => serializeChapterForAudit(c)).join('\n\n=========\n\n'),
+        '=== END BUILT CHAPTERS ===',
+        '',
+        `UNBUILT CHAPTERS (use story-thread.md only): ${unbuilt.length ? unbuilt.join(', ') : 'none'}`,
+        '',
+        'Return strict JSON only.',
       ].join('\n');
 
-      setLoadingStatus(`Running Trajectory Audit with ${auditModelId}...`);
-      const report = await callGeminiJSON({
+      setLoadingStatus(`Running Cross-Chapter Tie-In Audit with ${auditModelId}...`);
+      const raw = await callGeminiJSON({
         apiKey: state.settings.apiKey,
         modelId: auditModelId,
         prompt,
         schema: TRAJECTORY_AUDIT_SCHEMA,
-        temperature: 0.3,
+        temperature: 0.2,
       });
-
+      const report = finalizeTrajectoryReport(raw);
       setState((prev) => ({
         ...prev,
         auditReports: {
           ...prev.auditReports,
           trajectory: {
             ...prev.auditReports.trajectory,
-            [activeChapter.id]: {
+            all: {
               ...report,
               ranAt: new Date().toLocaleTimeString(),
               model: auditModelId,
+              chaptersAudited: populated.map((c) => c.number),
             },
           },
         },
       }));
-      showToast(`Trajectory Audit complete (${report.overallStatus}).`);
+      showToast(`Cross-Chapter Tie-In Audit complete (${report.overallStatus}).`);
     } catch (err) {
-      setErrorBanner(err.message || 'Trajectory Audit failed.');
+      setErrorBanner(err.message || 'Cross-Chapter Tie-In Audit failed.');
     } finally {
       setLoadingStatus('');
     }
   };
 
+  // SINGLE-CHAPTER COHERENCE AUDIT (auditReports.storyline[chapterId])
   const handleRunStorylineAudit = async () => {
     if (!activeChapter || activeChapter.scenes.length === 0) {
       setErrorBanner('Add or Auto-Fill at least one scene in this chapter before auditing.');
       return;
     }
+    const { thread, canon } = auditDocs();
+    if (!thread) {
+      setErrorBanner('story-thread.md is not loaded. Open Tab 1 > Sync Hosted Defaults first.');
+      return;
+    }
     setErrorBanner('');
-    setLoadingStatus('Compiling Canon, Story Thread & Chapter...');
+    setLoadingStatus('Compiling chapter, story thread and canon...');
     try {
-      const vaultText = compileVaultPrompt(state.vaultDocs);
-      const chapterDump = serializeChapterForAudit(activeChapter);
-
       const prompt = [
-        'You are the Lead Continuity & Macro-Storyline Auditor for "The Adventures of Tom" (20 chapters + 1 bonus chapter).',
-        'Audit the active chapter against canon-and-characters.md, story-thread.md, and all injected Reference Vault docs.',
-        'Evaluate: 1) Overarching Storyline Alignment, 2) Mystery & Scaling Rule Integrity (orange-block sizing, no premature knowledge of camera or coin-to-block rules), 3) Cast Knowledge Gates, 4) Character Voice & Arc Consistency.',
+        `You are a harsh, precise story editor grading ONE chapter (${activeChapter.label}) of the family comedy JRPG "The Adventures of Tom" for coherence. Grade on 4 strict checks. Do not be generous; a chapter that merely avoids contradictions is not a 10.`,
         '',
-        vaultText,
+        'CHECK 1, MYTHOLOGY ALIGNMENT: Does every monster, boss, orange cube, grey patch, flashbulb and coin follow the camera\'s physical rules in story-thread.md? Flag anything random or unexplained.',
+        'CHECK 2, INTERNAL CAUSE AND EFFECT: Do scene transitions, character decisions and stakes make sense on their own, without outside knowledge?',
+        'CHECK 3, TIE-IN VALUE: How specifically does this chapter advance the main mystery (camera, Julian, Clara) or Tom\'s foil arc? Flag filler scenes that do not earn their keep.',
+        'CHECK 4, KNOWLEDGE GATE: Does anyone know too much too early, or ignore something they should already know at this point?',
         '',
-        '=== ACTIVE CHAPTER ===',
-        chapterDump,
-        '=== END ACTIVE CHAPTER ===',
+        'For each check give status (PASS, WARN, FAIL), a 1 to 10 score and a short analysis. Give an overall status, a 1 to 10 coherenceScore and a summary. Then list issues using the exact Scene IDs from the chapter: whatFeelsBroken (what feels random or broken), concreteFix (a specific change), which check it belongs to, severity, and lineNumber (1-based, or 0 when it is about the whole scene). Return an empty issues list only if there is truly nothing to fix.',
+        '',
+        `=== story-thread.md ===\n${thread}\n=== END story-thread.md ===`,
+        '',
+        `=== canon-and-characters.md ===\n${canon || '(not loaded)'}\n=== END canon-and-characters.md ===`,
+        '',
+        '=== CHAPTER TO GRADE (scenes, beats, knowledge gates, scripts) ===',
+        serializeChapterForAudit(activeChapter),
+        '=== END CHAPTER ===',
+        '',
+        'Return strict JSON only.',
       ].join('\n');
 
-      setLoadingStatus(`Running Overall Storyline Audit with ${auditModelId}...`);
-      const report = await callGeminiJSON({
+      setLoadingStatus(`Running Chapter Coherence Audit with ${auditModelId}...`);
+      const raw = await callGeminiJSON({
         apiKey: state.settings.apiKey,
         modelId: auditModelId,
         prompt,
         schema: STORYLINE_AUDIT_SCHEMA,
-        temperature: 0.3,
+        temperature: 0.2,
       });
-
+      const report = finalizeStorylineReport(raw);
       setState((prev) => ({
         ...prev,
         auditReports: {
@@ -2265,12 +2330,24 @@ export default function App() {
           },
         },
       }));
-      showToast(`Storyline Audit complete (${report.overallStatus}).`);
+      showToast(`Chapter Coherence Audit complete (${report.overallStatus}, ${report.coherenceScore}/10).`);
     } catch (err) {
-      setErrorBanner(err.message || 'Overall Storyline Audit failed.');
+      setErrorBanner(err.message || 'Chapter Coherence Audit failed.');
     } finally {
       setLoadingStatus('');
     }
+  };
+
+  // Jump from a cross-chapter finding to a scene in any chapter.
+  const handleJumpToChapterScene = (chapterNumber, sceneIdStr) => {
+    const ch =
+      state.chapters.find((c) => c.scenes.some((s) => s.sceneId.toLowerCase() === (sceneIdStr || '').toLowerCase())) ||
+      state.chapters.find((c) => c.number === chapterNumber);
+    if (!ch) return;
+    const sc = ch.scenes.find((s) => s.sceneId.toLowerCase() === (sceneIdStr || '').toLowerCase()) || ch.scenes[0];
+    setState((prev) => ({ ...prev, activeChapterId: ch.id, activeSceneId: sc?.id || '' }));
+    setHighlightedLineIdx(null);
+    setActiveTab('studio');
   };
 
   const handleJumpToIssue = (sceneIdStr, lineNumber) => {
@@ -2372,8 +2449,10 @@ export default function App() {
     ).length;
   }, [activeScene]);
 
-  const activeTrajectoryReport = state.auditReports.trajectory[activeChapter?.id];
-  const activeStorylineReport = state.auditReports.storyline[activeChapter?.id];
+  const activeTrajectoryReport =
+    state.auditReports.trajectory.all?.schema === AUDIT_SCHEMA_VERSION ? state.auditReports.trajectory.all : null;
+  const storylineRaw = state.auditReports.storyline[activeChapter?.id];
+  const activeStorylineReport = storylineRaw?.schema === AUDIT_SCHEMA_VERSION ? storylineRaw : null;
   const needsSetup = !state.settings.apiKey || vaultStats.loadedCount === 0;
 
   // ==========================================================================
@@ -3758,14 +3837,14 @@ export default function App() {
             <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-4 flex flex-wrap items-center justify-between gap-4">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <h2 className="text-base font-semibold text-white">Dual Narrative Checkers</h2>
+                  <h2 className="text-base font-semibold text-white">Narrative Audits</h2>
                   <span className="text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-indigo-300">
                     Audit Model: {auditModelId || 'Not set'}
                   </span>
                 </div>
                 <p className="text-xs text-slate-400">
-                  Auditing <strong>{activeChapter.label}</strong> ({activeChapter.scenes.length} scene
-                  {activeChapter.scenes.length === 1 ? '' : 's'}). Click any Issue Card to jump straight to that line.
+                  Coherence Audit grades <strong>{activeChapter.label}</strong> ({activeChapter.scenes.length} scene
+                  {activeChapter.scenes.length === 1 ? '' : 's'}); Tie-In Audit reads every populated chapter ({state.chapters.filter((c) => c.scenes.length > 0).length}). Click any card to jump to it.
                 </p>
               </div>
 
@@ -3788,7 +3867,7 @@ export default function App() {
                   className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white transition"
                 >
                   <ShieldCheck className="w-4 h-4" />
-                  Chapter Trajectory Checker
+                  Cross-Chapter Tie-In Audit
                 </button>
 
                 <button
@@ -3797,135 +3876,114 @@ export default function App() {
                   className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white transition"
                 >
                   <Compass className="w-4 h-4" />
-                  Overall Storyline Checker
+                  Chapter Coherence Audit
                 </button>
               </div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-              {/* TRAJECTORY REPORT */}
+              {/* CROSS-CHAPTER TIE-IN REPORT (trajectory) */}
               <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-4 space-y-4">
                 <div className="flex items-center justify-between border-b border-slate-800 pb-3">
                   <div>
                     <h3 className="text-sm font-bold text-white flex items-center gap-2">
                       <ShieldCheck className="w-4 h-4 text-indigo-400" />
-                      Chapter Trajectory Scorecard
+                      Cross-Chapter Tie-In Audit
                     </h3>
                     {activeTrajectoryReport && (
                       <p className="text-[11px] text-slate-500 mt-0.5">
-                        {activeTrajectoryReport.ranAt} · {activeTrajectoryReport.model}
+                        {activeTrajectoryReport.ranAt} · {activeTrajectoryReport.model} · chapters{' '}
+                        {(activeTrajectoryReport.chaptersAudited || []).join(', ')}
                       </p>
                     )}
                   </div>
-                  {activeTrajectoryReport && (
-                    <StatusBadge status={activeTrajectoryReport.overallStatus} />
-                  )}
+                  {activeTrajectoryReport && <StatusBadge status={activeTrajectoryReport.overallStatus} />}
                 </div>
 
                 {!activeTrajectoryReport ? (
                   <div className="py-12 text-center text-slate-500 text-xs">
-                    Run <strong>Chapter Trajectory Checker</strong> to audit pacing, comedy rhythm, beat coverage, and physical segues.
+                    Run <strong>Cross-Chapter Tie-In Audit</strong> to check the escalation curve, the setup and payoff ledger, and cross-chapter contradictions across every populated chapter.
                   </div>
                 ) : (
                   <div className="space-y-4">
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                      {activeTrajectoryReport.summary}
-                    </p>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="bg-slate-950 border border-slate-800 rounded-lg p-3">
-                        <div className="text-[11px] text-slate-400 uppercase font-semibold">
-                          Pacing & Balance
-                        </div>
-                        <div className="text-2xl font-bold text-indigo-300 mt-1">
-                          {activeTrajectoryReport.pacingScore}
-                          <span className="text-xs text-slate-500 font-normal">/10</span>
-                        </div>
-                        <p className="text-xs text-slate-400 mt-1">
-                          {activeTrajectoryReport.pacingNotes}
-                        </p>
+                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">{activeTrajectoryReport.summary}</p>
+
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400">Escalation Curve</h4>
+                        <StatusBadge status={activeTrajectoryReport.escalationCurve?.status} />
                       </div>
-                      <div className="bg-slate-950 border border-slate-800 rounded-lg p-3">
-                        <div className="text-[11px] text-slate-400 uppercase font-semibold">
-                          Comedy Rhythm
+                      <p className="text-xs text-slate-300 leading-relaxed">{activeTrajectoryReport.escalationCurve?.analysis}</p>
+                      {(activeTrajectoryReport.escalationCurve?.chapters || []).map((c, i) => (
+                        <div key={i} className="flex items-start gap-2 bg-slate-950/70 border border-slate-800 rounded-lg p-2.5 text-xs">
+                          {c.biggerThanPrevious ? (
+                            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                          ) : (
+                            <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+                          )}
+                          <div>
+                            <span className="font-mono text-indigo-300 mr-1.5">Ch {c.chapterNumber}</span>
+                            <span className="text-slate-200 font-medium">{c.objectSize}</span>
+                            <span className="text-slate-500 ml-1.5">({c.source})</span>
+                            {c.note && <p className="text-slate-400 mt-0.5">{c.note}</p>}
+                          </div>
                         </div>
-                        <div className="text-2xl font-bold text-violet-300 mt-1">
-                          {activeTrajectoryReport.comedyRhythmScore}
-                          <span className="text-xs text-slate-500 font-normal">/10</span>
-                        </div>
-                        <p className="text-xs text-slate-400 mt-1">
-                          {activeTrajectoryReport.comedyNotes}
-                        </p>
-                      </div>
+                      ))}
                     </div>
 
-                    {activeTrajectoryReport.beatCoverage?.length > 0 && (
-                      <div className="space-y-1.5">
-                        <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                          Beat Coverage
-                        </h4>
-                        {activeTrajectoryReport.beatCoverage.map((b, i) => (
-                          <div
-                            key={i}
-                            className="flex items-start gap-2 bg-slate-950/70 border border-slate-800 rounded-lg p-2.5 text-xs"
-                          >
-                            {b.covered ? (
-                              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                            ) : (
-                              <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+                    <div className="space-y-1.5">
+                      <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                        Setup & Payoff Ledger ({activeTrajectoryReport.setupPayoffLedger?.length || 0})
+                      </h4>
+                      {(activeTrajectoryReport.setupPayoffLedger || []).map((l, i) => {
+                        const tone =
+                          l.status === 'PAID_OFF'
+                            ? 'text-emerald-300 bg-emerald-500/15 border-emerald-500/30'
+                            : l.status === 'OPEN'
+                            ? 'text-sky-300 bg-sky-500/15 border-sky-500/30'
+                            : 'text-rose-300 bg-rose-500/15 border-rose-500/30';
+                        return (
+                          <div key={i} className="bg-slate-950/70 border border-slate-800 rounded-lg p-2.5 text-xs">
+                            <div className="flex items-start justify-between gap-2">
+                              <span className="text-slate-100 font-medium">{l.clue}</span>
+                              <span className={`px-2 py-0.5 rounded-full border text-[10px] font-semibold shrink-0 ${tone}`}>{l.status}</span>
+                            </div>
+                            <p className="text-slate-400 mt-0.5">
+                              Planted: {l.plantedIn || 'n/a'} · Payoff: {l.paidOffIn || 'none'}
+                            </p>
+                            {l.note && <p className="text-slate-300 mt-0.5">{l.note}</p>}
+                            {(l.status === 'DANGLING' || l.status === 'UNEARNED') && l.fix && (
+                              <p className="text-emerald-300/90 mt-0.5">Fix: {l.fix}</p>
                             )}
-                            <div>
-                              <span className="font-mono text-indigo-300 mr-1.5">{b.sceneId}</span>
-                              <span className="text-slate-200 font-medium">{b.beat}</span>
-                              <p className="text-slate-400 mt-0.5">{b.note}</p>
-                            </div>
                           </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {activeTrajectoryReport.physicalSegueAudit?.length > 0 && (
-                      <div className="space-y-1.5">
-                        <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                          Physical Segue Audit
-                        </h4>
-                        {activeTrajectoryReport.physicalSegueAudit.map((seg, i) => (
-                          <div
-                            key={i}
-                            className="bg-slate-950/70 border border-slate-800 rounded-lg p-2.5 text-xs flex items-start justify-between gap-2"
-                          >
-                            <div>
-                              <div className="font-mono text-slate-200">
-                                {seg.fromSceneId} → {seg.toSceneId}
-                              </div>
-                              <p className="text-slate-400 mt-0.5">{seg.note}</p>
-                            </div>
-                            <StatusBadge status={seg.status} />
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                        );
+                      })}
+                    </div>
 
                     <div className="space-y-2">
                       <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                        Issue Cards ({activeTrajectoryReport.issues?.length || 0})
+                        Contradictions ({activeTrajectoryReport.contradictions?.length || 0})
                       </h4>
-                      {activeTrajectoryReport.issues?.map((iss, i) => (
+                      {(activeTrajectoryReport.contradictions || []).length === 0 && (
+                        <p className="text-xs text-slate-500">None found.</p>
+                      )}
+                      {(activeTrajectoryReport.contradictions || []).map((c, i) => (
                         <button
                           key={i}
-                          onClick={() => handleJumpToIssue(iss.sceneId, iss.lineNumber)}
-                          className="w-full text-left bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-indigo-500/50 rounded-lg p-3 transition group"
+                          onClick={() => handleJumpToChapterScene((c.chapterNumbers || [])[0], c.sceneId)}
+                          className="w-full text-left bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-indigo-500/50 rounded-lg p-3 transition"
                         >
                           <div className="flex items-center justify-between gap-2 mb-1">
                             <span className="font-mono text-xs font-bold text-indigo-300">
-                              {iss.sceneId}
-                              {iss.lineNumber > 0 ? ` · L${iss.lineNumber}` : ''}
+                              {c.kind} · Ch {(c.chapterNumbers || []).join(' vs ')}
+                              {c.sceneId ? ` · ${c.sceneId}` : ''}
                             </span>
                             <span className="text-[11px] text-indigo-400 inline-flex items-center gap-1">
                               Jump <ExternalLink className="w-3 h-3" />
                             </span>
                           </div>
-                          <p className="text-xs text-slate-200 font-medium">{iss.problem}</p>
-                          <p className="text-xs text-emerald-300/90 mt-1">Fix: {iss.suggestedFix}</p>
+                          <p className="text-xs text-slate-200 font-medium">{c.problem}</p>
+                          <p className="text-xs text-emerald-300/90 mt-1">Fix: {c.fix}</p>
                         </button>
                       ))}
                     </div>
@@ -3933,44 +3991,51 @@ export default function App() {
                 )}
               </div>
 
-              {/* OVERALL STORYLINE REPORT */}
+              {/* SINGLE-CHAPTER COHERENCE REPORT CARD (storyline) */}
               <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-4 space-y-4">
                 <div className="flex items-center justify-between border-b border-slate-800 pb-3">
                   <div>
                     <h3 className="text-sm font-bold text-white flex items-center gap-2">
                       <Compass className="w-4 h-4 text-violet-400" />
-                      Overall Storyline & Canon Continuity
+                      Chapter Coherence Report Card
                     </h3>
                     {activeStorylineReport && (
                       <p className="text-[11px] text-slate-500 mt-0.5">
-                        {activeStorylineReport.ranAt} · {activeStorylineReport.model}
+                        {activeChapter.label} · {activeStorylineReport.ranAt} · {activeStorylineReport.model}
                       </p>
                     )}
                   </div>
                   {activeStorylineReport && (
-                    <StatusBadge status={activeStorylineReport.overallStatus} />
+                    <div className="flex items-center gap-2">
+                      <span className="text-2xl font-bold text-violet-300">
+                        {activeStorylineReport.coherenceScore}
+                        <span className="text-xs text-slate-500 font-normal">/10</span>
+                      </span>
+                      <StatusBadge status={activeStorylineReport.overallStatus} />
+                    </div>
                   )}
                 </div>
 
                 {!activeStorylineReport ? (
                   <div className="py-12 text-center text-slate-500 text-xs">
-                    Run <strong>Overall Storyline Checker</strong> to audit plot alignment, orange-block/camera rules, cast knowledge gates, and character voice consistency.
+                    Run <strong>Chapter Coherence Audit</strong> to grade this chapter on mythology alignment, cause and effect, tie-in value and the knowledge gate.
                   </div>
                 ) : (
                   <div className="space-y-4">
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                      {activeStorylineReport.summary}
-                    </p>
+                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">{activeStorylineReport.summary}</p>
                     <div className="space-y-2.5">
                       {[
-                        { title: 'Overarching Storyline Alignment', data: activeStorylineReport.storylineAlignment },
-                        { title: 'Mystery & Scaling Rule Integrity', data: activeStorylineReport.mysteryScalingIntegrity },
-                        { title: 'Cast Knowledge Gates', data: activeStorylineReport.castKnowledgeGates },
-                        { title: 'Character Voice & Arc Consistency', data: activeStorylineReport.characterVoiceArc },
+                        { title: 'Mythology Alignment', data: activeStorylineReport.checks?.mythologyAlignment },
+                        { title: 'Internal Cause & Effect', data: activeStorylineReport.checks?.causeAndEffect },
+                        { title: 'Tie-In Value', data: activeStorylineReport.checks?.tieInValue },
+                        { title: 'Knowledge Gate Check', data: activeStorylineReport.checks?.knowledgeGate },
                       ].map((pillar, i) => (
                         <div key={i} className="bg-slate-950/80 border border-slate-800 rounded-lg p-3">
                           <div className="flex items-center justify-between gap-2 mb-1">
-                            <span className="text-xs font-semibold text-white">{pillar.title}</span>
+                            <span className="text-xs font-semibold text-white">
+                              {pillar.title}
+                              <span className="ml-2 font-mono text-slate-400">{pillar.data?.score}/10</span>
+                            </span>
                             <StatusBadge status={pillar.data?.status} />
                           </div>
                           <p className="text-xs text-slate-300 leading-relaxed">{pillar.data?.analysis}</p>
@@ -3980,27 +4045,37 @@ export default function App() {
 
                     <div className="space-y-2">
                       <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                        Continuity Issues ({activeStorylineReport.issues?.length || 0})
+                        Fix List ({activeStorylineReport.issues?.length || 0})
                       </h4>
-                      {activeStorylineReport.issues?.map((iss, i) => (
-                        <button
-                          key={i}
-                          onClick={() => handleJumpToIssue(iss.sceneId, iss.lineNumber)}
-                          className="w-full text-left bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-violet-500/50 rounded-lg p-3 transition group"
-                        >
-                          <div className="flex items-center justify-between gap-2 mb-1">
-                            <span className="font-mono text-xs font-bold text-violet-300">
-                              {iss.sceneId}
-                              {iss.lineNumber > 0 ? ` · L${iss.lineNumber}` : ''} · {iss.category}
-                            </span>
-                            <span className="text-[11px] text-violet-400 inline-flex items-center gap-1">
-                              Jump <ExternalLink className="w-3 h-3" />
-                            </span>
-                          </div>
-                          <p className="text-xs text-slate-200 font-medium">{iss.problem}</p>
-                          <p className="text-xs text-emerald-300/90 mt-1">Fix: {iss.suggestedFix}</p>
-                        </button>
-                      ))}
+                      {(activeStorylineReport.issues || []).length === 0 && (
+                        <p className="text-xs text-slate-500">Nothing to fix.</p>
+                      )}
+                      <ul className="space-y-2">
+                        {(activeStorylineReport.issues || []).map((iss, i) => (
+                          <li key={i}>
+                            <button
+                              onClick={() => handleJumpToIssue(iss.sceneId, iss.lineNumber)}
+                              className="w-full text-left bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-violet-500/50 rounded-lg p-3 transition"
+                            >
+                              <div className="flex items-center justify-between gap-2 mb-1">
+                                <span className="font-mono text-xs font-bold text-violet-300">
+                                  {iss.sceneId}
+                                  {iss.lineNumber > 0 ? ` · L${iss.lineNumber}` : ''} · {iss.check}
+                                </span>
+                                <span className="text-[11px] text-violet-400 inline-flex items-center gap-1">
+                                  Jump <ExternalLink className="w-3 h-3" />
+                                </span>
+                              </div>
+                              <p className="text-xs text-slate-200">
+                                <strong>What feels random or broken:</strong> {iss.whatFeelsBroken}
+                              </p>
+                              <p className="text-xs text-emerald-300/90 mt-1">
+                                <strong>Concrete fix:</strong> {iss.concreteFix}
+                              </p>
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 )}
