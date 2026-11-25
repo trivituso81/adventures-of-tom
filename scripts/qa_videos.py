@@ -9,9 +9,9 @@ from google import genai
 from PIL import Image
 
 QUEUE_PATH = Path("art-factory/queue.json")
-MANIFEST_PATH = Path("art-factory/characters.json")
 PACKETS_PATH = Path("art-factory/move-packets-pass1.json")
 REPORT_PATH = Path("art-factory/qa-report-pass1-drafts.json")
+QA_MODEL = "gemini-2.5-flash"
 PASS_THRESHOLD = 7.5
 
 def load_json(path, default):
@@ -116,6 +116,7 @@ def grade_video(client, model, item, move_meta):
                 "notes": data.get("notes", ""),
             }
         except Exception as exc:
+            print(f"[qa_videos] API ERROR on {item.get('character_id')}/{item.get('move_id')}: {exc}", flush=True)
             return {
                 "passed": False,
                 "overall": 0.0,
@@ -125,16 +126,17 @@ def grade_video(client, model, item, move_meta):
             }
 
 def main():
-    manifest = load_json(MANIFEST_PATH, {})
-    cfg = manifest.get("config", {})
-    model = cfg.get("models", {}).get("flash_bridge", "gemini-2.5-flash")
     queue = load_json(QUEUE_PATH, {"updated_at": "", "items": []})
     packets = load_json(PACKETS_PATH, {"moves": []})
     move_lookup = build_move_lookup(packets)
+    pass1_ids = set(move_lookup.keys())
     client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
-    drafts = [i for i in queue.get("items", []) if i.get("stage") == "battle_move_draft"]
-    print(f"[qa_videos] auditing {len(drafts)} battle_move_draft item(s) with {model}", flush=True)
+    drafts = [
+        i for i in queue.get("items", [])
+        if i.get("stage") == "battle_move_draft" and i.get("move_id") in pass1_ids
+    ]
+    print(f"[qa_videos] auditing {len(drafts)} Pass-1 battle_move_draft item(s) with {QA_MODEL}", flush=True)
 
     results = []
     passed_count = 0
@@ -143,7 +145,7 @@ def main():
     for item in drafts:
         mid = item.get("move_id", "")
         meta = move_lookup.get(mid, {})
-        grade = grade_video(client, model, item, meta)
+        grade = grade_video(client, QA_MODEL, item, meta)
         item["qa_passed"] = grade["passed"]
         item["qa_overall"] = grade["overall"]
         item["qa_scores"] = grade["scores"]
