@@ -2138,13 +2138,13 @@
   {
    "id": "t-lastnight",
    "lane": "claude",
-   "col": "done",
+   "col": "up",
    "theme": "Project Ops",
    "title": "Last night: what the night shift did",
    "ask": "setup",
    "fyi": true,
    "blocks": [],
-   "next": "Night of 2026-11-24. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: nothing. Starts used: 0 of 5. Limits of the night QA: the test browser is Chromium on a server, not Safari on the iPhone; it cannot hear, cannot judge touch, and cannot see the Duo fold.",
+   "next": "Night of 2026-11-25. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: Watch the seven Pass-1 draft moves in a fight: Open ADMIN > BATTLE LAB and start PASS-1 DRAFT REVIEW (first page, under the chapter 1 reviews; or Take me there on the dashboard). Grace, TNB, Amy, Justin and Deedee stand on the field with a panel at the bottom: tap PLAY on a move to watch its video on that ... (full steps on the card); Stuck twice: Night QA: the test browser plays your check car: Card c-night-qa (Night QA: the test browser plays your check cards) stalled again after its one automatic rescue. The rescue started 7:45 AM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it. Starts used: 0 of 5. Limits of the night QA: the test browser is Chromium on a server, not Safari on the iPhone; it cannot hear, cannot judge touch, and cannot see the Duo fold.",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukGbrHbR5tTUJoJwwSg",
     "opening": "board"
@@ -2175,10 +2175,14 @@
     {
      "d": "2026-11-22",
      "t": "Shipped as t-lastnight: Last night's Needs you lines now say what to do, not only the card's name"
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Night of 2026-11-25: Night of 2026-11-25. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: Watc"
     }
    ],
    "created": "2026-11-21",
-   "changed": "2026-11-22",
+   "changed": "2026-11-25",
    "sections": [
     [
      "Ran",
@@ -2207,7 +2211,8 @@
     [
      "Needs you",
      [
-      "nothing"
+      "Watch the seven Pass-1 draft moves in a fight: Open ADMIN > BATTLE LAB and start PASS-1 DRAFT REVIEW (first page, under the chapter 1 reviews; or Take me there on the dashboard). Grace, TNB, Amy, Justin and Deedee stand on the field with a panel at the bottom: tap PLAY on a move to watch its video on that ... (full steps on the card)",
+      "Stuck twice: Night QA: the test browser plays your check car: Card c-night-qa (Night QA: the test browser plays your check cards) stalled again after its one automatic rescue. The rescue started 7:45 AM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it."
      ]
     ],
     [
@@ -2223,7 +2228,7 @@
      ]
     ]
    ],
-   "night_key": "2026-11-24",
+   "night_key": "2026-11-25",
    "tag": "t-lastnight",
    "note": "The what to do doesn't tell me what to do",
    "prompt": {
@@ -2236,8 +2241,7 @@
     "text": "Read claude/handoff-rules.md. Tom handed you board card t-lastnight with this note: The what to do doesn't tell me what to do. Work out what is needed, rewrite the card, and do it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "started_at": "2026-11-22T17:03:19+00:00",
-   "after": "nothing for Tom: end",
-   "done": "2026-11-22"
+   "after": "nothing for Tom: end"
   },
   {
    "id": "c-night-clean",
@@ -6666,7 +6670,7 @@
    "id": "c-pass1review1",
    "tag": "pass1review1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "PASS-1 DRAFT REVIEW in the Battle Lab, drafts 1.5x longer",
    "next": "Add the PASS-1 DRAFT REVIEW Lab fight with PLAY for the 7 Pass-1 clips and rebake them 1.5 times longer.",
@@ -6678,6 +6682,10 @@
     {
      "d": "2026-11-25",
      "t": "Tom (PR 17): \"Two fixes for Pass-1 draft review: 1. Add a PASS-1 DRAFT REVIEW preset under ADMIN > BATTLE LAB > TESTS AND REVIEWS (similar to CHAPTER 1 REVIEW) with direct PLAY buttons for all 7 wired Pass-1 clips ... 2. Make the playback duration of those 7 baked clips 1.5x longer so the actions read clearly at both 1x and 2x battle speed.\" New card; started."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as pass1review1: PASS-1 DRAFT REVIEW in the Battle Lab, and the seven drafts play 1.5 times longer"
     }
    ],
    "blocks": [],
@@ -6692,7 +6700,8 @@
     "model": "Claude Opus 5.5 (row C: a Lab fight, the review panel and a rebake)",
     "effort": "medium (the review panel and the bake tool exist)",
     "text": "Read the c-pass1review1 card and docs/CHANGES.md pass1review1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-25"
   },
   {
    "id": "t-pass1draftplay",
@@ -13125,8 +13134,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "47a24666a7ca87b81333701b1115039517b131d7",
- "synced_at": "2026-11-25T18:39:22+00:00",
+ "synced": "cdc719045b9d7bba4a0aba75953be7a23eaa12a5",
+ "synced_at": "2026-11-25T20:41:02+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -13203,6 +13212,6 @@
     }
    ]
   },
-  "reported": "2026-11-24"
+  "reported": "2026-11-25"
  }
 }
