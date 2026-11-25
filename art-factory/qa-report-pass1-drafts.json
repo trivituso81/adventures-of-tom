@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-25T07:53:25Z",
-  "total_audited": 116,
+  "generated_at": "2026-11-25T15:58:35Z",
+  "total_audited": 45,
   "passed": 0,
-  "failed": 116,
+  "failed": 45,
   "failed_list": [
     "tom/tom-ff-basic (0.0)",
     "tom/tom-ff-s1 (0.0)",
@@ -12,15 +12,6 @@
     "tom/univ-pick-me-up (0.0)",
     "tom/univ-double-team (0.0)",
     "tom/univ-full-ruckus (0.0)",
-    "tom/tom-gg-basic (0.0)",
-    "tom/tom-gg-s1 (0.0)",
-    "tom/tom-gg-s2 (0.0)",
-    "tom/tom-gg-s2_counter (0.0)",
-    "tom/tom-gg-cap (0.0)",
-    "tom/tom-sb-basic (0.0)",
-    "tom/tom-sb-s1 (0.0)",
-    "tom/tom-sb-s2 (0.0)",
-    "tom/tom-sb-cap (0.0)",
     "grace/grace-sc-basic (0.0)",
     "grace/grace-sc-s1 (0.0)",
     "grace/grace-sc-s2 (0.0)",
@@ -28,98 +19,36 @@
     "grace/univ-pick-me-up (0.0)",
     "grace/univ-double-team (0.0)",
     "grace/univ-full-ruckus (0.0)",
-    "grace/grace-ca-basic (0.0)",
-    "grace/grace-ca-s1 (0.0)",
-    "grace/grace-ca-s2 (0.0)",
-    "grace/grace-ca-s2_counter (0.0)",
-    "grace/grace-ca-cap (0.0)",
-    "grace/grace-sp-basic (0.0)",
-    "grace/grace-sp-s1 (0.0)",
-    "grace/grace-sp-s2 (0.0)",
-    "grace/grace-sp-cap (0.0)",
     "tnb/tnb-cer-basic (0.0)",
     "tnb/tnb-cer-s1 (0.0)",
     "tnb/tnb-cer-s2 (0.0)",
     "tnb/tnb-cer-cap (0.0)",
-    "tnb/tnb-lb-basic (0.0)",
-    "tnb/tnb-lb-s1 (0.0)",
-    "tnb/tnb-lb-s2 (0.0)",
-    "tnb/tnb-lb-cap (0.0)",
-    "tnb/tnb-sk-basic (0.0)",
-    "tnb/tnb-sk-s1 (0.0)",
-    "tnb/tnb-sk-s2 (0.0)",
-    "tnb/tnb-sk-cap (0.0)",
     "amy/amy-fq-basic (0.0)",
     "amy/amy-fq-s1 (0.0)",
     "amy/amy-fq-s2 (0.0)",
     "amy/amy-fq-cap (0.0)",
-    "amy/amy-cb-basic (0.0)",
-    "amy/amy-cb-s1 (0.0)",
-    "amy/amy-cb-s2 (0.0)",
-    "amy/amy-cb-cap (0.0)",
-    "amy/amy-sm-basic (0.0)",
-    "amy/amy-sm-s1 (0.0)",
-    "amy/amy-sm-s2 (0.0)",
-    "amy/amy-sm-cap (0.0)",
     "justin/justin-bb-basic (0.0)",
     "justin/justin-bb-s1 (0.0)",
     "justin/justin-bb-s2 (0.0)",
     "justin/justin-bb-cap (0.0)",
-    "justin/justin-lw-basic (0.0)",
-    "justin/justin-lw-s1 (0.0)",
-    "justin/justin-lw-s2 (0.0)",
-    "justin/justin-lw-cap (0.0)",
-    "justin/justin-ar-basic (0.0)",
-    "justin/justin-ar-s1 (0.0)",
-    "justin/justin-ar-s2 (0.0)",
-    "justin/justin-ar-cap (0.0)",
     "olivia/olivia-rc-basic (0.0)",
     "olivia/olivia-rc-s1 (0.0)",
     "olivia/olivia-rc-s2 (0.0)",
     "olivia/olivia-rc-cap (0.0)",
-    "olivia/olivia-wm-basic (0.0)",
-    "olivia/olivia-wm-s1 (0.0)",
-    "olivia/olivia-wm-s2 (0.0)",
-    "olivia/olivia-wm-cap (0.0)",
-    "olivia/olivia-na-basic (0.0)",
-    "olivia/olivia-na-s1 (0.0)",
-    "olivia/olivia-na-s2 (0.0)",
-    "olivia/olivia-na-cap (0.0)",
     "deedee/deedee-nf-basic (0.0)",
     "deedee/deedee-nf-s1 (0.0)",
     "deedee/deedee-nf-s1_counter (0.0)",
     "deedee/deedee-nf-s2 (0.0)",
     "deedee/deedee-nf-cap (0.0)",
-    "deedee/deedee-rn-basic (0.0)",
-    "deedee/deedee-rn-s1 (0.0)",
-    "deedee/deedee-rn-s2 (0.0)",
-    "deedee/deedee-rn-cap (0.0)",
-    "deedee/deedee-hc-basic (0.0)",
-    "deedee/deedee-hc-s1 (0.0)",
-    "deedee/deedee-hc-s2 (0.0)",
-    "deedee/deedee-hc-cap (0.0)",
     "boppy/boppy-dep-basic (0.0)",
     "boppy/boppy-dep-s1 (0.0)",
     "boppy/boppy-dep-s1_counter (0.0)",
     "boppy/boppy-dep-s2 (0.0)",
     "boppy/boppy-dep-cap (0.0)",
-    "boppy/boppy-pb-basic (0.0)",
-    "boppy/boppy-pb-s1 (0.0)",
-    "boppy/boppy-pb-s1_counter (0.0)",
-    "boppy/boppy-pb-s2 (0.0)",
-    "boppy/boppy-pb-cap (0.0)",
-    "boppy/boppy-ba-basic (0.0)",
-    "boppy/boppy-ba-s1 (0.0)",
-    "boppy/boppy-ba-s2 (0.0)",
-    "boppy/boppy-ba-cap (0.0)",
     "rose/rose-sr-basic (0.0)",
     "rose/rose-sr-s1 (0.0)",
     "rose/rose-sr-s2 (0.0)",
-    "rose/rose-sr-cap (0.0)",
-    "rose/rose-cr-basic (0.0)",
-    "rose/rose-cr-s1 (0.0)",
-    "rose/rose-cr-s2 (0.0)",
-    "rose/rose-cr-cap (0.0)"
+    "rose/rose-sr-cap (0.0)"
   ],
   "results": [
     {
@@ -138,7 +67,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "tom_battle_move_draft_tom-ff-s1",
@@ -156,7 +85,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "tom_battle_move_draft_tom-ff-s1_counter",
@@ -174,7 +103,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "tom_battle_move_draft_tom-ff-s2",
@@ -192,7 +121,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "tom_battle_move_draft_tom-ff-cap",
@@ -210,7 +139,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "tom_battle_move_draft_univ-pick-me-up",
@@ -228,7 +157,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "tom_battle_move_draft_univ-double-team",
@@ -246,7 +175,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "tom_battle_move_draft_univ-full-ruckus",
@@ -264,169 +193,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "tom_battle_move_draft_tom-gg-basic",
-      "character_id": "tom",
-      "move_id": "tom-gg-basic",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "tom_battle_move_draft_tom-gg-s1",
-      "character_id": "tom",
-      "move_id": "tom-gg-s1",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "tom_battle_move_draft_tom-gg-s2",
-      "character_id": "tom",
-      "move_id": "tom-gg-s2",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "tom_battle_move_draft_tom-gg-s2_counter",
-      "character_id": "tom",
-      "move_id": "tom-gg-s2_counter",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "tom_battle_move_draft_tom-gg-cap",
-      "character_id": "tom",
-      "move_id": "tom-gg-cap",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "tom_battle_move_draft_tom-sb-basic",
-      "character_id": "tom",
-      "move_id": "tom-sb-basic",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "tom_battle_move_draft_tom-sb-s1",
-      "character_id": "tom",
-      "move_id": "tom-sb-s1",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "tom_battle_move_draft_tom-sb-s2",
-      "character_id": "tom",
-      "move_id": "tom-sb-s2",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "tom_battle_move_draft_tom-sb-cap",
-      "character_id": "tom",
-      "move_id": "tom-sb-cap",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "grace_battle_move_draft_grace-sc-basic",
@@ -444,7 +211,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "grace_battle_move_draft_grace-sc-s1",
@@ -462,7 +229,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "grace_battle_move_draft_grace-sc-s2",
@@ -480,7 +247,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "grace_battle_move_draft_grace-sc-cap",
@@ -498,7 +265,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "grace_battle_move_draft_univ-pick-me-up",
@@ -516,7 +283,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "grace_battle_move_draft_univ-double-team",
@@ -534,7 +301,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "grace_battle_move_draft_univ-full-ruckus",
@@ -552,169 +319,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "grace_battle_move_draft_grace-ca-basic",
-      "character_id": "grace",
-      "move_id": "grace-ca-basic",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "grace_battle_move_draft_grace-ca-s1",
-      "character_id": "grace",
-      "move_id": "grace-ca-s1",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "grace_battle_move_draft_grace-ca-s2",
-      "character_id": "grace",
-      "move_id": "grace-ca-s2",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "grace_battle_move_draft_grace-ca-s2_counter",
-      "character_id": "grace",
-      "move_id": "grace-ca-s2_counter",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "grace_battle_move_draft_grace-ca-cap",
-      "character_id": "grace",
-      "move_id": "grace-ca-cap",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "grace_battle_move_draft_grace-sp-basic",
-      "character_id": "grace",
-      "move_id": "grace-sp-basic",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "grace_battle_move_draft_grace-sp-s1",
-      "character_id": "grace",
-      "move_id": "grace-sp-s1",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "grace_battle_move_draft_grace-sp-s2",
-      "character_id": "grace",
-      "move_id": "grace-sp-s2",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "grace_battle_move_draft_grace-sp-cap",
-      "character_id": "grace",
-      "move_id": "grace-sp-cap",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "tnb_battle_move_draft_tnb-cer-basic",
@@ -732,7 +337,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "tnb_battle_move_draft_tnb-cer-s1",
@@ -750,7 +355,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "tnb_battle_move_draft_tnb-cer-s2",
@@ -768,7 +373,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "tnb_battle_move_draft_tnb-cer-cap",
@@ -786,151 +391,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "tnb_battle_move_draft_tnb-lb-basic",
-      "character_id": "tnb",
-      "move_id": "tnb-lb-basic",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "tnb_battle_move_draft_tnb-lb-s1",
-      "character_id": "tnb",
-      "move_id": "tnb-lb-s1",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "tnb_battle_move_draft_tnb-lb-s2",
-      "character_id": "tnb",
-      "move_id": "tnb-lb-s2",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "tnb_battle_move_draft_tnb-lb-cap",
-      "character_id": "tnb",
-      "move_id": "tnb-lb-cap",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "tnb_battle_move_draft_tnb-sk-basic",
-      "character_id": "tnb",
-      "move_id": "tnb-sk-basic",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "tnb_battle_move_draft_tnb-sk-s1",
-      "character_id": "tnb",
-      "move_id": "tnb-sk-s1",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "tnb_battle_move_draft_tnb-sk-s2",
-      "character_id": "tnb",
-      "move_id": "tnb-sk-s2",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "tnb_battle_move_draft_tnb-sk-cap",
-      "character_id": "tnb",
-      "move_id": "tnb-sk-cap",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "amy_battle_move_draft_amy-fq-basic",
@@ -948,7 +409,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "amy_battle_move_draft_amy-fq-s1",
@@ -966,7 +427,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "amy_battle_move_draft_amy-fq-s2",
@@ -984,7 +445,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "amy_battle_move_draft_amy-fq-cap",
@@ -1002,151 +463,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "amy_battle_move_draft_amy-cb-basic",
-      "character_id": "amy",
-      "move_id": "amy-cb-basic",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "amy_battle_move_draft_amy-cb-s1",
-      "character_id": "amy",
-      "move_id": "amy-cb-s1",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "amy_battle_move_draft_amy-cb-s2",
-      "character_id": "amy",
-      "move_id": "amy-cb-s2",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "amy_battle_move_draft_amy-cb-cap",
-      "character_id": "amy",
-      "move_id": "amy-cb-cap",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "amy_battle_move_draft_amy-sm-basic",
-      "character_id": "amy",
-      "move_id": "amy-sm-basic",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "amy_battle_move_draft_amy-sm-s1",
-      "character_id": "amy",
-      "move_id": "amy-sm-s1",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "amy_battle_move_draft_amy-sm-s2",
-      "character_id": "amy",
-      "move_id": "amy-sm-s2",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "amy_battle_move_draft_amy-sm-cap",
-      "character_id": "amy",
-      "move_id": "amy-sm-cap",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "justin_battle_move_draft_justin-bb-basic",
@@ -1164,7 +481,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "justin_battle_move_draft_justin-bb-s1",
@@ -1182,7 +499,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "justin_battle_move_draft_justin-bb-s2",
@@ -1200,7 +517,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "justin_battle_move_draft_justin-bb-cap",
@@ -1218,151 +535,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "justin_battle_move_draft_justin-lw-basic",
-      "character_id": "justin",
-      "move_id": "justin-lw-basic",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "justin_battle_move_draft_justin-lw-s1",
-      "character_id": "justin",
-      "move_id": "justin-lw-s1",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "justin_battle_move_draft_justin-lw-s2",
-      "character_id": "justin",
-      "move_id": "justin-lw-s2",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "justin_battle_move_draft_justin-lw-cap",
-      "character_id": "justin",
-      "move_id": "justin-lw-cap",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "justin_battle_move_draft_justin-ar-basic",
-      "character_id": "justin",
-      "move_id": "justin-ar-basic",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "justin_battle_move_draft_justin-ar-s1",
-      "character_id": "justin",
-      "move_id": "justin-ar-s1",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "justin_battle_move_draft_justin-ar-s2",
-      "character_id": "justin",
-      "move_id": "justin-ar-s2",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "justin_battle_move_draft_justin-ar-cap",
-      "character_id": "justin",
-      "move_id": "justin-ar-cap",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "olivia_battle_move_draft_olivia-rc-basic",
@@ -1380,7 +553,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "olivia_battle_move_draft_olivia-rc-s1",
@@ -1398,7 +571,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "olivia_battle_move_draft_olivia-rc-s2",
@@ -1416,7 +589,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "olivia_battle_move_draft_olivia-rc-cap",
@@ -1434,151 +607,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "olivia_battle_move_draft_olivia-wm-basic",
-      "character_id": "olivia",
-      "move_id": "olivia-wm-basic",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "olivia_battle_move_draft_olivia-wm-s1",
-      "character_id": "olivia",
-      "move_id": "olivia-wm-s1",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "olivia_battle_move_draft_olivia-wm-s2",
-      "character_id": "olivia",
-      "move_id": "olivia-wm-s2",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "olivia_battle_move_draft_olivia-wm-cap",
-      "character_id": "olivia",
-      "move_id": "olivia-wm-cap",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "olivia_battle_move_draft_olivia-na-basic",
-      "character_id": "olivia",
-      "move_id": "olivia-na-basic",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "olivia_battle_move_draft_olivia-na-s1",
-      "character_id": "olivia",
-      "move_id": "olivia-na-s1",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "olivia_battle_move_draft_olivia-na-s2",
-      "character_id": "olivia",
-      "move_id": "olivia-na-s2",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "olivia_battle_move_draft_olivia-na-cap",
-      "character_id": "olivia",
-      "move_id": "olivia-na-cap",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "deedee_battle_move_draft_deedee-nf-basic",
@@ -1596,7 +625,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "deedee_battle_move_draft_deedee-nf-s1",
@@ -1614,7 +643,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "deedee_battle_move_draft_deedee-nf-s1_counter",
@@ -1632,7 +661,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "deedee_battle_move_draft_deedee-nf-s2",
@@ -1650,7 +679,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "deedee_battle_move_draft_deedee-nf-cap",
@@ -1668,151 +697,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "deedee_battle_move_draft_deedee-rn-basic",
-      "character_id": "deedee",
-      "move_id": "deedee-rn-basic",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "deedee_battle_move_draft_deedee-rn-s1",
-      "character_id": "deedee",
-      "move_id": "deedee-rn-s1",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "deedee_battle_move_draft_deedee-rn-s2",
-      "character_id": "deedee",
-      "move_id": "deedee-rn-s2",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "deedee_battle_move_draft_deedee-rn-cap",
-      "character_id": "deedee",
-      "move_id": "deedee-rn-cap",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "deedee_battle_move_draft_deedee-hc-basic",
-      "character_id": "deedee",
-      "move_id": "deedee-hc-basic",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "deedee_battle_move_draft_deedee-hc-s1",
-      "character_id": "deedee",
-      "move_id": "deedee-hc-s1",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "deedee_battle_move_draft_deedee-hc-s2",
-      "character_id": "deedee",
-      "move_id": "deedee-hc-s2",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "deedee_battle_move_draft_deedee-hc-cap",
-      "character_id": "deedee",
-      "move_id": "deedee-hc-cap",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "boppy_battle_move_draft_boppy-dep-basic",
@@ -1830,7 +715,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "boppy_battle_move_draft_boppy-dep-s1",
@@ -1848,7 +733,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "boppy_battle_move_draft_boppy-dep-s1_counter",
@@ -1866,7 +751,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "boppy_battle_move_draft_boppy-dep-s2",
@@ -1884,7 +769,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "boppy_battle_move_draft_boppy-dep-cap",
@@ -1902,169 +787,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "boppy_battle_move_draft_boppy-pb-basic",
-      "character_id": "boppy",
-      "move_id": "boppy-pb-basic",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "boppy_battle_move_draft_boppy-pb-s1",
-      "character_id": "boppy",
-      "move_id": "boppy-pb-s1",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "boppy_battle_move_draft_boppy-pb-s1_counter",
-      "character_id": "boppy",
-      "move_id": "boppy-pb-s1_counter",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "boppy_battle_move_draft_boppy-pb-s2",
-      "character_id": "boppy",
-      "move_id": "boppy-pb-s2",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "boppy_battle_move_draft_boppy-pb-cap",
-      "character_id": "boppy",
-      "move_id": "boppy-pb-cap",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "boppy_battle_move_draft_boppy-ba-basic",
-      "character_id": "boppy",
-      "move_id": "boppy-ba-basic",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "boppy_battle_move_draft_boppy-ba-s1",
-      "character_id": "boppy",
-      "move_id": "boppy-ba-s1",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "boppy_battle_move_draft_boppy-ba-s2",
-      "character_id": "boppy",
-      "move_id": "boppy-ba-s2",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "boppy_battle_move_draft_boppy-ba-cap",
-      "character_id": "boppy",
-      "move_id": "boppy-ba-cap",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "rose_battle_move_draft_rose-sr-basic",
@@ -2082,7 +805,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "rose_battle_move_draft_rose-sr-s1",
@@ -2100,7 +823,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "rose_battle_move_draft_rose-sr-s2",
@@ -2118,7 +841,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     },
     {
       "id": "rose_battle_move_draft_rose-sr-cap",
@@ -2136,79 +859,7 @@
       "failure_tags": [
         "qa_api_error"
       ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "rose_battle_move_draft_rose-cr-basic",
-      "character_id": "rose",
-      "move_id": "rose-cr-basic",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "rose_battle_move_draft_rose-cr-s1",
-      "character_id": "rose",
-      "move_id": "rose-cr-s1",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "rose_battle_move_draft_rose-cr-s2",
-      "character_id": "rose",
-      "move_id": "rose-cr-s2",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "rose_battle_move_draft_rose-cr-cap",
-      "character_id": "rose",
-      "move_id": "rose-cr-cap",
-      "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
-      "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
-      },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
     }
   ]
 }
