@@ -2336,7 +2336,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-25",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukD8RBy9czHhghgPwiX",
+    "url": "https://claude.ai/code/session_01RXeukD8RBy9czHhghgPwiX",
     "opening": "not started"
    },
    "nightly": true,
@@ -2383,6 +2383,10 @@
      "d": "2026-11-25",
      "t": "Ran: looked at 4 play cards (t-b3s22ch15 to ch18), all about fun, pace and readability; all 4 marked yours. No build.",
      "at": "2026-11-25T08:02:49.000Z"
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -6447,6 +6451,18 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukD8RBy9czHhghgPwiX",
+   "title": "Night QA: the test browser plays your check cards",
+   "first": "2026-11-25T08:02:55Z",
+   "last": "2026-11-25T08:02:55Z",
+   "tags": [
+    "night"
+   ],
+   "cards": [
+    "c-night-qa"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
    "title": "Script Studio: auto QA and rewrite inside Generate Scene",
@@ -12765,8 +12781,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "b49596984d3dd6913ac26b244c69e852070d20d3",
- "synced_at": "2026-11-25T08:01:13+00:00",
+ "synced": "c3a46c7ac394051178afbc412e01af4b72d1828c",
+ "synced_at": "2026-11-25T08:03:42+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
