@@ -1540,6 +1540,12 @@
    "cmd": "python3 -I tools/script-studio/read_test.py",
    "group": "g1",
    "minutes": 1
+  },
+  {
+   "id": "pass1_preview_test",
+   "cmd": "python3 -I tools/pass1_preview_test.py",
+   "group": "g1",
+   "minutes": 2
   }
  ]
 }

@@ -27,7 +27,7 @@ B3_SKILLS.hand_me_my_glasses_scrub={id:'hand_me_my_glasses_scrub',vibe:'deedee_n
 // other 5 Pep Capstone that does print one (Tarmac Porsche Transfer). Its Drench leaves every monster it hits Drenched by the
 // normal rule (not one whose Toasty it set off: spec 2.5).
 B3_SKILLS.fifty_year_dust_tsunami={id:'fifty_year_dust_tsunami',vibe:'deedee_neat',slot:'cap',name:'Fifty-Year Dust Tsunami',pep:5,flavor:['drench'],power:'heavy',hits:1,
-  target:'all_foes',tags:[],composure:0,effects:[{op:'strip',kind:'buff',all:true,to:'target'},{op:'strip',kind:'hazard'},{op:'damage'}],line:null,anim:{kind:'default',shape:'cast'},
+  target:'all_foes',tags:[],composure:0,effects:[{op:'strip',kind:'buff',all:true,to:'target'},{op:'strip',kind:'hazard'},{op:'damage'}],line:null,anim:{kind:'clip',clip:'pf_deedee_nf_cap',shape:'cast'},
   short:'Scrubs every monster clean, then a heavy wave Drenches all.',
   desc:'Scrubs every buff off every monster and clears anything they left on the family\u2019s floor. Then a heavy Drench wave hits them all and leaves them Drenched.'};
 // Spotless Floor: "a Drenched foe" is one that is Drenched when the pips come off, or whose Drenched this same action set off
