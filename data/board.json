@@ -6505,7 +6505,7 @@
    "id": "c-scriptstudio6",
    "tag": "scriptstudio6",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Script Studio: Fix button now rewrites flagged lines",
    "next": "Shipped: flagged lines must change, one forced redo, no silent revert. Next: run Fix Remaining Issues on ch1Goal again and tell me if any line still comes back unchanged.",
@@ -6521,6 +6521,10 @@
     {
      "d": "2026-11-25",
      "t": "Shipped as scriptstudio6."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as scriptstudio6: Script Studio: Fix Remaining Issues and Pass 4 now really rewrite Critic-flagged lines"
     }
    ],
    "blocks": [],
@@ -6535,7 +6539,8 @@
     "model": "Claude Sonnet 5.5 (row C: a bug whose cause had to be found)",
     "effort": "medium (cause and fix are written in the card)",
     "text": "Read the c-scriptstudio6 card and docs/CHANGES.md scriptstudio6, then re-check rewriteScene and qualityRank in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/qa_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-25"
   }
  ],
  "sessions": [
@@ -6543,16 +6548,18 @@
    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
    "title": "Script Studio: auto QA and rewrite inside Generate Scene",
    "first": "2026-11-24T23:29:09-08:00",
-   "last": "2026-11-25T08:21:03-08:00",
+   "last": "2026-11-25T08:38:31-08:00",
    "tags": [
     "scriptstudio3",
     "scriptstudio4",
-    "scriptstudio5"
+    "scriptstudio5",
+    "scriptstudio6"
    ],
    "cards": [
     "c-scriptstudio3",
     "c-scriptstudio4",
-    "c-scriptstudio5"
+    "c-scriptstudio5",
+    "c-scriptstudio6"
    ]
   },
   {
@@ -12871,8 +12878,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "82cd4937a8826b5665139967307a191182ff78ef",
- "synced_at": "2026-11-25T16:21:56+00:00",
+ "synced": "d92f6919b10e1fed688da227fa8292a7bd9472a7",
+ "synced_at": "2026-11-25T16:39:24+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
