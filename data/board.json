@@ -6541,6 +6541,43 @@
     "text": "Read the c-scriptstudio6 card and docs/CHANGES.md scriptstudio6, then re-check rewriteScene and qualityRank in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/qa_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "done": "2026-11-25"
+  },
+  {
+   "id": "c-scriptstudio7",
+   "tag": "scriptstudio7",
+   "lane": "claude",
+   "col": "done",
+   "theme": "Tools",
+   "title": "Script Studio: strict QA bar and Generate Chapter",
+   "next": "Shipped: strict bar, carbon default, 4 retries with early stop, Generate Chapter. Next: open a chapter with empty scenes, tap Generate Chapter and read the summary banner.",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
+    "opening": "Update AoT Script Studio (tools/script-studio/src/App.jsx) to enforce a strict QA bar"
+   },
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Tom: \"enforce a strict QA bar while running hands-free across an entire chapter\". New card; started."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as scriptstudio7."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-25",
+   "changed": "2026-11-25",
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Script Studio strict QA bar, carbon default, 4 retries and Generate Chapter.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build with the design in the card)",
+    "effort": "medium (the changes are specified in the card)",
+    "text": "Read the c-scriptstudio7 card and docs/CHANGES.md scriptstudio7, then re-check runSceneQAPipeline and handleGenerateChapter in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/qa_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "done": "2026-11-25"
   }
  ],
  "sessions": [

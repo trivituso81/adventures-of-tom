@@ -111,8 +111,8 @@ function resetCoreToHosted(vaultDocs, hosted) {
 }
 
 const MODEL_PRESETS = [
-  { id: 'gemini-4-neon', label: 'Gemini 4 Neon (Generation default)' },
-  { id: 'gemini-4-carbon', label: 'Gemini 4 Carbon (Audit / Critic default)' },
+  { id: 'gemini-4-neon', label: 'Gemini 4 Neon' },
+  { id: 'gemini-4-carbon', label: 'Gemini 4 Carbon (Generation + Audit default)' },
   { id: 'gemini-4-hydrogen', label: 'Gemini 4 Hydrogen (Fast / Budget)' },
   { id: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash (Fast & Balanced)' },
   { id: 'gemini-2.5-flash-lite', label: 'Gemini 2.5 Flash-Lite (Ultra Fast)' },
@@ -243,7 +243,8 @@ function createInitialState() {
     activeSceneId: '',
     settings: {
       apiKey: '',
-      genModelPreset: 'gemini-4-neon',
+      genModelPreset: 'gemini-4-carbon',
+      genCarbonMigrated: true,
       genCustomModel: '',
       auditModelPreset: 'gemini-4-carbon',
       auditCustomModel: '',
@@ -894,7 +895,12 @@ function finalizeTrajectoryReport(r) {
 // Settings saved before the Gemini 4 presets used the removed gemini-2.5-pro id.
 function migrateModelSettings(settings) {
   const s = { ...(settings || {}) };
-  if (s.genModelPreset === 'gemini-2.5-pro') s.genModelPreset = 'gemini-4-neon';
+  if (s.genModelPreset === 'gemini-2.5-pro') s.genModelPreset = 'gemini-4-carbon';
+  // One time: the Generation default moved from Neon to Carbon (same depth as the Critic).
+  if (!s.genCarbonMigrated) {
+    if (s.genModelPreset === 'gemini-4-neon') s.genModelPreset = 'gemini-4-carbon';
+    s.genCarbonMigrated = true;
+  }
   if (s.auditModelPreset === 'gemini-2.5-pro') s.auditModelPreset = 'gemini-4-carbon';
   return s;
 }
@@ -907,8 +913,12 @@ function migrateModelSettings(settings) {
 // SCENE QA PIPELINE (Generate Scene = Draft > Format > QA gate > Auto-rewrite)
 // ============================================================================
 
-const QA_MAX_RETRIES = 2;
+const QA_MAX_RETRIES = 4;
+const QA_STALL_LIMIT = 2; // stop early after this many consecutive retries that do not beat the best score
 const QA_PASS_SCORE = 8;
+// A scene passes ONLY with score >= QA_PASS_SCORE, 0 linter errors and no high-severity issue in these categories.
+const QA_BLOCKING_CATEGORIES = ['Logic', 'Canon', 'Voice', 'KnowledgeGate'];
+const isBlockingIssue = (i) => i && i.severity === 'high' && QA_BLOCKING_CATEGORIES.includes(i.category);
 
 const DEPRECATED_TERMS = ['Tombo', 'Marlowe', 'Little Elsewhere', 'rhubarb crisp', 'amber', 'Tommy'];
 
@@ -1119,10 +1129,11 @@ const CRITIC_SCHEMA = {
           lineIndex: { type: 'INTEGER' },
           speaker: { type: 'STRING' },
           category: { type: 'STRING', enum: ['Comedy', 'Voice', 'Logic', 'Canon', 'KnowledgeGate'] },
+          severity: { type: 'STRING', enum: ['high', 'medium', 'low'] },
           problem: { type: 'STRING' },
           fix: { type: 'STRING' },
         },
-        required: ['lineIndex', 'speaker', 'category', 'problem', 'fix'],
+        required: ['lineIndex', 'speaker', 'category', 'severity', 'problem', 'fix'],
       },
     },
   },
@@ -1185,8 +1196,8 @@ async function runCriticPass({ ctx, apiKey, auditModelId, lines }) {
     'Judge the numbered draft against comedy-bible.md, canon-and-characters.md and the scene\'s knowledge gate.',
     'Look for: jokes that are not funny or are AI-generic; lines that do not sound like that character; lines that make no sense in the moment; sitcom-cheesy or on-the-nose lines; a beat owned by the wrong character; anyone knowing or referencing something the knowledge gate says they do not know yet; canon violations; character-sheet trivia shoehorned in where nobody would say it.',
     'Do NOT flag a line merely because its wording differs from a mandatory beat or from text quoted in a beat; beats are plot facts, not a script. Flag beat-related lines ONLY when the dialogue is a flat, unfunny paraphrase, or when the plot fact itself is missing or wrong.',
-    `Score 1 to 10. Set "pass" to false if the score is below ${QA_PASS_SCORE}, OR if any single line is nonsensical, out of character, sitcom-cheesy, or gives the wrong character ownership of a beat. Otherwise true.`,
-    'For each problem give lineIndex (the L number, 1-based), the speaker, a category (Comedy, Voice, Logic, Canon or KnowledgeGate), what is wrong, and a concrete fix. Return an empty issues list only if there is truly nothing to fix.',
+    `Score 1 to 10. Set "pass" to false if the score is below ${QA_PASS_SCORE}, OR if any single line is nonsensical, out of character, sitcom-cheesy, or gives the wrong character ownership of a beat. Also set "pass" to false if any issue has severity high in Logic, Canon, Voice or KnowledgeGate. Otherwise true.`,
+    'For each problem give lineIndex (the L number, 1-based), the speaker, a category (Comedy, Voice, Logic, Canon or KnowledgeGate), a severity (high = breaks logic, canon, the character voice or the knowledge gate; medium = clearly weak; low = polish), what is wrong, and a concrete fix. Return an empty issues list only if there is truly nothing to fix.',
     '',
     `=== REFERENCE DOC: comedy-bible.md ===\n${comedyBible || '(not loaded)'}\n=== END ===`,
     '',
@@ -1204,10 +1215,11 @@ async function runCriticPass({ ctx, apiKey, auditModelId, lines }) {
   ].join('\n');
   const r = await callGeminiJSON({ apiKey, modelId: auditModelId, prompt: criticPrompt, schema: CRITIC_SCHEMA, temperature: 0.2 });
   const score = Number(r.score) || 0;
+  const issues = (r.issues || []).map((i) => ({ ...i, lineIndex: Number(i.lineIndex) || 0 }));
   return {
-    pass: r.pass === true && score >= QA_PASS_SCORE,
+    pass: r.pass === true && score >= QA_PASS_SCORE && !issues.some(isBlockingIssue),
     score,
-    issues: (r.issues || []).map((i) => ({ ...i, lineIndex: Number(i.lineIndex) || 0 })),
+    issues,
   };
 }
 
@@ -1271,7 +1283,12 @@ function buildRewritePrompt({ ctx, activeBannedWords, ev }) {
 // Linter errors are mechanical and never outweigh a better Critic score.
 function qualityRank(ev) {
   const unavailable = Boolean(ev.critic.unavailable);
-  return [unavailable ? 1 : 0, unavailable ? 0 : -ev.critic.score, ev.linter.length + ev.critic.issues.length];
+  return [
+    unavailable ? 1 : 0,
+    unavailable ? 0 : -ev.critic.score,
+    ev.critic.issues.filter(isBlockingIssue).length,
+    ev.linter.length + ev.critic.issues.length,
+  ];
 }
 function isStrictlyWorse(a, b) {
   const x = qualityRank(a);
@@ -1326,7 +1343,7 @@ async function rewriteScene({ ctx, apiKey, genModelId, activeBannedWords, ev }) 
 function buildQAReport(ev, retries) {
   const notes = [];
   for (const e of ev.linter) notes.push(`L${e.lineIndex + 1} (${e.speaker || 'n/a'}) linter: ${e.message}`);
-  for (const i of ev.critic.issues) notes.push(`L${i.lineIndex} (${i.speaker}) ${i.category}: ${i.problem}`);
+  for (const i of ev.critic.issues) notes.push(`L${i.lineIndex} (${i.speaker}) ${i.category}${i.severity ? ` [${i.severity}]` : ''}: ${i.problem}`);
   if (ev.critic.unavailable) notes.push(`Showrunner critic unavailable: ${ev.critic.unavailable}`);
   return {
     passed: ev.ok,
@@ -1425,10 +1442,12 @@ async function runSceneQAPipeline({ apiKey, genModelId, auditModelId, vaultDocs,
     return best;
   };
 
-  let ev = await evaluate(current, `Running QA check (Attempt 1/${QA_MAX_RETRIES})...`);
+  let ev = await evaluate(current, `Running QA check (Attempt 1/${QA_MAX_RETRIES + 1})...`);
   consider(ev);
   let retries = 0;
-  while (!ev.ok && retries < QA_MAX_RETRIES) {
+  let stalled = 0;
+  let bestScore = ev.critic.unavailable ? -1 : ev.critic.score;
+  while (!ev.ok && retries < QA_MAX_RETRIES && stalled < QA_STALL_LIMIT) {
     // A critic outage cannot be fixed by rewriting; only rewrite when there is something concrete to fix.
     if (ev.critic.unavailable && ev.linter.length === 0) break;
     retries += 1;
@@ -1437,9 +1456,16 @@ async function runSceneQAPipeline({ apiKey, genModelId, auditModelId, vaultDocs,
     if (!newLines.length) break;
     ev = await evaluate(
       newLines,
-      retries < QA_MAX_RETRIES ? `Running QA check (Attempt ${retries + 1}/${QA_MAX_RETRIES})...` : 'Running final QA check...'
+      retries < QA_MAX_RETRIES ? `Running QA check (Attempt ${retries + 1}/${QA_MAX_RETRIES + 1})...` : 'Running final QA check...'
     );
     consider(ev);
+    const sc = ev.critic.unavailable ? -1 : ev.critic.score;
+    if (sc > bestScore) {
+      bestScore = sc;
+      stalled = 0;
+    } else {
+      stalled += 1;
+    }
   }
 
   const final = ev.ok ? ev : best;
@@ -1604,6 +1630,10 @@ export default function App() {
 
   // Loading & Feedback
   const [loadingStatus, setLoadingStatus] = useState('');
+  const stateRef = useRef(state);
+  stateRef.current = state;
+  const [chapterRun, setChapterRun] = useState(null); // { running, chapterLabel, total, passed, failed:[{id,note}], stopped, aborted }
+  const chapterStopRef = useRef(false);
   const [errorBanner, setErrorBanner] = useState('');
   const [toast, setToast] = useState('');
 
@@ -2178,6 +2208,68 @@ export default function App() {
     } finally {
       setLoadingStatus('');
     }
+  };
+
+
+  // Generate Chapter: full 4-pass QA pipeline on every empty scene, in order, saving each scene as it finishes.
+  const handleGenerateChapter = async () => {
+    if (!activeChapter || chapterRun?.running) return;
+    const chapterId = activeChapter.id;
+    const startChapter = stateRef.current.chapters.find((c) => c.id === chapterId);
+    if (!startChapter) return;
+    const total = startChapter.scenes.length;
+    const targets = startChapter.scenes.map((sc, idx) => ({ id: sc.id, sceneId: sc.sceneId, pos: idx + 1 })).filter((t) => {
+      const sc = startChapter.scenes.find((x) => x.id === t.id);
+      return sc && sc.lines.length === 0;
+    });
+    if (!targets.length) return;
+    setErrorBanner('');
+    chapterStopRef.current = false;
+    const run = { running: true, chapterLabel: startChapter.label, total: targets.length, passed: 0, failed: [], stopped: false, aborted: false };
+    setChapterRun({ ...run });
+    let consecutiveErrors = 0;
+    for (const t of targets) {
+      if (chapterStopRef.current) {
+        run.stopped = true;
+        break;
+      }
+      const prefix = `Scene ${t.pos}/${total}: ${t.sceneId || t.id} - `;
+      setLoadingStatus(`${prefix}Drafting...`);
+      try {
+        const cur = stateRef.current;
+        const chapter = cur.chapters.find((c) => c.id === chapterId);
+        const scene = chapter?.scenes.find((x) => x.id === t.id);
+        if (!scene) continue;
+        const { lines, qa } = await runSceneQAPipeline({
+          apiKey: cur.settings.apiKey,
+          genModelId,
+          auditModelId,
+          vaultDocs: cur.vaultDocs,
+          chapter,
+          scene,
+          activeBannedWords,
+          setStatus: (m) => setLoadingStatus(prefix + m),
+        });
+        updateChapter(chapterId, (ch) => ({
+          ...ch,
+          scenes: ch.scenes.map((sc) => (sc.id === t.id ? { ...sc, lines, qa } : sc)),
+        }));
+        consecutiveErrors = 0;
+        if (qa.passed) run.passed += 1;
+        else run.failed.push({ id: t.sceneId || t.id, note: '' });
+      } catch (err) {
+        consecutiveErrors += 1;
+        run.failed.push({ id: t.sceneId || t.id, note: 'error' });
+        if (consecutiveErrors >= 2) {
+          run.aborted = true;
+          setErrorBanner(`Chapter run stopped after 2 errors in a row: ${err.message || 'generation failed'}`);
+          break;
+        }
+      }
+      setChapterRun({ ...run, failed: [...run.failed] });
+    }
+    setChapterRun({ ...run, running: false, failed: [...run.failed] });
+    setLoadingStatus('');
   };
 
   // QA badge: one more surgical pass on the saved Critic issues, no restart from Pass 1.
@@ -3052,6 +3144,25 @@ export default function App() {
 
                 <div className="flex flex-wrap items-center gap-1.5">
                   <button
+                    onClick={handleGenerateChapter}
+                    disabled={Boolean(loadingStatus) || activeChapter.scenes.every((sc) => sc.lines.length > 0) || activeChapter.scenes.length === 0}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-200 border border-emerald-500/40 disabled:opacity-40 transition"
+                    title="Run the full 4-pass QA pipeline on every empty scene in this chapter, in order"
+                    data-testid="generate-chapter"
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    Generate Chapter
+                  </button>
+                  {chapterRun?.running && (
+                    <button
+                      onClick={() => { chapterStopRef.current = true; }}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-rose-600/20 hover:bg-rose-600/30 text-rose-200 border border-rose-500/40 transition"
+                      data-testid="stop-chapter"
+                    >
+                      Stop after this scene
+                    </button>
+                  )}
+                  <button
                     onClick={handleAutoFillChapterFromVault}
                     disabled={Boolean(loadingStatus)}
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-200 border border-indigo-500/40 disabled:opacity-40 transition"
@@ -3069,6 +3180,24 @@ export default function App() {
                   </button>
                 </div>
               </div>
+
+              {chapterRun && !chapterRun.running && (
+                <div className="mt-2.5 pt-2.5 border-t border-slate-800/80 flex items-start justify-between gap-3 text-xs" data-testid="chapter-summary">
+                  <div className="text-slate-200">
+                    <span className="font-semibold">
+                      {chapterRun.chapterLabel}: {chapterRun.passed} of {chapterRun.total} scene{chapterRun.total === 1 ? '' : 's'} passed the strict QA bar
+                    </span>
+                    {chapterRun.stopped && <span className="text-amber-300"> (stopped early)</span>}
+                    {chapterRun.aborted && <span className="text-rose-300"> (aborted after errors)</span>}
+                    {chapterRun.failed.length > 0 && (
+                      <div className="mt-1 text-amber-200">
+                        Still failing: {chapterRun.failed.map((f) => (f.note ? `${f.id} (${f.note})` : f.id)).join(', ')}
+                      </div>
+                    )}
+                  </div>
+                  <button onClick={() => setChapterRun(null)} className="text-slate-400 hover:text-white" aria-label="Dismiss summary">x</button>
+                </div>
+              )}
 
               {/* Row 2: Scene Selector Strip (shown when scenes exist) */}
               {activeChapter.scenes.length > 0 && (
@@ -3713,7 +3842,7 @@ export default function App() {
                               activeScene.qa.notes.map((n, i) => <li key={i}>{n}</li>)
                             )}
                           </ul>
-                          {activeScene.qa.score != null && activeScene.qa.score < QA_PASS_SCORE && (
+                          {activeScene.qa.passed === false && (
                             <button
                               onClick={handleFixRemainingIssues}
                               disabled={Boolean(loadingStatus)}

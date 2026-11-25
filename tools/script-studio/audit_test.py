@@ -66,7 +66,7 @@ with sync_playwright() as p:
     check(len(vals) == 2, 'two model dropdowns found')
     check(all(o[:3] == ['gemini-4-neon', 'gemini-4-carbon', 'gemini-4-hydrogen'] for o, _ in vals), 'presets lead with neon, carbon, hydrogen')
     check(all('gemini-2.5-pro' not in o for o, _ in vals), 'gemini-2.5-pro preset is gone')
-    check([v for _, v in vals] == ['gemini-4-neon', 'gemini-4-carbon'], 'old saved 2.5-pro settings migrate to neon (gen) and carbon (audit): %s' % [v for _, v in vals])
+    check([v for _, v in vals] == ['gemini-4-carbon', 'gemini-4-carbon'], 'old saved 2.5-pro settings migrate to carbon (gen) and carbon (audit): %s' % [v for _, v in vals])
     pg.locator('div.fixed button:has(svg.lucide-x)').first.click(); pg.wait_for_timeout(300)
     pg.get_by_text('3. Checkers').click(); pg.wait_for_timeout(500)
     check(pg.get_by_role('button', name='Chapter Coherence Audit').count() == 1 and pg.get_by_role('button', name='Cross-Chapter Tie-In Audit').count() == 1, 'buttons renamed')
