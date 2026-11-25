@@ -11,7 +11,7 @@ on:
         required: true
         default: 'no'
       stage:
-        description: 'end = only regenerate end.png; video = continue to the video'
+        description: 'end = only make the keyframe; video = continue to the video'
         required: true
         default: 'end'
 

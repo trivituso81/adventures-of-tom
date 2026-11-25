@@ -1,36 +1,34 @@
 #!/usr/bin/env python3
 """Sandbox proof of concept: Justin 'Stud-Finder Beep & Knock' (pf-justin-bb-basic). Standalone. Touches nothing outside this folder.
 One attempt, hard cap $1.00 (ledger.json in this folder counts every call; a rerun reuses files already made and never pays twice).
-Steps: 1 two keyframes (fal nano-banana edit, hero PNG as reference, flat #00FF00), 2 one Veo 3.1 Lite first-last-frame video,
+Steps: 1 start keyframe (end.png is a copy of it) (fal nano-banana edit, hero PNG as reference, flat #00FF00), 2 one Veo 3.1 Lite first-last-frame video,
 3 ffmpeg chromakey + despill, transparent WebM trimmed to the action window (no slowdown). Attempt 1 is kept in attempt1/.
 Needs env FAL_KEY. Uses tools/art-library/falq.py read only (imported, not changed)."""
 import os, sys, json, subprocess, time
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, '..', '..', 'tools', 'art-library'))
 import falq
-CAP = 1.00
+CAP = 1.25   # raised from 1.00 by Tom 2026-11-25 14:44
 IMG, VID = 'fal-ai/nano-banana/edit', 'fal-ai/veo3.1/lite/first-last-frame-to-video'
 EST_IMG, EST_VID = 0.0398, 0.05 * 4          # 4 s is Veo Lite's shortest length (allowed: 4s, 6s, 8s); audio off
 LEDGER = os.path.join(HERE, 'ledger.json')
 P = lambda n: os.path.join(HERE, n)
 
-LOOK = ("Keep this exact character from the reference image: same face, hair, beard, build, clothes, tool belt and hand-painted realistic caricature style. "
-        "16:9 landscape frame. Fixed camera: Justin's full body from boots to hair fills only about 55 percent of the frame height, centered horizontally, "
-        "with his boots resting at the same spot 12 percent above the bottom edge, so there is a wide margin of empty green on all four sides and nothing is cropped. "
-        "Background is one solid flat pure #00FF00 green, no floor, no shadow, no gradient, no other objects. Facing screen-left in side view, feet planted flat and still. "
-        "In his off-hand (the hand nearest the camera) he holds an oversized bright yellow electronic stud finder with a small flashing red LED, clearly visible. "
-        "In his striking hand he grips a heavy steel claw hammer.")
-START = ("Windup pose: Justin leans back in one bold anticipation, the claw hammer raised high overhead in his striking hand, the bright yellow stud finder "
-         "held out in front of him in his off-hand. " + LOOK)
-END = ("FOLLOW-THROUGH pose, same camera, same size, same boots position as the reference, but a DIFFERENT arm pose: do not copy the hammer position from the reference. "
-       "Justin has just driven one huge slam: his torso leans far forward toward screen-left, his striking arm is fully extended straight out in front of him at shoulder height, "
-       "and the steel claw hammer is swung all the way forward and held perfectly horizontal, its head pointing far out to screen-left, with a small white impact spark at the hammer head. "
-       "Nothing is raised above his head: the space above his head is empty. The bright yellow stud finder with its red LED is thrust forward in his off-hand and clearly visible. " + LOOK)
-MOTION = ("Locked static camera, flat solid green background throughout, no cuts, no zoom, no pan. Justin stays on the same spot with his feet planted, facing screen-left, "
-          "and keeps the same size in frame. He holds the bright yellow stud finder in his off-hand and the steel claw hammer in his striking hand, both gripped the whole time, "
-          "and the stud finder stays visible. He leans back with the hammer raised overhead, then drives the hammer in one single overhead-to-horizontal slam toward screen-left "
-          "while thrusting the stud finder forward, then holds the final pose. One hammer slam only, no punching, no extra swings. Face, clothes and painted style stay identical. Silent.")
-NEG = "camera movement, zoom, punching, boxing, extra swings, repeated strikes, dropping the stud finder, walking, character shrinking, cropping, text, other characters"
+START = ("Keep this exact character from the reference image: same face, hair, beard, build, clothes and hand-painted realistic caricature style. "
+         "Justin in his neutral idle battle stance: standing relaxed, feet planted flat, body turned three-quarters toward screen-left, facing three-quarters left. "
+         "In one hand he holds a normal palm-sized yellow electronic stud finder, about the size of a TV remote, at waist height. "
+         "A steel framing hammer is tucked into his tool belt at his hip, the handle hanging down at his side; the hammer is NOT raised, NOT on his shoulder and NOT in his hand. "
+         "16:9 landscape frame, fixed camera: his full body from boots to hair fills about 55 percent of the frame height, centered horizontally, boots 12 percent above the bottom edge, "
+         "wide margin of empty green on all four sides, nothing cropped. Background is one solid flat pure #00FF00 green, no floor, no shadow, no gradient. "
+         "No glowing, no beams, no light cones, no rays, no sparks, no effects of any kind.")
+MOTION = ("Locked static camera, flat solid green background throughout, no cuts, no zoom, no pan. Justin stays on the same spot at the same size, facing three-quarters left. "
+          "He steps forward in place, gliding the palm-sized yellow electronic stud finder smoothly left to right until pausing at a spot, then swiftly draws the framing hammer from his belt "
+          "and gives it one single crisp deadpan knock to the left, then tucks the hammer back into his belt and settles cleanly into his neutral idle stance, ending exactly as he began. "
+          "Exactly one knock, no repeated swings. No glowing beams, no light cones, no laser or scanner rays, no impact sparks, no comic stars, no visual effects of any kind. Silent.")
+NEG = ("camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, "
+       "text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, "
+       "blurry limbs, extra fingers, morphed props, anime speedlines, glowing beams, light cones, laser rays, scanner rays, impact sparks, comic stars, glow effects, oversized stud finder, "
+       "double swing, repeated knocks, character shrinking, cropping")
 
 def say(*a): print(time.strftime('%H:%M:%S'), *a, flush=True)
 def spent():
@@ -53,7 +51,8 @@ def main():
         res = fal.wait(fal.send(IMG, {'prompt': prompt, 'image_urls': refs, 'num_images': 1, 'output_format': 'png', 'aspect_ratio': '16:9'}))
         open(P(name), 'wb').write(fal.download(falq.image_url(res))); book(name, EST_IMG)
     keyframe('start.png', START, [hero])
-    keyframe('end.png', END, [hero, falq.data_uri(open(P('start.png'), 'rb').read())])
+    if not os.path.exists(P('end.png')):
+        import shutil; shutil.copyfile(P('start.png'), P('end.png')); say('end.png is an exact copy of start.png (seamless return to idle)')
     if os.environ.get('STAGE') == 'end': say('stage end only: stopping before the video, spent $%.4f' % spent()); return
     if not os.path.exists(P('raw.mp4')):
         guard(EST_VID); say('making video (Veo 3.1 Lite first-last-frame, 4 s)')
@@ -69,7 +68,7 @@ def main():
                                capture_output=True, text=True).stdout.split('/')[0].split()[0] or 24)
     d = np.abs(np.diff(fr, axis=0)).mean(axis=(1, 2)); mv = np.where(d > max(0.15, d.max() * 0.12))[0]
     t0 = max(0.0, (mv[0] - 3) / fps) if len(mv) else 0.0
-    t1 = min(len(fr) / fps, (mv[-1] + 1) / fps + 0.4) if len(mv) else len(fr) / fps
+    t1 = min(len(fr) / fps, t0 + 2.7)   # Tom: trim to about 2.7 s (the manifest duration)
     say('action window %.2f s to %.2f s of %.2f s (no slowdown)' % (t0, t1, len(fr) / fps))
     open(P('window.json'), 'w').write(json.dumps({'start': round(t0, 3), 'end': round(t1, 3), 'fps': fps}))
     vf = 'chromakey=0x00FF00:0.30:0.12,despill=type=green:mix=0.6:expand=0.2,format=yuva420p'
