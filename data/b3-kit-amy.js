@@ -22,14 +22,14 @@ B3_TRAITS.workout_streak={id:'workout_streak',vibe:'amy_fitness',name:'Workout S
   desc:'Every turn Amy takes builds a Rep, up to 4. Each Rep gives her 5% more Speed and 5% more damage on Clobber hits.'};
 // The spec says "ultra-fast recovery": Base Recovery 60 instead of 80 (my call).
 B3_SKILLS.kettlebell_swing={id:'kettlebell_swing',vibe:'amy_fitness',slot:'basic',name:'Kettlebell Swing',pep:0,flavor:['clobber'],power:'light',hits:1,
-  target:'foe',tags:[],composure:0,rec:60,effects:[{op:'damage'},{op:'counter',id:'reps',n:1,max:4,to:'self'}],line:null,anim:{kind:'default',shape:'strike'},
+  target:'foe',tags:[],composure:0,rec:60,effects:[{op:'damage'},{op:'counter',id:'reps',n:1,max:4,to:'self'}],line:null,anim:{kind:'clip',clip:'pf_amy_fq_basic',shape:'strike'},
   short:'Light hit. Builds a Rep, and Amy’s next turn comes sooner.',
   desc:'Light Clobber swing. Builds a Rep, and Amy waits much less than after any other Basic.'};
 // Burpee Blitz: a standard Clobber hit. With 3 or more Reps it also gives Amy a bonus mini-turn at once: one Basic or one Skill that costs
 // 2 Pep or less, paid for in the normal way (only the spec's Colossal Dumpling says "for free", my call). It is her one free action this round.
 B3_SKILLS.burpee_blitz={id:'burpee_blitz',vibe:'amy_fitness',slot:'s1',name:'Burpee Blitz',pep:2,flavor:['clobber'],power:'standard',hits:1,
   target:'foe',tags:[],composure:0,counter:'reps',
-  effects:[{op:'damage'},{op:'grant',to:'self',maxPep:2,basic:true,needCounter:{id:'reps',min:3}}],line:null,anim:{kind:'default',shape:'strike'},
+  effects:[{op:'damage'},{op:'grant',to:'self',maxPep:2,basic:true,needCounter:{id:'reps',min:3}}],line:null,anim:{kind:'clip',clip:'pf_amy_fq_s1',shape:'strike'},
   short:'Hit. With 3 Reps, Amy gets a bonus turn right away.',
   desc:'Standard Clobber jump-kick. With 3 or more Reps, Amy also gets an extra mini-turn right away: a Basic, or a Skill that costs 2 Pep or less. Once a round.'};
 // Pace-Partner Run: the ally's Speed is raised to Amy's Speed as it is when she calls them (a copied value, not a percent) for 2 turns.

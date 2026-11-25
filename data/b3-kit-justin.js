@@ -19,7 +19,7 @@ B3_TRAITS.load_bearing_swing={id:'load_bearing_swing',vibe:'justin_basement',nam
   on:'afterHit',carrier:'source',flavor:'clobber',tgtGuarded:true,limit:'round',show:true,effects:[{op:'composure',n:1,to:'target'}],
   desc:'Justin waits 15% longer after a Clobber move. Once a round, a Clobber hit on a shielded monster, or one with at least his Defense, knocks 1 extra Composure pip off it.'};
 B3_SKILLS.stud_finder_beep_and_knock={id:'stud_finder_beep_and_knock',vibe:'justin_basement',slot:'basic',name:'Stud-Finder Beep & Knock',pep:0,flavor:['clobber'],power:'light',hits:1,
-  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'knocked_loose',to:'target'}],line:null,anim:{kind:'default',shape:'strike'},
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'knocked_loose',to:'target'}],line:null,anim:{kind:'clip',clip:'pf_justin_bb_basic',shape:'strike'},
   short:'Light hit. Clobber hits do more to it for 1 turn.',
   desc:'Light Clobber hit with a beeping stud finder. For 1 turn the monster takes 15% more damage from Clobber hits.'};
 // Demo-Day Prybar: a standard Clobber hit that first rips every shield and Guard Stance off the monster (so nothing soaks or softens it), then

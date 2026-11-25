@@ -25,7 +25,7 @@ B3_SKILLS.crunchy_sugar_cube_pop={id:'crunchy_sugar_cube_pop',vibe:'grace_squish
 // Grace and that member each gain 1 Pep (spec 3.2). It is their one granted action of the round (spec 2.2): someone who
 // already had one, or who has no such Skill to use, cannot be chosen. My call: "any skill" means a Skill, never the Basic.
 B3_SKILLS.colossal_diamond_gold_dumpling={id:'colossal_diamond_gold_dumpling',vibe:'grace_squishy',slot:'cap',name:'Colossal Diamond-Gold Dumpling',pep:6,flavor:['support'],power:0,hits:0,
-  target:'ally',tags:[],composure:0,effects:[{op:'pep',n:1,to:'self'},{op:'pep',n:1,to:'target'},{op:'grant',maxPep:4,free:true,to:'target'}],line:null,anim:{kind:'default',shape:'give'},
+  target:'ally',tags:[],composure:0,effects:[{op:'pep',n:1,to:'self'},{op:'pep',n:1,to:'target'},{op:'grant',maxPep:4,free:true,to:'target'}],line:null,anim:{kind:'clip',clip:'pf_grace_sc_cap',shape:'give'},
   short:'One family member uses a Skill right now, free.',
   desc:'One family member uses a Skill of 4 Pep or less right now, for free, without losing their place on the turn bar. Grace and that family member each gain 1 Pep. Once a round for each person.'};
 // Sensory Satisfying: judged as Grace's turn ends. If the very next face on the turn bar is family, they get So Satisfying

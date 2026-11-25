@@ -25,7 +25,7 @@ B3_SKILLS.wheel_thrown_lump={id:'wheel_thrown_lump',vibe:'tnb_potter',slot:'basi
 // Center the Bowl: the spec's "30% Max HP clay carapace" is a clay shield of 30% of the target's Max HP (the Support Lean makes it bigger);
 // it clears Toasty and Bleed. Any family member can be picked, TNB too (my call).
 B3_SKILLS.center_the_bowl={id:'center_the_bowl',vibe:'tnb_potter',slot:'s1',name:'Center the Bowl',pep:3,flavor:['support'],power:0,hits:0,
-  target:'family',tags:[],composure:0,effects:[{op:'cleanse',ids:['toasty','bleed'],to:'target'},{op:'shield',pct:.30,clay:true,to:'target'}],line:null,anim:{kind:'default',shape:'give'},
+  target:'family',tags:[],composure:0,effects:[{op:'cleanse',ids:['toasty','bleed'],to:'target'},{op:'shield',pct:.30,clay:true,to:'target'}],line:null,anim:{kind:'clip',clip:'pf_tnb_cer_s1',shape:'give'},
   short:'Clay shield on one family member. Clears Toasty and Bleed.',
   desc:'Puts a pottery wheel under a family member and shapes a clay shield around them worth 30% of their HP. It clears Toasty and Bleed.'};
 // Three-AM Kiln Firing: the spec prints no tier for the Sizzle wave, so it is standard at the all-monsters share (my call).
@@ -44,7 +44,7 @@ B3_QUIRKS.coaster_policy={id:'coaster_policy',vibe:'tnb_potter',name:'Coaster Po
 // (engine/b3-custom.js b3VesselTake); the second one it soaks, or the end of its 4th round, breaks it into a heavy Clobber and Razzle wave
 // on every monster and 2 Composure pips off each (b3VesselBurst). Deals nothing the turn it is set down.
 B3_SKILLS.grand_amphora_masterpiece={id:'grand_amphora_masterpiece',vibe:'tnb_potter',slot:'cap',name:'Grand Amphora Masterpiece',pep:5,flavor:['clobber'],power:0,hits:0,
-  target:'field',tags:[],composure:0,effects:[{op:'hazard',id:'amphora'}],line:null,anim:{kind:'default',shape:'cast'},
+  target:'field',tags:[],composure:0,effects:[{op:'hazard',id:'amphora'}],line:null,anim:{kind:'clip',clip:'pf_tnb_cer_cap',shape:'cast'},
   short:'A big vase blocks 2 attacks, then smashes every monster.',
   desc:'Sets a towering terracotta vase in front of the family. It soaks the next 2 monster attacks whole, then shatters into a heavy Clobber and Razzle hit on every monster that also knocks 2 Composure pips off each. If nobody attacks it, it shatters by itself when 4 rounds have passed.'};
 // Kintsugi Gold Seam: when any family member's shield breaks, TNB mends them 15% of their Max HP and for 1 turn their hits set off

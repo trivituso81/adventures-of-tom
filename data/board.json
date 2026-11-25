@@ -6615,6 +6615,101 @@
     "text": "Read the c-scriptstudio8 card and docs/CHANGES.md scriptstudio8, then adjust the Read Mode view in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/read_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "done": "2026-11-25"
+  },
+  {
+   "id": "c-pass1draft1",
+   "tag": "pass1draft1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "title": "Play the Pass-1 draft videos in the new battle",
+   "next": "Shipped on branch claude/issue-16-20261125-1815: seven 480p draft videos baked and wired to their kit moves. Waits for the pull request to be merged.",
+   "chat": {
+    "url": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45672541108",
+    "opening": "Go ahead and bake the 15 passing 480p battle_move_draft clips"
+   },
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Tom (issue 16): \"Go ahead and bake the 15 passing 480p battle_move_draft clips into data/clips/<id>.js and wire them into Battle 3 (data/b3-kit-<id>.js) as a playable preview so I can test them in Battle Lab today.\" New card; started."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as pass1draft1: 7 of 15 wired. 3 moves already play a video and were kept, 3 team-up clips and 2 counter clips have no slot in Battle 3 yet (card c-pass1final)."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-25",
+   "changed": "2026-11-25",
+   "after": "t-pass1draftplay",
+   "prompt": {
+    "what": "Bake the Pass-1 draft videos into battle clips and wire them as a preview.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5 (row D: new tool and judgement on which moves to wire)",
+    "effort": "medium (the pieces exist: bake_clip.py, wanbake.wire)",
+    "text": "Read the c-pass1draft1 card and docs/CHANGES.md pass1draft1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "t-pass1draftplay",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "play",
+   "title": "Watch the seven Pass-1 draft moves in a fight",
+   "next": "Open ADMIN > BATTLE LAB > NEW BATTLE and start NEW 10: AMY, JUSTIN AND OLIVIA (or Take me there on the dashboard). On Amy's turn use Kettlebell Swing, then Burpee Blitz; on Justin's turn use Stud-Finder Beep & Knock. Then NEW 7: TNB JOINS: Center the Bowl and Grand Amphora Masterpiece. Then NEW 1: TWO MUDLINGS: Grace's Colossal Diamond-Gold Dumpling and Deedee's Fifty-Year Dust Tsunami. Each move should play its new video on the person (480p drafts, so softer than the finals). Judge the look: right person, right size, the hit lands when it should. Your answer goes to card c-pass1final (the 1080p finals). Then press All good, or Something is wrong and say which move.",
+   "blocks": [
+    "c-pass1final"
+   ],
+   "jump": {
+    "fight": "new",
+    "i": 9
+   },
+   "created": "2026-11-25",
+   "changed": "2026-11-25",
+   "chat": {
+    "url": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45672541108",
+    "opening": "Go ahead and bake the 15 passing 480p battle_move_draft clips"
+   },
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Made by pass1draft1: the seven draft videos wired as previews."
+    }
+   ]
+  },
+  {
+   "id": "c-pass1final",
+   "tag": "pass1final1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "title": "Wire the Pass-1 1080p finals and the counter clips",
+   "next": "When Tom has made battle_move_final videos in the Art Factory, rebake them over the pf- drafts with tools/clip-bake/bake_factory.py, and decide how a counter clip and a team-up clip play in Battle 3.",
+   "chat": {
+    "url": "",
+    "opening": ""
+   },
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Made by pass1draft1: finals replace the drafts; counters (deedee-nf-s1_counter, boppy-dep-s1_counter) and univ-double-team, univ-full-ruckus need an engine slot first."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-25",
+   "changed": "2026-11-25",
+   "prompt": {
+    "what": "Replace the Pass-1 draft clips with the 1080p finals and give counter clips a slot.",
+    "before": [
+     "Tom: make battle_move_final videos in the Art Factory (art-factory.html, stage battle_move_final) for the moves he wants, and finish card t-pass1draftplay."
+    ],
+    "model": "Claude Opus 5.5 (row D: engine design for counter and team-up clips)",
+    "effort": "medium (the bake tool exists)",
+    "text": "Read the c-pass1final card, its blocking Tom card t-pass1draftplay (note and answer) and docs/CHANGES.md pass1draft1. Point PREVIEW in tools/clip-bake/bake_factory.py at the battle_move_final folders for every final that passed QA in art-factory/queue.json and rebake, add any new move whose kit row has no video, then design how a counter clip (deedee-nf-s1_counter, boppy-dep-s1_counter) plays in Battle 3. Run python3 tools/pass1_preview_test.py and python3 tools/smoke.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
