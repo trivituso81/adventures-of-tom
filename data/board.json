@@ -6988,7 +6988,7 @@
    "url": "https://claude.ai/code/session_01RXeukEM2jz8QayJemqru3D",
    "title": "Justin proof clip: stricter prompt and two-stage QA gate",
    "first": "2026-11-25T13:20:40-08:00",
-   "last": "2026-11-25T13:48:52-08:00",
+   "last": "2026-11-25T13:51:31-08:00",
    "tags": [
     "justinpoc1a",
     "art-factory"
@@ -13351,8 +13351,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "6e5ee0900c32ce56446507d5eb89463ee8d935c2",
- "synced_at": "2026-11-25T21:49:38+00:00",
+ "synced": "4a8df9267ffb9885f40629156ac1166e107cfb5d",
+ "synced_at": "2026-11-25T21:52:40+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
