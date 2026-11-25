@@ -2336,7 +2336,7 @@
    "created": "2026-11-21",
    "changed": "2026-11-25",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukD8RBy9czHhghgPwiX",
+    "url": "https://claude.ai/code/cse_01RXeukFGXQ6EVSYrKHPNHnv",
     "opening": "not started"
    },
    "nightly": true,
@@ -2387,6 +2387,10 @@
     {
      "d": "2026-11-25",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
     }
    ],
    "prompt": {
@@ -2402,7 +2406,14 @@
     "date": "2026-11-25",
     "build": ""
    },
-   "started_at": "2026-11-25T08:01:12+00:00"
+   "started_at": "2026-11-25T15:45:46+00:00",
+   "rescue": {
+    "at": "2026-11-25T15:45:46+00:00",
+    "n": 1,
+    "why": "Quiet: the conversation may have stopped",
+    "url": "https://claude.ai/code/cse_01RXeukFGXQ6EVSYrKHPNHnv",
+    "prev": "https://claude.ai/code/session_01RXeukD8RBy9czHhghgPwiX"
+   }
   },
   {
    "id": "c-fix-dash3-try",
@@ -12781,8 +12792,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "2d76a014db71d45a6a2e83009cb6d95ed2f2e50a",
- "synced_at": "2026-11-25T08:07:53+00:00",
+ "synced": "0b16f2c0adaf50e8587a130f809638a0b4869f51",
+ "synced_at": "2026-11-25T15:45:46+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
