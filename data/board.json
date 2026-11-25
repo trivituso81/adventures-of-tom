@@ -6988,7 +6988,7 @@
    "url": "https://claude.ai/code/session_01RXeukEM2jz8QayJemqru3D",
    "title": "Justin proof clip: stricter prompt and two-stage QA gate",
    "first": "2026-11-25T13:20:40-08:00",
-   "last": "2026-11-25T13:51:31-08:00",
+   "last": "2026-11-25T13:54:14-08:00",
    "tags": [
     "justinpoc1a",
     "art-factory"
@@ -7001,7 +7001,7 @@
    "url": "https://claude.ai/code/session_01RXeukD9yD14UyHFztUqyXd",
    "title": "sandbox: justin stud-finder test (isolated, manual workflow, no existing file touched)",
    "first": "2026-11-25T13:47:43-08:00",
-   "last": "2026-11-25T13:47:43-08:00",
+   "last": "2026-11-25T13:53:29-08:00",
    "tags": [
     "sandbox"
    ],
@@ -13351,8 +13351,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "4a8df9267ffb9885f40629156ac1166e107cfb5d",
- "synced_at": "2026-11-25T21:52:40+00:00",
+ "synced": "c26acf5f945dfb2e850bc8e37565a5af2e0500b7",
+ "synced_at": "2026-11-25T21:55:09+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
