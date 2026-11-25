@@ -17,8 +17,8 @@ def battle_move_draft_rules(move):
     props = "the props named above" if move else "the named props"
     return (
         "STAGING RULES. "
-        "1) Planted feet and locked camera: grounded on one fixed floor plane, both feet stay planted for the whole clip, only torso lean, weight shift and arm extension move; "
-        "no backing up behind the party, no wandering off-center, zero camera pan, zoom or orbit. "
+        "1) Anchored stance and locked camera: grounded on one fixed floor plane and anchored in one battle spot for the whole clip; torso lean, weight shift, a small forward bracing step or heel pivot and arm extension are fine; "
+        "no backing up behind the party, no wandering off-center, no sliding, zero camera pan, zoom or orbit. "
         f"2) Props in hand from frame 1: {props} are already gripped and clearly visible in the very first frame, drawn slightly oversized so they read at small on-screen battle size; "
         "never pulled from a pocket or belt and never appearing mid-clip. "
         "3) One exaggerated leftward action: exactly one bold anticipation, strike and follow-through arc aimed decisively toward screen-left, toward the enemies; "

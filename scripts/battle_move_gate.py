@@ -173,8 +173,10 @@ def stage2_prompt(prop, action):
         '"feet_planted": bool, "failure_reason": string}. '
         "prop_visible_frame1: BOTH expected props are already gripped in the character's hands in the first (leftmost) tile, "
         "not on a belt, in a pocket or appearing later. prop_visible_at_sprite_scale: each prop is still recognizable at this "
-        "size in the later tiles. action_reads_leftward: one bold strike clearly aimed toward screen-left. feet_planted: both "
-        "feet stay in the same place on the floor in every tile, no walking or backing up. "
+        "size in the later tiles. action_reads_leftward: one bold strike clearly aimed toward screen-left. feet_planted: the character stays "
+        "anchored in their battle spot during the strike. TRUE even when a foot lifts or steps a little, a natural forward bracing step, "
+        "weight shift or heel pivot into the swing. FALSE only if the character retreats to the right behind the party, wanders across the "
+        "stage, slides unnaturally, or drops awkwardly onto the floor off their spot. "
         "Be strict: when unsure answer false. failure_reason is empty when everything is true, otherwise one short sentence."
     )
 
@@ -246,5 +248,5 @@ def retry_feedback(gate):
         if "action_reads_leftward" in s2.get("hard_rejected_on", []):
             notes.append("Aim the strike clearly toward screen-left")
         if "feet_planted" in s2.get("hard_rejected_on", []):
-            notes.append("Both feet stay planted in place")
+            notes.append("Stay anchored in the battle spot, no retreating, wandering or sliding")
     return ". ".join(notes) + "." if notes else ""
