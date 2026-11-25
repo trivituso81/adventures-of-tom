@@ -1,3 +1,9 @@
+## scriptstudio2 (2026-11-24): Script Studio v2 is live at /script-studio/ with the hosted vault still auto-loading
+
+Card c-scriptstudio2. Tom's v2 component (no placeholder scene, 2-pane Scene Studio, Auto-Fill from Story Thread, Paste Script import) replaces v1. The vault patch (startup auto-load of the six hosted docs, non-destructive merge into localStorage key `aot_script_studio_state_v2`, Sync Hosted Defaults with a confirmation modal) is now a script, `tools/script-studio/apply_vault_patch.py`, so every new version from Tom is: run it on his file, `npm run build`, `python3 tools/script-studio/e2e_test.py`. No API key is in the repo or the build (checked the source and the built JS).
+
+Checked: e2e test all pass on v2 (6 of 6 Loaded, about 82,000 tokens; live edit and upload survive reload; Revert; Sync restores hosted text; no page errors). The test follows v2's labels (tab "1. Vault", Edit toggle, Revert). Not tested by me: Auto-Fill from Story Thread and Paste Script (they call Gemini or only parse pasted text and were not part of the request).
+
 ## scriptstudio1 (2026-11-24): AoT Script Studio is hosted at /script-studio/ with its six reference docs auto-loaded
 
 Card c-scriptstudio1. Tom's `aot-script-studio.jsx` (React, Tailwind, lucide-react) is built by Vite from `tools/script-studio/` into `script-studio/` (committed, the site has no build step; rebuild steps in `tools/script-studio/README.md`) and linked from Admin under Art Factory. On startup it fetches the six docs from `script-studio/reference-vault/` and merges them without touching anything Tom edited or uploaded (empty slot: fills `content` and `uploadedContent`, inject on; edited slot: only fills an empty `uploadedContent`). New Sync Hosted Defaults button in the Vault header (confirmation modal) resets the six core slots to the hosted files. No API key is in the repo or the build; the key box stays in the browser's localStorage.
