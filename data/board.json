@@ -6875,7 +6875,7 @@
    "col": "wait",
    "theme": "Battle Animations",
    "title": "Justin proof clip: stricter prompt and two-stage QA gate",
-   "next": "Waiting on Tom: fal.ai refused the repo FAL_KEY (403) at the first call of the Justin proof run. Once the key or balance is fixed, change run_id in art-factory/single-clip-trigger.json to a new value and push: that starts the one 480p clip (max 2 renders).",
+   "next": "Both allowed renders are spent and neither passed the gate (render 2 was close: props and leftward slam read, but a foot steps). Tom decides whether to allow one more proof render; the report is art-factory/qa-single-clip-justin-poc-2.json and the re-gate art-factory/qa-single-clip-justin-poc-2-regate.json.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukEM2jz8QayJemqru3D",
     "opening": "You are the Technical Director and Pipeline Engineer for trivituso81/adventures-of-tom"
@@ -6892,6 +6892,10 @@
     {
      "d": "2026-11-25",
      "t": "Pushed justinpoc1a (prompt rules, two-stage gate, single-clip trigger). Run 1 crashed before any render (packet lookup, fixed). Run 2 (justin-poc-1b) stopped at the first fal call: 403 Forbidden from fal storage auth. No render happened, nothing spent. Ended without shipping the clip: fal refuses the repo key, which needs Tom."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Run justin-poc-2 (fal fixed): 2 renders at 480p. Render 1 failed Stage 1 (foot_retreat 0.21). Render 2 passed Stage 1 (churn 0.753, left reach 0.452, foot retreat 0.142) and was re-gated with no new render after a Stage 2 bug fix: rejected on feet_planted (left foot lifts and shifts). Ended without shipping: nothing baked, the old Justin clip stays in PASS-1 DRAFT REVIEW. Render budget of this proof is spent."
     }
    ],
    "blocks": [],
@@ -6908,27 +6912,6 @@
     "text": "Read the c-justinpoc1 card and docs/CHANGES.md justinpoc1a. Change run_id in art-factory/single-clip-trigger.json to justin-poc-1c (nothing else) and push it; the push starts the single 480p clip. When the run ends read art-factory/qa-single-clip-justin-poc-1c.json and report whether it passed the gate. Do not run anything else. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "waiting_on": "tom"
-  },
-  {
-   "id": "t-fixfalkey",
-   "lane": "tom",
-   "col": "up",
-   "theme": "Battle Animations",
-   "ask": "setup",
-   "title": "Fix the fal key or balance",
-   "next": "Open fal.ai, sign in, and check Billing for credit left, then check that the key saved as repo secret FAL_KEY is still active. The Justin proof run got 403 Forbidden from fal on its first call (no render, nothing spent). When it is fixed, tap I did this and write on the card what you changed. That unblocks the Claude card c-justinpoc1 (Justin proof clip: stricter prompt and two-stage QA gate), which re-runs the one clip.",
-   "blocks": [
-    "c-justinpoc1"
-   ],
-   "fyi": false,
-   "created": "2026-11-25",
-   "changed": "2026-11-25",
-   "history": [
-    {
-     "d": "2026-11-25",
-     "t": "Made by justinpoc1a: the Justin proof run was refused by fal (403)."
-    }
-   ]
   },
   {
    "id": "c-scriptstudio11",
@@ -6966,6 +6949,34 @@
     "text": "Read the c-scriptstudio11 card and docs/CHANGES.md scriptstudio11, then adjust the EP Note box in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/epnote_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "done": "2026-11-25"
+  },
+  {
+   "id": "t-justinpoc-more",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "decide",
+   "title": "Allow one more Justin proof render?",
+   "next": "Decide whether the Justin proof gets one more 480p render. This unblocks the Claude card c-justinpoc1 (Justin proof clip: stricter prompt and two-stage QA gate). Render 2 had both props and one overhead-to-horizontal slam but his left foot stepped, so the gate (correctly) rejected it. One more render costs about one 480p clip.",
+   "choices": [
+    "One more render, same prompt plus one change: both feet stay put (Recommended)",
+    "No more renders: keep the old Justin clip and move on"
+   ],
+   "leads": [
+    "Claude raises the run id and pushes the trigger; the run ends with a gate verdict.",
+    "The card closes; the gate stays for the other moves."
+   ],
+   "blocks": [
+    "c-justinpoc1"
+   ],
+   "created": "2026-11-25",
+   "changed": "2026-11-25",
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Made by justinpoc1a: render 2 failed only the planted-feet check."
+    }
+   ]
   }
  ],
  "sessions": [
