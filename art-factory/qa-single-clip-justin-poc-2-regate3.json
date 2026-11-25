@@ -1,0 +1,94 @@
+{
+  "run_id": "justin-poc-2-regate3",
+  "resolution": "480p",
+  "duration_multiplier": 1.5,
+  "max_retries": 1,
+  "started_at": "2026-11-25T21:50:36Z",
+  "moves": [
+    {
+      "move_id": "justin-bb-basic",
+      "clip_id": "pf-justin-bb-basic",
+      "passed": false,
+      "renders": 0,
+      "baked": "",
+      "attempts": [
+        {
+          "attempt": 0,
+          "regate_of": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/attempt_2_raw_alpha.webm",
+          "feedback": "",
+          "video": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/attempt_2_raw_alpha.webm",
+          "gate": {
+            "stage1": {
+              "frames_sampled": 10,
+              "thresholds": {
+                "min_peak_mask_churn": 0.22,
+                "min_left_reach_ratio": 0.12,
+                "max_foot_retreat_ratio": 0.15
+              },
+              "peak_mask_churn": 0.753,
+              "left_reach_ratio": 0.452,
+              "foot_retreat_ratio": 0.1423,
+              "failures": [],
+              "passed": true
+            },
+            "stage2": {
+              "prop_visible_frame1": false,
+              "prop_visible_at_sprite_scale": true,
+              "action_reads_leftward": true,
+              "feet_planted": true,
+              "pass": false,
+              "votes": {
+                "prop_visible_frame1": [
+                  false,
+                  true,
+                  false
+                ],
+                "prop_visible_at_sprite_scale": [
+                  true,
+                  true,
+                  true
+                ],
+                "action_reads_leftward": [
+                  true,
+                  true,
+                  true
+                ],
+                "feet_planted": [
+                  true,
+                  true,
+                  true
+                ],
+                "pass": [
+                  false,
+                  true,
+                  false
+                ]
+              },
+              "failure_reason": "The props are not gripped in the character's hands in frame 1 as required.",
+              "hard_rejected_on": [
+                "prop_visible_frame1"
+              ],
+              "passed": false,
+              "runs": 3,
+              "contact_sheet_frames": [
+                0,
+                30,
+                60,
+                89,
+                119,
+                149
+              ],
+              "contact_sheet": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/regate_contact_sheet_200px.png"
+            },
+            "passed": false,
+            "failure_reason": "Stage 2 sprite-scale check: The props are not gripped in the character's hands in frame 1 as required.",
+            "failure_tags": [
+              "gate2_prop_visible_frame1"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "finished_at": "2026-11-25T21:51:00Z"
+}
