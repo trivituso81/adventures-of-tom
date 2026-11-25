@@ -287,6 +287,126 @@ def generate_start_frame_item(kit, char, cfg, hero_src, feedback):
         "status": "review",
     }
 
+def judge_start_frame(client, out_path, hero_src, kit, char, cfg):
+    props_text = ", ".join(kit.get("held_props", []))
+    rubric = (
+        f"You are a strict automated QA judge for 2D JRPG battle start frames. "
+        f"Image 1 is the approved Hero reference for {char['name']}. "
+        f"Image 2 is the candidate prop-locked start frame. "
+        f"Check 4 rules: "
+        f"1) Character identity, face, hair, age, proportions, and outfit closely match Image 1. "
+        f"2) All required props are clearly visible and naturally held/worn: {props_text}. "
+        f"3) Full body from head to toe is visible with no cut-off head, limbs, or props. "
+        f"4) Background is clean flat mid-grey with no extra characters, text, or scenery. "
+        f"Return JSON ONLY: {{\"passed\": true/false, \"issues\": [\"short issue\"], \"repair_hint\": \"concrete fix instruction if failed, else empty string\"}}."
+    )
+    try:
+        resp = client.models.generate_content(
+            model=cfg["models"]["flash_bridge"],
+            contents=[
+                "IMAGE 1: APPROVED HERO REFERENCE",
+                open_on_mid_grey(hero_src),
+                "IMAGE 2: CANDIDATE PROP-LOCKED START FRAME",
+                open_on_mid_grey(out_path),
+                rubric,
+            ],
+            config=types.GenerateContentConfig(response_mime_type="application/json"),
+        )
+        txt = (resp.text or "").strip()
+        if txt.startswith("```"):  # strip fence if present
+            txt = txt.split("\n", 1)[-1].rsplit("```", 1)[0].strip()
+        data = json.loads(txt)
+        return bool(data.get("passed")), data.get("issues", []), str(data.get("repair_hint", "")).strip()
+    except Exception as exc:
+        print(f"[qa_start_frames:{kit['prop_kit_id']}] judge error: {exc}", flush=True)
+        return False, [f"judge_error: {type(exc).__name__}"], "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background."
+
+def run_qa_start_frames(manifest, cfg, char_id, move_id, feedback, queue):
+    q_path = Path(START_FRAME_QUEUE_PATH)
+    if not q_path.exists():
+        raise RuntimeError(f"Missing start-frame queue file: {q_path}")
+    sf_data = json.loads(q_path.read_text(encoding="utf-8"))
+    kits = sf_data.get("unique_kits", [])
+    filter_move = (move_id or "").strip()
+    filter_char = (char_id or "").strip()
+    max_fixes = 2
+
+    tasks = []
+    for kit in kits:
+        cid = kit["character_id"]
+        pkid = kit["prop_kit_id"]
+        if filter_char and filter_char != "all_uploaded" and cid != filter_char:
+            continue
+        if filter_move and filter_move != pkid and filter_move not in kit.get("used_by_moves", []):
+            continue
+        char = get_character(manifest, cid)
+        hero_src = resolve_hero_source(char, cfg, allow_fallback=False)
+        if not hero_src:
+            print(f"[qa_start_frames] skipping {pkid} (no Hero PNG found for {cid})", flush=True)
+            continue
+        tasks.append((kit, char, hero_src))
+
+    if not tasks:
+        print("[qa_start_frames] no start frames matched filters.", flush=True)
+        return
+
+    print(f"[qa_start_frames] auditing {len(tasks)} start frame(s) with auto-fix (up to {max_fixes} retries each)", flush=True)
+
+    def worker(triple):
+        kit, char, hero_src = triple
+        pkid = kit["prop_kit_id"]
+        out_p = Path(kit["start_frame_path"])
+        client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+        item = None
+        if not out_p.exists():
+            print(f"[qa_start_frames:{pkid}] missing PNG, generating now", flush=True)
+            item = generate_start_frame_item(kit, char, cfg, hero_src, feedback)
+        passed, issues, repair = judge_start_frame(client, out_p, hero_src, kit, char, cfg)
+        print(f"[qa_start_frames:{pkid}] initial check passed={passed} issues={issues}", flush=True)
+        retries = 0
+        while not passed and retries < max_fixes:
+            retries += 1
+            fix_fb = f"{repair} {feedback}".strip()
+            print(f"[qa_start_frames:{pkid}] auto-fixing attempt {retries}/{max_fixes}: {repair}", flush=True)
+            item = generate_start_frame_item(kit, char, cfg, hero_src, fix_fb)
+            passed, issues, repair = judge_start_frame(client, out_p, hero_src, kit, char, cfg)
+            print(f"[qa_start_frames:{pkid}] re-check {retries} passed={passed} issues={issues}", flush=True)
+        if item is None:
+            raw_dir = out_p.parent / "_raw"
+            item = {
+                "id": f"{char['id']}_start_frame_{pkid}",
+                "character_id": char["id"],
+                "stage": "start_frames",
+                "move_id": pkid,
+                "held_props": kit.get("held_props", []),
+                "used_by_moves": kit.get("used_by_moves", []),
+                "raw_path": str(raw_dir / f"{pkid}_raw.png"),
+                "rgba_path": str(raw_dir / f"{pkid}_rgba.png"),
+                "start_frame_path": str(out_p),
+            }
+        item["qa_passed"] = passed
+        item["qa_issues"] = issues
+        item["qa_repair_hint"] = repair
+        item["qa_retries"] = retries
+        item["status"] = "approved" if passed else "qa_failed"
+        return item
+
+    passed_count = 0
+    failed_ids = []
+    for offset in range(0, len(tasks), 6):
+        chunk = tasks[offset:offset + 6]
+        with ThreadPoolExecutor(max_workers=min(3, len(chunk))) as ex:
+            results = list(ex.map(worker, chunk))
+        for item in results:
+            queue["items"] = [i for i in queue["items"] if i["id"] != item["id"]] + [item]
+            if item.get("qa_passed"):
+                passed_count += 1
+            else:
+                failed_ids.append(item["move_id"])
+        save_queue(cfg["queue_path"], queue)
+        print(f"[qa_start_frames] checkpointed {passed_count}/{len(tasks)} approved so far", flush=True)
+    print(f"[qa_start_frames] DONE: {passed_count}/{len(tasks)} approved. Remaining failed: {failed_ids}", flush=True)
+
 def run_batch_start_frames(manifest, cfg, char_id, move_id, feedback, queue):
     q_path = Path(START_FRAME_QUEUE_PATH)
     if not q_path.exists():
@@ -651,6 +771,9 @@ def main():
         return
     if stage == "start_frames":
         run_batch_start_frames(manifest, cfg, char_id, move_id, feedback, queue)
+        return
+    if stage == "qa_start_frames":
+        run_qa_start_frames(manifest, cfg, char_id, move_id, feedback, queue)
         return
     if char_id == "all_uploaded":
         if stage in ("battle_idle", "battle_move_draft", "battle_move_final", "battle_state_draft", "battle_state_final"):
