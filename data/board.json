@@ -6877,7 +6877,7 @@
    "title": "Justin proof clip: stricter prompt and two-stage QA gate",
    "next": "Shipped: the Justin proof clip is baked and live in PASS-1 DRAFT REVIEW. Tom watches it on the card t-pass1draftplay; if it reads well, the gate (two stages, Frame 0 split) is ready for the other moves in a later card.",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukEM2jz8QayJemqru3D",
+    "url": "https://claude.ai/code/cse_01RXeukCaFAwDGmB8YFJQsNt",
     "opening": "You are the Technical Director and Pipeline Engineer for trivituso81/adventures-of-tom"
    },
    "history": [
@@ -6904,6 +6904,10 @@
     {
      "d": "2026-11-25",
      "t": "Tom: \"Implement the full-res Frame 0 split for prop_visible_frame1 and re-gate/bake the saved Render 2 video\". Stage 2 now sends Frame 0 at full size plus the 200 px sheet in each of 3 votes: all four checks 3 of 3 true. Baked at 1.5x into PASS-1 DRAFT REVIEW as art/clips/pf-justin-bb-basic.webp?v=justinpoc2regate5 (run justin-poc-2-regate5). Total renders for the proof: 2, 0 after poc-2."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Rescue started (Its note starts with Shipped but the card is open). One automatic session decides: finish it, back to Tom, start next, or retire."
     }
    ],
    "blocks": [],
@@ -6918,7 +6922,15 @@
     "model": "Claude Sonnet 5.5 (row A: one value change and a report)",
     "effort": "low (change one field, read one report)",
     "text": "Read the c-justinpoc1 card and docs/CHANGES.md justinpoc1a. Change run_id in art-factory/single-clip-trigger.json to justin-poc-1c (nothing else) and push it; the push starts the single 480p clip. When the run ends read art-factory/qa-single-clip-justin-poc-1c.json and report whether it passed the gate. Do not run anything else. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "rescue": {
+    "at": "2026-11-25T22:02:04+00:00",
+    "n": 1,
+    "why": "Its note starts with Shipped but the card is open",
+    "url": "https://claude.ai/code/cse_01RXeukCaFAwDGmB8YFJQsNt",
+    "prev": "https://claude.ai/code/session_01RXeukEM2jz8QayJemqru3D"
+   },
+   "started_at": "2026-11-25T22:02:04+00:00"
   },
   {
    "id": "c-scriptstudio11",
@@ -6963,7 +6975,7 @@
    "url": "https://claude.ai/code/session_01RXeukEM2jz8QayJemqru3D",
    "title": "Justin proof clip: stricter prompt and two-stage QA gate",
    "first": "2026-11-25T13:20:40-08:00",
-   "last": "2026-11-25T13:57:06-08:00",
+   "last": "2026-11-25T14:01:09-08:00",
    "tags": [
     "justinpoc1a",
     "art-factory"
@@ -13326,8 +13338,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "994cae4ced815fe905c91c8432de2fa2f70f2cd6",
- "synced_at": "2026-11-25T21:58:04+00:00",
+ "synced": "6fec6f96f0bb08f83d335ddda1a0d7a2b241901d",
+ "synced_at": "2026-11-25T22:02:06+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
