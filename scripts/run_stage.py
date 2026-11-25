@@ -10,11 +10,9 @@ import fal_client
 from google import genai
 from google.genai import types
 from PIL import Image
-from art_director_agent import ANTI_RING_NEG, IDLE_NEG, build_prompt, describe_child_geometry, get_character, list_character_move_ids, load_manifest, resolve_move_prompts
+from art_director_agent import ANTI_RING_NEG, IDLE_NEG, build_prompt, describe_child_geometry, get_character, list_character_move_ids, load_manifest, resolve_move_prompts, resolve_start_frame_path
 from qa_judge_agent import judge_candidate
-from qa_video_audit import audit_queue_items
 
-START_FRAME_QUEUE_PATH = "art-factory/start-frame-queue-pass1.json"
 BATTLE_STATES = ("dodge", "cast", "hit", "ko")
 
 BATTLE_STATE_PROMPTS = {
@@ -59,20 +57,6 @@ def save_queue(path, data):
     p = Path(path)
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(data, indent=2) + chr(10), encoding="utf-8")
-
-def append_prompt_log(cfg, entry):
-    log_path = Path(cfg.get("prompt_log_path", "art-factory/prompt_log.json"))
-    if log_path.exists():
-        try:
-            log_data = json.loads(log_path.read_text(encoding="utf-8"))
-        except Exception:
-            log_data = {"entries": []}
-    else:
-        log_data = {"entries": []}
-    entry["logged_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-    log_data.setdefault("entries", []).append(entry)
-    log_path.parent.mkdir(parents=True, exist_ok=True)
-    log_path.write_text(json.dumps(log_data, indent=2) + chr(10), encoding="utf-8")
 
 def download_file(url, dest):
     r = requests.get(url, timeout=180)
@@ -171,297 +155,6 @@ def resolve_hero_source(char, cfg, allow_fallback=True):
         return Path(cfg["tom_hero_path"])
     return None
 
-def open_on_mid_grey(img_path):
-    im = Image.open(img_path)
-    if im.mode in ("RGBA", "LA"):
-        bg = Image.new("RGBA", im.size, (128, 128, 128, 255))
-        bg.alpha_composite(im.convert("RGBA"))
-        return bg.convert("RGB")
-    return im.convert("RGB")
-
-def generate_start_frame_item(kit, char, cfg, hero_src, feedback):
-    prop_kit_id = kit["prop_kit_id"]
-    out_path = Path(kit["start_frame_path"])
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    raw_dir = out_path.parent / "_raw"
-    raw_dir.mkdir(parents=True, exist_ok=True)
-    raw_p = raw_dir / f"{prop_kit_id}_raw.png"
-    rgba_p = raw_dir / f"{prop_kit_id}_rgba.png"
-
-    props_list = kit.get("held_props", [])
-    props_text = ", ".join(props_list)
-    clean_fb = " ".join(w for w in (feedback or "").split() if w.lower() != "force").strip()
-    char_notes = char.get("notes", "")
-    style_lock = cfg.get("style_lock", "")
-
-    prompt = (
-        f"Prop-locked neutral battle-ready character start frame of {char['name']} on a solid flat #808080 mid-grey studio background. "
-        f"Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. "
-        f"Show {char['name']} full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: {props_text}. "
-        f"Character details: {char_notes}. "
-        f"{style_lock} "
-        f"Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles. "
-        f"{clean_fb}"
-    ).strip()
-
-    contents = []
-    style_p = Path(cfg["style_key_path"])
-    if style_p.exists():
-        contents.append("GAME STYLE REFERENCE (match exact bold dark ink outlines, chunky painted shading, warm golden top-left light, and color richness; ignore its background and use flat #808080 mid-grey):")
-        contents.append(Image.open(style_p))
-    contents.append(f"APPROVED HERO CHARACTER ANCHOR FOR {char['name'].upper()} (keep this exact character identity, face, hair, proportions, and outfit; only adjust hands/stance to naturally hold the requested props):")
-    contents.append(open_on_mid_grey(hero_src))
-    contents.append(prompt)
-
-    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
-    engine = "gemini"
-    try:
-        resp = client.models.generate_content(
-            model=cfg["models"]["stills"],
-            contents=contents,
-            config=types.GenerateContentConfig(
-                response_modalities=["IMAGE"],
-                image_config=types.ImageConfig(image_size="2K"),
-            ),
-        )
-        img_bytes = None
-        for part in resp.candidates[0].content.parts:
-            if getattr(part, "inline_data", None) and part.inline_data.data:
-                img_bytes = part.inline_data.data
-                break
-        if not img_bytes:
-            raise RuntimeError("Gemini returned no image bytes")
-    except Exception as exc:
-        if not char.get("child_bridge"):
-            raise
-        out = fal_client.subscribe(cfg["models"]["flux_fallback"], arguments={"prompt": prompt, "image_size": "square_hd"})
-        url = out["images"][0]["url"]
-        img_bytes = requests.get(url, timeout=120).content
-        engine = f"flux_bridge ({type(exc).__name__})"
-
-    raw_p.write_bytes(img_bytes)
-    cutout_ok = False
-    try:
-        cutout_still(raw_p, rgba_p, cfg)
-        fg = Image.open(rgba_p).convert("RGBA")
-        bbox = fg.getbbox()
-        if bbox:
-            fg = fg.crop(bbox)
-        pad_x = max(48, int(fg.width * 0.18))
-        pad_top = max(32, int(fg.height * 0.10))
-        pad_bot = max(24, int(fg.height * 0.08))
-        canvas = Image.new("RGBA", (fg.width + pad_x * 2, fg.height + pad_top + pad_bot), (128, 128, 128, 255))
-        canvas.alpha_composite(fg, (pad_x, pad_top))
-        canvas.convert("RGB").save(out_path)
-        cutout_ok = True
-    except Exception as exc:
-        print(f"[start_frames:{prop_kit_id}] cutout skipped ({exc}), saving raw image", flush=True)
-        open_on_mid_grey(raw_p).save(out_path)
-
-    append_prompt_log(cfg, {
-        "item_id": f"{char['id']}_start_frame_{prop_kit_id}",
-        "character_id": char["id"],
-        "stage": "start_frames",
-        "move_id": prop_kit_id,
-        "model": cfg["models"]["stills"] if engine == "gemini" else engine,
-        "resolution": "2K",
-        "source_path": str(hero_src),
-        "output_path": str(out_path),
-        "held_props": props_list,
-        "used_by_moves": kit.get("used_by_moves", []),
-        "prompt": prompt,
-        "feedback": feedback,
-    })
-    print(f"[start_frames:{prop_kit_id}] saved -> {out_path} ({engine})", flush=True)
-    return {
-        "id": f"{char['id']}_start_frame_{prop_kit_id}",
-        "character_id": char["id"],
-        "stage": "start_frames",
-        "move_id": prop_kit_id,
-        "held_props": props_list,
-        "used_by_moves": kit.get("used_by_moves", []),
-        "engine": engine,
-        "raw_path": str(raw_p),
-        "rgba_path": str(rgba_p) if cutout_ok else "",
-        "start_frame_path": str(out_path),
-        "status": "review",
-    }
-
-def judge_start_frame(client, out_path, hero_src, kit, char, cfg):
-    props_text = ", ".join(kit.get("held_props", []))
-    rubric = (
-        f"You are a strict automated QA judge for 2D JRPG battle start frames. "
-        f"Image 1 is the approved Hero reference for {char['name']}. "
-        f"Image 2 is the candidate prop-locked start frame. "
-        f"Check 4 rules: "
-        f"1) Character identity, face, hair, age, proportions, and outfit closely match Image 1. "
-        f"2) All required props are clearly visible and naturally held/worn: {props_text}. "
-        f"3) Full body from head to toe is visible with no cut-off head, limbs, or props. "
-        f"4) Background is clean flat mid-grey with no extra characters, text, or scenery. "
-        f"Return JSON ONLY: {{\"passed\": true/false, \"issues\": [\"short issue\"], \"repair_hint\": \"concrete fix instruction if failed, else empty string\"}}."
-    )
-    try:
-        resp = client.models.generate_content(
-            model=cfg["models"]["flash_bridge"],
-            contents=[
-                "IMAGE 1: APPROVED HERO REFERENCE",
-                open_on_mid_grey(hero_src),
-                "IMAGE 2: CANDIDATE PROP-LOCKED START FRAME",
-                open_on_mid_grey(out_path),
-                rubric,
-            ],
-            config=types.GenerateContentConfig(response_mime_type="application/json"),
-        )
-        txt = (resp.text or "").strip()
-        if txt.startswith("```"):  # strip fence if present
-            txt = txt.split("\n", 1)[-1].rsplit("```", 1)[0].strip()
-        data = json.loads(txt)
-        return bool(data.get("passed")), data.get("issues", []), str(data.get("repair_hint", "")).strip()
-    except Exception as exc:
-        print(f"[qa_start_frames:{kit['prop_kit_id']}] judge error: {exc}", flush=True)
-        return False, [f"judge_error: {type(exc).__name__}"], "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background."
-
-def run_qa_start_frames(manifest, cfg, char_id, move_id, feedback, queue):
-    q_path = Path(START_FRAME_QUEUE_PATH)
-    if not q_path.exists():
-        raise RuntimeError(f"Missing start-frame queue file: {q_path}")
-    sf_data = json.loads(q_path.read_text(encoding="utf-8"))
-    kits = sf_data.get("unique_kits", [])
-    filter_move = (move_id or "").strip()
-    filter_char = (char_id or "").strip()
-    max_fixes = 2
-
-    tasks = []
-    for kit in kits:
-        cid = kit["character_id"]
-        pkid = kit["prop_kit_id"]
-        if filter_char and filter_char != "all_uploaded" and cid != filter_char:
-            continue
-        if filter_move and filter_move != pkid and filter_move not in kit.get("used_by_moves", []):
-            continue
-        char = get_character(manifest, cid)
-        hero_src = resolve_hero_source(char, cfg, allow_fallback=False)
-        if not hero_src:
-            print(f"[qa_start_frames] skipping {pkid} (no Hero PNG found for {cid})", flush=True)
-            continue
-        tasks.append((kit, char, hero_src))
-
-    if not tasks:
-        print("[qa_start_frames] no start frames matched filters.", flush=True)
-        return
-
-    print(f"[qa_start_frames] auditing {len(tasks)} start frame(s) with auto-fix (up to {max_fixes} retries each)", flush=True)
-
-    def worker(triple):
-        kit, char, hero_src = triple
-        pkid = kit["prop_kit_id"]
-        out_p = Path(kit["start_frame_path"])
-        client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
-        item = None
-        if not out_p.exists():
-            print(f"[qa_start_frames:{pkid}] missing PNG, generating now", flush=True)
-            item = generate_start_frame_item(kit, char, cfg, hero_src, feedback)
-        passed, issues, repair = judge_start_frame(client, out_p, hero_src, kit, char, cfg)
-        print(f"[qa_start_frames:{pkid}] initial check passed={passed} issues={issues}", flush=True)
-        retries = 0
-        while not passed and retries < max_fixes:
-            retries += 1
-            fix_fb = f"{repair} {feedback}".strip()
-            print(f"[qa_start_frames:{pkid}] auto-fixing attempt {retries}/{max_fixes}: {repair}", flush=True)
-            item = generate_start_frame_item(kit, char, cfg, hero_src, fix_fb)
-            passed, issues, repair = judge_start_frame(client, out_p, hero_src, kit, char, cfg)
-            print(f"[qa_start_frames:{pkid}] re-check {retries} passed={passed} issues={issues}", flush=True)
-        if item is None:
-            raw_dir = out_p.parent / "_raw"
-            item = {
-                "id": f"{char['id']}_start_frame_{pkid}",
-                "character_id": char["id"],
-                "stage": "start_frames",
-                "move_id": pkid,
-                "held_props": kit.get("held_props", []),
-                "used_by_moves": kit.get("used_by_moves", []),
-                "raw_path": str(raw_dir / f"{pkid}_raw.png"),
-                "rgba_path": str(raw_dir / f"{pkid}_rgba.png"),
-                "start_frame_path": str(out_p),
-            }
-        item["qa_passed"] = passed
-        item["qa_issues"] = issues
-        item["qa_repair_hint"] = repair
-        item["qa_retries"] = retries
-        item["status"] = "approved" if passed else "qa_failed"
-        return item
-
-    passed_count = 0
-    failed_ids = []
-    for offset in range(0, len(tasks), 6):
-        chunk = tasks[offset:offset + 6]
-        with ThreadPoolExecutor(max_workers=min(3, len(chunk))) as ex:
-            results = list(ex.map(worker, chunk))
-        for item in results:
-            queue["items"] = [i for i in queue["items"] if i["id"] != item["id"]] + [item]
-            if item.get("qa_passed"):
-                passed_count += 1
-            else:
-                failed_ids.append(item["move_id"])
-        save_queue(cfg["queue_path"], queue)
-        print(f"[qa_start_frames] checkpointed {passed_count}/{len(tasks)} approved so far", flush=True)
-    print(f"[qa_start_frames] DONE: {passed_count}/{len(tasks)} approved. Remaining failed: {failed_ids}", flush=True)
-
-def run_batch_start_frames(manifest, cfg, char_id, move_id, feedback, queue):
-    q_path = Path(START_FRAME_QUEUE_PATH)
-    if not q_path.exists():
-        raise RuntimeError(f"Missing start-frame queue file: {q_path}")
-    sf_data = json.loads(q_path.read_text(encoding="utf-8"))
-    kits = sf_data.get("unique_kits", [])
-    force_regen = "force" in (feedback or "").lower().split()
-    filter_move = (move_id or "").strip()
-    filter_char = (char_id or "").strip()
-
-    tasks = []
-    for kit in kits:
-        cid = kit["character_id"]
-        pkid = kit["prop_kit_id"]
-        if filter_char and filter_char != "all_uploaded" and cid != filter_char:
-            continue
-        if filter_move and filter_move != pkid and filter_move not in kit.get("used_by_moves", []):
-            continue
-        out_p = Path(kit["start_frame_path"])
-        if out_p.exists() and not force_regen:
-            print(f"[start_frames] skipping {pkid} (already exists; add 'force' in feedback to regenerate)", flush=True)
-            continue
-        char = get_character(manifest, cid)
-        hero_src = resolve_hero_source(char, cfg, allow_fallback=False)
-        if not hero_src:
-            print(f"[start_frames] skipping {pkid} (no Hero PNG found for {cid})", flush=True)
-            continue
-        tasks.append((kit, char, hero_src))
-
-    if not tasks:
-        print("[start_frames] no start frames to generate.", flush=True)
-        return
-
-    print(f"[start_frames] generating {len(tasks)} prop-locked start frame(s): {[k['prop_kit_id'] for k, _, _ in tasks]}", flush=True)
-
-    def worker(triple):
-        kit, char, src = triple
-        try:
-            return generate_start_frame_item(kit, char, cfg, src, feedback)
-        except Exception as exc:
-            print(f"[start_frames] FAILED {kit['prop_kit_id']}: {exc}", flush=True)
-            return None
-
-    total_done = 0
-    for offset in range(0, len(tasks), 6):
-        chunk = tasks[offset:offset + 6]
-        with ThreadPoolExecutor(max_workers=min(3, len(chunk))) as ex:
-            results = [r for r in ex.map(worker, chunk) if r is not None]
-        for item in results:
-            queue["items"] = [i for i in queue["items"] if i["id"] != item["id"]] + [item]
-        save_queue(cfg["queue_path"], queue)
-        total_done += len(results)
-        print(f"[start_frames] checkpointed {total_done}/{len(tasks)} start frame(s)", flush=True)
-    print(f"[start_frames] finished {total_done}/{len(tasks)} prop-locked start frame(s).", flush=True)
-
 def run_stills(stage, char, cfg, feedback, queue):
     count = 8 if stage == "hero" else 1
     size_label = "2K" if stage == "hero" else "4K"
@@ -507,23 +200,24 @@ def generate_video_item(stage, char, cfg, move_id, feedback, hero_src):
     slug = f"{stage}_{move_id}" if move_id else stage
     out_dir = Path(cfg["staging_dir"]) / char["id"] / slug
     out_dir.mkdir(parents=True, exist_ok=True)
-    print(f"[video:{char['id']}] source hero={hero_src}", flush=True)
-    clean_src = prep_video_source(hero_src, out_dir, cfg)
+    prop_src = None
+    if stage in ("battle_move_draft", "battle_move_final") and move_id:
+        prop_src = resolve_start_frame_path(move_id)
+    effective_src = prop_src if prop_src else hero_src
+    if prop_src:
+        print(f"[video:{char['id']}] prop-locked start frame={prop_src} (move={move_id})", flush=True)
+    else:
+        print(f"[video:{char['id']}] source hero={hero_src} (move={move_id or 'none'})", flush=True)
+    clean_src = prep_video_source(effective_src, out_dir, cfg)
     img_url = fal_client.upload_file(str(clean_src))
-    model_used = cfg["models"]["video_move"]
-    res_tag = "480p"
-    neg_prompt = ""
     if stage == "battle_idle":
-        model_used = cfg["models"]["video_idle"]
-        res_tag = "4s"
         prompt = build_prompt(stage, char, cfg, move_id=move_id, feedback=feedback)
-        neg_prompt = IDLE_NEG
-        print(f"[video:{char['id']}] calling {model_used} (4s, audio off)", flush=True)
+        print(f"[video:{char['id']}] calling {cfg['models']['video_idle']} (4s, audio off)", flush=True)
         try:
-            res = fal_client.subscribe(model_used, arguments={"prompt": prompt, "negative_prompt": neg_prompt, "start_image_url": img_url, "end_image_url": img_url, "duration": "4", "generate_audio": False})
+            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "negative_prompt": IDLE_NEG, "start_image_url": img_url, "end_image_url": img_url, "duration": "4", "generate_audio": False})
         except Exception as e1:
             print(f"[video:{char['id']}] kling start/end retry: {e1}", flush=True)
-            res = fal_client.subscribe(model_used, arguments={"prompt": prompt, "negative_prompt": neg_prompt, "start_image_url": img_url, "duration": "4", "generate_audio": False})
+            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "negative_prompt": IDLE_NEG, "start_image_url": img_url, "duration": "4", "generate_audio": False})
     elif stage in ("battle_state_draft", "battle_state_final"):
         res_tag = "480p" if stage == "battle_state_draft" else "1080p"
         state_key = (move_id or "dodge").strip().lower()
@@ -533,21 +227,21 @@ def generate_video_item(stage, char, cfg, move_id, feedback, hero_src):
             neg_prompt = f"{ANTI_RING_NEG}, blood, gore, violence, camera pan, zoom, background scenery, text, watermark"
         else:
             neg_prompt = f"{ANTI_RING_NEG}, hurt, knocked out, lying down, camera pan, zoom, background scenery, text, watermark"
-        print(f"[video:{char['id']}] calling {model_used} ({res_tag}, state={state_key})", flush=True)
+        print(f"[video:{char['id']}] calling {cfg['models']['video_move']} ({res_tag}, state={state_key})", flush=True)
         try:
-            res = fal_client.subscribe(model_used, arguments={"prompt": prompt, "negative_prompt": neg_prompt, "start_image_url": img_url, "resolution": res_tag})
+            res = fal_client.subscribe(cfg["models"]["video_move"], arguments={"prompt": prompt, "negative_prompt": neg_prompt, "start_image_url": img_url, "resolution": res_tag})
         except Exception as e1:
             print(f"[video:{char['id']}] wan state image_url retry: {e1}", flush=True)
-            res = fal_client.subscribe(model_used, arguments={"prompt": prompt, "negative_prompt": neg_prompt, "image_url": img_url, "resolution": res_tag})
+            res = fal_client.subscribe(cfg["models"]["video_move"], arguments={"prompt": prompt, "negative_prompt": neg_prompt, "image_url": img_url, "resolution": res_tag})
     else:
         res_tag = "480p" if stage == "battle_move_draft" else "1080p"
         prompt, neg_prompt = resolve_move_prompts(stage, char, cfg, move_id=move_id, feedback=feedback)
-        print(f"[video:{char['id']}] calling {model_used} ({res_tag}, move={move_id or 'custom'})", flush=True)
+        print(f"[video:{char['id']}] calling {cfg['models']['video_move']} ({res_tag}, move={move_id or 'custom'})", flush=True)
         try:
-            res = fal_client.subscribe(model_used, arguments={"prompt": prompt, "negative_prompt": neg_prompt, "start_image_url": img_url, "resolution": res_tag})
+            res = fal_client.subscribe(cfg["models"]["video_move"], arguments={"prompt": prompt, "negative_prompt": neg_prompt, "start_image_url": img_url, "resolution": res_tag})
         except Exception as e1:
             print(f"[video:{char['id']}] wan image_url retry: {e1}", flush=True)
-            res = fal_client.subscribe(model_used, arguments={"prompt": prompt, "negative_prompt": neg_prompt, "image_url": img_url, "resolution": res_tag})
+            res = fal_client.subscribe(cfg["models"]["video_move"], arguments={"prompt": prompt, "negative_prompt": neg_prompt, "image_url": img_url, "resolution": res_tag})
     vid_url = res.get("video", {}).get("url") or res.get("url")
     print(f"[video:{char['id']}] generated raw video={vid_url}", flush=True)
     try:
@@ -560,24 +254,13 @@ def generate_video_item(stage, char, cfg, move_id, feedback, hero_src):
     raw_vid = out_dir / "raw_alpha.webm"
     download_file(alpha_url, raw_vid)
     strip_audio_if_present(raw_vid)
-    append_prompt_log(cfg, {
-        "item_id": f"{char['id']}_{slug}",
-        "character_id": char["id"],
-        "stage": stage,
-        "move_id": move_id,
-        "model": model_used,
-        "resolution": res_tag,
-        "source_path": str(hero_src),
-        "output_path": str(raw_vid),
-        "prompt": prompt,
-        "negative_prompt": neg_prompt,
-        "feedback": feedback,
-    })
     return {
         "id": f"{char['id']}_{slug}",
         "character_id": char["id"],
         "stage": stage,
         "move_id": move_id,
+        "start_frame_source": str(effective_src),
+        "used_prop_start_frame": bool(prop_src),
         "raw_video_path": str(raw_vid),
         "needs_encode": True,
         "status": "encoding"
@@ -701,38 +384,6 @@ def run_batch_video(stage, manifest, cfg, move_id, feedback, queue):
     save_queue(cfg["queue_path"], queue)
     print(f"[batch] queued {len(results)}/{len(targets)} character(s) for Safari/WebM alpha encoding.", flush=True)
 
-def run_rerun_failed(manifest, cfg, char_id, move_id, feedback, queue):
-    failed_items = []
-    for it in queue.get("items", []):
-        if it.get("status") != "qa_failed" and it.get("qa_passed") is not False:
-            continue
-        if it.get("stage") not in ("battle_idle", "battle_move_draft", "battle_move_final", "battle_state_draft", "battle_state_final"):
-            continue
-        if char_id and char_id != "all_uploaded" and it.get("character_id") != char_id:
-            continue
-        if move_id and it.get("move_id") != move_id:
-            continue
-        failed_items.append(it)
-    if not failed_items:
-        print("[rerun_failed] no qa_failed video items matched filters.", flush=True)
-        return
-    print(f"[rerun_failed] regenerating {len(failed_items)} failed item(s)", flush=True)
-    for it in failed_items:
-        c = get_character(manifest, it["character_id"])
-        hero_src = resolve_hero_source(c, cfg, allow_fallback=True)
-        repair_parts = []
-        if it.get("qa_repair_hint"):
-            repair_parts.append(it["qa_repair_hint"])
-        if it.get("failure_tags"):
-            repair_parts.append("Avoid: " + ", ".join(it["failure_tags"]))
-        if feedback and feedback.strip():
-            repair_parts.append(feedback.strip())
-        combined_fb = " ".join(repair_parts).strip()
-        new_item = generate_video_item(it["stage"], c, cfg, it.get("move_id", ""), combined_fb, hero_src)
-        new_item["rerun_count"] = int(it.get("rerun_count", 0)) + 1
-        queue["items"] = [i for i in queue["items"] if i["id"] != new_item["id"]] + [new_item]
-        save_queue(cfg["queue_path"], queue)
-
 def run_approve(char_id, cand_idx, feedback, cfg, queue):
     target_stage = feedback.strip() or "hero"
     matches = [i for i in queue["items"] if i["character_id"] == char_id and i["stage"] == target_stage and str(i.get("candidate_index", 0)) == str(cand_idx)]
@@ -761,19 +412,6 @@ def main():
     queue = load_queue(cfg["queue_path"])
     if stage == "approve":
         run_approve(char_id, cand_idx, feedback, cfg, queue)
-        return
-    if stage == "qa_audit":
-        audit_queue_items(queue, char_id=char_id, move_id=move_id)
-        save_queue(cfg["queue_path"], queue)
-        return
-    if stage == "rerun_failed":
-        run_rerun_failed(manifest, cfg, char_id, move_id, feedback, queue)
-        return
-    if stage == "start_frames":
-        run_batch_start_frames(manifest, cfg, char_id, move_id, feedback, queue)
-        return
-    if stage == "qa_start_frames":
-        run_qa_start_frames(manifest, cfg, char_id, move_id, feedback, queue)
         return
     if char_id == "all_uploaded":
         if stage in ("battle_idle", "battle_move_draft", "battle_move_final", "battle_state_draft", "battle_state_final"):

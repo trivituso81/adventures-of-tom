@@ -5,6 +5,9 @@ from pathlib import Path
 ANTI_RING_NEG = "glowing ring, neon halo, aura outline, rim glow, spotlight, stage lighting, light beam, light cone, floor glow, lens flare, muted desaturated sketch, photorealistic 3D, 16-bit, 32-bit, 8-bit, pixel art, retro, sprite, SNES, Final Fantasy, hurt, knocked out"
 IDLE_NEG = "frozen start, static pause, motionless opening, delayed animation, repeated blinking, double blink, fluttering eyelids, mouth opening, sighing, pursing lips, speaking, camera movement, blur, distort"
 
+PASS1_MOVES_PATH = Path("art-factory/move-packets-pass1.json")
+PASS1_START_FRAMES_PATH = Path("art-factory/start-frame-queue-pass1.json")
+
 def load_manifest(path="art-factory/characters.json"):
     return json.loads(Path(path).read_text(encoding="utf-8"))
 
@@ -38,10 +41,15 @@ def load_all_move_manifests():
     art_dir = Path("art-factory")
     if not art_dir.exists():
         return manifests
-    skip = {"characters.json", "queue.json"}
+    skip = {"characters.json", "queue.json", "start-frame-queue-pass1.json"}
+    candidates = []
+    if PASS1_MOVES_PATH.exists():
+        candidates.append(PASS1_MOVES_PATH)
     for p in sorted(art_dir.glob("*.json")):
-        if p.name in skip:
+        if p.name in skip or p == PASS1_MOVES_PATH:
             continue
+        candidates.append(p)
+    for p in candidates:
         try:
             data = json.loads(p.read_text(encoding="utf-8"))
             if isinstance(data, dict) and isinstance(data.get("moves"), list):
@@ -50,6 +58,28 @@ def load_all_move_manifests():
             continue
     return manifests
 
+def resolve_start_frame_path(move_id, queue_path=PASS1_START_FRAMES_PATH):
+    if not move_id:
+        return None
+    qp = Path(queue_path)
+    if not qp.exists():
+        return None
+    try:
+        data = json.loads(qp.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+    for kit in data.get("unique_kits", []):
+        if move_id in kit.get("used_by_moves", []):
+            p = Path(kit.get("start_frame_path", ""))
+            if p.exists():
+                return p
+    for entry in data.get("flagged_moves", []):
+        if entry.get("move_id") == move_id:
+            p = Path(entry.get("start_frame_path", ""))
+            if p.exists():
+                return p
+    return None
+
 def list_character_move_ids(char_name, include_universal=True):
     move_ids = []
     seen = set()
@@ -57,14 +87,18 @@ def list_character_move_ids(char_name, include_universal=True):
     for data in load_all_move_manifests():
         for m in data.get("moves", []):
             m_char = (m.get("character") or "").strip().lower()
-            if m_char != target and not (include_universal and m_char == "universal"):
+            m_cid = (m.get("character_id") or "").strip().lower()
+            is_match = (m_char == target or m_cid == target)
+            is_univ = include_universal and (m_char == "universal" or m_cid == "universal")
+            if not is_match and not is_univ:
                 continue
             mid = m.get("id")
             if mid and mid not in seen and m.get("wanClip"):
                 seen.add(mid)
                 move_ids.append(mid)
-            if mid and m.get("reactiveCounterClip"):
-                cid = f"{mid}_counter"
+            counter = m.get("reactiveCounterClip")
+            if mid and isinstance(counter, dict):
+                cid = counter.get("id") or f"{mid}_counter"
                 if cid not in seen:
                     seen.add(cid)
                     move_ids.append(cid)
