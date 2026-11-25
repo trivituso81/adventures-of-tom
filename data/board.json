@@ -9587,6 +9587,38 @@
     "text": "Host art-factory-pusher.html at the site root and link it from admin.html. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "done": "2026-11-24"
+  },
+  {
+   "id": "c-scriptstudio1",
+   "tag": "scriptstudio1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "Host AoT Script Studio with the six reference docs auto-loaded",
+   "next": "Build the React app into script-studio/, auto-load six reference docs, add Sync Hosted Defaults.",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDiptdfSViWowh4C6s",
+    "opening": "Can you host this on our site"
+   },
+   "history": [
+    {
+     "d": "2026-11-24",
+     "t": "Tom: \"Separate request once you're done: I have a standalone single-file React component (aot-script-studio.jsx)... host it on my website and wire it up to auto-load my six reference .md files\". New card; started."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-24",
+   "changed": "2026-11-24",
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Builds Script Studio into script-studio/ with the six reference docs auto-loaded and Sync Hosted Defaults.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build with a few unknowns, tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read the c-scriptstudio1 card and tools/script-studio/README.md, then continue the Script Studio build. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
