@@ -2489,14 +2489,16 @@
       "flavor": "Clobber",
       "lifecycle_state": "DRAFT_REVIEW",
       "pitch": {
-        "windup": "Justin steps forward in-place gliding a yellow electronic stud finder smoothly left-to-right until pausing at a spot.",
-        "peak": "Justin swiftly draws a framing hammer from his belt for one crisp deadpan knock left.",
-        "recovery": "Justin tucks the hammer back and steps cleanly to idle."
+        "windup": "Justin, feet planted, leans back in one bold anticipation with the hammer raised overhead and the stud finder held out front.",
+        "peak": "Justin drives one huge overhead-to-horizontal hammer slam straight toward screen-left while thrusting the flashing stud finder forward.",
+        "recovery": "Justin follows through, then settles back to his planted idle stance."
       },
       "held_props": [
-        "yellow electronic stud finder",
-        "framing hammer"
+        "oversized bright-yellow electronic stud finder (flashing red LED)",
+        "heavy steel claw hammer"
       ],
+      "expected_prop": "oversized bright-yellow electronic stud finder with a flashing red LED in the off-hand and a heavy steel claw hammer in the striking hand, both gripped from frame 1",
+      "expected_action": "with feet planted, Justin leans forward toward screen-left and drives one huge overhead-to-horizontal hammer slam straight toward screen-left while thrusting the flashing stud finder forward",
       "needs_custom_start_frame": true,
       "prop_kit_id": "justin-studfinder-hammer",
       "safe_padding_pct": {
@@ -2529,8 +2531,8 @@
         "durationSec": 2.7,
         "fps": 24,
         "numFrames": 65,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: justin-bb-basic | 2.7s | 65 frames @ 24fps] Justin steps forward in-place gliding a yellow electronic stud finder smoothly left-to-right until pausing at a spot, swiftly draws a framing hammer from his belt for one crisp deadpan knock left, tucks the hammer back, and steps to idle.",
-        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: justin-bb-basic | 2.7s | 65 frames @ 24fps] Justin holds oversized bright-yellow electronic stud finder with a flashing red LED in the off-hand and a heavy steel claw hammer in the striking hand, both gripped from frame 1. With feet planted, Justin leans forward toward screen-left and drives one huge overhead-to-horizontal hammer slam straight toward screen-left while thrusting the flashing stud finder forward.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines, pulling a prop from a belt or pocket, walking, stepping backward, idle breathing, looking at camera"
       },
       "reactiveCounterClip": null,
       "engineSpec": {

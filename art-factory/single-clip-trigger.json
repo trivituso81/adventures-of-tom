@@ -1,0 +1,9 @@
+{
+  "run_id": "justin-poc-1",
+  "move_ids": [
+    "pf-justin-bb-basic"
+  ],
+  "resolution": "480p",
+  "duration_multiplier": 1.5,
+  "max_retries": 1
+}

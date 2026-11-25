@@ -7,6 +7,7 @@ import time
 from pathlib import Path
 from google import genai
 from PIL import Image
+from battle_move_gate import run_gate
 
 QUEUE_PATH = Path("art-factory/queue.json")
 PACKETS_PATH = Path("art-factory/move-packets-pass1.json")
@@ -72,6 +73,17 @@ def grade_video(client, model, item, move_meta):
             "failure_tags": ["missing_or_empty_video"],
             "notes": f"Video file missing: {vid_str}",
         }
+    # Two-stage gate first: Stage 1 is free, Stage 2 is one vision call. Cutout or likeness cleanliness alone never passes a clip.
+    gate = run_gate(vid_path, move_meta, client, model, sheet_path=vid_path.with_name("contact_sheet_200px.png"))
+    if not gate["passed"]:
+        return {
+            "passed": False,
+            "overall": 0.0,
+            "scores": {"likeness": 0, "prop_integrity": 0, "motion_fluidity": 0, "staging_cleanliness": 0},
+            "failure_tags": gate["failure_tags"],
+            "notes": gate["failure_reason"],
+            "gate": gate,
+        }
     with tempfile.TemporaryDirectory() as tmp_dir:
         frame_paths = extract_key_frames(vid_path, tmp_dir)
         if not frame_paths:
@@ -114,6 +126,7 @@ def grade_video(client, model, item, move_meta):
                 },
                 "failure_tags": tags,
                 "notes": data.get("notes", ""),
+                "gate": gate,
             }
         except Exception as exc:
             print(f"[qa_videos] API ERROR on {item.get('character_id')}/{item.get('move_id')}: {exc}", flush=True)
@@ -151,6 +164,7 @@ def main():
         item["qa_scores"] = grade["scores"]
         item["qa_failure_tags"] = grade["failure_tags"]
         item["qa_notes"] = grade["notes"]
+        item["qa_gate"] = grade.get("gate")
         item["status"] = "qa_passed" if grade["passed"] else "qa_failed"
 
         if grade["passed"]:

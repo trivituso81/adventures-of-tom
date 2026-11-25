@@ -5,6 +5,28 @@ from pathlib import Path
 ANTI_RING_NEG = "glowing ring, neon halo, aura outline, rim glow, spotlight, stage lighting, light beam, light cone, floor glow, lens flare, muted desaturated sketch, photorealistic 3D, 16-bit, 32-bit, 8-bit, pixel art, retro, sprite, SNES, Final Fantasy, hurt, knocked out"
 IDLE_NEG = "frozen start, static pause, motionless opening, delayed animation, repeated blinking, double blink, fluttering eyelids, mouth opening, sighing, pursing lips, speaking, camera movement, blur, distort"
 
+BATTLE_MOVE_DRAFT_NEG = (
+    "subtle idle breathing, standing still, motionless, waist fidgeting, looking at the camera, gentle passive gesture, small hand gestures, "
+    "pulling a prop from a pocket or belt, prop appearing mid-clip, multi-step choreography, walking, stepping backward, backing away, "
+    "wandering off-center, camera pan, camera zoom, camera orbit"
+)
+
+def battle_move_draft_rules(move):
+    """Staging rules every battle_move_draft prompt carries (one Single Exaggerated Leftward Action, planted feet, props from Frame 1).
+    No banned words here: sanitize_prompt strips them (sprite, retro, hurt, ...)."""
+    props = "the props named above" if move else "the named props"
+    return (
+        "STAGING RULES. "
+        "1) Planted feet and locked camera: grounded on one fixed floor plane, both feet stay planted for the whole clip, only torso lean, weight shift and arm extension move; "
+        "no backing up behind the party, no wandering off-center, zero camera pan, zoom or orbit. "
+        f"2) Props in hand from frame 1: {props} are already gripped and clearly visible in the very first frame, drawn slightly oversized so they read at small on-screen battle size; "
+        "never pulled from a pocket or belt and never appearing mid-clip. "
+        "3) One exaggerated leftward action: exactly one bold anticipation, strike and follow-through arc aimed decisively toward screen-left, toward the enemies; "
+        "no multi-step choreography, no waist-level fumbling. "
+        "4) Silhouette readability: wide arm extension, clear torso turn, readable negative space around the figure when seen about 200 pixels tall. "
+        "5) Forbidden: subtle idle breathing, standing still, waist fidgeting, looking at the camera, gentle passive gestures."
+    )
+
 PASS1_MOVES_PATH = Path("art-factory/move-packets-pass1.json")
 PASS1_START_FRAMES_PATH = Path("art-factory/start-frame-queue-pass1.json")
 
@@ -131,15 +153,21 @@ def resolve_move_prompts(stage, char, cfg, move_id="", feedback=""):
         pos = normalize_backdrop_for_grey(pos, bg_hex)
         pos = pos.replace("Acting party member (swap per character reference image)", char["name"])
         pos = pos.replace("Single acting character", char["name"])
+        if stage == "battle_move_draft":
+            pos = f"{pos} {battle_move_draft_rules(found['move'])}"
         if feedback and feedback.strip() and feedback.strip() not in pos:
             clean_fb = normalize_backdrop_for_grey(feedback.strip(), bg_hex)
             pos = f"{pos} Director notes: {clean_fb}"
         pos = sanitize_prompt(pos, cfg["banned_words"])
         neg_base = clip.get("negativePrompt") or defaults.get("negativePrompt") or ""
         neg = f"{neg_base}, {ANTI_RING_NEG}".strip(", ")
+        if stage == "battle_move_draft":
+            neg = f"{neg}, {BATTLE_MOVE_DRAFT_NEG}"
         return pos, neg
     clean_fb = normalize_backdrop_for_grey(feedback, bg_hex)
     pos = build_prompt(stage, char, cfg, move_id=move_id, feedback=clean_fb)
+    if stage == "battle_move_draft":
+        return f"{pos} {battle_move_draft_rules(None)}", f"{ANTI_RING_NEG}, {BATTLE_MOVE_DRAFT_NEG}"
     return pos, ANTI_RING_NEG
 
 def build_prompt(stage, char, cfg, move_id="", feedback="", extra_hint=""):

@@ -10,7 +10,7 @@ laid on flat magenta and written as a lossless video; the marks are found from t
 picture, END half a second after the last movement) except HIT, which is the picture that reaches farthest left, toward the monsters; then
 tools/art-library/wanbake.py bakes it with tools/clip-bake/bake_clip.py and wires the kit row (anim {kind:'clip'}). Needs ffmpeg with libvpx.
 A packet the game cannot play yet (no kit row, or the move already plays an approved video) is not in PREVIEW: see docs/CHANGES.md pass1draft1."""
-import os, sys, glob, json, shutil, subprocess, tempfile
+import os, re, sys, glob, json, shutil, subprocess, tempfile
 import numpy as np
 from PIL import Image
 
@@ -32,7 +32,7 @@ PREVIEW = {
     'deedee-nf-cap':   ('deedee', 'deedee', 'fifty_year_dust_tsunami', 'cast', 1.25),
 }
 STEP = 3
-SLOW = 1.5                                          # pass1slow1 (Tom 2026-11-25): every preview plays 1.5 times longer than its speed above
+SLOW = float(os.environ.get('PASS1_DURATION_MULT') or 1.5)    # pass1slow1 (Tom 2026-11-25): every preview plays 1.5 times longer than its speed above
 
 
 def clip_id(packet):
@@ -88,12 +88,16 @@ def main():
             if bad: raise SystemExit('%s: %s' % (p, bad))
             stamp = 'art-factory draft %s %s' % (os.path.relpath(webm, ROOT), json.dumps(m))
             av, note = wanbake.bake_args(job, mkv, len(fs), FPS, stamp)
+            if os.environ.get('PASS1_CLIP_TAG'): av += ['--tag', os.environ['PASS1_CLIP_TAG']]   # a new ?v= so a phone's cache-first copy is replaced
             if check: av += ['--sheet', os.path.join(check, clip_id(p) + '.png')]
             r = subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'clip-bake', 'bake_clip.py'), mkv, clip_id(p), owner] + av,
                                cwd=ROOT, capture_output=True, text=True)
             if r.returncode: raise SystemExit('%s: bake_clip.py failed: %s' % (p, (r.stdout + r.stderr)[-600:]))
             ix = os.path.join(ROOT, 'index.html'); html = open(ix, encoding='utf-8').read()
             tag = 'data/clips/%s.js' % clip_id(p)
+            vtag = os.environ.get('PASS1_CLIP_TAG')
+            if vtag and tag in html:
+                html = re.sub(re.escape(tag) + r'\?v=[A-Za-z0-9_.-]+', tag + '?v=' + vtag, html); open(ix, 'w', encoding='utf-8').write(html)
             if tag not in html:
                 last = [l for l in html.split('\n') if l.startswith('<script src="data/clips/')][-1]
                 html = html.replace(last + '\n', last + '\n<script src="%s?v=clip0"></script>\n' % tag, 1)
