@@ -14,6 +14,7 @@ from art_director_agent import ANTI_RING_NEG, IDLE_NEG, build_prompt, describe_c
 from qa_judge_agent import judge_candidate
 from qa_video_audit import audit_queue_items
 
+START_FRAME_QUEUE_PATH = "art-factory/start-frame-queue-pass1.json"
 BATTLE_STATES = ("dodge", "cast", "hit", "ko")
 
 BATTLE_STATE_PROMPTS = {
@@ -169,6 +170,177 @@ def resolve_hero_source(char, cfg, allow_fallback=True):
     if allow_fallback:
         return Path(cfg["tom_hero_path"])
     return None
+
+def open_on_mid_grey(img_path):
+    im = Image.open(img_path)
+    if im.mode in ("RGBA", "LA"):
+        bg = Image.new("RGBA", im.size, (128, 128, 128, 255))
+        bg.alpha_composite(im.convert("RGBA"))
+        return bg.convert("RGB")
+    return im.convert("RGB")
+
+def generate_start_frame_item(kit, char, cfg, hero_src, feedback):
+    prop_kit_id = kit["prop_kit_id"]
+    out_path = Path(kit["start_frame_path"])
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    raw_dir = out_path.parent / "_raw"
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    raw_p = raw_dir / f"{prop_kit_id}_raw.png"
+    rgba_p = raw_dir / f"{prop_kit_id}_rgba.png"
+
+    props_list = kit.get("held_props", [])
+    props_text = ", ".join(props_list)
+    clean_fb = " ".join(w for w in (feedback or "").split() if w.lower() != "force").strip()
+    char_notes = char.get("notes", "")
+    style_lock = cfg.get("style_lock", "")
+
+    prompt = (
+        f"Prop-locked neutral battle-ready character start frame of {char['name']} on a solid flat #808080 mid-grey studio background. "
+        f"Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. "
+        f"Show {char['name']} full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: {props_text}. "
+        f"Character details: {char_notes}. "
+        f"{style_lock} "
+        f"Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles. "
+        f"{clean_fb}"
+    ).strip()
+
+    contents = []
+    style_p = Path(cfg["style_key_path"])
+    if style_p.exists():
+        contents.append("GAME STYLE REFERENCE (match exact bold dark ink outlines, chunky painted shading, warm golden top-left light, and color richness; ignore its background and use flat #808080 mid-grey):")
+        contents.append(Image.open(style_p))
+    contents.append(f"APPROVED HERO CHARACTER ANCHOR FOR {char['name'].upper()} (keep this exact character identity, face, hair, proportions, and outfit; only adjust hands/stance to naturally hold the requested props):")
+    contents.append(open_on_mid_grey(hero_src))
+    contents.append(prompt)
+
+    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+    engine = "gemini"
+    try:
+        resp = client.models.generate_content(
+            model=cfg["models"]["stills"],
+            contents=contents,
+            config=types.GenerateContentConfig(
+                response_modalities=["IMAGE"],
+                image_config=types.ImageConfig(image_size="2K"),
+            ),
+        )
+        img_bytes = None
+        for part in resp.candidates[0].content.parts:
+            if getattr(part, "inline_data", None) and part.inline_data.data:
+                img_bytes = part.inline_data.data
+                break
+        if not img_bytes:
+            raise RuntimeError("Gemini returned no image bytes")
+    except Exception as exc:
+        if not char.get("child_bridge"):
+            raise
+        out = fal_client.subscribe(cfg["models"]["flux_fallback"], arguments={"prompt": prompt, "image_size": "square_hd"})
+        url = out["images"][0]["url"]
+        img_bytes = requests.get(url, timeout=120).content
+        engine = f"flux_bridge ({type(exc).__name__})"
+
+    raw_p.write_bytes(img_bytes)
+    cutout_ok = False
+    try:
+        cutout_still(raw_p, rgba_p, cfg)
+        fg = Image.open(rgba_p).convert("RGBA")
+        bbox = fg.getbbox()
+        if bbox:
+            fg = fg.crop(bbox)
+        pad_x = max(48, int(fg.width * 0.18))
+        pad_top = max(32, int(fg.height * 0.10))
+        pad_bot = max(24, int(fg.height * 0.08))
+        canvas = Image.new("RGBA", (fg.width + pad_x * 2, fg.height + pad_top + pad_bot), (128, 128, 128, 255))
+        canvas.alpha_composite(fg, (pad_x, pad_top))
+        canvas.convert("RGB").save(out_path)
+        cutout_ok = True
+    except Exception as exc:
+        print(f"[start_frames:{prop_kit_id}] cutout skipped ({exc}), saving raw image", flush=True)
+        open_on_mid_grey(raw_p).save(out_path)
+
+    append_prompt_log(cfg, {
+        "item_id": f"{char['id']}_start_frame_{prop_kit_id}",
+        "character_id": char["id"],
+        "stage": "start_frames",
+        "move_id": prop_kit_id,
+        "model": cfg["models"]["stills"] if engine == "gemini" else engine,
+        "resolution": "2K",
+        "source_path": str(hero_src),
+        "output_path": str(out_path),
+        "held_props": props_list,
+        "used_by_moves": kit.get("used_by_moves", []),
+        "prompt": prompt,
+        "feedback": feedback,
+    })
+    print(f"[start_frames:{prop_kit_id}] saved -> {out_path} ({engine})", flush=True)
+    return {
+        "id": f"{char['id']}_start_frame_{prop_kit_id}",
+        "character_id": char["id"],
+        "stage": "start_frames",
+        "move_id": prop_kit_id,
+        "held_props": props_list,
+        "used_by_moves": kit.get("used_by_moves", []),
+        "engine": engine,
+        "raw_path": str(raw_p),
+        "rgba_path": str(rgba_p) if cutout_ok else "",
+        "start_frame_path": str(out_path),
+        "status": "review",
+    }
+
+def run_batch_start_frames(manifest, cfg, char_id, move_id, feedback, queue):
+    q_path = Path(START_FRAME_QUEUE_PATH)
+    if not q_path.exists():
+        raise RuntimeError(f"Missing start-frame queue file: {q_path}")
+    sf_data = json.loads(q_path.read_text(encoding="utf-8"))
+    kits = sf_data.get("unique_kits", [])
+    force_regen = "force" in (feedback or "").lower().split()
+    filter_move = (move_id or "").strip()
+    filter_char = (char_id or "").strip()
+
+    tasks = []
+    for kit in kits:
+        cid = kit["character_id"]
+        pkid = kit["prop_kit_id"]
+        if filter_char and filter_char != "all_uploaded" and cid != filter_char:
+            continue
+        if filter_move and filter_move != pkid and filter_move not in kit.get("used_by_moves", []):
+            continue
+        out_p = Path(kit["start_frame_path"])
+        if out_p.exists() and not force_regen:
+            print(f"[start_frames] skipping {pkid} (already exists; add 'force' in feedback to regenerate)", flush=True)
+            continue
+        char = get_character(manifest, cid)
+        hero_src = resolve_hero_source(char, cfg, allow_fallback=False)
+        if not hero_src:
+            print(f"[start_frames] skipping {pkid} (no Hero PNG found for {cid})", flush=True)
+            continue
+        tasks.append((kit, char, hero_src))
+
+    if not tasks:
+        print("[start_frames] no start frames to generate.", flush=True)
+        return
+
+    print(f"[start_frames] generating {len(tasks)} prop-locked start frame(s): {[k['prop_kit_id'] for k, _, _ in tasks]}", flush=True)
+
+    def worker(triple):
+        kit, char, src = triple
+        try:
+            return generate_start_frame_item(kit, char, cfg, src, feedback)
+        except Exception as exc:
+            print(f"[start_frames] FAILED {kit['prop_kit_id']}: {exc}", flush=True)
+            return None
+
+    total_done = 0
+    for offset in range(0, len(tasks), 6):
+        chunk = tasks[offset:offset + 6]
+        with ThreadPoolExecutor(max_workers=min(3, len(chunk))) as ex:
+            results = [r for r in ex.map(worker, chunk) if r is not None]
+        for item in results:
+            queue["items"] = [i for i in queue["items"] if i["id"] != item["id"]] + [item]
+        save_queue(cfg["queue_path"], queue)
+        total_done += len(results)
+        print(f"[start_frames] checkpointed {total_done}/{len(tasks)} start frame(s)", flush=True)
+    print(f"[start_frames] finished {total_done}/{len(tasks)} prop-locked start frame(s).", flush=True)
 
 def run_stills(stage, char, cfg, feedback, queue):
     count = 8 if stage == "hero" else 1
@@ -476,6 +648,9 @@ def main():
         return
     if stage == "rerun_failed":
         run_rerun_failed(manifest, cfg, char_id, move_id, feedback, queue)
+        return
+    if stage == "start_frames":
+        run_batch_start_frames(manifest, cfg, char_id, move_id, feedback, queue)
         return
     if char_id == "all_uploaded":
         if stage in ("battle_idle", "battle_move_draft", "battle_move_final", "battle_state_draft", "battle_state_final"):

@@ -12,6 +12,7 @@ on:
           - hero
           - turnaround
           - sheets
+          - start_frames
           - battle_idle
           - battle_move_draft
           - battle_move_final
