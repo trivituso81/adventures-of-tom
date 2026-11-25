@@ -1,0 +1,624 @@
+{
+  "schema_version": "aot-start-frame-queue-v1",
+  "game": "The Adventures of Tom",
+  "stage": "Phase 1A - Prop-Locked Start-Frame Batch Queue",
+  "bgHex": "#808080",
+  "total_moves_flagged": 27,
+  "unique_start_frames_to_generate": 22,
+  "unique_kits": [
+    {
+      "prop_kit_id": "tom-lounge-pass",
+      "character_id": "tom",
+      "character": "Tom",
+      "held_props": [
+        "laminated Sky Club pass",
+        "metal brag tag"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/tom-lounge-pass.png",
+      "used_by_moves": [
+        "tom-ff-basic"
+      ]
+    },
+    {
+      "prop_kit_id": "tom-carryon",
+      "character_id": "tom",
+      "character": "Tom",
+      "held_props": [
+        "black hard-shell rolling carry-on suitcase"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/tom-carryon.png",
+      "used_by_moves": [
+        "tom-ff-s1",
+        "tom-ff-s1_counter"
+      ]
+    },
+    {
+      "prop_kit_id": "tom-360-medallion",
+      "character_id": "tom",
+      "character": "Tom",
+      "held_props": [
+        "black invite-only 360 medallion"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/tom-360-medallion.png",
+      "used_by_moves": [
+        "tom-ff-cap"
+      ]
+    },
+    {
+      "prop_kit_id": "grace-white-dumpling",
+      "character_id": "grace",
+      "character": "Grace",
+      "held_props": [
+        "palm-sized white soup-dumpling squishy"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/grace-white-dumpling.png",
+      "used_by_moves": [
+        "grace-sc-basic"
+      ]
+    },
+    {
+      "prop_kit_id": "grace-needoh",
+      "character_id": "grace",
+      "character": "Grace",
+      "held_props": [
+        "bright neon-teal gel NeeDoh ball"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/grace-needoh.png",
+      "used_by_moves": [
+        "grace-sc-s1"
+      ]
+    },
+    {
+      "prop_kit_id": "grace-sugar-cube",
+      "character_id": "grace",
+      "character": "Grace",
+      "held_props": [
+        "translucent ice-cube sugar squishy"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/grace-sugar-cube.png",
+      "used_by_moves": [
+        "grace-sc-s2"
+      ]
+    },
+    {
+      "prop_kit_id": "rose-goggles-lamby",
+      "character_id": "rose",
+      "character": "Rose",
+      "held_props": [
+        "tattered Lamby plush",
+        "tiny aviator goggles"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/rose-goggles-lamby.png",
+      "used_by_moves": [
+        "rose-sr-s2"
+      ]
+    },
+    {
+      "prop_kit_id": "rose-twin-lambies",
+      "character_id": "rose",
+      "character": "Rose",
+      "held_props": [
+        "tattered Lamby plush",
+        "spotless white Backup Lamby plush"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/rose-twin-lambies.png",
+      "used_by_moves": [
+        "rose-sr-cap"
+      ]
+    },
+    {
+      "prop_kit_id": "amy-kettlebell",
+      "character_id": "amy",
+      "character": "Amy",
+      "held_props": [
+        "cast-iron kettlebell"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/amy-kettlebell.png",
+      "used_by_moves": [
+        "amy-fq-basic",
+        "amy-fq-cap"
+      ]
+    },
+    {
+      "prop_kit_id": "deedee-windex",
+      "character_id": "deedee",
+      "character": "Deedee",
+      "held_props": [
+        "bright blue Windex spray bottle"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/deedee-windex.png",
+      "used_by_moves": [
+        "deedee-nf-basic"
+      ]
+    },
+    {
+      "prop_kit_id": "deedee-mop-sign",
+      "character_id": "deedee",
+      "character": "Deedee",
+      "held_props": [
+        "wooden-handle string mop",
+        "folded yellow caution sign"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/deedee-mop-sign.png",
+      "used_by_moves": [
+        "deedee-nf-s1"
+      ]
+    },
+    {
+      "prop_kit_id": "deedee-glasses-pin",
+      "character_id": "deedee",
+      "character": "Deedee",
+      "held_props": [
+        "reading glasses",
+        "wooden rolling pin"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/deedee-glasses-pin.png",
+      "used_by_moves": [
+        "deedee-nf-s2"
+      ]
+    },
+    {
+      "prop_kit_id": "deedee-gloves-mop",
+      "character_id": "deedee",
+      "character": "Deedee",
+      "held_props": [
+        "bright yellow rubber cleaning gloves",
+        "wooden-handle string mop"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/deedee-gloves-mop.png",
+      "used_by_moves": [
+        "deedee-nf-cap"
+      ]
+    },
+    {
+      "prop_kit_id": "boppy-nightstick",
+      "character_id": "boppy",
+      "character": "Boppy",
+      "held_props": [
+        "wooden warden nightstick"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/boppy-nightstick.png",
+      "used_by_moves": [
+        "boppy-dep-basic",
+        "boppy-dep-s1"
+      ]
+    },
+    {
+      "prop_kit_id": "boppy-keys",
+      "character_id": "boppy",
+      "character": "Boppy",
+      "held_props": [
+        "heavy brass warden key ring"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/boppy-keys.png",
+      "used_by_moves": [
+        "boppy-dep-cap"
+      ]
+    },
+    {
+      "prop_kit_id": "tnb-clay-lump",
+      "character_id": "tnb",
+      "character": "TNB",
+      "held_props": [
+        "studio potter apron",
+        "hefty lump of wet gray stoneware clay"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/tnb-clay-lump.png",
+      "used_by_moves": [
+        "tnb-cer-basic"
+      ]
+    },
+    {
+      "prop_kit_id": "tnb-kiln-mitt",
+      "character_id": "tnb",
+      "character": "TNB",
+      "held_props": [
+        "quilted kiln mitt"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/tnb-kiln-mitt.png",
+      "used_by_moves": [
+        "tnb-cer-s2"
+      ]
+    },
+    {
+      "prop_kit_id": "nara-water-bowl",
+      "character_id": "nara",
+      "character": "Nara",
+      "held_props": [
+        "stainless steel water bowl"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/nara-water-bowl.png",
+      "used_by_moves": [
+        "nara-ap-basic"
+      ]
+    },
+    {
+      "prop_kit_id": "justin-studfinder-hammer",
+      "character_id": "justin",
+      "character": "Justin",
+      "held_props": [
+        "yellow electronic stud finder",
+        "framing hammer"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/justin-studfinder-hammer.png",
+      "used_by_moves": [
+        "justin-bb-basic"
+      ]
+    },
+    {
+      "prop_kit_id": "justin-crowbar",
+      "character_id": "justin",
+      "character": "Justin",
+      "held_props": [
+        "heavy forged steel crowbar"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/justin-crowbar.png",
+      "used_by_moves": [
+        "justin-bb-s1"
+      ]
+    },
+    {
+      "prop_kit_id": "justin-level-driver",
+      "character_id": "justin",
+      "character": "Justin",
+      "held_props": [
+        "small carpenter level",
+        "cordless impact driver"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/justin-level-driver.png",
+      "used_by_moves": [
+        "justin-bb-s2"
+      ]
+    },
+    {
+      "prop_kit_id": "olivia-speed-rope",
+      "character_id": "olivia",
+      "character": "Olivia",
+      "held_props": [
+        "speed jump rope"
+      ],
+      "start_frame_path": "art-factory/staging/start-frames/olivia-speed-rope.png",
+      "used_by_moves": [
+        "olivia-rc-basic",
+        "olivia-rc-s1",
+        "olivia-rc-s2",
+        "olivia-rc-cap"
+      ]
+    }
+  ],
+  "flagged_moves": [
+    {
+      "move_id": "tom-ff-basic",
+      "character_id": "tom",
+      "character": "Tom",
+      "name": "Lounge Pass Flex",
+      "held_props": [
+        "laminated Sky Club pass",
+        "metal brag tag"
+      ],
+      "prop_kit_id": "tom-lounge-pass",
+      "start_frame_path": "art-factory/staging/start-frames/tom-lounge-pass.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "tom-ff-s1",
+      "character_id": "tom",
+      "character": "Tom",
+      "name": "Zone One Blockade",
+      "held_props": [
+        "black hard-shell rolling carry-on suitcase"
+      ],
+      "prop_kit_id": "tom-carryon",
+      "start_frame_path": "art-factory/staging/start-frames/tom-carryon.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "tom-ff-cap",
+      "character_id": "tom",
+      "character": "Tom",
+      "name": "Tarmac Porsche Transfer",
+      "held_props": [
+        "black invite-only 360 medallion"
+      ],
+      "prop_kit_id": "tom-360-medallion",
+      "start_frame_path": "art-factory/staging/start-frames/tom-360-medallion.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "grace-sc-basic",
+      "character_id": "grace",
+      "character": "Grace",
+      "name": "Soup-Dumpling Squeeze",
+      "held_props": [
+        "palm-sized white soup-dumpling squishy"
+      ],
+      "prop_kit_id": "grace-white-dumpling",
+      "start_frame_path": "art-factory/staging/start-frames/grace-white-dumpling.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "grace-sc-s1",
+      "character_id": "grace",
+      "character": "Grace",
+      "name": "NeeDoh Stretch Pass",
+      "held_props": [
+        "bright neon-teal gel NeeDoh ball"
+      ],
+      "prop_kit_id": "grace-needoh",
+      "start_frame_path": "art-factory/staging/start-frames/grace-needoh.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "grace-sc-s2",
+      "character_id": "grace",
+      "character": "Grace",
+      "name": "Crunchy Sugar-Cube Pop",
+      "held_props": [
+        "translucent ice-cube sugar squishy"
+      ],
+      "prop_kit_id": "grace-sugar-cube",
+      "start_frame_path": "art-factory/staging/start-frames/grace-sugar-cube.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "rose-sr-s2",
+      "character_id": "rose",
+      "character": "Rose",
+      "name": "\"Giddyup, Tata!\" Launch",
+      "held_props": [
+        "tattered Lamby plush",
+        "tiny aviator goggles"
+      ],
+      "prop_kit_id": "rose-goggles-lamby",
+      "start_frame_path": "art-factory/staging/start-frames/rose-goggles-lamby.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "rose-sr-cap",
+      "character_id": "rose",
+      "character": "Rose",
+      "name": "Double-Lamby Pinball Blitz",
+      "held_props": [
+        "tattered Lamby plush",
+        "spotless white Backup Lamby plush"
+      ],
+      "prop_kit_id": "rose-twin-lambies",
+      "start_frame_path": "art-factory/staging/start-frames/rose-twin-lambies.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "amy-fq-basic",
+      "character_id": "amy",
+      "character": "Amy",
+      "name": "Kettlebell Swing",
+      "held_props": [
+        "cast-iron kettlebell"
+      ],
+      "prop_kit_id": "amy-kettlebell",
+      "start_frame_path": "art-factory/staging/start-frames/amy-kettlebell.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "amy-fq-cap",
+      "character_id": "amy",
+      "character": "Amy",
+      "name": "Follow-Along Finale Burnout",
+      "held_props": [
+        "cast-iron kettlebell"
+      ],
+      "prop_kit_id": "amy-kettlebell",
+      "start_frame_path": "art-factory/staging/start-frames/amy-kettlebell.png",
+      "reuses_existing_kit": true
+    },
+    {
+      "move_id": "deedee-nf-basic",
+      "character_id": "deedee",
+      "character": "Deedee",
+      "name": "Windex Spritz",
+      "held_props": [
+        "bright blue Windex spray bottle"
+      ],
+      "prop_kit_id": "deedee-windex",
+      "start_frame_path": "art-factory/staging/start-frames/deedee-windex.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "deedee-nf-s1",
+      "character_id": "deedee",
+      "character": "Deedee",
+      "name": "Wet-Floor Hazard",
+      "held_props": [
+        "wooden-handle string mop",
+        "folded yellow caution sign"
+      ],
+      "prop_kit_id": "deedee-mop-sign",
+      "start_frame_path": "art-factory/staging/start-frames/deedee-mop-sign.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "deedee-nf-s2",
+      "character_id": "deedee",
+      "character": "Deedee",
+      "name": "\"Hand Me My Glasses\" Scrub",
+      "held_props": [
+        "reading glasses",
+        "wooden rolling pin"
+      ],
+      "prop_kit_id": "deedee-glasses-pin",
+      "start_frame_path": "art-factory/staging/start-frames/deedee-glasses-pin.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "deedee-nf-cap",
+      "character_id": "deedee",
+      "character": "Deedee",
+      "name": "Fifty-Year Dust Tsunami",
+      "held_props": [
+        "bright yellow rubber cleaning gloves",
+        "wooden-handle string mop"
+      ],
+      "prop_kit_id": "deedee-gloves-mop",
+      "start_frame_path": "art-factory/staging/start-frames/deedee-gloves-mop.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "boppy-dep-basic",
+      "character_id": "boppy",
+      "character": "Boppy",
+      "name": "Warden's Nightstick Rap",
+      "held_props": [
+        "wooden warden nightstick"
+      ],
+      "prop_kit_id": "boppy-nightstick",
+      "start_frame_path": "art-factory/staging/start-frames/boppy-nightstick.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "boppy-dep-s1",
+      "character_id": "boppy",
+      "character": "Boppy",
+      "name": "\"Nobody Gets Past Me!\"",
+      "held_props": [
+        "wooden warden nightstick"
+      ],
+      "prop_kit_id": "boppy-nightstick",
+      "start_frame_path": "art-factory/staging/start-frames/boppy-nightstick.png",
+      "reuses_existing_kit": true
+    },
+    {
+      "move_id": "boppy-dep-cap",
+      "character_id": "boppy",
+      "character": "Boppy",
+      "name": "Warden's Iron Gate",
+      "held_props": [
+        "heavy brass warden key ring"
+      ],
+      "prop_kit_id": "boppy-keys",
+      "start_frame_path": "art-factory/staging/start-frames/boppy-keys.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "tnb-cer-basic",
+      "character_id": "tnb",
+      "character": "TNB",
+      "name": "Wheel-Thrown Lump",
+      "held_props": [
+        "studio potter apron",
+        "hefty lump of wet gray stoneware clay"
+      ],
+      "prop_kit_id": "tnb-clay-lump",
+      "start_frame_path": "art-factory/staging/start-frames/tnb-clay-lump.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "tnb-cer-s2",
+      "character_id": "tnb",
+      "character": "TNB",
+      "name": "Three-AM Kiln Firing",
+      "held_props": [
+        "quilted kiln mitt"
+      ],
+      "prop_kit_id": "tnb-kiln-mitt",
+      "start_frame_path": "art-factory/staging/start-frames/tnb-kiln-mitt.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "nara-ap-basic",
+      "character_id": "nara",
+      "character": "Nara",
+      "name": "Startled Water-Bowl Flip",
+      "held_props": [
+        "stainless steel water bowl"
+      ],
+      "prop_kit_id": "nara-water-bowl",
+      "start_frame_path": "art-factory/staging/start-frames/nara-water-bowl.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "justin-bb-basic",
+      "character_id": "justin",
+      "character": "Justin",
+      "name": "Stud-Finder Beep & Knock",
+      "held_props": [
+        "yellow electronic stud finder",
+        "framing hammer"
+      ],
+      "prop_kit_id": "justin-studfinder-hammer",
+      "start_frame_path": "art-factory/staging/start-frames/justin-studfinder-hammer.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "justin-bb-s1",
+      "character_id": "justin",
+      "character": "Justin",
+      "name": "Demo-Day Prybar",
+      "held_props": [
+        "heavy forged steel crowbar"
+      ],
+      "prop_kit_id": "justin-crowbar",
+      "start_frame_path": "art-factory/staging/start-frames/justin-crowbar.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "justin-bb-s2",
+      "character_id": "justin",
+      "character": "Justin",
+      "name": "Hang Fresh Drywall",
+      "held_props": [
+        "small carpenter level",
+        "cordless impact driver"
+      ],
+      "prop_kit_id": "justin-level-driver",
+      "start_frame_path": "art-factory/staging/start-frames/justin-level-driver.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "olivia-rc-basic",
+      "character_id": "olivia",
+      "character": "Olivia",
+      "name": "Rusty Speed-Rope Snap",
+      "held_props": [
+        "speed jump rope"
+      ],
+      "prop_kit_id": "olivia-speed-rope",
+      "start_frame_path": "art-factory/staging/start-frames/olivia-speed-rope.png",
+      "reuses_existing_kit": false
+    },
+    {
+      "move_id": "olivia-rc-s1",
+      "character_id": "olivia",
+      "character": "Olivia",
+      "name": "Criss-Cross Double-Under",
+      "held_props": [
+        "speed jump rope"
+      ],
+      "prop_kit_id": "olivia-speed-rope",
+      "start_frame_path": "art-factory/staging/start-frames/olivia-speed-rope.png",
+      "reuses_existing_kit": true
+    },
+    {
+      "move_id": "olivia-rc-s2",
+      "character_id": "olivia",
+      "character": "Olivia",
+      "name": "\"Better Than Bobby!\" Hype",
+      "held_props": [
+        "speed jump rope"
+      ],
+      "prop_kit_id": "olivia-speed-rope",
+      "start_frame_path": "art-factory/staging/start-frames/olivia-speed-rope.png",
+      "reuses_existing_kit": true
+    },
+    {
+      "move_id": "olivia-rc-cap",
+      "character_id": "olivia",
+      "character": "Olivia",
+      "name": "Regional Championship Freestyle",
+      "held_props": [
+        "speed jump rope"
+      ],
+      "prop_kit_id": "olivia-speed-rope",
+      "start_frame_path": "art-factory/staging/start-frames/olivia-speed-rope.png",
+      "reuses_existing_kit": true
+    }
+  ]
+}
