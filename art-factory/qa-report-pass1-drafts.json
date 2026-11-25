@@ -1,54 +1,39 @@
 {
-  "generated_at": "2026-11-25T15:58:35Z",
+  "generated_at": "2026-11-25T16:14:10Z",
   "total_audited": 45,
-  "passed": 0,
-  "failed": 45,
+  "passed": 15,
+  "failed": 30,
   "failed_list": [
-    "tom/tom-ff-basic (0.0)",
-    "tom/tom-ff-s1 (0.0)",
-    "tom/tom-ff-s1_counter (0.0)",
-    "tom/tom-ff-s2 (0.0)",
-    "tom/tom-ff-cap (0.0)",
-    "tom/univ-pick-me-up (0.0)",
-    "tom/univ-double-team (0.0)",
-    "tom/univ-full-ruckus (0.0)",
-    "grace/grace-sc-basic (0.0)",
-    "grace/grace-sc-s1 (0.0)",
-    "grace/grace-sc-s2 (0.0)",
-    "grace/grace-sc-cap (0.0)",
-    "grace/univ-pick-me-up (0.0)",
-    "grace/univ-double-team (0.0)",
-    "grace/univ-full-ruckus (0.0)",
-    "tnb/tnb-cer-basic (0.0)",
-    "tnb/tnb-cer-s1 (0.0)",
-    "tnb/tnb-cer-s2 (0.0)",
-    "tnb/tnb-cer-cap (0.0)",
-    "amy/amy-fq-basic (0.0)",
-    "amy/amy-fq-s1 (0.0)",
-    "amy/amy-fq-s2 (0.0)",
-    "amy/amy-fq-cap (0.0)",
-    "justin/justin-bb-basic (0.0)",
-    "justin/justin-bb-s1 (0.0)",
-    "justin/justin-bb-s2 (0.0)",
-    "justin/justin-bb-cap (0.0)",
-    "olivia/olivia-rc-basic (0.0)",
-    "olivia/olivia-rc-s1 (0.0)",
-    "olivia/olivia-rc-s2 (0.0)",
-    "olivia/olivia-rc-cap (0.0)",
-    "deedee/deedee-nf-basic (0.0)",
-    "deedee/deedee-nf-s1 (0.0)",
-    "deedee/deedee-nf-s1_counter (0.0)",
-    "deedee/deedee-nf-s2 (0.0)",
-    "deedee/deedee-nf-cap (0.0)",
-    "boppy/boppy-dep-basic (0.0)",
-    "boppy/boppy-dep-s1 (0.0)",
-    "boppy/boppy-dep-s1_counter (0.0)",
-    "boppy/boppy-dep-s2 (0.0)",
-    "boppy/boppy-dep-cap (0.0)",
-    "rose/rose-sr-basic (0.0)",
-    "rose/rose-sr-s1 (0.0)",
-    "rose/rose-sr-s2 (0.0)",
-    "rose/rose-sr-cap (0.0)"
+    "tom/tom-ff-basic (7.25)",
+    "tom/tom-ff-s1_counter (6.0)",
+    "tom/tom-ff-cap (7.25)",
+    "tom/univ-pick-me-up (7.0)",
+    "grace/grace-sc-basic (7.25)",
+    "grace/grace-sc-s1 (7.25)",
+    "grace/univ-pick-me-up (7.0)",
+    "grace/univ-full-ruckus (7.25)",
+    "tnb/tnb-cer-basic (6.5)",
+    "tnb/tnb-cer-s2 (5.0)",
+    "amy/amy-fq-s2 (7.25)",
+    "amy/amy-fq-cap (5.75)",
+    "justin/justin-bb-s1 (7.0)",
+    "justin/justin-bb-s2 (6.75)",
+    "justin/justin-bb-cap (7.0)",
+    "olivia/olivia-rc-basic (5.75)",
+    "olivia/olivia-rc-s1 (6.0)",
+    "olivia/olivia-rc-s2 (6.75)",
+    "olivia/olivia-rc-cap (6.0)",
+    "deedee/deedee-nf-basic (6.0)",
+    "deedee/deedee-nf-s1 (7.25)",
+    "deedee/deedee-nf-s2 (5.75)",
+    "boppy/boppy-dep-basic (6.75)",
+    "boppy/boppy-dep-s1 (5.5)",
+    "boppy/boppy-dep-s2 (5.75)",
+    "boppy/boppy-dep-cap (7.0)",
+    "rose/rose-sr-basic (6.25)",
+    "rose/rose-sr-s1 (6.5)",
+    "rose/rose-sr-s2 (6.75)",
+    "rose/rose-sr-cap (6.5)"
   ],
   "results": [
     {
@@ -57,35 +42,36 @@
       "move_id": "tom-ff-basic",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 7.25,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 4.0,
+        "motion_fluidity": 6.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "incorrect_prop_material",
+        "incorrect_prop_content"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The character is consistently drawn, but one of the two expected props is incorrect in both material and content."
     },
     {
       "id": "tom_battle_move_draft_tom-ff-s1",
       "character_id": "tom",
       "move_id": "tom-ff-s1",
       "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
+      "passed": true,
+      "overall": 7.5,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 4.0,
+        "motion_fluidity": 7.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "prop_missing_start_frame"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The character likeness and staging are excellent, but the expected prop is entirely missing from the initial frame."
     },
     {
       "id": "tom_battle_move_draft_tom-ff-s1_counter",
@@ -93,35 +79,35 @@
       "move_id": "tom-ff-s1_counter",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 6.0,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 3.0,
+        "motion_fluidity": 2.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "prop_teleportation",
+        "missing_prop_continuity",
+        "abrupt_motion_transition"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation lacks transitional frames, causing abrupt character movement and the prop to appear and disappear suddenly."
     },
     {
       "id": "tom_battle_move_draft_tom-ff-s2",
       "character_id": "tom",
       "move_id": "tom-ff-s2",
       "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
+      "passed": true,
+      "overall": 9.75,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 10.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 9.0,
+        "staging_cleanliness": 10.0
       },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "failure_tags": [],
+      "notes": "The animation consistently maintains character design and prop integrity, showcasing a clear, quick movement across a clean stage."
     },
     {
       "id": "tom_battle_move_draft_tom-ff-cap",
@@ -129,17 +115,17 @@
       "move_id": "tom-ff-cap",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 7.25,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 10.0,
+        "prop_integrity": 1.0,
+        "motion_fluidity": 8.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_expected_prop"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "Character likeness and staging are clean, but the required 'black invite-only 360 medallion' prop is entirely missing from all frames."
     },
     {
       "id": "tom_battle_move_draft_univ-pick-me-up",
@@ -147,53 +133,56 @@
       "move_id": "univ-pick-me-up",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 7.0,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 10.0,
+        "prop_integrity": 1.0,
+        "motion_fluidity": 7.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "unexpected_prop"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "An unexpected white tube-like object is present in the character's hands in the middle frame."
     },
     {
       "id": "tom_battle_move_draft_univ-double-team",
       "character_id": "tom",
       "move_id": "univ-double-team",
       "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
+      "passed": true,
+      "overall": 7.75,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 10.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 1.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "move_not_depicted",
+        "animation_insufficient",
+        "missing_character_instance"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation fails to represent the 'double-team' move, showing only subtle, idle-like posture changes for a single character."
     },
     {
       "id": "tom_battle_move_draft_univ-full-ruckus",
       "character_id": "tom",
       "move_id": "univ-full-ruckus",
       "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
+      "passed": true,
+      "overall": 7.5,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 5.0,
+        "staging_cleanliness": 6.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "background_scenery",
+        "motion_mismatch"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation includes an unrequested spotlight effect and the motion does not adequately convey a 'full ruckus' for the character."
     },
     {
       "id": "grace_battle_move_draft_grace-sc-basic",
@@ -201,17 +190,19 @@
       "move_id": "grace-sc-basic",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 7.25,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 3.0,
+        "motion_fluidity": 7.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "prop_missing_at_start",
+        "prop_spontaneous_generation",
+        "prop_not_held_in_middle_frame"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "Character animation is expressive and clean, but the main prop is absent at the start and appears spontaneously mid-air."
     },
     {
       "id": "grace_battle_move_draft_grace-sc-s1",
@@ -219,53 +210,54 @@
       "move_id": "grace-sc-s1",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 7.25,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 3.0,
+        "motion_fluidity": 7.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "prop_missing_start_frame",
+        "prop_missing_end_frame",
+        "unlisted_prop_present"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The character animation is expressive, but the expected prop is only present during the middle frame, and an unlisted charm is visible in the start and end frames."
     },
     {
       "id": "grace_battle_move_draft_grace-sc-s2",
       "character_id": "grace",
       "move_id": "grace-sc-s2",
       "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
+      "passed": true,
+      "overall": 8.5,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 9.0,
+        "motion_fluidity": 7.0,
+        "staging_cleanliness": 9.0
       },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "failure_tags": [],
+      "notes": "The animation clearly depicts a spell cast with a well-rendered temporary prop and consistent character design."
     },
     {
       "id": "grace_battle_move_draft_grace-sc-cap",
       "character_id": "grace",
       "move_id": "grace-sc-cap",
       "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
+      "passed": true,
+      "overall": 8.5,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 5.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "abrupt_emotional_change",
+        "jarring_posture_shift"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation exhibits a very abrupt shift in both character emotion and body language between the middle and end frames."
     },
     {
       "id": "grace_battle_move_draft_univ-pick-me-up",
@@ -273,35 +265,35 @@
       "move_id": "univ-pick-me-up",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 7.0,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 8.0,
+        "staging_cleanliness": 1.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "extra_character_present"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation features an unexpected extra character's hand in the middle frame, violating staging cleanliness."
     },
     {
       "id": "grace_battle_move_draft_univ-double-team",
       "character_id": "grace",
       "move_id": "univ-double-team",
       "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
+      "passed": true,
+      "overall": 7.5,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 3.0,
+        "motion_fluidity": 8.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "morphing_prop"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The attached charm significantly morphs its design between the starting and subsequent frames."
     },
     {
       "id": "grace_battle_move_draft_univ-full-ruckus",
@@ -309,17 +301,18 @@
       "move_id": "univ-full-ruckus",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 7.25,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 10.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 7.0,
+        "staging_cleanliness": 2.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "extra_character_elements",
+        "background_scenery"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation sequence includes extraneous character copies and subtle background lighting effects in the action frames."
     },
     {
       "id": "tnb_battle_move_draft_tnb-cer-basic",
@@ -327,35 +320,34 @@
       "move_id": "tnb-cer-basic",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 6.5,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 1.0,
+        "motion_fluidity": 6.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_expected_props",
+        "unexpected_prop_present"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The character is missing the specified pottery props and instead conjures an unexpected magical orb."
     },
     {
       "id": "tnb_battle_move_draft_tnb-cer-s1",
       "character_id": "tnb",
       "move_id": "tnb-cer-s1",
       "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
+      "passed": true,
+      "overall": 9.75,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 10.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 9.0,
+        "staging_cleanliness": 10.0
       },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "failure_tags": [],
+      "notes": "The character performs a clean, fluid ceremonial motion with consistent likeness and staging."
     },
     {
       "id": "tnb_battle_move_draft_tnb-cer-s2",
@@ -363,71 +355,72 @@
       "move_id": "tnb-cer-s2",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 5.0,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 10.0,
+        "prop_integrity": 5.0,
+        "motion_fluidity": 3.0,
+        "staging_cleanliness": 2.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_prop_start_frame",
+        "prop_pop_in",
+        "background_scenery_present"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation includes extraneous background scenery and the expected props appear abruptly without fluid transition."
     },
     {
       "id": "tnb_battle_move_draft_tnb-cer-cap",
       "character_id": "tnb",
       "move_id": "tnb-cer-cap",
       "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
+      "passed": true,
+      "overall": 9.0,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 7.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "broken_anatomy"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The character executes a clear ceremonial hand gesture, but the middle frame exhibits minor anatomical inconsistencies in the hands."
     },
     {
       "id": "amy_battle_move_draft_amy-fq-basic",
       "character_id": "amy",
       "move_id": "amy-fq-basic",
       "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
+      "passed": true,
+      "overall": 8.0,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 5.0,
+        "motion_fluidity": 8.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "prop_missing",
+        "morphed_prop"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The character and motion are well-executed, but the kettlebell is absent in the initial frame and changes appearance by the final frame."
     },
     {
       "id": "amy_battle_move_draft_amy-fq-s1",
       "character_id": "amy",
       "move_id": "amy-fq-s1",
       "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
+      "passed": true,
+      "overall": 9.75,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 10.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 9.0,
+        "staging_cleanliness": 10.0
       },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "failure_tags": [],
+      "notes": "Amy's likeness and costume are consistently maintained as she transitions into a clear and assertive fighting stance."
     },
     {
       "id": "amy_battle_move_draft_amy-fq-s2",
@@ -435,17 +428,17 @@
       "move_id": "amy-fq-s2",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 7.25,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 4.0,
+        "motion_fluidity": 6.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "unexpected_prop"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The character's likeness and staging are clean, but an unexpected smartwatch appears in the middle frame, and the motion transition feels abrupt."
     },
     {
       "id": "amy_battle_move_draft_amy-fq-cap",
@@ -453,35 +446,34 @@
       "move_id": "amy-fq-cap",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 5.75,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 2.0,
+        "motion_fluidity": 2.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_prop_animation",
+        "magical_prop_appearance"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation suffers from illogical prop handling, as the kettlebell appears and disappears without a clear action."
     },
     {
       "id": "justin_battle_move_draft_justin-bb-basic",
       "character_id": "justin",
       "move_id": "justin-bb-basic",
       "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
+      "passed": true,
+      "overall": 9.75,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 10.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 9.0,
+        "staging_cleanliness": 10.0
       },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "failure_tags": [],
+      "notes": "The character performs a clear basic action involving retrieving and returning a tool from their belt."
     },
     {
       "id": "justin_battle_move_draft_justin-bb-s1",
@@ -489,17 +481,18 @@
       "move_id": "justin-bb-s1",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 7.0,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 1.0,
+        "motion_fluidity": 8.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "prop_mismatch",
+        "missing_expected_prop"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The character animation is well-executed, but the character holds a hammer instead of the expected crowbar."
     },
     {
       "id": "justin_battle_move_draft_justin-bb-s2",
@@ -507,17 +500,18 @@
       "move_id": "justin-bb-s2",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 6.75,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 6.0,
+        "motion_fluidity": 8.0,
+        "staging_cleanliness": 4.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "extra_elements",
+        "prop_disappearance"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation includes extraneous floating elements and a key prop disappears by the end frame."
     },
     {
       "id": "justin_battle_move_draft_justin-bb-cap",
@@ -525,17 +519,18 @@
       "move_id": "justin-bb-cap",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 7.0,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 10.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 1.0,
+        "staging_cleanliness": 7.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "move_mismatch",
+        "unexpected_stage_prop"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation incorrectly depicts an injury reaction instead of the specified 'bb-cap' move, featuring an unrequested nail on the stage."
     },
     {
       "id": "olivia_battle_move_draft_olivia-rc-basic",
@@ -543,17 +538,18 @@
       "move_id": "olivia-rc-basic",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 5.75,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 1.0,
+        "motion_fluidity": 3.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "incorrect_prop",
+        "prop_inconsistency"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation features a completely incorrect prop (a sword-like object) in the middle frame instead of the expected speed jump rope."
     },
     {
       "id": "olivia_battle_move_draft_olivia-rc-s1",
@@ -561,17 +557,18 @@
       "move_id": "olivia-rc-s1",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 6.0,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 2.0,
+        "motion_fluidity": 3.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_prop",
+        "abrupt_motion"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation lacks fluid motion due to the jump rope appearing and disappearing, and the overall action feels very abrupt."
     },
     {
       "id": "olivia_battle_move_draft_olivia-rc-s2",
@@ -579,17 +576,17 @@
       "move_id": "olivia-rc-s2",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 6.75,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 1.0,
+        "motion_fluidity": 7.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_prop"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation is clean and the character is consistent, but the required 'speed jump rope' prop is entirely missing from all frames."
     },
     {
       "id": "olivia_battle_move_draft_olivia-rc-cap",
@@ -597,17 +594,18 @@
       "move_id": "olivia-rc-cap",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 6.0,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 2.0,
+        "motion_fluidity": 3.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_prop",
+        "abrupt_animation"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation is choppy with missing frames and the expected jump rope prop is not consistently present."
     },
     {
       "id": "deedee_battle_move_draft_deedee-nf-basic",
@@ -615,17 +613,21 @@
       "move_id": "deedee-nf-basic",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 6.0,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 3.0,
+        "motion_fluidity": 2.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "prop_missing_in_start_frame",
+        "prop_morphed_in_end_frame",
+        "abrupt_facial_expression_change",
+        "abrupt_pose_change",
+        "prop_appears_abruptly"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation displays abrupt changes in character expression, pose, and prop presence without fluid transitions."
     },
     {
       "id": "deedee_battle_move_draft_deedee-nf-s1",
@@ -633,35 +635,37 @@
       "move_id": "deedee-nf-s1",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 7.25,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 10.0,
+        "prop_integrity": 4.0,
+        "motion_fluidity": 5.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_prop",
+        "inconsistent_props"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The folded yellow caution sign is present in the middle frame but completely disappears in the final frame."
     },
     {
       "id": "deedee_battle_move_draft_deedee-nf-s1_counter",
       "character_id": "deedee",
       "move_id": "deedee-nf-s1_counter",
       "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
+      "passed": true,
+      "overall": 8.75,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 10.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 9.0,
+        "staging_cleanliness": 6.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "unexpected_ground_effect",
+        "staging_element_not_removed"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "An unexplained splash and puddle appear on the ground throughout the animation frames."
     },
     {
       "id": "deedee_battle_move_draft_deedee-nf-s2",
@@ -669,35 +673,36 @@
       "move_id": "deedee-nf-s2",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 5.75,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 3.0,
+        "motion_fluidity": 3.0,
+        "staging_cleanliness": 8.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_props_start_frame",
+        "abrupt_prop_appearance",
+        "abrupt_pose_transition",
+        "unspecified_visual_effect"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation features jarring transitions and props that appear abruptly, along with an unspecified visual effect."
     },
     {
       "id": "deedee_battle_move_draft_deedee-nf-cap",
       "character_id": "deedee",
       "move_id": "deedee-nf-cap",
       "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
+      "passed": true,
+      "overall": 9.0,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 9.0,
+        "motion_fluidity": 8.0,
+        "staging_cleanliness": 10.0
       },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "failure_tags": [],
+      "notes": "The animation clearly depicts the character's readiness for battle with accurate props and expressive posing."
     },
     {
       "id": "boppy_battle_move_draft_boppy-dep-basic",
@@ -705,17 +710,18 @@
       "move_id": "boppy-dep-basic",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 6.75,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 5.0,
+        "motion_fluidity": 7.0,
+        "staging_cleanliness": 6.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "extra_prop_visual_clutter",
+        "prop_mismatch"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation provides clear keyframes for the move, but the prominent fishing gear introduces visual clutter."
     },
     {
       "id": "boppy_battle_move_draft_boppy-dep-s1",
@@ -723,35 +729,36 @@
       "move_id": "boppy-dep-s1",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 5.5,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 1.0,
+        "motion_fluidity": 3.0,
+        "staging_cleanliness": 9.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_expected_prop",
+        "incorrect_held_prop",
+        "extra_props_present",
+        "static_animation_frames"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation features incorrect and extra props, with motion limited to a single pose transition followed by a static hold."
     },
     {
       "id": "boppy_battle_move_draft_boppy-dep-s1_counter",
       "character_id": "boppy",
       "move_id": "boppy-dep-s1_counter",
       "used_prop_start_frame": false,
-      "passed": false,
-      "overall": 0.0,
+      "passed": true,
+      "overall": 9.75,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 10.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 9.0,
+        "staging_cleanliness": 10.0
       },
-      "failure_tags": [
-        "qa_api_error"
-      ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "failure_tags": [],
+      "notes": "Boppy's character and props are consistent across all frames, depicting a clear pointing action."
     },
     {
       "id": "boppy_battle_move_draft_boppy-dep-s2",
@@ -759,17 +766,19 @@
       "move_id": "boppy-dep-s2",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 5.75,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 10.0,
+        "prop_integrity": 1.0,
+        "motion_fluidity": 2.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "extra_props",
+        "abrupt_pose_change",
+        "static_motion_segment"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation introduces unexpected fishing gear in the middle and end frames and lacks fluid motion between the poses."
     },
     {
       "id": "boppy_battle_move_draft_boppy-dep-cap",
@@ -777,17 +786,20 @@
       "move_id": "boppy-dep-cap",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 7.0,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 4.0,
+        "motion_fluidity": 5.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_prop_start_frame",
+        "missing_prop_end_frame",
+        "abrupt_facial_transition",
+        "abrupt_prop_disappearance"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The prop is missing from the start and end frames, and the character's expression and prop transitions are abrupt."
     },
     {
       "id": "rose_battle_move_draft_rose-sr-basic",
@@ -795,17 +807,20 @@
       "move_id": "rose-sr-basic",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 6.25,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 7.0,
+        "prop_integrity": 3.0,
+        "motion_fluidity": 5.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_start_prop",
+        "prop_condition_mismatch",
+        "costume_inconsistency",
+        "abrupt_action_sequence"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation suffers from prop and costume inconsistencies, and the motion feels abrupt for a 3-frame sequence."
     },
     {
       "id": "rose_battle_move_draft_rose-sr-s1",
@@ -813,17 +828,20 @@
       "move_id": "rose-sr-s1",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 6.5,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 3.0,
+        "motion_fluidity": 4.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "prop_missing_start_frame",
+        "incorrect_prop_detail",
+        "abrupt_motion",
+        "abrupt_expression_change"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The animation abruptly introduces the prop, and the Lamby plush lacks the specified tattered detail."
     },
     {
       "id": "rose_battle_move_draft_rose-sr-s2",
@@ -831,17 +849,18 @@
       "move_id": "rose-sr-s2",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 6.75,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 10.0,
+        "prop_integrity": 2.0,
+        "motion_fluidity": 5.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_prop",
+        "prop_appears_mid_animation"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "The tattered Lamby plush is entirely missing, and the aviator goggles appear suddenly mid-animation."
     },
     {
       "id": "rose_battle_move_draft_rose-sr-cap",
@@ -849,17 +868,20 @@
       "move_id": "rose-sr-cap",
       "used_prop_start_frame": false,
       "passed": false,
-      "overall": 0.0,
+      "overall": 6.5,
       "scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0
+        "likeness": 9.0,
+        "prop_integrity": 3.0,
+        "motion_fluidity": 4.0,
+        "staging_cleanliness": 10.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "prop_missing_start_frame",
+        "prop_missing_middle_frame",
+        "prop_count_mismatch",
+        "motion_inconsistent_props"
       ],
-      "notes": "402 RESOURCE_EXHAUSTED. {'error': {'code': 402, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      "notes": "Props are absent or inconsistent in count across the start and middle frames of the animation."
     }
   ]
 }

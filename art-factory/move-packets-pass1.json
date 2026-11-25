@@ -70,14 +70,15 @@
       "hit_stop_frames": 3,
       "screen_shake_px": 4,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 4.0,
+        "motion_fluidity": 6.0,
+        "staging_cleanliness": 10.0,
+        "overall": 7.25
       },
       "failure_tags": [
-        "qa_api_error"
+        "incorrect_prop_material",
+        "incorrect_prop_content"
       ],
       "wanClip": {
         "filename": "tom-ff-basic.mp4",
@@ -115,7 +116,7 @@
       "pep_cost": 2,
       "base_recovery": 100,
       "flavor": "Clobber",
-      "lifecycle_state": "ANCHORED",
+      "lifecycle_state": "DRAFT_REVIEW",
       "pitch": {
         "windup": "Tom stays in-place and crisply snaps the telescoping handle of his black hard-shell rolling carry-on suitcase shut.",
         "peak": "Tom swings the carry-on sideways in front of his knees like a riot shield, plants his sneakers wide, and locks into an immovable guardian brace.",
@@ -145,14 +146,14 @@
       "hit_stop_frames": 5,
       "screen_shake_px": 6,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 4.0,
+        "motion_fluidity": 7.0,
+        "staging_cleanliness": 10.0,
+        "overall": 7.5
       },
       "failure_tags": [
-        "qa_api_error"
+        "prop_missing_start_frame"
       ],
       "wanClip": {
         "filename": "tom-ff-s1.mp4",
@@ -211,7 +212,7 @@
       "pep_cost": 3,
       "base_recovery": 100,
       "flavor": "Support",
-      "lifecycle_state": "ANCHORED",
+      "lifecycle_state": "DRAFT_REVIEW",
       "pitch": {
         "windup": "Tom stays in-place and raises two fingers calmly in a practiced flight-crew signal.",
         "peak": "Tom sweeps his open palm horizontally across his chest as if sliding Delta One cabin doors shut while stepping into a stoic protective guard.",
@@ -238,15 +239,13 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 0,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 10.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 9.0,
+        "staging_cleanliness": 10.0,
+        "overall": 9.75
       },
-      "failure_tags": [
-        "qa_api_error"
-      ],
+      "failure_tags": [],
       "wanClip": {
         "filename": "tom-ff-s2.mp4",
         "durationSec": 4.2,
@@ -313,14 +312,14 @@
       "hit_stop_frames": 6,
       "screen_shake_px": 11,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 10.0,
+        "prop_integrity": 1.0,
+        "motion_fluidity": 8.0,
+        "staging_cleanliness": 10.0,
+        "overall": 7.25
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_expected_prop"
       ],
       "wanClip": {
         "filename": "tom-ff-cap.mp4",
@@ -389,14 +388,16 @@
       "hit_stop_frames": 3,
       "screen_shake_px": 4,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 3.0,
+        "motion_fluidity": 7.0,
+        "staging_cleanliness": 10.0,
+        "overall": 7.25
       },
       "failure_tags": [
-        "qa_api_error"
+        "prop_missing_at_start",
+        "prop_spontaneous_generation",
+        "prop_not_held_in_middle_frame"
       ],
       "wanClip": {
         "filename": "grace-sc-basic.mp4",
@@ -464,14 +465,16 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 0,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 3.0,
+        "motion_fluidity": 7.0,
+        "staging_cleanliness": 10.0,
+        "overall": 7.25
       },
       "failure_tags": [
-        "qa_api_error"
+        "prop_missing_start_frame",
+        "prop_missing_end_frame",
+        "unlisted_prop_present"
       ],
       "wanClip": {
         "filename": "grace-sc-s1.mp4",
@@ -509,7 +512,7 @@
       "pep_cost": 4,
       "base_recovery": 100,
       "flavor": "Racket",
-      "lifecycle_state": "ANCHORED",
+      "lifecycle_state": "DRAFT_REVIEW",
       "pitch": {
         "windup": "Grace stays in-place and raises a translucent ice-cube sugar squishy overhead between both palms like priming a thunderbolt.",
         "peak": "Grace leans forward with fierce focus and crushes the sugar cube decisively between her hands.",
@@ -538,15 +541,13 @@
       "hit_stop_frames": 5,
       "screen_shake_px": 7,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 9.0,
+        "motion_fluidity": 7.0,
+        "staging_cleanliness": 9.0,
+        "overall": 8.5
       },
-      "failure_tags": [
-        "qa_api_error"
-      ],
+      "failure_tags": [],
       "wanClip": {
         "filename": "grace-sc-s2.mp4",
         "durationSec": 4.1,
@@ -583,7 +584,7 @@
       "pep_cost": 6,
       "base_recovery": 120,
       "flavor": "Support",
-      "lifecycle_state": "ANCHORED",
+      "lifecycle_state": "DRAFT_REVIEW",
       "pitch": {
         "windup": "Grace stays in-place, looks skyward, and clasps both hands overhead as if turning a celestial bamboo steamer latch.",
         "peak": "Grace sweeps both arms gracefully downward to guide the Engine's colossal diamond-gold soup dumpling drop.",
@@ -610,14 +611,15 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 5,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 5.0,
+        "staging_cleanliness": 10.0,
+        "overall": 8.5
       },
       "failure_tags": [
-        "qa_api_error"
+        "abrupt_emotional_change",
+        "jarring_posture_shift"
       ],
       "wanClip": {
         "filename": "grace-sc-cap.mp4",
@@ -682,14 +684,17 @@
       "hit_stop_frames": 3,
       "screen_shake_px": 5,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 7.0,
+        "prop_integrity": 3.0,
+        "motion_fluidity": 5.0,
+        "staging_cleanliness": 10.0,
+        "overall": 6.25
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_start_prop",
+        "prop_condition_mismatch",
+        "costume_inconsistency",
+        "abrupt_action_sequence"
       ],
       "wanClip": {
         "filename": "rose-sr-basic.mp4",
@@ -755,14 +760,17 @@
       "hit_stop_frames": 3,
       "screen_shake_px": 6,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 3.0,
+        "motion_fluidity": 4.0,
+        "staging_cleanliness": 10.0,
+        "overall": 6.5
       },
       "failure_tags": [
-        "qa_api_error"
+        "prop_missing_start_frame",
+        "incorrect_prop_detail",
+        "abrupt_motion",
+        "abrupt_expression_change"
       ],
       "wanClip": {
         "filename": "rose-sr-s1.mp4",
@@ -832,14 +840,15 @@
       "hit_stop_frames": 5,
       "screen_shake_px": 8,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 10.0,
+        "prop_integrity": 2.0,
+        "motion_fluidity": 5.0,
+        "staging_cleanliness": 10.0,
+        "overall": 6.75
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_prop",
+        "prop_appears_mid_animation"
       ],
       "wanClip": {
         "filename": "rose-sr-s2.mp4",
@@ -907,14 +916,17 @@
       "hit_stop_frames": 4,
       "screen_shake_px": 10,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 3.0,
+        "motion_fluidity": 4.0,
+        "staging_cleanliness": 10.0,
+        "overall": 6.5
       },
       "failure_tags": [
-        "qa_api_error"
+        "prop_missing_start_frame",
+        "prop_missing_middle_frame",
+        "prop_count_mismatch",
+        "motion_inconsistent_props"
       ],
       "wanClip": {
         "filename": "rose-sr-cap.mp4",
@@ -951,7 +963,7 @@
       "pep_cost": 0,
       "base_recovery": 80,
       "flavor": "Clobber",
-      "lifecycle_state": "ANCHORED",
+      "lifecycle_state": "DRAFT_REVIEW",
       "pitch": {
         "windup": "Amy jogs two crisp steps forward in-place gripping a cast-iron kettlebell with both hands and hinges cleanly at the hips.",
         "peak": "Amy snaps her hips forward driving the kettlebell straight up in a fierce textbook athletic strike arc.",
@@ -980,14 +992,15 @@
       "hit_stop_frames": 4,
       "screen_shake_px": 6,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 5.0,
+        "motion_fluidity": 8.0,
+        "staging_cleanliness": 10.0,
+        "overall": 8.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "prop_missing",
+        "morphed_prop"
       ],
       "wanClip": {
         "filename": "amy-fq-basic.mp4",
@@ -1025,7 +1038,7 @@
       "pep_cost": 2,
       "base_recovery": 100,
       "flavor": "Clobber",
-      "lifecycle_state": "ANCHORED",
+      "lifecycle_state": "DRAFT_REVIEW",
       "pitch": {
         "windup": "Amy drops swiftly into a crisp textbook push-up plank in-place.",
         "peak": "Amy explodes upward into a high flying jump-kick aimed left.",
@@ -1052,15 +1065,13 @@
       "hit_stop_frames": 4,
       "screen_shake_px": 7,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 10.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 9.0,
+        "staging_cleanliness": 10.0,
+        "overall": 9.75
       },
-      "failure_tags": [
-        "qa_api_error"
-      ],
+      "failure_tags": [],
       "wanClip": {
         "filename": "amy-fq-s1.mp4",
         "durationSec": 3.2,
@@ -1124,14 +1135,14 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 0,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 4.0,
+        "motion_fluidity": 6.0,
+        "staging_cleanliness": 10.0,
+        "overall": 7.25
       },
       "failure_tags": [
-        "qa_api_error"
+        "unexpected_prop"
       ],
       "wanClip": {
         "filename": "amy-fq-s2.mp4",
@@ -1198,14 +1209,15 @@
       "hit_stop_frames": 6,
       "screen_shake_px": 11,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 2.0,
+        "motion_fluidity": 2.0,
+        "staging_cleanliness": 10.0,
+        "overall": 5.75
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_prop_animation",
+        "magical_prop_appearance"
       ],
       "wanClip": {
         "filename": "amy-fq-cap.mp4",
@@ -1272,14 +1284,18 @@
       "hit_stop_frames": 3,
       "screen_shake_px": 3,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 3.0,
+        "motion_fluidity": 2.0,
+        "staging_cleanliness": 10.0,
+        "overall": 6.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "prop_missing_in_start_frame",
+        "prop_morphed_in_end_frame",
+        "abrupt_facial_expression_change",
+        "abrupt_pose_change",
+        "prop_appears_abruptly"
       ],
       "wanClip": {
         "filename": "deedee-nf-basic.mp4",
@@ -1348,14 +1364,15 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 0,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 10.0,
+        "prop_integrity": 4.0,
+        "motion_fluidity": 5.0,
+        "staging_cleanliness": 10.0,
+        "overall": 7.25
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_prop",
+        "inconsistent_props"
       ],
       "wanClip": {
         "filename": "deedee-nf-s1.mp4",
@@ -1443,14 +1460,17 @@
       "hit_stop_frames": 5,
       "screen_shake_px": 7,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 3.0,
+        "motion_fluidity": 3.0,
+        "staging_cleanliness": 8.0,
+        "overall": 5.75
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_props_start_frame",
+        "abrupt_prop_appearance",
+        "abrupt_pose_transition",
+        "unspecified_visual_effect"
       ],
       "wanClip": {
         "filename": "deedee-nf-s2.mp4",
@@ -1489,7 +1509,7 @@
       "pep_cost": 5,
       "base_recovery": 120,
       "flavor": "Drench",
-      "lifecycle_state": "ANCHORED",
+      "lifecycle_state": "DRAFT_REVIEW",
       "pitch": {
         "windup": "Deedee stays in-place, snaps bright yellow rubber cleaning gloves firmly onto both wrists, and lifts her wooden mop overhead like an ocean staff.",
         "peak": "Deedee sweeps the mop powerfully downward left to unleash the Engine's soapy tsunami.",
@@ -1520,15 +1540,13 @@
       "hit_stop_frames": 6,
       "screen_shake_px": 11,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 9.0,
+        "motion_fluidity": 8.0,
+        "staging_cleanliness": 10.0,
+        "overall": 9.0
       },
-      "failure_tags": [
-        "qa_api_error"
-      ],
+      "failure_tags": [],
       "wanClip": {
         "filename": "deedee-nf-cap.mp4",
         "durationSec": 6.9,
@@ -1595,14 +1613,15 @@
       "hit_stop_frames": 4,
       "screen_shake_px": 5,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 5.0,
+        "motion_fluidity": 7.0,
+        "staging_cleanliness": 6.0,
+        "overall": 6.75
       },
       "failure_tags": [
-        "qa_api_error"
+        "extra_prop_visual_clutter",
+        "prop_mismatch"
       ],
       "wanClip": {
         "filename": "boppy-dep-basic.mp4",
@@ -1669,14 +1688,17 @@
       "hit_stop_frames": 3,
       "screen_shake_px": 5,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 1.0,
+        "motion_fluidity": 3.0,
+        "staging_cleanliness": 9.0,
+        "overall": 5.5
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_expected_prop",
+        "incorrect_held_prop",
+        "extra_props_present",
+        "static_animation_frames"
       ],
       "wanClip": {
         "filename": "boppy-dep-s1.mp4",
@@ -1757,14 +1779,16 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 0,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 10.0,
+        "prop_integrity": 1.0,
+        "motion_fluidity": 2.0,
+        "staging_cleanliness": 10.0,
+        "overall": 5.75
       },
       "failure_tags": [
-        "qa_api_error"
+        "extra_props",
+        "abrupt_pose_change",
+        "static_motion_segment"
       ],
       "wanClip": {
         "filename": "boppy-dep-s2.mp4",
@@ -1831,14 +1855,17 @@
       "hit_stop_frames": 6,
       "screen_shake_px": 10,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 4.0,
+        "motion_fluidity": 5.0,
+        "staging_cleanliness": 10.0,
+        "overall": 7.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_prop_start_frame",
+        "missing_prop_end_frame",
+        "abrupt_facial_transition",
+        "abrupt_prop_disappearance"
       ],
       "wanClip": {
         "filename": "boppy-dep-cap.mp4",
@@ -1907,14 +1934,15 @@
       "hit_stop_frames": 3,
       "screen_shake_px": 4,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 1.0,
+        "motion_fluidity": 6.0,
+        "staging_cleanliness": 10.0,
+        "overall": 6.5
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_expected_props",
+        "unexpected_prop_present"
       ],
       "wanClip": {
         "filename": "tnb-cer-basic.mp4",
@@ -1953,7 +1981,7 @@
       "pep_cost": 3,
       "base_recovery": 100,
       "flavor": "Support",
-      "lifecycle_state": "ANCHORED",
+      "lifecycle_state": "DRAFT_REVIEW",
       "pitch": {
         "windup": "TNB stays in-place and gently cups both clay-dusted hands in front of his torso.",
         "peak": "TNB performs smooth meditative vessel-centering motions with relaxed serene focus.",
@@ -1980,15 +2008,13 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 0,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 10.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 9.0,
+        "staging_cleanliness": 10.0,
+        "overall": 9.75
       },
-      "failure_tags": [
-        "qa_api_error"
-      ],
+      "failure_tags": [],
       "wanClip": {
         "filename": "tnb-cer-s1.mp4",
         "durationSec": 3.5,
@@ -2054,14 +2080,16 @@
       "hit_stop_frames": 4,
       "screen_shake_px": 6,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 10.0,
+        "prop_integrity": 5.0,
+        "motion_fluidity": 3.0,
+        "staging_cleanliness": 2.0,
+        "overall": 5.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_prop_start_frame",
+        "prop_pop_in",
+        "background_scenery_present"
       ],
       "wanClip": {
         "filename": "tnb-cer-s2.mp4",
@@ -2099,7 +2127,7 @@
       "pep_cost": 5,
       "base_recovery": 120,
       "flavor": "Clobber",
-      "lifecycle_state": "ANCHORED",
+      "lifecycle_state": "DRAFT_REVIEW",
       "pitch": {
         "windup": "TNB stays in-place with unflappable serenity, takes one calm breath, and sweeps both hands gracefully upward.",
         "peak": "TNB delivers one gentle deadpan knuckle-tap forward to shatter the Engine's leaning terracotta amphora.",
@@ -2127,14 +2155,14 @@
       "hit_stop_frames": 6,
       "screen_shake_px": 11,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 7.0,
+        "staging_cleanliness": 10.0,
+        "overall": 9.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "broken_anatomy"
       ],
       "wanClip": {
         "filename": "tnb-cer-cap.mp4",
@@ -2459,7 +2487,7 @@
       "pep_cost": 0,
       "base_recovery": 80,
       "flavor": "Clobber",
-      "lifecycle_state": "ANCHORED",
+      "lifecycle_state": "DRAFT_REVIEW",
       "pitch": {
         "windup": "Justin steps forward in-place gliding a yellow electronic stud finder smoothly left-to-right until pausing at a spot.",
         "peak": "Justin swiftly draws a framing hammer from his belt for one crisp deadpan knock left.",
@@ -2489,15 +2517,13 @@
       "hit_stop_frames": 4,
       "screen_shake_px": 6,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 10.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 9.0,
+        "staging_cleanliness": 10.0,
+        "overall": 9.75
       },
-      "failure_tags": [
-        "qa_api_error"
-      ],
+      "failure_tags": [],
       "wanClip": {
         "filename": "justin-bb-basic.mp4",
         "durationSec": 2.7,
@@ -2563,14 +2589,15 @@
       "hit_stop_frames": 5,
       "screen_shake_px": 8,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 1.0,
+        "motion_fluidity": 8.0,
+        "staging_cleanliness": 10.0,
+        "overall": 7.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "prop_mismatch",
+        "missing_expected_prop"
       ],
       "wanClip": {
         "filename": "justin-bb-s1.mp4",
@@ -2636,14 +2663,15 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 0,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 6.0,
+        "motion_fluidity": 8.0,
+        "staging_cleanliness": 4.0,
+        "overall": 6.75
       },
       "failure_tags": [
-        "qa_api_error"
+        "extra_elements",
+        "prop_disappearance"
       ],
       "wanClip": {
         "filename": "justin-bb-s2.mp4",
@@ -2708,14 +2736,15 @@
       "hit_stop_frames": 7,
       "screen_shake_px": 13,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 10.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 1.0,
+        "staging_cleanliness": 7.0,
+        "overall": 7.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "move_mismatch",
+        "unexpected_stage_prop"
       ],
       "wanClip": {
         "filename": "justin-bb-cap.mp4",
@@ -2783,14 +2812,15 @@
       "hit_stop_frames": 3,
       "screen_shake_px": 5,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 1.0,
+        "motion_fluidity": 3.0,
+        "staging_cleanliness": 10.0,
+        "overall": 5.75
       },
       "failure_tags": [
-        "qa_api_error"
+        "incorrect_prop",
+        "prop_inconsistency"
       ],
       "wanClip": {
         "filename": "olivia-rc-basic.mp4",
@@ -2857,14 +2887,15 @@
       "hit_stop_frames": 3,
       "screen_shake_px": 6,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 2.0,
+        "motion_fluidity": 3.0,
+        "staging_cleanliness": 10.0,
+        "overall": 6.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_prop",
+        "abrupt_motion"
       ],
       "wanClip": {
         "filename": "olivia-rc-s1.mp4",
@@ -2932,14 +2963,14 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 3,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 1.0,
+        "motion_fluidity": 7.0,
+        "staging_cleanliness": 10.0,
+        "overall": 6.75
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_prop"
       ],
       "wanClip": {
         "filename": "olivia-rc-s2.mp4",
@@ -3008,14 +3039,15 @@
       "hit_stop_frames": 7,
       "screen_shake_px": 12,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 2.0,
+        "motion_fluidity": 3.0,
+        "staging_cleanliness": 10.0,
+        "overall": 6.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "missing_prop",
+        "abrupt_animation"
       ],
       "wanClip": {
         "filename": "olivia-rc-cap.mp4",
@@ -3079,14 +3111,14 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 0,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 8.0,
+        "staging_cleanliness": 1.0,
+        "overall": 7.0
       },
       "failure_tags": [
-        "qa_api_error"
+        "extra_character_present"
       ],
       "wanClip": {
         "filename": "univ-pick-me-up.mp4",
@@ -3123,7 +3155,7 @@
       "pep_cost": 0,
       "base_recovery": 100,
       "flavor": "Mixed",
-      "lifecycle_state": "ANCHORED",
+      "lifecycle_state": "DRAFT_REVIEW",
       "pitch": {
         "windup": "Single acting character turns their head briefly toward their adjacent teammate for a sharp synchronized nod.",
         "peak": "Acting character snaps into ready-relay focus and hands off cleanly to their Main Vibe Basic Action clip.",
@@ -3150,14 +3182,14 @@
       "hit_stop_frames": 4,
       "screen_shake_px": 7,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 9.0,
+        "prop_integrity": 3.0,
+        "motion_fluidity": 8.0,
+        "staging_cleanliness": 10.0,
+        "overall": 7.5
       },
       "failure_tags": [
-        "qa_api_error"
+        "morphing_prop"
       ],
       "wanClip": {
         "filename": "univ-double-team.mp4",
@@ -3222,14 +3254,15 @@
       "hit_stop_frames": 8,
       "screen_shake_px": 14,
       "qa_scores": {
-        "likeness": 0,
-        "prop_integrity": 0,
-        "motion_fluidity": 0,
-        "staging_cleanliness": 0,
-        "overall": 0.0
+        "likeness": 10.0,
+        "prop_integrity": 10.0,
+        "motion_fluidity": 7.0,
+        "staging_cleanliness": 2.0,
+        "overall": 7.25
       },
       "failure_tags": [
-        "qa_api_error"
+        "extra_character_elements",
+        "background_scenery"
       ],
       "wanClip": {
         "filename": "univ-full-ruckus.mp4",
