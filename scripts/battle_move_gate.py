@@ -164,15 +164,17 @@ def validate_stage2(data):
 
 def stage2_prompt(prop, action):
     return (
-        "You are a strict QA judge for a 2D hand-painted JRPG battle animation. The image is a contact sheet of 6 frames "
-        "from one clip, left to right at 0%, 20%, 40%, 60%, 80% and 100% of its length, each shown at true in-game size "
-        "(the figure is about 200 pixels tall). The enemies are to the LEFT of the screen. "
+        "You are a strict QA judge for a 2D hand-painted JRPG battle animation. You get TWO images. "
+        "IMAGE 1 is FRAME 0: the first frame of the clip at full resolution. "
+        "IMAGE 2 is a contact sheet of 6 frames from the same clip, left to right at 0%, 20%, 40%, 60%, 80% and 100% of its length, "
+        "each shown at true in-game size (the figure is about 200 pixels tall). The enemies are to the LEFT of the screen. "
         f"EXPECTED PROPS: {prop}. EXPECTED ACTION: {action}. "
         "Answer ONLY with strict JSON with exactly these keys: "
         '{"pass": bool, "prop_visible_frame1": bool, "prop_visible_at_sprite_scale": bool, "action_reads_leftward": bool, '
         '"feet_planted": bool, "failure_reason": string}. '
-        "prop_visible_frame1: BOTH expected props are already gripped in the character's hands in the first (leftmost) tile, "
-        "not on a belt, in a pocket or appearing later. prop_visible_at_sprite_scale: each prop is still recognizable at this "
+        "Judge prop_visible_frame1 ONLY on IMAGE 1 (Frame 0): true when BOTH expected props are already gripped or held in the character's hands, "
+        "including held low at the hip or side before the windup; false when a prop is on a belt, in a pocket, or missing. "
+        "Judge the other three ONLY on IMAGE 2 (the contact sheet). prop_visible_at_sprite_scale: each prop is still recognizable at this "
         "size in the later tiles. action_reads_leftward: one bold strike clearly aimed toward screen-left. feet_planted: the character stays "
         "anchored in their battle spot during the strike. TRUE even when a foot lifts or steps a little, a natural forward bracing step, "
         "weight shift or heel pivot into the swing. FALSE only if the character retreats to the right behind the party, wanders across the "
@@ -181,12 +183,12 @@ def stage2_prompt(prop, action):
     )
 
 
-def stage2_once(sheet, prompt, client, model):
+def stage2_once(images, prompt, client, model):
     """One vision answer, validated; None when the response is unusable (a second ask is made once)."""
     last_err = ""
     for _ in range(2):
         try:
-            resp = client.models.generate_content(model=model, contents=[prompt, sheet])   # no JSON mode: the v1 API refuses it (poc-2); parse_json strips fences
+            resp = client.models.generate_content(model=model, contents=[prompt, *images])   # no JSON mode: the v1 API refuses it (poc-2); parse_json strips fences
             data = parse_json(resp.text)
             if validate_stage2(data):
                 return data, ""
@@ -196,13 +198,13 @@ def stage2_once(sheet, prompt, client, model):
     return None, last_err
 
 
-def stage2(sheet, prop, action, client, model, runs=3):
+def stage2(sheet, prop, action, client, model, runs=3, frame0=None):
     """Three runs, majority per boolean (the repo's QA convention: one noisy vision call must not decide a clip).
     A boolean false in the majority hard-rejects in code, whatever `pass` says."""
     prompt = stage2_prompt(prop, action)
     answers, err = [], ""
     for _ in range(runs):
-        a, e = stage2_once(sheet, prompt, client, model)
+        a, e = stage2_once([frame0 if frame0 is not None else sheet, sheet], prompt, client, model)   # image 1 Frame 0 full size, image 2 the 200 px sheet
         if a is not None:
             answers.append(a)
         else:
@@ -242,7 +244,10 @@ def run_gate(video, move_meta, client, model, sheet_path=None):
                     "failure_reason": "Stage 1 motion gate: " + ", ".join(s1["failures"]),
                     "failure_tags": ["gate1_" + f for f in s1["failures"]]}
         sheet, idx = build_contact_sheet(files, mask, sheet_path or Path(tmp) / "sheet.png")
-        s2 = stage2(sheet, prop, action, client, model)
+        f0 = Image.open(files[0]).convert("RGBA")
+        f0bg = Image.new("RGBA", f0.size, (128, 128, 128, 255))
+        f0bg.alpha_composite(f0)
+        s2 = stage2(sheet, prop, action, client, model, frame0=f0bg.convert("RGB"))
         s2["contact_sheet_frames"] = idx
         s2["contact_sheet"] = str(sheet_path) if sheet_path else None
         ok = bool(s2["passed"])
