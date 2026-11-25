@@ -1,4 +1,10 @@
 [
+{"tag":"artbake1484","at":"2026-11-18T16:00:48+00:00","what":"","kind":"house"},
+{"tag":"artbake1481","at":"2026-11-18T15:58:17+00:00","what":"","kind":"house"},
+{"tag":"clipstudy1","at":"2026-11-18T07:42:35-08:00","what":"Art Library clips: four test videos to generate (cheap model, 2 second strike, Rose lying down, Mudling idle)","card":"b-clipstudy1","theme":"Battle Animations"},
+{"tag":"linegap1","at":"2026-11-18T07:36:09-08:00","what":"Story scenes play on AUTO, and each chapter 1 line has its own pause before the next speaker","card":"b-linegap1","theme":"Story and Dialogue"},
+{"tag":"artbake1480","at":"2026-11-18T15:16:35+00:00","what":"","kind":"house"},
+{"tag":"artbake1479","at":"2026-11-18T15:13:41+00:00","what":"","kind":"house"},
 {"tag":"ch1tags1","at":"2026-11-17T19:36:27-08:00","what":"Chapter 1 voice tags checked against Gemini's ElevenLabs v4 research, 10 lines retagged","card":"b-ch1tags1","theme":"Voice Clips"},
 {"tag":"clipspeed1","at":"2026-11-17T19:18:18-08:00","what":"Art Library clips: a SPEED control in the review screen","card":"b-clipspeed1","theme":"Battle Animations"},
 {"tag":"clipgen1d","at":"2026-11-17T18:47:00-08:00","what":"Rose's first Grok-made punch is in the CLIP TEST fight, floor shadow removed","card":"b-clipgen1d","theme":"Battle Animations"},

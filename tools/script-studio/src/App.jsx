@@ -435,6 +435,13 @@ function lintLine(line, activeBannedWords) {
         message: `Overflow (${text.length} ch; max 115)`,
       });
     }
+    if (/\bTata\b/i.test(text)) {
+      warnings.push({
+        code: 'TATA',
+        severity: 'error',
+        message: 'On-screen spelling is "Ta-Ta" (canon-and-characters.md), never "Tata"',
+      });
+    }
   }
 
   if (text.includes('—')) {
@@ -996,7 +1003,7 @@ function lintScene(lines, activeBannedWords) {
 
     // Engine rules that would break the game (overflow, Nara speaking, bad mood tags).
     for (const w of lintLine(line, [])) {
-      if (w.severity === 'error' && ['LONG', 'NARA_SPEAKS', 'MOOD_COMBO', 'MOOD_INVALID'].includes(w.code)) {
+      if (w.severity === 'error' && ['LONG', 'NARA_SPEAKS', 'MOOD_COMBO', 'MOOD_INVALID', 'TATA'].includes(w.code)) {
         push(idx, line, w.code, w.message);
       }
     }
@@ -1129,9 +1136,17 @@ const HARD_FORMAT_RULES = (activeBannedWords) =>
     '- Never put spoken dialogue (quoted speech) inside an "action" line. Speech is always its own "dialogue" line.',
     '- Every "dialogue" line is 35 to 115 characters.',
     '- TNB never uses "!" or ALL-CAPS words. Nara never speaks (her sounds are "action" lines).',
+    '- On screen, the girls\' name for Tom is written "Ta-Ta", never "Tata".',
     `- Mood/pose is one single value from [${ALL_MOOD_POSE_OPTIONS.join(', ')}]. Julian Vance, Clara and Mr. Pistachio use "none".`,
     `- Never use: ${[...new Set([...(activeBannedWords || []), ...DEPRECATED_TERMS, ...AI_COMEDY_CLICHES])].join(', ')}. Never "Rosie" alone (only "Cozy Rosie").`,
   ].join('\n');
+
+const WRITER_CRAFT_RULES = [
+  'CRAFT RULES:',
+  '- MANDATORY BEATS are plot facts only. Dramatize each fact in your own words; never copy a beat\'s prose.',
+  '- If a beat contains quoted dialogue (words in quotation marks), NEVER thesaurus-paraphrase it. Either use those exact words in the character\'s mouth or leave that quote out; a synonym-swapped version of a quote is wrong.',
+  '- Character-sheet trivia (for example visitor lanyards or SkyMiles) is background for the voice, not a checklist. NEVER shoehorn it into a scene unless it fits the immediate conversation naturally.',
+];
 
 function toLineObjects(items) {
   return (items || []).map((item) => ({
@@ -1146,8 +1161,7 @@ function toLineObjects(items) {
   }));
 }
 
-// Runs the whole pipeline. `setStatus` gets the live progress text. Returns { lines, qa }.
-async function runSceneQAPipeline({ apiKey, genModelId, auditModelId, vaultDocs, chapter, scene, activeBannedWords, setStatus }) {
+function buildQAContext({ vaultDocs, chapter, scene }) {
   const speakers = scene.requiredSpeakers || [];
   const combat = Boolean(scene.triggers?.combatEncounter?.trim());
   const comedyBible = docText(vaultDocs, 'comedy-bible.md');
@@ -1161,17 +1175,164 @@ async function runSceneQAPipeline({ apiKey, genModelId, auditModelId, vaultDocs,
         .join('\n\n')
     : '';
   const s = scene.sliders || DEFAULT_SLIDERS;
+  return { comedyBible, canon, dossiers, facts, combatDocs, s };
+}
+
+async function runCriticPass({ ctx, apiKey, auditModelId, lines }) {
+  const { comedyBible, canon, facts } = ctx;
+  const criticPrompt = [
+    'You are a harsh, experienced sitcom Showrunner reviewing a script for the family JRPG "The Adventures of Tom". You protect the comedy, the characters and the canon. Be specific and unsentimental.',
+    'Judge the numbered draft against comedy-bible.md, canon-and-characters.md and the scene\'s knowledge gate.',
+    'Look for: jokes that are not funny or are AI-generic; lines that do not sound like that character; lines that make no sense in the moment; sitcom-cheesy or on-the-nose lines; a beat owned by the wrong character; anyone knowing or referencing something the knowledge gate says they do not know yet; canon violations; character-sheet trivia shoehorned in where nobody would say it.',
+    `Score 1 to 10. Set "pass" to false if the score is below ${QA_PASS_SCORE}, OR if any single line is nonsensical, out of character, sitcom-cheesy, or gives the wrong character ownership of a beat. Otherwise true.`,
+    'For each problem give lineIndex (the L number, 1-based), the speaker, a category (Comedy, Voice, Logic, Canon or KnowledgeGate), what is wrong, and a concrete fix. Return an empty issues list only if there is truly nothing to fix.',
+    '',
+    `=== REFERENCE DOC: comedy-bible.md ===\n${comedyBible || '(not loaded)'}\n=== END ===`,
+    '',
+    `=== REFERENCE DOC: canon-and-characters.md ===\n${canon || '(not loaded)'}\n=== END ===`,
+    '',
+    '=== SCENE ===',
+    facts,
+    '=== END SCENE ===',
+    '',
+    '=== DRAFT ===',
+    numberedScript(lines),
+    '=== END DRAFT ===',
+    '',
+    'Return strict JSON only.',
+  ].join('\n');
+  const r = await callGeminiJSON({ apiKey, modelId: auditModelId, prompt: criticPrompt, schema: CRITIC_SCHEMA, temperature: 0.2 });
+  const score = Number(r.score) || 0;
+  return {
+    pass: r.pass === true && score >= QA_PASS_SCORE,
+    score,
+    issues: (r.issues || []).map((i) => ({ ...i, lineIndex: Number(i.lineIndex) || 0 })),
+  };
+}
+
+async function evaluateScene({ ctx, apiKey, auditModelId, activeBannedWords, lines }) {
+  const linter = lintScene(lines, activeBannedWords);
+  let critic;
+  try {
+    critic = await runCriticPass({ ctx, apiKey, auditModelId, lines });
+  } catch (err) {
+    critic = { pass: false, score: 0, issues: [], unavailable: String(err.message || err) };
+  }
+  return { lines, linter, critic, ok: linter.length === 0 && critic.pass };
+}
+
+// PASS 4 prompt: surgical. Passing lines are kept word for word; only flagged lines (and neighbours needed for logic) change.
+function buildRewritePrompt({ ctx, activeBannedWords, ev }) {
+  const { comedyBible, dossiers, facts, combatDocs } = ctx;
+  const linterList = ev.linter.length
+    ? ev.linter.map((e) => `- L${e.lineIndex + 1} (${e.speaker}) [${e.code}]: ${e.message}`).join('\n')
+    : '(none)';
+  const criticList = ev.critic.issues.length
+    ? ev.critic.issues.map((i) => `- L${i.lineIndex} (${i.speaker}) [${i.category}]: ${i.problem} FIX: ${i.fix}`).join('\n')
+    : '(none)';
+  const flagged = [...new Set([...ev.linter.map((e) => e.lineIndex + 1), ...ev.critic.issues.map((i) => i.lineIndex)])]
+    .filter((n) => n > 0)
+    .sort((a, b) => a - b);
+  return [
+    'You are the head writer of "The Adventures of Tom". Your draft failed QA. Fix it SURGICALLY.',
+    `FLAGGED LINES: ${flagged.length ? flagged.map((n) => `L${n}`).join(', ') : '(none by number; fix the issues listed below)'}.`,
+    '- PRESERVE every passing line exactly as written (same words, speaker, type and mood). Do not polish, reorder or reword lines that were not flagged.',
+    '- Rewrite ONLY the flagged lines, plus any adjacent lines that must change so the logic and the flow still make sense (for example a reply that no longer follows). You may split, add or delete a line only when a flagged line\'s fix requires it.',
+    '- Fix the cause, not the symptom: a flat joke needs a better joke, not a synonym.',
+    ...WRITER_CRAFT_RULES,
+    '',
+    `=== REFERENCE DOC: comedy-bible.md ===\n${comedyBible || '(not loaded)'}\n=== END ===`,
+    '',
+    '=== SPEAKER DOSSIERS ===',
+    dossiers || '(none)',
+    '=== END DOSSIERS ===',
+    combatDocs ? `\n${combatDocs}\n` : '',
+    '=== SCENE ===',
+    facts,
+    '=== END SCENE ===',
+    '',
+    HARD_FORMAT_RULES(activeBannedWords),
+    '',
+    '=== CURRENT DRAFT ===',
+    numberedScript(ev.lines),
+    '=== END CURRENT DRAFT ===',
+    '',
+    `=== LINTER ERRORS (must all be fixed) ===\n${linterList}\n=== END ===`,
+    '',
+    `=== SHOWRUNNER ISSUES (score ${ev.critic.score}/10) ===\n${criticList}\n=== END ===`,
+    '',
+    'Return the full scene (kept lines plus fixed lines, in order) as JSON matching the schema.',
+  ].join('\n');
+}
+
+function buildQAReport(ev, retries) {
+  const notes = [];
+  for (const e of ev.linter) notes.push(`L${e.lineIndex + 1} (${e.speaker || 'n/a'}) linter: ${e.message}`);
+  for (const i of ev.critic.issues) notes.push(`L${i.lineIndex} (${i.speaker}) ${i.category}: ${i.problem}`);
+  if (ev.critic.unavailable) notes.push(`Showrunner critic unavailable: ${ev.critic.unavailable}`);
+  return {
+    passed: ev.ok,
+    score: ev.critic.unavailable ? null : ev.critic.score,
+    retries,
+    notes,
+    issues: ev.critic.issues,
+    at: new Date().toISOString(),
+  };
+}
+
+// "Fix Remaining Issues": one more surgical rewrite of the scene as it stands, using the Critic issues saved on the badge.
+async function runFixPass({ apiKey, genModelId, auditModelId, vaultDocs, chapter, scene, activeBannedWords, setStatus }) {
+  const prevQa = scene.qa || {};
+  const ctx = buildQAContext({ vaultDocs, chapter, scene });
+  const before = {
+    lines: scene.lines,
+    linter: lintScene(scene.lines, activeBannedWords),
+    critic: { pass: false, score: prevQa.score ?? 0, issues: prevQa.issues || [] },
+  };
+  if (before.linter.length === 0 && before.critic.issues.length === 0) {
+    throw new Error('No saved Critic issues or linter errors to fix. Run Generate Scene again.');
+  }
+  setStatus('Auto-fixing issues...');
+  const rewritten = await callGeminiJSON({
+    apiKey,
+    modelId: genModelId,
+    prompt: buildRewritePrompt({ ctx, activeBannedWords, ev: before }),
+    schema: SCENE_GEN_SCHEMA,
+    temperature: 0.6,
+  });
+  const newLines = toLineObjects(rewritten.lines);
+  if (!newLines.length) throw new Error('The rewrite returned no lines.');
+  setStatus('Running QA check...');
+  const after = await evaluateScene({ ctx, apiKey, auditModelId, activeBannedWords, lines: newLines });
+  const retries = (prevQa.retries || 0) + 1;
+  const worse =
+    after.linter.length > before.linter.length ||
+    after.critic.unavailable ||
+    (!after.ok && after.critic.score < (prevQa.score ?? 0) && after.linter.length >= before.linter.length);
+  if (worse) {
+    const kept = buildQAReport({ ...before, ok: false }, retries);
+    kept.notes = [...kept.notes, 'The last fix pass made things worse, so the previous version was kept.'];
+    return { lines: scene.lines, qa: kept, kept: true };
+  }
+  return { lines: newLines, qa: buildQAReport(after, retries), kept: false };
+}
+
+// Runs the whole pipeline. `setStatus` gets the live progress text. Returns { lines, qa }.
+async function runSceneQAPipeline({ apiKey, genModelId, auditModelId, vaultDocs, chapter, scene, activeBannedWords, setStatus }) {
+  const ctx = buildQAContext({ vaultDocs, chapter, scene });
+  const { comedyBible, dossiers, facts, combatDocs, s } = ctx;
 
   // PASS 1: plain-text comedy draft (no JSON).
   setStatus('Drafting...');
   const draftPrompt = [
     'You are the head writer of the family comedy JRPG "The Adventures of Tom". Write ONE scene as a plain-text script.',
     'Voice target: Hacks, Schitt\'s Creek and Abbott Elementary. Sharp, specific banter that comes from each character\'s comedy engine (see the dossiers). No sitcom filler, no generic quips.',
-    'Dramatize the mandatory beats in your own words. Never paraphrase a beat verbatim or announce it. Respect the knowledge gate.',
+    'Never announce a beat. Respect the knowledge gate.',
+    ...WRITER_CRAFT_RULES,
     'Format, one item per line:',
     '  ACTION: a short description of what happens (never contains anyone speaking)',
     '  NAME (mood): what the character says   [mood is optional]',
-    `Aim for ${s.minLines} to ${s.maxLines} spoken lines, each under 115 characters. Contractions always. Zero em dashes. Never put spoken dialogue inside an ACTION line.`,
+    `Aim for ${s.minLines} to ${s.maxLines} spoken lines, each under 115 characters. Contractions always. Zero em dashes. Never put spoken dialogue inside an ACTION line. On screen, write the girls' name for Tom as "Ta-Ta", never "Tata".`,
     `Never use these words: ${[...new Set([...(activeBannedWords || []), ...DEPRECATED_TERMS])].join(', ')}.`,
     '',
     `=== REFERENCE DOC: comedy-bible.md ===\n${comedyBible || '(not loaded)'}\n=== END comedy-bible.md ===`,
@@ -1205,47 +1366,9 @@ async function runSceneQAPipeline({ apiKey, genModelId, auditModelId, vaultDocs,
   if (!current.length) throw new Error('Formatter returned no lines.');
 
   // PASS 3 + 4: QA gate with up to QA_MAX_RETRIES auto-rewrites.
-  const runCritic = async (lines) => {
-    const criticPrompt = [
-      'You are a harsh, experienced sitcom Showrunner reviewing a script for the family JRPG "The Adventures of Tom". You protect the comedy, the characters and the canon. Be specific and unsentimental.',
-      'Judge the numbered draft against comedy-bible.md, canon-and-characters.md and the scene\'s knowledge gate.',
-      'Look for: jokes that are not funny or are AI-generic; lines that do not sound like that character; lines that make no sense in the moment; sitcom-cheesy or on-the-nose lines; a beat owned by the wrong character; anyone knowing or referencing something the knowledge gate says they do not know yet; canon violations.',
-      `Score 1 to 10. Set "pass" to false if the score is below ${QA_PASS_SCORE}, OR if any single line is nonsensical, out of character, sitcom-cheesy, or gives the wrong character ownership of a beat. Otherwise true.`,
-      'For each problem give lineIndex (the L number, 1-based), the speaker, a category (Comedy, Voice, Logic, Canon or KnowledgeGate), what is wrong, and a concrete fix. Return an empty issues list only if there is truly nothing to fix.',
-      '',
-      `=== REFERENCE DOC: comedy-bible.md ===\n${comedyBible || '(not loaded)'}\n=== END ===`,
-      '',
-      `=== REFERENCE DOC: canon-and-characters.md ===\n${canon || '(not loaded)'}\n=== END ===`,
-      '',
-      '=== SCENE ===',
-      facts,
-      '=== END SCENE ===',
-      '',
-      '=== DRAFT ===',
-      numberedScript(lines),
-      '=== END DRAFT ===',
-      '',
-      'Return strict JSON only.',
-    ].join('\n');
-    const r = await callGeminiJSON({ apiKey, modelId: auditModelId, prompt: criticPrompt, schema: CRITIC_SCHEMA, temperature: 0.2 });
-    const score = Number(r.score) || 0;
-    return {
-      pass: r.pass === true && score >= QA_PASS_SCORE,
-      score,
-      issues: (r.issues || []).map((i) => ({ ...i, lineIndex: Number(i.lineIndex) || 0 })),
-    };
-  };
-
-  const evaluate = async (lines, label) => {
+  const evaluate = (lines, label) => {
     setStatus(label);
-    const linter = lintScene(lines, activeBannedWords);
-    let critic;
-    try {
-      critic = await runCritic(lines);
-    } catch (err) {
-      critic = { pass: false, score: 0, issues: [], unavailable: String(err.message || err) };
-    }
-    return { lines, linter, critic, ok: linter.length === 0 && critic.pass };
+    return evaluateScene({ ctx, apiKey, auditModelId, activeBannedWords, lines });
   };
 
   let best = null;
@@ -1269,38 +1392,7 @@ async function runSceneQAPipeline({ apiKey, genModelId, auditModelId, vaultDocs,
     if (ev.critic.unavailable && ev.linter.length === 0) break;
     retries += 1;
     setStatus(`Auto-fixing issues (retry ${retries}/${QA_MAX_RETRIES})...`);
-    const linterList = ev.linter.length
-      ? ev.linter.map((e) => `- L${e.lineIndex + 1} (${e.speaker}) [${e.code}]: ${e.message}`).join('\n')
-      : '(none)';
-    const criticList = ev.critic.issues.length
-      ? ev.critic.issues.map((i) => `- L${i.lineIndex} (${i.speaker}) [${i.category}]: ${i.problem} FIX: ${i.fix}`).join('\n')
-      : '(none)';
-    const rewritePrompt = [
-      'You are the head writer of "The Adventures of Tom". Your draft failed QA. Rewrite the WHOLE scene so every listed problem is fixed. You may rewrite, merge, split, add or delete lines. Keep what already works.',
-      'Fix the cause, not the symptom: a flat joke needs a better joke, not a synonym.',
-      '',
-      `=== REFERENCE DOC: comedy-bible.md ===\n${comedyBible || '(not loaded)'}\n=== END ===`,
-      '',
-      '=== SPEAKER DOSSIERS ===',
-      dossiers || '(none)',
-      '=== END DOSSIERS ===',
-      combatDocs ? `\n${combatDocs}\n` : '',
-      '=== SCENE ===',
-      facts,
-      '=== END SCENE ===',
-      '',
-      HARD_FORMAT_RULES(activeBannedWords),
-      '',
-      '=== CURRENT DRAFT ===',
-      numberedScript(ev.lines),
-      '=== END CURRENT DRAFT ===',
-      '',
-      `=== LINTER ERRORS (must all be fixed) ===\n${linterList}\n=== END ===`,
-      '',
-      `=== SHOWRUNNER ISSUES (score ${ev.critic.score}/10) ===\n${criticList}\n=== END ===`,
-      '',
-      'Return the full corrected scene as JSON matching the schema.',
-    ].join('\n');
+    const rewritePrompt = buildRewritePrompt({ ctx, activeBannedWords, ev });
     const rewritten = await callGeminiJSON({ apiKey, modelId: genModelId, prompt: rewritePrompt, schema: SCENE_GEN_SCHEMA, temperature: 0.6 });
     const newLines = toLineObjects(rewritten.lines);
     if (!newLines.length) break;
@@ -1312,20 +1404,7 @@ async function runSceneQAPipeline({ apiKey, genModelId, auditModelId, vaultDocs,
   }
 
   const final = ev.ok ? ev : best;
-  const notes = [];
-  for (const e of final.linter) notes.push(`L${e.lineIndex + 1} (${e.speaker || 'n/a'}) linter: ${e.message}`);
-  for (const i of final.critic.issues) notes.push(`L${i.lineIndex} (${i.speaker}) ${i.category}: ${i.problem}`);
-  if (final.critic.unavailable) notes.push(`Showrunner critic unavailable: ${final.critic.unavailable}`);
-  return {
-    lines: final.lines,
-    qa: {
-      passed: final.ok,
-      score: final.critic.unavailable ? null : final.critic.score,
-      retries,
-      notes,
-      at: new Date().toISOString(),
-    },
-  };
+  return { lines: final.lines, qa: buildQAReport(final, retries) };
 }
 
 function formatWorkshopScene(scene) {
@@ -2057,6 +2136,40 @@ export default function App() {
       );
     } catch (err) {
       setErrorBanner(err.message || 'Scene generation failed.');
+    } finally {
+      setLoadingStatus('');
+    }
+  };
+
+  // QA badge: one more surgical pass on the saved Critic issues, no restart from Pass 1.
+  const handleFixRemainingIssues = async () => {
+    if (!activeChapter || !activeScene || !activeScene.qa) return;
+    setErrorBanner('');
+    setLoadingStatus('Auto-fixing issues...');
+    try {
+      const { lines: fixedLines, qa, kept } = await runFixPass({
+        apiKey: state.settings.apiKey,
+        genModelId,
+        auditModelId,
+        vaultDocs: state.vaultDocs,
+        chapter: activeChapter,
+        scene: activeScene,
+        activeBannedWords,
+        setStatus: setLoadingStatus,
+      });
+      updateActiveScene((sc) => ({
+        ...sc,
+        history: kept ? sc.history : pushSceneSnapshot(sc, `Before Fix Remaining Issues (${sc.lines.length}L)`),
+        lines: fixedLines,
+        qa,
+      }));
+      showToast(
+        kept
+          ? 'The fix pass made things worse, so the previous version was kept.'
+          : `Fix pass done. QA ${qa.score == null ? 'unavailable' : `${qa.score}/10`}.`
+      );
+    } catch (err) {
+      setErrorBanner(err.message || 'Fix Remaining Issues failed.');
     } finally {
       setLoadingStatus('');
     }
@@ -3561,6 +3674,16 @@ export default function App() {
                               activeScene.qa.notes.map((n, i) => <li key={i}>{n}</li>)
                             )}
                           </ul>
+                          {activeScene.qa.score != null && activeScene.qa.score < QA_PASS_SCORE && (
+                            <button
+                              onClick={handleFixRemainingIssues}
+                              disabled={Boolean(loadingStatus)}
+                              className="mt-2.5 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-100 font-semibold disabled:opacity-50 transition"
+                            >
+                              <Wand2 className="w-3.5 h-3.5" />
+                              Fix Remaining Issues
+                            </button>
+                          )}
                         </details>
                       )}
                       {activeScene.lines.map((line, idx) => {

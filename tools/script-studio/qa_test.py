@@ -17,7 +17,7 @@ BAD = [
     L('action', 'Narrator', 'Boppy squints at the sign. "I do not like this one bit," he says.'),
     L('dialogue', 'Boppy', 'It is a lifesaver that nobody asked me, Tommy, and I will not pretend otherwise — ever.'),
     L('dialogue', 'TNB', 'Wow, the WELCOME COMMITTEE is here!'),
-    L('dialogue', 'Grace', 'Rosie is jumping on the amber lamp again, and she is being aggressively silly today.'),
+    L('dialogue', 'Grace', 'Tata, Rosie is jumping on the amber lamp again, and she is being aggressively silly today.'),
 ]
 GOOD = [
     L('action', 'Narrator', 'Boppy squints at the sign, then at his stomach, then at the sign again.'),
@@ -41,11 +41,11 @@ def run(scenario):
             reqs.append(('format', gc, prompt)); ok(json.dumps({'lines': BAD}))
         elif 'Showrunner reviewing' in prompt:
             reqs.append(('critic', gc, prompt)); state['critic'] += 1
-            good = scenario == 'fix1' and state['critic'] >= 2
+            good = (scenario == 'fix1' and state['critic'] >= 2) or (scenario == 'fixlater' and state['rewrites'] >= 3)
             ok(json.dumps({'pass': good, 'score': 9 if good else 6, 'issues': [] if good else [{'lineIndex': 2, 'speaker': 'Boppy', 'category': 'Voice', 'problem': 'Not funny and not Boppy.', 'fix': 'Anchor it in his stomach complaint.'}]}))
         elif 'Your draft failed QA' in prompt:
             reqs.append(('rewrite', gc, prompt)); state['rewrites'] += 1
-            ok(json.dumps({'lines': GOOD if scenario == 'fix1' else BAD}))
+            ok(json.dumps({'lines': GOOD if scenario == 'fix1' or (scenario == 'fixlater' and state['rewrites'] >= 3) else BAD}))
         else:
             route.fulfill(status=500, body='unexpected prompt')
     seed = {
@@ -77,11 +77,22 @@ def run(scenario):
         pg.locator('details summary').first.click(); pg.wait_for_timeout(200)
         detail = pg.locator('details').first.inner_text()
         lines = pg.locator('textarea').count()
+        fixinfo = None
+        if scenario in ('never', 'fix1'):
+            fixinfo = pg.get_by_role('button', name='Fix Remaining Issues').count()
+        if scenario == 'fixlater':
+            btn = pg.get_by_role('button', name='Fix Remaining Issues')
+            before = btn.count()
+            btn.click()
+            for _ in range(200):
+                if pg.locator('details summary').first.inner_text().find('QA passed') >= 0: break
+                pg.wait_for_timeout(50)
+            fixinfo = (before, pg.locator('details summary').first.inner_text(), pg.get_by_role('button', name='Fix Remaining Issues').count())
         b.close()
-    return reqs, state, seen, summary, detail, errs, lines
+    return reqs, state, seen, summary, detail, errs, lines, fixinfo
 
 # Scenario A: fails once, auto-fixed by retry 1.
-reqs, st, seen, summary, detail, errs, nlines = run('fix1')
+reqs, st, seen, summary, detail, errs, nlines, fixinfo = run('fix1')
 kinds = [r[0] for r in reqs]
 print(kinds, '|', summary.replace('\n', ' '))
 check(kinds == ['draft', 'format', 'critic', 'rewrite', 'critic'], 'fix1: order is draft, format, critic, rewrite, critic')
@@ -100,15 +111,33 @@ check({'Drafting...', 'Running QA check (Attempt 1/2)...', 'Auto-fixing issues (
 check('QA passed' in summary and '9/10' in summary and '1 auto-fix' in summary, 'badge: passed, 9/10, 1 auto-fix')
 check('No remaining notes' in detail, 'badge details: no remaining notes')
 check(nlines >= 4, 'final script shown')
+check(fixinfo == 0, 'no Fix Remaining Issues button on a scene that passed')
+check('TATA' in rw and 'Ta-Ta' in rw, 'linter flags "Tata" and the rewrite prompt says to use Ta-Ta')
+dp = reqs[0][2]
+check('NEVER thesaurus-paraphrase' in dp and 'NEVER shoehorn' in dp and 'SkyMiles' in dp and 'plot facts only' in dp, 'pass 1 prompt has the beat and trivia rules')
+check('NEVER thesaurus-paraphrase' in rw and 'NEVER shoehorn' in rw, 'pass 4 prompt has the beat and trivia rules')
+check('PRESERVE every passing line exactly' in rw and 'Rewrite ONLY the flagged lines' in rw and 'FLAGGED LINES: L1, L2, L3, L4' in rw, 'pass 4 prompt is surgical and names the flagged lines')
 check(not errs, 'no page errors %s' % errs)
 
 # Scenario B: never passes, stops after 2 retries and shows remaining notes.
-reqs, st, seen, summary, detail, errs, nlines = run('never')
+reqs, st, seen, summary, detail, errs, nlines, fixinfo = run('never')
 kinds = [r[0] for r in reqs]
 print(kinds, '|', summary.replace('\n', ' '))
 check(kinds == ['draft', 'format', 'critic', 'rewrite', 'critic', 'rewrite', 'critic'], 'never: max 2 retries then stops')
 check('needs a look' in summary and '2 auto-fixes' in summary, 'badge: needs a look, 2 auto-fixes')
+check(fixinfo == 1, 'Fix Remaining Issues button shown under 8/10')
 check('linter:' in detail and 'Voice:' in detail, 'badge lists remaining linter and critic notes')
+check(not errs, 'no page errors %s' % errs)
+
+# Scenario C: stays below 8 after the auto loop, then Fix Remaining Issues repairs it without restarting from pass 1.
+reqs, st, seen, summary, detail, errs, nlines, fixinfo = run('fixlater')
+kinds = [r[0] for r in reqs]
+print(kinds, '|', fixinfo)
+check(kinds == ['draft', 'format', 'critic', 'rewrite', 'critic', 'rewrite', 'critic', 'rewrite', 'critic'], 'fixlater: one extra rewrite plus one QA check, no new draft or format')
+fp = reqs[7][2]
+check('Not funny and not Boppy.' in fp and 'TATA' in fp and 'PRESERVE every passing line' in fp, 'fix pass sends the saved Critic issue and the linter errors, surgically')
+check(reqs[7][1].get('temperature') == 0.6 and reqs[8][1].get('temperature') == 0.2, 'fix pass: rewrite 0.6, then critic 0.2')
+check(fixinfo[0] == 1 and 'QA passed' in fixinfo[1] and '3 auto-fixes' in fixinfo[1] and fixinfo[2] == 0, 'badge after the fix: passed, 3 auto-fixes, button gone: %s' % (fixinfo,))
 check(not errs, 'no page errors %s' % errs)
 srv.shutdown()
 print('FAILED %d' % len(fails) if fails else 'ALL PASS'); sys.exit(1 if fails else 0)

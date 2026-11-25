@@ -6459,6 +6459,42 @@
     "text": "Read the c-scriptstudio4 card and tools/script-studio/README.md, then finish the Script Studio audits in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/audit_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "done": "2026-11-24"
+  },
+  {
+   "id": "c-scriptstudio5",
+   "tag": "scriptstudio5",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "Script Studio: Fix button, Ta-Ta check, tighter rules",
+   "next": "Shipped: Fix Remaining Issues button, Ta-Ta linter check, surgical rewrite rules. Next: use it on a real scene and tell me if passing lines still drift.",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
+    "opening": "Make three targeted improvements to AoT Script Studio's auto-QA loop"
+   },
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Tom: \"Add a Fix Remaining Issues button ... flag Tata ... update the Pass 1 and Pass 4 system prompts\". New card; started."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as scriptstudio5."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-25",
+   "changed": "2026-11-25",
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Adds the Fix Remaining Issues button, the Ta-Ta check and surgical rewrite rules to Script Studio's QA loop.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build with the design in the card)",
+    "effort": "medium (the changes are specified in the card)",
+    "text": "Read the c-scriptstudio5 card and tools/script-studio/README.md, then finish the Script Studio QA loop changes in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/qa_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [

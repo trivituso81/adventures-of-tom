@@ -10,3 +10,4 @@ React + Tailwind + lucide-react app (`src/App.jsx`), built with Vite into `scrip
 - Test: `python3 tools/script-studio/e2e_test.py` (needs playwright and chromium).
 - Generate Scene runs a 4-pass pipeline (draft, format, linter plus Showrunner critic, up to 2 auto-rewrites; `lintScene` and `runSceneQAPipeline` in `src/App.jsx`). Test with the Gemini API mocked: `python3 tools/script-studio/qa_test.py`.
 - Checkers tab: Chapter Coherence Audit (storyline, per chapter) and Cross-Chapter Tie-In Audit (trajectory, all populated chapters), both on the Audit Model at 0.2. Presets are Gemini 4 neon (generation), carbon (audit), hydrogen (budget). Test with Gemini mocked: `python3 tools/script-studio/audit_test.py`.
+- QA badge: Fix Remaining Issues (under 8/10) runs one more surgical rewrite on the saved Critic issues (`runFixPass`). Linter flags "Tata" (use "Ta-Ta").
