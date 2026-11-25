@@ -66,7 +66,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install pipeline dependencies
-        run: pip install --quiet google-genai fal-client pillow mediapipe opencv-python-headless numpy requests
+        run: pip install --quiet google-genai fal-client pillow mediapipe opencv-python-headless numpy requests scipy
       - name: Run Art Factory stage
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -165,7 +165,7 @@ jobs:
       - name: Install ffmpeg (with libvpx for the alpha video)
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - name: Install pipeline dependencies
-        run: pip install --quiet google-genai fal-client pillow mediapipe opencv-python-headless numpy requests
+        run: pip install --quiet google-genai fal-client pillow mediapipe opencv-python-headless numpy requests scipy
       - name: Single-clip render, two-stage QA gate, bake
         id: run
         continue-on-error: true
