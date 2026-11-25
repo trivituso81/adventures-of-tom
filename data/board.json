@@ -9751,7 +9751,7 @@
    "lane": "claude",
    "col": "done",
    "theme": "Tools",
-   "title": "Script Studio: chapter coherence and cross-chapter tie-in audits, Gemini 4 presets",
+   "title": "Script Studio: new audits and Gemini 4 presets",
    "next": "Shipped: both audits upgraded, Gemini 4 presets in. Next: run them on a real chapter with your key; if a model id is rejected, use Custom Model ID.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
