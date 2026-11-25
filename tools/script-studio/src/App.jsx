@@ -865,6 +865,438 @@ const STORYLINE_AUDIT_SCHEMA = {
 // EXPORT FORMATTERS
 // ============================================================================
 
+// ============================================================================
+// SCENE QA PIPELINE (Generate Scene = Draft > Format > QA gate > Auto-rewrite)
+// ============================================================================
+
+const QA_MAX_RETRIES = 2;
+const QA_PASS_SCORE = 8;
+
+const DEPRECATED_TERMS = ['Tombo', 'Marlowe', 'Little Elsewhere', 'rhubarb crisp', 'amber', 'Tommy'];
+
+const AI_COMEDY_CLICHES = [
+  'aggressively',
+  'security detail',
+  'welcome committee',
+  'lifesaver',
+  'fan club',
+  'sanctioned',
+  'concerning amount',
+];
+
+// Spoken forms that must be contracted. Matched as whole phrases, case-insensitive.
+const UNCONTRACTED_FORMS = [
+  'do not', 'does not', 'did not', 'is not', 'are not', 'was not', 'were not', 'have not', 'has not',
+  'had not', 'will not', 'would not', 'could not', 'should not', 'cannot', 'can not',
+  'i am', 'you are', 'we are', 'they are', 'he is', 'she is', 'it is', 'that is', 'there is',
+  'what is', "let us", 'i will', 'you will', 'we will', 'they will', 'i have', 'you have', 'we have',
+  'i would', 'you would', 'we would', 'they would', 'i had', 'you had',
+];
+
+const TNB_CAPS_OK = ['TNB', 'LA'];
+
+function escapeRegExp(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// Deterministic linter for a whole generated scene. Returns [{ lineIndex (0-based), speaker, code, message }].
+function lintScene(lines, activeBannedWords) {
+  const errors = [];
+  const push = (idx, line, code, message) =>
+    errors.push({ lineIndex: idx, speaker: line.speaker || '', code, message });
+
+  const banned = [...new Set([...(activeBannedWords || []), ...DEPRECATED_TERMS])]
+    .map((w) => w.trim())
+    .filter(Boolean);
+
+  lines.forEach((line, idx) => {
+    const text = line.text || '';
+    const type = line.type || 'dialogue';
+    const speakerLower = (line.speaker || '').trim().toLowerCase();
+
+    if (text.includes('—') || (line.speaker || '').includes('—')) {
+      push(idx, line, 'EM_DASH', 'Contains an em dash. Use a comma, period or en dash instead.');
+    }
+
+    if (type === 'dialogue') {
+      const lower = ` ${text.toLowerCase().replace(/[’]/g, "'")} `;
+      const hits = UNCONTRACTED_FORMS.filter((f) => new RegExp(`[^a-z']${escapeRegExp(f)}[^a-z']`).test(lower));
+      if (hits.length) {
+        push(idx, line, 'NO_CONTRACTION', `Spoken line is not contracted ("${hits.join('", "')}"). Use contractions.`);
+      }
+    }
+
+    if (type === 'action') {
+      const quoted = text.match(/["“][^"“”]{2,}["”]/g) || [];
+      const spoken = quoted.filter((q) => q.trim().split(/\s+/).length >= 2);
+      if (spoken.length) {
+        push(idx, line, 'QUOTE_IN_ACTION', `Quoted spoken dialogue inside an action line (${spoken[0].slice(0, 40)}). Move it to its own dialogue line.`);
+      }
+    }
+
+    for (const word of banned) {
+      const re = new RegExp(`\\b${escapeRegExp(word)}s?\\b`, 'i');
+      if (re.test(text)) {
+        const kind = DEPRECATED_TERMS.some((d) => d.toLowerCase() === word.toLowerCase()) ? 'Deprecated term' : 'Banned word';
+        push(idx, line, 'BANNED_TERM', `${kind}: "${word}".`);
+      }
+    }
+
+    // "Rosie" is only allowed as "Cozy Rosie".
+    const rosie = /\bRosie\b/gi;
+    let m;
+    while ((m = rosie.exec(text))) {
+      if (!/cozy\s+$/i.test(text.slice(0, m.index))) {
+        push(idx, line, 'ROSIE', 'Never "Rosie" alone. Use "Rose", or "Cozy Rosie" when talking TO her.');
+        break;
+      }
+    }
+
+    const lowerText = text.toLowerCase();
+    for (const c of AI_COMEDY_CLICHES) {
+      if (lowerText.includes(c)) push(idx, line, 'CLICHE', `AI comedy cliche: "${c}". Write a fresher, character-specific joke.`);
+    }
+
+    if (speakerLower === 'tnb') {
+      if (text.includes('!')) push(idx, line, 'TNB_BANG', 'TNB never uses an exclamation mark.');
+      const caps = (text.match(/\b[A-Z]{2,}\b/g) || []).filter((w) => !TNB_CAPS_OK.includes(w));
+      if (caps.length) push(idx, line, 'TNB_CAPS', `TNB never uses ALL-CAPS words (${caps.join(', ')}).`);
+    }
+
+    // Engine rules that would break the game (overflow, Nara speaking, bad mood tags).
+    for (const w of lintLine(line, [])) {
+      if (w.severity === 'error' && ['LONG', 'NARA_SPEAKS', 'MOOD_COMBO', 'MOOD_INVALID'].includes(w.code)) {
+        push(idx, line, w.code, w.message);
+      }
+    }
+  });
+
+  return errors;
+}
+
+// Pull only the dossier material for the scene's speakers out of the two reference docs.
+function extractSpeakerDossiers(vaultDocs, speakers) {
+  const find = (name) => vaultDocs.find((d) => d.name.toLowerCase() === name && d.content?.trim());
+  const canon = find('canon-and-characters.md')?.content || '';
+  const comedy = find('comedy-bible.md')?.content || '';
+  const out = [];
+  const seen = new Set();
+
+  for (const sp of speakers) {
+    const name = sp.trim();
+    if (!name) continue;
+    const first = name.split(/\s+/)[0];
+    const re = new RegExp(`\\b${escapeRegExp(name)}\\b|\\*\\*${escapeRegExp(first)}\\*\\*`, 'i');
+    const parts = [];
+
+    // Comedy engine sections: "### 2.x Name ..." until the next heading.
+    const sections = comedy.split(/\n(?=###? )/);
+    for (const sec of sections) {
+      const head = sec.split('\n', 1)[0];
+      if (/^###\s+2\.\d+/.test(head) && re.test(head) && !seen.has(head)) {
+        seen.add(head);
+        parts.push(sec.trim());
+      }
+    }
+    // Canon: the cast table row plus bullet lines that name the character.
+    for (const ln of canon.split('\n')) {
+      if (seen.has(ln)) continue;
+      const isRow = /^\|\s*\*\*/.test(ln) && re.test(ln.split('|')[1] || '');
+      const isBullet = /^\s*-\s/.test(ln) && re.test(ln) && ln.length < 900;
+      if (isRow || isBullet) {
+        seen.add(ln);
+        parts.push(ln.trim());
+      }
+    }
+    out.push(`--- DOSSIER: ${name} ---\n${parts.length ? parts.join('\n\n') : '(No dossier found in the vault for this speaker.)'}`);
+  }
+  return out.join('\n\n');
+}
+
+function docText(vaultDocs, name) {
+  const d = vaultDocs.find((x) => x.name.toLowerCase() === name);
+  return d?.content?.trim() ? d.content.trim() : '';
+}
+
+function compileSceneFacts(chapter, scene) {
+  const beats = (scene.mandatoryBeats || []).filter((b) => b.trim());
+  return [
+    `SCENE: ${scene.sceneId} | ${scene.title}${scene.location ? ` | ${scene.location}` : ''}`,
+    `REQUIRED SPEAKERS: ${(scene.requiredSpeakers || []).join(', ') || '(unspecified)'}`,
+    `MANDATORY BEATS (story facts that must happen; never copy their wording, dramatize them):\n${
+      beats.length ? beats.map((b, i) => `  ${i + 1}. ${b}`).join('\n') : '  (None specified)'
+    }`,
+    `KNOWLEDGE GATE (what characters know entering the scene; nobody may know or reference more):\n  ${scene.knowledgeGate || '(None specified)'}`,
+    scene.sliders?.directorNotes?.trim() ? `DIRECTOR NOTES (override defaults): ${scene.sliders.directorNotes.trim()}` : '',
+  ]
+    .filter(Boolean)
+    .join('\n');
+}
+
+function numberedScript(lines) {
+  return lines
+    .map((l, i) => `L${i + 1} [${l.type}] ${l.speaker}${l.mood && l.mood !== 'none' ? ` (${l.mood})` : ''}: ${l.text}`)
+    .join('\n');
+}
+
+async function callGeminiText({ apiKey, modelId, prompt, temperature }) {
+  if (!apiKey || !apiKey.trim()) {
+    throw new Error('Missing Gemini API Key. Click API Settings in the top right to add your key.');
+  }
+  if (!modelId || !modelId.trim()) {
+    throw new Error('Missing Model ID. Open API Settings and select or enter a Gemini model ID.');
+  }
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(
+    modelId.trim()
+  )}:generateContent?key=${encodeURIComponent(apiKey.trim())}`;
+  const res = await fetch(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      contents: [{ role: 'user', parts: [{ text: prompt }] }],
+      generationConfig: { temperature },
+    }),
+  });
+  const data = await res.json().catch(() => null);
+  if (!res.ok) {
+    throw new Error(`Gemini API Error (${modelId}): ${data?.error?.message || `HTTP ${res.status} ${res.statusText}`}`);
+  }
+  const text = (data?.candidates?.[0]?.content?.parts || []).map((p) => p.text || '').join('').trim();
+  if (!text) {
+    throw new Error(`Gemini returned no text (finishReason: ${data?.candidates?.[0]?.finishReason || 'Empty response'}).`);
+  }
+  return text;
+}
+
+const CRITIC_SCHEMA = {
+  type: 'OBJECT',
+  properties: {
+    pass: { type: 'BOOLEAN' },
+    score: { type: 'NUMBER' },
+    issues: {
+      type: 'ARRAY',
+      items: {
+        type: 'OBJECT',
+        properties: {
+          lineIndex: { type: 'INTEGER' },
+          speaker: { type: 'STRING' },
+          category: { type: 'STRING', enum: ['Comedy', 'Voice', 'Logic', 'Canon', 'KnowledgeGate'] },
+          problem: { type: 'STRING' },
+          fix: { type: 'STRING' },
+        },
+        required: ['lineIndex', 'speaker', 'category', 'problem', 'fix'],
+      },
+    },
+  },
+  required: ['pass', 'score', 'issues'],
+};
+
+const HARD_FORMAT_RULES = (activeBannedWords) =>
+  [
+    'HARD RULES:',
+    '- Contractions always in spoken dialogue (I\'m, it\'s, don\'t). ZERO em dashes.',
+    '- Never put spoken dialogue (quoted speech) inside an "action" line. Speech is always its own "dialogue" line.',
+    '- Every "dialogue" line is 35 to 115 characters.',
+    '- TNB never uses "!" or ALL-CAPS words. Nara never speaks (her sounds are "action" lines).',
+    `- Mood/pose is one single value from [${ALL_MOOD_POSE_OPTIONS.join(', ')}]. Julian Vance, Clara and Mr. Pistachio use "none".`,
+    `- Never use: ${[...new Set([...(activeBannedWords || []), ...DEPRECATED_TERMS, ...AI_COMEDY_CLICHES])].join(', ')}. Never "Rosie" alone (only "Cozy Rosie").`,
+  ].join('\n');
+
+function toLineObjects(items) {
+  return (items || []).map((item) => ({
+    id: uid('line'),
+    type: item.type || 'dialogue',
+    speaker: item.speaker || '',
+    mood: item.mood || 'none',
+    text: item.text || '',
+    locked: false,
+    flags: [],
+    customNote: '',
+  }));
+}
+
+// Runs the whole pipeline. `setStatus` gets the live progress text. Returns { lines, qa }.
+async function runSceneQAPipeline({ apiKey, genModelId, auditModelId, vaultDocs, chapter, scene, activeBannedWords, setStatus }) {
+  const speakers = scene.requiredSpeakers || [];
+  const combat = Boolean(scene.triggers?.combatEncounter?.trim());
+  const comedyBible = docText(vaultDocs, 'comedy-bible.md');
+  const canon = docText(vaultDocs, 'canon-and-characters.md');
+  const dossiers = extractSpeakerDossiers(vaultDocs, speakers);
+  const facts = compileSceneFacts(chapter, scene);
+  const combatDocs = combat
+    ? ['battle-spec-v11.md', 'bestiary-v11.md', 'workshop-and-map-spec.md']
+        .map((n) => (docText(vaultDocs, n) ? `=== REFERENCE DOC: ${n} ===\n${docText(vaultDocs, n)}\n=== END ${n} ===` : ''))
+        .filter(Boolean)
+        .join('\n\n')
+    : '';
+  const s = scene.sliders || DEFAULT_SLIDERS;
+
+  // PASS 1: plain-text comedy draft (no JSON).
+  setStatus('Drafting...');
+  const draftPrompt = [
+    'You are the head writer of the family comedy JRPG "The Adventures of Tom". Write ONE scene as a plain-text script.',
+    'Voice target: Hacks, Schitt\'s Creek and Abbott Elementary. Sharp, specific banter that comes from each character\'s comedy engine (see the dossiers). No sitcom filler, no generic quips.',
+    'Dramatize the mandatory beats in your own words. Never paraphrase a beat verbatim or announce it. Respect the knowledge gate.',
+    'Format, one item per line:',
+    '  ACTION: a short description of what happens (never contains anyone speaking)',
+    '  NAME (mood): what the character says   [mood is optional]',
+    `Aim for ${s.minLines} to ${s.maxLines} spoken lines, each under 115 characters. Contractions always. Zero em dashes. Never put spoken dialogue inside an ACTION line.`,
+    `Never use these words: ${[...new Set([...(activeBannedWords || []), ...DEPRECATED_TERMS])].join(', ')}.`,
+    '',
+    `=== REFERENCE DOC: comedy-bible.md ===\n${comedyBible || '(not loaded)'}\n=== END comedy-bible.md ===`,
+    '',
+    '=== SPEAKER DOSSIERS (canon-and-characters.md and comedy engines) ===',
+    dossiers || '(No required speakers set.)',
+    '=== END DOSSIERS ===',
+    combatDocs ? `\n${combatDocs}\n` : '',
+    '=== SCENE ===',
+    facts,
+    '=== END SCENE ===',
+    '',
+    'Output only the script. No title, no commentary, no markdown.',
+  ].join('\n');
+  const draftText = await callGeminiText({ apiKey, modelId: genModelId, prompt: draftPrompt, temperature: 0.85 });
+
+  // PASS 2: JSON formatter.
+  setStatus('Formatting script...');
+  const formatPrompt = [
+    'Convert this plain-text scene script into the exact JSON schema (lines[] of {type, speaker, mood, text}).',
+    'Keep every word of dialogue exactly as written. Do not add, remove or reorder lines, with ONE exception: if an ACTION line contains anyone speaking in quotes, split the speech out into its own "dialogue" line for that speaker (right after the action) and leave the action line as pure description.',
+    'ACTION lines become type "action" with speaker "Narrator" unless a character does the action (then use that character as speaker). Use "dialogue" for speech. Use mood "none" when no mood is given or when it is not in the allowed list.',
+    HARD_FORMAT_RULES(activeBannedWords),
+    '',
+    '=== SCRIPT ===',
+    draftText,
+    '=== END SCRIPT ===',
+  ].join('\n');
+  const formatted = await callGeminiJSON({ apiKey, modelId: genModelId, prompt: formatPrompt, schema: SCENE_GEN_SCHEMA, temperature: 0.1 });
+  let current = toLineObjects(formatted.lines);
+  if (!current.length) throw new Error('Formatter returned no lines.');
+
+  // PASS 3 + 4: QA gate with up to QA_MAX_RETRIES auto-rewrites.
+  const runCritic = async (lines) => {
+    const criticPrompt = [
+      'You are a harsh, experienced sitcom Showrunner reviewing a script for the family JRPG "The Adventures of Tom". You protect the comedy, the characters and the canon. Be specific and unsentimental.',
+      'Judge the numbered draft against comedy-bible.md, canon-and-characters.md and the scene\'s knowledge gate.',
+      'Look for: jokes that are not funny or are AI-generic; lines that do not sound like that character; lines that make no sense in the moment; sitcom-cheesy or on-the-nose lines; a beat owned by the wrong character; anyone knowing or referencing something the knowledge gate says they do not know yet; canon violations.',
+      `Score 1 to 10. Set "pass" to false if the score is below ${QA_PASS_SCORE}, OR if any single line is nonsensical, out of character, sitcom-cheesy, or gives the wrong character ownership of a beat. Otherwise true.`,
+      'For each problem give lineIndex (the L number, 1-based), the speaker, a category (Comedy, Voice, Logic, Canon or KnowledgeGate), what is wrong, and a concrete fix. Return an empty issues list only if there is truly nothing to fix.',
+      '',
+      `=== REFERENCE DOC: comedy-bible.md ===\n${comedyBible || '(not loaded)'}\n=== END ===`,
+      '',
+      `=== REFERENCE DOC: canon-and-characters.md ===\n${canon || '(not loaded)'}\n=== END ===`,
+      '',
+      '=== SCENE ===',
+      facts,
+      '=== END SCENE ===',
+      '',
+      '=== DRAFT ===',
+      numberedScript(lines),
+      '=== END DRAFT ===',
+      '',
+      'Return strict JSON only.',
+    ].join('\n');
+    const r = await callGeminiJSON({ apiKey, modelId: auditModelId, prompt: criticPrompt, schema: CRITIC_SCHEMA, temperature: 0.2 });
+    const score = Number(r.score) || 0;
+    return {
+      pass: r.pass === true && score >= QA_PASS_SCORE,
+      score,
+      issues: (r.issues || []).map((i) => ({ ...i, lineIndex: Number(i.lineIndex) || 0 })),
+    };
+  };
+
+  const evaluate = async (lines, label) => {
+    setStatus(label);
+    const linter = lintScene(lines, activeBannedWords);
+    let critic;
+    try {
+      critic = await runCritic(lines);
+    } catch (err) {
+      critic = { pass: false, score: 0, issues: [], unavailable: String(err.message || err) };
+    }
+    return { lines, linter, critic, ok: linter.length === 0 && critic.pass };
+  };
+
+  let best = null;
+  const consider = (ev) => {
+    const rank = (e) => [e.linter.length, e.critic.unavailable ? 99 : 0, -e.critic.score];
+    if (!best) return (best = ev);
+    const a = rank(ev);
+    const b = rank(best);
+    for (let i = 0; i < a.length; i++) {
+      if (a[i] < b[i]) return (best = ev);
+      if (a[i] > b[i]) return best;
+    }
+    return (best = ev);
+  };
+
+  let ev = await evaluate(current, `Running QA check (Attempt 1/${QA_MAX_RETRIES})...`);
+  consider(ev);
+  let retries = 0;
+  while (!ev.ok && retries < QA_MAX_RETRIES) {
+    // A critic outage cannot be fixed by rewriting; only rewrite when there is something concrete to fix.
+    if (ev.critic.unavailable && ev.linter.length === 0) break;
+    retries += 1;
+    setStatus(`Auto-fixing issues (retry ${retries}/${QA_MAX_RETRIES})...`);
+    const linterList = ev.linter.length
+      ? ev.linter.map((e) => `- L${e.lineIndex + 1} (${e.speaker}) [${e.code}]: ${e.message}`).join('\n')
+      : '(none)';
+    const criticList = ev.critic.issues.length
+      ? ev.critic.issues.map((i) => `- L${i.lineIndex} (${i.speaker}) [${i.category}]: ${i.problem} FIX: ${i.fix}`).join('\n')
+      : '(none)';
+    const rewritePrompt = [
+      'You are the head writer of "The Adventures of Tom". Your draft failed QA. Rewrite the WHOLE scene so every listed problem is fixed. You may rewrite, merge, split, add or delete lines. Keep what already works.',
+      'Fix the cause, not the symptom: a flat joke needs a better joke, not a synonym.',
+      '',
+      `=== REFERENCE DOC: comedy-bible.md ===\n${comedyBible || '(not loaded)'}\n=== END ===`,
+      '',
+      '=== SPEAKER DOSSIERS ===',
+      dossiers || '(none)',
+      '=== END DOSSIERS ===',
+      combatDocs ? `\n${combatDocs}\n` : '',
+      '=== SCENE ===',
+      facts,
+      '=== END SCENE ===',
+      '',
+      HARD_FORMAT_RULES(activeBannedWords),
+      '',
+      '=== CURRENT DRAFT ===',
+      numberedScript(ev.lines),
+      '=== END CURRENT DRAFT ===',
+      '',
+      `=== LINTER ERRORS (must all be fixed) ===\n${linterList}\n=== END ===`,
+      '',
+      `=== SHOWRUNNER ISSUES (score ${ev.critic.score}/10) ===\n${criticList}\n=== END ===`,
+      '',
+      'Return the full corrected scene as JSON matching the schema.',
+    ].join('\n');
+    const rewritten = await callGeminiJSON({ apiKey, modelId: genModelId, prompt: rewritePrompt, schema: SCENE_GEN_SCHEMA, temperature: 0.6 });
+    const newLines = toLineObjects(rewritten.lines);
+    if (!newLines.length) break;
+    ev = await evaluate(
+      newLines,
+      retries < QA_MAX_RETRIES ? `Running QA check (Attempt ${retries + 1}/${QA_MAX_RETRIES})...` : 'Running final QA check...'
+    );
+    consider(ev);
+  }
+
+  const final = ev.ok ? ev : best;
+  const notes = [];
+  for (const e of final.linter) notes.push(`L${e.lineIndex + 1} (${e.speaker || 'n/a'}) linter: ${e.message}`);
+  for (const i of final.critic.issues) notes.push(`L${i.lineIndex} (${i.speaker}) ${i.category}: ${i.problem}`);
+  if (final.critic.unavailable) notes.push(`Showrunner critic unavailable: ${final.critic.unavailable}`);
+  return {
+    lines: final.lines,
+    qa: {
+      passed: final.ok,
+      score: final.critic.unavailable ? null : final.critic.score,
+      retries,
+      notes,
+      at: new Date().toISOString(),
+    },
+  };
+}
+
 function formatWorkshopScene(scene) {
   const header = `W ${scene.sceneId || 'scene'} ${scene.lines.length}`;
   const body = scene.lines.map((line, idx) => {
@@ -1565,46 +1997,18 @@ export default function App() {
   const handleGenerateScene = async () => {
     if (!activeChapter || !activeScene) return;
     setErrorBanner('');
-    setLoadingStatus('Compiling Reference Vault...');
+    setLoadingStatus('Drafting...');
     try {
-      const vaultText = compileVaultPrompt(state.vaultDocs);
-      const blueprintText = compileBlueprintPrompt(activeChapter, activeScene);
-      const slidersText = compileSlidersPrompt(activeScene.sliders, activeBannedWords);
-
-      const prompt = [
-        'You are the Head Writer for the turn-based JRPG "The Adventures of Tom".',
-        'Write ONE complete, crisp, playable scene strictly adhering to all injected Reference Vault documents, the Scene Blueprint, and the numeric Co-Writing Sliders below.',
-        '',
-        vaultText,
-        '',
-        '=== SCENE BLUEPRINT ===',
-        blueprintText,
-        '=== END SCENE BLUEPRINT ===',
-        '',
-        slidersText,
-        '',
-        'Return ONLY valid JSON matching the schema.',
-      ].join('\n');
-
-      setLoadingStatus(`Generating ${activeScene.sceneId} with ${genModelId}...`);
-      const result = await callGeminiJSON({
+      const { lines: generatedLines, qa } = await runSceneQAPipeline({
         apiKey: state.settings.apiKey,
-        modelId: genModelId,
-        prompt,
-        schema: SCENE_GEN_SCHEMA,
-        temperature: 0.75,
+        genModelId,
+        auditModelId,
+        vaultDocs: state.vaultDocs,
+        chapter: activeChapter,
+        scene: activeScene,
+        activeBannedWords,
+        setStatus: setLoadingStatus,
       });
-
-      const generatedLines = (result.lines || []).map((item) => ({
-        id: uid('line'),
-        type: item.type || 'dialogue',
-        speaker: item.speaker || '',
-        mood: item.mood || 'none',
-        text: item.text || '',
-        locked: false,
-        flags: [],
-        customNote: '',
-      }));
 
       updateActiveScene((sc) => ({
         ...sc,
@@ -1613,8 +2017,13 @@ export default function App() {
             ? pushSceneSnapshot(sc, `Before Generate (${sc.lines.length}L)`)
             : sc.history,
         lines: generatedLines,
+        qa,
       }));
-      showToast(`Generated ${generatedLines.length} lines for ${activeScene.sceneId}.`);
+      showToast(
+        `Generated ${generatedLines.length} lines for ${activeScene.sceneId}. QA ${
+          qa.score == null ? 'unavailable' : `${qa.score}/10`
+        }, ${qa.retries} auto-fix${qa.retries === 1 ? '' : 'es'}.`
+      );
     } catch (err) {
       setErrorBanner(err.message || 'Scene generation failed.');
     } finally {
@@ -3048,6 +3457,33 @@ export default function App() {
                     </div>
                   ) : (
                     <div className="space-y-2.5">
+                      {activeScene.qa && (
+                        <details
+                          className={`rounded-xl border px-3 py-2 text-xs ${
+                            activeScene.qa.passed
+                              ? 'bg-emerald-950/30 border-emerald-500/30 text-emerald-200'
+                              : 'bg-amber-950/30 border-amber-500/30 text-amber-200'
+                          }`}
+                        >
+                          <summary className="cursor-pointer select-none font-semibold flex flex-wrap items-center gap-x-3 gap-y-1">
+                            <span>{activeScene.qa.passed ? 'QA passed' : 'QA: needs a look'}</span>
+                            <span className="font-mono">
+                              Score {activeScene.qa.score == null ? 'n/a' : `${activeScene.qa.score}/10`}
+                            </span>
+                            <span className="font-mono">
+                              {activeScene.qa.retries} auto-fix{activeScene.qa.retries === 1 ? '' : 'es'}
+                            </span>
+                            <span className="font-mono">{(activeScene.qa.notes || []).length} note{(activeScene.qa.notes || []).length === 1 ? '' : 's'}</span>
+                          </summary>
+                          <ul className="mt-2 space-y-1 list-disc pl-5 text-slate-300">
+                            {(activeScene.qa.notes || []).length === 0 ? (
+                              <li>No remaining notes.</li>
+                            ) : (
+                              activeScene.qa.notes.map((n, i) => <li key={i}>{n}</li>)
+                            )}
+                          </ul>
+                        </details>
+                      )}
                       {activeScene.lines.map((line, idx) => {
                         const warnings = lintLine(line, activeBannedWords);
                         const charLen = (line.text || '').length;

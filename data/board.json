@@ -9711,7 +9711,7 @@
    "col": "prog",
    "theme": "Tools",
    "title": "Script Studio: auto QA and rewrite inside Generate Scene",
-   "next": "Building the 4-pass flow (draft, format, QA gate, auto-rewrite) into the Generate Scene button",
+   "next": "Shipped: Generate Scene now drafts, QA-checks and auto-fixes. Next: try it on a real scene with your Gemini key.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
     "opening": "Locate the AoT Script Studio app in the trivituso81/adventures-of-tom repo"
@@ -9720,6 +9720,10 @@
     {
      "d": "2026-11-24",
      "t": "Tom: \"upgrade its scene generation flow so it automatically quality-checks and fixes its own dialogue before showing it to me\". New card; started."
+    },
+    {
+     "d": "2026-11-24",
+     "t": "Shipped as scriptstudio3 (4-pass pipeline inside Generate Scene, QA badge, qa_test.py)."
     }
    ],
    "blocks": [],

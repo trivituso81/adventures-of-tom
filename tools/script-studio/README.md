@@ -8,3 +8,4 @@ React + Tailwind + lucide-react app (`src/App.jsx`), built with Vite into `scrip
   `python3 tools/script-studio/sync_vault.py` refreshes them from `claude/` and `docs/`. In the app, Tab 1 > Sync Hosted Defaults pulls the latest into the browser.
 - Startup merge never overwrites a doc the user edited or uploaded. The Gemini key is typed into API Settings and kept in the browser only; it is never in the repo or the build.
 - Test: `python3 tools/script-studio/e2e_test.py` (needs playwright and chromium).
+- Generate Scene runs a 4-pass pipeline (draft, format, linter plus Showrunner critic, up to 2 auto-rewrites; `lintScene` and `runSceneQAPipeline` in `src/App.jsx`). Test with the Gemini API mocked: `python3 tools/script-studio/qa_test.py`.
