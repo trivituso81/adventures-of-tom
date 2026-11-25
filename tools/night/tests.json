@@ -1516,6 +1516,24 @@
    "cmd": "python3 -I tools/workflow_check_test.py",
    "group": "g1",
    "minutes": 1
+  },
+  {
+   "id": "script_studio_e2e_test",
+   "cmd": "python3 -I tools/script-studio/e2e_test.py",
+   "group": "g1",
+   "minutes": 1
+  },
+  {
+   "id": "script_studio_qa_test",
+   "cmd": "python3 -I tools/script-studio/qa_test.py",
+   "group": "g1",
+   "minutes": 1
+  },
+  {
+   "id": "script_studio_audit_test",
+   "cmd": "python3 -I tools/script-studio/audit_test.py",
+   "group": "g1",
+   "minutes": 1
   }
  ]
 }
