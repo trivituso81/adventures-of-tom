@@ -1617,6 +1617,9 @@ export default function App() {
   const [speakerInput, setSpeakerInput] = useState('');
   const [expandedFlagLineIds, setExpandedFlagLineIds] = useState({});
   const [highlightedLineIdx, setHighlightedLineIdx] = useState(null);
+  const [readMode, setReadMode] = useState(false);
+  const [readScope, setReadScope] = useState('scene'); // scene | chapter
+  const [readQaOpen, setReadQaOpen] = useState({});
   const [dismissSetupGuide, setDismissSetupGuide] = useState(false);
 
   // Modals
@@ -2594,6 +2597,18 @@ export default function App() {
     setActiveTab('studio');
   };
 
+  // Read Mode: jump back to Edit Mode and scroll to that line.
+  const handleEditFromRead = (sceneInternalId, idx) => {
+    setReadMode(false);
+    setActiveTab('studio');
+    setState((prev) => ({ ...prev, activeSceneId: sceneInternalId }));
+    setHighlightedLineIdx(idx);
+    window.setTimeout(() => {
+      const el = document.getElementById(`line-card-${idx}`);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 200);
+  };
+
   const handleJumpToIssue = (sceneIdStr, lineNumber) => {
     if (!activeChapter) return;
     const match = activeChapter.scenes.find(
@@ -2738,6 +2753,24 @@ export default function App() {
                 {vaultStats.totalTokens.toLocaleString()} tok)
               </p>
             </div>
+          </div>
+
+          {/* Edit Mode | Read Mode */}
+          <div className="flex items-center bg-slate-900 p-1 rounded-xl border border-slate-800" role="group" aria-label="Edit or Read mode">
+            <button
+              onClick={() => setReadMode(false)}
+              data-testid="mode-edit"
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${!readMode ? 'bg-indigo-600 text-white shadow' : 'text-slate-400 hover:text-slate-100'}`}
+            >
+              <Edit3 className="w-3.5 h-3.5" /> Edit Mode
+            </button>
+            <button
+              onClick={() => { setReadMode(true); setActiveTab('studio'); }}
+              data-testid="mode-read"
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${readMode ? 'bg-amber-500 text-slate-950 shadow' : 'text-slate-400 hover:text-slate-100'}`}
+            >
+              <Eye className="w-3.5 h-3.5" /> Read Mode
+            </button>
           </div>
 
           {/* 4-Step Segmented Nav */}
@@ -3079,7 +3112,106 @@ export default function App() {
         {/* ================================================================ */}
         {/* TAB 2: STREAMLINED 2-PANE SCENE STUDIO                           */}
         {/* ================================================================ */}
-        {activeTab === 'studio' && activeChapter && (
+        {activeTab === 'studio' && activeChapter && readMode && (() => {
+          const readScenes = readScope === 'chapter' ? activeChapter.scenes : activeScene ? [activeScene] : [];
+          const sceneIdx = activeChapter.scenes.findIndex((sc) => sc.id === activeScene?.id);
+          return (
+            <div className="max-w-2xl mx-auto" data-testid="read-view">
+              <div className="flex items-center justify-between gap-2 mb-6 text-xs">
+                <div className="inline-flex bg-slate-900 p-0.5 rounded-lg border border-slate-800">
+                  {[['scene', 'Current Scene'], ['chapter', 'Full Chapter']].map(([id, label]) => (
+                    <button
+                      key={id}
+                      onClick={() => setReadScope(id)}
+                      className={`px-3 py-1 rounded-md font-medium transition ${readScope === id ? 'bg-slate-700 text-white' : 'text-slate-400 hover:text-slate-100'}`}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+                {readScope === 'scene' && activeChapter.scenes.length > 1 && (
+                  <div className="inline-flex items-center gap-1 text-slate-400">
+                    <button
+                      disabled={sceneIdx <= 0}
+                      onClick={() => setState((prev) => ({ ...prev, activeSceneId: activeChapter.scenes[sceneIdx - 1].id }))}
+                      className="px-2 py-1 rounded hover:bg-slate-800 disabled:opacity-30"
+                      aria-label="Previous scene"
+                    >
+                      <ArrowLeft className="w-3.5 h-3.5" />
+                    </button>
+                    <span className="font-mono">{sceneIdx + 1}/{activeChapter.scenes.length}</span>
+                    <button
+                      disabled={sceneIdx < 0 || sceneIdx >= activeChapter.scenes.length - 1}
+                      onClick={() => setState((prev) => ({ ...prev, activeSceneId: activeChapter.scenes[sceneIdx + 1].id }))}
+                      className="px-2 py-1 rounded hover:bg-slate-800 disabled:opacity-30"
+                      aria-label="Next scene"
+                    >
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                )}
+              </div>
+              {readScenes.length === 0 && <p className="text-slate-500 text-center py-16">No scenes in this chapter yet.</p>}
+              {readScenes.map((sc) => (
+                <section key={sc.id} className="mb-14" data-testid="read-scene">
+                  <header className="mb-6 pb-3 border-b border-slate-800">
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                      <h2 className="text-base font-bold tracking-wide uppercase text-slate-100">{sc.title || sc.sceneId}</h2>
+                      <span className="text-[11px] font-mono text-slate-500">{sc.sceneId}</span>
+                      {sc.qa && (
+                        <button
+                          onClick={() => setReadQaOpen((o) => ({ ...o, [sc.id]: !o[sc.id] }))}
+                          data-testid="read-qa-pill"
+                          title="Show or hide the QA notes"
+                          className={`text-[11px] font-mono px-2 py-0.5 rounded-full border ${
+                            sc.qa.passed ? 'text-emerald-300 border-emerald-500/40 bg-emerald-500/10' : 'text-amber-300 border-amber-500/40 bg-amber-500/10'
+                          }`}
+                        >
+                          QA: {sc.qa.score == null ? 'n/a' : `${sc.qa.score}/10`}
+                        </button>
+                      )}
+                    </div>
+                    {(sc.location || sc.mapId) && <p className="text-xs text-slate-500 mt-1">{sc.location || sc.mapId}</p>}
+                    {sc.qa && readQaOpen[sc.id] && (
+                      <ul className="mt-2 space-y-1 list-disc pl-5 text-xs text-slate-400" data-testid="read-qa-notes">
+                        {(sc.qa.notes || []).length === 0 ? <li>No remaining notes.</li> : sc.qa.notes.map((n, i) => <li key={i}>{n}</li>)}
+                      </ul>
+                    )}
+                  </header>
+                  {sc.lines.length === 0 && <p className="text-slate-600 italic text-sm">No lines yet.</p>}
+                  <div className="space-y-4 font-serif text-[17px] leading-relaxed text-slate-200">
+                    {sc.lines.map((line, idx) => (
+                      <div
+                        key={line.id}
+                        onClick={() => handleEditFromRead(sc.id, idx)}
+                        data-testid="read-line"
+                        title="Click to edit this line"
+                        className="group relative cursor-pointer rounded-md px-3 -mx-3 py-1 hover:bg-slate-900/70 transition"
+                      >
+                        {line.type === 'dialogue' ? (
+                          <>
+                            <div className="text-center text-[13px] font-bold uppercase tracking-widest text-slate-100">
+                              {line.speaker || 'Speaker'}
+                              {line.mood && line.mood !== 'none' && (
+                                <span className="font-normal normal-case tracking-normal text-slate-500"> ({line.mood})</span>
+                              )}
+                            </div>
+                            <p className="text-center">{line.text}</p>
+                          </>
+                        ) : (
+                          <p className="italic text-slate-400">{line.text}</p>
+                        )}
+                        <Edit3 className="w-3.5 h-3.5 absolute right-2 top-2 text-slate-500 opacity-0 group-hover:opacity-100 transition" />
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
+          );
+        })()}
+
+        {activeTab === 'studio' && activeChapter && !readMode && (
           <div className="space-y-4">
             {/* Compact Guided Onboarding Strip (only when API key or Vault missing) */}
             {needsSetup && !dismissSetupGuide && (

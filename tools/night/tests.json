@@ -1534,6 +1534,12 @@
    "cmd": "python3 -I tools/script-studio/audit_test.py",
    "group": "g1",
    "minutes": 1
+  },
+  {
+   "id": "script_studio_read_test",
+   "cmd": "python3 -I tools/script-studio/read_test.py",
+   "group": "g1",
+   "minutes": 1
   }
  ]
 }

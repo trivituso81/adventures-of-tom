@@ -6578,6 +6578,43 @@
     "text": "Read the c-scriptstudio7 card and docs/CHANGES.md scriptstudio7, then re-check runSceneQAPipeline and handleGenerateChapter in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/qa_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "done": "2026-11-25"
+  },
+  {
+   "id": "c-scriptstudio8",
+   "tag": "scriptstudio8",
+   "lane": "claude",
+   "col": "done",
+   "theme": "Tools",
+   "title": "Script Studio: Read Mode",
+   "next": "Shipped: Edit Mode | Read Mode toggle, screenplay layout, Current Scene or Full Chapter, click a line to edit it. Next: open Read Mode on a chapter and tell me what to change in the look.",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
+    "opening": "Add a distraction-free Read Mode toggle to AoT Script Studio"
+   },
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Tom: \"distraction-free Read Mode toggle ... review scripts cleanly\". New card; started."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as scriptstudio8."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-25",
+   "changed": "2026-11-25",
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Script Studio Read Mode.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build with the design in the card)",
+    "effort": "medium (the changes are specified in the card)",
+    "text": "Read the c-scriptstudio8 card and docs/CHANGES.md scriptstudio8, then adjust the Read Mode view in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/read_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "done": "2026-11-25"
   }
  ],
  "sessions": [
