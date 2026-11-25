@@ -6793,6 +6793,43 @@
    ],
    "created": "2026-11-25",
    "changed": "2026-11-25"
+  },
+  {
+   "id": "c-scriptstudio9",
+   "tag": "scriptstudio9",
+   "lane": "claude",
+   "col": "done",
+   "theme": "Tools",
+   "title": "Script Studio: Tata spelling fix, Read Mode branches",
+   "next": "Shipped: Tata is the on-screen spelling and Ta-Ta is flagged; conditional action lines are badged in Read Mode. Next: regenerate or Fix Remaining Issues on scenes that still say Ta-Ta.",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
+    "opening": "Make two fixes and push to main: 1. Fix the inverted Tata spelling rule"
+   },
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Tom: \"Fix the inverted Tata spelling rule\" and badge conditional branches in Read Mode. New card; started."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as scriptstudio9."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-25",
+   "changed": "2026-11-25",
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Script Studio Tata spelling and Read Mode branch badges.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build with the design in the card)",
+    "effort": "medium (the changes are specified in the card)",
+    "text": "Read the c-scriptstudio9 card and docs/CHANGES.md scriptstudio9, then re-check the TATA linter rule and branchLabel in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/qa_test.py and read_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "done": "2026-11-25"
   }
  ],
  "sessions": [

@@ -21,7 +21,7 @@ BAD = [
     L('action', 'Narrator', 'Boppy squints at the sign. "I do not like this one bit," he says.'),
     L('dialogue', 'Boppy', 'It is a lifesaver that nobody asked me, Tommy, and I will not pretend otherwise — ever.'),
     L('dialogue', 'TNB', 'Wow, the WELCOME COMMITTEE is here!'),
-    L('dialogue', 'Grace', 'Tata, Rosie is jumping on the amber lamp again, and she is being aggressively silly today.'),
+    L('dialogue', 'Grace', 'Ta-Ta, Rosie is jumping on the amber lamp again, and she is being aggressively silly today.'),
 ]
 GOOD = [
     L('action', 'Narrator', 'Boppy squints at the sign, then at his stomach, then at the sign again.'),
@@ -117,7 +117,7 @@ check('QA passed' in summary and '9/10' in summary and '1 auto-fix' in summary, 
 check('No remaining notes' in detail, 'badge details: no remaining notes')
 check(nlines >= 4, 'final script shown')
 check(fixinfo == 0, 'no Fix Remaining Issues button on a scene that passed')
-check('TATA' in rw and 'Ta-Ta' in rw, 'linter flags "Tata" and the rewrite prompt says to use Ta-Ta')
+check('TATA' in rw and 'use "Tata"' in rw.replace('Use "Tata"', 'use "Tata"'), 'linter flags "Ta-Ta" and the rewrite prompt says to use Tata')
 dp = reqs[0][2]
 check('NEVER thesaurus-paraphrase' in dp and 'NEVER shoehorn' in dp and 'SkyMiles' in dp and 'plot facts only' in dp and 'Invent fresh comedic dialogue' in dp, 'pass 1 prompt has the beat and trivia rules')
 check('NEVER thesaurus-paraphrase' in rw and 'NEVER shoehorn' in rw and 'Invent fresh comedic dialogue' in rw, 'pass 4 prompt has the beat and trivia rules')
@@ -162,14 +162,14 @@ def chapters():
     return out
 
 
-# Seeded scenarios: the scene already carries a QA badge with saved Critic issues and one linter error ("Tata").
+# Seeded scenarios: the scene already carries a QA badge with saved Critic issues and one linter error ("Ta-Ta").
 OLD2 = "Truly, this establishment looks open, and that disturbs me greatly."
 OLD3 = "Maybe it's just a door, Boppy. A normal door that's open on a weekday."
 SEED = [L('action', 'Narrator', 'Boppy squints at the sign, then at his stomach.'), L('dialogue', 'Boppy', OLD2), L('dialogue', 'TNB', OLD3),
-        L('dialogue', 'Grace', "Tata, Cozy Rosie is on the lamp again, wearing Lamby like a hat.")]
+        L('dialogue', 'Grace', "Ta-Ta, Cozy Rosie is on the lamp again, wearing Lamby like a hat.")]
 NEW2 = "Nobody opens a door this early unless it's a trap, and my stomach knows it."
 NEW3 = "Or it's a door, Boppy. Doors do that. Want to test it with a cinnamon roll?"
-NEW4 = "Ta-Ta, Cozy Rosie is on the lamp again, wearing Lamby like a hat."
+NEW4 = "Tata, Cozy Rosie is on the lamp again, wearing Lamby like a hat."
 ISSUES = [{'lineIndex': 2, 'speaker': 'Boppy', 'category': 'Comedy', 'problem': 'Flat, says nothing funny.', 'fix': 'Give him a gut-based conspiracy.'},
           {'lineIndex': 3, 'speaker': 'TNB', 'category': 'Voice', 'problem': 'TNB would not explain the obvious.', 'fix': 'Dry, offers a practical test.'}]
 
@@ -226,7 +226,7 @@ check('MUST rewrite EVERY flagged line' in rp, 'fix prompt requires every flagge
 rd = reqs[1][1]
 check(OLD2 in rd and OLD3 in rd and 'word for word' in rd, 'redo prompt names the lines that came back unchanged')
 check(NEW2 in texts and NEW3 in texts, 'Critic-flagged lines are replaced in the scene, not just the linter line')
-check(OLD2 not in texts and OLD3 not in texts and NEW4 in texts, 'old flagged text is gone and Tata is fixed')
+check(OLD2 not in texts and OLD3 not in texts and NEW4 in texts, 'old flagged text is gone and Ta-Ta is fixed')
 check('QA passed' in summary and '9/10' in summary and '3 auto-fixes' in summary, 'badge updated from the new QA run: %s' % summary.replace('\n', ' '))
 check(not errs, 'no page errors %s' % errs)
 

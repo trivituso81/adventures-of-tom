@@ -20,7 +20,8 @@ def scene(i, sid, title, loc, lines, qa=None):
 S1 = scene(1, 'ch1_a', 'The Door', 'Rivituso House', [
     line(1, 'action', 'Narrator', 'Boppy squints at the sign.'),
     line(2, 'dialogue', 'Boppy', "I don't trust a door this early.", 'grumpy'),
-    line(3, 'dialogue', 'TNB', "It's just a door.")], {'passed': True, 'score': 9, 'retries': 1, 'notes': [], 'issues': [], 'at': 'x'})
+    line(3, 'dialogue', 'TNB', "It's just a door."),
+    line(6, 'action', 'Narrator', 'If the party loses, the screen fades to a gray kitchen.')], {'passed': True, 'score': 9, 'retries': 1, 'notes': [], 'issues': [], 'at': 'x'})
 S2 = scene(2, 'ch1_b', 'The Lamp', 'Kitchen', [line(4, 'dialogue', 'Grace', 'Rose is on the lamp.'), line(5, 'dialogue', 'Amy', 'Get down, please.')],
            {'passed': False, 'score': 6, 'retries': 2, 'notes': ['L2 (Amy) Voice [high]: flat'], 'issues': [], 'at': 'x'})
 chs = [{'id': 'ch%d' % i, 'number': i, 'label': 'Chapter %d' % i, 'title': 'Chapter %d' % i, 'purpose': '', 'disabledBannedWords': [], 'scenes': [S1, S2] if i == 1 else []} for i in range(1, 22)]
@@ -42,14 +43,17 @@ with sync_playwright() as p:
     check('QA: 9/10' in txt and pg.get_by_test_id('read-qa-notes').count() == 0, 'compact QA pill, notes collapsed')
     pg.get_by_test_id('read-qa-pill').click(); pg.wait_for_timeout(150)
     check(pg.get_by_test_id('read-qa-notes').count() == 1, 'clicking the pill expands the notes')
-    check(pg.evaluate("[...document.querySelectorAll('[data-testid=read-line] .italic')].length") == 1, 'action line is italic prose')
+    check(pg.evaluate("[...document.querySelectorAll('[data-testid=read-line] .italic')].length") == 2, 'action lines are italic prose')
     check(pg.evaluate("document.querySelector('[data-testid=read-line] .uppercase') !== null && getComputedStyle(document.querySelector('[data-testid=read-line] .uppercase')).textTransform === 'uppercase'"), 'speaker name is uppercase bold')
+    br = pg.get_by_test_id('read-branch')
+    check(br.count() == 1 and '[IF PARTY LOSES]' in br.inner_text(), 'conditional action line is badged [IF PARTY LOSES]: %s' % br.inner_text().replace('\n', ' '))
+    check(pg.evaluate("parseFloat(getComputedStyle(document.querySelector('[data-testid=read-branch]')).marginLeft) > 10"), 'conditional block is indented')
     pg.get_by_role('button', name='Full Chapter').click(); pg.wait_for_timeout(300)
     check(pg.get_by_test_id('read-scene').count() == 2, 'Full Chapter shows both scenes continuously')
     full = pg.get_by_test_id('read-view').inner_text()
     check('Kitchen' in full and 'QA: 6/10' in full, 'second scene header has location and its QA pill')
     pg.screenshot(path='/tmp/read-mode.png')
-    pg.get_by_test_id('read-line').nth(4).click(); pg.wait_for_timeout(700)
+    pg.get_by_test_id('read-line').nth(5).click(); pg.wait_for_timeout(700)
     check(pg.get_by_test_id('read-view').count() == 0 and pg.locator('textarea').count() > 0, 'clicking a line returns to Edit Mode')
     sc = pg.evaluate("document.getElementById('line-card-1') && document.getElementById('line-card-1').getBoundingClientRect().top")
     ta = pg.locator('#line-card-1 textarea').input_value()

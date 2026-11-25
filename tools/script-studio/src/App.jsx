@@ -436,11 +436,11 @@ function lintLine(line, activeBannedWords) {
         message: `Overflow (${text.length} ch; max 115)`,
       });
     }
-    if (/\bTata\b/i.test(text)) {
+    if (/\bTa-Ta\b/i.test(text)) {
       warnings.push({
         code: 'TATA',
         severity: 'error',
-        message: 'On-screen spelling is "Ta-Ta" (canon-and-characters.md), never "Tata"',
+        message: 'On-screen spelling is "Tata" with no hyphen (canon-and-characters.md); "Ta-Ta" is for TTS pronunciation only. Use "Tata"',
       });
     }
   }
@@ -916,6 +916,17 @@ function migrateModelSettings(settings) {
 const QA_MAX_RETRIES = 4;
 const QA_STALL_LIMIT = 2; // stop early after this many consecutive retries that do not beat the best score
 const QA_PASS_SCORE = 8;
+// Read Mode: an action line that opens a conditional branch ("If the party loses, ...") gets a badge like [IF PARTY LOSES].
+const branchLabel = (line) => {
+  if (!line || line.type === 'dialogue') return null;
+  const m = String(line.text || '').trim().match(/^(if|when|whenever|should|unless|otherwise|in case)\b\s*(.*?)(?:[,:;.\u2026]|$)/i);
+  if (!m) return null;
+  const kw = m[1].toUpperCase();
+  const cond = m[2].replace(/^(the|a|an)\s+/i, '').trim();
+  if (kw === 'OTHERWISE' || !cond) return kw;
+  const label = `${kw} ${cond}`.toUpperCase();
+  return label.length > 44 ? `${label.slice(0, 43)}\u2026` : label;
+};
 // A scene passes ONLY with score >= QA_PASS_SCORE, 0 linter errors and no high-severity issue in these categories.
 const QA_BLOCKING_CATEGORIES = ['Logic', 'Canon', 'Voice', 'KnowledgeGate'];
 const isBlockingIssue = (i) => i && i.severity === 'high' && QA_BLOCKING_CATEGORIES.includes(i.category);
@@ -1147,7 +1158,7 @@ const HARD_FORMAT_RULES = (activeBannedWords) =>
     '- Never put spoken dialogue (quoted speech) inside an "action" line. Speech is always its own "dialogue" line.',
     '- Every "dialogue" line is 35 to 115 characters.',
     '- TNB never uses "!" or ALL-CAPS words. Nara never speaks (her sounds are "action" lines).',
-    '- On screen, the girls\' name for Tom is written "Ta-Ta", never "Tata".',
+    '- On screen, the girls\' name for Tom is written "Tata" (no hyphen), never "Ta-Ta". Hyphenated "Ta-Ta" is for TTS pronunciation only.',
     `- Mood/pose is one single value from [${ALL_MOOD_POSE_OPTIONS.join(', ')}]. Julian Vance, Clara and Mr. Pistachio use "none".`,
     `- Never use: ${[...new Set([...(activeBannedWords || []), ...DEPRECATED_TERMS, ...AI_COMEDY_CLICHES])].join(', ')}. Never "Rosie" alone (only "Cozy Rosie").`,
   ].join('\n');
@@ -1397,7 +1408,7 @@ async function runSceneQAPipeline({ apiKey, genModelId, auditModelId, vaultDocs,
     'Format, one item per line:',
     '  ACTION: a short description of what happens (never contains anyone speaking)',
     '  NAME (mood): what the character says   [mood is optional]',
-    `Aim for ${s.minLines} to ${s.maxLines} spoken lines, each under 115 characters. Contractions always. Zero em dashes. Never put spoken dialogue inside an ACTION line. On screen, write the girls' name for Tom as "Ta-Ta", never "Tata".`,
+    `Aim for ${s.minLines} to ${s.maxLines} spoken lines, each under 115 characters. Contractions always. Zero em dashes. Never put spoken dialogue inside an ACTION line. On screen, write the girls' name for Tom as "Tata" (no hyphen), never "Ta-Ta".`,
     `Never use these words: ${[...new Set([...(activeBannedWords || []), ...DEPRECATED_TERMS])].join(', ')}.`,
     '',
     `=== REFERENCE DOC: comedy-bible.md ===\n${comedyBible || '(not loaded)'}\n=== END comedy-bible.md ===`,
@@ -3198,6 +3209,13 @@ export default function App() {
                             </div>
                             <p className="text-center">{line.text}</p>
                           </>
+                        ) : branchLabel(line) ? (
+                          <div className="ml-6 pl-4 border-l-2 border-amber-500/50" data-testid="read-branch">
+                            <span className="inline-block mb-1 text-[11px] font-sans font-bold tracking-wider text-amber-300 bg-amber-500/10 border border-amber-500/30 rounded px-1.5 py-0.5">
+                              [{branchLabel(line)}]
+                            </span>
+                            <p className="italic text-slate-400">{line.text}</p>
+                          </div>
                         ) : (
                           <p className="italic text-slate-400">{line.text}</p>
                         )}

@@ -27,7 +27,7 @@ Other canon: Michael is about 10% taller than the other adults; Justin (6'5" in 
 
 ## Voice and tone rules
 
-- The girls call Tom **"Tata"** (both syllables stressed equally) in **speech only**. Written as "Ta-Ta" in on-screen text, spelled "Tah Tah" in voice-bake scripts. Every menu, interface and system message says **Tom**.
+- The girls call Tom **"Tata"** (both syllables stressed equally) in **speech only**. **Tom's nickname is ALWAYS spelled "Tata" (no hyphen) in all on-screen dialogue and text.** Hyphenated "Ta-Ta" or "Tah Tah" is strictly for ElevenLabs TTS pronunciation (voice-bake scripts) and must NEVER appear in on-screen script dialogue. Every menu, interface and system message says **Tom**.
 - Dialogue is short, warm and funny. Jokes come from the character, not from randomness.
 - **No em dashes anywhere in game text.**
 - Abilities must come from each character's real interests and personality. Tom rejected a "heel click" for 9-year-old Grace because no 9-year-old would do or know it. If a move is a clever adult idea a real kid would not have, it is wrong.

@@ -117,7 +117,7 @@ Format for each: Workshop note (the one-liner in the packet), Comedy engine, bli
 | Mundane | Louder about little things (a seat, a lanyard, a loaf). Thrilled by a visitor lanyard (Tom confirmed). |
 | Signature lines | "That was UNCALLED for!" / "No touching, please." / "I own a house." / "Six years he's waved at me. I've never once come up these steps." |
 | Moves (comedy DNA) | Disconnected Controller, Starter Splash, Sourdough Snob, Retail Therapy, Seat 1A Peasants, 10-Step Skincare, Konami Code, Know-It-All, Cartridge Tilt |
-| Rules | Never condescending, never the judge, never "I'm so annoyed" or repeating back disbelief. Never sarcastic straight man. Never announces a trait. Girls call him "Tata" in speech only, "Ta-Ta" on screen, "Tom" in every interface. |
+| Rules | Never condescending, never the judge, never "I'm so annoyed" or repeating back disbelief. Never sarcastic straight man. Never announces a trait. Girls call him "Tata" in speech and on screen (never "Ta-Ta"; hyphenated spellings are TTS-only), "Tom" in every interface. |
 | Items | Lucky Controller; Lie-Flat Slippers ("Delta One amenity kit. Tom has kept them since 2019."); Mechanical Keyboard (starter) |
 
 ### 2.2 Grace (9, 4'2)
