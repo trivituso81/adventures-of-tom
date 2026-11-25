@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-25T05:28:38Z",
+  "updated_at": "2026-11-25T06:46:28Z",
   "items": [
     {
       "id": "tom_hero_0",
@@ -1538,6 +1538,395 @@
       "status": "review",
       "webm_path": "art-factory/staging/rose/battle_move_draft_rose-cr-cap/battle_alpha.webm",
       "safari_mp4_path": "art-factory/staging/rose/battle_move_draft_rose-cr-cap/battle_alpha_safari_hvc1.mp4"
+    },
+    {
+      "id": "tom_start_frame_tom-lounge-pass",
+      "character_id": "tom",
+      "stage": "start_frames",
+      "move_id": "tom-lounge-pass",
+      "held_props": [
+        "laminated Sky Club pass",
+        "metal brag tag"
+      ],
+      "used_by_moves": [
+        "tom-ff-basic"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/tom-lounge-pass_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/tom-lounge-pass.png",
+      "status": "review"
+    },
+    {
+      "id": "tom_start_frame_tom-carryon",
+      "character_id": "tom",
+      "stage": "start_frames",
+      "move_id": "tom-carryon",
+      "held_props": [
+        "black hard-shell rolling carry-on suitcase"
+      ],
+      "used_by_moves": [
+        "tom-ff-s1",
+        "tom-ff-s1_counter"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/tom-carryon_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/tom-carryon.png",
+      "status": "review"
+    },
+    {
+      "id": "tom_start_frame_tom-360-medallion",
+      "character_id": "tom",
+      "stage": "start_frames",
+      "move_id": "tom-360-medallion",
+      "held_props": [
+        "black invite-only 360 medallion"
+      ],
+      "used_by_moves": [
+        "tom-ff-cap"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/tom-360-medallion_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/tom-360-medallion.png",
+      "status": "review"
+    },
+    {
+      "id": "grace_start_frame_grace-white-dumpling",
+      "character_id": "grace",
+      "stage": "start_frames",
+      "move_id": "grace-white-dumpling",
+      "held_props": [
+        "palm-sized white soup-dumpling squishy"
+      ],
+      "used_by_moves": [
+        "grace-sc-basic"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/grace-white-dumpling_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/grace-white-dumpling.png",
+      "status": "review"
+    },
+    {
+      "id": "grace_start_frame_grace-needoh",
+      "character_id": "grace",
+      "stage": "start_frames",
+      "move_id": "grace-needoh",
+      "held_props": [
+        "bright neon-teal gel NeeDoh ball"
+      ],
+      "used_by_moves": [
+        "grace-sc-s1"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/grace-needoh_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/grace-needoh.png",
+      "status": "review"
+    },
+    {
+      "id": "grace_start_frame_grace-sugar-cube",
+      "character_id": "grace",
+      "stage": "start_frames",
+      "move_id": "grace-sugar-cube",
+      "held_props": [
+        "translucent ice-cube sugar squishy"
+      ],
+      "used_by_moves": [
+        "grace-sc-s2"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/grace-sugar-cube_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/grace-sugar-cube.png",
+      "status": "review"
+    },
+    {
+      "id": "rose_start_frame_rose-goggles-lamby",
+      "character_id": "rose",
+      "stage": "start_frames",
+      "move_id": "rose-goggles-lamby",
+      "held_props": [
+        "tattered Lamby plush",
+        "tiny aviator goggles"
+      ],
+      "used_by_moves": [
+        "rose-sr-s2"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/rose-goggles-lamby_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/rose-goggles-lamby.png",
+      "status": "review"
+    },
+    {
+      "id": "rose_start_frame_rose-twin-lambies",
+      "character_id": "rose",
+      "stage": "start_frames",
+      "move_id": "rose-twin-lambies",
+      "held_props": [
+        "tattered Lamby plush",
+        "spotless white Backup Lamby plush"
+      ],
+      "used_by_moves": [
+        "rose-sr-cap"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/rose-twin-lambies_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/rose-twin-lambies.png",
+      "status": "review"
+    },
+    {
+      "id": "amy_start_frame_amy-kettlebell",
+      "character_id": "amy",
+      "stage": "start_frames",
+      "move_id": "amy-kettlebell",
+      "held_props": [
+        "cast-iron kettlebell"
+      ],
+      "used_by_moves": [
+        "amy-fq-basic",
+        "amy-fq-cap"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/amy-kettlebell_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/amy-kettlebell.png",
+      "status": "review"
+    },
+    {
+      "id": "deedee_start_frame_deedee-windex",
+      "character_id": "deedee",
+      "stage": "start_frames",
+      "move_id": "deedee-windex",
+      "held_props": [
+        "bright blue Windex spray bottle"
+      ],
+      "used_by_moves": [
+        "deedee-nf-basic"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/deedee-windex_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/deedee-windex.png",
+      "status": "review"
+    },
+    {
+      "id": "deedee_start_frame_deedee-mop-sign",
+      "character_id": "deedee",
+      "stage": "start_frames",
+      "move_id": "deedee-mop-sign",
+      "held_props": [
+        "wooden-handle string mop",
+        "folded yellow caution sign"
+      ],
+      "used_by_moves": [
+        "deedee-nf-s1"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/deedee-mop-sign_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/deedee-mop-sign.png",
+      "status": "review"
+    },
+    {
+      "id": "deedee_start_frame_deedee-glasses-pin",
+      "character_id": "deedee",
+      "stage": "start_frames",
+      "move_id": "deedee-glasses-pin",
+      "held_props": [
+        "reading glasses",
+        "wooden rolling pin"
+      ],
+      "used_by_moves": [
+        "deedee-nf-s2"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/deedee-glasses-pin_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/deedee-glasses-pin.png",
+      "status": "review"
+    },
+    {
+      "id": "deedee_start_frame_deedee-gloves-mop",
+      "character_id": "deedee",
+      "stage": "start_frames",
+      "move_id": "deedee-gloves-mop",
+      "held_props": [
+        "bright yellow rubber cleaning gloves",
+        "wooden-handle string mop"
+      ],
+      "used_by_moves": [
+        "deedee-nf-cap"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/deedee-gloves-mop_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/deedee-gloves-mop.png",
+      "status": "review"
+    },
+    {
+      "id": "boppy_start_frame_boppy-nightstick",
+      "character_id": "boppy",
+      "stage": "start_frames",
+      "move_id": "boppy-nightstick",
+      "held_props": [
+        "wooden warden nightstick"
+      ],
+      "used_by_moves": [
+        "boppy-dep-basic",
+        "boppy-dep-s1"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/boppy-nightstick_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/boppy-nightstick.png",
+      "status": "review"
+    },
+    {
+      "id": "boppy_start_frame_boppy-keys",
+      "character_id": "boppy",
+      "stage": "start_frames",
+      "move_id": "boppy-keys",
+      "held_props": [
+        "heavy brass warden key ring"
+      ],
+      "used_by_moves": [
+        "boppy-dep-cap"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/boppy-keys_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/boppy-keys.png",
+      "status": "review"
+    },
+    {
+      "id": "tnb_start_frame_tnb-clay-lump",
+      "character_id": "tnb",
+      "stage": "start_frames",
+      "move_id": "tnb-clay-lump",
+      "held_props": [
+        "studio potter apron",
+        "hefty lump of wet gray stoneware clay"
+      ],
+      "used_by_moves": [
+        "tnb-cer-basic"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/tnb-clay-lump_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/tnb-clay-lump.png",
+      "status": "review"
+    },
+    {
+      "id": "tnb_start_frame_tnb-kiln-mitt",
+      "character_id": "tnb",
+      "stage": "start_frames",
+      "move_id": "tnb-kiln-mitt",
+      "held_props": [
+        "quilted kiln mitt"
+      ],
+      "used_by_moves": [
+        "tnb-cer-s2"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/tnb-kiln-mitt_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/tnb-kiln-mitt.png",
+      "status": "review"
+    },
+    {
+      "id": "nara_start_frame_nara-water-bowl",
+      "character_id": "nara",
+      "stage": "start_frames",
+      "move_id": "nara-water-bowl",
+      "held_props": [
+        "stainless steel water bowl"
+      ],
+      "used_by_moves": [
+        "nara-ap-basic"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/nara-water-bowl_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/nara-water-bowl.png",
+      "status": "review"
+    },
+    {
+      "id": "justin_start_frame_justin-studfinder-hammer",
+      "character_id": "justin",
+      "stage": "start_frames",
+      "move_id": "justin-studfinder-hammer",
+      "held_props": [
+        "yellow electronic stud finder",
+        "framing hammer"
+      ],
+      "used_by_moves": [
+        "justin-bb-basic"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/justin-studfinder-hammer_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/justin-studfinder-hammer.png",
+      "status": "review"
+    },
+    {
+      "id": "justin_start_frame_justin-crowbar",
+      "character_id": "justin",
+      "stage": "start_frames",
+      "move_id": "justin-crowbar",
+      "held_props": [
+        "heavy forged steel crowbar"
+      ],
+      "used_by_moves": [
+        "justin-bb-s1"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/justin-crowbar_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/justin-crowbar.png",
+      "status": "review"
+    },
+    {
+      "id": "justin_start_frame_justin-level-driver",
+      "character_id": "justin",
+      "stage": "start_frames",
+      "move_id": "justin-level-driver",
+      "held_props": [
+        "small carpenter level",
+        "cordless impact driver"
+      ],
+      "used_by_moves": [
+        "justin-bb-s2"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/justin-level-driver_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/justin-level-driver.png",
+      "status": "review"
+    },
+    {
+      "id": "olivia_start_frame_olivia-speed-rope",
+      "character_id": "olivia",
+      "stage": "start_frames",
+      "move_id": "olivia-speed-rope",
+      "held_props": [
+        "speed jump rope"
+      ],
+      "used_by_moves": [
+        "olivia-rc-basic",
+        "olivia-rc-s1",
+        "olivia-rc-s2",
+        "olivia-rc-cap"
+      ],
+      "engine": "gemini",
+      "raw_path": "art-factory/staging/start-frames/_raw/olivia-speed-rope_raw.png",
+      "rgba_path": "",
+      "start_frame_path": "art-factory/staging/start-frames/olivia-speed-rope.png",
+      "status": "review"
     }
   ]
 }

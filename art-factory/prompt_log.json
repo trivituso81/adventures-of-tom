@@ -1,0 +1,437 @@
+{
+  "entries": [
+    {
+      "item_id": "tom_start_frame_tom-360-medallion",
+      "character_id": "tom",
+      "stage": "start_frames",
+      "move_id": "tom-360-medallion",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/tom-hero.png",
+      "output_path": "art-factory/staging/start-frames/tom-360-medallion.png",
+      "held_props": [
+        "black invite-only 360 medallion"
+      ],
+      "used_by_moves": [
+        "tom-ff-cap"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Tom on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Tom full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: black invite-only 360 medallion. Character details: Baseline adult face height reference; short trimmed beard, hair combed horizontally left to right. Outfit: dark indigo-purple short-sleeve t-shirt with small classic game controller graphic on chest, brown leather belt, olive-brown utility pants, dark wristwatch on left wrist, sturdy cream sneakers.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:43:49Z"
+    },
+    {
+      "item_id": "tom_start_frame_tom-lounge-pass",
+      "character_id": "tom",
+      "stage": "start_frames",
+      "move_id": "tom-lounge-pass",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/tom-hero.png",
+      "output_path": "art-factory/staging/start-frames/tom-lounge-pass.png",
+      "held_props": [
+        "laminated Sky Club pass",
+        "metal brag tag"
+      ],
+      "used_by_moves": [
+        "tom-ff-basic"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Tom on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Tom full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: laminated Sky Club pass, metal brag tag. Character details: Baseline adult face height reference; short trimmed beard, hair combed horizontally left to right. Outfit: dark indigo-purple short-sleeve t-shirt with small classic game controller graphic on chest, brown leather belt, olive-brown utility pants, dark wristwatch on left wrist, sturdy cream sneakers.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:43:49Z"
+    },
+    {
+      "item_id": "tom_start_frame_tom-carryon",
+      "character_id": "tom",
+      "stage": "start_frames",
+      "move_id": "tom-carryon",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/tom-hero.png",
+      "output_path": "art-factory/staging/start-frames/tom-carryon.png",
+      "held_props": [
+        "black hard-shell rolling carry-on suitcase"
+      ],
+      "used_by_moves": [
+        "tom-ff-s1",
+        "tom-ff-s1_counter"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Tom on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Tom full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: black hard-shell rolling carry-on suitcase. Character details: Baseline adult face height reference; short trimmed beard, hair combed horizontally left to right. Outfit: dark indigo-purple short-sleeve t-shirt with small classic game controller graphic on chest, brown leather belt, olive-brown utility pants, dark wristwatch on left wrist, sturdy cream sneakers.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:43:49Z"
+    },
+    {
+      "item_id": "grace_start_frame_grace-sugar-cube",
+      "character_id": "grace",
+      "stage": "start_frames",
+      "move_id": "grace-sugar-cube",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/grace.png",
+      "output_path": "art-factory/staging/start-frames/grace-sugar-cube.png",
+      "held_props": [
+        "translucent ice-cube sugar squishy"
+      ],
+      "used_by_moves": [
+        "grace-sc-s2"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Grace on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Grace full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: translucent ice-cube sugar squishy. Character details: Carries Sparkling Diamond Gold Soup Dumpling Squishy.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:44:10Z"
+    },
+    {
+      "item_id": "grace_start_frame_grace-white-dumpling",
+      "character_id": "grace",
+      "stage": "start_frames",
+      "move_id": "grace-white-dumpling",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/grace.png",
+      "output_path": "art-factory/staging/start-frames/grace-white-dumpling.png",
+      "held_props": [
+        "palm-sized white soup-dumpling squishy"
+      ],
+      "used_by_moves": [
+        "grace-sc-basic"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Grace on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Grace full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: palm-sized white soup-dumpling squishy. Character details: Carries Sparkling Diamond Gold Soup Dumpling Squishy.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:44:11Z"
+    },
+    {
+      "item_id": "grace_start_frame_grace-needoh",
+      "character_id": "grace",
+      "stage": "start_frames",
+      "move_id": "grace-needoh",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/grace.png",
+      "output_path": "art-factory/staging/start-frames/grace-needoh.png",
+      "held_props": [
+        "bright neon-teal gel NeeDoh ball"
+      ],
+      "used_by_moves": [
+        "grace-sc-s1"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Grace on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Grace full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: bright neon-teal gel NeeDoh ball. Character details: Carries Sparkling Diamond Gold Soup Dumpling Squishy.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:44:11Z"
+    },
+    {
+      "item_id": "amy_start_frame_amy-kettlebell",
+      "character_id": "amy",
+      "stage": "start_frames",
+      "move_id": "amy-kettlebell",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/amy.png",
+      "output_path": "art-factory/staging/start-frames/amy-kettlebell.png",
+      "held_props": [
+        "cast-iron kettlebell"
+      ],
+      "used_by_moves": [
+        "amy-fq-basic",
+        "amy-fq-cap"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Amy on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Amy full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: cast-iron kettlebell. Character details: Fitness Queen and elementary Special Ed teacher.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:44:32Z"
+    },
+    {
+      "item_id": "rose_start_frame_rose-goggles-lamby",
+      "character_id": "rose",
+      "stage": "start_frames",
+      "move_id": "rose-goggles-lamby",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/rose.png",
+      "output_path": "art-factory/staging/start-frames/rose-goggles-lamby.png",
+      "held_props": [
+        "tattered Lamby plush",
+        "tiny aviator goggles"
+      ],
+      "used_by_moves": [
+        "rose-sr-s2"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Rose on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Rose full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: tattered Lamby plush, tiny aviator goggles. Character details: Carries tattered Lamby plush.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:44:33Z"
+    },
+    {
+      "item_id": "rose_start_frame_rose-twin-lambies",
+      "character_id": "rose",
+      "stage": "start_frames",
+      "move_id": "rose-twin-lambies",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/rose.png",
+      "output_path": "art-factory/staging/start-frames/rose-twin-lambies.png",
+      "held_props": [
+        "tattered Lamby plush",
+        "spotless white Backup Lamby plush"
+      ],
+      "used_by_moves": [
+        "rose-sr-cap"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Rose on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Rose full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: tattered Lamby plush, spotless white Backup Lamby plush. Character details: Carries tattered Lamby plush.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:44:33Z"
+    },
+    {
+      "item_id": "deedee_start_frame_deedee-mop-sign",
+      "character_id": "deedee",
+      "stage": "start_frames",
+      "move_id": "deedee-mop-sign",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/deedee.png",
+      "output_path": "art-factory/staging/start-frames/deedee-mop-sign.png",
+      "held_props": [
+        "wooden-handle string mop",
+        "folded yellow caution sign"
+      ],
+      "used_by_moves": [
+        "deedee-nf-s1"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Deedee on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Deedee full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: wooden-handle string mop, folded yellow caution sign. Character details: Retired nurse matriarch; warm apple muffins.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:44:54Z"
+    },
+    {
+      "item_id": "deedee_start_frame_deedee-windex",
+      "character_id": "deedee",
+      "stage": "start_frames",
+      "move_id": "deedee-windex",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/deedee.png",
+      "output_path": "art-factory/staging/start-frames/deedee-windex.png",
+      "held_props": [
+        "bright blue Windex spray bottle"
+      ],
+      "used_by_moves": [
+        "deedee-nf-basic"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Deedee on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Deedee full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: bright blue Windex spray bottle. Character details: Retired nurse matriarch; warm apple muffins.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:44:55Z"
+    },
+    {
+      "item_id": "deedee_start_frame_deedee-glasses-pin",
+      "character_id": "deedee",
+      "stage": "start_frames",
+      "move_id": "deedee-glasses-pin",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/deedee.png",
+      "output_path": "art-factory/staging/start-frames/deedee-glasses-pin.png",
+      "held_props": [
+        "reading glasses",
+        "wooden rolling pin"
+      ],
+      "used_by_moves": [
+        "deedee-nf-s2"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Deedee on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Deedee full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: reading glasses, wooden rolling pin. Character details: Retired nurse matriarch; warm apple muffins.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:44:57Z"
+    },
+    {
+      "item_id": "boppy_start_frame_boppy-nightstick",
+      "character_id": "boppy",
+      "stage": "start_frames",
+      "move_id": "boppy-nightstick",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/boppy.png",
+      "output_path": "art-factory/staging/start-frames/boppy-nightstick.png",
+      "held_props": [
+        "wooden warden nightstick"
+      ],
+      "used_by_moves": [
+        "boppy-dep-basic",
+        "boppy-dep-s1"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Boppy on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Boppy full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: wooden warden nightstick. Character details: Always wearing fishing rod and creel at all times, indoors and outdoors.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:45:20Z"
+    },
+    {
+      "item_id": "boppy_start_frame_boppy-keys",
+      "character_id": "boppy",
+      "stage": "start_frames",
+      "move_id": "boppy-keys",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/boppy.png",
+      "output_path": "art-factory/staging/start-frames/boppy-keys.png",
+      "held_props": [
+        "heavy brass warden key ring"
+      ],
+      "used_by_moves": [
+        "boppy-dep-cap"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Boppy on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Boppy full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: heavy brass warden key ring. Character details: Always wearing fishing rod and creel at all times, indoors and outdoors.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:45:20Z"
+    },
+    {
+      "item_id": "deedee_start_frame_deedee-gloves-mop",
+      "character_id": "deedee",
+      "stage": "start_frames",
+      "move_id": "deedee-gloves-mop",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/deedee.png",
+      "output_path": "art-factory/staging/start-frames/deedee-gloves-mop.png",
+      "held_props": [
+        "bright yellow rubber cleaning gloves",
+        "wooden-handle string mop"
+      ],
+      "used_by_moves": [
+        "deedee-nf-cap"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Deedee on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Deedee full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: bright yellow rubber cleaning gloves, wooden-handle string mop. Character details: Retired nurse matriarch; warm apple muffins.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:45:25Z"
+    },
+    {
+      "item_id": "tnb_start_frame_tnb-clay-lump",
+      "character_id": "tnb",
+      "stage": "start_frames",
+      "move_id": "tnb-clay-lump",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/tnb.png",
+      "output_path": "art-factory/staging/start-frames/tnb-clay-lump.png",
+      "held_props": [
+        "studio potter apron",
+        "hefty lump of wet gray stoneware clay"
+      ],
+      "used_by_moves": [
+        "tnb-cer-basic"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of TNB on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show TNB full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: studio potter apron, hefty lump of wet gray stoneware clay. Character details: Spring Street ceramicist and LA longboarder.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:45:40Z"
+    },
+    {
+      "item_id": "tnb_start_frame_tnb-kiln-mitt",
+      "character_id": "tnb",
+      "stage": "start_frames",
+      "move_id": "tnb-kiln-mitt",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/tnb.png",
+      "output_path": "art-factory/staging/start-frames/tnb-kiln-mitt.png",
+      "held_props": [
+        "quilted kiln mitt"
+      ],
+      "used_by_moves": [
+        "tnb-cer-s2"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of TNB on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show TNB full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: quilted kiln mitt. Character details: Spring Street ceramicist and LA longboarder.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:45:44Z"
+    },
+    {
+      "item_id": "nara_start_frame_nara-water-bowl",
+      "character_id": "nara",
+      "stage": "start_frames",
+      "move_id": "nara-water-bowl",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/nara.png",
+      "output_path": "art-factory/staging/start-frames/nara-water-bowl.png",
+      "held_props": [
+        "stainless steel water bowl"
+      ],
+      "used_by_moves": [
+        "nara-ap-basic"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Nara on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Nara full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: stainless steel water bowl. Character details: 40-lb black Labradoodle; non-speaking.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:45:47Z"
+    },
+    {
+      "item_id": "justin_start_frame_justin-level-driver",
+      "character_id": "justin",
+      "stage": "start_frames",
+      "move_id": "justin-level-driver",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/justin.png",
+      "output_path": "art-factory/staging/start-frames/justin-level-driver.png",
+      "held_props": [
+        "small carpenter level",
+        "cordless impact driver"
+      ],
+      "used_by_moves": [
+        "justin-bb-s2"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Justin on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Justin full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: small carpenter level, cordless impact driver. Character details: 6 ft 4 in lineman and DIY renovator.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:46:08Z"
+    },
+    {
+      "item_id": "justin_start_frame_justin-studfinder-hammer",
+      "character_id": "justin",
+      "stage": "start_frames",
+      "move_id": "justin-studfinder-hammer",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/justin.png",
+      "output_path": "art-factory/staging/start-frames/justin-studfinder-hammer.png",
+      "held_props": [
+        "yellow electronic stud finder",
+        "framing hammer"
+      ],
+      "used_by_moves": [
+        "justin-bb-basic"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Justin on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Justin full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: yellow electronic stud finder, framing hammer. Character details: 6 ft 4 in lineman and DIY renovator.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:46:08Z"
+    },
+    {
+      "item_id": "justin_start_frame_justin-crowbar",
+      "character_id": "justin",
+      "stage": "start_frames",
+      "move_id": "justin-crowbar",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/justin.png",
+      "output_path": "art-factory/staging/start-frames/justin-crowbar.png",
+      "held_props": [
+        "heavy forged steel crowbar"
+      ],
+      "used_by_moves": [
+        "justin-bb-s1"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Justin on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Justin full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: heavy forged steel crowbar. Character details: 6 ft 4 in lineman and DIY renovator.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:46:08Z"
+    },
+    {
+      "item_id": "olivia_start_frame_olivia-speed-rope",
+      "character_id": "olivia",
+      "stage": "start_frames",
+      "move_id": "olivia-speed-rope",
+      "model": "gemini-3-pro-image",
+      "resolution": "2K",
+      "source_path": "art-factory/refs/olivia.png",
+      "output_path": "art-factory/staging/start-frames/olivia-speed-rope.png",
+      "held_props": [
+        "speed jump rope"
+      ],
+      "used_by_moves": [
+        "olivia-rc-basic",
+        "olivia-rc-s1",
+        "olivia-rc-s2",
+        "olivia-rc-cap"
+      ],
+      "prompt": "Prop-locked neutral battle-ready character start frame of Olivia on a solid flat #808080 mid-grey studio background. Keep the EXACT character design, face, hair, age, proportions, outfit, bold dark ink contour lines, and chunky hand-painted shading from the attached approved Hero character image. Show Olivia full-body from head to toe with generous empty mid-grey margin on all sides, centered, angled slightly right in a ready battle stance, clearly holding or equipped with: speed jump rope. Character details: News anchor, working mom, jump-rope champ.. Illustrated storybook RPG character concept art: about 4 heads tall, large head, small slender body, sturdy shoes, large gentle simplified eyes, whimsical fairy-tale charm matching the character's age. Bold dark ink contour lines, chunky brushed painted shading in a few clear tones, rich warm saturated jewel-toned colors, warm golden light from upper-left. Match the exact line weight, brush texture, and color richness of the style reference. Not flat vector art, not muted grey pencil sketch, not photorealistic 3D. Flat #808080 mid-grey studio background. Solid flat #808080 mid-grey background only. No ground shadow, no floor, no scenery, no text, no extra characters, no glowing particles.",
+      "feedback": "",
+      "logged_at": "2026-11-25T06:46:28Z"
+    }
+  ]
+}
