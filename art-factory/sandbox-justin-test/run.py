@@ -8,7 +8,7 @@ import os, sys, json, subprocess, time
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, '..', '..', 'tools', 'art-library'))
 import falq
-CAP = 2.50   # raised by Tom: 1.00 -> 1.25 (14:44) -> 2.00 (14:46) -> 2.50 (15:06), 2026-11-25
+CAP = 3.25   # raised by Tom: 1.00 -> 1.25 (14:44) -> 2.00 (14:46) -> 2.50 (15:06) -> 3.25 (15:29), 2026-11-25
 IMG, VID = 'fal-ai/nano-banana/edit', 'fal-ai/kling-video/v3/pro/image-to-video'
 EST_IMG, EST_VID = 0.0398, 0.60          # EST_VID is a guard figure only; the live fal price is read first and booked if higher
 LEDGER = os.path.join(HERE, 'ledger.json')
@@ -21,8 +21,8 @@ START = ("Keep this exact character from the reference image: same face, hair, b
          "16:9 landscape frame, fixed camera: his full body from boots to hair fills about 55 percent of the frame height, centered horizontally, boots 12 percent above the bottom edge, "
          "wide margin of empty green on all four sides, nothing cropped. Background is one solid flat pure #00FF00 green, no floor, no shadow, no gradient. "
          "No glowing, no beams, no light cones, no rays, no sparks, no effects of any kind.")
-MOTION = ("2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: justin-bb-basic | 2.7s | 65 frames @ 24fps] Justin steps forward in-place gliding a yellow electronic stud finder smoothly left-to-right until pausing at a spot, swiftly draws a framing hammer from his belt for one crisp deadpan knock left, tucks the hammer back, and steps to idle. No glowing beams, no light cones, no laser or scanner rays, no impact sparks, no comic stars, no visual effects of any kind. Strictly locked static camera, no scale drift: Justin stays the same size and on the same spot.")
-NEG = ("camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines, glowing beams, light cones, laser rays, scanner rays, impact sparks, comic stars, glow effects")
+MOTION = ("2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. Justin starts in his neutral idle battle stance. He steps briskly into stance, glides the palm-sized yellow electronic stud finder briefly left to right through empty air, swiftly draws the framing hammer from his belt for one crisp deadpan knock left into empty air, immediately tucks the hammer back into his belt, and steps cleanly back into his exact starting neutral idle stance, completing the whole sequence quickly with a held idle at the end. Strictly locked static camera, zero scale drift, Justin stays the same size, pure solid #00FF00 green background throughout. No floating white rings, no target circles, no reticles, no glowing beams, no light cones, no sparks, no comic stars, no floating objects of any kind, no visual effects.")
+NEG = ("camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines, floating white rings, target circles, reticles, crosshairs, glowing beams, light cones, laser rays, scanner rays, sparks, impact sparks, comic stars, floating objects, glow effects, ground shadow, face changes, character shrinking, camera movement")
 
 def say(*a): print(time.strftime('%H:%M:%S'), *a, flush=True)
 def spent():
@@ -49,14 +49,15 @@ def main():
         import shutil; shutil.copyfile(P('start.png'), P('end.png')); say('end.png is an exact copy of start.png (seamless return to idle)')
     if os.environ.get('STAGE') == 'end': say('stage end only: stopping before the video, spent $%.4f' % spent()); return
     if not os.path.exists(P('raw.mp4')):
-        guard(EST_VID); say('making video (Kling v3 Pro image-to-video, 3 s, start image only)')
-        live = fal.price(VID); est = falq.apply_live(EST_VID if not live else 0, live, 'video', 3) or EST_VID
+        guard(EST_VID); say('making video (Kling v3 Pro image-to-video, 4 s, start image only)')
+        live = fal.price(VID); est = falq.apply_live(EST_VID if not live else 0, live, 'video', 4) or EST_VID
         say('fal live price:', live, '-> booking', est)
         if spent() + est > CAP: sys.exit('STOP: live price too high for the cap')
         body = {'prompt': MOTION, 'negative_prompt': NEG, 'start_image_url': falq.data_uri(open(P('start.png'), 'rb').read()),
-                'duration': '3', 'generate_audio': False}
+                'duration': '4', 'generate_audio': False}
         res = fal.wait(fal.send(VID, body))
         open(P('raw.mp4'), 'wb').write(fal.download(res['video']['url'])); book('raw.mp4', est)
+    if os.environ.get('STAGE') == 'raw': say('stage raw: stopping after the raw video, spent $%.4f' % spent()); return
     import numpy as np
     r = subprocess.run(['ffmpeg', '-loglevel', 'error', '-i', P('raw.mp4'), '-vf', 'scale=160:90,format=gray', '-f', 'rawvideo', '-'], capture_output=True, check=True)
     fr = np.frombuffer(r.stdout, np.uint8).reshape(-1, 90, 160).astype(float)
