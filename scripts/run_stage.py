@@ -12,6 +12,7 @@ from google.genai import types
 from PIL import Image
 from art_director_agent import ANTI_RING_NEG, IDLE_NEG, build_prompt, describe_child_geometry, get_character, list_character_move_ids, load_manifest, resolve_move_prompts
 from qa_judge_agent import judge_candidate
+from qa_video_audit import audit_queue_items
 
 BATTLE_STATES = ("dodge", "cast", "hit", "ko")
 
@@ -57,6 +58,20 @@ def save_queue(path, data):
     p = Path(path)
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(data, indent=2) + chr(10), encoding="utf-8")
+
+def append_prompt_log(cfg, entry):
+    log_path = Path(cfg.get("prompt_log_path", "art-factory/prompt_log.json"))
+    if log_path.exists():
+        try:
+            log_data = json.loads(log_path.read_text(encoding="utf-8"))
+        except Exception:
+            log_data = {"entries": []}
+    else:
+        log_data = {"entries": []}
+    entry["logged_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+    log_data.setdefault("entries", []).append(entry)
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    log_path.write_text(json.dumps(log_data, indent=2) + chr(10), encoding="utf-8")
 
 def download_file(url, dest):
     r = requests.get(url, timeout=180)
@@ -203,14 +218,20 @@ def generate_video_item(stage, char, cfg, move_id, feedback, hero_src):
     print(f"[video:{char['id']}] source hero={hero_src}", flush=True)
     clean_src = prep_video_source(hero_src, out_dir, cfg)
     img_url = fal_client.upload_file(str(clean_src))
+    model_used = cfg["models"]["video_move"]
+    res_tag = "480p"
+    neg_prompt = ""
     if stage == "battle_idle":
+        model_used = cfg["models"]["video_idle"]
+        res_tag = "4s"
         prompt = build_prompt(stage, char, cfg, move_id=move_id, feedback=feedback)
-        print(f"[video:{char['id']}] calling {cfg['models']['video_idle']} (4s, audio off)", flush=True)
+        neg_prompt = IDLE_NEG
+        print(f"[video:{char['id']}] calling {model_used} (4s, audio off)", flush=True)
         try:
-            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "negative_prompt": IDLE_NEG, "start_image_url": img_url, "end_image_url": img_url, "duration": "4", "generate_audio": False})
+            res = fal_client.subscribe(model_used, arguments={"prompt": prompt, "negative_prompt": neg_prompt, "start_image_url": img_url, "end_image_url": img_url, "duration": "4", "generate_audio": False})
         except Exception as e1:
             print(f"[video:{char['id']}] kling start/end retry: {e1}", flush=True)
-            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "negative_prompt": IDLE_NEG, "start_image_url": img_url, "duration": "4", "generate_audio": False})
+            res = fal_client.subscribe(model_used, arguments={"prompt": prompt, "negative_prompt": neg_prompt, "start_image_url": img_url, "duration": "4", "generate_audio": False})
     elif stage in ("battle_state_draft", "battle_state_final"):
         res_tag = "480p" if stage == "battle_state_draft" else "1080p"
         state_key = (move_id or "dodge").strip().lower()
@@ -220,21 +241,21 @@ def generate_video_item(stage, char, cfg, move_id, feedback, hero_src):
             neg_prompt = f"{ANTI_RING_NEG}, blood, gore, violence, camera pan, zoom, background scenery, text, watermark"
         else:
             neg_prompt = f"{ANTI_RING_NEG}, hurt, knocked out, lying down, camera pan, zoom, background scenery, text, watermark"
-        print(f"[video:{char['id']}] calling {cfg['models']['video_move']} ({res_tag}, state={state_key})", flush=True)
+        print(f"[video:{char['id']}] calling {model_used} ({res_tag}, state={state_key})", flush=True)
         try:
-            res = fal_client.subscribe(cfg["models"]["video_move"], arguments={"prompt": prompt, "negative_prompt": neg_prompt, "start_image_url": img_url, "resolution": res_tag})
+            res = fal_client.subscribe(model_used, arguments={"prompt": prompt, "negative_prompt": neg_prompt, "start_image_url": img_url, "resolution": res_tag})
         except Exception as e1:
             print(f"[video:{char['id']}] wan state image_url retry: {e1}", flush=True)
-            res = fal_client.subscribe(cfg["models"]["video_move"], arguments={"prompt": prompt, "negative_prompt": neg_prompt, "image_url": img_url, "resolution": res_tag})
+            res = fal_client.subscribe(model_used, arguments={"prompt": prompt, "negative_prompt": neg_prompt, "image_url": img_url, "resolution": res_tag})
     else:
         res_tag = "480p" if stage == "battle_move_draft" else "1080p"
         prompt, neg_prompt = resolve_move_prompts(stage, char, cfg, move_id=move_id, feedback=feedback)
-        print(f"[video:{char['id']}] calling {cfg['models']['video_move']} ({res_tag}, move={move_id or 'custom'})", flush=True)
+        print(f"[video:{char['id']}] calling {model_used} ({res_tag}, move={move_id or 'custom'})", flush=True)
         try:
-            res = fal_client.subscribe(cfg["models"]["video_move"], arguments={"prompt": prompt, "negative_prompt": neg_prompt, "start_image_url": img_url, "resolution": res_tag})
+            res = fal_client.subscribe(model_used, arguments={"prompt": prompt, "negative_prompt": neg_prompt, "start_image_url": img_url, "resolution": res_tag})
         except Exception as e1:
             print(f"[video:{char['id']}] wan image_url retry: {e1}", flush=True)
-            res = fal_client.subscribe(cfg["models"]["video_move"], arguments={"prompt": prompt, "negative_prompt": neg_prompt, "image_url": img_url, "resolution": res_tag})
+            res = fal_client.subscribe(model_used, arguments={"prompt": prompt, "negative_prompt": neg_prompt, "image_url": img_url, "resolution": res_tag})
     vid_url = res.get("video", {}).get("url") or res.get("url")
     print(f"[video:{char['id']}] generated raw video={vid_url}", flush=True)
     try:
@@ -247,6 +268,19 @@ def generate_video_item(stage, char, cfg, move_id, feedback, hero_src):
     raw_vid = out_dir / "raw_alpha.webm"
     download_file(alpha_url, raw_vid)
     strip_audio_if_present(raw_vid)
+    append_prompt_log(cfg, {
+        "item_id": f"{char['id']}_{slug}",
+        "character_id": char["id"],
+        "stage": stage,
+        "move_id": move_id,
+        "model": model_used,
+        "resolution": res_tag,
+        "source_path": str(hero_src),
+        "output_path": str(raw_vid),
+        "prompt": prompt,
+        "negative_prompt": neg_prompt,
+        "feedback": feedback,
+    })
     return {
         "id": f"{char['id']}_{slug}",
         "character_id": char["id"],
@@ -375,6 +409,38 @@ def run_batch_video(stage, manifest, cfg, move_id, feedback, queue):
     save_queue(cfg["queue_path"], queue)
     print(f"[batch] queued {len(results)}/{len(targets)} character(s) for Safari/WebM alpha encoding.", flush=True)
 
+def run_rerun_failed(manifest, cfg, char_id, move_id, feedback, queue):
+    failed_items = []
+    for it in queue.get("items", []):
+        if it.get("status") != "qa_failed" and it.get("qa_passed") is not False:
+            continue
+        if it.get("stage") not in ("battle_idle", "battle_move_draft", "battle_move_final", "battle_state_draft", "battle_state_final"):
+            continue
+        if char_id and char_id != "all_uploaded" and it.get("character_id") != char_id:
+            continue
+        if move_id and it.get("move_id") != move_id:
+            continue
+        failed_items.append(it)
+    if not failed_items:
+        print("[rerun_failed] no qa_failed video items matched filters.", flush=True)
+        return
+    print(f"[rerun_failed] regenerating {len(failed_items)} failed item(s)", flush=True)
+    for it in failed_items:
+        c = get_character(manifest, it["character_id"])
+        hero_src = resolve_hero_source(c, cfg, allow_fallback=True)
+        repair_parts = []
+        if it.get("qa_repair_hint"):
+            repair_parts.append(it["qa_repair_hint"])
+        if it.get("failure_tags"):
+            repair_parts.append("Avoid: " + ", ".join(it["failure_tags"]))
+        if feedback and feedback.strip():
+            repair_parts.append(feedback.strip())
+        combined_fb = " ".join(repair_parts).strip()
+        new_item = generate_video_item(it["stage"], c, cfg, it.get("move_id", ""), combined_fb, hero_src)
+        new_item["rerun_count"] = int(it.get("rerun_count", 0)) + 1
+        queue["items"] = [i for i in queue["items"] if i["id"] != new_item["id"]] + [new_item]
+        save_queue(cfg["queue_path"], queue)
+
 def run_approve(char_id, cand_idx, feedback, cfg, queue):
     target_stage = feedback.strip() or "hero"
     matches = [i for i in queue["items"] if i["character_id"] == char_id and i["stage"] == target_stage and str(i.get("candidate_index", 0)) == str(cand_idx)]
@@ -403,6 +469,13 @@ def main():
     queue = load_queue(cfg["queue_path"])
     if stage == "approve":
         run_approve(char_id, cand_idx, feedback, cfg, queue)
+        return
+    if stage == "qa_audit":
+        audit_queue_items(queue, char_id=char_id, move_id=move_id)
+        save_queue(cfg["queue_path"], queue)
+        return
+    if stage == "rerun_failed":
+        run_rerun_failed(manifest, cfg, char_id, move_id, feedback, queue)
         return
     if char_id == "all_uploaded":
         if stage in ("battle_idle", "battle_move_draft", "battle_move_final", "battle_state_draft", "battle_state_final"):

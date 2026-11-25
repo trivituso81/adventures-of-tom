@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>AoT Stage Lab - Battle 3 Previewer (1280x756)</title>
+<style>
+  :root { --bg:#0f1117; --card:#181c26; --bd:#2b3245; --tx:#eef2ff; --mut:#94a3b8; --acc:#f59e0b; --ok:#22c55e; --err:#ef4444; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:12px; background:var(--bg); color:var(--tx); font:14px/1.45 system-ui,-apple-system,sans-serif; }
+  .wrap { max-width:1320px; margin:0 auto; display:grid; gap:12px; }
+  .card { background:var(--card); border:1px solid var(--bd); border-radius:10px; padding:12px; }
+  .top { display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:space-between; }
+  h1 { margin:0; font-size:17px; color:var(--acc); }
+  .stage-shell { position:relative; width:100%; aspect-ratio:1280/756; background:#0b0e14; border:1px solid var(--bd); border-radius:10px; overflow:hidden; }
+  canvas#stage { width:100%; height:100%; display:block; }
+  .row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:8px; }
+  label { display:block; font-size:11px; color:var(--mut); margin-bottom:3px; }
+  select, input, textarea { width:100%; background:#0c0f15; color:var(--tx); border:1px solid var(--bd); border-radius:6px; padding:7px 8px; font:13px/1.35 system-ui,sans-serif; }
+  textarea { min-height:74px; font-family:ui-monospace,monospace; font-size:12px; }
+  button { background:var(--acc); color:#141008; border:0; border-radius:6px; padding:8px 12px; font-weight:700; cursor:pointer; }
+  button.sec { background:#273046; color:var(--tx); }
+  button.ok { background:var(--ok); color:#052e16; }
+  .pill { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:700; background:#273046; color:var(--tx); }
+  .mut { color:var(--mut); font-size:12px; }
+  .beats { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:8px; margin-top:8px; }
+  .beat { background:#111520; border:1px solid var(--bd); border-radius:8px; padding:8px; font-size:12px; }
+  .beat b { color:var(--acc); display:block; margin-bottom:3px; }
+  video#clipVid { display:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card top">
+    <div>
+      <h1>AoT Stage Lab (1280x756 Battle 3 Previewer)</h1>
+      <div class="mut" id="statusLine">Loading art-factory/move-packets-slice.json...</div>
+    </div>
+    <div class="row">
+      <select id="moveSel" style="width:auto;min-width:210px"></select>
+      <button id="playBtn">Play Move</button>
+      <button id="vfxBtn" class="sec">Test VFX Now</button>
+      <label class="sec" style="margin:0;padding:8px 10px;border-radius:6px;background:#273046;color:#eef2ff;cursor:pointer;font-weight:700;font-size:13px">Load JSON<input id="jsonFile" type="file" accept=".json" style="display:none"></label>
+      <label class="sec" style="margin:0;padding:8px 10px;border-radius:6px;background:#273046;color:#eef2ff;cursor:pointer;font-weight:700;font-size:13px">Load Clip<input id="clipFile" type="file" accept="video/*" style="display:none"></label>
+    </div>
+  </div>
+
+  <div class="stage-shell">
+    <canvas id="stage" width="1280" height="756"></canvas>
+    <video id="clipVid" playsinline muted crossorigin="anonymous"></video>
+  </div>
+
+  <div class="card">
+    <div class="row" style="justify-content:space-between;margin-bottom:8px">
+      <div class="row">
+        <span class="pill" id="metaFlavor">Flavor</span>
+        <span class="pill" id="metaTier">Tier</span>
+        <span class="pill" id="metaCue">VFX Cue</span>
+        <span class="pill" id="metaClip">Placeholder Actor</span>
+      </div>
+      <div class="row">
+        <button id="approveBtn" class="ok">Mark COMPOSITED</button>
+        <button id="copyBtn" class="sec">Copy Updated JSON</button>
+        <button id="dlBtn" class="sec">Download JSON</button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div><label>Lifecycle State</label><select id="fState"><option>IDEA</option><option>PITCH_REVIEW</option><option>ANCHORED</option><option>DRAFT_REVIEW</option><option>COMPOSITED</option><option>LIVE_READY</option></select></div>
+      <div><label>Impact (ms)</label><input id="fImpact" type="number" step="50"></div>
+      <div><label>Hit-Stop (frames @24fps)</label><input id="fHitStop" type="number" min="0" max="20"></div>
+      <div><label>Screen Shake (px)</label><input id="fShake" type="number" min="0" max="30"></div>
+      <div><label>Foot Anchor X (0-1280)</label><input id="fFootX" type="number" step="10"></div>
+      <div><label>Foot Anchor Y (0-756)</label><input id="fFootY" type="number" step="10"></div>
+      <div><label>VFX Flavor Override</label><select id="fFlavor"><option>Clobber</option><option>Sizzle</option><option>Drench</option><option>Razzle</option><option>Racket</option></select></div>
+      <div><label>Failure Tags (comma-sep)</label><input id="fTags" type="text" placeholder="e.g. border_clip, prop_morph"></div>
+    </div>
+
+    <div class="beats">
+      <div class="beat"><b>Beat 1 - Windup</b><span id="bWindup"></span></div>
+      <div class="beat"><b>Beat 2 - Peak</b><span id="bPeak"></span></div>
+      <div class="beat"><b>Beat 3 - Recovery</b><span id="bRecovery"></span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const W = 1280, H = 756;
+const ctx = $('stage').getContext('2d');
+const vid = $('clipVid');
+
+const FALLBACK_PACKETS = {
+  schema_version: 'aot-move-packet-v1',
+  game: 'The Adventures of Tom',
+  specVersion: 'v11',
+  stage_dimensions_px: { width: 1280, height: 756 },
+  lifecycle_states: ['IDEA','PITCH_REVIEW','ANCHORED','DRAFT_REVIEW','COMPOSITED','LIVE_READY'],
+  moves: [
+    { id:'tom-gg-s1', character_id:'tom', character:'Tom', vibe:'Gamer Geek', tier:'Skill 1', name:'Controller Toss', flavor:'Clobber', lifecycle_state:'PITCH_REVIEW', pitch:{ windup:'Poised sidearm throw stance gripping controller with wrist-strap.', peak:'Deadpan boomerang toss left, yanking controller back by wrist-strap.', recovery:'Clean two-hand catch and settle to idle.' }, held_props:['handheld game controller','trailing wrist-strap'], needs_custom_start_frame:true, safe_padding_pct:{left:26,right:24,top:12,bottom:8}, foot_anchor_xy:[930,540], impact_ms:1250, vfx_cue_id:'proj_boomerang_return', secondary_vfx_cue_ids:['vfx_core_clobber_impact'], hit_stop_frames:4, screen_shake_px:6, qa_scores:{overall:null}, failure_tags:[], wanClip:{ durationSec:3.3, fps:24, numFrames:81 } },
+    { id:'grace-sp-s1', character_id:'grace', character:'Grace', vibe:'Stage Performer', tier:'Skill 1', name:'Jazz-Hands Cartwheel', flavor:'Clobber', lifecycle_state:'PITCH_REVIEW', pitch:{ windup:'Broadway prep lunge with arms high in a V.', peak:'Full-body crisp acrobatic cartwheel in-place.', recovery:'Textbook gymnast landing with triumphant deadpan jazz hands.' }, held_props:[], needs_custom_start_frame:false, safe_padding_pct:{left:32,right:32,top:18,bottom:8}, foot_anchor_xy:[1020,470], impact_ms:1450, vfx_cue_id:'vfx_core_clobber_impact', secondary_vfx_cue_ids:['vfx_core_timeline_chevrons'], hit_stop_frames:4, screen_shake_px:7, qa_scores:{overall:null}, failure_tags:[], wanClip:{ durationSec:3.4, fps:24, numFrames:81 } },
+    { id:'nara-ap-basic', character_id:'nara', character:'Nara', vibe:'Attached Pup', tier:'Basic Action', name:'Startled Water-Bowl Flip', flavor:'Drench', lifecycle_state:'PITCH_REVIEW', pitch:{ windup:'Perks curly ears straight up on all four paws beside water bowl.', peak:'Hops back on all fours, front paw accidentally flips water bowl left.', recovery:'Lands on all four paws blinking in innocent confusion.' }, held_props:['stainless steel water bowl'], needs_custom_start_frame:true, safe_padding_pct:{left:28,right:22,top:14,bottom:8}, foot_anchor_xy:[1060,610], impact_ms:1150, vfx_cue_id:'vfx_core_drench_splash', secondary_vfx_cue_ids:['proj_arc_single'], hit_stop_frames:2, screen_shake_px:4, qa_scores:{overall:null}, failure_tags:[], wanClip:{ durationSec:2.5, fps:24, numFrames:61 } },
+    { id:'deedee-hc-s1', character_id:'deedee', character:'Deedee', vibe:'Home Cook', tier:'Skill 1', name:'Warm Apple Muffins', flavor:'Sizzle', lifecycle_state:'PITCH_REVIEW', pitch:{ windup:'Oven mitts on, lifts steaming 12-cup apple muffin pan to chest.', peak:'Tilts steaming pan toward party slots in warm serving sweep.', recovery:'Tucks tin down with crisp matriarch nod back to idle.' }, held_props:['quilted oven mitts','12-cup muffin tin'], needs_custom_start_frame:true, safe_padding_pct:{left:24,right:24,top:12,bottom:8}, foot_anchor_xy:[970,650], impact_ms:1650, vfx_cue_id:'vfx_core_sizzle_wave', secondary_vfx_cue_ids:['proj_ally_handoff_party','vfx_core_heal_cleanse'], hit_stop_frames:0, screen_shake_px:0, qa_scores:{overall:null}, failure_tags:[], wanClip:{ durationSec:3.5, fps:24, numFrames:85 } },
+    { id:'tom-gg-cap', character_id:'tom', character:'Tom', vibe:'Gamer Geek', tier:'Grand Capstone', name:'Konami Code', flavor:'Razzle', lifecycle_state:'PITCH_REVIEW', pitch:{ windup:'Arcade focus with retro controller, crisp sneaker hop cadence on floor pad.', peak:'Final B-A stomps and straight-left point unleashing rainbow retro barrage.', recovery:'Holds rock-solid 1s deadpan hero pose before returning to idle.' }, held_props:['retro handheld game controller'], needs_custom_start_frame:true, safe_padding_pct:{left:28,right:28,top:16,bottom:8}, foot_anchor_xy:[930,540], impact_ms:3300, vfx_cue_id:'vfx_core_razzle_beam_arc', secondary_vfx_cue_ids:['setpiece_giant_sky_controller','vfx_core_composure_break'], hit_stop_frames:7, screen_shake_px:12, qa_scores:{overall:null}, failure_tags:[], wanClip:{ durationSec:7.0, fps:24, numFrames:169 } }
+  ]
+};
+
+const FLAVOR_COLORS = { Clobber:'#d97706', Sizzle:'#ef4444', Drench:'#0284c7', Razzle:'#9333ea', Racket:'#db2777' };
+let doc = null, cur = null, hasRealVideo = false;
+let anim = { playing:false, elapsedMs:0, durationMs:3000, impactFired:false, freezeMs:0, shakeMs:0, shakePx:0, particles:[], popups:[], konamiTimer:0 };
+
+const ENEMY_POS = [330, 520];
+const PARTY_SLOTS = [[930,540],[1020,470],[1060,610],[970,650]];
+
+function spawnVfx(move) {
+  const fl = $('fFlavor').value || move.flavor || 'Clobber';
+  const col = FLAVOR_COLORS[fl] || '#f59e0b';
+  const isHeal = (move.secondary_vfx_cue_ids || []).includes('vfx_core_heal_cleanse');
+  const origin = move.foot_anchor_xy || [930, 540];
+  const target = isHeal ? [990, 540] : ENEMY_POS;
+  anim.freezeMs = Math.round((Number(move.hit_stop_frames) || 0) * (1000 / 24));
+  anim.shakePx = Number(move.screen_shake_px) || 0;
+  anim.shakeMs = anim.shakePx > 0 ? 320 : 0;
+  if (move.id === 'tom-gg-cap') anim.konamiTimer = 1800;
+
+  const count = fl === 'Razzle' ? 36 : 24;
+  for (let i = 0; i < count; i++) {
+    const ang = (Math.PI * 2 * i) / count + Math.random() * 0.3;
+    const spd = 120 + Math.random() * 260;
+    anim.particles.push({
+      x: target[0] + (Math.random() - 0.5) * 40,
+      y: target[1] - 60 + (Math.random() - 0.5) * 40,
+      vx: Math.cos(ang) * spd,
+      vy: Math.sin(ang) * spd - (fl === 'Sizzle' ? 110 : 30),
+      r: 5 + Math.random() * 11,
+      color: isHeal && i % 2 === 0 ? '#10b981' : col,
+      life: 0, maxLife: 650 + Math.random() * 350,
+      kind: fl
+    });
+  }
+  anim.particles.push({ x: target[0], y: target[1] - 60, vx:0, vy:0, r:16, color:col, life:0, maxLife:520, kind:'RING_' + fl });
+  if (move.vfx_cue_id === 'proj_boomerang_return') {
+    anim.particles.push({ x: origin[0], y: origin[1] - 75, tx: target[0], ty: target[1] - 70, life:0, maxLife:700, color:'#38bdf8', kind:'BOOMERANG' });
+  }
+  const val = isHeal ? '+145 HP' : (move.tier === 'Grand Capstone' ? '-412' : '-168');
+  anim.popups.push({ x: target[0], y: target[1] - 135, text: val, sub: isHeal ? 'STUFFED!' : fl.toUpperCase() + '!', color: isHeal ? '#34d399' : '#fef08a', life:0, maxLife:1100 });
+}
+
+function tryAutoLoadClip(move) {
+  hasRealVideo = false;
+  vid.pause();
+  vid.removeAttribute('src');
+  const cid = move.character_id || move.character.toLowerCase();
+  const base = `art-factory/staging/${cid}/battle_move_draft_${move.id}`;
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const url = isSafari ? `${base}/safari_hvc1.mp4` : `${base}/preview.webm`;
+  $('metaClip').textContent = 'Checking clip...';
+  vid.onloadeddata = () => { hasRealVideo = true; $('metaClip').textContent = 'Live Clip: ' + url.split('/').pop(); };
+  vid.onerror = () => { hasRealVideo = false; $('metaClip').textContent = 'Placeholder Actor (no clip yet)'; };
+  vid.src = url;
+  vid.load();
+}
+
+function bindMove(move) {
+  cur = move;
+  $('metaFlavor').textContent = move.flavor;
+  $('metaFlavor').style.background = FLAVOR_COLORS[move.flavor] || '#273046';
+  $('metaTier').textContent = `${move.character} | ${move.tier}`;
+  $('metaCue').textContent = move.vfx_cue_id;
+  $('fState').value = move.lifecycle_state || 'PITCH_REVIEW';
+  $('fImpact').value = move.impact_ms ?? 1200;
+  $('fHitStop').value = move.hit_stop_frames ?? 3;
+  $('fShake').value = move.screen_shake_px ?? 5;
+  $('fFootX').value = (move.foot_anchor_xy || [930,540])[0];
+  $('fFootY').value = (move.foot_anchor_xy || [930,540])[1];
+  $('fFlavor').value = move.flavor || 'Clobber';
+  $('fTags').value = (move.failure_tags || []).join(', ');
+  $('bWindup').textContent = move.pitch?.windup || '';
+  $('bPeak').textContent = move.pitch?.peak || '';
+  $('bRecovery').textContent = move.pitch?.recovery || '';
+  tryAutoLoadClip(move);
+}
+
+function syncEditsToCur() {
+  if (!cur) return;
+  cur.lifecycle_state = $('fState').value;
+  cur.impact_ms = Number($('fImpact').value) || 0;
+  cur.hit_stop_frames = Number($('fHitStop').value) || 0;
+  cur.screen_shake_px = Number($('fShake').value) || 0;
+  cur.foot_anchor_xy = [Number($('fFootX').value) || 930, Number($('fFootY').value) || 540];
+  cur.flavor = $('fFlavor').value;
+  cur.failure_tags = $('fTags').value.split(',').map(s => s.trim()).filter(Boolean);
+  if (cur.engineSpec) {
+    cur.engineSpec.contactTriggerSec = Number((cur.impact_ms / 1000).toFixed(2));
+    cur.engineSpec.hitStopFrames = cur.hit_stop_frames;
+  }
+}
+
+['fState','fImpact','fHitStop','fShake','fFootX','fFootY','fFlavor','fTags'].forEach(id => {
+  $(id).addEventListener('change', syncEditsToCur);
+});
+
+function loadDoc(data, label) {
+  doc = data;
+  const sel = $('moveSel');
+  sel.innerHTML = '';
+  (doc.moves || []).forEach((m, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = `${m.character}: ${m.name} (${m.id})`;
+    sel.appendChild(opt);
+  });
+  $('statusLine').textContent = `${label} (${doc.moves.length} move packets loaded)`;
+  if (doc.moves.length) bindMove(doc.moves[0]);
+}
+
+$('moveSel').onchange = () => bindMove(doc.moves[Number($('moveSel').value)]);
+$('playBtn').onclick = () => {
+  if (!cur) return;
+  syncEditsToCur();
+  anim.playing = true;
+  anim.elapsedMs = 0;
+  anim.durationMs = Math.round(((cur.wanClip && cur.wanClip.durationSec) || 3.2) * 1000);
+  anim.impactFired = false;
+  anim.particles = [];
+  anim.popups = [];
+  if (hasRealVideo) { vid.currentTime = 0; vid.play().catch(() => {}); }
+};
+$('vfxBtn').onclick = () => { if (cur) { syncEditsToCur(); spawnVfx(cur); } };
+$('approveBtn').onclick = () => { if (!cur) return; $('fState').value = 'COMPOSITED'; syncEditsToCur(); $('statusLine').textContent = `Marked ${cur.id} as COMPOSITED (export JSON to save).`; };
+$('copyBtn').onclick = async () => {
+  syncEditsToCur();
+  await navigator.clipboard.writeText(JSON.stringify(doc, null, 2));
+  $('statusLine').textContent = 'Copied updated move-packets-slice.json to clipboard.';
+};
+$('dlBtn').onclick = () => {
+  syncEditsToCur();
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(doc, null, 2) + '\n'], { type:'application/json' }));
+  a.download = 'move-packets-slice.json';
+  a.click();
+};
+$('jsonFile').onchange = async e => {
+  const f = e.target.files[0]; if (!f) return;
+  loadDoc(JSON.parse(await f.text()), 'Local file: ' + f.name);
+};
+$('clipFile').onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  vid.src = URL.createObjectURL(f);
+  vid.onloadeddata = () => { hasRealVideo = true; $('metaClip').textContent = 'Local Clip: ' + f.name; };
+  vid.load();
+};
+
+let lastTs = performance.now();
+function drawStage(ts) {
+  const rawDt = Math.min(50, ts - lastTs);
+  lastTs = ts;
+  const frozen = anim.freezeMs > 0;
+  if (frozen) {
+    anim.freezeMs = Math.max(0, anim.freezeMs - rawDt);
+    if (hasRealVideo && !vid.paused) vid.pause();
+  } else if (anim.playing) {
+    if (hasRealVideo && vid.paused && anim.elapsedMs < anim.durationMs) vid.play().catch(() => {});
+    anim.elapsedMs += rawDt;
+    if (!anim.impactFired && anim.elapsedMs >= (cur?.impact_ms || 1200)) {
+      anim.impactFired = true;
+      spawnVfx(cur);
+    }
+    if (anim.elapsedMs >= anim.durationMs) anim.playing = false;
+  }
+  if (anim.shakeMs > 0) anim.shakeMs = Math.max(0, anim.shakeMs - rawDt);
+  if (anim.konamiTimer > 0) anim.konamiTimer = Math.max(0, anim.konamiTimer - rawDt);
+
+  ctx.save();
+  if (anim.shakeMs > 0 && anim.shakePx > 0) {
+    const mag = anim.shakePx * (anim.shakeMs / 320);
+    ctx.translate((Math.random() - 0.5) * mag * 2, (Math.random() - 0.5) * mag * 2);
+  }
+
+  const sky = ctx.createLinearGradient(0, 0, 0, H);
+  sky.addColorStop(0, '#1e293b'); sky.addColorStop(0.55, '#334155'); sky.addColorStop(0.56, '#3f6212'); sky.addColorStop(1, '#1a2e05');
+  ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
+
+  ctx.fillStyle = 'rgba(15,23,42,0.72)'; ctx.fillRect(0, 0, W, 56);
+  ctx.fillStyle = '#f8fafc'; ctx.font = 'bold 18px system-ui';
+  ctx.fillText(`BATTLE 3 STAGE LAB (1280x756)  |  ${cur ? cur.character + ' - ' + cur.name : ''}`, 22, 35);
+  ctx.fillStyle = '#fbbf24'; ctx.font = 'bold 14px ui-monospace,monospace';
+  ctx.fillText(`t=${Math.round(anim.elapsedMs)}ms / ${anim.durationMs}ms  |  impact=${cur?.impact_ms || 0}ms  |  hitStop=${cur?.hit_stop_frames || 0}f  |  shake=${cur?.screen_shake_px || 0}px`, 660, 34);
+
+  ctx.fillStyle = 'rgba(0,0,0,0.34)';
+  ctx.beginPath(); ctx.ellipse(ENEMY_POS[0], ENEMY_POS[1], 72, 20, 0, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = anim.freezeMs > 0 ? '#ffffff' : '#64748b';
+  ctx.beginPath(); ctx.roundRect(ENEMY_POS[0] - 48, ENEMY_POS[1] - 150, 96, 145, 18); ctx.fill();
+  ctx.fillStyle = '#0f172a'; ctx.font = 'bold 14px system-ui'; ctx.fillText('TARGET FOE', ENEMY_POS[0] - 42, ENEMY_POS[1] - 72);
+
+  PARTY_SLOTS.forEach((pt, idx) => {
+    ctx.fillStyle = 'rgba(255,255,255,0.12)';
+    ctx.beginPath(); ctx.ellipse(pt[0], pt[1], 44, 13, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = 'rgba(255,255,255,0.45)'; ctx.font = '11px ui-monospace'; ctx.fillText('S' + (idx + 1), pt[0] - 8, pt[1] + 4);
+  });
+
+  if (cur) {
+    const [fx, fy] = cur.foot_anchor_xy || [930, 540];
+    ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(fx - 14, fy); ctx.lineTo(fx + 14, fy); ctx.moveTo(fx, fy - 14); ctx.lineTo(fx, fy + 14); ctx.stroke();
+    if (hasRealVideo && vid.readyState >= 2) {
+      const vh = 260, vw = vh * (vid.videoWidth / Math.max(1, vid.videoHeight));
+      ctx.drawImage(vid, fx - vw / 2, fy - vh + 14, vw, vh);
+    } else {
+      const prog = anim.playing ? anim.elapsedMs / Math.max(1, anim.durationMs) : 0;
+      const lunge = anim.playing ? Math.sin(prog * Math.PI) * -55 : 0;
+      const hPx = cur.character_id === 'nara' ? 92 : (cur.character_id === 'grace' ? 140 : 185);
+      const wPx = cur.character_id === 'nara' ? 116 : 74;
+      ctx.fillStyle = FLAVOR_COLORS[cur.flavor] || '#f59e0b';
+      ctx.beginPath(); ctx.roundRect(fx - wPx / 2 + lunge, fy - hPx, wPx, hPx, 16); ctx.fill();
+      ctx.fillStyle = '#0f172a'; ctx.font = 'bold 14px system-ui';
+      ctx.fillText(cur.character.toUpperCase(), fx - 28 + lunge, fy - hPx / 2);
+    }
+  }
+
+  if (anim.konamiTimer > 0) {
+    ctx.fillStyle = 'rgba(147,51,234,0.22)'; ctx.fillRect(0, 56, W, H - 56);
+    ctx.fillStyle = '#fde047'; ctx.font = 'bold 34px ui-monospace,monospace';
+    ctx.fillText('UP UP DOWN DOWN LEFT RIGHT LEFT RIGHT B A', 210, 145);
+  }
+
+  const dt = frozen ? 0 : rawDt;
+  anim.particles = anim.particles.filter(p => {
+    p.life += dt;
+    if (p.life >= p.maxLife) return false;
+    const t = p.life / p.maxLife;
+    ctx.globalAlpha = 1 - t;
+    if (p.kind.startsWith('RING_')) {
+      ctx.strokeStyle = p.color; ctx.lineWidth = 6 * (1 - t);
+      ctx.beginPath(); ctx.arc(p.x, p.y, 20 + t * 145, 0, Math.PI * 2); ctx.stroke();
+    } else if (p.kind === 'BOOMERANG') {
+      const arc = Math.sin(t * Math.PI);
+      const bx = p.x + (p.tx - p.x) * arc;
+      const by = p.y + (p.ty - p.y) * arc - Math.sin(t * Math.PI * 2) * 35;
+      ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(bx, by, 12, 0, Math.PI * 2); ctx.fill();
+    } else {
+      p.x += p.vx * (dt / 1000); p.y += p.vy * (dt / 1000);
+      ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x, p.y, p.r * (1 - t * 0.5), 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    return true;
+  });
+
+  anim.popups = anim.popups.filter(pp => {
+    pp.life += dt;
+    if (pp.life >= pp.maxLife) return false;
+    const t = pp.life / pp.maxLife;
+    ctx.globalAlpha = 1 - t;
+    ctx.font = '900 40px system-ui'; ctx.fillStyle = '#090d16';
+    ctx.fillText(pp.text, pp.x - 42, pp.y - t * 65 + 3);
+    ctx.fillStyle = pp.color; ctx.fillText(pp.text, pp.x - 45, pp.y - t * 65);
+    ctx.font = 'bold 16px system-ui'; ctx.fillStyle = '#ffffff';
+    ctx.fillText(pp.sub, pp.x - 35, pp.y - t * 65 + 24);
+    ctx.globalAlpha = 1;
+    return true;
+  });
+
+  ctx.fillStyle = 'rgba(15,23,42,0.85)'; ctx.fillRect(0, H - 64, W, 64);
+  ctx.fillStyle = '#cbd5e1'; ctx.font = '13px ui-monospace,monospace';
+  ctx.fillText(`STATE: ${cur?.lifecycle_state || '-'}  |  PROPS: ${(cur?.held_props || []).join(', ') || 'none'}  |  SAFE PAD: L${cur?.safe_padding_pct?.left || 0}% R${cur?.safe_padding_pct?.right || 0}%`, 22, H - 26);
+  ctx.restore();
+  requestAnimationFrame(drawStage);
+}
+
+fetch('art-factory/move-packets-slice.json', { cache:'no-store' })
+  .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+  .then(d => loadDoc(d, 'Loaded art-factory/move-packets-slice.json'))
+  .catch(() => loadDoc(FALLBACK_PACKETS, 'Loaded embedded Phase 0 slice (offline fallback)'));
+
+requestAnimationFrame(drawStage);
+</script>
+</body>
+</html>

@@ -1,0 +1,351 @@
+{
+  "schema_version": "aot-move-packet-v1",
+  "game": "The Adventures of Tom",
+  "specVersion": "v11",
+  "stage": "Phase 0 - 5-Move Prototype Slice",
+  "stage_dimensions_px": {
+    "width": 1280,
+    "height": 756
+  },
+  "lifecycle_states": [
+    "IDEA",
+    "PITCH_REVIEW",
+    "ANCHORED",
+    "DRAFT_REVIEW",
+    "COMPOSITED",
+    "LIVE_READY"
+  ],
+  "wanDefaults": {
+    "fps": 24,
+    "backdropMode": "mid_grey",
+    "bgHex": "#808080",
+    "stylePrefix": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames.",
+    "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+  },
+  "moves": [
+    {
+      "id": "tom-gg-s1",
+      "character_id": "tom",
+      "character": "Tom",
+      "height_in": 71,
+      "vibe": "Gamer Geek",
+      "tier": "Skill 1",
+      "name": "Controller Toss",
+      "pep_cost": 2,
+      "base_recovery": 100,
+      "flavor": "Clobber",
+      "lifecycle_state": "PITCH_REVIEW",
+      "pitch": {
+        "windup": "Tom steps into a poised sidearm throw stance in-place, gripping his handheld game controller by the body with its wrist-strap looped taut around his right wrist.",
+        "peak": "Tom whips a crisp, deadpan straight-faced boomerang sidearm toss forward-left, tracking the flight intently before snapping his wrist to yank the returning controller back by its strap.",
+        "recovery": "Tom catches the controller cleanly in both palms with quiet gamer satisfaction and settles back into his neutral battle stance."
+      },
+      "held_props": [
+        "handheld game controller",
+        "trailing wrist-strap"
+      ],
+      "needs_custom_start_frame": true,
+      "safe_padding_pct": {
+        "left": 26,
+        "right": 24,
+        "top": 12,
+        "bottom": 8
+      },
+      "foot_anchor_xy": [930, 540],
+      "impact_ms": 1250,
+      "vfx_cue_id": "proj_boomerang_return",
+      "secondary_vfx_cue_ids": [
+        "vfx_core_clobber_impact"
+      ],
+      "hit_stop_frames": 4,
+      "screen_shake_px": 6,
+      "qa_scores": {
+        "likeness": null,
+        "prop_integrity": null,
+        "motion_fluidity": null,
+        "staging_cleanliness": null,
+        "overall": null
+      },
+      "failure_tags": [],
+      "wanClip": {
+        "filename": "tom-gg-s1.mp4",
+        "durationSec": 3.3,
+        "fps": 24,
+        "numFrames": 81,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tom-gg-s1 | 3.3s | 81 frames @ 24fps] Tom (5'11\" man with beard and horizontal left-to-right hair, no glasses, no blazer) stands in-place gripping a handheld game controller with a trailing wrist-strap, winds up into a poised sidearm throw, whips the controller crisply forward-left in a deadpan boomerang toss, tugs the strap to catch the returning controller cleanly in both hands, and settles smoothly into idle stance.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [0.9, 1.5, 0.9],
+        "translationPath": "in_place",
+        "contactTriggerSec": 1.25,
+        "hitStopFrames": 4,
+        "vfxPrimitives": [
+          "proj_boomerang_return",
+          "vfx_core_clobber_impact"
+        ],
+        "v11Hook": "R1 Skill (2 Pep, 100 Rec): 1.0x Clobber boomerang hit with wrist-strap return"
+      }
+    },
+    {
+      "id": "grace-sp-s1",
+      "character_id": "grace",
+      "character": "Grace",
+      "height_in": 50,
+      "vibe": "Stage Performer",
+      "tier": "Skill 1",
+      "name": "Jazz-Hands Cartwheel",
+      "pep_cost": 2,
+      "base_recovery": 100,
+      "flavor": "Clobber",
+      "lifecycle_state": "PITCH_REVIEW",
+      "pitch": {
+        "windup": "Grace snaps into a crisp Broadway prep lunge with arms raised high in a V and fierce stage-performer concentration.",
+        "peak": "Grace launches into a clean full-body acrobatic cartwheel in-place with straight legs and crisp timing, kicking through the strike apex.",
+        "recovery": "Grace sticks a textbook gymnast landing facing three-quarters left, flashes triumphant deadpan jazz hands for half a beat, and settles cleanly to idle."
+      },
+      "held_props": [],
+      "needs_custom_start_frame": false,
+      "safe_padding_pct": {
+        "left": 32,
+        "right": 32,
+        "top": 18,
+        "bottom": 8
+      },
+      "foot_anchor_xy": [1020, 470],
+      "impact_ms": 1450,
+      "vfx_cue_id": "vfx_core_clobber_impact",
+      "secondary_vfx_cue_ids": [
+        "vfx_core_timeline_chevrons"
+      ],
+      "hit_stop_frames": 4,
+      "screen_shake_px": 7,
+      "qa_scores": {
+        "likeness": null,
+        "prop_integrity": null,
+        "motion_fluidity": null,
+        "staging_cleanliness": null,
+        "overall": null
+      },
+      "failure_tags": [],
+      "wanClip": {
+        "filename": "grace-sp-s1.mp4",
+        "durationSec": 3.4,
+        "fps": 24,
+        "numFrames": 81,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: grace-sp-s1 | 3.4s | 81 frames @ 24fps] Grace (4'2\" child stage performer) snaps into a crisp theatrical prep lunge with arms raised, executes one full-body crisp acrobatic cartwheel in-place with clean straight limbs and full head-to-shoe visibility inside frame, sticks a sharp landing flashing earnest deadpan jazz hands, and settles smoothly into idle stance.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, extra limbs, morphed limbs, cropped hands, cropped feet, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [0.8, 1.6, 1.0],
+        "translationPath": "approach_enemy (0.0s-0.8s prep dash; 0.8s-2.4s cartwheel impact; 2.4s-3.4s return)",
+        "contactTriggerSec": 1.45,
+        "hitStopFrames": 4,
+        "vfxPrimitives": [
+          "vfx_core_clobber_impact",
+          "vfx_core_timeline_chevrons"
+        ],
+        "v11Hook": "R1 Skill (2 Pep, 100 Rec): 1.0x Clobber + timeline swap up to 25 ticks"
+      }
+    },
+    {
+      "id": "nara-ap-basic",
+      "character_id": "nara",
+      "character": "Nara",
+      "height_in": 24,
+      "vibe": "Attached Pup",
+      "tier": "Basic Action",
+      "name": "Startled Water-Bowl Flip",
+      "pep_cost": 0,
+      "base_recovery": 80,
+      "flavor": "Drench",
+      "lifecycle_state": "PITCH_REVIEW",
+      "pitch": {
+        "windup": "Nara (40-lb black curly-coated labradoodle strictly on all four paws) perks both curly ears straight up in sudden startle beside her stainless steel water bowl.",
+        "peak": "Nara hops backward on all four paws and accidentally catches the rim of the stainless steel water bowl with her front right paw, flipping it forward-left.",
+        "recovery": "Nara lands softly on all four paws, blinks once in innocent canine confusion, and settles cleanly into her quadruped idle stance."
+      },
+      "held_props": [
+        "stainless steel water bowl"
+      ],
+      "needs_custom_start_frame": true,
+      "safe_padding_pct": {
+        "left": 28,
+        "right": 22,
+        "top": 14,
+        "bottom": 8
+      },
+      "foot_anchor_xy": [1060, 610],
+      "impact_ms": 1150,
+      "vfx_cue_id": "vfx_core_drench_splash",
+      "secondary_vfx_cue_ids": [
+        "proj_arc_single"
+      ],
+      "hit_stop_frames": 2,
+      "screen_shake_px": 4,
+      "qa_scores": {
+        "likeness": null,
+        "prop_integrity": null,
+        "motion_fluidity": null,
+        "staging_cleanliness": null,
+        "overall": null
+      },
+      "failure_tags": [],
+      "wanClip": {
+        "filename": "nara-ap-basic.mp4",
+        "durationSec": 2.5,
+        "fps": 24,
+        "numFrames": 61,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: nara-ap-basic | 2.5s | 61 frames @ 24fps] Nara (real 40-lb black curly-coated labradoodle strictly on all four paws, zero human posture) perks both curly ears straight up in sudden startle, hops backward on all four paws, accidentally catches a stainless steel water bowl with her front right paw flipping it left, and settles blinking on all fours.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anthropomorphic dog, speaking dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [0.6, 1.1, 0.8],
+        "translationPath": "in_place",
+        "contactTriggerSec": 1.15,
+        "hitStopFrames": 2,
+        "vfxPrimitives": [
+          "proj_arc_single",
+          "vfx_core_drench_splash"
+        ],
+        "v11Hook": "Basic (0 Pep / +2 Pep, 80 Rec): 0.5x front-row Drench (applies Drenched)"
+      }
+    },
+    {
+      "id": "deedee-hc-s1",
+      "character_id": "deedee",
+      "character": "Deedee",
+      "height_in": 65,
+      "vibe": "Home Cook",
+      "tier": "Skill 1",
+      "name": "Warm Apple Muffins",
+      "pep_cost": 3,
+      "base_recovery": 100,
+      "flavor": "Sizzle",
+      "lifecycle_state": "PITCH_REVIEW",
+      "pitch": {
+        "windup": "Deedee slips both hands into quilted oven mitts and lifts a fresh 12-cup muffin tin packed with golden cinnamon-apple muffins to chest height.",
+        "peak": "Deedee tilts the steaming muffin pan briskly toward her family party slots in a generous matriarch serving sweep.",
+        "recovery": "Deedee tucks the tin neatly back down with a warm, no-nonsense nod and settles cleanly into her idle battle stance."
+      },
+      "held_props": [
+        "quilted oven mitts",
+        "12-cup muffin tin of warm cinnamon-apple muffins"
+      ],
+      "needs_custom_start_frame": true,
+      "safe_padding_pct": {
+        "left": 24,
+        "right": 24,
+        "top": 12,
+        "bottom": 8
+      },
+      "foot_anchor_xy": [970, 650],
+      "impact_ms": 1650,
+      "vfx_cue_id": "vfx_core_sizzle_wave",
+      "secondary_vfx_cue_ids": [
+        "proj_ally_handoff_party",
+        "vfx_core_heal_cleanse"
+      ],
+      "hit_stop_frames": 0,
+      "screen_shake_px": 0,
+      "qa_scores": {
+        "likeness": null,
+        "prop_integrity": null,
+        "motion_fluidity": null,
+        "staging_cleanliness": null,
+        "overall": null
+      },
+      "failure_tags": [],
+      "wanClip": {
+        "filename": "deedee-hc-s1.mp4",
+        "durationSec": 3.5,
+        "fps": 24,
+        "numFrames": 85,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: deedee-hc-s1 | 3.5s | 85 frames @ 24fps] Deedee (5'5\" warm matriarch home cook) wears quilted oven mitts holding a 12-cup muffin pan filled with golden cinnamon-apple muffins, lifts the tin proudly to chest height, tilts it in a brisk generous serving motion toward her allies, gives one crisp satisfied matriarch nod, and settles smoothly back into idle stance.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [0.9, 1.7, 0.9],
+        "translationPath": "in_place",
+        "contactTriggerSec": 1.65,
+        "hitStopFrames": 0,
+        "vfxPrimitives": [
+          "vfx_core_sizzle_wave",
+          "proj_ally_handoff_party",
+          "vfx_core_heal_cleanse"
+        ],
+        "v11Hook": "R1 Skill (3 Pep, 100 Rec): Party heal + Stuffed buff (warm cinnamon Sizzle steam)"
+      }
+    },
+    {
+      "id": "tom-gg-cap",
+      "character_id": "tom",
+      "character": "Tom",
+      "height_in": 71,
+      "vibe": "Gamer Geek",
+      "tier": "Grand Capstone",
+      "name": "Konami Code",
+      "pep_cost": 6,
+      "base_recovery": 120,
+      "flavor": "Razzle",
+      "lifecycle_state": "PITCH_REVIEW",
+      "pitch": {
+        "windup": "Tom drops into intense arcade focus holding his retro controller, then taps a crisp rhythmic foot-hop cadence in-place as the engine drops the giant floor controller beneath his sneakers.",
+        "peak": "Tom executes the final two decisive B-A button stomps and thrusts his arm straight left with rock-solid deadpan JRPG gravitas to unleash the engine's rainbow starbeam and retro meteor barrage.",
+        "recovery": "Tom holds a stoic 1-second victorious gamer hero pose before lowering his arm smoothly back to idle."
+      },
+      "held_props": [
+        "retro handheld game controller"
+      ],
+      "needs_custom_start_frame": true,
+      "safe_padding_pct": {
+        "left": 28,
+        "right": 28,
+        "top": 16,
+        "bottom": 8
+      },
+      "foot_anchor_xy": [930, 540],
+      "impact_ms": 3300,
+      "vfx_cue_id": "vfx_core_razzle_beam_arc",
+      "secondary_vfx_cue_ids": [
+        "setpiece_giant_sky_controller",
+        "vfx_core_composure_break"
+      ],
+      "hit_stop_frames": 7,
+      "screen_shake_px": 12,
+      "qa_scores": {
+        "likeness": null,
+        "prop_integrity": null,
+        "motion_fluidity": null,
+        "staging_cleanliness": null,
+        "overall": null
+      },
+      "failure_tags": [],
+      "wanClip": {
+        "filename": "tom-gg-cap.mp4",
+        "durationSec": 7.0,
+        "fps": 24,
+        "numFrames": 169,
+        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tom-gg-cap | 7.0s | 169 frames @ 24fps] Tom (5'11\" man with beard and horizontal left-to-right hair, no glasses, no blazer) stands in-place holding a retro handheld game controller with solemn arcade intensity, performs a crisp rhythmic rapid-fire button-input and light sneaker foot-hop cadence in-place, finishes with one decisive downward stomp and bold straight-left pointing command, holds a rock-solid 1-second deadpan hero pose, and lowers his arm smoothly to idle.",
+        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
+      },
+      "reactiveCounterClip": null,
+      "engineSpec": {
+        "beatsSec": [2.0, 3.5, 1.5],
+        "translationPath": "in_place (giant floor controller + rainbow barrage handled by Engine)",
+        "contactTriggerSec": 3.3,
+        "hitStopFrames": 7,
+        "vfxPrimitives": [
+          "setpiece_giant_sky_controller",
+          "vfx_core_razzle_beam_arc",
+          "vfx_core_composure_break"
+        ],
+        "v11Hook": "R4 Capstone (6 Pep, 120 Rec): AoE Razzle barrage + -2 Composure (Up Up Down Down Left Right Left Right B A)"
+      }
+    }
+  ]
+}

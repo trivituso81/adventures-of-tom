@@ -17,6 +17,8 @@ on:
           - battle_move_final
           - battle_state_draft
           - battle_state_final
+          - qa_audit
+          - rerun_failed
           - approve
           - revise
           - encode_alpha
@@ -102,7 +104,7 @@ jobs:
   encode_safari_alpha:
     runs-on: macos-latest
     needs: generate
-    if: ${{ always() && (inputs.stage == 'battle_idle' || inputs.stage == 'battle_move_draft' || inputs.stage == 'battle_move_final' || inputs.stage == 'battle_state_draft' || inputs.stage == 'battle_state_final' || inputs.stage == 'encode_alpha') && (needs.generate.result == 'success' || needs.generate.result == 'skipped') }}
+    if: ${{ always() && (inputs.stage == 'battle_idle' || inputs.stage == 'battle_move_draft' || inputs.stage == 'battle_move_final' || inputs.stage == 'battle_state_draft' || inputs.stage == 'battle_state_final' || inputs.stage == 'rerun_failed' || inputs.stage == 'encode_alpha') && (needs.generate.result == 'success' || needs.generate.result == 'skipped') }}
     steps:
       - uses: actions/checkout@v4
         with:
