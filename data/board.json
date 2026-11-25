@@ -6874,7 +6874,7 @@
    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
    "title": "Script Studio: auto QA and rewrite inside Generate Scene",
    "first": "2026-11-24T23:29:09-08:00",
-   "last": "2026-11-25T12:49:41-08:00",
+   "last": "2026-11-25T12:57:52-08:00",
    "tags": [
     "scriptstudio3",
     "scriptstudio4",
@@ -6882,7 +6882,8 @@
     "scriptstudio6",
     "scriptstudio7",
     "scriptstudio8",
-    "scriptstudio9"
+    "scriptstudio9",
+    "scriptstudio10"
    ],
    "cards": [
     "c-scriptstudio3",
@@ -6891,7 +6892,8 @@
     "c-scriptstudio6",
     "c-scriptstudio7",
     "c-scriptstudio8",
-    "c-scriptstudio9"
+    "c-scriptstudio9",
+    "c-scriptstudio10"
    ]
   },
   {
@@ -13210,8 +13212,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "014c35a4a9e008f6d01ce6cd9148293a3746d670",
- "synced_at": "2026-11-25T20:50:40+00:00",
+ "synced": "a047c7ccafc5ef5434b1faa943a5545b40d1134e",
+ "synced_at": "2026-11-25T20:58:40+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
