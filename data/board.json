@@ -6464,7 +6464,7 @@
    "id": "c-scriptstudio5",
    "tag": "scriptstudio5",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Script Studio: Fix button, Ta-Ta check, tighter rules",
    "next": "Shipped: Fix Remaining Issues button, Ta-Ta linter check, surgical rewrite rules. Next: use it on a real scene and tell me if passing lines still drift.",
@@ -6480,6 +6480,10 @@
     {
      "d": "2026-11-25",
      "t": "Shipped as scriptstudio5."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as scriptstudio5: Script Studio QA loop: Fix Remaining Issues button, Ta-Ta spelling check, sharper writer rules"
     }
    ],
    "blocks": [],
@@ -6494,10 +6498,27 @@
     "model": "Claude Sonnet 5.5 (row C: a build with the design in the card)",
     "effort": "medium (the changes are specified in the card)",
     "text": "Read the c-scriptstudio5 card and tools/script-studio/README.md, then finish the Script Studio QA loop changes in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/qa_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-25"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
+   "title": "Script Studio: auto QA and rewrite inside Generate Scene",
+   "first": "2026-11-24T23:29:09-08:00",
+   "last": "2026-11-25T08:21:03-08:00",
+   "tags": [
+    "scriptstudio3",
+    "scriptstudio4",
+    "scriptstudio5"
+   ],
+   "cards": [
+    "c-scriptstudio3",
+    "c-scriptstudio4",
+    "c-scriptstudio5"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukD8RBy9czHhghgPwiX",
    "title": "Night QA: the test browser plays your check cards",
@@ -6508,20 +6529,6 @@
    ],
    "cards": [
     "c-night-qa"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
-   "title": "Script Studio: auto QA and rewrite inside Generate Scene",
-   "first": "2026-11-24T23:29:09-08:00",
-   "last": "2026-11-25T00:07:05-08:00",
-   "tags": [
-    "scriptstudio3",
-    "scriptstudio4"
-   ],
-   "cards": [
-    "c-scriptstudio3",
-    "c-scriptstudio4"
    ]
   },
   {
@@ -12828,8 +12835,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "0b16f2c0adaf50e8587a130f809638a0b4869f51",
- "synced_at": "2026-11-25T15:45:46+00:00",
+ "synced": "82cd4937a8826b5665139967307a191182ff78ef",
+ "synced_at": "2026-11-25T16:21:56+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
