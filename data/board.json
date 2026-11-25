@@ -9708,7 +9708,7 @@
    "id": "c-scriptstudio3",
    "tag": "scriptstudio3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Script Studio: auto QA and rewrite inside Generate Scene",
    "next": "Shipped: Generate Scene now drafts, QA-checks and auto-fixes. Next: try it on a real scene with your Gemini key.",
@@ -9724,6 +9724,10 @@
     {
      "d": "2026-11-24",
      "t": "Shipped as scriptstudio3 (4-pass pipeline inside Generate Scene, QA badge, qa_test.py)."
+    },
+    {
+     "d": "2026-11-24",
+     "t": "Shipped as scriptstudio3: Script Studio's Generate Scene now drafts, checks and fixes its own dialogue before showing it"
     }
    ],
    "blocks": [],
@@ -9738,7 +9742,8 @@
     "model": "Claude Sonnet 5.5 (row C: a build where the design is worked out in the session)",
     "effort": "medium (the pipeline is specified in the card)",
     "text": "Read the c-scriptstudio3 card and tools/script-studio/README.md, then finish the Script Studio QA pipeline in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/e2e_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-24"
   }
  ],
  "sessions": [
@@ -9746,8 +9751,10 @@
    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
    "title": "Script Studio: auto QA and rewrite inside Generate Scene",
    "first": "2026-11-24T23:29:09-08:00",
-   "last": "2026-11-24T23:29:09-08:00",
-   "tags": [],
+   "last": "2026-11-24T23:32:53-08:00",
+   "tags": [
+    "scriptstudio3"
+   ],
    "cards": [
     "c-scriptstudio3"
    ]
@@ -16056,8 +16063,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "10a70a73b91db223e32e8b60b5ab30651e510232",
- "synced_at": "2026-11-25T07:29:53+00:00",
+ "synced": "b406eacb2a5eadc6ba56c7b2f23015b93ecb6b14",
+ "synced_at": "2026-11-25T07:33:40+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
