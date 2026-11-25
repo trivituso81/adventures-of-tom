@@ -10145,6 +10145,1046 @@
      "t": "Closed by wanpurpose1. Tom (21:36): \"it doesn't have to be perfect in every single way, but it does have to complete the overall purpose and theme\". Claude put deedee-wetfloor-a2-r10 in the game (mop sweep, wet-floor sign, finger wag); no new video."
     }
    ]
+  },
+  {
+   "id": "b-board-crispcard",
+   "title": "Board: new card to replace the leftover crisp with apple muffins",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-crispcard",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as board-crispcard. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-board-numpy",
+   "title": "Board sync was stuck: the check step crashed because the GitHub runner has no numpy",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-numpy",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"the board is stuck yet again ... The last sync failed and the board was last synced at 11:14 AM\". Cause: board_check.py imports wanstage (numpy) for stage jobs; the runner has no numpy, so every sync run died before pushing. Fixed in board-numpy."
+    }
+   ]
+  },
+  {
+   "id": "b-guideuse-45069823314",
+   "title": "Idle (standing and breathing) (tnb) now plays a video chosen in the Battle Guide",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guideuse-45069823314",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as guideuse-45069823314. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-guideuse-45076526823",
+   "title": "Idle (standing and breathing) (tnb), Guard (tnb) now plays a video chosen in the Battle Guide",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guideuse-45076526823",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as guideuse-45076526823. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-voices-t-crispvoices-617",
+   "title": "16 voice takes made from board card t-crispvoices and merged into the game",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "voices-t-crispvoices-617",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as voices-t-crispvoices-617. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-wanbulk-tmovestagelab-45071628174",
+   "title": "16 battle videos made from board card t-movestage-lab passed their checks and were put in the game",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanbulk-tmovestagelab-45071628174",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanbulk-tmovestagelab-45071628174. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-wanbulk-tmovestagelab-45075789998",
+   "title": "1 battle videos made from board card t-movestage-lab passed their checks and were put in the game",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanbulk-tmovestagelab-45075789998",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanbulk-tmovestagelab-45075789998. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "b-wannoday1",
+   "title": "no daily limit on battle videos",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wannoday1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wannoday1. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "c-b3look",
+   "title": "Battle screen: the new menu's look, and only what is needed",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "b3look",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as b3look: the new battle screen takes the new menu's look and shows every fact once; Details hides the details everywhere"
+    }
+   ]
+  },
+  {
+   "id": "c-b3s16",
+   "title": "Battle system stage 16: Tombo skins on the new battle",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "b3s16",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as b3s16: The Tombos are back in the new battle as named skins on the Full Family Ruckus"
+    }
+   ]
+  },
+  {
+   "id": "c-b3s19",
+   "title": "Battle stage 19: third Vibes, four in a conversation",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "b3s19",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as b3s19: the third Vibe of each of the ten characters is in Battle 3 (40 new moves, 20 Quirks), and old saves load it at 0 Vibe Points"
+    }
+   ]
+  },
+  {
+   "id": "c-b3s20",
+   "title": "Battle system stage 20: Character Level by shared XP",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "b3s20",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as b3s20: Character Level by shared XP on the new battle, with the chapter 5 to 10 XP amounts retuned in data"
+    }
+   ]
+  },
+  {
+   "id": "c-b3s21",
+   "title": "Battle stage 21: Vibe Mastery, Casual Mode, Vibe save",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "b3s21",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as b3s21: Vibe Mastery is the only progression on the new battle, and Casual Mode (Freelancer) is in"
+    }
+   ]
+  },
+  {
+   "id": "c-b3s22",
+   "title": "Battle stage 22: Part 2 bestiary, Traits and Quirks",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "b3s22",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as b3s22: The 30 Traits and 60 Quirks are checked as finished data, and nothing in Battle 3 uses the old Traits file"
+    }
+   ]
+  },
+  {
+   "id": "c-boppy-bigfish",
+   "title": "Boppy's unimpressed pose still wears the old Big Fish cap",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "done",
+   "tag": "boppy-bigfish",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-21",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    }
+   ]
+  },
+  {
+   "id": "c-ch1title",
+   "title": "Rename chapter 1 to Muffin to See Here",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "ch1title1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as ch1title1: Chapter 1 is now called \"Muffin to See Here\" (was \"The Soup Dumpling Protocol\"); every other chapter name is unchanged"
+    }
+   ]
+  },
+  {
+   "id": "c-chaptercard-storybook",
+   "title": "Chapter headings in the storybook look of the main menu",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "chaptercard1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as chaptercard1: Chapter title cards now look like the main menu (cream paper card on the dusk wash), not 16-bit pixel text"
+    }
+   ]
+  },
+  {
+   "id": "c-crispfix",
+   "title": "Replace every leftover crisp with apple muffins",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "crispfix1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as crispfix1: Deedee's dessert is apple muffins in every spoken line, sign note and doc; 16 old recordings removed"
+    }
+   ]
+  },
+  {
+   "id": "c-fix-guideboot",
+   "title": "Battle Guide stuck on the loading screen",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guideboot1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as guideboot1: the Battle Guide opens again; it was stuck on \"Loading the game's battle data...\""
+    }
+   ]
+  },
+  {
+   "id": "c-fix-menu1look",
+   "title": "Fix: Look at the new menu's first screen on the Duo and",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "fix-menu1look",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Retired: Tom wrote \"There is no menu in the admin\". True today: the new menu (ADMIN > Menu, New or Old) is built by card c-menu1, which has not shipped (only its start commit is on main). t-menu1look opened before the menu existed. No code change made here."
+    }
+   ]
+  },
+  {
+   "id": "c-guideflow-1",
+   "title": "Remove the Guide's $10 a day limit; check workflows",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guideflow1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as guideflow1: The Battle Guide has no daily video limit, and a broken workflow file can no longer be pushed"
+    }
+   ]
+  },
+  {
+   "id": "c-guideflow-2",
+   "title": "Build the one status file for Guide requests",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guideflow2",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as guideflow2: The Battle Guide has one status file for its requests (nothing changes on screen yet)"
+    }
+   ]
+  },
+  {
+   "id": "c-guideflow-3",
+   "title": "Build the Guide worker and the picture line",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guideflow3",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Free proof on GitHub done: empty queue ends in 2 to 3 s, a dry row reaches done (runs 45110400003, 45111014330). Narrowed the checkout (guideflow3b) after the first run took 51 s. Test rows removed."
+    }
+   ]
+  },
+  {
+   "id": "c-guideflow-4",
+   "title": "Add the video line to the Guide worker",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guideflow4",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Free proof on GitHub (stand-in rows only, nothing paid): dry row done; replay of a stored take ran end to end (marks, clip gate with the look check, cut, kept on guidegen, done); poke to first claim 44 s including the ffmpeg install. The proof found the runner has no ffprobe (every replay was called \"hardly moves\"); fixed in guideflow4b (ffmpeg from apt). Proof rows and take 9 files removed. The keep step takes about 2.7 min for a 10 MB video (card 6 or later may speed it)."
+    }
+   ]
+  },
+  {
+   "id": "c-guideflow-5",
+   "title": "Switch the Guide page to the one status file",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guideflow5",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as guideflow5: The Battle Guide page reads one status file and shows one status line per request"
+    }
+   ]
+  },
+  {
+   "id": "c-guideflow-plan",
+   "title": "Plan a Battle Guide animation flow that works",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guideflow-plan",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as guideflow-plan: a plan and nine build cards for a Battle Guide animation flow that always shows the true status"
+    }
+   ]
+  },
+  {
+   "id": "c-guidestuck1",
+   "title": "Battle Guide videos stuck at CHECKING all night",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guidestuck1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as guidestuck1: Battle Guide videos no longer stall at CHECKING, and a lost run no longer loses the paid videos"
+    }
+   ]
+  },
+  {
+   "id": "c-menuux-cards",
+   "title": "Create the menu build cards",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "menuux-cards",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Not needed: Tom approved in the chat and the proposal session made the build cards itself (build board-menuux4)."
+    }
+   ]
+  },
+  {
+   "id": "c-movestage",
+   "title": "Moves in three layers: body video, stage, set piece",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "movestage1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as movestage1: Plan for moves that grow with each rank (body video, stage, set piece), Tom's eight moves written that way, other family moves wait in the Battle Guide"
+    }
+   ]
+  },
+  {
+   "id": "c-reports-13",
+   "title": "Fix the report backlog (3 open)",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "done",
+   "tag": "reports-2026-11-21c",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as reports-2026-11-21c: Chapter 2 scenes start the moment the party arrives, and a third family member sits at the left of the Family page"
+    }
+   ]
+  },
+  {
+   "id": "c-sal-listen-swap",
+   "title": "Sal listens with a feeling frame, not the bad picture",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "done",
+   "tag": "salslisten1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as salslisten1: Sal listens in his loving feeling frame instead of the listening picture"
+    }
+   ]
+  },
+  {
+   "id": "c-squishyfont1",
+   "title": "Grace's squishy reveal: caption in the storybook font",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "squishyfont1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as squishyfont1: Grace's squishy close-up names it in the chapter card's storybook type"
+    }
+   ]
+  },
+  {
+   "id": "c-standingfix",
+   "title": "Standing cards: show them as \"Runs every night\", no START",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "tag": "standingfix",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as standingfix: standing night cards show under Runs every night with no START, and Nightly refactoring waits on GitHub"
+    }
+   ]
+  },
+  {
+   "id": "c-startpics",
+   "title": "Start pictures for the rest of the cast",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as startpics1: the Battle Guide can make the start picture for Amy, Boppy, Justin, Olivia, TNB and Nara, which turns on their video buttons"
+    }
+   ]
+  },
+  {
+   "id": "c-startpics10",
+   "title": "Queue any number of requests, notify each change",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics10",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"be able to send as many concurrent requests as I want, and they need to queue. And when one is completed, the next one needs to go, and then I need to be notified of the status change for each.\" Built startpics10."
+    }
+   ]
+  },
+  {
+   "id": "c-startpics11",
+   "title": "Use this one: fix the failed push, show and notify its status",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics11",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"i said use in game and the status doesnt update. i cant even see it when its done\". Built startpics11."
+    }
+   ]
+  },
+  {
+   "id": "c-startpics12",
+   "title": "Guide videos get their own lane",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics12b",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"i generated a video for Tom and it's been siting for 10 minutes again\". Built startpics12b."
+    }
+   ]
+  },
+  {
+   "id": "c-startpics2",
+   "title": "Standard pose animations listed for Amy and the other five",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics2",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as startpics2: the Battle Guide lists the standard pose animations (idle, guard, hit, dodge, knocked out, victory, running) for Amy, Boppy, Justin, Olivia, TNB and Nara"
+    }
+   ]
+  },
+  {
+   "id": "c-startpics3",
+   "title": "Boppy's victory: ASL I love you and a sparkling gold tooth",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics3",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as startpics3: Boppy's victory animation is the ASL I love you sign with a toothy grin and a sparkling gold tooth"
+    }
+   ]
+  },
+  {
+   "id": "c-startpics4",
+   "title": "TNB and Nara victory poses",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics4",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as startpics4: TNB's victory is folded arms, a smile and a wink; Nara's victory is a jump onto her hind legs"
+    }
+   ]
+  },
+  {
+   "id": "c-startpics5",
+   "title": "Amy's standard poses on the Animations screen",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics5",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as startpics5: the Battle Guide's Animations screen now shows Amy's standard poses (and the other five's)"
+    }
+   ]
+  },
+  {
+   "id": "c-startpics6",
+   "title": "Amy's start picture and the Make it crash",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics6",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as startpics6: Amy's start picture is in the game, and the start picture job no longer crashes after making one"
+    }
+   ]
+  },
+  {
+   "id": "c-startpics7",
+   "title": "Guide taps no longer lost or doubled",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics7",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"Something is still fundamentally wrong here, both with the image requests and the animation requests. They all hang\". Cause: GitHub keeps one waiting run per group and a card's video batch cancelled the waiting guide run. Built startpics7."
+    }
+   ]
+  },
+  {
+   "id": "c-startpics8",
+   "title": "Start pictures go before queued videos",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics8",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"the image generation is definitely not working for generating the hero pose... clicked it 10 minutes ago for boppy and nara\". Cause: pictures waited behind a dozen queued videos in one run. Built startpics8."
+    }
+   ]
+  },
+  {
+   "id": "c-startpics9",
+   "title": "Start pictures get their own line",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "startpics9",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: \"I just want to generate these images. I've been trying for over a day\". Cause: pictures shared a line with videos and were cancelled by them. Built startpics9."
+    }
+   ]
+  },
+  {
+   "id": "c-takes-38383a",
+   "title": "Merge 1 new voice take",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "takes-2026-11-23",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as takes-2026-11-23: 1 of Tom's new voice takes is in the game (Grace's Tata, don't walk yet)"
+    }
+   ]
+  },
+  {
+   "id": "c-takes-e8fba6",
+   "title": "Merge 2 new voice takes",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "done",
+   "tag": "takes-2026-11-21",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Retired, nothing to merge: of the 3 kept takes on branch takes sent 11-21 to 11-22, Nine wrappers (Grace) is not a line in the game, and A FISH (Tom) and Huh, that would tip the scales (TNB) have different words from the screen lines (the takes add \"massive\" and \"A massive fish, huh? Sounds like he tipped the scales\"), so they stay out until Tom rewords the scene. Hello Rose, Three and I do have news were already merged in takes-2026-11-21. The 26 older unmerged kept takes were judged stale in takes-2026-11-20b and are not wanted."
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-stage-tom-bluebang-vid-r1",
+   "title": "Fix the stopped video stage-tom-bluebang-vid",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-stage-tom-bluebang-vid-r1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-stage-tom-bluebang-vid-r1: the blue burst video gets a smaller start picture so its sparks stay inside the frame, and the next try is started"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-stage-tom-glare-vid-r1",
+   "title": "Fix the stopped video stage-tom-glare-vid",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-stage-tom-glare-vid-r1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-stage-tom-glare-vid-r1: the headlight flare video is tried again with its start picture shrunk to 80 percent"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-stage-tom-jetwash-vid-r1",
+   "title": "Fix the stopped video stage-tom-jetwash-vid",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-stage-tom-jetwash-vid-r1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-stage-tom-jetwash-vid-r1: the jet wash video is tried again with its start picture shrunk to 80 percent"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-stage-tom-starbeam-vid-r1",
+   "title": "Fix the stopped video stage-tom-starbeam-vid",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-stage-tom-starbeam-vid-r1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-stage-tom-starbeam-vid-r1: the starbeam video (rev 2) pulses so the star visibly twinkles"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-stage-tom-suitedoor-r1",
+   "title": "Fix the stopped video stage-tom-suitedoor",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-stage-tom-suitedoor-r1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-stage-tom-suitedoor-r1: the suite door picture was accepted and put in the game"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-tom-blockade-r4",
+   "title": "Fix the stopped video tom-blockade",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-tom-blockade-r4",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-tom-blockade-r4: Tom's Zone One Blockade video (rev 4, first try) is accepted and put in the game"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-tom-cartridge-r1",
+   "title": "Fix the stopped video tom-cartridge",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-tom-cartridge-r1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-tom-cartridge-r1: the cartridge blow video was accepted and put in the game"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-tom-controller-r1",
+   "title": "Fix the stopped video tom-controller",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-tom-controller-r1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-tom-controller-r1: Tom's Controller Toss video (rev 2) starts smaller so his flung hand clears the left edge"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-tom-controller-r2",
+   "title": "Fix the stopped video tom-controller",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-tom-controller-r2",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-tom-controller-r2: Tom's controller toss body video accepted and baked, no new try"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-tom-konami-r1",
+   "title": "Fix the stopped video tom-konami",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-tom-konami-r1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-tom-konami-r1: Tom's Konami Code body video is in the game, accepted by eye after two stopped tries"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-tom-porsche-r1",
+   "title": "Fix the stopped video tom-porsche",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-tom-porsche-r1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-tom-porsche-r1: the Tom Porsche body video is accepted and in the game, no new try"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-tom-rose-giddyup-r1",
+   "title": "Fix the stopped video tom-rose-giddyup",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-tom-rose-giddyup-r1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-tom-rose-giddyup-r1: Tom and Rose's Giddyup video (rev 2) starts smaller so Rose's leap clears the edge"
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-tom-suitedoor-r1",
+   "title": "Fix the stopped video tom-suitedoor",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "wanstop-tom-suitedoor-r1",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Shipped as wanstop-tom-suitedoor-r1: accepted the first tom-suitedoor video by eye and put it in the game"
+    }
+   ]
+  },
+  {
+   "id": "t-b3s22ch11",
+   "title": "Milestone: play chapter 11 on the new battle",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-b3s23-confirm",
+   "title": "Confirm the battle 2 purge (stage 23)",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom chose: Yes, delete battle 2 and its leftovers as the plan lists"
+    }
+   ]
+  },
+  {
+   "id": "t-chaptercard-look",
+   "title": "Look at the new chapter title cards",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-crispvoices",
+   "title": "Make 16 apple muffins voices (one tap, then listen)",
+   "theme": "Voice Clips",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-guideboot-try",
+   "title": "Open the Battle Guide and check it loads",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: all good."
+    }
+   ]
+  },
+  {
+   "id": "t-reports13-ch2",
+   "title": "Chapter 2: two scene reports need one answer from you",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom chose: Start each scene the moment the party arrives, no long walk-in"
+    }
+   ]
+  },
+  {
+   "id": "t-startpics-try",
+   "title": "Make the start pictures in the Battle Guide",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Not needed: the planning session c-guideflow-plan replaces this flow. Amy, Boppy, Olivia, TNB and Nara already have start pictures on main; Justin's is the first tap of the new card t-guideflow-phone, which also carries the ntfy step."
+    }
+   ]
+  },
+  {
+   "id": "t-wangaveup-stage-tom-bluebang-vid-r2",
+   "title": "The video stage-tom-bluebang-vid did not pass in 4 tries",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom chose: Give it 4 more tries"
+    }
+   ]
+  },
+  {
+   "id": "t-wangaveup-tom-controller-r2",
+   "title": "The video tom-controller did not pass in 4 tries",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom chose: Give it 4 more tries"
+    }
+   ]
+  },
+  {
+   "id": "t-wanwatch-tom-blockade-0522",
+   "title": "Watch 1 new battle video",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Tom: all good."
+    }
+   ]
   }
  ]
 }
