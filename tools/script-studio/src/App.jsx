@@ -916,6 +916,11 @@ function migrateModelSettings(settings) {
 const QA_MAX_RETRIES = 4;
 const QA_STALL_LIMIT = 2; // stop early after this many consecutive retries that do not beat the best score
 const QA_PASS_SCORE = 8;
+// EP Note: a one-line instruction from Tom, injected at the very top of the Writer prompt for one run.
+const epNoteLine = (note) =>
+  note && note.trim()
+    ? `TOP PRIORITY INSTRUCTION FROM THE EXECUTIVE PRODUCER (follows nothing else; overrides every default, craft rule and style note below): ${note.trim()}`
+    : '';
 // Read Mode: an action line that opens a conditional branch ("If the party loses, ...") gets a badge like [IF PARTY LOSES].
 const branchLabel = (line) => {
   if (!line || line.type === 'dialogue') return null;
@@ -1251,7 +1256,7 @@ async function evaluateScene({ ctx, apiKey, auditModelId, activeBannedWords, lin
 
 // PASS 4 prompt: surgical. Passing lines are kept word for word; only flagged lines (and neighbours needed for logic) change.
 function buildRewritePrompt({ ctx, activeBannedWords, ev }) {
-  const { comedyBible, dossiers, facts, combatDocs } = ctx;
+  const { comedyBible, dossiers, facts, combatDocs, epNote } = ctx;
   const linterList = ev.linter.length
     ? ev.linter.map((e) => `- L${e.lineIndex + 1} (${e.speaker}) [${e.code}]: ${e.message}`).join('\n')
     : '(none)';
@@ -1262,6 +1267,7 @@ function buildRewritePrompt({ ctx, activeBannedWords, ev }) {
     .filter((n) => n > 0)
     .sort((a, b) => a - b);
   return [
+    ...(epNote && epNote.trim() ? [epNoteLine(epNote), ''] : []),
     'You are the head writer of "The Adventures of Tom". Your draft failed QA. Fix it SURGICALLY.',
     `FLAGGED LINES: ${flagged.length ? flagged.map((n) => `L${n}`).join(', ') : '(none by number; fix the issues listed below)'}.`,
     '- PRESERVE every UNFLAGGED line exactly as written (same words, speaker, type and mood). Do not polish, reorder or reword lines that were not flagged.',
@@ -1398,13 +1404,14 @@ async function runFixPass({ apiKey, genModelId, auditModelId, vaultDocs, chapter
 }
 
 // Runs the whole pipeline. `setStatus` gets the live progress text. Returns { lines, qa }.
-async function runSceneQAPipeline({ apiKey, genModelId, auditModelId, vaultDocs, chapter, scene, activeBannedWords, setStatus }) {
-  const ctx = buildQAContext({ vaultDocs, chapter, scene });
+async function runSceneQAPipeline({ apiKey, genModelId, auditModelId, vaultDocs, chapter, scene, activeBannedWords, setStatus, epNote = '' }) {
+  const ctx = { ...buildQAContext({ vaultDocs, chapter, scene }), epNote };
   const { comedyBible, dossiers, facts, combatDocs, s } = ctx;
 
   // PASS 1: plain-text comedy draft (no JSON).
   setStatus('Drafting...');
   const draftPrompt = [
+    ...(epNote && epNote.trim() ? [epNoteLine(epNote), ''] : []),
     'You are the head writer of the family comedy JRPG "The Adventures of Tom". Write ONE scene as a plain-text script.',
     'Voice target: Hacks, Schitt\'s Creek and Abbott Elementary. Sharp, specific banter that comes from each character\'s comedy engine (see the dossiers). No sitcom filler, no generic quips.',
     'Never announce a beat. Respect the knowledge gate.',
@@ -1632,6 +1639,7 @@ export default function App() {
   const [speakerInput, setSpeakerInput] = useState('');
   const [expandedFlagLineIds, setExpandedFlagLineIds] = useState({});
   const [highlightedLineIdx, setHighlightedLineIdx] = useState(null);
+  const [epNote, setEpNote] = useState('');
   const [readMode, setReadMode] = useState(false);
   const [readScope, setReadScope] = useState('scene'); // scene | chapter
   const [readQaOpen, setReadQaOpen] = useState({});
@@ -2195,8 +2203,10 @@ export default function App() {
     if (!activeChapter || !activeScene) return;
     setErrorBanner('');
     setLoadingStatus('Drafting...');
+    const note = epNote.trim();
     try {
       const { lines: generatedLines, qa } = await runSceneQAPipeline({
+        epNote: note,
         apiKey: state.settings.apiKey,
         genModelId,
         auditModelId,
@@ -2225,6 +2235,7 @@ export default function App() {
       setErrorBanner(err.message || 'Scene generation failed.');
     } finally {
       setLoadingStatus('');
+      if (note) setEpNote('');
     }
   };
 
@@ -2350,6 +2361,7 @@ export default function App() {
 
     setErrorBanner('');
     setLoadingStatus('Compiling Reference Vault & Line Context...');
+    const note = epNote.trim();
     try {
       const vaultText = compileVaultPrompt(state.vaultDocs);
       const blueprintText = compileBlueprintPrompt(activeChapter, activeScene);
@@ -2374,6 +2386,7 @@ export default function App() {
         .join('\n');
 
       const prompt = [
+        ...(note ? [epNoteLine(note), ''] : []),
         'You are performing a SURGICAL REWRITE on specific lines in a scene of "The Adventures of Tom".',
         '1. Preserve ALL [LOCKED] and [KEEP VERBATIM] lines exactly as written.',
         `2. Rewrite ONLY these exact line numbers: ${Array.from(targetNums).join(', ')}.`,
@@ -2429,6 +2442,7 @@ export default function App() {
       setErrorBanner(err.message || 'Surgical regeneration failed.');
     } finally {
       setLoadingStatus('');
+      if (note) setEpNote('');
     }
   };
 
@@ -3905,6 +3919,18 @@ export default function App() {
                         <Zap className="w-4 h-4 text-violet-400" />
                         Rewrite {flaggedCount > 0 ? `${flaggedCount} Flagged` : 'Unlocked'}
                       </button>
+
+                      <input
+                        type="text"
+                        value={epNote}
+                        onChange={(e) => setEpNote(e.target.value)}
+                        disabled={Boolean(loadingStatus)}
+                        placeholder="EP Note (one run only)"
+                        maxLength={300}
+                        data-testid="ep-note"
+                        title="A one-line instruction for the Writer. Used as the top-priority instruction on the next Generate Scene or Rewrite, then cleared."
+                        className="w-48 sm:w-64 px-2.5 py-2 rounded-lg text-xs bg-slate-950 border border-amber-500/40 text-amber-100 placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                      />
 
                       <button
                         onClick={() =>

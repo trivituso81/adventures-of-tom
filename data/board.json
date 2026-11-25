@@ -6929,6 +6929,43 @@
      "t": "Made by justinpoc1a: the Justin proof run was refused by fal (403)."
     }
    ]
+  },
+  {
+   "id": "c-scriptstudio11",
+   "tag": "scriptstudio11",
+   "lane": "claude",
+   "col": "done",
+   "theme": "Tools",
+   "title": "Script Studio: EP Note box",
+   "next": "Shipped: EP Note box next to Rewrite Unlocked; it is the top-priority Writer instruction for one run, then clears. Next: type a note, tap Generate Scene or Rewrite, and check the box clears.",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
+    "opening": "add a single-line EP Note text input right next to the Rewrite Unlocked button"
+   },
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Tom: \"add a single-line EP Note text input right next to the Rewrite Unlocked button\". New card; started."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as scriptstudio11."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-25",
+   "changed": "2026-11-25",
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Script Studio EP Note box.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build with the design in the card)",
+    "effort": "medium (the changes are specified in the card)",
+    "text": "Read the c-scriptstudio11 card and docs/CHANGES.md scriptstudio11, then adjust the EP Note box in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/epnote_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "done": "2026-11-25"
   }
  ],
  "sessions": [

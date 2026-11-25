@@ -1552,6 +1552,12 @@
    "cmd": "python3 -I tools/pass1_review_test.py",
    "group": "g1",
    "minutes": 2
+  },
+  {
+   "id": "script_studio_epnote_test",
+   "cmd": "python3 -I tools/script-studio/epnote_test.py",
+   "group": "g1",
+   "minutes": 1
   }
  ]
 }

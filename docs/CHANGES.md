@@ -10,6 +10,12 @@ Trigger: `.github/workflows/art-factory.yml` has a `push` trigger on `art-factor
 
 Checked: Stage 1 on all 116 staged drafts (91 pass; the old Justin clip passes Stage 1 and would be caught by Stage 2, where it loses the props), Stage 2 with a mocked model (all four booleans, `pass: true` with one false boolean, invalid JSON), the contact sheet at 200 px, the new prompt (no banned words, rules present, only on `battle_move_draft`), the bake of `pf-justin-bb-basic` reproduces the slot byte for byte with only the `?v=` tag changed, `tools/workflow_check.py`, `tools/board_check.py`. Not checked: the paid fal render and the real Gemini call (they run in the Action).
 
+## scriptstudio11 (2026-11-25): Script Studio: EP Note box for a one-run top-priority Writer instruction
+
+Card c-scriptstudio11. Tom: a single-line EP Note input right next to Rewrite Unlocked. In `tools/script-studio/src/App.jsx`: the box sits directly after the Rewrite button. On Generate Scene, whatever is typed becomes the first line of the Pass 1 Writer prompt (and of every auto-fix rewrite in that run, so the fixes keep honoring it); on Rewrite Unlocked (or Rewrite N Flagged) it is the first line of the surgical rewrite prompt. The text is marked as a top-priority instruction from the Executive Producer that overrides defaults, craft rules and style notes. The box is cleared when the run ends (also when it errors). The formatter and the Critic do not get the note. Generate Chapter and Fix Remaining Issues do not use it and do not clear it.
+
+Checked: new `tools/script-studio/epnote_test.py` (9 checks, mocked Gemini): box next to the button, note is the first line of the Writer, auto-fix and surgical prompts, absent from formatter and critic, absent when empty, cleared after both runs. `qa_test.py`, `audit_test.py`, `e2e_test.py`, `read_test.py` pass. Row added to `tools/night/tests.json`. Not checked: real Gemini obeying the note.
+
 ## scriptstudio10 (2026-11-25): Script Studio: leaner writer rules and a stricter, calibrated Critic
 
 Card c-scriptstudio10. Tom: dialogue was bloated and unfocused and scores were too generous. In `tools/script-studio/src/App.jsx`, `WRITER_CRAFT_RULES` (used by Pass 1 and the Pass 4 rewrite) now says: lean pacing (plot and task information in the fewest lines; never stretch a handoff or prop beat like borrowing a pencil into a back-and-forth; one sharp one-liner then move on); natural spoken English only (no invented shorthand that needs decoding, with "Knees, Tata, knees!" and "Mind the hair on takeoff" as the examples to avoid); no meta-jargon or recycled crutches (no "side quest", no repeated travel or aviation puns, nicknames like "Cozy Rosie" used rarely) and characters never narrate the scene title. The Critic prompt has a SCORE CALIBRATION block: cap the score at 6.5 or lower for (a) padded back-and-forth on a mundane beat, (b) awkward phrasing that makes the reader pause, (c) sitcom tropes or meta-jargon, (d) a character narrating the scene title; flag each as an issue; award 8 or higher only when the scene is lean, clear on first read and sharp. The 8/10 strict pass bar is unchanged.
@@ -239,6 +245,7 @@ Card c-b3s22ch19. Chapter 19 is on the BY CHAPTER list for Battle 3. One number 
 | Checks and the page test | `tools/b3-check-s22ch19.js`, `tools/ch19_b3_test.py` (`tools/night/tests.json`); older checks and tests that counted chapter 19 as unswitched now say 20 (`b3-check-s15/17/18/18bonus/22ch18`, `b3_story_test.py`, `battle_guide_test.py`) |
 | Guide data | `data/guide-anims.json` rebuilt |
 | Docs | `docs/BATTLE3.md` "What stage 22 chapter 19 holds" |
+
 ## guideflow6 (2026-11-23): In the Battle Guide you can upload your own start picture, and one button makes all of a person's missing standard poses
 
 Card c-guideflow-6, plan `claude/guide-flow-plan.md` section 10 step 6 (3.2 D11 and D13, 5.2, 5.5, rows X13 and X14 of section 6, the T8 additions). Changed: `battle-guide.html`, `tools/battle_guide_test.py`, `docs/BATTLE_GUIDE.md`. The plan was built as written; no step needed a different way. Nothing was paid for and no service was called (every test uses the stand-in GitHub).
@@ -391,6 +398,7 @@ Card c-b3s22ch15. Chapter 15 is on the BY CHAPTER list for Battle 3. One number 
 | The dining room picture behind the fight on Battle 3 (only Battle 2 asked for it before) | `data/ch15-battle.js` |
 | Chapter 15 test (the table, HUSH-9, the one fight, the kind ending, the Hush Chip; portrait and landscape), night manifest entry, new rule check file | `tools/ch15_b3_test.py`, `tools/night/tests.json`, `tools/b3-check-s22ch15.js` |
 | Checks that counted switched chapters now include 15; chapter 16 is the first unswitched one | `tools/b3-check-s15.js` to `s22ch14.js`, `tools/b3_story_test.py`, `tools/battle_guide_test.py`, `data/guide-anims.json` |
+
 ## guideflow2 (2026-11-23): The Battle Guide has one status file for its requests (nothing changes on screen yet)
 
 Card c-guideflow-2 (plan claude/guide-flow-plan.md section 10 step 2). Built `tools/guidegen/store.py`: `queue.json` on the branch `guideq` with add, claim (several workers can never take the same row), the table of allowed changes of plan 4.3 (any other change is refused), the same for the use field, the reaper for dead jobs, the 7 day archive, and one phone message per change of plan 5.6 (none for queued, making, checking or cancelled). The why and do words of plan section 6 are the `WORDS` table, copied to `data/guide-words.json` for the page. Tested without any network or money by `tools/guidegen/store_test.py` against a stand-in GitHub that answers 409 for a stale save: 50 rounds of two workers claiming at once, every allowed and every refused change, duplicate add, reaper, notifications, archive, a file over 1 MiB. Added to the night test list. Not looked at: the page, the workflows and `wangen.py` (not touched in this card); the real branch `guideq` does not exist yet and is created by the first real write.
@@ -513,6 +521,7 @@ Card c-b3s22ch12. Chapter 12 is on the BY CHAPTER list for Battle 3, with the be
 | The chapter test library ran only on Python 3.12 (a backslash inside an f-string); now it runs on 3.11 too | `tools/b3_chapter_lib.py` |
 
 Tests: `node tools/b3-sim.js check` (FAILS: []).
+
 ## squishyfont1 (2026-11-22): Grace's squishy close-up names it in the chapter card's storybook type
 
 Card c-squishyfont1. Tom: "When grace reveals her squishy in scene 1, make the font for the squishy match the other storybook game font from interstitial." The two caption lines under the squishy (and under Nine Scoops' cow and dice, same showcase) were drawn with the pixel label font; they are now a DOM caption (`#sqcap`, m2.css) in the chapter title card's typefaces (Bricolage Grotesque 800 for the name, Figtree 700 for the second line). Read "interstitial" as the chapter title card; if he meant the picture close-up captions (Trebuchet), say so.
@@ -538,6 +547,7 @@ Tom: "this battle guide is shit. i said use in game and the status doesnt update
 ## wanstop-stage-tom-starbeam-vid-r1 (2026-11-22): the starbeam video (rev 2) pulses so the star visibly twinkles
 
 Card c-wanstop-stage-tom-starbeam-vid-r1. Looked at both stopped videos (contact sheets of every 15th frame): the star and its sparkle trail sit almost still, so the twinkle does not read (motion 0.6 of 255, needs 2.0; background, edges and loop were fine). Kept: start picture, 480p, 3 s, seed 81, endpoint, the camera and background text, the loop settings. Changed one thing: the motion sentence in `stage-tom-starbeam-motion-v2.txt` now says the star pulses brighter and dimmer three times with the trail flickering (job `stage-tom-starbeam-vid`, rev 2). Next try started by `wgen` on t-movestage-lab. Nothing for Tom.
+
 ## wanstop-tom-cartridge-r1 (2026-11-22): the cartridge blow video was accepted and put in the game
 
 Card c-wanstop-tom-cartridge-r1. The bulk run stopped tom-cartridge after two tries; both failed only the look check p1 (it said the blow was missing). I looked at the pictures of both videos: in each he pulls the cartridge from his pocket, holds it to his mouth with both hands, squints with puffed cheeks, nods and tucks it away, ending in the start stance. Try 2 (`tom-cartridge-a2-r1.mp4`) passed height, feet, flat background, edges and ends, so I accepted it (Tom 2026-11-21: the purpose and theme must be met, not every detail) and baked it with the job's own settings (`wanbake.bake`, `wanbake.wire`).
@@ -586,6 +596,7 @@ Tom (11-22): "shrink the character down so that the top of their head is aligned
 - Removed: the Vibe chips, the Make it Primary and Make it Secondary buttons, the old Lean and VP lines, the stats-line switch, and their CSS.
 - Tests: `tools/m2_test.py` (new checks: Lv on the name line, bar under, Tom's head top level with the name, switch at the title's right, cards, Primary, Secondary, Off, peek), `tools/b3_test.py` s4, s9c, s21 updated to the cards.
 - Not looked at: a real phone.
+
 ## startpics9 (2026-11-22): start pictures have their own line, so videos can no longer block or cancel them
 
 Card c-startpics9. Tom (11-22 13:22): "I just want to generate these images. I've been trying for over a day, and we keep running into the same issues over and over again." Cause: Make the start picture shared the `wan-gen` line with every video batch; GitHub keeps one waiting run per line, so a card's video batch (`board: wan generate t-movestage-lab`) cancelled the waiting picture runs (TNB, Boppy, Nara, and the run I started by hand), and a picture waited behind an hour of videos. Fixed: a new workflow `startpic-gen.yml` (its own line, own queue file `data/startpic-requests.json`, own results and ledger on branch `startpic`, `wangen.py --startpics`); nothing else enters that line. The Guide's button now asks it and polls it. A picture that already exists is dropped before any money is spent. Boppy's and Nara's pictures were made through it in 2 minutes (Nara's already existed from the earlier run, nothing spent). Boppy's picture came out facing right and was flipped by the checker, which also reverses the lettering on his cap ("Paso Robles"): flagged to Tom. Test: `python3 -I tools/art-library/startpic_test.py` (S11).
@@ -602,6 +613,7 @@ Part b of card c-movestage-build (plan `claude/move-staging-plan.md`). The video
 ## startpics8 (2026-11-22): start pictures go first; videos wait for the next run
 
 Card c-startpics8. Tom (11-22 13:08): "the image generation is definitely not working for generating the hero pose. i clicked it 10 minutes ago for boppy and nara and hard refreshed yet i still cant generate the breathing pose". Cause (from the live progress file on branch `guidegen`): one guide run took all 14 queued requests, and `run_guide_requests` made every video before it looked at the start pictures, one video at a time, so Nara's picture (and Boppy's, in the next run) waited behind about 12 videos, roughly an hour. Fixed: a run that finds both pictures and videos makes the pictures only (about a minute), leaves the videos in `data/wan-requests.json`, and starts the next guide run for them (`next_guide_run` in `wangen.py`; the sweep step does it if that call fails). I stopped the running batch (the finished videos and the money ledger are saved by the checkpoint step) and put its unfinished requests back in the queue so they run after the pictures. Test: `python3 -I tools/art-library/startpic_test.py` (S10).
+
 ## wannoday1 (2026-11-22): no daily limit on battle videos
 
 Tom: "remove this - i will manage the limit myself with my balance". The card Judge Tom's eight moves showed all 18 waiting jobs as "spending limit": the log said "the $15 a day for videos is spent ($20.14 today)" (the day counts in UTC, so it resets at 4 PM Pacific). `_bulk.auto.day_dollars` in `tools/art-library/wangen-jobs.json` is now `null`, which `settings` and `budget` in `wanbulk.py` read as no daily limit. The per animation limit (4 videos, $3.20) and the run cap on the card still hold. Test: `wanbulk_test.py` B10. Nothing in the game changed.
@@ -761,6 +773,7 @@ Card c-guidestuck1. Tom (06:53): "Creating animations within the battle guide se
 - **Rose Mode on the new deck** (`engine/b3-deck.js`, `b3-deck.css`, words in `data/b3-ux-words.js`): each move shows its flavor as the emoji picture, its price as drops on the kind line (the number stays), and the recommended move (`b3Rec`) gets a star with the words "Try this" next to the existing gold glow. Nothing is added in normal modes. DETAILS off still hides the plain line.
 - **Removed**: `battle-ux.html`, the `battle-ux/` pictures and the Battle screen redesign (proposal) button in Admin. `claude/battleux-plan.md` and `claude/battleux-mock/` stay. (`admin_hub_test.py` has two failures, "one link per fight" at 390 and 844 px, that were there before this build.)
 - **Tests**: `tools/b3_layout_test.py` now checks, at every size and turn, that each live monster's badges are exactly its Pet Peeves (DETAILS on and off), the tray does not repeat them, and a Rose Mode pass (DETAILS off and on) that every move has a picture and drops, the recommended move is starred, and no detail shows. Frames: `tools/shots/b3-layout-<size>-f5.png` (badges under both Mudlings and The Big One) and `b3-layout-<size>-rose0.png` / `-rose1.png` (Rose deck).
+
 ## fix-menu4play-4 (2026-11-22): Party tab: name, level and green bar now sit above the HP, above the pictures
 
 Card c-fix-menu4play-4, from t-menu4play. Tom: "On the party tab, you only moved the HP to the top that you were also supposed to move the character name and level which of course is what's supposed to be at the top above the HP". Fix 3 had moved only the HP. Each person's top line is now the name, then Level and the green bar, then HP, all above the pictures (`m2Page` in `engine/m2-family.js`, `.m2-hd` in `m2.css`). The cards under the pictures keep the Vibe name, stars and Front or Back row. Nothing else changed. The two pencil reports open on 2026-11-22 are about chapter 2 scenes, not this menu, and stay open.
@@ -823,6 +836,7 @@ Card c-b3s16 (battle system stage 16). When two family members fire a Full Famil
 ## fix-menu4play-3 (2026-11-22): Menu: Party tab, name beside the bar, HP above the pictures, Primary and Secondary, tap twice to pick
 
 Tom's report on t-menu4play: tab renamed Party; name level with the green bar and HP above the pictures; the Vibe name bigger; the gauge reads Combos with Double Team and Family Ruckus; the switch reads Show skill descriptions and, off, hides the whole description; Main and Pocket became Primary and Secondary; the mastered note is gone; tapping a Vibe once shows the +/- on Health, Attack, Defense and Speed, tapping it again makes it Primary.
+
 ## battleux2 (2026-11-21): every family move now has one plain line that says what it does
 
 Card c-battleux2. Wrote a `short` line (60 characters at most) on all 80 family moves of the 10 members in `data/b3-kit-*.js`, plus Pick-Me-Up in `data/b3-rules.js`. The new battle screen shows it under each move when DETAILS is on, and in the strip on a phone held sideways (where the strip has room for one line instead of the full description). Rules and numbers did not change; these are not spoken lines, so nothing to bake.
@@ -1107,6 +1121,7 @@ Two tries of rev 4 failed only the look-checks (the pocket pickup and tuck are c
 ## wanqueue1 (2026-11-21): a video run also makes every other card still waiting; fal.ai is out of credit
 
 Card c-wanqueue1. Tom (21:59): "that leaves me totally confused as to what happens next". Facts: every wan-gen run since 05:20 UTC stopped on fal "User is locked. Reason: Exhausted balance" (ledger $66.52); Rose's pair tap (05:23 UTC) was dropped because two cards asked at once and GitHub keeps one waiting run. Change: after its own card, a bulk run makes every other card whose wgen.want is still true (read from the newest main), so a dropped run no longer strands a tap. Tom card t-fal-topup.
+
 ## boardwedge1 (2026-11-22): board sync can no longer be stalled by a Tom card that blocks only finished work, or by merge-conflict markers in the board files
 
 Card c-boardwedge1. Tom (11-21 21:13): "Yes" to a card that makes board-sync unable to stall.
@@ -1146,6 +1161,7 @@ Card c-menu4. Tom approved the redesign on t-menuux-decide (11-21 18:20). Nothin
 | Docs | CLAUDE.md Where things live, docs/DUO.md menus row, docs/ARCHITECTURE.md, docs/BATTLE3.md |
 
 Not done or not changed: the shop still uses the old panel styles (`mwin`, `item-list`) and `menuZoom`; the old Stampcard stays until a chapter no longer runs on the old battle (Stampcard link on Vibes). The painted pictures on the Family page were not touched. Not tested on a real iPhone or the Duo: the five sizes are covered by `m2_test.py` in Chromium only.
+
 ## videohist2 (2026-11-22): Video History rebuilds itself after every video run
 
 Card c-videohist-auto. The wan-gen Action has a new last step: after a run that made videos (not a dry run, not a run with nothing to make) it runs tools/videohist/publish.py, which clones main fresh (the workflow checkout is shallow and main may have moved during the run), rebuilds data/video-history.json and art/video-history/ from the wangen branch files with tools/videohist/build.py, commits only those two paths ("videohist: rebuilt after wan-gen run <id> [skip ci]") and pushes to main; a refused push fetches the new main, resets to it (main's copy of every other file) and rebuilds, up to 5 times. A run that changes nothing pushes nothing. The step is continue-on-error, so a failed rebuild never fails a video run. Test: tools/videohist/videohist_test.py H4 (a local bare repo with two made-up videos, one refused push, only the two history paths change). Not run for real: the first real rebuild happens with the next wan-gen run.
@@ -1209,6 +1225,7 @@ Card c-movefun. Tom (11-21 20:02): "But what makes it giddy up Tata? These moves
 | Wrong (1) | Rose Giddyup, Tata! (no Tom in it; already being remade by pairmove1) |
 
 Length is not the cause: every move plays 2.1 to 3.4 s, and the two good signature moves are 2.8 s. Each flat move has one fix (one prompt sentence; Cube Pop and Wet-Floor also play at 1.25x). List and exact wording: claude/move-fun-review.md. Board: t-movefun-pick (Tom decides) blocks c-movefun-fix (Sonnet 5.5 medium, auto, build movefun2).
+
 ## menu3 (2026-11-22): the new menu has its Bag and System pages (still behind the MENU: NEW switch)
 
 Card c-menu3. Tom approved the design on t-menuux-decide (11-21 18:20). Nothing a player sees changes until Tom picks `MENU: NEW` in ADMIN (or `index.html?menu=new`). Bag and System are pages of the book now; no tab opens today's Items or Load screens any more.
@@ -1249,6 +1266,7 @@ Card c-menu2. Tom approved the design on t-menuux-decide (11-21 18:20). Nothing 
 - Removed (purge rule): the menu1 wrapper around `b3vRender` that cleared the New skill tag, and the Vibes tab's `b3vOpen('menu')` path. The old overlay stays for the Battle Lab door.
 - Tests passing: `python3 tools/m2_test.py` (both pages at the five sizes: overflow, text under 12.5 px, targets under 44 px, em dashes; the later-game loadout with Ranks 5 and 4, 4 and 3, 3 and 3 and both Quirk slots in use; Make it Main, row refusal, Quirk chooser, details switch, a late joiner's split and Lock it in, bench faces, Wear, Take off, Best gear, keys), `python3 tools/smoke.py`, `python3 tools/b3_test.py s4`. Screens: `tools/shots/m2-<size>-vibes.png`, `-gear.png`, `-quirks.png`, `-pool.png`.
 - Not done: Bag and System (card c-menu3), the switch to New for everyone and the purge of the old menu (c-menu4); no fight number changed.
+
 ## pairmove1 (2026-11-21): two-person battle videos; Rose's Giddyup will ride Tom's shoulders
 
 Card c-pairmove1. Tom (20:02): "But what makes it giddy up Tata? These moves need to be fun." Tom (20:07): "it needs to be something where she jumps on the shoulders and then jumps off and says giddy up... the more the advanced move is that more acceptable is for to take longer."
@@ -1312,6 +1330,7 @@ Card c-menu1. Tom approved the design on t-menuux-decide (11-21 18:20): "looks g
 - Built notes for c-menu2 (Vibes and Gear): add a page by giving `m2Render` a body for the tab in `engine/m2-core.js` (`M2.tab`), put its styles in `m2.css` under `#m2`, and reuse `.m2-plate`, `.m2-chip`, `.m2-btn`; the old screens open through `m2OpenLegacy(tab)`.
 - Tests passing: `python3 tools/m2_test.py`, `python3 tools/smoke.py`.
 - Not done: no change to the old menu's code, no other tab built, nothing pushed to the Project.
+
 ## animplan1 (2026-11-22): the Battle Guide has a Plan view of every battle animation
 
 Card c-animplan. Tom (2026-11-21 18:09): "there's no clarity on the plan, which animations we do and when". ADMIN > BATTLE GUIDE > Animations now opens with a PLAN: three counts (Making, Next, Done) and a list per group, one row per animation, tap a row to open its owner. Done: a baked video is in the game (82). Making: a job in `tools/art-library/wangen-jobs.json` with no baked video, or an open `c-wanstop-<job>` card; shows the job's rev (now: Rose's Giddyup, rev 8). Next: no video and no job (267). It reads the same data as the rest of the guide (`data/guide-anims.json`, the jobs file, the board), so it moves by itself. Test: `tools/battle_guide_test.py` (counts match the data, rose-giddyup is a Making row, portrait and landscape, screenshots `tools/shots/guide-plan-*.png`). Not looked at: the rest of battle_guide_test past the take-card check fails to start in this sandbox's Chromium (video decode), so only the new block and the first 325 lines were run.
@@ -1449,6 +1468,7 @@ Tom, on t-dash3-try, after the first fix: "didnt work, its till rotated 90 degre
 ## fix-dash3-try (2026-11-22): the dashboard's Duo folded, upright size stays upright
 
 Tom, on t-dash3-try: "duo folded upright is the wrong orientation". Cause: a folded Duo is not a tablet, so the game follows the landscape choice saved by its own rotate button (`le-layout`, shared by every game tab in the browser) and sat sideways inside the upright 466 x 657 frame. Fix: at the four Duo sizes `forceDuo` in `dashboard.html` sets the game frame's `layout.mode` to auto (frame only, nothing saved), so the layout follows how the pane is held. `tools/dashboard_test.py` now saves a landscape choice, switches sizes and checks the folded upright frame is not rotated. Reproduced and checked in the browser at 466 x 657 before and after.
+
 ## reports-2026-11-21b (2026-11-22): every boss is drawn 2.5 times larger, the Old Oak Park barrier no longer sits under the party, and the chapter 2 clean-up is finished
 
 Second part of card c-reports-13. Eighteen reports on build wanch5 (chapter 2); fix-ch2play (above) had already cut or reworded most of the lines, so this part closes the rest and answers each report.
@@ -1585,6 +1605,7 @@ Card c-wanbulk. Tom (14:51, during c-wanch4): "Why do we have to do an opus prom
 What the checks say about the stored videos (measurements only, free; the job flags above applied): the two plan 4.10 cases fail the way the plan says (`rose-giddyup` r4: the edge check only; `deedee-wetfloor` r4: the feet check at 9.5 percent and the edge check). Of the 46 videos (the final rev of each job) on branch `wangen`, 12 pass every measurement as they are, 2 files are not readable, and 32 fail at least one (feet 23, edge 11, background 8, last against first 6, height 2): mostly the feet rule at 1 percent (Deedee's idle drifts 2.7 percent and Tom approved it) and the end rule for moves that do not return (victory, run). The thresholds are the plan's numbers and live in one table (`LIMITS` in `wanqa.py`); a job that is judged by its own looser number says so in `limits` with a `why`. Nothing was changed on the strength of this table.
 
 Files: `tools/art-library/wanqa.py`, `wanbake.py`, `wanbulk.py` (new), `wangen.py` (`--bulk`, `--replay-checks`), `wangen-jobs.json` (`_bulk`, `airborne` on rose-giddyup, `returns: false` on the four knock-outs), `.github/workflows/wan-gen.yml`, `board.html`, `tools/board_check.py`, `tools/board_sync.py`. Tests: `python3 tools/art-library/wanbulk_test.py` (a stand-in fal that answers with real ffmpeg videos, the stand-in xAI, a local git remote; pass, edge retry, stop, cap, bake and wire into a copy of the real kit files, the cards, a second tap, no check key, the r4 replay), `python3 tools/art-library/wangen_test.py` (W1 to W13), `python3 tools/board_wan_test.py` (the card on the page, portrait and landscape). Not exercised in a session: a real fal call, the real `bump_tags.py` inside the Action (its own tests are `tag_check` and `buildlog_test`), and the full game smoke after a merge (the first bulk card's watch card is the check).
+
 ## nighttestsb (2026-11-21): first real night test run read; the runner no longer crashes on a folder; minutes measured and groups rebalanced
 
 Card c-nighttests, part b. First real run (GitHub run 44942942208): 197 of 210 rows ran, 306 measured minutes. 4 groups finished in 41 to 79 minutes, g3 crashed on a folder inside `tools/shots` (fixed: only files are scanned), g1 (which holds `b3_test.py`) hit the 4 hour job limit and was cancelled, so 13 rows have no result yet. 79 rows failed on main (the baseline: the next nights compare with it and add a card only for a test that was passing); 11 of them hit the time limit.
@@ -1699,6 +1720,7 @@ Card c-battleguide2. Tom's notes on the guide: none (his card Try the Battle Gui
 | Where the list comes from | `python3 tools/guide_planned.py` reads the plan documents and writes `data/guide-planned.json` (hashes of the sources; `--check` says when one changed). Each item carries a `when` rule the page checks against the game's own `data/b3-*.js`, so a third Vibe, a monster, a chapter or a rule in the game makes the planned item vanish and the real one show by itself. What the list was built from, row by row: docs/BATTLE_GUIDE.md "Planned, not built yet". |
 
 Also: `data/battle-lab-index.json` was stale (27 of the 66 fights; the Battle Lab page listed too few), regenerated with `node tools/battle_lab_index.js`. docs/BATTLE3.md "Where it is played today" said chapters 2 to 20 still use battle 2; it now says chapters 1 to 10 are on the new battle (`B3_STORY.chapters`). Tests: `tools/battle_guide_test.py` (new checks listed in docs/BATTLE_GUIDE.md "Test"), `b3_test.py new1`, `node tools/b3-sim.js check`; the guide test's stand-in board now drops the guide's note cards together with their Tom cards, so its two `board_check` checks pass again.
+
 ## nightgreenj (2026-11-21): the chapter clip review test is taken off the known failures: it already passes
 
 Card c-nightgreen, test `clip_review_test` (`python3 tools/clip_review_test.py`; the list said "failing since b3s8"). Neither the test nor the game is wrong today: on current main it passes three times in a row (about 75 seconds each) in portrait and landscape: the review panel lists the three clips, PLAY and PLAY ALL draw them in order, only the clip that plays is loaded and it is let go afterwards, REDO saves a rejection with the note, and leaving the fight removes the panel. Whatever broke it at b3s8 was fixed by a later build.
@@ -1715,6 +1737,7 @@ Card c-wanch3. Tom's answer on t-wanch2-watch was All good with no note, so ther
 | Deedee Wet-Floor | Kling r4, prompt `wan-deedee-wetfloor-v2.txt` ("beside her feet, level with them") | Missed the same way a third time (mop head 114 px below her feet row) and swept twice. Stop-loss on wording: c-wanch4 asks Tom first |
 
 Nothing was replaced, so nothing was purged. `tools/guidegen/build_map.js`: a monster now gets its Wan job in the Battle Guide when that job made its clip (the guide shows the Wan prompt for the bite). Spent: fal $1.72 (ledger $50.96). Tests: `wanproof_test.py` FAILS [], `video_only_test.py` FAILS [], `b3_test.py s8`, `guidegen/build_map_test.py` (only its earlier Lounge Pass failure), `guidegen/take_test.py`, smoke (portrait and landscape).
+
 ## voices-t-ch1voices-334 (2026-11-21): 10 voice takes made from board card t-ch1voices and merged into the game
 
 The voice-gen Action made the takes (voiceboard1, tools/voice-learn/voiceboard.py) and merged them with merge-local.js: 10 clips, 0 lines on needs-human (silent, not merged), about 0 credits. Nobody has listened to these takes yet; the card asks Tom to.
@@ -1752,6 +1775,7 @@ Card c-dash2. Tom answered the first try (t-dash1-try) with All good and no writ
 | Left for dash3 | The Next for you column. |
 
 Test: `python3 tools/dashboard_test.py` (272 checks incl. every size at 3440 x 1328 and 3440 x 1440, a stand-in newer build, a chapter jump from the title and from mid-game, both kinds of test fight, Mute through a reload, Report on and off); `python3 tools/smoke.py`.
+
 ## costs2 (2026-11-21): AI Costs fills itself in: a daily balance read and every paying job writing what its run cost
 
 Card c-costs2. Tom's notes on the first look (t-costs1look) were "all good", so nothing in the page's layout changed for them. Facts and the table of what each service lets a job read: docs/COSTS.md "How the page fills itself in".
@@ -1785,6 +1809,7 @@ Card c-night-qa, a second hand run after build nightqa (which another session ha
 - Checked: `python3 tools/hollow_trail_test.py` 10 runs in a row.
 
 ## ch3lessons (2026-11-21): chapter 3's script cut by the chapter 1 and 2 lessons before it is built: 148 lines became 124 (24 cut, 4 rewritten, one orphan fixed), every voice script retagged
+
 ## board-ch1voices (2026-11-21): a board card makes chapter 1's 10 missing voices with one tap
 
 Tom (13:08): after playing chapter 1, voices were still missing; he asked for a card that generates them all. Every chapter 1 line the game can show (scenes, NPC houses, the six monsters, the cab trip pools) was checked against the baked clips in a real browser: 10 dialogue lines have no clip (Tom x2, Deedee x3, Boppy, Grace, Rose, Sal, Aunt Ellie; 1,313 characters, about 578 credits). New Tom card `t-ch1voices` carries them as `voices`, so Generate all voices (voiceboard1) makes them. Not in the card: Deedee's 3 battle barks (the voice job makes dialogue lines only, and Battle 3 plays no spoken move lines). No credits spent; the first paid run is Tom's tap.
@@ -1797,6 +1822,7 @@ Card c-reports-10, report r-20261121-125831-qvon. Tom: "the car in phone image s
 - Checked: replayed `ch1Sunday` in the browser (tablet size with Duo, and phone landscape): picture shown under TNB's line; calling the close at every 50 ms before the line appeared did not close it; the scene ended and the picture closed. Not looked at: Firefox, python smoke.
 
 ## guardwin1 (2026-11-21): Tom now does the victory celebration when a fight is won while his guard is up, instead of staying in the guard pose
+
 ## nightqa (2026-11-21): the night QA exists: a standing card that sorts Tom's play cards each night, two detail lines on the board page, and the rule that stops yes or no checks reaching Tom
 
 Card c-nightqa (plan claude/night-plan.md section 8). Built: the standing card `c-night-qa` (nightly, Sonnet 5.5 medium, prompt holds steps 2 to 4 and the limits word for word); the `machine` field shown in a card's details as "Checked by the night QA" (what was seen, picture links to branch `night` under `qa/`) or "Needs your eyes" (why), with cases in `tools/board_test.py`; the Last night card ends with "Limits of the night QA" (`tools/night/lastnight.py`); the nightqa1 rule in CLAUDE.md. First night, run by hand on the 4 oldest play cards: t-alvarezplay, t-ch2play, t-ch6play, t-gatezeroplay all sorted YOURS (looks, sound, motion, timing); none closed, none failed, no pictures because no check was a provable fact. Tests: board_check ok; night_test ok; board_test's new cases pass (the run stops later at an old `#bcopy` wait that also fails without this change here); board_sync_test R5 and smoke's heights check fail with and without this change.
