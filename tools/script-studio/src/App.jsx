@@ -1143,8 +1143,8 @@ const HARD_FORMAT_RULES = (activeBannedWords) =>
 
 const WRITER_CRAFT_RULES = [
   'CRAFT RULES:',
-  '- MANDATORY BEATS are plot facts only. Dramatize each fact in your own words; never copy a beat\'s prose.',
-  '- If a beat contains quoted dialogue (words in quotation marks), NEVER thesaurus-paraphrase it. Either use those exact words in the character\'s mouth or leave that quote out; a synonym-swapped version of a quote is wrong.',
+  '- MANDATORY BEATS are plot facts only: what must happen and who learns what. They are not a script and their wording is not graded.',
+  '- Invent fresh comedic dialogue for each beat, in the speaker\'s own voice. If a beat contains quoted text, that text only tells you what the moment is; NEVER thesaurus-paraphrase it (swapping synonyms on quoted beat text is flat and wrong). Write a new joke that delivers the same plot fact.',
   '- Character-sheet trivia (for example visitor lanyards or SkyMiles) is background for the voice, not a checklist. NEVER shoehorn it into a scene unless it fits the immediate conversation naturally.',
 ];
 
@@ -1184,6 +1184,7 @@ async function runCriticPass({ ctx, apiKey, auditModelId, lines }) {
     'You are a harsh, experienced sitcom Showrunner reviewing a script for the family JRPG "The Adventures of Tom". You protect the comedy, the characters and the canon. Be specific and unsentimental.',
     'Judge the numbered draft against comedy-bible.md, canon-and-characters.md and the scene\'s knowledge gate.',
     'Look for: jokes that are not funny or are AI-generic; lines that do not sound like that character; lines that make no sense in the moment; sitcom-cheesy or on-the-nose lines; a beat owned by the wrong character; anyone knowing or referencing something the knowledge gate says they do not know yet; canon violations; character-sheet trivia shoehorned in where nobody would say it.',
+    'Do NOT flag a line merely because its wording differs from a mandatory beat or from text quoted in a beat; beats are plot facts, not a script. Flag beat-related lines ONLY when the dialogue is a flat, unfunny paraphrase, or when the plot fact itself is missing or wrong.',
     `Score 1 to 10. Set "pass" to false if the score is below ${QA_PASS_SCORE}, OR if any single line is nonsensical, out of character, sitcom-cheesy, or gives the wrong character ownership of a beat. Otherwise true.`,
     'For each problem give lineIndex (the L number, 1-based), the speaker, a category (Comedy, Voice, Logic, Canon or KnowledgeGate), what is wrong, and a concrete fix. Return an empty issues list only if there is truly nothing to fix.',
     '',
@@ -1236,8 +1237,9 @@ function buildRewritePrompt({ ctx, activeBannedWords, ev }) {
   return [
     'You are the head writer of "The Adventures of Tom". Your draft failed QA. Fix it SURGICALLY.',
     `FLAGGED LINES: ${flagged.length ? flagged.map((n) => `L${n}`).join(', ') : '(none by number; fix the issues listed below)'}.`,
-    '- PRESERVE every passing line exactly as written (same words, speaker, type and mood). Do not polish, reorder or reword lines that were not flagged.',
+    '- PRESERVE every UNFLAGGED line exactly as written (same words, speaker, type and mood). Do not polish, reorder or reword lines that were not flagged.',
     '- Rewrite ONLY the flagged lines, plus any adjacent lines that must change so the logic and the flow still make sense (for example a reply that no longer follows). You may split, add or delete a line only when a flagged line\'s fix requires it.',
+    '- You MUST rewrite EVERY flagged line (every L number listed under FLAGGED LINES, from the linter or the Showrunner). Returning the same text for a flagged line is a failure. Each Showrunner "FIX" is a direction, not final wording: write fresh, funnier dialogue that solves the problem.',
     '- Fix the cause, not the symptom: a flat joke needs a better joke, not a synonym.',
     ...WRITER_CRAFT_RULES,
     '',
@@ -1263,6 +1265,62 @@ function buildRewritePrompt({ ctx, activeBannedWords, ev }) {
     '',
     'Return the full scene (kept lines plus fixed lines, in order) as JSON matching the schema.',
   ].join('\n');
+}
+
+// Lower is better: a usable critic verdict first, then the higher score, then fewer total problems.
+// Linter errors are mechanical and never outweigh a better Critic score.
+function qualityRank(ev) {
+  const unavailable = Boolean(ev.critic.unavailable);
+  return [unavailable ? 1 : 0, unavailable ? 0 : -ev.critic.score, ev.linter.length + ev.critic.issues.length];
+}
+function isStrictlyWorse(a, b) {
+  const x = qualityRank(a);
+  const y = qualityRank(b);
+  for (let i = 0; i < x.length; i++) {
+    if (x[i] > y[i]) return true;
+    if (x[i] < y[i]) return false;
+  }
+  return false;
+}
+
+const normLineText = (t) => String(t || '').toLowerCase().replace(/[\u2018\u2019]/g, "'").replace(/\s+/g, ' ').trim();
+
+// Critic-flagged lines whose exact text came back unchanged in the rewrite.
+function unchangedFlaggedLines(oldLines, newLines, issues) {
+  const newTexts = new Set(newLines.map((l) => normLineText(l.text)));
+  const seen = new Set();
+  const out = [];
+  for (const i of issues || []) {
+    const old = oldLines[(Number(i.lineIndex) || 0) - 1];
+    if (!old || seen.has(i.lineIndex)) continue;
+    seen.add(i.lineIndex);
+    if (newTexts.has(normLineText(old.text))) out.push({ lineNumber: i.lineIndex, speaker: old.speaker, text: old.text });
+  }
+  return out;
+}
+
+// One rewrite call, plus one forced redo if any Critic-flagged line came back word for word.
+async function rewriteScene({ ctx, apiKey, genModelId, activeBannedWords, ev }) {
+  const prompt = buildRewritePrompt({ ctx, activeBannedWords, ev });
+  const call = async (text, temperature) =>
+    toLineObjects((await callGeminiJSON({ apiKey, modelId: genModelId, prompt: text, schema: SCENE_GEN_SCHEMA, temperature })).lines);
+  let out = await call(prompt, 0.6);
+  const stale = out.length ? unchangedFlaggedLines(ev.lines, out, ev.critic.issues) : [];
+  if (stale.length) {
+    const again = await call(
+      [
+        prompt,
+        '',
+        '=== YOUR LAST ATTEMPT FAILED ===',
+        'You returned these flagged lines word for word. That is not allowed. Rewrite each one now with new, funnier dialogue that fixes its Showrunner issue, and keep everything else as you had it:',
+        ...stale.map((l) => `- L${l.lineNumber} (${l.speaker}): "${l.text}"`),
+        '=== END ===',
+      ].join('\n'),
+      0.8
+    );
+    if (again.length) out = again;
+  }
+  return out;
 }
 
 function buildQAReport(ev, retries) {
@@ -1293,25 +1351,15 @@ async function runFixPass({ apiKey, genModelId, auditModelId, vaultDocs, chapter
     throw new Error('No saved Critic issues or linter errors to fix. Run Generate Scene again.');
   }
   setStatus('Auto-fixing issues...');
-  const rewritten = await callGeminiJSON({
-    apiKey,
-    modelId: genModelId,
-    prompt: buildRewritePrompt({ ctx, activeBannedWords, ev: before }),
-    schema: SCENE_GEN_SCHEMA,
-    temperature: 0.6,
-  });
-  const newLines = toLineObjects(rewritten.lines);
+  const newLines = await rewriteScene({ ctx, apiKey, genModelId, activeBannedWords, ev: before });
   if (!newLines.length) throw new Error('The rewrite returned no lines.');
   setStatus('Running QA check...');
   const after = await evaluateScene({ ctx, apiKey, auditModelId, activeBannedWords, lines: newLines });
   const retries = (prevQa.retries || 0) + 1;
-  const worse =
-    after.linter.length > before.linter.length ||
-    after.critic.unavailable ||
-    (!after.ok && after.critic.score < (prevQa.score ?? 0) && after.linter.length >= before.linter.length);
-  if (worse) {
+  // Keep the previous version only when the new one is strictly worse on the Critic's score and total problems.
+  if (isStrictlyWorse(after, before)) {
     const kept = buildQAReport({ ...before, ok: false }, retries);
-    kept.notes = [...kept.notes, 'The last fix pass made things worse, so the previous version was kept.'];
+    kept.notes = [...kept.notes, `The last fix pass scored worse (${after.critic.unavailable ? 'critic unavailable' : `${after.critic.score}/10`}), so the previous version was kept.`];
     return { lines: scene.lines, qa: kept, kept: true };
   }
   return { lines: newLines, qa: buildQAReport(after, retries), kept: false };
@@ -1373,15 +1421,8 @@ async function runSceneQAPipeline({ apiKey, genModelId, auditModelId, vaultDocs,
 
   let best = null;
   const consider = (ev) => {
-    const rank = (e) => [e.linter.length, e.critic.unavailable ? 99 : 0, -e.critic.score];
-    if (!best) return (best = ev);
-    const a = rank(ev);
-    const b = rank(best);
-    for (let i = 0; i < a.length; i++) {
-      if (a[i] < b[i]) return (best = ev);
-      if (a[i] > b[i]) return best;
-    }
-    return (best = ev);
+    if (!best || !isStrictlyWorse(ev, best)) best = ev;
+    return best;
   };
 
   let ev = await evaluate(current, `Running QA check (Attempt 1/${QA_MAX_RETRIES})...`);
@@ -1392,9 +1433,7 @@ async function runSceneQAPipeline({ apiKey, genModelId, auditModelId, vaultDocs,
     if (ev.critic.unavailable && ev.linter.length === 0) break;
     retries += 1;
     setStatus(`Auto-fixing issues (retry ${retries}/${QA_MAX_RETRIES})...`);
-    const rewritePrompt = buildRewritePrompt({ ctx, activeBannedWords, ev });
-    const rewritten = await callGeminiJSON({ apiKey, modelId: genModelId, prompt: rewritePrompt, schema: SCENE_GEN_SCHEMA, temperature: 0.6 });
-    const newLines = toLineObjects(rewritten.lines);
+    const newLines = await rewriteScene({ ctx, apiKey, genModelId, activeBannedWords, ev });
     if (!newLines.length) break;
     ev = await evaluate(
       newLines,

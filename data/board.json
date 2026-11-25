@@ -6500,6 +6500,42 @@
     "text": "Read the c-scriptstudio5 card and tools/script-studio/README.md, then finish the Script Studio QA loop changes in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/qa_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "done": "2026-11-25"
+  },
+  {
+   "id": "c-scriptstudio6",
+   "tag": "scriptstudio6",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "Script Studio: Fix button now rewrites flagged lines",
+   "next": "Shipped: flagged lines must change, one forced redo, no silent revert. Next: run Fix Remaining Issues on ch1Goal again and tell me if any line still comes back unchanged.",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
+    "opening": "In tools/script-studio/src/App.jsx, there is a bug in Fix Remaining Issues"
+   },
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Tom: \"it only changed Tata to Ta-Ta and left every single Critic-flagged line word-for-word identical\". New card; started."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as scriptstudio6."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-25",
+   "changed": "2026-11-25",
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Fixes Script Studio's Fix Remaining Issues so Critic-flagged lines are really rewritten.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a bug whose cause had to be found)",
+    "effort": "medium (cause and fix are written in the card)",
+    "text": "Read the c-scriptstudio6 card and docs/CHANGES.md scriptstudio6, then re-check rewriteScene and qualityRank in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/qa_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
