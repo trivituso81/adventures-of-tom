@@ -10,6 +10,10 @@ on:
         description: 'Type YES to spend up to $1.00 on fal (about $0.30 expected).'
         required: true
         default: 'no'
+      stage:
+        description: 'end = only regenerate end.png; video = continue to the video'
+        required: true
+        default: 'end'
 
 permissions:
   contents: write
@@ -34,6 +38,7 @@ jobs:
       - name: Make keyframes, video, keyed WebM
         env:
           FAL_KEY: ${{ secrets.FAL_KEY }}
+          STAGE: ${{ github.event.inputs.stage }}
         run: python3 art-factory/sandbox-justin-test/run.py
       - name: Save results (only the sandbox folder)
         if: ${{ always() }}

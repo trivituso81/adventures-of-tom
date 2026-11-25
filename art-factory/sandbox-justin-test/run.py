@@ -22,9 +22,10 @@ LOOK = ("Keep this exact character from the reference image: same face, hair, be
         "In his striking hand he grips a heavy steel claw hammer.")
 START = ("Windup pose: Justin leans back in one bold anticipation, the claw hammer raised high overhead in his striking hand, the bright yellow stud finder "
          "held out in front of him in his off-hand. " + LOOK)
-END = ("Peak pose, same camera, same size, same boots position as the reference: Justin leans forward toward screen-left having just driven one huge hammer slam, "
-       "the steel claw hammer swung down to horizontal pointing straight screen-left at chest height, the bright yellow stud finder with its red LED thrust forward "
-       "in his off-hand and clearly visible. " + LOOK)
+END = ("FOLLOW-THROUGH pose, same camera, same size, same boots position as the reference, but a DIFFERENT arm pose: do not copy the hammer position from the reference. "
+       "Justin has just driven one huge slam: his torso leans far forward toward screen-left, his striking arm is fully extended straight out in front of him at shoulder height, "
+       "and the steel claw hammer is swung all the way forward and held perfectly horizontal, its head pointing far out to screen-left, with a small white impact spark at the hammer head. "
+       "Nothing is raised above his head: the space above his head is empty. The bright yellow stud finder with its red LED is thrust forward in his off-hand and clearly visible. " + LOOK)
 MOTION = ("Locked static camera, flat solid green background throughout, no cuts, no zoom, no pan. Justin stays on the same spot with his feet planted, facing screen-left, "
           "and keeps the same size in frame. He holds the bright yellow stud finder in his off-hand and the steel claw hammer in his striking hand, both gripped the whole time, "
           "and the stud finder stays visible. He leans back with the hammer raised overhead, then drives the hammer in one single overhead-to-horizontal slam toward screen-left "
@@ -53,6 +54,7 @@ def main():
         open(P(name), 'wb').write(fal.download(falq.image_url(res))); book(name, EST_IMG)
     keyframe('start.png', START, [hero])
     keyframe('end.png', END, [hero, falq.data_uri(open(P('start.png'), 'rb').read())])
+    if os.environ.get('STAGE') == 'end': say('stage end only: stopping before the video, spent $%.4f' % spent()); return
     if not os.path.exists(P('raw.mp4')):
         guard(EST_VID); say('making video (Veo 3.1 Lite first-last-frame, 4 s)')
         body = {'prompt': MOTION, 'first_frame_url': falq.data_uri(open(P('start.png'), 'rb').read()),
