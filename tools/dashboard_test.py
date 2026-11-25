@@ -36,7 +36,8 @@ def open_jump_cards(board):
     return [c for c in board['cards'] if c.get('lane') == 'tom' and c.get('ask') == 'play' and c.get('col') not in ('done', 'wait') and not c.get('backlog') and c.get('jump')]
 def wait_landed(pg, j, timeout=180000):
     """Wait until the game is at the place a jump names: the fight is on screen, or the chapter is up (and the map and flags, when named)."""
-    if 'fight' in j: cond = "typeof B3==='object'&&B3.active===true&&!!B3.F&&splash.active===false"
+    if j.get('fight') == 'lab': cond = "typeof B2==='object'&&B2.active===true&&splash.active===false"
+    elif 'fight' in j: cond = "typeof B3==='object'&&B3.active===true&&!!B3.F&&splash.active===false"
     else:
         cond = "typeof STORY==='object'&&STORY.mode==='full'&&STORY.chapter===%s&&splash.active===false&&!!__LE.map" % (21 if j['chapter'] == 'B' else j['chapter'])
         if j.get('map'): cond += "&&__LE.map.id===%s" % json.dumps(j['map'])
@@ -124,9 +125,9 @@ def take_me_there(pg, ctx, errs, board_standin):
         j = c['jump']
         pg.evaluate("(j)=>__DASH.take(j)", j); wait_landed(pg, j)
         if 'fight' in j:
-            names = {('new', e['i']): e['name'] for e in json.load(open(os.path.join(ROOT, 'data', 'battle-lab-index.json')))['b3']}
-            ok(names[('new', j['i'])] in pg.inner_text('#pane2 .wh') and pg.evaluate("document.getElementById('ft-new%d')?document.getElementById('ft-new%d').classList.contains('on'):true" % (j['i'], j['i'])), 'dash3: real card %s: the game is in the named test fight (%s)' % (c['id'], pg.inner_text('#pane2 .wh')))
-            party = geval(pg, "B3.F.party.map(u=>u.id).join(',')")
+            ix = json.load(open(os.path.join(ROOT, 'data', 'battle-lab-index.json'))); names = {('new', e['i']): e['name'] for e in ix['b3']}; names.update({('lab', e['i']): e['name'] for e in ix['b2']})
+            ok(names[(j['fight'], j['i'])] in pg.inner_text('#pane2 .wh') and pg.evaluate("document.getElementById('ft-%s%d')?document.getElementById('ft-%s%d').classList.contains('on'):true" % (j['fight'], j['i'], j['fight'], j['i'])), 'dash3: real card %s: the game is in the named test fight (%s)' % (c['id'], pg.inner_text('#pane2 .wh')))
+            party = geval(pg, "B3.F.party.map(u=>u.id).join(',')") if j['fight'] == 'new' else geval(pg, "B2.party.map(u=>u.id).join(',')")
             ok(c['id'] != 't-guardwinplay' or 'tom' in party.split(','), 'dash3: real card %s: Tom is in the party (%s)' % (c['id'], party))
         else:
             ok(geval(pg, "STORY.chapter") == (21 if j['chapter'] == 'B' else j['chapter']), 'dash3: real card %s: the game is in chapter %s' % (c['id'], j['chapter']))

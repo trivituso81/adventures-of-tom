@@ -6663,19 +6663,51 @@
    "done": "2026-11-25"
   },
   {
+   "id": "c-pass1review1",
+   "tag": "pass1review1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "title": "PASS-1 DRAFT REVIEW in the Battle Lab, drafts 1.5x longer",
+   "next": "Add the PASS-1 DRAFT REVIEW Lab fight with PLAY for the 7 Pass-1 clips and rebake them 1.5 times longer.",
+   "chat": {
+    "url": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45688849925",
+    "opening": "Two fixes for Pass-1 draft review"
+   },
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Tom (PR 17): \"Two fixes for Pass-1 draft review: 1. Add a PASS-1 DRAFT REVIEW preset under ADMIN > BATTLE LAB > TESTS AND REVIEWS (similar to CHAPTER 1 REVIEW) with direct PLAY buttons for all 7 wired Pass-1 clips ... 2. Make the playback duration of those 7 baked clips 1.5x longer so the actions read clearly at both 1x and 2x battle speed.\" New card; started."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-25",
+   "changed": "2026-11-25",
+   "after": "t-pass1draftplay",
+   "prompt": {
+    "what": "A Battle Lab review fight for the Pass-1 drafts, and the drafts played 1.5 times longer.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5 (row C: a Lab fight, the review panel and a rebake)",
+    "effort": "medium (the review panel and the bake tool exist)",
+    "text": "Read the c-pass1review1 card and docs/CHANGES.md pass1review1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
    "id": "t-pass1draftplay",
    "lane": "tom",
    "col": "up",
    "theme": "Battle Animations",
    "ask": "play",
    "title": "Watch the seven Pass-1 draft moves in a fight",
-   "next": "Open ADMIN > BATTLE LAB > NEW BATTLE and start NEW 10: AMY, JUSTIN AND OLIVIA (or Take me there on the dashboard). On Amy's turn use Kettlebell Swing, then Burpee Blitz; on Justin's turn use Stud-Finder Beep & Knock. Then NEW 7: TNB JOINS: Center the Bowl and Grand Amphora Masterpiece. Then NEW 1: TWO MUDLINGS: Grace's Colossal Diamond-Gold Dumpling and Deedee's Fifty-Year Dust Tsunami. Each move should play its new video on the person (480p drafts, so softer than the finals). Judge the look: right person, right size, the hit lands when it should. Your answer goes to card c-pass1final (the 1080p finals). Then press All good, or Something is wrong and say which move.",
+   "next": "Open ADMIN > BATTLE LAB and start PASS-1 DRAFT REVIEW (first page, under the chapter 1 reviews; or Take me there on the dashboard). Grace, TNB, Amy, Justin and Deedee stand on the field with a panel at the bottom: tap PLAY on a move to watch its video on that person, or PLAY ALL for all seven in a row. They now play 1.5 times longer than before. Judge the look: right person, right size, the action reads clearly. Your answer goes to card c-pass1final (the 1080p finals). Then press All good, or Something is wrong and say which move.",
    "blocks": [
     "c-pass1final"
    ],
    "jump": {
-    "fight": "new",
-    "i": 9
+    "fight": "lab",
+    "i": 2
    },
    "created": "2026-11-25",
    "changed": "2026-11-25",
@@ -6687,6 +6719,10 @@
     {
      "d": "2026-11-25",
      "t": "Made by pass1draft1: the seven draft videos wired as previews."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Tom (PR 17) asked for a review fight with PLAY for all 7 and the drafts 1.5x longer: card c-pass1review1. Check moved to PASS-1 DRAFT REVIEW."
     }
    ]
   },
