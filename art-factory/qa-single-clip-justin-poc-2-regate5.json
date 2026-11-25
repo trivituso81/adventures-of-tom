@@ -1,0 +1,90 @@
+{
+  "run_id": "justin-poc-2-regate5",
+  "resolution": "480p",
+  "duration_multiplier": 1.5,
+  "max_retries": 1,
+  "started_at": "2026-11-25T21:59:52Z",
+  "moves": [
+    {
+      "move_id": "justin-bb-basic",
+      "clip_id": "pf-justin-bb-basic",
+      "passed": true,
+      "renders": 0,
+      "baked": "pf-justin-bb-basic",
+      "attempts": [
+        {
+          "attempt": 0,
+          "regate_of": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/attempt_2_raw_alpha.webm",
+          "feedback": "",
+          "video": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/attempt_2_raw_alpha.webm",
+          "gate": {
+            "stage1": {
+              "frames_sampled": 10,
+              "thresholds": {
+                "min_peak_mask_churn": 0.22,
+                "min_left_reach_ratio": 0.12,
+                "max_foot_retreat_ratio": 0.15
+              },
+              "peak_mask_churn": 0.753,
+              "left_reach_ratio": 0.452,
+              "foot_retreat_ratio": 0.1423,
+              "failures": [],
+              "passed": true
+            },
+            "stage2": {
+              "prop_visible_frame1": true,
+              "prop_visible_at_sprite_scale": true,
+              "action_reads_leftward": true,
+              "feet_planted": true,
+              "pass": true,
+              "votes": {
+                "prop_visible_frame1": [
+                  true,
+                  true,
+                  true
+                ],
+                "prop_visible_at_sprite_scale": [
+                  true,
+                  true,
+                  true
+                ],
+                "action_reads_leftward": [
+                  true,
+                  true,
+                  true
+                ],
+                "feet_planted": [
+                  true,
+                  true,
+                  true
+                ],
+                "pass": [
+                  true,
+                  true,
+                  true
+                ]
+              },
+              "failure_reason": "",
+              "hard_rejected_on": [],
+              "passed": true,
+              "runs": 3,
+              "contact_sheet_frames": [
+                0,
+                30,
+                60,
+                89,
+                119,
+                149
+              ],
+              "contact_sheet": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/regate_contact_sheet_200px.png"
+            },
+            "passed": true,
+            "failure_reason": "",
+            "failure_tags": []
+          }
+        }
+      ]
+    }
+  ],
+  "finished_at": "2026-11-25T22:00:36Z"
+}
