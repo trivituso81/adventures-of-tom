@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-25T06:46:28Z",
+  "updated_at": "2026-11-25T07:13:34Z",
   "items": [
     {
       "id": "tom_hero_0",
@@ -1555,7 +1555,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/tom-lounge-pass_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/tom-lounge-pass.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "tom_start_frame_tom-carryon",
@@ -1573,7 +1579,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/tom-carryon_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/tom-carryon.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "tom_start_frame_tom-360-medallion",
@@ -1590,7 +1602,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/tom-360-medallion_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/tom-360-medallion.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "grace_start_frame_grace-white-dumpling",
@@ -1607,7 +1625,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/grace-white-dumpling_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/grace-white-dumpling.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "grace_start_frame_grace-needoh",
@@ -1624,7 +1648,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/grace-needoh_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/grace-needoh.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "grace_start_frame_grace-sugar-cube",
@@ -1641,7 +1671,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/grace-sugar-cube_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/grace-sugar-cube.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "rose_start_frame_rose-goggles-lamby",
@@ -1659,7 +1695,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/rose-goggles-lamby_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/rose-goggles-lamby.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "rose_start_frame_rose-twin-lambies",
@@ -1677,7 +1719,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/rose-twin-lambies_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/rose-twin-lambies.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "amy_start_frame_amy-kettlebell",
@@ -1695,7 +1743,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/amy-kettlebell_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/amy-kettlebell.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "deedee_start_frame_deedee-windex",
@@ -1712,7 +1766,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/deedee-windex_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/deedee-windex.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "deedee_start_frame_deedee-mop-sign",
@@ -1730,7 +1790,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/deedee-mop-sign_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/deedee-mop-sign.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "deedee_start_frame_deedee-glasses-pin",
@@ -1748,7 +1814,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/deedee-glasses-pin_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/deedee-glasses-pin.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "deedee_start_frame_deedee-gloves-mop",
@@ -1766,7 +1838,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/deedee-gloves-mop_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/deedee-gloves-mop.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "boppy_start_frame_boppy-nightstick",
@@ -1784,7 +1862,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/boppy-nightstick_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/boppy-nightstick.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "boppy_start_frame_boppy-keys",
@@ -1801,7 +1885,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/boppy-keys_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/boppy-keys.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "tnb_start_frame_tnb-clay-lump",
@@ -1819,7 +1909,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/tnb-clay-lump_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/tnb-clay-lump.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "tnb_start_frame_tnb-kiln-mitt",
@@ -1836,7 +1932,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/tnb-kiln-mitt_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/tnb-kiln-mitt.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "nara_start_frame_nara-water-bowl",
@@ -1853,7 +1955,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/nara-water-bowl_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/nara-water-bowl.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "justin_start_frame_justin-studfinder-hammer",
@@ -1871,7 +1979,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/justin-studfinder-hammer_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/justin-studfinder-hammer.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "justin_start_frame_justin-crowbar",
@@ -1888,7 +2002,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/justin-crowbar_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/justin-crowbar.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "justin_start_frame_justin-level-driver",
@@ -1906,7 +2026,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/justin-level-driver_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/justin-level-driver.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     },
     {
       "id": "olivia_start_frame_olivia-speed-rope",
@@ -1926,7 +2052,13 @@
       "raw_path": "art-factory/staging/start-frames/_raw/olivia-speed-rope_raw.png",
       "rgba_path": "",
       "start_frame_path": "art-factory/staging/start-frames/olivia-speed-rope.png",
-      "status": "review"
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_issues": [
+        "judge_error: ClientError"
+      ],
+      "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
+      "qa_retries": 2
     }
   ]
 }
