@@ -6970,22 +6970,10 @@
  ],
  "sessions": [
   {
-   "url": "https://claude.ai/code/session_01RXeukEM2jz8QayJemqru3D",
-   "title": "Justin proof clip: stricter prompt and two-stage QA gate",
-   "first": "2026-11-25T13:20:40-08:00",
-   "last": "2026-11-25T13:27:30-08:00",
-   "tags": [
-    "justinpoc1a"
-   ],
-   "cards": [
-    "c-justinpoc1"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
    "title": "Script Studio: auto QA and rewrite inside Generate Scene",
    "first": "2026-11-24T23:29:09-08:00",
-   "last": "2026-11-25T12:57:52-08:00",
+   "last": "2026-11-25T13:30:57-08:00",
    "tags": [
     "scriptstudio3",
     "scriptstudio4",
@@ -6994,7 +6982,8 @@
     "scriptstudio7",
     "scriptstudio8",
     "scriptstudio9",
-    "scriptstudio10"
+    "scriptstudio10",
+    "scriptstudio11"
    ],
    "cards": [
     "c-scriptstudio3",
@@ -7004,7 +6993,20 @@
     "c-scriptstudio7",
     "c-scriptstudio8",
     "c-scriptstudio9",
-    "c-scriptstudio10"
+    "c-scriptstudio10",
+    "c-scriptstudio11"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEM2jz8QayJemqru3D",
+   "title": "Justin proof clip: stricter prompt and two-stage QA gate",
+   "first": "2026-11-25T13:20:40-08:00",
+   "last": "2026-11-25T13:27:30-08:00",
+   "tags": [
+    "justinpoc1a"
+   ],
+   "cards": [
+    "c-justinpoc1"
    ]
   },
   {
@@ -13323,8 +13325,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "78eced26b8c7505c2ba5e0cb7ce17303c77e1652",
- "synced_at": "2026-11-25T21:28:17+00:00",
+ "synced": "c5186a22b4cdd6ed0f4b1cd501f2075dd61eace9",
+ "synced_at": "2026-11-25T21:31:44+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
