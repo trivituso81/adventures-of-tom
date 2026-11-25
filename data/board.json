@@ -6872,10 +6872,10 @@
    "id": "c-justinpoc1",
    "tag": "justinpoc1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Justin proof clip: stricter prompt and two-stage QA gate",
-   "next": "Shipped: the Justin proof clip is baked and live in PASS-1 DRAFT REVIEW. Tom watches it on the card t-pass1draftplay; if it reads well, the gate (two stages, Frame 0 split) is ready for the other moves in a later card.",
+   "next": "Done. Justin proof clip is baked and live in PASS-1 DRAFT REVIEW; Tom judges it on t-pass1draftplay.",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukCaFAwDGmB8YFJQsNt",
     "opening": "You are the Technical Director and Pipeline Engineer for trivituso81/adventures-of-tom"
@@ -6908,6 +6908,11 @@
     {
      "d": "2026-11-25",
      "t": "Rescue started (Its note starts with Shipped but the card is open). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-25",
+     "at": "2026-11-25T22:10:00+00:00",
+     "t": "Rescue (RETIRE): the work already shipped as justinpoc2regate5 (clip baked, 2 renders total, gate passed 4 of 4). Tom's watch card t-pass1draftplay is open. The old 'Re-run' prompt is obsolete (render budget spent, no poc-1c run wanted). Closed."
     }
    ],
    "blocks": [],
@@ -6923,14 +6928,8 @@
     "effort": "low (change one field, read one report)",
     "text": "Read the c-justinpoc1 card and docs/CHANGES.md justinpoc1a. Change run_id in art-factory/single-clip-trigger.json to justin-poc-1c (nothing else) and push it; the push starts the single 480p clip. When the run ends read art-factory/qa-single-clip-justin-poc-1c.json and report whether it passed the gate. Do not run anything else. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "rescue": {
-    "at": "2026-11-25T22:02:04+00:00",
-    "n": 1,
-    "why": "Its note starts with Shipped but the card is open",
-    "url": "https://claude.ai/code/cse_01RXeukCaFAwDGmB8YFJQsNt",
-    "prev": "https://claude.ai/code/session_01RXeukEM2jz8QayJemqru3D"
-   },
-   "started_at": "2026-11-25T22:02:04+00:00"
+   "started_at": "2026-11-25T22:02:04+00:00",
+   "done": "2026-11-25"
   },
   {
    "id": "c-scriptstudio11",
