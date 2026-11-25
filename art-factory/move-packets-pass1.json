@@ -2487,7 +2487,7 @@
       "pep_cost": 0,
       "base_recovery": 80,
       "flavor": "Clobber",
-      "lifecycle_state": "DRAFT_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Justin, feet planted, leans back in one bold anticipation with the hammer raised overhead and the stud finder held out front.",
         "peak": "Justin drives one huge overhead-to-horizontal hammer slam straight toward screen-left while thrusting the flashing stud finder forward.",
@@ -2525,7 +2525,9 @@
         "staging_cleanliness": 10.0,
         "overall": 9.75
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "gate2_invalid_response"
+      ],
       "wanClip": {
         "filename": "justin-bb-basic.mp4",
         "durationSec": 2.7,
@@ -2549,6 +2551,43 @@
           "vfx_core_status_debuff_badges"
         ],
         "v11Hook": "Basic (0 Pep / +2 Pep, 80 Rec): 0.5x Clobber (+15% Clobber dmg taken 1t; +15% slower Clobber rec via Trait)"
+      },
+      "qa_gate": {
+        "stage1": {
+          "frames_sampled": 10,
+          "thresholds": {
+            "min_peak_mask_churn": 0.22,
+            "min_left_reach_ratio": 0.12,
+            "max_foot_retreat_ratio": 0.15
+          },
+          "peak_mask_churn": 0.753,
+          "left_reach_ratio": 0.452,
+          "foot_retreat_ratio": 0.1423,
+          "failures": [],
+          "passed": true
+        },
+        "stage2": {
+          "passed": false,
+          "pass": false,
+          "failure_reason": "stage2_unusable_response (ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'JSON mode is not enabled for api version v1. Use api version v1beta instead.', 'status': 'INVALID_ARGUMENT'}})",
+          "hard_rejected_on": [
+            "invalid_response"
+          ],
+          "contact_sheet_frames": [
+            0,
+            30,
+            60,
+            89,
+            119,
+            149
+          ],
+          "contact_sheet": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/attempt_2_contact_sheet_200px.png"
+        },
+        "passed": false,
+        "failure_reason": "Stage 2 sprite-scale check: stage2_unusable_response (ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'JSON mode is not enabled for api version v1. Use api version v1beta instead.', 'status': 'INVALID_ARGUMENT'}})",
+        "failure_tags": [
+          "gate2_invalid_response"
+        ]
       }
     },
     {

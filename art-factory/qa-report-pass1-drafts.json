@@ -460,22 +460,6 @@
       "notes": "The animation suffers from illogical prop handling, as the kettlebell appears and disappears without a clear action."
     },
     {
-      "id": "justin_battle_move_draft_justin-bb-basic",
-      "character_id": "justin",
-      "move_id": "justin-bb-basic",
-      "used_prop_start_frame": false,
-      "passed": true,
-      "overall": 9.75,
-      "scores": {
-        "likeness": 10.0,
-        "prop_integrity": 10.0,
-        "motion_fluidity": 9.0,
-        "staging_cleanliness": 10.0
-      },
-      "failure_tags": [],
-      "notes": "The character performs a clear basic action involving retrieving and returning a tool from their belt."
-    },
-    {
       "id": "justin_battle_move_draft_justin-bb-s1",
       "character_id": "justin",
       "move_id": "justin-bb-s1",
@@ -882,6 +866,51 @@
         "motion_inconsistent_props"
       ],
       "notes": "Props are absent or inconsistent in count across the start and middle frames of the animation."
+    },
+    {
+      "id": "justin_battle_move_draft_justin-bb-basic",
+      "character_id": "justin",
+      "move_id": "justin-bb-basic",
+      "used_prop_start_frame": true,
+      "passed": false,
+      "gate": {
+        "stage1": {
+          "frames_sampled": 10,
+          "thresholds": {
+            "min_peak_mask_churn": 0.22,
+            "min_left_reach_ratio": 0.12,
+            "max_foot_retreat_ratio": 0.15
+          },
+          "peak_mask_churn": 0.753,
+          "left_reach_ratio": 0.452,
+          "foot_retreat_ratio": 0.1423,
+          "failures": [],
+          "passed": true
+        },
+        "stage2": {
+          "passed": false,
+          "pass": false,
+          "failure_reason": "stage2_unusable_response (ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'JSON mode is not enabled for api version v1. Use api version v1beta instead.', 'status': 'INVALID_ARGUMENT'}})",
+          "hard_rejected_on": [
+            "invalid_response"
+          ],
+          "contact_sheet_frames": [
+            0,
+            30,
+            60,
+            89,
+            119,
+            149
+          ],
+          "contact_sheet": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/attempt_2_contact_sheet_200px.png"
+        },
+        "passed": false,
+        "failure_reason": "Stage 2 sprite-scale check: stage2_unusable_response (ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'JSON mode is not enabled for api version v1. Use api version v1beta instead.', 'status': 'INVALID_ARGUMENT'}})",
+        "failure_tags": [
+          "gate2_invalid_response"
+        ]
+      },
+      "attempts": 2
     }
   ]
 }

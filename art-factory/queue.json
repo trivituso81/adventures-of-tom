@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-25T16:53:34Z",
+  "updated_at": "2026-11-25T21:38:28Z",
   "items": [
     {
       "id": "tom_hero_0",
@@ -1582,27 +1582,6 @@
         "qa_api_error"
       ],
       "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
-    },
-    {
-      "id": "justin_battle_move_draft_justin-bb-basic",
-      "character_id": "justin",
-      "stage": "battle_move_draft",
-      "move_id": "justin-bb-basic",
-      "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/raw_alpha.webm",
-      "needs_encode": false,
-      "status": "qa_passed",
-      "webm_path": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/battle_alpha_safari_hvc1.mp4",
-      "qa_passed": true,
-      "qa_overall": 9.75,
-      "qa_scores": {
-        "likeness": 10.0,
-        "prop_integrity": 10.0,
-        "motion_fluidity": 9.0,
-        "staging_cleanliness": 10.0
-      },
-      "qa_failure_tags": [],
-      "qa_notes": "The character performs a clear basic action involving retrieving and returning a tool from their belt."
     },
     {
       "id": "justin_battle_move_draft_justin-bb-s1",
@@ -3488,6 +3467,59 @@
       ],
       "qa_repair_hint": "Ensure exact Hero likeness, all required props clearly held, full body visible, flat #808080 grey background.",
       "qa_retries": 2
+    },
+    {
+      "id": "justin_battle_move_draft_justin-bb-basic",
+      "character_id": "justin",
+      "stage": "battle_move_draft",
+      "move_id": "justin-bb-basic",
+      "start_frame_source": "art-factory/staging/start-frames/justin-studfinder-hammer.png",
+      "used_prop_start_frame": true,
+      "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/raw_alpha.webm",
+      "needs_encode": true,
+      "status": "qa_failed",
+      "qa_passed": false,
+      "qa_gate": {
+        "stage1": {
+          "frames_sampled": 10,
+          "thresholds": {
+            "min_peak_mask_churn": 0.22,
+            "min_left_reach_ratio": 0.12,
+            "max_foot_retreat_ratio": 0.15
+          },
+          "peak_mask_churn": 0.753,
+          "left_reach_ratio": 0.452,
+          "foot_retreat_ratio": 0.1423,
+          "failures": [],
+          "passed": true
+        },
+        "stage2": {
+          "passed": false,
+          "pass": false,
+          "failure_reason": "stage2_unusable_response (ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'JSON mode is not enabled for api version v1. Use api version v1beta instead.', 'status': 'INVALID_ARGUMENT'}})",
+          "hard_rejected_on": [
+            "invalid_response"
+          ],
+          "contact_sheet_frames": [
+            0,
+            30,
+            60,
+            89,
+            119,
+            149
+          ],
+          "contact_sheet": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/attempt_2_contact_sheet_200px.png"
+        },
+        "passed": false,
+        "failure_reason": "Stage 2 sprite-scale check: stage2_unusable_response (ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'JSON mode is not enabled for api version v1. Use api version v1beta instead.', 'status': 'INVALID_ARGUMENT'}})",
+        "failure_tags": [
+          "gate2_invalid_response"
+        ]
+      },
+      "qa_failure_tags": [
+        "gate2_invalid_response"
+      ],
+      "qa_notes": "Stage 2 sprite-scale check: stage2_unusable_response (ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'JSON mode is not enabled for api version v1. Use api version v1beta instead.', 'status': 'INVALID_ARGUMENT'}})"
     }
   ]
 }
