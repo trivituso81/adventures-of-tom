@@ -1,3 +1,11 @@
+## pusher1 (2026-11-24): The Art Factory GitHub pusher page is on the site
+
+Card c-pusher1. Tom's page is hosted at https://trivituso81.github.io/adventures-of-tom/aot-pusher.html and linked from Admin under Art Factory. Edits to his file: `noindex, nofollow` robots meta added; the Pass 1 card, `PASS1_WORKFLOW`, `PASS1_CHARACTERS` and the `pushPass1` handler removed (they would overwrite the current workflow and `characters.json`). The GitHub token config, Git Trees commit logic and the `{message, files}` patch parser are unchanged; no token is in the file.
+
+Also: `art-factory.yml` (workflow_dispatch only, `cancel-in-progress: false`, serialises queue.json merges) was re-added with a top-level `concurrency` by commit 9104809, which stopped `bump_tags`; it is listed in `LEGACY_TOP_LEVEL` in `tools/workflow_check.py` instead of being rewritten blind.
+
+Checked: `python3 tools/admin_hub_test.py`.
+
 ## b3s23b (2026-11-23): Stats, elements and flying monsters have a home that is not Battle 2
 
 Card c-b3s23b (slice 23b of the battle 2 purge). New `data/bt-tables.js` (loads right after data/party.js) holds `BT_STAT_KEYS`, `BT_STAT_NAMES`, `BT_STATS`, `btStat`, `BT_ELEMS` and `BT_FLYERS`. Readers outside battle 2 now use those names: data/party.js (`statTotal` no longer guards on `b2Stat`), engine/progress.js (`b6MaxHp`, element names) and engine/town-render.js (flyers hover). data/battle2-data.js and engine/battle2-ui.js keep `B2_STATS`, `B2_STAT_KEYS`, `B2_STAT_NAMES`, `b2Stat`, `B2_ELEMS`, `B2_FLYERS` as one-line aliases of the new names for the Old path only; slice 23d deletes them. Values are byte for byte the old ones. No save field was touched (old stamps, ranks, HEART and Tombo flags stay in saves and are simply not read by anything new).

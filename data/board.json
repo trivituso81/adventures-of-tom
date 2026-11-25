@@ -9555,10 +9555,10 @@
    "id": "c-pusher1",
    "tag": "pusher1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Host the Art Factory GitHub pusher page on the site",
-   "next": "Add art-factory-pusher.html (Tom's upload, unchanged) to the site and link it from Admin.",
+   "next": "Done: hosted at /aot-pusher.html",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDiptdfSViWowh4C6s",
     "opening": "Can you host this on our site"
@@ -9567,6 +9567,10 @@
     {
      "d": "2026-11-24",
      "t": "Tom: \"Can you host this on our site I give you approval for full repo access\". New card; started."
+    },
+    {
+     "d": "2026-11-24",
+     "t": "Shipped as pusher1. Three edits Tom named: robots noindex, Pass 1 removed, token and commit logic untouched."
     }
    ],
    "blocks": [],
@@ -9581,7 +9585,8 @@
     "model": "Claude Sonnet 5.5 (row B: copy a finished file and wire a link, tests catch mistakes)",
     "effort": "medium (steps are known)",
     "text": "Host art-factory-pusher.html at the site root and link it from admin.html. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-24"
   }
  ],
  "sessions": [

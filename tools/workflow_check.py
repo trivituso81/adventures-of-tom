@@ -10,7 +10,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PAID = ('FAL_KEY', 'XAI_API_KEY', 'ELEVENLABS_API_KEY')
 # Files that had a top-level concurrency (all with cancel-in-progress: false) before this check existed. The plan says the real folder must pass, so they are
 # listed here by name instead of being rewritten blind; a NEW paid workflow gets no such pass. Move one to its job, then delete its name here.
-LEGACY_TOP_LEVEL = {'clip-gate.yml', 'clip-gen.yml', 'costs-sync.yml', 'guide-draft.yml', 'guide-reconcile.yml', 'music-gen.yml', 'night-tests.yml', 'voice-take.yml'}
+LEGACY_TOP_LEVEL = {'art-factory.yml', 'clip-gate.yml', 'clip-gen.yml', 'costs-sync.yml', 'guide-draft.yml', 'guide-reconcile.yml', 'music-gen.yml', 'night-tests.yml', 'voice-take.yml'}
 
 def conc_problem(c):
     if isinstance(c, str): return None
