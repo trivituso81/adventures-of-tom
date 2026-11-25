@@ -2330,7 +2330,7 @@
    "title": "Night QA: the test browser plays your check cards",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "next": "Standing card. Each night a test browser plays up to 4 of your \"play and report\" cards in portrait, landscape and the Duo size. A yes or no check that passes is closed for you with the pictures; one that fails becomes a fix card; a check only a person can judge stays yours and says why. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
@@ -2391,6 +2391,10 @@
     {
      "d": "2026-11-25",
      "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Stuck twice: The rescue started 7:45 AM and went quiet for 2 hours. Waiting on Tom (card t-stuck-night-qa)."
     }
    ],
    "prompt": {
@@ -2413,7 +2417,8 @@
     "why": "Quiet: the conversation may have stopped",
     "url": "https://claude.ai/code/cse_01RXeukFGXQ6EVSYrKHPNHnv",
     "prev": "https://claude.ai/code/session_01RXeukD8RBy9czHhghgPwiX"
-   }
+   },
+   "waiting_on": "tom"
   },
   {
    "id": "c-fix-dash3-try",
@@ -6620,7 +6625,7 @@
    "id": "c-pass1draft1",
    "tag": "pass1draft1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Play the Pass-1 draft videos in the new battle",
    "next": "Shipped on branch claude/issue-16-20261125-1815: seven 480p draft videos baked and wired to their kit moves. Waits for the pull request to be merged.",
@@ -6636,6 +6641,10 @@
     {
      "d": "2026-11-25",
      "t": "Shipped as pass1draft1: 7 of 15 wired. 3 moves already play a video and were kept, 3 team-up clips and 2 counter clips have no slot in Battle 3 yet (card c-pass1final)."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as pass1draft1: Seven Art Factory draft videos play as previews in the new battle"
     }
    ],
    "blocks": [],
@@ -6650,7 +6659,8 @@
     "model": "Claude Opus 5.5 (row D: new tool and judgement on which moves to wire)",
     "effort": "medium (the pieces exist: bake_clip.py, wanbake.wire)",
     "text": "Read the c-pass1draft1 card and docs/CHANGES.md pass1draft1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-25"
   },
   {
    "id": "t-pass1draftplay",
@@ -6710,6 +6720,34 @@
     "effort": "medium (the bake tool exists)",
     "text": "Read the c-pass1final card, its blocking Tom card t-pass1draftplay (note and answer) and docs/CHANGES.md pass1draft1. Point PREVIEW in tools/clip-bake/bake_factory.py at the battle_move_final folders for every final that passed QA in art-factory/queue.json and rebake, add any new move whose kit row has no video, then design how a counter clip (deedee-nf-s1_counter, boppy-dep-s1_counter) plays in Battle 3. Run python3 tools/pass1_preview_test.py and python3 tools/smoke.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "t-stuck-night-qa",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Project Ops",
+   "ask": "unstick",
+   "unstick": {
+    "card": "c-night-qa",
+    "kind": "stuck"
+   },
+   "title": "Stuck twice: Night QA: the test browser plays your check car",
+   "next": "Card c-night-qa (Night QA: the test browser plays your check cards) stalled again after its one automatic rescue. The rescue started 7:45 AM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it.",
+   "blocks": [
+    "c-night-qa"
+   ],
+   "chat": {
+    "url": "",
+    "opening": "board"
+   },
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Added by board-sync: card c-night-qa stalled after its rescue"
+    }
+   ],
+   "created": "2026-11-25",
+   "changed": "2026-11-25"
   }
  ],
  "sessions": [
@@ -13051,8 +13089,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "03e6b652a7939fd09cc1e160f70acbccde5adb6d",
- "synced_at": "2026-11-25T17:24:57+00:00",
+ "synced": "47a24666a7ca87b81333701b1115039517b131d7",
+ "synced_at": "2026-11-25T18:39:22+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
