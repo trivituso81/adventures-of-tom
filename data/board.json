@@ -9703,6 +9703,38 @@
    ],
    "created": "2026-11-24",
    "changed": "2026-11-24"
+  },
+  {
+   "id": "c-scriptstudio3",
+   "tag": "scriptstudio3",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "Script Studio: auto QA and rewrite inside Generate Scene",
+   "next": "Building the 4-pass flow (draft, format, QA gate, auto-rewrite) into the Generate Scene button",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
+    "opening": "Locate the AoT Script Studio app in the trivituso81/adventures-of-tom repo"
+   },
+   "history": [
+    {
+     "d": "2026-11-24",
+     "t": "Tom: \"upgrade its scene generation flow so it automatically quality-checks and fixes its own dialogue before showing it to me\". New card; started."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-24",
+   "changed": "2026-11-24",
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Adds the 4-pass generate, format, QA gate and auto-rewrite flow to Script Studio's Generate Scene button.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build where the design is worked out in the session)",
+    "effort": "medium (the pipeline is specified in the card)",
+    "text": "Read the c-scriptstudio3 card and tools/script-studio/README.md, then finish the Script Studio QA pipeline in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/e2e_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
