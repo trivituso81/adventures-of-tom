@@ -41,7 +41,7 @@ def read_trigger(path=TRIGGER):
     if not 0.5 <= mult <= 3:
         raise SystemExit("duration_multiplier must be between 0.5 and 3")
     retries = max(0, min(int(t.get("max_retries", HARD_MAX_RETRIES)), HARD_MAX_RETRIES))
-    return {"run_id": str(t.get("run_id") or time.strftime("run-%Y%m%d%H%M%S")), "move_ids": ids, "duration_multiplier": mult, "max_retries": retries}
+    return {"regate_only": bool(t.get("regate_only")), "run_id": str(t.get("run_id") or time.strftime("run-%Y%m%d%H%M%S")), "move_ids": ids, "duration_multiplier": mult, "max_retries": retries}
 
 
 def merge_json_list(items, new, key="id"):
@@ -76,7 +76,22 @@ def main():
         char = get_character(manifest, meta["character_id"])
         hero_src = resolve_hero_source(char, cfg, allow_fallback=True)
         feedback, attempts, winner, item = "", [], None, None
-        for attempt in range(1, trig["max_retries"] + 2):
+        out_dir = Path(cfg["staging_dir"]) / char["id"] / f"battle_move_draft_{pid}"
+        if trig["regate_only"]:
+            # NO render: gate the newest attempt_N_raw_alpha.webm already in staging (a fix to the gate must not cost a render).
+            found = sorted(out_dir.glob("attempt_*_raw_alpha.webm"), key=lambda q: int(re.search(r"attempt_(\d+)_", q.name).group(1)))
+            if not found:
+                raise SystemExit(f"regate_only: no attempt video in {out_dir}")
+            video = found[-1]
+            shutil.copy2(video, out_dir / "raw_alpha.webm")
+            iid = f"{char['id']}_battle_move_draft_{pid}"
+            item = next((i for i in queue["items"] if i.get("id") == iid), {"id": iid, "character_id": char["id"], "stage": "battle_move_draft", "move_id": pid})
+            item["raw_video_path"] = str(out_dir / "raw_alpha.webm")
+            gate = run_gate(video, meta, client, QA_MODEL, sheet_path=out_dir / "regate_contact_sheet_200px.png")
+            print(f"[single-clip] {pid} regate of {video.name}: passed={gate['passed']} {gate['failure_reason']}", flush=True)
+            attempts.append({"attempt": 0, "regate_of": str(video), "feedback": "", "video": str(video), "gate": gate})
+            winner = gate if gate["passed"] else None
+        for attempt in ([] if trig["regate_only"] else range(1, trig["max_retries"] + 2)):
             print(f"[single-clip] {pid} render {attempt}/{trig['max_retries'] + 1}", flush=True)
             item = generate_video_item("battle_move_draft", char, cfg, pid, feedback, hero_src)
             video = Path(item["raw_video_path"])
@@ -100,7 +115,7 @@ def main():
                 m["lifecycle_state"] = "DRAFT_REVIEW" if winner else "ANCHORED"
                 m["qa_gate"] = final
         entry = {"id": item["id"], "character_id": char["id"], "move_id": pid, "used_prop_start_frame": item.get("used_prop_start_frame", False),
-                 "passed": bool(winner), "gate": final, "attempts": len(attempts)}
+                 "passed": bool(winner), "gate": final, "attempts": 0 if trig["regate_only"] else len(attempts)}
         report_all["results"] = merge_json_list(report_all.get("results", []), entry)
         baked = ""
         if winner:
@@ -114,7 +129,7 @@ def main():
                 baked = "pf-" + pid
         else:
             exit_code = exit_code or 2
-        run_report["moves"].append({"move_id": pid, "clip_id": "pf-" + pid, "passed": bool(winner), "renders": len(attempts),
+        run_report["moves"].append({"move_id": pid, "clip_id": "pf-" + pid, "passed": bool(winner), "renders": 0 if trig["regate_only"] else len(attempts),
                                     "baked": baked, "attempts": attempts})
 
     run_report["finished_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())

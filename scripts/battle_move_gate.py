@@ -180,13 +180,11 @@ def stage2_prompt(prop, action):
 
 
 def stage2(sheet, prop, action, client, model):
-    from google.genai import types
     prompt = stage2_prompt(prop, action)
     last_err = ""
     for _ in range(2):
         try:
-            resp = client.models.generate_content(model=model, contents=[prompt, sheet],
-                                                  config=types.GenerateContentConfig(response_mime_type="application/json"))
+            resp = client.models.generate_content(model=model, contents=[prompt, sheet])   # no JSON mode: the v1 API refuses it (poc-2); parse_json strips fences
             data = parse_json(resp.text)
             if validate_stage2(data):
                 bad = [k for k in STAGE2_BOOLS if not data[k]]

@@ -1,9 +1,10 @@
 {
-  "run_id": "justin-poc-2",
+  "run_id": "justin-poc-2-regate",
   "move_ids": [
     "pf-justin-bb-basic"
   ],
   "resolution": "480p",
   "duration_multiplier": 1.5,
-  "max_retries": 1
+  "max_retries": 1,
+  "regate_only": true
 }
