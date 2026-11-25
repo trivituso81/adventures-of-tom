@@ -40,7 +40,7 @@
       "pep_cost": 0,
       "base_recovery": 80,
       "flavor": "Racket",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Tom takes two crisp brisk forward steps in-place, tilting his chin up with deadpan airline-VIP pride while holding his laminated Sky Club pass and metal brag tag.",
         "peak": "Tom executes one sharp snooty wrist-flick forward-left to tap an off-screen foe with the laminated card edge.",
@@ -70,13 +70,15 @@
       "hit_stop_frames": 3,
       "screen_shake_px": 4,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "tom-ff-basic.mp4",
         "durationSec": 2.6,
@@ -113,7 +115,7 @@
       "pep_cost": 2,
       "base_recovery": 100,
       "flavor": "Clobber",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Tom stays in-place and crisply snaps the telescoping handle of his black hard-shell rolling carry-on suitcase shut.",
         "peak": "Tom swings the carry-on sideways in front of his knees like a riot shield, plants his sneakers wide, and locks into an immovable guardian brace.",
@@ -143,13 +145,15 @@
       "hit_stop_frames": 5,
       "screen_shake_px": 6,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "tom-ff-s1.mp4",
         "durationSec": 3.3,
@@ -207,7 +211,7 @@
       "pep_cost": 3,
       "base_recovery": 100,
       "flavor": "Support",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Tom stays in-place and raises two fingers calmly in a practiced flight-crew signal.",
         "peak": "Tom sweeps his open palm horizontally across his chest as if sliding Delta One cabin doors shut while stepping into a stoic protective guard.",
@@ -234,13 +238,15 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 0,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "tom-ff-s2.mp4",
         "durationSec": 4.2,
@@ -277,7 +283,7 @@
       "pep_cost": 5,
       "base_recovery": 120,
       "flavor": "Racket",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Tom stays in-place, squares his shoulders solemnly, and raises his black invite-only 360 medallion skyward with intense JRPG focus.",
         "peak": "Tom points decisively straight left as tarmac wind ripples his shirt hem while the Engine's black Porsche SUV sweeps the clearing.",
@@ -307,13 +313,15 @@
       "hit_stop_frames": 6,
       "screen_shake_px": 11,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "tom-ff-cap.mp4",
         "durationSec": 7.0,
@@ -351,7 +359,7 @@
       "pep_cost": 0,
       "base_recovery": 80,
       "flavor": "Clobber",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Grace stays in-place holding a palm-sized white soup-dumpling squishy between thumb and forefinger, giving it one earnest concentrated pinch.",
         "peak": "Grace flicks the squishy crisply forward-left in a deadpan boomerang arc.",
@@ -381,13 +389,15 @@
       "hit_stop_frames": 3,
       "screen_shake_px": 4,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "grace-sc-basic.mp4",
         "durationSec": 2.6,
@@ -425,7 +435,7 @@
       "pep_cost": 3,
       "base_recovery": 100,
       "flavor": "Support",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Grace stays in-place stretching a bright neon-teal gel NeeDoh ball taut between both hands with intense tactical focus.",
         "peak": "Grace turns slightly toward an adjacent ally and lobs a crisp underhand pass.",
@@ -454,13 +464,15 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 0,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "grace-sc-s1.mp4",
         "durationSec": 3.4,
@@ -497,7 +509,7 @@
       "pep_cost": 4,
       "base_recovery": 100,
       "flavor": "Racket",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Grace stays in-place and raises a translucent ice-cube sugar squishy overhead between both palms like priming a thunderbolt.",
         "peak": "Grace leans forward with fierce focus and crushes the sugar cube decisively between her hands.",
@@ -526,13 +538,15 @@
       "hit_stop_frames": 5,
       "screen_shake_px": 7,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "grace-sc-s2.mp4",
         "durationSec": 4.1,
@@ -569,7 +583,7 @@
       "pep_cost": 6,
       "base_recovery": 120,
       "flavor": "Support",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Grace stays in-place, looks skyward, and clasps both hands overhead as if turning a celestial bamboo steamer latch.",
         "peak": "Grace sweeps both arms gracefully downward to guide the Engine's colossal diamond-gold soup dumpling drop.",
@@ -596,13 +610,15 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 5,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "grace-sc-cap.mp4",
         "durationSec": 6.8,
@@ -639,7 +655,7 @@
       "pep_cost": 0,
       "base_recovery": 80,
       "flavor": "Clobber",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Rose tucks her worn tattered plush Lamby securely under one arm like a football and drops her shoulder in a fierce running-back crouch.",
         "peak": "Rose performs two rapid low tackle-step lunges in-place.",
@@ -666,13 +682,15 @@
       "hit_stop_frames": 3,
       "screen_shake_px": 5,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "rose-sr-basic.mp4",
         "durationSec": 2.7,
@@ -708,7 +726,7 @@
       "pep_cost": 3,
       "base_recovery": 100,
       "flavor": "Clobber",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Rose clutches tattered Lamby tightly, gasps looking down at her sneakers, and crouches like a coiled spring.",
         "peak": "Rose performs three crisp rhythmic high-knee rebound hops in-place with fierce determination across floating cushions.",
@@ -737,13 +755,15 @@
       "hit_stop_frames": 3,
       "screen_shake_px": 6,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "rose-sr-s1.mp4",
         "durationSec": 3.5,
@@ -780,7 +800,7 @@
       "pep_cost": 4,
       "base_recovery": 100,
       "flavor": "Sizzle",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Rose snaps tiny aviator goggles onto tattered Lamby and hops enthusiastically upward tapping an ally shoulder gesture.",
         "peak": "Rose curls tightly into a compact airborne cannonball tuck in-place as the Engine arcs her into the foe.",
@@ -812,13 +832,15 @@
       "hit_stop_frames": 5,
       "screen_shake_px": 8,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "rose-sr-s2.mp4",
         "durationSec": 4.4,
@@ -857,7 +879,7 @@
       "pep_cost": 6,
       "base_recovery": 120,
       "flavor": "Clobber",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Rose holds worn tattered Lamby in her left hand and spotless white Backup Lamby in her right, hoisting both skyward in solemn twin-plushie focus.",
         "peak": "Rose tucks both Lambies forward into a rapid tucked pinball roll cycle in-place while the Engine ricochets her across foes.",
@@ -885,13 +907,15 @@
       "hit_stop_frames": 4,
       "screen_shake_px": 10,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "rose-sr-cap.mp4",
         "durationSec": 7.2,
@@ -927,7 +951,7 @@
       "pep_cost": 0,
       "base_recovery": 80,
       "flavor": "Clobber",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Amy jogs two crisp steps forward in-place gripping a cast-iron kettlebell with both hands and hinges cleanly at the hips.",
         "peak": "Amy snaps her hips forward driving the kettlebell straight up in a fierce textbook athletic strike arc.",
@@ -956,13 +980,15 @@
       "hit_stop_frames": 4,
       "screen_shake_px": 6,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "amy-fq-basic.mp4",
         "durationSec": 2.5,
@@ -999,7 +1025,7 @@
       "pep_cost": 2,
       "base_recovery": 100,
       "flavor": "Clobber",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Amy drops swiftly into a crisp textbook push-up plank in-place.",
         "peak": "Amy explodes upward into a high flying jump-kick aimed left.",
@@ -1026,13 +1052,15 @@
       "hit_stop_frames": 4,
       "screen_shake_px": 7,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "amy-fq-s1.mp4",
         "durationSec": 3.2,
@@ -1069,7 +1097,7 @@
       "pep_cost": 3,
       "base_recovery": 100,
       "flavor": "Support",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Amy taps her wrist fitness watch decisively and beckons a teammate forward with a brisk coach gesture.",
         "peak": "Amy jogs smoothly in high-knee rhythm in-place with steady arm pumps.",
@@ -1096,13 +1124,15 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 0,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "amy-fq-s2.mp4",
         "durationSec": 4.0,
@@ -1139,7 +1169,7 @@
       "pep_cost": 6,
       "base_recovery": 120,
       "flavor": "Clobber",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Amy locks eyes intensely on an invisible timer gripping her cast-iron kettlebell.",
         "peak": "Amy executes an explosive rapid-fire lunge, squat-press, and overhead slam circuit in-place with zero fatigue.",
@@ -1168,13 +1198,15 @@
       "hit_stop_frames": 6,
       "screen_shake_px": 11,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "amy-fq-cap.mp4",
         "durationSec": 7.0,
@@ -1211,7 +1243,7 @@
       "pep_cost": 0,
       "base_recovery": 80,
       "flavor": "Drench",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Deedee marches briskly forward in-place with no-nonsense posture and raises a bright blue Windex spray bottle to eye level.",
         "peak": "Deedee squeezes the trigger twice in sharp point-blank bursts left.",
@@ -1240,13 +1272,15 @@
       "hit_stop_frames": 3,
       "screen_shake_px": 3,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "deedee-nf-basic.mp4",
         "durationSec": 2.6,
@@ -1283,7 +1317,7 @@
       "pep_cost": 3,
       "base_recovery": 100,
       "flavor": "Drench",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Deedee marches forward holding a classic wooden-handle string mop.",
         "peak": "Deedee executes two brisk figure-eight mopping sweeps at floor level and sets down a small folded yellow caution sign.",
@@ -1314,13 +1348,15 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 0,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "deedee-nf-s1.mp4",
         "durationSec": 3.4,
@@ -1376,7 +1412,7 @@
       "pep_cost": 4,
       "base_recovery": 100,
       "flavor": "Clobber",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Deedee reaches up to pull her reading glasses smoothly down from the top of her head onto her nose and grips a wooden rolling pin with both hands.",
         "peak": "Deedee steps forward into a vigorous brisk scrubbing-smack motion left.",
@@ -1407,13 +1443,15 @@
       "hit_stop_frames": 5,
       "screen_shake_px": 7,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "deedee-nf-s2.mp4",
         "durationSec": 4.3,
@@ -1451,7 +1489,7 @@
       "pep_cost": 5,
       "base_recovery": 120,
       "flavor": "Drench",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Deedee stays in-place, snaps bright yellow rubber cleaning gloves firmly onto both wrists, and lifts her wooden mop overhead like an ocean staff.",
         "peak": "Deedee sweeps the mop powerfully downward left to unleash the Engine's soapy tsunami.",
@@ -1482,13 +1520,15 @@
       "hit_stop_frames": 6,
       "screen_shake_px": 11,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "deedee-nf-cap.mp4",
         "durationSec": 6.9,
@@ -1526,7 +1566,7 @@
       "pep_cost": 0,
       "base_recovery": 80,
       "flavor": "Clobber",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Boppy (wearing his fishing rod and wicker creel on his back) raps a sturdy wooden warden nightstick once calmly against his open left palm.",
         "peak": "Boppy steps forward into a crisp low horizontal shin-crack swing.",
@@ -1555,13 +1595,15 @@
       "hit_stop_frames": 4,
       "screen_shake_px": 5,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "boppy-dep-basic.mp4",
         "durationSec": 2.7,
@@ -1598,7 +1640,7 @@
       "pep_cost": 3,
       "base_recovery": 100,
       "flavor": "Racket",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Boppy (rod and creel on his back) plants his boots wide and braces his wooden nightstick diagonally across his chest.",
         "peak": "Boppy leans his chin forward delivering a gruff deadpan shout left.",
@@ -1627,13 +1669,15 @@
       "hit_stop_frames": 3,
       "screen_shake_px": 5,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "boppy-dep-s1.mp4",
         "durationSec": 3.5,
@@ -1686,7 +1730,7 @@
       "pep_cost": 3,
       "base_recovery": 100,
       "flavor": "Racket",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Boppy (rod and creel on his back) adjusts his creel strap comfortably and shifts his weight onto one hip.",
         "peak": "Boppy gestures slowly and earnestly with one hand tracing an imaginary hill as he launches into a long unhurried story.",
@@ -1713,13 +1757,15 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 0,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "boppy-dep-s2.mp4",
         "durationSec": 4.4,
@@ -1756,7 +1802,7 @@
       "pep_cost": 5,
       "base_recovery": 120,
       "flavor": "Clobber",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Boppy (rod and creel on his back) lifts a heavy brass warden key ring high overhead with stoic gravity.",
         "peak": "Boppy slams his fist firmly downward like a gavel to drop the Engine's gleaming Rikers iron gates.",
@@ -1785,13 +1831,15 @@
       "hit_stop_frames": 6,
       "screen_shake_px": 10,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "boppy-dep-cap.mp4",
         "durationSec": 7.1,
@@ -1828,7 +1876,7 @@
       "pep_cost": 0,
       "base_recovery": 80,
       "flavor": "Clobber",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "TNB scoops a hefty lump of wet gray stoneware clay in one hand with totally unhurried poise.",
         "peak": "TNB lobs a smooth effortless underhand toss left.",
@@ -1859,13 +1907,15 @@
       "hit_stop_frames": 3,
       "screen_shake_px": 4,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "tnb-cer-basic.mp4",
         "durationSec": 2.6,
@@ -1903,7 +1953,7 @@
       "pep_cost": 3,
       "base_recovery": 100,
       "flavor": "Support",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "TNB stays in-place and gently cups both clay-dusted hands in front of his torso.",
         "peak": "TNB performs smooth meditative vessel-centering motions with relaxed serene focus.",
@@ -1930,13 +1980,15 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 0,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "tnb-cer-s1.mp4",
         "durationSec": 3.5,
@@ -1973,7 +2025,7 @@
       "pep_cost": 4,
       "base_recovery": 100,
       "flavor": "Sizzle",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "TNB slips on one quilted kiln mitt with completely unhurried calm.",
         "peak": "TNB reaches out to unlatch and swing open an invisible loft kiln door, taking a relaxed half-step back as warm light washes over him.",
@@ -2002,13 +2054,15 @@
       "hit_stop_frames": 4,
       "screen_shake_px": 6,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "tnb-cer-s2.mp4",
         "durationSec": 4.3,
@@ -2045,7 +2099,7 @@
       "pep_cost": 5,
       "base_recovery": 120,
       "flavor": "Clobber",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "TNB stays in-place with unflappable serenity, takes one calm breath, and sweeps both hands gracefully upward.",
         "peak": "TNB delivers one gentle deadpan knuckle-tap forward to shatter the Engine's leaning terracotta amphora.",
@@ -2073,13 +2127,15 @@
       "hit_stop_frames": 6,
       "screen_shake_px": 11,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "tnb-cer-cap.mp4",
         "durationSec": 6.8,
@@ -2403,7 +2459,7 @@
       "pep_cost": 0,
       "base_recovery": 80,
       "flavor": "Clobber",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Justin steps forward in-place gliding a yellow electronic stud finder smoothly left-to-right until pausing at a spot.",
         "peak": "Justin swiftly draws a framing hammer from his belt for one crisp deadpan knock left.",
@@ -2433,13 +2489,15 @@
       "hit_stop_frames": 4,
       "screen_shake_px": 6,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "justin-bb-basic.mp4",
         "durationSec": 2.7,
@@ -2476,7 +2534,7 @@
       "pep_cost": 3,
       "base_recovery": 100,
       "flavor": "Clobber",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Justin chokes up on a heavy forged steel crowbar with both hands and wedges it forward with solid contractor footing.",
         "peak": "Justin heaves powerfully backward in a decisive shield-ripping motion.",
@@ -2505,13 +2563,15 @@
       "hit_stop_frames": 5,
       "screen_shake_px": 8,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "justin-bb-s1.mp4",
         "durationSec": 3.5,
@@ -2548,7 +2608,7 @@
       "pep_cost": 4,
       "base_recovery": 100,
       "flavor": "Support",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Justin stays in-place and sights carefully along a small carpenter level.",
         "peak": "Justin raises his cordless impact driver and drives four crisp rhythmic screws into four corners in front of him.",
@@ -2576,13 +2636,15 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 0,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "justin-bb-s2.mp4",
         "durationSec": 4.3,
@@ -2618,7 +2680,7 @@
       "pep_cost": 6,
       "base_recovery": 120,
       "flavor": "Clobber",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Justin stays in-place, squares up heroically, flinches sharply clutching his foot in silent agonized restraint, and hops three times on one leg.",
         "peak": "Justin channels his pain into one thunderous straight-faced right-footed punt left, launching the Engine's 80-lb steel toolbox.",
@@ -2646,13 +2708,15 @@
       "hit_stop_frames": 7,
       "screen_shake_px": 13,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "justin-bb-cap.mp4",
         "durationSec": 7.2,
@@ -2690,7 +2754,7 @@
       "pep_cost": 0,
       "base_recovery": 80,
       "flavor": "Clobber",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Olivia darts briskly forward in-place gripping her speed-rope handles and twirls the cord once overhead.",
         "peak": "Olivia snaps a razor-crisp forward whip-crack straight left.",
@@ -2719,13 +2783,15 @@
       "hit_stop_frames": 3,
       "screen_shake_px": 5,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "olivia-rc-basic.mp4",
         "durationSec": 2.5,
@@ -2762,7 +2828,7 @@
       "pep_cost": 3,
       "base_recovery": 100,
       "flavor": "Clobber",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Olivia bounds forward in-place gripping her speed-rope handles.",
         "peak": "Olivia launches into an ultra-crisp rapid criss-cross double-under jump-rope flurry on her toes with blurring wrist crosses.",
@@ -2791,13 +2857,15 @@
       "hit_stop_frames": 3,
       "screen_shake_px": 6,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "olivia-rc-s1.mp4",
         "durationSec": 3.4,
@@ -2834,7 +2902,7 @@
       "pep_cost": 2,
       "base_recovery": 100,
       "flavor": "Racket",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Olivia stays in-place jumping rope in an effortless, rhythmic cadence.",
         "peak": "Olivia earnestly ticks off competitive points and talks trash left toward an off-screen foe about beating her brother Bobby.",
@@ -2864,13 +2932,15 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 3,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "olivia-rc-s2.mp4",
         "durationSec": 4.0,
@@ -2908,7 +2978,7 @@
       "pep_cost": 6,
       "base_recovery": 120,
       "flavor": "Clobber",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Olivia salutes invisible judges with intense championship gravity and sprints forward in-place gripping her speed rope.",
         "peak": "Olivia explodes into a dazzling seven-beat close-range freestyle criss-cross jump-rope showcase ending in a dramatic downward whip-snap split finish.",
@@ -2938,13 +3008,15 @@
       "hit_stop_frames": 7,
       "screen_shake_px": 12,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "olivia-rc-cap.mp4",
         "durationSec": 7.3,
@@ -2982,7 +3054,7 @@
       "pep_cost": 4,
       "base_recovery": 100,
       "flavor": "Support",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Acting party member leans earnestly toward an adjacent ally slot and extends a firm helping hand downward.",
         "peak": "Acting party member pulls steadily upward as if lifting a fallen relative back onto their feet.",
@@ -3007,13 +3079,15 @@
       "hit_stop_frames": 0,
       "screen_shake_px": 0,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "univ-pick-me-up.mp4",
         "durationSec": 3.4,
@@ -3049,7 +3123,7 @@
       "pep_cost": 0,
       "base_recovery": 100,
       "flavor": "Mixed",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Single acting character turns their head briefly toward their adjacent teammate for a sharp synchronized nod.",
         "peak": "Acting character snaps into ready-relay focus and hands off cleanly to their Main Vibe Basic Action clip.",
@@ -3076,13 +3150,15 @@
       "hit_stop_frames": 4,
       "screen_shake_px": 7,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "univ-double-team.mp4",
         "durationSec": 4.3,
@@ -3119,7 +3195,7 @@
       "pep_cost": 0,
       "base_recovery": 120,
       "flavor": "Mixed",
-      "lifecycle_state": "PITCH_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
         "windup": "Single acting character steps into dramatic spotlight focus and raises one hand in unified family determination.",
         "peak": "Engine orchestrates both allies' highest unlocked Main Vibe Skill clips under the prismatic Family Ruckus crest.",
@@ -3146,13 +3222,15 @@
       "hit_stop_frames": 8,
       "screen_shake_px": 14,
       "qa_scores": {
-        "likeness": null,
-        "prop_integrity": null,
-        "motion_fluidity": null,
-        "staging_cleanliness": null,
-        "overall": null
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0,
+        "overall": 0.0
       },
-      "failure_tags": [],
+      "failure_tags": [
+        "qa_api_error"
+      ],
       "wanClip": {
         "filename": "univ-full-ruckus.mp4",
         "durationSec": 7.4,

@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-25T07:33:29Z",
+  "updated_at": "2026-11-25T07:53:25Z",
   "items": [
     {
       "id": "tom_hero_0",
@@ -160,9 +160,21 @@
       "move_id": "tom-ff-basic",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-ff-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tom/battle_move_draft_tom-ff-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tom_battle_idle",
@@ -281,9 +293,21 @@
       "move_id": "tom-ff-s1",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tom_battle_move_draft_tom-ff-s1_counter",
@@ -292,9 +316,21 @@
       "move_id": "tom-ff-s1_counter",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1_counter/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1_counter/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1_counter/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s1_counter/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tom_battle_move_draft_tom-ff-s2",
@@ -303,9 +339,21 @@
       "move_id": "tom-ff-s2",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tom_battle_move_draft_tom-ff-cap",
@@ -314,9 +362,21 @@
       "move_id": "tom-ff-cap",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-ff-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tom/battle_move_draft_tom-ff-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-ff-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tom_battle_move_draft_univ-pick-me-up",
@@ -325,9 +385,21 @@
       "move_id": "univ-pick-me-up",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_univ-pick-me-up/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tom/battle_move_draft_univ-pick-me-up/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_univ-pick-me-up/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_univ-pick-me-up/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tom_battle_move_draft_univ-double-team",
@@ -336,9 +408,21 @@
       "move_id": "univ-double-team",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_univ-double-team/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tom/battle_move_draft_univ-double-team/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_univ-double-team/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_univ-double-team/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tom_battle_move_draft_univ-full-ruckus",
@@ -347,9 +431,21 @@
       "move_id": "univ-full-ruckus",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_univ-full-ruckus/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tom/battle_move_draft_univ-full-ruckus/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_univ-full-ruckus/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_univ-full-ruckus/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tom_battle_move_draft_tom-gg-basic",
@@ -358,9 +454,21 @@
       "move_id": "tom-gg-basic",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-gg-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tom/battle_move_draft_tom-gg-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tom_battle_move_draft_tom-gg-s1",
@@ -369,9 +477,21 @@
       "move_id": "tom-gg-s1",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tom_battle_move_draft_tom-gg-s2",
@@ -380,9 +500,21 @@
       "move_id": "tom-gg-s2",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tom_battle_move_draft_tom-gg-s2_counter",
@@ -391,9 +523,21 @@
       "move_id": "tom-gg-s2_counter",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2_counter/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2_counter/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2_counter/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-s2_counter/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tom_battle_move_draft_tom-gg-cap",
@@ -402,9 +546,21 @@
       "move_id": "tom-gg-cap",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-gg-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tom/battle_move_draft_tom-gg-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-gg-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tom_battle_move_draft_tom-sb-basic",
@@ -413,9 +569,21 @@
       "move_id": "tom-sb-basic",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-sb-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tom/battle_move_draft_tom-sb-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-sb-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-sb-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tom_battle_move_draft_tom-sb-s1",
@@ -424,9 +592,21 @@
       "move_id": "tom-sb-s1",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tom_battle_move_draft_tom-sb-s2",
@@ -435,9 +615,21 @@
       "move_id": "tom-sb-s2",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-sb-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tom_battle_move_draft_tom-sb-cap",
@@ -446,9 +638,21 @@
       "move_id": "tom-sb-cap",
       "raw_video_path": "art-factory/staging/tom/battle_move_draft_tom-sb-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tom/battle_move_draft_tom-sb-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-sb-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tom/battle_move_draft_tom-sb-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "grace_battle_move_draft_grace-sc-basic",
@@ -457,9 +661,21 @@
       "move_id": "grace-sc-basic",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sc-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sc-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sc-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sc-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "grace_battle_move_draft_grace-sc-s1",
@@ -468,9 +684,21 @@
       "move_id": "grace-sc-s1",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "grace_battle_move_draft_grace-sc-s2",
@@ -479,9 +707,21 @@
       "move_id": "grace-sc-s2",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sc-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "grace_battle_move_draft_grace-sc-cap",
@@ -490,9 +730,21 @@
       "move_id": "grace-sc-cap",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sc-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sc-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sc-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sc-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "grace_battle_move_draft_univ-pick-me-up",
@@ -501,9 +753,21 @@
       "move_id": "univ-pick-me-up",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_univ-pick-me-up/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/grace/battle_move_draft_univ-pick-me-up/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_univ-pick-me-up/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_univ-pick-me-up/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "grace_battle_move_draft_univ-double-team",
@@ -512,9 +776,21 @@
       "move_id": "univ-double-team",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_univ-double-team/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/grace/battle_move_draft_univ-double-team/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_univ-double-team/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_univ-double-team/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "grace_battle_move_draft_univ-full-ruckus",
@@ -523,9 +799,21 @@
       "move_id": "univ-full-ruckus",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_univ-full-ruckus/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/grace/battle_move_draft_univ-full-ruckus/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_univ-full-ruckus/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_univ-full-ruckus/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "grace_battle_move_draft_grace-ca-basic",
@@ -534,9 +822,21 @@
       "move_id": "grace-ca-basic",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-ca-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/grace/battle_move_draft_grace-ca-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "grace_battle_move_draft_grace-ca-s1",
@@ -545,9 +845,21 @@
       "move_id": "grace-ca-s1",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "grace_battle_move_draft_grace-ca-s2",
@@ -556,9 +868,21 @@
       "move_id": "grace-ca-s2",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "grace_battle_move_draft_grace-ca-s2_counter",
@@ -567,9 +891,21 @@
       "move_id": "grace-ca-s2_counter",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2_counter/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2_counter/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2_counter/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-s2_counter/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "grace_battle_move_draft_grace-ca-cap",
@@ -578,9 +914,21 @@
       "move_id": "grace-ca-cap",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-ca-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/grace/battle_move_draft_grace-ca-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-ca-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "grace_battle_move_draft_grace-sp-basic",
@@ -589,9 +937,21 @@
       "move_id": "grace-sp-basic",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sp-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sp-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sp-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sp-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "grace_battle_move_draft_grace-sp-s1",
@@ -600,9 +960,21 @@
       "move_id": "grace-sp-s1",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "grace_battle_move_draft_grace-sp-s2",
@@ -611,9 +983,21 @@
       "move_id": "grace-sp-s2",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sp-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "grace_battle_move_draft_grace-sp-cap",
@@ -622,9 +1006,21 @@
       "move_id": "grace-sp-cap",
       "raw_video_path": "art-factory/staging/grace/battle_move_draft_grace-sp-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/grace/battle_move_draft_grace-sp-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sp-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/grace/battle_move_draft_grace-sp-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tnb_battle_move_draft_tnb-cer-basic",
@@ -633,9 +1029,21 @@
       "move_id": "tnb-cer-basic",
       "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tnb_battle_move_draft_tnb-cer-s1",
@@ -644,9 +1052,21 @@
       "move_id": "tnb-cer-s1",
       "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tnb_battle_move_draft_tnb-cer-s2",
@@ -655,9 +1075,21 @@
       "move_id": "tnb-cer-s2",
       "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tnb_battle_move_draft_tnb-cer-cap",
@@ -666,9 +1098,21 @@
       "move_id": "tnb-cer-cap",
       "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-cer-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tnb_battle_move_draft_tnb-lb-basic",
@@ -677,9 +1121,21 @@
       "move_id": "tnb-lb-basic",
       "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tnb_battle_move_draft_tnb-lb-s1",
@@ -688,9 +1144,21 @@
       "move_id": "tnb-lb-s1",
       "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tnb_battle_move_draft_tnb-lb-s2",
@@ -699,9 +1167,21 @@
       "move_id": "tnb-lb-s2",
       "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tnb_battle_move_draft_tnb-lb-cap",
@@ -710,9 +1190,21 @@
       "move_id": "tnb-lb-cap",
       "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-lb-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tnb_battle_move_draft_tnb-sk-basic",
@@ -721,9 +1213,21 @@
       "move_id": "tnb-sk-basic",
       "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tnb_battle_move_draft_tnb-sk-s1",
@@ -732,9 +1236,21 @@
       "move_id": "tnb-sk-s1",
       "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tnb_battle_move_draft_tnb-sk-s2",
@@ -743,9 +1259,21 @@
       "move_id": "tnb-sk-s2",
       "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tnb_battle_move_draft_tnb-sk-cap",
@@ -754,9 +1282,21 @@
       "move_id": "tnb-sk-cap",
       "raw_video_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/tnb/battle_move_draft_tnb-sk-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "amy_battle_move_draft_amy-fq-basic",
@@ -765,9 +1305,21 @@
       "move_id": "amy-fq-basic",
       "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-fq-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/amy/battle_move_draft_amy-fq-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-fq-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-fq-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "amy_battle_move_draft_amy-fq-s1",
@@ -776,9 +1328,21 @@
       "move_id": "amy-fq-s1",
       "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-fq-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/amy/battle_move_draft_amy-fq-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-fq-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-fq-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "amy_battle_move_draft_amy-fq-s2",
@@ -787,9 +1351,21 @@
       "move_id": "amy-fq-s2",
       "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-fq-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/amy/battle_move_draft_amy-fq-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-fq-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-fq-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "amy_battle_move_draft_amy-fq-cap",
@@ -798,9 +1374,21 @@
       "move_id": "amy-fq-cap",
       "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-fq-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/amy/battle_move_draft_amy-fq-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-fq-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-fq-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "amy_battle_move_draft_amy-cb-basic",
@@ -809,9 +1397,21 @@
       "move_id": "amy-cb-basic",
       "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-cb-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/amy/battle_move_draft_amy-cb-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-cb-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-cb-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "amy_battle_move_draft_amy-cb-s1",
@@ -820,9 +1420,21 @@
       "move_id": "amy-cb-s1",
       "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-cb-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/amy/battle_move_draft_amy-cb-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-cb-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-cb-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "amy_battle_move_draft_amy-cb-s2",
@@ -831,9 +1443,21 @@
       "move_id": "amy-cb-s2",
       "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-cb-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/amy/battle_move_draft_amy-cb-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-cb-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-cb-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "amy_battle_move_draft_amy-cb-cap",
@@ -842,9 +1466,21 @@
       "move_id": "amy-cb-cap",
       "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-cb-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/amy/battle_move_draft_amy-cb-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-cb-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-cb-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "amy_battle_move_draft_amy-sm-basic",
@@ -853,9 +1489,21 @@
       "move_id": "amy-sm-basic",
       "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-sm-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/amy/battle_move_draft_amy-sm-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-sm-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-sm-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "amy_battle_move_draft_amy-sm-s1",
@@ -864,9 +1512,21 @@
       "move_id": "amy-sm-s1",
       "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-sm-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/amy/battle_move_draft_amy-sm-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-sm-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-sm-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "amy_battle_move_draft_amy-sm-s2",
@@ -875,9 +1535,21 @@
       "move_id": "amy-sm-s2",
       "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-sm-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/amy/battle_move_draft_amy-sm-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-sm-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-sm-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "amy_battle_move_draft_amy-sm-cap",
@@ -886,9 +1558,21 @@
       "move_id": "amy-sm-cap",
       "raw_video_path": "art-factory/staging/amy/battle_move_draft_amy-sm-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/amy/battle_move_draft_amy-sm-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-sm-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/amy/battle_move_draft_amy-sm-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "justin_battle_move_draft_justin-bb-basic",
@@ -897,9 +1581,21 @@
       "move_id": "justin-bb-basic",
       "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "justin_battle_move_draft_justin-bb-s1",
@@ -908,9 +1604,21 @@
       "move_id": "justin-bb-s1",
       "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-bb-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/justin/battle_move_draft_justin-bb-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-bb-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-bb-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "justin_battle_move_draft_justin-bb-s2",
@@ -919,9 +1627,21 @@
       "move_id": "justin-bb-s2",
       "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-bb-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/justin/battle_move_draft_justin-bb-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-bb-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-bb-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "justin_battle_move_draft_justin-bb-cap",
@@ -930,9 +1650,21 @@
       "move_id": "justin-bb-cap",
       "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-bb-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/justin/battle_move_draft_justin-bb-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-bb-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-bb-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "justin_battle_move_draft_justin-lw-basic",
@@ -941,9 +1673,21 @@
       "move_id": "justin-lw-basic",
       "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-lw-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/justin/battle_move_draft_justin-lw-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-lw-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-lw-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "justin_battle_move_draft_justin-lw-s1",
@@ -952,9 +1696,21 @@
       "move_id": "justin-lw-s1",
       "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-lw-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/justin/battle_move_draft_justin-lw-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-lw-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-lw-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "justin_battle_move_draft_justin-lw-s2",
@@ -963,9 +1719,21 @@
       "move_id": "justin-lw-s2",
       "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-lw-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/justin/battle_move_draft_justin-lw-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-lw-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-lw-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "justin_battle_move_draft_justin-lw-cap",
@@ -974,9 +1742,21 @@
       "move_id": "justin-lw-cap",
       "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-lw-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/justin/battle_move_draft_justin-lw-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-lw-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-lw-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "justin_battle_move_draft_justin-ar-basic",
@@ -985,9 +1765,21 @@
       "move_id": "justin-ar-basic",
       "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-ar-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/justin/battle_move_draft_justin-ar-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-ar-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-ar-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "justin_battle_move_draft_justin-ar-s1",
@@ -996,9 +1788,21 @@
       "move_id": "justin-ar-s1",
       "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-ar-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/justin/battle_move_draft_justin-ar-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-ar-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-ar-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "justin_battle_move_draft_justin-ar-s2",
@@ -1007,9 +1811,21 @@
       "move_id": "justin-ar-s2",
       "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-ar-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/justin/battle_move_draft_justin-ar-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-ar-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-ar-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "justin_battle_move_draft_justin-ar-cap",
@@ -1018,9 +1834,21 @@
       "move_id": "justin-ar-cap",
       "raw_video_path": "art-factory/staging/justin/battle_move_draft_justin-ar-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/justin/battle_move_draft_justin-ar-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-ar-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/justin/battle_move_draft_justin-ar-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "olivia_battle_move_draft_olivia-rc-basic",
@@ -1029,9 +1857,21 @@
       "move_id": "olivia-rc-basic",
       "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "olivia_battle_move_draft_olivia-rc-s1",
@@ -1040,9 +1880,21 @@
       "move_id": "olivia-rc-s1",
       "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "olivia_battle_move_draft_olivia-rc-s2",
@@ -1051,9 +1903,21 @@
       "move_id": "olivia-rc-s2",
       "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "olivia_battle_move_draft_olivia-rc-cap",
@@ -1062,9 +1926,21 @@
       "move_id": "olivia-rc-cap",
       "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-rc-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "olivia_battle_move_draft_olivia-wm-basic",
@@ -1073,9 +1949,21 @@
       "move_id": "olivia-wm-basic",
       "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "olivia_battle_move_draft_olivia-wm-s1",
@@ -1084,9 +1972,21 @@
       "move_id": "olivia-wm-s1",
       "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "olivia_battle_move_draft_olivia-wm-s2",
@@ -1095,9 +1995,21 @@
       "move_id": "olivia-wm-s2",
       "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "olivia_battle_move_draft_olivia-wm-cap",
@@ -1106,9 +2018,21 @@
       "move_id": "olivia-wm-cap",
       "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-wm-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "olivia_battle_move_draft_olivia-na-basic",
@@ -1117,9 +2041,21 @@
       "move_id": "olivia-na-basic",
       "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "olivia_battle_move_draft_olivia-na-s1",
@@ -1128,9 +2064,21 @@
       "move_id": "olivia-na-s1",
       "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "olivia_battle_move_draft_olivia-na-s2",
@@ -1139,9 +2087,21 @@
       "move_id": "olivia-na-s2",
       "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "olivia_battle_move_draft_olivia-na-cap",
@@ -1150,9 +2110,21 @@
       "move_id": "olivia-na-cap",
       "raw_video_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/olivia/battle_move_draft_olivia-na-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "deedee_battle_move_draft_deedee-nf-basic",
@@ -1161,9 +2133,21 @@
       "move_id": "deedee-nf-basic",
       "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "deedee_battle_move_draft_deedee-nf-s1",
@@ -1172,9 +2156,21 @@
       "move_id": "deedee-nf-s1",
       "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "deedee_battle_move_draft_deedee-nf-s1_counter",
@@ -1183,9 +2179,21 @@
       "move_id": "deedee-nf-s1_counter",
       "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-s1_counter/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-s1_counter/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-s1_counter/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-s1_counter/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "deedee_battle_move_draft_deedee-nf-s2",
@@ -1194,9 +2202,21 @@
       "move_id": "deedee-nf-s2",
       "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "deedee_battle_move_draft_deedee-nf-cap",
@@ -1205,9 +2225,21 @@
       "move_id": "deedee-nf-cap",
       "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-nf-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "deedee_battle_move_draft_deedee-rn-basic",
@@ -1216,9 +2248,21 @@
       "move_id": "deedee-rn-basic",
       "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "deedee_battle_move_draft_deedee-rn-s1",
@@ -1227,9 +2271,21 @@
       "move_id": "deedee-rn-s1",
       "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "deedee_battle_move_draft_deedee-rn-s2",
@@ -1238,9 +2294,21 @@
       "move_id": "deedee-rn-s2",
       "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "deedee_battle_move_draft_deedee-rn-cap",
@@ -1249,9 +2317,21 @@
       "move_id": "deedee-rn-cap",
       "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-rn-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "deedee_battle_move_draft_deedee-hc-basic",
@@ -1260,9 +2340,21 @@
       "move_id": "deedee-hc-basic",
       "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "deedee_battle_move_draft_deedee-hc-s1",
@@ -1271,9 +2363,21 @@
       "move_id": "deedee-hc-s1",
       "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "deedee_battle_move_draft_deedee-hc-s2",
@@ -1282,9 +2386,21 @@
       "move_id": "deedee-hc-s2",
       "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "deedee_battle_move_draft_deedee-hc-cap",
@@ -1293,9 +2409,21 @@
       "move_id": "deedee-hc-cap",
       "raw_video_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/deedee/battle_move_draft_deedee-hc-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "boppy_battle_move_draft_boppy-dep-basic",
@@ -1304,9 +2432,21 @@
       "move_id": "boppy-dep-basic",
       "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "boppy_battle_move_draft_boppy-dep-s1",
@@ -1315,9 +2455,21 @@
       "move_id": "boppy-dep-s1",
       "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "boppy_battle_move_draft_boppy-dep-s1_counter",
@@ -1326,9 +2478,21 @@
       "move_id": "boppy-dep-s1_counter",
       "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-s1_counter/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-s1_counter/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-s1_counter/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-s1_counter/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "boppy_battle_move_draft_boppy-dep-s2",
@@ -1337,9 +2501,21 @@
       "move_id": "boppy-dep-s2",
       "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "boppy_battle_move_draft_boppy-dep-cap",
@@ -1348,9 +2524,21 @@
       "move_id": "boppy-dep-cap",
       "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-dep-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "boppy_battle_move_draft_boppy-pb-basic",
@@ -1359,9 +2547,21 @@
       "move_id": "boppy-pb-basic",
       "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "boppy_battle_move_draft_boppy-pb-s1",
@@ -1370,9 +2570,21 @@
       "move_id": "boppy-pb-s1",
       "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "boppy_battle_move_draft_boppy-pb-s1_counter",
@@ -1381,9 +2593,21 @@
       "move_id": "boppy-pb-s1_counter",
       "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-s1_counter/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-s1_counter/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-s1_counter/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-s1_counter/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "boppy_battle_move_draft_boppy-pb-s2",
@@ -1392,9 +2616,21 @@
       "move_id": "boppy-pb-s2",
       "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "boppy_battle_move_draft_boppy-pb-cap",
@@ -1403,9 +2639,21 @@
       "move_id": "boppy-pb-cap",
       "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-pb-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "boppy_battle_move_draft_boppy-ba-basic",
@@ -1414,9 +2662,21 @@
       "move_id": "boppy-ba-basic",
       "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "boppy_battle_move_draft_boppy-ba-s1",
@@ -1425,9 +2685,21 @@
       "move_id": "boppy-ba-s1",
       "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "boppy_battle_move_draft_boppy-ba-s2",
@@ -1436,9 +2708,21 @@
       "move_id": "boppy-ba-s2",
       "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "boppy_battle_move_draft_boppy-ba-cap",
@@ -1447,9 +2731,21 @@
       "move_id": "boppy-ba-cap",
       "raw_video_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/boppy/battle_move_draft_boppy-ba-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "rose_battle_move_draft_rose-sr-basic",
@@ -1458,9 +2754,21 @@
       "move_id": "rose-sr-basic",
       "raw_video_path": "art-factory/staging/rose/battle_move_draft_rose-sr-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/rose/battle_move_draft_rose-sr-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/rose/battle_move_draft_rose-sr-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/rose/battle_move_draft_rose-sr-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "rose_battle_move_draft_rose-sr-s1",
@@ -1469,9 +2777,21 @@
       "move_id": "rose-sr-s1",
       "raw_video_path": "art-factory/staging/rose/battle_move_draft_rose-sr-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/rose/battle_move_draft_rose-sr-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/rose/battle_move_draft_rose-sr-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/rose/battle_move_draft_rose-sr-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "rose_battle_move_draft_rose-sr-s2",
@@ -1480,9 +2800,21 @@
       "move_id": "rose-sr-s2",
       "raw_video_path": "art-factory/staging/rose/battle_move_draft_rose-sr-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/rose/battle_move_draft_rose-sr-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/rose/battle_move_draft_rose-sr-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/rose/battle_move_draft_rose-sr-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "rose_battle_move_draft_rose-sr-cap",
@@ -1491,9 +2823,21 @@
       "move_id": "rose-sr-cap",
       "raw_video_path": "art-factory/staging/rose/battle_move_draft_rose-sr-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/rose/battle_move_draft_rose-sr-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/rose/battle_move_draft_rose-sr-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/rose/battle_move_draft_rose-sr-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "rose_battle_move_draft_rose-cr-basic",
@@ -1502,9 +2846,21 @@
       "move_id": "rose-cr-basic",
       "raw_video_path": "art-factory/staging/rose/battle_move_draft_rose-cr-basic/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/rose/battle_move_draft_rose-cr-basic/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/rose/battle_move_draft_rose-cr-basic/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/rose/battle_move_draft_rose-cr-basic/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "rose_battle_move_draft_rose-cr-s1",
@@ -1513,9 +2869,21 @@
       "move_id": "rose-cr-s1",
       "raw_video_path": "art-factory/staging/rose/battle_move_draft_rose-cr-s1/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/rose/battle_move_draft_rose-cr-s1/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/rose/battle_move_draft_rose-cr-s1/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/rose/battle_move_draft_rose-cr-s1/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "rose_battle_move_draft_rose-cr-s2",
@@ -1524,9 +2892,21 @@
       "move_id": "rose-cr-s2",
       "raw_video_path": "art-factory/staging/rose/battle_move_draft_rose-cr-s2/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/rose/battle_move_draft_rose-cr-s2/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/rose/battle_move_draft_rose-cr-s2/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/rose/battle_move_draft_rose-cr-s2/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "rose_battle_move_draft_rose-cr-cap",
@@ -1535,9 +2915,21 @@
       "move_id": "rose-cr-cap",
       "raw_video_path": "art-factory/staging/rose/battle_move_draft_rose-cr-cap/raw_alpha.webm",
       "needs_encode": false,
-      "status": "review",
+      "status": "qa_failed",
       "webm_path": "art-factory/staging/rose/battle_move_draft_rose-cr-cap/battle_alpha.webm",
-      "safari_mp4_path": "art-factory/staging/rose/battle_move_draft_rose-cr-cap/battle_alpha_safari_hvc1.mp4"
+      "safari_mp4_path": "art-factory/staging/rose/battle_move_draft_rose-cr-cap/battle_alpha_safari_hvc1.mp4",
+      "qa_passed": false,
+      "qa_overall": 0.0,
+      "qa_scores": {
+        "likeness": 0,
+        "prop_integrity": 0,
+        "motion_fluidity": 0,
+        "staging_cleanliness": 0
+      },
+      "qa_failure_tags": [
+        "qa_api_error"
+      ],
+      "qa_notes": "404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
     },
     {
       "id": "tom_start_frame_tom-lounge-pass",
