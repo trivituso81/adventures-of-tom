@@ -6830,6 +6830,43 @@
     "text": "Read the c-scriptstudio9 card and docs/CHANGES.md scriptstudio9, then re-check the TATA linter rule and branchLabel in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/qa_test.py and read_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "done": "2026-11-25"
+  },
+  {
+   "id": "c-scriptstudio10",
+   "tag": "scriptstudio10",
+   "lane": "claude",
+   "col": "done",
+   "theme": "Tools",
+   "title": "Script Studio: leaner writer, stricter critic",
+   "next": "Shipped: writer rules for lean pacing, plain English, no meta-jargon; critic caps padded or awkward scenes at 6.5. Next: generate a scene and tell me if the dialogue is leaner and the scores more honest.",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
+    "opening": "Update the Writer and Audit/Critic prompts in tools/script-studio/src/App.jsx"
+   },
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Tom: \"fix bloated, unfocused dialogue and over-scoring\". New card; started."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as scriptstudio10."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-25",
+   "changed": "2026-11-25",
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Script Studio writer and critic prompt calibration.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build with the design in the card)",
+    "effort": "medium (the changes are specified in the card)",
+    "text": "Read the c-scriptstudio10 card and docs/CHANGES.md scriptstudio10, then adjust WRITER_CRAFT_RULES and the Critic prompt in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/qa_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "done": "2026-11-25"
   }
  ],
  "sessions": [

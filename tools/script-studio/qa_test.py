@@ -117,6 +117,13 @@ check('QA passed' in summary and '9/10' in summary and '1 auto-fix' in summary, 
 check('No remaining notes' in detail, 'badge details: no remaining notes')
 check(nlines >= 4, 'final script shown')
 check(fixinfo == 0, 'no Fix Remaining Issues button on a scene that passed')
+pass1 = reqs[0][2]
+for needle in ('LEAN PACING', 'borrowing a pencil', 'NATURAL SPOKEN ENGLISH ONLY', 'Knees, Tata, knees!', 'NO META-JARGON', 'side quest', 'Cozy Rosie'):
+    check(needle in pass1, 'writer prompt has: ' + needle)
+check('LEAN PACING' in rw and 'NO META-JARGON' in rw, 'rewrite prompt carries the same craft rules')
+crit = reqs[2][2]
+for needle in ('cap the score at 6.5 or lower', 'bloated back-and-forth padding', 'makes the reader pause', 'sitcom tropes or meta-jargon', 'narrating the scene title', 'Only award 8 or higher if the scene is lean, immediately clear on first read and genuinely sharp'):
+    check(needle in crit, 'critic prompt has: ' + needle)
 check('TATA' in rw and 'use "Tata"' in rw.replace('Use "Tata"', 'use "Tata"'), 'linter flags "Ta-Ta" and the rewrite prompt says to use Tata')
 dp = reqs[0][2]
 check('NEVER thesaurus-paraphrase' in dp and 'NEVER shoehorn' in dp and 'SkyMiles' in dp and 'plot facts only' in dp and 'Invent fresh comedic dialogue' in dp, 'pass 1 prompt has the beat and trivia rules')

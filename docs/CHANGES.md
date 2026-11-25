@@ -1,3 +1,9 @@
+## scriptstudio10 (2026-11-25): Script Studio: leaner writer rules and a stricter, calibrated Critic
+
+Card c-scriptstudio10. Tom: dialogue was bloated and unfocused and scores were too generous. In `tools/script-studio/src/App.jsx`, `WRITER_CRAFT_RULES` (used by Pass 1 and the Pass 4 rewrite) now says: lean pacing (plot and task information in the fewest lines; never stretch a handoff or prop beat like borrowing a pencil into a back-and-forth; one sharp one-liner then move on); natural spoken English only (no invented shorthand that needs decoding, with "Knees, Tata, knees!" and "Mind the hair on takeoff" as the examples to avoid); no meta-jargon or recycled crutches (no "side quest", no repeated travel or aviation puns, nicknames like "Cozy Rosie" used rarely) and characters never narrate the scene title. The Critic prompt has a SCORE CALIBRATION block: cap the score at 6.5 or lower for (a) padded back-and-forth on a mundane beat, (b) awkward phrasing that makes the reader pause, (c) sitcom tropes or meta-jargon, (d) a character narrating the scene title; flag each as an issue; award 8 or higher only when the scene is lean, clear on first read and sharp. The 8/10 strict pass bar is unchanged.
+
+Checked: `qa_test.py` now asserts every phrase above is in the Pass 1, rewrite and Critic prompts (all pass), plus `audit_test.py`, `e2e_test.py`, `read_test.py`. Not checked: whether real Gemini actually writes leaner dialogue or scores lower; that needs a real run.
+
 ## pass1review1 (2026-11-25): PASS-1 DRAFT REVIEW in the Battle Lab, and the seven drafts play 1.5 times longer
 
 Card c-pass1review1, PR 17. Tom: "Add a PASS-1 DRAFT REVIEW preset under ADMIN > BATTLE LAB > TESTS AND REVIEWS (similar to CHAPTER 1 REVIEW) with direct PLAY buttons for all 7 wired Pass-1 clips ... Make the playback duration of those 7 baked clips 1.5x longer so the actions read clearly at both 1x and 2x battle speed."
