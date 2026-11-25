@@ -2526,7 +2526,7 @@
         "overall": 9.75
       },
       "failure_tags": [
-        "gate2_invalid_response"
+        "gate2_feet_planted"
       ],
       "wanClip": {
         "filename": "justin-bb-basic.mp4",
@@ -2567,12 +2567,16 @@
           "passed": true
         },
         "stage2": {
-          "passed": false,
           "pass": false,
-          "failure_reason": "stage2_unusable_response (ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'JSON mode is not enabled for api version v1. Use api version v1beta instead.', 'status': 'INVALID_ARGUMENT'}})",
+          "prop_visible_frame1": true,
+          "prop_visible_at_sprite_scale": true,
+          "action_reads_leftward": true,
+          "feet_planted": false,
+          "failure_reason": "The character's left foot lifts and shifts position during the animation.",
           "hard_rejected_on": [
-            "invalid_response"
+            "feet_planted"
           ],
+          "passed": false,
           "contact_sheet_frames": [
             0,
             30,
@@ -2581,12 +2585,12 @@
             119,
             149
           ],
-          "contact_sheet": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/attempt_2_contact_sheet_200px.png"
+          "contact_sheet": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/regate_contact_sheet_200px.png"
         },
         "passed": false,
-        "failure_reason": "Stage 2 sprite-scale check: stage2_unusable_response (ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'JSON mode is not enabled for api version v1. Use api version v1beta instead.', 'status': 'INVALID_ARGUMENT'}})",
+        "failure_reason": "Stage 2 sprite-scale check: The character's left foot lifts and shifts position during the animation.",
         "failure_tags": [
-          "gate2_invalid_response"
+          "gate2_feet_planted"
         ]
       }
     },
