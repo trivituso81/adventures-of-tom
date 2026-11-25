@@ -1,0 +1,45 @@
+name: Reroll Failed Pass-1 Drafts
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reroll:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests fal-client google-genai pillow
+
+      - name: Reroll failed Pass-1 drafts
+        env:
+          FAL_KEY: ${{ secrets.FAL_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/reroll_failed_videos.py
+
+      - name: Re-run automated video QA
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/qa_videos.py
+
+      - name: Commit rerolled drafts and QA report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add art-factory/queue.json art-factory/move-packets-pass1.json art-factory/qa-report-pass1-drafts.json art-factory/staging/
+          git diff --staged --quiet || git commit -m "Auto-reroll failed Pass-1 draft videos and update QA report"
+          git pull --rebase origin main
+          git push
