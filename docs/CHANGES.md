@@ -1,3 +1,11 @@
+## scriptstudio1 (2026-11-24): AoT Script Studio is hosted at /script-studio/ with its six reference docs auto-loaded
+
+Card c-scriptstudio1. Tom's `aot-script-studio.jsx` (React, Tailwind, lucide-react) is built by Vite from `tools/script-studio/` into `script-studio/` (committed, the site has no build step; rebuild steps in `tools/script-studio/README.md`) and linked from Admin under Art Factory. On startup it fetches the six docs from `script-studio/reference-vault/` and merges them without touching anything Tom edited or uploaded (empty slot: fills `content` and `uploadedContent`, inject on; edited slot: only fills an empty `uploadedContent`). New Sync Hosted Defaults button in the Vault header (confirmation modal) resets the six core slots to the hosted files. No API key is in the repo or the build; the key box stays in the browser's localStorage.
+
+The vault docs: four are copies from `claude/` (`comedy-bible.md` was only in the Project and is now in `claude/` too); `canon-and-characters.md` is built from `docs/CANON.md` plus `claude/canon-addendum.md`, and `workshop-and-map-spec.md` from `claude/script-workshop-plan.md`, `docs/SCRIPT_EDITOR.md` and `docs/MAP_SIZES.md` (`tools/script-studio/sync_vault.py`). Replace either with a hand-written file of the same name if one exists.
+
+Checked: `python3 tools/script-studio/e2e_test.py` all pass (fresh session 6 of 6 Loaded, about 82,000 tokens; live edit and upload survive reload; Revert to Uploaded; Sync restores hosted text; no page errors).
+
 ## pusher1 (2026-11-24): The Art Factory GitHub pusher page is on the site
 
 Card c-pusher1. Tom's page is hosted at https://trivituso81.github.io/adventures-of-tom/aot-pusher.html and linked from Admin under Art Factory. Edits to his file: `noindex, nofollow` robots meta added; the Pass 1 card, `PASS1_WORKFLOW`, `PASS1_CHARACTERS` and the `pushPass1` handler removed (they would overwrite the current workflow and `characters.json`). The GitHub token config, Git Trees commit logic and the `{message, files}` patch parser are unchanged; no token is in the file.
