@@ -9411,7 +9411,7 @@
    "title": "Battle stage 23c: Remove the Old battle path from the story",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "next": "Slice 23c of the battle 2 purge: Remove the Old battle path from the story. Starts after c-b3s23b ships.",
    "blocks": [
     "c-b3s23d"
@@ -9440,6 +9440,10 @@
     {
      "d": "2026-11-24",
      "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-24",
+     "t": "Stuck twice: The rescue started 4:47 PM and went quiet for 2 hours. Waiting on Tom (card t-stuck-b3s23c)."
     }
    ],
    "prompt": {
@@ -9458,7 +9462,8 @@
     "url": "https://claude.ai/code/cse_01RXeukGb2fFVJCawCEPprf1",
     "prev": "https://claude.ai/code/session_01RXeukDDAC9uzYqrva7TFNX"
    },
-   "started_at": "2026-11-25T00:47:03+00:00"
+   "started_at": "2026-11-25T00:47:03+00:00",
+   "waiting_on": "tom"
   },
   {
    "id": "c-b3s23d",
@@ -9656,6 +9661,34 @@
     "effort": "medium (steps are known)",
     "text": "Replace tools/script-studio/src/App.jsx with Tom's v2, re-apply the vault auto-load patch, rebuild and run tools/script-studio/e2e_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "t-stuck-b3s23c",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle System",
+   "ask": "unstick",
+   "unstick": {
+    "card": "c-b3s23c",
+    "kind": "stuck"
+   },
+   "title": "Stuck twice: Battle stage 23c: Remove the Old battle path fr",
+   "next": "Card c-b3s23c (Battle stage 23c: Remove the Old battle path from the story) stalled again after its one automatic rescue. The rescue started 4:47 PM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it.",
+   "blocks": [
+    "c-b3s23c"
+   ],
+   "chat": {
+    "url": "",
+    "opening": "board"
+   },
+   "history": [
+    {
+     "d": "2026-11-24",
+     "t": "Added by board-sync: card c-b3s23c stalled after its rescue"
+    }
+   ],
+   "created": "2026-11-24",
+   "changed": "2026-11-24"
   }
  ],
  "sessions": [
@@ -9663,14 +9696,15 @@
    "url": "https://claude.ai/code/session_01RXeukDiptdfSViWowh4C6s",
    "title": "Host the Art Factory GitHub pusher page on the site",
    "first": "2026-11-24T18:16:07-08:00",
-   "last": "2026-11-24T18:30:59-08:00",
+   "last": "2026-11-24T21:30:53-08:00",
    "tags": [
     "pusher1",
     "scriptstudio1"
    ],
    "cards": [
     "c-pusher1",
-    "c-scriptstudio1"
+    "c-scriptstudio1",
+    "c-scriptstudio2"
    ]
   },
   {
@@ -15961,8 +15995,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "d5d807078b47e0c917480faa13efa9731575b334",
- "synced_at": "2026-11-25T02:31:47+00:00",
+ "synced": "4ba6d55a8c90f0808579df6ab78c20f096236086",
+ "synced_at": "2026-11-25T05:31:39+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
