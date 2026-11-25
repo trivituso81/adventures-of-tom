@@ -3,16 +3,16 @@
 <style>
 body{margin:0;background:#111;color:#eee;font:15px system-ui;display:flex;flex-direction:column;align-items:center;gap:10px;padding:12px}
 #stage{position:relative;width:min(92vw,900px);aspect-ratio:16/9;background:url(battle-bg.webp) center/cover;border:2px solid #444;overflow:hidden}
-#stage video{position:absolute;left:50%;bottom:0;height:96%;transform:translateX(-50%)}
+#stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center} button{padding:8px 14px;font-size:15px}
-#thumbs img{height:140px;background:#0f0;margin:2px}
+#thumbs img{height:170px;background:#0f0;margin:2px}
 </style>
-<h3>Justin: Stud-Finder Beep and Knock (sandbox, 1 attempt)</h3>
+<h3>Justin: Stud-Finder Beep and Knock (sandbox, attempt 2: hammer slam, 16:9)</h3>
 <div id="stage"><video id="v" src="justin-bb-basic-alpha.webm" autoplay loop muted playsinline></video></div>
 <div class="row"><button onclick="v.currentTime=0;v.play()">Restart</button>
 <button onclick="v.playbackRate=v.playbackRate==1?.5:1">Speed: toggle half</button>
 <button onclick="s.style.background=s.style.background.includes('lime')?'':'lime'">Green check on/off</button></div>
 <p>Transparent WebM needs Chrome or Edge (Safari on iPhone shows it with a black box). Raw video and keyframes below.</p>
 <div id="thumbs"><img src="start.png"><img src="end.png"></div>
-<p><a style="color:#8cf" href="raw.mp4">raw.mp4 (before keying)</a></p>
+<p><a style="color:#8cf" href="raw.mp4">raw.mp4 (before keying)</a> | <a style="color:#8cf" href="attempt1/raw.mp4">attempt 1 raw</a></p>
 <script>var v=document.getElementById('v'),s=document.getElementById('stage');</script>
