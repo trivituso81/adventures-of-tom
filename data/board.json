@@ -6896,6 +6896,10 @@
     {
      "d": "2026-11-25",
      "t": "Run justin-poc-2 (fal fixed): 2 renders at 480p. Render 1 failed Stage 1 (foot_retreat 0.21). Render 2 passed Stage 1 (churn 0.753, left reach 0.452, foot retreat 0.142) and was re-gated with no new render after a Stage 2 bug fix: rejected on feet_planted (left foot lifts and shifts). Ended without shipping: nothing baked, the old Justin clip stays in PASS-1 DRAFT REVIEW. Render budget of this proof is spent."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Tom: feet_planted was too strict, re-gate render 2 with no render. Rubric changed (bracing step allowed), feet_planted now passes. Stage 2 then failed prop_visible_frame1 twice (single call, then 3-run majority 2 of 3 false) although frame 0 clearly shows the hammer gripped in one hand and the stud finder in the other: the 200 px contact-sheet tile is too small for that one question. Ended without baking. Recommended: ask the frame 1 question on the full-size frame 0, keep the other three on the 200 px sheet. 0 new renders."
     }
    ],
    "blocks": [],
