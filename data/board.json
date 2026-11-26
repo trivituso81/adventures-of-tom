@@ -6637,10 +6637,10 @@
    "theme": "Battle Animations",
    "tag": "guidecross1",
    "title": "Battle Guide: manifest crosswalk and per-ability needs",
-   "next": "Build the crosswalk of the three Stage 2A move manifests and the Stage 2C effect library against the game's skills, show each move's clip facts and effects in the Guide, and list per ability what Tom must supply or approve, with a one-page summary.",
+   "next": "Built and pushed as guidecross1: tools/guidegen/manifest_crosswalk.py, data/guide-manifest.json, a Manifest block on each move page in the Battle Guide, the list row What Tom has to do under Animations, the generated section of docs/BATTLE_GUIDE.md, and tests C1 to C13 in tools/battle_guide_test.py. 117 of 123 moves matched by name, 6 by hand, none left; 283 of 284 effect names matched to the 37 library assets, 1 unmatched (vfx_sunset_gold_stunt_lines). Tom card t-guidecross-decide asks for the five decisions the page lists.",
    "blocks": [],
    "created": "2026-11-25",
-   "changed": "2026-11-25",
+   "changed": "2026-11-26",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukCskdRQQ8jaXgjzwk7",
     "opening": "I grant approval to the repo for: Board: new card \"Battle Guide: manifest crosswalk and per-ability needs\"."
@@ -6653,6 +6653,10 @@
     {
      "d": "2026-11-25",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as guidecross1. Found: the moves name 284 distinct effects (not about 170) and the library usedBy holds 0 stale move ids (not 39; 33 usedBy entries name no matching effect). Left alone: guide test checks that already failed (animation count 713 vs 679, plan counts, no-engine check) and board_sync_test board4."
     }
    ],
    "prompt": {
@@ -6663,7 +6667,8 @@
     "model": "Claude Sonnet 5.5 (row C: a build whose steps are written in the task, tests catch mistakes)",
     "effort": "high (a new generator script, a page change and a test, with six hand matches to resolve)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json, docs/BATTLE_GUIDE.md and the Battle Animation Pipeline Lock in CLAUDE.md. Your first push is the commit \"board: start c-guide-crosswalk\".\n\nTask: fully incorporate art-factory/aot-stage2-pass1-manifest-24fps.json, aot-stage2-pass2-manifest-24fps.json, aot-stage2-pass3-manifest-24fps.json and aot-stage2c-vfx-library-v11.json into the Battle Guide (battle-guide.html).\n1. Build tools/guidegen/manifest_crosswalk.py and commit its output data/guide-manifest.json: each manifest move id matched to its game skill id by name (117 of 123 match; resolve the other 6 by hand and list them), and each vfxPrimitives name matched to a library asset id (the library has 37 assets, the moves name about 170, and usedBy holds 39 stale move ids). Report every unmatched item.\n2. Show on each move's page in the Guide: the clip's motion text, duration and frame count, contact time, beats, hit-stop frames, the effects it uses, and whether those effects are built (buildStatus).\n3. Do not use the manifests' stylePrefix or negativePrompt for any clip (they carry the green screen and the banned painting word, which the pipeline lock bans). Keep only the motion text and engineSpec.\n4. For each ability, list exactly what Tom must supply or approve to implement it: the Hero or start frame status, the clip status, each effect not yet built, and any decision. Put this list in the Guide and in docs/BATTLE_GUIDE.md. Also make a one-page summary grouped by what Tom has to do.\n5. Add a test to tools/battle_guide_test.py that fails if any manifest move or effect is missing from the crosswalk. Run smoke and the guide tests, look at portrait and landscape, and push with a new build tag and a docs/CHANGES.md entry.\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "t-guidecross-decide"
   },
   {
    "id": "b-guideuse-45780590322",
@@ -6774,6 +6779,33 @@
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26"
+  },
+  {
+   "id": "t-guidecross-decide",
+   "title": "Battle Guide: five decisions the manifest crosswalk lists",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "decide",
+   "fyi": true,
+   "next": "Open ADMIN > BATTLE GUIDE > Animations > What Tom has to do and read the five lines under Decide (name differences 3, two held props 7, Capstone clips longer than 5.0 s 28, one effect with no library asset, one weak effect match). Then tap one answer here. Nothing is built from your answer yet; the next session that makes start frames, clips or effects reads it.",
+   "choices": [
+    "Approve all five as recommended (Recommended)",
+    "I will answer line by line in chat"
+   ],
+   "leads": [
+    "Names stay the game's except Boppy's Pier Slam; the first listed prop is held and the other is worn on the belt; Capstone body clips run up to 5.0 s with the engine drawing the rest; vfx_sunset_gold_stunt_lines is dropped; the elimination match for the Lamby decoy glint stays.",
+    "Nothing is assumed; tell me each answer in a new chat and it goes onto the cards."
+   ],
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by c-guide-crosswalk (guidecross1): the decisions the page lists for Tom."
+    }
+   ]
   }
  ],
  "sessions": [

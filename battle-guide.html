@@ -183,6 +183,13 @@ a.play.fight{background:var(--surface);border:1px solid var(--accent);color:var(
 }
 /* The Duo folded and held sideways (678 x 445): keep the tab bar thin so the list has room. */
 @media (max-height:480px){#tabs button{min-height:40px;flex-direction:row;justify-content:center;gap:6px}#tabs button svg{width:18px;height:18px}header{height:46px}#stage{height:52vh}}
+.mani{border-top:1px solid var(--line);margin-top:6px}
+.mani table.mt,table.mt{width:100%;border-collapse:collapse;font-size:14px}.mt th{width:92px;text-align:left;vertical-align:top;color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:6px 8px 6px 0}.mt td{padding:6px 0;overflow-wrap:anywhere}.mt tr+tr{border-top:1px solid var(--line)}
+.mfx{border:1px solid var(--line);border-radius:12px;padding:8px 10px;margin:6px 0;background:var(--well)}.mfx .chip{margin-top:6px}
+.chip.warn{border-color:var(--prob);color:var(--prob-text)}.chip.gold{border-color:#d9a82b;color:#ffd34d}.chip.ok{border-color:#3d8f5f}
+.mneed{border:1px solid var(--line);border-radius:12px;padding:8px 10px;margin:6px 0;font-size:14px;overflow-wrap:anywhere}.mneed.tom{border-color:#d9a82b}.mneed .meta{margin:0 0 4px}
+.mtodo{border:1px solid var(--line);border-radius:12px;padding:6px 10px;margin:6px 0}.mtodo summary{cursor:pointer;min-height:36px;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}.mtodo summary .hint{flex:1 1 100%}
+.mchips{display:flex;flex-wrap:wrap;gap:6px;padding:6px 0}.mchip{font-size:12px;padding:4px 8px;border-radius:999px;background:var(--well);border:1px solid var(--line);color:inherit;text-decoration:none}
 </style>
 </head>
 <body>
@@ -222,6 +229,7 @@ const wide=()=>matchMedia('(min-width:560px) and (min-height:560px)').matches;
 const CLIPS={};            // clip id -> its data, once its file is loaded
 const CLIP_SRC={};         // clip id -> the address of its data file, read from index.html
 function bclipDefine(id,D){CLIPS[id]=D;}
+let MANI=null,MANI_P=null;   // guidecross1: data/guide-manifest.json (tools/guidegen/manifest_crosswalk.py)
 let BUILD='',BOARD_DOC=null,GUIDE=null,GUIDE_P=null,JOBS=null,PLAN_DOC=null,INDEX_SRCS=[];   // GUIDE: data/guide-anims.json (guidegen1a): per animation its prompt, start picture, price and what is missing
 function addScript(src){return new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=()=>no(new Error('Could not load '+src));document.head.appendChild(s);});}
 async function boot(){
@@ -243,6 +251,7 @@ async function boot(){
     GUIDE_P=fetch('data/guide-anims.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{GUIDE=j;try{if(typeof buildAnims==='function'&&B3_CAST)buildAnims();}catch(e){}planRefresh();try{if(tab==='anims'&&sel&&typeof renderDetailKeep==='function')renderDetailKeep();}catch(e){}}).catch(()=>{});
     fetch('tools/art-library/wangen-jobs.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{JOBS=j;planRefresh();}).catch(()=>{});   // animplan1: the video jobs and their rev, for the Plan view
     fetch('data/guide-words.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{GWORDS=j;}).catch(()=>{});   // guideflow5: the words of each failure (X1 and X2 are the page's own)
+    MANI_P=fetch('data/guide-manifest.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{MANI=j;try{if(tab==='anims'&&sel&&typeof renderDetailKeep==='function')renderDetailKeep();}catch(e){}return j;}).catch(()=>null);
     PLAN_DOC=await fetch('data/guide-planned.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).catch(()=>null);   // battleguide2: everything planned and not built (tools/guide_planned.py)
     build();route();qStart();
   }catch(e){$('list').innerHTML='<div id="boot" class="err">'+esc(e.message)+'. Open this page again in a minute; if it stays, tell Claude.</div>';}
@@ -445,7 +454,7 @@ function renderList(){
     h+='<div class="grp">'+rows.length+' entries</div>'+rows.map(s=>rowHtml('glossary',s.id,s.name,esc(s.desc||''),'','<span class="badge">'+esc(s.kind)+'</span>')).join('');
   }else if(tab==='anims'){
     const tot=ANIMS.length,v=ANIMS.filter(a=>a.video).length;
-    h=notifyHtml()+planHtml()+'<p class="hint" style="margin:0 2px 10px">'+v+' of '+tot+' animations are videos. Tap a name, play an animation, and send Claude a note on it.</p>';
+    h=(MANI?rowHtml('anims','todo','What Tom has to do',esc(MANI.summary.decide.reduce((n,g)=>n+(g.count?1:0),0)+' decisions waiting, '+MANI.counts.moves+' moves in the manifests'),''):'')+notifyHtml()+planHtml()+'<p class="hint" style="margin:0 2px 10px">'+v+' of '+tot+' animations are videos. Tap a name, play an animation, and send Claude a note on it.</p>';
     const line=id=>{const A=animsOf(id),n=A.filter(a=>a.video).length;return A.length?rowHtml('anims',id,ownerName(id),n+' video'+(n===1?'':'s')+', '+(A.length-n)+' without',facePic(id)):'';};
     h+='<div class="grp">Family</div>'+Object.keys(B3_CAST).map(line).join('');
     const by={};Object.values(B3_FOES).forEach(f=>{(by[f.ch]=by[f.ch]||[]).push(f);});
@@ -495,6 +504,7 @@ function renderDetail(){
   else if(tab==='monsters'&&B3_FOES[sel]){title=B3_FOES[sel].name;h=foeHtml(sel);}
   else if(tab==='monsters'&&planOf('foe').some(x=>x.id===sel)){const P=planOf('foe').find(x=>x.id===sel);title=P.name+' (planned)';h=plannedFoeHtml(P);}
   else if(tab==='glossary'){const s=glossRows().find(x=>x.id===sel);if(s){title=s.name;h=statusHtml(s);}}
+  else if(tab==='anims'&&sel==='todo'){title='What Tom has to do';h=todoHtml();}
   else if(tab==='anims'){title=ownerName(sel)+': animations';h=animsHtml(sel);}
   if(!h){D.classList.remove('open');D.innerHTML='';return;}
   D.innerHTML='<div id="dback"><button type="button" data-back="1">&lsaquo; Back</button><b>'+esc(title)+'</b></div>'+h;
@@ -588,7 +598,7 @@ function rulesTopics(){
      'On your turn, if the next one on the bar is also family, the pair can spend it in place of the first one\'s move. It costs 0 Pep and does not use the second one\'s turn.'])
     +'<table><tr><th>Spend</th><th>Name</th><th>What happens</th></tr>'
     +'<tr><td>'+K.doubleTeam+'%</td><td><b>Double Team</b></td><td>Both use their Main Vibe\'s Basic on one monster at +'+pct(K.doubleTeamPower)+' power. Both flavors count, so the pair can Prime and Detonate alone.</td></tr>'
-    +'<tr><td>'+K.full+'%</td><td><b>Full Family Ruckus</b></td><td>Both fire their best unlocked Main Vibe Skill for free, as one action. It can take '+C.capFullRuckus+' pips.</td></tr></table>'});
+    +'<tr><td>'+K.full+'%</td><td><b>Full Family Ruckus</b></td><td>Both fire their best unlocked Main Vibe Skill for free, as one action. It can take '+C.capFullRuckus+' pips.</td></tr></table>'+(MANI?manifestBlock('univ-double-team')+manifestBlock('univ-full-ruckus'):'')});
   T.push({id:'vibes',title:'Vibes, Ranks and Quirks',sub:'How the family grows',html:()=>
     li(['A <b>Vibe</b> is a job: a Trait, a Basic, two Skills, a Grand Capstone and two Quirks.',
      '<b>Main Vibe</b>: gives its Trait, its Basic, its unlocked Skills and its Lean.',
@@ -1322,17 +1332,76 @@ function genBlock(a){
   if((fam||g.canMake)&&!g.waits)h+='<p class="hint" id="ghow">One tap makes one video from the prompt above ('+esc(genWords(g))+', about $'+g.price.toFixed(2)+'). You see it next to '+(g.video?'the one in the game':'the standard motion')+' before anything changes in the game.</p>';
   return h+'</div>';
 }
+// ---------- the Manifest panel and the To do screen (guidecross1, card c-guide-crosswalk) ----------
+// data/guide-manifest.json (tools/guidegen/manifest_crosswalk.py): the three Stage 2 move manifests and the effect library matched to the game's skills.
+// Only each clip's motion text and engineSpec are in it (the manifests' style prefix and negative prompt are banned by the pipeline lock). Nothing here starts a job.
+const NEED_KIND={hero:'Hero picture',start:'Start frame',clip:'Clip',effect:'Effect',decision:'Decision'};
+const NEED_WHO={tom:['You','gold'],claude:['Claude first',''],none:['Done or nothing needed','']};
+const fmtS=x=>(Math.round(x*100)/100)+' s';
+function maniOf(a){if(!MANI||!a||a.kind!=='move')return null;const mid=MANI.bySkill[String(a.id).replace(/^move:/,'')];return mid?mid:null;}
+function maniClip(c,label){
+  return '<tr><th>'+label+'</th><td>'+esc(c.motion)+'</td></tr>'
+   +'<tr><th>Length</th><td>'+fmtS(c.durationSec)+', '+c.frames+' frames at '+c.fps+' frames a second <span class="hint">('+esc(c.file)+')</span></td></tr>';
+}
+function manifestBlock(mid){
+  const m=MANI&&MANI.moves[mid];if(!m)return '';
+  const E=m.engine,mt=m.match||{};
+  let h='<div class="mani" data-mani="'+esc(mid)+'"><h3>Manifest (Stage 2)</h3><div class="meta"><span class="chip">'+esc(mid)+'</span><span class="chip">Pass '+m.pass+'</span><span class="chip">'+esc(m.tier)+'</span>'
+   +'<span class="chip">'+(mt.how==='hand'?'matched by hand':'matched by name')+'</span></div>';
+  if(mt.how==='hand')h+='<p class="hint">'+esc(mt.why)+'</p>';
+  h+='<table class="mt"><tbody>'+maniClip(m.clip,'Motion')
+   +'<tr><th>Contact</th><td>'+fmtS(E.contactSec)+' into the clip</td></tr>'
+   +'<tr><th>Beats</th><td>'+E.beatsSec.map((b,i)=>'Beat '+(i+1)+' '+fmtS(b)).join(', ')+'</td></tr>'
+   +'<tr><th>Hit-stop</th><td>'+E.hitStopFrames+' frames</td></tr>'
+   +'<tr><th>Path</th><td>'+esc(E.translationPath)+'</td></tr>'
+   +'<tr><th>Rule hook</th><td>'+esc(E.v11Hook)+'</td></tr>';
+  if(m.counterClip)h+=maniClip(m.counterClip,'Counter motion');
+  h+='</tbody></table><h3>Effects it uses</h3>';
+  h+=m.effects.map(e=>{
+    const bs=e.built==='built'?'built':e.built==='no asset'?'no library asset':'not built yet ('+e.built+')';
+    return '<div class="mfx"><b>'+esc(e.name)+'</b>'+(e.role!=='effect'?' <span class="chip">'+esc(e.role)+'</span>':'')+(e.note?' <span class="hint">'+esc(e.note)+'</span>':'')
+     +'<div class="hint">'+(e.asset?'Library asset <b>'+esc(e.asset)+'</b>'+(e.confirmed?', listed for this move in the library':', matched by its name only (the library does not list this move)'):'No asset in the effect library covers it.')+'</div>'
+     +'<span class="chip'+(e.built==='built'?'':' warn')+'">'+esc(bs)+'</span></div>';}).join('');
+  const order=['decision','hero','start','clip','effect'],ns=m.needs.slice().sort((a,b)=>order.indexOf(a.kind)-order.indexOf(b.kind));
+  h+='<h3>What you have to supply or approve</h3><div class="mneeds">'+ns.map(n=>{const w=NEED_WHO[n.who];
+    return '<div class="mneed '+n.who+'"><div class="meta"><span class="chip">'+NEED_KIND[n.kind]+'</span><span class="chip'+(w[1]?' '+w[1]:'')+'">'+w[0]+'</span></div><div>'+esc(n.what===NEED_KIND[n.kind]?'':n.what+': ')+esc(n.status)+'</div>'
+     +(n.tom?'<div class="hint"><b>'+(n.who==='tom'?'Your part: ':'')+'</b>'+esc(n.tom)+'</div>':'')+'</div>';}).join('')+'</div></div>';
+  return h;
+}
+function maniLink(mid){
+  const r=MANI.moves[mid],mt=r.match;
+  if(mt&&mt.kind==='skill')return '<a class="mchip" href="#anims/'+encodeURIComponent('move:'+mt.id)+'" data-anim="move:'+esc(mt.id)+'">'+esc(mid)+'</a>';
+  return '<a class="mchip" href="#rules/ruckus" data-go="rules" data-id="ruckus">'+esc(mid)+'</a>';
+}
+function todoHtml(){
+  if(!MANI)return '<h2>What Tom has to do</h2><p class="hint">The manifest crosswalk could not be loaded. Open this page again in a minute.</p>';
+  const S=MANI.summary,C=MANI.counts,U=MANI.unmatched;
+  const grp=(title,hint,rows)=>'<h3>'+esc(title)+'</h3><p class="hint">'+esc(hint)+'</p>'+rows.map(g=>'<details class="mtodo"><summary><b>'+esc(g.what)+'</b> <span class="chip'+(g.count?'':' ok')+'">'+g.count+'</span><span class="hint">'+esc(g.ask)+'</span></summary>'
+    +(g.moves.length?'<div class="mchips">'+g.moves.map(maniLink).join('')+'</div>':'')+'</details>').join('');
+  let h='<h2>What Tom has to do</h2><p class="hint">One page, from the three Stage 2 manifests ('+C.moves+' moves) and the effect library ('+C.assets+' assets). Tap a line to see which moves.</p>'
+   +grp('Decide','You can do these now. Each line says what is recommended.',S.decide)
+   +grp('Approve now','A factory draft has passed its check and is waiting for you.',S.approveNow)
+   +grp('Approve later','Claude has to make or build these first. There is nothing for you yet.',S.approveLater);
+  h+='<h3>The crosswalk</h3><table class="mt"><tbody>'
+   +'<tr><th>Moves</th><td>'+C.moves+': '+C.matchedByName+' matched to a game skill by name, '+C.matchedByHand+' by hand</td></tr>'
+   +'<tr><th>Effects</th><td>'+C.effectNames+' names ('+C.effectUses+' uses) against '+C.assets+' library assets: '+C.effectsMatched+' matched, '+C.effectsUnmatched+' not</td></tr>'
+   +'<tr><th>Not matched</th><td>'+(U.effects.length?U.effects.map(n=>esc(n)+' (in '+esc(U.effectMoves[n].join(', '))+')').join('; '):'nothing')+'</td></tr>'
+   +'<tr><th>Library</th><td>'+C.assetsBuilt+' of '+C.assets+' assets built</td></tr></tbody></table>';
+  return h;
+}
+
 async function openPlayer(animId){
   if(!GUIDE&&GUIDE_P)await GUIDE_P;
+  if(!MANI&&MANI_P)await MANI_P;
   const a=ANIM_BY[animId];if(!a)return;PL.a=a;PL.on=false;cancelAnimationFrame(PL.raf);PL.D=null;PL.img=null;PL.t=0;PL.speed=1;
   const head='<div class="sh-top"><h2>'+esc(ownerName(a.owner))+': '+esc(a.name)+'</h2><button type="button" class="ghost" id="bclose">Close</button></div>';
   const stage=msg=>'<div id="stage"><canvas id="cv" width="2" height="2"></canvas><div id="hitflag">HIT</div>'+(msg?'<div class="msg">'+msg+'</div>':'')+'</div>';
   const S=$('sheet');delete S.dataset.mode;S.classList.add('open');$('dim').classList.add('open');S.scrollTop=0;
   if(!a.clip){
-    S.innerHTML=head+stage(a.kind==='state'?'No video yet. In a fight this moment shows one of their other videos until its own is made.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+genBlock(a)+noteForm(a);
+    S.innerHTML=head+stage(a.kind==='state'?'No video yet. In a fight this moment shows one of their other videos until its own is made.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+genBlock(a)+noteForm(a)+(maniOf(a)?manifestBlock(maniOf(a)):'');
     initMake(a);return;
   }
-  S.innerHTML=head+stage('Loading the video...')+'<div class="ctl"><button type="button" id="bplay">Pause</button><input type="range" id="scrub" min="0" max="1" step="1" value="0" aria-label="Frame"><button type="button" class="spd" data-s="1" aria-pressed="true">1x</button><button type="button" class="spd" data-s="0.5" aria-pressed="false">&frac12;</button><button type="button" class="spd" data-s="0.25" aria-pressed="false">&frac14;</button></div><p class="hint" id="fno" style="margin:0"></p>'+genBlock(a)+noteForm(a);
+  S.innerHTML=head+stage('Loading the video...')+'<div class="ctl"><button type="button" id="bplay">Pause</button><input type="range" id="scrub" min="0" max="1" step="1" value="0" aria-label="Frame"><button type="button" class="spd" data-s="1" aria-pressed="true">1x</button><button type="button" class="spd" data-s="0.5" aria-pressed="false">&frac12;</button><button type="button" class="spd" data-s="0.25" aria-pressed="false">&frac14;</button></div><p class="hint" id="fno" style="margin:0"></p>'+genBlock(a)+noteForm(a)+(maniOf(a)?manifestBlock(maniOf(a)):'');
   initMake(a);
   try{
     const r=await loadClip(a.clip);if(PL.a!==a)return;PL.D=r.D;PL.img=r.img;

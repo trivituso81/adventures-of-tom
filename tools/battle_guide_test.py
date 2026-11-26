@@ -191,6 +191,97 @@ def ready(pg):
 SIZES = [('folded', 466, 657, False), ('folded-side', 678, 445, False), ('open-side', 951, 648, True), ('open-up', 669, 869, True)]
 with sync_playwright() as p:
     br = p.chromium.launch(executable_path=os.environ.get('CHROMIUM') or None)
+    # guidecross1 (card c-guide-crosswalk): the manifest crosswalk. A move or effect of the three Stage 2 manifests that is missing from data/guide-manifest.json fails here. It runs first so a crash later in this long file cannot skip it.
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('manifest_crosswalk', os.path.join(ROOT, 'tools', 'guidegen', 'manifest_crosswalk.py')); MC = importlib.util.module_from_spec(spec); spec.loader.exec_module(MC)
+    AFD = os.path.join(ROOT, 'art-factory')
+    MAN = [json.load(open(os.path.join(AFD, f), encoding='utf-8')) for f in MC.MANIFESTS]
+    LIBD = json.load(open(os.path.join(AFD, MC.LIBRARY), encoding='utf-8'))
+    XM = json.load(open(os.path.join(ROOT, 'data', 'guide-manifest.json'), encoding='utf-8'))
+    all_moves = [m for d in MAN for m in d['moves']]
+    all_effects = sorted({t for m in all_moves for raw in m['engineSpec']['vfxPrimitives'] for t in re.findall(r'vfx_[a-z0-9_]+', raw)})
+    def crosswalk_missing(doc):
+        """Everything of the manifests that the crosswalk does not hold or leaves unresolved. [] means complete."""
+        bad = []
+        lib = {a['id'] for a in LIBD['assets']}
+        for m in all_moves:
+            r = doc['moves'].get(m['id'])
+            if not r: bad.append('move ' + m['id'] + ' is not in the crosswalk'); continue
+            if not r.get('match'): bad.append('move ' + m['id'] + ' has no game match'); continue
+            if r.get('clip', {}).get('motion', '') == '': bad.append('move ' + m['id'] + ' has no motion text')
+            if m['reactiveCounterClip'] and not r.get('counterClip'): bad.append('move ' + m['id'] + ' lost its counter clip')
+            names = {e['name'] for e in r.get('effects', [])}
+            for raw in m['engineSpec']['vfxPrimitives']:
+                for t in re.findall(r'vfx_[a-z0-9_]+', raw):
+                    if t not in names: bad.append('move ' + m['id'] + ' is missing effect ' + t)
+            if not any(n['kind'] == 'clip' for n in r.get('needs', [])) or not any(n['kind'] == 'start' for n in r.get('needs', [])) or not any(n['kind'] == 'hero' for n in r.get('needs', [])): bad.append('move ' + m['id'] + ' has no hero, start frame or clip line in its needs')
+        for t in all_effects:
+            x = doc['effects'].get(t)
+            if not x: bad.append('effect ' + t + ' is not in the crosswalk'); continue
+            if x['asset'] is None and t not in doc['unmatched']['effects']: bad.append('effect ' + t + ' has no asset and is not listed as unmatched')
+            if x['asset'] is not None and x['asset'] not in lib: bad.append('effect ' + t + ' points at ' + str(x['asset']) + ', not a library asset')
+        for a in lib:
+            if a not in doc['assets']: bad.append('library asset ' + a + ' is not in the crosswalk')
+        if set(doc['unmatched']['effects']) != {t for t, x in doc['effects'].items() if x['asset'] is None}: bad.append('the unmatched list differs from the effects with no asset')
+        return bad
+    miss = crosswalk_missing(XM)
+    check('C1 every manifest move (%d) and effect (%d) is in the crosswalk, matched or listed unmatched' % (len(all_moves), len(all_effects)), len(all_moves) == 123 and len(XM['moves']) == 123 and not miss, miss[:6])
+    mut = json.loads(json.dumps(XM)); del mut['moves']['tom-ff-basic']
+    check('C2 the check fails when a manifest move is missing from the crosswalk', any('tom-ff-basic' in b for b in crosswalk_missing(mut)))
+    mut = json.loads(json.dumps(XM)); del mut['effects']['vfx_racket_brass_rings']
+    check('C3 the check fails when a manifest effect is missing from the crosswalk', any('vfx_racket_brass_rings' in b for b in crosswalk_missing(mut)))
+    mut = json.loads(json.dumps(XM)); mut['moves']['tom-ff-basic']['effects'] = mut['moves']['tom-ff-basic']['effects'][:1]
+    check('C4 the check fails when a move loses one of its effects', any('tom-ff-basic is missing effect' in b for b in crosswalk_missing(mut)))
+    mut = json.loads(json.dumps(XM)); mut['unmatched']['effects'] = []
+    check('C5 the check fails when an unmatched effect is not reported', any('not listed as unmatched' in b for b in crosswalk_missing(mut)))
+    check('C6 117 moves match a game skill by name, 6 by hand, none are left over; the six are listed', XM['counts']['matchedByName'] == 117 and XM['counts']['matchedByHand'] == 6 and not XM['unmatched']['moves'] and len(XM['handMoves']) == 6, XM['counts'])
+    sk = {s['id'] for s in json.loads(subprocess.run(['node', '-e', r"""
+const fs=require('fs'),path=require('path'),vm=require('vm');const html=fs.readFileSync('index.html','utf8');
+const files=[...html.matchAll(/<script[^>]+src="(data\/b3-[^"?]+\.js)/g)].map(m=>m[1]);const ctx=vm.createContext({Math,JSON,Object,Array,String,Number,Error,console:{log(){},error(){}}});
+for(const f of files)vm.runInContext(fs.readFileSync(f,'utf8'),ctx,{filename:f});console.log(JSON.stringify(vm.runInContext('Object.values(B3_SKILLS).map(s=>({id:s.id}))',ctx)));"""], cwd=ROOT, capture_output=True, text=True, check=True).stdout)}
+    check('C7 every matched game skill id is a real skill (or the Family Ruckus rule)', all((r['match']['kind'] == 'skill' and r['match']['id'] in sk) or (r['match']['kind'] == 'rule' and r['match']['id'] in ('ruckus.double', 'ruckus.full')) for r in XM['moves'].values()))
+    check('C8 the library has 37 assets and every one is in the crosswalk with its buildStatus', len(LIBD['assets']) == 37 and all(XM['assets'][a['id']]['buildStatus'] == a['buildStatus'] for a in LIBD['assets']))
+    txt = open(os.path.join(ROOT, 'data', 'guide-manifest.json'), encoding='utf-8').read().lower()
+    carriers = [d['wanDefaults']['stylePrefix'] for d in MAN] + [d['wanDefaults']['negativePrompt'] for d in MAN]
+    check('C9 the manifests\' style prefix, negative prompt, green screen and painting word are not in data/guide-manifest.json', not any(c.lower()[:60] in txt for c in carriers) and not any(w in txt for w in ('#00ff00', 'chroma', 'gouache', 'bobblehead', '4 heads tall')))
+    check('C10 no clip\'s motion text holds a word the pipeline lock bans', not [m for m, r in XM['moves'].items() for c in (r['clip'], r['counterClip']) if c and re.search(r'#00ff00|chroma|gouache|bobblehead|4 heads tall|\bsprite\b|1\.5x', c['motion'].lower())])
+    ok_cw = subprocess.run([sys.executable, '-I', os.path.join(ROOT, 'tools', 'guidegen', 'manifest_crosswalk.py'), '--check'], cwd=ROOT, capture_output=True, text=True)
+    check('C11 manifest_crosswalk.py --check: data/guide-manifest.json and the docs/BATTLE_GUIDE.md section are what the script writes', ok_cw.returncode == 0, ok_cw.stdout + ok_cw.stderr)
+    dtext = open(os.path.join(ROOT, 'docs', 'BATTLE_GUIDE.md'), encoding='utf-8').read(); dsec = dtext[dtext.index(MC.DOC_BEGIN):dtext.index(MC.DOC_END)]
+    check('C12 docs/BATTLE_GUIDE.md has one row for every manifest move and the one-page summary, and no em dash', dsec.count('\n| `') >= 123 + 6 and 'The one-page summary: what Tom has to do' in dsec and chr(8212) not in dsec and chr(8212) not in txt)
+    needs_ok = all(n['who'] in ('tom', 'claude', 'none') and n['kind'] in ('hero', 'start', 'clip', 'effect', 'decision') for r in XM['moves'].values() for n in r['needs'])
+    unbuilt_listed = all(any(n['kind'] == 'effect' and n['what'] == e['name'] for n in r['needs']) for r in XM['moves'].values() for e in r['effects'] if e['asset'] and e['built'] != 'built')
+    check('C13 every move lists its hero, start frame and clip, and every effect that is not built is a line of its needs', needs_ok and unbuilt_listed)
+    # the page: a move's sheet in portrait and landscape
+    for name, w, h in (('portrait', 390, 844), ('landscape', 844, 390)):
+        cx = br.new_context(viewport={'width': w, 'height': h}, device_scale_factor=2, has_touch=True); pg = cx.new_page(); perr = []; pg.on('pageerror', lambda e: perr.append(str(e)))
+        ready(pg)
+        pg.evaluate("location.hash='#anims/move:lounge_pass_flex'"); pg.wait_for_selector('#sheet.open .mani', timeout=30000)
+        r = XM['moves']['tom-ff-basic']; tx = pg.locator('#sheet .mani').inner_text()
+        check('manifest (%s): the move page shows the motion text, %.1f s, %d frames, contact, beats and hit-stop' % (name, r['clip']['durationSec'], r['clip']['frames']), r['clip']['motion'][:60] in tx and '2.6 s' in tx and '61 frames at 24' in tx and 'contact' in tx.lower() and '1.05 s' in tx and 'Beat 1 0.7 s, Beat 2 1.1 s, Beat 3 0.8 s' in tx and 'hit-stop' in tx.lower() and '3 frames' in tx, tx[:400])
+        check('manifest (%s): it lists each effect with its library asset and says it is not built' % name, 'vfx_racket_brass_rings' in tx and 'vfx_core_racket_rings' in tx and 'vfx_eyes_on_me_spotlight' in tx and tx.count('not built yet (todo)') == 2, tx[-900:])
+        check('manifest (%s): it lists what Tom must supply or approve (Hero, start frame, clip, decision)' % name, all(k in tx for k in ('Hero picture', 'Start frame', 'Clip', 'Decision')) and 'approved: art-factory/refs/tom.png' in tx and 'Decide which prop is held' in tx, tx[-1500:])
+        check('manifest (%s): the page never shows the banned style words' % name, not re.search(r'#00ff00|chroma|gouache', pg.locator('#sheet').inner_text().lower()))
+        check('manifest (%s): no sideways scroll, no script errors' % name, pg.evaluate("document.documentElement.scrollWidth<=innerWidth&&document.getElementById('sheet').scrollWidth<=document.getElementById('sheet').clientWidth+1") and not perr, perr)
+        pg.locator('#sheet .mani').scroll_into_view_if_needed(); pg.screenshot(path=os.path.join(out, 'guide-manifest-move-%s.png' % name))
+        pg.evaluate("document.getElementById('sheet').scrollTop=document.getElementById('sheet').scrollHeight"); pg.wait_for_timeout(200); pg.screenshot(path=os.path.join(out, 'guide-manifest-needs-%s.png' % name))
+        pg.evaluate("closeSheet()"); pg.evaluate("location.hash='#anims/move:vacuum_cleaner_bolt'"); pg.wait_for_function("document.querySelector('#sheet .mani')&&document.querySelector('#sheet .mani').dataset.mani==='nara-ap-s2'", timeout=30000)
+        tx = pg.locator('#sheet .mani').inner_text()
+        check('manifest (%s): a move matched by hand says so and why (Skateboard Bolt! is Vacuum-Cleaner Bolt!) and asks which name is canon' % name, 'matched by hand' in tx and 'Skateboard Bolt!' in tx and 'Which name is canon' in tx, tx[:500])
+        pg.evaluate("closeSheet()"); pg.evaluate("location.hash='#anims/move:grand_jete_spotlight_finale'"); pg.wait_for_function("document.querySelector('#sheet .mani')&&document.querySelector('#sheet .mani').dataset.mani==='grace-sp-cap'", timeout=30000)
+        tx = pg.locator('#sheet .mani').inner_text()
+        check('manifest (%s): a Capstone longer than 5.0 s asks for the length decision' % name, 'Length' in tx and 'at most 5.0 s' in tx, tx[-800:])
+        pg.evaluate("closeSheet()")
+        pg.evaluate("location.hash='#anims/todo'"); pg.wait_for_selector('#detail h2:has-text("What Tom has to do")', timeout=30000)
+        td = pg.locator('#detail').inner_text(); S = XM['summary']
+        check('manifest (%s): the To do screen has the three groups with the counts of the data' % name, all(t in td.lower() for t in ('decide', 'approve now', 'approve later')) and all(g['what'] in td for k in ('decide', 'approveNow', 'approveLater') for g in S[k]) and pg.locator('#detail details.mtodo').count() == sum(len(S[k]) for k in S), td[:500])
+        pg.locator('#detail details.mtodo').first.evaluate('d=>d.open=true')
+        check('manifest (%s): a To do line opens to the moves it is about, each a link to its page' % name, pg.locator('#detail details.mtodo').first.locator('.mchip').count() == len(S['decide'][0]['moves']) > 0)
+        check('manifest (%s): the To do screen has no sideways scroll and no script error' % name, pg.evaluate("document.documentElement.scrollWidth<=innerWidth") and not perr, perr)
+        pg.screenshot(path=os.path.join(out, 'guide-manifest-todo-%s.png' % name))
+        pg.evaluate("location.hash='#rules/ruckus'"); pg.wait_for_selector('#detail .mani[data-mani="univ-double-team"]', timeout=30000)
+        check('manifest (%s): Family Ruckus (Rules) shows the manifest of Double Team and the Full Family Ruckus' % name, pg.locator('#detail .mani').count() == 2, pg.locator('#detail .mani').count())
+        cx.close()
     for name, w, h, two in SIZES:
         cx = br.new_context(viewport={'width': w, 'height': h}, device_scale_factor=2, has_touch=True)
         pg = cx.new_page(); errs = []; pg.on('pageerror', lambda e: errs.append(str(e)))
@@ -908,7 +999,8 @@ vm.runInContext(code,ctx);console.log(JSON.stringify(ctx.OUT));"""
         ready(pg); pg.click('#tabs [data-tab=anims]'); pg.wait_for_selector('.plangrp', timeout=30000); pg.wait_for_timeout(1200)
         c = pg.eval_on_selector_all('.plansum b', 'a=>a.map(x=>+x.textContent)')
         check('plan (%s): counts Making %d, Next %d, Done %d match the data' % (name, wm, wn, wd), c == [wm, wn, wd] and sum(c) == len(G), c)
-        rr = pg.locator('.plangrp[data-plan=making] .row', has_text='Giddyup').inner_text()
+        try: rr = pg.locator('.plangrp[data-plan=making] .row', has_text='Giddyup').inner_text(timeout=4000)
+        except Exception as e: rr = 'no Making row for Giddyup'  # guidecross1: a miss here is a failed check, not a crash that skips every test after it
         check('plan (%s): rose-giddyup is a Making row with rev %s' % (name, JB['rose-giddyup']['rev']), 'REV %s' % JB['rose-giddyup']['rev'] in rr, rr)
         check('plan (%s): one row per animation in each group' % name, pg.eval_on_selector_all('.plangrp', 'a=>a.map(d=>d.querySelectorAll(".row").length)') == [wm, wn, wd])
         check('plan (%s): no sideways scroll, no script errors' % name, pg.evaluate("document.documentElement.scrollWidth<=innerWidth") and not perr, perr)
