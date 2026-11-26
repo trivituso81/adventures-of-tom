@@ -7054,6 +7054,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukD9yD14UyHFztUqyXd",
+   "title": "sandbox: justin stud-finder test (isolated, manual workflow, no existing file touched)",
+   "first": "2026-11-25T13:47:43-08:00",
+   "last": "2026-11-25T16:28:33-08:00",
+   "tags": [
+    "sandbox"
+   ],
+   "cards": []
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukHG5RM8zrqSWjpjE8C",
    "title": "Justin production clip: #00FF00 start, new Kling prompt",
    "first": "2026-11-25T16:11:08-08:00",
@@ -7064,16 +7074,6 @@
    "cards": [
     "c-justinbb9"
    ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukD9yD14UyHFztUqyXd",
-   "title": "sandbox: justin stud-finder test (isolated, manual workflow, no existing file touched)",
-   "first": "2026-11-25T13:47:43-08:00",
-   "last": "2026-11-25T16:18:41-08:00",
-   "tags": [
-    "sandbox"
-   ],
-   "cards": []
   },
   {
    "url": "https://claude.ai/code/session_01RXeukEM2jz8QayJemqru3D",
@@ -13432,8 +13432,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "d5e846cf4b15d8b6430e7dc607f95dce882b575e",
- "synced_at": "2026-11-26T00:26:56+00:00",
+ "synced": "b7d0ee560abb8be1fd6d1c5d408829cd6e395dae",
+ "synced_at": "2026-11-26T00:29:24+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
