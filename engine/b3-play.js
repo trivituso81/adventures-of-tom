@@ -19,7 +19,7 @@
 // Every kind ends by calling reveal(), which shows the next hit's beats.
 
 const B3={active:false,F:null,cfg:null,view:null,ui:'busy',sel:0,opts:[],pending:null,actor:null,result:null,artWait:false,log:[]};
-const B3P={t:0,q:[],body:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false,cheerAt:null,cheerKey:null};
+const B3P={t:0,q:[],body:{},foe:{},fa:{},pops:[],words:[],fx:[],at:{},flash:null,cheer:false,cheerAt:null,cheerKey:null};   // at: where each family member was last drawn (vfxfight1: library effects land there)
 // How an enemy stands that is not in its art: flyers hover this many pixels off the ground.
 const B3_BOSS_SIZE=2.5;   // every boss is drawn 2.5 times the usual fit (Tom 2026-11-21, report r-20261121-180138-yorh: "all bosses should be HUGE, at least 2.5x larger")
 const B3_FOE_LOOK={skeeter:{hover:14},bigone:{size:2.5}};   // size: drawn this many times larger than the usual fit (Tom 2026-11-21: the Big One 2.5x)
@@ -44,7 +44,7 @@ function b3Update(dt) {
   B3P.pops=B3P.pops.filter(p=>B3P.t-p.t0<p.dur); B3P.words=B3P.words.filter(w=>B3P.t-w.t0<w.dur); B3P.fx=B3P.fx.filter(f=>B3P.t-f.t0<f.dur);
   if(B3P.flash&&B3P.t-B3P.flash.t0>=B3P.flash.dur) B3P.flash=null;
 }
-function b3PlayReset() { Object.assign(B3P,{t:0,q:[],body:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false,cheerAt:null,cheerKey:null}); if(typeof B3C!=='undefined') B3C.gs={}; if(typeof b3gReset==='function') b3gReset(); }   // wanch1: guard clip state starts fresh with the fight's clock
+function b3PlayReset() { Object.assign(B3P,{t:0,q:[],body:{},foe:{},fa:{},pops:[],words:[],fx:[],at:{},flash:null,cheer:false,cheerAt:null,cheerKey:null}); if(typeof B3C!=='undefined') B3C.gs={}; if(typeof b3gReset==='function') b3gReset(); if(typeof b3vReset==='function') b3vReset(); }   // wanch1: guard clip state starts fresh with the fight's clock
 
 // ---------- The view: what the screen shows right now ----------
 function b3ViewSync() {
@@ -325,7 +325,9 @@ function b3PlayMove(beats,done,mid,waited) {   // mid: the first move of a Famil
   const finishNow=()=>{ while(shown<hits.length) reveal(); for(const b of post) b3Show(b); if(reacts.length) b3After(.3*K,()=>react(0)); else wrap(); };
   const finish=s=>at(s,finishNow);
   const shape=head.shape,foe=src[0]==='f',fl=B3_FLAVORS[head.flavor[0]]||B3_FLAVORS.support;
-  if(SR&&b3gReady(SR)) { b3gPlay(SR,{head,hits,late,reveal,finishNow}); return; }   // movestage2: the row's body clip, stage steps and set piece (engine/b3-stage.js)
+  // vfxfight1 (engine/b3-vfx.js): the move's library effects play from the moment its first hit lands; vfx(sec) arms them for `sec` seconds from now and says whether a library projectile will fly (then no default ball).
+  const vfx=sec=>typeof b3vArm==='function'?b3vArm(head,own,sec):false;
+  if(SR&&b3gReady(SR)) { b3gPlay(SR,{head,hits,late,reveal,finishNow,cue:vfx}); return; }   // movestage2: the row's body clip, stage steps and set piece (engine/b3-stage.js)
   // A video clip plays the move (the move's or act's row says which, engine/b3-clips.js). It plays at the clock's own pace, not B3_TEMPO's:
   // the hit shows on the clip's impact frame (a clip with no impact lands at `at` of its length). A family member crosses to the monster first.
   let CL=cid&&b3cReady(cid)?BCLIPS[cid]:null;
@@ -334,6 +336,7 @@ function b3PlayMove(beats,done,mid,waited) {   // mid: the first move of a Famil
     // pairmove1: the partner's body plays the video at the partner's spot, the mover is hidden; the hit lands as the mover springs off (impact frame),
     // carried to the monster by a short arc.
     const land=b3cLandAt(CL,head.anim),dur=CL.dur/1000,ph=b3PartyHome(b3Unit(B3.F,PR.key)),fly=.3;
+    vfx(hits.length?land+fly:land);
     B3P.body[PR.key]={kind:'cmove',t0:B3P.t,T0:0,jx:ph.cx,jy:ph.base,C:CL,back:0,dur:dur+.12};
     B3P.body[src]={kind:'away',t0:B3P.t,dur:dur+.12};
     const tg=hits.length&&hits[0].swing.tgts[0];
@@ -350,6 +353,7 @@ function b3PlayMove(beats,done,mid,waited) {   // mid: the first move of a Famil
       let jx=home.cx,jy=home.base; if(travel) { const st=b3cStand(src,CL,tg); jx=st.x; jy=st.y; T0=.55; }
       B3P.body[src]={kind:'cmove',t0:B3P.t,T0,jx,jy,C:CL,back:travel?.5:0,dur:T0+dur+.12+(travel?.5:0)};
     }
+    vfx(T0+land);
     const SN=head.anim.sound; if(SN&&CL.ms[SN.at]!=null) b3After(T0+CL.ms[SN.at]/1000,()=>b3Sfx(SN.sfx));   // a sound on a given clip picture (data/b3-sfx.js)
     if(hits.length) hits.forEach((h,k)=>b3After(T0+land+k*.35,reveal)); else b3After(T0+land,()=>{ for(const b of late) b3Show(b); });
     b3After(Math.max(T0+dur+.1,T0+land+Math.max(0,hits.length-1)*.35+.25),finishNow); return;
@@ -357,8 +361,9 @@ function b3PlayMove(beats,done,mid,waited) {   // mid: the first move of a Famil
   // A move with no hits (a pass, a self buff): a pose, then the effects.
   if(!hits.length) {
     const tg=head.tgts[0];
+    const lp=vfx(.5*K);
     if(foe) B3P.fa[src].hold=B3P.t+.5*K; else if(!b3cBodyClip(src,shape==='give'?'give':'cast')) B3P.body[src]={kind:'pose',f:shape==='give'?B3_BODY.give:B3_BODY.cast,t0:B3P.t,dur:.75*K};
-    if(tg&&tg!==src) { const a=b3Spot(src),z=b3Spot(tg); B3P.fx.push({kind:'proj',x0:a.x,y0:a.y,x1:z.x,y1:z.y,color:fl.color,t0:B3P.t+.2*K,dur:.3*K,arc:40}); }
+    if(tg&&tg!==src&&!lp) { const a=b3Spot(src),z=b3Spot(tg); B3P.fx.push({kind:'proj',x0:a.x,y0:a.y,x1:z.x,y1:z.y,color:fl.color,t0:B3P.t+.2*K,dur:.3*K,arc:40}); }
     at(.5,()=>{ for(const b of late) b3Show(b); });
     finish(.6); return;
   }
@@ -373,7 +378,7 @@ function b3PlayMove(beats,done,mid,waited) {   // mid: the first move of a Famil
       finish(t); return;
     }
     keys.push({t:0,x:home.cx,y:home.base,f:B3_BODY.windup},{t:.2,x:home.cx,y:home.base,f:B3_BODY.windup});
-    t=.2;
+    t=.2; vfx((.2+.16)*K);
     hits.forEach((h,k)=>{ const z=b3Spot(h.swing.tgts[0]);
       keys.push({t:t+.15,x:z.sx,y:z.sb,f:B3_BODY.dash},{t:t+.16,x:z.sx-8,y:z.sb,f:B3_BODY.strike},{t:t+.3,x:z.sx-8,y:z.sb,f:B3_BODY.strike});
       at(t+.16,reveal); t+=.3;
@@ -387,9 +392,9 @@ function b3PlayMove(beats,done,mid,waited) {   // mid: the first move of a Famil
   const a=b3Spot(src);
   if(foe) B3P.fa[src].hold=B3P.t+(.25+hits.length*.34)*K;
   else if(shape==='throw'||!b3cBodyClip(src,shape==='give'?'give':'cast')) B3P.body[src]={kind:'pose',f:shape==='give'?B3_BODY.give:shape==='throw'?B3_BODY.strike:B3_BODY.cast,t0:B3P.t,dur:(.35+hits.length*.34)*K};
-  t=.2;
+  t=.2; const lp=vfx((.2+.26)*K);
   for(const h of hits) {
-    for(const k of h.swing.tgts) { const z=b3Spot(k); B3P.fx.push({kind:'proj',x0:a.x+(foe?20:-20),y0:a.y,x1:z.x,y1:z.y,color:fl.color,t0:B3P.t+t*K,dur:.26*K,arc:shape==='throw'?46:10}); }
+    if(!lp) for(const k of h.swing.tgts) { const z=b3Spot(k); B3P.fx.push({kind:'proj',x0:a.x+(foe?20:-20),y0:a.y,x1:z.x,y1:z.y,color:fl.color,t0:B3P.t+t*K,dur:.26*K,arc:shape==='throw'?46:10}); }
     at(t+.26,reveal); t+=.34;
   }
   finish(t+.1);
@@ -415,10 +420,13 @@ function b3Draw() {
     if(foe) for(const f of L) { const P=B3P.foe[f.key]; if(P) ellipse(P.px,P.py+1,P.def.sprite[0].length*P.sc*.62,7,H.color); }
     else for(const u of F.party) { const hm=b3PartyHome(u); ellipse(hm.cx,hm.base,34,6,H.color); }
     gfx.globalAlpha=1; b3Text(H.short+(h.uses<90?' x'+h.uses:''),foe?70:500,14,H.color,2); }
+  // vfxfight1 (engine/b3-vfx.js): a library effect is drawn at its own layer's point: the ones on the floor and the ones standing behind the units come first.
+  b3vDraw('ground_decal',t); b3vDraw('behind_units',t);
   // Enemies, back to front.
   for(const f of F.foes.filter(f=>B3P.foe[f.key]).sort((a,b)=>B3P.foe[a.key].py-B3P.foe[b.key].py)) b3DrawFoe(f,t,picked.includes(f.key));   // an add shows once its `summon` beat has played
   // Party, back to front (slot order runs up-screen to down-screen).
   for(const u of F.party) b3DrawMember(u,t,picked.includes(u.key));
+  b3vDraw('unit_overlay',t);   // vfxfight1: bursts, badges, shields and heals, over the units that stand behind them
   // Things in flight and bursts.
   for(const e of B3P.fx) {
     const q=(t-e.t0)/e.dur; if(q<0) continue;
@@ -428,7 +436,9 @@ function b3Draw() {
     else if(e.kind==='burst') { gfx.globalAlpha=Math.max(0,1-q); for(let k=0;k<8;k++) { const a=k*.785+.3,r=10+q*34; rect(e.x+Math.cos(a)*r-2,e.y+Math.sin(a)*r*.8-2,5,5,k%2?'#ffffff':e.color); } gfx.globalAlpha=1; }
   }
   if(typeof b3gDrawFront==='function') b3gDrawFront(t);   // movestage2: props, flying things, glows and words of a stage row
+  b3vDraw('foreground_sweep',t);   // vfxfight1: waves, beams, vehicles and projectiles that cross the whole field
   if(B3P.flash) { const q=(t-B3P.flash.t0)/B3P.flash.dur; gfx.globalAlpha=(B3P.flash.a||.3)*(1-q); rect(0,0,576,324,B3P.flash.color); gfx.globalAlpha=1; }
+  b3vDraw('screen_lighting',t);   // vfxfight1: dims, spotlights and the moon: over the whole field, under the numbers and the big words
   // Numbers and tags.
   for(const p of B3P.pops) { const q=(t-p.t0)/p.dur,w=(String(p.text).length*4-1)*p.sc,x=Math.max(w/2+3,Math.min(573-w/2,p.x)),y=Math.max(4,p.y-q*22);
     gfx.globalAlpha=q>.75?(1-q)/.25:1; b3Text(p.text,x,y,p.color,p.sc); gfx.globalAlpha=1; }
@@ -565,6 +575,7 @@ function b3DrawMember(u,t,picked) {
   if(gnd) bclipGround(gfx,gnd[0],gnd[1],cx,base,sp.scale);   // rose-lava-xftr: the lava pool the game draws under her (engine/clip-ground.js)
   ellipse(cx+ft.dx*sp.scale,base-1,Math.max(ft.w*sp.scale*.62,w*.3),5,'rgba(47,73,54,.34)');
   const x=Math.round(cx-w/2),y=Math.round(base-h+bl-hop);
+  B3P.at[u.key]={cx:Math.round(cx),base:Math.round(base),h:Math.round(h)};   // vfxfight1: where a library effect lands on this member
   const idle=fk===B3_BODY.idle&&!CF&&!(B3_BODY_CLIPS[u.id]||{}).idle,breath=idle?(.5+.5*Math.sin(t*1.7+u.slot*1.3))*.008:0;
   activeKneelCut=frame===sp.kneel&&!sp.noShift?Math.round(sp.idle.length*.62):0;
   if(breath) { gfx.save(); gfx.translate(cx,base); gfx.scale(1,1+breath); gfx.translate(-cx,-base); drawSprite(frame,sp.pal,x,y,sp.scale,{flash}); gfx.restore(); }

@@ -28,6 +28,10 @@
   {
    "script": "tools/ns_b3_test.py",
    "why": "plays the whole bonus chapter in real time (about 40 minutes per layout, portrait and landscape), run by hand before a push that touches chapter 21 or Battle 3's story layer, not a nightly test"
+  },
+  {
+   "script": "tools/b3_vfx_test.py",
+   "why": "plays every move of four Lab fights in real time in Chrome (about 9 minutes); run by hand after a change to engine/b3-vfx.js, engine/pass1-vfx.js or the effect layers in engine/vfx-library.js"
   }
  ],
  "tests": [

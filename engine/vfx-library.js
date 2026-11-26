@@ -282,7 +282,7 @@ P1_VFX_SELF.vfx_core_shield_ward=true;
 // A set-piece is bigger than a unit: it spans the enemy half, the party side or the whole screen, so it is drawn in fight coordinates (576 x 324, VL_W x VL_HT)
 // around the anchor engine/pass1-vfx.js gives it. An effect that draws on the foe (P1_VFX_SELF unset) gets the foe in x,y and the member in p._from; an effect
 // that draws on the member (P1_VFX_SELF set) gets the member in x,y, its height in p._h and the foe in p._foe {x,y,h}. The library's `layer` (behind_units,
-// unit_overlay ...) is not honoured yet: the draw call comes after the member's body and before the next member, so every layer is drawn at that one point.
+// unit_overlay ...) is in P1_VFX_LAYER at the end of this file: a real fight (engine/b3-vfx.js) draws each effect at its layer's point; the Battle Lab review draws them all after the member's body.
 const VL_W=576, VL_HT=324;
 function vlRR(g,x,y,w,h,r){ r=Math.max(0,Math.min(r,w/2,h/2)); g.beginPath(); g.moveTo(x+r,y); g.lineTo(x+w-r,y); g.quadraticCurveTo(x+w,y,x+w,y+r); g.lineTo(x+w,y+h-r); g.quadraticCurveTo(x+w,y+h,x+w-r,y+h); g.lineTo(x+r,y+h); g.quadraticCurveTo(x,y+h,x,y+h-r); g.lineTo(x,y+r); g.quadraticCurveTo(x,y,x+r,y); g.closePath(); }
 function vlBox(g,x,y,w,h,f,s,r){ vlRR(g,x,y,w,h,r||0); g.fillStyle=f; g.fill(); if(s){ g.strokeStyle=s; g.stroke(); } }
@@ -599,3 +599,12 @@ Object.assign(P1_VFX_MS,{setpiece_black_porsche_suv:vlPorscheMs,setpiece_delta_o
   setpiece_michael_sprint_and_chopper:VL_NEWS_MS,setpiece_gym_bleachers_and_ruckus_crest:vlGymMs});
 // The set-pieces that draw on the member playing the clip, not on the foe.
 for(const id of ['setpiece_delta_one_pod_doors','setpiece_giant_sky_controller','setpiece_3tier_sparkler_cake','setpiece_diamond_gold_dumpling','setpiece_giant_easel_portrait','setpiece_broadway_spotlights','setpiece_sofa_cushion_fort','setpiece_blanket_kingdom_castle','setpiece_8seat_sunday_table','setpiece_rising_full_moon','setpiece_rikers_iron_gates','setpiece_sentient_ghost_pepper','setpiece_eighth_dining_chair']) P1_VFX_SELF[id]=true;
+
+// vfxfight1 (2026-11-26): each effect's layer, the library's own `layer` field (art-factory/aot-stage2c-vfx-library-v11.json). A real Battle 3 fight draws an effect at its layer's point in the draw order
+// (engine/b3-vfx.js: ground_decal and behind_units under the units, unit_overlay over them, foreground_sweep over the field, screen_lighting last); the Battle Lab review still draws them all at one point.
+// tools/guide_timing_test.py checks this table against the library file, so a layer changed there and not here fails the test.
+for(const id of ['vfx_core_clobber_impact','vfx_core_detonation_pops','vfx_core_composure_break','vfx_core_heal_cleanse','vfx_core_shield_ward','vfx_core_timeline_chevrons','vfx_core_status_debuff_badges','setpiece_delta_one_pod_doors','setpiece_sofa_cushion_fort','setpiece_rikers_iron_gates','setpiece_leaning_grand_amphora']) P1_VFX_LAYER[id]='unit_overlay';
+for(const id of ['vfx_core_sizzle_wave','vfx_core_drench_splash','vfx_core_razzle_beam_arc','vfx_core_racket_rings','proj_arc_single','proj_boomerang_return','proj_ally_handoff_party','setpiece_black_porsche_suv','setpiece_diamond_gold_dumpling','setpiece_50yr_dust_tsunami','setpiece_cattail_pier_leviathan','setpiece_sentient_ghost_pepper','setpiece_waymo_and_la_metro','setpiece_michael_sprint_and_chopper']) P1_VFX_LAYER[id]='foreground_sweep';
+for(const id of ['proj_ground_hazard_mat','setpiece_giant_sky_controller','setpiece_mega_whoopee_cushion']) P1_VFX_LAYER[id]='ground_decal';
+for(const id of ['setpiece_3tier_sparkler_cake','setpiece_giant_easel_portrait','setpiece_blanket_kingdom_castle','setpiece_8seat_sunday_table','setpiece_eighth_dining_chair']) P1_VFX_LAYER[id]='behind_units';
+for(const id of ['setpiece_broadway_spotlights','setpiece_rising_full_moon','setpiece_stadium_jumbotron','setpiece_gym_bleachers_and_ruckus_crest']) P1_VFX_LAYER[id]='screen_lighting';

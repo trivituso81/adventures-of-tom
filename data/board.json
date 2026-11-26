@@ -8579,7 +8579,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Draw library effects in a real Battle 3 fight",
-   "next": "In progress: drawing the 37 Stage 2C library effects at each move's contact moment in a real Battle 3 fight, each at its own layer point in the draw order, with a fight that survives an effect that throws. Tests: guide_timing_test, b3_test, smoke, then a look at a fight in portrait and landscape.",
+   "next": "Shipped (vfxfight1): the Stage 2C library effects draw in a real Battle 3 fight at each move's contact moment, on the right foe and member, each at its own layer (ground_decal, behind_units, unit_overlay, foreground_sweep, screen_lighting) in the fight's draw order; an effect that throws is dropped for that cue and the fight goes on. Not done: sound effects for the library effects (source decision) and hit stop in fights. Test: python3 tools/b3_vfx_test.py (about 9 minutes, run by hand).",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGJG774MKmrW8qNpsd",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done. Add a card for this task first\""
@@ -8592,6 +8592,10 @@
     {
      "d": "2026-11-26",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Built: engine/b3-vfx.js arms each move's library effects at its contact moment (the same moment the hit shows, 0.0 to 0.03 s) and draws them per layer from b3Draw. Tests: guide_timing_test, b3_vfx_test (all 119 manifest moves, 80 moves played by hand in four fights, portrait and landscape), smoke, b3_test. Ended with nothing for Tom."
     }
    ],
    "blocks": [],

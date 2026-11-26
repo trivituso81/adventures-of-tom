@@ -117,6 +117,34 @@ const rec=[]; ctx.__rec=rec;
 E("P1_VFX['setpiece_sentient_ghost_pepper']=(g,x,y,u,z,p)=>__rec.push(['pepper',x,y,Math.round(u*1000)/1000,p&&p._foe,p&&p._h]); P1_VFX['setpiece_cattail_pier_leviathan']=(g,x,y,u,z,p)=>__rec.push(['pier',x,y,p&&p.fishTier,p&&p._h,p&&p._foe]);");
 E("p1DrawVfx(__g,{id:'pf_boppy_pb_cap'},3300+100,{x:90,y:210,h:100})"); E("p1DrawVfx(__g,{id:'pf_boppy_ba_cap'},3450+100,{x:90,y:210,h:100})"); E("p1DrawVfx(__g,{id:'pf_boppy_ba_s2'},2050+100,{x:90,y:210,h:100})");
 out.setpieceCalls=rec.slice();
+// vfxfight1: the library's layers, a row found by move id, and p1DrawVfx with a layer, a target and a throwing effect (what a real Battle 3 fight asks of it)
+out.layerTable=Object.fromEntries(lib.map(id=>[id,E("P1_VFX_LAYER['"+id+"']")])); out.layers=E("P1_LAYERS");
+out.mvRow=E("(()=>{const r=gtMetaMove('lounge_pass_flex');return r&&[r.id,r.impact_ms,r.vfx];})()");
+out.mvNone=E("[gtMetaMove('no_such_move'),gtMetaMove(null),gtMetaMove(undefined),gtMetaMove('')]");
+ctx.__faults=[]; E("var gameFault=(w,e)=>__faults.push([w,String(e&&e.message)])");
+const rl=[]; ctx.__rl=rl; const keep={}; for(const id of ['vfx_core_clobber_impact','vfx_core_sizzle_wave','vfx_core_heal_cleanse']) keep[id]=E("P1_VFX['"+id+"']");
+ctx.__keep=keep;
+E("P1_VFX['vfx_core_clobber_impact']=(g,x,y,u,z,p)=>__rl.push(['clobber',x,y,p&&p._h,p&&p._foe,p&&p._from]); P1_VFX['vfx_core_sizzle_wave']=(g,x,y,u,z,p)=>__rl.push(['sizzle',x,y,p&&p._h]); P1_VFX['vfx_core_heal_cleanse']=(g,x,y,u,z,p)=>__rl.push(['heal',x,y,p&&p._h,p&&p._foe]);");
+E("var __M={impact_ms:100,vfx:['vfx_core_clobber_impact','vfx_core_sizzle_wave','vfx_core_heal_cleanse'],fxp:null}");
+const pick=(o)=>{ rl.length=0; ctx.__o=o; E("p1DrawVfx(__g,{id:'x'},150,{x:90,y:210,h:100},__o)"); return rl.map(r=>r.slice()); };
+out.noLayer=pick({meta:E("__M"),target:{x:11,y:22,h:33},foe:{x:5,y:6,h:7}}).map(r=>r[0]);
+out.layerOnly={unit_overlay:pick({meta:E("__M"),layer:'unit_overlay',target:{x:11,y:22,h:33}}).map(r=>r[0]),foreground_sweep:pick({meta:E("__M"),layer:'foreground_sweep',target:{x:11,y:22,h:33}}).map(r=>r[0]),screen_lighting:pick({meta:E("__M"),layer:'screen_lighting',target:{x:11,y:22,h:33}}).map(r=>r[0])};
+out.only=pick({meta:E("__M"),only:'vfx_core_sizzle_wave',target:{x:11,y:22,h:33}}).map(r=>r[0]);
+out.target=pick({meta:E("__M"),target:{x:11,y:22,h:33},foe:{x:5,y:6,h:7}});
+out.selfNoB2=(()=>{ E("B2.foes[0].dead=true"); const r=pick({meta:E("__M"),foe:{x:5,y:6,h:7}}); const none=pick({meta:E("__M")}); E("B2.foes[0].dead=false"); return {withFoe:r.map(q=>q[0]),none:none.length}; })();
+out.defaultFoe=pick({meta:E("__M")}).filter(r=>r[0]==='clobber').map(r=>r.slice(1,4));   // no O: the first foe standing, as the Battle Lab review has always made the call
+// a throwing effect: the canvas is unwound (every save() undone), the fault is logged once, and the effect is skipped from then on
+const cvc=[]; ctx.__cv=new Proxy({},{get(t,k){ return (...a)=>{ cvc.push(k); }; },set(){ return true; }});
+E("P1_VFX['vfx_core_clobber_impact']=(g,x,y,u,z,p)=>{ g.save(); g.save(); g.restore(); g.restore(); g.restore(); g.save(); g.save(); throw new Error('boom'); }");
+ctx.__dead={}; ctx.__o2={meta:E("({impact_ms:100,vfx:['vfx_core_clobber_impact'],fxp:null})"),target:{x:1,y:2,h:3},dead:ctx.__dead};
+E("p1DrawVfx(__cv,{id:'x'},150,{x:90,y:210,h:100},__o2)"); const first=cvc.slice(); cvc.length=0;
+E("p1DrawVfx(__cv,{id:'x'},160,{x:90,y:210,h:100},__o2)");
+out.throwing={calls:first,again:cvc.length,dead:Object.keys(ctx.__dead),faults:ctx.__faults.slice()};
+// the Battle Lab review's own call (no O, a clipShow-like S) also survives a throwing effect and remembers it on S
+ctx.__S={id:'pf_amy_fq_basic'}; E("P1_VFX['vfx_core_clobber_impact']=(g)=>{ throw new Error('boom2'); }"); ctx.__faults.length=0;
+let thr=null; try{ E("p1DrawVfx(__g,__S,1050+100,{x:90,y:210,h:100})"); E("p1DrawVfx(__g,__S,1050+120,{x:90,y:210,h:100})"); }catch(e){ thr=e.message; }
+out.reviewThrow={thrown:thr,dead:Object.keys(ctx.__S._vfxDead||{}),faults:ctx.__faults.length};
+for(const id in keep) ctx.__id=id, E("P1_VFX[__id]=__keep[__id]");
 console.log(JSON.stringify(out));
 """
 r = subprocess.run(['node', '-e', JS, R], capture_output=True, text=True, cwd=R)
@@ -172,4 +200,23 @@ check('a set-piece that draws on the member is told where the foe is, and a move
       len(pep) == 1 and pep[0][1:3] == [90, 210] and pep[0][4] == {'x': 300, 'y': 155, 'h': 90} and pep[0][5] == 100 and [c[3] for c in pier] == ['leviathan', 'striper'] and pier[0][1:3] == [300, 155], sc)
 withlib = [m for m in man['moves'] if m['libraryAssets']]
 check('every move that names a library effect now has its effects built (%d moves)' % len(withlib), len(withlib) > 100 and all(m['check']['effectsBuilt'] for m in withlib), [m['manifestId'] for m in withlib if not m['check']['effectsBuilt']][:5])
+
+libjson = json.load(open(os.path.join(R, 'art-factory/aot-stage2c-vfx-library-v11.json'), encoding='utf-8'))['assets']
+check('vfxfight1: every effect has the layer the library file gives it (P1_VFX_LAYER agrees with art-factory/aot-stage2c-vfx-library-v11.json for all 37)', o.get('layerTable') == {a['id']: a['layer'] for a in libjson} and set(o['layerTable'].values()) <= set(o.get('layers') or []), {k: v for k, v in (o.get('layerTable') or {}).items() if v != {a['id']: a['layer'] for a in libjson}.get(k)})
+check('vfxfight1: the layers are named in the order a fight draws them', o.get('layers') == ['ground_decal', 'behind_units', 'unit_overlay', 'foreground_sweep', 'screen_lighting'], o.get('layers'))
+check('vfxfight1: a move is found by its game move id (lounge_pass_flex has the manifest row, with the manifest id) and an unknown or empty id gives null', (o.get('mvRow') or [None])[0] == 'tom-ff-basic' and o['mvRow'][1] == 1050 and o['mvRow'][2] == tom['libraryAssets'] and o.get('mvNone') == [None, None, None, None], (o.get('mvRow'), o.get('mvNone')))
+check('vfxfight1: p1DrawVfx with no layer draws every effect of the move (the clobber and the sizzle on the target, the heal on the member)', o.get('noLayer') == ['clobber', 'sizzle', 'heal'], o.get('noLayer'))
+check('vfxfight1: with a layer it draws only the effects of that layer (unit_overlay: clobber and heal; foreground_sweep: sizzle; screen_lighting: nothing); with `only` it draws that one', o.get('layerOnly') == {'unit_overlay': ['clobber', 'heal'], 'foreground_sweep': ['sizzle'], 'screen_lighting': []} and o.get('only') == ['sizzle'], (o.get('layerOnly'), o.get('only')))
+tg = o.get('target') or []
+check('vfxfight1: an effect on the foe lands on the target it is given (11, 22, 33 px tall) and is told where the foe is; the heal lands on the member (90, 210, 100 px tall) and is told the foe',
+      len(tg) == 3 and tg[0][:5] == ['clobber', 11, 22, 33, {'x': 5, 'y': 6, 'h': 7}] and tg[0][5] == {'x': 90, 'y': 210} and tg[1][:4] == ['sizzle', 11, 22, 33] and tg[2][:5] == ['heal', 90, 210, 100, {'x': 5, 'y': 6, 'h': 7}], tg)
+check('vfxfight1: a real fight has no Battle Lab foe: the call is given the foe and needs nothing else; with neither a foe nor a Lab foe standing nothing draws', (o.get('selfNoB2') or {}).get('withFoe') == ['clobber', 'sizzle', 'heal'] and (o.get('selfNoB2') or {}).get('none') == 0, o.get('selfNoB2'))
+check('vfxfight1: with no options the call is the one the Battle Lab review has always made (the first foe standing, (300, 155))', o.get('defaultFoe') == [[300, 155, 90]], o.get('defaultFoe'))
+th = o.get('throwing') or {}
+check('vfxfight1: an effect that throws after save() calls leaves the canvas as it found it (two saves undone, the extra restore ignored), the fault is logged once, the effect is skipped from then on',
+      th.get('calls') == ['save', 'save', 'restore', 'restore', 'save', 'save', 'restore', 'restore'] and th.get('again') == 0 and th.get('dead') == ['vfx_core_clobber_impact'] and th.get('faults') == [['effect vfx_core_clobber_impact', 'boom']], th)
+rt = o.get('reviewThrow') or {}
+check('vfxfight1: the Battle Lab review\'s call survives a throwing effect too: nothing is thrown, the effect is remembered on the clip and logged once', rt.get('thrown') is None and rt.get('dead') == ['vfx_core_clobber_impact'] and rt.get('faults') == 1, rt)
+i4, i5, i6 = (html.find(n) for n in ('engine/b3-stage.js?v=', 'engine/b3-vfx.js?v=', 'engine/b3-play.js?v='))
+check('vfxfight1: index.html loads b3-vfx.js between b3-stage.js and b3-play.js, with a cache tag', 0 < i4 < i5 < i6 and i1 < i5, (i4, i5, i6))
 print('FAILS:', fails); sys.exit(1 if fails else 0)

@@ -167,7 +167,7 @@ function b3gFoeOffset(key,t) {
 }
 
 // ---------- playing a move's row (b3PlayMove hands over here) ----------
-// env: the pieces of b3PlayMove: head, hits, late, reveal, finishNow. Returns true when the row plays the move.
+// env: the pieces of b3PlayMove: head, hits, late, reveal, finishNow, cue (arms the move's library effects). Returns true when the row plays the move.
 function b3gPlay(R,env) {
   const head=env.head,src=head.src,CL=BCLIPS[R.body.clip],home=b3gHome(src),dur=CL.dur/1000,now=B3P.t;
   const tg0=env.hits.length?env.hits[0].swing.tgts:head.tgts||[];
@@ -188,6 +188,7 @@ function b3gPlay(R,env) {
   if(hitT==null) hitT=lateT;
   const run=B3G.run={id:head.id,t0:now,hitAt:env.hits.length?hitT:lateT,hitReal:null,marks,ids:Object.assign({},ids),setpiece:!!R.setpiece,budget:R.budget,end:null,len:null};
   ctx.ids=ids;
+  if(env.cue) env.cue(env.hits.length?hitT:lateT);   // vfxfight1: the move's library effects play from the hit's moment (engine/b3-vfx.js)
   for(const s of steps) { b3After(s._T,()=>{ ctx.stepT=s._T; b3gDo(s,ctx); }); }
   // THE HIT (or, for a move with no hit, its effects) shows at its moment.
   const reveal=env.reveal,mark=()=>{ if(run.hitReal==null) run.hitReal=B3P.t-run.t0; };
