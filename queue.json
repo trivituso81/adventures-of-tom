@@ -2882,12 +2882,11 @@
     "n": 1
    },
    "use": {
-    "state": "applying",
+    "state": "live",
     "at": "2026-11-26T09:13:50Z",
-    "since": "2026-11-26T09:13:50Z",
-    "build": "",
-    "why": "",
-    "run": 45790051267
+    "since": "2026-11-26T09:25:16Z",
+    "build": "guideuse-45790051267",
+    "why": ""
    },
    "left": false,
    "dry": false,
