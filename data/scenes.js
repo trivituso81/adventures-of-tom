@@ -17,8 +17,17 @@ SCENES.opening=()=>{
     placeFollowers(); for(const f of followers) f.hidden=true; refreshAreaUI(); resize(); camera.snap=true; };
   const toSquare=()=>{ currentMap=worlds[h.area]||town; player.x=dx; player.y=dy; player.facing='down'; player.move=null;
     placeFollowers(); for(const f of followers) f.hidden=true; refreshAreaUI(); resize(); camera.snap=true; };
+  // opening-zoom1 (Tom 2026-11-26): the chapter opens on the Square, the camera pushes in on Long Island Taxi Co., then a medium fade to the office (no cut).
+  const toOutside=()=>{ currentMap=worlds[h.area]||town; player.x=dx; player.y=dy; player.facing='down'; player.move=null; player.hidden=true;
+    placeFollowers(); for(const f of followers) f.hidden=true; refreshAreaUI(); resize(); camera.snap=true; setSceneZoom(1); sceneZoomManual=false; };
+  const settleZoom=()=>{ setSceneZoom(1); sceneZoomManual=false; };
   return [
+    {call:toOutside}, {cam:[h.x+h.w/2,h.y+h.h/2-.5]}, {wait:.5},
+    {zoom:2.4,time:1.6},                             // camera zooms into the taxi company
+    {fade:'out',time:.8},                            // medium fade
+    {call:settleZoom},
     {call:toRoom}, {show:'tom'}, {cam:[8.5,6.6]},   // frame Tom and Sal together (landscape shows about six rows)
+    {fade:'in',time:.8},
     {wait:.7},
     {face:'tom',dir:'up'},
     {step:stretchStep()},
