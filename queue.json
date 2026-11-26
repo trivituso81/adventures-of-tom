@@ -5474,8 +5474,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T18:34:29Z",
-   "state": "checking",
-   "since": "2026-11-26T18:36:57Z",
+   "state": "done",
+   "since": "2026-11-26T18:45:00Z",
    "run": 45877017620,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -5488,7 +5488,27 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/move-zone-one-blockade/t3.js",
+    "img": "takes/move-zone-one-blockade/t3.webp",
+    "frames": 45,
+    "kb": 846,
+    "words": "0 to 132 step 3, impact 78, 1.5x",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "edge: 1 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)"
+     ],
+     "faults": [
+      "edge"
+     ],
+     "vision_ran": true,
+     "spent": 0.0079,
+     "error": null,
+     "words": "The clip gate flags this take: edge: 1 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)."
+    },
+    "n": 3
+   },
    "use": null,
    "left": false,
    "dry": false,
