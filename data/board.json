@@ -8253,7 +8253,7 @@
   {
    "id": "c-vfx-library-rest",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "vfxlib2",
    "title": "Library effects: shield, chevrons, badges, 4 projectiles",
@@ -8278,6 +8278,10 @@
     {
      "d": "2026-11-26",
      "t": "Shipped as vfxlib2: the 7 effects are built, tested (84 params variants, no NaN) and looked at on a contact sheet in Chrome"
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as vfxlib2: library effects 9 to 15 are built: shield, timeline chevrons, debuff badges and the four projectiles"
     }
    ],
    "prompt": {
@@ -8288,7 +8292,8 @@
     "model": "Claude Sonnet 5.5 (row C: a build whose steps are written in the task, tests catch mistakes)",
     "effort": "high (7 drawn effects, engine wiring, test and manifest change)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done. Your first push is the commit \"board: start c-vfx-library-rest\". Build vfx_core_shield_ward, vfx_core_timeline_chevrons, vfx_core_status_debuff_badges, proj_arc_single, proj_boomerang_return, proj_ally_handoff_party and proj_ground_hazard_mat in engine/vfx-library.js; add them to P1_VFX, P1_VFX_MS and P1_VFX_SELF; set buildStatus to built; add them to tools/guide_timing_test.py; regenerate data/guide-manifest.json; update docs/BATTLE_GUIDE.md and docs/CHANGES.md (vfxlib2). Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-26"
   },
   {
    "id": "c-hidebf",
@@ -8500,6 +8505,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDFd2qtbyr3VHjudbi",
+   "title": "Library effects: shield, chevrons, badges, 4 projectiles",
+   "first": "2026-11-26T08:52:40-08:00",
+   "last": "2026-11-26T09:12:27-08:00",
+   "tags": [
+    "vfxlib2"
+   ],
+   "cards": [
+    "c-vfx-library-rest"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFUy1ZAKH1RRjtXyko",
    "title": "Install Tom's new walk, feelings, talking, listen frames",
    "first": "2026-11-26T00:55:22-08:00",
@@ -8526,16 +8543,6 @@
    "cards": [
     "c-hidebf",
     "c-hidebf2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDFd2qtbyr3VHjudbi",
-   "title": "Library effects: shield, chevrons, badges, 4 projectiles",
-   "first": "2026-11-26T08:52:40-08:00",
-   "last": "2026-11-26T08:52:40-08:00",
-   "tags": [],
-   "cards": [
-    "c-vfx-library-rest"
    ]
   },
   {
@@ -15032,8 +15039,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "6e80af736fe55b044658051447d2002e1b8de2f8",
- "synced_at": "2026-11-26T17:11:24+00:00",
+ "synced": "3eaa9c14a5bfae3537ac6e3c6da3fbeea7214094",
+ "synced_at": "2026-11-26T17:13:15+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
