@@ -3973,6 +3973,34 @@
    "replay": "",
    "id": "v-body-boppy-hit-t1",
    "kind": "video"
+  },
+  "v-body-boppy-dodge-t1": {
+   "lane": "vid",
+   "anim": "body:boppy:dodge",
+   "who": "boppy",
+   "take": 1,
+   "route": "wan",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: DODGE\nFrom his starting relaxed stance, he quickly ducks and leans his upper body back and away to the right once, as if something is flying past, while his feet stay planted. Without repeating the dodge, he straightens up and returns to his starting relaxed stance, holding it for the rest of the clip.",
+   "promptRev": 0,
+   "start": "boppy",
+   "note": "",
+   "cap": 1,
+   "at": "2026-11-26T09:35:16Z",
+   "state": "queued",
+   "since": "2026-11-26T09:35:16Z",
+   "run": 0,
+   "fal": null,
+   "tries": 0,
+   "cost": 0,
+   "why": "",
+   "do": "",
+   "result": null,
+   "use": null,
+   "left": false,
+   "dry": false,
+   "replay": "",
+   "id": "v-body-boppy-dodge-t1",
+   "kind": "video"
   }
  }
 }
