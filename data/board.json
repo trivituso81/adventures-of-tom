@@ -7722,7 +7722,7 @@
   {
    "id": "c-wanstop-rose-raspberry-r1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanstop-rose-raspberry-r1",
    "title": "Fix the stopped video rose-raspberry",
@@ -7753,6 +7753,10 @@
     {
      "d": "2026-11-26",
      "t": "Accepted attempt 2 (rose-raspberry-a2-r1.mp4) by eye: hands on hips, cheeks puffed, lean, arms crossed, return; every measured check passed, only the literal look check p1 missed. Baked (29 frames) and wired to supersonic_raspberry. No new try, nothing spent."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as wanstop-rose-raspberry-r1: Rose's raspberry video is accepted and put in the game"
     }
    ],
    "prompt": {
@@ -7764,7 +7768,8 @@
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-rose-raspberry-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job rose-raspberry (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1. Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Missing cheek puff, lean left, and raspberry; shows ar. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: rose-raspberry-r1-result.json (every check with numbers and the look-check answers) and the videos rose-raspberry-r1.mp4, rose-raspberry-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-rosestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-rose-raspberry-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-rosestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-rose-raspberry-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-26T13:03:02+00:00"
+   "started_at": "2026-11-26T13:03:02+00:00",
+   "done": "2026-11-26"
   },
   {
    "id": "c-wanstop-rose-whoopee-r1",
@@ -7865,6 +7870,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukF1rbVFnoe1adhMEML",
+   "title": "Fix the stopped video rose-raspberry",
+   "first": "2026-11-26T13:05:28Z",
+   "last": "2026-11-26T13:07:45Z",
+   "tags": [
+    "wanstop-rose-raspberry-r1"
+   ],
+   "cards": [
+    "c-wanstop-rose-raspberry-r1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDXGs3AAhsyHm7c3WV",
    "title": "Fix the stopped video rose-whoopee",
    "first": "2026-11-26T13:05:56Z",
@@ -7872,16 +7889,6 @@
    "tags": [],
    "cards": [
     "c-wanstop-rose-whoopee-r1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukF1rbVFnoe1adhMEML",
-   "title": "Fix the stopped video rose-raspberry",
-   "first": "2026-11-26T13:05:28Z",
-   "last": "2026-11-26T13:05:28Z",
-   "tags": [],
-   "cards": [
-    "c-wanstop-rose-raspberry-r1"
    ]
   },
   {
@@ -14482,8 +14489,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "6e10f5cb0b5413beef122998e4e53f291f365a01",
- "synced_at": "2026-11-26T13:06:16+00:00",
+ "synced": "2f5dbe35cc5c63b8f2cb703448a735bdd872474d",
+ "synced_at": "2026-11-26T13:08:33+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
