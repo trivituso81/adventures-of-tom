@@ -3505,6 +3505,35 @@
    "id": "v-move-lounge-pass-flex-t1",
    "kind": "video",
    "pad": 0.8
+  },
+  "v-move-zone-one-blockade-t1": {
+   "lane": "vid",
+   "anim": "move:zone_one_blockade",
+   "who": "tom",
+   "take": 1,
+   "route": "wan",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: ZONE ONE BLOCKADE\nFrom his starting relaxed stance, he holds both arms out to the sides with his elbows bent, like a gate, with a calm, no-nonsense face, as if guarding his spot at the front of a boarding line. Then he bumps his hip to the left once. He holds that wide blocking pose for a moment, then lowers his arms and returns to his starting relaxed stance.",
+   "promptRev": 4,
+   "start": "tom",
+   "note": "",
+   "cap": 1,
+   "at": "2026-11-26T09:23:20Z",
+   "state": "queued",
+   "since": "2026-11-26T09:23:20Z",
+   "run": 0,
+   "fal": null,
+   "tries": 0,
+   "cost": 0,
+   "why": "",
+   "do": "",
+   "result": null,
+   "use": null,
+   "left": false,
+   "dry": false,
+   "replay": "",
+   "id": "v-move-zone-one-blockade-t1",
+   "kind": "video",
+   "pad": 0.8
   }
  }
 }
