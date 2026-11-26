@@ -2380,8 +2380,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T08:20:03Z",
-   "state": "checking",
-   "since": "2026-11-26T08:44:31Z",
+   "state": "done",
+   "since": "2026-11-26T08:51:03Z",
    "run": 45782279434,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -2394,7 +2394,27 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-tom-cast/t2.js",
+    "img": "takes/body-tom-cast/t2.webp",
+    "frames": 70,
+    "kb": 1291,
+    "words": "0 to 138 step 2",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "edge: 13 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)"
+     ],
+     "faults": [
+      "edge"
+     ],
+     "vision_ran": true,
+     "spent": 0.0081,
+     "error": null,
+     "words": "The clip gate flags this take: edge: 13 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)."
+    },
+    "n": 2
+   },
    "use": null,
    "left": false,
    "dry": false,
