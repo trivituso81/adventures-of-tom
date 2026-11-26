@@ -6972,12 +6972,12 @@
    "id": "c-justinbb9",
    "tag": "justinbb9",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Justin production clip: #00FF00 start, new Kling prompt",
    "next": "Ready for Opus 5.5 medium: build the Justin clip from four pinned pose keyframes (method in claude/next-justinbb9.md). Roll 1 from a single image failed twice the same way.",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFJ3SQckykBNpN3Deq",
+    "url": "https://claude.ai/code/session_01RXeukFJ3SQckykBNpN3Deq",
     "opening": "UNCONSTRAINED PRODUCTION ORDER (REPO: trivituso81/adventures-of-tom)"
    },
    "history": [
@@ -7001,6 +7001,10 @@
      "d": "2026-11-26",
      "at": "2026-11-26T00:20:31+00:00",
      "t": "Rescue chose START NEXT: the method change (four pinned pose keyframes, first-last-frame video, key.py, 8-frame checkerboard QA) is taste work for Opus 5.5 and needs paid fal runs, so a Sonnet rescue does not run it. Prompt already carries the method from claude/next-justinbb9.md; card moved to Up next."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "blocks": [],
@@ -7025,6 +7029,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFJ3SQckykBNpN3Deq",
+   "title": "Justin production clip: #00FF00 start, new Kling prompt",
+   "first": "2026-11-26T00:20:35Z",
+   "last": "2026-11-26T00:20:35Z",
+   "tags": [],
+   "cards": [
+    "c-justinbb9"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukCaFAwDGmB8YFJQsNt",
    "title": "Justin proof clip: stricter prompt and two-stage QA gate",
@@ -13414,8 +13428,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "0a73d190fc6e850149c874c17b41057a6d90b0bd",
- "synced_at": "2026-11-26T00:19:23+00:00",
+ "synced": "e2d5444b1f2b32b41180b6603aa0e32e66ec0dd7",
+ "synced_at": "2026-11-26T00:21:23+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
