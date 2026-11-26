@@ -7148,85 +7148,10 @@
     "est": 0.5,
     "auto": true,
     "run": {
-     "state": "done",
-     "at": "2026-11-26T12:56:21Z",
-     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45822234075",
-     "n": 19,
-     "merged": [
-      "rose-baitswitch"
-     ],
-     "passed_not_baked": [],
-     "retried": [
-      "rose-citadel",
-      "rose-raspberry",
-      "rose-whoopee"
-     ],
-     "stopped": [
-      {
-       "what": "rose-citadel",
-       "why": "failed twice: p1",
-       "card": "t-wangaveup-rose-citadel-r2"
-      },
-      {
-       "what": "rose-raspberry",
-       "why": "failed twice: p1",
-       "card": "c-wanstop-rose-raspberry-r1"
-      },
-      {
-       "what": "rose-whoopee",
-       "why": "failed twice: p1",
-       "card": "c-wanstop-rose-whoopee-r1"
-      }
-     ],
-     "waiting": [],
-     "capped": [],
-     "unchecked": [],
-     "errors": [],
-     "already": [
-      "stage-rose-cushion",
-      "stage-rose-lamby",
-      "stage-rose-backuplamby",
-      "stage-rose-comet",
-      "stage-rose-ripple",
-      "stage-rose-cushionwall",
-      "stage-rose-castle",
-      "stage-rose-whoopee",
-      "rose-tacklelunge",
-      "rose-lavahop",
-      "rose-doublelamby",
-      "rose-pretzel",
-      "rose-boomerang",
-      "rose-kingdom",
-      "rose-boop"
-     ],
-     "gaveup": [
-      "rose-citadel"
-     ],
-     "bake_failed": {},
-     "spent": 3.04,
-     "build": "wanbulk-trosestagelab-45822234075",
-     "watch": "",
-     "revs": {
-      "stage-rose-cushion": 1,
-      "stage-rose-lamby": 1,
-      "stage-rose-backuplamby": 1,
-      "stage-rose-comet": 1,
-      "stage-rose-ripple": 1,
-      "stage-rose-cushionwall": 1,
-      "stage-rose-castle": 1,
-      "stage-rose-whoopee": 1,
-      "rose-tacklelunge": 1,
-      "rose-lavahop": 1,
-      "rose-doublelamby": 1,
-      "rose-pretzel": 1,
-      "rose-boomerang": 1,
-      "rose-citadel": 2,
-      "rose-kingdom": 1,
-      "rose-boop": 1,
-      "rose-raspberry": 1,
-      "rose-baitswitch": 1,
-      "rose-whoopee": 1
-     }
+     "state": "running",
+     "at": "2026-11-26T13:04:37Z",
+     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45823476031",
+     "n": 19
     }
    },
    "chat": {
