@@ -7035,6 +7035,114 @@
      "t": "Made by tomframes."
     }
    ]
+  },
+  {
+   "id": "c-rosestage",
+   "tag": "rosestage1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "title": "Rose's twelve moves: staging rows and body videos",
+   "next": "Writes the staging rows, body prompts and prop pictures for all twelve of Rose's moves so Generate works for them, then the wan-gen Action makes the videos and pictures inside the auto limits.",
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "",
+    "opening": "\"are you missing plans for some of the battle animations?\" and \"why dont i get the button to create the animation\""
+   },
+   "prompt": {
+    "what": "Writes the staging rows (data/b3-stage.js), body prompts, prop prompts and wan jobs for Rose's twelve moves, following claude/move-staging-plan.md and Tom's eight rows.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: new rows with a written pattern and tests)",
+    "effort": "medium",
+    "text": "Read CLAUDE.md, claude/move-staging-plan.md and data/b3-stage.js (Tom's eight rows). Rose's twelve moves already have rows, body prompts (tools/art-library/prompts/wan-rose-*-v1.txt), prop prompts (stage-rose-*-v1.txt) and jobs in tools/art-library/wangen-jobs.json. Check them against the plan, run python3 -I tools/movestage_test.py and python3 tools/guidegen/build_map.js, and fix anything the tests or the videos show. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Tom (about Rose's special moves): \"Waits for staging. ... Its staging row is not written yet, so no video can be made for it.\" and \"why dont i get the button to create the animation\". Cause: only Tom's eight moves had staging rows. Added rows for Rose's twelve, ten new body prompts plus one replacement for the tackle (the old tackle prompt pulls Lamby from behind her back), eight prop pictures, and build_map now uses a row's own body job when the row makes a new body."
+    }
+   ],
+   "after": "t-rosestage-lab"
+  },
+  {
+   "id": "t-rosestage-lab",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "animations",
+   "fyi": true,
+   "title": "Rose's twelve moves are being made",
+   "next": "Nothing to tap. The wan-gen Action is making 8 prop pictures and 11 body videos for Rose (about $7, inside the auto limits). When this card shows done, start a Battle 3 fight with Rose in the party (ADMIN > BATTLE LAB > NEW BATTLE) and play her moves. A Move Lab for Rose does not exist yet; card c-movelab-rose adds it.",
+   "wan": {
+    "jobs": [
+     "stage-rose-cushion",
+     "stage-rose-lamby",
+     "stage-rose-backuplamby",
+     "stage-rose-comet",
+     "stage-rose-ripple",
+     "stage-rose-cushionwall",
+     "stage-rose-castle",
+     "stage-rose-whoopee",
+     "rose-tacklelunge",
+     "rose-lavahop",
+     "rose-doublelamby",
+     "rose-pretzel",
+     "rose-boomerang",
+     "rose-citadel",
+     "rose-kingdom",
+     "rose-boop",
+     "rose-raspberry",
+     "rose-baitswitch",
+     "rose-whoopee"
+    ],
+    "cap": 10,
+    "watch": false,
+    "watch_note": "Tom judges them by playing Rose's moves in a Battle 3 fight until the Move Lab handles Rose (card c-movelab-rose)."
+   },
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by c-rosestage."
+    }
+   ]
+  },
+  {
+   "id": "c-movelab-rose",
+   "tag": "movelab2",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "title": "Move Lab for any person, starting with Rose",
+   "next": "The Move Lab only loads Tom's loadout (engine/b3-movelab.js). Adds a person picker so Tom can judge Rose's twelve moves with Keep, Tweak or Replace.",
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "",
+    "opening": "added by c-rosestage"
+   },
+   "prompt": {
+    "what": "Lets the Move Lab load any person's moves, so Rose's twelve staged moves can be judged there.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the Lab exists, one hardcoded person to generalise)",
+    "effort": "medium",
+    "text": "Read CLAUDE.md and claude/move-staging-plan.md. engine/b3-movelab.js loads only Tom (b3mlPrepare, loadouts.tom, MOVE LAB: TOM in engine/b3-lab.js). Add a person picker so the Move Lab can start with Rose, using the rows of data/b3-stage.js, keep Keep, Tweak and Replace working for her moves, add a test next to tools/movestage_lab_test.py, and look at the frames in portrait and landscape. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by c-rosestage: Rose's moves have staging rows but the Move Lab is Tom-only."
+    }
+   ]
   }
  ],
  "sessions": [
