@@ -9027,7 +9027,7 @@
    "id": "c-hitstop1",
    "tag": "hitstop1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Play hit stop in a real Battle 3 fight",
    "next": "Shipped (hitstop1): in a real Battle 3 fight the member and the foes a move hits are held on the hit picture for hitStopFrames / 24 seconds, then show where the clock is; the battle clock, the rules, the clips and the library effects are untouched, and a hold that throws is dropped. Not done: sound effects (a decision on where they come from is still open). Tests: guide_timing_test, b3_hitstop_test (new), b3_vfx_test, smoke, b3_test new1 to new5.",
@@ -9043,6 +9043,10 @@
     {
      "d": "2026-11-26",
      "t": "Built: engine/b3-vfx.js holds the member and the foes a move hits on the hit picture for hitStopFrames / 24 s (b3vUnit, armed by b3PlayMove with the effects). Tests: guide_timing_test (hit stop checks added), new tools/b3_hitstop_test.py (real fights, portrait and landscape), b3_vfx_test, smoke, b3_test new1 to new5. Ended with nothing for Tom."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as hitstop1: a move's hit stop plays in a real Battle 3 fight"
     }
    ],
    "blocks": [],
@@ -9057,7 +9061,8 @@
     "model": "Claude Sonnet 5.5 (row C: a build whose steps are written in the task, tests catch mistakes)",
     "effort": "high (a timing change in the fight's draw path, a safety wrapper, four test suites and a visual check)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done (the vfxfight1 paragraph). Your first push is the commit \"board: start c-hitstop1\". Play hit stop in a real Battle 3 fight: data/guide-manifest.json gives each move a hitStopFrames value (frames at 24 fps); when a move's hit shows, freeze the foe and the member for about hitStopFrames / 24 seconds, then continue, using engine/b3-vfx.js and b3PlayMove in engine/b3-play.js. The battle clock and the rules never wait on it; a move with hitStopFrames 0 or no manifest row changes nothing; a fight must never break if the freeze throws; library effects keep drawing at their normal pace. Run python3 -I tools/guide_timing_test.py, python3 tools/b3_vfx_test.py, python3 tools/smoke.py and python3 tools/b3_test.py for new1 to new5, and look at a fight in portrait and landscape in Chrome before pushing. Update docs/BATTLE_GUIDE.md What is done and docs/CHANGES.md. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-26"
   },
   {
    "id": "c-deedeefart",
@@ -9324,6 +9329,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukFa5bNJ7yJ4ZRNZpa3",
+   "title": "Play hit stop in a real Battle 3 fight",
+   "first": "2026-11-26T13:32:07-08:00",
+   "last": "2026-11-26T14:25:15-08:00",
+   "tags": [
+    "hitstop1"
+   ],
+   "cards": [
+    "c-hitstop1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
    "title": "Install Rose's new walk, feelings, talking, listen frames",
    "first": "2026-11-26T11:07:14-08:00",
@@ -9356,16 +9373,6 @@
    ],
    "cards": [
     "c-deedeefart"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFa5bNJ7yJ4ZRNZpa3",
-   "title": "Play hit stop in a real Battle 3 fight",
-   "first": "2026-11-26T13:32:07-08:00",
-   "last": "2026-11-26T13:32:07-08:00",
-   "tags": [],
-   "cards": [
-    "c-hitstop1"
    ]
   },
   {
@@ -16097,8 +16104,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "c69b06532f28e0be34eed29702a6131549526547",
- "synced_at": "2026-11-26T22:24:07+00:00",
+ "synced": "5eb1962dd4a9e4d6e95819ade71dd6b538f07fcd",
+ "synced_at": "2026-11-26T22:31:00+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
