@@ -1,0 +1,50 @@
+name: sandbox-justin-canon
+
+# Isolated test 2 (Justin, canonical sprite). MANUAL ONLY. Touches only art-factory/sandbox-justin-canon/. Needs repo secret FAL_KEY.
+
+on:
+  workflow_dispatch:
+    inputs:
+      go:
+        description: 'Type YES to spend on fal.'
+        required: true
+        default: 'no'
+      stage:
+        description: 'start = make start.png only; raw = continue to the Kling video'
+        required: true
+        default: 'start'
+
+permissions:
+  contents: write
+
+jobs:
+  justin:
+    if: ${{ github.event.inputs.go == 'YES' }}
+    runs-on: ubuntu-latest
+    concurrency:
+      group: sandbox-justin-canon
+      cancel-in-progress: false
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - name: Make the picture or video
+        env:
+          FAL_KEY: ${{ secrets.FAL_KEY }}
+          STAGE: ${{ github.event.inputs.stage }}
+        run: python3 art-factory/sandbox-justin-canon/run.py
+      - name: Save results (only this sandbox folder)
+        if: ${{ always() }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add art-factory/sandbox-justin-canon
+          git diff --cached --quiet && exit 0
+          git commit -m "sandbox: justin canon results"
+          for i in 1 2 3 4 5 6 7 8; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep $((5 + RANDOM % 10)); done
+          exit 1
