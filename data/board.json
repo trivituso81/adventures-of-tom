@@ -6975,7 +6975,7 @@
    "col": "done",
    "theme": "Battle Animations",
    "title": "Justin benchmark: Wan 3.0 vs Kling v3 Pro, #808080",
-   "next": "Phase 0 (lock, gate v2, Kettlebell prompt, Battle Lab review extras, workflow) shipped as justinbb9a. Phase 1 benchmark is started by art-factory/benchmark-trigger.json; read art-factory/benchmark/<run_id>/scorecard.json or BLOCKER_REPORT.md.",
+   "next": "Benchmark bench-justinbb9-2 done: Wan 3.0 passed 3 of 3, Kling v3 Pro 0 of 3; winner wan3_s1 (score 0.9575) is baked into PASS-1 DRAFT REVIEW. $4.98 of $5.00 spent. Open points: Justin has no idle video yet (the Hero still is not allowed in battle), and Kling needs its own prompt work if it is wanted.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukD88aZXMwDZ8KSAuK8",
     "opening": "UNCONSTRAINED PRODUCTION ORDER (REPO: trivituso81/adventures-of-tom)"
@@ -7037,6 +7037,10 @@
     {
      "d": "2026-11-25",
      "t": "Shipped as justinbb9: Phase 1 benchmark started: Wan 3.0 and Kling v3 Pro, 3 seeds each, $5.00 cap"
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Benchmark bench-justinbb9-2 finished: Wan 3.0 3/3, Kling v3 Pro 0/3, winner wan3_s1 matted and baked, $4.98 spent. Results in art-factory/benchmark/bench-justinbb9-2/."
     }
    ],
    "blocks": [],
