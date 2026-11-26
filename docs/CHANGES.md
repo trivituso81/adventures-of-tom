@@ -1,3 +1,14 @@
+## guideuse-45780590322 (2026-11-26): Getting hit (tom) now plays a video chosen in the Battle Guide
+
+Card c-guidegen, batched by c-guideflow-7. USE THIS ONE in the Battle Guide (the `use` of a row in queue.json, Action guide-apply). Not seen on the phone yet.
+- Getting hit (`body:tom:hit`, rev 2): Wan job tom-hit is now rev 2 (prompt file tools/art-library/prompts/wan-tom-hit-v2.txt); clip tom_hit cut (48 pictures, 0 to 94 step 2, 1.5x); B3_BODY_CLIPS.tom.hit = tom_hit (was 'tom_hit')
+- start picture of tom is now in `art/clips/start/tom-hero.png` (you uploaded it; used exactly as painted)
+- start picture of grace is now in `art/clips/start/grace-hero.png` (you uploaded it; used exactly as painted)
+- start picture of rose is now in `art/clips/start/rose-hero.png` (you uploaded it; used exactly as painted)
+- start picture of boppy is now in `art/clips/start/boppy-hero.png` (you uploaded it; used exactly as painted)
+- start picture of amy is now in `art/clips/start/amy-hero.png` (you uploaded it; used exactly as painted)
+- start picture of justin is now in `art/clips/start/justin-hero.png` (you uploaded it; used exactly as painted)
+
 ## justinbb9k (2026-11-25): Justin's Stud-Finder Beep and Knock is now a Wan 3.0 clip with one held prop (hammer), stud finder on the belt
 
 Run bench-justinbb9-7 (WO-01H, $2.10 of $2.25, Wan 3.0 only): the new Direct-Hero start frame passed Gate 1 (head difference 0.0), 2 of 3 seeds passed the gate, seed 1 won (score 0.9439) and is baked into `pf-justin-bb-basic` (`?v=benchjustinbb97`). Strike frames checked by eye: one hammer, the stud finder stays on the belt, no floating or duplicate prop. One mid-swing frame of the raw video has faint grey whoosh streaks left of the hammer. The `justinbb9d` Mudling effects and shake are unchanged (WebKit stage test and Pass 1 review test pass). `scripts/matte_winner.py` now keeps keyed gaps between an arm and the body transparent after the clamp.

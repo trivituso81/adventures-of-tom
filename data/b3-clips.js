@@ -9,7 +9,7 @@
 // wanch2a (2026-11-21): the painted body states (B3_BODY_PAINT, the painted guard, fidget, hit, dodge, knock-out, get up, run and victory
 // poses) were purged; Tom's rule "NO PAINTED POSES IN BATTLE" (CLAUDE.md). A new video for a state is listed here and replaces its stand-in.
 const B3_BODY_CLIPS={
-  tom:   {cast:'tom_cast',dodge:'tom_dodge',idle:'tom_idle',guard:'tom_guard',hit:'tom_hit',ko:'tom_ko',victory:'tom_victory',run:'tom_run'},   // wanch1: Wan 3.0 videos
+  tom:   {cast:'tom_cast',dodge:'tom_dodge',idle:'tom_idle',guard:'tom_guard',ko:'tom_ko',victory:'tom_victory',run:'tom_run',hit:'tom_hit'},   // wanch1: Wan 3.0 videos
   grace: {dodge:'grace_dodge',cast:'grace_cast',give:'grace_give',idle:'grace_idle',guard:'grace_guard',hit:'grace_hit',ko:'grace_ko',victory:'grace_victory',run:'grace_run'},   // wanch1: Wan 3.0 videos (wanch2: cast on Kling 4.0, dodge a Wan duck)
   rose:  {cast:'rose_cast',dodge:'rose_dodge',victory:'rose_victory',give:'rose_give',idle:'rose_idle',guard:'rose_guard',hit:'rose_hit',ko:'rose_ko',run:'rose_run'},   // wanch1: Wan 3.0 videos (victory, give, dodge: anim-rose-*, 2026-11-21)
   deedee:{cast:'deedee_cast',dodge:'deedee_dodge',give:'deedee_give',idle:'deedee_idle',guard:'deedee_guard',hit:'deedee_hit',ko:'deedee_ko',victory:'deedee_victory',run:'deedee_run'},   // wanch1: Wan 3.0 videos (ko: anim-deedee-ko-yes1)
