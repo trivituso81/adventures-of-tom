@@ -7134,17 +7134,11 @@
     }
    ],
    "wgen": {
-    "want": false,
-    "at": "2026-11-26T12:47:40Z",
+    "want": true,
+    "at": "2026-11-26T12:48:41Z",
     "n": 1,
     "est": 0.5,
-    "auto": true,
-    "run": {
-     "state": "running",
-     "at": "2026-11-26T12:48:26Z",
-     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45822234075",
-     "n": 19
-    }
+    "auto": true
    },
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukEQEES7HckHBnqBmQg",
