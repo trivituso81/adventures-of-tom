@@ -4821,8 +4821,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:46:48Z",
-   "state": "checking",
-   "since": "2026-11-26T11:22:15Z",
+   "state": "done",
+   "since": "2026-11-26T11:29:00Z",
    "run": 45808903596,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -4835,7 +4835,29 @@
    "cost": 0.0,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-amy-hit/t3.js",
+    "img": "takes/body-amy-hit/t3.webp",
+    "frames": 55,
+    "kb": 1116,
+    "words": "0 to 108 step 2, 1.5x",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "hit_no_stumble: the body moves back only 1% of the height (should stumble backwards)",
+      "vision h_stagger: Body shows minor pose shifts but does not stagger backwards to the right.; Body remains mostly upright in place with only minor hand movements, no backward stagger."
+     ],
+     "faults": [
+      "h_stagger",
+      "hit_no_stumble"
+     ],
+     "vision_ran": true,
+     "spent": 0.0042,
+     "error": null,
+     "words": "The clip gate flags this take: hit_no_stumble: the body moves back only 1% of the height (should stumble backwards); vision h_stagger: Body shows minor pose shifts but does not stagger backwards to the right.; Body remains mostly upright in place with only minor hand movements, no backward stagger.."
+    },
+    "n": 3
+   },
    "use": null,
    "left": false,
    "dry": false,
