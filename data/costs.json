@@ -1180,6 +1180,24 @@
    "source": "clip-gen run (guide takes)",
    "at": "2026-11-23T05:26:24Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45117613695"
+  },
+  {
+   "service": "google",
+   "date": "2026-11-25",
+   "amount": 0.5838,
+   "what": "art-factory benchmark bench-justinbb9-2: Wan 3.0 x3, Kling v3 Pro x3, start frame, matting of the winner",
+   "source": "art-factory benchmark run",
+   "at": "2026-11-26T02:16:29Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45739239489"
+  },
+  {
+   "service": "fal",
+   "date": "2026-11-25",
+   "amount": 4.3953,
+   "what": "art-factory benchmark bench-justinbb9-2: Wan 3.0 x3, Kling v3 Pro x3, start frame, matting of the winner",
+   "source": "art-factory benchmark run",
+   "at": "2026-11-26T02:16:29Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45739239489"
   }
  ],
  "balances": [
