@@ -4500,8 +4500,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:35:19Z",
-   "state": "checking",
-   "since": "2026-11-26T10:40:44Z",
+   "state": "done",
+   "since": "2026-11-26T10:58:11Z",
    "run": 45798843411,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -4514,7 +4514,33 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-boppy-ko/t1.js",
+    "img": "takes/body-boppy-ko/t1.webp",
+    "frames": 75,
+    "kb": 853,
+    "words": "0 to 148 step 2, 1.5x",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "edge: 39 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)",
+      "ko_forward: ends 0% of the height in front of where it stood (falls forward, should fall backwards)",
+      "vision k_dizzy: No dizzy or woozy face expressions like crossed eyes before falling.; Face shows no dizziness like swirly or crossed eyes before falling.",
+      "vision k_back: Figure ends lying on back but head faces left, not toward the back right.; Does not fall backwards or end lying on back; sits upright facing left."
+     ],
+     "faults": [
+      "edge",
+      "k_back",
+      "k_dizzy",
+      "ko_forward"
+     ],
+     "vision_ran": true,
+     "spent": 0.0075,
+     "error": null,
+     "words": "The clip gate flags this take: edge: 39 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground); ko_forward: ends 0% of the height in front of where it stood (falls forward, should fall backwards); vision k_dizzy: No dizzy or woozy face expressions like crossed eyes before falling.; Face shows no dizziness like swirly or crossed eyes before falling.; vision k_back: Figure ends lying on back but head faces left, not toward the back right.; Does not fall backwards or end lying on back; sits upright facing left.."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
