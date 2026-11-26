@@ -8,7 +8,7 @@
 // Under each person: name, level, health, Main Vibe with Rank stars, Front row or Back row, and a New skill tag after a Rank-up until
 // their Vibes page is opened. Everyone recruited who is not in the party waits on the bench; Change swaps them in (benchSwap,
 // benchToParty in engine/bench.js). The Family Ruckus gauge has its marks at 50 and 100.
-const M2_V='menu1',M2_FIG=.935,M2_FEET=.04,M2_ASPECT=547/820;
+const M2_V='menu2',M2_FIG=.935,M2_FEET=.04,M2_ASPECT=547/820;
 const m2Inches=m=>(typeof WALK_SCALE!=='undefined'&&WALK_SCALE[m.id]&&WALK_SCALE[m.id].inches)||0;
 const m2Bench=()=>(typeof benchMembers==='function'?benchMembers():[]);
 function m2RuckusPct() { const v=(typeof B3S!=='undefined'&&Number.isFinite(B3S.ruckus))?B3S.ruckus:0; return Math.max(0,Math.min(100,Math.round(v))); }

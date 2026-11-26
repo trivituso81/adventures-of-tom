@@ -1,3 +1,8 @@
+## heroframes1 (2026-11-26): the menu hero paintings of Tom, Grace and Boppy are the newest approved ones
+
+Tom: "Implement any other pending approved character pose sheets". Checked every approved Characters entry in the Art Library: nothing newer than what is in the game is waiting for Amy, Justin, Olivia, Ellie, Jojo or Michael (their last approvals are from 11-11 or earlier; amy-listen and justin-listen are not generated yet). What was left: the menu hero paintings. `bake_menu_heroes.py tom grace deedee boppy` now bakes `tom-hero-v4`, `grace-hero-v2` and `boppy-hero-v3` (Deedee's `deedee-hero-v2` was already in). `M2_V` moved to `menu2` so phones fetch the new pictures. Not done: the four Deedee fart poses (Tom said a later scene) and `tomride-title-v2` (no screen uses it). Portraits (`portraits/`) are baked by the portrait Action, not touched here.
+
+
 ## board-smokefix2 (2026-11-26): board card for the two smoke failures on main
 
 Added card c-smokefix2 (Claude lane, Tools theme): `python3 tools/smoke.py` fails on main on the board4 check in `board_sync_test` and on the night manifest, which lacks `tools/hidebf_test.py`. Board only; no game file changed.

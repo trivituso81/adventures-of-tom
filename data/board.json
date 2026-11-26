@@ -9438,6 +9438,63 @@
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26"
+  },
+  {
+   "id": "c-heroframes1",
+   "title": "Install the newest approved hero paintings in the menus",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "done",
+   "next": "Shipped as heroframes1: menu heroes for Tom, Grace and Boppy baked from the newest approved paintings.",
+   "blocks": [],
+   "changed": "2026-11-26",
+   "created": "2026-11-26",
+   "done": "2026-11-26",
+   "tag": "heroframes1",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
+    "opening": "\"Implement any other pending approved character pose sheets\""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by the session: Tom's words: \"Implement any other pending approved character pose sheets\"."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as heroframes1: menu heroes of Tom, Grace and Boppy are the newest approved paintings"
+    }
+   ],
+   "after": "t-heroframes1play",
+   "prompt": {
+    "what": "Bakes the menu hero paintings from the newest approved versions.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the bake exists)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md and card c-heroframes1 in data/board.json. Your first push is the commit board: start c-heroframes1. Run python3 tools/sprite-bake/bake_menu_heroes.py tom grace deedee boppy and bump M2_V. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "t-heroframes1play",
+   "title": "Look at the new hero paintings in the menu",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open the game, RELOAD on the title, press Start to open the menu, then Family. Look at Tom, Grace and Boppy: each should be the newest painting (Tom's Retro Guardian shirt, Grace's lilac hoodie, Boppy's Paso Robles cap and vest). Tell me with the REPORT tab which one is wrong.",
+   "where": "phone",
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by heroframes1."
+    }
+   ]
   }
  ],
  "sessions": [
