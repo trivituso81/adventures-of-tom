@@ -2415,8 +2415,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T08:29:42Z",
-   "state": "checking",
-   "since": "2026-11-26T08:46:11Z",
+   "state": "done",
+   "since": "2026-11-26T08:49:35Z",
    "run": 45782279434,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -2429,7 +2429,23 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-tom-idle/t3.js",
+    "img": "takes/body-tom-idle/t3.webp",
+    "frames": 50,
+    "kb": 645,
+    "words": "0 to 147 step 3, loop wrap",
+    "gate": {
+     "hold": false,
+     "reasons": [],
+     "faults": [],
+     "vision_ran": true,
+     "spent": 0.0081,
+     "error": null,
+     "words": "The clip gate found nothing wrong."
+    },
+    "n": 3
+   },
    "use": null,
    "left": false,
    "dry": false,
