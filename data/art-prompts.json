@@ -6571,6 +6571,14 @@
      "date": "2026-11-14",
      "from": "v1",
      "at": 1794689827056
+    },
+    {
+     "n": 2,
+     "file": "art/raw/characters/rose-talk-v3.png",
+     "date": "2026-11-26",
+     "from": "v2",
+     "at": 1795719731335,
+     "up": true
     }
    ],
    "rejects": [],
