@@ -1,3 +1,6 @@
+## wanstop-rose-doublelamby-r1 (2026-11-26): Rose's Double Lamby video tried again with her feet kept on the ground
+The first two tries did the move but lifted her feet off the spot. One sentence of the prompt changed (the bounce onto the balls of her feet became a knee dip with both feet flat); nothing else.
+
 ## wanstop-rose-citadel-r1 (2026-11-26): Rose's Sofa Cushion Citadel video gets one prompt change and its next try starts
 
 Both tries (rev 1) showed Rose lifting both arms, sweeping them wide and returning, but the Lamby plush popped in and out (the start picture has empty hands), so the look check failed twice on the plush. One change: the prompt (`wan-rose-citadel-v2.txt`) drops the plush sentence and says both hands stay empty, the wording of the controller toss; pad, seed, start picture and model are kept. Job rev 2. The next try is started by `wgen` on card t-rosestage-lab.
