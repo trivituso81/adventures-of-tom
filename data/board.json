@@ -2248,13 +2248,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-25",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGRWRcLWqN5bqexXNU",
     "opening": "not started"
    },
    "nightly": true,
@@ -2313,6 +2313,14 @@
     {
      "d": "2026-11-25",
      "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Started by the night shift."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -2327,7 +2335,8 @@
    "last_run": {
     "date": "2026-11-23",
     "build": ""
-   }
+   },
+   "started_at": "2026-11-26T07:39:23+00:00"
   },
   {
    "id": "c-night-qa",
@@ -7112,7 +7121,7 @@
   {
    "id": "c-guide-crosswalk",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "guidecross1",
    "title": "Battle Guide: manifest crosswalk and per-ability needs",
@@ -7128,6 +7137,10 @@
     {
      "d": "2026-11-25",
      "t": "Made by Tom's request in this conversation; first push of the session."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -7150,6 +7163,16 @@
    "tags": [],
    "cards": [
     "c-justinbb9"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCskdRQQ8jaXgjzwk7",
+   "title": "Battle Guide: manifest crosswalk and per-ability needs",
+   "first": "2026-11-25T23:38:33-08:00",
+   "last": "2026-11-25T23:38:33-08:00",
+   "tags": [],
+   "cards": [
+    "c-guide-crosswalk"
    ]
   },
   {
@@ -13564,8 +13587,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "59d96ba4b25918b40ba6f723a93adebd7c2fdc43",
- "synced_at": "2026-11-26T05:48:40+00:00",
+ "synced": "2bed71069ec80a1e56eca25134a6b11c502e9ca1",
+ "synced_at": "2026-11-26T07:39:24+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -13638,6 +13661,13 @@
     {
      "id": "c-night-qa",
      "at": "2026-11-25T08:01:12+00:00",
+     "kind": "standing"
+    }
+   ],
+   "2026-11-25": [
+    {
+     "id": "c-night-clean",
+     "at": "2026-11-26T07:39:23+00:00",
      "kind": "standing"
     }
    ]
