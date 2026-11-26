@@ -1,3 +1,7 @@
+## hidebf2 (2026-11-26): The battleframe box also hides objects and effects
+
+Tom: the Hide painted battleframes box should also hide the objects and effects of each character. The 132 `-fx-` sheets (Characters tab, "objects and effects") now hide with the battle frames: 290 of 429 Characters entries while ticked. Test: `python3 tools/hidebf_test.py`.
+
 ## hidebf1 (2026-11-26): Art Library has a Hide painted battleframes box, ticked by default
 
 Tom: a box on the left of the Art Library, ticked by default, that hides every battle frame for every character. It hides 158 Characters entries: every battle stance sheet 1 and 2 (all party members, Jojo, Nara, young Boppy battle sheets) and every ability frame sheet (ids with `-ab-`). Hidden entries are gone from the list, the search, the tab and filter counts and the group counts. Ability object and effect sheets (`-fx-`), emotion and talk sheets, enemies and battle backgrounds stay. The Review queue is unchanged, so a picture waiting for approval is never lost. The choice is saved on the device; a `?open=` link to a battle frame unticks the box so the link still lands. Test: `python3 tools/hidebf_test.py`.

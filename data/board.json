@@ -8300,6 +8300,29 @@
     }
    ],
    "after": "nothing for Tom: end"
+  },
+  {
+   "id": "c-hidebf2",
+   "tag": "hidebf2",
+   "lane": "claude",
+   "col": "done",
+   "theme": "Tools",
+   "title": "Art Library: battleframe box also hides objects and effects",
+   "next": "Done. Hide painted battleframes now also hides every character's objects and effects sheets (290 entries in all). Untick the box to see them.",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "done": "2026-11-26",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukH7bSqAJrwdcNpCdR9",
+    "opening": "In the art library on the left side, there needs to be a checkbox"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Tom: \"The checkbook should also hide objects and effects for each character\". Shipped as hidebf2: the -fx- sheets are hidden by the same box."
+    }
+   ],
+   "after": "nothing for Tom: end"
   }
  ],
  "sessions": [

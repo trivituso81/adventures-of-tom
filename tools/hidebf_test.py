@@ -8,7 +8,7 @@ HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.join(HERE, '..
 out = sys.argv[1] if len(sys.argv) > 1 else '/tmp/hidebf'; os.makedirs(out, exist_ok=True)
 fails = []
 es = json.load(open(os.path.join(ROOT, 'data', 'art-prompts.json'), encoding='utf-8'))['entries']
-BF = re.compile(r'-ab-|-battle-stance-\d|-battle-sheet-\d')
+BF = re.compile(r'-ab-|-fx-|-battle-stance-\d|-battle-sheet-\d')
 bf = [e for e in es if e['tab'] == 'Characters' and BF.search(e['id'])]; chars = [e for e in es if e['tab'] == 'Characters']
 if len(bf) < 100: fails.append('expected 100+ battle-frame entries, found %d' % len(bf))
 srv = subprocess.Popen([sys.executable, os.path.join(HERE, 'serve.py'), '8096'], cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL); time.sleep(2)

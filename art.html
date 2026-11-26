@@ -251,7 +251,7 @@ async function probe(){
   if(changed) paintList(true);
 }
 // hidebf1 (Tom 2026-11-26): "Hide painted battleframes" is ticked by default. Battle frames = every party character's battle stance sheets, young Boppy's battle sheets and every ability frame sheet (ids with -ab-). Hidden entries leave the list, the search, the tab and filter counts and the group counts.
-const BF_ID=/-ab-|-battle-stance-\d|-battle-sheet-\d/;
+const BF_ID=/-ab-|-fx-|-battle-stance-\d|-battle-sheet-\d/;   // hidebf2 (Tom 11-26): the objects and effects sheets (-fx-) of each character count as battle frames too
 const isBF=e=>e.tab==='Characters'&&BF_ID.test(e.id);
 const bfHidden=e=>UI.hideBF!==false&&isBF(e);
 const shownEntries=()=>DATA.entries.filter(e=>!bfHidden(e));
