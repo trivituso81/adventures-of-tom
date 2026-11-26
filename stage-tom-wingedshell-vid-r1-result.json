@@ -1,0 +1,89 @@
+{
+ "what": "stage-tom-wingedshell-vid",
+ "rev": 1,
+ "verdict": "passed",
+ "file": "stage-tom-wingedshell-vid-r1.mp4",
+ "n": 90,
+ "fps": 30.0,
+ "attempts": [
+  {
+   "name": "stage-tom-wingedshell-vid",
+   "file": "stage-tom-wingedshell-vid-r1.mp4",
+   "pad": null,
+   "failed": [],
+   "evidence": [],
+   "checks": {
+    "n": 90,
+    "fps": 30.0,
+    "w": 640,
+    "h": 640,
+    "checks": [
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 100.0,
+      "limit": 97.0,
+      "say": "the edge of the picture is at least 100.0 percent the flat magenta in every picture (needs 97)"
+     },
+     {
+      "id": "edge",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.05,
+      "say": "the object touches an edge of the picture in 0 of 90 pictures (limit 5 percent)"
+     },
+     {
+      "id": "motion",
+      "ok": true,
+      "v": 18.5,
+      "limit": 2.0,
+      "say": "the biggest change from the first picture is 18.5 of 255 (needs 2.0): it moves"
+     },
+     {
+      "id": "loop",
+      "ok": true,
+      "v": 0.62,
+      "limit": 14.0,
+      "say": "the last picture differs from the first by 0.6 of 255 (a loop needs 14 or less)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 1.0,
+    "yes": 3,
+    "of": 3,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0055,
+    "items": [
+     {
+      "id": "f_none",
+      "q": "Is there no person, no hand, no face and no character in ANY of the pictures (only the object on its flat pure magenta background)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Only the winged turtle shell on magenta background"
+     },
+     {
+      "id": "f_same",
+      "q": "Is it the same object in every picture, with the same shape, colours and drawing style as in the start picture (Image 2)? Say no if it turns into something else.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Same turtle shell object, shape, colors and hand-drawn style in all frames"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does the video show the main action of this description well enough to be used in a game? Small differences do NOT matter: exact timing, how many sparks or rays, exact size. Say no only if the main action is missing, a clearly different thing happens instead, or the object leaves the picture.",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Wings flap up and down steadily as the shell bobs in place"
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-22T21:43:37Z",
+ "skipped_checks": [],
+ "merged": "wanbulk-tmovestagelab-45071628174",
+ "bake_note": "tom/wingedshell: tom/wingedshell obj pictures 30 box px 192 145 sheet (924, 775) in memory mb 2.86 kb 225"
+}

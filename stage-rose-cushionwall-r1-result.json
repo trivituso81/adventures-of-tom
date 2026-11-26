@@ -1,0 +1,131 @@
+{
+ "what": "stage-rose-cushionwall",
+ "rev": 1,
+ "verdict": "passed",
+ "file": "stage-rose-cushionwall-a2-r1.png",
+ "n": 1,
+ "fps": 0,
+ "attempts": [
+  {
+   "name": "stage-rose-cushionwall",
+   "file": "stage-rose-cushionwall-r1.png",
+   "pad": null,
+   "failed": [
+    "bg"
+   ],
+   "evidence": [
+    "bg: the edge of the picture is 93.7 percent the flat magenta asked for (needs 97)"
+   ],
+   "checks": {
+    "n": null,
+    "fps": null,
+    "w": 1024,
+    "h": 1024,
+    "checks": [
+     {
+      "id": "bg",
+      "ok": false,
+      "v": 93.7,
+      "limit": 97.0,
+      "say": "the edge of the picture is 93.7 percent the flat magenta asked for (needs 97)"
+     },
+     {
+      "id": "size",
+      "ok": true,
+      "v": 0.288,
+      "limit": 0.015,
+      "say": "the object fills 28.8 percent of the picture (needs 1.5)"
+     },
+     {
+      "id": "margin",
+      "ok": true,
+      "v": 0.08,
+      "limit": 0.02,
+      "say": "the object keeps 8.0 percent of room to the nearest edge (needs 2.0)"
+     },
+     {
+      "id": "centre",
+      "ok": true,
+      "v": 0.006,
+      "limit": 0.3,
+      "say": "the object is 1 percent of the picture off centre (limit 30)"
+     }
+    ]
+   },
+   "vision": null,
+   "look_checks": "not run (a measurement failed first)"
+  },
+  {
+   "name": "stage-rose-cushionwall-a2",
+   "file": "stage-rose-cushionwall-a2-r1.png",
+   "pad": null,
+   "failed": [],
+   "evidence": [],
+   "checks": {
+    "n": null,
+    "fps": null,
+    "w": 1024,
+    "h": 1024,
+    "checks": [
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 100.0,
+      "limit": 97.0,
+      "say": "the edge of the picture is 100.0 percent the flat magenta asked for (needs 97)"
+     },
+     {
+      "id": "size",
+      "ok": true,
+      "v": 0.258,
+      "limit": 0.015,
+      "say": "the object fills 25.8 percent of the picture (needs 1.5)"
+     },
+     {
+      "id": "margin",
+      "ok": true,
+      "v": 0.102,
+      "limit": 0.02,
+      "say": "the object keeps 10.2 percent of room to the nearest edge (needs 2.0)"
+     },
+     {
+      "id": "centre",
+      "ok": true,
+      "v": 0.004,
+      "limit": 0.3,
+      "say": "the object is 0 percent of the picture off centre (limit 30)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 1.0,
+    "yes": 2,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0031,
+    "items": [
+     {
+      "id": "f_obj",
+      "q": "Is this ONE single object, drawn whole and centred on a plain flat pure magenta background, with no person, no hand, no extra objects and no text other than lettering the description asks for?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Single centered object on plain magenta background, no people/hands/text/extra items."
+     },
+     {
+      "id": "p1",
+      "q": "Does the object in the picture match the description well enough to be used as that object in a game? Small differences in exact shape or colour do NOT matter; say no only if it is a clearly different object or something important in the description is missing.",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Matches stacked cushions/blankets with flag on top in specified style and view."
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-26T09:58:28Z",
+ "skipped_checks": [],
+ "merged": "wanbulk-trosestagelab-45796453993",
+ "bake_note": "rose/cushionwall: rose/cushionwall prop pictures 1 box px 256 154 sheet (258, 156) in memory mb 0.16 kb 15"
+}

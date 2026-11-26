@@ -1,0 +1,16 @@
+20:57:23 guide requests; ledger $74.11
+20:57:23 1 guide request(s) found, 0 start picture request(s)
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:272: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  rows, today = [], datetime.datetime.utcnow().strftime('%Y-%m-%d')
+20:57:25 frame: art/clips/start/tnb-hero.png -> 720x1280, height filled, 70 px cut from each side
+20:57:25 job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $74.11 of the $74.70 cap
+20:57:25 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BREATHING IDLE\nHe stands in his starting relaxed stance and breathes slowly and gently, his chest and shoulders rising and falling softly, and blinks once. His arms, head and feet stay where they are for the whole clip.", "start_image_url": "<data uri, 1357 KB>", "end_image_url": "<data uri, 1357 KB>"}
+20:57:26 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:213: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+20:57:26 sent, request 01a2050c-ae20-7771-8f89-9bc8f9c742ca
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+20:59:29 DONE: guide-body-tnb-idle-t1-r1.mp4 (8999 KB). Ledger $74.61 of $74.70.
+20:59:30 costlog: logged 1 row(s) to data/costs.json: fal 0.5

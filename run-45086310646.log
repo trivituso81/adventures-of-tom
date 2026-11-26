@@ -1,0 +1,70 @@
+00:05:08 stage-tom-bluebang-vid: Tom asked for more tries at 2026-11-22T23:56:13.787Z, so its count starts again from then
+00:05:08 bulk run for t-movestage-lab: 26 job(s) stage-tom-bluebang, stage-tom-glare, stage-tom-carryon, stage-tom-suitedoor, stage-tom-porsche, stage-tom-controller, stage-tom-wingedshell, stage-tom-runwaylights, stage-tom-jetwash, stage-tom-fireball, stage-tom-starbeam, stage-tom-meteor, stage-tom-bluebang-vid, stage-tom-glare-vid, stage-tom-wingedshell-vid, stage-tom-runwaylights-vid, stage-tom-jetwash-vid, stage-tom-fireball-vid, stage-tom-starbeam-vid, stage-tom-meteor-vid, tom-suitedoor, tom-porsche, tom-cartridge, tom-controller, tom-shell, tom-konami; run cap $12.00 (ledger $88.61)
+00:05:08 estimate if every job is made once: $6.00; an edge retry adds one more video for that job
+00:05:10 [stage-tom-glare] stage-tom-glare rev 1 already has a result (passed): nothing sent.
+00:05:10 [stage-tom-bluebang] stage-tom-bluebang rev 1 already has a result (passed): nothing sent.
+00:05:10 [stage-tom-carryon] stage-tom-carryon rev 1 already has a result (passed): nothing sent.
+00:05:10 [stage-tom-porsche] stage-tom-porsche rev 1 already has a result (passed): nothing sent.
+00:05:10 [stage-tom-suitedoor] stage-tom-suitedoor rev 1 already has a result (stopped): nothing sent.
+00:05:10 [stage-tom-wingedshell] stage-tom-wingedshell rev 1 already has a result (passed): nothing sent.
+00:05:10 [stage-tom-controller] stage-tom-controller rev 1 already has a result (passed): nothing sent.
+00:05:10 [stage-tom-jetwash] stage-tom-jetwash rev 1 already has a result (passed): nothing sent.
+00:05:10 [stage-tom-fireball] stage-tom-fireball rev 1 already has a result (passed): nothing sent.
+00:05:10 [stage-tom-runwaylights] stage-tom-runwaylights rev 1 already has a result (passed): nothing sent.
+00:05:10 [stage-tom-starbeam] stage-tom-starbeam rev 1 already has a result (passed): nothing sent.
+00:05:10 [stage-tom-meteor] stage-tom-meteor rev 1 already has a result (passed): nothing sent.
+00:05:10 [tom-porsche] tom-porsche rev 1 already has a result (stopped): nothing sent.
+00:05:10 [tom-cartridge] tom-cartridge rev 1 already has a result (stopped): nothing sent.
+00:05:10 [tom-suitedoor] tom-suitedoor rev 1 already has a result (stopped): nothing sent.
+00:05:10 [tom-shell] tom-shell rev 1 already has a result (passed): nothing sent.
+00:05:10 [tom-konami] tom-konami rev 1 already has a result (stopped): nothing sent.
+00:05:10 [tom-controller] tom-controller rev 2 already has a result (stopped): nothing sent.
+00:05:10 [stage-tom-bluebang-vid] stage-tom-bluebang-vid rev 2 already has a result (stopped): nothing sent.
+00:05:10 [stage-tom-glare-vid] stage-tom-glare-vid rev 1 already has a result (stopped): nothing sent.
+00:05:10 [stage-tom-wingedshell-vid] stage-tom-wingedshell-vid rev 1 already has a result (passed): nothing sent.
+00:05:10 [stage-tom-runwaylights-vid] stage-tom-runwaylights-vid rev 1 already has a result (passed): nothing sent.
+00:05:10 [stage-tom-fireball-vid] stage-tom-fireball-vid rev 1 already has a result (passed): nothing sent.
+00:05:10 [stage-tom-starbeam-vid] stage-tom-starbeam-vid rev 2 already has a result (passed): nothing sent.
+00:05:10 [stage-tom-meteor-vid] stage-tom-meteor-vid rev 1 already has a result (passed): nothing sent.
+00:05:10 frame: /home/runner/work/_temp/wangen/stage-tom-jetwash-r1.png -> as it is, sent as it is, then shrunk to 80% on the same magenta (pad)
+00:05:10 [stage-tom-jetwash-vid] job rev 2 on alibaba/wan-3.0/image-to-video, estimate $0.15; ledger so far $88.61 of the $100.61 cap
+00:05:10 [stage-tom-jetwash-vid] request: {"resolution": "480p", "aspect_ratio": "1:1", "duration": 3, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D animation of the exact object in the attached first-frame image, preserving its exact shape, colors and hand-drawn colored pencil and ink style throughout every frame. There is no person, hand or character anywhere in the clip.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The object stays centered on the same spot on a flat, solid pure black background. Silent clip.\n\nMOTION: JET WASH\nThe streaks of hot air ripple and stream to the left once, then thin out and fade away completely until only the black background is left.", "start_image_url": "<data uri, 750 KB>"}
+00:05:11 [stage-tom-jetwash-vid] live fal price: $0.045 per seconds
+00:05:11 [stage-tom-jetwash-vid] sent, request 01a205b8-91a8-7071-a421-d03cde9423fc
+00:06:22 [stage-tom-jetwash-vid] DONE: stage-tom-jetwash-vid-r2.mp4 (2164 KB). Ledger $88.75 of $100.61.
+00:06:24 [stage-tom-jetwash-vid] stage-tom-jetwash-vid attempt 1: failed: bg, edge
+00:06:24 [stage-tom-jetwash-vid] stage-tom-jetwash-vid: failed bg, edge, so it is made once more with every setting the same (a re-roll).
+00:06:24 frame: /home/runner/work/_temp/wangen/stage-tom-jetwash-r1.png -> as it is, sent as it is, then shrunk to 80% on the same magenta (pad)
+00:06:24 [stage-tom-jetwash-vid] job rev 2 on alibaba/wan-3.0/image-to-video, estimate $0.15; ledger so far $88.75 of the $100.61 cap
+00:06:24 [stage-tom-jetwash-vid] request: {"resolution": "480p", "aspect_ratio": "1:1", "duration": 3, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D animation of the exact object in the attached first-frame image, preserving its exact shape, colors and hand-drawn colored pencil and ink style throughout every frame. There is no person, hand or character anywhere in the clip.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The object stays centered on the same spot on a flat, solid pure black background. Silent clip.\n\nMOTION: JET WASH\nThe streaks of hot air ripple and stream to the left once, then thin out and fade away completely until only the black background is left.", "start_image_url": "<data uri, 750 KB>"}
+00:06:25 [stage-tom-jetwash-vid] live fal price: $0.045 per seconds
+00:06:25 [stage-tom-jetwash-vid] sent, request 01a205b9-b14b-7e61-90be-d52b9e44f7a3
+00:07:31 [stage-tom-jetwash-vid] DONE: stage-tom-jetwash-vid-a2-r2.mp4 (1377 KB). Ledger $88.91 of $100.61.
+00:07:32 [stage-tom-jetwash-vid] stage-tom-jetwash-vid attempt 2: failed: edge
+00:07:32 stage-tom-bluebang     already
+00:07:32 stage-tom-glare        already
+00:07:32 stage-tom-carryon      already
+00:07:32 stage-tom-suitedoor    already
+00:07:32 stage-tom-porsche      already
+00:07:32 stage-tom-controller   already
+00:07:32 stage-tom-wingedshell  already
+00:07:32 stage-tom-runwaylights already
+00:07:32 stage-tom-jetwash      already
+00:07:32 stage-tom-fireball     already
+00:07:32 stage-tom-starbeam     already
+00:07:32 stage-tom-meteor       already
+00:07:32 tom-suitedoor          already
+00:07:32 tom-porsche            already
+00:07:32 tom-cartridge          already
+00:07:32 tom-controller         already
+00:07:32 tom-shell              already
+00:07:32 tom-konami             already
+00:07:32 stage-tom-bluebang-vid already
+00:07:32 stage-tom-glare-vid    already
+00:07:32 stage-tom-wingedshell-vid already
+00:07:32 stage-tom-runwaylights-vid already
+00:07:32 stage-tom-jetwash-vid  stopped (retried with a smaller pad)
+00:07:32 stage-tom-fireball-vid already
+00:07:32 stage-tom-starbeam-vid already
+00:07:32 stage-tom-meteor-vid   already
+00:07:34 costlog: logged 1 row(s) to data/costs.json: fal 0.3

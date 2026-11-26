@@ -1,0 +1,14 @@
+{
+ "card": "t-pairmove1-gen",
+ "build": null,
+ "rows": [
+  {
+   "what": "tom-rose-giddyup",
+   "rev": 1,
+   "state": "error",
+   "why": "fal result said 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}"
+  }
+ ],
+ "spent_fal": 0.785,
+ "spent_xai": 0.0
+}

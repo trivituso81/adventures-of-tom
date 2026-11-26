@@ -1,0 +1,122 @@
+{
+ "card": "t-rosestage-lab",
+ "build": "wanbulk-trosestagelab-45796453993",
+ "rows": [
+  {
+   "what": "stage-rose-cushion",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "stage-rose-lamby",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "stage-rose-backuplamby",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "stage-rose-comet",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "stage-rose-ripple",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "stage-rose-cushionwall",
+   "rev": 1,
+   "state": "passed",
+   "retried": true
+  },
+  {
+   "what": "stage-rose-castle",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "stage-rose-whoopee",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "rose-tacklelunge",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "rose-lavahop",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "rose-doublelamby",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "rose-pretzel",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "rose-boomerang",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "rose-citadel",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "rose-kingdom",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "rose-boop",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "rose-raspberry",
+   "rev": 1,
+   "state": "capped",
+   "why": "the run cap would be passed"
+  },
+  {
+   "what": "rose-baitswitch",
+   "rev": 1,
+   "state": "capped",
+   "why": "the run cap would be passed"
+  },
+  {
+   "what": "rose-whoopee",
+   "rev": 1,
+   "state": "capped",
+   "why": "the run cap would be passed"
+  }
+ ],
+ "spent_fal": 9.85,
+ "spent_xai": 0.0566
+}

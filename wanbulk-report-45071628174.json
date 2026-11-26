@@ -1,0 +1,164 @@
+{
+ "card": "t-movestage-lab",
+ "build": "wanbulk-tmovestagelab-45071628174",
+ "rows": [
+  {
+   "what": "stage-tom-bluebang",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "stage-tom-glare",
+   "rev": 1,
+   "state": "passed",
+   "retried": true
+  },
+  {
+   "what": "stage-tom-carryon",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "stage-tom-suitedoor",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "stage-tom-porsche",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "stage-tom-controller",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "stage-tom-wingedshell",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "stage-tom-runwaylights",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "stage-tom-jetwash",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "stage-tom-fireball",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "stage-tom-starbeam",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "stage-tom-meteor",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "tom-suitedoor",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "tom-porsche",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "tom-cartridge",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "tom-controller",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "tom-shell",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "tom-konami",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "stage-tom-bluebang-vid",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "stage-tom-glare-vid",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "stage-tom-wingedshell-vid",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "stage-tom-runwaylights-vid",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "stage-tom-jetwash-vid",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "stage-tom-fireball-vid",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "stage-tom-starbeam-vid",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "stage-tom-meteor-vid",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  }
+ ],
+ "spent_fal": 9.4,
+ "spent_xai": 0.1336
+}

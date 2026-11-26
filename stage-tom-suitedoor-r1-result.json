@@ -1,0 +1,157 @@
+{
+ "what": "stage-tom-suitedoor",
+ "rev": 1,
+ "verdict": "stopped",
+ "file": "stage-tom-suitedoor-a2-r1.png",
+ "attempts": [
+  {
+   "name": "stage-tom-suitedoor",
+   "file": "stage-tom-suitedoor-r1.png",
+   "pad": null,
+   "failed": [
+    "p1"
+   ],
+   "evidence": [
+    "p1: Does the object in the picture match the description well enough to be used as that object in a game? Small differences in exact shape or co (Light is on top right, not upper left; lacks warm golden light and soft shading from upper left)"
+   ],
+   "checks": {
+    "n": null,
+    "fps": null,
+    "w": 1024,
+    "h": 1024,
+    "checks": [
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 100.0,
+      "limit": 97.0,
+      "say": "the edge of the picture is 100.0 percent the flat magenta asked for (needs 97)"
+     },
+     {
+      "id": "size",
+      "ok": true,
+      "v": 0.369,
+      "limit": 0.015,
+      "say": "the object fills 36.9 percent of the picture (needs 1.5)"
+     },
+     {
+      "id": "margin",
+      "ok": true,
+      "v": 0.1,
+      "limit": 0.02,
+      "say": "the object keeps 10.0 percent of room to the nearest edge (needs 2.0)"
+     },
+     {
+      "id": "centre",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.3,
+      "say": "the object is 0 percent of the picture off centre (limit 30)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.5,
+    "yes": 1,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0047,
+    "items": [
+     {
+      "id": "f_obj",
+      "q": "Is this ONE single object, drawn whole and centred on a plain flat pure magenta background, with no person, no hand, no extra objects and no text other than lettering the description asks for?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Single centered object on plain magenta background, no people/hands/extra objects/text"
+     },
+     {
+      "id": "p1",
+      "q": "Does the object in the picture match the description well enough to be used as that object in a game? Small differences in exact shape or colour do NOT matter; say no only if it is a clearly different object or something important in the description is missing.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Light is on top right, not upper left; lacks warm golden light and soft shading from upper left"
+     }
+    ]
+   },
+   "look_checks": "run"
+  },
+  {
+   "name": "stage-tom-suitedoor-a2",
+   "file": "stage-tom-suitedoor-a2-r1.png",
+   "pad": null,
+   "failed": [
+    "p1"
+   ],
+   "evidence": [
+    "p1: Does the object in the picture match the description well enough to be used as that object in a game? Small differences in exact shape or co (Looks like furniture cabinet, not airplane privacy suite door panel)"
+   ],
+   "checks": {
+    "n": null,
+    "fps": null,
+    "w": 1024,
+    "h": 1024,
+    "checks": [
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 100.0,
+      "limit": 97.0,
+      "say": "the edge of the picture is 100.0 percent the flat magenta asked for (needs 97)"
+     },
+     {
+      "id": "size",
+      "ok": true,
+      "v": 0.288,
+      "limit": 0.015,
+      "say": "the object fills 28.8 percent of the picture (needs 1.5)"
+     },
+     {
+      "id": "margin",
+      "ok": true,
+      "v": 0.104,
+      "limit": 0.02,
+      "say": "the object keeps 10.4 percent of room to the nearest edge (needs 2.0)"
+     },
+     {
+      "id": "centre",
+      "ok": true,
+      "v": 0.003,
+      "limit": 0.3,
+      "say": "the object is 0 percent of the picture off centre (limit 30)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.5,
+    "yes": 1,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.003,
+    "items": [
+     {
+      "id": "f_obj",
+      "q": "Is this ONE single object, drawn whole and centred on a plain flat pure magenta background, with no person, no hand, no extra objects and no text other than lettering the description asks for?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Single object centered on plain magenta background, no people/hands/extra objects/text"
+     },
+     {
+      "id": "p1",
+      "q": "Does the object in the picture match the description well enough to be used as that object in a game? Small differences in exact shape or colour do NOT matter; say no only if it is a clearly different object or something important in the description is missing.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Looks like furniture cabinet, not airplane privacy suite door panel"
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-22T21:33:19Z",
+ "evidence": [
+  "p1: Does the object in the picture match the description well enough to be used as that object in a game? Small differences in exact shape or co (Looks like furniture cabinet, not airplane privacy suite door panel)"
+ ],
+ "why": "failed twice: p1"
+}

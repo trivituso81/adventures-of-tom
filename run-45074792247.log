@@ -1,0 +1,4 @@
+21:57:32 guide requests; ledger $87.16
+21:57:32 1 guide request(s) found, 0 start picture request(s)
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:298: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  rows, today = [], datetime.datetime.utcnow().strftime('%Y-%m-%d')

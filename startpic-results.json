@@ -1,0 +1,83 @@
+{
+ "results": [
+  {
+   "startpic": "tnb",
+   "take": 1795379861,
+   "at": "2026-11-22T20:37:41.765Z",
+   "cost": 0.15,
+   "size": [
+    848,
+    1264
+   ],
+   "mirrored": true,
+   "facing": false,
+   "note": "It faced right, so it was mirrored (anything carried on one side, such as a bag, is now on the other side).",
+   "checks": [
+    {
+     "id": "magenta",
+     "ok": true,
+     "say": "the background is flat magenta (FF00FF is asked for)"
+    },
+    {
+     "id": "flat",
+     "ok": true,
+     "say": "the edges are clear (97.5 percent background)"
+    },
+    {
+     "id": "inside",
+     "ok": true,
+     "say": "the whole figure is inside the frame (smallest margin 0.6 percent of the picture)"
+    },
+    {
+     "id": "tall",
+     "ok": true,
+     "say": "the figure is 98 percent of the picture height (at least 60)"
+    }
+   ],
+   "published": true
+  },
+  {
+   "startpic": "nara",
+   "take": 1795380974,
+   "at": "2026-11-22T20:56:14.799Z",
+   "cost": 0.15,
+   "size": [
+    848,
+    1264
+   ],
+   "mirrored": true,
+   "facing": false,
+   "note": "It faced right, so it was mirrored (anything carried on one side, such as a bag, is now on the other side).",
+   "checks": [
+    {
+     "id": "magenta",
+     "ok": true,
+     "say": "the background is flat magenta (FF00FF is asked for)"
+    },
+    {
+     "id": "flat",
+     "ok": true,
+     "say": "the edges are clear (100.0 percent background)"
+    },
+    {
+     "id": "inside",
+     "ok": true,
+     "say": "the whole figure is inside the frame (smallest margin 2.8 percent of the picture)"
+    },
+    {
+     "id": "tall",
+     "ok": true,
+     "say": "the figure is 91 percent of the picture height (at least 60)"
+    }
+   ],
+   "published": true
+  },
+  {
+   "startpic": "nara",
+   "take": 1795380979,
+   "at": "2026-11-22T20:56:19.060Z",
+   "cost": 0,
+   "error": "The guide has spent its $10.00 for today already. Try again tomorrow, or ask Claude."
+  }
+ ]
+}

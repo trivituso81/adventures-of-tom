@@ -1,0 +1,14 @@
+{
+ "card": "t-pairmove1-gen",
+ "build": null,
+ "rows": [
+  {
+   "what": "tom-rose-giddyup",
+   "rev": 1,
+   "state": "error",
+   "why": "not ready after 20 minutes; the request is kept: run again (no new charge)"
+  }
+ ],
+ "spent_fal": 0.0,
+ "spent_xai": 0.0
+}

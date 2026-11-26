@@ -1,0 +1,122 @@
+{
+ "what": "rose-giddyup",
+ "rev": 8,
+ "verdict": "stopped",
+ "file": "rose-giddyup-r8.mp4",
+ "attempts": [
+  {
+   "name": "rose-giddyup",
+   "file": "rose-giddyup-r8.mp4",
+   "pad": 0.65,
+   "failed": [
+    "edge",
+    "p1",
+    "p2"
+   ],
+   "evidence": [
+    "edge: the figure touches the left/top edge in 10 of 121 pictures (video frames 12 to 14, 36 to 38, 70 to 71, 74 to 75)",
+    "p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she circles one hand above her head li (No clear cowgirl hand circle or cannonball jump; shows varied poses instead)",
+    "p2: Reading the pictures in order, does this happen, once and clearly: \"Without jumping again, she returns to her starting relaxed stance.\"  Say (No return to relaxed stance after poses; ends in standing positions)"
+   ],
+   "checks": {
+    "n": 121,
+    "fps": 24.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 813 px first, 813 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.01,
+      "frames": [],
+      "say": "lowest row of the figure in the first and last picture only (a jump): first picture row 1040; at most 0 px (0.0 percent of the frame height) away; limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 11.2,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (251, 27, 247) (27 away from magenta), spread at most 11.2 (limit 15), 0.27 percent of it off colour (limit 1), colour moved at most 3 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 10,
+      "limit": 0,
+      "frames": [
+       12,
+       13,
+       14,
+       36,
+       37,
+       38,
+       70,
+       71,
+       74,
+       75
+      ],
+      "sides": [
+       "left",
+       "top"
+      ],
+      "say": "the figure touches the left/top edge in 10 of 121 pictures (video frames 12 to 14, 36 to 38, 70 to 71, 74 to 75)"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 1.85,
+      "limit": 3.0,
+      "say": "last picture against the first: 1.85 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.333,
+    "yes": 1,
+    "of": 3,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0053,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Consistent character across all frames matching start picture"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she circles one hand above her head like a cowgirl shouting giddyup, then crouches and leaps straight up once, hugging her knees in a tight upright cannonball at the top of the jump, and lands on her feet.\"  Say no if it does not happen, happens twice, or something else happens instead.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "No clear cowgirl hand circle or cannonball jump; shows varied poses instead"
+     },
+     {
+      "id": "p2",
+      "q": "Reading the pictures in order, does this happen, once and clearly: \"Without jumping again, she returns to her starting relaxed stance.\"  Say no if it does not happen, happens twice, or something else happens instead.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "No return to relaxed stance after poses; ends in standing positions"
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-22T02:59:55Z",
+ "evidence": [
+  "edge: the figure touches the left/top edge in 10 of 121 pictures (video frames 12 to 14, 36 to 38, 70 to 71, 74 to 75)",
+  "p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she circles one hand above her head li (No clear cowgirl hand circle or cannonball jump; shows varied poses instead)",
+  "p2: Reading the pictures in order, does this happen, once and clearly: \"Without jumping again, she returns to her starting relaxed stance.\"  Say (No return to relaxed stance after poses; ends in standing positions)"
+ ],
+ "why": "failed: edge, p1, p2"
+}

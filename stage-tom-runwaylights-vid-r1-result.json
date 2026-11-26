@@ -1,0 +1,89 @@
+{
+ "what": "stage-tom-runwaylights-vid",
+ "rev": 1,
+ "verdict": "passed",
+ "file": "stage-tom-runwaylights-vid-r1.mp4",
+ "n": 90,
+ "fps": 30.0,
+ "attempts": [
+  {
+   "name": "stage-tom-runwaylights-vid",
+   "file": "stage-tom-runwaylights-vid-r1.mp4",
+   "pad": null,
+   "failed": [],
+   "evidence": [],
+   "checks": {
+    "n": 90,
+    "fps": 30.0,
+    "w": 640,
+    "h": 640,
+    "checks": [
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 99.4,
+      "limit": 97.0,
+      "say": "the edge of the picture is at least 99.4 percent the flat black in every picture (needs 97)"
+     },
+     {
+      "id": "edge",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.05,
+      "say": "the object touches an edge of the picture in 0 of 90 pictures (limit 5 percent)"
+     },
+     {
+      "id": "motion",
+      "ok": true,
+      "v": 2.59,
+      "limit": 2.0,
+      "say": "the biggest change from the first picture is 2.6 of 255 (needs 2.0): it moves"
+     },
+     {
+      "id": "loop",
+      "ok": true,
+      "v": 0.13,
+      "limit": 14.0,
+      "say": "the last picture differs from the first by 0.1 of 255 (a loop needs 14 or less)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 1.0,
+    "yes": 3,
+    "of": 3,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0055,
+    "items": [
+     {
+      "id": "f_none",
+      "q": "Is there no person, no hand, no face and no character in ANY of the pictures (only the object on its flat pure black background)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Only the light bar object on black background"
+     },
+     {
+      "id": "f_same",
+      "q": "Is it the same object in every picture, with the same shape, colours and drawing style as in the start picture (Image 2)? Say no if it turns into something else.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Same light bar object, shape, colors, and pencil/ink style throughout"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does the video show the main action of this description well enough to be used in a game? Small differences do NOT matter: exact timing, how many sparks or rays, exact size. Say no only if the main action is missing, a clearly different thing happens instead, or the object leaves the picture.",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Shows chase wave of lights brightening right to left repeatedly, ends as began"
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-22T21:44:48Z",
+ "skipped_checks": [],
+ "merged": "wanbulk-tmovestagelab-45071628174",
+ "bake_note": "tom/runwaylights: tom/runwaylights obj pictures 23 box px 384 64 sheet (375, 1351) in memory mb 2.03 kb 191"
+}

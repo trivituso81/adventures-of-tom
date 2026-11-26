@@ -1,0 +1,157 @@
+{
+ "what": "rose-lavahop",
+ "rev": 1,
+ "verdict": "stopped",
+ "file": "rose-lavahop-a2-r1.mp4",
+ "attempts": [
+  {
+   "name": "rose-lavahop",
+   "file": "rose-lavahop-r1.mp4",
+   "pad": 0.8,
+   "failed": [
+    "feet"
+   ],
+   "evidence": [
+    "feet: lowest row of the figure in every picture: first picture row 1127; at most 237 px (18.5 percent of the frame height) away (28 pictures over); limit 1 percent"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 974 px first, 974 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": false,
+      "v": 0.1852,
+      "limit": 0.01,
+      "frames": [
+       63,
+       64,
+       65,
+       66,
+       67,
+       68,
+       69,
+       70,
+       71,
+       72,
+       73,
+       74
+      ],
+      "say": "lowest row of the figure in every picture: first picture row 1127; at most 237 px (18.5 percent of the frame height) away (28 pictures over); limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 3.64,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (253, 20, 247) (20 away from magenta), spread at most 3.6 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 16 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": true,
+      "v": 0,
+      "limit": 0,
+      "frames": [],
+      "sides": [],
+      "say": "the figure never touches an edge"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.69,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.69 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": null,
+   "look_checks": "not run (a measurement failed first)"
+  },
+  {
+   "name": "rose-lavahop-a2",
+   "file": "rose-lavahop-a2-r1.mp4",
+   "pad": 0.8,
+   "failed": [
+    "feet"
+   ],
+   "evidence": [
+    "feet: lowest row of the figure in every picture: first picture row 1127; at most 192 px (15.0 percent of the frame height) away (24 pictures over); limit 1 percent"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 974 px first, 974 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": false,
+      "v": 0.15,
+      "limit": 0.01,
+      "frames": [
+       55,
+       56,
+       57,
+       58,
+       59,
+       60,
+       61,
+       62,
+       63,
+       64,
+       65,
+       66
+      ],
+      "say": "lowest row of the figure in every picture: first picture row 1127; at most 192 px (15.0 percent of the frame height) away (24 pictures over); limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 3.77,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (253, 20, 247) (20 away from magenta), spread at most 3.8 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 18 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": true,
+      "v": 0,
+      "limit": 0,
+      "frames": [],
+      "sides": [],
+      "say": "the figure never touches an edge"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.68,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.68 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": null,
+   "look_checks": "not run (a measurement failed first)"
+  }
+ ],
+ "at": "2026-11-26T10:02:58Z",
+ "evidence": [
+  "feet: lowest row of the figure in every picture: first picture row 1127; at most 192 px (15.0 percent of the frame height) away (24 pictures over); limit 1 percent"
+ ],
+ "why": "failed twice: feet"
+}

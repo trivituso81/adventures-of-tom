@@ -1,0 +1,26 @@
+{
+ "card": "t-movefun-gen",
+ "build": null,
+ "rows": [
+  {
+   "what": "tom-blockade",
+   "rev": 3,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "grace-cubepop",
+   "rev": 4,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "deedee-wetfloor",
+   "rev": 10,
+   "state": "stopped",
+   "retried": true
+  }
+ ],
+ "spent_fal": 3.57,
+ "spent_xai": 0.0412
+}

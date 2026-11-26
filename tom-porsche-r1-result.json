@@ -1,0 +1,184 @@
+{
+ "what": "tom-porsche",
+ "rev": 1,
+ "verdict": "stopped",
+ "file": "tom-porsche-a2-r1.mp4",
+ "attempts": [
+  {
+   "name": "tom-porsche",
+   "file": "tom-porsche-r1.mp4",
+   "pad": null,
+   "failed": [
+    "edge"
+   ],
+   "evidence": [
+    "edge: the figure touches the left edge in 4 of 150 pictures (video frames 112 to 115)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 1233 px first, 1233 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0039,
+      "limit": 0.01,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 1254; at most 5 px (0.4 percent of the frame height) away; limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 6.86,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (251, 36, 243) (36 away from magenta), spread at most 6.9 (limit 15), 0.12 percent of it off colour (limit 1), colour moved at most 7 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 4,
+      "limit": 0,
+      "frames": [
+       112,
+       113,
+       114,
+       115
+      ],
+      "sides": [
+       "left"
+      ],
+      "say": "the figure touches the left edge in 4 of 150 pictures (video frames 112 to 115)"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 1.03,
+      "limit": 3.0,
+      "say": "last picture against the first: 1.03 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 1.0,
+    "yes": 2,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0051,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Consistent character design across all frames"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? \"From his starting relaxed stance, he raises one wrist and glances at it once as if checking a watch, with a patient, unbothered face. Then he lifts his other hand beside his head and gives one small two-finger wave forward to the left, as if signaling his driver, holds that pose with a faint smug smile, then lowers his hand and returns to his starting relaxed stance.\"  Small differences do NOT matter: how many strokes, steps or waves, exactly where an object comes from or goes, the exact pose, or the order of small details. Say no only if the main action is missing, a clearly different action happens instead, the person flips, spins round, falls or turns away from the camera, or the action keeps repeating over and over.",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Sequence shows watch check then two-finger wave and return to stance"
+     }
+    ]
+   },
+   "look_checks": "run"
+  },
+  {
+   "name": "tom-porsche-a2",
+   "file": "tom-porsche-a2-r1.mp4",
+   "pad": 0.8,
+   "failed": [
+    "p1"
+   ],
+   "evidence": [
+    "p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Multiple different actions and poses shown, not the specific watch check then wave sequence)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 988 px first, 988 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0031,
+      "limit": 0.01,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 1131; at most 4 px (0.3 percent of the frame height) away; limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 2.64,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (253, 34, 243) (34 away from magenta), spread at most 2.6 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 11 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": true,
+      "v": 0,
+      "limit": 0,
+      "frames": [],
+      "sides": [],
+      "say": "the figure never touches an edge"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.71,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.71 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.5,
+    "yes": 1,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.005,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Consistent character across all frames"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? \"From his starting relaxed stance, he raises one wrist and glances at it once as if checking a watch, with a patient, unbothered face. Then he lifts his other hand beside his head and gives one small two-finger wave forward to the left, as if signaling his driver, holds that pose with a faint smug smile, then lowers his hand and returns to his starting relaxed stance.\"  Small differences do NOT matter: how many strokes, steps or waves, exactly where an object comes from or goes, the exact pose, or the order of small details. Say no only if the main action is missing, a clearly different action happens instead, the person flips, spins round, falls or turns away from the camera, or the action keeps repeating over and over.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Multiple different actions and poses shown, not the specific watch check then wave sequence"
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-22T21:37:54Z",
+ "evidence": [
+  "p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Multiple different actions and poses shown, not the specific watch check then wave sequence)"
+ ],
+ "why": "failed twice: p1"
+}

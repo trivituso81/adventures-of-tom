@@ -1,0 +1,83 @@
+21:05:52 guide requests; ledger $74.61
+21:05:52 14 guide request(s) found, 2 start picture request(s)
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:272: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  for r in sps:
+21:05:54 frame: art/clips/start/amy-hero.png -> 720x1280, height filled, 70 px cut from each side
+21:05:54 job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $74.61 of the $75.20 cap
+21:05:54 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BREATHING IDLE\nShe stands in her starting relaxed stance and breathes slowly and gently, her chest and shoulders rising and falling softly, and blinks once. Her arms, head and feet stay where they are for the whole clip.", "start_image_url": "<data uri, 1297 KB>", "end_image_url": "<data uri, 1297 KB>"}
+21:05:54 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:213: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+21:05:55 sent, request 01a20514-6fbb-75c3-9a9f-81456651250e
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+21:07:58 DONE: guide-body-amy-idle-t1-r1.mp4 (7929 KB). Ledger $75.11 of $75.20.
+21:07:59 frame: art/clips/start/tnb-hero.png -> 720x1280, height filled, 70 px cut from each side
+21:07:59 job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $75.11 of the $75.70 cap
+21:07:59 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BRACED GUARD\nFrom his starting relaxed stance, he bends his knees, tucks his chin and raises both arms once, crossing his forearms in an X in front of his face with both fists closed. He holds that braced guard, breathing gently, then lowers his arms and stands back up into his starting stance.", "start_image_url": "<data uri, 1357 KB>", "end_image_url": "<data uri, 1357 KB>"}
+21:07:59 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:213: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+21:07:59 sent, request 01a20516-5695-7fb2-82c9-db06dd8720e7
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+21:10:01 DONE: guide-body-tnb-guard-t1-r1.mp4 (11882 KB). Ledger $75.61 of $75.70.
+21:10:01 frame: art/clips/start/tnb-hero.png -> 720x1280, height filled, 70 px cut from each side
+21:10:01 job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $75.61 of the $76.20 cap
+21:10:01 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: FLINCH\nFrom his starting relaxed stance, he flinches once as if bumped from the front, leaning his upper body back with a wince and his arms pulled in, while his feet stay planted. Without repeating the flinch, he straightens up and returns to his starting relaxed stance, holding it for the rest of the clip.", "start_image_url": "<data uri, 1357 KB>", "end_image_url": "<data uri, 1357 KB>"}
+21:10:02 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:213: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+21:10:02 sent, request 01a20518-35e8-70c0-a490-21224382ed76
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+21:12:06 DONE: guide-body-tnb-hit-t1-r1.mp4 (10459 KB). Ledger $76.11 of $76.20.
+21:12:06 frame: art/clips/start/tnb-hero.png -> 720x1280, height filled, 70 px cut from each side
+21:12:06 job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $76.11 of the $76.70 cap
+21:12:06 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: DODGE\nFrom his starting relaxed stance, he quickly ducks and leans his upper body back and away to the right once, as if something is flying past, while his feet stay planted. Without repeating the dodge, he straightens up and returns to his starting relaxed stance, holding it for the rest of the clip.", "start_image_url": "<data uri, 1357 KB>", "end_image_url": "<data uri, 1357 KB>"}
+21:12:06 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:213: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+21:12:06 sent, request 01a2051a-1bf7-72a2-ac37-112fbbbb8492
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+21:14:09 DONE: guide-body-tnb-dodge-t1-r1.mp4 (10354 KB). Ledger $76.61 of $76.70.
+21:14:09 frame: art/clips/start/tnb-hero.png -> 720x1280, height filled, 70 px cut from each side
+21:14:09 job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $76.61 of the $77.20 cap
+21:14:09 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: TOO TIRED TO GO ON\nFrom his starting relaxed stance, he gets dizzy, wobbles once, and slowly sinks down to sit on the ground with his eyes closed and his head drooping, as if he has fallen fast asleep. He stays sitting there, completely still, for the rest of the clip.", "start_image_url": "<data uri, 1357 KB>", "end_image_url": "<data uri, 1357 KB>"}
+21:14:10 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:213: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+21:14:10 sent, request 01a2051b-fe4e-7ea1-bc8b-98ac6a4606e7
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+21:16:15 DONE: guide-body-tnb-ko-t1-r1.mp4 (12401 KB). Ledger $77.11 of $77.20.
+21:16:16 frame: art/clips/start/tnb-hero.png -> 720x1280, height filled, 70 px cut from each side
+21:16:16 job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $77.11 of the $77.70 cap
+21:16:16 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: VICTORY\nFrom his starting relaxed stance, he folds his arms across his chest, smiles, and winks once with one eye. He holds the folded arms and the smile with the eye open again and remains completely still in that pose for the rest of the clip.", "start_image_url": "<data uri, 1357 KB>", "end_image_url": "<data uri, 1357 KB>"}
+21:16:16 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:213: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+21:16:16 sent, request 01a2051d-eaf6-7893-8ccd-8ef42a6a343c
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+push refused (1): To https://github.com/trivituso81/adventures-of-tom.git
+ ! [rejected]        HEAD -> guidegen (stale info)
+error: failed to push some refs to 'https://github.com/trivituso81/adventures-of-tom.git'
+
+kept on branch guidegen (attempt 2)
+21:18:31 DONE: guide-body-tnb-victory-t1-r1.mp4 (8700 KB). Ledger $77.61 of $77.70.
+21:18:31 job rev 1 on google/nano-banana-2.1/edit, estimate $0.15; ledger so far $77.61 of the $77.91 cap
+21:18:31 request: {"aspect_ratio": "2:3", "resolution": "1K", "num_images": 1, "output_format": "png", "prompt": "IMAGE EDIT REQUEST: ONE IMAGE. Return exactly one image, nothing else.\n\nATTACH: the hero picture of the character (the reference). Nothing else.\n\nWHAT THIS IS\nThe same dog as the attached picture, redrawn for use as the first frame of an animation for a family role-playing game. Keep EXACTLY this dog: the same face, the same head size compared to the body, the same fur, collar and tag, the same colors, the same proportions, and the same hand-drawn colored pencil and ink drawing style with soft shading and fine pencil lines. Do not redesign, restyle, simplify or change anything about the character. Not pixel art, not 3D, not anime, not a flat cartoon, not a photo.\n\nWHAT TO CHANGE (only these three things)\n1. FACING: the dog is turned to face LEFT of the image, in a three-quarter view, head and body both turned left, looking toward the left edge. Standing on all four paws, relaxed and alert, mouth a little open, tail down and relaxed.\n2. BACKGROUND: one flat, solid, pure magenta color (hex FF00FF) across the whole image, edge to edge. No paper texture, no gradient, no vignette, no ground line and no cast shadow on the ground. The character must not contain any magenta or pink-purple shades of that color.\n3. FRAMING: the whole character from the top of the head to the soles of the paws is visible, centered, with a clear margin of magenta on every side. Nothing is cut off. The head must not touch the top edge.\n\nEDGES\nCrisp, clean outlines all the way around the character so the figure can be cut out from the flat background. No glow, no blur, no soft halo, no extra objects, no text, no props, no other people.\n\nFamily friendly for ages 6 and up.", "image_urls": ["<data uri, 3527 KB>"]}
+21:18:31 live fal price: $1.0 per units
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:213: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+21:18:31 sent, request 01a2051f-fbb3-7662-9639-701297077b8d
+21:18:52 DONE: startpic-nara-t1795380974-r1.png (1695 KB). Ledger $77.75 of $77.91.
+21:19:00 costlog: logged 1 row(s) to data/costs.json: xai 0.0027
+21:19:01 costlog: logged 1 row(s) to data/costs.json: fal 3.15

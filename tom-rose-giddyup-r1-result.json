@@ -1,0 +1,82 @@
+{
+ "what": "tom-rose-giddyup",
+ "rev": 1,
+ "verdict": "stopped",
+ "file": "tom-rose-giddyup-r1.mp4",
+ "attempts": [
+  {
+   "name": "tom-rose-giddyup",
+   "file": "tom-rose-giddyup-r1.mp4",
+   "pad": 0.65,
+   "failed": [
+    "feet",
+    "edge"
+   ],
+   "evidence": [
+    "feet: lowest row of the figure in the first and last picture only (a jump): first picture row 899; at most 14 px (1.1 percent of the frame height) away (1 pictures over); limit 1 percent",
+    "edge: the figure touches the right edge in 2 of 121 pictures (video frames 86 to 87)"
+   ],
+   "checks": {
+    "n": 121,
+    "fps": 24.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": false,
+      "v": 0.0269,
+      "limit": 0.02,
+      "say": "standing height 520 px first, 534 px last (2.7 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": false,
+      "v": 0.0109,
+      "limit": 0.01,
+      "frames": [
+       120
+      ],
+      "say": "lowest row of the figure in the first and last picture only (a jump): first picture row 899; at most 14 px (1.1 percent of the frame height) away (1 pictures over); limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 3.63,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (249, 2, 245) (10 away from magenta), spread at most 3.6 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 2 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 2,
+      "limit": 0,
+      "frames": [
+       86,
+       87
+      ],
+      "sides": [
+       "right"
+      ],
+      "say": "the figure touches the right edge in 2 of 121 pictures (video frames 86 to 87)"
+     },
+     {
+      "id": "ends",
+      "ok": false,
+      "v": 21.86,
+      "limit": 3.0,
+      "say": "last picture against the first: 21.86 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": null,
+   "look_checks": "not run (a measurement failed first)"
+  }
+ ],
+ "at": "2026-11-22T07:09:53Z",
+ "evidence": [
+  "feet: lowest row of the figure in the first and last picture only (a jump): first picture row 899; at most 14 px (1.1 percent of the frame height) away (1 pictures over); limit 1 percent",
+  "edge: the figure touches the right edge in 2 of 121 pictures (video frames 86 to 87)"
+ ],
+ "why": "failed: feet, edge"
+}

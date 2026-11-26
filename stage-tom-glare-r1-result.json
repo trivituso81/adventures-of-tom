@@ -1,0 +1,154 @@
+{
+ "what": "stage-tom-glare",
+ "rev": 1,
+ "verdict": "passed",
+ "file": "stage-tom-glare-a2-r1.png",
+ "n": 1,
+ "fps": 0,
+ "attempts": [
+  {
+   "name": "stage-tom-glare",
+   "file": "stage-tom-glare-r1.png",
+   "pad": null,
+   "failed": [
+    "p1"
+   ],
+   "evidence": [
+    "p1: Does the object in the picture match the description well enough to be used as that object in a game? Small differences in exact shape or co (Lacks hand-drawn colored pencil/ink style with soft shading; looks like realistic photo.)"
+   ],
+   "checks": {
+    "n": null,
+    "fps": null,
+    "w": 1024,
+    "h": 1024,
+    "checks": [
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 100.0,
+      "limit": 97.0,
+      "say": "the edge of the picture is 100.0 percent the flat black asked for (needs 97)"
+     },
+     {
+      "id": "size",
+      "ok": true,
+      "v": 0.262,
+      "limit": 0.015,
+      "say": "the object fills 26.2 percent of the picture (needs 1.5)"
+     },
+     {
+      "id": "margin",
+      "ok": true,
+      "v": 0.089,
+      "limit": 0.02,
+      "say": "the object keeps 8.9 percent of room to the nearest edge (needs 2.0)"
+     },
+     {
+      "id": "centre",
+      "ok": true,
+      "v": 0.007,
+      "limit": 0.3,
+      "say": "the object is 1 percent of the picture off centre (limit 30)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.5,
+    "yes": 1,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0044,
+    "items": [
+     {
+      "id": "f_obj",
+      "q": "Is this ONE single object, drawn whole and centred on a plain flat pure black background, with no person, no hand, no extra objects and no text other than lettering the description asks for?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Single centered light object on pure black bg, no people/hands/text/extra objects."
+     },
+     {
+      "id": "p1",
+      "q": "Does the object in the picture match the description well enough to be used as that object in a game? Small differences in exact shape or colour do NOT matter; say no only if it is a clearly different object or something important in the description is missing.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Lacks hand-drawn colored pencil/ink style with soft shading; looks like realistic photo."
+     }
+    ]
+   },
+   "look_checks": "run"
+  },
+  {
+   "name": "stage-tom-glare-a2",
+   "file": "stage-tom-glare-a2-r1.png",
+   "pad": null,
+   "failed": [],
+   "evidence": [],
+   "checks": {
+    "n": null,
+    "fps": null,
+    "w": 1024,
+    "h": 1024,
+    "checks": [
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 100.0,
+      "limit": 97.0,
+      "say": "the edge of the picture is 100.0 percent the flat black asked for (needs 97)"
+     },
+     {
+      "id": "size",
+      "ok": true,
+      "v": 0.213,
+      "limit": 0.015,
+      "say": "the object fills 21.3 percent of the picture (needs 1.5)"
+     },
+     {
+      "id": "margin",
+      "ok": true,
+      "v": 0.061,
+      "limit": 0.02,
+      "say": "the object keeps 6.1 percent of room to the nearest edge (needs 2.0)"
+     },
+     {
+      "id": "centre",
+      "ok": true,
+      "v": 0.002,
+      "limit": 0.3,
+      "say": "the object is 0 percent of the picture off centre (limit 30)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 1.0,
+    "yes": 2,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.003,
+    "items": [
+     {
+      "id": "f_obj",
+      "q": "Is this ONE single object, drawn whole and centred on a plain flat pure black background, with no person, no hand, no extra objects and no text other than lettering the description asks for?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Single centered object on pure black background, no people/hands/text/extra objects."
+     },
+     {
+      "id": "p1",
+      "q": "Does the object in the picture match the description well enough to be used as that object in a game? Small differences in exact shape or colour do NOT matter; say no only if it is a clearly different object or something important in the description is missing.",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Bright round core with long thin rays, hand-drawn pencil style, warm golden light, centered on black."
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-22T21:32:35Z",
+ "skipped_checks": [],
+ "merged": "wanbulk-tmovestagelab-45071628174",
+ "bake_note": "the first picture of the video tom/glare: baked with the video"
+}

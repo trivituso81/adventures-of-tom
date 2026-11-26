@@ -1,0 +1,228 @@
+{
+ "what": "rose-boomerang",
+ "rev": 2,
+ "verdict": "stopped",
+ "file": "rose-boomerang-a2-r2.mp4",
+ "attempts": [
+  {
+   "name": "rose-boomerang",
+   "file": "rose-boomerang-r2.mp4",
+   "pad": 0.8,
+   "failed": [
+    "edge",
+    "p1"
+   ],
+   "evidence": [
+    "edge: the figure touches the left edge in 27 of 150 pictures (video frames 19 to 21, 39 to 45, 100 to 116)",
+    "p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (No throw or Lamby visible; only idle, walking, and hugging poses shown.)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 974 px first, 974 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0031,
+      "limit": 0.01,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 1127; at most 4 px (0.3 percent of the frame height) away; limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 6.59,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (252, 20, 247) (20 away from magenta), spread at most 6.6 (limit 15), 0.19 percent of it off colour (limit 1), colour moved at most 19 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 27,
+      "limit": 0,
+      "frames": [
+       19,
+       20,
+       21,
+       39,
+       40,
+       41,
+       42,
+       43,
+       44,
+       45,
+       100,
+       101,
+       102,
+       103,
+       104,
+       105,
+       106,
+       107,
+       108,
+       109,
+       110,
+       111,
+       112,
+       113,
+       114,
+       115,
+       116
+      ],
+      "sides": [
+       "left"
+      ],
+      "say": "the figure touches the left edge in 27 of 150 pictures (video frames 19 to 21, 39 to 45, 100 to 116)"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.68,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.68 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.5,
+    "yes": 1,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0052,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Same girl with consistent face, hair, outfit, and style across all frames and start image."
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? \"She throws her worn Lamby plush straight left once with a big overhand toss. Her hand is now empty. She lowers her shoulder and makes two quick low tackle lunges by bending her knees and leaning her shoulders forward while both feet stay planted on the exact same spot, then snatches the air in front of her with one hand as if catching Lamby coming home, hugs her hand to her chest, and returns to her starting relaxed stance.\"  Small differences do NOT matter: how many strokes, steps or waves, exactly where an object comes from or goes, the exact pose, or the order of small details. Say no only if the main action is missing, a clearly different action happens instead, the person flips, spins round, falls or turns away from the camera, or the action keeps repeating over and over.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "No throw or Lamby visible; only idle, walking, and hugging poses shown."
+     }
+    ]
+   },
+   "look_checks": "run"
+  },
+  {
+   "name": "rose-boomerang-a2",
+   "file": "rose-boomerang-a2-r2.mp4",
+   "pad": 0.8,
+   "failed": [
+    "feet",
+    "edge"
+   ],
+   "evidence": [
+    "feet: lowest row of the figure in every picture: first picture row 1127; at most 37 px (2.9 percent of the frame height) away (36 pictures over); limit 1 percent",
+    "edge: the figure touches the left edge in 23 of 150 pictures (video frames 16, 35 to 39, 83 to 93, 121 to 126)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 974 px first, 974 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": false,
+      "v": 0.0289,
+      "limit": 0.01,
+      "frames": [
+       60,
+       61,
+       62,
+       63,
+       64,
+       65,
+       66,
+       67,
+       68,
+       69,
+       70,
+       71
+      ],
+      "say": "lowest row of the figure in every picture: first picture row 1127; at most 37 px (2.9 percent of the frame height) away (36 pictures over); limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 10.41,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (253, 20, 247) (20 away from magenta), spread at most 10.4 (limit 15), 0.35 percent of it off colour (limit 1), colour moved at most 18 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 23,
+      "limit": 0,
+      "frames": [
+       16,
+       35,
+       36,
+       37,
+       38,
+       39,
+       83,
+       84,
+       85,
+       86,
+       87,
+       88,
+       89,
+       90,
+       91,
+       92,
+       93,
+       121,
+       122,
+       123,
+       124,
+       125,
+       126
+      ],
+      "sides": [
+       "left"
+      ],
+      "say": "the figure touches the left edge in 23 of 150 pictures (video frames 16, 35 to 39, 83 to 93, 121 to 126)"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.7,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.70 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": null,
+   "look_checks": "not run (a measurement failed first)"
+  }
+ ],
+ "at": "2026-11-26T13:13:52Z",
+ "evidence": [
+  "feet: lowest row of the figure in every picture: first picture row 1127; at most 37 px (2.9 percent of the frame height) away (36 pictures over); limit 1 percent",
+  "edge: the figure touches the left edge in 23 of 150 pictures (video frames 16, 35 to 39, 83 to 93, 121 to 126)"
+ ],
+ "why": "failed twice: feet, edge"
+}

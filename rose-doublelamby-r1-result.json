@@ -1,0 +1,148 @@
+{
+ "what": "rose-doublelamby",
+ "rev": 1,
+ "verdict": "stopped",
+ "file": "rose-doublelamby-a2-r1.mp4",
+ "attempts": [
+  {
+   "name": "rose-doublelamby",
+   "file": "rose-doublelamby-r1.mp4",
+   "pad": 0.8,
+   "failed": [
+    "feet"
+   ],
+   "evidence": [
+    "feet: lowest row of the figure in every picture: first picture row 1127; at most 165 px (12.9 percent of the frame height) away (9 pictures over); limit 1 percent"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 974 px first, 974 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": false,
+      "v": 0.1289,
+      "limit": 0.01,
+      "frames": [
+       64,
+       65,
+       66,
+       67,
+       68,
+       69,
+       70,
+       71,
+       72
+      ],
+      "say": "lowest row of the figure in every picture: first picture row 1127; at most 165 px (12.9 percent of the frame height) away (9 pictures over); limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 3.93,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (253, 20, 247) (20 away from magenta), spread at most 3.9 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 17 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": true,
+      "v": 0,
+      "limit": 0,
+      "frames": [],
+      "sides": [],
+      "say": "the figure never touches an edge"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.68,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.68 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": null,
+   "look_checks": "not run (a measurement failed first)"
+  },
+  {
+   "name": "rose-doublelamby-a2",
+   "file": "rose-doublelamby-a2-r1.mp4",
+   "pad": 0.8,
+   "failed": [
+    "feet"
+   ],
+   "evidence": [
+    "feet: lowest row of the figure in every picture: first picture row 1127; at most 98 px (7.7 percent of the frame height) away (6 pictures over); limit 1 percent"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 974 px first, 974 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": false,
+      "v": 0.0766,
+      "limit": 0.01,
+      "frames": [
+       71,
+       72,
+       73,
+       74,
+       75,
+       76
+      ],
+      "say": "lowest row of the figure in every picture: first picture row 1127; at most 98 px (7.7 percent of the frame height) away (6 pictures over); limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 4.04,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (252, 20, 247) (20 away from magenta), spread at most 4.0 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 17 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": true,
+      "v": 0,
+      "limit": 0,
+      "frames": [],
+      "sides": [],
+      "say": "the figure never touches an edge"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.67,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.67 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": null,
+   "look_checks": "not run (a measurement failed first)"
+  }
+ ],
+ "at": "2026-11-26T10:03:00Z",
+ "evidence": [
+  "feet: lowest row of the figure in every picture: first picture row 1127; at most 98 px (7.7 percent of the frame height) away (6 pictures over); limit 1 percent"
+ ],
+ "why": "failed twice: feet"
+}

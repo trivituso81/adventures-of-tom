@@ -1,0 +1,19 @@
+04:03:13 bulk run for t-wanmop1-gen: 1 job(s) deedee-wetfloor; run cap $3.20 (ledger $59.02)
+04:03:13 estimate if every job is made once: $0.79; an edge retry adds one more video for that job
+04:03:15 frame: art/clips/start/deedee-hero.png -> 720x1280, height filled, 70 px cut from each side, then shrunk to 65% on the same magenta (pad)
+04:03:15 [deedee-wetfloor] job rev 8 on kling/v4/image-to-video, estimate $0.79; ledger so far $59.02 of the $62.23 cap
+04:03:15 [deedee-wetfloor] request: {"resolution": "720p", "duration": 5, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: WET-FLOOR MOP\nFrom her starting relaxed stance, she brings a short string mop with a floppy wet head out from behind her back, holds it in both hands and slides its head across the top of the floor beside her feet, level with them, once, in one short sweep from right to left. Without repeating the sweep, she puts the mop behind her back and returns to her starting relaxed stance.", "start_image_url": "<data uri, 565 KB>", "end_image_url": "<data uri, 565 KB>"}
+04:03:16 [deedee-wetfloor] live fal price: $0.157 per seconds
+04:03:16 [deedee-wetfloor] sent, request 01a2016c-2d2a-72d0-8721-eba9a2108b5d
+04:07:08 [deedee-wetfloor] DONE: deedee-wetfloor-r8.mp4 (2699 KB). Ledger $59.81 of $62.23.
+04:07:14 [deedee-wetfloor] deedee-wetfloor attempt 1 (pad 0.65): failed: bg
+04:07:14 [deedee-wetfloor] deedee-wetfloor: failed bg, so it is made once more with every setting the same (a re-roll).
+04:07:15 frame: art/clips/start/deedee-hero.png -> 720x1280, height filled, 70 px cut from each side, then shrunk to 65% on the same magenta (pad)
+04:07:15 [deedee-wetfloor] job rev 8 on kling/v4/image-to-video, estimate $0.79; ledger so far $59.81 of the $62.23 cap
+04:07:15 [deedee-wetfloor] request: {"resolution": "720p", "duration": 5, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: WET-FLOOR MOP\nFrom her starting relaxed stance, she brings a short string mop with a floppy wet head out from behind her back, holds it in both hands and slides its head across the top of the floor beside her feet, level with them, once, in one short sweep from right to left. Without repeating the sweep, she puts the mop behind her back and returns to her starting relaxed stance.", "start_image_url": "<data uri, 565 KB>", "end_image_url": "<data uri, 565 KB>"}
+04:07:15 [deedee-wetfloor] live fal price: $0.157 per seconds
+04:07:15 [deedee-wetfloor] sent, request 01a2016f-d40c-7820-9332-00564697756e
+04:12:13 [deedee-wetfloor] DONE: deedee-wetfloor-a2-r8.mp4 (2943 KB). Ledger $60.59 of $62.23.
+04:12:19 [deedee-wetfloor] deedee-wetfloor attempt 2 (pad 0.65): failed: feet, edge
+04:12:19 deedee-wetfloor        stopped (retried with a smaller pad)
+04:12:21 costlog: logged 1 row(s) to data/costs.json: fal 1.57

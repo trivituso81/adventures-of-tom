@@ -1,0 +1,13 @@
+{
+ "what": "rose-giddyup",
+ "rev": 5,
+ "endpoint": "kling/v4/image-to-video",
+ "dry_run": false,
+ "cap": 54.53,
+ "spent_before": 53.03,
+ "estimate": 0.785,
+ "file": "rose-giddyup-r5.mp4",
+ "bytes": 4178667,
+ "rid": "01a20055-20df-7e62-917d-9ee4c0301e50",
+ "spent_after": 53.815
+}

@@ -1,0 +1,14 @@
+{
+ "results": [
+  {
+   "anim": "move:suite_door_slide",
+   "take": 4,
+   "at": "2026-11-22T22:16:30.078Z",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SUITE DOOR SLIDE\nFrom his starting relaxed stance, he spreads both arms out wide to his sides with flat open palms, then sweeps both hands inward once until his palms meet in front of his chest, like sliding a pair of doors shut. He gives one small, polite nod with a calm, professional smile, holds that pose, then lowers his hands and returns to his starting relaxed stance.",
+   "promptRev": 1,
+   "route": "wan",
+   "cost": 0,
+   "error": "The guide has spent its $10.00 for today already. Try again tomorrow, or ask Claude."
+  }
+ ]
+}

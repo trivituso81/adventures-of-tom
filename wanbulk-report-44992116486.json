@@ -1,0 +1,26 @@
+{
+ "card": "t-movefun-gen",
+ "build": null,
+ "rows": [
+  {
+   "what": "tom-blockade",
+   "rev": 4,
+   "state": "error",
+   "why": "fal refused the key (403): {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}"
+  },
+  {
+   "what": "grace-cubepop",
+   "rev": 4,
+   "state": "already",
+   "verdict": "stopped"
+  },
+  {
+   "what": "deedee-wetfloor",
+   "rev": 10,
+   "state": "already",
+   "verdict": "stopped"
+  }
+ ],
+ "spent_fal": 0.0,
+ "spent_xai": 0.0
+}

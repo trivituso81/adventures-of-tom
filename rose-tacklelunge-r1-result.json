@@ -1,0 +1,215 @@
+{
+ "what": "rose-tacklelunge",
+ "rev": 1,
+ "verdict": "stopped",
+ "file": "rose-tacklelunge-a2-r1.mp4",
+ "attempts": [
+  {
+   "name": "rose-tacklelunge",
+   "file": "rose-tacklelunge-r1.mp4",
+   "pad": 0.8,
+   "failed": [
+    "feet",
+    "edge"
+   ],
+   "evidence": [
+    "feet: lowest row of the figure in every picture: first picture row 1127; at most 86 px (6.7 percent of the frame height) away (81 pictures over); limit 1 percent",
+    "edge: the figure touches the left/right edge in 33 of 150 pictures (video frames 11 to 17, 58 to 83)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 974 px first, 974 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": false,
+      "v": 0.0672,
+      "limit": 0.01,
+      "frames": [
+       24,
+       25,
+       26,
+       27,
+       28,
+       29,
+       30,
+       31,
+       32,
+       33,
+       34,
+       35
+      ],
+      "say": "lowest row of the figure in every picture: first picture row 1127; at most 86 px (6.7 percent of the frame height) away (81 pictures over); limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 4.8,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (252, 20, 247) (20 away from magenta), spread at most 4.8 (limit 15), 0.06 percent of it off colour (limit 1), colour moved at most 19 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 33,
+      "limit": 0,
+      "frames": [
+       11,
+       12,
+       13,
+       14,
+       15,
+       16,
+       17,
+       58,
+       59,
+       60,
+       61,
+       62,
+       63,
+       64,
+       65,
+       66,
+       67,
+       68,
+       69,
+       70,
+       71,
+       72,
+       73,
+       74,
+       75,
+       76,
+       77,
+       78,
+       79,
+       80,
+       81,
+       82,
+       83
+      ],
+      "sides": [
+       "left",
+       "right"
+      ],
+      "say": "the figure touches the left/right edge in 33 of 150 pictures (video frames 11 to 17, 58 to 83)"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.68,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.68 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": null,
+   "look_checks": "not run (a measurement failed first)"
+  },
+  {
+   "name": "rose-tacklelunge-a2",
+   "file": "rose-tacklelunge-a2-r1.mp4",
+   "pad": 0.8,
+   "failed": [
+    "feet",
+    "edge"
+   ],
+   "evidence": [
+    "feet: lowest row of the figure in every picture: first picture row 1127; at most 54 px (4.2 percent of the frame height) away (82 pictures over); limit 1 percent",
+    "edge: the figure touches the left edge in 13 of 150 pictures (video frames 17 to 21, 65 to 72)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 974 px first, 974 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": false,
+      "v": 0.0422,
+      "limit": 0.01,
+      "frames": [
+       27,
+       28,
+       29,
+       30,
+       31,
+       32,
+       33,
+       34,
+       35,
+       36,
+       37,
+       38
+      ],
+      "say": "lowest row of the figure in every picture: first picture row 1127; at most 54 px (4.2 percent of the frame height) away (82 pictures over); limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 4.5,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (252, 20, 247) (20 away from magenta), spread at most 4.5 (limit 15), 0.01 percent of it off colour (limit 1), colour moved at most 17 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 13,
+      "limit": 0,
+      "frames": [
+       17,
+       18,
+       19,
+       20,
+       21,
+       65,
+       66,
+       67,
+       68,
+       69,
+       70,
+       71,
+       72
+      ],
+      "sides": [
+       "left"
+      ],
+      "say": "the figure touches the left edge in 13 of 150 pictures (video frames 17 to 21, 65 to 72)"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.69,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.69 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": null,
+   "look_checks": "not run (a measurement failed first)"
+  }
+ ],
+ "at": "2026-11-26T10:02:49Z",
+ "evidence": [
+  "feet: lowest row of the figure in every picture: first picture row 1127; at most 54 px (4.2 percent of the frame height) away (82 pictures over); limit 1 percent",
+  "edge: the figure touches the left edge in 13 of 150 pictures (video frames 17 to 21, 65 to 72)"
+ ],
+ "why": "failed twice: feet, edge"
+}

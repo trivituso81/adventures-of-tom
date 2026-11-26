@@ -1,0 +1,32 @@
+06:16:27 bulk run for t-movefun-gen: 3 job(s) tom-blockade, grace-cubepop, deedee-wetfloor; run cap $9.60 (ledger $66.52)
+06:16:27 estimate if every job is made once: $1.79; an edge retry adds one more video for that job
+06:16:29 [grace-cubepop] grace-cubepop rev 4 already has a result (stopped): nothing sent.
+06:16:29 [deedee-wetfloor] deedee-wetfloor rev 10 already has a result (stopped): nothing sent.
+06:16:30 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side, then shrunk to 80% on the same magenta (pad)
+06:16:30 [tom-blockade] job rev 4 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $66.52 of the $76.12 cap
+06:16:30 [tom-blockade] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: ZONE ONE BLOCKADE\nFrom his starting relaxed stance, he holds both arms out to the sides with his elbows bent, like a gate, with a calm, no-nonsense face, as if guarding his spot at the front of a boarding line. Then he bumps his hip to the left once. He holds that wide blocking pose for a moment, then lowers his arms and returns to his starting relaxed stance.", "start_image_url": "<data uri, 857 KB>", "end_image_url": "<data uri, 857 KB>"}
+06:16:30 [tom-blockade] live fal price: $0.045 per seconds
+06:16:31 [tom-blockade] sent, request 01a201e6-2bd7-71a1-ae35-b2f5d5167ab6
+06:18:12 [tom-blockade] DONE: tom-blockade-r4.mp4 (7798 KB). Ledger $67.02 of $76.12.
+06:18:27 [tom-blockade] tom-blockade attempt 1 (pad 0.8): failed: p1
+06:18:27 [tom-blockade] tom-blockade: failed p1, so it is made once more with every setting the same (a re-roll).
+06:18:27 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side, then shrunk to 80% on the same magenta (pad)
+06:18:27 [tom-blockade] job rev 4 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $67.02 of the $76.12 cap
+06:18:27 [tom-blockade] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: ZONE ONE BLOCKADE\nFrom his starting relaxed stance, he holds both arms out to the sides with his elbows bent, like a gate, with a calm, no-nonsense face, as if guarding his spot at the front of a boarding line. Then he bumps his hip to the left once. He holds that wide blocking pose for a moment, then lowers his arms and returns to his starting relaxed stance.", "start_image_url": "<data uri, 857 KB>", "end_image_url": "<data uri, 857 KB>"}
+06:18:27 [tom-blockade] live fal price: $0.045 per seconds
+06:18:28 [tom-blockade] sent, request 01a201e7-f326-70f0-8634-a5987bf99d4f
+06:20:04 [tom-blockade] DONE: tom-blockade-a2-r4.mp4 (7582 KB). Ledger $67.52 of $76.12.
+06:20:18 [tom-blockade] tom-blockade attempt 2 (pad 0.8): failed: edge, p1
+06:20:18 tom-blockade           stopped (retried with a smaller pad)
+06:20:18 grace-cubepop          already
+06:20:18 deedee-wetfloor        already
+06:20:20 costlog: logged 2 row(s) to data/costs.json: fal 1.0; xai 0.0131
+06:20:22 bulk run for t-pairmove1-gen: 1 job(s) tom-rose-giddyup; run cap $3.20 (ledger $67.52)
+06:20:22 estimate if every job is made once: $0.79; an edge retry adds one more video for that job
+06:20:24 frame: art/clips/start/tom-rose-pair.png -> 720x1280, width filled, padded top and bottom, then shrunk to 65% on the same magenta (pad)
+06:20:24 [tom-rose-giddyup] job rev 1 on kling/v4/image-to-video, estimate $0.79; ledger so far $67.52 of the $70.72 cap
+06:20:24 [tom-rose-giddyup] request: {"resolution": "720p", "duration": 5, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact two characters in the attached first-frame image, a man and a young girl, preserving their exact faces, proportions, hair, outfits, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. Both characters face left. The man's feet stay planted on the exact same spot the whole time. Flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: GIDDYUP RIDE\nThe girl hops up onto the man's shoulders and sits there with one leg on each side of his head while he holds her ankles, and she raises one fist high like a rider shouting giddyup. Then she springs forward off his shoulders once, lands on her feet in front of him in a low crouch, and holds that pose.", "start_image_url": "<data uri, 300 KB>"}
+06:20:24 [tom-rose-giddyup] live fal price: $0.157 per seconds
+06:20:24 [tom-rose-giddyup] picking up request 01a201af-5849-70d2-b8e4-efbe1d76a9b1 sent earlier (no new charge)
+06:40:29 [tom-rose-giddyup] STOP: not ready after 20 minutes; the request is kept: run again (no new charge)
+06:40:29 tom-rose-giddyup       error: not ready after 20 minutes; the request is kept: run again (no new charge)

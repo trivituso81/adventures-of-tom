@@ -1,0 +1,88 @@
+12:48:26 bulk run for t-rosestage-lab: 19 job(s) stage-rose-cushion, stage-rose-lamby, stage-rose-backuplamby, stage-rose-comet, stage-rose-ripple, stage-rose-cushionwall, stage-rose-castle, stage-rose-whoopee, rose-tacklelunge, rose-lavahop, rose-doublelamby, rose-pretzel, rose-boomerang, rose-citadel, rose-kingdom, rose-boop, rose-raspberry, rose-baitswitch, rose-whoopee; run cap $10.00 (ledger $99.06)
+12:48:26 estimate if every job is made once: $6.70; an edge retry adds one more video for that job
+12:48:28 [stage-rose-cushion] stage-rose-cushion rev 1 already has a result (passed): nothing sent.
+12:48:28 [stage-rose-backuplamby] stage-rose-backuplamby rev 1 already has a result (passed): nothing sent.
+12:48:28 [stage-rose-ripple] stage-rose-ripple rev 1 already has a result (passed): nothing sent.
+12:48:28 [stage-rose-lamby] stage-rose-lamby rev 1 already has a result (passed): nothing sent.
+12:48:28 [stage-rose-comet] stage-rose-comet rev 1 already has a result (passed): nothing sent.
+12:48:28 [stage-rose-castle] stage-rose-castle rev 1 already has a result (passed): nothing sent.
+12:48:28 [stage-rose-cushionwall] stage-rose-cushionwall rev 1 already has a result (passed): nothing sent.
+12:48:28 [stage-rose-whoopee] stage-rose-whoopee rev 1 already has a result (passed): nothing sent.
+12:48:28 [rose-tacklelunge] rose-tacklelunge rev 1 already has a result (stopped): nothing sent.
+12:48:28 [rose-lavahop] rose-lavahop rev 1 already has a result (stopped): nothing sent.
+12:48:28 [rose-doublelamby] rose-doublelamby rev 1 already has a result (stopped): nothing sent.
+12:48:28 [rose-boomerang] rose-boomerang rev 1 already has a result (stopped): nothing sent.
+12:48:28 [rose-pretzel] rose-pretzel rev 1 already has a result (stopped): nothing sent.
+12:48:28 [rose-boop] rose-boop rev 1 already has a result (stopped): nothing sent.
+12:48:28 [rose-kingdom] rose-kingdom rev 1 already has a result (stopped): nothing sent.
+12:48:29 frame: art/clips/start/rose-hero.png -> 720x1280, width filled, padded top and bottom, then shrunk to 80% on the same magenta (pad)
+12:48:29 [rose-baitswitch] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $99.06 of the $109.06 cap
+12:48:29 [rose-baitswitch] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BAIT AND SWITCH\nShe crouches and sets one hand flat on the floor in front of her as if placing something down, hugs her worn Lamby plush close to her chest with the other arm, and peeks left with a sneaky grin. She holds the sneaky crouch for one second, then stands up and returns to her starting relaxed stance.", "start_image_url": "<data uri, 792 KB>", "end_image_url": "<data uri, 792 KB>"}
+12:48:29 frame: art/clips/start/rose-hero.png -> 720x1280, width filled, padded top and bottom, then shrunk to 80% on the same magenta (pad)
+12:48:29 [rose-raspberry] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $99.06 of the $109.06 cap
+12:48:29 [rose-raspberry] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SUPERSONIC RASPBERRY\nShe plants both fists on her hips, puffs both cheeks out wide, and leans slightly left, blowing an earnest cheek-flapping raspberry for one long moment. Then she crosses her arms proudly and returns to her starting relaxed stance. She holds nothing in her hands.", "start_image_url": "<data uri, 792 KB>", "end_image_url": "<data uri, 792 KB>"}
+12:48:29 frame: art/clips/start/rose-hero.png -> 720x1280, width filled, padded top and bottom, then shrunk to 80% on the same magenta (pad)
+12:48:29 [rose-citadel] job rev 2 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $99.06 of the $109.06 cap
+12:48:29 [rose-citadel] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SOFA CUSHION CITADEL\nShe lifts both arms high like an architect planning a fort, then sweeps both arms out wide to frame a long protective wall, nodding happily. She holds the wide pose for a moment, then lowers her arms and returns to her starting relaxed stance. Both of her hands stay empty for the whole clip.", "start_image_url": "<data uri, 792 KB>", "end_image_url": "<data uri, 792 KB>"}
+12:48:29 [rose-baitswitch] live fal price: $0.05 per seconds
+12:48:29 [rose-citadel] live fal price: $0.05 per seconds
+12:48:29 [rose-raspberry] live fal price: $0.05 per seconds
+12:48:29 [rose-raspberry] rev 1 of rose-raspberry is already made (rose-raspberry-r1.mp4). Nothing sent. Raise rev in wangen-jobs.json for a new try.
+12:48:30 [rose-baitswitch] sent, request 01a217e6-79f0-74b2-9e36-5ff2e8c6a64d
+12:48:30 [rose-citadel] sent, request 01a217e6-7a2f-74f2-80ba-796b9356dadb
+12:48:43 [rose-raspberry] rose-raspberry attempt 1 (pad 0.8): failed: p1
+12:48:43 [rose-raspberry] rose-raspberry: failed p1, so it is made once more with every setting the same (a re-roll).
+12:48:43 frame: art/clips/start/rose-hero.png -> 720x1280, width filled, padded top and bottom, then shrunk to 80% on the same magenta (pad)
+12:48:43 [rose-raspberry] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $100.06 of the $109.06 cap
+12:48:43 [rose-raspberry] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SUPERSONIC RASPBERRY\nShe plants both fists on her hips, puffs both cheeks out wide, and leans slightly left, blowing an earnest cheek-flapping raspberry for one long moment. Then she crosses her arms proudly and returns to her starting relaxed stance. She holds nothing in her hands.", "start_image_url": "<data uri, 792 KB>", "end_image_url": "<data uri, 792 KB>"}
+12:48:43 [rose-raspberry] live fal price: $0.05 per seconds
+12:48:44 [rose-raspberry] sent, request 01a217e6-b01c-72c0-83db-80f7b7861a5a
+12:50:27 [rose-baitswitch] DONE: rose-baitswitch-r1.mp4 (8418 KB). Ledger $100.56 of $109.06.
+12:50:27 [rose-citadel] DONE: rose-citadel-r2.mp4 (7829 KB). Ledger $100.56 of $109.06.
+12:50:39 [rose-baitswitch] rose-baitswitch attempt 1 (pad 0.8): PASSED
+12:50:40 frame: art/clips/start/rose-hero.png -> 720x1280, width filled, padded top and bottom, then shrunk to 80% on the same magenta (pad)
+12:50:40 [rose-whoopee] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $100.56 of the $109.06 cap
+12:50:40 [rose-whoopee] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: WHOOPEE-CUSHION TRAP\nShe keeps a deadpan straight face and pushes both palms low and forward as if sliding a giant mat across the floor. She clamps both hands tightly over her ears and braces, then pops into a proud one-second Master-of-Mischief pose with her hands on her hips. She returns to her starting relaxed stance. She holds nothing in her hands.", "start_image_url": "<data uri, 792 KB>", "end_image_url": "<data uri, 792 KB>"}
+12:50:40 [rose-whoopee] live fal price: $0.05 per seconds
+12:50:40 [rose-whoopee] sent, request 01a217e8-7830-7790-8781-7d5c86ad5fa4
+12:50:41 [rose-raspberry] DONE: rose-raspberry-a2-r1.mp4 (7726 KB). Ledger $101.06 of $109.06.
+12:50:43 [rose-citadel] rose-citadel attempt 1 (pad 0.8): failed: p1
+12:50:43 [rose-citadel] rose-citadel: failed p1, so it is made once more with every setting the same (a re-roll).
+12:50:43 frame: art/clips/start/rose-hero.png -> 720x1280, width filled, padded top and bottom, then shrunk to 80% on the same magenta (pad)
+12:50:43 [rose-citadel] job rev 2 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $101.06 of the $109.06 cap
+12:50:43 [rose-citadel] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SOFA CUSHION CITADEL\nShe lifts both arms high like an architect planning a fort, then sweeps both arms out wide to frame a long protective wall, nodding happily. She holds the wide pose for a moment, then lowers her arms and returns to her starting relaxed stance. Both of her hands stay empty for the whole clip.", "start_image_url": "<data uri, 792 KB>", "end_image_url": "<data uri, 792 KB>"}
+12:50:44 [rose-citadel] live fal price: $0.05 per seconds
+12:50:44 [rose-citadel] sent, request 01a217e8-86fd-7492-b9e7-dd65c2b85102
+12:50:54 [rose-raspberry] rose-raspberry attempt 2 (pad 0.8): failed: p1
+12:52:53 [rose-whoopee] DONE: rose-whoopee-r1.mp4 (7817 KB). Ledger $101.56 of $109.06.
+12:52:56 [rose-citadel] DONE: rose-citadel-a2-r2.mp4 (7978 KB). Ledger $101.56 of $109.06.
+12:53:05 [rose-whoopee] rose-whoopee attempt 1 (pad 0.8): failed: f_same, p1
+12:53:05 [rose-whoopee] rose-whoopee: failed f_same, p1, so it is made once more with every setting the same (a re-roll).
+12:53:06 frame: art/clips/start/rose-hero.png -> 720x1280, width filled, padded top and bottom, then shrunk to 80% on the same magenta (pad)
+12:53:06 [rose-whoopee] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $101.56 of the $109.06 cap
+12:53:06 [rose-whoopee] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: WHOOPEE-CUSHION TRAP\nShe keeps a deadpan straight face and pushes both palms low and forward as if sliding a giant mat across the floor. She clamps both hands tightly over her ears and braces, then pops into a proud one-second Master-of-Mischief pose with her hands on her hips. She returns to her starting relaxed stance. She holds nothing in her hands.", "start_image_url": "<data uri, 792 KB>", "end_image_url": "<data uri, 792 KB>"}
+12:53:06 [rose-whoopee] live fal price: $0.05 per seconds
+12:53:07 [rose-whoopee] sent, request 01a217ea-b421-7692-91a3-aafe309ee28d
+12:53:10 [rose-citadel] rose-citadel attempt 2 (pad 0.8): failed: p1
+12:55:19 [rose-whoopee] DONE: rose-whoopee-a2-r1.mp4 (8284 KB). Ledger $102.06 of $109.06.
+12:55:31 [rose-whoopee] rose-whoopee attempt 2 (pad 0.8): failed: p1
+12:55:31 stage-rose-cushion     already
+12:55:31 stage-rose-lamby       already
+12:55:31 stage-rose-backuplamby already
+12:55:31 stage-rose-comet       already
+12:55:31 stage-rose-ripple      already
+12:55:31 stage-rose-cushionwall already
+12:55:31 stage-rose-castle      already
+12:55:31 stage-rose-whoopee     already
+12:55:31 rose-tacklelunge       already
+12:55:31 rose-lavahop           already
+12:55:31 rose-doublelamby       already
+12:55:31 rose-pretzel           already
+12:55:31 rose-boomerang         already
+12:55:31 rose-citadel           stopped (retried with a smaller pad)
+12:55:31 rose-kingdom           already
+12:55:31 rose-boop              already
+12:55:31 rose-raspberry         stopped (retried with a smaller pad)
+12:55:31 rose-baitswitch        passed
+12:55:31 rose-whoopee           stopped (retried with a smaller pad)
+12:55:33 costlog: logged 2 row(s) to data/costs.json: fal 3.0; xai 0.0423

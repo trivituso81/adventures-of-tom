@@ -1,0 +1,102 @@
+{
+ "what": "stage-tom-bluebang-vid",
+ "rev": 1,
+ "verdict": "stopped",
+ "file": "stage-tom-bluebang-vid-a2-r1.mp4",
+ "attempts": [
+  {
+   "name": "stage-tom-bluebang-vid",
+   "file": "stage-tom-bluebang-vid-r1.mp4",
+   "pad": null,
+   "failed": [
+    "bg",
+    "edge"
+   ],
+   "evidence": [
+    "bg: the edge of the picture is at least 96.8 percent the flat black in every picture (needs 97)",
+    "edge: the object touches an edge of the picture in 43 of 90 pictures (limit 5 percent)"
+   ],
+   "checks": {
+    "n": 90,
+    "fps": 30.0,
+    "w": 640,
+    "h": 640,
+    "checks": [
+     {
+      "id": "bg",
+      "ok": false,
+      "v": 96.8,
+      "limit": 97.0,
+      "say": "the edge of the picture is at least 96.8 percent the flat black in every picture (needs 97)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 0.478,
+      "limit": 0.05,
+      "say": "the object touches an edge of the picture in 43 of 90 pictures (limit 5 percent)"
+     },
+     {
+      "id": "motion",
+      "ok": true,
+      "v": 46.99,
+      "limit": 2.0,
+      "say": "the biggest change from the first picture is 47.0 of 255 (needs 2.0): it moves"
+     }
+    ]
+   },
+   "vision": null,
+   "look_checks": "not run (a measurement failed first)"
+  },
+  {
+   "name": "stage-tom-bluebang-vid-a2",
+   "file": "stage-tom-bluebang-vid-a2-r1.mp4",
+   "pad": null,
+   "failed": [
+    "bg",
+    "edge"
+   ],
+   "evidence": [
+    "bg: the edge of the picture is at least 92.8 percent the flat black in every picture (needs 97)",
+    "edge: the object touches an edge of the picture in 62 of 90 pictures (limit 5 percent)"
+   ],
+   "checks": {
+    "n": 90,
+    "fps": 30.0,
+    "w": 640,
+    "h": 640,
+    "checks": [
+     {
+      "id": "bg",
+      "ok": false,
+      "v": 92.8,
+      "limit": 97.0,
+      "say": "the edge of the picture is at least 92.8 percent the flat black in every picture (needs 97)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 0.689,
+      "limit": 0.05,
+      "say": "the object touches an edge of the picture in 62 of 90 pictures (limit 5 percent)"
+     },
+     {
+      "id": "motion",
+      "ok": true,
+      "v": 72.05,
+      "limit": 2.0,
+      "say": "the biggest change from the first picture is 72.1 of 255 (needs 2.0): it moves"
+     }
+    ]
+   },
+   "vision": null,
+   "look_checks": "not run (a measurement failed first)"
+  }
+ ],
+ "at": "2026-11-22T21:45:02Z",
+ "evidence": [
+  "bg: the edge of the picture is at least 92.8 percent the flat black in every picture (needs 97)",
+  "edge: the object touches an edge of the picture in 62 of 90 pictures (limit 5 percent)"
+ ],
+ "why": "failed twice: bg, edge"
+}

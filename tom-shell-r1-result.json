@@ -1,0 +1,92 @@
+{
+ "what": "tom-shell",
+ "rev": 1,
+ "verdict": "passed",
+ "file": "tom-shell-r1.mp4",
+ "n": 150,
+ "fps": 30.0,
+ "attempts": [
+  {
+   "name": "tom-shell",
+   "file": "tom-shell-r1.mp4",
+   "pad": 0.8,
+   "failed": [],
+   "evidence": [],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.001,
+      "limit": 0.02,
+      "say": "standing height 988 px first, 987 px last (0.1 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0031,
+      "limit": 0.01,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 1131; at most 4 px (0.3 percent of the frame height) away; limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 2.3,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (253, 34, 243) (34 away from magenta), spread at most 2.3 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 9 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": true,
+      "v": 0,
+      "limit": 0,
+      "frames": [],
+      "sides": [],
+      "say": "the figure never touches an edge"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.71,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.71 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 1.0,
+    "yes": 2,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0051,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "same person, face, hair, outfit and style"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? \"From his starting relaxed stance, he raises one finger above his head and draws one slow circle in the air, then brings his arm down and points straight ahead to the left with a calm, knowing look. He holds the point, then lowers his hand and returns to his starting relaxed stance.\"  Small differences do NOT matter: how many strokes, steps or waves, exactly where an object comes from or goes, the exact pose, or the order of small details. Say no only if the main action is missing, a clearly different action happens instead, the person flips, spins round, falls or turns away from the camera, or the action keeps repeating over and over.",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Sequence shows raise finger, circle motion, point left, hold, and return to stance"
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-22T21:40:06Z",
+ "skipped_checks": [],
+ "merged": "wanbulk-tmovestagelab-45071628174",
+ "bake_note": "tom-shell (video frames 0 to 104, every 4, kind strike, hit at frame 24). tom_shell frames 27 frame px 272 404 rows 68 101 sheet (2457, 800) in memory mb 7.9 (as a grid 11.9) kb 585 dur ms 2250 kind strike impact ms 500 reach [24.8, 77.5]; wired: the row winged_shell_lock_on plays clip tom_shell (nothing else edited)"
+}

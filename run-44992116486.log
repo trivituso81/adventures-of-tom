@@ -1,0 +1,12 @@
+06:06:46 bulk run for t-movefun-gen: 3 job(s) tom-blockade, grace-cubepop, deedee-wetfloor; run cap $9.60 (ledger $66.52)
+06:06:46 estimate if every job is made once: $1.79; an edge retry adds one more video for that job
+06:06:49 [grace-cubepop] grace-cubepop rev 4 already has a result (stopped): nothing sent.
+06:06:49 [deedee-wetfloor] deedee-wetfloor rev 10 already has a result (stopped): nothing sent.
+06:06:49 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side, then shrunk to 80% on the same magenta (pad)
+06:06:49 [tom-blockade] job rev 4 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $66.52 of the $76.12 cap
+06:06:49 [tom-blockade] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: ZONE ONE BLOCKADE\nFrom his starting relaxed stance, he holds both arms out to the sides with his elbows bent, like a gate, with a calm, no-nonsense face, as if guarding his spot at the front of a boarding line. Then he bumps his hip to the left once. He holds that wide blocking pose for a moment, then lowers his arms and returns to his starting relaxed stance.", "start_image_url": "<data uri, 857 KB>", "end_image_url": "<data uri, 857 KB>"}
+06:06:50 [tom-blockade] live fal price: $0.045 per seconds
+06:06:50 [tom-blockade] STOP: fal refused the key (403): {"detail":"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing."}
+06:06:50 tom-blockade           error: fal refused the key (403): {"detail":"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing."}
+06:06:50 grace-cubepop          already
+06:06:50 deedee-wetfloor        already

@@ -1,0 +1,19 @@
+01:32:07 bulk run for t-wanstop-gen: 2 job(s) rose-giddyup, deedee-wetfloor; run cap $2.00 (ledger $55.38)
+01:32:07 estimate if every job is made once: $1.57; an edge retry adds one more video for that job
+01:32:10 frame: art/clips/start/rose-hero.png -> 720x1280, height filled, 70 px cut from each side, then shrunk to 65% on the same magenta (pad)
+01:32:10 [rose-giddyup] job rev 7 on kling/v4/image-to-video, estimate $0.79; ledger so far $55.38 of the $57.38 cap
+01:32:10 [rose-giddyup] request: {"resolution": "720p", "duration": 5, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: GIDDYUP LAUNCH\nFrom her starting relaxed stance, she circles one hand above her head like a cowgirl shouting giddyup, then crouches and leaps straight up once, hugging her knees in a tight cannonball at the top of the jump, and lands on her feet. Without jumping again, she returns to her starting relaxed stance.", "start_image_url": "<data uri, 651 KB>", "end_image_url": "<data uri, 651 KB>"}
+01:32:10 frame: art/clips/start/deedee-hero.png -> 720x1280, height filled, 70 px cut from each side, then shrunk to 65% on the same magenta (pad)
+01:32:10 [deedee-wetfloor] job rev 6 on kling/v4/image-to-video, estimate $0.79; ledger so far $55.38 of the $57.38 cap
+01:32:10 [deedee-wetfloor] request: {"resolution": "720p", "duration": 5, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: WET-FLOOR MOP\nFrom her starting relaxed stance, she brings a short mop out from behind her back, holds it in both hands and slides its head across the top of the floor beside her feet, level with them, once, in one short sweep from right to left, the mop head staying on top of the floor the whole time. Without repeating the sweep, she puts the mop behind her back and returns to her starting relaxed stance.", "start_image_url": "<data uri, 565 KB>", "end_image_url": "<data uri, 565 KB>"}
+01:32:10 [rose-giddyup] live fal price: $0.157 per seconds
+01:32:10 [deedee-wetfloor] live fal price: $0.157 per seconds
+01:32:11 [deedee-wetfloor] sent, request 01a200e1-d9f5-7ec2-833a-ece543d4a4ea
+01:32:11 [rose-giddyup] sent, request 01a200e1-da12-7e80-84c6-b6db364e61e2
+01:36:03 [deedee-wetfloor] DONE: deedee-wetfloor-r6.mp4 (3066 KB). Ledger $56.95 of $57.38.
+01:36:14 [deedee-wetfloor] deedee-wetfloor attempt 1 (pad 0.65): failed: p1, p2
+01:36:23 [rose-giddyup] DONE: rose-giddyup-r7.mp4 (3944 KB). Ledger $56.95 of $57.38.
+01:36:30 [rose-giddyup] rose-giddyup attempt 1 (pad 0.65): failed: bg, edge
+01:36:30 rose-giddyup           stopped
+01:36:30 deedee-wetfloor        stopped
+01:36:31 costlog: logged 2 row(s) to data/costs.json: fal 1.57; xai 0.0055

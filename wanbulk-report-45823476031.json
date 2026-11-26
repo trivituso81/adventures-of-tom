@@ -1,0 +1,122 @@
+{
+ "card": "t-rosestage-lab",
+ "build": null,
+ "rows": [
+  {
+   "what": "stage-rose-cushion",
+   "rev": 1,
+   "state": "already",
+   "verdict": "passed"
+  },
+  {
+   "what": "stage-rose-lamby",
+   "rev": 1,
+   "state": "already",
+   "verdict": "passed"
+  },
+  {
+   "what": "stage-rose-backuplamby",
+   "rev": 1,
+   "state": "already",
+   "verdict": "passed"
+  },
+  {
+   "what": "stage-rose-comet",
+   "rev": 1,
+   "state": "already",
+   "verdict": "passed"
+  },
+  {
+   "what": "stage-rose-ripple",
+   "rev": 1,
+   "state": "already",
+   "verdict": "passed"
+  },
+  {
+   "what": "stage-rose-cushionwall",
+   "rev": 1,
+   "state": "already",
+   "verdict": "passed"
+  },
+  {
+   "what": "stage-rose-castle",
+   "rev": 1,
+   "state": "already",
+   "verdict": "passed"
+  },
+  {
+   "what": "stage-rose-whoopee",
+   "rev": 1,
+   "state": "already",
+   "verdict": "passed"
+  },
+  {
+   "what": "rose-tacklelunge",
+   "rev": 2,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "rose-lavahop",
+   "rev": 2,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "rose-doublelamby",
+   "rev": 2,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "rose-pretzel",
+   "rev": 2,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "rose-boomerang",
+   "rev": 2,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "rose-citadel",
+   "rev": 2,
+   "state": "already",
+   "verdict": "stopped"
+  },
+  {
+   "what": "rose-kingdom",
+   "rev": 2,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "rose-boop",
+   "rev": 2,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "rose-raspberry",
+   "rev": 1,
+   "state": "already",
+   "verdict": "stopped"
+  },
+  {
+   "what": "rose-baitswitch",
+   "rev": 1,
+   "state": "already",
+   "verdict": "passed"
+  },
+  {
+   "what": "rose-whoopee",
+   "rev": 1,
+   "state": "already",
+   "verdict": "stopped"
+  }
+ ],
+ "spent_fal": 7.0,
+ "spent_xai": 0.057
+}

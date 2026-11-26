@@ -1,0 +1,36 @@
+20:36:46 bulk run for t-movestage-lab: 26 job(s) stage-tom-bluebang, stage-tom-glare, stage-tom-carryon, stage-tom-suitedoor, stage-tom-porsche, stage-tom-controller, stage-tom-wingedshell, stage-tom-runwaylights, stage-tom-jetwash, stage-tom-fireball, stage-tom-starbeam, stage-tom-meteor, stage-tom-bluebang-vid, stage-tom-glare-vid, stage-tom-wingedshell-vid, stage-tom-runwaylights-vid, stage-tom-jetwash-vid, stage-tom-fireball-vid, stage-tom-starbeam-vid, stage-tom-meteor-vid, tom-suitedoor, tom-porsche, tom-cartridge, tom-controller, tom-shell, tom-konami; run cap $12.00 (ledger $73.95)
+20:36:46 estimate if every job is made once: $6.00; an edge retry adds one more video for that job
+20:36:48 [stage-tom-bluebang-vid] stage-tom-bluebang-vid waits: its picture stage-tom-bluebang has not passed yet (not made). Nothing sent.
+20:36:48 [stage-tom-glare-vid] stage-tom-glare-vid waits: its picture stage-tom-glare has not passed yet (not made). Nothing sent.
+20:36:48 [stage-tom-wingedshell-vid] stage-tom-wingedshell-vid waits: its picture stage-tom-wingedshell has not passed yet (not made). Nothing sent.
+20:36:48 [stage-tom-runwaylights-vid] stage-tom-runwaylights-vid waits: its picture stage-tom-runwaylights has not passed yet (not made). Nothing sent.
+20:36:48 [stage-tom-jetwash-vid] stage-tom-jetwash-vid waits: its picture stage-tom-jetwash has not passed yet (not made). Nothing sent.
+20:36:48 [stage-tom-fireball-vid] stage-tom-fireball-vid waits: its picture stage-tom-fireball has not passed yet (not made). Nothing sent.
+20:36:48 [stage-tom-starbeam-vid] stage-tom-starbeam-vid waits: its picture stage-tom-starbeam has not passed yet (not made). Nothing sent.
+20:36:48 [stage-tom-meteor-vid] stage-tom-meteor-vid waits: its picture stage-tom-meteor has not passed yet (not made). Nothing sent.
+20:36:48 stage-tom-bluebang     capped: the $15 a day for videos is spent ($20.14 today)
+20:36:48 stage-tom-glare        capped: the $15 a day for videos is spent ($20.14 today)
+20:36:48 stage-tom-carryon      capped: the $15 a day for videos is spent ($20.14 today)
+20:36:48 stage-tom-suitedoor    capped: the $15 a day for videos is spent ($20.14 today)
+20:36:48 stage-tom-porsche      capped: the $15 a day for videos is spent ($20.14 today)
+20:36:48 stage-tom-controller   capped: the $15 a day for videos is spent ($20.14 today)
+20:36:48 stage-tom-wingedshell  capped: the $15 a day for videos is spent ($20.14 today)
+20:36:48 stage-tom-runwaylights capped: the $15 a day for videos is spent ($20.14 today)
+20:36:48 stage-tom-jetwash      capped: the $15 a day for videos is spent ($20.14 today)
+20:36:48 stage-tom-fireball     capped: the $15 a day for videos is spent ($20.14 today)
+20:36:48 stage-tom-starbeam     capped: the $15 a day for videos is spent ($20.14 today)
+20:36:48 stage-tom-meteor       capped: the $15 a day for videos is spent ($20.14 today)
+20:36:48 tom-suitedoor          capped: the $15 a day for videos is spent ($20.14 today)
+20:36:48 tom-porsche            capped: the $15 a day for videos is spent ($20.14 today)
+20:36:48 tom-cartridge          capped: the $15 a day for videos is spent ($20.14 today)
+20:36:48 tom-controller         capped: the $15 a day for videos is spent ($20.14 today)
+20:36:48 tom-shell              capped: the $15 a day for videos is spent ($20.14 today)
+20:36:48 tom-konami             capped: the $15 a day for videos is spent ($20.14 today)
+20:36:48 stage-tom-bluebang-vid waiting: its picture stage-tom-bluebang has not passed yet (not made)
+20:36:48 stage-tom-glare-vid    waiting: its picture stage-tom-glare has not passed yet (not made)
+20:36:48 stage-tom-wingedshell-vid waiting: its picture stage-tom-wingedshell has not passed yet (not made)
+20:36:48 stage-tom-runwaylights-vid waiting: its picture stage-tom-runwaylights has not passed yet (not made)
+20:36:48 stage-tom-jetwash-vid  waiting: its picture stage-tom-jetwash has not passed yet (not made)
+20:36:48 stage-tom-fireball-vid waiting: its picture stage-tom-fireball has not passed yet (not made)
+20:36:48 stage-tom-starbeam-vid waiting: its picture stage-tom-starbeam has not passed yet (not made)
+20:36:48 stage-tom-meteor-vid   waiting: its picture stage-tom-meteor has not passed yet (not made)

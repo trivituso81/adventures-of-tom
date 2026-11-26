@@ -1,0 +1,177 @@
+{
+ "what": "tom-konami",
+ "rev": 1,
+ "verdict": "stopped",
+ "file": "tom-konami-a2-r1.mp4",
+ "attempts": [
+  {
+   "name": "tom-konami",
+   "file": "tom-konami-r1.mp4",
+   "pad": 0.8,
+   "failed": [
+    "p1"
+   ],
+   "evidence": [
+    "p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Thumbs not tapping on controller; multiple victory poses instead of one)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 988 px first, 988 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0031,
+      "limit": 0.01,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 1131; at most 4 px (0.3 percent of the frame height) away; limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 2.45,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (253, 34, 243) (34 away from magenta), spread at most 2.5 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 13 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": true,
+      "v": 0,
+      "limit": 0,
+      "frames": [],
+      "sides": [],
+      "say": "the figure never touches an edge"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.72,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.72 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.5,
+    "yes": 1,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.005,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Consistent character across all frames"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? \"From his starting relaxed stance, he holds both empty hands together in front of his chest as if holding a game controller and taps his thumbs up and down in a steady rhythm, eyes narrowed in total focus. Then he throws both arms straight up once in quiet triumph with a small, smug smile, holds that pose, then lowers his arms and returns to his starting relaxed stance.\"  Small differences do NOT matter: how many strokes, steps or waves, exactly where an object comes from or goes, the exact pose, or the order of small details. Say no only if the main action is missing, a clearly different action happens instead, the person flips, spins round, falls or turns away from the camera, or the action keeps repeating over and over.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Thumbs not tapping on controller; multiple victory poses instead of one"
+     }
+    ]
+   },
+   "look_checks": "run"
+  },
+  {
+   "name": "tom-konami-a2",
+   "file": "tom-konami-a2-r1.mp4",
+   "pad": 0.8,
+   "failed": [
+    "p1"
+   ],
+   "evidence": [
+    "p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (main action missing: no hands together as if holding controller or thumb tapping rhythm)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.001,
+      "limit": 0.02,
+      "say": "standing height 987 px first, 988 px last (0.1 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0031,
+      "limit": 0.01,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 1131; at most 4 px (0.3 percent of the frame height) away; limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 2.61,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (253, 34, 243) (34 away from magenta), spread at most 2.6 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 13 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": true,
+      "v": 0,
+      "limit": 0,
+      "frames": [],
+      "sides": [],
+      "say": "the figure never touches an edge"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.72,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.72 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.5,
+    "yes": 1,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0051,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "same person, face, hair, outfit and style throughout"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? \"From his starting relaxed stance, he holds both empty hands together in front of his chest as if holding a game controller and taps his thumbs up and down in a steady rhythm, eyes narrowed in total focus. Then he throws both arms straight up once in quiet triumph with a small, smug smile, holds that pose, then lowers his arms and returns to his starting relaxed stance.\"  Small differences do NOT matter: how many strokes, steps or waves, exactly where an object comes from or goes, the exact pose, or the order of small details. Say no only if the main action is missing, a clearly different action happens instead, the person flips, spins round, falls or turns away from the camera, or the action keeps repeating over and over.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "main action missing: no hands together as if holding controller or thumb tapping rhythm"
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-22T21:42:19Z",
+ "evidence": [
+  "p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (main action missing: no hands together as if holding controller or thumb tapping rhythm)"
+ ],
+ "why": "failed twice: p1"
+}

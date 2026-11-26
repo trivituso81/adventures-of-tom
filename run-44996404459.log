@@ -1,0 +1,22 @@
+07:04:20 bulk run for t-pairmove1-gen: 1 job(s) tom-rose-giddyup; run cap $3.20 (ledger $67.52)
+07:04:20 estimate if every job is made once: $0.79; an edge retry adds one more video for that job
+07:04:22 frame: art/clips/start/tom-rose-pair.png -> 720x1280, width filled, padded top and bottom, then shrunk to 65% on the same magenta (pad)
+07:04:22 [tom-rose-giddyup] job rev 1 on kling/v4/image-to-video, estimate $0.79; ledger so far $67.52 of the $70.72 cap
+07:04:22 [tom-rose-giddyup] request: {"resolution": "720p", "duration": 5, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact two characters in the attached first-frame image, a man and a young girl, preserving their exact faces, proportions, hair, outfits, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. Both characters face left. The man's feet stay planted on the exact same spot the whole time. Flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: GIDDYUP RIDE\nThe girl hops up onto the man's shoulders and sits there with one leg on each side of his head while he holds her ankles, and she raises one fist high like a rider shouting giddyup. Then she springs forward off his shoulders once, lands on her feet in front of him in a low crouch, and holds that pose.", "start_image_url": "<data uri, 300 KB>"}
+07:04:22 [tom-rose-giddyup] dropping request 01a201af-5849-70d2-b8e4-efbe1d76a9b1: sent 2026-11-22T05:16:38.381732Z and still HTTP 404 after an hour; a new one is sent
+07:04:23 [tom-rose-giddyup] live fal price: $0.157 per seconds
+07:04:23 [tom-rose-giddyup] sent, request 01a20211-fde9-72d1-bc7a-1dce30544b22
+07:09:46 [tom-rose-giddyup] DONE: tom-rose-giddyup-r1.mp4 (3275 KB). Ledger $68.31 of $70.72.
+07:09:53 [tom-rose-giddyup] tom-rose-giddyup attempt 1 (pad 0.65): failed: feet, edge
+07:09:53 [tom-rose-giddyup] tom-rose-giddyup: failed feet, edge, so it is made once more with every setting the same (a re-roll).
+07:09:53 tom-rose-giddyup       stopped
+07:09:55 costlog: logged 1 row(s) to data/costs.json: fal 0.785
+07:09:57 tom-blockade: Tom asked for more tries at 2026-11-22T06:21:17.719Z, so its count starts again from then
+07:09:57 bulk run for t-movefun-gen: 3 job(s) tom-blockade, grace-cubepop, deedee-wetfloor; run cap $9.60 (ledger $68.31)
+07:09:57 estimate if every job is made once: $1.79; an edge retry adds one more video for that job
+07:09:59 [tom-blockade] tom-blockade rev 4 was stopped before Tom asked for more tries (2026-11-22T06:21:17.719Z): a Claude session changes one thing and starts the next try.
+07:09:59 [grace-cubepop] grace-cubepop rev 4 already has a result (stopped): nothing sent.
+07:09:59 [deedee-wetfloor] deedee-wetfloor rev 10 already has a result (stopped): nothing sent.
+07:09:59 tom-blockade           stopped (retried with a smaller pad)
+07:09:59 grace-cubepop          already
+07:09:59 deedee-wetfloor        already

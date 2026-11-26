@@ -1,0 +1,154 @@
+{
+ "what": "rose-boop",
+ "rev": 1,
+ "verdict": "stopped",
+ "file": "rose-boop-a2-r1.mp4",
+ "attempts": [
+  {
+   "name": "rose-boop",
+   "file": "rose-boop-r1.mp4",
+   "pad": 0.8,
+   "failed": [
+    "feet"
+   ],
+   "evidence": [
+    "feet: lowest row of the figure in every picture: first picture row 1127; at most 24 px (1.9 percent of the frame height) away (9 pictures over); limit 1 percent"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 974 px first, 974 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": false,
+      "v": 0.0187,
+      "limit": 0.01,
+      "frames": [
+       40,
+       41,
+       42,
+       43,
+       44,
+       45,
+       46,
+       47,
+       48
+      ],
+      "say": "lowest row of the figure in every picture: first picture row 1127; at most 24 px (1.9 percent of the frame height) away (9 pictures over); limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 3.33,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (252, 20, 247) (20 away from magenta), spread at most 3.3 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 19 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": true,
+      "v": 0,
+      "limit": 0,
+      "frames": [],
+      "sides": [],
+      "say": "the figure never touches an edge"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.68,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.68 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": null,
+   "look_checks": "not run (a measurement failed first)"
+  },
+  {
+   "name": "rose-boop-a2",
+   "file": "rose-boop-a2-r1.mp4",
+   "pad": 0.8,
+   "failed": [
+    "feet"
+   ],
+   "evidence": [
+    "feet: lowest row of the figure in every picture: first picture row 1127; at most 44 px (3.4 percent of the frame height) away (21 pictures over); limit 1 percent"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 974 px first, 974 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": false,
+      "v": 0.0344,
+      "limit": 0.01,
+      "frames": [
+       34,
+       35,
+       36,
+       37,
+       38,
+       39,
+       40,
+       41,
+       42,
+       43,
+       44,
+       45
+      ],
+      "say": "lowest row of the figure in every picture: first picture row 1127; at most 44 px (3.4 percent of the frame height) away (21 pictures over); limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 4.19,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (252, 20, 247) (20 away from magenta), spread at most 4.2 (limit 15), 0.03 percent of it off colour (limit 1), colour moved at most 20 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": true,
+      "v": 0,
+      "limit": 0,
+      "frames": [],
+      "sides": [],
+      "say": "the figure never touches an edge"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.66,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.66 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": null,
+   "look_checks": "not run (a measurement failed first)"
+  }
+ ],
+ "at": "2026-11-26T10:10:58Z",
+ "evidence": [
+  "feet: lowest row of the figure in every picture: first picture row 1127; at most 44 px (3.4 percent of the frame height) away (21 pictures over); limit 1 percent"
+ ],
+ "why": "failed twice: feet"
+}

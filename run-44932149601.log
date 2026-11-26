@@ -1,0 +1,9 @@
+17:50:57 1 job(s): rose-hit; up to 3 at once; ledger $31.60 of the $41.60 cap
+17:50:57 frame: art/clips/start/rose-hero.png -> 720x1280, height filled, 70 px cut from each side
+17:50:57 job rev 3 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $31.60 of the $41.60 cap
+17:50:57 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: FLINCH BACKWARD\nFrom her starting relaxed stance, she flinches backward once as if bumped from the front, stumbling one small step back away to the right with a wince and her arms pulled in. Without repeating the flinch, she steps back into place and returns to her starting relaxed stance, holding it for the rest of the clip.", "start_image_url": "<data uri, 1409 KB>", "end_image_url": "<data uri, 1409 KB>"}
+17:50:58 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:246: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+17:50:58 sent, request 01a1ff3b-9b44-7af1-aac6-9f7f90807e6a
+17:52:56 DONE: rose-hit-r3.mp4 (10801 KB). Ledger $32.10 of $41.60.

@@ -1,0 +1,55 @@
+23:58:16 stage-tom-bluebang-vid: Tom asked for more tries at 2026-11-22T23:56:13.787Z, so its count starts again from then
+23:58:16 bulk run for t-movestage-lab: 26 job(s) stage-tom-bluebang, stage-tom-glare, stage-tom-carryon, stage-tom-suitedoor, stage-tom-porsche, stage-tom-controller, stage-tom-wingedshell, stage-tom-runwaylights, stage-tom-jetwash, stage-tom-fireball, stage-tom-starbeam, stage-tom-meteor, stage-tom-bluebang-vid, stage-tom-glare-vid, stage-tom-wingedshell-vid, stage-tom-runwaylights-vid, stage-tom-jetwash-vid, stage-tom-fireball-vid, stage-tom-starbeam-vid, stage-tom-meteor-vid, tom-suitedoor, tom-porsche, tom-cartridge, tom-controller, tom-shell, tom-konami; run cap $12.00 (ledger $88.61)
+23:58:16 estimate if every job is made once: $6.00; an edge retry adds one more video for that job
+23:58:18 [stage-tom-bluebang] stage-tom-bluebang rev 1 already has a result (passed): nothing sent.
+23:58:18 [stage-tom-glare] stage-tom-glare rev 1 already has a result (passed): nothing sent.
+23:58:18 [stage-tom-suitedoor] stage-tom-suitedoor rev 1 already has a result (stopped): nothing sent.
+23:58:18 [stage-tom-carryon] stage-tom-carryon rev 1 already has a result (passed): nothing sent.
+23:58:18 [stage-tom-porsche] stage-tom-porsche rev 1 already has a result (passed): nothing sent.
+23:58:18 [stage-tom-controller] stage-tom-controller rev 1 already has a result (passed): nothing sent.
+23:58:18 [stage-tom-wingedshell] stage-tom-wingedshell rev 1 already has a result (passed): nothing sent.
+23:58:18 [stage-tom-runwaylights] stage-tom-runwaylights rev 1 already has a result (passed): nothing sent.
+23:58:18 [stage-tom-jetwash] stage-tom-jetwash rev 1 already has a result (passed): nothing sent.
+23:58:18 [stage-tom-fireball] stage-tom-fireball rev 1 already has a result (passed): nothing sent.
+23:58:18 [stage-tom-starbeam] stage-tom-starbeam rev 1 already has a result (passed): nothing sent.
+23:58:18 [stage-tom-meteor] stage-tom-meteor rev 1 already has a result (passed): nothing sent.
+23:58:18 [tom-suitedoor] tom-suitedoor rev 1 already has a result (stopped): nothing sent.
+23:58:18 [tom-porsche] tom-porsche rev 1 already has a result (stopped): nothing sent.
+23:58:18 [tom-controller] tom-controller rev 2 already has a result (stopped): nothing sent.
+23:58:18 [tom-cartridge] tom-cartridge rev 1 already has a result (stopped): nothing sent.
+23:58:18 [tom-konami] tom-konami rev 1 already has a result (stopped): nothing sent.
+23:58:18 [tom-shell] tom-shell rev 1 already has a result (passed): nothing sent.
+23:58:18 [stage-tom-glare-vid] stage-tom-glare-vid rev 1 already has a result (stopped): nothing sent.
+23:58:18 [stage-tom-wingedshell-vid] stage-tom-wingedshell-vid rev 1 already has a result (passed): nothing sent.
+23:58:18 [stage-tom-bluebang-vid] stage-tom-bluebang-vid rev 2 already has a result (stopped): nothing sent.
+23:58:18 [stage-tom-jetwash-vid] stage-tom-jetwash-vid rev 1 already has a result (stopped): nothing sent.
+23:58:18 [stage-tom-fireball-vid] stage-tom-fireball-vid rev 1 already has a result (passed): nothing sent.
+23:58:18 [stage-tom-starbeam-vid] stage-tom-starbeam-vid rev 2 already has a result (passed): nothing sent.
+23:58:18 [stage-tom-runwaylights-vid] stage-tom-runwaylights-vid rev 1 already has a result (passed): nothing sent.
+23:58:18 [stage-tom-meteor-vid] stage-tom-meteor-vid rev 1 already has a result (passed): nothing sent.
+23:58:18 stage-tom-bluebang     already
+23:58:18 stage-tom-glare        already
+23:58:18 stage-tom-carryon      already
+23:58:18 stage-tom-suitedoor    already
+23:58:18 stage-tom-porsche      already
+23:58:18 stage-tom-controller   already
+23:58:18 stage-tom-wingedshell  already
+23:58:18 stage-tom-runwaylights already
+23:58:18 stage-tom-jetwash      already
+23:58:18 stage-tom-fireball     already
+23:58:18 stage-tom-starbeam     already
+23:58:18 stage-tom-meteor       already
+23:58:18 tom-suitedoor          already
+23:58:18 tom-porsche            already
+23:58:18 tom-cartridge          already
+23:58:18 tom-controller         already
+23:58:18 tom-shell              already
+23:58:18 tom-konami             already
+23:58:18 stage-tom-bluebang-vid already
+23:58:18 stage-tom-glare-vid    already
+23:58:18 stage-tom-wingedshell-vid already
+23:58:18 stage-tom-runwaylights-vid already
+23:58:18 stage-tom-jetwash-vid  already
+23:58:18 stage-tom-fireball-vid already
+23:58:18 stage-tom-starbeam-vid already
+23:58:18 stage-tom-meteor-vid   already

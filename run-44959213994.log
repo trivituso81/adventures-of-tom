@@ -1,0 +1,10 @@
+22:58:27 1 job(s): rose-giddyup; up to 3 at once; ledger $53.03 of the $54.53 cap
+22:58:27 frame: art/clips/start/rose-hero.png -> 720x1280, height filled, 70 px cut from each side, then shrunk to 65% on the same magenta (pad)
+22:58:27 job rev 5 on kling/v4/image-to-video, estimate $0.79; ledger so far $53.03 of the $54.53 cap
+22:58:27 request: {"resolution": "720p", "duration": 5, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: GIDDYUP LAUNCH\nFrom her starting relaxed stance, she twirls one hand above her head like a cowgirl shouting giddyup, then crouches and leaps up and forward to the left once, hugging her knees in a tight cannonball at the top of the jump, and lands on her feet. Without jumping again, she returns to her starting relaxed stance.", "start_image_url": "<data uri, 651 KB>", "end_image_url": "<data uri, 651 KB>"}
+22:58:28 live fal price: $0.157 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:187: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+22:58:28 sent, request 01a20055-20df-7e62-917d-9ee4c0301e50
+23:01:21 DONE: rose-giddyup-r5.mp4 (4080 KB). Ledger $53.81 of $54.53.
+23:01:23 costlog: logged 1 row(s) to data/costs.json: fal 0.785

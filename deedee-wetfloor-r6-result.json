@@ -1,0 +1,105 @@
+{
+ "what": "deedee-wetfloor",
+ "rev": 6,
+ "verdict": "stopped",
+ "file": "deedee-wetfloor-r6.mp4",
+ "attempts": [
+  {
+   "name": "deedee-wetfloor",
+   "file": "deedee-wetfloor-r6.mp4",
+   "pad": 0.65,
+   "failed": [
+    "p1",
+    "p2"
+   ],
+   "evidence": [
+    "p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short mop out from behind (Mop appears from side not behind back; multiple inconsistent sweeps shown.)",
+    "p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and return (No clear put away behind back; returns to stance without proper sequence.)"
+   ],
+   "checks": {
+    "n": 121,
+    "fps": 24.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 790 px first, 790 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0734,
+      "limit": 0.1,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 1031; at most 94 px (7.3 percent of the frame height) away; limit 10 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 1.58,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (251, 41, 243) (41 away from magenta), spread at most 1.6 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 2 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": true,
+      "v": 0,
+      "limit": 0,
+      "frames": [],
+      "sides": [],
+      "say": "the figure never touches an edge"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 1.55,
+      "limit": 3.0,
+      "say": "last picture against the first: 1.55 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.333,
+    "yes": 1,
+    "of": 3,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0055,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Same person, face, hair, outfit, colors and style throughout."
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short mop out from behind her back, holds it in both hands and slides its head across the top of the floor beside her feet, level with them, once, in one short sweep from right to left, the mop head staying on top of the floor the whole time.\"  Say no if it does not happen, happens twice, or something else happens instead.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Mop appears from side not behind back; multiple inconsistent sweeps shown."
+     },
+     {
+      "id": "p2",
+      "q": "Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and returns to her starting relaxed stance.\"  Say no if it does not happen, happens twice, or something else happens instead.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "No clear put away behind back; returns to stance without proper sequence."
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-22T01:36:14Z",
+ "evidence": [
+  "p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short mop out from behind (Mop appears from side not behind back; multiple inconsistent sweeps shown.)",
+  "p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and return (No clear put away behind back; returns to stance without proper sequence.)"
+ ],
+ "why": "failed: p1, p2"
+}

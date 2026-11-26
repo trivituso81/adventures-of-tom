@@ -1,0 +1,14 @@
+{
+ "card": "t-pairmove1-gen",
+ "build": null,
+ "rows": [
+  {
+   "what": "tom-rose-giddyup",
+   "rev": 2,
+   "state": "capped",
+   "why": "the $15 a day for videos is spent ($14.99 today)"
+  }
+ ],
+ "spent_fal": 0.0,
+ "spent_xai": 0.0
+}

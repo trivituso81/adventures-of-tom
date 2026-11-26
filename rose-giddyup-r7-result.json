@@ -1,0 +1,80 @@
+{
+ "what": "rose-giddyup",
+ "rev": 7,
+ "verdict": "stopped",
+ "file": "rose-giddyup-r7.mp4",
+ "attempts": [
+  {
+   "name": "rose-giddyup",
+   "file": "rose-giddyup-r7.mp4",
+   "pad": 0.65,
+   "failed": [
+    "bg",
+    "edge"
+   ],
+   "evidence": [
+    "bg: background far from the figure: colour (251, 27, 247) (27 away from magenta), spread at most 23.8 (limit 15), 1.26 percent of it off colour (limit 1), colour moved at most 3 (limit 40)",
+    "edge: the figure touches the left edge in 2 of 121 pictures (video frames 58 to 59)"
+   ],
+   "checks": {
+    "n": 121,
+    "fps": 24.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 812 px first, 812 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.01,
+      "frames": [],
+      "say": "lowest row of the figure in the first and last picture only (a jump): first picture row 1039; at most 0 px (0.0 percent of the frame height) away; limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": false,
+      "v": 23.79,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (251, 27, 247) (27 away from magenta), spread at most 23.8 (limit 15), 1.26 percent of it off colour (limit 1), colour moved at most 3 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 2,
+      "limit": 0,
+      "frames": [
+       58,
+       59
+      ],
+      "sides": [
+       "left"
+      ],
+      "say": "the figure touches the left edge in 2 of 121 pictures (video frames 58 to 59)"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 2.07,
+      "limit": 3.0,
+      "say": "last picture against the first: 2.07 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": null,
+   "look_checks": "not run (a measurement failed first)"
+  }
+ ],
+ "at": "2026-11-22T01:36:30Z",
+ "evidence": [
+  "bg: background far from the figure: colour (251, 27, 247) (27 away from magenta), spread at most 23.8 (limit 15), 1.26 percent of it off colour (limit 1), colour moved at most 3 (limit 40)",
+  "edge: the figure touches the left edge in 2 of 121 pictures (video frames 58 to 59)"
+ ],
+ "why": "failed: bg, edge"
+}

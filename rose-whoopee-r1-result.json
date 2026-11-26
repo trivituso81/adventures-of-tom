@@ -1,0 +1,179 @@
+{
+ "what": "rose-whoopee",
+ "rev": 1,
+ "verdict": "stopped",
+ "file": "rose-whoopee-a2-r1.mp4",
+ "attempts": [
+  {
+   "name": "rose-whoopee",
+   "file": "rose-whoopee-r1.mp4",
+   "pad": 0.8,
+   "failed": [
+    "f_same",
+    "p1"
+   ],
+   "evidence": [
+    "f_same: Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the  (face, expression, and hair details change across frames)",
+    "p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (main pushing and ear-clamping actions missing; wrong sequence of poses)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 974 px first, 974 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.01,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 1127; at most 0 px (0.0 percent of the frame height) away; limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 3.67,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (253, 20, 247) (20 away from magenta), spread at most 3.7 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 18 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": true,
+      "v": 0,
+      "limit": 0,
+      "frames": [],
+      "sides": [],
+      "say": "the figure never touches an edge"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.68,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.68 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.0,
+    "yes": 0,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0053,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": false,
+      "why": "face, expression, and hair details change across frames"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? \"She keeps a deadpan straight face and pushes both palms low and forward as if sliding a giant mat across the floor. She clamps both hands tightly over her ears and braces, then pops into a proud one-second Master-of-Mischief pose with her hands on her hips. She returns to her starting relaxed stance. She holds nothing in her hands.\"  Small differences do NOT matter: how many strokes, steps or waves, exactly where an object comes from or goes, the exact pose, or the order of small details. Say no only if the main action is missing, a clearly different action happens instead, the person flips, spins round, falls or turns away from the camera, or the action keeps repeating over and over.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "main pushing and ear-clamping actions missing; wrong sequence of poses"
+     }
+    ]
+   },
+   "look_checks": "run"
+  },
+  {
+   "name": "rose-whoopee-a2",
+   "file": "rose-whoopee-a2-r1.mp4",
+   "pad": 0.8,
+   "failed": [
+    "p1"
+   ],
+   "evidence": [
+    "p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Missing deadpan face, mat push, ear clamp, and Master-of-Mischief pose; shows varied idle animations instead.)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 974 px first, 974 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.01,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 1127; at most 0 px (0.0 percent of the frame height) away; limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 3.77,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (252, 20, 247) (20 away from magenta), spread at most 3.8 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 18 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": true,
+      "v": 0,
+      "limit": 0,
+      "frames": [],
+      "sides": [],
+      "say": "the figure never touches an edge"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.67,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.67 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.5,
+    "yes": 1,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0081,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Same girl with consistent face, hair, outfit, and style across all frames and Image 2."
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? \"She keeps a deadpan straight face and pushes both palms low and forward as if sliding a giant mat across the floor. She clamps both hands tightly over her ears and braces, then pops into a proud one-second Master-of-Mischief pose with her hands on her hips. She returns to her starting relaxed stance. She holds nothing in her hands.\"  Small differences do NOT matter: how many strokes, steps or waves, exactly where an object comes from or goes, the exact pose, or the order of small details. Say no only if the main action is missing, a clearly different action happens instead, the person flips, spins round, falls or turns away from the camera, or the action keeps repeating over and over.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Missing deadpan face, mat push, ear clamp, and Master-of-Mischief pose; shows varied idle animations instead."
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-26T12:55:31Z",
+ "evidence": [
+  "p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Missing deadpan face, mat push, ear clamp, and Master-of-Mischief pose; shows varied idle animations instead.)"
+ ],
+ "why": "failed twice: p1"
+}

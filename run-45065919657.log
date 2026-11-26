@@ -1,0 +1,41 @@
+20:22:56 guide requests; ledger $73.81
+20:22:56 0 guide request(s) found, 1 start picture request(s)
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:272: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  rows, today = [], datetime.datetime.utcnow().strftime('%Y-%m-%d')
+20:22:59 job rev 1 on google/nano-banana-2.1/edit, estimate $0.15; ledger so far $73.81 of the $74.11 cap
+20:22:59 request: {"aspect_ratio": "2:3", "resolution": "1K", "num_images": 1, "output_format": "png", "prompt": "IMAGE EDIT REQUEST: ONE IMAGE. Return exactly one image, nothing else.\n\nATTACH: the hero picture of the character (the reference). Nothing else.\n\nWHAT THIS IS\nThe same character as the attached picture, redrawn for use as the first frame of an animation for a family role-playing game. Keep EXACTLY this character: the same face, the same head size compared to the body, the same hair, the same clothes, shoes and accessories, the same colors, the same proportions, and the same hand-drawn colored pencil and ink drawing style with soft shading and fine pencil lines. Do not redesign, restyle, simplify or change anything about the character. Not pixel art, not 3D, not anime, not a flat cartoon, not a photo.\n\nWHAT TO CHANGE (only these three things)\n1. FACING: the character is turned to face LEFT of the image, in a three-quarter view, head and body both turned left, looking toward the left edge. Standing relaxed, feet apart a little, arms loose at the sides.\n2. BACKGROUND: one flat, solid, pure magenta color (hex FF00FF) across the whole image, edge to edge. No paper texture, no gradient, no vignette, no ground line and no cast shadow on the ground. The character must not contain any magenta or pink-purple shades of that color.\n3. FRAMING: the whole character from the top of the hair to the soles of the shoes is visible, centered, with a clear margin of magenta on every side. Nothing is cut off. The head must not touch the top edge.\n\nEDGES\nCrisp, clean outlines all the way around the character so the figure can be cut out from the flat background. No glow, no blur, no soft halo, no extra objects, no text, no props, no other people.\n\nFamily friendly for ages 6 and up.", "image_urls": ["<data uri, 3284 KB>"]}
+20:22:59 live fal price: $1.0 per units
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:213: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+20:23:00 sent, request 01a204ed-257f-7a40-903c-78b10b18c3e6
+20:23:26 DONE: startpic-amy-t1795378848-r1.png (1448 KB). Ledger $73.95 of $74.11.
+Traceback (most recent call last):
+  File "/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py", line 412, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py", line 386, in main
+    rc = run_guide_requests(a, jobs, state, lock, save, fal, os.environ.get('FAL_KEY', ''))
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py", line 312, in run_guide_requests
+    json.dump({'results': (old + srows)[-40:]}, open(os.path.join(a.out, 'startpic-results.json'), 'w'), indent=1)
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/json/__init__.py", line 179, in dump
+    for chunk in iterable:
+                 ^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/json/encoder.py", line 326, in _iterencode_list
+    yield from chunks
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/json/encoder.py", line 326, in _iterencode_list
+    yield from chunks
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type bool is not JSON serializable

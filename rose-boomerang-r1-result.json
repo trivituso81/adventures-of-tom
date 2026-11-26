@@ -1,0 +1,194 @@
+{
+ "what": "rose-boomerang",
+ "rev": 1,
+ "verdict": "stopped",
+ "file": "rose-boomerang-a2-r1.mp4",
+ "attempts": [
+  {
+   "name": "rose-boomerang",
+   "file": "rose-boomerang-r1.mp4",
+   "pad": 0.8,
+   "failed": [
+    "feet",
+    "edge"
+   ],
+   "evidence": [
+    "feet: lowest row of the figure in every picture: first picture row 1127; at most 40 px (3.1 percent of the frame height) away (40 pictures over); limit 1 percent",
+    "edge: the figure touches the left edge in 19 of 150 pictures (video frames 35 to 46, 91 to 97)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 974 px first, 974 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": false,
+      "v": 0.0312,
+      "limit": 0.01,
+      "frames": [
+       63,
+       64,
+       65,
+       66,
+       67,
+       68,
+       69,
+       70,
+       71,
+       72,
+       73,
+       74
+      ],
+      "say": "lowest row of the figure in every picture: first picture row 1127; at most 40 px (3.1 percent of the frame height) away (40 pictures over); limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 4.62,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (253, 20, 247) (20 away from magenta), spread at most 4.6 (limit 15), 0.05 percent of it off colour (limit 1), colour moved at most 18 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 19,
+      "limit": 0,
+      "frames": [
+       35,
+       36,
+       37,
+       38,
+       39,
+       40,
+       41,
+       42,
+       43,
+       44,
+       45,
+       46,
+       91,
+       92,
+       93,
+       94,
+       95,
+       96,
+       97
+      ],
+      "sides": [
+       "left"
+      ],
+      "say": "the figure touches the left edge in 19 of 150 pictures (video frames 35 to 46, 91 to 97)"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.68,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.68 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": null,
+   "look_checks": "not run (a measurement failed first)"
+  },
+  {
+   "name": "rose-boomerang-a2",
+   "file": "rose-boomerang-a2-r1.mp4",
+   "pad": 0.8,
+   "failed": [
+    "feet",
+    "edge"
+   ],
+   "evidence": [
+    "feet: lowest row of the figure in every picture: first picture row 1127; at most 28 px (2.2 percent of the frame height) away (79 pictures over); limit 1 percent",
+    "edge: the figure touches the left edge in 7 of 150 pictures (video frames 23, 49 to 54)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 974 px first, 974 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": false,
+      "v": 0.0219,
+      "limit": 0.01,
+      "frames": [
+       24,
+       25,
+       26,
+       27,
+       28,
+       29,
+       30,
+       31,
+       32,
+       33,
+       34,
+       35
+      ],
+      "say": "lowest row of the figure in every picture: first picture row 1127; at most 28 px (2.2 percent of the frame height) away (79 pictures over); limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 6.87,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (252, 20, 247) (20 away from magenta), spread at most 6.9 (limit 15), 0.17 percent of it off colour (limit 1), colour moved at most 19 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 7,
+      "limit": 0,
+      "frames": [
+       23,
+       49,
+       50,
+       51,
+       52,
+       53,
+       54
+      ],
+      "sides": [
+       "left"
+      ],
+      "say": "the figure touches the left edge in 7 of 150 pictures (video frames 23, 49 to 54)"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.69,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.69 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": null,
+   "look_checks": "not run (a measurement failed first)"
+  }
+ ],
+ "at": "2026-11-26T10:07:09Z",
+ "evidence": [
+  "feet: lowest row of the figure in every picture: first picture row 1127; at most 28 px (2.2 percent of the frame height) away (79 pictures over); limit 1 percent",
+  "edge: the figure touches the left edge in 7 of 150 pictures (video frames 23, 49 to 54)"
+ ],
+ "why": "failed twice: feet, edge"
+}

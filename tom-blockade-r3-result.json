@@ -1,0 +1,233 @@
+{
+ "what": "tom-blockade",
+ "rev": 3,
+ "verdict": "stopped",
+ "file": "tom-blockade-a2-r3.mp4",
+ "attempts": [
+  {
+   "name": "tom-blockade",
+   "file": "tom-blockade-r3.mp4",
+   "pad": null,
+   "failed": [
+    "edge",
+    "p1",
+    "p2",
+    "p3"
+   ],
+   "evidence": [
+    "edge: the figure touches the right edge in 5 of 150 pictures (video frames 29 to 33)",
+    "p1: Reading the pictures in order, does this happen, once and clearly: \"From his starting relaxed stance, he holds both arms out to the sides wi (Pose is inconsistent; arms not clearly like a gate with elbows bent in sequence)",
+    "p2: Reading the pictures in order, does this happen, once and clearly: \"Then he bumps his hip to the left once.\"  Say no if it does not happen,  (No visible hip bump to the left in any frame)",
+    "p3: Reading the pictures in order, does this happen, once and clearly: \"He holds that wide blocking pose for a moment, then lowers his arms and  (No clear hold of wide blocking pose before returning to start)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 1233 px first, 1233 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0039,
+      "limit": 0.01,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 1254; at most 5 px (0.4 percent of the frame height) away; limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 1.77,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (251, 36, 243) (36 away from magenta), spread at most 1.8 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 7 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 5,
+      "limit": 0,
+      "frames": [
+       29,
+       30,
+       31,
+       32,
+       33
+      ],
+      "sides": [
+       "right"
+      ],
+      "say": "the figure touches the right edge in 5 of 150 pictures (video frames 29 to 33)"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 1.03,
+      "limit": 3.0,
+      "say": "last picture against the first: 1.03 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.25,
+    "yes": 1,
+    "of": 4,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0055,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Consistent character across all frames"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does this happen, once and clearly: \"From his starting relaxed stance, he holds both arms out to the sides with his elbows bent, like a gate, with a calm, no-nonsense face, as if guarding his spot at the front of a boarding line.\"  Say no if it does not happen, happens twice, or something else happens instead.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Pose is inconsistent; arms not clearly like a gate with elbows bent in sequence"
+     },
+     {
+      "id": "p2",
+      "q": "Reading the pictures in order, does this happen, once and clearly: \"Then he bumps his hip to the left once.\"  Say no if it does not happen, happens twice, or something else happens instead.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "No visible hip bump to the left in any frame"
+     },
+     {
+      "id": "p3",
+      "q": "Reading the pictures in order, does this happen, once and clearly: \"He holds that wide blocking pose for a moment, then lowers his arms and returns to his starting relaxed stance.\"  Say no if it does not happen, happens twice, or something else happens instead.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "No clear hold of wide blocking pose before returning to start"
+     }
+    ]
+   },
+   "look_checks": "run"
+  },
+  {
+   "name": "tom-blockade-a2",
+   "file": "tom-blockade-a2-r3.mp4",
+   "pad": null,
+   "failed": [
+    "edge",
+    "p1",
+    "p2",
+    "p3"
+   ],
+   "evidence": [
+    "edge: the figure touches the right edge in 2 of 150 pictures (video frames 32 to 33)",
+    "p1: Reading the pictures in order, does this happen, once and clearly: \"From his starting relaxed stance, he holds both arms out to the sides wi (Pose varies but never clearly holds both arms out like a gate with elbows bent.)",
+    "p2: Reading the pictures in order, does this happen, once and clearly: \"Then he bumps his hip to the left once.\"  Say no if it does not happen,  (No visible hip bump to the left in any frame.)",
+    "p3: Reading the pictures in order, does this happen, once and clearly: \"He holds that wide blocking pose for a moment, then lowers his arms and  (No wide blocking pose held or clear return sequence matching description.)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0008,
+      "limit": 0.02,
+      "say": "standing height 1233 px first, 1234 px last (0.1 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0039,
+      "limit": 0.01,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 1254; at most 5 px (0.4 percent of the frame height) away; limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 1.79,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (251, 36, 243) (36 away from magenta), spread at most 1.8 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 8 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 2,
+      "limit": 0,
+      "frames": [
+       32,
+       33
+      ],
+      "sides": [
+       "right"
+      ],
+      "say": "the figure touches the right edge in 2 of 150 pictures (video frames 32 to 33)"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 1.03,
+      "limit": 3.0,
+      "say": "last picture against the first: 1.03 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.25,
+    "yes": 1,
+    "of": 4,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0084,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Consistent character across all frames matching start image."
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does this happen, once and clearly: \"From his starting relaxed stance, he holds both arms out to the sides with his elbows bent, like a gate, with a calm, no-nonsense face, as if guarding his spot at the front of a boarding line.\"  Say no if it does not happen, happens twice, or something else happens instead.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Pose varies but never clearly holds both arms out like a gate with elbows bent."
+     },
+     {
+      "id": "p2",
+      "q": "Reading the pictures in order, does this happen, once and clearly: \"Then he bumps his hip to the left once.\"  Say no if it does not happen, happens twice, or something else happens instead.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "No visible hip bump to the left in any frame."
+     },
+     {
+      "id": "p3",
+      "q": "Reading the pictures in order, does this happen, once and clearly: \"He holds that wide blocking pose for a moment, then lowers his arms and returns to his starting relaxed stance.\"  Say no if it does not happen, happens twice, or something else happens instead.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "No wide blocking pose held or clear return sequence matching description."
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-22T05:03:54Z",
+ "evidence": [
+  "edge: the figure touches the right edge in 2 of 150 pictures (video frames 32 to 33)",
+  "p1: Reading the pictures in order, does this happen, once and clearly: \"From his starting relaxed stance, he holds both arms out to the sides wi (Pose varies but never clearly holds both arms out like a gate with elbows bent.)",
+  "p2: Reading the pictures in order, does this happen, once and clearly: \"Then he bumps his hip to the left once.\"  Say no if it does not happen,  (No visible hip bump to the left in any frame.)",
+  "p3: Reading the pictures in order, does this happen, once and clearly: \"He holds that wide blocking pose for a moment, then lowers his arms and  (No wide blocking pose held or clear return sequence matching description.)"
+ ],
+ "why": "failed twice: edge, p1, p2, p3"
+}

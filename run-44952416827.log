@@ -1,0 +1,9 @@
+21:37:47 1 job(s): rose-cushion-kling; up to 3 at once; ledger $51.74 of the $52.55 cap
+21:37:47 frame: art/clips/start/rose-cushion.png -> 720x1280, height filled, 70 px cut from each side, then shrunk to 80% on the same magenta (pad)
+21:37:47 job rev 1 on kling/v4/image-to-video, estimate $0.79; ledger so far $51.74 of the $52.55 cap
+21:37:47 request: {"resolution": "720p", "duration": 5, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: CUSHION HOP\nShe gasps, tosses the couch cushion she is holding down onto the floor at her feet, and hops onto the cushion with both feet. She bounces up and down on the cushion twice with her arms up, giggling. Without bouncing again, she hops off as the cushion disappears, and she holds her starting relaxed stance.", "start_image_url": "<data uri, 912 KB>"}
+21:37:48 live fal price: $0.157 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:186: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+21:37:48 sent, request 01a2000b-4536-7802-b982-6db57a3b558b
+21:41:45 DONE: rose-cushion-kling-r1.mp4 (6259 KB). Ledger $52.53 of $52.55.

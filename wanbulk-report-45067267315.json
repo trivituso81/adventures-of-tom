@@ -1,0 +1,164 @@
+{
+ "card": "t-movestage-lab",
+ "build": null,
+ "rows": [
+  {
+   "what": "stage-tom-bluebang",
+   "rev": 1,
+   "state": "capped",
+   "why": "the $15 a day for videos is spent ($20.14 today)"
+  },
+  {
+   "what": "stage-tom-glare",
+   "rev": 1,
+   "state": "capped",
+   "why": "the $15 a day for videos is spent ($20.14 today)"
+  },
+  {
+   "what": "stage-tom-carryon",
+   "rev": 1,
+   "state": "capped",
+   "why": "the $15 a day for videos is spent ($20.14 today)"
+  },
+  {
+   "what": "stage-tom-suitedoor",
+   "rev": 1,
+   "state": "capped",
+   "why": "the $15 a day for videos is spent ($20.14 today)"
+  },
+  {
+   "what": "stage-tom-porsche",
+   "rev": 1,
+   "state": "capped",
+   "why": "the $15 a day for videos is spent ($20.14 today)"
+  },
+  {
+   "what": "stage-tom-controller",
+   "rev": 1,
+   "state": "capped",
+   "why": "the $15 a day for videos is spent ($20.14 today)"
+  },
+  {
+   "what": "stage-tom-wingedshell",
+   "rev": 1,
+   "state": "capped",
+   "why": "the $15 a day for videos is spent ($20.14 today)"
+  },
+  {
+   "what": "stage-tom-runwaylights",
+   "rev": 1,
+   "state": "capped",
+   "why": "the $15 a day for videos is spent ($20.14 today)"
+  },
+  {
+   "what": "stage-tom-jetwash",
+   "rev": 1,
+   "state": "capped",
+   "why": "the $15 a day for videos is spent ($20.14 today)"
+  },
+  {
+   "what": "stage-tom-fireball",
+   "rev": 1,
+   "state": "capped",
+   "why": "the $15 a day for videos is spent ($20.14 today)"
+  },
+  {
+   "what": "stage-tom-starbeam",
+   "rev": 1,
+   "state": "capped",
+   "why": "the $15 a day for videos is spent ($20.14 today)"
+  },
+  {
+   "what": "stage-tom-meteor",
+   "rev": 1,
+   "state": "capped",
+   "why": "the $15 a day for videos is spent ($20.14 today)"
+  },
+  {
+   "what": "tom-suitedoor",
+   "rev": 1,
+   "state": "capped",
+   "why": "the $15 a day for videos is spent ($20.14 today)"
+  },
+  {
+   "what": "tom-porsche",
+   "rev": 1,
+   "state": "capped",
+   "why": "the $15 a day for videos is spent ($20.14 today)"
+  },
+  {
+   "what": "tom-cartridge",
+   "rev": 1,
+   "state": "capped",
+   "why": "the $15 a day for videos is spent ($20.14 today)"
+  },
+  {
+   "what": "tom-controller",
+   "rev": 1,
+   "state": "capped",
+   "why": "the $15 a day for videos is spent ($20.14 today)"
+  },
+  {
+   "what": "tom-shell",
+   "rev": 1,
+   "state": "capped",
+   "why": "the $15 a day for videos is spent ($20.14 today)"
+  },
+  {
+   "what": "tom-konami",
+   "rev": 1,
+   "state": "capped",
+   "why": "the $15 a day for videos is spent ($20.14 today)"
+  },
+  {
+   "what": "stage-tom-bluebang-vid",
+   "rev": 1,
+   "state": "waiting",
+   "why": "its picture stage-tom-bluebang has not passed yet (not made)"
+  },
+  {
+   "what": "stage-tom-glare-vid",
+   "rev": 1,
+   "state": "waiting",
+   "why": "its picture stage-tom-glare has not passed yet (not made)"
+  },
+  {
+   "what": "stage-tom-wingedshell-vid",
+   "rev": 1,
+   "state": "waiting",
+   "why": "its picture stage-tom-wingedshell has not passed yet (not made)"
+  },
+  {
+   "what": "stage-tom-runwaylights-vid",
+   "rev": 1,
+   "state": "waiting",
+   "why": "its picture stage-tom-runwaylights has not passed yet (not made)"
+  },
+  {
+   "what": "stage-tom-jetwash-vid",
+   "rev": 1,
+   "state": "waiting",
+   "why": "its picture stage-tom-jetwash has not passed yet (not made)"
+  },
+  {
+   "what": "stage-tom-fireball-vid",
+   "rev": 1,
+   "state": "waiting",
+   "why": "its picture stage-tom-fireball has not passed yet (not made)"
+  },
+  {
+   "what": "stage-tom-starbeam-vid",
+   "rev": 1,
+   "state": "waiting",
+   "why": "its picture stage-tom-starbeam has not passed yet (not made)"
+  },
+  {
+   "what": "stage-tom-meteor-vid",
+   "rev": 1,
+   "state": "waiting",
+   "why": "its picture stage-tom-meteor has not passed yet (not made)"
+  }
+ ],
+ "spent_fal": 0.0,
+ "spent_xai": 0.0
+}

@@ -1,0 +1,20 @@
+{
+ "card": "t-wanstop-gen",
+ "build": null,
+ "rows": [
+  {
+   "what": "rose-giddyup",
+   "rev": 7,
+   "state": "stopped",
+   "retried": false
+  },
+  {
+   "what": "deedee-wetfloor",
+   "rev": 6,
+   "state": "stopped",
+   "retried": false
+  }
+ ],
+ "spent_fal": 1.57,
+ "spent_xai": 0.0055
+}

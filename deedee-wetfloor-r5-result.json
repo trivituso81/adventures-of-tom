@@ -1,0 +1,135 @@
+{
+ "what": "deedee-wetfloor",
+ "rev": 5,
+ "verdict": "stopped",
+ "file": "deedee-wetfloor-r5.mp4",
+ "attempts": [
+  {
+   "name": "deedee-wetfloor",
+   "file": "deedee-wetfloor-r5.mp4",
+   "pad": 0.65,
+   "failed": [
+    "edge",
+    "p1",
+    "p2"
+   ],
+   "evidence": [
+    "edge: the figure touches the left/right edge in 23 of 121 pictures (video frames 32, 34 to 39, 52 to 53, 60 to 61, 64 to 65, 76 to 77 and more)",
+    "p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short mop out from behind (Mop appears without clear bringing out from back; sweep unclear or inconsistent)",
+    "p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and return (No clear putting mop behind back; returns to stance but motion incomplete)"
+   ],
+   "checks": {
+    "n": 121,
+    "fps": 24.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 790 px first, 790 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0766,
+      "limit": 0.1,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 1031; at most 98 px (7.7 percent of the frame height) away; limit 10 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 1.71,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (252, 42, 243) (42 away from magenta), spread at most 1.7 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 3 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 23,
+      "limit": 0,
+      "frames": [
+       32,
+       34,
+       35,
+       36,
+       37,
+       38,
+       39,
+       52,
+       53,
+       60,
+       61,
+       64,
+       65,
+       76,
+       77,
+       84,
+       85,
+       86,
+       87,
+       88,
+       89,
+       90,
+       91
+      ],
+      "sides": [
+       "left",
+       "right"
+      ],
+      "say": "the figure touches the left/right edge in 23 of 121 pictures (video frames 32, 34 to 39, 52 to 53, 60 to 61, 64 to 65, 76 to 77 and more)"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 1.52,
+      "limit": 3.0,
+      "say": "last picture against the first: 1.52 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.333,
+    "yes": 1,
+    "of": 3,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0055,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Consistent character across all frames"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short mop out from behind her back, holds it in both hands and slides its head across the top of the floor beside her feet, level with them, once, in one wide sweep from right to left, the mop head staying on top of the floor the whole time.\"  Say no if it does not happen, happens twice, or something else happens instead.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Mop appears without clear bringing out from back; sweep unclear or inconsistent"
+     },
+     {
+      "id": "p2",
+      "q": "Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and returns to her starting relaxed stance.\"  Say no if it does not happen, happens twice, or something else happens instead.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "No clear putting mop behind back; returns to stance but motion incomplete"
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-22T00:47:25Z",
+ "evidence": [
+  "edge: the figure touches the left/right edge in 23 of 121 pictures (video frames 32, 34 to 39, 52 to 53, 60 to 61, 64 to 65, 76 to 77 and more)",
+  "p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short mop out from behind (Mop appears without clear bringing out from back; sweep unclear or inconsistent)",
+  "p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and return (No clear putting mop behind back; returns to stance but motion incomplete)"
+ ],
+ "why": "failed: edge, p1, p2"
+}

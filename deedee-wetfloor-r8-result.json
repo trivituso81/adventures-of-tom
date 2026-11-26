@@ -1,0 +1,146 @@
+{
+ "what": "deedee-wetfloor",
+ "rev": 8,
+ "verdict": "stopped",
+ "file": "deedee-wetfloor-a2-r8.mp4",
+ "attempts": [
+  {
+   "name": "deedee-wetfloor",
+   "file": "deedee-wetfloor-r8.mp4",
+   "pad": 0.65,
+   "failed": [
+    "bg"
+   ],
+   "evidence": [
+    "bg: background far from the figure: colour (252, 42, 243) (42 away from magenta), spread at most 12.7 (limit 15), 5.46 percent of it off colour (limit 1), colour moved at most 2 (limit 40)"
+   ],
+   "checks": {
+    "n": 121,
+    "fps": 24.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 790 px first, 790 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0844,
+      "limit": 0.1,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 1031; at most 108 px (8.4 percent of the frame height) away; limit 10 percent"
+     },
+     {
+      "id": "bg",
+      "ok": false,
+      "v": 12.68,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (252, 42, 243) (42 away from magenta), spread at most 12.7 (limit 15), 5.46 percent of it off colour (limit 1), colour moved at most 2 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": true,
+      "v": 0,
+      "limit": 0,
+      "frames": [],
+      "sides": [],
+      "say": "the figure never touches an edge"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 1.46,
+      "limit": 3.0,
+      "say": "last picture against the first: 1.46 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": null,
+   "look_checks": "not run (a measurement failed first)"
+  },
+  {
+   "name": "deedee-wetfloor-a2",
+   "file": "deedee-wetfloor-a2-r8.mp4",
+   "pad": 0.65,
+   "failed": [
+    "feet",
+    "edge"
+   ],
+   "evidence": [
+    "feet: lowest row of the figure in every picture: first picture row 1031; at most 130 px (10.2 percent of the frame height) away (2 pictures over); limit 10 percent",
+    "edge: the figure touches the left edge in 6 of 121 pictures (video frames 46 to 47, 70 to 73)"
+   ],
+   "checks": {
+    "n": 121,
+    "fps": 24.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 790 px first, 790 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": false,
+      "v": 0.1016,
+      "limit": 0.1,
+      "frames": [
+       50,
+       51
+      ],
+      "say": "lowest row of the figure in every picture: first picture row 1031; at most 130 px (10.2 percent of the frame height) away (2 pictures over); limit 10 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 1.57,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (251, 41, 243) (41 away from magenta), spread at most 1.6 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 2 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 6,
+      "limit": 0,
+      "frames": [
+       46,
+       47,
+       70,
+       71,
+       72,
+       73
+      ],
+      "sides": [
+       "left"
+      ],
+      "say": "the figure touches the left edge in 6 of 121 pictures (video frames 46 to 47, 70 to 73)"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 1.55,
+      "limit": 3.0,
+      "say": "last picture against the first: 1.55 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": null,
+   "look_checks": "not run (a measurement failed first)"
+  }
+ ],
+ "at": "2026-11-22T04:12:19Z",
+ "evidence": [
+  "feet: lowest row of the figure in every picture: first picture row 1031; at most 130 px (10.2 percent of the frame height) away (2 pictures over); limit 10 percent",
+  "edge: the figure touches the left edge in 6 of 121 pictures (video frames 46 to 47, 70 to 73)"
+ ],
+ "why": "failed twice: feet, edge"
+}

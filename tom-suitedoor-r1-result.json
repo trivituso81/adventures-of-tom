@@ -1,0 +1,205 @@
+{
+ "what": "tom-suitedoor",
+ "rev": 1,
+ "verdict": "stopped",
+ "file": "tom-suitedoor-a2-r1.mp4",
+ "attempts": [
+  {
+   "name": "tom-suitedoor",
+   "file": "tom-suitedoor-r1.mp4",
+   "pad": 0.8,
+   "failed": [
+    "p1"
+   ],
+   "evidence": [
+    "p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (main action missing: no arms spreading wide or sweeping inward like sliding doors)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.001,
+      "limit": 0.02,
+      "say": "standing height 987 px first, 988 px last (0.1 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0031,
+      "limit": 0.01,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 1131; at most 4 px (0.3 percent of the frame height) away; limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 2.37,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (253, 34, 243) (34 away from magenta), spread at most 2.4 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 12 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": true,
+      "v": 0,
+      "limit": 0,
+      "frames": [],
+      "sides": [],
+      "say": "the figure never touches an edge"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.72,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.72 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.5,
+    "yes": 1,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0081,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "same person, face, hair, outfit, colors and style throughout"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? \"From his starting relaxed stance, he spreads both arms out wide to his sides with flat open palms, then sweeps both hands inward once until his palms meet in front of his chest, like sliding a pair of doors shut. He gives one small, polite nod with a calm, professional smile, holds that pose, then lowers his hands and returns to his starting relaxed stance.\"  Small differences do NOT matter: how many strokes, steps or waves, exactly where an object comes from or goes, the exact pose, or the order of small details. Say no only if the main action is missing, a clearly different action happens instead, the person flips, spins round, falls or turns away from the camera, or the action keeps repeating over and over.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "main action missing: no arms spreading wide or sweeping inward like sliding doors"
+     }
+    ]
+   },
+   "look_checks": "run"
+  },
+  {
+   "name": "tom-suitedoor-a2",
+   "file": "tom-suitedoor-a2-r1.mp4",
+   "pad": 0.8,
+   "failed": [
+    "edge",
+    "p1"
+   ],
+   "evidence": [
+    "edge: the figure touches the left edge in 22 of 150 pictures (video frames 29 to 50)",
+    "p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Animation shows multiple arm gestures and poses instead of single described sequence)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 988 px first, 988 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0023,
+      "limit": 0.01,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 1131; at most 3 px (0.2 percent of the frame height) away; limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 2.51,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (253, 34, 243) (34 away from magenta), spread at most 2.5 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 11 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 22,
+      "limit": 0,
+      "frames": [
+       29,
+       30,
+       31,
+       32,
+       33,
+       34,
+       35,
+       36,
+       37,
+       38,
+       39,
+       40,
+       41,
+       42,
+       43,
+       44,
+       45,
+       46,
+       47,
+       48,
+       49,
+       50
+      ],
+      "sides": [
+       "left"
+      ],
+      "say": "the figure touches the left edge in 22 of 150 pictures (video frames 29 to 50)"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.71,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.71 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.5,
+    "yes": 1,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0052,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Consistent character across all frames"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? \"From his starting relaxed stance, he spreads both arms out wide to his sides with flat open palms, then sweeps both hands inward once until his palms meet in front of his chest, like sliding a pair of doors shut. He gives one small, polite nod with a calm, professional smile, holds that pose, then lowers his hands and returns to his starting relaxed stance.\"  Small differences do NOT matter: how many strokes, steps or waves, exactly where an object comes from or goes, the exact pose, or the order of small details. Say no only if the main action is missing, a clearly different action happens instead, the person flips, spins round, falls or turns away from the camera, or the action keeps repeating over and over.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Animation shows multiple arm gestures and poses instead of single described sequence"
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-22T21:37:29Z",
+ "evidence": [
+  "edge: the figure touches the left edge in 22 of 150 pictures (video frames 29 to 50)",
+  "p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Animation shows multiple arm gestures and poses instead of single described sequence)"
+ ],
+ "why": "failed twice: edge, p1"
+}

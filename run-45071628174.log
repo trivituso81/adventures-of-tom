@@ -1,0 +1,287 @@
+21:31:58 bulk run for t-movestage-lab: 26 job(s) stage-tom-bluebang, stage-tom-glare, stage-tom-carryon, stage-tom-suitedoor, stage-tom-porsche, stage-tom-controller, stage-tom-wingedshell, stage-tom-runwaylights, stage-tom-jetwash, stage-tom-fireball, stage-tom-starbeam, stage-tom-meteor, stage-tom-bluebang-vid, stage-tom-glare-vid, stage-tom-wingedshell-vid, stage-tom-runwaylights-vid, stage-tom-jetwash-vid, stage-tom-fireball-vid, stage-tom-starbeam-vid, stage-tom-meteor-vid, tom-suitedoor, tom-porsche, tom-cartridge, tom-controller, tom-shell, tom-konami; run cap $12.00 (ledger $77.75)
+21:31:58 estimate if every job is made once: $6.00; an edge retry adds one more video for that job
+21:32:01 [stage-tom-bluebang] job rev 1 on google/nano-banana-2.1, estimate $0.15; ledger so far $77.75 of the $89.75 cap
+21:32:01 [stage-tom-bluebang] request: {"aspect_ratio": "1:1", "resolution": "1K", "num_images": 1, "output_format": "png", "prompt": "ONE PICTURE OF ONE OBJECT FOR A GAME.\n\nA bright blue burst of light, round at the center with short jagged rays and a few small white sparks. Drawn in a hand-drawn colored pencil and ink illustration style with soft shading and warm golden light from the upper left, no thick outlines, not pixel art.\n\nCentered. The whole object is centered with a wide empty margin on every side. Flat, solid pure black background with nothing else in the picture.\n\nNo people, no hands, no logos or badges, no text."}
+21:32:01 [stage-tom-glare] job rev 1 on google/nano-banana-2.1, estimate $0.15; ledger so far $77.75 of the $89.75 cap
+21:32:01 [stage-tom-glare] request: {"aspect_ratio": "1:1", "resolution": "1K", "num_images": 1, "output_format": "png", "prompt": "ONE PICTURE OF ONE OBJECT FOR A GAME.\n\nA blinding white car headlight glare: a bright round core with long thin rays of light spreading out in every direction. Drawn in a hand-drawn colored pencil and ink illustration style with soft shading and warm golden light from the upper left, no thick outlines, not pixel art.\n\nCentered. The whole object is centered with a wide empty margin on every side. Flat, solid pure black background with nothing else in the picture.\n\nNo people, no hands, no logos or badges, no text."}
+21:32:01 [stage-tom-carryon] job rev 1 on google/nano-banana-2.1, estimate $0.15; ledger so far $77.75 of the $89.75 cap
+21:32:01 [stage-tom-carryon] request: {"aspect_ratio": "1:1", "resolution": "1K", "num_images": 1, "output_format": "png", "prompt": "ONE PICTURE OF ONE OBJECT FOR A GAME.\n\nA silver hard-shell carry-on suitcase standing upright on its two small wheels, its telescoping handle pulled up, with a small gold luggage tag hanging from the handle. Drawn in a hand-drawn colored pencil and ink illustration style with soft shading and warm golden light from the upper left, no thick outlines, not pixel art.\n\nSeen from the side, the wheels facing left. The whole object is centered with a wide empty margin on every side. Flat, solid pure magenta background (#FF00FF) with no shadow, no floor and nothing else in the picture.\n\nNo people, no hands, no logos or badges, no other text: the only lettering is the tag, which reads ZONE 1 in bold black capitals."}
+21:32:01 [stage-tom-carryon] live fal price: $1.0 per units
+21:32:01 [stage-tom-glare] live fal price: $1.0 per units
+21:32:01 [stage-tom-bluebang] live fal price: $1.0 per units
+21:32:01 [stage-tom-carryon] sent, request 01a2052c-56a6-7bd1-b7e7-3f2a7401643c
+21:32:01 [stage-tom-glare] sent, request 01a2052c-56f2-70f0-b228-c9bb09d7fb08
+21:32:01 [stage-tom-bluebang] sent, request 01a2052c-5734-75a1-b962-eed293e5d58f
+21:32:12 [stage-tom-glare] DONE: stage-tom-glare-r1.png (1218 KB). Ledger $78.20 of $89.75.
+21:32:15 [stage-tom-glare] stage-tom-glare attempt 1: failed: p1
+21:32:15 [stage-tom-glare] stage-tom-glare: failed p1, so it is made once more with every setting the same (a re-roll).
+21:32:15 [stage-tom-glare] job rev 1 on google/nano-banana-2.1, estimate $0.15; ledger so far $78.20 of the $89.75 cap
+21:32:15 [stage-tom-glare] request: {"aspect_ratio": "1:1", "resolution": "1K", "num_images": 1, "output_format": "png", "prompt": "ONE PICTURE OF ONE OBJECT FOR A GAME.\n\nA blinding white car headlight glare: a bright round core with long thin rays of light spreading out in every direction. Drawn in a hand-drawn colored pencil and ink illustration style with soft shading and warm golden light from the upper left, no thick outlines, not pixel art.\n\nCentered. The whole object is centered with a wide empty margin on every side. Flat, solid pure black background with nothing else in the picture.\n\nNo people, no hands, no logos or badges, no text."}
+21:32:15 [stage-tom-glare] live fal price: $1.0 per units
+21:32:16 [stage-tom-glare] sent, request 01a2052c-8ef3-7c32-8ad5-2c6fab44b537
+21:32:17 [stage-tom-bluebang] DONE: stage-tom-bluebang-r1.png (1106 KB). Ledger $78.36 of $89.75.
+21:32:20 [stage-tom-bluebang] stage-tom-bluebang attempt 1: PASSED
+21:32:20 [stage-tom-suitedoor] job rev 1 on google/nano-banana-2.1, estimate $0.15; ledger so far $78.36 of the $89.75 cap
+21:32:20 [stage-tom-suitedoor] request: {"aspect_ratio": "1:1", "resolution": "1K", "num_images": 1, "output_format": "png", "prompt": "ONE PICTURE OF ONE OBJECT FOR A GAME.\n\nOne low, sleek airplane privacy suite door panel: a tall rectangle of charcoal gray with a thin walnut wood trim along its top edge and one small glowing amber reading light near the top corner. Drawn in a hand-drawn colored pencil and ink illustration style with soft shading and warm golden light from the upper left, no thick outlines, not pixel art.\n\nSeen straight from the side, standing upright like a narrow wall. The whole object is centered with a wide empty margin on every side. Flat, solid pure magenta background (#FF00FF) with no shadow, no floor and nothing else in the picture.\n\nNo people, no hands, no logos or badges, no text."}
+21:32:20 [stage-tom-suitedoor] live fal price: $1.0 per units
+21:32:21 [stage-tom-suitedoor] sent, request 01a2052c-a28b-7c83-b784-3b74fb17e3cb
+21:32:27 [stage-tom-carryon] DONE: stage-tom-carryon-r1.png (940 KB). Ledger $78.50 of $89.75.
+21:32:31 [stage-tom-carryon] stage-tom-carryon attempt 1: PASSED
+21:32:31 [stage-tom-porsche] job rev 1 on google/nano-banana-2.1, estimate $0.15; ledger so far $78.50 of the $89.75 cap
+21:32:31 [stage-tom-porsche] request: {"aspect_ratio": "1:1", "resolution": "1K", "num_images": 1, "output_format": "png", "prompt": "ONE PICTURE OF ONE OBJECT FOR A GAME.\n\nA sleek black luxury SUV with tinted windows and polished silver wheels, its headlights switched on. Drawn in a hand-drawn colored pencil and ink illustration style with soft shading and warm golden light from the upper left, no thick outlines, not pixel art.\n\nSeen exactly from the side, the front of the car facing left, both wheels on one level line. The whole object is centered with a wide empty margin on every side. Flat, solid pure magenta background (#FF00FF) with no shadow, no floor and nothing else in the picture.\n\nNo people, no hands, no logos or badges, no other text: the only lettering is a small white card propped inside the rear side window, which reads TOM in black capitals."}
+21:32:31 [stage-tom-porsche] live fal price: $1.0 per units
+21:32:31 [stage-tom-porsche] sent, request 01a2052c-cc23-75c0-9490-44af134fb9bc
+21:32:31 [stage-tom-glare] DONE: stage-tom-glare-a2-r1.png (1242 KB). Ledger $78.66 of $89.75.
+21:32:35 [stage-tom-glare] stage-tom-glare attempt 2: PASSED
+21:32:35 [stage-tom-controller] job rev 1 on google/nano-banana-2.1, estimate $0.15; ledger so far $78.66 of the $89.75 cap
+21:32:35 [stage-tom-controller] request: {"aspect_ratio": "1:1", "resolution": "1K", "num_images": 1, "output_format": "png", "prompt": "ONE PICTURE OF ONE OBJECT FOR A GAME.\n\nA gray game controller with two handles, a direction pad and four round buttons, its short black wrist strap dangling from one end. Drawn in a hand-drawn colored pencil and ink illustration style with soft shading and warm golden light from the upper left, no thick outlines, not pixel art.\n\nSeen from the front, lying flat toward the viewer. The whole object is centered with a wide empty margin on every side. Flat, solid pure magenta background (#FF00FF) with no shadow, no floor and nothing else in the picture.\n\nNo people, no hands, no logos or badges, no text."}
+21:32:35 [stage-tom-controller] live fal price: $1.0 per units
+21:32:36 [stage-tom-controller] sent, request 01a2052c-dd40-7f52-b3f0-7228f1105714
+21:32:47 [stage-tom-suitedoor] DONE: stage-tom-suitedoor-r1.png (1107 KB). Ledger $78.81 of $89.75.
+21:32:50 [stage-tom-suitedoor] stage-tom-suitedoor attempt 1: failed: p1
+21:32:50 [stage-tom-suitedoor] stage-tom-suitedoor: failed p1, so it is made once more with every setting the same (a re-roll).
+21:32:50 [stage-tom-suitedoor] job rev 1 on google/nano-banana-2.1, estimate $0.15; ledger so far $78.81 of the $89.75 cap
+21:32:50 [stage-tom-suitedoor] request: {"aspect_ratio": "1:1", "resolution": "1K", "num_images": 1, "output_format": "png", "prompt": "ONE PICTURE OF ONE OBJECT FOR A GAME.\n\nOne low, sleek airplane privacy suite door panel: a tall rectangle of charcoal gray with a thin walnut wood trim along its top edge and one small glowing amber reading light near the top corner. Drawn in a hand-drawn colored pencil and ink illustration style with soft shading and warm golden light from the upper left, no thick outlines, not pixel art.\n\nSeen straight from the side, standing upright like a narrow wall. The whole object is centered with a wide empty margin on every side. Flat, solid pure magenta background (#FF00FF) with no shadow, no floor and nothing else in the picture.\n\nNo people, no hands, no logos or badges, no text."}
+21:32:50 [stage-tom-suitedoor] live fal price: $1.0 per units
+21:32:50 [stage-tom-suitedoor] sent, request 01a2052d-16d4-7f23-99cd-c2c14e79544b
+21:32:51 [stage-tom-controller] DONE: stage-tom-controller-r1.png (1189 KB). Ledger $78.95 of $89.75.
+21:32:54 [stage-tom-controller] stage-tom-controller attempt 1: PASSED
+21:32:54 [stage-tom-wingedshell] job rev 1 on google/nano-banana-2.1, estimate $0.15; ledger so far $78.95 of the $89.75 cap
+21:32:54 [stage-tom-wingedshell] request: {"aspect_ratio": "1:1", "resolution": "1K", "num_images": 1, "output_format": "png", "prompt": "ONE PICTURE OF ONE OBJECT FOR A GAME.\n\nA glossy blue dome-shaped turtle shell with a pale cream band around its rim and two small white feathered wings spread out from its sides. Drawn in a hand-drawn colored pencil and ink illustration style with soft shading and warm golden light from the upper left, no thick outlines, not pixel art.\n\nSeen from the side, wings raised. The whole object is centered with a wide empty margin on every side. Flat, solid pure magenta background (#FF00FF) with no shadow, no floor and nothing else in the picture.\n\nNo people, no hands, no logos or badges, no text."}
+21:32:55 [stage-tom-wingedshell] live fal price: $1.0 per units
+21:32:55 [stage-tom-wingedshell] sent, request 01a2052d-27d0-7f03-83e2-ad360ad1fca5
+21:32:57 [stage-tom-porsche] DONE: stage-tom-porsche-r1.png (1144 KB). Ledger $79.11 of $89.75.
+21:33:01 [stage-tom-porsche] stage-tom-porsche attempt 1: PASSED
+21:33:01 [stage-tom-runwaylights] job rev 1 on google/nano-banana-2.1, estimate $0.15; ledger so far $79.11 of the $89.75 cap
+21:33:01 [stage-tom-runwaylights] request: {"aspect_ratio": "1:1", "resolution": "1K", "num_images": 1, "output_format": "png", "prompt": "ONE PICTURE OF ONE OBJECT FOR A GAME.\n\nA long, straight row of small round airport runway edge lights, white and pale blue, evenly spaced, all lit and glowing softly. Drawn in a hand-drawn colored pencil and ink illustration style with soft shading and warm golden light from the upper left, no thick outlines, not pixel art.\n\nA thin horizontal strip running from the left edge to the right edge of the picture, seen from slightly above. The whole object is centered with a wide empty margin on every side. Flat, solid pure black background with nothing else in the picture.\n\nNo people, no hands, no logos or badges, no text."}
+21:33:02 [stage-tom-runwaylights] live fal price: $1.0 per units
+21:33:02 [stage-tom-runwaylights] sent, request 01a2052d-441d-77d2-b590-7180b69bf6b4
+21:33:11 [stage-tom-wingedshell] DONE: stage-tom-wingedshell-r1.png (1140 KB). Ledger $79.25 of $89.75.
+21:33:15 [stage-tom-wingedshell] stage-tom-wingedshell attempt 1: PASSED
+21:33:15 [stage-tom-jetwash] job rev 1 on google/nano-banana-2.1, estimate $0.15; ledger so far $79.25 of the $89.75 cap
+21:33:15 [stage-tom-jetwash] request: {"aspect_ratio": "1:1", "resolution": "1K", "num_images": 1, "output_format": "png", "prompt": "ONE PICTURE OF ONE OBJECT FOR A GAME.\n\nA gust of hot jet engine wind: long wavy streaks of glowing white and pale orange air, all blowing sideways to the left. Drawn in a hand-drawn colored pencil and ink illustration style with soft shading and warm golden light from the upper left, no thick outlines, not pixel art.\n\nA wide horizontal band of streaks. The whole object is centered with a wide empty margin on every side. Flat, solid pure black background with nothing else in the picture.\n\nNo people, no hands, no logos or badges, no text."}
+21:33:15 [stage-tom-jetwash] live fal price: $1.0 per units
+21:33:15 [stage-tom-jetwash] sent, request 01a2052d-7655-78b3-828b-a28da9071d9d
+21:33:16 [stage-tom-suitedoor] DONE: stage-tom-suitedoor-a2-r1.png (1036 KB). Ledger $79.41 of $89.75.
+21:33:19 [stage-tom-suitedoor] stage-tom-suitedoor attempt 2: failed: p1
+21:33:19 [stage-tom-fireball] job rev 1 on google/nano-banana-2.1, estimate $0.15; ledger so far $79.41 of the $89.75 cap
+21:33:19 [stage-tom-fireball] request: {"aspect_ratio": "1:1", "resolution": "1K", "num_images": 1, "output_format": "png", "prompt": "ONE PICTURE OF ONE OBJECT FOR A GAME.\n\nA small chunky fireball with a bright yellow core, orange flames and a short flaming tail pointing up. Drawn in a hand-drawn colored pencil and ink illustration style with soft shading and warm golden light from the upper left, no thick outlines, not pixel art.\n\nSeen from the side, falling straight down. The whole object is centered with a wide empty margin on every side. Flat, solid pure black background with nothing else in the picture.\n\nNo people, no hands, no logos or badges, no text."}
+21:33:20 [stage-tom-fireball] live fal price: $1.0 per units
+21:33:20 [stage-tom-fireball] sent, request 01a2052d-8936-7cf2-b29e-b5c14bf45af1
+21:33:28 [stage-tom-runwaylights] DONE: stage-tom-runwaylights-r1.png (326 KB). Ledger $79.56 of $89.75.
+21:33:31 [stage-tom-jetwash] DONE: stage-tom-jetwash-r1.png (1184 KB). Ledger $79.56 of $89.75.
+21:33:31 [stage-tom-runwaylights] stage-tom-runwaylights attempt 1: PASSED
+21:33:31 [stage-tom-starbeam] job rev 1 on google/nano-banana-2.1, estimate $0.15; ledger so far $79.56 of the $89.75 cap
+21:33:31 [stage-tom-starbeam] request: {"aspect_ratio": "1:1", "resolution": "1K", "num_images": 1, "output_format": "png", "prompt": "ONE PICTURE OF ONE OBJECT FOR A GAME.\n\nA falling star: a bright five-pointed white and gold star with a long glittering trail of sparkles above it. Drawn in a hand-drawn colored pencil and ink illustration style with soft shading and warm golden light from the upper left, no thick outlines, not pixel art.\n\nFalling straight down. The whole object is centered with a wide empty margin on every side. Flat, solid pure black background with nothing else in the picture.\n\nNo people, no hands, no logos or badges, no text."}
+21:33:31 [stage-tom-starbeam] live fal price: $1.0 per units
+21:33:31 [stage-tom-starbeam] sent, request 01a2052d-b6bf-78a1-9a07-eb275a72dc79
+21:33:34 [stage-tom-jetwash] stage-tom-jetwash attempt 1: PASSED
+21:33:34 [stage-tom-meteor] job rev 1 on google/nano-banana-2.1, estimate $0.15; ledger so far $79.70 of the $89.75 cap
+21:33:34 [stage-tom-meteor] request: {"aspect_ratio": "1:1", "resolution": "1K", "num_images": 1, "output_format": "png", "prompt": "ONE PICTURE OF ONE OBJECT FOR A GAME.\n\nA small rocky meteor with glowing red cracks and a long fiery orange tail above it. Drawn in a hand-drawn colored pencil and ink illustration style with soft shading and warm golden light from the upper left, no thick outlines, not pixel art.\n\nFalling straight down. The whole object is centered with a wide empty margin on every side. Flat, solid pure black background with nothing else in the picture.\n\nNo people, no hands, no logos or badges, no text."}
+21:33:34 [stage-tom-meteor] live fal price: $1.0 per units
+21:33:34 [stage-tom-meteor] sent, request 01a2052d-c222-71e3-9c39-a7c960646fbe
+21:33:35 [stage-tom-fireball] DONE: stage-tom-fireball-r1.png (432 KB). Ledger $79.86 of $89.75.
+21:33:38 [stage-tom-fireball] stage-tom-fireball attempt 1: PASSED
+21:33:39 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side, then shrunk to 80% on the same magenta (pad)
+21:33:39 [tom-suitedoor] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $79.86 of the $89.75 cap
+21:33:39 [tom-suitedoor] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SUITE DOOR SLIDE\nFrom his starting relaxed stance, he spreads both arms out wide to his sides with flat open palms, then sweeps both hands inward once until his palms meet in front of his chest, like sliding a pair of doors shut. He gives one small, polite nod with a calm, professional smile, holds that pose, then lowers his hands and returns to his starting relaxed stance.", "start_image_url": "<data uri, 857 KB>", "end_image_url": "<data uri, 857 KB>"}
+21:33:39 [tom-suitedoor] live fal price: $0.045 per seconds
+21:33:39 [tom-suitedoor] sent, request 01a2052d-d672-7b90-8f10-11a33d03b40c
+21:33:47 [stage-tom-starbeam] DONE: stage-tom-starbeam-r1.png (370 KB). Ledger $80.36 of $89.75.
+21:33:50 [stage-tom-meteor] DONE: stage-tom-meteor-r1.png (484 KB). Ledger $80.36 of $89.75.
+21:33:50 [stage-tom-starbeam] stage-tom-starbeam attempt 1: PASSED
+21:33:50 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side
+21:33:50 [tom-porsche] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $80.36 of the $89.75 cap
+21:33:50 [tom-porsche] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: TARMAC PORSCHE TRANSFER\nFrom his starting relaxed stance, he raises one wrist and glances at it once as if checking a watch, with a patient, unbothered face. Then he lifts his other hand beside his head and gives one small two-finger wave forward to the left, as if signaling his driver, holds that pose with a faint smug smile, then lowers his hand and returns to his starting relaxed stance.", "start_image_url": "<data uri, 1268 KB>", "end_image_url": "<data uri, 1268 KB>"}
+21:33:50 [tom-porsche] live fal price: $0.045 per seconds
+21:33:51 [tom-porsche] sent, request 01a2052e-0363-7a40-b974-2d6668bf8480
+21:33:53 [stage-tom-meteor] stage-tom-meteor attempt 1: PASSED
+21:33:53 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side
+21:33:53 [tom-cartridge] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $80.86 of the $89.75 cap
+21:33:53 [tom-cartridge] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: CARTRIDGE BLOW\nFrom his starting relaxed stance, he quickly pulls a small gray game cartridge out of his pocket, holds it up to his mouth with both hands and blows hard into its open end once with puffed cheeks. He squints into the cartridge with one eye shut, gives one small satisfied nod with a deadpan face, then tucks it back into his pocket and returns to his starting relaxed stance.", "start_image_url": "<data uri, 1268 KB>", "end_image_url": "<data uri, 1268 KB>"}
+21:33:54 [tom-cartridge] live fal price: $0.045 per seconds
+21:33:54 [tom-cartridge] sent, request 01a2052e-0fde-7de2-9ae4-c4f461dd0463
+21:35:22 [tom-suitedoor] DONE: tom-suitedoor-r1.mp4 (7146 KB). Ledger $81.36 of $89.75.
+21:35:33 [tom-porsche] DONE: tom-porsche-r1.mp4 (9289 KB). Ledger $81.36 of $89.75.
+21:35:34 [tom-suitedoor] tom-suitedoor attempt 1 (pad 0.8): failed: p1
+21:35:34 [tom-suitedoor] tom-suitedoor: failed p1, so it is made once more with every setting the same (a re-roll).
+21:35:35 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side, then shrunk to 80% on the same magenta (pad)
+21:35:35 [tom-suitedoor] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $81.36 of the $89.75 cap
+21:35:35 [tom-suitedoor] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SUITE DOOR SLIDE\nFrom his starting relaxed stance, he spreads both arms out wide to his sides with flat open palms, then sweeps both hands inward once until his palms meet in front of his chest, like sliding a pair of doors shut. He gives one small, polite nod with a calm, professional smile, holds that pose, then lowers his hands and returns to his starting relaxed stance.", "start_image_url": "<data uri, 857 KB>", "end_image_url": "<data uri, 857 KB>"}
+21:35:35 [tom-suitedoor] live fal price: $0.045 per seconds
+21:35:35 [tom-suitedoor] sent, request 01a2052f-9b23-74d3-b9bf-a9b3a0ee5de9
+21:35:36 [tom-cartridge] DONE: tom-cartridge-r1.mp4 (10484 KB). Ledger $81.86 of $89.75.
+21:35:44 [tom-porsche] tom-porsche attempt 1 (pad none): failed: edge
+21:35:44 [tom-porsche] tom-porsche: only the edge check failed, so it is made once more with pad 0.8.
+21:35:45 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side, then shrunk to 80% on the same magenta (pad)
+21:35:45 [tom-porsche] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $81.86 of the $89.75 cap
+21:35:45 [tom-porsche] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: TARMAC PORSCHE TRANSFER\nFrom his starting relaxed stance, he raises one wrist and glances at it once as if checking a watch, with a patient, unbothered face. Then he lifts his other hand beside his head and gives one small two-finger wave forward to the left, as if signaling his driver, holds that pose with a faint smug smile, then lowers his hand and returns to his starting relaxed stance.", "start_image_url": "<data uri, 857 KB>", "end_image_url": "<data uri, 857 KB>"}
+21:35:45 [tom-porsche] live fal price: $0.045 per seconds
+21:35:46 [tom-porsche] sent, request 01a2052f-c39c-7ad2-8906-3c2d9a91ffae
+21:35:49 [tom-cartridge] tom-cartridge attempt 1 (pad none): failed: p1
+21:35:49 [tom-cartridge] tom-cartridge: failed p1, so it is made once more with every setting the same (a re-roll).
+21:35:49 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side
+21:35:49 [tom-cartridge] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $82.36 of the $89.75 cap
+21:35:49 [tom-cartridge] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: CARTRIDGE BLOW\nFrom his starting relaxed stance, he quickly pulls a small gray game cartridge out of his pocket, holds it up to his mouth with both hands and blows hard into its open end once with puffed cheeks. He squints into the cartridge with one eye shut, gives one small satisfied nod with a deadpan face, then tucks it back into his pocket and returns to his starting relaxed stance.", "start_image_url": "<data uri, 1268 KB>", "end_image_url": "<data uri, 1268 KB>"}
+21:35:49 [tom-cartridge] live fal price: $0.045 per seconds
+21:35:50 [tom-cartridge] sent, request 01a2052f-d32b-7542-aa97-9a815a2ea651
+21:37:17 [tom-suitedoor] DONE: tom-suitedoor-a2-r1.mp4 (7364 KB). Ledger $82.86 of $89.75.
+21:37:29 [tom-suitedoor] tom-suitedoor attempt 2 (pad 0.8): failed: edge, p1
+21:37:30 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side, then shrunk to 80% on the same magenta (pad)
+21:37:30 [tom-controller] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $82.86 of the $89.75 cap
+21:37:30 [tom-controller] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: CONTROLLER TOSS\nFrom his starting relaxed stance, he draws one empty hand back and flings it forward to the left once in a sidearm throw, then keeps watching ahead with a flat, unimpressed face. Without looking, he raises the same open hand beside his shoulder and closes it once in a casual catch, holds that pose, then lowers his hand and returns to his starting relaxed stance. Both of his hands stay empty for the whole clip.", "start_image_url": "<data uri, 857 KB>", "end_image_url": "<data uri, 857 KB>"}
+21:37:30 [tom-controller] live fal price: $0.045 per seconds
+21:37:30 [tom-controller] sent, request 01a20531-5cf7-7e61-8c37-3825d8f83fb5
+21:37:43 [tom-porsche] DONE: tom-porsche-a2-r1.mp4 (7274 KB). Ledger $83.36 of $89.75.
+21:37:47 [tom-cartridge] DONE: tom-cartridge-a2-r1.mp4 (10045 KB). Ledger $83.36 of $89.75.
+21:37:54 [tom-porsche] tom-porsche attempt 2 (pad 0.8): failed: p1
+21:37:54 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side, then shrunk to 80% on the same magenta (pad)
+21:37:54 [tom-shell] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $83.36 of the $89.75 cap
+21:37:54 [tom-shell] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: WINGED SHELL LOCK-ON\nFrom his starting relaxed stance, he raises one finger above his head and draws one slow circle in the air, then brings his arm down and points straight ahead to the left with a calm, knowing look. He holds the point, then lowers his hand and returns to his starting relaxed stance.", "start_image_url": "<data uri, 857 KB>", "end_image_url": "<data uri, 857 KB>"}
+21:37:54 [tom-shell] live fal price: $0.045 per seconds
+21:37:55 [tom-shell] sent, request 01a20531-bbea-7b62-9e49-3e3e66d58843
+21:37:58 [tom-cartridge] tom-cartridge attempt 2 (pad none): failed: p1
+21:37:58 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side, then shrunk to 80% on the same magenta (pad)
+21:37:58 [tom-konami] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $83.86 of the $89.75 cap
+21:37:58 [tom-konami] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: KONAMI CODE\nFrom his starting relaxed stance, he holds both empty hands together in front of his chest as if holding a game controller and taps his thumbs up and down in a steady rhythm, eyes narrowed in total focus. Then he throws both arms straight up once in quiet triumph with a small, smug smile, holds that pose, then lowers his arms and returns to his starting relaxed stance.", "start_image_url": "<data uri, 857 KB>", "end_image_url": "<data uri, 857 KB>"}
+21:37:59 [tom-konami] live fal price: $0.045 per seconds
+21:37:59 [tom-konami] sent, request 01a20531-cc81-7a03-9f4d-888330676997
+21:39:33 [tom-controller] DONE: tom-controller-r1.mp4 (6870 KB). Ledger $84.36 of $89.75.
+21:39:44 [tom-controller] tom-controller attempt 1 (pad 0.8): failed: edge, p1
+21:39:44 [tom-controller] tom-controller: failed edge, p1, so it is made once more with every setting the same (a re-roll).
+21:39:44 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side, then shrunk to 80% on the same magenta (pad)
+21:39:44 [tom-controller] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $84.36 of the $89.75 cap
+21:39:44 [tom-controller] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: CONTROLLER TOSS\nFrom his starting relaxed stance, he draws one empty hand back and flings it forward to the left once in a sidearm throw, then keeps watching ahead with a flat, unimpressed face. Without looking, he raises the same open hand beside his shoulder and closes it once in a casual catch, holds that pose, then lowers his hand and returns to his starting relaxed stance. Both of his hands stay empty for the whole clip.", "start_image_url": "<data uri, 857 KB>", "end_image_url": "<data uri, 857 KB>"}
+21:39:45 [tom-controller] live fal price: $0.045 per seconds
+21:39:45 [tom-controller] sent, request 01a20533-6b68-7742-813e-f0cf8fa34fe4
+21:39:52 [tom-shell] DONE: tom-shell-r1.mp4 (7508 KB). Ledger $84.86 of $89.75.
+21:39:56 [tom-konami] DONE: tom-konami-r1.mp4 (8267 KB). Ledger $84.86 of $89.75.
+21:40:06 [tom-shell] tom-shell attempt 1 (pad 0.8): PASSED
+21:40:10 [tom-konami] tom-konami attempt 1 (pad 0.8): failed: p1
+21:40:10 [tom-konami] tom-konami: failed p1, so it is made once more with every setting the same (a re-roll).
+21:40:10 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side, then shrunk to 80% on the same magenta (pad)
+21:40:10 [tom-konami] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $84.86 of the $89.75 cap
+21:40:10 [tom-konami] request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: KONAMI CODE\nFrom his starting relaxed stance, he holds both empty hands together in front of his chest as if holding a game controller and taps his thumbs up and down in a steady rhythm, eyes narrowed in total focus. Then he throws both arms straight up once in quiet triumph with a small, smug smile, holds that pose, then lowers his arms and returns to his starting relaxed stance.", "start_image_url": "<data uri, 857 KB>", "end_image_url": "<data uri, 857 KB>"}
+21:40:10 [tom-konami] live fal price: $0.045 per seconds
+21:40:11 [tom-konami] sent, request 01a20533-cf31-78c1-ae9d-6e263a5d8679
+21:41:58 [tom-controller] DONE: tom-controller-a2-r1.mp4 (8300 KB). Ledger $85.36 of $89.75.
+21:42:08 [tom-konami] DONE: tom-konami-a2-r1.mp4 (7748 KB). Ledger $85.36 of $89.75.
+21:42:10 [tom-controller] tom-controller attempt 2 (pad 0.8): failed: edge, p1
+21:42:19 [tom-konami] tom-konami attempt 2 (pad 0.8): failed: p1
+21:42:19 frame: /home/runner/work/_temp/wangen/stage-tom-glare-a2-r1.png -> as it is, sent as it is
+21:42:19 [stage-tom-glare-vid] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.15; ledger so far $85.36 of the $89.75 cap
+21:42:19 [stage-tom-glare-vid] request: {"resolution": "480p", "aspect_ratio": "1:1", "duration": 3, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D animation of the exact object in the attached first-frame image, preserving its exact shape, colors and hand-drawn colored pencil and ink style throughout every frame. There is no person, hand or character anywhere in the clip.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The object stays centered on the same spot on a flat, solid pure black background. Silent clip.\n\nMOTION: HEADLIGHT FLARE\nThe glare flares brighter once, its rays stretching longer, then it fades away completely until only the black background is left.", "start_image_url": "<data uri, 1242 KB>"}
+21:42:19 frame: /home/runner/work/_temp/wangen/stage-tom-bluebang-r1.png -> as it is, sent as it is
+21:42:19 [stage-tom-bluebang-vid] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.15; ledger so far $85.36 of the $89.75 cap
+21:42:19 [stage-tom-bluebang-vid] request: {"resolution": "480p", "aspect_ratio": "1:1", "duration": 3, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D animation of the exact object in the attached first-frame image, preserving its exact shape, colors and hand-drawn colored pencil and ink style throughout every frame. There is no person, hand or character anywhere in the clip.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The object stays centered on the same spot on a flat, solid pure black background. Silent clip.\n\nMOTION: BLUE BLAST\nThe blue burst flares out once, its sparks flying outward, then it shrinks and fades away completely until only the black background is left.", "start_image_url": "<data uri, 1106 KB>"}
+21:42:19 frame: /home/runner/work/_temp/wangen/stage-tom-wingedshell-r1.png -> as it is, sent as it is
+21:42:19 [stage-tom-wingedshell-vid] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.15; ledger so far $85.36 of the $89.75 cap
+21:42:19 [stage-tom-wingedshell-vid] request: {"resolution": "480p", "aspect_ratio": "1:1", "duration": 3, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D animation of the exact object in the attached first-frame image, preserving its exact shape, colors and hand-drawn colored pencil and ink style throughout every frame. There is no person, hand or character anywhere in the clip.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The object stays centered on the same spot on a flat, solid pure magenta background with no shadows or lighting changes. Silent clip.\n\nMOTION: WINGS FLAPPING\nIts two small white wings flap up and down in a steady rhythm while the shell bobs gently in place. It ends exactly as it began.", "start_image_url": "<data uri, 1140 KB>", "end_image_url": "<data uri, 1140 KB>"}
+21:42:20 [stage-tom-bluebang-vid] live fal price: $0.045 per seconds
+21:42:20 price lookup said 500: {"error":{"type":"server_error","message":"Unexpected server error"}}
+
+21:42:20 [stage-tom-wingedshell-vid] live fal price: $0.045 per seconds
+21:42:20 [stage-tom-bluebang-vid] sent, request 01a20535-c874-72d2-a334-2533b12fb73f
+21:42:20 [stage-tom-glare-vid] sent, request 01a20535-c8c2-71a1-82b1-f530308b84a6
+21:42:20 [stage-tom-wingedshell-vid] sent, request 01a20535-c937-7771-a239-f26611b48d66
+21:43:32 [stage-tom-wingedshell-vid] DONE: stage-tom-wingedshell-vid-r1.mp4 (2135 KB). Ledger $85.81 of $89.75.
+21:43:37 [stage-tom-wingedshell-vid] stage-tom-wingedshell-vid attempt 1: PASSED
+21:43:37 frame: /home/runner/work/_temp/wangen/stage-tom-runwaylights-r1.png -> as it is, sent as it is
+21:43:37 [stage-tom-runwaylights-vid] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.15; ledger so far $85.81 of the $89.75 cap
+21:43:37 [stage-tom-runwaylights-vid] request: {"resolution": "480p", "aspect_ratio": "1:1", "duration": 3, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D animation of the exact object in the attached first-frame image, preserving its exact shape, colors and hand-drawn colored pencil and ink style throughout every frame. There is no person, hand or character anywhere in the clip.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The object stays centered on the same spot on a flat, solid pure black background. Silent clip.\n\nMOTION: RUNWAY LIGHTS CHASE\nThe lights brighten one after another from the right end to the left end in a smooth wave, again and again, while the row stays in place. It ends exactly as it began.", "start_image_url": "<data uri, 326 KB>", "end_image_url": "<data uri, 326 KB>"}
+21:43:37 [stage-tom-runwaylights-vid] live fal price: $0.045 per seconds
+21:43:37 [stage-tom-runwaylights-vid] sent, request 01a20536-f622-7412-b053-4141621f1663
+21:43:47 [stage-tom-glare-vid] DONE: stage-tom-glare-vid-r1.mp4 (2716 KB). Ledger $85.95 of $89.75.
+21:43:47 [stage-tom-bluebang-vid] DONE: stage-tom-bluebang-vid-r1.mp4 (2833 KB). Ledger $85.95 of $89.75.
+21:43:48 [stage-tom-glare-vid] stage-tom-glare-vid attempt 1: failed: bg, edge
+21:43:48 [stage-tom-glare-vid] stage-tom-glare-vid: failed bg, edge, so it is made once more with every setting the same (a re-roll).
+21:43:48 frame: /home/runner/work/_temp/wangen/stage-tom-glare-a2-r1.png -> as it is, sent as it is
+21:43:48 [stage-tom-glare-vid] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.15; ledger so far $85.95 of the $89.75 cap
+21:43:48 [stage-tom-glare-vid] request: {"resolution": "480p", "aspect_ratio": "1:1", "duration": 3, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D animation of the exact object in the attached first-frame image, preserving its exact shape, colors and hand-drawn colored pencil and ink style throughout every frame. There is no person, hand or character anywhere in the clip.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The object stays centered on the same spot on a flat, solid pure black background. Silent clip.\n\nMOTION: HEADLIGHT FLARE\nThe glare flares brighter once, its rays stretching longer, then it fades away completely until only the black background is left.", "start_image_url": "<data uri, 1242 KB>"}
+21:43:48 [stage-tom-bluebang-vid] stage-tom-bluebang-vid attempt 1: failed: bg, edge
+21:43:48 [stage-tom-bluebang-vid] stage-tom-bluebang-vid: failed bg, edge, so it is made once more with every setting the same (a re-roll).
+21:43:48 frame: /home/runner/work/_temp/wangen/stage-tom-bluebang-r1.png -> as it is, sent as it is
+21:43:48 [stage-tom-bluebang-vid] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.15; ledger so far $85.95 of the $89.75 cap
+21:43:48 [stage-tom-bluebang-vid] request: {"resolution": "480p", "aspect_ratio": "1:1", "duration": 3, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D animation of the exact object in the attached first-frame image, preserving its exact shape, colors and hand-drawn colored pencil and ink style throughout every frame. There is no person, hand or character anywhere in the clip.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The object stays centered on the same spot on a flat, solid pure black background. Silent clip.\n\nMOTION: BLUE BLAST\nThe blue burst flares out once, its sparks flying outward, then it shrinks and fades away completely until only the black background is left.", "start_image_url": "<data uri, 1106 KB>"}
+21:43:48 [stage-tom-glare-vid] live fal price: $0.045 per seconds
+21:43:48 [stage-tom-bluebang-vid] live fal price: $0.045 per seconds
+21:43:49 [stage-tom-bluebang-vid] sent, request 01a20537-2310-7062-b5ee-8fbdc40a3015
+21:43:49 [stage-tom-glare-vid] sent, request 01a20537-2334-73d3-bdde-38f56f247f7d
+21:44:44 [stage-tom-runwaylights-vid] DONE: stage-tom-runwaylights-vid-r1.mp4 (632 KB). Ledger $86.25 of $89.75.
+21:44:48 [stage-tom-runwaylights-vid] stage-tom-runwaylights-vid attempt 1: PASSED
+21:44:48 frame: /home/runner/work/_temp/wangen/stage-tom-jetwash-r1.png -> as it is, sent as it is
+21:44:48 [stage-tom-jetwash-vid] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.15; ledger so far $86.25 of the $89.75 cap
+21:44:48 [stage-tom-jetwash-vid] request: {"resolution": "480p", "aspect_ratio": "1:1", "duration": 3, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D animation of the exact object in the attached first-frame image, preserving its exact shape, colors and hand-drawn colored pencil and ink style throughout every frame. There is no person, hand or character anywhere in the clip.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The object stays centered on the same spot on a flat, solid pure black background. Silent clip.\n\nMOTION: JET WASH\nThe streaks of hot air ripple and stream to the left once, then thin out and fade away completely until only the black background is left.", "start_image_url": "<data uri, 1184 KB>"}
+21:44:48 [stage-tom-jetwash-vid] live fal price: $0.045 per seconds
+21:44:49 [stage-tom-jetwash-vid] sent, request 01a20538-0cd6-7a52-a673-556f3319078b
+21:45:00 [stage-tom-glare-vid] DONE: stage-tom-glare-vid-a2-r1.mp4 (2767 KB). Ledger $86.41 of $89.75.
+21:45:00 [stage-tom-bluebang-vid] DONE: stage-tom-bluebang-vid-a2-r1.mp4 (3777 KB). Ledger $86.41 of $89.75.
+21:45:02 [stage-tom-glare-vid] stage-tom-glare-vid attempt 2: failed: bg, edge
+21:45:02 frame: /home/runner/work/_temp/wangen/stage-tom-fireball-r1.png -> as it is, sent as it is
+21:45:02 [stage-tom-fireball-vid] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.15; ledger so far $86.41 of the $89.75 cap
+21:45:02 [stage-tom-fireball-vid] request: {"resolution": "480p", "aspect_ratio": "1:1", "duration": 3, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D animation of the exact object in the attached first-frame image, preserving its exact shape, colors and hand-drawn colored pencil and ink style throughout every frame. There is no person, hand or character anywhere in the clip.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The object stays centered on the same spot on a flat, solid pure black background. Silent clip.\n\nMOTION: FIREBALL FLICKER\nThe flames flicker and lick upward while the fireball stays in place. It ends exactly as it began.", "start_image_url": "<data uri, 432 KB>", "end_image_url": "<data uri, 432 KB>"}
+21:45:02 [stage-tom-bluebang-vid] stage-tom-bluebang-vid attempt 2: failed: bg, edge
+21:45:02 frame: /home/runner/work/_temp/wangen/stage-tom-starbeam-r1.png -> as it is, sent as it is
+21:45:02 [stage-tom-starbeam-vid] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.15; ledger so far $86.41 of the $89.75 cap
+21:45:02 [stage-tom-starbeam-vid] request: {"resolution": "480p", "aspect_ratio": "1:1", "duration": 3, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D animation of the exact object in the attached first-frame image, preserving its exact shape, colors and hand-drawn colored pencil and ink style throughout every frame. There is no person, hand or character anywhere in the clip.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The object stays centered on the same spot on a flat, solid pure black background. Silent clip.\n\nMOTION: STAR TWINKLE\nThe star twinkles and its trail of sparkles shimmers while it stays in place. It ends exactly as it began.", "start_image_url": "<data uri, 370 KB>", "end_image_url": "<data uri, 370 KB>"}
+21:45:02 [stage-tom-fireball-vid] live fal price: $0.045 per seconds
+21:45:02 [stage-tom-starbeam-vid] live fal price: $0.045 per seconds
+21:45:02 [stage-tom-fireball-vid] sent, request 01a20538-419a-7283-a954-0a02d18d9688
+21:45:02 [stage-tom-starbeam-vid] sent, request 01a20538-41d6-7331-950b-c93f09c4d00d
+21:46:00 [stage-tom-jetwash-vid] DONE: stage-tom-jetwash-vid-r1.mp4 (2028 KB). Ledger $86.70 of $89.75.
+21:46:01 [stage-tom-jetwash-vid] stage-tom-jetwash-vid attempt 1: failed: bg, edge
+21:46:01 [stage-tom-jetwash-vid] stage-tom-jetwash-vid: failed bg, edge, so it is made once more with every setting the same (a re-roll).
+21:46:01 frame: /home/runner/work/_temp/wangen/stage-tom-jetwash-r1.png -> as it is, sent as it is
+21:46:01 [stage-tom-jetwash-vid] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.15; ledger so far $86.70 of the $89.75 cap
+21:46:01 [stage-tom-jetwash-vid] request: {"resolution": "480p", "aspect_ratio": "1:1", "duration": 3, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D animation of the exact object in the attached first-frame image, preserving its exact shape, colors and hand-drawn colored pencil and ink style throughout every frame. There is no person, hand or character anywhere in the clip.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The object stays centered on the same spot on a flat, solid pure black background. Silent clip.\n\nMOTION: JET WASH\nThe streaks of hot air ripple and stream to the left once, then thin out and fade away completely until only the black background is left.", "start_image_url": "<data uri, 1184 KB>"}
+21:46:02 [stage-tom-jetwash-vid] live fal price: $0.045 per seconds
+21:46:02 [stage-tom-jetwash-vid] sent, request 01a20539-2cc8-70a2-8267-7d38f4e01053
+21:46:13 [stage-tom-starbeam-vid] DONE: stage-tom-starbeam-vid-r1.mp4 (299 KB). Ledger $86.86 of $89.75.
+21:46:14 [stage-tom-fireball-vid] DONE: stage-tom-fireball-vid-r1.mp4 (932 KB). Ledger $86.86 of $89.75.
+21:46:14 [stage-tom-starbeam-vid] stage-tom-starbeam-vid attempt 1: failed: motion
+21:46:14 [stage-tom-starbeam-vid] stage-tom-starbeam-vid: failed motion, so it is made once more with every setting the same (a re-roll).
+21:46:14 frame: /home/runner/work/_temp/wangen/stage-tom-starbeam-r1.png -> as it is, sent as it is
+21:46:14 [stage-tom-starbeam-vid] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.15; ledger so far $86.86 of the $89.75 cap
+21:46:14 [stage-tom-starbeam-vid] request: {"resolution": "480p", "aspect_ratio": "1:1", "duration": 3, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D animation of the exact object in the attached first-frame image, preserving its exact shape, colors and hand-drawn colored pencil and ink style throughout every frame. There is no person, hand or character anywhere in the clip.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The object stays centered on the same spot on a flat, solid pure black background. Silent clip.\n\nMOTION: STAR TWINKLE\nThe star twinkles and its trail of sparkles shimmers while it stays in place. It ends exactly as it began.", "start_image_url": "<data uri, 370 KB>", "end_image_url": "<data uri, 370 KB>"}
+21:46:16 [stage-tom-starbeam-vid] live fal price: $0.045 per seconds
+21:46:16 [stage-tom-starbeam-vid] sent, request 01a20539-6218-7260-87af-2cd270ed9470
+21:46:19 [stage-tom-fireball-vid] stage-tom-fireball-vid attempt 1: PASSED
+21:46:19 frame: /home/runner/work/_temp/wangen/stage-tom-meteor-r1.png -> as it is, sent as it is
+21:46:19 [stage-tom-meteor-vid] job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.15; ledger so far $87.00 of the $89.75 cap
+21:46:19 [stage-tom-meteor-vid] request: {"resolution": "480p", "aspect_ratio": "1:1", "duration": 3, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D animation of the exact object in the attached first-frame image, preserving its exact shape, colors and hand-drawn colored pencil and ink style throughout every frame. There is no person, hand or character anywhere in the clip.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The object stays centered on the same spot on a flat, solid pure black background. Silent clip.\n\nMOTION: METEOR FLAMES\nThe fiery tail flickers and the red cracks pulse while the meteor stays in place. It ends exactly as it began.", "start_image_url": "<data uri, 484 KB>", "end_image_url": "<data uri, 484 KB>"}
+21:46:19 [stage-tom-meteor-vid] live fal price: $0.045 per seconds
+21:46:19 [stage-tom-meteor-vid] sent, request 01a20539-6f7f-7300-b8f0-b0efa4a5c750
+21:47:08 [stage-tom-jetwash-vid] DONE: stage-tom-jetwash-vid-a2-r1.mp4 (1648 KB). Ledger $87.16 of $89.75.
+21:47:10 [stage-tom-jetwash-vid] stage-tom-jetwash-vid attempt 2: failed: bg, edge
+21:47:27 [stage-tom-starbeam-vid] DONE: stage-tom-starbeam-vid-a2-r1.mp4 (299 KB). Ledger $87.16 of $89.75.
+21:47:29 [stage-tom-starbeam-vid] stage-tom-starbeam-vid attempt 2: failed: motion
+21:47:31 [stage-tom-meteor-vid] DONE: stage-tom-meteor-vid-r1.mp4 (1064 KB). Ledger $87.16 of $89.75.
+21:47:35 [stage-tom-meteor-vid] stage-tom-meteor-vid attempt 1: PASSED
+21:47:35 stage-tom-bluebang     passed
+21:47:35 stage-tom-glare        passed (retried with a smaller pad)
+21:47:35 stage-tom-carryon      passed
+21:47:35 stage-tom-suitedoor    stopped (retried with a smaller pad)
+21:47:35 stage-tom-porsche      passed
+21:47:35 stage-tom-controller   passed
+21:47:35 stage-tom-wingedshell  passed
+21:47:35 stage-tom-runwaylights passed
+21:47:35 stage-tom-jetwash      passed
+21:47:35 stage-tom-fireball     passed
+21:47:35 stage-tom-starbeam     passed
+21:47:35 stage-tom-meteor       passed
+21:47:35 tom-suitedoor          stopped (retried with a smaller pad)
+21:47:35 tom-porsche            stopped (retried with a smaller pad)
+21:47:35 tom-cartridge          stopped (retried with a smaller pad)
+21:47:35 tom-controller         stopped (retried with a smaller pad)
+21:47:35 tom-shell              passed
+21:47:35 tom-konami             stopped (retried with a smaller pad)
+21:47:35 stage-tom-bluebang-vid stopped (retried with a smaller pad)
+21:47:35 stage-tom-glare-vid    stopped (retried with a smaller pad)
+21:47:35 stage-tom-wingedshell-vid passed
+21:47:35 stage-tom-runwaylights-vid passed
+21:47:35 stage-tom-jetwash-vid  stopped (retried with a smaller pad)
+21:47:35 stage-tom-fireball-vid passed
+21:47:35 stage-tom-starbeam-vid stopped (retried with a smaller pad)
+21:47:35 stage-tom-meteor-vid   passed
+21:47:37 costlog: logged 2 row(s) to data/costs.json: fal 9.4; xai 0.1336
+21:48:50 push refused, trying again (1)

@@ -1,0 +1,115 @@
+15:14:30 guide requests; ledger $68.81
+15:14:30 10 guide request(s) found
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:261: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  rows, today = [], datetime.datetime.utcnow().strftime('%Y-%m-%d')
+15:14:32 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side
+15:14:32 job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $68.81 of the $69.41 cap
+15:14:32 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: WINGED SHELL LOCK-ON\nFrom his starting relaxed stance, he brings a small blue winged shell out from behind his back, holds it forward at chest height once as if aiming a lock-on, and releases it to hover in the air. Without repeating the gesture, he tucks the shell behind his back again. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.", "start_image_url": "<data uri, 1268 KB>", "end_image_url": "<data uri, 1268 KB>"}
+15:14:33 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:210: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+15:14:33 sent, request 01a203d2-c1a9-7b60-8e19-bf1476ca12fc
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+15:16:36 DONE: guide-move-winged-shell-lock-on-t1-r1.mp4 (9864 KB). Ledger $69.31 of $69.41.
+15:16:37 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side
+15:16:37 job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $69.31 of the $69.91 cap
+15:16:37 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: TARMAC PORSCHE TRANSFER\nFrom his starting relaxed stance, he brings a small model Porsche car out from behind his back, holds it forward at chest height once with a proud smile, and transfers it smoothly from one hand to the other. Without repeating the transfer, he tucks the car behind his back again. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.", "start_image_url": "<data uri, 1268 KB>", "end_image_url": "<data uri, 1268 KB>"}
+15:16:37 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:210: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+15:16:37 sent, request 01a203d4-a5fd-7d53-a088-826931f5c131
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+15:18:26 DONE: guide-move-tarmac-porsche-transfer-t1-r1.mp4 (10577 KB). Ledger $69.81 of $69.91.
+15:18:27 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side
+15:18:27 job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $69.81 of the $70.41 cap
+15:18:27 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: CARTRIDGE BLOW\nFrom his starting relaxed stance, he brings a game cartridge out from behind his back, raises it to his mouth, and blows into it once with a quick puff. Without repeating the gesture, he tucks the cartridge behind his back again. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.", "start_image_url": "<data uri, 1268 KB>", "end_image_url": "<data uri, 1268 KB>"}
+15:18:27 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:210: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+15:18:27 sent, request 01a203d6-53be-76e2-b681-a741d0159f19
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+15:20:16 DONE: guide-move-cartridge-blow-t1-r1.mp4 (9665 KB). Ledger $70.31 of $70.41.
+15:20:17 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side
+15:20:17 job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $70.31 of the $70.91 cap
+15:20:17 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: KONAMI CODE\nFrom his starting relaxed stance, he brings a small handheld game controller out from behind his back, holds it forward at chest height, and presses the buttons in the Konami Code pattern once with both thumbs. Without repeating the gesture, he tucks the controller behind his back again. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.", "start_image_url": "<data uri, 1268 KB>", "end_image_url": "<data uri, 1268 KB>"}
+15:20:17 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:210: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+15:20:17 sent, request 01a203d8-01b6-7e51-ad53-2617dae356c0
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+15:22:21 DONE: guide-move-konami-code-t1-r1.mp4 (9628 KB). Ledger $70.81 of $70.91.
+15:22:22 frame: art/clips/start/deedee-hero.png -> 720x1280, height filled, 70 px cut from each side
+15:22:22 job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $70.81 of the $71.41 cap
+15:22:22 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: FIFTY-YEAR DUST TSUNAMI\nFrom her starting relaxed stance, she brings a small feather duster out from behind her back, waves it forward once in a wide sweeping arc at chest height as if clearing the air. Without repeating the gesture, she tucks the duster behind her back again. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.", "start_image_url": "<data uri, 1212 KB>", "end_image_url": "<data uri, 1212 KB>"}
+15:22:22 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:210: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+15:22:22 sent, request 01a203d9-e9e1-7d42-96e2-58d0cf0db4fe
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+15:24:10 DONE: guide-move-fifty-year-dust-tsunami-t1-r1.mp4 (7007 KB). Ledger $71.31 of $71.41.
+15:24:10 frame: art/clips/start/deedee-hero.png -> 720x1280, height filled, 70 px cut from each side
+15:24:10 job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $71.31 of the $71.91 cap
+15:24:10 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: \"LITTLE PINCH!\" SYRINGE POKE\nFrom her starting relaxed stance, she brings a small syringe out from behind her back, dabs the air once with a cotton swab held in her other hand, then jabs the syringe forward once at waist height. Without repeating the jab, she tucks the swab and syringe behind her back again. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.", "start_image_url": "<data uri, 1212 KB>", "end_image_url": "<data uri, 1212 KB>"}
+15:24:10 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:210: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+15:24:11 sent, request 01a203db-925e-7520-bbaa-55a8326fad7f
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+15:25:55 DONE: guide-move-little-pinch-syringe-poke-t1-r1.mp4 (6816 KB). Ledger $71.81 of $71.91.
+15:25:56 frame: art/clips/start/deedee-hero.png -> 720x1280, height filled, 70 px cut from each side
+15:25:56 job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $71.81 of the $72.41 cap
+15:25:56 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: DEEDEE MAKES IT BETTER\nFrom her starting relaxed stance, she brings a small glowing heart-shaped charm out from behind her back, holds it up forward at chest height once with both hands as if offering a gift to the whole family. Without repeating the gesture, she tucks the charm behind her back again. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.", "start_image_url": "<data uri, 1212 KB>", "end_image_url": "<data uri, 1212 KB>"}
+15:25:56 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:210: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+15:25:56 sent, request 01a203dd-2dff-71a0-afa2-54799ac06e16
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+15:27:59 DONE: guide-move-deedee-makes-it-better-t1-r1.mp4 (7487 KB). Ledger $72.31 of $72.41.
+15:27:59 frame: art/clips/start/deedee-hero.png -> 720x1280, height filled, 70 px cut from each side
+15:27:59 job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $72.31 of the $72.91 cap
+15:27:59 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: \"BRING A JACKET!\" WARD\nFrom her starting relaxed stance, she brings two small folded jackets out from behind her back, holds them out forward in both hands at chest height once as if offering them to friends. Without repeating the gesture, she tucks the jackets behind her back again. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.", "start_image_url": "<data uri, 1212 KB>", "end_image_url": "<data uri, 1212 KB>"}
+15:27:59 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:210: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+15:28:00 sent, request 01a203df-1019-75f0-a249-e094b7f3bb87
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+15:29:48 DONE: guide-move-bring-a-jacket-ward-t1-r1.mp4 (7651 KB). Ledger $72.81 of $72.91.
+15:29:49 frame: art/clips/start/deedee-hero.png -> 720x1280, height filled, 70 px cut from each side
+15:29:49 job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $72.81 of the $73.41 cap
+15:29:49 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: TO THE MOON & BACK\nFrom her starting relaxed stance, she brings a glowing full moon orb out from behind her back, holds it up forward at face height once with both hands like an offering to the sky. Without repeating the gesture, she tucks the orb behind her back again. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.", "start_image_url": "<data uri, 1212 KB>", "end_image_url": "<data uri, 1212 KB>"}
+15:29:49 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:210: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+15:29:49 sent, request 01a203e0-bd58-7512-941c-f97266ddd47c
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+15:31:52 DONE: guide-move-to-the-moon-and-back-t1-r1.mp4 (8424 KB). Ledger $73.31 of $73.41.
+15:31:52 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side
+15:31:52 job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $73.31 of the $73.91 cap
+15:31:52 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: CONTROLLER TOSS\nFrom his starting relaxed stance, he brings a game controller out from behind his back, winds one arm back, and throws it forward once. Without repeating the throw, he catches the controller as it flies back. He tucks the controller behind his back again, returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.", "start_image_url": "<data uri, 1268 KB>", "end_image_url": "<data uri, 1268 KB>"}
+15:31:53 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:210: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+15:31:53 sent, request 01a203e2-9fb1-77b2-94ed-78ca91a71aa3
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+15:33:42 DONE: guide-move-controller-toss-t2-r1.mp4 (10968 KB). Ledger $73.81 of $73.91.
+15:33:44 costlog: logged 1 row(s) to data/costs.json: fal 5.0

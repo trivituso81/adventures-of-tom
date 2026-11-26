@@ -1,0 +1,9 @@
+21:22:27 1 job(s): rose-lava-kling; up to 3 at once; ledger $50.96 of the $51.76 cap
+21:22:27 frame: art/clips/start/rose-cushion.png -> 720x1280, height filled, 70 px cut from each side, then shrunk to 80% on the same magenta (pad)
+21:22:27 job rev 1 on kling/v4/image-to-video, estimate $0.79; ledger so far $50.96 of the $51.76 cap
+21:22:27 request: {"resolution": "720p", "duration": 5, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects other than the lava. Silent clip.\n\nMOTION: THE FLOOR IS LAVA\nA small pool of bubbling orange lava spreads across the floor around her feet. She gasps, tosses the couch cushion she is holding down onto the lava, and hops onto the cushion with both feet. She bounces up and down on the cushion twice with her arms up, giggling. Without bouncing again, she hops off as the lava and the cushion disappear, and she holds her starting relaxed stance.", "start_image_url": "<data uri, 912 KB>"}
+21:22:28 live fal price: $0.157 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:186: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+21:22:28 sent, request 01a1fffd-3d46-7503-9a88-5a8f17278712
+21:26:47 DONE: rose-lava-kling-r1.mp4 (6318 KB). Ledger $51.74 of $51.76.

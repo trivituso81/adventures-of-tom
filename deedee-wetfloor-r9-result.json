@@ -1,0 +1,207 @@
+{
+ "what": "deedee-wetfloor",
+ "rev": 9,
+ "verdict": "stopped",
+ "file": "deedee-wetfloor-a2-r9.mp4",
+ "attempts": [
+  {
+   "name": "deedee-wetfloor",
+   "file": "deedee-wetfloor-r9.mp4",
+   "pad": 0.55,
+   "failed": [
+    "edge",
+    "p1",
+    "p2"
+   ],
+   "evidence": [
+    "edge: the figure touches the left edge in 6 of 121 pictures (video frames 51 to 53, 72 to 74)",
+    "p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short string mop with a f (Mop appears from side, not behind back; multiple sweeps and poses instead of one clear sweep)",
+    "p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and return (Mop not put behind back; ends in varied poses without returning to start stance once clearly)"
+   ],
+   "checks": {
+    "n": 121,
+    "fps": 24.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0045,
+      "limit": 0.02,
+      "say": "standing height 665 px first, 668 px last (0.5 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0688,
+      "limit": 0.1,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 967; at most 88 px (6.9 percent of the frame height) away; limit 10 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 1.57,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (251, 41, 243) (41 away from magenta), spread at most 1.6 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 2 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 6,
+      "limit": 0,
+      "frames": [
+       51,
+       52,
+       53,
+       72,
+       73,
+       74
+      ],
+      "sides": [
+       "left"
+      ],
+      "say": "the figure touches the left edge in 6 of 121 pictures (video frames 51 to 53, 72 to 74)"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 1.42,
+      "limit": 3.0,
+      "say": "last picture against the first: 1.42 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.333,
+    "yes": 1,
+    "of": 3,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0055,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Consistent character across all frames matching Image 2"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short string mop with a floppy wet head out from behind her back, holds it in both hands and slides its head across the top of the floor beside her feet, level with them, once, in one short sweep from right to left.\"  Say no if it does not happen, happens twice, or something else happens instead.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Mop appears from side, not behind back; multiple sweeps and poses instead of one clear sweep"
+     },
+     {
+      "id": "p2",
+      "q": "Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and returns to her starting relaxed stance.\"  Say no if it does not happen, happens twice, or something else happens instead.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Mop not put behind back; ends in varied poses without returning to start stance once clearly"
+     }
+    ]
+   },
+   "look_checks": "run"
+  },
+  {
+   "name": "deedee-wetfloor-a2",
+   "file": "deedee-wetfloor-a2-r9.mp4",
+   "pad": 0.55,
+   "failed": [
+    "p1",
+    "p2"
+   ],
+   "evidence": [
+    "p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short string mop with a f (Mop appears variably, multiple sweeps and poses instead of one clear sweep)",
+    "p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and return (No clear putting mop behind back or return to start; inconsistent sequence)"
+   ],
+   "checks": {
+    "n": 121,
+    "fps": 24.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.003,
+      "limit": 0.02,
+      "say": "standing height 669 px first, 667 px last (0.3 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0594,
+      "limit": 0.1,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 971; at most 76 px (5.9 percent of the frame height) away; limit 10 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 6.53,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (251, 41, 243) (41 away from magenta), spread at most 6.5 (limit 15), 0.11 percent of it off colour (limit 1), colour moved at most 2 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": true,
+      "v": 0,
+      "limit": 0,
+      "frames": [],
+      "sides": [],
+      "say": "the figure never touches an edge"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 1.33,
+      "limit": 3.0,
+      "say": "last picture against the first: 1.33 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.333,
+    "yes": 1,
+    "of": 3,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0055,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Consistent character across all frames"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short string mop with a floppy wet head out from behind her back, holds it in both hands and slides its head across the top of the floor beside her feet, level with them, once, in one short sweep from right to left.\"  Say no if it does not happen, happens twice, or something else happens instead.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Mop appears variably, multiple sweeps and poses instead of one clear sweep"
+     },
+     {
+      "id": "p2",
+      "q": "Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and returns to her starting relaxed stance.\"  Say no if it does not happen, happens twice, or something else happens instead.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "No clear putting mop behind back or return to start; inconsistent sequence"
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-22T04:26:34Z",
+ "evidence": [
+  "p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she brings a short string mop with a f (Mop appears variably, multiple sweeps and poses instead of one clear sweep)",
+  "p2: Reading the pictures in order, does this happen, once and clearly: \"Without repeating the sweep, she puts the mop behind her back and return (No clear putting mop behind back or return to start; inconsistent sequence)"
+ ],
+ "why": "failed twice: p1, p2"
+}

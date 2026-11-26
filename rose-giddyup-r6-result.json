@@ -1,0 +1,105 @@
+{
+ "what": "rose-giddyup",
+ "rev": 6,
+ "verdict": "stopped",
+ "file": "rose-giddyup-r6.mp4",
+ "attempts": [
+  {
+   "name": "rose-giddyup",
+   "file": "rose-giddyup-r6.mp4",
+   "pad": 0.65,
+   "failed": [
+    "p1",
+    "p2"
+   ],
+   "evidence": [
+    "p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she twirls one hand above her head lik (inconsistent motion; multiple poses but no clear cannonball jump or leap)",
+    "p2: Reading the pictures in order, does this happen, once and clearly: \"Without jumping again, she returns to her starting relaxed stance.\"  Say (ends in relaxed stance but sequence does not clearly show single return after jump)"
+   ],
+   "checks": {
+    "n": 121,
+    "fps": 24.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0012,
+      "limit": 0.02,
+      "say": "standing height 813 px first, 812 px last (0.1 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0008,
+      "limit": 0.01,
+      "frames": [],
+      "say": "lowest row of the figure in the first and last picture only (a jump): first picture row 1040; at most 1 px (0.1 percent of the frame height) away; limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 9.6,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (252, 27, 245) (27 away from magenta), spread at most 9.6 (limit 15), 0.21 percent of it off colour (limit 1), colour moved at most 3 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": true,
+      "v": 0,
+      "limit": 0,
+      "frames": [],
+      "sides": [],
+      "say": "the figure never touches an edge"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 2.01,
+      "limit": 3.0,
+      "say": "last picture against the first: 2.01 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.333,
+    "yes": 1,
+    "of": 3,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.008,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "same girl, face, hair, outfit, colors and style throughout"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she twirls one hand above her head like a cowgirl shouting giddyup, then crouches and leaps straight up once, hugging her knees in a tight cannonball at the top of the jump, and lands on her feet.\"  Say no if it does not happen, happens twice, or something else happens instead.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "inconsistent motion; multiple poses but no clear cannonball jump or leap"
+     },
+     {
+      "id": "p2",
+      "q": "Reading the pictures in order, does this happen, once and clearly: \"Without jumping again, she returns to her starting relaxed stance.\"  Say no if it does not happen, happens twice, or something else happens instead.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "ends in relaxed stance but sequence does not clearly show single return after jump"
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-22T00:47:35Z",
+ "evidence": [
+  "p1: Reading the pictures in order, does this happen, once and clearly: \"From her starting relaxed stance, she twirls one hand above her head lik (inconsistent motion; multiple poses but no clear cannonball jump or leap)",
+  "p2: Reading the pictures in order, does this happen, once and clearly: \"Without jumping again, she returns to her starting relaxed stance.\"  Say (ends in relaxed stance but sequence does not clearly show single return after jump)"
+ ],
+ "why": "failed: p1, p2"
+}

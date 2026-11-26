@@ -1,0 +1,217 @@
+{
+ "what": "tom-controller",
+ "rev": 1,
+ "verdict": "stopped",
+ "file": "tom-controller-a2-r1.mp4",
+ "attempts": [
+  {
+   "name": "tom-controller",
+   "file": "tom-controller-r1.mp4",
+   "pad": 0.8,
+   "failed": [
+    "edge",
+    "p1"
+   ],
+   "evidence": [
+    "edge: the figure touches the left edge in 14 of 150 pictures (video frames 52 to 65)",
+    "p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (No sidearm throw or catch; mostly idle poses with minor fist raises)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.001,
+      "limit": 0.02,
+      "say": "standing height 987 px first, 988 px last (0.1 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0023,
+      "limit": 0.01,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 1131; at most 3 px (0.2 percent of the frame height) away; limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 2.59,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (253, 34, 243) (34 away from magenta), spread at most 2.6 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 10 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 14,
+      "limit": 0,
+      "frames": [
+       52,
+       53,
+       54,
+       55,
+       56,
+       57,
+       58,
+       59,
+       60,
+       61,
+       62,
+       63,
+       64,
+       65
+      ],
+      "sides": [
+       "left"
+      ],
+      "say": "the figure touches the left edge in 14 of 150 pictures (video frames 52 to 65)"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.71,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.71 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.5,
+    "yes": 1,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0051,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Consistent character across all frames"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? \"From his starting relaxed stance, he draws one empty hand back and flings it forward to the left once in a sidearm throw, then keeps watching ahead with a flat, unimpressed face. Without looking, he raises the same open hand beside his shoulder and closes it once in a casual catch, holds that pose, then lowers his hand and returns to his starting relaxed stance. Both of his hands stay empty for the whole clip.\"  Small differences do NOT matter: how many strokes, steps or waves, exactly where an object comes from or goes, the exact pose, or the order of small details. Say no only if the main action is missing, a clearly different action happens instead, the person flips, spins round, falls or turns away from the camera, or the action keeps repeating over and over.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "No sidearm throw or catch; mostly idle poses with minor fist raises"
+     }
+    ]
+   },
+   "look_checks": "run"
+  },
+  {
+   "name": "tom-controller-a2",
+   "file": "tom-controller-a2-r1.mp4",
+   "pad": 0.8,
+   "failed": [
+    "edge",
+    "p1"
+   ],
+   "evidence": [
+    "edge: the figure touches the left edge in 15 of 150 pictures (video frames 49 to 63)",
+    "p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Main action missing: no throw to left, no catch pose, just idle variations and arm raises.)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.001,
+      "limit": 0.02,
+      "say": "standing height 987 px first, 988 px last (0.1 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0031,
+      "limit": 0.01,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 1131; at most 4 px (0.3 percent of the frame height) away; limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 2.47,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (253, 34, 243) (34 away from magenta), spread at most 2.5 (limit 15), 0.00 percent of it off colour (limit 1), colour moved at most 11 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 15,
+      "limit": 0,
+      "frames": [
+       49,
+       50,
+       51,
+       52,
+       53,
+       54,
+       55,
+       56,
+       57,
+       58,
+       59,
+       60,
+       61,
+       62,
+       63
+      ],
+      "sides": [
+       "left"
+      ],
+      "say": "the figure touches the left edge in 15 of 150 pictures (video frames 49 to 63)"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.72,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.72 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.5,
+    "yes": 1,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0051,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Same person, face, hair, outfit, colors and style throughout"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? \"From his starting relaxed stance, he draws one empty hand back and flings it forward to the left once in a sidearm throw, then keeps watching ahead with a flat, unimpressed face. Without looking, he raises the same open hand beside his shoulder and closes it once in a casual catch, holds that pose, then lowers his hand and returns to his starting relaxed stance. Both of his hands stay empty for the whole clip.\"  Small differences do NOT matter: how many strokes, steps or waves, exactly where an object comes from or goes, the exact pose, or the order of small details. Say no only if the main action is missing, a clearly different action happens instead, the person flips, spins round, falls or turns away from the camera, or the action keeps repeating over and over.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Main action missing: no throw to left, no catch pose, just idle variations and arm raises."
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-22T21:42:10Z",
+ "evidence": [
+  "edge: the figure touches the left edge in 15 of 150 pictures (video frames 49 to 63)",
+  "p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Main action missing: no throw to left, no catch pose, just idle variations and arm raises.)"
+ ],
+ "why": "failed twice: edge, p1"
+}

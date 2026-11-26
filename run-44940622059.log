@@ -1,0 +1,12 @@
+19:24:26 guide requests; ledger $39.52
+19:24:26 1 guide request(s) found
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:207: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  rows, today = [], datetime.datetime.utcnow().strftime('%Y-%m-%d')
+19:24:29 frame: art/clips/start/tom-hero.png -> 720x1280, height filled, 70 px cut from each side
+19:24:29 job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $39.52 of the $40.12 cap
+19:24:29 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: CONTROLLER TOSS\nFrom his starting relaxed stance, he winds one arm back and throws it forward once, as if tossing something small. Without repeating the throw, he lowers his arm. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.", "start_image_url": "<data uri, 1268 KB>", "end_image_url": "<data uri, 1268 KB>"}
+19:24:29 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:170: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+19:24:29 sent, request 01a1ff91-395e-7bf3-9bc6-a3b153ab9181
+19:26:26 DONE: guide-move-controller-toss-t1-r1.mp4 (8234 KB). Ledger $40.02 of $40.12.

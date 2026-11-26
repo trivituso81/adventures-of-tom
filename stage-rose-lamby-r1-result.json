@@ -1,0 +1,82 @@
+{
+ "what": "stage-rose-lamby",
+ "rev": 1,
+ "verdict": "passed",
+ "file": "stage-rose-lamby-r1.png",
+ "n": 1,
+ "fps": 0,
+ "attempts": [
+  {
+   "name": "stage-rose-lamby",
+   "file": "stage-rose-lamby-r1.png",
+   "pad": null,
+   "failed": [],
+   "evidence": [],
+   "checks": {
+    "n": null,
+    "fps": null,
+    "w": 1024,
+    "h": 1024,
+    "checks": [
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 100.0,
+      "limit": 97.0,
+      "say": "the edge of the picture is 100.0 percent the flat magenta asked for (needs 97)"
+     },
+     {
+      "id": "size",
+      "ok": true,
+      "v": 0.268,
+      "limit": 0.015,
+      "say": "the object fills 26.8 percent of the picture (needs 1.5)"
+     },
+     {
+      "id": "margin",
+      "ok": true,
+      "v": 0.119,
+      "limit": 0.02,
+      "say": "the object keeps 11.9 percent of room to the nearest edge (needs 2.0)"
+     },
+     {
+      "id": "centre",
+      "ok": true,
+      "v": 0.016,
+      "limit": 0.3,
+      "say": "the object is 2 percent of the picture off centre (limit 30)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 1.0,
+    "yes": 2,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0033,
+    "items": [
+     {
+      "id": "f_obj",
+      "q": "Is this ONE single object, drawn whole and centred on a plain flat pure magenta background, with no person, no hand, no extra objects and no text other than lettering the description asks for?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "One single plush lamb object, whole, centered on flat pure magenta background, no people/hands/extra objects/text."
+     },
+     {
+      "id": "p1",
+      "q": "Does the object in the picture match the description well enough to be used as that object in a game? Small differences in exact shape or colour do NOT matter; say no only if it is a clearly different object or something important in the description is missing.",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Matches worn tattered plush lamb with loose seams, missing patch, floppy ears, in faded cream/grey, hand-drawn style, front view."
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-26T09:57:38Z",
+ "skipped_checks": [],
+ "merged": "wanbulk-trosestagelab-45796453993",
+ "bake_note": "rose/lamby: rose/lamby prop pictures 1 box px 183 256 sheet (185, 258) in memory mb 0.19 kb 19"
+}

@@ -1,0 +1,14 @@
+{
+ "card": "t-wanmop1-gen",
+ "build": null,
+ "rows": [
+  {
+   "what": "deedee-wetfloor",
+   "rev": 9,
+   "state": "stopped",
+   "retried": true
+  }
+ ],
+ "spent_fal": 1.57,
+ "spent_xai": 0.011
+}

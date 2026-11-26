@@ -1,0 +1,10 @@
+05:16:35 bulk run for t-pairmove1-gen: 1 job(s) tom-rose-giddyup; run cap $3.20 (ledger $65.73)
+05:16:35 estimate if every job is made once: $0.79; an edge retry adds one more video for that job
+05:16:37 frame: art/clips/start/tom-rose-pair.png -> 720x1280, width filled, padded top and bottom, then shrunk to 65% on the same magenta (pad)
+05:16:37 [tom-rose-giddyup] job rev 1 on kling/v4/image-to-video, estimate $0.79; ledger so far $65.73 of the $68.94 cap
+05:16:37 [tom-rose-giddyup] request: {"resolution": "720p", "duration": 5, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact two characters in the attached first-frame image, a man and a young girl, preserving their exact faces, proportions, hair, outfits, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. Both characters face left. The man's feet stay planted on the exact same spot the whole time. Flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: GIDDYUP RIDE\nThe girl hops up onto the man's shoulders and sits there with one leg on each side of his head while he holds her ankles, and she raises one fist high like a rider shouting giddyup. Then she springs forward off his shoulders once, lands on her feet in front of him in a low crouch, and holds that pose.", "start_image_url": "<data uri, 300 KB>"}
+05:16:37 [tom-rose-giddyup] live fal price: $0.157 per seconds
+05:16:38 [tom-rose-giddyup] sent, request 01a201af-5849-70d2-b8e4-efbe1d76a9b1
+05:16:38 [tom-rose-giddyup] STOP: fal result said 403: {"detail":"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing."}
+05:16:38 tom-rose-giddyup       error: fal result said 403: {"detail":"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing."}
+05:16:39 costlog: logged 1 row(s) to data/costs.json: fal 0.785

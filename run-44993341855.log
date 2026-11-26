@@ -1,0 +1,9 @@
+06:45:08 tom-blockade: Tom asked for more tries at 2026-11-22T06:21:17.719Z, so its count starts again from then
+06:45:08 bulk run for t-movefun-gen: 3 job(s) tom-blockade, grace-cubepop, deedee-wetfloor; run cap $9.60 (ledger $67.52)
+06:45:08 estimate if every job is made once: $1.79; an edge retry adds one more video for that job
+06:45:11 [tom-blockade] tom-blockade rev 4 already has a result (stopped): nothing sent.
+06:45:11 [grace-cubepop] grace-cubepop rev 4 already has a result (stopped): nothing sent.
+06:45:11 [deedee-wetfloor] deedee-wetfloor rev 10 already has a result (stopped): nothing sent.
+06:45:11 tom-blockade           already
+06:45:11 grace-cubepop          already
+06:45:11 deedee-wetfloor        already

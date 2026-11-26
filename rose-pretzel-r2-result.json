@@ -1,0 +1,266 @@
+{
+ "what": "rose-pretzel",
+ "rev": 2,
+ "verdict": "stopped",
+ "file": "rose-pretzel-a2-r2.mp4",
+ "attempts": [
+  {
+   "name": "rose-pretzel",
+   "file": "rose-pretzel-r2.mp4",
+   "pad": 0.8,
+   "failed": [
+    "edge",
+    "p1"
+   ],
+   "evidence": [
+    "edge: the figure touches the left edge in 38 of 150 pictures (video frames 22 to 53, 105 to 110)",
+    "p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (no leaning, bonking, or pretzel actions shown)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 974 px first, 974 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.01,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 1127; at most 0 px (0.0 percent of the frame height) away; limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 7.71,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (253, 20, 247) (20 away from magenta), spread at most 7.7 (limit 15), 0.14 percent of it off colour (limit 1), colour moved at most 20 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 38,
+      "limit": 0,
+      "frames": [
+       22,
+       23,
+       24,
+       25,
+       26,
+       27,
+       28,
+       29,
+       30,
+       31,
+       32,
+       33,
+       34,
+       35,
+       36,
+       37,
+       38,
+       39,
+       40,
+       41,
+       42,
+       43,
+       44,
+       45,
+       46,
+       47,
+       48,
+       49,
+       50,
+       51,
+       52,
+       53,
+       105,
+       106,
+       107,
+       108,
+       109,
+       110
+      ],
+      "sides": [
+       "left"
+      ],
+      "say": "the figure touches the left edge in 38 of 150 pictures (video frames 22 to 53, 105 to 110)"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.68,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.68 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.5,
+    "yes": 1,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0051,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "consistent character across all frames"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? \"She leans forward from the waist with her feet planted, holding her worn Lamby plush, and gives one earnest bonk straight left with it. She turns her head toward her right side, takes one tiny pretzel from her pocket with her free hand, and holds it out in front of her with a gentle pat of the air. Then she settles back into her starting relaxed stance. She stays on the same spot.\"  Small differences do NOT matter: how many strokes, steps or waves, exactly where an object comes from or goes, the exact pose, or the order of small details. Say no only if the main action is missing, a clearly different action happens instead, the person flips, spins round, falls or turns away from the camera, or the action keeps repeating over and over.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "no leaning, bonking, or pretzel actions shown"
+     }
+    ]
+   },
+   "look_checks": "run"
+  },
+  {
+   "name": "rose-pretzel-a2",
+   "file": "rose-pretzel-a2-r2.mp4",
+   "pad": 0.8,
+   "failed": [
+    "edge",
+    "p1"
+   ],
+   "evidence": [
+    "edge: the figure touches the left edge in 111 of 150 pictures (video frames 22 to 132)",
+    "p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (no bonk with Lamby plush; no leaning or pretzel action shown)"
+   ],
+   "checks": {
+    "n": 150,
+    "fps": 30.0,
+    "w": 720,
+    "h": 1280,
+    "checks": [
+     {
+      "id": "height",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.02,
+      "say": "standing height 974 px first, 974 px last (0.0 percent apart; limit 2 percent)"
+     },
+     {
+      "id": "feet",
+      "ok": true,
+      "v": 0.0,
+      "limit": 0.01,
+      "frames": [],
+      "say": "lowest row of the figure in every picture: first picture row 1127; at most 0 px (0.0 percent of the frame height) away; limit 1 percent"
+     },
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 10.95,
+      "limit": 15.0,
+      "say": "background far from the figure: colour (253, 20, 247) (20 away from magenta), spread at most 11.0 (limit 15), 0.46 percent of it off colour (limit 1), colour moved at most 16 (limit 40)"
+     },
+     {
+      "id": "edge",
+      "ok": false,
+      "v": 111,
+      "limit": 0,
+      "frames": [
+       22,
+       23,
+       24,
+       25,
+       26,
+       27,
+       28,
+       29,
+       30,
+       31,
+       32,
+       33,
+       34,
+       35,
+       36,
+       37,
+       38,
+       39,
+       40,
+       41,
+       42,
+       43,
+       44,
+       45,
+       46,
+       47,
+       48,
+       49,
+       50,
+       51,
+       52,
+       53,
+       54,
+       55,
+       56,
+       57,
+       58,
+       59,
+       60,
+       61
+      ],
+      "sides": [
+       "left"
+      ],
+      "say": "the figure touches the left edge in 111 of 150 pictures (video frames 22 to 132)"
+     },
+     {
+      "id": "ends",
+      "ok": true,
+      "v": 0.7,
+      "limit": 3.0,
+      "say": "last picture against the first: 0.70 of 255 (limit under 3)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 0.5,
+    "yes": 1,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0051,
+    "items": [
+     {
+      "id": "f_same",
+      "q": "Is it the same person in every picture, with the same face, hair, outfit and drawing style as in the start picture (Image 2)? Say no if the face, hair, outfit or the colours of skin and clothes change.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "same girl, face, hair, outfit, colors and style throughout"
+     },
+     {
+      "id": "p1",
+      "q": "Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? \"She leans forward from the waist with her feet planted, holding her worn Lamby plush, and gives one earnest bonk straight left with it. She turns her head toward her right side, takes one tiny pretzel from her pocket with her free hand, and holds it out in front of her with a gentle pat of the air. Then she settles back into her starting relaxed stance. She stays on the same spot.\"  Small differences do NOT matter: how many strokes, steps or waves, exactly where an object comes from or goes, the exact pose, or the order of small details. Say no only if the main action is missing, a clearly different action happens instead, the person flips, spins round, falls or turns away from the camera, or the action keeps repeating over and over.",
+      "kind": "prompt",
+      "yes": false,
+      "why": "no bonk with Lamby plush; no leaning or pretzel action shown"
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-26T13:13:36Z",
+ "evidence": [
+  "edge: the figure touches the left edge in 111 of 150 pictures (video frames 22 to 132)",
+  "p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (no bonk with Lamby plush; no leaning or pretzel action shown)"
+ ],
+ "why": "failed twice: edge, p1"
+}

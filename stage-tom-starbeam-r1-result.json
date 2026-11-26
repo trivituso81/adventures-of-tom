@@ -1,0 +1,82 @@
+{
+ "what": "stage-tom-starbeam",
+ "rev": 1,
+ "verdict": "passed",
+ "file": "stage-tom-starbeam-r1.png",
+ "n": 1,
+ "fps": 0,
+ "attempts": [
+  {
+   "name": "stage-tom-starbeam",
+   "file": "stage-tom-starbeam-r1.png",
+   "pad": null,
+   "failed": [],
+   "evidence": [],
+   "checks": {
+    "n": null,
+    "fps": null,
+    "w": 1024,
+    "h": 1024,
+    "checks": [
+     {
+      "id": "bg",
+      "ok": true,
+      "v": 100.0,
+      "limit": 97.0,
+      "say": "the edge of the picture is 100.0 percent the flat black asked for (needs 97)"
+     },
+     {
+      "id": "size",
+      "ok": true,
+      "v": 0.039,
+      "limit": 0.015,
+      "say": "the object fills 3.9 percent of the picture (needs 1.5)"
+     },
+     {
+      "id": "margin",
+      "ok": true,
+      "v": 0.07,
+      "limit": 0.02,
+      "say": "the object keeps 7.0 percent of room to the nearest edge (needs 2.0)"
+     },
+     {
+      "id": "centre",
+      "ok": true,
+      "v": 0.083,
+      "limit": 0.3,
+      "say": "the object is 8 percent of the picture off centre (limit 30)"
+     }
+    ]
+   },
+   "vision": {
+    "score": 1.0,
+    "yes": 2,
+    "of": 2,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.003,
+    "items": [
+     {
+      "id": "f_obj",
+      "q": "Is this ONE single object, drawn whole and centred on a plain flat pure black background, with no person, no hand, no extra objects and no text other than lettering the description asks for?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Single centered star with trail on pure black bg, no people/hands/text."
+     },
+     {
+      "id": "p1",
+      "q": "Does the object in the picture match the description well enough to be used as that object in a game? Small differences in exact shape or colour do NOT matter; say no only if it is a clearly different object or something important in the description is missing.",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Matches falling star with five-pointed shape, glitter trail, hand-drawn style, black bg."
+     }
+    ]
+   },
+   "look_checks": "run"
+  }
+ ],
+ "at": "2026-11-22T21:33:50Z",
+ "skipped_checks": [],
+ "merged": "wanbulk-tmovestagelab-45071628174",
+ "bake_note": "the first picture of the video tom/starbeam: baked with the video"
+}

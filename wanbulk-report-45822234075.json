@@ -1,0 +1,122 @@
+{
+ "card": "t-rosestage-lab",
+ "build": "wanbulk-trosestagelab-45822234075",
+ "rows": [
+  {
+   "what": "stage-rose-cushion",
+   "rev": 1,
+   "state": "already",
+   "verdict": "passed"
+  },
+  {
+   "what": "stage-rose-lamby",
+   "rev": 1,
+   "state": "already",
+   "verdict": "passed"
+  },
+  {
+   "what": "stage-rose-backuplamby",
+   "rev": 1,
+   "state": "already",
+   "verdict": "passed"
+  },
+  {
+   "what": "stage-rose-comet",
+   "rev": 1,
+   "state": "already",
+   "verdict": "passed"
+  },
+  {
+   "what": "stage-rose-ripple",
+   "rev": 1,
+   "state": "already",
+   "verdict": "passed"
+  },
+  {
+   "what": "stage-rose-cushionwall",
+   "rev": 1,
+   "state": "already",
+   "verdict": "passed"
+  },
+  {
+   "what": "stage-rose-castle",
+   "rev": 1,
+   "state": "already",
+   "verdict": "passed"
+  },
+  {
+   "what": "stage-rose-whoopee",
+   "rev": 1,
+   "state": "already",
+   "verdict": "passed"
+  },
+  {
+   "what": "rose-tacklelunge",
+   "rev": 1,
+   "state": "already",
+   "verdict": "stopped"
+  },
+  {
+   "what": "rose-lavahop",
+   "rev": 1,
+   "state": "already",
+   "verdict": "stopped"
+  },
+  {
+   "what": "rose-doublelamby",
+   "rev": 1,
+   "state": "already",
+   "verdict": "stopped"
+  },
+  {
+   "what": "rose-pretzel",
+   "rev": 1,
+   "state": "already",
+   "verdict": "stopped"
+  },
+  {
+   "what": "rose-boomerang",
+   "rev": 1,
+   "state": "already",
+   "verdict": "stopped"
+  },
+  {
+   "what": "rose-citadel",
+   "rev": 2,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "rose-kingdom",
+   "rev": 1,
+   "state": "already",
+   "verdict": "stopped"
+  },
+  {
+   "what": "rose-boop",
+   "rev": 1,
+   "state": "already",
+   "verdict": "stopped"
+  },
+  {
+   "what": "rose-raspberry",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  },
+  {
+   "what": "rose-baitswitch",
+   "rev": 1,
+   "state": "passed",
+   "retried": false
+  },
+  {
+   "what": "rose-whoopee",
+   "rev": 1,
+   "state": "stopped",
+   "retried": true
+  }
+ ],
+ "spent_fal": 3.0,
+ "spent_xai": 0.0423
+}

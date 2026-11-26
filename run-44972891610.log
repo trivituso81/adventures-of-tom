@@ -1,0 +1,16 @@
+01:46:38 guide requests; ledger $56.95
+01:46:38 1 guide request(s) found
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:238: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  rows, today = [], datetime.datetime.utcnow().strftime('%Y-%m-%d')
+01:46:41 frame: art/clips/start/rose-hero.png -> 720x1280, height filled, 70 px cut from each side, then shrunk to 65% on the same magenta (pad)
+01:46:41 job rev 1 on alibaba/wan-3.0/image-to-video, estimate $0.50; ledger so far $56.95 of the $57.55 cap
+01:46:41 request: {"resolution": "720p", "aspect_ratio": "9:16", "duration": 5, "audio": false, "enable_prompt_expansion": true, "seed": 81, "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: GIDDYUP LAUNCH\nFrom her starting relaxed stance, she circles one hand above her head like a cowgirl shouting giddyup, then crouches and leaps straight up once, hugging her knees in a tight cannonball at the top of the jump, and lands on her feet. Without jumping again, she returns to her starting relaxed stance.", "start_image_url": "<data uri, 651 KB>", "end_image_url": "<data uri, 651 KB>"}
+01:46:42 live fal price: $0.045 per seconds
+/home/runner/work/adventures-of-tom/adventures-of-tom/tools/art-library/wangen.py:198: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  pend.update(rev=rev, est=est, at=datetime.datetime.utcnow().isoformat() + 'Z')
+01:46:42 sent, request 01a200ef-271d-7532-9be8-6d1ef361e5e4
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+kept on branch guidegen (attempt 1)
+01:48:58 DONE: guide-move-giddyup-tata-launch-t1-r1.mp4 (9074 KB). Ledger $57.45 of $57.55.
+01:49:00 costlog: logged 1 row(s) to data/costs.json: fal 0.5

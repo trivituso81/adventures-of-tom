@@ -1,0 +1,16 @@
+{
+ "video": {
+  "url": "https://v3b.fal.media/files/b/0ab40083/v0kUNKY25mtCzOj3QGgHJ_vPcQeFu2.mp4",
+  "content_type": "video/mp4",
+  "file_name": "v0kUNKY25mtCzOj3QGgHJ_vPcQeFu2.mp4",
+  "file_size": 8649794,
+  "width": 720,
+  "height": 1280,
+  "fps": 30.0,
+  "duration": 5.0,
+  "num_frames": 150
+ },
+ "seed": 81,
+ "duration": 5.0,
+ "actual_prompt": null
+}
