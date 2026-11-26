@@ -2527,12 +2527,11 @@
     "n": 3
    },
    "use": {
-    "state": "applying",
+    "state": "live",
     "at": "2026-11-26T09:00:22Z",
-    "since": "2026-11-26T09:00:22Z",
-    "build": "",
-    "why": "",
-    "run": 45787096926
+    "since": "2026-11-26T09:03:47Z",
+    "build": "guideuse-45787096926",
+    "why": ""
    },
    "left": false,
    "dry": false,
