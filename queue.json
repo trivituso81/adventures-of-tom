@@ -3599,12 +3599,11 @@
     "n": 2
    },
    "use": {
-    "state": "applying",
+    "state": "live",
     "at": "2026-11-26T09:44:13Z",
-    "since": "2026-11-26T09:44:13Z",
-    "build": "",
-    "why": "",
-    "run": 45795371400
+    "since": "2026-11-26T09:53:33Z",
+    "build": "guideuse-45795371400",
+    "why": ""
    },
    "left": false,
    "dry": false,
