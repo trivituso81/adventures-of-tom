@@ -4276,8 +4276,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:35:05Z",
-   "state": "checking",
-   "since": "2026-11-26T10:21:55Z",
+   "state": "done",
+   "since": "2026-11-26T10:53:20Z",
    "run": 45798843411,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -4290,7 +4290,29 @@
    "cost": 0.0,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-boppy-idle/t2.js",
+    "img": "takes/body-boppy-idle/t2.webp",
+    "frames": 50,
+    "kb": 397,
+    "words": "0 to 147 step 3, loop wrap",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "blink_none: no blink in the stretch the game loops (blinks in the whole video: none)",
+      "vision i_relaxed: Figure walks in place with shifting poses, not a static relaxed stance.; Figure walks in place with alternating leg/arm poses, not a static relaxed stance."
+     ],
+     "faults": [
+      "blink_none",
+      "i_relaxed"
+     ],
+     "vision_ran": true,
+     "spent": 0.0038,
+     "error": null,
+     "words": "The clip gate flags this take: blink_none: no blink in the stretch the game loops (blinks in the whole video: none); vision i_relaxed: Figure walks in place with shifting poses, not a static relaxed stance.; Figure walks in place with alternating leg/arm poses, not a static relaxed stance.."
+    },
+    "n": 2
+   },
    "use": null,
    "left": false,
    "dry": false,
