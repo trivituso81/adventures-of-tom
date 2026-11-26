@@ -7292,7 +7292,7 @@
    "created": "2026-11-26",
    "changed": "2026-11-26",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFamX7pxS3LbNcCVdd",
+    "url": "https://claude.ai/code/session_01RXeukFamX7pxS3LbNcCVdd",
     "opening": "added by the wan-gen job"
    },
    "history": [
@@ -7303,6 +7303,10 @@
     {
      "d": "2026-11-26",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -7319,7 +7323,7 @@
   {
    "id": "c-wanstop-rose-doublelamby-r1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanstop-rose-doublelamby-r1",
    "title": "Fix the stopped video rose-doublelamby",
@@ -7354,6 +7358,10 @@
     {
      "d": "2026-11-26",
      "t": "Looked at both videos: the move reads, but the bounce onto the balls of the feet lifts her off her spot for about 6 pictures (up to 98 px). Changed ONE sentence of the prompt (dip her knees twice with both feet flat), rev 2, kept picture, pad, seed; started the next try."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as wanstop-rose-doublelamby-r1: Rose's Double Lamby video tried again with her feet kept on the ground"
     }
    ],
    "prompt": {
@@ -7365,7 +7373,8 @@
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-rose-doublelamby-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job rose-doublelamby (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: feet. Evidence: feet: lowest row of the figure in every picture: first picture row 1127; at most 98 px (7.7 percent of the frame height) away (6 pictures over); limit 1 percent. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: rose-doublelamby-r1-result.json (every check with numbers and the look-check answers) and the videos rose-doublelamby-r1.mp4, rose-doublelamby-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-rosestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-rose-doublelamby-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-rosestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-rose-doublelamby-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-26T12:39:26+00:00"
+   "started_at": "2026-11-26T12:39:26+00:00",
+   "done": "2026-11-26"
   },
   {
    "id": "c-wanstop-rose-pretzel-r1",
@@ -7605,6 +7614,29 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukFpdh5RK5hQ3kZE4T8",
+   "title": "Fix the stopped video rose-doublelamby",
+   "first": "2026-11-26T12:42:01Z",
+   "last": "2026-11-26T12:44:22Z",
+   "tags": [
+    "wanstop-rose-doublelamby-r1"
+   ],
+   "cards": [
+    "c-wanstop-rose-doublelamby-r1",
+    "t-rosestage-lab"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFamX7pxS3LbNcCVdd",
+   "title": "Fix the stopped video rose-lavahop",
+   "first": "2026-11-26T12:44:00Z",
+   "last": "2026-11-26T12:44:00Z",
+   "tags": [],
+   "cards": [
+    "c-wanstop-rose-lavahop-r1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukD7GEcmLtBCPMpBzQR",
    "title": "Fix the stopped video rose-citadel",
    "first": "2026-11-26T12:41:39Z",
@@ -7625,16 +7657,6 @@
    "tags": [],
    "cards": [
     "c-wanstop-rose-tacklelunge-r1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFpdh5RK5hQ3kZE4T8",
-   "title": "Fix the stopped video rose-doublelamby",
-   "first": "2026-11-26T12:42:01Z",
-   "last": "2026-11-26T12:42:01Z",
-   "tags": [],
-   "cards": [
-    "c-wanstop-rose-doublelamby-r1"
    ]
   },
   {
@@ -14141,8 +14163,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "3a33618082220bfd16755201660f8fe11791305a",
- "synced_at": "2026-11-26T12:43:50+00:00",
+ "synced": "91d1e36e062724040191ea9760d3b5c510917f36",
+ "synced_at": "2026-11-26T12:44:49+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
