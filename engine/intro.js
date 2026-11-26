@@ -146,13 +146,15 @@ function hugEndStep() {
 }
 
 // Tom stretches after six hours in the cab line: his eight painted stretch poses (data/story-poses.js, storypose1) in order, facing the camera.
-const STRETCH_DUR=2.4; // seconds for the whole stretch
+const STRETCH_DUR=2.8; // seconds for the whole stretch
 const STRETCH_SEQ=[['st_stiff',0],['st_rise',.1],['st_reach',.22],['st_bendl',.42],['st_bendr',.54],['st_push',.66],['st_exhale',.76],['st_fresh',.88]];
 function stretchStep() {
   return {t:0,start(){ this.t=0; this.s2=false; player.facing='down'; player.scenePose={f:'st_stiff'}; snd.stretch(); },
     update(dt){ this.t+=dt; if(!this.s2&&this.t>STRETCH_DUR*.75) { this.s2=true; snd.stretch(); }
-      const u=Math.min(1,this.t/STRETCH_DUR); let f='st_stiff'; for(const [n,at] of STRETCH_SEQ) if(u>=at) f=n;
-      player.scenePose={f};
+      const u=Math.min(1,this.t/STRETCH_DUR); let f='st_stiff',prev=null,at0=0,i=0; for(const [n,at] of STRETCH_SEQ) { if(u>=at) { prev=i?STRETCH_SEQ[i-1][0]:null; f=n; at0=at; } i++; }
+      // tomstretch4: each pose fades in over the first 0.06 of the stretch (eased) on top of the one before it, so the poses run into each other (Tom 11-26: "merge seamlessly")
+      const m=Math.min(1,(u-at0)/.06),mix=m*m*(3-2*m);
+      player.scenePose=prev&&mix<1?{f,prev,mix}:{f};
       if(u>=1) { player.scenePose=null; return true; } return false; }};
 }
 // Little character sounds for the opening, built on the game's synth (tone and noise).

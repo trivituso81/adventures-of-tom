@@ -280,7 +280,8 @@ function emoFx(a,kind) { if(a&&kind) a._fx={kind,t0:lifeNow()}; }
 function actorLife(a,posKey) {
   if(!lifeOn(a)) { if(a) a._fx=null; return null; }
   const now=lifeNow();
-  if(a._lifeKey!==posKey) { if(a._lifeKey!==undefined) a._sqT=now; a._lifeKey=posKey; }
+  const lk=String(posKey).startsWith('st_')?'st':posKey;   // tomstretch4: the stretch poses never squash (they cross-fade instead)
+  if(a._lifeKey!==lk) { if(a._lifeKey!==undefined&&a._lifeKey!=='st'&&lk!=='st') a._sqT=now; a._lifeKey=lk; }
   let s=1,lift=0,pip=null,pt=0;
   if(a._sqT!==undefined) { const e=(now-a._sqT)/LIFE_SQ;
     if(e<1) s*=lifeSquashScale(e); else a._sqT=undefined; }
