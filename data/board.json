@@ -8442,6 +8442,60 @@
     "effort": "high (22 drawn effects, engine wiring, test and manifest change)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done. Your first push is the commit \"board: start c-vfxlib3\". Build the 22 setpiece_* effects of art-factory/aot-stage2c-vfx-library-v11.json in library order in engine/vfx-library.js; add them to P1_VFX, P1_VFX_MS, P1_VFX_SELF and P1_VFX_LEAD; set buildStatus to built; add them to tools/guide_timing_test.py; run python3 -I tools/guidegen/manifest_crosswalk.py; update docs/BATTLE_GUIDE.md What is done and docs/CHANGES.md (vfxlib3). Look at a contact sheet in Chrome before pushing. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "c-openzoom",
+   "title": "Chapter 1 opening: zoom into the taxi office, then fade",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "openzoom1",
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "next": "Camera zooms into Long Island Taxi Co. on the Square, then a medium fade to the office with Tom.",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEWDdsXz8MszJbLSbb",
+    "opening": "\"At the very beginning of chapter 1, before displaying Tom inside the taxi company\""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Tom (09:18): \"At the very beginning of chapter 1, before displaying Tom inside the taxi company, the camera should zoom into the taxi company instead of just cutting, and then the transition should be a medium fade.\""
+    }
+   ],
+   "after": "t-openzoomplay",
+   "prompt": {
+    "what": "Adds a camera zoom into Long Island Taxi Co. and a medium fade to the office at the start of chapter 1.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: small change, tests and frames catch mistakes)",
+    "effort": "medium (the piece is small)",
+    "text": "Read CLAUDE.md, then card c-openzoom in data/board.json. Your first push is the commit board: start c-openzoom. In SCENES.opening in data/scenes.js the chapter opens on the Square, the camera zooms into Long Island Taxi Co. over 1.6 seconds, then a 0.8 second fade to the office with Tom. Check it in portrait and landscape. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "t-openzoomplay",
+   "title": "Watch the new Chapter 1 opening zoom and fade",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "jump": {
+    "chapter": 1
+   },
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "next": "Open the game, RELOAD on the title, then CHAPTERS > Chapter 1. After the chapter card, the camera should push into the taxi company on the Square, fade out and in (about a second each way), and then show Tom stretching inside. Tell me with the REPORT tab if the zoom or the fade feels too fast, too slow, or too far in.",
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by openzoom1."
+    }
+   ]
   }
  ],
  "sessions": [
