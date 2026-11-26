@@ -8908,6 +8908,60 @@
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26"
+  },
+  {
+   "id": "c-tomframes4",
+   "title": "Install Tom's newer frames: feelings, listen, crouch, hug",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "up",
+   "next": "In progress: baking Tom's newly approved feelings (v9), listening (v2), thinking (v2), greeting crouch (v2) and greeting hug (v3) pictures.",
+   "blocks": [],
+   "changed": "2026-11-26",
+   "created": "2026-11-26",
+   "tag": "tomframes4",
+   "chat": {
+    "url": "",
+    "opening": "\"now do Tom's newly approved frames, including hugging the girls in the intro\""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by the session: Tom's words: \"now do Tom's newly approved frames, including hugging the girls in the intro\"."
+    }
+   ],
+   "after": "t-tomframes4play",
+   "prompt": {
+    "what": "Installs Tom's newly approved feelings, listening, thinking, greeting crouch and greeting hug pictures.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the bakes exist and tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md and docs/CHANGES.md tomframes, tomframes2, tomstretch3 and roseframes, then card c-tomframes4 in data/board.json. Your first push is the commit board: start c-tomframes4. Install Tom's newly approved pictures: tom-emotions-v9, tom-listen-v2, tom-think-v2, tom-greeting-crouch-v2 and tom-grace-rose-greeting-hug-v3. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "t-tomframes4play",
+   "title": "Look at Tom's newer frames and the intro hug",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Not ready yet: opens when the frames are pushed.",
+   "jump": {
+    "chapter": 1
+   },
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by tomframes4."
+    }
+   ]
   }
  ],
  "sessions": [
