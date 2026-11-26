@@ -1,3 +1,7 @@
+## wanstop-rose-raspberry-r1 (2026-11-26): Rose's raspberry video is accepted and put in the game
+
+The wan-gen checks stopped rose-raspberry only on the literal look check (p1); height, feet, background, edges and ends all passed. By eye the second try shows hands on hips, puffed cheeks, a lean, arms crossed and a return to idle, which is the move (Tom 2026-11-21: the overall purpose counts). Baked as clip rose_raspberry (29 frames, tools/art-library/wanbake.py, job settings) and wired to the staged move supersonic_raspberry. No new try, no money spent. Watch card t-wanwatch-rose-raspberry-r1.
+
 ## wanbulk-trosestagelab-45822234075 (2026-11-26): 1 battle videos made from board card t-rosestage-lab passed their checks and were put in the game
 
 The wan-gen Action made them (wanbulk, tools/art-library/wangen.py --bulk), measured them (height, feet, flat background, edges, last picture against first) and had a vision model check the motion and the person (tools/art-library/wanqa.py), then baked each with the settings stored on its job and wired it (tools/art-library/wanbake.py): rose-baitswitch. Nobody has watched them yet; the card asks Tom to.

@@ -7726,9 +7726,9 @@
    "theme": "Battle Animations",
    "tag": "wanstop-rose-raspberry-r1",
    "title": "Fix the stopped video rose-raspberry",
-   "next": "The bulk run stopped rose-raspberry (failed twice: p1) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "next": "Accepted by the stop session, baked and wired. Watch card t-wanwatch-rose-raspberry-r1 asks Tom to look once.",
    "blocks": [],
-   "after": "nothing for Tom: end",
+   "after": "t-wanwatch-rose-raspberry-r1",
    "auto": true,
    "wan_card": "t-rosestage-lab",
    "created": "2026-11-26",
@@ -7749,6 +7749,10 @@
     {
      "d": "2026-11-26",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Accepted attempt 2 (rose-raspberry-a2-r1.mp4) by eye: hands on hips, cheeks puffed, lean, arms crossed, return; every measured check passed, only the literal look check p1 missed. Baked (29 frames) and wired to supersonic_raspberry. No new try, nothing spent."
     }
    ],
    "prompt": {
@@ -7831,6 +7835,32 @@
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26"
+  },
+  {
+   "id": "t-wanwatch-rose-raspberry-r1",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "animations",
+   "fyi": true,
+   "title": "Watch 1 new battle video",
+   "next": "Open ADMIN > BATTLE GUIDE, find each animation named below, press PLAY and watch it once on your phone. Tap All good, or Something is wrong and say what you saw. New: rose-raspberry. Build wanstop-rose-raspberry-r1.",
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by the stop session of c-wanstop-rose-raspberry-r1: rose-raspberry plays the move (hands on hips, cheeks puffed, lean, arms crossed, back to idle). The look check read it too literally (Tom 2026-11-21: the purpose counts), so it was accepted, baked and wired with no new try."
+    }
+   ],
+   "wanwatch": [
+    "rose-raspberry"
+   ]
   }
  ],
  "sessions": [
