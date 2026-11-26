@@ -1,0 +1,15 @@
+{
+  "attempts": [
+    {
+      "reused_from": "art-factory/benchmark/bench-justinbb9-4/start_frame.png",
+      "measured": {
+        "border_exact_808080_fraction": 1.0,
+        "figure_height_fraction": 0.854,
+        "head_mean_abs_diff_vs_hero": null,
+        "passed": true
+      },
+      "passed": true
+    }
+  ],
+  "passed": true
+}

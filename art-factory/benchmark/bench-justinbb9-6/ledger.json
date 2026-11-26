@@ -1,0 +1,31 @@
+{
+  "cap": 2.0,
+  "total": 1.8984,
+  "rows": [
+    {
+      "label": "Stage B judge calls: 3 seeds x 3 runs",
+      "usd": 0.1134,
+      "service": "google"
+    },
+    {
+      "label": "wan3_s1: 5 s at $0.100/s",
+      "usd": 0.525,
+      "service": "fal"
+    },
+    {
+      "label": "wan3_s3: 5 s at $0.100/s",
+      "usd": 0.525,
+      "service": "fal"
+    },
+    {
+      "label": "wan3_s2: 5 s at $0.100/s",
+      "usd": 0.525,
+      "service": "fal"
+    },
+    {
+      "label": "matte winner wan3_s2: birefnet v2 video (estimate)",
+      "usd": 0.21,
+      "service": "fal"
+    }
+  ]
+}
