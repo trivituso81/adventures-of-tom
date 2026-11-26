@@ -2434,12 +2434,11 @@
     "n": 2
    },
    "use": {
-    "state": "applying",
+    "state": "live",
     "at": "2026-11-26T09:23:09Z",
-    "since": "2026-11-26T09:23:09Z",
-    "build": "",
-    "why": "",
-    "run": 45791800597
+    "since": "2026-11-26T09:33:08Z",
+    "build": "guideuse-45791800597",
+    "why": ""
    },
    "left": false,
    "dry": false,
