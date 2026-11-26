@@ -7134,120 +7134,11 @@
     }
    ],
    "wgen": {
-    "want": false,
-    "at": "2026-11-26T09:55:07Z",
-    "n": 19,
-    "est": 6.7,
-    "auto": true,
-    "run": {
-     "state": "done",
-     "at": "2026-11-26T10:12:13Z",
-     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45796453993",
-     "n": 19,
-     "merged": [
-      "stage-rose-cushion",
-      "stage-rose-lamby",
-      "stage-rose-backuplamby",
-      "stage-rose-cushionwall",
-      "stage-rose-castle",
-      "stage-rose-whoopee"
-     ],
-     "passed_not_baked": [
-      "stage-rose-comet",
-      "stage-rose-ripple"
-     ],
-     "retried": [
-      "stage-rose-cushionwall",
-      "rose-tacklelunge",
-      "rose-lavahop",
-      "rose-doublelamby",
-      "rose-pretzel",
-      "rose-boomerang",
-      "rose-citadel",
-      "rose-kingdom",
-      "rose-boop"
-     ],
-     "stopped": [
-      {
-       "what": "rose-tacklelunge",
-       "why": "failed twice: feet, edge",
-       "card": "c-wanstop-rose-tacklelunge-r1"
-      },
-      {
-       "what": "rose-lavahop",
-       "why": "failed twice: feet",
-       "card": "c-wanstop-rose-lavahop-r1"
-      },
-      {
-       "what": "rose-doublelamby",
-       "why": "failed twice: feet",
-       "card": "c-wanstop-rose-doublelamby-r1"
-      },
-      {
-       "what": "rose-pretzel",
-       "why": "failed twice: feet, edge",
-       "card": "c-wanstop-rose-pretzel-r1"
-      },
-      {
-       "what": "rose-boomerang",
-       "why": "failed twice: feet, edge",
-       "card": "c-wanstop-rose-boomerang-r1"
-      },
-      {
-       "what": "rose-citadel",
-       "why": "failed twice: p1",
-       "card": "c-wanstop-rose-citadel-r1"
-      },
-      {
-       "what": "rose-kingdom",
-       "why": "failed twice: edge",
-       "card": "c-wanstop-rose-kingdom-r1"
-      },
-      {
-       "what": "rose-boop",
-       "why": "failed twice: feet",
-       "card": "c-wanstop-rose-boop-r1"
-      }
-     ],
-     "waiting": [],
-     "capped": [
-      "rose-raspberry",
-      "rose-baitswitch",
-      "rose-whoopee"
-     ],
-     "unchecked": [],
-     "errors": [],
-     "already": [],
-     "gaveup": [],
-     "bake_failed": {
-      "stage-rose-comet": "NOT baked: bake_stage.py failed: a prop is on magenta\n",
-      "stage-rose-ripple": "NOT baked: bake_stage.py failed: a prop is on magenta\n"
-     },
-     "spent": 9.91,
-     "build": "wanbulk-trosestagelab-45796453993",
-     "watch": "",
-     "revs": {
-      "stage-rose-cushion": 1,
-      "stage-rose-lamby": 1,
-      "stage-rose-backuplamby": 1,
-      "stage-rose-comet": 1,
-      "stage-rose-ripple": 1,
-      "stage-rose-cushionwall": 1,
-      "stage-rose-castle": 1,
-      "stage-rose-whoopee": 1,
-      "rose-tacklelunge": 1,
-      "rose-lavahop": 1,
-      "rose-doublelamby": 1,
-      "rose-pretzel": 1,
-      "rose-boomerang": 1,
-      "rose-citadel": 1,
-      "rose-kingdom": 1,
-      "rose-boop": 1,
-      "rose-raspberry": 1,
-      "rose-baitswitch": 1,
-      "rose-whoopee": 1
-     }
-    }
+    "want": true,
+    "at": "2026-11-26T12:42:52Z",
+    "n": 1,
+    "est": 0.5,
+    "auto": true
    },
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukEQEES7HckHBnqBmQg",
@@ -7580,6 +7471,10 @@
     {
      "d": "2026-11-26",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Both tries show Rose doing the move (arms up, then wide, then back) but the Lamby plush pops in and out, because the start picture has empty hands. One change: the prompt now says both hands stay empty (tom-controller wording); pad, seed, frame, model kept. rev 2, next try started on t-rosestage-lab."
     }
    ],
    "prompt": {

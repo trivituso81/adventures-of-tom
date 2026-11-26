@@ -1,3 +1,7 @@
+## wanstop-rose-citadel-r1 (2026-11-26): Rose's Sofa Cushion Citadel video gets one prompt change and its next try starts
+
+Both tries (rev 1) showed Rose lifting both arms, sweeping them wide and returning, but the Lamby plush popped in and out (the start picture has empty hands), so the look check failed twice on the plush. One change: the prompt (`wan-rose-citadel-v2.txt`) drops the plush sentence and says both hands stay empty, the wording of the controller toss; pad, seed, start picture and model are kept. Job rev 2. The next try is started by `wgen` on card t-rosestage-lab.
+
 ## wanbulk-trosestagelab-45796453993 (2026-11-26): 6 battle videos made from board card t-rosestage-lab passed their checks and were put in the game
 
 The wan-gen Action made them (wanbulk, tools/art-library/wangen.py --bulk), measured them (height, feet, flat background, edges, last picture against first) and had a vision model check the motion and the person (tools/art-library/wanqa.py), then baked each with the settings stored on its job and wired it (tools/art-library/wanbake.py): stage-rose-cushion, stage-rose-lamby, stage-rose-backuplamby, stage-rose-cushionwall, stage-rose-castle, stage-rose-whoopee. Nobody has watched them yet; the card asks Tom to.
