@@ -97,6 +97,10 @@ Card c-guidegen, batched by c-guideflow-7. USE THIS ONE in the Battle Guide (the
 - Getting hit (`body:tnb:hit`, rev 1): Wan job tnb-hit is now rev 1 (prompt file tools/art-library/prompts/wan-tnb-hit-v1.txt); clip tnb_hit cut (48 pictures, 0 to 94 step 2, 1.5x); script tag added to index.html; B3_BODY_CLIPS.tnb.hit = tnb_hit
 - Idle (standing and breathing) (`body:amy:idle`, rev 1): Wan job amy-idle is now rev 1 (prompt file tools/art-library/prompts/wan-amy-idle-v1.txt); clip amy_idle cut (50 pictures, 0 to 147 step 3, loop wrap); script tag added to index.html; B3_BODY_CLIPS.amy.idle = amy_idle (new owner row)
 
+## tomframes3 (2026-11-26): Tom's plain dialogue face is the new walking face; the stretch fade is gone
+
+Tom (11-26 09:49 and 09:50): "The old frames are still being used in the dialog portrait" and the stretch transition is "way too much". Fact: `portraits/talk/tom.webp` (the face on lines with no mood and no talking pose) still showed the old balding walking sheet (v3), because the first install baked it before the walk atlas was new. Rebaked from the new walk (v4) standing frame, framed from hair top to neck like Amy's and Olivia's (`WALK_FRAMED` in bake_talk_faces.py; the hero-ratio framing cut his chin). Stretch: the crossfade and its drawing code are removed (purged); poses change as cuts with no squash (the squash exemption for `st_` poses stays) and the 2.8 s length stays. Not changed: the feelings, tell, point, ask, answer and think faces (cut from sheets v8, v3 and the older singles).
+
 ## tomstretch5 (2026-11-26): the stretch's pose fade is about 4 times shorter
 
 Tom (11-26 09:33): the fade between stretch poses "looks very strange and psychedelic"; no jolts, or make it about 10 times more subtle. Kept: no squash or hop on stretch poses, the 2.8 s length. Changed: the fade window is 0.015 of the stretch (about 40 ms, three frames) instead of 0.06 (170 ms), so two poses no longer show through each other for long.

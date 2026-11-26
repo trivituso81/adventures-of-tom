@@ -8539,6 +8539,39 @@
     "text": "Read CLAUDE.md (Pose Editor, Tom's painted frames are used as painted, One head multiplier, Real heights) and claude/next-addendum-listen1.md, then card c-tomframes in data/board.json. Your first push is the commit board: start c-tomframes. Tom uploaded new painted sheets for Tom on 2026-11-26: tom-walking-sheet-v4, tom-emotions-v8, tom-talk-v3, and tom-listen-v1 is approved. Install them for Tom only. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "done": "2026-11-26"
+  },
+  {
+   "id": "c-tomframes3",
+   "title": "Tom's plain dialogue face from the new walk; no stretch fade",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "done",
+   "next": "Shipped as tomframes3. Tom looks at a plain line and the stretch on his phone (card t-tomframesplay).",
+   "blocks": [],
+   "changed": "2026-11-26",
+   "created": "2026-11-26",
+   "tag": "tomframes3",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFUy1ZAKH1RRjtXyko",
+    "opening": "\"implement tom's new walking, emotions, and listening frames\""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Tom (09:49, 09:50): \"The old frames are still being used in the dialog portrait\"; \"the stretch transitions is still way too much\". Built tomframes3."
+    }
+   ],
+   "after": "t-tomframesplay",
+   "prompt": {
+    "what": "Installs Tom's new stretching sheet.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the bakes exist and tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md (Pose Editor, Tom's painted frames are used as painted, One head multiplier, Real heights) and claude/next-addendum-listen1.md, then card c-tomframes in data/board.json. Your first push is the commit board: start c-tomframes. Tom uploaded new painted sheets for Tom on 2026-11-26: tom-walking-sheet-v4, tom-emotions-v8, tom-talk-v3, and tom-listen-v1 is approved. Install them for Tom only. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "done": "2026-11-26"
   }
  ],
  "sessions": [

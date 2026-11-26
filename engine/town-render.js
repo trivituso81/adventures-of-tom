@@ -110,11 +110,7 @@ function drawSheetActor(a,set) {
   activeTint=noTint?null:(m?garmentTint(bp?'bt':'ow',m.id,memberTopColor(m)):null);
   if(rider&&!painted) drawOwRider(rider,a.facing,cx,base-hk,true,k);
   activeTint=noTint?null:(m?garmentTint(bp?'bt':'ow',m.id,memberTopColor(m)):null);
-  const P0=a.scenePose,ga0=gfx.globalAlpha; let pb=null;
-  if(bp&&bp.story&&P0&&P0.prev&&P0.mix<1) { a.scenePose={f:P0.prev,mid:P0.mid,emo:P0.emo}; try { pb=scenePoseDraw(a,set,k); } finally { a.scenePose=P0; } }   // tomstretch4: the pose before, under the one fading in
-  if(pb) { const pw=pb.rows[0].length*kd,ph2=pb.rows.length*kd; drawSprite(pb.rows,pb.pal,cx-Math.floor(pw/2),Math.round(base-ph2),kd); gfx.globalAlpha=Math.max(.02,P0.mix); }
   drawSprite(fr,bp?bp.pal:set.pal,cx-Math.floor(wk/2),Math.round(base-hk),kd);
-  gfx.globalAlpha=ga0;
   if(rider&&!painted) drawOwRider(rider,a.facing,cx,base-hk,false,k);
   activeTint=null;
   if(lf&&lf.pip) drawLifePip(lf.pip,lf.pt,cx,base-hk,k);
