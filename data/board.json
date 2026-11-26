@@ -6977,7 +6977,7 @@
    "title": "Justin production clip: #00FF00 start, new Kling prompt",
    "next": "Roll 4 is the best so far but still fails QA (draw smear, ends with hand near hip). Next: Kling multi_prompt shots from the same start.png. See claude/next-justinbb9.md.",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukFJ3SQckykBNpN3Deq",
+    "url": "https://claude.ai/code/session_01RXeukD88aZXMwDZ8KSAuK8",
     "opening": "UNCONSTRAINED PRODUCTION ORDER (REPO: trivituso81/adventures-of-tom)"
    },
    "history": [
@@ -7021,6 +7021,10 @@
     {
      "d": "2026-11-25",
      "t": "Roll 4: face clear, rap forward right, green keys clean; still fails QA (ghosted frame while drawing the hammer, not an exact idle at the end, faint boot shadow). Ended without shipping; nothing pushed to the game. Four rolls this session, total fal spend about $5.0. Next: Kling multi_prompt (three shots), see claude/next-justinbb9.md."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "blocks": [],
@@ -7063,6 +7067,16 @@
    "tags": [],
    "cards": [
     "c-justinpoc1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukD88aZXMwDZ8KSAuK8",
+   "title": "Justin production clip: #00FF00 start, new Kling prompt",
+   "first": "2026-11-25T17:11:15-08:00",
+   "last": "2026-11-25T17:11:15-08:00",
+   "tags": [],
+   "cards": [
+    "c-justinbb9"
    ]
   },
   {
@@ -13444,8 +13458,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "7e193c887ac35a2d07f53961f96ba661e2e12bb1",
- "synced_at": "2026-11-26T00:42:56+00:00",
+ "synced": "52c48df37d55fad4c2e3ba499805ccc1fe34c534",
+ "synced_at": "2026-11-26T01:11:59+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
