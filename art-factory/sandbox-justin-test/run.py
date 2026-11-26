@@ -41,13 +41,14 @@ def main():
     keyframe('start.png', START, [hero])
     if os.environ.get('STAGE') == 'end': say('stage end only: stopping before the video, spent $%.4f' % spent()); return
     if not os.path.exists(P('raw.mp4')):
-        guard(EST_VID); say('making video (Kling v3 Pro image-to-video, 5 s, start image only)')
+        guard(EST_VID); say('making video (Kling v3 Pro image-to-video, 6 s, cfg 0.85, start image only)')
         live = fal.price(VID); est = falq.apply_live(EST_VID if not live else 0, live, 'video', 5) or EST_VID
         say('fal live price:', live, '-> booking', est)
         if spent() + est > CAP: sys.exit('STOP: live price too high for the cap')
         body = {'prompt': MOTION, 'negative_prompt': NEG, 'start_image_url': falq.data_uri(open(P('start.png'), 'rb').read()),
-                'duration': '5', 'generate_audio': False}
+                'duration': '6', 'generate_audio': False, 'cfg_scale': 0.85, 'shot_type': 'customize'}
         res = fal.wait(fal.send(VID, body))
+        say('fal response:', json.dumps({k: (v if k != 'video' else {a: b for a, b in v.items() if a != 'url'}) for k, v in res.items()})[:400])
         open(P('raw.mp4'), 'wb').write(fal.download(res['video']['url'])); book('raw.mp4', est)
     if os.environ.get('STAGE') == 'raw': say('stage raw: stopping after the raw video, spent $%.4f' % spent()); return
     import numpy as np

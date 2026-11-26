@@ -6975,7 +6975,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Justin production clip: #00FF00 start, new Kling prompt",
-   "next": "Ready for Opus 5.5 medium: build the Justin clip from four pinned pose keyframes (method in claude/next-justinbb9.md). Roll 1 from a single image failed twice the same way.",
+   "next": "Roll 1 failed (turns to camera, scowl, 3 s clip, pastel green). Roll 2 runs the same Kling video route with cfg_scale 0.85 and 6 s; see claude/next-justinbb9.md.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFJ3SQckykBNpN3Deq",
     "opening": "UNCONSTRAINED PRODUCTION ORDER (REPO: trivituso81/adventures-of-tom)"
@@ -7005,19 +7005,23 @@
     {
      "d": "2026-11-25",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Tom: video is possible, the implementation is the problem. Handoff rewritten to stay on the Kling video route. Roll 2: cfg_scale 0.85 (was the 0.5 default), duration 6."
     }
    ],
    "blocks": [],
    "created": "2026-11-25",
    "changed": "2026-11-25",
    "prompt": {
-    "what": "Make the Justin clip from four pinned pose keyframes instead of one free Kling roll.",
+    "what": "Continue the Justin Kling video run: change one implementation setting per roll, key by green dominance, 8-frame QA.",
     "before": [
      "Nothing to do first."
     ],
-    "model": "Claude Opus 5.5 (row D: generator prompts judged by taste)",
-    "effort": "medium (the method is written in claude/next-justinbb9.md)",
-    "text": "Read the c-justinbb9 card and claude/next-justinbb9.md. Make four exact #00FF00 pose stills of Justin from art-factory/sandbox-justin-test/hero.png, pair them with first-last-frame video, key with key.py, then run the 8-frame checkerboard QA before anything is pushed. Do not roll Kling from one image again. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "model": "Claude Sonnet 5.5 (row B: written steps, QA gate catches mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read the c-justinbb9 card and claude/next-justinbb9.md. Continue the Kling v3 Pro roll for justin-bb-basic from start.png, changing one setting per roll, key with key.py, run the 8-frame checkerboard QA before pushing. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "rescue": {
     "at": "2026-11-26T00:19:22+00:00",

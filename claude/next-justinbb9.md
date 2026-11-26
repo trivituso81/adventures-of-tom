@@ -16,7 +16,5 @@ Order: one transparent .webm for justin-bb-basic, 3.5 to 4.0 s, Kling v3 Pro fro
 Attempt 8 (long style prompt) and roll 1 (Tom's short prompt) are different prompts with the same failure: he rotates toward camera, the face changes, the props do not stay where the prompt puts them. The prompt is not the lever, so a third Kling roll from one image would be the same bet. Stop-loss rule applied: no third roll.
 
 ## Next session should
-- Change the method, not the prompt: build the motion from pose keyframes. Make four stills from hero.png with nano-banana (idle, stud finder glide, hammer rap, nod) on exact #00FF00, check each against the hero, then animate each pair with first-last-frame video (short segments, start and end both pinned), and join them. Pinned end frames are what stops the turn and the drift.
-- Key with key.py (green dominance), not a #00FF00-only chromakey, because every video model drifts the green.
-- Ask for a clip longer than 4 s and trim to 3.5 to 4.0 s, or join segments.
-- Keep the 8-frame checkerboard QA from this session (extract at (i+0.5)/8 of the duration).
+- Keep Kling v3 Pro, image-to-video from start.png only. Change implementation, one thing at a time: cfg_scale (default 0.5, now 0.85), duration (ask for 6 s, the 5 s ask came back 3.04 s), key by green dominance (key.py) because the output green drifts.
+- Keep the 8-frame checkerboard QA (frames at (i+0.5)/8 of the duration).
