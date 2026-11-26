@@ -1585,6 +1585,25 @@
    "date": "2026-11-25",
    "at": "2026-11-25T23:09:46Z",
    "read": true
+  },
+  {
+   "service": "elevenlabs",
+   "left": 400262,
+   "limit": 600000,
+   "unit": "credits",
+   "source": "Read from ElevenLabs by the costs-sync job (pro plan, 199,738 credits used).",
+   "date": "2026-11-26",
+   "at": "2026-11-26T23:04:02Z",
+   "read": true
+  },
+  {
+   "service": "fal",
+   "left": 97.82,
+   "unit": "usd",
+   "source": "Read from fal by the costs-sync job (FAL_ADMIN_KEY).",
+   "date": "2026-11-26",
+   "at": "2026-11-26T23:04:02Z",
+   "read": true
   }
  ]
 }
