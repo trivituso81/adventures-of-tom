@@ -6514,6 +6514,14 @@
      "date": "2026-11-14",
      "from": "v1",
      "at": 1794689438625
+    },
+    {
+     "n": 2,
+     "file": "art/raw/characters/grace-talk-v3.png",
+     "date": "2026-11-26",
+     "from": "v2",
+     "at": 1795722877257,
+     "up": true
     }
    ],
    "rejects": [],
