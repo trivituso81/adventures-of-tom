@@ -3147,12 +3147,11 @@
     "n": 5
    },
    "use": {
-    "state": "applying",
+    "state": "live",
     "at": "2026-11-26T09:32:19Z",
-    "since": "2026-11-26T09:32:19Z",
-    "build": "",
-    "why": "",
-    "run": 45793298334
+    "since": "2026-11-26T09:46:43Z",
+    "build": "guideuse-45793298334",
+    "why": ""
    },
    "left": false,
    "dry": false,
