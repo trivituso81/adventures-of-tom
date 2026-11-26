@@ -9346,7 +9346,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Battle Lab review holds hit stop at the right length, 24 fps",
-   "next": "Make p1Clock count a manifest row's hit_stop_frames at 24 fps and keep pass1-meta rows at 60 fps; update tools/guide_timing_test.py, docs/BATTLE_GUIDE.md and docs/CHANGES.md; run guide_timing_test, smoke and b3_hitstop_test.",
+   "next": "Shipped (hitstoplab1): the Battle Lab pass-1 review holds a manifest row's hit stop at hit_stop_frames / 24 s (was / 60, about 2.5 times too short); rows measured on the baked video in data/pass1-meta.js still hold at 60 fps. Tests: guide_timing_test, b3_hitstop_test pass; smoke shows only two failures that are on main without this change.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukEMmPhXEHE2tFioPmh",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done (the hitstop1 paragraph). Add a card for this task first\""
@@ -9355,6 +9355,10 @@
     {
      "d": "2026-11-26",
      "t": "Started: Tom asked to fix the Battle Lab pass-1 clip clock (p1Clock) so a manifest row's hit stop frames count at 24 fps, the separate step left open by hitstop1. Board: new card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Built: p1Clock counts a manifest row at 24 fps and a pass1-meta row at 60 fps; guide_timing_test updated (24 fps check plus a pass1-meta 60 fps check), docs/BATTLE_GUIDE.md and docs/CHANGES.md updated. Ended with nothing for Tom."
     }
    ],
    "blocks": [],

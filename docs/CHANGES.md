@@ -1,3 +1,9 @@
+## hitstoplab1 (2026-11-26): the Battle Lab review holds a move's hit stop at the right length
+
+Tom's card c-hitstoplab1 (the separate step hitstop1 left open). In the Battle Lab pass-1 review, `p1Clock` (`engine/pass1-vfx.js`) held a clip for `hit_stop_frames * 1000 / 60` ms for every row. A row that comes from `data/guide-manifest.json` (`from:'manifest'`, built by `engine/guide-timing.js`) has its frames at 24 fps, so the review held it about 2.5 times too short (3 frames: 50 ms instead of 125 ms; 7 frames: 117 ms instead of 292 ms). `p1Clock` now counts a manifest row at 24 fps (`hit_stop_frames * 1000 / 24`) and a row from `data/pass1-meta.js` (measured on the baked video) still at 60 fps. Nothing else changed: no clip, impact time, rule or `engine/b3-vfx.js`.
+
+Checked: `python3 -I tools/guide_timing_test.py` (the p1Clock check now expects 24 fps for the manifest row `pf_tom_ff_basic`, and a new check that a `pass1-meta` row, Justin's `pf_justin_bb_basic` at 4 frames, still holds 66.7 ms at 60 fps) passes; `python3 tools/b3_hitstop_test.py` passes (real fights, portrait and landscape). `python3 tools/smoke.py` ends with two failures that are on main without this change (`board_sync_test` "board4: board_check accepts a Tom card waiting on its fix", and the night manifest missing `tools/hidebf_test.py`); the third, the cache tag of `engine/pass1-vfx.js`, is fixed by this build's bump.
+
 ## tnbframes (2026-11-26): TNB's new walking, feelings, talking, thinking and listening pictures are in the game
 
 Card c-tnbframes. Tom's words: "and finally once those are all done, do TNB's". Not seen on the phone yet. Same install as `boppyframes`.

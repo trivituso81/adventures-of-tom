@@ -5,8 +5,9 @@ const P1_SLIDE_MS=350;
 function p1Meta(id){ const k=String(id).replace(/_/g,'-');   // the clip key is pf_justin_bb_basic, the packet id pf-justin-bb-basic
   const M=typeof PASS1_META!=='undefined'?PASS1_META[k]:null; if(M) return M;   // a row measured on the baked video wins
   return typeof gtMeta==='function'?gtMeta(k):null; }   // else the manifest's contactSec and hitStopFrames (engine/guide-timing.js)
-// Time into the clip with hit-stop applied: the clock holds still for hit_stop_frames at 60 fps after the impact.
-function p1Clock(S,ms){ const M=p1Meta(S.id); if(!M||!M.hit_stop_frames) return ms; const hold=M.hit_stop_frames*1000/60;
+// Time into the clip with hit-stop applied: the clock holds still for hit_stop_frames after the impact.
+// A manifest row (from:'manifest', engine/guide-timing.js) counts them at the 24 fps the clips were made at; a row measured on the baked video (data/pass1-meta.js) counts them at 60 fps.
+function p1Clock(S,ms){ const M=p1Meta(S.id); if(!M||!M.hit_stop_frames) return ms; const hold=M.hit_stop_frames*1000/(M.from==='manifest'?24:60);
   if(ms<M.impact_ms) return ms; if(ms<M.impact_ms+hold) return M.impact_ms; return ms-hold; }
 // Slide lead: a clip that approaches the foe first slides out for P1_SLIDE_MS holding its first picture, plays, then slides back for as long.
 function p1Lead(S){ const M=p1Meta(S.id); return M&&M.approach?P1_SLIDE_MS:0; }

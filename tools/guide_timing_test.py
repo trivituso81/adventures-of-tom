@@ -22,7 +22,8 @@ out.rows=E("gtUse")(doc);
 out.manifestOnly=E("p1Meta('pf_tom_ff_basic')");           // in the manifest, no row in PASS1_META
 out.baked=E("p1Meta('pf_justin_bb_basic')");               // a row measured on the baked video wins over the manifest
 out.unknown=E("p1Meta('pf_nobody_nothing')");
-out.clock=E("(()=>{const S={id:'pf_tom_ff_basic'},M=p1Meta(S.id),hold=M.hit_stop_frames*1000/60,c=M.impact_ms;return [[500,500],[c,c],[c+hold/2,c],[c+hold,c],[c+hold+100,c+100],[2000,2000-hold]].map(([ms,want])=>[p1Clock(S,ms),want]);})()");
+out.clock=E("(()=>{const S={id:'pf_tom_ff_basic'},M=p1Meta(S.id),hold=M.hit_stop_frames*1000/24,c=M.impact_ms;return [[500,500],[c,c],[c+hold/2,c],[c+hold,c],[c+hold+100,c+100],[2000,2000-hold]].map(([ms,want])=>[p1Clock(S,ms),want]);})()");
+out.clockBaked=E("(()=>{const S={id:'pf_justin_bb_basic'},M=p1Meta(S.id),hold=M.hit_stop_frames*1000/60,c=M.impact_ms;return [M.from||null,M.hit_stop_frames,hold,[[500,500],[c,c],[c+hold/2,c],[c+hold,c],[c+hold+100,c+100],[3000,3000-hold]].map(([ms,want])=>[p1Clock(S,ms),want])];})()");
 out.badDoc=E("gtUse({moves:[{manifestId:'x-y',contactSec:'1'},{manifestId:'x-z',contactSec:-1},{manifestId:'x-w',contactSec:0.5,hitStopFrames:null}]})");
 out.badDocRow=E("gtMeta('x-w')");
 E("gtUse")(doc);
@@ -215,7 +216,9 @@ check('its effects are the move\'s library assets', mo.get('vfx') == tom['librar
 bk = o.get('baked') or {}
 check('a clip with a row baked from the video keeps that row (Justin: 1700 ms, not the manifest 1300 ms)', bk.get('impact_ms') == 1700 and bk.get('hit_stop_frames') == 4 and bk.get('from') is None, bk)
 check('a clip the manifest does not name gets no timing', o.get('unknown') is None, o.get('unknown'))
-check('the hit stop holds the picture for hitStopFrames at 60 fps after the contact (%d frames = %d ms), then time runs on, shifted by that hold' % (tom['hitStopFrames'], round(tom['hitStopFrames'] * 1000 / 60)), len(o.get('clock', [])) == 6 and all(abs(a - b) < 1e-6 for a, b in o.get('clock', [])), o.get('clock'))
+check('a manifest row holds the picture for hitStopFrames at 24 fps after the contact (%d frames = %.1f ms), then time runs on, shifted by that hold' % (tom['hitStopFrames'], tom['hitStopFrames'] * 1000 / 24), len(o.get('clock', [])) == 6 and all(abs(a - b) < 1e-6 for a, b in o.get('clock', [])) and abs((o.get('clock') or [[0, 0]] * 6)[5][0] - (2000 - tom['hitStopFrames'] * 1000 / 24)) < 1e-6, o.get('clock'))
+cb = o.get('clockBaked') or [None, 0, 0, []]
+check('a row measured on the baked video still holds at 60 fps (Justin: %d frames = %.1f ms, not the 24 fps %.1f ms)' % (bk.get('hit_stop_frames', 0), bk.get('hit_stop_frames', 0) * 1000 / 60, bk.get('hit_stop_frames', 0) * 1000 / 24), cb[0] is None and cb[1] == 4 and abs(cb[2] - 4000 / 60) < 1e-6 and len(cb[3]) == 6 and all(abs(a - b) < 1e-6 for a, b in cb[3]), cb)
 check('a bad row is left out (text contactSec, negative contactSec); a null hitStopFrames means no hit stop', o.get('badDoc') == 1 and (o.get('badDocRow') or {}).get('hit_stop_frames') == 0, (o.get('badDoc'), o.get('badDocRow')))
 check('all 37 library assets are registered as effects, each with a length of 400 ms or more', o.get('registered') == ['function'] * 37 and len(o.get('lib', [])) == 37 and all(isinstance(v, (int, float)) and v >= 400 for v in o.get('lens', [])), (o.get('registered'), o.get('lens')))
 SELF = ['vfx_core_heal_cleanse', 'vfx_core_shield_ward', 'setpiece_delta_one_pod_doors', 'setpiece_giant_sky_controller', 'setpiece_3tier_sparkler_cake', 'setpiece_diamond_gold_dumpling', 'setpiece_giant_easel_portrait', 'setpiece_broadway_spotlights', 'setpiece_sofa_cushion_fort', 'setpiece_blanket_kingdom_castle', 'setpiece_8seat_sunday_table', 'setpiece_rising_full_moon', 'setpiece_rikers_iron_gates', 'setpiece_sentient_ghost_pepper', 'setpiece_eighth_dining_chair']
