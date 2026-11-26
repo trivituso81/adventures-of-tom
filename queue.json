@@ -2829,8 +2829,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T08:54:21Z",
-   "state": "checking",
-   "since": "2026-11-26T08:56:40Z",
+   "state": "done",
+   "since": "2026-11-26T09:07:27Z",
    "run": 45782279434,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -2843,7 +2843,29 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-rose-ko/t1.js",
+    "img": "takes/body-rose-ko/t1.webp",
+    "frames": 75,
+    "kb": 1054,
+    "words": "0 to 148 step 2, 1.5x",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "vision k_dizzy: No swirly/crossed eyes or woozy look before falling; expressions are sad/tired.; No dizzy or woozy face shown before falling; expressions are sad/tired.",
+      "vision k_back: Falls to sitting slumped forward, not backwards onto back with head to right.; Falls to sitting then side-lying, not backwards onto back with head to right."
+     ],
+     "faults": [
+      "k_back",
+      "k_dizzy"
+     ],
+     "vision_ran": true,
+     "spent": 0.0074,
+     "error": null,
+     "words": "The clip gate flags this take: vision k_dizzy: No swirly/crossed eyes or woozy look before falling; expressions are sad/tired.; No dizzy or woozy face shown before falling; expressions are sad/tired.; vision k_back: Falls to sitting slumped forward, not backwards onto back with head to right.; Falls to sitting then side-lying, not backwards onto back with head to right.."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
