@@ -8208,7 +8208,7 @@
   {
    "id": "c-guidetime",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "guidetime1",
    "title": "Engine reads move contact time and hit stop; 8 effects",
@@ -8225,6 +8225,10 @@
     {
      "d": "2026-11-26",
      "t": "Started: Tom asked for the engine step and the first 8 library effects in this conversation. Board: new card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as guidetime1: the engine reads each move's contact moment and hit stop from the manifest, and the first 8 library effects are built"
     }
    ],
    "prompt": {
@@ -8235,7 +8239,8 @@
     "model": "Claude Sonnet 5.5 (row C: a build whose steps are written in the task, tests catch mistakes)",
     "effort": "high (a new engine step, 8 drawn effects, a crosswalk change and a test)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done. Your first push is the commit \"board: start c-guidetime\".\n\nTask: engine/guide-timing.js reads contactSec and hitStopFrames from data/guide-manifest.json and gives p1Meta (engine/pass1-vfx.js) a row for every manifest move; a row baked from the video in data/pass1-meta.js wins. engine/vfx-library.js draws the first 8 effects of art-factory/aot-stage2c-vfx-library-v11.json in code. Run python3 -I tools/guide_timing_test.py and python3 -I tools/guide_manifest_test.py."
-   }
+   },
+   "done": "2026-11-26"
   }
  ],
  "sessions": [
@@ -8375,6 +8380,18 @@
    "tags": [],
    "cards": [
     "t-lastnight"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCyrFfWfcWhho82Amx",
+   "title": "Engine reads move contact time and hit stop; 8 effects",
+   "first": "2026-11-26T08:41:12-08:00",
+   "last": "2026-11-26T08:41:12-08:00",
+   "tags": [
+    "guidetime1"
+   ],
+   "cards": [
+    "c-guidetime"
    ]
   },
   {
@@ -14861,8 +14878,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "2f1a98de84ba52c0c22cfd7206a5c7c325b4f04d",
- "synced_at": "2026-11-26T13:10:03+00:00",
+ "synced": "30bda147258632a09c841f47591d8a513fe75151",
+ "synced_at": "2026-11-26T16:42:04+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
