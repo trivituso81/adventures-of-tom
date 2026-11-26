@@ -78,6 +78,10 @@ Card c-guidegen, batched by c-guideflow-7. USE THIS ONE in the Battle Guide (the
 - Getting hit (`body:tnb:hit`, rev 1): Wan job tnb-hit is now rev 1 (prompt file tools/art-library/prompts/wan-tnb-hit-v1.txt); clip tnb_hit cut (48 pictures, 0 to 94 step 2, 1.5x); script tag added to index.html; B3_BODY_CLIPS.tnb.hit = tnb_hit
 - Idle (standing and breathing) (`body:amy:idle`, rev 1): Wan job amy-idle is now rev 1 (prompt file tools/art-library/prompts/wan-amy-idle-v1.txt); clip amy_idle cut (50 pictures, 0 to 147 step 3, loop wrap); script tag added to index.html; B3_BODY_CLIPS.amy.idle = amy_idle (new owner row)
 
+## tomframes2 (2026-11-26): Tom's feelings, thinking and listening pictures now draw at the same size as his other poses
+
+Tom (11-26 08:20 and 08:22): "I see lots of old frames ... Especially the listening and they are a different sizes". Fact: the first install drew his 8 feelings poses about 33 rows tall (the old sheet's size factor was kept for the new, smaller painting) while talking poses were 40 to 42, and thinking and listening were about 11 percent taller than telling. Now `EMO_HEAD['tom']` is 1.13 and `TALK_FIT` (bake_story_poses.py) sets the thinking and listening figures to the height of the other talking poses. Measured in the atlases: feelings 39 to 41 rows, talking 40 to 42 rows, thinking and listening 40.7. Only Tom's two story atlases changed; other people's files are as they were. Tom's own Pose Editor lines (applied to tell, point, ask and answer) are untouched.
+
 ## tomframes (2026-11-26): Tom's new walking, feelings, talking and listening pictures are in the game
 
 Card c-tomframes. Tom's words: "implement tom's new walking, emotions, and listening frames." Not seen on the phone yet.

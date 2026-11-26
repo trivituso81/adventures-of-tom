@@ -73,7 +73,7 @@ for _id, _h in EMO_H.items():
 # figure (3 and 4.6 percent) while the standing head stayed Tom's size; each factor took half of that back (1.89 to 1.92, 1.32 to 1.35), the same
 # height and face split as above.
 # ch2fix1 (report r-20261114-160921-smrp, Tom: "This emotion state is size down too much for TNB"): TNB 1.35 to 1.27, his moods about 6 percent bigger.
-EMO_HEAD = {'tom': 1.39, 'tnb': 1.27, 'grace': 1.37, 'rose': 1.67, 'amy': 1.36, 'justin': 1.32, 'deedee': 1.30, 'boppy': 1.92, 'olivia': 1.35, 'ellie': 1.43}
+EMO_HEAD = {'tom': 1.13, 'tnb': 1.27, 'grace': 1.37, 'rose': 1.67, 'amy': 1.36, 'justin': 1.32, 'deedee': 1.30, 'boppy': 1.92, 'olivia': 1.35, 'ellie': 1.43}
 # headmood1 (2026-11-12, Tom: the HEAD SIZES factor applies to every state): emotion_frames.py grows each mood figure's head by that character's factor (head_tweak.json)
 # and records the figure's height growth as 'hg' in data/emotions.js. Moods keep their height (the walk keeps height too), so the strip scale takes the growth back.
 def _emo_hg():
@@ -88,6 +88,7 @@ for _k in list(EMO_HEAD): EMO_HEAD[_k] *= EMO_HG.get(_k, 1.0)
 # A set exists only once its strip exists, so with no talking sheets this bake writes exactly what it wrote before. Size: one factor per person that makes the
 # Telling figure (standing straight) as tall as the overworld stand ('h' as for the moods); talk_frames.py already grew the head by the HEAD SIZES factor,
 # so the head is the walk's size and the figure keeps its real height (the walk keeps height too). Look at it next to the stand when the first sheet is baked.
+TALK_FIT = {'tom'}   # tomframes2 (Tom 11-26: the listening pose and the others were different sizes)
 TALK_TYPES = ['tell', 'point', 'ask', 'answer', 'think']   # think (c-reports 2026-11-19): the fifth pose, for lines where someone thinks about or examines what is being said
 # listen1 (2026-11-20): talk_frames.py appends one frame per approved single picture, think then listen (talk_frames.SINGLES), so the names follow the pictures that exist.
 import glob as _glob
@@ -353,6 +354,10 @@ for cid, S in SETS.items():
             S['k'] = max(5, min(10, int(hd * stand_frame(S['member'])[1]) if hd else int(figs[S['ref']].height / S['h'])))   # never upscale the painted frames
     elif 'ground' in S: figs = dict(zip(S['names'], cut_cells(key_ground(os.path.join(RAW, S['sheet']), S['ground'], S.get('dark_cos', .985)), S['cut'][0], S['cut'][1], S['cut'][0] * S['cut'][1], S.get('dil', 6))))
     elif 'cut' in S: figs = dict(zip(S['names'], _cut(os.path.join(RAW, S['sheet']), S['cut'][0], S['cut'][1], [n[3:] for n in S['names']] + ['x%d' % i for i in range(S['cut'][0] * S['cut'][1] - len(S['names']))]).values()))
+    if S.get('talk') and S.get('member') in TALK_FIT and 'strip' in S:   # tomframes2: every upright talking figure of this person is the Telling figure's height (same real height, one size)
+        for _n in list(figs):
+            if _n != S['ref'] and _n.startswith('tk_'):
+                _r = figs[S['ref']].height * (0.969 if _n in ('tk_think', 'tk_listen') else 1.0) / figs[_n].height; figs[_n] = figs[_n].resize((max(1, round(figs[_n].width * _r)), round(figs[_n].height * _r)), Image.LANCZOS)
     for _n in S.get('flip', []): figs[_n] = figs[_n].transpose(Image.FLIP_LEFT_RIGHT)
     if 'strip' not in S and 'cut' not in S and 'ground' not in S: figs = dict(zip(S['names'], grid(os.path.join(RAW, S['sheet']), 4, 2)))
     f = S['h'] * S['k'] / figs[S['ref']].height

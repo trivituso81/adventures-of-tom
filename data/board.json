@@ -6979,11 +6979,11 @@
    "theme": "Characters",
    "lane": "claude",
    "col": "done",
-   "next": "Shipped as tomframes: Tom's new walking, feelings, talking and listening pictures are in the game for Tom only. Tom looks at them on his phone (card t-tomframesplay).",
+   "next": "Shipped as tomframes2: sizes of Tom's feelings, thinking and listening poses fixed. Tom looks at them on his phone (card t-tomframesplay).",
    "blocks": [],
    "changed": "2026-11-26",
    "created": "2026-11-26",
-   "tag": "tomframes",
+   "tag": "tomframes2",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFUy1ZAKH1RRjtXyko",
     "opening": "\"implement tom's new walking, emotions, and listening frames\""
@@ -7000,6 +7000,10 @@
     {
      "d": "2026-11-26",
      "t": "Shipped as tomframes: Tom's new walking, feelings, talking and listening pictures are in the game"
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Tom (08:20, 08:22): \"I see lots of old frames and the portrait for dialog isn't updated either. Especially the listening and they are a different sizes\". Built tomframes2: feelings poses were about 33 rows tall against 40 to 42 for talking, and thinking and listening were 11 percent taller than telling; all now 39 to 42 rows. Dialog faces for Tom were already the new ones (cache tag tomframes); the hero portrait portraits/tom.png in menus is a different picture and was not part of this card."
     }
    ],
    "after": "t-tomframesplay",
@@ -7022,7 +7026,7 @@
    "col": "up",
    "ask": "play",
    "fyi": true,
-   "next": "Open the game, RELOAD on the title, then CHAPTERS > Chapter 1 and play the opening. Look at Tom walking in all four directions (no pink between his arms and body), his talking poses and feelings in conversations, and Tom standing in his listening pose while someone else talks. Tell me with the REPORT tab if a pose is too big, too small or faces the wrong way.",
+   "next": "Open the game, RELOAD on the title (if it still looks old, close the home-screen app and open it again), then CHAPTERS > Chapter 1. Look at Tom's feelings, talking and listening poses: they should all be one size and match his walking size. Tell me with the REPORT tab which pose is wrong.",
    "jump": {
     "chapter": 1
    },
@@ -7033,6 +7037,10 @@
     {
      "d": "2026-11-26",
      "t": "Made by tomframes."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Updated by tomframes2."
     }
    ]
   },
