@@ -26983,6 +26983,14 @@
      "from": "v2",
      "at": 1795722375223,
      "up": true
+    },
+    {
+     "n": 2,
+     "file": "art/raw/characters/deedee-listen-v3.png",
+     "date": "2026-11-26",
+     "from": "v3",
+     "at": 1795727083012,
+     "up": true
     }
    ],
    "rejects": [],
