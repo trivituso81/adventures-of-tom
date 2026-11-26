@@ -1,3 +1,7 @@
+## justinbb9h (2026-11-25): WO-01G, separate hand zones and no drawn impact lines, Wan 3.0 only
+
+Tom's order WO-01G ($2.00 hard cap): same Direct-Hero start frame, Wan 3.0 only. The prompt now holds the stud finder still at his side and swings the hammer once into empty air toward screen-left, with zero effects; the negative prompt bans sparks, impact lines, motion lines, starburst, flash and glow. Run bench-justinbb9-6. Locked thresholds untouched.
+
 ## justinbb9g (2026-11-25): WO-01F, one beat per move, same Direct-Hero start frame, Wan 3.0 only
 
 Tom's order WO-01F ($2.00 hard cap): keep one clip per move, reuse the justinbb9f start frame (no picture is paid for again), and ask Wan for one physical beat (hold the stud finder steady, one hammer tap, settle). Run bench-justinbb9-5, Wan 3.0 only, 3 seeds. The Justin packet's pitch and expected action now describe the one beat; the stud finder beep stays the Battle Lab effect `vfx_red_stud_led_ping`. Locked thresholds untouched.

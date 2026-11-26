@@ -6975,7 +6975,7 @@
    "col": "done",
    "theme": "Battle Animations",
    "title": "Justin benchmark: Wan 3.0 vs Kling v3 Pro, #808080",
-   "next": "BLOCKED after bench-justinbb9-5 ($1.69 of $2.00, Wan 0/3): Stage B failures were own-prop tap (s1) and drawn yellow sparks (s2, s3). Tom decides the next single change (for example: move the stud finder out of the tap hand zone, or add sparks to the negative prompt).",
+   "next": "Running bench-justinbb9-6 (Wan 3.0, 3 seeds, $2.00 cap). Result lands in art-factory/benchmark/bench-justinbb9-6/.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukD88aZXMwDZ8KSAuK8",
     "opening": "UNCONSTRAINED PRODUCTION ORDER (REPO: trivituso81/adventures-of-tom)"
@@ -7069,6 +7069,10 @@
     {
      "d": "2026-11-25",
      "t": "bench-justinbb9-5 (WO-01F, build justinbb9g): Wan 3.0 0/3, $1.69 of $2.00. Stage B fails: s1 hammer taps own stud finder, s2 and s3 baked-in yellow sparks around the props. Nothing matted or baked; the earlier clip stays. Build justinbb9g, ended without shipping a baked clip."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Tom WO-01G: separate hand zones, ban comic impact lines, same start frame, Wan only, $2.00 cap. Run bench-justinbb9-6, build justinbb9h."
     }
    ],
    "blocks": [],

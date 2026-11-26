@@ -29,10 +29,11 @@ LOCK_PATH = ROOT / "art-factory" / "PIPELINE_LOCK.json"
 PACKETS = ROOT / "art-factory" / "move-packets-pass1.json"
 
 BENCH_PROMPT = ("Static locked camera, zero zoom, zero scale drift. Remaining in three-quarters-left profile on a flat #808080 mid-grey background with the exact same face and "
-                "expression, he holds the yellow stud finder steady in his front hand, delivers one crisp forward-left tap with the claw hammer, and settles smoothly back into "
-                "his exact starting stance.")
-BENCH_NEGATIVE = ("turning toward camera, facing right, blank stare, angry face, proportion change, realistic human proportions, hitting own props, duplicate hammer, belt drawing, "
-                  "prop morphing, floating rings, target reticles, laser beams, sparks, floor circle, camera pan, zoom, 3D CGI, photorealistic")
+                "expression, he lowers his front hand to hold the yellow stud finder completely still at his side, extends his other arm to swing the claw hammer once cleanly into "
+                "empty air toward the far left edge of the frame, and returns smoothly to his exact starting stance. Zero visual effects, zero drawn lines, zero flashes.")
+BENCH_NEGATIVE = ("hitting own props, hammer touching stud finder, sparks, yellow spark lines, impact lines, comic action lines, motion lines, starburst, flash, glow, turning toward camera, "
+                  "facing right, blank stare, angry face, proportion change, realistic human proportions, duplicate hammer, belt drawing, prop morphing, floating rings, target reticles, "
+                  "laser beams, floor circle, camera pan, zoom, 3D CGI, photorealistic")
 
 WAN = "alibaba/wan-3.0/image-to-video"
 KLING = "fal-ai/kling-video/v3/pro/image-to-video"

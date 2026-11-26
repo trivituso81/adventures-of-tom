@@ -2489,16 +2489,16 @@
       "flavor": "Clobber",
       "lifecycle_state": "DRAFT_REVIEW",
       "pitch": {
-        "windup": "Justin, standing in place in three-quarters-left profile, holds the yellow stud finder steady in his front hand and the claw hammer in the other from frame 0.",
-        "peak": "Justin delivers one crisp forward-left tap with the claw hammer.",
-        "recovery": "Justin settles smoothly back into his exact starting stance."
+        "windup": "Justin, standing in place in three-quarters-left profile, lowers his front hand to hold the yellow stud finder completely still at his side, claw hammer in the other hand.",
+        "peak": "Justin swings the claw hammer once cleanly into empty air toward the far left edge of the frame.",
+        "recovery": "Justin returns smoothly to his exact starting stance."
       },
       "held_props": [
         "flat palm-sized bright-yellow electronic stud finder held in one hand",
         "single steel claw hammer gripped in the other hand"
       ],
       "expected_prop": "a flat palm-sized bright-yellow electronic stud finder held in one hand and ONE steel claw hammer gripped in the other hand from frame 0, no second hammer on the belt",
-      "expected_action": "standing in place in three-quarters-left profile with the exact Hero face and expression, Justin holds the yellow stud finder steady, delivers one crisp forward-left tap with the claw hammer, and settles back into his exact starting stance",
+      "expected_action": "standing in place in three-quarters-left profile with the exact Hero face and expression, Justin holds the yellow stud finder completely still at his side, swings the claw hammer once cleanly into empty air toward screen-left without touching the stud finder, and returns to his exact starting stance, with no drawn sparks, lines or flashes",
       "needs_custom_start_frame": true,
       "prop_kit_id": "justin-studfinder-hammer",
       "safe_padding_pct": {
