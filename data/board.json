@@ -9144,7 +9144,7 @@
    "title": "Add Deedee's four fart poses to the Art Library, approved",
    "theme": "Characters",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as deedeefart1: four Deedee fart poses are in ADMIN > ART LIBRARY > Characters > Deedee, approved. Not used in the game yet; Tom decides the scene later. Nothing for Tom to do.",
    "blocks": [],
    "changed": "2026-11-26",
@@ -9166,6 +9166,10 @@
     {
      "d": "2026-11-26",
      "t": "Added deedee-fart-bend, -hop, -shock and -battle (sheet of 3) as approved uploads, build deedeefart1. No game wiring."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as deedeefart1: four Deedee fart poses are in the Art Library, approved, not used in the game yet"
     }
    ],
    "after": "nothing for Tom: end",
@@ -9177,7 +9181,8 @@
     "model": "Claude Sonnet 5.5 (row B: the steps are written down and tests catch mistakes)",
     "effort": "medium (a small data change with validate and test runs)",
     "text": "Read claude/handoff-rules.md and data/board.json, then finish card c-deedeefart: confirm the four entries deedee-fart-bend, deedee-fart-hop, deedee-fart-shock and deedee-fart-battle exist in data/art-prompts.json as approved with art/raw/characters/deedee-fart-*-v1.png, run node tools/art-library/validate.js, and push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-26"
   },
   {
    "id": "c-boppyframes",
@@ -9240,6 +9245,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGMYJgHrbA1WNfACNw",
+   "title": "Add Deedee's four fart poses to the Art Library, approved",
+   "first": "2026-11-26T13:34:20-08:00",
+   "last": "2026-11-26T13:36:54-08:00",
+   "tags": [
+    "deedeefart1"
+   ],
+   "cards": [
+    "c-deedeefart"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
    "title": "Install Rose's new walk, feelings, talking, listen frames",
    "first": "2026-11-26T11:07:14-08:00",
@@ -9256,16 +9273,6 @@
     "c-tomframes4",
     "c-deedeeframes",
     "c-boppyframes"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGMYJgHrbA1WNfACNw",
-   "title": "Add Deedee's four fart poses to the Art Library, approved",
-   "first": "2026-11-26T13:34:20-08:00",
-   "last": "2026-11-26T13:34:20-08:00",
-   "tags": [],
-   "cards": [
-    "c-deedeefart"
    ]
   },
   {
@@ -16007,8 +16014,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "5214107a4273aa0bd72703a6958ffb7273843c78",
- "synced_at": "2026-11-26T21:36:00+00:00",
+ "synced": "ffac950d762498f76ce43e1924b541eaeeb2c772",
+ "synced_at": "2026-11-26T21:37:27+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
