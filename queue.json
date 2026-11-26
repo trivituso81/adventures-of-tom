@@ -5021,8 +5021,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:46:48Z",
-   "state": "checking",
-   "since": "2026-11-26T11:31:19Z",
+   "state": "done",
+   "since": "2026-11-26T11:38:16Z",
    "run": 45808903596,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -5035,7 +5035,27 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-amy-run/t2.js",
+    "img": "takes/body-amy-run/t2.webp",
+    "frames": 75,
+    "kb": 1412,
+    "words": "0 to 148 step 2, loop wrap",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "vision r_stride: Moderate steps look like walking, not long sprinting strides.; Shows moderate walk steps, not long sprinting strides with strong arm swings."
+     ],
+     "faults": [
+      "r_stride"
+     ],
+     "vision_ran": true,
+     "spent": 0.007,
+     "error": null,
+     "words": "The clip gate flags this take: vision r_stride: Moderate steps look like walking, not long sprinting strides.; Shows moderate walk steps, not long sprinting strides with strong arm swings.."
+    },
+    "n": 2
+   },
    "use": null,
    "left": false,
    "dry": false,
