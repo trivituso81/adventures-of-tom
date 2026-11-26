@@ -2489,16 +2489,15 @@
       "flavor": "Clobber",
       "lifecycle_state": "ANCHORED",
       "pitch": {
-        "windup": "Justin, standing in place in three-quarters-left profile, lowers his front hand to hold the yellow stud finder completely still at his side, claw hammer in the other hand.",
+        "windup": "Justin, standing in place in three-quarters-left profile, holds one claw hammer in his striking hand, his other hand empty, the yellow stud finder clipped flat on his tool belt.",
         "peak": "Justin swings the claw hammer once cleanly into empty air toward the far left edge of the frame.",
         "recovery": "Justin returns smoothly to his exact starting stance."
       },
       "held_props": [
-        "flat palm-sized bright-yellow electronic stud finder held in one hand",
-        "single steel claw hammer gripped in the other hand"
+        "single steel claw hammer gripped in one hand (the only held prop)"
       ],
-      "expected_prop": "a flat palm-sized bright-yellow electronic stud finder held in one hand and ONE steel claw hammer gripped in the other hand from frame 0, no second hammer on the belt",
-      "expected_action": "standing in place in three-quarters-left profile with the exact Hero face and expression, Justin holds the yellow stud finder completely still at his side, swings the claw hammer once cleanly into empty air toward screen-left without touching the stud finder, and returns to his exact starting stance, with no drawn sparks, lines or flashes",
+      "expected_prop": "ONE steel claw hammer gripped in one hand from frame 0, the other hand empty, and a flat palm-sized bright-yellow stud finder clipped flat on the tool belt (worn, never held); no second hammer and no second stud finder anywhere",
+      "expected_action": "standing in place in three-quarters-left profile with the exact Hero face and expression, Justin swings the claw hammer once cleanly into empty air toward screen-left and returns to his exact starting stance, the other hand staying empty and the stud finder staying clipped on the belt, with no drawn sparks, lines or flashes",
       "needs_custom_start_frame": true,
       "prop_kit_id": "justin-studfinder-hammer",
       "safe_padding_pct": {

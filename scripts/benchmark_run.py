@@ -29,11 +29,11 @@ LOCK_PATH = ROOT / "art-factory" / "PIPELINE_LOCK.json"
 PACKETS = ROOT / "art-factory" / "move-packets-pass1.json"
 
 BENCH_PROMPT = ("Static locked camera, zero zoom, zero scale drift. Remaining in three-quarters-left profile on a flat #808080 mid-grey background with the exact same face and "
-                "expression, he lowers his front hand to hold the yellow stud finder completely still at his side, extends his other arm to swing the claw hammer once cleanly into "
-                "empty air toward the far left edge of the frame, and returns smoothly to his exact starting stance. Zero visual effects, zero drawn lines, zero flashes.")
-BENCH_NEGATIVE = ("hitting own props, hammer touching stud finder, sparks, yellow spark lines, impact lines, comic action lines, motion lines, starburst, flash, glow, turning toward camera, "
-                  "facing right, blank stare, angry face, proportion change, realistic human proportions, duplicate hammer, belt drawing, prop morphing, floating rings, target reticles, "
-                  "laser beams, floor circle, camera pan, zoom, 3D CGI, photorealistic")
+                "expression, he swings the claw hammer once cleanly into empty air toward the far left edge of the frame and returns smoothly to his exact starting stance. "
+                "His other hand stays empty at his side. Zero visual effects, zero drawn lines, zero flashes.")
+BENCH_NEGATIVE = ("floating prop, duplicate prop, second stud finder, stud finder in hand, sparks, yellow spark lines, impact lines, comic action lines, motion lines, starburst, flash, glow, "
+                  "turning toward camera, facing right, blank stare, angry face, proportion change, realistic human proportions, duplicate hammer, belt drawing, prop morphing, "
+                  "floating rings, target reticles, laser beams, floor circle, camera pan, zoom, 3D CGI, photorealistic")
 
 WAN = "alibaba/wan-3.0/image-to-video"
 KLING = "fal-ai/kling-video/v3/pro/image-to-video"
@@ -161,16 +161,17 @@ def load_lock():
 START_PROMPT = (
     "Edit this image. Change ONLY the hands and what they hold; every other pixel stays exactly as it is: do not change the face, the expression, the hair, the head size, "
     "the body proportions, the clothes, the colors, the line work or the position of the figure. "
-    "Put a flat palm-sized bright-yellow electronic stud finder in his hand on the left side of the image, held low in front of him, and one steel claw hammer in his hand "
-    "on the right side of the image, held low at hip height. Remove the hammer from the belt pouch so the only hammer is the one in his hand. "
+    "Put one steel claw hammer in his hand on the right side of the image, held low at hip height. His other hand, on the left side of the image, is empty and relaxed at his side. "
+    "Clip the flat palm-sized bright-yellow electronic stud finder flat against the front of his tool belt, on the left hip, so it is worn on the belt and is NOT held in any hand. "
+    "Remove the hammer from the belt pouch so the only hammer is the one in his hand. "
     "Keep the flat solid grey background exactly as it is, with no shadow, scenery or text."
 )
 HAND_BAND = (0.34, 1.00)      # the part of the figure's height the edit may own (below the chin: body, arms, hands, props); the edit model moves the arms a little, so a seam inside the
                               # body shows. The seam is at the neck and feathered over FEATHER of the height.
 FEATHER = 0.03
 HEAD_BAND = 0.32              # the top share of the figure's height that must stay pixel-identical to the Hero
-GATE1_BOOLS = ("matches_hero_ink_pencil_style", "three_quarter_left_profile", "same_face_and_expression_as_hero", "stud_finder_held_in_one_hand",
-               "single_claw_hammer_in_other_hand", "zero_duplicate_belt_hammer", "full_body_unclipped")
+GATE1_BOOLS = ("matches_hero_ink_pencil_style", "three_quarter_left_profile", "same_face_and_expression_as_hero", "stud_finder_clipped_on_belt_not_in_hand",
+               "single_claw_hammer_in_one_hand", "other_hand_empty", "zero_duplicate_belt_hammer", "full_body_unclipped")
 
 
 def figure_box(rgba_img):
@@ -280,8 +281,9 @@ def gate1_vision(client, model, hero, start):
               "matches_hero_ink_pencil_style: same fine dark-brown ink contours, colored-pencil hatching and grain, warm highlights, about three heads tall, same outfit as IMAGE 1. "
               "three_quarter_left_profile: body and face turned three-quarters toward the left of the frame. "
               "same_face_and_expression_as_hero: the face, expression, hair, head size and body proportions are identical to IMAGE 1, not redrawn. "
-              "stud_finder_held_in_one_hand: exactly one flat palm-sized bright-yellow stud finder held in one hand. "
-              "single_claw_hammer_in_other_hand: exactly one claw hammer gripped in the other hand. "
+              "stud_finder_clipped_on_belt_not_in_hand: exactly one flat palm-sized bright-yellow stud finder worn flat on the tool belt and not held in any hand. "
+              "single_claw_hammer_in_one_hand: exactly one claw hammer gripped in one hand. "
+              "other_hand_empty: the other hand holds nothing and is relaxed. "
               "zero_duplicate_belt_hammer: no second hammer on the belt or anywhere else. "
               "full_body_unclipped: hair to boots fully visible. Be strict: when unsure answer false.")
     last = ""

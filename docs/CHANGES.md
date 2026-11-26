@@ -1,3 +1,7 @@
+## justinbb9j (2026-11-25): WO-01H, one held prop (stud finder clipped on the belt), Justin start frame re-edited, Wan 3.0 only
+
+Tom's order WO-01H ($2.25 hard cap): Justin holds only the claw hammer, the stud finder is clipped flat on his belt, the other hand is empty. The Hero-locked start frame is edited again with that rule (head and face stay the Hero's pixels), Gate 1 now asks the three new yes or no questions (stud finder on the belt, one hammer, other hand empty), and the Wan prompt is the one hammer swing and return. Run bench-justinbb9-7, 3 Wan 3.0 seeds, no Kling. The rule is written into CLAUDE.md. Locked thresholds untouched.
+
 ## justinbb9i (2026-11-25): WO-01G result, Wan 1 of 3 passed the gate but its winner has a floating duplicate stud finder, so it was not baked
 
 Run bench-justinbb9-6 (Wan 3.0 only, $1.90): seed 2 passed Stage A and Stage B (15 of 18 judge votes), seeds 1 and 3 failed on a duplicate stud finder in the air. Looking at the baked frames of seed 2, a second yellow stud finder also floats ahead of the hammer in about four frames around the strike, which the judge missed, so the clip was NOT put in the game; the earlier clip stays. Also fixed in `scripts/matte_winner.py`: the birefnet video fallback paints the background black, so the "alpha" video had no transparency; `ensure_alpha` now makes the border-connected black (and big enclosed gaps) transparent. Gate thresholds and the lock file are untouched.
