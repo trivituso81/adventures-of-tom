@@ -5153,8 +5153,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:46:55Z",
-   "state": "checking",
-   "since": "2026-11-26T11:40:33Z",
+   "state": "done",
+   "since": "2026-11-26T11:45:24Z",
    "run": 45808903596,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -5167,7 +5167,29 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-justin-dodge/t2.js",
+    "img": "takes/body-justin-dodge/t2.webp",
+    "frames": 37,
+    "kb": 654,
+    "words": "0 to 72 step 2",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "edge: 10 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)",
+      "dodge_forward: the body goes forward 14% of the height (should go back or to the side)"
+     ],
+     "faults": [
+      "dodge_forward",
+      "edge"
+     ],
+     "vision_ran": true,
+     "spent": 0.0071,
+     "error": null,
+     "words": "The clip gate flags this take: edge: 10 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground); dodge_forward: the body goes forward 14% of the height (should go back or to the side)."
+    },
+    "n": 2
+   },
    "use": null,
    "left": false,
    "dry": false,
