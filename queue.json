@@ -1506,8 +1506,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T08:09:39Z",
-   "state": "checking",
-   "since": "2026-11-26T08:22:56Z",
+   "state": "done",
+   "since": "2026-11-26T08:25:15Z",
    "run": 45782279434,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -1520,7 +1520,37 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-justin-ko/t1.js",
+    "img": "takes/body-justin-ko/t1.webp",
+    "frames": 75,
+    "kb": 1218,
+    "words": "0 to 148 step 2, 1.5x",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "edge: 1 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)",
+      "ko_forward: ends 1% of the height in front of where it stood (falls forward, should fall backwards)",
+      "vision p_same: The figure in image 1 changes expression, pose, and in later frames has distorted proportions like a tiny head.; Head and body proportions distort wildly in later frames, especially 15.",
+      "vision p_parts: Hands change shape in sitting/lying poses; eyes change shape and expression drastically.; Hands change shape and position; eyes change expression and shape drastically.",
+      "vision k_dizzy: Face shows sad/tired expressions before falling but no swirly eyes, crossed eyes, or wobbling.; No dizzy or woozy face shown before falling; only sad expressions.",
+      "vision k_back: Figure sits and lies facing forward/down, not falling backwards to lie on its back with head to the right.; Figure sits down facing forward and slumps, does not fall backwards onto its back."
+     ],
+     "faults": [
+      "edge",
+      "k_back",
+      "k_dizzy",
+      "ko_forward",
+      "p_parts",
+      "p_same"
+     ],
+     "vision_ran": true,
+     "spent": 0.0077,
+     "error": null,
+     "words": "The clip gate flags this take: edge: 1 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground); ko_forward: ends 1% of the height in front of where it stood (falls forward, should fall backwards); vision p_same: The figure in image 1 changes expression, pose, and in later frames has distorted proportions like a tiny head.; Head and body proportions distort wildly in later frames, especially 15.; vision p_parts: Hands change shape in sitting/lying poses; eyes change shape and expression drastically.; Hands change shape and position; eyes change expression and shape drastically.."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
