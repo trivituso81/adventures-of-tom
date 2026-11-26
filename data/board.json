@@ -6755,7 +6755,7 @@
   {
    "id": "t-guideedit-try",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "ask": "play",
    "fyi": true,
@@ -6780,9 +6780,15 @@
     {
      "d": "2026-11-26",
      "t": "Made with its Claude card so the check is ready when the build ships."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Tom: all good.",
+     "at": "2026-11-26T09:21:28.469Z"
     }
    ],
-   "build": "guideedit1"
+   "build": "guideedit1",
+   "done": "2026-11-26"
   },
   {
    "id": "b-guideuse-45781979798",
