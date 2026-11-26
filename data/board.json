@@ -8649,6 +8649,60 @@
    },
    "after": "nothing for Tom: end",
    "done": "2026-11-26"
+  },
+  {
+   "id": "c-roseframes",
+   "title": "Install Rose's new walk, feelings, talking, listen frames",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "up",
+   "next": "In progress: baking Rose's new walking (v3), feelings (v4), talking (v3) and listening (v2) sheets, the same way as Tom's.",
+   "blocks": [],
+   "changed": "2026-11-26",
+   "created": "2026-11-26",
+   "tag": "roseframes",
+   "chat": {
+    "url": "",
+    "opening": "\"impelement all the new approved rose frames\""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by the session: Tom's words: \"impelement all the new approved rose frames. i approve full repo access\"."
+    }
+   ],
+   "after": "t-roseframesplay",
+   "prompt": {
+    "what": "Installs Rose's new walking, feelings, talking and listening sheets for Rose only.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the bakes exist and tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md and claude/next-addendum-listen1.md and docs/CHANGES.md tomframes, then card c-roseframes in data/board.json. Your first push is the commit board: start c-roseframes. Tom uploaded new painted sheets for Rose on 2026-11-26: rose-walking-sheet-v3, rose-emotions-v4, rose-talk-v3 and rose-listen-v2. Install them for Rose only. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "t-roseframesplay",
+   "title": "Look at Rose's new walk, feelings, talking and listen frames",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Not ready yet: opens when Rose's frames are pushed.",
+   "jump": {
+    "chapter": 1
+   },
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by roseframes."
+    }
+   ]
   }
  ],
  "sessions": [
