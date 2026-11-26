@@ -9361,6 +9361,16 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEMmPhXEHE2tFioPmh",
+   "title": "Battle Lab review holds hit stop at the right length, 24 fps",
+   "first": "2026-11-26T14:37:43-08:00",
+   "last": "2026-11-26T14:37:43-08:00",
+   "tags": [],
+   "cards": [
+    "c-hitstoplab1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFa5bNJ7yJ4ZRNZpa3",
    "title": "Play hit stop in a real Battle 3 fight",
    "first": "2026-11-26T13:32:07-08:00",
@@ -16136,8 +16146,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "5eb1962dd4a9e4d6e95819ade71dd6b538f07fcd",
- "synced_at": "2026-11-26T22:31:00+00:00",
+ "synced": "f887358c566940c90fede5ecc4338cd7bb32e69e",
+ "synced_at": "2026-11-26T22:38:34+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
