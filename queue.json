@@ -476,8 +476,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T07:57:33Z",
-   "state": "checking",
-   "since": "2026-11-26T08:05:20Z",
+   "state": "done",
+   "since": "2026-11-26T08:11:03Z",
    "run": 45778513410,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -490,7 +490,31 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-tom-dodge/t1.js",
+    "img": "takes/body-tom-dodge/t1.webp",
+    "frames": 45,
+    "kb": 766,
+    "words": "0 to 88 step 2",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "edge: 1 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)",
+      "dodge_forward: the body goes forward 8% of the height (should go back or to the side)",
+      "vision d_back: Character stays centered without moving back or sideways; mostly crouches in place.; Figure squats in place with forward-leaning hand-to-head motions, no clear backward or side dodge."
+     ],
+     "faults": [
+      "d_back",
+      "dodge_forward",
+      "edge"
+     ],
+     "vision_ran": true,
+     "spent": 0.0111,
+     "error": null,
+     "words": "The clip gate flags this take: edge: 1 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground); dodge_forward: the body goes forward 8% of the height (should go back or to the side); vision d_back: Character stays centered without moving back or sideways; mostly crouches in place.; Figure squats in place with forward-leaning hand-to-head motions, no clear backward or side dodge.."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
