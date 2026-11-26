@@ -9499,6 +9499,32 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
+   "title": "Install Rose's new walk, feelings, talking, listen frames",
+   "first": "2026-11-26T11:07:14-08:00",
+   "last": "2026-11-26T15:45:26-08:00",
+   "tags": [
+    "roseframes",
+    "graceframes",
+    "tomframes4",
+    "deedeeframes",
+    "boppyframes",
+    "ridepics1",
+    "tnbframes",
+    "heroframes1"
+   ],
+   "cards": [
+    "c-roseframes",
+    "c-graceframes",
+    "c-tomframes4",
+    "c-deedeeframes",
+    "c-boppyframes",
+    "c-ridepics1",
+    "c-tnbframes",
+    "c-heroframes1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGWAy9zihymc3KiLZk",
    "title": "Fix the two failures smoke shows on main",
    "first": "2026-11-26T15:42:38-08:00",
@@ -9520,30 +9546,6 @@
    "cards": [
     "c-hitstoplab1",
     "c-smokefix2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
-   "title": "Install Rose's new walk, feelings, talking, listen frames",
-   "first": "2026-11-26T11:07:14-08:00",
-   "last": "2026-11-26T14:45:52-08:00",
-   "tags": [
-    "roseframes",
-    "graceframes",
-    "tomframes4",
-    "deedeeframes",
-    "boppyframes",
-    "ridepics1",
-    "tnbframes"
-   ],
-   "cards": [
-    "c-roseframes",
-    "c-graceframes",
-    "c-tomframes4",
-    "c-deedeeframes",
-    "c-boppyframes",
-    "c-ridepics1",
-    "c-tnbframes"
    ]
   },
   {
@@ -16299,8 +16301,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "ded9b30fa79e8e2b0cb0d0596d7208a4ec94ede5",
- "synced_at": "2026-11-26T23:43:35+00:00",
+ "synced": "683a9618e7cf5a6f769d0399289cacee9ac9a3ed",
+ "synced_at": "2026-11-26T23:46:11+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
