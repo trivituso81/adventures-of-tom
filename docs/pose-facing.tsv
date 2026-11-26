@@ -71,13 +71,13 @@ olivia	em_scared	r
 olivia	em_surprised	r
 olivia	em_proud	r
 olivia	em_unimpressed	r
-tnb	em_happy	r
+tnb	em_happy	f
 tnb	em_loving	l
 tnb	em_sad	f
 tnb	em_angry	f
 tnb	em_scared	r
 tnb	em_surprised	r
-tnb	em_proud	r
+tnb	em_proud	f
 tnb	em_unimpressed	r
 nara	em_happy	l
 nara	em_loving	f
@@ -568,7 +568,7 @@ tnb	tk_tell	l
 tnb	tk_point	r
 tnb	tk_ask	f
 tnb	tk_answer	r
-tnb	tk_think	f
+tnb	tk_think	l
 grace	tk_tell	f
 grace	tk_point	r
 grace	tk_ask	f
@@ -615,3 +615,4 @@ rose	tk_listen	r
 deedee	tk_listen	r
 boppy	tk_listen	l
 ellie	tk_listen	r
+tnb	tk_listen	l

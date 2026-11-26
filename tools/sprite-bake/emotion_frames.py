@@ -36,7 +36,7 @@ def sheet_label(cid, i):
 
 # roseframes (2026-11-26): the newest Rose listening picture is a 4 up strip painted in her new outfit. Cell 0 (hands clasped, listening) is tk_listen; cell 1 (chin on hand)
 # is the thinking pose, so tk_think is cut from the same strip (rose-think has no new picture of its own and the old one is the old yellow dress). Other cells are unused.
-STRIP_CELL = {'rose-listen': 0, 'rose-think': 1, 'grace-listen': 0, 'grace-think': 1, 'tom-listen': 0, 'deedee-listen': 0, 'deedee-think': 1, 'boppy-listen': 0, 'boppy-think': 1}   # graceframes: Grace's listen-v2 is the same kind of strip
+STRIP_CELL = {'rose-listen': 0, 'rose-think': 1, 'grace-listen': 0, 'grace-think': 1, 'tom-listen': 0, 'deedee-listen': 0, 'deedee-think': 1, 'boppy-listen': 0, 'boppy-think': 1, 'tnb-listen': 0, 'tnb-think': 1}   # graceframes: Grace's listen-v2 is the same kind of strip
 
 # tomframes4 (2026-11-26): Tom's newest listen picture (tom-listen-v2) is a 4 up strip (cell 0 hands clasped = tk_listen), and tom-think-v2 is a 2 x 2 sheet of four poses;
 # its top right cell (chin on hand) is tk_think. (column, row) of the cell, used only while the newest file is a 2 x 2 sheet (taller than wide).
@@ -49,7 +49,7 @@ def _is_strip(sid):
 
 def single_figure(sid):
     """The newest approved single picture art/raw/characters/<sid>-v<N>.png, keyed and cleaned like a sheet cell."""
-    src_sid = sid.replace('-think', '-listen') if sid in ('rose-think', 'grace-think', 'deedee-think', 'boppy-think') and _is_strip(sid.replace('-think', '-listen')) else sid
+    src_sid = sid.replace('-think', '-listen') if sid in ('rose-think', 'grace-think', 'deedee-think', 'boppy-think', 'tnb-think') and _is_strip(sid.replace('-think', '-listen')) else sid
     vs = sorted(glob.glob(os.path.join(RAW, f'{src_sid}-v*.png')), key=lambda p: int(re.search(r'-v(\d+)\.png$', p).group(1)))
     img = Image.open(vs[-1]).convert('RGB')
     cell = STRIP_CELL.get(sid)
@@ -91,23 +91,25 @@ def cut(cid):
     for i in range(8):
         r, c = divmod(i, 4)
         y0, y1, x0, x1 = r * H // 2, (r + 1) * H // 2, c * W // 4, (c + 1) * W // 4
-        figs.append(clean_cell(rgba[y0:y1, x0:x1].copy(), cid in FRINGE))
+        figs.append(clean_cell(rgba[y0:y1, x0:x1].copy(), FRINGE.get(cid)))
     for i, sid in REPLACE.get(cid, {}).items():
         figs[i] = fit_head(cid, single_figure(sid), [figs[j] for j in UPRIGHT if j not in REPLACE[cid]], i)
     return figs
 
-FRINGE = {'boppy'}   # boppyframes: cast whose sheets carry a magenta glow just inside the figure's edge (Boppy talk v4: purple on the cap and by the hand)
+FRINGE = {'boppy': 1.0, 'tnb': .30}   # cast whose sheets carry a magenta glow just inside the figure's edge (Boppy talk v4: purple on the cap and by the hand; TNB's hair, tnbframes: only the top share of the figure is cleaned, his plaid shirt is purple)
 
-def defringe(cell, depth=20):
-    """Clear strongly magenta pixels within `depth` px of the edge (R and B both far above G). Opt in per person: pink dresses and lilac hoodies would lose their rim."""
+def defringe(cell, depth=20, share=1.0):
+    """Clear strongly magenta pixels within `depth` px of the edge (R and B both far above G), in the top `share` of the figure. Opt in per person: pink dresses and lilac hoodies would lose their rim."""
     A = cell[:, :, 3] > 20; d = ndi.distance_transform_edt(A); c = cell.astype(int)
+    ys = np.where(A.any(1))[0]; ymax = ys[0] + int((ys[-1] - ys[0]) * share)
     mag = (c[:, :, 0] - c[:, :, 1] > 25) & (c[:, :, 2] - c[:, :, 1] > 40) & (c[:, :, 0] > 100) & (d <= depth) & A
+    mag[ymax + 1:] = False
     cell[mag, 3] = 0
     return cell
 
-def clean_cell(cell, fringe=False):
-    """One keyed sheet cell -> the figure alone, cropped (also used for the talking sheets, talk_frames.py)."""
-    if fringe: cell = defringe(cell)
+def clean_cell(cell, fringe=None):
+    """One keyed sheet cell -> the figure alone, cropped (also used for the talking sheets, talk_frames.py). fringe = share of the figure (from the top) to defringe, or None."""
+    if fringe: cell = defringe(cell, share=fringe)
     A = cell[:, :, 3] > 20
     lab, n = ndi.label(ndi.binary_dilation(A, iterations=6))
     big = 1 + int(np.argmax(ndi.sum(A, lab, range(1, n + 1))))          # the figure; stray specks and smudges dropped

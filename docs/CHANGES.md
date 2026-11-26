@@ -1,3 +1,15 @@
+## tnbframes (2026-11-26): TNB's new walking, feelings, talking, thinking and listening pictures are in the game
+
+Card c-tnbframes. Tom's words: "and finally once those are all done, do TNB's". Not seen on the phone yet. Same install as `boppyframes`.
+- Sheets installed for TNB only: `tnb-walking-sheet-v3`, `tnb-emotions-v4`, `tnb-talk-v3` and `tnb-listen-v1`. Hero painting: unchanged (no new one).
+- Walking: `walk_splice.py tnb` and `heights.py write` (real height unchanged). Feelings and talking: `emotion_frames.py tnb`, `talk_frames.py tnb` (head x1.46), `bake_story_poses.py` (only TNB's sets kept; drift on Ellie and Pip restored from main), dialogue faces.
+- `tnb-listen-v1` is a 4 up strip: cell 1 (hands clasped) is `tk_listen`, cell 2 (chin on hand) is `tk_think` (`STRIP_CELL`). His old `tnb-think-v1` is no longer used.
+- TNB's talk sheet has hands that reach into the next cell (the point and the open hand), which the quarter cut sliced off. `talk_frames.py` cuts his sheet by piece (`PIECE_SPLIT`), so both hands are whole.
+- Pink flecks in his hair: `defringe` in `emotion_frames.py` now takes the share of the figure to clean (`FRINGE`: Boppy whole, TNB the top 30 percent, because his plaid shirt is purple). A few faint flecks are left.
+- His plain dialogue face is framed on the new walk frame (`WALK_FRAMED`); the hero ratios cut it at the forehead.
+- Facing rows (`docs/pose-facing.tsv`): happy and proud now `f`, think `l`, and a new row for `tk_listen` (`l`).
+- Tests: `heights_test.py` and `pose_editor_test.py` pass; smoke has the two failures that already fail on main.
+
 ## hitstop1 (2026-11-26): a move's hit stop plays in a real Battle 3 fight
 
 Tom's card c-hitstop1 (the "Not done" item of vfxfight1). When a family move's first hit shows in a real fight, the member who made the move and the foes it hits are held on the picture they show at that moment for `hitStopFrames / 24` seconds (`data/guide-manifest.json`, frames at the 24 fps the clips were made at: 3 frames is 0.125 s, the longest row is 7 frames, 0.29 s), then they show where the battle clock is. Nothing else waits: the battle clock, the queue of beats, the rules, the clips, the library effects, the numbers and every other unit run as before (the hit beat shows at the same moment with or without a hold; the held time is skipped after the hold, not played again).

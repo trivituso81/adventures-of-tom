@@ -13,6 +13,7 @@ After it: python3 tools/sprite-bake/bake_story_poses.py (about 11 minutes, run i
 import os, sys, re, glob
 import numpy as np
 from PIL import Image
+from scipy import ndimage as ndi
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from walk_sheet_frames import _key
 import emotion_frames as EF
@@ -38,14 +39,25 @@ def _row_gap(rgba):
     return best if cnt[best] == 0 else H // 2
 
 
+PIECE_SPLIT = {'tnb'}   # talk sheets cut by piece instead of by quarter
+
 def cut(cid):
     rgba = _key(np.array(Image.open(src_path(cid)).convert('RGB')))
     H, W = rgba.shape[:2]
     if W < 1.5 * H:   # 2 x 2 sheet (newer talk sheets): tell, point / ask, answer, row by row
         cut_y = _row_gap(rgba) if cid in GAP_SPLIT else H // 2   # tomframes: Tom's talk-v3 paints the lower row's heads above the half-way line, so split in the empty band between the rows
         rows = [(0, cut_y), (cut_y, H)]
-        return [EF.clean_cell(rgba[a:b, c * W // 2:(c + 1) * W // 2].copy(), cid in EF.FRINGE) for a, b in rows for c in range(2)]
-    return [EF.clean_cell(rgba[:, c * W // 4:(c + 1) * W // 4].copy(), cid in EF.FRINGE) for c in range(4)]
+        return [EF.clean_cell(rgba[a:b, c * W // 2:(c + 1) * W // 2].copy(), EF.FRINGE.get(cid)) for a, b in rows for c in range(2)]
+    if cid in PIECE_SPLIT:   # tnbframes: TNB's talk v3 has hands reaching into the next cell (point, answer); cut by piece so a reaching hand is not sliced off at the cell edge
+        A = rgba[:, :, 3] > 20; lab, n = ndi.label(ndi.binary_dilation(A, iterations=6)); sizes = ndi.sum(A, lab, range(1, n + 1))
+        big = sorted(sorted(range(n), key=lambda i: -sizes[i])[:4], key=lambda i: ndi.find_objects(lab)[i][1].start)
+        if len(big) == 4 and all(sizes[i] > 3000 for i in big):
+            outs = []
+            for i in big:
+                sy, sx = ndi.find_objects(lab)[i]; cut_ = rgba[sy, sx].copy(); cut_[lab[sy, sx] != i + 1, 3] = 0
+                outs.append(EF.clean_cell(cut_, EF.FRINGE.get(cid)))
+            return outs
+    return [EF.clean_cell(rgba[:, c * W // 4:(c + 1) * W // 4].copy(), EF.FRINGE.get(cid)) for c in range(4)]
 
 
 def chin_share(cid):

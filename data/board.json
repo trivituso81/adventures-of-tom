@@ -9249,7 +9249,7 @@
    "theme": "Characters",
    "lane": "claude",
    "col": "prog",
-   "next": "In progress: baking TNB's newly approved walking v3, feelings v4, talking v3 and listening v1 pictures.",
+   "next": "Shipped as build tnbframes: TNB's walking, feelings, talking and listening are baked and pushed.",
    "blocks": [],
    "changed": "2026-11-26",
    "created": "2026-11-26",
@@ -9266,6 +9266,10 @@
     {
      "d": "2026-11-26",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Updated by tnbframes: pushed."
     }
    ],
    "after": "t-tnbframesplay",
@@ -9287,7 +9291,7 @@
    "col": "up",
    "ask": "play",
    "fyi": true,
-   "next": "Not ready yet: opens when the frames are pushed.",
+   "next": "Open the game, RELOAD on the title (if it still looks old, close the home-screen app and open it again), then CHAPTERS > Chapter 1. Look at TNB in the story scenes and in dialogue: his walking, feelings, talking, thinking and listening poses should be one size and match his walking size, and his hands in the pointing and open-hand talking poses should be whole. Tell me with the REPORT tab which pose is wrong.",
    "jump": {
     "chapter": 1
    },
@@ -9298,6 +9302,10 @@
     {
      "d": "2026-11-26",
      "t": "Made by tnbframes."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Updated by tnbframes: build is in."
     }
    ]
   },
