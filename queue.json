@@ -3063,7 +3063,13 @@
     },
     "n": 1
    },
-   "use": null,
+   "use": {
+    "state": "wanted",
+    "at": "2026-11-26T09:22:12Z",
+    "since": "2026-11-26T09:22:12Z",
+    "build": "",
+    "why": ""
+   },
    "left": false,
    "dry": false,
    "replay": "",
@@ -3254,7 +3260,7 @@
     "est": 0.5
    },
    "tries": 2,
-   "cost": 0.0,
+   "cost": 0,
    "why": "",
    "do": "",
    "result": null,
@@ -3288,7 +3294,7 @@
     "est": 0.5
    },
    "tries": 2,
-   "cost": 0.0,
+   "cost": 0,
    "why": "",
    "do": "",
    "result": null,
@@ -3322,7 +3328,7 @@
     "est": 0.5
    },
    "tries": 2,
-   "cost": 0.0,
+   "cost": 0,
    "why": "",
    "do": "",
    "result": null,
