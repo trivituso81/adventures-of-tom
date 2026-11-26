@@ -8243,6 +8243,38 @@
    "done": "2026-11-26"
   },
   {
+   "id": "c-vfx-library-rest",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "tag": "vfxlib2",
+   "title": "Library effects: shield, chevrons, badges, 4 projectiles",
+   "next": "Builds the next 7 Stage 2C library effects in engine/vfx-library.js (shield_ward, timeline_chevrons, status_debuff_badges, proj_arc_single, proj_boomerang_return, proj_ally_handoff_party, proj_ground_hazard_mat), replaces the old chevrons and badges in pass1-vfx.js, adds them to the timing test, regenerates the manifest. Set pieces and sound are not touched.",
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "",
+    "opening": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section \"What is done\". Your first push is the commit \"board: start c-vfx-library-rest\""
+   },
+   "after": "nothing for Tom: end",
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Started: Tom asked for the next 7 library effects (continuing guidetime1). Board: new card."
+    }
+   ],
+   "prompt": {
+    "what": "Draws the next 7 Stage 2C library effects in code and tests them.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build whose steps are written in the task, tests catch mistakes)",
+    "effort": "high (7 drawn effects, engine wiring, test and manifest change)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done. Your first push is the commit \"board: start c-vfx-library-rest\". Build vfx_core_shield_ward, vfx_core_timeline_chevrons, vfx_core_status_debuff_badges, proj_arc_single, proj_boomerang_return, proj_ally_handoff_party and proj_ground_hazard_mat in engine/vfx-library.js; add them to P1_VFX, P1_VFX_MS and P1_VFX_SELF; set buildStatus to built; add them to tools/guide_timing_test.py; regenerate data/guide-manifest.json; update docs/BATTLE_GUIDE.md and docs/CHANGES.md (vfxlib2). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
    "id": "c-hidebf",
    "tag": "hidebf1",
    "lane": "claude",
