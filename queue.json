@@ -4787,8 +4787,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:46:48Z",
-   "state": "checking",
-   "since": "2026-11-26T11:22:17Z",
+   "state": "done",
+   "since": "2026-11-26T11:34:01Z",
    "run": 45808903596,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -4801,7 +4801,27 @@
    "cost": 0.0,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-amy-guard/t2.js",
+    "img": "takes/body-amy-guard/t2.webp",
+    "frames": 67,
+    "kb": 1307,
+    "words": "0 to 132 step 2, hold 46, lowering 108",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "vision g_cover: Hands cover mouth/cheeks shyly, not forearms shielding face and chest like a block.; Hands rise to face but do not cover chest with forearms like a shield."
+     ],
+     "faults": [
+      "g_cover"
+     ],
+     "vision_ran": true,
+     "spent": 0.0038,
+     "error": null,
+     "words": "The clip gate flags this take: vision g_cover: Hands cover mouth/cheeks shyly, not forearms shielding face and chest like a block.; Hands rise to face but do not cover chest with forearms like a shield.."
+    },
+    "n": 2
+   },
    "use": null,
    "left": false,
    "dry": false,
