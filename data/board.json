@@ -8887,29 +8887,6 @@
    ]
   },
   {
-   "id": "svc-art-bake",
-   "service": "art-bake",
-   "lane": "github",
-   "col": "prog",
-   "theme": "Tools",
-   "title": "art-bake is running",
-   "next": "art-bake is running",
-   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45892828729",
-   "chat": {
-    "url": "",
-    "opening": "service run"
-   },
-   "history": [
-    {
-     "d": "2026-11-26",
-     "t": "art-bake started."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-26",
-   "changed": "2026-11-26"
-  },
-  {
    "id": "c-tomframes4",
    "title": "Install Tom's newer frames: feelings, listen, crouch, hug",
    "theme": "Characters",
