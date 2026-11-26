@@ -4011,8 +4011,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:29:44Z",
-   "state": "checking",
-   "since": "2026-11-26T10:21:50Z",
+   "state": "done",
+   "since": "2026-11-26T10:38:37Z",
    "run": 45798843411,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -4025,7 +4025,29 @@
    "cost": 0.0,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-grace-run/t1.js",
+    "img": "takes/body-grace-run/t1.webp",
+    "frames": 75,
+    "kb": 1405,
+    "words": "0 to 148 step 2, loop wrap",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "size: shrinks to 0.87x the start picture while the game shows it",
+      "edge: 2 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)"
+     ],
+     "faults": [
+      "edge",
+      "size"
+     ],
+     "vision_ran": true,
+     "spent": 0.0035,
+     "error": null,
+     "words": "The clip gate flags this take: size: shrinks to 0.87x the start picture while the game shows it; edge: 2 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
