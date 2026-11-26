@@ -6975,7 +6975,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Justin production clip: #00FF00 start, new Kling prompt",
-   "next": "Roll 1 failed (turns to camera, scowl, 3 s clip, pastel green). Roll 2 runs the same Kling video route with cfg_scale 0.85 and 6 s; see claude/next-justinbb9.md.",
+   "next": "Roll 3 (cfg_scale 0.95) running; roll 2 was close but the hammer smeared across his face. See claude/next-justinbb9.md.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFJ3SQckykBNpN3Deq",
     "opening": "UNCONSTRAINED PRODUCTION ORDER (REPO: trivituso81/adventures-of-tom)"
@@ -7009,6 +7009,10 @@
     {
      "d": "2026-11-25",
      "t": "Tom: video is possible, the implementation is the problem. Handoff rewritten to stay on the Kling video route. Roll 2: cfg_scale 0.85 (was the 0.5 default), duration 6."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Roll 2 (cfg_scale 0.85, 6 s): green now true (7,241,3), chromakey works, clip 6.04 s. Failed QA: hammer smears over face in 2 of 8 frames, ends with hand on hip not exact idle. Roll 3: cfg_scale 0.95, nothing else changed. Total fal spend $4.10 before roll 3."
     }
    ],
    "blocks": [],
