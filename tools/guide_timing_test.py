@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""guide_timing_test.py (guidetime1, 2026-11-26; vfxlib2 added effects 9 to 15): the engine step that reads contactSec and hitStopFrames from data/guide-manifest.json
-(engine/guide-timing.js, through p1Meta in engine/pass1-vfx.js) and the first 15 effects of the Stage 2C library (engine/vfx-library.js).
+"""guide_timing_test.py (guidetime1, 2026-11-26; vfxlib2 added effects 9 to 15; vfxlib3 added the 22 set-pieces, 16 to 37): the engine step that reads contactSec and hitStopFrames from data/guide-manifest.json
+(engine/guide-timing.js, through p1Meta in engine/pass1-vfx.js) and the 37 effects of the Stage 2C library (engine/vfx-library.js).
 Runs the real engine files in Node with a recording canvas: no browser, no network. Run: python3 -I tools/guide_timing_test.py"""
 import json, os, subprocess, sys
 R = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); fails = []
@@ -30,7 +30,7 @@ E("gtUse")(doc);
 const bad=[]; let calls=0; const log=[];
 const mk=()=>new Proxy({},{get(t,k){ if(k in t) return t[k]; if(k==='createLinearGradient'||k==='createRadialGradient') return ()=>({addColorStop(){}}); return (...a)=>{ calls++; if(k==='translate'||k==='arc') log.push([k,...a]); for(const v of a) if(typeof v==='number'&&!isFinite(v)) bad.push(k+'('+a.join(',')+')'); }; },set(t,k,v){ t[k]=v; if(typeof v==='number'&&!isFinite(v)) bad.push(k+'='+v); return true; }});
 ctx.__g=mk();
-const lib=JSON.parse(fs.readFileSync(path.join(R,'art-factory/aot-stage2c-vfx-library-v11.json'),'utf8')).assets.slice(0,15).map(a=>a.id);
+const lib=JSON.parse(fs.readFileSync(path.join(R,'art-factory/aot-stage2c-vfx-library-v11.json'),'utf8')).assets.map(a=>a.id);
 out.lib=lib; out.registered=lib.map(id=>E("typeof P1_VFX['"+id+"']")); out.lens=lib.map(id=>E("(()=>{const L=P1_VFX_MS['"+id+"'];return typeof L==='function'?L(null):L;})()"));
 out.self=E("Object.keys(P1_VFX_SELF)");
 const variants={
@@ -48,7 +48,30 @@ const variants={
  proj_arc_single:[null,{spriteId:'wet_clay'},{spriteId:'chili_seeds',arcHeightPx:110,spinSpeed:6},{spriteId:'mason_jar',arcHeightPx:45,spinSpeed:0},{spriteId:'penalty_flag'},{spriteId:'buttered_popcorn'},{spriteId:'toolbox',startPos:{x:500,y:200},endPos:{x:300,y:160}},{_from:{x:520,y:210}}],
  proj_boomerang_return:[null,{spriteId:'soup_dumpling'},{spriteId:'wrist_strap_controller'},{spriteId:'tattered_lamby',apexTimeFrac:.3},{spriteId:'fishing_lure',hasLine:true,pullTargetToFront:true,apexTimeFrac:.7},{hasLine:true,_from:{x:520,y:210}}],
  proj_ally_handoff_party:[null,{spriteId:'neon_needoh_ball'},{spriteId:'cinnamon_roll',targetAllyIds:['a','b','c','d'],arcHeightPx:55},{spriteId:'warm_muffin',targetAllyIds:['a','b']},{spriteId:'diaper_bag_snack_pack',arcHeightPx:30},{spriteId:'ebike_chirp',onCatchVfxId:'vfx_core_heal_cleanse'},{spriteId:'x',onCatchVfxId:'proj_arc_single'}],
- proj_ground_hazard_mat:[null,{hazardType:'wet_floor'},{hazardType:'hot_glue',durationRounds:2},{hazardType:'molten_lava',durationRounds:2,_h:120},{hazardType:'skateboard_debris'}]};
+ proj_ground_hazard_mat:[null,{hazardType:'wet_floor'},{hazardType:'hot_glue',durationRounds:2},{hazardType:'molten_lava',durationRounds:2,_h:120},{hazardType:'skateboard_debris'}],
+ setpiece_black_porsche_suv:[null,{speedPxSec:600,highBeamAlpha:0,dustTrail:false},{speedPxSec:1600,highBeamAlpha:1},{speedPxSec:'x',_h:120}],
+ setpiece_delta_one_pod_doors:[null,{allyIds:['a']},{allyIds:['a','b','c'],closeDurationMs:900,amberLedPulse:false},{closeDurationMs:200,_h:120}],
+ setpiece_giant_sky_controller:[null,{buttonSeq:['U','D']},{buttonSeq:[],meteorCount:4},{meteorCount:30,_foe:{x:120,y:150,h:90},_h:100}],
+ setpiece_3tier_sparkler_cake:[null,{sparklerCount:3},{sparklerCount:16,partyInfusionTint:'#38bdf8'},{partyInfusionTint:'nonsense'}],
+ setpiece_diamond_gold_dumpling:[null,{squashBounceFactor:.05,sparkleDensity:6},{squashBounceFactor:.4,sparkleDensity:50,_h:120}],
+ setpiece_giant_easel_portrait:[null,{gemCount:6,forcePeeve:'Razzle'},{gemCount:40,_foe:{x:100,y:160,h:90}},{forcePeeve:'Bedazzle'}],
+ setpiece_broadway_spotlights:[null,{dimAlpha:.1,flashCount:3,trackCaster:false},{dimAlpha:.7,flashCount:24},{_h:120}],
+ setpiece_sofa_cushion_fort:[null,{partyShieldPct:0,antiPushAnchor:false},{partyShieldPct:.25},{partyShieldPct:1,_h:120}],
+ setpiece_blanket_kingdom_castle:[null,{twinkleStars:8,warmWaveDelayTurns:3},{twinkleStars:60,_foe:{x:150,y:170,h:90}},{warmWaveDelayTurns:0}],
+ setpiece_mega_whoopee_cushion:[null,{inflateMs:300,blastScale:1,breakStances:false},{inflateMs:1200,blastScale:3},{_h:120}],
+ setpiece_8seat_sunday_table:[null,{durationRounds:1,candleFlicker:false},{durationRounds:3},{_h:120}],
+ setpiece_rising_full_moon:[null,{moonRiseMs:800,sizzleShave:0},{moonRiseMs:3000,sizzleShave:4},{moonRiseMs:'x',_h:120}],
+ setpiece_50yr_dust_tsunami:[null,{sweepMs:800,wipeHazards:false,wipeBuffs:false},{sweepMs:3000},{wipeHazards:true,wipeBuffs:false,_h:120}],
+ setpiece_rikers_iron_gates:[null,{dropMs:200,screenShakePx:0,durationRounds:1},{dropMs:900,screenShakePx:14,durationRounds:3},{_h:120}],
+ setpiece_cattail_pier_leviathan:[null,{fishTier:'leviathan',tallySpent:4},{fishTier:'striper',tallySpent:2,showFoldingChair:false},{fishTier:'leviathan',showFoldingChair:false,_from:{x:520,y:210}}],
+ setpiece_sentient_ghost_pepper:[null,{coneWidthDeg:15,instantBurnTicks:0},{coneWidthDeg:80,instantBurnTicks:4},{_foe:{x:100,y:160,h:90},_h:100}],
+ setpiece_leaning_grand_amphora:[null,{hitsToAbsorb:1,shardCount:8},{hitsToAbsorb:4,shardCount:60,dualFlavor:['Sizzle','Drench']},{dualFlavor:[],_from:{x:520,y:210}}],
+ setpiece_waymo_and_la_metro:[null,{vehicle:'waymo_rescue',lidarFlash:false},{vehicle:'la_metro_express'},{vehicle:'waymo_rescue',lidarFlash:true,ruckusGain:100,_from:{x:520,y:210}}],
+ setpiece_eighth_dining_chair:[null,{seatHeightPx:16,decreeBarks:1},{seatHeightPx:44,decreeBarks:5},{_h:120}],
+ setpiece_stadium_jumbotron:[null,{rewindPct:.1},{rewindPct:1},{_h:120}],
+ setpiece_michael_sprint_and_chopper:[null,{mode:'michael_sprint'},{mode:'livnews_chopper',tickerText:'BREAKING NEWS'},{mode:'livnews_chopper',tickerText:'A very long ticker line that is cut at thirty characters'}],
+ setpiece_gym_bleachers_and_ruckus_crest:[null,{mode:'gym_pyro'},{mode:'ruckus_50_link',_from:{x:520,y:210}},{mode:'ruckus_100_crest',composureCap:6},{mode:'ruckus_100_crest',composureCap:1}]
+};
 out.drawn=0;
 for(const id of lib) for(const p of variants[id]) for(let i=0;i<=20;i++){ ctx.__id=id; ctx.__p=p; ctx.__u=i/20; try{ E("P1_VFX[__id](__g,300,150,__u,1.8,__p)"); out.drawn++; }catch(e){ bad.push(id+' threw '+e.message); } }
 out.calls=calls; out.bad=bad.slice(0,6); out.variantCount=lib.reduce((n,id)=>n+variants[id].length,0);
@@ -78,6 +101,22 @@ E("p1DrawVfx(__g,{id:'pf_tnb_cer_basic'},700,{x:90,y:210,h:100})"); E("p1DrawVfx
 out.arcDrawn=painted.slice(); painted.length=0; E("p1DrawVfx(__g,{id:'pf_tnb_cer_basic'},1250+141,{x:90,y:210,h:100})"); out.arcTooLate=painted.length;
 painted.length=0; E("p1DrawVfx(__g,{id:'pf_tom_ff_basic'},1050+100,{x:90,y:210,h:100})"); out.badgesDrawn=painted.slice();
 painted.length=0; E("p1DrawVfx(__g,{id:'pf_amy_fq_basic'},1050+5000,{x:90,y:210,h:100})"); out.afterEnd=painted.length;
+// vfxlib3: the first translate() of a frame is where a vehicle or a runner stands, so its x over time is the path it travels
+const pathX=(id,p,N)=>{ const xs=[]; for(let i=0;i<=N;i++){ log.length=0; ctx.__id=id; ctx.__p=p; ctx.__u=i/N; E("P1_VFX[__id](__g,300,155,__u,1.8,__p)"); const t=log.find(l=>l[0]==='translate'); xs.push(t?t[1]:NaN); } return xs; };
+const cross=(xs)=>xs.every(v=>isFinite(v))&&nonInc(xs)&&xs[0]>576&&xs[xs.length-1]<300;
+out.porscheX=pathX('setpiece_black_porsche_suv',null,40); out.metroX=pathX('setpiece_waymo_and_la_metro',{vehicle:'la_metro_express'},40); out.sprintX=pathX('setpiece_michael_sprint_and_chopper',{mode:'michael_sprint'},40); out.chopperX=pathX('setpiece_michael_sprint_and_chopper',{mode:'livnews_chopper'},40);
+out.cross={porsche:cross(out.porscheX),metro:cross(out.metroX),sprint:cross(out.sprintX),chopper:cross(out.chopperX)};
+out.porscheMs={slow:E("P1_VFX_MS['setpiece_black_porsche_suv']({speedPxSec:600})"),fast:E("P1_VFX_MS['setpiece_black_porsche_suv']({speedPxSec:1600})"),dflt:E("P1_VFX_MS['setpiece_black_porsche_suv'](null)")};
+const callsOf=(id,p)=>{ calls=0; for(let i=0;i<=20;i++){ ctx.__id=id; ctx.__p=p; ctx.__u=i/20; E("P1_VFX[__id](__g,300,155,__u,1.8,__p)"); } return calls; };
+out.modesDiffer=[['setpiece_waymo_and_la_metro',{vehicle:'waymo_rescue'},{vehicle:'la_metro_express'}],['setpiece_michael_sprint_and_chopper',{mode:'michael_sprint'},{mode:'livnews_chopper'}],['setpiece_cattail_pier_leviathan',{fishTier:'striper'},{fishTier:'leviathan'}],['setpiece_gym_bleachers_and_ruckus_crest',{mode:'gym_pyro'},{mode:'ruckus_100_crest'}]].map(([id,a,b])=>callsOf(id,a)!==callsOf(id,b));
+out.moonMs={lo:E("P1_VFX_MS['setpiece_rising_full_moon']({moonRiseMs:800})"),hi:E("P1_VFX_MS['setpiece_rising_full_moon']({moonRiseMs:3000})")};
+// the manifest's effectParams reach the effect: Boppy's two moves draw the striper and the leviathan, TNB's the Waymo and the Metro, Olivia's the sprint and the chopper, the three gym modes
+out.fxp=['boppy-ba-s2','boppy-ba-cap','tnb-lb-s2','tnb-lb-cap','olivia-wm-cap','olivia-na-cap','olivia-rc-cap','univ-double-team','univ-full-ruckus'].map(k=>[k,E("p1Meta('pf_"+k.replace(/-/g,'_')+"')").fxp]);
+// p1DrawVfx: a set-piece that draws on the member is told where the foe is (p._foe) and, from the manifest, which mode it draws
+const rec=[]; ctx.__rec=rec;
+E("P1_VFX['setpiece_sentient_ghost_pepper']=(g,x,y,u,z,p)=>__rec.push(['pepper',x,y,Math.round(u*1000)/1000,p&&p._foe,p&&p._h]); P1_VFX['setpiece_cattail_pier_leviathan']=(g,x,y,u,z,p)=>__rec.push(['pier',x,y,p&&p.fishTier,p&&p._h,p&&p._foe]);");
+E("p1DrawVfx(__g,{id:'pf_boppy_pb_cap'},3300+100,{x:90,y:210,h:100})"); E("p1DrawVfx(__g,{id:'pf_boppy_ba_cap'},3450+100,{x:90,y:210,h:100})"); E("p1DrawVfx(__g,{id:'pf_boppy_ba_s2'},2050+100,{x:90,y:210,h:100})");
+out.setpieceCalls=rec.slice();
 console.log(JSON.stringify(out));
 """
 r = subprocess.run(['node', '-e', JS, R], capture_output=True, text=True, cwd=R)
@@ -95,9 +134,10 @@ check('a clip with a row baked from the video keeps that row (Justin: 1700 ms, n
 check('a clip the manifest does not name gets no timing', o.get('unknown') is None, o.get('unknown'))
 check('the hit stop holds the picture for hitStopFrames at 60 fps after the contact (%d frames = %d ms), then time runs on, shifted by that hold' % (tom['hitStopFrames'], round(tom['hitStopFrames'] * 1000 / 60)), len(o.get('clock', [])) == 6 and all(abs(a - b) < 1e-6 for a, b in o.get('clock', [])), o.get('clock'))
 check('a bad row is left out (text contactSec, negative contactSec); a null hitStopFrames means no hit stop', o.get('badDoc') == 1 and (o.get('badDocRow') or {}).get('hit_stop_frames') == 0, (o.get('badDoc'), o.get('badDocRow')))
-check('the first 15 library assets are all registered as effects', o.get('registered') == ['function'] * 15 and len(o.get('lib', [])) == 15, o.get('registered'))
-check('only the heal and the shield draw on the member', sorted(o.get('self', [])) == ['vfx_core_heal_cleanse', 'vfx_core_shield_ward'], o.get('self'))
-check('every effect draws at 21 moments of its length with each of its params variants (%d in all), no error, no NaN or Infinity in any canvas call' % o.get('variantCount', 0), o.get('variantCount', 0) == 84 and o.get('drawn') == 21 * o.get('variantCount', 0) and o.get('calls', 0) > 6000 and not o.get('bad'), (o.get('drawn'), o.get('variantCount'), o.get('calls'), o.get('bad')))
+check('all 37 library assets are registered as effects, each with a length of 400 ms or more', o.get('registered') == ['function'] * 37 and len(o.get('lib', [])) == 37 and all(isinstance(v, (int, float)) and v >= 400 for v in o.get('lens', [])), (o.get('registered'), o.get('lens')))
+SELF = ['vfx_core_heal_cleanse', 'vfx_core_shield_ward', 'setpiece_delta_one_pod_doors', 'setpiece_giant_sky_controller', 'setpiece_3tier_sparkler_cake', 'setpiece_diamond_gold_dumpling', 'setpiece_giant_easel_portrait', 'setpiece_broadway_spotlights', 'setpiece_sofa_cushion_fort', 'setpiece_blanket_kingdom_castle', 'setpiece_8seat_sunday_table', 'setpiece_rising_full_moon', 'setpiece_rikers_iron_gates', 'setpiece_sentient_ghost_pepper', 'setpiece_eighth_dining_chair']
+check('15 effects draw on the member (the heal, the shield, 13 set-pieces on the party side); every other one draws on the foe', sorted(o.get('self', [])) == sorted(SELF), o.get('self'))
+check('every effect draws at 21 moments of its length with each of its params variants (%d in all), no error, no NaN or Infinity in any canvas call' % o.get('variantCount', 0), o.get('variantCount', 0) == 172 and o.get('drawn') == 21 * o.get('variantCount', 0) and o.get('calls', 0) > 6000 and not o.get('bad'), (o.get('drawn'), o.get('variantCount'), o.get('calls'), o.get('bad')))
 check('the lobbed projectile flies right to left (every step of its path is at or left of the one before, from the member to the foe)', o.get('arcRightToLeft'), o.get('arcX', [])[:5])
 check('the boomerang goes out to the foe (apex at the foe\'s x) and comes back to the member', o.get('boomOutAndBack'), o.get('boomX', [])[:5])
 check('the snack toss flies to the party side (left to right)', o.get('handToParty'), o.get('handX', [])[:5])
@@ -112,8 +152,24 @@ check('after the contact the clobber draws on the middle of the foe (300, 155) a
 fx = {m['manifestId']: m['check'] for m in man['moves']}
 check('the Guide says Done for contact and hit stop only where a baked clip plays at the manifest numbers (6 moves) and Not yet for Justin\'s stud finder (1700 vs 1300)',
       sorted(k for k, v in fx.items() if v['contactApplied']) == ['amy-fq-basic', 'amy-fq-s1', 'deedee-nf-cap', 'grace-sc-cap', 'tnb-cer-cap', 'tnb-cer-s1'] and not fx['justin-bb-basic']['contactApplied'], [k for k, v in fx.items() if v['contactApplied']])
-check('exactly the first 15 library assets are built', [a['id'] for a in man['assets'] if a['status'] != 'todo'] == o.get('lib'), [a['id'] for a in man['assets'] if a['status'] != 'todo'])
+check('all 37 library assets are built (nothing todo is left)', [a['id'] for a in man['assets'] if a['status'] != 'todo'] == o.get('lib'), [a['id'] for a in man['assets'] if a['status'] != 'todo'])
 html = open(os.path.join(R, 'index.html'), encoding='utf-8').read()
 i1, i2, i3 = (html.find('engine/' + n) for n in ('guide-timing.js?v=', 'pass1-vfx.js?v=', 'vfx-library.js?v='))
 check('index.html loads guide-timing.js, then pass1-vfx.js, then vfx-library.js, each with a cache tag', 0 < i1 < i2 < i3, (i1, i2, i3))
+check('the Porsche, the Metro train, the sprinting man and the news chopper each travel right to left, from off the right edge to the foe\'s side', all((o.get('cross') or {}).values()) and len(o.get('cross') or {}) == 4, o.get('cross'))
+pm = o.get('porscheMs') or {}
+check('the Porsche\'s time on screen follows its speed (600 px/s slower than 1150 slower than 1600) and is under 2 s at the default', pm.get('slow', 0) > pm.get('dflt', 0) > pm.get('fast', 9e9) and pm.get('dflt', 9e9) < 2000, pm)
+check('each set-piece that has modes draws them differently (Waymo vs Metro, sprint vs chopper, striper vs leviathan, gym vs crest)', o.get('modesDiffer') == [True] * 4, o.get('modesDiffer'))
+mm = o.get('moonMs') or {}
+check('the moon\'s length follows moonRiseMs (800 ms rise shorter than a 3000 ms rise)', 0 < mm.get('lo', 0) < mm.get('hi', 0), mm)
+want = {'boppy-ba-s2': {'setpiece_cattail_pier_leviathan': {'fishTier': 'striper'}}, 'boppy-ba-cap': {'setpiece_cattail_pier_leviathan': {'fishTier': 'leviathan'}}, 'tnb-lb-s2': {'setpiece_waymo_and_la_metro': {'vehicle': 'waymo_rescue'}}, 'tnb-lb-cap': {'setpiece_waymo_and_la_metro': {'vehicle': 'la_metro_express'}},
+        'olivia-wm-cap': {'setpiece_michael_sprint_and_chopper': {'mode': 'michael_sprint'}}, 'olivia-na-cap': {'setpiece_michael_sprint_and_chopper': {'mode': 'livnews_chopper'}}, 'olivia-rc-cap': {'setpiece_gym_bleachers_and_ruckus_crest': {'mode': 'gym_pyro'}},
+        'univ-double-team': {'setpiece_gym_bleachers_and_ruckus_crest': {'mode': 'ruckus_50_link'}}, 'univ-full-ruckus': {'setpiece_gym_bleachers_and_ruckus_crest': {'mode': 'ruckus_100_crest'}}}
+check('the manifest\'s effectParams (written by manifest_crosswalk.py) become the move\'s fxp: 9 moves pick the mode of their set-piece', dict(o.get('fxp') or []) == want and {m['manifestId']: m['effectParams'] for m in man['moves'] if 'effectParams' in m} == want, o.get('fxp'))
+sc = o.get('setpieceCalls') or []
+pep = [c for c in sc if c[0] == 'pepper']; pier = [c for c in sc if c[0] == 'pier']
+check('a set-piece that draws on the member is told where the foe is, and a move\'s mode reaches it (pepper at the member (90, 210) with the foe at (300, 155) 90 px tall; the cap draws the leviathan, the second skill the striper)',
+      len(pep) == 1 and pep[0][1:3] == [90, 210] and pep[0][4] == {'x': 300, 'y': 155, 'h': 90} and pep[0][5] == 100 and [c[3] for c in pier] == ['leviathan', 'striper'] and pier[0][1:3] == [300, 155], sc)
+withlib = [m for m in man['moves'] if m['libraryAssets']]
+check('every move that names a library effect now has its effects built (%d moves)' % len(withlib), len(withlib) > 100 and all(m['check']['effectsBuilt'] for m in withlib), [m['manifestId'] for m in withlib if not m['check']['effectsBuilt']][:5])
 print('FAILS:', fails); sys.exit(1 if fails else 0)

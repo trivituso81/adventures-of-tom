@@ -8410,11 +8410,11 @@
   {
    "id": "c-vfxlib3",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "theme": "Battle Animations",
    "tag": "vfxlib3",
    "title": "Library set-pieces: the 22 setpiece_* effects",
-   "next": "Builds the 22 set-piece effects of the Stage 2C library (engine/vfx-library.js) in library order, wires them into P1_VFX, P1_VFX_MS, P1_VFX_SELF and P1_VFX_LEAD, marks them built, and tests them. After this, all 37 library effects are built; the next step is drawing effects in a real fight.",
+   "next": "Shipped as vfxlib3: all 22 set-pieces are drawn in engine/vfx-library.js, so all 37 Stage 2C library effects are built (13 draw on the member, 9 on the foe; nine moves pick a set-piece mode through effectParams). Looked at on a contact sheet in Chrome. Not done: sound, drawing effects in a real fight (only the Battle Lab pass-1 review draws them), honouring the library's layer. Next Claude card: draw the effects in a real fight.",
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26",
@@ -8430,7 +8430,7 @@
     },
     {
      "d": "2026-11-26",
-     "t": "Started: the conversation claimed this card."
+     "t": "Shipped as vfxlib3: the 22 library set-pieces are built, so all 37 library effects are drawn; tests pass and a contact sheet was looked at in Chrome"
     }
    ],
    "prompt": {

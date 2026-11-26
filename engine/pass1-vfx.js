@@ -21,9 +21,9 @@ const P1_VFX={   // (g,x,y,u,z,p): z scales the effect so it reads on a phone; p
   vfx_red_stud_led_ping:(g,x,y,u,z)=>{ g.save(); g.globalAlpha=1-u; g.fillStyle='#ff3030'; g.beginPath(); g.arc(x,y,(5+u*4)*z,0,7); g.fill(); g.strokeStyle='#ff3030'; g.lineWidth=3*z; g.beginPath(); g.arc(x,y,(8+u*30)*z,0,7); g.stroke(); g.restore(); }
 };
 // Draw each cue of the clip from the impact (a projectile from P1_VFX_LEAD before it, so it lands on the impact), for its own length (P1_VFX_MS, 500 ms when it names none), on the first foe still standing (fight coordinates,
-// the same space the foes are drawn in). A cue in P1_VFX_SELF (a heal) draws on the member playing the clip instead: the draw call passes where it stands (A).
+// the same space the foes are drawn in). A cue in P1_VFX_SELF (a heal, a shield, a set-piece on the party side) draws on the member playing the clip instead: the draw call passes where it stands (A), and p._foe tells it where the foe is.
 // The effects of the Stage 2C library live in engine/vfx-library.js and add themselves to P1_VFX, P1_VFX_MS and P1_VFX_SELF.
 function p1DrawVfx(g,S,ms,A){ const M=p1Meta(S.id); if(!M) return;
-  const f=B2.foes.find(q=>!q.dead); if(!f) return; const h=f.def.sprite.length*f.sc, x=f.px, y=f.py-h*.5, from=A?{x:A.x,y:A.y}:null;   // from: where the member playing the clip stands, for a projectile's start and a tether's end
+  const f=B2.foes.find(q=>!q.dead); if(!f) return; const h=f.def.sprite.length*f.sc, x=f.px, y=f.py-h*.5, from=A?{x:A.x,y:A.y}:null, foe={x:x,y:y,h};   // from: where the member playing the clip stands, for a projectile's start and a tether's end
   for(const id of M.vfx){ const fn=P1_VFX[id]; if(!fn) continue; const p=(M.fxp&&M.fxp[id])||null, Ld=P1_VFX_LEAD[id], lead=typeof Ld==='function'?Ld(p):(Ld||0), L=P1_VFX_MS[id], len=typeof L==='function'?L(p):(L||500), d=ms-M.impact_ms+lead; if(d<0||d>len) continue;
-    if(P1_VFX_SELF[id]){ if(A) fn(g,A.x,A.y,d/len,1.8,Object.assign({_h:A.h,_from:from},p)); } else fn(g,x,y,d/len,1.8,Object.assign({_h:h,_from:from},p)); } }
+    if(P1_VFX_SELF[id]){ if(A) fn(g,A.x,A.y,d/len,1.8,Object.assign({_h:A.h,_from:from,_foe:foe},p)); } else fn(g,x,y,d/len,1.8,Object.assign({_h:h,_from:from,_foe:foe},p)); } }

@@ -121,7 +121,7 @@
     "staged": true,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -159,7 +159,7 @@
     "staged": true,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -309,7 +309,7 @@
     "staged": false,
     "clipWired": true,
     "contactApplied": true,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -747,7 +747,7 @@
     "staged": false,
     "clipWired": true,
     "contactApplied": true,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -895,7 +895,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1042,7 +1042,7 @@
     "staged": false,
     "clipWired": true,
     "contactApplied": true,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1485,8 +1485,13 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
+   },
+   "effectParams": {
+    "setpiece_gym_bleachers_and_ruckus_crest": {
+     "mode": "gym_pyro"
+    }
    }
   },
   {
@@ -1557,8 +1562,13 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
+   },
+   "effectParams": {
+    "setpiece_gym_bleachers_and_ruckus_crest": {
+     "mode": "ruckus_50_link"
+    }
    }
   },
   {
@@ -1594,8 +1604,13 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
+   },
+   "effectParams": {
+    "setpiece_gym_bleachers_and_ruckus_crest": {
+     "mode": "ruckus_100_crest"
+    }
    }
   },
   {
@@ -1742,7 +1757,7 @@
     "staged": true,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1891,7 +1906,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2003,7 +2018,7 @@
     "staged": true,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2042,7 +2057,7 @@
     "staged": true,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2343,7 +2358,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2493,7 +2508,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2605,8 +2620,13 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
+   },
+   "effectParams": {
+    "setpiece_waymo_and_la_metro": {
+     "vehicle": "waymo_rescue"
+    }
    }
   },
   {
@@ -2645,8 +2665,13 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
+   },
+   "effectParams": {
+    "setpiece_waymo_and_la_metro": {
+     "vehicle": "la_metro_express"
+    }
    }
   },
   {
@@ -3090,8 +3115,13 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
+   },
+   "effectParams": {
+    "setpiece_michael_sprint_and_chopper": {
+     "mode": "michael_sprint"
+    }
    }
   },
   {
@@ -3239,7 +3269,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3386,7 +3416,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3534,7 +3564,7 @@
     "staged": true,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3829,7 +3859,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3939,8 +3969,13 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
+   },
+   "effectParams": {
+    "setpiece_cattail_pier_leviathan": {
+     "fishTier": "striper"
+    }
    }
   },
   {
@@ -3976,8 +4011,13 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
+   },
+   "effectParams": {
+    "setpiece_cattail_pier_leviathan": {
+     "fishTier": "leviathan"
+    }
    }
   },
   {
@@ -4272,7 +4312,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -4424,7 +4464,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -4574,8 +4614,13 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
+   },
+   "effectParams": {
+    "setpiece_michael_sprint_and_chopper": {
+     "mode": "livnews_chopper"
+    }
    }
   }
  ],
@@ -4920,7 +4965,7 @@
    "id": "setpiece_black_porsche_suv",
    "name": "Delta 360 Black Tarmac Porsche SUV",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_porsche_tarmac_screech_jetwash",
    "usedBy": [
     "tom-ff-cap"
@@ -4930,7 +4975,7 @@
    "id": "setpiece_delta_one_pod_doors",
    "name": "Delta One Privacy-Pod Sliding Doors",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_cabin_pod_slide_click",
    "usedBy": [
     "tom-ff-s2"
@@ -4940,7 +4985,7 @@
    "id": "setpiece_giant_sky_controller",
    "name": "Giant Sky-Dropped Floor Controller (Konami Code)",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_giant_pad_thud + sfx_konami_chime_barrage",
    "usedBy": [
     "tom-gg-cap"
@@ -4950,7 +4995,7 @@
    "id": "setpiece_3tier_sparkler_cake",
    "name": "Three-Tier Showstopper Cake Cart",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_match_strike + sfx_sparkler_fanfare",
    "usedBy": [
     "tom-sb-cap"
@@ -4960,7 +5005,7 @@
    "id": "setpiece_diamond_gold_dumpling",
    "name": "Colossal Sky-Steamer & Diamond-Gold Dumpling",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_bamboo_latch + sfx_giant_squish_chime",
    "usedBy": [
     "grace-sc-cap"
@@ -4970,7 +5015,7 @@
    "id": "setpiece_giant_easel_portrait",
    "name": "Giant Wooden Easel & Neon Portrait Reveal",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_drape_whip + sfx_paint_splash_chime",
    "usedBy": [
     "grace-ca-cap"
@@ -4980,7 +5025,7 @@
    "id": "setpiece_broadway_spotlights",
    "name": "Broadway Spotlights & Flashbulb Rig",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_spotlight_clunk + sfx_flashbulb_ovations",
    "usedBy": [
     "grace-sp-cap"
@@ -4990,7 +5035,7 @@
    "id": "setpiece_sofa_cushion_fort",
    "name": "Sofa-Cushion Citadel & Twin-Lamby Lookouts",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_cushion_thump_stack",
    "usedBy": [
     "rose-cr-s2"
@@ -5000,7 +5045,7 @@
    "id": "setpiece_blanket_kingdom_castle",
    "name": "Star-Lit Kingdom of Ten-Thousand Blankets",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_twinkle_castle_rise + sfx_warm_whoosh",
    "usedBy": [
     "rose-cr-cap"
@@ -5010,7 +5055,7 @@
    "id": "setpiece_mega_whoopee_cushion",
    "name": "Trampoline-Sized Pink Whoopee Cushion",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_tuba_whoopee_quake",
    "usedBy": [
     "rose-pr-cap"
@@ -5020,7 +5065,7 @@
    "id": "setpiece_8seat_sunday_table",
    "name": "Full-House 8-Seat Sunday Dinner Table",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_brass_dinner_bell_3x",
    "usedBy": [
     "deedee-hc-cap"
@@ -5030,7 +5075,7 @@
    "id": "setpiece_rising_full_moon",
    "name": "Rising Full Moon & Moonlight Embrace",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_moonlight_choir_warm_wave",
    "usedBy": [
     "deedee-rn-cap"
@@ -5040,7 +5085,7 @@
    "id": "setpiece_50yr_dust_tsunami",
    "name": "Fifty-Year Sparkling Soapy Tsunami",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_tidal_soapy_wash_sparkle",
    "usedBy": [
     "deedee-nf-cap"
@@ -5050,7 +5095,7 @@
    "id": "setpiece_rikers_iron_gates",
    "name": "Gleaming Brass-and-Iron Rikers Warden Gates",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_iron_gate_clang_lock",
    "usedBy": [
     "boppy-dep-cap"
@@ -5060,7 +5105,7 @@
    "id": "setpiece_cattail_pier_leviathan",
    "name": "Cattail Pier Pilings, Swells & Breaching Catch (NO BOAT)",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_reel_scream + sfx_giant_water_breach",
    "usedBy": [
     "boppy-ba-s2",
@@ -5071,7 +5116,7 @@
    "id": "setpiece_sentient_ghost_pepper",
    "name": "Sentient Back-Garden Ghost Pepper",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_ghost_pepper_hiss_roar",
    "usedBy": [
     "boppy-pb-cap"
@@ -5081,7 +5126,7 @@
    "id": "setpiece_leaning_grand_amphora",
    "name": "Leaning Museum-Sized Grand Terracotta Amphora",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_pottery_rise + sfx_ceramic_shatter_storm",
    "usedBy": [
     "tnb-cer-cap"
@@ -5091,7 +5136,7 @@
    "id": "setpiece_waymo_and_la_metro",
    "name": "Autonomous Waymo SUV & LA Metro Express Train",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_waymo_chime_lidar / sfx_metro_horn_whoosh",
    "usedBy": [
     "tnb-lb-s2",
@@ -5102,7 +5147,7 @@
    "id": "setpiece_eighth_dining_chair",
    "name": "Ornate Eighth Wooden Dining Chair",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_chair_slide + sfx_regal_barks_3x",
    "usedBy": [
     "nara-pp-cap"
@@ -5112,7 +5157,7 @@
    "id": "setpiece_stadium_jumbotron",
    "name": "Stadium Jumbotron Instant Replay Screen",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_ref_whistle + sfx_vhs_rewind + sfx_stadium_horn",
    "usedBy": [
     "justin-ar-cap"
@@ -5122,7 +5167,7 @@
    "id": "setpiece_michael_sprint_and_chopper",
    "name": "6'4\" Michael Toddler Sprint & LivNews Chopper",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_sprint_tray_slide / sfx_chopper_blades_breaking_news",
    "usedBy": [
     "olivia-wm-cap",
@@ -5133,7 +5178,7 @@
    "id": "setpiece_gym_bleachers_and_ruckus_crest",
    "name": "Neon Gym Bleachers Pyro & 100% Family Ruckus Crest",
    "category": "Custom Set-Piece",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_pyro_fountains / sfx_family_ruckus_brass_fanfare",
    "usedBy": [
     "olivia-rc-cap",

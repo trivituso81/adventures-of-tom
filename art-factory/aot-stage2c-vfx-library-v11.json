@@ -461,7 +461,7 @@
       "usedBy": [
         "tom-ff-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_delta_one_pod_doors",
@@ -478,7 +478,7 @@
       "usedBy": [
         "tom-ff-s2"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_giant_sky_controller",
@@ -495,7 +495,7 @@
       "usedBy": [
         "tom-gg-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_3tier_sparkler_cake",
@@ -512,7 +512,7 @@
       "usedBy": [
         "tom-sb-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_diamond_gold_dumpling",
@@ -529,7 +529,7 @@
       "usedBy": [
         "grace-sc-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_giant_easel_portrait",
@@ -546,7 +546,7 @@
       "usedBy": [
         "grace-ca-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_broadway_spotlights",
@@ -563,7 +563,7 @@
       "usedBy": [
         "grace-sp-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_sofa_cushion_fort",
@@ -580,7 +580,7 @@
       "usedBy": [
         "rose-cr-s2"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_blanket_kingdom_castle",
@@ -597,7 +597,7 @@
       "usedBy": [
         "rose-cr-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_mega_whoopee_cushion",
@@ -614,7 +614,7 @@
       "usedBy": [
         "rose-pr-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_8seat_sunday_table",
@@ -631,7 +631,7 @@
       "usedBy": [
         "deedee-hc-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_rising_full_moon",
@@ -648,7 +648,7 @@
       "usedBy": [
         "deedee-rn-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_50yr_dust_tsunami",
@@ -665,7 +665,7 @@
       "usedBy": [
         "deedee-nf-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_rikers_iron_gates",
@@ -682,7 +682,7 @@
       "usedBy": [
         "boppy-dep-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_cattail_pier_leviathan",
@@ -700,7 +700,7 @@
         "boppy-ba-s2",
         "boppy-ba-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_sentient_ghost_pepper",
@@ -717,7 +717,7 @@
       "usedBy": [
         "boppy-pb-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_leaning_grand_amphora",
@@ -734,7 +734,7 @@
       "usedBy": [
         "tnb-cer-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_waymo_and_la_metro",
@@ -752,7 +752,7 @@
         "tnb-lb-s2",
         "tnb-lb-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_eighth_dining_chair",
@@ -769,7 +769,7 @@
       "usedBy": [
         "nara-pp-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_stadium_jumbotron",
@@ -786,7 +786,7 @@
       "usedBy": [
         "justin-ar-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_michael_sprint_and_chopper",
@@ -804,7 +804,7 @@
         "olivia-wm-cap",
         "olivia-na-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_gym_bleachers_and_ruckus_crest",
@@ -823,7 +823,7 @@
         "univ-double-team",
         "univ-full-ruckus"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     }
   ]
 }

@@ -14,6 +14,7 @@ function gtUse(doc){
     const c=m&&m.contactSec, h=m&&m.hitStopFrames;
     if(!m||!m.manifestId||typeof c!=='number'||!isFinite(c)||c<0) continue;
     by[m.manifestId]={impact_ms:Math.round(c*1000),hit_stop_frames:(typeof h==='number'&&isFinite(h)&&h>0)?Math.round(h):0,screen_shake_px:0,approach:false,vfx:(m.libraryAssets||[]).slice(),from:'manifest'};
+    if(m.effectParams&&typeof m.effectParams==='object') by[m.manifestId].fxp=m.effectParams;   // which mode of a set-piece this move draws (the crosswalk's EFFECT_PARAMS)
     n++;
   }
   GT.by=by; GT.n=n; GT.loaded=true; return n;
