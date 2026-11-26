@@ -6975,7 +6975,7 @@
    "col": "done",
    "theme": "Battle Animations",
    "title": "Justin benchmark: Wan 3.0 vs Kling v3 Pro, #808080",
-   "next": "Running bench-justinbb9-6 (Wan 3.0, 3 seeds, $2.00 cap). Result lands in art-factory/benchmark/bench-justinbb9-6/.",
+   "next": "BLOCKED after bench-justinbb9-6 ($1.90): seed 2 passed the gate (score 0.8531) but has a floating duplicate stud finder near the hammer in about 4 frames. Tom decides the one change (recommended: drop the stud finder from the swing shot, hold it only in the start frame, or tighten the Stage B judge for duplicate props).",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukD88aZXMwDZ8KSAuK8",
     "opening": "UNCONSTRAINED PRODUCTION ORDER (REPO: trivituso81/adventures-of-tom)"
@@ -7073,6 +7073,10 @@
     {
      "d": "2026-11-25",
      "t": "Tom WO-01G: separate hand zones, ban comic impact lines, same start frame, Wan only, $2.00 cap. Run bench-justinbb9-6, build justinbb9h."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "bench-justinbb9-6 (WO-01G): Wan 3.0 gate 1/3, $1.90. Seed 2 passed the gate but its frames show a second stud finder floating ahead of the hammer in about 4 frames, so it was not baked. Matte alpha fix in matte_winner.py. Build justinbb9i, ended without shipping a baked clip."
     }
    ],
    "blocks": [],

@@ -1,3 +1,7 @@
+## justinbb9i (2026-11-25): WO-01G result, Wan 1 of 3 passed the gate but its winner has a floating duplicate stud finder, so it was not baked
+
+Run bench-justinbb9-6 (Wan 3.0 only, $1.90): seed 2 passed Stage A and Stage B (15 of 18 judge votes), seeds 1 and 3 failed on a duplicate stud finder in the air. Looking at the baked frames of seed 2, a second yellow stud finder also floats ahead of the hammer in about four frames around the strike, which the judge missed, so the clip was NOT put in the game; the earlier clip stays. Also fixed in `scripts/matte_winner.py`: the birefnet video fallback paints the background black, so the "alpha" video had no transparency; `ensure_alpha` now makes the border-connected black (and big enclosed gaps) transparent. Gate thresholds and the lock file are untouched.
+
 ## justinbb9h (2026-11-25): WO-01G, separate hand zones and no drawn impact lines, Wan 3.0 only
 
 Tom's order WO-01G ($2.00 hard cap): same Direct-Hero start frame, Wan 3.0 only. The prompt now holds the stud finder still at his side and swings the hammer once into empty air toward screen-left, with zero effects; the negative prompt bans sparks, impact lines, motion lines, starburst, flash and glow. Run bench-justinbb9-6. Locked thresholds untouched.

@@ -35,6 +35,29 @@ def decode_rgba(video, tmp):
     return []
 
 
+BLACK_MAX = 14           # the birefnet video fallback returns the cut-out over opaque black: that border-connected black is the background
+
+
+def ensure_alpha(rgba):
+    """A frame whose alpha is fully opaque came from a matte model that painted the background black (birefnet video). Make the
+    border-connected near-black region transparent, with a short ramp at its edge, so the cut-out has a real alpha."""
+    if rgba[..., 3].min() < 250:
+        return rgba, False
+    mx = rgba[..., :3].max(2)
+    bg = ndimage.binary_dilation(ndimage.label(mx <= BLACK_MAX)[0] > 0, iterations=0)
+    lab, _ = ndimage.label(mx <= BLACK_MAX)
+    edge = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))) - {0}
+    sizes = np.bincount(lab.ravel())
+    big = {i for i in range(1, len(sizes)) if sizes[i] >= 200}      # a gap between an arm and the body is background too
+    bg = np.isin(lab, list(edge | big))
+    out = rgba.copy()
+    out[..., 3][bg] = 0
+    ring = ndimage.binary_dilation(bg, iterations=2) & ~bg
+    ramp = np.clip((mx.astype(np.float32) - BLACK_MAX) / 30.0, 0, 1) * 255
+    out[..., 3][ring] = np.maximum(ramp[ring], 40).astype(np.uint8)
+    return out, True
+
+
 def clamp_frame(rgba):
     """rgba: HxWx4 uint8. Returns (clamped array, interior pixel count)."""
     a = rgba[..., 3]
@@ -119,6 +142,7 @@ def finish(alpha_webm, out_dir, fps):
     frames, holes_fixed = [], 0
     for i, f in enumerate(files):
         raw = np.asarray(Image.open(f).convert("RGBA"))
+        raw, keyed = ensure_alpha(raw)
         cl, _ = clamp_frame(raw)
         holes_fixed += int(((cl[..., 3] == 255) & (raw[..., 3] < 250)).sum())
         Image.fromarray(cl).save(work / f"c{i + 1:04d}.png")

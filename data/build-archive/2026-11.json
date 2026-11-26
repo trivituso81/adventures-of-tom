@@ -1,4 +1,5 @@
 [
+{"tag":"voicegen2","at":"2026-11-18T20:59:59-08:00","what":"256 generated voice takes merged into the game (chapters 1, 2, 6 and 8); 2 lines stay silent","card":"b-voicegen2","theme":"Voice Clips"},
 {"tag":"voicegen1c","at":"2026-11-18T19:17:13-08:00","what":"Voice take job: first real result noted (5 lines made, 245 credits); notes only, no game change","card":"b-voicegen1c","theme":"Voice Clips"},
 {"tag":"voicegen1b","at":"2026-11-18T19:13:07-08:00","what":"Voice take job fixed after its first real run: ffmpeg installed on the runner, a preflight before any paid request, a paid take is never thrown away (tools only, no game change)","card":"b-voicegen1b","theme":"Voice Clips"},
 {"tag":"voicegen1","at":"2026-11-18T19:05:51-08:00","what":"A manual GitHub Action that makes one checked voice take for each line with no clip (not run yet; nothing in the game changed)"},
