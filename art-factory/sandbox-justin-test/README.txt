@@ -1,2 +1,2 @@
-Attempts 1 to 7 are in attempt1/ to attempt7/. Attempt 8 (new calm start.png, Kling v3 Pro, start image only, 5 s raw trimmed 0.4 to 4.3 s, keyed by key.py) is the files in this folder.
-Total fal spend: see ledger.json.
+Attempts 1 to 8 are in attempt1/ to attempt8/. Attempt 9 (same start.png, simplified motion, Kling v3 Pro 3 s, keyed by key.py) is the files in this folder.
+Note: another dispatch of this workflow (5 s, about $0.70) ran at 00:11 UTC from a board auto-start and its result did not merge; ledger.json counts only what was merged.
