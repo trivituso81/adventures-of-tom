@@ -1,3 +1,8 @@
+## guideuse-45781979798 (2026-11-26): Knocked out (tom) now plays a video chosen in the Battle Guide
+
+Card c-guidegen, batched by c-guideflow-7. USE THIS ONE in the Battle Guide (the `use` of a row in queue.json, Action guide-apply). Not seen on the phone yet.
+- Knocked out (`body:tom:ko`, rev 2): Wan job tom-ko is now rev 2 (prompt file tools/art-library/prompts/wan-tom-ko-v2.txt); clip tom_ko cut (75 pictures, 0 to 148 step 2, 1.5x); B3_BODY_CLIPS.tom.ko = tom_ko (was 'tom_ko')
+
 ## guideuse-45780590322 (2026-11-26): Getting hit (tom) now plays a video chosen in the Battle Guide
 
 Card c-guidegen, batched by c-guideflow-7. USE THIS ONE in the Battle Guide (the `use` of a row in queue.json, Action guide-apply). Not seen on the phone yet.
