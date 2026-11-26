@@ -702,15 +702,43 @@
    "note": "",
    "cap": 0,
    "at": "2026-11-26T08:01:07Z",
-   "state": "checking",
-   "since": "2026-11-26T08:01:16Z",
+   "state": "done",
+   "since": "2026-11-26T08:02:35Z",
    "run": 45779612232,
    "fal": null,
    "tries": 1,
    "cost": 0,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "path": "startpics/rose-hero.png",
+    "mirrored": false,
+    "own": true,
+    "checks": [
+     {
+      "id": "magenta",
+      "ok": true,
+      "say": "the background is flat magenta (FF00FF is asked for)"
+     },
+     {
+      "id": "flat",
+      "ok": true,
+      "say": "the edges are clear (100.0 percent background)"
+     },
+     {
+      "id": "inside",
+      "ok": true,
+      "say": "the whole figure is inside the frame (smallest margin 2.7 percent of the picture)"
+     },
+     {
+      "id": "tall",
+      "ok": true,
+      "say": "the figure is 94 percent of the picture height (at least 60)"
+     }
+    ],
+    "main": false,
+    "note": ""
+   },
    "use": null,
    "left": false,
    "dry": false,
