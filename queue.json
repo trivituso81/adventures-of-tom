@@ -3536,12 +3536,11 @@
     "n": 2
    },
    "use": {
-    "state": "applying",
+    "state": "live",
     "at": "2026-11-26T09:43:00Z",
-    "since": "2026-11-26T09:43:00Z",
-    "build": "",
-    "why": "",
-    "run": 45795371400
+    "since": "2026-11-26T09:53:30Z",
+    "build": "guideuse-45795371400",
+    "why": ""
    },
    "left": false,
    "dry": false,
