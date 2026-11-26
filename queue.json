@@ -130,8 +130,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T07:52:08Z",
-   "state": "checking",
-   "since": "2026-11-26T07:54:36Z",
+   "state": "done",
+   "since": "2026-11-26T07:57:47Z",
    "run": 45778513410,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -144,7 +144,27 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-boppy-idle/t1.js",
+    "img": "takes/body-boppy-idle/t1.webp",
+    "frames": 50,
+    "kb": 574,
+    "words": "0 to 147 step 3, loop wrap",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "blink_none: no blink in the stretch the game loops (blinks in the whole video: none)"
+     ],
+     "faults": [
+      "blink_none"
+     ],
+     "vision_ran": true,
+     "spent": 0.0073,
+     "error": null,
+     "words": "The clip gate flags this take: blink_none: no blink in the stretch the game loops (blinks in the whole video: none)."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
