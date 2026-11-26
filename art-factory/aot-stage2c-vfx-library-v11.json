@@ -279,7 +279,7 @@
         "amy-sm-s1",
         "nara-pp-s2"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "vfx_core_timeline_chevrons",
@@ -317,7 +317,7 @@
         "justin-ar-s2",
         "olivia-na-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "vfx_core_status_debuff_badges",
@@ -355,7 +355,7 @@
         "olivia-na-s2",
         "olivia-na-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "proj_arc_single",
@@ -379,7 +379,7 @@
         "justin-ar-s1",
         "rose-sr-s2"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "proj_boomerang_return",
@@ -400,7 +400,7 @@
         "boppy-ba-basic",
         "nara-gd-s2"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "proj_ally_handoff_party",
@@ -423,7 +423,7 @@
         "tnb-lb-s1",
         "rose-cr-basic"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "proj_ground_hazard_mat",
@@ -444,7 +444,7 @@
         "grace-ca-s2",
         "rose-pr-cap"
       ],
-      "buildStatus": "todo"
+      "buildStatus": "built"
     },
     {
       "id": "setpiece_black_porsche_suv",

@@ -47,7 +47,7 @@
     "staged": true,
     "clipWired": true,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -84,7 +84,7 @@
     "staged": true,
     "clipWired": true,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -198,7 +198,7 @@
     "staged": false,
     "clipWired": true,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -235,7 +235,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -272,7 +272,7 @@
     "staged": false,
     "clipWired": true,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -381,7 +381,7 @@
     "staged": true,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -419,7 +419,7 @@
     "staged": true,
     "clipWired": true,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -528,7 +528,7 @@
     "staged": false,
     "clipWired": true,
     "contactApplied": true,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -564,7 +564,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -601,7 +601,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -674,7 +674,7 @@
     "staged": false,
     "clipWired": true,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -711,7 +711,7 @@
     "staged": false,
     "clipWired": true,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -784,7 +784,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -821,7 +821,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -859,7 +859,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -931,7 +931,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -968,7 +968,7 @@
     "staged": false,
     "clipWired": true,
     "contactApplied": true,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1005,7 +1005,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1079,7 +1079,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1152,7 +1152,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1227,7 +1227,7 @@
     "staged": false,
     "clipWired": true,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1298,7 +1298,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1336,7 +1336,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1446,7 +1446,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1631,7 +1631,7 @@
     "staged": true,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1667,7 +1667,7 @@
     "staged": true,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1816,7 +1816,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1852,7 +1852,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1928,7 +1928,7 @@
     "staged": true,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1966,7 +1966,7 @@
     "staged": true,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2079,7 +2079,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2117,7 +2117,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2154,7 +2154,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2228,7 +2228,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2303,7 +2303,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2380,7 +2380,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2418,7 +2418,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2455,7 +2455,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2566,7 +2566,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2719,7 +2719,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2756,7 +2756,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2903,7 +2903,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3015,7 +3015,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3163,7 +3163,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3200,7 +3200,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3312,7 +3312,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3349,7 +3349,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3423,7 +3423,7 @@
     "staged": true,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3496,7 +3496,7 @@
     "staged": true,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3606,7 +3606,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3644,7 +3644,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3755,7 +3755,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3792,7 +3792,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3867,7 +3867,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -4049,7 +4049,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -4086,7 +4086,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -4233,7 +4233,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -4309,7 +4309,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -4347,7 +4347,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -4386,7 +4386,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -4461,7 +4461,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -4534,7 +4534,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -4778,7 +4778,7 @@
    "id": "vfx_core_shield_ward",
    "name": "Ally Shield, Carapace, Drywall & Ward Shell",
    "category": "Core Primitive",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_shield_latch / sfx_shield_shatter",
    "usedBy": [
     "tom-ff-s1",
@@ -4797,7 +4797,7 @@
    "id": "vfx_core_timeline_chevrons",
    "name": "Timeline Push, Pull, Swap & Pep/Ruckus Pop",
    "category": "Core Primitive",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_timeline_whoosh_up / sfx_timeline_shove_back / sfx_pep_ding",
    "usedBy": [
     "grace-sc-basic",
@@ -4828,7 +4828,7 @@
    "id": "vfx_core_status_debuff_badges",
    "name": "Stat Buff/Debuff, Strip, Invert & Taunt Tether",
    "category": "Core Primitive",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_buff_chime / sfx_debuff_drop / sfx_buff_shatter",
    "usedBy": [
     "tom-ff-basic",
@@ -4859,7 +4859,7 @@
    "id": "proj_arc_single",
    "name": "Lobbed Projectile Arc Engine",
    "category": "Projectile Engine",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_throw_whoosh + impact_sfx",
    "usedBy": [
     "tnb-cer-basic",
@@ -4876,7 +4876,7 @@
    "id": "proj_boomerang_return",
    "name": "Boomerang & Fishing-Line Pull Engine",
    "category": "Projectile Engine",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_boomerang_whir / sfx_fishing_cast_reel",
    "usedBy": [
     "grace-sc-basic",
@@ -4890,7 +4890,7 @@
    "id": "proj_ally_handoff_party",
    "name": "Ally Toss & Party Snack Distribution Engine",
    "category": "Projectile Engine",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_soft_toss / sfx_snack_catch_pop",
    "usedBy": [
     "grace-sc-s1",
@@ -4906,7 +4906,7 @@
    "id": "proj_ground_hazard_mat",
    "name": "Persistent Ground Hazard & Lava Floor Engine",
    "category": "Projectile Engine",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_mop_slosh / sfx_lava_bubble / sfx_skateboard_clack",
    "usedBy": [
     "rose-sr-s1",

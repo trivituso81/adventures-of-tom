@@ -6,7 +6,7 @@
 // (P1_VFX_MS), z the phone scale, p the params or null. engine/pass1-vfx.js draws them from the impact of a pass-1 clip on the foe (the heal on
 // the member playing the clip: P1_VFX_SELF). They add themselves to P1_VFX, so a move's libraryAssets in data/guide-manifest.json pick them up.
 // The party stands on the right of the screen and the foe on the left, so every swing, spray, bolt and beam comes in from the right.
-// Not here yet: sound (sfxHook names only), the set-pieces and projectiles, and drawing in a real fight (only the Battle Lab review draws them).
+// Effects 9 to 15 (shield, chevrons, badges, the four projectiles) are further down (vfxlib2). Not here yet: sound (sfxHook names only), the set-pieces, and drawing in a real fight (only the Battle Lab review draws them).
 const VL_TAU=Math.PI*2, VL_INK='#3b2a1a';
 const vlRnd=n=>{ const s=Math.sin(n*127.1+311.7)*43758.5453; return s-Math.floor(s); };   // the same n gives the same number, so every frame redraws the same particles
 const vlClamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -137,3 +137,142 @@ Object.assign(P1_VFX,{vfx_core_clobber_impact:vlClobber,vfx_core_sizzle_wave:vlS
 Object.assign(P1_VFX_MS,{vfx_core_clobber_impact:p=>VL_CLOBBER_HIT_MS+(vlClamp(Math.round((p&&p.hits)||1),1,7)-1)*((p&&p.intervalMs)||110),vfx_core_sizzle_wave:900,vfx_core_drench_splash:850,
   vfx_core_razzle_beam_arc:700,vfx_core_racket_rings:800,vfx_core_detonation_pops:1100,vfx_core_composure_break:p=>p&&p.triggeredBreak?1300:900,vfx_core_heal_cleanse:1100});
 P1_VFX_SELF.vfx_core_heal_cleanse=true;
+
+// ---- vfxlib2 (2026-11-26): library effects 9 to 15, in the library's order: shield_ward, timeline_chevrons, status_debuff_badges, then the four projectiles. ----
+// p._h is the height of the unit the effect draws on (the member for the shield, the foe for the rest) and p._from is where the member playing the clip
+// stands ({x,y}, fight coordinates); engine/pass1-vfx.js fills both. Projectiles fly from the member to the foe, so from the right to the left, and arrive
+// at the clip's contact moment: P1_VFX_LEAD says how long before the contact each one starts (the other effects start at the contact).
+const vlH=(p,z)=>p&&p._h>0?p._h:90*z;
+const vlFrom=(p,x,y,z)=>p&&p._from&&isFinite(p._from.x)&&isFinite(p._from.y)?p._from:{x:x+240*z,y:y-8*z};   // no caster known: start off to the right of the target
+// A small painted-in-code prop for a projectile (spriteId picks it; an id it does not know is a round ball). Drawn at x,y, about r wide, turned by rot.
+function vlProp(g,id,x,y,r,rot,col){ id=String(id||'').toLowerCase(); g.save(); g.translate(x,y); g.rotate(rot||0); g.lineWidth=Math.max(1,r*.16); g.strokeStyle=VL_INK; g.lineJoin='round';
+  const el=(rx,ry,f,dx,dy)=>{ g.fillStyle=f; g.beginPath(); g.ellipse(dx||0,dy||0,rx,ry,0,0,VL_TAU); g.fill(); g.stroke(); }, rc=(w,h,f,dx,dy)=>{ g.fillStyle=f; g.beginPath(); g.rect((dx||0)-w/2,(dy||0)-h/2,w,h); g.fill(); g.stroke(); };
+  if(/clay/.test(id)){ el(r*.9,r*.62,'#8b8478'); g.fillStyle='rgba(255,255,255,.35)'; g.beginPath(); g.ellipse(-r*.25,-r*.2,r*.32,r*.16,0,0,VL_TAU); g.fill(); }
+  else if(/chili|seed/.test(id)){ for(let k=0;k<3;k++) el(r*.3,r*.16,k%2?'#ef4444':'#f97316',(k-1)*r*.55,((k*37)%5-2)*r*.14); }
+  else if(/jar|mason/.test(id)){ rc(r*1.1,r*1.4,'#bfe3ee'); rc(r*1.2,r*.3,'#9ca3af',0,-r*.78); g.fillStyle='rgba(255,255,255,.6)'; g.fillRect(-r*.34,-r*.5,r*.16,r*.8); }
+  else if(/flag|penalty/.test(id)){ rc(r*.14,r*1.7,'#78716c'); g.fillStyle='#facc15'; g.beginPath(); g.moveTo(r*.07,-r*.8); g.lineTo(r*1.1,-r*.55); g.lineTo(r*.07,-r*.2); g.closePath(); g.fill(); g.stroke(); }
+  else if(/popcorn/.test(id)){ for(let k=0;k<4;k++) el(r*.36,r*.34,k%2?'#fff7d6':'#fde68a',((k%2)-.5)*r*.8,(k>1?.35:-.3)*r); }
+  else if(/tool/.test(id)){ rc(r*1.6,r*.9,'#dc2626',0,r*.12); g.lineWidth=r*.16; g.beginPath(); g.moveTo(-r*.5,-r*.32); g.lineTo(-r*.5,-r*.62); g.lineTo(r*.5,-r*.62); g.lineTo(r*.5,-r*.32); g.stroke(); }
+  else if(/dumpling|soup/.test(id)){ el(r*.8,r*.6,'#fafafa'); g.lineWidth=r*.1; for(let k=-1;k<=1;k++){ g.beginPath(); g.moveTo(k*r*.26,-r*.5); g.lineTo(k*r*.12,-r*.12); g.stroke(); } }
+  else if(/controller|strap/.test(id)){ rc(r*1.5,r*.8,'#334155'); g.fillStyle='#e2e8f0'; g.beginPath(); g.arc(-r*.4,0,r*.12,0,VL_TAU); g.arc(r*.4,0,r*.12,0,VL_TAU); g.fill(); }
+  else if(/lamb/.test(id)){ el(r*.7,r*.6,'#f5efe2'); el(r*.2,r*.3,'#e7d9c3',-r*.5,-r*.5); el(r*.2,r*.3,'#e7d9c3',r*.5,-r*.5); g.fillStyle=VL_INK; g.beginPath(); g.arc(-r*.2,0,r*.07,0,VL_TAU); g.arc(r*.2,0,r*.07,0,VL_TAU); g.fill(); }
+  else if(/lure|fish/.test(id)){ el(r*.8,r*.3,'#cbd5e1'); g.fillStyle='#ef4444'; g.beginPath(); g.arc(r*.5,0,r*.16,0,VL_TAU); g.fill(); g.beginPath(); g.arc(-r*.9,r*.15,r*.28,-.3,Math.PI*.9); g.stroke(); }
+  else if(/doh|ball/.test(id)){ el(r*.7,r*.7,'#84cc16'); g.fillStyle='#d9f99d'; g.beginPath(); g.arc(-r*.2,-r*.2,r*.2,0,VL_TAU); g.fill(); }
+  else if(/cinnamon|roll/.test(id)){ el(r*.8,r*.8,'#d6a063'); g.strokeStyle='#92400e'; g.lineWidth=r*.12; g.beginPath(); g.arc(0,0,r*.4,0,Math.PI*1.7); g.arc(0,0,r*.2,0,Math.PI*1.5); g.stroke(); g.fillStyle='rgba(255,255,255,.7)'; g.beginPath(); g.arc(r*.1,-r*.3,r*.2,0,VL_TAU); g.fill(); }
+  else if(/muffin/.test(id)){ g.fillStyle='#e5e7eb'; g.beginPath(); g.moveTo(-r*.5,r*.1); g.lineTo(r*.5,r*.1); g.lineTo(r*.38,r*.7); g.lineTo(-r*.38,r*.7); g.closePath(); g.fill(); g.stroke(); el(r*.62,r*.46,'#b4763a',0,-r*.12); }
+  else if(/snack|diaper|pack|bag/.test(id)){ rc(r*1.1,r*1.2,'#fbbf24'); g.fillStyle='#fff'; g.fillRect(-r*.3,-r*.2,r*.6,r*.4); }
+  else if(/bike|chirp/.test(id)){ g.fillStyle='rgba(0,0,0,0)'; g.beginPath(); g.arc(-r*.5,r*.2,r*.4,0,VL_TAU); g.arc(r*.5,r*.2,r*.4,0,VL_TAU); g.stroke(); g.beginPath(); g.moveTo(-r*.5,r*.2); g.lineTo(0,-r*.4); g.lineTo(r*.5,r*.2); g.stroke(); }
+  else el(r*.7,r*.7,col||'#b45309');
+  g.restore(); }
+
+// 9. Ally Shield, Carapace, Drywall & Ward Shell: { targetIds, skin: 'clay'|'glaze'|'drywall'|'jacket'|'crust'|'seatbelt'|'velvet'|'plush', shieldPct }
+// Draws on the member playing the clip (P1_VFX_SELF); targetIds are not read, the shell goes on that member. p._h is the member's height.
+const VL_SHIELD={clay:['#c2764a','#7c3f1d'],glaze:['#2dd4bf','#0f766e'],drywall:['#f1f5f9','#94a3b8'],jacket:['#fb923c','#9a3412'],crust:['#f6c453','#92400e'],seatbelt:['#64748b','#1e293b'],velvet:['#be123c','#fbbf24'],plush:['#f9a8d4','#be185d']};
+function vlShield(g,x,y,u,z,p){ p=vlP(p,{targetIds:[],skin:'glaze',shieldPct:30}); const S=VL_SHIELD[p.skin]||VL_SHIELD.glaze, H=vlH(p,z), a=vlFade(u,.3), k=vlBack(vlClamp(u/.28,0,1));
+  const rx=Math.max(1,H*.38*k), ry=Math.max(1,H*.62*k), th=(2+vlClamp(p.shieldPct,5,100)/100*5)*z, sk=VL_SHIELD[p.skin]?p.skin:'glaze'; g.save();
+  g.globalAlpha=a*.28; g.fillStyle=S[0]; g.beginPath(); g.ellipse(x,y,rx,ry,0,0,VL_TAU); g.fill();   // the shell
+  g.globalAlpha=a; g.strokeStyle=S[0]; g.lineWidth=th; g.beginPath(); g.ellipse(x,y,rx,ry,0,0,VL_TAU); g.stroke(); g.strokeStyle=S[1]; g.lineWidth=1.4*z; g.beginPath(); g.ellipse(x,y,rx+th*.5,ry+th*.5,0,0,VL_TAU); g.stroke();
+  g.lineWidth=1.6*z; g.fillStyle=S[1];
+  if(sk==='clay'){ g.strokeStyle=S[1]; for(let i=-1;i<=1;i++){ g.beginPath(); g.ellipse(x,y+i*ry*.4,rx*Math.sqrt(1-i*i*.16),rx*.2,0,0,VL_TAU); g.stroke(); } }   // throwing-wheel rings
+  else if(sk==='glaze'){ g.strokeStyle='rgba(255,255,255,.85)'; g.lineWidth=3*z; g.beginPath(); g.ellipse(x,y,rx*.8,ry*.8,0,Math.PI*1.1,Math.PI*1.45); g.stroke(); const sp=vlClamp((u-.3)*3,0,1); g.globalAlpha=a*Math.sin(sp*Math.PI); g.fillStyle='#fff'; vlStar(g,x-rx*.55,y-ry*.55,6*z,1.4*z,4,0); g.fill(); }   // the fired glaze catches the light
+  else if(sk==='drywall'){ g.strokeStyle=S[1]; g.beginPath(); g.moveTo(x,y-ry); g.lineTo(x,y+ry); g.moveTo(x-rx,y); g.lineTo(x+rx,y); g.stroke(); for(const [sx,sy] of [[-.55,-.6],[.55,-.6],[-.55,.6],[.55,.6]]){ g.beginPath(); g.arc(x+sx*rx,y+sy*ry,2*z,0,VL_TAU); g.fill(); } }   // panel seams and screws
+  else if(sk==='jacket'){ g.strokeStyle=S[1]; g.setLineDash([4*z,3*z]); g.beginPath(); g.ellipse(x,y,rx*.82,ry*.82,0,0,VL_TAU); g.stroke(); g.setLineDash([]); g.beginPath(); g.moveTo(x,y-ry*.8); g.lineTo(x,y+ry*.8); g.stroke(); }   // knit stitching and a zip
+  else if(sk==='crust'){ g.strokeStyle=S[1]; g.lineWidth=2.4*z; for(let i=-1;i<=1;i++){ g.beginPath(); g.moveTo(x+i*rx*.4-rx*.12,y-ry*.35); g.lineTo(x+i*rx*.4+rx*.12,y+ry*.35); g.stroke(); } g.fillStyle='#fef3c7'; for(let i=0;i<6;i++){ g.beginPath(); g.arc(x+(vlRnd(i)-.5)*rx*1.3,y+(vlRnd(i+9)-.5)*ry*1.4,1.5*z,0,VL_TAU); g.fill(); } }   // scored loaf, sesame
+  else if(sk==='seatbelt'){ g.strokeStyle=S[1]; g.lineWidth=7*z; g.beginPath(); g.moveTo(x-rx*.8,y-ry*.78); g.lineTo(x+rx*.8,y+ry*.78); g.stroke(); g.fillStyle='#e2e8f0'; g.fillRect(x+rx*.5-4*z,y+ry*.5-4*z,8*z,8*z); }   // the mom-arm bar across
+  else if(sk==='velvet'){ g.fillStyle=S[1]; for(const sx of [-1,1]){ g.fillRect(x+sx*rx-1.6*z,y-ry*.3,3.2*z,ry*.9); g.beginPath(); g.arc(x+sx*rx,y-ry*.34,3.4*z,0,VL_TAU); g.fill(); } g.strokeStyle=S[0]; g.lineWidth=4*z; g.beginPath(); g.moveTo(x-rx,y-ry*.3); g.quadraticCurveTo(x,y+ry*.2,x+rx,y-ry*.3); g.stroke(); }   // two brass posts and the rope
+  else { g.strokeStyle=S[1]; g.setLineDash([3*z,3*z]); g.beginPath(); g.ellipse(x,y,rx*.8,ry*.8,0,0,VL_TAU); g.stroke(); g.setLineDash([]); g.fillStyle=S[1]; g.beginPath(); g.arc(x-rx*.18,y-ry*.1,2.2*z,0,VL_TAU); g.arc(x+rx*.18,y-ry*.1,2.2*z,0,VL_TAU); g.fill(); }   // plush stitching and two button eyes
+  const fl=vlClamp((u-.24)/.14,0,1); if(fl>0&&fl<1){ g.globalAlpha=(1-fl)*.9; g.strokeStyle='#fff'; g.lineWidth=3*z; g.beginPath(); g.ellipse(x,y,rx*(1+fl*.25),ry*(1+fl*.2),0,0,VL_TAU); g.stroke(); }   // the latch flash
+  g.restore(); }
+
+// 10. Timeline Push, Pull, Swap & Pep/Ruckus Pop: { targetIds, dir: 'pull'|'push'|'swap'|'bonus_turn', pct: 10..35, pepDelta: 0..2 }
+// The same arrows as the turn bar: teal left-pointing for a pull forward, red right-pointing for a push back. Draws on the unit it lands on.
+function vlChev(g,cx,cy,s,col,left){ g.strokeStyle=col; g.lineWidth=Math.max(1,s*.42); g.lineCap='round'; g.lineJoin='round'; g.beginPath(); if(left){ g.moveTo(cx+s*.5,cy-s); g.lineTo(cx-s*.5,cy); g.lineTo(cx+s*.5,cy+s); } else { g.moveTo(cx-s*.5,cy-s); g.lineTo(cx+s*.5,cy); g.lineTo(cx-s*.5,cy+s); } g.stroke(); }
+function vlChevrons(g,x,y,u,z,p){ p=vlP(p,{targetIds:[],dir:'push',pct:20,pepDelta:0}); const H=vlH(p,z), a=vlFade(u,.3), n=2+Math.round(vlClamp(p.pct,10,35)/35*3), dir=p.dir, TEAL='#14b8a6', RED='#ef4444'; g.save();
+  const lane=(ly,left,col)=>{ for(let i=0;i<n;i++){ const t=((u*1.6+i/n)%1), px=x+(left?1:-1)*(1-2*t)*(22+n*8)*z; g.globalAlpha=a*Math.sin(t*Math.PI); vlChev(g,px,ly,7*z,col,left); } };
+  if(dir==='swap'){ lane(y-H*.14,true,TEAL); lane(y+H*.14,false,RED); g.globalAlpha=a*.8; g.strokeStyle='#0ea5e9'; g.lineWidth=2.4*z; g.beginPath(); g.arc(x,y,H*.3,u*8,u*8+Math.PI*1.2); g.stroke(); g.beginPath(); g.arc(x,y,H*.3,u*8+Math.PI,u*8+Math.PI*2.2); g.stroke(); }   // two lanes and a swap ring
+  else if(dir==='bonus_turn'){ const ru=vlClamp(u*1.4,0,1); g.globalAlpha=(1-ru)*a; g.strokeStyle='#fbbf24'; g.lineWidth=(5-3*ru)*z; g.beginPath(); g.ellipse(x,y+H*.5,14*z+vlEase(ru)*H*.5,5*z+vlEase(ru)*H*.14,0,0,VL_TAU); g.stroke();   // the bonus-turn ring and a mini turn token
+    const k=vlBack(vlClamp((u-.2)/.25,0,1)); g.globalAlpha=a; g.fillStyle='#fef3c7'; g.strokeStyle='#d97706'; g.lineWidth=2*z; g.beginPath(); g.arc(x,y-H*.5-14*z,8*z*k,0,VL_TAU); g.fill(); g.stroke(); vlChev(g,x,y-H*.5-14*z,3.4*z*k,'#d97706',true); }
+  else { const pull=dir==='pull'; lane(y,pull,pull?TEAL:RED); g.globalAlpha=a; g.font='900 '+Math.round(11*z)+'px Georgia,serif'; g.textAlign='center'; g.textBaseline='middle'; g.lineWidth=3.4*z; g.lineJoin='round'; g.strokeStyle=VL_INK; g.fillStyle=pull?'#99f6e4':'#fecaca'; const t=(pull?'-':'+')+Math.round(vlClamp(p.pct,10,35))+'%'; g.strokeText(t,x,y-H*.5-12*z); g.fillText(t,x,y-H*.5-12*z); }
+  const pep=vlClamp(Math.round(p.pepDelta)||0,0,2); for(let i=0;i<pep;i++){ const k=vlBack(vlClamp((u-.3-i*.12)/.2,0,1)); if(k<=0) continue; g.globalAlpha=a; g.fillStyle='#fde047'; g.strokeStyle=VL_INK; g.lineWidth=1.4*z; vlStar(g,x+(i-(pep-1)/2)*22*z,y-H*.5-34*z-u*8*z,9*z*k,3.6*z*k,5,-.2); g.fill(); g.stroke(); }   // gold Pep stars rise over the head
+  g.restore(); }
+
+// 11. Stat Buff/Debuff, Strip, Invert & Taunt Tether: { mode: 'buff_up'|'debuff_down'|'strip'|'steal'|'invert'|'taunt_tether'|'mix_mark'|'perm_def_crack' }
+// Three screen-rule badges sit on the foe's head (just above it: p._h is the foe's height); the stolen badges and the tether run to the member (p._from).
+function vlBadge(g,x,y,r,col,glyph){ g.save(); g.fillStyle=col; g.strokeStyle='#fff'; g.lineWidth=Math.max(1,r*.2); g.beginPath(); g.arc(x,y,r,0,VL_TAU); g.fill(); g.stroke(); g.fillStyle='#fff'; g.strokeStyle='#fff'; g.lineWidth=Math.max(1,r*.3); g.lineJoin='round'; g.lineCap='round';
+  if(glyph==='up'||glyph==='down'){ const s=glyph==='up'?-1:1; g.beginPath(); g.moveTo(x-r*.5,y-s*r*.1); g.lineTo(x,y+s*r*.5); g.lineTo(x+r*.5,y-s*r*.1); g.stroke(); g.beginPath(); g.moveTo(x,y+s*r*.5); g.lineTo(x,y-s*r*.5); g.stroke(); }
+  else if(glyph==='shield'){ g.beginPath(); g.moveTo(x-r*.5,y-r*.5); g.lineTo(x+r*.5,y-r*.5); g.lineTo(x+r*.5,y+r*.05); g.quadraticCurveTo(x+r*.4,y+r*.5,x,y+r*.65); g.quadraticCurveTo(x-r*.4,y+r*.5,x-r*.5,y+r*.05); g.closePath(); g.fill(); }
+  else if(glyph==='tab'){ g.beginPath(); g.rect(x-r*.5,y-r*.3,r,r*.7); g.fill(); g.beginPath(); g.rect(x-r*.5,y-r*.55,r*.5,r*.3); g.fill(); }
+  g.restore(); }
+function vlBadges(g,x,y,u,z,p){ p=vlP(p,{mode:'debuff_down'}); const H=vlH(p,z), hy=y-H*.5-13*z, r=8*z, a=vlFade(u,.25), m=p.mode, fr=vlFrom(p,x,y,z); g.save();
+  const slot=i=>x+(i-1)*22*z, pop=i=>vlBack(vlClamp((u-i*.08)/.2,0,1));
+  if(m==='buff_up'||m==='debuff_down'){ const up=m==='buff_up'; for(let i=0;i<3;i++){ const k=pop(i); if(k<=0) continue; g.globalAlpha=a; vlBadge(g,slot(i),hy+(up?-u*8:u*6)*z,r*k,up?['#14b8a6','#22c55e','#f59e0b'][i]:['#64748b','#ef4444','#6366f1'][i],up?'up':'down'); } }
+  else if(m==='strip'){ for(let i=0;i<3;i++){ const k=pop(i), bu=vlClamp((u-.4-i*.07)/.3,0,1); if(bu<=0){ if(k>0){ g.globalAlpha=a; vlBadge(g,slot(i),hy,r*k,'#14b8a6','up'); } continue; }
+      if(bu>=1) continue; g.globalAlpha=(1-bu)*a; for(let j=0;j<6;j++){ const an=j*VL_TAU/6+vlRnd(i*6+j)*.5, d=vlEase(bu)*(14+vlRnd(j+i*9)*10)*z; g.fillStyle=j%2?'#fef08a':'#99f6e4'; g.beginPath(); g.arc(slot(i)+Math.cos(an)*d,hy+Math.sin(an)*d,(3-bu*2)*z,0,VL_TAU); g.fill(); } } }   // each badge pops into shards
+  else if(m==='steal'){ for(let i=0;i<3;i++){ const t=vlClamp((u-.2-i*.08)/.55,0,1), k=pop(i); if(t>=1) continue; const px=vlLerp(slot(i),fr.x,vlEase(t)), py=vlLerp(hy,fr.y-20*z,vlEase(t))-Math.sin(t*Math.PI)*34*z; g.globalAlpha=a*(1-t*.3); vlBadge(g,px,py,r*Math.max(k,0)*(1-t*.3),'#22c55e','up'); } }   // the buffs fly off in an arc to the thief
+  else if(m==='invert'){ for(let i=0;i<3;i++){ const t=vlClamp((u-.2-i*.07)/.35,0,1), s=Math.cos(t*Math.PI), k=pop(i); if(k<=0) continue; g.globalAlpha=a; g.save(); g.translate(slot(i),hy); g.scale(1,Math.abs(s)<.06?.06:s); const flipped=t>.5; vlBadge(g,0,0,r*k,flipped?'#ef4444':'#14b8a6',flipped?'down':'up'); g.restore(); } }
+  else if(m==='taunt_tether'){ const k=vlBack(vlClamp(u/.2,0,1)); g.globalAlpha=a; g.strokeStyle='#f59e0b'; g.lineWidth=2.2*z; g.setLineDash([6*z,5*z]); g.lineDashOffset=-u*160*z; g.beginPath(); g.moveTo(x,hy); g.quadraticCurveTo((x+fr.x)/2,Math.min(hy,fr.y)-26*z,fr.x,fr.y-H*.3); g.stroke(); g.setLineDash([]);   // the aggro tether to the one it is locked on
+    g.strokeStyle='#ef4444'; g.lineWidth=2*z; g.beginPath(); g.arc(x,hy,11*z*k,u*5,u*5+Math.PI*1.5); g.stroke(); g.beginPath(); g.moveTo(x-16*z*k,hy); g.lineTo(x-7*z*k,hy); g.moveTo(x+16*z*k,hy); g.lineTo(x+7*z*k,hy); g.stroke(); }
+  else if(m==='mix_mark'){ for(let i=0;i<4;i++){ const k=pop(i); if(k<=0) continue; const tx=x+(i-1.5)*19*z; g.globalAlpha=a; g.fillStyle=i%2?'#818cf8':'#6366f1'; g.strokeStyle='#fff'; g.lineWidth=1.6*z; g.beginPath(); g.moveTo(tx-8*z*k,hy+6*z*k); g.lineTo(tx-8*z*k,hy-4*z*k); g.quadraticCurveTo(tx-8*z*k,hy-9*z*k,tx-3*z*k,hy-9*z*k); g.lineTo(tx+3*z*k,hy-9*z*k); g.quadraticCurveTo(tx+8*z*k,hy-9*z*k,tx+8*z*k,hy-4*z*k); g.lineTo(tx+8*z*k,hy+6*z*k); g.closePath(); g.fill(); g.stroke(); } }   // four browser-tab marks
+  else if(m==='perm_def_crack'){ const k=pop(0); g.globalAlpha=a; if(k>0) vlBadge(g,x,hy,r*1.2*k,'#64748b','shield'); const c=vlClamp((u-.25)/.2,0,1);
+    g.strokeStyle='#fff'; g.lineWidth=1.8*z; g.shadowColor=VL_INK; g.shadowBlur=2*z; g.beginPath(); g.moveTo(x+1*z,hy-9*z*c); g.lineTo(x-3*z,hy-2*z*c); g.lineTo(x+2*z,hy+2*z*c); g.lineTo(x-1*z,hy+9*z*c); g.stroke();   // the shield badge splits
+    for(let i=0;i<3;i++){ const f=vlClamp((u-.4-i*.08)/.3,0,1); if(f<=0) continue; g.lineWidth=2.2*z; vlBolt(g,x+(i-1)*H*.16,y-H*.3,x+(i-1)*H*.2,y-H*.3+f*H*.6,i*13,5*z); g.stroke(); } }   // permanent fissures down the foe
+  g.restore(); }
+
+// 12. Lobbed Projectile Arc Engine: { spriteId, startPos, endPos, arcHeightPx: 45..110, spinSpeed, impactVfxId }
+// Flies from the member (or startPos) to the foe (or endPos) in VL_ARC_FLY ms, right to left, with spin, a ground shadow and a fading trail, and lands at the
+// contact moment. spinSpeed is turns per flight. impactVfxId is not drawn here: the move's own impact effect (the clobber, the splash) is its own library asset.
+const VL_ARC_FLY=560, VL_ARC_TAIL=140, VL_ARC_MS=VL_ARC_FLY+VL_ARC_TAIL;
+function vlArc(g,x,y,u,z,p){ p=vlP(p,{spriteId:'',startPos:null,endPos:null,arcHeightPx:70,spinSpeed:2,impactVfxId:''}); const e=p.endPos||{x,y}, s=p.startPos||vlFrom(p,x,y,z), f=VL_ARC_FLY/VL_ARC_MS, t=vlClamp(u/f,0,1), ah=vlClamp(p.arcHeightPx,45,110)*z*.8;
+  const at=q=>({x:vlLerp(s.x,e.x,q),y:vlLerp(s.y,e.y,q)-ah*4*q*(1-q)}); g.save();
+  if(u<f){ const P=at(t), hh=4*t*(1-t); g.globalAlpha=.3; g.fillStyle='#000'; g.beginPath(); g.ellipse(P.x,vlLerp(s.y,e.y,t)+34*z,(11-hh*4)*z,(3.4-hh)*z,0,0,VL_TAU); g.fill();   // the shadow on the ground under the flight
+    for(let k=3;k>=1;k--){ const T=at(Math.max(0,t-k*.05)); g.globalAlpha=.16*(4-k)/3; g.fillStyle='#fff'; g.beginPath(); g.arc(T.x,T.y,5*z,0,VL_TAU); g.fill(); }
+    g.globalAlpha=1; vlProp(g,p.spriteId,P.x,P.y,15*z,t*p.spinSpeed*VL_TAU,'#b45309'); }
+  else { const k=(u-f)/(1-f); g.globalAlpha=(1-k)*.7; g.fillStyle='#e7dcc5'; for(let j=0;j<4;j++){ g.beginPath(); g.arc(e.x+(j-1.5)*9*z*(.6+k),e.y+24*z-k*8*z-(j%2)*5*z,(4+k*8)*z,0,VL_TAU); g.fill(); } }   // a puff where it lands
+  g.restore(); }
+
+// 13. Boomerang & Fishing-Line Pull Engine: { spriteId, hasLine, pullTargetToFront, apexTimeFrac: 0.5 }
+// Out to the foe (a bonk at the apex, which is the clip's contact moment) and back to the member on a different curve. hasLine draws the taut line from the
+// member; pullTargetToFront draws the tug chevrons that drag the foe toward the party on the way back.
+const VL_BOOM_MS=900;
+function vlBoom(g,x,y,u,z,p){ p=vlP(p,{spriteId:'',hasLine:false,pullTargetToFront:false,apexTimeFrac:.5}); const ap=vlClamp(p.apexTimeFrac,.3,.7), s=vlFrom(p,x,y,z), out=u<ap, w=out?vlEase(u/ap):vlClamp((u-ap)/(1-ap),0,1), ew=out?w:w*w*(3-2*w); g.save();
+  const px=out?vlLerp(s.x,x,ew):vlLerp(x,s.x,ew), py=(out?vlLerp(s.y,y,ew)-Math.sin(ew*Math.PI)*38*z:vlLerp(y,s.y,ew)+Math.sin(ew*Math.PI)*34*z);   // out on the high curve, back on the low one
+  if(p.hasLine){ g.strokeStyle='#f1f5f9'; g.lineWidth=1.6*z; g.shadowColor=VL_INK; g.shadowBlur=1.5*z; g.beginPath(); g.moveTo(s.x,s.y); const sag=p.pullTargetToFront&&!out?0:(out?6:10)*z; g.quadraticCurveTo((s.x+px)/2,(s.y+py)/2+sag,px,py); g.stroke(); g.shadowBlur=0; }   // the taut line
+  const ru=u/ap; if(u<.985){ g.globalAlpha=1; vlProp(g,p.spriteId,px,py,14*z,p.hasLine?Math.atan2(s.y-py,s.x-px)+Math.PI:u*7*VL_TAU,'#0284c7'); }
+  if(out&&ru>.9||!out&&u-ap<.14){ const bk=out?0:(u-ap)/.14; g.globalAlpha=1-bk; g.fillStyle='#fff3c4'; g.strokeStyle=VL_INK; g.lineWidth=1.6*z; vlStar(g,x,y,(10+bk*14)*z,(4+bk*5)*z,7,bk); g.fill(); g.stroke(); }   // the bonk at the apex
+  if(p.pullTargetToFront&&!out){ const k=vlClamp((u-ap)/(1-ap),0,1); g.globalAlpha=Math.sin(k*Math.PI); for(let i=0;i<3;i++) vlChev(g,x+(14+i*11+k*30)*z,y,6*z,'#ef4444',false); }   // the foe is dragged toward the party
+  g.restore(); }
+
+// 14. Ally Toss & Party Snack Distribution Engine: { spriteId, targetAllyIds: [], arcHeightPx: 30..55, onCatchVfxId }
+// The one projectile that flies to the party's side (rightward): a gentle arc from the member to one ally or all four (one item each, a beat apart).
+// onCatchVfxId names a library effect that plays, squeezed into the end of the effect, where each item is caught.
+const VL_HAND_MS=800, VL_HAND_AT=[[40,-4],[62,-28],[24,-32],[68,10]];
+function vlHandoff(g,x,y,u,z,p){ p=vlP(p,{spriteId:'',targetAllyIds:[],arcHeightPx:42,onCatchVfxId:''}); const n=vlClamp((Array.isArray(p.targetAllyIds)?p.targetAllyIds.length:0)||1,1,4), s=vlFrom(p,x,y,z), ah=vlClamp(p.arcHeightPx,30,55)*z*.8, fly=.56; g.save();
+  for(let k=0;k<n;k++){ const t0=(u-k*.07)/fly, e={x:s.x+VL_HAND_AT[n===1?0:k][0]*z,y:s.y+VL_HAND_AT[n===1?0:k][1]*z}; if(t0<0) continue;
+    if(t0<1){ const t=vlEase(t0); g.globalAlpha=1; vlProp(g,p.spriteId,vlLerp(s.x,e.x,t),vlLerp(s.y,e.y,t)-ah*4*t0*(1-t0),12*z,t0*3,'#059669'); continue; }
+    const cu=vlClamp((u-k*.07-fly)/Math.max(.05,1-fly-k*.07),0,1); g.globalAlpha=(1-cu)*.9; g.strokeStyle='#34d399'; g.lineWidth=(3-2*cu)*z; g.beginPath(); g.arc(e.x,e.y,(6+vlEase(cu)*20)*z,0,VL_TAU); g.stroke();   // the catch pop
+    g.fillStyle='#fde68a'; for(let j=0;j<4;j++){ const an=j*VL_TAU/4+cu*2; vlStar(g,e.x+Math.cos(an)*(10+cu*14)*z,e.y+Math.sin(an)*(10+cu*14)*z,4*z*(1-cu),1*z,4,0); g.fill(); }
+    const fn=p.onCatchVfxId&&p.onCatchVfxId!=='proj_ally_handoff_party'&&!/^proj_/.test(p.onCatchVfxId)?P1_VFX[p.onCatchVfxId]:null; if(fn&&cu<1) fn(g,e.x,e.y,cu,z,{_h:56*z}); }
+  g.restore(); }
+
+// 15. Persistent Ground Hazard & Lava Floor Engine: { hazardType: 'wet_floor'|'hot_glue'|'molten_lava'|'skateboard_debris', durationRounds: 1..2 }
+// A flattened floor decal under the foe's feet (p._h is the foe's height): it spreads in, stays for the rest of the effect, then fades. Round pips mark 1 or 2 rounds.
+const VL_HAZ_MS=1800;
+function vlHazard(g,x,y,u,z,p){ p=vlP(p,{hazardType:'wet_floor',durationRounds:1}); const H=vlH(p,z), fy=y+H*.5, rd=vlClamp(Math.round(p.durationRounds)||1,1,2), grow=vlEase(vlClamp(u/.16,0,1)), rx=Math.max(1,(52+(rd-1)*10)*z*grow), ry=rx*.28, a=vlFade(u,.2), T=p.hazardType, tm=u*VL_HAZ_MS/1000; g.save(); g.globalAlpha=a;
+  const base=(f,s)=>{ g.fillStyle=f; g.strokeStyle=s; g.lineWidth=2*z; g.beginPath(); g.ellipse(x,fy,rx,ry,0,0,VL_TAU); g.fill(); g.stroke(); };
+  if(T==='hot_glue'){ base('rgba(249,168,212,.5)','#be185d'); for(let i=0;i<14;i++){ const an=vlRnd(i)*VL_TAU, d=Math.sqrt(vlRnd(i+9))*.85, sx=x+Math.cos(an)*rx*d, sy=fy+Math.sin(an)*ry*d, tw=.5+.5*Math.sin(tm*9+i*1.7); g.fillStyle=i%3?'#f0abfc':'#fff'; vlStar(g,sx,sy,(2.4+tw*2.4)*z,.8*z,4,0); g.fill(); } }   // rhinestones twinkling in a glue mat
+  else if(T==='molten_lava'){ base('rgba(234,88,12,.78)','#7c2d12'); g.fillStyle='#fbbf24'; for(let i=0;i<5;i++){ const bt=(tm*.9+vlRnd(i))%1, bx=x+(vlRnd(i+4)-.5)*rx*1.5, by=fy+(vlRnd(i+8)-.5)*ry*1.2; g.globalAlpha=a*(1-bt); g.beginPath(); g.arc(bx,by,(2+bt*5)*z,0,VL_TAU); g.fill(); }   // bubbles swell and pop
+    g.globalAlpha=a; for(let i=0;i<3;i++){ const cx=x+(i-1)*rx*.55, cy=fy+Math.sin(tm*3+i*2)*1.5*z-ry*.1; g.fillStyle=['#cbd5c0','#99c9c4','#e6d3b3'][i]; g.strokeStyle=VL_INK; g.lineWidth=1.6*z; g.beginPath(); g.rect(cx-9*z,cy-4*z,18*z,8*z); g.fill(); g.stroke(); } }   // sofa cushions floating on it
+  else if(T==='skateboard_debris'){ base('rgba(148,163,184,.35)','#475569'); for(let i=0;i<3;i++){ const k=((tm*.8+i/3)%1), wx=x+rx*(1-2*k)*.8, wy=fy+(i-1)*ry*.4; g.strokeStyle='#1e293b'; g.fillStyle='#e2e8f0'; g.lineWidth=1.8*z; g.beginPath(); g.arc(wx,wy,4.4*z,0,VL_TAU); g.fill(); g.stroke(); g.beginPath(); g.moveTo(wx,wy); g.lineTo(wx+Math.cos(k*30)*4*z,wy+Math.sin(k*30)*4*z); g.stroke(); }   // wheels rolling out from the party side
+    g.fillStyle='#a16207'; for(let i=0;i<3;i++){ g.save(); g.translate(x+(i-1)*rx*.5,fy+ry*.2*(i%2?-1:1)); g.rotate(i*1.3); g.fillRect(-6*z,-1.6*z,12*z,3.2*z); g.restore(); } }   // splinters of deck
+  else { base('rgba(125,211,252,.5)','#0369a1'); g.strokeStyle='rgba(255,255,255,.85)'; g.lineWidth=2*z; g.beginPath(); g.ellipse(x,fy,rx*.8,ry*.7,0,Math.PI*1.1,Math.PI*1.5); g.stroke();
+    for(let i=0;i<9;i++){ const bt=(tm*.6+vlRnd(i))%1, bx=x+(vlRnd(i+4)-.5)*rx*1.6, by=fy-bt*18*z+(vlRnd(i+8)-.5)*ry; g.globalAlpha=a*Math.sin(bt*Math.PI)*.9; g.strokeStyle='#fff'; g.fillStyle='rgba(255,255,255,.35)'; g.lineWidth=1.2*z; g.beginPath(); g.arc(bx,by,(2.6+vlRnd(i)*3)*z,0,VL_TAU); g.fill(); g.stroke(); }   // soap suds drifting up
+    g.globalAlpha=a; g.fillStyle='#facc15'; g.strokeStyle=VL_INK; g.lineWidth=1.6*z; g.beginPath(); g.moveTo(x+rx*.72,fy-ry*.2); g.lineTo(x+rx*.72-8*z,fy+ry*.5); g.lineTo(x+rx*.72+8*z,fy+ry*.5); g.closePath(); g.fill(); g.stroke(); g.fillStyle=VL_INK; g.fillRect(x+rx*.72-3*z,fy+ry*.1,6*z,1.6*z); }   // a wet-floor cone
+  g.globalAlpha=a; for(let i=0;i<rd;i++){ g.fillStyle='#fff'; g.strokeStyle=VL_INK; g.lineWidth=1.4*z; g.beginPath(); g.arc(x-rx*.9+i*10*z,fy+ry*1.35,3.4*z,0,VL_TAU); g.fill(); g.stroke(); }   // one pip a round
+  g.restore(); }
+
+Object.assign(P1_VFX,{vfx_core_shield_ward:vlShield,vfx_core_timeline_chevrons:vlChevrons,vfx_core_status_debuff_badges:vlBadges,proj_arc_single:vlArc,proj_boomerang_return:vlBoom,
+  proj_ally_handoff_party:vlHandoff,proj_ground_hazard_mat:vlHazard});
+Object.assign(P1_VFX_MS,{vfx_core_shield_ward:1000,vfx_core_timeline_chevrons:900,vfx_core_status_debuff_badges:1000,proj_arc_single:VL_ARC_MS,proj_boomerang_return:VL_BOOM_MS,
+  proj_ally_handoff_party:VL_HAND_MS,proj_ground_hazard_mat:VL_HAZ_MS});
+Object.assign(P1_VFX_LEAD,{proj_arc_single:VL_ARC_FLY,proj_boomerang_return:p=>Math.round(VL_BOOM_MS*vlClamp((p&&p.apexTimeFrac)||.5,.3,.7)),proj_ally_handoff_party:0});
+P1_VFX_SELF.vfx_core_shield_ward=true;
