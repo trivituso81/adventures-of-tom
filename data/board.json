@@ -7123,6 +7123,14 @@
     {
      "d": "2026-11-26",
      "t": "rosestage1 shipped; started the run by the wanauto1 rule: 8 prop pictures and 11 body videos, about $6.70, inside the auto limits."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "wan-gen run 45796453993: stage-rose-cushion, stage-rose-lamby, stage-rose-backuplamby, stage-rose-cushionwall, stage-rose-castle, stage-rose-whoopee passed and are in the game (build wanbulk-trosestagelab-45796453993). No watch card: Tom judges them by playing Rose's moves in a Battle 3 fight until the Move Lab handles Rose (card c-movelab-rose)."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "wan-gen bulk run 45796453993: 16 made (8 passed and in the game, build wanbulk-trosestagelab-45796453993, 8 stopped); waiting for the next tap (spending limit): rose-raspberry, rose-baitswitch, rose-whoopee."
     }
    ],
    "wgen": {
@@ -7132,10 +7140,113 @@
     "est": 6.7,
     "auto": true,
     "run": {
-     "state": "running",
-     "at": "2026-11-26T09:57:16Z",
+     "state": "done",
+     "at": "2026-11-26T10:12:13Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45796453993",
-     "n": 19
+     "n": 19,
+     "merged": [
+      "stage-rose-cushion",
+      "stage-rose-lamby",
+      "stage-rose-backuplamby",
+      "stage-rose-cushionwall",
+      "stage-rose-castle",
+      "stage-rose-whoopee"
+     ],
+     "passed_not_baked": [
+      "stage-rose-comet",
+      "stage-rose-ripple"
+     ],
+     "retried": [
+      "stage-rose-cushionwall",
+      "rose-tacklelunge",
+      "rose-lavahop",
+      "rose-doublelamby",
+      "rose-pretzel",
+      "rose-boomerang",
+      "rose-citadel",
+      "rose-kingdom",
+      "rose-boop"
+     ],
+     "stopped": [
+      {
+       "what": "rose-tacklelunge",
+       "why": "failed twice: feet, edge",
+       "card": "c-wanstop-rose-tacklelunge-r1"
+      },
+      {
+       "what": "rose-lavahop",
+       "why": "failed twice: feet",
+       "card": "c-wanstop-rose-lavahop-r1"
+      },
+      {
+       "what": "rose-doublelamby",
+       "why": "failed twice: feet",
+       "card": "c-wanstop-rose-doublelamby-r1"
+      },
+      {
+       "what": "rose-pretzel",
+       "why": "failed twice: feet, edge",
+       "card": "c-wanstop-rose-pretzel-r1"
+      },
+      {
+       "what": "rose-boomerang",
+       "why": "failed twice: feet, edge",
+       "card": "c-wanstop-rose-boomerang-r1"
+      },
+      {
+       "what": "rose-citadel",
+       "why": "failed twice: p1",
+       "card": "c-wanstop-rose-citadel-r1"
+      },
+      {
+       "what": "rose-kingdom",
+       "why": "failed twice: edge",
+       "card": "c-wanstop-rose-kingdom-r1"
+      },
+      {
+       "what": "rose-boop",
+       "why": "failed twice: feet",
+       "card": "c-wanstop-rose-boop-r1"
+      }
+     ],
+     "waiting": [],
+     "capped": [
+      "rose-raspberry",
+      "rose-baitswitch",
+      "rose-whoopee"
+     ],
+     "unchecked": [],
+     "errors": [],
+     "already": [],
+     "gaveup": [],
+     "bake_failed": {
+      "stage-rose-comet": "NOT baked: bake_stage.py failed: a prop is on magenta\n",
+      "stage-rose-ripple": "NOT baked: bake_stage.py failed: a prop is on magenta\n"
+     },
+     "spent": 9.91,
+     "build": "wanbulk-trosestagelab-45796453993",
+     "watch": "",
+     "revs": {
+      "stage-rose-cushion": 1,
+      "stage-rose-lamby": 1,
+      "stage-rose-backuplamby": 1,
+      "stage-rose-comet": 1,
+      "stage-rose-ripple": 1,
+      "stage-rose-cushionwall": 1,
+      "stage-rose-castle": 1,
+      "stage-rose-whoopee": 1,
+      "rose-tacklelunge": 1,
+      "rose-lavahop": 1,
+      "rose-doublelamby": 1,
+      "rose-pretzel": 1,
+      "rose-boomerang": 1,
+      "rose-citadel": 1,
+      "rose-kingdom": 1,
+      "rose-boop": 1,
+      "rose-raspberry": 1,
+      "rose-baitswitch": 1,
+      "rose-whoopee": 1
+     }
     }
    },
    "chat": {
@@ -7228,6 +7339,286 @@
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26"
+  },
+  {
+   "id": "c-wanstop-rose-tacklelunge-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-rose-tacklelunge-r1",
+   "title": "Fix the stopped video rose-tacklelunge",
+   "next": "The bulk run stopped rose-tacklelunge (failed twice: feet, edge) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-rosestage-lab",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by the wan-gen job (45796453993): rose-tacklelunge stopped at rev 1. attempt 1 (pad 0.8) feet, edge; attempt 2 (pad 0.8) feet, edge. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: feet: lowest row of the figure in every picture: first picture row 1127; at most 54 px (4.2 percent of the frame height) away (82 pictures over); limit 1 percent; edge: the figure touches the left edge in 13 of 150 pictures (video frames 17 to 21, 65 to 72)"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-rose-tacklelunge-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job rose-tacklelunge (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: feet, edge. Evidence: feet: lowest row of the figure in every picture: first picture row 1127; at most 54 px (4.2 percent of the frame height) away (82 pictures over); limit 1 percent; edge: the figure touches the left edge in 13 of 150 pictures (video frames 17 to 21, 65 to 72). This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: rose-tacklelunge-r1-result.json (every check with numbers and the look-check answers) and the videos rose-tacklelunge-r1.mp4, rose-tacklelunge-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-rosestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-rose-tacklelunge-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-rosestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-rose-tacklelunge-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-wanstop-rose-lavahop-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-rose-lavahop-r1",
+   "title": "Fix the stopped video rose-lavahop",
+   "next": "The bulk run stopped rose-lavahop (failed twice: feet) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-rosestage-lab",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by the wan-gen job (45796453993): rose-lavahop stopped at rev 1. attempt 1 (pad 0.8) feet; attempt 2 (pad 0.8) feet. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: feet: lowest row of the figure in every picture: first picture row 1127; at most 192 px (15.0 percent of the frame height) away (24 pictures over); limit 1 percent"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-rose-lavahop-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job rose-lavahop (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: feet. Evidence: feet: lowest row of the figure in every picture: first picture row 1127; at most 192 px (15.0 percent of the frame height) away (24 pictures over); limit 1 percent. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: rose-lavahop-r1-result.json (every check with numbers and the look-check answers) and the videos rose-lavahop-r1.mp4, rose-lavahop-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-rosestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-rose-lavahop-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-rosestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-rose-lavahop-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-wanstop-rose-doublelamby-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-rose-doublelamby-r1",
+   "title": "Fix the stopped video rose-doublelamby",
+   "next": "The bulk run stopped rose-doublelamby (failed twice: feet) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-rosestage-lab",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by the wan-gen job (45796453993): rose-doublelamby stopped at rev 1. attempt 1 (pad 0.8) feet; attempt 2 (pad 0.8) feet. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: feet: lowest row of the figure in every picture: first picture row 1127; at most 98 px (7.7 percent of the frame height) away (6 pictures over); limit 1 percent"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-rose-doublelamby-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job rose-doublelamby (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: feet. Evidence: feet: lowest row of the figure in every picture: first picture row 1127; at most 98 px (7.7 percent of the frame height) away (6 pictures over); limit 1 percent. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: rose-doublelamby-r1-result.json (every check with numbers and the look-check answers) and the videos rose-doublelamby-r1.mp4, rose-doublelamby-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-rosestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-rose-doublelamby-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-rosestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-rose-doublelamby-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-wanstop-rose-pretzel-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-rose-pretzel-r1",
+   "title": "Fix the stopped video rose-pretzel",
+   "next": "The bulk run stopped rose-pretzel (failed twice: feet, edge) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-rosestage-lab",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by the wan-gen job (45796453993): rose-pretzel stopped at rev 1. attempt 1 (pad 0.8) feet, edge; attempt 2 (pad 0.8) feet, edge. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: feet: lowest row of the figure in every picture: first picture row 1127; at most 20 px (1.6 percent of the frame height) away (54 pictures over); limit 1 percent; edge: the figure touches the left edge in 31 of 150 pictures (video frames 51 to 76, 117 to 121)"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-rose-pretzel-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job rose-pretzel (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: feet, edge. Evidence: feet: lowest row of the figure in every picture: first picture row 1127; at most 20 px (1.6 percent of the frame height) away (54 pictures over); limit 1 percent; edge: the figure touches the left edge in 31 of 150 pictures (video frames 51 to 76, 117 to 121). This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: rose-pretzel-r1-result.json (every check with numbers and the look-check answers) and the videos rose-pretzel-r1.mp4, rose-pretzel-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-rosestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-rose-pretzel-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-rosestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-rose-pretzel-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-wanstop-rose-boomerang-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-rose-boomerang-r1",
+   "title": "Fix the stopped video rose-boomerang",
+   "next": "The bulk run stopped rose-boomerang (failed twice: feet, edge) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-rosestage-lab",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by the wan-gen job (45796453993): rose-boomerang stopped at rev 1. attempt 1 (pad 0.8) feet, edge; attempt 2 (pad 0.8) feet, edge. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: feet: lowest row of the figure in every picture: first picture row 1127; at most 28 px (2.2 percent of the frame height) away (79 pictures over); limit 1 percent; edge: the figure touches the left edge in 7 of 150 pictures (video frames 23, 49 to 54)"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-rose-boomerang-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job rose-boomerang (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: feet, edge. Evidence: feet: lowest row of the figure in every picture: first picture row 1127; at most 28 px (2.2 percent of the frame height) away (79 pictures over); limit 1 percent; edge: the figure touches the left edge in 7 of 150 pictures (video frames 23, 49 to 54). This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: rose-boomerang-r1-result.json (every check with numbers and the look-check answers) and the videos rose-boomerang-r1.mp4, rose-boomerang-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-rosestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-rose-boomerang-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-rosestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-rose-boomerang-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-wanstop-rose-citadel-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-rose-citadel-r1",
+   "title": "Fix the stopped video rose-citadel",
+   "next": "The bulk run stopped rose-citadel (failed twice: p1) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-rosestage-lab",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by the wan-gen job (45796453993): rose-citadel stopped at rev 1. attempt 1 (pad 0.8) p1; attempt 2 (pad 0.8) p1. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (no Lamby plush visible, action does not match descript"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-rose-citadel-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job rose-citadel (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1. Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (no Lamby plush visible, action does not match descript. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: rose-citadel-r1-result.json (every check with numbers and the look-check answers) and the videos rose-citadel-r1.mp4, rose-citadel-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-rosestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-rose-citadel-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-rosestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-rose-citadel-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-wanstop-rose-kingdom-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-rose-kingdom-r1",
+   "title": "Fix the stopped video rose-kingdom",
+   "next": "The bulk run stopped rose-kingdom (failed twice: edge) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-rosestage-lab",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by the wan-gen job (45796453993): rose-kingdom stopped at rev 1. attempt 1 (pad 0.8) p1; attempt 2 (pad 0.8) edge. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: edge: the figure touches the left edge in 10 of 150 pictures (video frames 11 to 16, 122 to 125)"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-rose-kingdom-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job rose-kingdom (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: edge. Evidence: edge: the figure touches the left edge in 10 of 150 pictures (video frames 11 to 16, 122 to 125). This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: rose-kingdom-r1-result.json (every check with numbers and the look-check answers) and the videos rose-kingdom-r1.mp4, rose-kingdom-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-rosestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-rose-kingdom-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-rosestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-rose-kingdom-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-wanstop-rose-boop-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-rose-boop-r1",
+   "title": "Fix the stopped video rose-boop",
+   "next": "The bulk run stopped rose-boop (failed twice: feet) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-rosestage-lab",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by the wan-gen job (45796453993): rose-boop stopped at rev 1. attempt 1 (pad 0.8) feet; attempt 2 (pad 0.8) feet. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: feet: lowest row of the figure in every picture: first picture row 1127; at most 44 px (3.4 percent of the frame height) away (21 pictures over); limit 1 percent"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-rose-boop-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job rose-boop (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: feet. Evidence: feet: lowest row of the figure in every picture: first picture row 1127; at most 44 px (3.4 percent of the frame height) away (21 pictures over); limit 1 percent. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: rose-boop-r1-result.json (every check with numbers and the look-check answers) and the videos rose-boop-r1.mp4, rose-boop-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-rosestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-rose-boop-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-rosestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-rose-boop-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
