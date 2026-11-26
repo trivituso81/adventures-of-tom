@@ -8987,6 +8987,51 @@
    "changed": "2026-11-26",
    "reruns": 1,
    "rerun_at": "2026-11-26T21:05:53+00:00"
+  },
+  {
+   "id": "c-deedeeframes",
+   "title": "Install Deedee's newer frames: walk, feelings, talk, listen",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "up",
+   "next": "In progress: baking Deedee's newly approved walking v3, feelings v4, talking v5 and listening v3 pictures.",
+   "blocks": [],
+   "changed": "2026-11-26",
+   "created": "2026-11-26",
+   "tag": "deedeeframes",
+   "chat": {
+    "url": "",
+    "opening": "\"when you're done, do deedee next\""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by the session: Tom's words: \"when you're done, do deedee next\"."
+    }
+   ],
+   "after": "t-deedeeframesplay"
+  },
+  {
+   "id": "t-deedeeframesplay",
+   "title": "Look at Deedee's new walk, feelings, talk, listen frames",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Not ready yet: opens when the frames are pushed.",
+   "jump": {
+    "chapter": 1
+   },
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by deedeeframes."
+    }
+   ]
   }
  ],
  "sessions": [
