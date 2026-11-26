@@ -1,3 +1,7 @@
+## wanstop-rose-kingdom-r1 (2026-11-26): Rose's Kingdom of Ten-Thousand Blankets video gets one prompt change and its next try starts
+
+Both tries (rev 1) did the move (hug the Lamby plush, lift it high, lower it), but the plush flew in from and out through the left edge of the picture because the start picture has empty hands: an edge miss on the second try and a look-check miss on the first. One change: the prompt (`wan-rose-kingdom-v2.txt`) says the plush is already hugged to her chest from the first frame; pad, seed, start picture and model kept. Job rev 2. The next try is started by `wgen` on card t-rosestage-lab.
+
 ## wanstop-rose-pretzel-r1 (2026-11-26): Rose's Pocket Pretzel video gets one prompt change and its next try starts
 
 Both tries (rev 1) showed the right move (Lamby bonk, pretzel from the pocket, held out, back to stance) but Rose took a real step forward, so her feet slid up to 1.7 percent of the frame and she touched the left edge in 31 to 34 pictures. One change: the prompt (`wan-rose-pretzel-v2.txt`) replaces "darts one quick step forward" with "leans forward from the waist with her feet planted"; the rest, pad, seed, start picture and model are kept. Job rev 2. The next try is started by `wgen` on card t-rosestage-lab.
