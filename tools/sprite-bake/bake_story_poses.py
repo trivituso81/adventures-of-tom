@@ -27,7 +27,7 @@ COLORS = 40
 
 # id: sheet, K (= that character's overworld K), standing height in rows (= its overworld stand frame), reference frame, frame names in reading order.
 SETS = {
-    'tom': {'sheet': 'tom-stretch-intro-v1.png', 'k': 9, 'h': 42, 'ref': 'st_fresh',
+    'tom': {'sheet': 'tom-stretch-intro-v2.png', 'k': 9, 'h': 42, 'ref': 'st_fresh',
             'names': ['st_stiff', 'st_rise', 'st_reach', 'st_bendl', 'st_bendr', 'st_push', 'st_exhale', 'st_fresh']},
     'grace': {'sheet': 'grace-squishy-intro-sheet-v1.png', 'k': 10, 'h': 39, 'ref': 'sq_squeeze',
               'names': ['sq_hide', 'sq_reveal', 'sq_raise', 'sq_show', 'sq_hug', 'sq_squeeze', 'sq_careful', 'sq_wave']},

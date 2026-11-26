@@ -7026,7 +7026,7 @@
    "col": "up",
    "ask": "play",
    "fyi": true,
-   "next": "Open the game, RELOAD on the title (if it still looks old, close the home-screen app and open it again), then CHAPTERS > Chapter 1. Look at Tom's feelings, talking and listening poses: they should all be one size and match his walking size. Tell me with the REPORT tab which pose is wrong.",
+   "next": "Open the game, RELOAD on the title (if it still looks old, close the home-screen app and open it again), then CHAPTERS > Chapter 1. Look at Tom's feelings, talking and listening poses: they should all be one size and match his walking size. Tell me with the REPORT tab which pose is wrong. Also: the arrival stretch (Chapter 1 opening) should show the new stretching pictures, ending with the breath puff.",
    "jump": {
     "chapter": 1
    },
@@ -8331,6 +8331,39 @@
     }
    ],
    "after": "nothing for Tom: end"
+  },
+  {
+   "id": "c-tomstretch3",
+   "title": "Install Tom's new stretching frames (tom-stretch-intro v2)",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "done",
+   "next": "Shipped as tomstretch3: the new stretching pictures are in the game. Tom looks at them on his phone (card t-tomframesplay).",
+   "blocks": [],
+   "changed": "2026-11-26",
+   "created": "2026-11-26",
+   "tag": "tomstretch3",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFUy1ZAKH1RRjtXyko",
+    "opening": "\"implement tom's new walking, emotions, and listening frames\""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Tom (08:59): \"I just approved a new stretching frame set that needs to be implemented\". Built tomstretch3."
+    }
+   ],
+   "after": "t-tomframesplay",
+   "prompt": {
+    "what": "Installs Tom's new stretching sheet.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the bakes exist and tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md (Pose Editor, Tom's painted frames are used as painted, One head multiplier, Real heights) and claude/next-addendum-listen1.md, then card c-tomframes in data/board.json. Your first push is the commit board: start c-tomframes. Tom uploaded new painted sheets for Tom on 2026-11-26: tom-walking-sheet-v4, tom-emotions-v8, tom-talk-v3, and tom-listen-v1 is approved. Install them for Tom only. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "done": "2026-11-26"
   }
  ],
  "sessions": [
