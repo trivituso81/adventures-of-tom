@@ -1560,6 +1560,18 @@
    "cmd": "python3 -I tools/script-studio/epnote_test.py",
    "group": "g1",
    "minutes": 1
+  },
+  {
+   "id": "guide_manifest_test",
+   "cmd": "python3 -I tools/guide_manifest_test.py",
+   "group": "g1",
+   "minutes": 1
+  },
+  {
+   "id": "guide_timing_test",
+   "cmd": "python3 -I tools/guide_timing_test.py",
+   "group": "g1",
+   "minutes": 1
   }
  ]
 }

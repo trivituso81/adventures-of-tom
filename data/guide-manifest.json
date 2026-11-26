@@ -308,7 +308,7 @@
     "inGame": true,
     "staged": false,
     "clipWired": true,
-    "contactApplied": false,
+    "contactApplied": true,
     "effectsBuilt": false,
     "sfxWired": false
    }
@@ -344,7 +344,7 @@
     "staged": true,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -455,7 +455,7 @@
     "staged": true,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -490,8 +490,8 @@
     "inGame": true,
     "staged": false,
     "clipWired": true,
-    "contactApplied": false,
-    "effectsBuilt": false,
+    "contactApplied": true,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -527,7 +527,7 @@
     "inGame": true,
     "staged": false,
     "clipWired": true,
-    "contactApplied": false,
+    "contactApplied": true,
     "effectsBuilt": false,
     "sfxWired": false
    }
@@ -637,7 +637,7 @@
     "staged": false,
     "clipWired": true,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -746,7 +746,7 @@
     "inGame": true,
     "staged": false,
     "clipWired": true,
-    "contactApplied": false,
+    "contactApplied": true,
     "effectsBuilt": false,
     "sfxWired": false
    }
@@ -967,7 +967,7 @@
     "inGame": true,
     "staged": false,
     "clipWired": true,
-    "contactApplied": false,
+    "contactApplied": true,
     "effectsBuilt": false,
     "sfxWired": false
    }
@@ -1041,7 +1041,7 @@
     "inGame": true,
     "staged": false,
     "clipWired": true,
-    "contactApplied": false,
+    "contactApplied": true,
     "effectsBuilt": false,
     "sfxWired": false
    }
@@ -1115,7 +1115,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1190,7 +1190,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1262,7 +1262,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1372,7 +1372,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1408,7 +1408,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1520,7 +1520,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1703,7 +1703,7 @@
     "staged": true,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -1778,7 +1778,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2191,7 +2191,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2265,7 +2265,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2682,7 +2682,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2792,7 +2792,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2828,7 +2828,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2865,7 +2865,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2940,7 +2940,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -2976,7 +2976,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3051,7 +3051,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3125,7 +3125,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3275,7 +3275,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3460,7 +3460,7 @@
     "staged": true,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3570,7 +3570,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3680,7 +3680,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -3716,7 +3716,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -4012,7 +4012,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -4122,7 +4122,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -4158,7 +4158,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -4195,7 +4195,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -4497,7 +4497,7 @@
     "staged": false,
     "clipWired": false,
     "contactApplied": false,
-    "effectsBuilt": false,
+    "effectsBuilt": true,
     "sfxWired": false
    }
   },
@@ -4584,7 +4584,7 @@
    "id": "vfx_core_clobber_impact",
    "name": "Clobber Kinetic Impact Burst",
    "category": "Core Primitive",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_clobber_hit_light / heavy / multi_flurry",
    "usedBy": [
     "tom-ff-s1",
@@ -4610,7 +4610,7 @@
    "id": "vfx_core_sizzle_wave",
    "name": "Sizzle Heat Wave & Burn Embers",
    "category": "Core Primitive",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_sizzle_whoosh / sfx_burn_tick_pop",
    "usedBy": [
     "rose-sr-s2",
@@ -4633,7 +4633,7 @@
    "id": "vfx_core_drench_splash",
    "name": "Drench Splash, Mist & Droplet Spray",
    "category": "Core Primitive",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_drench_spritz / sfx_drench_splash_heavy",
    "usedBy": [
     "deedee-nf-basic",
@@ -4655,7 +4655,7 @@
    "id": "vfx_core_razzle_beam_arc",
    "name": "Razzle Voltage Arc, Beam & Glitter",
    "category": "Core Primitive",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_razzle_zap / sfx_camera_flash / sfx_glitter_shimmer",
    "usedBy": [
     "tom-gg-s2",
@@ -4677,7 +4677,7 @@
    "id": "vfx_core_racket_rings",
    "name": "Racket Sonic Rings & Callout Waves",
    "category": "Core Primitive",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_racket_ring / sfx_clap_5beat / sfx_sneeze_110db",
    "usedBy": [
     "tom-ff-basic",
@@ -4709,7 +4709,7 @@
    "id": "vfx_core_detonation_pops",
    "name": "All 6 v11 Prime -> Detonation Bursts",
    "category": "Core Primitive",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_detonation_chime_plus_flavor",
    "usedBy": [
     "univ-double-team",
@@ -4723,7 +4723,7 @@
    "id": "vfx_core_composure_break",
    "name": "Composure Pip Shatter & Flustered Banner",
    "category": "Core Primitive",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_composure_crack / sfx_composure_break_gong",
    "usedBy": [
     "tom-ff-s1",
@@ -4748,7 +4748,7 @@
    "id": "vfx_core_heal_cleanse",
    "name": "Emerald Heal, Regen, Cleanse & Revive",
    "category": "Core Primitive",
-   "status": "todo",
+   "status": "built",
    "sfx": "sfx_heal_chime / sfx_cleanse_sparkle / sfx_revive_harp",
    "usedBy": [
     "univ-pick-me-up",

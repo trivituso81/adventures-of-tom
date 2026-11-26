@@ -262,7 +262,7 @@ function drawBattle() {
       rideBodyDraw(m,fr3,sp.pal,(poking?x-sp.scale*3:x)+wig,y+(fx.tickle>0?Math.abs(wig):0),sp.scale,{flash:fx.flash>0,alpha:1,lean:guarding?-7:0});
       if(stretch) gfx.restore();
       activeKneelCut=0;
-      if(shownClip&&B2.clipShow&&B2.clipShow.owner===m.id&&typeof p1DrawVfx==='function') p1DrawVfx(gfx,B2.clipShow,B2.clipShow.ms||0);   // pass-1 impact effects on the foe, drawn in code (engine/pass1-vfx.js)
+      if(shownClip&&B2.clipShow&&B2.clipShow.owner===m.id&&typeof p1DrawVfx==='function') p1DrawVfx(gfx,B2.clipShow,B2.clipShow.ms||0,{x:cx,y:base-Math.round(h*.5),h});   // pass-1 impact effects on the foe, drawn in code; a heal draws here on the member (engine/pass1-vfx.js)
       if(sp.handAt) RFX.postParty(i,sp,fr3,(poking?x-sp.scale*3:x)+wig,y+(fx.tickle>0?Math.abs(wig):0));
     }
     if(battle.v2) roseSeatFront(m);   // Rose's shoes on Tom's shoulders
