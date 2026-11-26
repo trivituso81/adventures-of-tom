@@ -1675,12 +1675,12 @@
   },
   "body:tnb:idle": {
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BREATHING IDLE\nHe stands in his starting relaxed stance and breathes slowly and gently, his chest and shoulders rising and falling softly, and blinks once. His arms, head and feet stay where they are for the whole clip.",
-   "rev": 2,
+   "rev": 3,
    "source": "used"
   },
   "body:tnb:guard": {
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BRACED GUARD\nFrom his starting relaxed stance, he bends his knees, tucks his chin and raises both arms once, crossing his forearms in an X in front of his face with both fists closed. He holds that braced guard, breathing gently, then lowers his arms and stands back up into his starting stance.",
-   "rev": 1,
+   "rev": 2,
    "source": "used"
   },
   "body:tom:hit": {
@@ -1751,6 +1751,16 @@
   "body:tom:cast": {
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: CASTING A SPELL\nFrom his starting relaxed stance, he cups both hands together in front of his chest and closes his eyes for a moment as if gathering a little magic, then sweeps both open hands forward to the left once and holds them out there, fingers spread, looking ahead with focus. Then he lowers his arms and returns to his starting relaxed stance.",
    "rev": 4,
+   "source": "used"
+  },
+  "body:tnb:hit": {
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: FLINCH\nFrom his starting relaxed stance, he flinches once as if bumped from the front, leaning his upper body back with a wince and his arms pulled in, while his feet stay planted. Without repeating the flinch, he straightens up and returns to his starting relaxed stance, holding it for the rest of the clip.",
+   "rev": 1,
+   "source": "used"
+  },
+  "body:amy:idle": {
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BREATHING IDLE\nShe stands in her starting relaxed stance and breathes slowly and gently, her chest and shoulders rising and falling softly, and blinks once. Her arms, head and feet stay where they are for the whole clip.",
+   "rev": 1,
    "source": "used"
   }
  }
