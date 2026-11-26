@@ -8572,6 +8572,38 @@
     "text": "Read CLAUDE.md (Pose Editor, Tom's painted frames are used as painted, One head multiplier, Real heights) and claude/next-addendum-listen1.md, then card c-tomframes in data/board.json. Your first push is the commit board: start c-tomframes. Tom uploaded new painted sheets for Tom on 2026-11-26: tom-walking-sheet-v4, tom-emotions-v8, tom-talk-v3, and tom-listen-v1 is approved. Install them for Tom only. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "done": "2026-11-26"
+  },
+  {
+   "id": "c-vfxfight1",
+   "tag": "vfxfight1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "title": "Draw library effects in a real Battle 3 fight",
+   "next": "In progress: drawing the 37 Stage 2C library effects at each move's contact moment in a real Battle 3 fight, each at its own layer point in the draw order, with a fight that survives an effect that throws. Tests: guide_timing_test, b3_test, smoke, then a look at a fight in portrait and landscape.",
+   "chat": {
+    "url": "",
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done. Add a card for this task first\""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Started: Tom asked for the library effects to draw in a real Battle 3 fight (the next step named by card c-vfxlib3). Board: new card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Draws the Stage 2C library effects in a real Battle 3 fight, each at its own layer.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build whose steps are written in the task, tests catch mistakes)",
+    "effort": "high (engine draw order across several layers, a safety wrapper, tests and a visual check)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done. Your first push is the commit \"board: start c-vfxfight1\". Draw the Stage 2C library effects of engine/vfx-library.js in a real Battle 3 fight, not only in the Battle Lab pass-1 review. A move's effects draw at its contact moment, using p1Meta and p1DrawVfx in engine/pass1-vfx.js, on the right foe and member. Honour the library layer (behind_units, unit_overlay, foreground_sweep, screen_lighting, ground_decal) from art-factory/aot-stage2c-vfx-library-v11.json by drawing each effect at its own point in the fight's draw order. A fight must never break if an effect throws. Run python3 -I tools/guide_timing_test.py, python3 tools/b3_test.py and python3 tools/smoke.py, and look at a fight in portrait and landscape in Chrome before pushing. Update docs/BATTLE_GUIDE.md What is done and docs/CHANGES.md. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
