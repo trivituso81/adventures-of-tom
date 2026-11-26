@@ -1,6 +1,6 @@
 {
  "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
- "built": "2026-11-26T13:02Z",
+ "built": "2026-11-26T13:24Z",
  "videos": [
   {
    "file": "deedee-cast-r3.mp4",
@@ -1262,6 +1262,40 @@
    "model": "alibaba"
   },
   {
+   "file": "rose-boomerang-a2-r2.mp4",
+   "job": "rose-boomerang",
+   "rev": 2,
+   "attempt": 2,
+   "at": "2026-11-26T13:11:48.937197Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Her feet left their spot on the floor.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-boomerang-a2-r2.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-boomerang-r2.mp4",
+   "job": "rose-boomerang",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-26T13:09:40.072848Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Part of her went past the edge of the picture.",
+    "The motion check said no to: \"She throws her worn Lamby plush straight left once with a big overhand toss. Her hand is now empty. She lowers her shoulder and makes two quick low tackle lunges by bending her knees and leaning her shoulders forward whi\" Its reason: No throw or Lamby visible; only idle, walking, and hugging poses shown."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-boomerang-r2.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
    "file": "rose-boomerang-a2-r1.mp4",
    "job": "rose-boomerang",
    "rev": 1,
@@ -1292,6 +1326,38 @@
    ],
    "in_game": null,
    "strip": "art/video-history/rose-boomerang-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-boop-a2-r2.mp4",
+   "job": "rose-boop",
+   "rev": 2,
+   "attempt": 2,
+   "at": "2026-11-26T13:15:48.180795Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"With her feet staying flat on the same spot, she leans her upper body forward with a mischievous face and taps one index finger straight left once in a cheeky nose boop. Then she giggles and returns to her relaxed stance\" Its reason: No forward lean or nose boop; only pointing left then idle variations."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-boop-a2-r2.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-boop-r2.mp4",
+   "job": "rose-boop",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-26T13:13:37.905021Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"With her feet staying flat on the same spot, she leans her upper body forward with a mischievous face and taps one index finger straight left once in a cheeky nose boop. Then she giggles and returns to her relaxed stance\" Its reason: No clear lean forward, nose boop, or giggle; mostly idle poses with pointing and standing."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-boop-r2.webp",
    "pad": 0.8,
    "model": "alibaba"
   },
@@ -1469,6 +1535,40 @@
    "in_game": null,
    "strip": "art/video-history/rose-dodge-r2.webp",
    "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-doublelamby-a2-r2.mp4",
+   "job": "rose-doublelamby",
+   "rev": 2,
+   "attempt": 2,
+   "at": "2026-11-26T13:07:19.589806Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Part of her went past the edge of the picture.",
+    "The motion check said no to: \"She holds her worn Lamby plush in one hand and raises it high over her head with a solemn face, then tucks her chin and dips her knees twice with both feet flat on the ground, like a pinball about to launch. She springs \" Its reason: Sequence shows varied unrelated poses, not the described raise, dips, hero pose and return."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-doublelamby-a2-r2.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-doublelamby-r2.mp4",
+   "job": "rose-doublelamby",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-26T13:04:40.629365Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Her feet left their spot on the floor.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-doublelamby-r2.webp",
+   "pad": 0.8,
    "model": "alibaba"
   },
   {
@@ -1764,6 +1864,38 @@
    "model": "alibaba"
   },
   {
+   "file": "rose-kingdom-a2-r2.mp4",
+   "job": "rose-kingdom",
+   "rev": 2,
+   "attempt": 2,
+   "at": "2026-11-26T13:11:40.410451Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"Her worn Lamby plush is already hugged against her chest from the first frame (it never enters from the sides of the picture), and she looks up with wide, earnest wonder. She lifts the plush high above her head in a calm\" Its reason: Plush enters from sides, not held from first frame; multiple lifts instead of one calm hold"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-kingdom-a2-r2.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-kingdom-r2.mp4",
+   "job": "rose-kingdom",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-26T13:09:46.113784Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"Her worn Lamby plush is already hugged against her chest from the first frame (it never enters from the sides of the picture), and she looks up with wide, earnest wonder. She lifts the plush high above her head in a calm\" Its reason: Plush enters from sides in several frames, no clear hold for one second or royal gesture"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-kingdom-r2.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
    "file": "rose-kingdom-a2-r1.mp4",
    "job": "rose-kingdom",
    "rev": 1,
@@ -1908,6 +2040,38 @@
    "model": null
   },
   {
+   "file": "rose-lavahop-a2-r2.mp4",
+   "job": "rose-lavahop",
+   "rev": 2,
+   "attempt": 2,
+   "at": "2026-11-26T13:07:21.078972Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"She gasps and looks down at her sneakers, then crouches like a coiled spring. She hops three times in a row on the spot, lifting her knees high and swinging her arms, with a fierce determined face. After the third hop sh\" Its reason: Missing gasp, look down at sneakers, and crouch; hops not clearly on spot with high knees"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-lavahop-a2-r2.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-lavahop-r2.mp4",
+   "job": "rose-lavahop",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-26T13:04:40.508110Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"She gasps and looks down at her sneakers, then crouches like a coiled spring. She hops three times in a row on the spot, lifting her knees high and swinging her arms, with a fierce determined face. After the third hop sh\" Its reason: no looking down at sneakers or crouch; hops unclear, no clear 3 high-knee hops"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-lavahop-r2.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
    "file": "rose-lavahop-a2-r1.mp4",
    "job": "rose-lavahop",
    "rev": 1,
@@ -1936,6 +2100,40 @@
    ],
    "in_game": null,
    "strip": "art/video-history/rose-lavahop-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-pretzel-a2-r2.mp4",
+   "job": "rose-pretzel",
+   "rev": 2,
+   "attempt": 2,
+   "at": "2026-11-26T13:11:43.367639Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Part of her went past the edge of the picture.",
+    "The motion check said no to: \"She leans forward from the waist with her feet planted, holding her worn Lamby plush, and gives one earnest bonk straight left with it. She turns her head toward her right side, takes one tiny pretzel from her pocket wit\" Its reason: no bonk with Lamby plush; no leaning or pretzel action shown"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-pretzel-a2-r2.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-pretzel-r2.mp4",
+   "job": "rose-pretzel",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-26T13:09:30.523086Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Part of her went past the edge of the picture.",
+    "The motion check said no to: \"She leans forward from the waist with her feet planted, holding her worn Lamby plush, and gives one earnest bonk straight left with it. She turns her head toward her right side, takes one tiny pretzel from her pocket wit\" Its reason: no leaning, bonking, or pretzel actions shown"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-pretzel-r2.webp",
    "pad": 0.8,
    "model": "alibaba"
   },
@@ -1980,11 +2178,11 @@
    "attempt": 2,
    "at": "2026-11-26T12:48:44.106492Z",
    "price": 0.5,
-   "verdict": "rejected",
+   "verdict": "in_game",
    "reasons": [
     "The motion check said no to: \"She plants both fists on her hips, puffs both cheeks out wide, and leans slightly left, blowing an earnest cheek-flapping raspberry for one long moment. Then she crosses her arms proudly and returns to her starting relax\" Its reason: Missing cheek puff, lean left, and raspberry; shows arm cross and idle poses instead"
    ],
-   "in_game": null,
+   "in_game": "rose-raspberry",
    "strip": "art/video-history/rose-raspberry-a2-r1.webp",
    "pad": 0.8,
    "model": "alibaba"
@@ -2086,6 +2284,40 @@
    "model": "kling"
   },
   {
+   "file": "rose-tacklelunge-a2-r2.mp4",
+   "job": "rose-tacklelunge",
+   "rev": 2,
+   "attempt": 2,
+   "at": "2026-11-26T13:07:19.226086Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Her feet left their spot on the floor.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-tacklelunge-a2-r2.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-tacklelunge-r2.mp4",
+   "job": "rose-tacklelunge",
+   "rev": 2,
+   "attempt": 1,
+   "at": "2026-11-26T13:04:40.509527Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Her feet left their spot on the floor.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-tacklelunge-r2.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
    "file": "rose-tacklelunge-a2-r1.mp4",
    "job": "rose-tacklelunge",
    "rev": 1,
@@ -2142,11 +2374,11 @@
    "attempt": 2,
    "at": "2026-11-26T12:53:07.287530Z",
    "price": 0.5,
-   "verdict": "rejected",
+   "verdict": "in_game",
    "reasons": [
     "The motion check said no to: \"She keeps a deadpan straight face and pushes both palms low and forward as if sliding a giant mat across the floor. She clamps both hands tightly over her ears and braces, then pops into a proud one-second Master-of-Misc\" Its reason: Missing deadpan face, mat push, ear clamp, and Master-of-Mischief pose; shows varied idle animations instead."
    ],
-   "in_game": null,
+   "in_game": "rose-whoopee",
    "strip": "art/video-history/rose-whoopee-a2-r1.webp",
    "pad": 0.8,
    "model": "alibaba"
