@@ -8914,20 +8914,24 @@
    "title": "Install Tom's newer frames: feelings, listen, crouch, hug",
    "theme": "Characters",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "In progress: baking Tom's newly approved feelings (v9), listening (v2), thinking (v2), greeting crouch (v2) and greeting hug (v3) pictures.",
    "blocks": [],
    "changed": "2026-11-26",
    "created": "2026-11-26",
    "tag": "tomframes4",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
     "opening": "\"now do Tom's newly approved frames, including hugging the girls in the intro\""
    },
    "history": [
     {
      "d": "2026-11-26",
      "t": "Made by the session: Tom's words: \"now do Tom's newly approved frames, including hugging the girls in the intro\"."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "after": "t-tomframes4play",
@@ -9081,6 +9085,21 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
+   "title": "Install Rose's new walk, feelings, talking, listen frames",
+   "first": "2026-11-26T11:07:14-08:00",
+   "last": "2026-11-26T12:43:21-08:00",
+   "tags": [
+    "roseframes",
+    "graceframes"
+   ],
+   "cards": [
+    "c-roseframes",
+    "c-graceframes",
+    "c-tomframes4"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukD7GEcmLtBCPMpBzQR",
    "title": "Fix the stopped video rose-citadel",
    "first": "2026-11-26T12:41:39Z",
@@ -9091,20 +9110,6 @@
    "cards": [
     "c-wanstop-rose-citadel-r1",
     "t-rosestage-lab"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
-   "title": "Install Rose's new walk, feelings, talking, listen frames",
-   "first": "2026-11-26T11:07:14-08:00",
-   "last": "2026-11-26T12:31:31-08:00",
-   "tags": [
-    "roseframes",
-    "graceframes"
-   ],
-   "cards": [
-    "c-roseframes",
-    "c-graceframes"
    ]
   },
   {
@@ -15706,8 +15711,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "bd0a4eadffc44121983111d442fdabafec6da880",
- "synced_at": "2026-11-26T20:32:20+00:00",
+ "synced": "7d85b1a02e279f7da4ef7581b1679eac625571e0",
+ "synced_at": "2026-11-26T20:44:06+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
