@@ -1,6 +1,6 @@
 {
  "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
- "built": "2026-11-26T09:27Z",
+ "built": "2026-11-26T09:35Z",
  "videos": [
   {
    "file": "deedee-cast-r3.mp4",
@@ -1254,11 +1254,11 @@
    "attempt": 1,
    "at": "2026-11-21T19:59:26.526761Z",
    "price": 0.785,
-   "verdict": "in_game",
+   "verdict": "unchecked",
    "reasons": [
     "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
    ],
-   "in_game": "rose-cast",
+   "in_game": null,
    "strip": "art/video-history/rose-cast-r3.webp",
    "pad": null,
    "model": "kling"
@@ -2255,11 +2255,11 @@
    "attempt": 1,
    "at": "2026-11-21T19:59:26.488766Z",
    "price": 0.785,
-   "verdict": "in_game",
+   "verdict": "unchecked",
    "reasons": [
     "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
    ],
-   "in_game": "tom-cast",
+   "in_game": null,
    "strip": "art/video-history/tom-cast-r3.webp",
    "pad": null,
    "model": "kling"
@@ -2595,11 +2595,11 @@
    "attempt": 1,
    "at": "2026-11-21T02:17:23.303874Z",
    "price": 0.5,
-   "verdict": "in_game",
+   "verdict": "unchecked",
    "reasons": [
     "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
    ],
-   "in_game": "tom-run",
+   "in_game": null,
    "strip": "art/video-history/tom-run-r1.webp",
    "pad": null,
    "model": "alibaba"
@@ -2658,11 +2658,11 @@
    "attempt": 1,
    "at": "2026-11-21T02:17:22.694965Z",
    "price": 0.5,
-   "verdict": "in_game",
+   "verdict": "unchecked",
    "reasons": [
     "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
    ],
-   "in_game": "tom-victory",
+   "in_game": null,
    "strip": "art/video-history/tom-victory-r1.webp",
    "pad": null,
    "model": "alibaba"
