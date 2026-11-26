@@ -2485,8 +2485,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T08:30:02Z",
-   "state": "checking",
-   "since": "2026-11-26T08:48:22Z",
+   "state": "done",
+   "since": "2026-11-26T08:52:26Z",
    "run": 45782279434,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -2499,7 +2499,27 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-tom-guard/t3.js",
+    "img": "takes/body-tom-guard/t3.webp",
+    "frames": 65,
+    "kb": 1214,
+    "words": "0 to 128 step 2, hold 32, lowering 106",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "vision g_cover: Fists raised to chin but forearms do not fully shield face and chest like a block.; Hands go to chin/mouth in thinking pose, not raised forearms shielding face and chest like a block."
+     ],
+     "faults": [
+      "g_cover"
+     ],
+     "vision_ran": true,
+     "spent": 0.0076,
+     "error": null,
+     "words": "The clip gate flags this take: vision g_cover: Fists raised to chin but forearms do not fully shield face and chest like a block.; Hands go to chin/mouth in thinking pose, not raised forearms shielding face and chest like a block.."
+    },
+    "n": 3
+   },
    "use": null,
    "left": false,
    "dry": false,
