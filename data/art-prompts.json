@@ -8365,6 +8365,14 @@
      "date": "2026-11-11",
      "from": "v2",
      "at": 1794361676336
+    },
+    {
+     "n": 2,
+     "file": "art/raw/characters/tnb-walking-sheet-v3.png",
+     "date": "2026-11-26",
+     "from": "v4",
+     "at": 1795728775620,
+     "up": true
     }
    ]
   },
