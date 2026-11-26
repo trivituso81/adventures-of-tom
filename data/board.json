@@ -8612,7 +8612,7 @@
   {
    "id": "c-guide-animtabs",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "guidefix1",
    "title": "Battle Guide: Animations tab does nothing",
@@ -8632,6 +8632,10 @@
     {
      "d": "2026-11-26",
      "t": "Shipped as guidefix1: the Battle Guide Animations tab works again (page read an old manifest format). Old C1 to C13 checks in tools/battle_guide_test.py still stop early; a Claude card should update them."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as guidefix1: the Battle Guide Animations tab works again"
     }
    ],
    "prompt": {
@@ -8643,7 +8647,8 @@
     "effort": "medium (one known place)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guide-animtabs in data/board.json. Fix battle-guide.html so the Animations tab loads with the newer guide-manifest.json format, and push with build guidefix1.\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-26"
   }
  ],
  "sessions": [
@@ -8779,8 +8784,10 @@
    "url": "https://claude.ai/code/session_01RXeukDwxR9ZuRHnWPoGUN5",
    "title": "Battle Guide: Animations tab does nothing",
    "first": "2026-11-26T10:02:54-08:00",
-   "last": "2026-11-26T10:02:54-08:00",
-   "tags": [],
+   "last": "2026-11-26T10:07:29-08:00",
+   "tags": [
+    "guidefix1"
+   ],
    "cards": [
     "c-guide-animtabs"
    ]
@@ -15360,8 +15367,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "ec460636647cb3edefc2ed7b3a1f5b2e7f16bcfd",
- "synced_at": "2026-11-26T18:03:24+00:00",
+ "synced": "62b35b3708bd5bac459657aca27e2c8edb17f58f",
+ "synced_at": "2026-11-26T18:08:15+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
