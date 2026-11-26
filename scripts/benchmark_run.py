@@ -164,8 +164,10 @@ START_PROMPT = (
     "on the right side of the image, held low at hip height. Remove the hammer from the belt pouch so the only hammer is the one in his hand. "
     "Keep the flat solid grey background exactly as it is, with no shadow, scenery or text."
 )
-HAND_BAND = (0.50, 0.76)      # the part of the figure's height that may be edited (arms, hands, belt, pouches); props may extend beyond the figure sideways
-HEAD_BAND = 0.40              # the top share of the figure's height that must stay pixel-identical to the Hero
+HAND_BAND = (0.34, 1.00)      # the part of the figure's height the edit may own (below the chin: body, arms, hands, props); the edit model moves the arms a little, so a seam inside the
+                              # body shows. The seam is at the neck and feathered over FEATHER of the height.
+FEATHER = 0.03
+HEAD_BAND = 0.32              # the top share of the figure's height that must stay pixel-identical to the Hero
 GATE1_BOOLS = ("matches_hero_ink_pencil_style", "three_quarter_left_profile", "same_face_and_expression_as_hero", "stud_finder_held_in_one_hand",
                "single_claw_hammer_in_other_hand", "zero_duplicate_belt_hammer", "full_body_unclipped")
 
@@ -189,22 +191,59 @@ def compose_start(rgba_path, out_path, size=(1344, 768), fig_frac=0.86):
     return out_path, (x, y, x + w, y + h)
 
 
+def register_edit(hero_comp, edited, box):
+    """The edit model returns the figure a little larger or shifted. Find the scale and shift that put the edit's head on the Hero's head (template match of the
+    Hero head over scales), and return the edit warped onto the Hero composite's grid, grey filled in."""
+    import cv2
+    import numpy as np
+    from PIL import Image
+    h = cv2.cvtColor(np.asarray(Image.open(hero_comp).convert("RGB")), cv2.COLOR_RGB2GRAY)
+    e0 = np.asarray(Image.open(edited).convert("RGB"))
+    H, W = h.shape
+    e0 = cv2.resize(e0, (W, H), interpolation=cv2.INTER_AREA)
+    e = cv2.cvtColor(e0, cv2.COLOR_RGB2GRAY)
+    x0, y0, x1, y1 = box
+    ya, yb = y0, y0 + int((y1 - y0) * 0.30)
+    tpl = h[ya:yb, x0 + int((x1 - x0) * 0.2):x1 - int((x1 - x0) * 0.2)]
+    best = (-1, 1.0, 0, 0)
+    for sc in np.arange(0.90, 1.2001, 0.01):
+        big = cv2.resize(e, None, fx=sc, fy=sc, interpolation=cv2.INTER_AREA)
+        if big.shape[0] < tpl.shape[0] or big.shape[1] < tpl.shape[1]:
+            continue
+        r = cv2.matchTemplate(big, tpl, cv2.TM_CCOEFF_NORMED)
+        _, mx, _, loc = cv2.minMaxLoc(r)
+        if mx > best[0]:
+            best = (mx, sc, loc[0], loc[1])
+    score, sc, lx, ly = best
+    # edit point (lx,ly)/sc maps to hero point (template origin)
+    ox, oy = x0 + int((x1 - x0) * 0.2), ya
+    M = np.float32([[1 / sc, 0, ox - lx / sc], [0, 1 / sc, oy - ly / sc]])
+    out = cv2.warpAffine(e0, M, (W, H), flags=cv2.INTER_AREA, borderMode=cv2.BORDER_CONSTANT, borderValue=(128, 128, 128))
+    return out, {"match": round(float(score), 3), "scale": round(float(sc), 3), "dx": round(float(ox - lx / sc), 1), "dy": round(float(oy - ly / sc), 1)}
+
+
 def lock_hero_pixels(hero_comp, edited, box, out_path, tol=14):
     """Final start frame: the Hero composite everywhere except the hand band; inside the band the edited picture, with its near-grey background snapped to exact #808080."""
     import numpy as np
     from PIL import Image
     base = np.asarray(Image.open(hero_comp).convert("RGB")).copy()
-    ed = Image.open(edited).convert("RGB")
-    if ed.size != (base.shape[1], base.shape[0]):
-        ed = ed.resize((base.shape[1], base.shape[0]), Image.LANCZOS)
-    ed = np.asarray(ed).astype(int)
+    reg, info = register_edit(hero_comp, edited, box)
+    say("[start frame] edit registered to the Hero:", info)
+    ed = reg.astype(int)
     x0, y0, x1, y1 = box
     fh = y1 - y0
     by0, by1 = y0 + int(fh * HAND_BAND[0]), y0 + int(fh * HAND_BAND[1])
     band = ed[by0:by1].copy()
     near = (np.abs(band - 128).max(axis=2) <= tol) & ((band.max(axis=2) - band.min(axis=2)) <= tol)
     band[near] = 128
-    base[by0:by1] = band.astype(np.uint8)
+    mag = (band[..., 0] > band[..., 1] + 25) & (band[..., 2] > band[..., 1] + 25)      # magenta fringe left from the grey-edit: pull red and blue down to green
+    band[mag, 0] = band[mag, 1]
+    band[mag, 2] = band[mag, 1]
+    # feather the top of the band into the Hero pixels (only where the Hero has the figure), so the neck seam is soft
+    nf = max(1, int(fh * FEATHER))
+    w = np.clip(np.arange(by1 - by0) / nf, 0, 1)[:, None, None]
+    hero_band = base[by0:by1].astype(float)
+    base[by0:by1] = (w * band + (1 - w) * hero_band).astype(np.uint8)
     Image.fromarray(base).save(out_path)
     return out_path
 
@@ -434,6 +473,7 @@ def run(svc=None, trigger=None, run_dir_root=None):
     cap = float(lock["active_spend_cap_usd"])
     if float(trig.get("cap_usd", cap)) > cap:
         raise SystemExit("the trigger asks for a cap above PIPELINE_LOCK.json")
+    cap = float(trig.get("cap_usd", cap))      # the run's own cap (never above the lock's)
     run_dir = Path(run_dir_root or ROOT / "art-factory" / "benchmark") / run_id
     seeds_dir = run_dir / "seeds"
     seeds_dir.mkdir(parents=True, exist_ok=True)

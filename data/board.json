@@ -7053,6 +7053,10 @@
     {
      "d": "2026-11-25",
      "t": "Tom (WO-01E): wan3_s1 failed visual QA (start frame redrawn, no stud-finder scan, effects unseen). Start frame now locks the Hero pixels, prompt restored to both beats, Wan 3.0 re-run with a $2.00 cap. Build justinbb9e."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Run bench-justinbb9-3 stopped at Gate 1 (seams from a misaligned hand edit, $0.38). Fixed by registering the edit to the Hero and joining at the neck; re-run bench-justinbb9-4. Build justinbb9f."
     }
    ],
    "blocks": [],
