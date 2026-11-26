@@ -575,13 +575,13 @@
    "name": "TNB",
    "inches": 70,
    "R": 41.408,
-   "standH": 461,
-   "sheet": "tnb-walking-sheet-v2.png",
+   "standH": 368,
+   "sheet": "tnb-walking-sheet-v3.png",
    "headTweak": 1.21,
    "now": {
     "f": 0.9355,
     "h": 1.16585,
-    "anchor": 129.08
+    "anchor": 103.04
    },
    "locked": null,
    "frames": {
@@ -590,23 +590,22 @@
      "key": "down_stand",
      "label": "TNB, walking, front standing",
      "img": "art/poses/tnb/walk-down_stand.webp",
-     "w": 172,
-     "h": 461,
-     "ax": 90.4,
+     "w": 139,
+     "h": 368,
+     "ax": 68.5,
      "link": null,
-     "sheet": "tnb-walking-sheet-v2.png",
+     "sheet": "tnb-walking-sheet-v3.png",
      "marks": {
-      "top": 23.1,
-      "chin": 130.0,
-      "feet": 461
+      "top": 12.4,
+      "chin": 103.0,
+      "feet": 368
      },
-     "conf": "high",
-     "s0": 0.089823,
+     "conf": "low",
+     "s0": 0.112523,
      "now": {
-      "f": 0.934,
-      "h": 1.158,
-      "anchor": 130.0,
-      "page": 41.408
+      "f": 0.9355,
+      "h": 1.16585,
+      "anchor": 103.04
      }
     },
     "down_step1": {
@@ -614,23 +613,22 @@
      "key": "down_step1",
      "label": "TNB, walking, front step 1",
      "img": "art/poses/tnb/walk-down_step1.webp",
-     "w": 185,
-     "h": 465,
-     "ax": 91.0,
+     "w": 153,
+     "h": 369,
+     "ax": 73.0,
      "link": "down_stand",
-     "sheet": "tnb-walking-sheet-v2.png",
+     "sheet": "tnb-walking-sheet-v3.png",
      "marks": {
-      "top": 23.1,
-      "chin": 130.0,
-      "feet": 465
+      "top": 12.4,
+      "chin": 103.0,
+      "feet": 369
      },
-     "conf": "high",
-     "s0": 0.089823,
+     "conf": "low",
+     "s0": 0.112523,
      "now": {
-      "f": 0.934,
-      "h": 1.158,
-      "anchor": 130.0,
-      "page": 41.408
+      "f": 0.9355,
+      "h": 1.16585,
+      "anchor": 103.04
      }
     },
     "down_step2": {
@@ -638,23 +636,22 @@
      "key": "down_step2",
      "label": "TNB, walking, front step 2",
      "img": "art/poses/tnb/walk-down_step2.webp",
-     "w": 183,
-     "h": 464,
-     "ax": 89.5,
+     "w": 144,
+     "h": 369,
+     "ax": 70.0,
      "link": "down_stand",
-     "sheet": "tnb-walking-sheet-v2.png",
+     "sheet": "tnb-walking-sheet-v3.png",
      "marks": {
-      "top": 23.1,
-      "chin": 130.0,
-      "feet": 464
+      "top": 12.4,
+      "chin": 103.0,
+      "feet": 369
      },
-     "conf": "high",
-     "s0": 0.089823,
+     "conf": "low",
+     "s0": 0.112523,
      "now": {
-      "f": 0.934,
-      "h": 1.158,
-      "anchor": 130.0,
-      "page": 41.408
+      "f": 0.9355,
+      "h": 1.16585,
+      "anchor": 103.04
      }
     },
     "up_stand": {
@@ -662,23 +659,22 @@
      "key": "up_stand",
      "label": "TNB, walking, back standing",
      "img": "art/poses/tnb/walk-up_stand.webp",
-     "w": 165,
-     "h": 469,
-     "ax": 83.0,
+     "w": 135,
+     "h": 365,
+     "ax": 68.0,
      "link": null,
-     "sheet": "tnb-walking-sheet-v2.png",
+     "sheet": "tnb-walking-sheet-v3.png",
      "marks": {
-      "top": 23.1,
-      "chin": 130.0,
-      "feet": 469
+      "top": 12.4,
+      "chin": 103.0,
+      "feet": 365
      },
      "conf": "low",
-     "s0": 0.089823,
+     "s0": 0.112523,
      "now": {
-      "f": 0.897,
-      "h": 1.186,
-      "anchor": 124.9,
-      "page": 41.193
+      "f": 0.9355,
+      "h": 1.16585,
+      "anchor": 103.04
      }
     },
     "up_step1": {
@@ -686,23 +682,22 @@
      "key": "up_step1",
      "label": "TNB, walking, back step 1",
      "img": "art/poses/tnb/walk-up_step1.webp",
-     "w": 185,
-     "h": 472,
-     "ax": 98.0,
+     "w": 149,
+     "h": 366,
+     "ax": 77.0,
      "link": "up_stand",
-     "sheet": "tnb-walking-sheet-v2.png",
+     "sheet": "tnb-walking-sheet-v3.png",
      "marks": {
-      "top": 23.1,
-      "chin": 130.0,
-      "feet": 472
+      "top": 12.4,
+      "chin": 103.0,
+      "feet": 366
      },
      "conf": "low",
-     "s0": 0.089823,
+     "s0": 0.112523,
      "now": {
-      "f": 0.897,
-      "h": 1.186,
-      "anchor": 124.9,
-      "page": 41.193
+      "f": 0.9355,
+      "h": 1.16585,
+      "anchor": 103.04
      }
     },
     "up_step2": {
@@ -710,23 +705,22 @@
      "key": "up_step2",
      "label": "TNB, walking, back step 2",
      "img": "art/poses/tnb/walk-up_step2.webp",
-     "w": 189,
-     "h": 473,
-     "ax": 91.5,
+     "w": 150,
+     "h": 367,
+     "ax": 77.5,
      "link": "up_stand",
-     "sheet": "tnb-walking-sheet-v2.png",
+     "sheet": "tnb-walking-sheet-v3.png",
      "marks": {
-      "top": 23.1,
-      "chin": 130.0,
-      "feet": 473
+      "top": 12.4,
+      "chin": 103.0,
+      "feet": 367
      },
      "conf": "low",
-     "s0": 0.089823,
+     "s0": 0.112523,
      "now": {
-      "f": 0.897,
-      "h": 1.186,
-      "anchor": 124.9,
-      "page": 41.193
+      "f": 0.9355,
+      "h": 1.16585,
+      "anchor": 103.04
      }
     },
     "left_stand": {
@@ -734,23 +728,22 @@
      "key": "left_stand",
      "label": "TNB, walking, side standing",
      "img": "art/poses/tnb/walk-left_stand.webp",
-     "w": 169,
-     "h": 479,
-     "ax": 94.0,
+     "w": 135,
+     "h": 363,
+     "ax": 80.1,
      "link": null,
-     "sheet": "tnb-walking-sheet-v2.png",
+     "sheet": "tnb-walking-sheet-v3.png",
      "marks": {
-      "top": 20.7,
-      "chin": 126.8,
-      "feet": 479
+      "top": 12.4,
+      "chin": 103.0,
+      "feet": 363
      },
      "conf": "low",
-     "s0": 0.089823,
+     "s0": 0.112523,
      "now": {
-      "f": 0.877,
-      "h": 1.158,
-      "anchor": 126.8,
-      "page": 41.076
+      "f": 0.9355,
+      "h": 1.16585,
+      "anchor": 103.04
      }
     },
     "left_step1": {
@@ -758,23 +751,22 @@
      "key": "left_step1",
      "label": "TNB, walking, side step 1",
      "img": "art/poses/tnb/walk-left_step1.webp",
-     "w": 290,
-     "h": 479,
-     "ax": 156.5,
+     "w": 214,
+     "h": 363,
+     "ax": 128.6,
      "link": "left_stand",
-     "sheet": "tnb-walking-sheet-v2.png",
+     "sheet": "tnb-walking-sheet-v3.png",
      "marks": {
-      "top": 20.7,
-      "chin": 126.8,
-      "feet": 479
+      "top": 12.4,
+      "chin": 103.0,
+      "feet": 363
      },
      "conf": "low",
-     "s0": 0.089823,
+     "s0": 0.112523,
      "now": {
-      "f": 0.877,
-      "h": 1.158,
-      "anchor": 126.8,
-      "page": 41.076
+      "f": 0.9355,
+      "h": 1.16585,
+      "anchor": 103.04
      }
     },
     "left_step2": {
@@ -782,23 +774,22 @@
      "key": "left_step2",
      "label": "TNB, walking, side step 2",
      "img": "art/poses/tnb/walk-left_step2.webp",
-     "w": 193,
-     "h": 480,
-     "ax": 124.5,
+     "w": 145,
+     "h": 371,
+     "ax": 87.2,
      "link": "left_stand",
-     "sheet": "tnb-walking-sheet-v2.png",
+     "sheet": "tnb-walking-sheet-v3.png",
      "marks": {
-      "top": 20.7,
-      "chin": 126.8,
-      "feet": 480
+      "top": 12.4,
+      "chin": 103.0,
+      "feet": 371
      },
      "conf": "low",
-     "s0": 0.089823,
+     "s0": 0.112523,
      "now": {
-      "f": 0.877,
-      "h": 1.158,
-      "anchor": 126.8,
-      "page": 41.076
+      "f": 0.9355,
+      "h": 1.16585,
+      "anchor": 103.04
      }
     },
     "em_happy": {
@@ -806,22 +797,22 @@
      "key": "em_happy",
      "label": "TNB, feeling happy",
      "img": "art/poses/tnb/mood-em_happy.webp",
-     "w": 223,
-     "h": 496,
-     "ax": 113.5,
+     "w": 209,
+     "h": 502,
+     "ax": 102.8,
      "link": null,
-     "sheet": "tnb-emotions-v3.png",
+     "sheet": "tnb-emotions-v4.png",
      "marks": {
-      "top": 23.6,
-      "chin": 133.0,
-      "feet": 496
+      "top": 13.5,
+      "chin": 112.0,
+      "feet": 502
      },
      "conf": "low",
-     "s0": 0.076422,
+     "s0": 0.076865,
      "now": {
-      "f": 1.116,
-      "h": 1.099,
-      "anchor": 166.6
+      "f": 1.0,
+      "h": 1.21,
+      "anchor": 112.0
      }
     },
     "em_loving": {
@@ -829,22 +820,22 @@
      "key": "em_loving",
      "label": "TNB, feeling loving",
      "img": "art/poses/tnb/mood-em_loving.webp",
-     "w": 241,
-     "h": 494,
-     "ax": 119.0,
+     "w": 214,
+     "h": 506,
+     "ax": 106.0,
      "link": null,
-     "sheet": "tnb-emotions-v3.png",
+     "sheet": "tnb-emotions-v4.png",
      "marks": {
-      "top": 24.0,
-      "chin": 135.0,
-      "feet": 494
+      "top": 15.8,
+      "chin": 131.0,
+      "feet": 506
      },
      "conf": "low",
-     "s0": 0.076422,
+     "s0": 0.076865,
      "now": {
-      "f": 1.097,
-      "h": 1.051,
-      "anchor": 158.7
+      "f": 1.0,
+      "h": 1.21,
+      "anchor": 131.0
      }
     },
     "em_sad": {
@@ -852,22 +843,22 @@
      "key": "em_sad",
      "label": "TNB, feeling sad",
      "img": "art/poses/tnb/mood-em_sad.webp",
-     "w": 239,
-     "h": 483,
-     "ax": 114.5,
+     "w": 215,
+     "h": 503,
+     "ax": 113.6,
      "link": null,
-     "sheet": "tnb-emotions-v3.png",
+     "sheet": "tnb-emotions-v4.png",
      "marks": {
-      "top": 28.1,
-      "chin": 158.0,
-      "feet": 483
+      "top": 18.3,
+      "chin": 152.0,
+      "feet": 503
      },
      "conf": "low",
-     "s0": 0.076422,
+     "s0": 0.076865,
      "now": {
-      "f": 1.182,
-      "h": 1.009,
-      "anchor": 171.0
+      "f": 1.0,
+      "h": 1.21,
+      "anchor": 152.0
      }
     },
     "em_angry": {
@@ -875,22 +866,22 @@
      "key": "em_angry",
      "label": "TNB, feeling angry",
      "img": "art/poses/tnb/mood-em_angry.webp",
-     "w": 309,
-     "h": 481,
-     "ax": 138.4,
+     "w": 293,
+     "h": 495,
+     "ax": 125.2,
      "link": null,
-     "sheet": "tnb-emotions-v3.png",
+     "sheet": "tnb-emotions-v4.png",
      "marks": {
-      "top": 29.5,
-      "chin": 166.0,
-      "feet": 481
+      "top": 16.5,
+      "chin": 137.0,
+      "feet": 495
      },
      "conf": "low",
-     "s0": 0.076422,
+     "s0": 0.076865,
      "now": {
-      "f": 1.152,
-      "h": 1.017,
-      "anchor": 161.1
+      "f": 1.0,
+      "h": 1.21,
+      "anchor": 137.0
      }
     },
     "em_scared": {
@@ -898,22 +889,22 @@
      "key": "em_scared",
      "label": "TNB, feeling scared",
      "img": "art/poses/tnb/mood-em_scared.webp",
-     "w": 239,
-     "h": 508,
-     "ax": 106.0,
+     "w": 218,
+     "h": 520,
+     "ax": 111.0,
      "link": null,
-     "sheet": "tnb-emotions-v3.png",
+     "sheet": "tnb-emotions-v4.png",
      "marks": {
-      "top": 21.7,
-      "chin": 122.0,
-      "feet": 508
+      "top": 14.8,
+      "chin": 123.0,
+      "feet": 520
      },
      "conf": "low",
-     "s0": 0.076422,
+     "s0": 0.076865,
      "now": {
-      "f": 1.066,
-      "h": 1.023,
-      "anchor": 162.9
+      "f": 1.0,
+      "h": 1.21,
+      "anchor": 123.0
      }
     },
     "em_surprised": {
@@ -921,22 +912,22 @@
      "key": "em_surprised",
      "label": "TNB, feeling surprised",
      "img": "art/poses/tnb/mood-em_surprised.webp",
-     "w": 270,
-     "h": 515,
-     "ax": 125.5,
+     "w": 263,
+     "h": 519,
+     "ax": 121.8,
      "link": null,
-     "sheet": "tnb-emotions-v3.png",
+     "sheet": "tnb-emotions-v4.png",
      "marks": {
-      "top": 20.8,
-      "chin": 117.0,
-      "feet": 515
+      "top": 15.8,
+      "chin": 131.0,
+      "feet": 519
      },
      "conf": "low",
-     "s0": 0.076422,
+     "s0": 0.076865,
      "now": {
-      "f": 1.015,
-      "h": 1.092,
-      "anchor": 153.2
+      "f": 1.0,
+      "h": 1.21,
+      "anchor": 131.0
      }
     },
     "em_proud": {
@@ -944,22 +935,22 @@
      "key": "em_proud",
      "label": "TNB, feeling proud",
      "img": "art/poses/tnb/mood-em_proud.webp",
-     "w": 303,
-     "h": 513,
-     "ax": 152.3,
+     "w": 269,
+     "h": 540,
+     "ax": 159.0,
      "link": null,
-     "sheet": "tnb-emotions-v3.png",
+     "sheet": "tnb-emotions-v4.png",
      "marks": {
-      "top": 19.5,
-      "chin": 110.0,
-      "feet": 513
+      "top": 14.3,
+      "chin": 119.0,
+      "feet": 540
      },
      "conf": "low",
-     "s0": 0.076422,
+     "s0": 0.076865,
      "now": {
-      "f": 0.972,
-      "h": 1.163,
-      "anchor": 136.7
+      "f": 1.0,
+      "h": 1.21,
+      "anchor": 119.0
      }
     },
     "em_unimpressed": {
@@ -967,22 +958,22 @@
      "key": "em_unimpressed",
      "label": "TNB, feeling unimpressed",
      "img": "art/poses/tnb/mood-em_unimpressed.webp",
-     "w": 221,
-     "h": 517,
-     "ax": 114.4,
+     "w": 216,
+     "h": 536,
+     "ax": 114.3,
      "link": null,
-     "sheet": "tnb-emotions-v3.png",
+     "sheet": "tnb-emotions-v4.png",
      "marks": {
-      "top": 23.1,
-      "chin": 130.0,
-      "feet": 517
+      "top": 13.8,
+      "chin": 115.0,
+      "feet": 536
      },
      "conf": "low",
-     "s0": 0.076422,
+     "s0": 0.076865,
      "now": {
-      "f": 0.989,
-      "h": 1.075,
-      "anchor": 149.8
+      "f": 1.0,
+      "h": 1.21,
+      "anchor": 115.0
      }
     },
     "tk_tell": {
@@ -990,18 +981,18 @@
      "key": "tk_tell",
      "label": "TNB, talking, telling",
      "img": "art/poses/tnb/talk-tk_tell.webp",
-     "w": 327,
-     "h": 573,
-     "ax": 201.2,
+     "w": 286,
+     "h": 850,
+     "ax": 146.5,
      "link": null,
-     "sheet": "tnb-talk-v2.png",
+     "sheet": "tnb-talk-v3.png",
      "marks": {
-      "top": 25.0,
-      "chin": 140.5,
-      "feet": 573
+      "top": 25.5,
+      "chin": 211.5,
+      "feet": 850
      },
      "conf": "low",
-     "s0": 0.064261,
+     "s0": 0.043606,
      "now": {
       "f": 1.066,
       "h": 1.258,
@@ -1013,18 +1004,18 @@
      "key": "tk_point",
      "label": "TNB, talking, pointing",
      "img": "art/poses/tnb/talk-tk_point.webp",
-     "w": 397,
-     "h": 565,
-     "ax": 175.5,
+     "w": 384,
+     "h": 846,
+     "ax": 168.3,
      "link": null,
-     "sheet": "tnb-talk-v2.png",
+     "sheet": "tnb-talk-v3.png",
      "marks": {
-      "top": 24.6,
-      "chin": 138.6,
-      "feet": 565
+      "top": 25.3,
+      "chin": 210.5,
+      "feet": 846
      },
      "conf": "low",
-     "s0": 0.064261,
+     "s0": 0.043606,
      "now": {
       "f": 1.135,
       "h": 1.19,
@@ -1036,18 +1027,18 @@
      "key": "tk_ask",
      "label": "TNB, talking, asking",
      "img": "art/poses/tnb/talk-tk_ask.webp",
-     "w": 311,
-     "h": 592,
-     "ax": 147.2,
+     "w": 340,
+     "h": 835,
+     "ax": 190.0,
      "link": null,
-     "sheet": "tnb-talk-v2.png",
+     "sheet": "tnb-talk-v3.png",
      "marks": {
-      "top": 25.8,
-      "chin": 145.2,
-      "feet": 592
+      "top": 25.0,
+      "chin": 207.8,
+      "feet": 835
      },
      "conf": "low",
-     "s0": 0.064261,
+     "s0": 0.043606,
      "now": {
       "f": 0.974,
       "h": 1.227,
@@ -1059,18 +1050,18 @@
      "key": "tk_answer",
      "label": "TNB, talking, answering",
      "img": "art/poses/tnb/talk-tk_answer.webp",
-     "w": 313,
-     "h": 593,
-     "ax": 140.2,
+     "w": 299,
+     "h": 846,
+     "ax": 164.3,
      "link": null,
-     "sheet": "tnb-talk-v2.png",
+     "sheet": "tnb-talk-v3.png",
      "marks": {
-      "top": 25.8,
-      "chin": 145.4,
-      "feet": 593
+      "top": 25.3,
+      "chin": 210.5,
+      "feet": 846
      },
      "conf": "low",
-     "s0": 0.064261,
+     "s0": 0.043606,
      "now": {
       "f": 0.967,
       "h": 1.233,
@@ -1924,7 +1915,7 @@
       "feet": 505
      },
      "conf": "low",
-     "s0": 0.068314,
+     "s0": 0.068227,
      "now": {
       "f": 1.0,
       "h": 1.1,
@@ -1947,7 +1938,7 @@
       "feet": 517
      },
      "conf": "low",
-     "s0": 0.068314,
+     "s0": 0.068227,
      "now": {
       "f": 1.0,
       "h": 1.1,
@@ -1970,7 +1961,7 @@
       "feet": 500
      },
      "conf": "low",
-     "s0": 0.068314,
+     "s0": 0.068227,
      "now": {
       "f": 1.0,
       "h": 1.1,
@@ -1993,7 +1984,7 @@
       "feet": 483
      },
      "conf": "low",
-     "s0": 0.068314,
+     "s0": 0.068227,
      "now": {
       "f": 1.0,
       "h": 1.1,
@@ -2016,7 +2007,7 @@
       "feet": 521
      },
      "conf": "low",
-     "s0": 0.068314,
+     "s0": 0.068227,
      "now": {
       "f": 1.0,
       "h": 1.1,
@@ -2039,7 +2030,7 @@
       "feet": 526
      },
      "conf": "low",
-     "s0": 0.068314,
+     "s0": 0.068227,
      "now": {
       "f": 1.0,
       "h": 1.1,
@@ -2062,7 +2053,7 @@
       "feet": 525
      },
      "conf": "low",
-     "s0": 0.068314,
+     "s0": 0.068227,
      "now": {
       "f": 1.0,
       "h": 1.1,
@@ -2074,18 +2065,18 @@
      "key": "em_unimpressed",
      "label": "Boppy, feeling unimpressed",
      "img": "art/poses/boppy/mood-em_unimpressed.webp",
-     "w": 278,
-     "h": 575,
-     "ax": 131.4,
+     "w": 293,
+     "h": 520,
+     "ax": 170.6,
      "link": null,
-     "sheet": "boppy-em-unimpressed-v2.png",
+     "sheet": "boppy-emotions-v7.png",
      "marks": {
       "top": 21.4,
       "chin": 178.0,
-      "feet": 575
+      "feet": 520
      },
      "conf": "low",
-     "s0": 0.068314,
+     "s0": 0.068227,
      "now": {
       "f": 1.0,
       "h": 1.1,

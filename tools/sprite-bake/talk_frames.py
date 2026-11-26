@@ -44,8 +44,8 @@ def cut(cid):
     if W < 1.5 * H:   # 2 x 2 sheet (newer talk sheets): tell, point / ask, answer, row by row
         cut_y = _row_gap(rgba) if cid in GAP_SPLIT else H // 2   # tomframes: Tom's talk-v3 paints the lower row's heads above the half-way line, so split in the empty band between the rows
         rows = [(0, cut_y), (cut_y, H)]
-        return [EF.clean_cell(rgba[a:b, c * W // 2:(c + 1) * W // 2].copy()) for a, b in rows for c in range(2)]
-    return [EF.clean_cell(rgba[:, c * W // 4:(c + 1) * W // 4].copy()) for c in range(4)]
+        return [EF.clean_cell(rgba[a:b, c * W // 2:(c + 1) * W // 2].copy(), cid in EF.FRINGE) for a, b in rows for c in range(2)]
+    return [EF.clean_cell(rgba[:, c * W // 4:(c + 1) * W // 4].copy(), cid in EF.FRINGE) for c in range(4)]
 
 
 def chin_share(cid):

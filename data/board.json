@@ -9143,7 +9143,7 @@
    "theme": "Characters",
    "lane": "claude",
    "col": "prog",
-   "next": "In progress: baking Boppy's newly approved walking v5, feelings v7, talking v4 and listening v2 pictures.",
+   "next": "Shipped as build boppyframes: Boppy's walking, feelings, talking and listening are baked and pushed.",
    "blocks": [],
    "changed": "2026-11-26",
    "created": "2026-11-26",
@@ -9160,6 +9160,10 @@
     {
      "d": "2026-11-26",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Updated by boppyframes: pushed."
     }
    ],
    "after": "t-boppyframesplay",
@@ -9181,7 +9185,7 @@
    "col": "up",
    "ask": "play",
    "fyi": true,
-   "next": "Not ready yet: opens when the frames are pushed.",
+   "next": "Open the game, RELOAD on the title (if it still looks old, close the home-screen app and open it again), then CHAPTERS > Chapter 1. Look at Boppy in the story scenes and in dialogue: his walking, feelings, talking, thinking and listening poses should be one size and match his walking size, and his grumpy (unimpressed) pose should be in the same outfit as the others. His hero painting in menus is not part of this card. Tell me with the REPORT tab which pose is wrong.",
    "jump": {
     "chapter": 1
    },
@@ -9192,6 +9196,10 @@
     {
      "d": "2026-11-26",
      "t": "Made by boppyframes."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Updated by boppyframes: build is in."
     }
    ]
   }

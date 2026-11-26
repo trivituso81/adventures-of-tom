@@ -24,7 +24,8 @@ def src_path(cid):
 
 # reports 2026-11-19 (card c-reports): one approved single-figure picture of the Art Library replaces one cell of a person's mood sheet. {person: {cell index: entry id}}.
 # r-20261114-100734-1a2w: Boppy's unimpressed frame (cell 7 of boppy-emotions-v6) lost his mustache; `boppy-em-unimpressed` is painted with it.
-REPLACE = {'boppy': {7: 'boppy-em-unimpressed'}}
+# boppyframes (2026-11-26): boppy-emotions-v7 paints the mustache and the new outfit in cell 7, so the single-picture stand-in is no longer used (its file stays in the Art Library).
+REPLACE = {}
 
 def sheet_label(cid, i):
     """The picture file cell i of this person's mood strip comes from: the sheet, or the single figure that replaces that cell (the Pose Editor ties his lines to it)."""
@@ -35,7 +36,7 @@ def sheet_label(cid, i):
 
 # roseframes (2026-11-26): the newest Rose listening picture is a 4 up strip painted in her new outfit. Cell 0 (hands clasped, listening) is tk_listen; cell 1 (chin on hand)
 # is the thinking pose, so tk_think is cut from the same strip (rose-think has no new picture of its own and the old one is the old yellow dress). Other cells are unused.
-STRIP_CELL = {'rose-listen': 0, 'rose-think': 1, 'grace-listen': 0, 'grace-think': 1, 'tom-listen': 0, 'deedee-listen': 0, 'deedee-think': 1}   # graceframes: Grace's listen-v2 is the same kind of strip
+STRIP_CELL = {'rose-listen': 0, 'rose-think': 1, 'grace-listen': 0, 'grace-think': 1, 'tom-listen': 0, 'deedee-listen': 0, 'deedee-think': 1, 'boppy-listen': 0, 'boppy-think': 1}   # graceframes: Grace's listen-v2 is the same kind of strip
 
 # tomframes4 (2026-11-26): Tom's newest listen picture (tom-listen-v2) is a 4 up strip (cell 0 hands clasped = tk_listen), and tom-think-v2 is a 2 x 2 sheet of four poses;
 # its top right cell (chin on hand) is tk_think. (column, row) of the cell, used only while the newest file is a 2 x 2 sheet (taller than wide).
@@ -48,7 +49,7 @@ def _is_strip(sid):
 
 def single_figure(sid):
     """The newest approved single picture art/raw/characters/<sid>-v<N>.png, keyed and cleaned like a sheet cell."""
-    src_sid = sid.replace('-think', '-listen') if sid in ('rose-think', 'grace-think', 'deedee-think') and _is_strip(sid.replace('-think', '-listen')) else sid
+    src_sid = sid.replace('-think', '-listen') if sid in ('rose-think', 'grace-think', 'deedee-think', 'boppy-think') and _is_strip(sid.replace('-think', '-listen')) else sid
     vs = sorted(glob.glob(os.path.join(RAW, f'{src_sid}-v*.png')), key=lambda p: int(re.search(r'-v(\d+)\.png$', p).group(1)))
     img = Image.open(vs[-1]).convert('RGB')
     cell = STRIP_CELL.get(sid)
@@ -90,13 +91,23 @@ def cut(cid):
     for i in range(8):
         r, c = divmod(i, 4)
         y0, y1, x0, x1 = r * H // 2, (r + 1) * H // 2, c * W // 4, (c + 1) * W // 4
-        figs.append(clean_cell(rgba[y0:y1, x0:x1].copy()))
+        figs.append(clean_cell(rgba[y0:y1, x0:x1].copy(), cid in FRINGE))
     for i, sid in REPLACE.get(cid, {}).items():
         figs[i] = fit_head(cid, single_figure(sid), [figs[j] for j in UPRIGHT if j not in REPLACE[cid]], i)
     return figs
 
-def clean_cell(cell):
+FRINGE = {'boppy'}   # boppyframes: cast whose sheets carry a magenta glow just inside the figure's edge (Boppy talk v4: purple on the cap and by the hand)
+
+def defringe(cell, depth=20):
+    """Clear strongly magenta pixels within `depth` px of the edge (R and B both far above G). Opt in per person: pink dresses and lilac hoodies would lose their rim."""
+    A = cell[:, :, 3] > 20; d = ndi.distance_transform_edt(A); c = cell.astype(int)
+    mag = (c[:, :, 0] - c[:, :, 1] > 25) & (c[:, :, 2] - c[:, :, 1] > 40) & (c[:, :, 0] > 100) & (d <= depth) & A
+    cell[mag, 3] = 0
+    return cell
+
+def clean_cell(cell, fringe=False):
     """One keyed sheet cell -> the figure alone, cropped (also used for the talking sheets, talk_frames.py)."""
+    if fringe: cell = defringe(cell)
     A = cell[:, :, 3] > 20
     lab, n = ndi.label(ndi.binary_dilation(A, iterations=6))
     big = 1 + int(np.argmax(ndi.sum(A, lab, range(1, n + 1))))          # the figure; stray specks and smudges dropped

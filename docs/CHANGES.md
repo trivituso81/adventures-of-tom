@@ -1,3 +1,15 @@
+## boppyframes (2026-11-26): Boppy's new walking, feelings, talking, thinking and listening pictures are in the game
+
+Card c-boppyframes. Tom's words: "check boppy next". Not seen on the phone yet. Same install as `deedeeframes`.
+- Sheets installed for Boppy only: `boppy-walking-sheet-v5`, `boppy-emotions-v7`, `boppy-talk-v4` and `boppy-listen-v2`. Not part of this card: his new hero painting (`boppy-hero-v3`, shown only in menus).
+- Walking: `walk_splice.py boppy` and `heights.py write` (real height unchanged). v5's bottom row has neighbouring figures that nearly touch, so `walk_sheet_frames.grid` now retries with a tighter merge distance (added in deedeeframes).
+- Feelings and talking: `emotion_frames.py boppy`, `talk_frames.py boppy` (head x1.10), `bake_story_poses.py` (only Boppy's sets kept; drift on TNB, Ellie and Pip restored from main), dialogue faces.
+- The unimpressed frame is now cell 8 of `boppy-emotions-v7` (it has the mustache and the new outfit). The old stand-in picture `boppy-em-unimpressed` (purple vest) is no longer used (`REPLACE` is empty).
+- `boppy-listen-v2` is a 4 up strip: cell 1 (hands clasped) is `tk_listen`, cell 2 (chin on hand) is `tk_think` (`STRIP_CELL`).
+- Boppy's talk sheet carried a magenta glow on the cap and by the hand: `defringe` in `emotion_frames.py` (only for people in `FRINGE`, Boppy) clears it within 20 px of the edge. A very faint trace of it is left on the first talking frame's cap.
+- Facing rows (`docs/pose-facing.tsv`): unimpressed and think now `l`, tell `r`, answer `f`.
+- Tests: `heights_test.py` and `pose_editor_test.py` pass; smoke has the two failures that already fail on main.
+
 ## deedeefart1 (2026-11-26): four Deedee fart poses are in the Art Library, approved, not used in the game yet
 
 Tom (13:31): "create 4 pose entries of deedee making a fart in the art library. am attaching them here, you can flag them as approved. they will be used at a later point in the game that we haven't decided on yet." Four new entries in ADMIN > ART LIBRARY > Characters > Deedee, each approved from the picture Tom sent (stored as `art/raw/characters/deedee-fart-<name>-v1.png`, version flagged `up`): `deedee-fart-bend` (bent over laughing, hands on knees), `deedee-fart-hop` (giggling, hand over mouth, one foot kicked up), `deedee-fart-shock` (hands out, mouth open in an O) and `deedee-fart-battle` (one sheet of three angry poses: scowl stance, bent-over puff, big blast). Each has a self-contained prompt built on the approved pose frame (`tools/art-library/fartpose-prompts.js`, registered in `make-prompts.js`) so GENERATE can remake it. No `bake` field and no wiring: nothing in the game reads them, and no game file changed, so no cache tag moved.

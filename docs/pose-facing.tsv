@@ -38,7 +38,7 @@ boppy	em_angry	f
 boppy	em_scared	r
 boppy	em_surprised	r
 boppy	em_proud	r
-boppy	em_unimpressed	r
+boppy	em_unimpressed	l
 ellie	em_happy	r
 ellie	em_loving	r
 ellie	em_sad	f
@@ -594,11 +594,11 @@ deedee	tk_point	r
 deedee	tk_ask	f
 deedee	tk_answer	l
 deedee	tk_think	l
-boppy	tk_tell	l
+boppy	tk_tell	r
 boppy	tk_point	r
 boppy	tk_ask	f
-boppy	tk_answer	l
-boppy	tk_think	r
+boppy	tk_answer	f
+boppy	tk_think	l
 ellie	tk_tell	r
 ellie	tk_point	r
 ellie	tk_ask	f
