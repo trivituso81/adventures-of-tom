@@ -7784,6 +7784,10 @@
     {
      "d": "2026-11-26",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Session started (board: start)."
     }
    ],
    "prompt": {
