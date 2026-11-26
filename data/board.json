@@ -6935,6 +6935,29 @@
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26"
+  },
+  {
+   "id": "b-guideuse-45789372779",
+   "tag": "guideuse-45789372779",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-26",
+   "theme": "Battle System",
+   "title": "Getting hit (rose), Dodge (rose), Guard (rose) now plays a video chosen in the Battle Guide",
+   "next": "Done: Getting hit (rose), Dodge (rose), Guard (rose) now plays a video chosen in the Battle Guide",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as guideuse-45789372779. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26"
   }
  ],
  "sessions": [
@@ -13416,8 +13439,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "340d1fec12ed4c8b217dd85715f77ce172bfa17a",
- "synced_at": "2026-11-26T09:11:22+00:00",
+ "synced": "6544968edd9330ac320922796ad9e5ae0ff3ec9b",
+ "synced_at": "2026-11-26T09:22:01+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
