@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one grid of 4 columns by 4 rows showing 16 separate items?",
+  "Does the first item show a pair of ultra-light red racing flat shoes?",
+  "Does the second item show a green felt-tip pen with the cap on and a small circle mark beside it?",
+  "Does the third item show a wide-brimmed garden hat with a silk flower and a ladybug on the brim?",
+  "Does the fourth item show a floral apron with frosting and flour stains and a front pocket?",
+  "Does the fifth item show a pair of muddy rubber garden clogs with a stripe and caked in brown dirt?",
+  "Does the sixth item show a quilted oven mitt with a flower pattern and a worn thumb?",
+  "Does the seventh item show a khaki bucket hat with seven fishing lures hooked in the brim?",
+  "Does the eighth item show a fishing vest with a dozen pockets and a few peppers sticking out, laid flat?",
+  "Does the ninth item show a pair of comfy gray orthopedic sneakers with thick arch support soles?"
+ ]
+}

@@ -1,0 +1,1252 @@
+{
+ "results": [
+  {
+   "key": "room-gatezero-plane@20261120T075035",
+   "id": "room-gatezero-plane",
+   "file": "results/room-gatezero-plane/20261120T075035.png",
+   "t": 1795161035245,
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Gate Zero painting.\n\nCopy out only the white airplane seen through the big windows, whole: its body, nose, windows, wings, engines and tail, including the parts behind the window frames, painted complete as if the window frames were not in front of it. It stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Do not copy the jet bridge, the windows, the window frames or anything inside the room. Put it on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "refs": [
+    "art/gatezero.webp"
+   ],
+   "card": "t-gatezeroart",
+   "cost": 0.05
+  },
+  {
+   "key": "room-gatezero-noplane@20261120T075037",
+   "id": "room-gatezero-noplane",
+   "file": "results/room-gatezero-noplane/20261120T075037.png",
+   "t": 1795161037338,
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Gate Zero painting.\n\nReturn the same painting, unchanged in every way, except: remove the white airplane outside the big windows (its body, wings, tail, engines and windows). Where the airplane was, paint what is behind it: the same wet airfield at dusk, the same distant runway lights, hills and evening sky, continuing naturally. Keep the gray jet bridge tunnel attached to the building where it is, simply ending in the open air.\n\nEverything else stays exactly where it is, at exactly the same size: the window frames, pillars, lamps, the departures board, the podium, the jet bridge door, every seat, the carpet, the plants, the posts and the railings. Same canvas size and framing, same colors and light, same painted brushwork. Do not add anything. No people, no words. Deliver the image itself.",
+   "refs": [
+    "art/gatezero.webp"
+   ],
+   "card": "t-gatezeroart",
+   "cost": 0.05
+  },
+  {
+   "key": "area-hollow-trail2@20261121T005221",
+   "id": "area-hollow-trail2",
+   "file": "results/area-hollow-trail2/20261121T005221.png",
+   "t": 1795222341462,
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Grump Hollow, a woodland area with a pond, from \"The Adventures of Tom\", a family role-playing game. Nine small paper muffin wrappers are already pasted onto its ground as a guide.\n\nPAINT THIS ONE PICTURE\nThe exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: repaint each of the nine small muffin wrappers so it belongs in the painting. Keep every wrapper exactly where it is and exactly as small as it is in the attached picture: do not move, enlarge, add or remove any. They make a loose trail. The first wrapper is in the lower left part of the big muddy clearing. The rest run left and up to the old soggy wooden bench in the top left nook, then up the narrow path that leads into the trees at the top left corner of the clearing. The last one is where that narrow path ends.\n\nTHE WRAPPERS\nEach wrapper is a pleated paper muffin liner, cream and pale golden brown, crumpled and flattened, with a few cake crumbs and a smear of mud. Exactly nine, each crumpled a little differently, with crisp pleated edges so each one still reads at a glance. Each lies flat on the ground with a soft painted contact shadow, painted by hand in the same brushwork and warm light as the rest of the picture.\n\nKEEP\nEverything else in the picture stays exactly as painted: every tree, path, rock, bench, sign, the pond and the exit board keep their places, sizes and colors. No people, animals or monsters. No new words, letters or numbers.",
+   "refs": [
+    "art/raw/areas/hollow-trail2-guide.png"
+   ],
+   "card": "",
+   "cost": 0.05,
+   "qa": {
+    "score": 1.0,
+    "yes": 16,
+    "of": 16,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0103,
+    "items": [
+     {
+      "id": "f_one",
+      "q": "Is this one single image (not a collage of separate attempts, no borders or frames added around it)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Single cohesive painting, no collage, borders or frames."
+     },
+     {
+      "id": "f_paint",
+      "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Smooth hand-painted style with soft shading, no outlines or pixel art."
+     },
+     {
+      "id": "f_text",
+      "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Only prompt-allowed text on sign; no extras."
+     },
+     {
+      "id": "f_crop",
+      "q": "Is every figure and object fully inside the picture with space around it, nothing cut off at an edge?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "All objects fully inside with surrounding space."
+     },
+     {
+      "id": "f_same",
+      "q": "Is the character or creature the same one as in the reference picture (same face, colors, proportions, outfit, finish)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Matches reference scene exactly except for wrappers."
+     },
+     {
+      "id": "f_anat",
+      "q": "Do faces, eyes and hands look right (no extra or missing fingers or limbs, no warped face)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "No characters, faces, eyes or hands present."
+     },
+     {
+      "id": "p1",
+      "q": "Is there exactly one single painting of Grump Hollow with a pond shown?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Exactly one painting of Grump Hollow with pond."
+     },
+     {
+      "id": "p2",
+      "q": "Are there exactly nine small muffin wrappers visible in the painting?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Exactly nine muffin wrappers visible."
+     },
+     {
+      "id": "p3",
+      "q": "Is the first muffin wrapper located in the lower left part of the big muddy clearing?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "First wrapper in lower left of muddy clearing."
+     },
+     {
+      "id": "p4",
+      "q": "Do the nine muffin wrappers form a loose trail running from the lower left clearing toward the upper left?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Wrappers form loose trail from lower left toward upper left."
+     },
+     {
+      "id": "p5",
+      "q": "Do the muffin wrappers continue their trail up to the old soggy wooden bench in the top left nook?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Trail reaches wooden bench in top left nook."
+     },
+     {
+      "id": "p6",
+      "q": "Do the muffin wrappers continue from the bench up the narrow path leading into the trees at the top left corner?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Trail continues from bench up narrow path to top left."
+     },
+     {
+      "id": "p7",
+      "q": "Is the last muffin wrapper positioned where the narrow path ends in the top left?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Last wrapper at end of narrow path in top left."
+     },
+     {
+      "id": "p8",
+      "q": "Does each muffin wrapper appear as a pleated paper liner that is cream and pale golden brown?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "All are cream and pale golden brown pleated liners."
+     },
+     {
+      "id": "p9",
+      "q": "Are the muffin wrappers crumpled and flattened with visible cake crumbs and a smear of mud?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Crumpled, flattened with visible crumbs and mud smears."
+     },
+     {
+      "id": "p10",
+      "q": "Does each muffin wrapper lie flat on the ground with a soft painted contact shadow?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Each lies flat with soft painted contact shadows."
+     }
+    ]
+   }
+  },
+  {
+   "key": "area-hollow-trail3@20261121T005224",
+   "id": "area-hollow-trail3",
+   "file": "results/area-hollow-trail3/20261121T005224.png",
+   "t": 1795222344510,
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Grump Hollow, a woodland area with a pond, from \"The Adventures of Tom\", a family role-playing game. Nine small paper muffin wrappers are already pasted onto its ground as a guide.\n\nPAINT THIS ONE PICTURE\nThe exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: repaint each of the nine small muffin wrappers so it belongs in the painting. Keep every wrapper exactly where it is and exactly as small as it is in the attached picture: do not move, enlarge, add or remove any. They make a loose trail. The first wrapper is at the top left corner of the big muddy clearing, where the narrow path comes out of the trees. The rest run down and to the right across the clearing. The last one is in the exact middle of the clearing.\n\nTHE WRAPPERS\nEach wrapper is a pleated paper muffin liner, cream and pale golden brown, crumpled and flattened, with a few cake crumbs and a smear of mud. Exactly nine, each crumpled a little differently, with crisp pleated edges so each one still reads at a glance. Each lies flat on the ground with a soft painted contact shadow, painted by hand in the same brushwork and warm light as the rest of the picture.\n\nKEEP\nEverything else in the picture stays exactly as painted: every tree, path, rock, bench, sign, the pond and the exit board keep their places, sizes and colors. No people, animals or monsters. No new words, letters or numbers.",
+   "refs": [
+    "art/raw/areas/hollow-trail3-guide.png"
+   ],
+   "card": "",
+   "cost": 0.05,
+   "qa": {
+    "score": 0.938,
+    "yes": 15,
+    "of": 16,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0137,
+    "items": [
+     {
+      "id": "f_one",
+      "q": "Is this one single image (not a collage of separate attempts, no borders or frames added around it)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Single cohesive painting, no collage or added borders."
+     },
+     {
+      "id": "f_paint",
+      "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Smooth hand-painted style with soft shading, no outlines or pixel art."
+     },
+     {
+      "id": "f_text",
+      "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Only sign text present, no extra letters/words/watermarks."
+     },
+     {
+      "id": "f_crop",
+      "q": "Is every figure and object fully inside the picture with space around it, nothing cut off at an edge?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "All elements fully inside with space around edges."
+     },
+     {
+      "id": "f_same",
+      "q": "Is the character or creature the same one as in the reference picture (same face, colors, proportions, outfit, finish)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Matches reference painting exactly except for specified wrapper changes."
+     },
+     {
+      "id": "f_anat",
+      "q": "Do faces, eyes and hands look right (no extra or missing fingers or limbs, no warped face)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "No characters or creatures present."
+     },
+     {
+      "id": "p1",
+      "q": "Is there exactly one painting shown?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Exactly one painting shown."
+     },
+     {
+      "id": "p2",
+      "q": "Is there exactly nine small muffin wrappers visible?",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Only 8 muffin wrappers visible."
+     },
+     {
+      "id": "p3",
+      "q": "Are all nine wrappers located in the big muddy clearing?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "All wrappers are in the big muddy clearing."
+     },
+     {
+      "id": "p4",
+      "q": "Does the first wrapper appear at the top left of the clearing where the narrow path emerges from the trees?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "First wrapper at top left where path emerges from trees."
+     },
+     {
+      "id": "p5",
+      "q": "Do the wrappers form a loose trail running down and to the right across the clearing?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Wrappers form loose trail down and to the right."
+     },
+     {
+      "id": "p6",
+      "q": "Is the last wrapper positioned in the exact middle of the clearing?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Last wrapper in middle of clearing."
+     },
+     {
+      "id": "p7",
+      "q": "Does each wrapper look like a pleated paper muffin liner that is cream and pale golden brown?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "All are cream and pale golden brown pleated liners."
+     },
+     {
+      "id": "p8",
+      "q": "Are the wrappers crumpled and flattened with visible cake crumbs and a smear of mud?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Crumpled, flattened with crumbs and mud smears visible."
+     },
+     {
+      "id": "p9",
+      "q": "Do all wrappers lie flat on the ground with a soft painted contact shadow?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "All lie flat with soft contact shadows."
+     },
+     {
+      "id": "p10",
+      "q": "Are the wrappers kept exactly the same size as in the attached picture?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "All kept exactly the same small size."
+     }
+    ]
+   }
+  },
+  {
+   "key": "area-hollow-trail1@20261121T005228",
+   "id": "area-hollow-trail1",
+   "file": "results/area-hollow-trail1/20261121T005228.png",
+   "t": 1795222348039,
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Grump Hollow, a woodland area with a pond, from \"The Adventures of Tom\", a family role-playing game. Nine small paper muffin wrappers are already pasted onto its ground as a guide.\n\nPAINT THIS ONE PICTURE\nThe exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: repaint each of the nine small muffin wrappers so it belongs in the painting. Keep every wrapper exactly where it is and exactly as small as it is in the attached picture: do not move, enlarge, add or remove any. They make a loose trail. The first wrapper is on the stone path just inside the gate, under the green exit board. The rest climb the path and curve into the lower left part of the big muddy clearing. The last one is a little left of the middle of the clearing.\n\nTHE WRAPPERS\nEach wrapper is a pleated paper muffin liner, cream and pale golden brown, crumpled and flattened, with a few cake crumbs and a smear of mud. Exactly nine, each crumpled a little differently, with crisp pleated edges so each one still reads at a glance. Each lies flat on the ground with a soft painted contact shadow, painted by hand in the same brushwork and warm light as the rest of the picture.\n\nKEEP\nEverything else in the picture stays exactly as painted: every tree, path, rock, bench, sign, the pond and the exit board keep their places, sizes and colors. No people, animals or monsters. No new words, letters or numbers.",
+   "refs": [
+    "art/raw/areas/hollow-trail1-guide.png"
+   ],
+   "card": "",
+   "cost": 0.05,
+   "qa": {
+    "score": 0.938,
+    "yes": 15,
+    "of": 16,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0135,
+    "items": [
+     {
+      "id": "f_one",
+      "q": "Is this one single image (not a collage of separate attempts, no borders or frames added around it)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "One single cohesive image"
+     },
+     {
+      "id": "f_paint",
+      "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Smooth hand-painted style with soft shading"
+     },
+     {
+      "id": "f_text",
+      "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Only prompt-allowed text on sign"
+     },
+     {
+      "id": "f_crop",
+      "q": "Is every figure and object fully inside the picture with space around it, nothing cut off at an edge?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "All elements fully inside with space"
+     },
+     {
+      "id": "f_same",
+      "q": "Is the character or creature the same one as in the reference picture (same face, colors, proportions, outfit, finish)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Matches reference painting exactly except for wrappers."
+     },
+     {
+      "id": "f_anat",
+      "q": "Do faces, eyes and hands look right (no extra or missing fingers or limbs, no warped face)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "No faces, eyes or hands depicted"
+     },
+     {
+      "id": "p1",
+      "q": "Is there exactly one single painting shown?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Exactly one single painting"
+     },
+     {
+      "id": "p2",
+      "q": "Is there exactly nine muffin wrappers visible?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Exactly nine muffin wrappers visible."
+     },
+     {
+      "id": "p3",
+      "q": "Are all nine wrappers located on the ground in the painting?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Visible wrappers are on the ground"
+     },
+     {
+      "id": "p4",
+      "q": "Do the nine wrappers form a loose trail starting on the stone path just inside the gate under the green exit board?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Trail starts on stone path inside gate under sign."
+     },
+     {
+      "id": "p5",
+      "q": "Do the nine wrappers continue climbing the path and curving into the lower left part of the big muddy clearing?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Wrappers climb path and curve into lower left of clearing."
+     },
+     {
+      "id": "p6",
+      "q": "Is the last wrapper positioned a little left of the middle of the clearing?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Last wrapper is left of middle in clearing."
+     },
+     {
+      "id": "p7",
+      "q": "Does each wrapper appear as a small pleated paper muffin liner?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Visible items appear as pleated liners"
+     },
+     {
+      "id": "p8",
+      "q": "Are the wrappers cream and pale golden brown in color?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Cream and golden brown colors"
+     },
+     {
+      "id": "p9",
+      "q": "Does each wrapper look crumpled and flattened with visible cake crumbs and a smear of mud?",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Lack visible crumbs and mud smears"
+     },
+     {
+      "id": "p10",
+      "q": "Does each wrapper lie flat on the ground with a soft painted contact shadow?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Each lies flat with soft painted contact shadow."
+     }
+    ]
+   }
+  },
+  {
+   "key": "area-hollow-trail4@20261121T005253",
+   "id": "area-hollow-trail4",
+   "file": "results/area-hollow-trail4/20261121T005253.png",
+   "t": 1795222373545,
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Grump Hollow, a woodland area with a pond, from \"The Adventures of Tom\", a family role-playing game. Nine small paper muffin wrappers are already pasted onto its ground as a guide.\n\nPAINT THIS ONE PICTURE\nThe exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: repaint each of the nine small muffin wrappers so it belongs in the painting. Keep every wrapper exactly where it is and exactly as small as it is in the attached picture: do not move, enlarge, add or remove any. They make a loose trail. The first wrapper is in the middle of the big muddy clearing. The rest run to the right along the path toward the pond shore. The last one is on the shore path a few steps in front of Boppy's small fishing bench with the thermos and the bucket, and none lie on the bench or in the water.\n\nTHE WRAPPERS\nEach wrapper is a pleated paper muffin liner, cream and pale golden brown, crumpled and flattened, with a few cake crumbs and a smear of mud. Exactly nine, each crumpled a little differently, with crisp pleated edges so each one still reads at a glance. Each lies flat on the ground with a soft painted contact shadow, painted by hand in the same brushwork and warm light as the rest of the picture.\n\nKEEP\nEverything else in the picture stays exactly as painted: every tree, path, rock, bench, sign, the pond and the exit board keep their places, sizes and colors. No people, animals or monsters. No new words, letters or numbers.",
+   "refs": [
+    "art/raw/areas/hollow-trail4-guide.png"
+   ],
+   "card": "",
+   "cost": 0.05,
+   "qa": {
+    "score": 1.0,
+    "yes": 16,
+    "of": 16,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0098,
+    "items": [
+     {
+      "id": "f_one",
+      "q": "Is this one single image (not a collage of separate attempts, no borders or frames added around it)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "single cohesive painting"
+     },
+     {
+      "id": "f_paint",
+      "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "smooth painted style with soft shading"
+     },
+     {
+      "id": "f_text",
+      "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "only prompt-allowed sign text present"
+     },
+     {
+      "id": "f_crop",
+      "q": "Is every figure and object fully inside the picture with space around it, nothing cut off at an edge?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "all elements fully framed with space"
+     },
+     {
+      "id": "f_same",
+      "q": "Is the character or creature the same one as in the reference picture (same face, colors, proportions, outfit, finish)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "matches reference painting exactly except wrappers"
+     },
+     {
+      "id": "f_anat",
+      "q": "Do faces, eyes and hands look right (no extra or missing fingers or limbs, no warped face)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "no characters or faces present"
+     },
+     {
+      "id": "p1",
+      "q": "Is there exactly one single painting of Grump Hollow woodland with a pond?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "exact Grump Hollow woodland with pond"
+     },
+     {
+      "id": "p2",
+      "q": "Are there exactly nine small crumpled paper muffin wrappers visible in the scene?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Exactly nine small crumpled muffin wrappers visible."
+     },
+     {
+      "id": "p3",
+      "q": "Do all nine wrappers appear as pleated cream and pale golden brown paper liners with cake crumbs and mud smears?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "All appear as pleated cream/golden brown liners with crumbs and mud."
+     },
+     {
+      "id": "p4",
+      "q": "Is the first wrapper located in the middle of the big muddy clearing?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "First wrapper is in middle of big muddy clearing."
+     },
+     {
+      "id": "p5",
+      "q": "Do the wrappers form a loose trail running to the right along the path toward the pond shore?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Wrappers form loose trail to right along path to pond shore."
+     },
+     {
+      "id": "p6",
+      "q": "Is the last wrapper positioned on the shore path a few steps in front of Boppy's small fishing bench?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Last wrapper on shore path in front of fishing bench."
+     },
+     {
+      "id": "p7",
+      "q": "Are none of the wrappers lying on the bench or in the water?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "None on bench or in water."
+     },
+     {
+      "id": "p8",
+      "q": "Does each wrapper lie flat on the ground with a soft painted contact shadow?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Each lies flat with soft painted contact shadow."
+     },
+     {
+      "id": "p9",
+      "q": "Are all wrappers kept exactly the same size and in their original positions without any moved, enlarged, added or removed?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "All same size, original positions, none moved/enlarged/added/removed."
+     },
+     {
+      "id": "p10",
+      "q": "Are there no people, animals or monsters visible anywhere in the painting?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "no people, animals or monsters visible"
+     }
+    ]
+   }
+  },
+  {
+   "key": "prop-gate-jpark-barn-open@20261122T070821",
+   "id": "prop-gate-jpark-barn-open",
+   "file": "results/prop-gate-jpark-barn-open/20261122T070821.png",
+   "t": 1795331301513,
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGES\n1) The current painting of Jefferson Park, from \"The Adventures of Tom\", a family role-playing game. Jefferson Park is a leafy neighborhood street with craftsman houses and purple trees. The opening is the side street at the far edge of the picture, beyond the green CAR BARN arch. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n2) The same object in its locked state, already approved for the game. Paint exactly this object: the same design, parts, materials, colors, proportions, size and camera angle. Only the change described below is different.\n\nPAINT THIS ONE OBJECT\nA tall old black iron double gate between two weathered stone posts, both gate leaves swung toward the viewer and hanging at an angle from their stone posts, so the space between the posts is clear from post to post. No chain and no padlock anywhere. The frost is gone. The riveted metal plate is fixed to the left gate leaf only and swings open with it; it reads exactly: DIVISION NINE CAR BARN\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. The stone posts span the full width of the side street, about two people wide, and are taller than a person. The gap between the open leaves is clear.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- Lettering is painted by you, spelled exactly as given, big, clear and easy to read. No other words anywhere.\n- Family friendly for children aged 6 and up.",
+   "refs": [
+    "art/jpark.webp",
+    "art/raw/props/prop-gate-jpark-barn-v1.png"
+   ],
+   "card": "",
+   "cost": 0.08,
+   "svc": "wan",
+   "try": 1,
+   "qa": {
+    "score": 0.929,
+    "yes": 13,
+    "of": 14,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0107,
+    "items": [
+     {
+      "id": "f_one",
+      "q": "Is this one single image (not a collage of separate attempts, no borders or frames added around it)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "single centered image with no collage or frames"
+     },
+     {
+      "id": "f_paint",
+      "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+      "kind": "fixed",
+      "yes": false,
+      "why": "3D rendered style with thick outlines, not hand-painted."
+     },
+     {
+      "id": "f_text",
+      "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "only the exact requested text on the sign"
+     },
+     {
+      "id": "f_bg",
+      "q": "Does the background match what the prompt asks for (for a flat color background: one flat color with no gradient, floor, shadow band or scenery)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "pure flat magenta background with no gradient or scenery"
+     },
+     {
+      "id": "f_crop",
+      "q": "Is every figure and object fully inside the picture with space around it, nothing cut off at an edge? A cut that the prompt asks for (for example a figure shown from the waist up) is fine; hands, heads, hair and props cut off by accident are not.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "fully inside with clear margin around all elements"
+     },
+     {
+      "id": "p1",
+      "q": "Is there exactly one object visible?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "exactly one gate object visible"
+     },
+     {
+      "id": "p2",
+      "q": "Are both gate leaves swung toward the viewer and hanging at an angle from the posts?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "both leaves swung open toward viewer at an angle"
+     },
+     {
+      "id": "p3",
+      "q": "Is the space between the two posts completely clear from post to post with no gate blocking it?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "space between posts is completely clear"
+     },
+     {
+      "id": "p4",
+      "q": "Is there no chain or padlock visible anywhere on the gate?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "no chain or padlock visible"
+     },
+     {
+      "id": "p5",
+      "q": "Is the riveted metal plate attached only to the left gate leaf?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "plate is only on the left gate leaf"
+     },
+     {
+      "id": "p6",
+      "q": "Are the stone posts taller than a person and spanning about two people in width?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "posts are tall and wide as described"
+     },
+     {
+      "id": "p7",
+      "q": "Is the entire object centered with a clear margin around it and fully inside the picture?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "centered with clear margin and fully inside"
+     },
+     {
+      "id": "p8",
+      "q": "Is there a small soft contact shadow directly under the object?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "small soft shadow under the object"
+     },
+     {
+      "id": "p9",
+      "q": "Are the gate leaves open such that the gap between them is clear?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "leaves open with clear gap between them"
+     }
+    ]
+   }
+  },
+  {
+   "key": "prop-gate-town-school-open@20261122T070821",
+   "id": "prop-gate-town-school-open",
+   "file": "results/prop-gate-town-school-open/20261122T070821.png",
+   "t": 1795331305517,
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGES\n1) The current painting of the Square, from \"The Adventures of Tom\", a family role-playing game. The Square is a cobbled plaza ringed by little shops. The opening is the cobbled lane at the far side of the plaza, beside the green SCHOOL arrow signboard and the toy shop with the round orange sign. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n2) The same object in its locked state, already approved for the game. Paint exactly this object: the same design, parts, materials, colors, proportions, size and camera angle. Only the change described below is different.\n\nPAINT THIS ONE OBJECT\nThe same school gate with its chain link gate leaf taken off: only the two grey steel posts and the top rail between them remain, and the space between the posts is empty, showing only background. No chain and no padlock anywhere. No sign, no words.\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. The posts span the full width of the lane, about two people wide, and are a little taller than a person. Nothing stands in the middle of the lane.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- No letters, words or numbers anywhere, not even the names on the signs in the painting.\n- Family friendly for children aged 6 and up.",
+   "refs": [
+    "art/town.webp",
+    "art/raw/props/prop-gate-town-school-v1.png"
+   ],
+   "card": "",
+   "cost": 0.08,
+   "svc": "wan",
+   "try": 1,
+   "qa": {
+    "score": 0.0,
+    "yes": 0,
+    "of": 14,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.011,
+    "items": [
+     {
+      "id": "f_one",
+      "q": "Is this one single image (not a collage of separate attempts, no borders or frames added around it)?",
+      "kind": "fixed",
+      "yes": false,
+      "why": "image is a full scene with multiple buildings"
+     },
+     {
+      "id": "f_paint",
+      "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+      "kind": "fixed",
+      "yes": false,
+      "why": "full colorful scene, not single object"
+     },
+     {
+      "id": "f_text",
+      "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+      "kind": "fixed",
+      "yes": false,
+      "why": "many signs with words like CRUMB BAKERY"
+     },
+     {
+      "id": "f_bg",
+      "q": "Does the background match what the prompt asks for (for a flat color background: one flat color with no gradient, floor, shadow band or scenery)?",
+      "kind": "fixed",
+      "yes": false,
+      "why": "detailed plaza background, not transparent or magenta"
+     },
+     {
+      "id": "f_crop",
+      "q": "Is every figure and object fully inside the picture with space around it, nothing cut off at an edge? A cut that the prompt asks for (for example a figure shown from the waist up) is fine; hands, heads, hair and props cut off by accident are not.",
+      "kind": "fixed",
+      "yes": false,
+      "why": "full scene, not isolated object"
+     },
+     {
+      "id": "p1",
+      "q": "Is there exactly one object shown with nothing else?",
+      "kind": "prompt",
+      "yes": false,
+      "why": "full village scene, not one object"
+     },
+     {
+      "id": "p2",
+      "q": "Are there only two grey steel posts and a top rail with the space between them completely empty?",
+      "kind": "prompt",
+      "yes": false,
+      "why": "no gate posts, full scene instead"
+     },
+     {
+      "id": "p3",
+      "q": "Is there no chain anywhere in the image?",
+      "kind": "prompt",
+      "yes": false,
+      "why": "no gate at all"
+     },
+     {
+      "id": "p4",
+      "q": "Is there no padlock anywhere in the image?",
+      "kind": "prompt",
+      "yes": false,
+      "why": "no gate at all"
+     },
+     {
+      "id": "p5",
+      "q": "Is there no sign anywhere in the image?",
+      "kind": "prompt",
+      "yes": false,
+      "why": "multiple signs present"
+     },
+     {
+      "id": "p6",
+      "q": "Do the posts span approximately the full width of the lane and appear a little taller than a person?",
+      "kind": "prompt",
+      "yes": false,
+      "why": "no gate posts shown"
+     },
+     {
+      "id": "p7",
+      "q": "Is nothing standing in the middle of the lane between the posts?",
+      "kind": "prompt",
+      "yes": false,
+      "why": "scene has many elements"
+     },
+     {
+      "id": "p8",
+      "q": "Is the object centered with a clear margin around it and fully inside the picture?",
+      "kind": "prompt",
+      "yes": false,
+      "why": "full scene, not centered object"
+     },
+     {
+      "id": "p9",
+      "q": "Is there a small soft contact shadow directly under the object?",
+      "kind": "prompt",
+      "yes": false,
+      "why": "no gate or shadow present"
+     }
+    ]
+   }
+  },
+  {
+   "key": "prop-gate-town-school-open@20261122T071654",
+   "id": "prop-gate-town-school-open",
+   "file": "results/prop-gate-town-school-open/20261122T071654.png",
+   "t": 1795331814082,
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGES\n1) The current painting of the Square, from \"The Adventures of Tom\", a family role-playing game. The Square is a cobbled plaza ringed by little shops. The opening is the cobbled lane at the far side of the plaza, beside the green SCHOOL arrow signboard and the toy shop with the round orange sign. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n2) The same object in its locked state, already approved for the game. Paint exactly this object: the same design, parts, materials, colors, proportions, size and camera angle. Only the change described below is different.\n\nPAINT THIS ONE OBJECT\nThe same school gate with its chain link gate leaf taken off: only the two grey steel posts and the top rail between them remain, and the space between the posts is empty, showing only background. No chain and no padlock anywhere. No sign, no words.\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. The posts span the full width of the lane, about two people wide, and are a little taller than a person. Nothing stands in the middle of the lane.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- No letters, words or numbers anywhere, not even the names on the signs in the painting.\n- Family friendly for children aged 6 and up.",
+   "refs": [
+    "art/town.webp",
+    "art/raw/props/prop-gate-town-school-v1.png"
+   ],
+   "card": "",
+   "cost": 0.08,
+   "svc": "wan",
+   "try": 1
+  },
+  {
+   "key": "prop-gate-jpark-barn-open@20261122T071654",
+   "id": "prop-gate-jpark-barn-open",
+   "file": "results/prop-gate-jpark-barn-open/20261122T071654.png",
+   "t": 1795331816073,
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or a scene.\n\nATTACHED IMAGES\n1) The current painting of Jefferson Park, from \"The Adventures of Tom\", a family role-playing game. Jefferson Park is a leafy neighborhood street with craftsman houses and purple trees. The opening is the side street at the far edge of the picture, beyond the green CAR BARN arch. Match its painting exactly: hand painted realistic storybook look, smooth soft shading, fine brush texture, the same colors and materials, warm golden light from the upper left, and the same camera angle. Not pixel art, not 16-bit. Do not copy any building, person or scene from it.\n2) The same object in its locked state, already approved for the game. Paint exactly this object: the same design, parts, materials, colors, proportions, size and camera angle. Only the change described below is different.\n\nPAINT THIS ONE OBJECT\nA tall old black iron double gate between two weathered stone posts, both gate leaves swung toward the viewer and hanging at an angle from their stone posts, so the space between the posts is clear from post to post. No chain and no padlock anywhere. The frost is gone. The riveted metal plate is fixed to the left gate leaf only and swings open with it; it reads exactly: DIVISION NINE CAR BARN\n\nRULES\n- The game draws this object on top of the painting at that opening, so it must look like it belongs in that exact place: same camera angle, same lighting, same materials as the paving, stone and wood around it. The stone posts span the full width of the side street, about two people wide, and are taller than a person. The gap between the open leaves is clear.\n- Centered, complete, fully inside the picture with a clear margin, crisp clean edges.\n- Background fully transparent (PNG with alpha). If your tool cannot output transparency, fill the whole background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere in the object.\n- No people, no animals, no characters, no scenery, no ground patch, no border, no frame, no caption. A small soft contact shadow directly under the object is fine.\n- Lettering is painted by you, spelled exactly as given, big, clear and easy to read. No other words anywhere.\n- Family friendly for children aged 6 and up.",
+   "refs": [
+    "art/jpark.webp",
+    "art/raw/props/prop-gate-jpark-barn-v1.png"
+   ],
+   "card": "",
+   "cost": 0.08,
+   "svc": "wan",
+   "try": 1,
+   "qa": {
+    "score": 0.286,
+    "yes": 4,
+    "of": 14,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.016,
+    "items": [
+     {
+      "id": "f_one",
+      "q": "Is this one single image (not a collage of separate attempts, no borders or frames added around it)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Single complete image with no collage or frames."
+     },
+     {
+      "id": "f_paint",
+      "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Smooth hand-painted look with soft shading, no thick outlines or pixel art."
+     },
+     {
+      "id": "f_text",
+      "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+      "kind": "fixed",
+      "yes": false,
+      "why": "Extra text 'DOWNTOWN', 'CREOLE', etc. not asked for in prompt."
+     },
+     {
+      "id": "f_bg",
+      "q": "Does the background match what the prompt asks for (for a flat color background: one flat color with no gradient, floor, shadow band or scenery)?",
+      "kind": "fixed",
+      "yes": false,
+      "why": "Complex scene background instead of transparent or flat magenta."
+     },
+     {
+      "id": "f_crop",
+      "q": "Is every figure and object fully inside the picture with space around it, nothing cut off at an edge? A cut that the prompt asks for (for example a figure shown from the waist up) is fine; hands, heads, hair and props cut off by accident are not.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Fully inside with clear margin around the object."
+     },
+     {
+      "id": "p1",
+      "q": "Is there exactly one object visible?",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Multiple buildings, trees, signs and scenery visible besides the gate."
+     },
+     {
+      "id": "p2",
+      "q": "Are both gate leaves swung toward the viewer and hanging at an angle from the posts?",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Gate leaves not swung toward viewer at an angle; integrated into scene."
+     },
+     {
+      "id": "p3",
+      "q": "Is the space between the two posts completely clear from post to post with no gate blocking it?",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Space between posts not clear; filled with street and background elements."
+     },
+     {
+      "id": "p4",
+      "q": "Is there no chain or padlock visible anywhere on the gate?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "No chain or padlock visible."
+     },
+     {
+      "id": "p5",
+      "q": "Is the riveted metal plate attached only to the left gate leaf?",
+      "kind": "prompt",
+      "yes": false,
+      "why": "No riveted metal plate visible on left leaf."
+     },
+     {
+      "id": "p6",
+      "q": "Are the stone posts taller than a person and spanning about two people in width?",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Stone posts not shown as taller than a person or spanning two people wide."
+     },
+     {
+      "id": "p7",
+      "q": "Is the entire object centered with a clear margin around it and fully inside the picture?",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Object not isolated or centered alone; embedded in full scene."
+     },
+     {
+      "id": "p8",
+      "q": "Is there a small soft contact shadow directly under the object?",
+      "kind": "prompt",
+      "yes": false,
+      "why": "No small soft contact shadow under the gate."
+     },
+     {
+      "id": "p9",
+      "q": "Are the gate leaves open such that the gap between them is clear?",
+      "kind": "prompt",
+      "yes": false,
+      "why": "Gate leaves not open with clear gap; part of closed scene view."
+     }
+    ]
+   }
+  },
+  {
+   "key": "tom-grace-rose-greeting-hug@20261126T085709",
+   "id": "tom-grace-rose-greeting-hug",
+   "file": "results/tom-grace-rose-greeting-hug/20261126T085709.png",
+   "t": 1795683429600,
+   "prompt": "Draw Tom (first attached picture), Grace (second) and Rose (third) as a greeting pose sheet. Grace is the older girl and Rose the little one; keep the size difference between all three exactly as in the pictures.\n\nCopy the attached pictures as exactly as possible in every frame: the same people, faces, hair, beard, clothes, shoes, colors, linework, painting style, level of detail and head size compared to the body. Only the poses change. Do not redesign anything.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells (8 frames, numbered left to right, top to bottom), the same scale in every cell, feet on the same ground line in every cell.\n\n1. Hearing them. Tom alone, standing, eyebrows raised, head lifted as if he just heard his name called.\n2. Delighted. Tom alone, a huge smile, arms starting to open.\n3. Crouching. Tom alone, crouched low, arms wide open.\n4. Girls running in. Tom crouched with arms open, Grace running in on one side and Rose on the other, both beaming.\n5. Crash hug. Both girls throw their arms around Tom at once.\n6. Group hug. The three of them in one tight hug, eyes closed, big smiles.\n7. Squeeze. The same hug, Rose's feet just off the ground.\n8. Looking up. A loose hug, all three looking at each other, laughing.\n\nBackground: one flat solid magenta #FF00FF filling the whole image. No magenta anywhere on the characters: pink shoes stay clearly pink. No grid lines, borders, numbers, labels, text, shadows, dust, motion lines, sparkles or glow effects. Nothing touches a cell edge. Family friendly.",
+   "refs": [
+    "art/raw/characters/tom-hero-v4.png",
+    "art/raw/characters/grace-hero-v1.png",
+    "art/raw/characters/rose-hero-v1.png"
+   ],
+   "card": "",
+   "cost": 0.07,
+   "svc": "xai",
+   "try": 1,
+   "qa": {
+    "score": 0.944,
+    "yes": 17,
+    "of": 18,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0157,
+    "items": [
+     {
+      "id": "f_one",
+      "q": "Is this one single image (not a collage of separate attempts, no borders or frames added around it)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "single image grid"
+     },
+     {
+      "id": "f_paint",
+      "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+      "kind": "fixed",
+      "yes": false,
+      "why": "thick black outlines"
+     },
+     {
+      "id": "f_text",
+      "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "no text present"
+     },
+     {
+      "id": "f_bg",
+      "q": "Does the background match what the prompt asks for (for a flat color background: one flat color with no gradient, floor, shadow band or scenery)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "solid magenta background"
+     },
+     {
+      "id": "f_crop",
+      "q": "Is every figure and object fully inside the picture with space around it, nothing cut off at an edge? A cut that the prompt asks for (for example a figure shown from the waist up) is fine; hands, heads, hair and props cut off by accident are not.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "all figures fully inside"
+     },
+     {
+      "id": "f_count",
+      "q": "Does the picture show exactly the number of poses, cells or items the prompt asks for, laid out as asked?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "exactly 8 frames in grid"
+     },
+     {
+      "id": "f_same",
+      "q": "Is the character or creature the same one as in the reference picture (same face, colors, proportions, outfit, finish)? Judge only the parts the prompt shows: a figure the prompt crops (for example waist up) is not faulted for legs, shoes or pants that are out of the picture.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "matches references closely"
+     },
+     {
+      "id": "f_anat",
+      "q": "Do faces, eyes and hands look right (no extra or missing fingers or limbs, no warped face)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "faces eyes hands look correct"
+     },
+     {
+      "id": "p1",
+      "q": "Is the image a grid of exactly 4 columns by 2 rows of equal square cells with 8 frames?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "4x2 grid of equal cells"
+     },
+     {
+      "id": "p2",
+      "q": "Is Tom shown alone in frame 1 standing with raised eyebrows and lifted head as if hearing his name?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Tom standing, raised eyebrows, head lifted"
+     },
+     {
+      "id": "p3",
+      "q": "Is Tom shown alone in frame 2 with a huge smile and arms starting to open?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Tom smiling, arms starting to open"
+     },
+     {
+      "id": "p4",
+      "q": "Is Tom shown alone in frame 3 crouched low with arms wide open?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Tom crouched low, arms wide open"
+     },
+     {
+      "id": "p5",
+      "q": "In frame 4, is Tom crouched with arms open while Grace runs in on one side and Rose on the other, both with beaming expressions?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Tom crouched, girls running in beaming"
+     },
+     {
+      "id": "p6",
+      "q": "In frame 5, are both girls throwing their arms around Tom at once in a crash hug?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "girls throwing arms around Tom in hug"
+     },
+     {
+      "id": "p7",
+      "q": "In frame 6, are all three in one tight group hug with eyes closed and big smiles?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "tight group hug, eyes closed, smiles"
+     },
+     {
+      "id": "p8",
+      "q": "In frame 7, is it the same hug as frame 6 but with Rose's feet just off the ground?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "same hug with Rose feet off ground"
+     },
+     {
+      "id": "p9",
+      "q": "In frame 8, are all three in a loose hug looking at each other and laughing?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "loose hug, looking at each other laughing"
+     },
+     {
+      "id": "p10",
+      "q": "Do all characters exactly match the attached reference pictures in visible faces, hair, beard, clothes, shoes, colors, head-to-body size, and size differences between Tom, Grace, and Rose?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "exact match to references in all details"
+     }
+    ]
+   }
+  },
+  {
+   "key": "tom-grace-rose-greeting-hug@20261126T091120",
+   "id": "tom-grace-rose-greeting-hug",
+   "file": "results/tom-grace-rose-greeting-hug/20261126T091120.png",
+   "t": 1795684280847,
+   "prompt": "Draw Tom (first attached picture), Grace (second) and Rose (third) as a greeting pose sheet. Grace is the older girl and Rose the little one; keep the size difference between all three exactly as in the pictures.\n\nCopy the attached pictures as exactly as possible in every frame: the same people, faces, hair, beard, clothes, shoes, colors, linework, painting style, level of detail and head size compared to the body. Only the poses change. Do not redesign anything.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells (8 frames, numbered left to right, top to bottom), the same scale in every cell, feet on the same ground line in every cell.\n\n1. Hearing them. Tom alone, standing, eyebrows raised, head lifted as if he just heard his name called.\n2. Delighted. Tom alone, a huge smile, arms starting to open.\n3. Crouching. Tom alone, crouched low, arms wide open.\n4. Girls running in. Tom crouched with arms open, Grace running in on one side and Rose on the other, both beaming.\n5. Crash hug. Both girls throw their arms around Tom at once.\n6. Group hug. The three of them in one tight hug, eyes closed, big smiles.\n7. Squeeze. The same hug, Rose's feet just off the ground.\n8. Looking up. A loose hug, all three looking at each other, laughing.\n\nBackground: one flat solid magenta #FF00FF filling the whole image. No magenta anywhere on the characters: pink shoes stay clearly pink. No grid lines, borders, numbers, labels, text, shadows, dust, motion lines, sparkles or glow effects. Nothing touches a cell edge. Family friendly.",
+   "refs": [
+    "art/raw/characters/tom-hero-v4.png",
+    "art/raw/characters/grace-hero-v1.png",
+    "art/raw/characters/rose-hero-v1.png"
+   ],
+   "card": "",
+   "cost": 0.07,
+   "svc": "xai",
+   "try": 1,
+   "qa": {
+    "score": 0.944,
+    "yes": 17,
+    "of": 18,
+    "model": "grok-4.20-0309-non-reasoning",
+    "runs": 3,
+    "spent": 0.0144,
+    "items": [
+     {
+      "id": "f_one",
+      "q": "Is this one single image (not a collage of separate attempts, no borders or frames added around it)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Single image grid as requested"
+     },
+     {
+      "id": "f_paint",
+      "q": "Is it a smooth hand-painted picture with soft shading and no thick black outlines, and clearly not pixel art?",
+      "kind": "fixed",
+      "yes": false,
+      "why": "Thick black outlines present, not smooth hand-painted"
+     },
+     {
+      "id": "f_text",
+      "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "No text, letters or numbers"
+     },
+     {
+      "id": "f_bg",
+      "q": "Does the background match what the prompt asks for (for a flat color background: one flat color with no gradient, floor, shadow band or scenery)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Solid magenta background matches"
+     },
+     {
+      "id": "f_crop",
+      "q": "Is every figure and object fully inside the picture with space around it, nothing cut off at an edge? A cut that the prompt asks for (for example a figure shown from the waist up) is fine; hands, heads, hair and props cut off by accident are not.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "All figures fully inside with space"
+     },
+     {
+      "id": "f_count",
+      "q": "Does the picture show exactly the number of poses, cells or items the prompt asks for, laid out as asked?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Exactly 8 frames in 4x2 grid"
+     },
+     {
+      "id": "f_same",
+      "q": "Is the character or creature the same one as in the reference picture (same face, colors, proportions, outfit, finish)? Judge only the parts the prompt shows: a figure the prompt crops (for example waist up) is not faulted for legs, shoes or pants that are out of the picture.",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Characters match references in visible details"
+     },
+     {
+      "id": "f_anat",
+      "q": "Do faces, eyes and hands look right (no extra or missing fingers or limbs, no warped face)?",
+      "kind": "fixed",
+      "yes": true,
+      "why": "Faces, eyes, hands and limbs look correct"
+     },
+     {
+      "id": "p1",
+      "q": "Is the image a grid of exactly 4 columns by 2 rows of equal square cells with 8 frames?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Exact 4x2 grid of equal cells"
+     },
+     {
+      "id": "p2",
+      "q": "Is Tom shown alone in frame 1 standing with raised eyebrows and lifted head as if hearing his name?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Tom alone standing, eyebrows raised, head lifted"
+     },
+     {
+      "id": "p3",
+      "q": "Is Tom shown alone in frame 2 with a huge smile and arms starting to open?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Tom alone with huge smile, arms opening"
+     },
+     {
+      "id": "p4",
+      "q": "Is Tom shown alone in frame 3 crouched low with arms wide open?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Tom alone crouched low, arms wide"
+     },
+     {
+      "id": "p5",
+      "q": "In frame 4, is Tom crouched with arms open while Grace runs in on one side and Rose on the other, both with beaming expressions?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Tom crouched, girls running in beaming"
+     },
+     {
+      "id": "p6",
+      "q": "In frame 5, are both girls throwing their arms around Tom at once in a crash hug?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Girls throwing arms around Tom in crash hug"
+     },
+     {
+      "id": "p7",
+      "q": "In frame 6, are all three in one tight group hug with eyes closed and big smiles?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Tight group hug, eyes closed, big smiles"
+     },
+     {
+      "id": "p8",
+      "q": "In frame 7, is it the same hug as frame 6 but with Rose's feet just off the ground?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Same hug with Rose feet off ground"
+     },
+     {
+      "id": "p9",
+      "q": "In frame 8, are all three in a loose hug looking at each other and laughing?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Loose hug, all looking and laughing"
+     },
+     {
+      "id": "p10",
+      "q": "Do all characters exactly match the attached reference pictures in visible faces, hair, beard, clothes, shoes, colors, head-to-body size, and size differences between Tom, Grace, and Rose?",
+      "kind": "prompt",
+      "yes": true,
+      "why": "Exact match to references in all visible aspects"
+     }
+    ]
+   }
+  }
+ ]
+}

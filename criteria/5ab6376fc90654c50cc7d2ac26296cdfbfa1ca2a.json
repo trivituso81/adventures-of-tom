@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one grid of 4 columns by 4 rows showing 16 separate items?",
+  "Does each item occupy its own cell without overlapping any other item or crossing cell boundaries?",
+  "Is each of the 16 items centered in its cell and filling about 70 percent of that cell?",
+  "Is there at least 12 percent empty margin on every side of each item within its cell?",
+  "Are the 16 items presented in left-to-right top-to-bottom order matching the exact list order provided?",
+  "Is the first item a striped popcorn bucket overflowing with buttery popcorn?",
+  "Is the second item a pale yellow bar of skate wax with visible grooves worn in it?",
+  "Is the third item a tiny clay taco with speckled glaze?",
+  "Is the fourth item a basket of lemons that includes a couple of leaves?",
+  "Is the fifth item a thick stack of screenplay pages with a brass brad?"
+ ]
+}

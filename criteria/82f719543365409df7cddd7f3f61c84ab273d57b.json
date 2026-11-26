@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is the horizon a single straight horizontal line at approximately y=590 across the full width?",
+  "Is everything below y=590 a flat even-toned brown floor with no objects, plants, rocks, puddles, or markings?",
+  "Are there exactly two large gnarled oak trees framing the far left and far right edges with bases near y=560?",
+  "Is there a band of dark green pond water spanning the full width between approximately y=400 and y=565 containing lily pads, water lilies, and one mossy log left of center?",
+  "Does the far shore show only mossy boulders, ferns, and a wall of twisted oak trunks with no buildings, houses, docks, or man-made structures?",
+  "Are the two broad mid-tone low-contrast bands between y=330 and y=590 (x=150-1050 and x=1340-1780) free of bright spots, high contrast, or busy details?",
+  "Is the top strip (y=0-100) and top-right corner (x=1500-1920, y=0-190) quiet with low detail and no bright spots or landmarks?",
+  "Are all vertical and horizontal edges perfectly vertical and horizontal with no rotation, tilt, vanishing point, or perspective distortion?",
+  "Is there no foreground framing element crossing below y=560 or touching the bottom edge except allowed side trees?",
+  "Does warm sunlight filtering appear only as soft golden patches above y=330 with no hard shadows or bright pools on the floor?"
+ ]
+}

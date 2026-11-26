@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one grid of 4 columns by 4 rows showing 16 separate items?",
+  "Is the first item a silver stopwatch with a big digital face and lanyard?",
+  "Is the second item a navy blazer laid flat with a tiny apple pin on the lapel?",
+  "Is the third item a sporty wristwatch with a bright strap?",
+  "Is the fourth item a shiny red relay baton shown as a smooth cylinder?",
+  "Is the fifth item a folded shiny silver foil marathon jacket?",
+  "Is the sixth item a shiny medal on a ribbon with a hole in it?",
+  "Is the seventh item a white marble rolling pin on a small wooden stand?",
+  "Is the eighth item a cream-colored apron with embroidered flowers?",
+  "Is the ninth item a huge sun hat with a very wide brim and a ladybug on a flower?"
+ ]
+}

@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one image showing a 4x4 grid of 16 items with no borders, labels or numbers?",
+  "Are there exactly 16 distinct objects, one fully visible and centered in each grid cell?",
+  "Does each object occupy about 70 percent of its cell with at least 12 percent empty margin on all sides?",
+  "Do no objects touch or cross any cell edges or overlap with each other?",
+  "Is the first object a gold and red casino-style round chip with a clover in the center?",
+  "Is the fourth object a purple velvet coat with a satin collar and one big button shown laid flat?",
+  "Is the ninth object a navy sleep eye mask with an elastic strap and two sleepy stitched eyes?",
+  "Is the eleventh object navy pajamas folded flat with a small gold zero on the pocket?",
+  "Is the fifteenth object a pale silk scarf loosely draped in a loop?",
+  "Is the sixteenth object a china teacup of tea on a saucer with a thick curl of steam and a tiny spoon?"
+ ]
+}

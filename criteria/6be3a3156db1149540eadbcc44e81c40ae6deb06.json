@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one grid of 4 columns by 4 rows showing 16 distinct items?",
+  "Does each item occupy its own square cell without touching or crossing any cell edges?",
+  "Is each item centered in its cell and filling about 70 percent of the cell with clear empty margin around it?",
+  "Are the 16 items presented in the exact order listed from left to right top to bottom starting with the red hair clip in position 1?",
+  "Is the first item a shiny red hair clip with a small bow shown open?",
+  "Is the second item a yellow gingham dress with round collar and puffed sleeves shown laid flat?",
+  "Is the fifth item a big round golden chocolate chip cookie with a thin curl of steam?",
+  "Is the eighth item one glossy red hot chili pepper with a green stem curved like a hook?",
+  "Is the thirteenth item a small round pie in a tin made of dark mud with a flower in the middle?",
+  "Is the sixteenth item one lonely striped sock shown soggy and drooping with a drip at the toe?"
+ ]
+}

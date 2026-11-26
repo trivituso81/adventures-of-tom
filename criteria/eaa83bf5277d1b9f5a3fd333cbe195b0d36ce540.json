@@ -1,0 +1,12 @@
+{
+ "requirements": [
+  "Is there exactly one image showing a 4x4 grid of 16 items with no borders, labels or numbers?",
+  "Are the 16 items arranged left to right and top to bottom in the exact order listed in the prompt?",
+  "Does each of the 16 items occupy its own cell with at least 12 percent empty margin on every side and nothing touching or crossing cell edges?",
+  "Is nothing overlapping between any of the items or cells?",
+  "Is the sledgehammer shown as a heavy sledgehammer with a thick wooden handle and steel head in three-quarter view?",
+  "Is the blazer shown as a fitted dark designer blazer with satin lapels laid flat?",
+  "Is the game jersey shown as a green and gold jersey with a big plain stripe, wrinkled?",
+  "Does the image contain exactly the 16 listed objects and no additional objects, people, hands or faces?"
+ ]
+}

@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is the image a grid of exactly 4 columns by 2 rows of equal square cells with 8 frames?",
+  "Is Tom shown alone in frame 1 standing with raised eyebrows and lifted head as if hearing his name?",
+  "Is Tom shown alone in frame 2 with a huge smile and arms starting to open?",
+  "Is Tom shown alone in frame 3 crouched low with arms wide open?",
+  "In frame 4, is Tom crouched with arms open while Grace runs in on one side and Rose on the other, both with beaming expressions?",
+  "In frame 5, are both girls throwing their arms around Tom at once in a crash hug?",
+  "In frame 6, are all three in one tight group hug with eyes closed and big smiles?",
+  "In frame 7, is it the same hug as frame 6 but with Rose's feet just off the ground?",
+  "In frame 8, are all three in a loose hug looking at each other and laughing?",
+  "Do all characters exactly match the attached reference pictures in visible faces, hair, beard, clothes, shoes, colors, head-to-body size, and size differences between Tom, Grace, and Rose?"
+ ]
+}

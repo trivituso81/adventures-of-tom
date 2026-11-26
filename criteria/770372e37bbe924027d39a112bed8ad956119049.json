@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one complete birthday sash shown?",
+  "Is the sash laid flat with the whole long loop visible?",
+  "Does the sash fill about 70 percent of the picture with at least 12 percent empty margin on every side?",
+  "Is the sash a single long wide band of gold fabric?",
+  "Is there a small gold bow tied on the band near the bottom of the loop?",
+  "Is the sash shown as one object only with nothing else present?",
+  "Is the sash centered in the picture?",
+  "Is the sash viewed from a three-quarter angle from slightly above?",
+  "Does the bow appear as one integrated part of the sash band?",
+  "Is the sash the only item visible with no additional objects?"
+ ]
+}

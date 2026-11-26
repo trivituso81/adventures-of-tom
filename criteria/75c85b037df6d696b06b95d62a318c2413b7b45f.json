@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one grid of 4 columns by 4 rows showing 16 distinct items?",
+  "Does the first item show a heavy orange kiln glove with a small charm tied on?",
+  "Does the second item show a rope tug toy with three knots and a few tooth marks?",
+  "Does the third item show a reflective hi-vis dog harness in bright yellow-green?",
+  "Does the fourth item show a silk striped racing bandana for a dog?",
+  "Does the fifth item show a bright orange deluxe squeaky ball with a squeaker hole and lightning stripe?",
+  "Does the sixth item show a bright yellow rain slicker for dogs with a hood?",
+  "Does the seventh item show a red dog collar with a golden jingle bell?",
+  "Does the eighth item show a huge thick knobbly stick with leaves on it?",
+  "Does the ninth item show a blue working dog vest with straps and patches?"
+ ]
+}

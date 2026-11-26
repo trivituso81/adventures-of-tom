@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one image showing a 4x4 grid of 16 distinct items?",
+  "Does the image contain precisely the 16 listed objects with none added, substituted or omitted?",
+  "Are the 16 objects arranged in a grid from left to right and top to bottom in the exact order given in the list?",
+  "Is each object complete, centered in its own cell and occupying roughly 70 percent of that cell?",
+  "Is there at least 12 percent empty margin on all sides of every object with nothing touching or crossing any cell boundary?",
+  "Do the rain booties show four tiny yellow dog booties with strap closures?",
+  "Does the squeaky ball appear as a bright yellow rubber ball with visible bite marks and a small squeaker hole?",
+  "Is the chicken jerky depicted as an open bag with golden strips spilling out?",
+  "Does the slobbery tennis ball look wet and shiny with visible drool strings?",
+  "Is the mechanical keyboard shown with chunky blue switches and colorful keycaps?"
+ ]
+}

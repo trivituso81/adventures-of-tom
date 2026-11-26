@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one single object shown?",
+  "Is the object a birthday sash with a big bow?",
+  "Is the sash colored gold?",
+  "Is the sash depicted as draped?",
+  "Is the object centered in the image?",
+  "Does the object fill about 70 percent of the picture?",
+  "Is there at least 12 percent empty margin on every side around the object?",
+  "Is the object shown in a three-quarter view from slightly above?",
+  "Is the sash shown as sparkly?",
+  "Does the image show only the sash with no other items or elements?"
+ ]
+}

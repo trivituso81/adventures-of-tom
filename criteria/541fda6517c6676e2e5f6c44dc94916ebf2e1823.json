@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one person visible in the image?",
+  "Does the person match the attached reference picture in face, hair, proportions, and outfit?",
+  "Is the image wide and horizontal in shape?",
+  "Does the person occupy the right third of the image?",
+  "Is the person shown from the waist up?",
+  "Is the person facing directly toward the viewer?",
+  "Is the person's one hand raised in a waving gesture?",
+  "Is the person displaying a gentle smile?",
+  "Is the left two thirds of the image a plain cream-colored ribbon area with a thin gold edge?",
+  "Is the left ribbon area completely empty with no words or letters?"
+ ]
+}

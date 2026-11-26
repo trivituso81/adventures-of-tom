@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one person shown from the waist up filling the right third of the image?",
+  "Is the person facing directly toward the viewer?",
+  "Are both of the person's arms raised in a cheering pose?",
+  "Is the person displaying a big open smile?",
+  "Does the person have the exact same face as in the attached reference picture?",
+  "Does the person have the exact same hair as in the attached reference picture?",
+  "Does the person have the exact same body proportions as in the attached reference picture?",
+  "Is the person wearing the exact same outfit as in the attached reference picture?",
+  "Is the left two thirds of the image a plain warm cream parchment ribbon with a thin gold edge?",
+  "Is the overall image a single wide horizontal banner?"
+ ]
+}

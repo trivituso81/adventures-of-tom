@@ -1,0 +1,14 @@
+{
+ "requirements": [
+  "Is there exactly one single object visible?",
+  "Is the object a road barrier gate in its open state?",
+  "Are there exactly two short posts visible?",
+  "Are the two posts red and white striped?",
+  "Is there no arm or sign crossing between the two posts?",
+  "Are the two posts about waist high relative to the implied scale?",
+  "Are the two posts positioned about two people wide apart?",
+  "Is the object shown from the exact same camera angle as the attached images?",
+  "Does the object have the exact same design, parts, materials, colors, proportions and size as the locked state image?",
+  "Is there a small soft contact shadow directly under the object?"
+ ]
+}

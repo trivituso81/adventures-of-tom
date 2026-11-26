@@ -1,0 +1,26 @@
+{
+ "card": "(requests)",
+ "auto": false,
+ "approved": [],
+ "held": [],
+ "state": "done",
+ "estimate": 0,
+ "cap": 1.0,
+ "dry_run": false,
+ "made": [],
+ "already": [],
+ "skipped": [
+  {
+   "id": "deedee-talk",
+   "why": "already approved"
+  }
+ ],
+ "failed": [],
+ "spent": 0.0,
+ "svc": {},
+ "stopped": [],
+ "at": "2026-11-26T21:04:35Z",
+ "asked": [
+  "deedee-talk"
+ ]
+}
