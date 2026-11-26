@@ -8582,13 +8582,17 @@
    "title": "Draw library effects in a real Battle 3 fight",
    "next": "In progress: drawing the 37 Stage 2C library effects at each move's contact moment in a real Battle 3 fight, each at its own layer point in the draw order, with a fight that survives an effect that throws. Tests: guide_timing_test, b3_test, smoke, then a look at a fight in portrait and landscape.",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGJG774MKmrW8qNpsd",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done. Add a card for this task first\""
    },
    "history": [
     {
      "d": "2026-11-26",
      "t": "Started: Tom asked for the library effects to draw in a real Battle 3 fight (the next step named by card c-vfxlib3). Board: new card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "blocks": [],
@@ -8764,6 +8768,26 @@
    "cards": [
     "c-wanstop-rose-citadel-r1",
     "t-rosestage-lab"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDwxR9ZuRHnWPoGUN5",
+   "title": "Battle Guide: Animations tab does nothing",
+   "first": "2026-11-26T10:02:54-08:00",
+   "last": "2026-11-26T10:02:54-08:00",
+   "tags": [],
+   "cards": [
+    "c-guide-animtabs"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGJG774MKmrW8qNpsd",
+   "title": "Draw library effects in a real Battle 3 fight",
+   "first": "2026-11-26T10:02:28-08:00",
+   "last": "2026-11-26T10:02:28-08:00",
+   "tags": [],
+   "cards": [
+    "c-vfxfight1"
    ]
   },
   {
@@ -15331,8 +15355,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "a905a2d5a0d513c57321b8b3a01e2b5ffc657283",
- "synced_at": "2026-11-26T17:53:26+00:00",
+ "synced": "ec460636647cb3edefc2ed7b3a1f5b2e7f16bcfd",
+ "synced_at": "2026-11-26T18:03:24+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
