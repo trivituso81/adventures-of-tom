@@ -2487,7 +2487,7 @@
       "pep_cost": 0,
       "base_recovery": 80,
       "flavor": "Clobber",
-      "lifecycle_state": "ANCHORED",
+      "lifecycle_state": "DRAFT_REVIEW",
       "pitch": {
         "windup": "Justin, standing in place in three-quarters-left profile, coils slightly with the claw hammer already in his front hand and the yellow stud finder clipped stationary at his chest belt line.",
         "peak": "Justin delivers one crisp forward-left tap into empty air with the claw hammer.",
@@ -2548,6 +2548,37 @@
         "in_hand": "the claw hammer in his front hand",
         "fixed_prop": "the yellow stud finder clipped stationary at his chest belt line",
         "strike": "one crisp forward-left tap into empty air with the claw hammer"
+      },
+      "qa_gate": {
+        "run_id": "bench-justinbb9-2",
+        "winner": "wan3_s1",
+        "stage_a": {
+          "raw_duration_sec": 5.0,
+          "trimmed_sec": 3.9,
+          "cut_frame": 116,
+          "peak_mask_churn": 0.5236,
+          "left_reach_ratio": 1.0833,
+          "foot_retreat_ratio": 0.0,
+          "end_to_start_iou": 0.9574,
+          "failures": [],
+          "passed": true
+        },
+        "stage_b": {
+          "matches_hero_ink_pencil_style": true,
+          "locked_3q_left_facing": true,
+          "single_prop_integrity": true,
+          "zero_baked_vfx_or_rings": true,
+          "clean_strike_and_idle_return": true,
+          "strict_quadruped": true,
+          "judge": "gemini-4-neon",
+          "runs": 3,
+          "rejected_on": [],
+          "passed": true,
+          "failure_reason": "",
+          "true_votes": 18,
+          "total_votes": 18
+        },
+        "passed": true
       }
     },
     {

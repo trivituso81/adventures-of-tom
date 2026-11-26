@@ -1,0 +1,53 @@
+{
+  "attempts": [
+    {
+      "attempt": 1,
+      "measured": {
+        "border_exact_808080_fraction": 1.0,
+        "figure_height_fraction": 0.859,
+        "passed": true
+      },
+      "vision": {
+        "matches_hero_ink_pencil_style": true,
+        "three_quarter_left_profile": true,
+        "calm_deadpan_closed_mouth": true,
+        "stud_finder_clipped_stationary_at_chest_belt": false,
+        "single_claw_hammer_in_front_hand": true,
+        "zero_duplicate_belt_hammer": true,
+        "full_body_unclipped": true,
+        "passed": false,
+        "rejected_on": [
+          "stud_finder_clipped_stationary_at_chest_belt"
+        ],
+        "runs": 3,
+        "judge": "gemini-4-neon",
+        "failure_reason": "Body faces nearly front-on instead of three-quarters left, and the stud finder sits on the shirt chest rather than clipped to a belt."
+      },
+      "passed": false
+    },
+    {
+      "attempt": 2,
+      "measured": {
+        "border_exact_808080_fraction": 1.0,
+        "figure_height_fraction": 0.859,
+        "passed": true
+      },
+      "vision": {
+        "matches_hero_ink_pencil_style": true,
+        "three_quarter_left_profile": true,
+        "calm_deadpan_closed_mouth": true,
+        "stud_finder_clipped_stationary_at_chest_belt": true,
+        "single_claw_hammer_in_front_hand": true,
+        "zero_duplicate_belt_hammer": true,
+        "full_body_unclipped": true,
+        "passed": true,
+        "rejected_on": [],
+        "runs": 3,
+        "judge": "gemini-4-neon",
+        "failure_reason": ""
+      },
+      "passed": true
+    }
+  ],
+  "passed": true
+}

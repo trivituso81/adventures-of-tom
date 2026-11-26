@@ -1,0 +1,66 @@
+{
+  "cap": 5.0,
+  "total": 4.9791,
+  "rows": [
+    {
+      "label": "start frame attempt 1: Gemini image + 3 judge calls",
+      "usd": 0.1785,
+      "service": "google"
+    },
+    {
+      "label": "start frame attempt 1: fal cutout",
+      "usd": 0.021,
+      "service": "fal"
+    },
+    {
+      "label": "start frame attempt 2: Gemini image + 3 judge calls",
+      "usd": 0.1785,
+      "service": "google"
+    },
+    {
+      "label": "start frame attempt 2: fal cutout",
+      "usd": 0.021,
+      "service": "fal"
+    },
+    {
+      "label": "Stage B judge calls: 6 seeds x 3 runs",
+      "usd": 0.2268,
+      "service": "google"
+    },
+    {
+      "label": "kling3pro_s3: 5 s at $0.140/s",
+      "usd": 0.735,
+      "service": "fal"
+    },
+    {
+      "label": "wan3_s1: 5 s at $0.100/s",
+      "usd": 0.525,
+      "service": "fal"
+    },
+    {
+      "label": "kling3pro_s1: 5 s at $0.140/s",
+      "usd": 0.735,
+      "service": "fal"
+    },
+    {
+      "label": "wan3_s2: 5 s at $0.100/s",
+      "usd": 0.525,
+      "service": "fal"
+    },
+    {
+      "label": "kling3pro_s2: 5 s at $0.140/s",
+      "usd": 0.735,
+      "service": "fal"
+    },
+    {
+      "label": "wan3_s3: 5 s at $0.100/s",
+      "usd": 0.525,
+      "service": "fal"
+    },
+    {
+      "label": "matte winner wan3_s1: 3.9 s at $0.14/s",
+      "usd": 0.5733,
+      "service": "fal"
+    }
+  ]
+}

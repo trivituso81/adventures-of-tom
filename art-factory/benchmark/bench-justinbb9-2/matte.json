@@ -1,0 +1,19 @@
+{
+  "frames": 117,
+  "pixels_made_opaque_by_clamp": 191922,
+  "webm": "/Users/runner/work/adventures-of-tom/adventures-of-tom/art-factory/benchmark/bench-justinbb9-2/winner_alpha.webm",
+  "safari_mp4": "/Users/runner/work/adventures-of-tom/adventures-of-tom/art-factory/benchmark/bench-justinbb9-2/winner_alpha_safari_hvc1.mp4",
+  "safari_note": "ok",
+  "checkerboard": "/Users/runner/work/adventures-of-tom/adventures-of-tom/art-factory/benchmark/bench-justinbb9-2/alpha_checkerboard_8.png",
+  "checkerboard_frames": [
+    0,
+    17,
+    33,
+    50,
+    66,
+    83,
+    99,
+    116
+  ],
+  "matte_model": "bria/video/background-removal"
+}
