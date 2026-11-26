@@ -535,8 +535,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T07:57:36Z",
-   "state": "checking",
-   "since": "2026-11-26T08:08:28Z",
+   "state": "done",
+   "since": "2026-11-26T08:12:01Z",
    "run": 45778513410,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -549,7 +549,33 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-tom-ko/t1.js",
+    "img": "takes/body-tom-ko/t1.webp",
+    "frames": 75,
+    "kb": 1258,
+    "words": "0 to 148 step 2, 1.5x",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "edge: 11 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)",
+      "ko_forward: ends 0% of the height in front of where it stood (falls forward, should fall backwards)",
+      "vision k_dizzy: Face shows sad/dejected expressions but no dizzy, swirly, or crossed eyes.; Face shows sadness with downturned features, but no swirly, crossed eyes or woozy look.",
+      "vision k_back: Falls to side then lies awkwardly; does not end on back with head to right.; Falls to sitting then lying on back, but head is toward the left, not right."
+     ],
+     "faults": [
+      "edge",
+      "k_back",
+      "k_dizzy",
+      "ko_forward"
+     ],
+     "vision_ran": true,
+     "spent": 0.0075,
+     "error": null,
+     "words": "The clip gate flags this take: edge: 11 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground); ko_forward: ends 0% of the height in front of where it stood (falls forward, should fall backwards); vision k_dizzy: Face shows sad/dejected expressions but no dizzy, swirly, or crossed eyes.; Face shows sadness with downturned features, but no swirly, crossed eyes or woozy look.; vision k_back: Falls to side then lies awkwardly; does not end on back with head to right.; Falls to sitting then lying on back, but head is toward the left, not right.."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
