@@ -8154,6 +8154,14 @@
      "date": "2026-11-13",
      "from": "v1",
      "at": 1794537938579
+    },
+    {
+     "n": 1,
+     "file": "art/raw/characters/tom-greeting-crouch-v2.png",
+     "date": "2026-11-26",
+     "from": "v3",
+     "at": 1795722443904,
+     "up": true
     }
    ],
    "rejects": [],
