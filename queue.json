@@ -3264,8 +3264,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T08:58:25Z",
-   "state": "checking",
-   "since": "2026-11-26T09:21:41Z",
+   "state": "done",
+   "since": "2026-11-26T09:26:14Z",
    "run": 45790862688,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -3275,10 +3275,34 @@
     "est": 0.5
    },
    "tries": 2,
-   "cost": 0,
+   "cost": 0.0,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-tnb-dodge/t5.js",
+    "img": "takes/body-tnb-dodge/t5.webp",
+    "frames": 40,
+    "kb": 847,
+    "words": "0 to 78 step 2",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "edge: 12 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)",
+      "dodge_forward: the body goes forward 12% of the height (should go back or to the side)",
+      "vision d_back: Figure shows side leans and some leg shifts but no clear backward or side dodge; includes forward-leaning elements.; Figure shifts sideways but shows forward-leaning poses and forward leg steps in multiple frames."
+     ],
+     "faults": [
+      "d_back",
+      "dodge_forward",
+      "edge"
+     ],
+     "vision_ran": true,
+     "spent": 0.0037,
+     "error": null,
+     "words": "The clip gate flags this take: edge: 12 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground); dodge_forward: the body goes forward 12% of the height (should go back or to the side); vision d_back: Figure shows side leans and some leg shifts but no clear backward or side dodge; includes forward-leaning elements.; Figure shifts sideways but shows forward-leaning poses and forward leg steps in multiple frames.."
+    },
+    "n": 5
+   },
    "use": null,
    "left": false,
    "dry": false,
