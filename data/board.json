@@ -6975,7 +6975,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Justin production clip: #00FF00 start, new Kling prompt",
-   "next": "Roll 3 (cfg_scale 0.95) running; roll 2 was close but the hammer smeared across his face. See claude/next-justinbb9.md.",
+   "next": "Roll 4 is the best so far but still fails QA (draw smear, ends with hand near hip). Next: Kling multi_prompt shots from the same start.png. See claude/next-justinbb9.md.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFJ3SQckykBNpN3Deq",
     "opening": "UNCONSTRAINED PRODUCTION ORDER (REPO: trivituso81/adventures-of-tom)"
@@ -7017,19 +7017,23 @@
     {
      "d": "2026-11-25",
      "t": "Roll 3 (cfg 0.95): worse, scowl and hammer blur over face, so cfg goes back to 0.85. Roll 4 changes only the negative prompt: adds hammer in front of face, hammer blocking face, motion blur, hand on hip. Spend $4.50 before roll 4."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Roll 4: face clear, rap forward right, green keys clean; still fails QA (ghosted frame while drawing the hammer, not an exact idle at the end, faint boot shadow). Ended without shipping; nothing pushed to the game. Four rolls this session, total fal spend about $5.0. Next: Kling multi_prompt (three shots), see claude/next-justinbb9.md."
     }
    ],
    "blocks": [],
    "created": "2026-11-25",
    "changed": "2026-11-25",
    "prompt": {
-    "what": "Continue the Justin Kling video run: change one implementation setting per roll, key by green dominance, 8-frame QA.",
+    "what": "Roll the Justin Kling video with three multi_prompt shots from start.png, key and QA.",
     "before": [
      "Nothing to do first."
     ],
     "model": "Claude Sonnet 5.5 (row B: written steps, QA gate catches mistakes)",
     "effort": "medium (steps are known)",
-    "text": "Read the c-justinbb9 card and claude/next-justinbb9.md. Continue the Kling v3 Pro roll for justin-bb-basic from start.png, changing one setting per roll, key with key.py, run the 8-frame checkerboard QA before pushing. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "text": "Read the c-justinbb9 card and claude/next-justinbb9.md. Roll Kling v3 Pro for justin-bb-basic from start.png with roll 4's settings but the action split into three multi_prompt shots, key with the #00FF00 chromakey, trim to 4.0 s, run the 8-frame checkerboard QA before pushing. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "rescue": {
     "at": "2026-11-26T00:19:22+00:00",

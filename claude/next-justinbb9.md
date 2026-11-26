@@ -15,6 +15,16 @@ Order: one transparent .webm for justin-bb-basic, 3.5 to 4.0 s, Kling v3 Pro fro
 ## Same miss twice
 Attempt 8 (long style prompt) and roll 1 (Tom's short prompt) are different prompts with the same failure: he rotates toward camera, the face changes, the props do not stay where the prompt puts them. The prompt is not the lever, so a third Kling roll from one image would be the same bet. Stop-loss rule applied: no third roll.
 
+## Rolls this session (Kling v3 Pro, start.png only, files in art-factory/sandbox-justin-test/attempt9/)
+| Roll | Change | Result |
+|---|---|---|
+| 1 | Tom's prompt, cfg default 0.5, duration 5 | 3.04 s, pastel green, turns to camera, scowl, hammer swung wide |
+| 2 | cfg_scale 0.85, duration 6 | 6.04 s, true green (7,241,3), #00FF00 chromakey works, calm; hammer smears over face, ends hand on hip |
+| 3 | cfg_scale 0.95 | worse: scowl, hammer blur over face |
+| 4 | cfg 0.85 back, negatives added (hammer in front of face, hammer blocking face, motion blur, hand on hip) | face clear, hammer rap forward is right; fails: one frame where the hand sweeps the torso when drawing the hammer (ghosted), ends with elbow out and hand near hip (not exact idle), faint floor shadow under boots |
+
 ## Next session should
-- Keep Kling v3 Pro, image-to-video from start.png only. Change implementation, one thing at a time: cfg_scale (default 0.5, now 0.85), duration (ask for 6 s, the 5 s ask came back 3.04 s), key by green dominance (key.py) because the output green drifts.
+- Stay on Kling v3 Pro video from start.png. Start from roll 4's settings (cfg 0.85, the added negatives, 6 s, trim to 4.0 s from about 2.0 s).
+- Change one thing: split the action into `multi_prompt` shots (Kling's own multi-shot input): shot 1 stud finder glide, shot 2 hammer draw and rap, shot 3 hammer back, nod, return to idle. This targets the draw smear and the ending stance.
+- Key with the #00FF00 chromakey (works now); raise the alpha cut slightly to remove the faint shadow under the boots.
 - Keep the 8-frame checkerboard QA (frames at (i+0.5)/8 of the duration).
