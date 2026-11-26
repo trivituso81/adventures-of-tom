@@ -8707,29 +8707,6 @@
      "t": "Made by roseframes."
     }
    ]
-  },
-  {
-   "id": "svc-art-bake",
-   "service": "art-bake",
-   "lane": "github",
-   "col": "prog",
-   "theme": "Tools",
-   "title": "art-bake is running",
-   "next": "art-bake is running",
-   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45884552203",
-   "chat": {
-    "url": "",
-    "opening": "service run"
-   },
-   "history": [
-    {
-     "d": "2026-11-26",
-     "t": "art-bake started."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-26",
-   "changed": "2026-11-26"
   }
  ],
  "sessions": [
