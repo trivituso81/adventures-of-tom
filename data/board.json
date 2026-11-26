@@ -8720,6 +8720,60 @@
      "t": "Updated by roseframes: build is in."
     }
    ]
+  },
+  {
+   "id": "c-graceframes",
+   "title": "Install Grace's new walk, feelings, talking, listen frames",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "up",
+   "next": "In progress: baking Grace's new walking (v3), feelings (v4), talking (v3) and listening (v2) sheets, the same way as Rose's.",
+   "blocks": [],
+   "changed": "2026-11-26",
+   "created": "2026-11-26",
+   "tag": "graceframes",
+   "chat": {
+    "url": "",
+    "opening": "\"now do grace\""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by the session: Tom's words: \"now do grace\" (after c-roseframes)."
+    }
+   ],
+   "after": "t-graceframesplay",
+   "prompt": {
+    "what": "Installs Grace's new walking, feelings, talking and listening sheets for Grace only.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the bakes exist and tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md and docs/CHANGES.md roseframes and tomframes, then card c-graceframes in data/board.json. Your first push is the commit board: start c-graceframes. Tom uploaded new painted sheets for Grace on 2026-11-26: grace-walking-sheet-v3, grace-emotions-v4, grace-talk-v3 and grace-listen-v2. Install them for Grace only. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "t-graceframesplay",
+   "title": "Look at Grace's new walk, feelings, talk, listen frames",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Not ready yet: opens when Grace's frames are pushed.",
+   "jump": {
+    "chapter": 1
+   },
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by graceframes."
+    }
+   ]
   }
  ],
  "sessions": [
