@@ -2574,15 +2574,43 @@
    "note": "",
    "cap": 0,
    "at": "2026-11-26T08:53:26Z",
-   "state": "checking",
-   "since": "2026-11-26T08:53:48Z",
+   "state": "done",
+   "since": "2026-11-26T08:55:05Z",
    "run": 45787006923,
    "fal": null,
    "tries": 1,
    "cost": 0,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "path": "startpics/tnb-hero.png",
+    "mirrored": false,
+    "own": true,
+    "checks": [
+     {
+      "id": "magenta",
+      "ok": true,
+      "say": "the background is flat magenta (FF00FF is asked for)"
+     },
+     {
+      "id": "flat",
+      "ok": true,
+      "say": "the edges are clear (99.8 percent background)"
+     },
+     {
+      "id": "inside",
+      "ok": true,
+      "say": "the whole figure is inside the frame (smallest margin 1.7 percent of the picture)"
+     },
+     {
+      "id": "tall",
+      "ok": true,
+      "say": "the figure is 97 percent of the picture height (at least 60)"
+     }
+    ],
+    "main": false,
+    "note": ""
+   },
    "use": null,
    "left": false,
    "dry": false,
