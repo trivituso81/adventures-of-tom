@@ -239,7 +239,7 @@
   "returns": false
  },
  "tom-victory": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -247,7 +247,7 @@
    "720p": 0.1,
    "1080p": 0.15
   },
-  "prompt_file": "tools/art-library/prompts/wan-tom-victory-v1.txt",
+  "prompt_file": "tools/art-library/prompts/wan-tom-victory-v2.txt",
   "frame": "art/clips/start/tom-hero.png",
   "fit": "720x1280",
   "frame_fields": [
@@ -263,7 +263,7 @@
   }
  },
  "tom-run": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -271,7 +271,7 @@
    "720p": 0.1,
    "1080p": 0.15
   },
-  "prompt_file": "tools/art-library/prompts/wan-tom-run-v1.txt",
+  "prompt_file": "tools/art-library/prompts/wan-tom-run-v2.txt",
   "frame": "art/clips/start/tom-hero.png",
   "fit": "720x1280",
   "frame_fields": [
@@ -288,14 +288,14 @@
   }
  },
  "tom-cast": {
-  "rev": 3,
+  "rev": 4,
   "kind": "video",
   "endpoint": "kling/v4/image-to-video",
   "est_per_s": {
    "720p": 0.157,
    "1080p": 0.235
   },
-  "prompt_file": "tools/art-library/prompts/wan-tom-cast-v1.txt",
+  "prompt_file": "tools/art-library/prompts/wan-tom-cast-v4.txt",
   "frame": "art/clips/start/tom-hero.png",
   "fit": "720x1280",
   "frame_fields": [
@@ -774,14 +774,14 @@
   }
  },
  "rose-cast": {
-  "rev": 3,
+  "rev": 4,
   "kind": "video",
   "endpoint": "kling/v4/image-to-video",
   "est_per_s": {
    "720p": 0.157,
    "1080p": 0.235
   },
-  "prompt_file": "tools/art-library/prompts/wan-rose-cast-v1.txt",
+  "prompt_file": "tools/art-library/prompts/wan-rose-cast-v4.txt",
   "frame": "art/clips/start/rose-hero.png",
   "fit": "720x1280",
   "frame_fields": [
