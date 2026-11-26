@@ -8,15 +8,15 @@ import os, sys, json, subprocess, time
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, '..', '..', 'tools', 'art-library'))
 import falq
-CAP = 3.50   # raised by Tom 2026-11-25: 1.00, 1.25 (14:44), 2.00 (14:46), 2.50 (15:06), 3.25 (15:29), 3.50 (15:39)
+CAP = 60.00   # Tom 2026-11-25 16:07: spend cap removed for the Justin production order; this ceiling is only a runaway-loop guard (history: 1.00 ... 3.50)
 IMG, VID = 'fal-ai/nano-banana/edit', 'fal-ai/kling-video/v3/pro/image-to-video'
-EST_IMG, EST_VID = 0.0398, 0.45          # EST_VID is a guard figure only; the live fal price is read first and booked if higher
+EST_IMG, EST_VID = 0.0398, 0.70          # EST_VID is a guard figure only; the live fal price is read first and booked if higher
 LEDGER = os.path.join(HERE, 'ledger.json')
 P = lambda n: os.path.join(HERE, n)
 
 START = ("Keep this exact character from the reference image: same face, hair, beard, build, clothes, tool belt and hand-painted realistic caricature style; he is a tall man, 6 foot 4, slim build. Justin in a neutral idle battle stance: standing relaxed with feet planted flat, body turned three-quarters toward screen-left, facing three-quarters left. Expression: calm, deadpan contractor focus, mouth closed, relaxed eyebrows, no smile, no scowl, no open mouth. In his right hand he holds ONE flat, palm-sized yellow electronic stud finder: a flat rectangular yellow tool with a small screen, no antenna, not a walkie-talkie, held at waist height. ONE steel claw hammer is tucked into his tool belt at his hip. His left hand is empty and relaxed at his side. There is exactly one hammer in the picture and it is in the belt, not in either hand. 16:9 landscape frame, fixed camera: his full body from boots to hair fills about 55 percent of the frame height, centered horizontally, boots 12 percent above the bottom edge, wide margin of empty green on all four sides, nothing cropped. Background is one solid flat pure #00FF00 green, no floor, no ground shadow, no gradient. No glowing, no beams, no rings, no sparks, no effects.")
-MOTION = ("2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left for the entire clip, strictly locked static tripod camera, isolated on a completely flat solid chroma-key green (#00FF00) background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. Justin starts in his neutral idle battle stance with calm, deadpan contractor focus. He stays facing three-quarters left for the entire clip and never turns toward the right. He holds the flat yellow stud finder up in his right hand briefly, then draws the single claw hammer from his tool belt and gives one clean tap forward and to the left, away from his body, into empty air, then tucks the hammer back into his belt and returns to his exact starting idle stance and holds still. The stud finder stays in his right hand and is never struck. Strictly locked static camera, zero scale drift, Justin stays the same size, pure solid flat #00FF00 green background, no floor shadow. No glowing bursts, no rings, no sparks, no comic stars, no visual effects of any kind.")
-NEG = ("camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines, turning right, facing right, turning around, hitting the stud finder, smashing the stud finder, prop morphing, floating white rings, target circles, reticles, glowing bursts, glowing beams, sparks, comic stars, floating objects, glow effects, ground shadow, floor shadow, duplicate hammers, hand-swapping props, shouting, angry face, face changes, character shrinking, character growing, camera movement")
+MOTION = ("Locked static camera, zero zoom, zero scale drift. The tall contractor remains facing three-quarters left the entire time. He steps up with calm deadpan focus, glides the flat yellow stud finder smoothly across empty air in front of him and pauses briefly, draws the single claw hammer from his tool belt for one crisp rap forward into empty air with the flat of the hammer, tucks the hammer cleanly back into his tool belt, gives a brisk satisfied nod, and steps back into his exact starting neutral idle stance.")
+NEG = ("turning right, bobblehead proportions, hitting stud finder, smashing props, duplicate hammer, hand-swapping props, prop morphing, floating rings, target circles, reticles, chalk lines, glowing bursts, beams, sparks, comic stars, shouting, angry face, floor shadow, textured green, olive background, camera movement, zoom, scale drift")
 
 def say(*a): print(time.strftime('%H:%M:%S'), *a, flush=True)
 def spent():
@@ -41,12 +41,12 @@ def main():
     keyframe('start.png', START, [hero])
     if os.environ.get('STAGE') == 'end': say('stage end only: stopping before the video, spent $%.4f' % spent()); return
     if not os.path.exists(P('raw.mp4')):
-        guard(EST_VID); say('making video (Kling v3 Pro image-to-video, 3 s, start image only)')
-        live = fal.price(VID); est = falq.apply_live(EST_VID if not live else 0, live, 'video', 3) or EST_VID
+        guard(EST_VID); say('making video (Kling v3 Pro image-to-video, 5 s, start image only)')
+        live = fal.price(VID); est = falq.apply_live(EST_VID if not live else 0, live, 'video', 5) or EST_VID
         say('fal live price:', live, '-> booking', est)
         if spent() + est > CAP: sys.exit('STOP: live price too high for the cap')
         body = {'prompt': MOTION, 'negative_prompt': NEG, 'start_image_url': falq.data_uri(open(P('start.png'), 'rb').read()),
-                'duration': '3', 'generate_audio': False}
+                'duration': '5', 'generate_audio': False}
         res = fal.wait(fal.send(VID, body))
         open(P('raw.mp4'), 'wb').write(fal.download(res['video']['url'])); book('raw.mp4', est)
     if os.environ.get('STAGE') == 'raw': say('stage raw: stopping after the raw video, spent $%.4f' % spent()); return

@@ -6967,6 +6967,37 @@
     "text": "Read the c-scriptstudio11 card and docs/CHANGES.md scriptstudio11, then adjust the EP Note box in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/epnote_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "done": "2026-11-25"
+  },
+  {
+   "id": "c-justinbb9",
+   "tag": "justinbb9",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "title": "Justin production clip: #00FF00 start, new Kling prompt",
+   "next": "Session rolls Kling with Tom's new prompt from a fixed #00FF00 start.png, keys locally, checks 8 frames, and pushes preview.html only when all pass.",
+   "chat": {
+    "url": "",
+    "opening": "UNCONSTRAINED PRODUCTION ORDER (REPO: trivituso81/adventures-of-tom)"
+   },
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Tom: \"Remove the sandbox spend cap and produce ONE 100% production-grade transparent .webm for justin-bb-basic ... Loop and re-roll autonomously until EVERY QA gate passes.\" Attempt 8 inspected: fails Gate 1 (pastel green) and Gate 2 (turns, face smear, hammer overhead). Cap raised to a $60 runaway guard."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-25",
+   "changed": "2026-11-25",
+   "prompt": {
+    "what": "Continue the Justin production clip if this session ended early.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: written steps, QA gate catches mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read the c-justinbb9 card and art-factory/sandbox-justin-test/README.txt. Continue the roll, key, 8-frame QA loop for justin-bb-basic. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
