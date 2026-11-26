@@ -12,9 +12,8 @@ QA_LIMITS = 'the test browser is Chromium on a server, not Safari on the iPhone;
 
 def _need(c):
     # Tom (11-22): the line must say what to do, not only name the card. The card's own `next` is the exact steps.
+    # Tom (11-26): "The what to do doesn't tell me what to do." Steps are never cut short.
     nx = re.sub(r'\s+', ' ', c.get('next') or '').strip()
-    if len(nx) > 260:
-        nx = nx[:260].rsplit(' ', 1)[0] + ' ... (full steps on the card)'
     return '%s: %s' % (c['title'], nx) if nx else c['title']
 
 
@@ -46,6 +45,9 @@ def lastnight(B, key, tests=None):
     secs = [('Ran', ran or ['nothing started']), ('Shipped', shipped or ['nothing']), ('Tests', [tl] if tl else ['no test run yet (it is built by card c-nighttests)']),
             ('Closed for you', closed or ['nothing']), ('Needs you', needs or ['nothing']), ('Starts used', ['%d of %d' % (used, night.get('max', 0))]),
             ('Limits of the night QA', [QA_LIMITS])]
-    text = 'Night of %s. ' % key + ' '.join('%s: %s.' % (h, '; '.join(x).rstrip('.')) for h, x in secs)
+    todo = [x for x in needs if x]
+    head = ('WHAT YOU DO (%d):\n' % len(todo) + '\n'.join('%d. %s' % (i + 1, x) for i, x in enumerate(todo))) if todo else 'WHAT YOU DO: nothing needed from you.'
+    rest = ' '.join('%s: %s.' % (h, '; '.join(x).rstrip('.')) for h, x in secs if h != 'Needs you')
+    text = head + '\n\nNight of %s. ' % key + rest
     news = bool(ran or shipped or closed or needs)
-    return {'next': text[:1500], 'sections': secs, 'news': news}
+    return {'next': text[:6000], 'sections': secs, 'news': news}

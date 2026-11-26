@@ -828,6 +828,10 @@ Card c-fix-guideboot. Tom (11-22): "The battle guide doesn't seem to be working 
 
 Card c-chaptercard-storybook. Tom (11-22): "currently they are 16 bit style and they don't fit with the storybook style of the game... I wanted look or feel like the main menu." The chapter card (CHAPTER N and the chapter's name; also the Part cards, the COMPLETE cards and the Bonus card) was pixel text drawn on the game canvas. It is now a DOM card, `#chcard` (made in `engine/story.js` by `chcardEl`, styled at the end of `m2.css`), in the menu's Golden Hour look: the dusk wash over the scene, a cream paper card with the book's layered edge and a thin gold inner rule, a small gold CHAPTER N line, a lamp-gold flower rule and the chapter's name in Bricolage Grotesque. It sits inside `#stage`, so it turns with the stage in landscape; sizes follow the stage box (`cqmin`), so long names wrap (looked at "The Subway Beneath the Sea of Clouds" in both). Timing, the chime and the backdrop map are unchanged. A 250 ms safety hides the card if an intro ends without a last frame. Looked at in portrait and landscape: CHAPTER 3, PART 1 and a long name. Tests: smoke (all checks pass apart from the tag bump this build makes).
 
+## t-lastnight-1126 (2026-11-26): Last night opens with a numbered list of what you do, with full steps
+
+Tom (11-26): "The what to do doesn't tell me what to do." The card Last night cut each Needs you line at 260 characters ("... (full steps on the card)") and buried them mid-text. `tools/night/lastnight.py` now writes WHAT YOU DO as numbered items first, each with the card's complete steps, then the night's summary. Nothing pushed to main from this run; branch claude/magical-planck-uiit15.
+
 ## t-lastnight (2026-11-22): Last night's Needs you lines now say what to do, not only the card's name
 
 Tom (11-22): "The what to do doesn't tell me what to do". `tools/night/lastnight.py` (`_need`) now writes each Needs you line as the card title plus that card's own exact steps (cut at 260 characters, full steps on the card). Not done: the older `t-board_sync_test.py` crash on `c-board3` (archived card) is not from this change.
