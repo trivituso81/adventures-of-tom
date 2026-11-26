@@ -1342,6 +1342,15 @@
    "source": "clip-gen run (guide takes)",
    "at": "2026-11-26T08:22:19Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45782279434"
+  },
+  {
+   "service": "xai",
+   "date": "2026-11-26",
+   "amount": 0.0857,
+   "what": "Art Library pictures and their QA checks made on xAI by the art-gen Action (tom-grace-rose-greeting-hug)",
+   "source": "art-gen run https://github.com/trivituso81/adventures-of-tom/actions/runs/45787443900",
+   "at": "2026-11-26T08:57:22Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45787443900"
   }
  ],
  "balances": [
