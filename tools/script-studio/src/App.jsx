@@ -111,8 +111,8 @@ function resetCoreToHosted(vaultDocs, hosted) {
 }
 
 const MODEL_PRESETS = [
-  { id: 'gemini-4-neon', label: 'Gemini 4 Neon' },
-  { id: 'gemini-4-carbon', label: 'Gemini 4 Carbon (Generation + Audit default)' },
+  { id: 'gemini-4-neon', label: 'Gemini 4 Neon (Writer Default - Fast & Sharp)' },
+  { id: 'gemini-4-carbon', label: 'Gemini 4 Carbon (Macro Audit Default)' },
   { id: 'gemini-4-hydrogen', label: 'Gemini 4 Hydrogen (Fast / Budget)' },
   { id: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash (Fast & Balanced)' },
   { id: 'gemini-2.5-flash-lite', label: 'Gemini 2.5 Flash-Lite (Ultra Fast)' },
@@ -198,6 +198,7 @@ function createEmptyScene(chapterNum, sceneIndex, overrides = {}) {
     title: overrides.title || `Scene ${sceneIndex}`,
     mapId: overrides.mapId || '',
     location: overrides.location || '',
+    comicPremise: overrides.comicPremise || '',
     requiredSpeakers: overrides.requiredSpeakers || [],
     mandatoryBeats: overrides.mandatoryBeats?.length ? overrides.mandatoryBeats : [''],
     knowledgeGate: overrides.knowledgeGate || '',
@@ -243,8 +244,9 @@ function createInitialState() {
     activeSceneId: '',
     settings: {
       apiKey: '',
-      genModelPreset: 'gemini-4-carbon',
+      genModelPreset: 'gemini-4-neon',
       genCarbonMigrated: true,
+      genNeonLeanMigrated: true,
       genCustomModel: '',
       auditModelPreset: 'gemini-4-carbon',
       auditCustomModel: '',
@@ -261,6 +263,30 @@ function createInitialState() {
 // SAFE STORAGE, CLIPBOARD & PARSER HELPERS
 // ============================================================================
 
+function normalizeChaptersOnLoad(chapters) {
+  if (!Array.isArray(chapters)) return createInitialChapters();
+  return chapters.map((ch) => ({
+    ...ch,
+    scenes: Array.isArray(ch.scenes)
+      ? ch.scenes.map((sc) => ({
+          ...sc,
+          comicPremise: sc.comicPremise || '',
+          lines: Array.isArray(sc.lines)
+            ? sc.lines.map((ln) => ({
+                ...ln,
+                text:
+                  ln.type === 'dialogue' || ln.type === 'text_message'
+                    ? String(ln.text || '')
+                        .replace(/\bTA-TA\b/g, 'TATA')
+                        .replace(/\bTa-Ta\b/gi, 'Tata')
+                    : String(ln.text || ''),
+              }))
+            : [],
+        }))
+      : [],
+  }));
+}
+
 function loadStateSafe() {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
@@ -270,6 +296,7 @@ function loadStateSafe() {
     return {
       ...base,
       ...parsed,
+      chapters: normalizeChaptersOnLoad(parsed.chapters || base.chapters),
       settings: { ...base.settings, ...migrateModelSettings(parsed.settings) },
       auditReports: {
         trajectory: parsed.auditReports?.trajectory || {},
@@ -443,6 +470,25 @@ function lintLine(line, activeBannedWords) {
         message: 'On-screen spelling is "Tata" with no hyphen (canon-and-characters.md); "Ta-Ta" is for TTS pronunciation only. Use "Tata"',
       });
     }
+    if (/\b(side quest|horror rule|airport buffer)\b/i.test(text)) {
+      warnings.push({
+        code: 'META_JARGON',
+        severity: 'error',
+        message: 'Meta-jargon / prompt label leaked ("side quest", "horror rule", "airport buffer"). Rewrite in natural speech',
+      });
+    }
+    const rosieMatch = /\bRosie\b/gi;
+    let rm;
+    while ((rm = rosieMatch.exec(text))) {
+      if (!/cozy\s+$/i.test(text.slice(0, rm.index))) {
+        warnings.push({
+          code: 'ROSIE',
+          severity: 'error',
+          message: 'Never "Rosie" alone; use "Rose" (or "Cozy Rosie" sparingly in direct address)',
+        });
+        break;
+      }
+    }
   }
 
   if (text.includes('—')) {
@@ -581,8 +627,16 @@ function compileSlidersPrompt(sliders, activeBannedWords) {
     .join('\n');
 }
 
-function compileBlueprintPrompt(chapter, scene) {
-  const beats = (scene.mandatoryBeats || []).filter((b) => b.trim());
+function stripUiWaypoints(beatText) {
+  return String(beatText || '')
+    .replace(/\s*(?:[;|•\-–]\s*)?\bGoal toast\s*:.*$/i, '')
+    .trim();
+}
+
+function compileBlueprintPrompt(chapter, scene, { keepWaypoints = false } = {}) {
+  const beats = (scene.mandatoryBeats || [])
+    .map((b) => (keepWaypoints ? String(b || '').trim() : stripUiWaypoints(b)))
+    .filter(Boolean);
   const triggers = [];
   if (scene.triggers?.combatEncounter)
     triggers.push(`Combat Encounter: ${scene.triggers.combatEncounter}`);
@@ -592,16 +646,21 @@ function compileBlueprintPrompt(chapter, scene) {
     triggers.push(`Close-Up Screen: ${scene.triggers.closeupScreen}`);
 
   return [
-    `CHAPTER: ${chapter.label} — ${chapter.title}`,
+    `CHAPTER: ${chapter.label} - ${chapter.title}`,
     `CHAPTER PURPOSE / ARC GOAL: ${chapter.purpose || '(Not specified)'}`,
     `SCENE ID: ${scene.sceneId} | TITLE: ${scene.title}`,
     `MAP ID: ${scene.mapId || '(unspecified)'} | LOCATION: ${scene.location || '(unspecified)'}`,
     `REQUIRED SPEAKERS: ${(scene.requiredSpeakers || []).join(', ') || '(unspecified)'}`,
+    scene.comicPremise && scene.comicPremise.trim()
+      ? `COMIC PREMISE (The 1 Funny Situation): ${scene.comicPremise.trim()}`
+      : '',
     `MANDATORY STORY BEATS:\n${beats.length ? beats.map((b, i) => `  ${i + 1}. ${b}`).join('\n') : '  (None specified)'}`,
     `KNOWLEDGE GATE CARRY-IN (Facts established on-screen so far):\n  ${scene.knowledgeGate || '(None specified)'}`,
     `EXACT PHYSICAL SEGUE TO NEXT SCENE: ${scene.physicalSegue || '(None specified)'}`,
     `OPTIONAL TRIGGERS: ${triggers.length ? triggers.join(' | ') : '(None)'}`,
-  ].join('\n');
+  ]
+    .filter(Boolean)
+    .join('\n');
 }
 
 async function callGeminiJSON({ apiKey, modelId, prompt, schema, temperature = 0.7 }) {
@@ -673,6 +732,7 @@ const CHAPTER_EXTRACT_SCHEMA = {
           title: { type: 'STRING' },
           mapId: { type: 'STRING' },
           location: { type: 'STRING' },
+          comicPremise: { type: 'STRING' },
           requiredSpeakers: { type: 'ARRAY', items: { type: 'STRING' } },
           mandatoryBeats: { type: 'ARRAY', items: { type: 'STRING' } },
           knowledgeGate: { type: 'STRING' },
@@ -892,14 +952,15 @@ function finalizeTrajectoryReport(r) {
   return { ...r, overallStatus: worstStatus(normStatus(r.overallStatus), derived), schema: AUDIT_SCHEMA_VERSION };
 }
 
-// Settings saved before the Gemini 4 presets used the removed gemini-2.5-pro id.
+// Migrate legacy model presets and ensure Writer defaults to Gemini 4 Neon (saving Carbon strictly for macro audits).
 function migrateModelSettings(settings) {
   const s = { ...(settings || {}) };
-  if (s.genModelPreset === 'gemini-2.5-pro') s.genModelPreset = 'gemini-4-carbon';
-  // One time: the Generation default moved from Neon to Carbon (same depth as the Critic).
-  if (!s.genCarbonMigrated) {
-    if (s.genModelPreset === 'gemini-4-neon') s.genModelPreset = 'gemini-4-carbon';
-    s.genCarbonMigrated = true;
+  if (s.genModelPreset === 'gemini-2.5-pro') s.genModelPreset = 'gemini-4-neon';
+  if (!s.genNeonLeanMigrated) {
+    if (!s.genModelPreset || s.genModelPreset === 'gemini-4-carbon') {
+      s.genModelPreset = 'gemini-4-neon';
+    }
+    s.genNeonLeanMigrated = true;
   }
   if (s.auditModelPreset === 'gemini-2.5-pro') s.auditModelPreset = 'gemini-4-carbon';
   return s;
@@ -946,6 +1007,9 @@ const AI_COMEDY_CLICHES = [
   'fan club',
   'sanctioned',
   'concerning amount',
+  'side quest',
+  'horror rule',
+  'airport buffer',
 ];
 
 // Spoken forms that must be contracted. Matched as whole phrases, case-insensitive.
@@ -1082,15 +1146,49 @@ function docText(vaultDocs, name) {
   return d?.content?.trim() ? d.content.trim() : '';
 }
 
+function extractGlobalComedyRules(vaultDocs) {
+  const comedy = docText(vaultDocs, 'comedy-bible.md');
+  const spec = docText(vaultDocs, 'workshop-and-map-spec.md');
+  const globalComedy = comedy
+    ? comedy.split(/\n(?=##\s+2\.)/)[0].trim()
+    : '';
+  const addressMatrix = spec
+    ? spec.split(/\n(?=##\s+2\.)/)[0].trim()
+    : '';
+  return [globalComedy, addressMatrix].filter(Boolean).join('\n\n');
+}
+
 function compileSceneFacts(chapter, scene) {
-  const beats = (scene.mandatoryBeats || []).filter((b) => b.trim());
+  const beats = (scene.mandatoryBeats || [])
+    .map((b) => stripUiWaypoints(b))
+    .filter(Boolean);
+  const triggerNotes = [];
+  if (scene.triggers?.combatEncounter?.trim()) {
+    triggerNotes.push(
+      `FIGHT TRIGGER: [FIGHT] ${scene.triggers.combatEncounter.trim()} (monsters speak short concrete sentences only; zero battle stats or mechanics)`
+    );
+  }
+  if (scene.triggers?.textMessageBeat?.trim()) {
+    triggerNotes.push(`TEXT MESSAGE TRIGGER: [TEXT_MESSAGE] ${scene.triggers.textMessageBeat.trim()}`);
+  }
+  if (scene.triggers?.closeupScreen?.trim()) {
+    triggerNotes.push(`CLOSE-UP TRIGGER: [CLOSEUP] ${scene.triggers.closeupScreen.trim()}`);
+  }
   return [
-    `SCENE: ${scene.sceneId} | ${scene.title}${scene.location ? ` | ${scene.location}` : ''}`,
+    `CHAPTER: ${chapter.label}${chapter.purpose ? ` (Arc Goal: ${chapter.purpose})` : ''}`,
+    `SCENE: ${scene.sceneId} | ${scene.title}${scene.mapId ? ` | Map: ${scene.mapId}` : ''}${scene.location ? ` | ${scene.location}` : ''}`,
     `REQUIRED SPEAKERS: ${(scene.requiredSpeakers || []).join(', ') || '(unspecified)'}`,
-    `MANDATORY BEATS (story facts that must happen; never copy their wording, dramatize them):\n${
+    scene.comicPremise && scene.comicPremise.trim()
+      ? `COMIC PREMISE (build the humor out of this exact situation, never generic sitcom filler):\n  ${scene.comicPremise.trim()}`
+      : '',
+    `MANDATORY BEATS (story facts that must happen; never copy their wording, dramatize them; never speak map waypoint labels aloud):\n${
       beats.length ? beats.map((b, i) => `  ${i + 1}. ${b}`).join('\n') : '  (None specified)'
     }`,
     `KNOWLEDGE GATE (what characters know entering the scene; nobody may know or reference more):\n  ${scene.knowledgeGate || '(None specified)'}`,
+    scene.physicalSegue && scene.physicalSegue.trim()
+      ? `PHYSICAL SEGUE OUT: ${scene.physicalSegue.trim()}`
+      : '',
+    triggerNotes.length ? `SCENE TRIGGERS:\n  ${triggerNotes.join('\n  ')}` : '',
     scene.sliders?.directorNotes?.trim() ? `DIRECTOR NOTES (override defaults): ${scene.sliders.directorNotes.trim()}` : '',
   ]
     .filter(Boolean)
@@ -1193,17 +1291,11 @@ function toLineObjects(items) {
 
 function buildQAContext({ vaultDocs, chapter, scene }) {
   const speakers = scene.requiredSpeakers || [];
-  const combat = Boolean(scene.triggers?.combatEncounter?.trim());
-  const comedyBible = docText(vaultDocs, 'comedy-bible.md');
+  const comedyBible = extractGlobalComedyRules(vaultDocs);
   const canon = docText(vaultDocs, 'canon-and-characters.md');
   const dossiers = extractSpeakerDossiers(vaultDocs, speakers);
   const facts = compileSceneFacts(chapter, scene);
-  const combatDocs = combat
-    ? ['battle-spec-v11.md', 'bestiary-v11.md', 'workshop-and-map-spec.md']
-        .map((n) => (docText(vaultDocs, n) ? `=== REFERENCE DOC: ${n} ===\n${docText(vaultDocs, n)}\n=== END ${n} ===` : ''))
-        .filter(Boolean)
-        .join('\n\n')
-    : '';
+  const combatDocs = ''; // Never inject battle-spec-v11.md or bestiary-v11.md into scene dialogue prompts
   const s = scene.sliders || DEFAULT_SLIDERS;
   return { comedyBible, canon, dossiers, facts, combatDocs, s };
 }
@@ -1376,8 +1468,8 @@ function buildQAReport(ev, retries) {
   };
 }
 
-// "Fix Remaining Issues": one more surgical rewrite of the scene as it stands, using the Critic issues saved on the badge.
-async function runFixPass({ apiKey, genModelId, auditModelId, vaultDocs, chapter, scene, activeBannedWords, setStatus }) {
+// "Fix Linter / Saved Issues": 1 single surgical call + $0 deterministic linter (no hidden Critic loop).
+async function runFixPass({ apiKey, genModelId, vaultDocs, chapter, scene, activeBannedWords, setStatus }) {
   const prevQa = scene.qa || {};
   const ctx = buildQAContext({ vaultDocs, chapter, scene });
   const before = {
@@ -1386,112 +1478,210 @@ async function runFixPass({ apiKey, genModelId, auditModelId, vaultDocs, chapter
     critic: { pass: false, score: prevQa.score ?? 0, issues: prevQa.issues || [] },
   };
   if (before.linter.length === 0 && before.critic.issues.length === 0) {
-    throw new Error('No saved Critic issues or linter errors to fix. Run Generate Scene again.');
+    throw new Error('Zero linter errors or saved issues to fix.');
   }
-  setStatus('Auto-fixing issues...');
-  const newLines = await rewriteScene({ ctx, apiKey, genModelId, activeBannedWords, ev: before });
+  setStatus(`Fixing flagged issues in 1 pass (${genModelId})...`);
+  const prompt = buildRewritePrompt({ ctx, activeBannedWords, ev: before });
+  const res = await callGeminiJSON({ apiKey, modelId: genModelId, prompt, schema: SCENE_GEN_SCHEMA, temperature: 0.6 });
+  const newLines = toLineObjects(res.lines);
   if (!newLines.length) throw new Error('The rewrite returned no lines.');
-  setStatus('Running QA check...');
-  const after = await evaluateScene({ ctx, apiKey, auditModelId, activeBannedWords, lines: newLines });
+  const afterLinter = lintScene(newLines, activeBannedWords);
   const retries = (prevQa.retries || 0) + 1;
-  // Keep the previous version only when the new one is strictly worse on the Critic's score and total problems.
-  if (isStrictlyWorse(after, before)) {
-    const kept = buildQAReport({ ...before, ok: false }, retries);
-    kept.notes = [...kept.notes, `The last fix pass scored worse (${after.critic.unavailable ? 'critic unavailable' : `${after.critic.score}/10`}), so the previous version was kept.`];
-    return { lines: scene.lines, qa: kept, kept: true };
-  }
-  return { lines: newLines, qa: buildQAReport(after, retries), kept: false };
+  const qa = {
+    passed: afterLinter.length === 0,
+    score: null,
+    mode: 'lean-linter',
+    retries,
+    notes: afterLinter.map((e) => `L${e.lineIndex + 1} (${e.speaker || 'n/a'}) [${e.code}]: ${e.message}`),
+    issues: [],
+    at: new Date().toISOString(),
+  };
+  return { lines: newLines, qa, kept: false };
 }
 
-// Runs the whole pipeline. `setStatus` gets the live progress text. Returns { lines, qa }.
-async function runSceneQAPipeline({ apiKey, genModelId, auditModelId, vaultDocs, chapter, scene, activeBannedWords, setStatus, epNote = '' }) {
-  const ctx = { ...buildQAContext({ vaultDocs, chapter, scene }), epNote };
-  const { comedyBible, dossiers, facts, combatDocs, s } = ctx;
+// Zero-cost deterministic JS parser for plain-text screenplay drafts (replaces the extra LLM JSON-formatter API call).
+function parsePlainDraftToLines(draftText) {
+  const cleaned = String(draftText || '')
+    .replace(/^```[a-z]*\s*/i, '')
+    .replace(/\s*```$/i, '')
+    .trim();
+  const rawRows = cleaned
+    .split(/\r?\n/)
+    .map((r) => r.replace(/^\s*[-*]\s+/, '').replace(/^\*\*|\*\*$/g, '').trim())
+    .filter(Boolean);
 
-  // PASS 1: plain-text comedy draft (no JSON).
-  setStatus('Drafting...');
+  const out = [];
+  for (const row of rawRows) {
+    const body = row.replace(/^L\d+\+?:\s*/i, '').trim();
+    if (!body || /^===/.test(body) || /^#{1,4}\s/.test(body)) continue;
+
+    // Bracketed or prefixed non-dialogue items: ACTION:, [ACTION], [FIGHT], [TEXT_MESSAGE], [CLOSEUP]
+    const actionPrefix = body.match(/^(?:ACTION|\[ACTION\])\s*:?\s*(.+)$/i);
+    if (actionPrefix) {
+      const actText = actionPrefix[1].trim();
+      const naraLead = actText.match(/^Nara\b/i) ? 'Nara' : 'Narrator';
+      out.push({
+        id: uid('line'),
+        type: 'action',
+        speaker: naraLead,
+        mood: 'none',
+        text: actText,
+        locked: false,
+        flags: [],
+        customNote: '',
+      });
+      continue;
+    }
+
+    const specialPrefix = body.match(
+      /^(?:\[(TEXT_MESSAGE|TEXT|CLOSEUP|CLOSE-UP|FIGHT)\]|(TEXT_MESSAGE|CLOSEUP|CLOSE-UP|FIGHT))\s*:?\s*(.+)$/i
+    );
+    if (specialPrefix) {
+      const rawTag = (specialPrefix[1] || specialPrefix[2] || 'ACTION').toUpperCase();
+      const typeMap = {
+        TEXT_MESSAGE: 'text_message',
+        TEXT: 'text_message',
+        CLOSEUP: 'closeup',
+        'CLOSE-UP': 'closeup',
+        FIGHT: 'fight',
+      };
+      const rest = specialPrefix[3].trim();
+      const spMatch = rest.match(/^([A-Za-z0-9 .'-]{1,24}):\s*(.+)$/);
+      out.push({
+        id: uid('line'),
+        type: typeMap[rawTag] || 'action',
+        speaker: spMatch ? spMatch[1].trim() : '',
+        mood: 'none',
+        text: spMatch ? spMatch[2].trim().replace(/^["“]|["”]$/g, '') : rest,
+        locked: false,
+        flags: [],
+        customNote: '',
+      });
+      continue;
+    }
+
+    // Standard dialogue: SPEAKER (mood): text  OR  SPEAKER [Text]: text
+    const textMsgInline = body.match(/^([A-Za-z0-9 .'-]{1,28})\s*\[Text(?:\s*Message)?\]\s*:\s*(.+)$/i);
+    if (textMsgInline) {
+      out.push({
+        id: uid('line'),
+        type: 'text_message',
+        speaker: textMsgInline[1].trim(),
+        mood: 'none',
+        text: textMsgInline[2].trim().replace(/^["“]|["”]$/g, ''),
+        locked: false,
+        flags: [],
+        customNote: '',
+      });
+      continue;
+    }
+
+    const dlgMatch = body.match(/^([A-Za-z0-9 .'-]{1,28})(?:\s*\(([^)]+)\))?\s*:\s*(.+)$/);
+    if (dlgMatch) {
+      const rawSp = dlgMatch[1].trim();
+      const moodRaw = (dlgMatch[2] || 'none').trim().toLowerCase();
+      const cleanTxt = dlgMatch[3]
+        .trim()
+        .replace(/^["“]|["”]$/g, '')
+        .replace(/\bTA-TA\b/g, 'TATA')
+        .replace(/\bTa-Ta\b/gi, 'Tata');
+      const isNara = rawSp.toLowerCase() === 'nara';
+      const normalizedSpeaker =
+        QUICK_CAST.find((c) => c.toLowerCase() === rawSp.toLowerCase()) ||
+        (rawSp === rawSp.toUpperCase() && rawSp.length > 2
+          ? rawSp.charAt(0).toUpperCase() + rawSp.slice(1).toLowerCase()
+          : rawSp);
+      out.push({
+        id: uid('line'),
+        type: isNara ? 'action' : 'dialogue',
+        speaker: normalizedSpeaker,
+        mood: isNara || NO_MOOD_SPEAKERS.includes(normalizedSpeaker.toLowerCase())
+          ? 'none'
+          : ALL_MOOD_POSE_OPTIONS.includes(moodRaw)
+          ? moodRaw
+          : 'none',
+        text: cleanTxt,
+        locked: false,
+        flags: [],
+        customNote: '',
+      });
+      continue;
+    }
+
+    // Bracketed stage direction line [Tom steps outside...]
+    const bracketAction = body.match(/^\[(.+)\]$/);
+    out.push({
+      id: uid('line'),
+      type: 'action',
+      speaker: 'Narrator',
+      mood: 'none',
+      text: bracketAction ? bracketAction[1].trim() : body,
+      locked: false,
+      flags: [],
+      customNote: '',
+    });
+  }
+  return out;
+}
+
+// Lean Single-Pass Pipeline: 1 API call (plain screenplay prose for maximum comedic timing) + $0 JS parser + $0 deterministic linter.
+// Zero hidden Critic calls and zero multi-pass auto-rewrite loops.
+async function runSceneQAPipeline({ apiKey, genModelId, vaultDocs, chapter, scene, activeBannedWords, setStatus, epNote = '' }) {
+  const ctx = { ...buildQAContext({ vaultDocs, chapter, scene }), epNote };
+  const { comedyBible, dossiers, facts, s } = ctx;
+  const slidersBlock = compileSlidersPrompt(s, activeBannedWords);
+
+  setStatus(`Drafting scene (1 single pass on ${genModelId})...`);
   const draftPrompt = [
     ...(epNote && epNote.trim() ? [epNoteLine(epNote), ''] : []),
-    'You are the head writer of the family comedy JRPG "The Adventures of Tom". Write ONE scene as a plain-text script.',
-    'Voice target: Hacks, Schitt\'s Creek and Abbott Elementary. Sharp, specific banter that comes from each character\'s comedy engine (see the dossiers). No sitcom filler, no generic quips.',
-    'Never announce a beat. Respect the knowledge gate.',
+    'You are the Head Writer and Comedy Showrunner of the turn-based JRPG "The Adventures of Tom". Write ONE scene as a lean, sharp plain-text script.',
+    'Voice target: Hacks, Schitt\'s Creek, Abbott Elementary, and Early Modern Family. Build every laugh out of the scene\'s COMIC PREMISE and each character\'s specific dossier engine.',
+    'Never announce a beat, never narrate the scene title, never speak UI map waypoint labels aloud, and strictly obey the Knowledge Gate.',
     ...WRITER_CRAFT_RULES,
-    'Format, one item per line:',
-    '  ACTION: a short description of what happens (never contains anyone speaking)',
-    '  NAME (mood): what the character says   [mood is optional]',
-    `Aim for ${s.minLines} to ${s.maxLines} spoken lines, each under 115 characters. Contractions always. Zero em dashes. Never put spoken dialogue inside an ACTION line. On screen, write the girls' name for Tom as "Tata" (no hyphen), never "Ta-Ta".`,
-    `Never use these words: ${[...new Set([...(activeBannedWords || []), ...DEPRECATED_TERMS])].join(', ')}.`,
     '',
-    `=== REFERENCE DOC: comedy-bible.md ===\n${comedyBible || '(not loaded)'}\n=== END comedy-bible.md ===`,
+    slidersBlock,
     '',
-    '=== SPEAKER DOSSIERS (canon-and-characters.md and comedy engines) ===',
+    'PLAIN-TEXT OUTPUT FORMAT (one item per line, zero markdown fences, zero commentary):',
+    '  ACTION: short concrete physical action supported by the 2D engine (never contains quoted speech)',
+    '  SPEAKER (mood): spoken dialogue (35 to 115 characters, contractions always, zero em dashes)',
+    '  [TEXT_MESSAGE] SPEAKER: text message content (only when scene has a text message beat)',
+    '  [CLOSEUP] painted close-up description (only when scene has a close-up trigger)',
+    '  [FIGHT] encounter name (only when scene has a combat trigger)',
+    `Allowed mood/pose tags (pick ONE or omit): ${ALL_MOOD_POSE_OPTIONS.filter((x) => x !== 'none').join(', ')}.`,
+    'On screen, ALWAYS spell Tom\'s nickname "Tata" (no hyphen), never "Ta-Ta".',
+    `Never use these words/phrases: ${[...new Set([...(activeBannedWords || []), ...DEPRECATED_TERMS, ...AI_COMEDY_CLICHES])].join(', ')}.`,
+    '',
+    `=== GLOBAL COMEDY & DIRECT-ADDRESS RULES ===\n${comedyBible || '(not loaded)'}\n=== END GLOBAL RULES ===`,
+    '',
+    '=== SCENE SPEAKER DOSSIERS ===',
     dossiers || '(No required speakers set.)',
-    '=== END DOSSIERS ===',
-    combatDocs ? `\n${combatDocs}\n` : '',
-    '=== SCENE ===',
+    '=== END SPEAKER DOSSIERS ===',
+    '',
+    '=== SCENE BLUEPRINT ===',
     facts,
-    '=== END SCENE ===',
+    '=== END SCENE BLUEPRINT ===',
     '',
-    'Output only the script. No title, no commentary, no markdown.',
+    'Output ONLY the script lines now.',
   ].join('\n');
-  const draftText = await callGeminiText({ apiKey, modelId: genModelId, prompt: draftPrompt, temperature: 0.85 });
 
-  // PASS 2: JSON formatter.
-  setStatus('Formatting script...');
-  const formatPrompt = [
-    'Convert this plain-text scene script into the exact JSON schema (lines[] of {type, speaker, mood, text}).',
-    'Keep every word of dialogue exactly as written. Do not add, remove or reorder lines, with ONE exception: if an ACTION line contains anyone speaking in quotes, split the speech out into its own "dialogue" line for that speaker (right after the action) and leave the action line as pure description.',
-    'ACTION lines become type "action" with speaker "Narrator" unless a character does the action (then use that character as speaker). Use "dialogue" for speech. Use mood "none" when no mood is given or when it is not in the allowed list.',
-    HARD_FORMAT_RULES(activeBannedWords),
-    '',
-    '=== SCRIPT ===',
-    draftText,
-    '=== END SCRIPT ===',
-  ].join('\n');
-  const formatted = await callGeminiJSON({ apiKey, modelId: genModelId, prompt: formatPrompt, schema: SCENE_GEN_SCHEMA, temperature: 0.1 });
-  let current = toLineObjects(formatted.lines);
-  if (!current.length) throw new Error('Formatter returned no lines.');
-
-  // PASS 3 + 4: QA gate with up to QA_MAX_RETRIES auto-rewrites.
-  const evaluate = (lines, label) => {
-    setStatus(label);
-    return evaluateScene({ ctx, apiKey, auditModelId, activeBannedWords, lines });
-  };
-
-  let best = null;
-  const consider = (ev) => {
-    if (!best || !isStrictlyWorse(ev, best)) best = ev;
-    return best;
-  };
-
-  let ev = await evaluate(current, `Running QA check (Attempt 1/${QA_MAX_RETRIES + 1})...`);
-  consider(ev);
-  let retries = 0;
-  let stalled = 0;
-  let bestScore = ev.critic.unavailable ? -1 : ev.critic.score;
-  while (!ev.ok && retries < QA_MAX_RETRIES && stalled < QA_STALL_LIMIT) {
-    // A critic outage cannot be fixed by rewriting; only rewrite when there is something concrete to fix.
-    if (ev.critic.unavailable && ev.linter.length === 0) break;
-    retries += 1;
-    setStatus(`Auto-fixing issues (retry ${retries}/${QA_MAX_RETRIES})...`);
-    const newLines = await rewriteScene({ ctx, apiKey, genModelId, activeBannedWords, ev });
-    if (!newLines.length) break;
-    ev = await evaluate(
-      newLines,
-      retries < QA_MAX_RETRIES ? `Running QA check (Attempt ${retries + 1}/${QA_MAX_RETRIES + 1})...` : 'Running final QA check...'
-    );
-    consider(ev);
-    const sc = ev.critic.unavailable ? -1 : ev.critic.score;
-    if (sc > bestScore) {
-      bestScore = sc;
-      stalled = 0;
-    } else {
-      stalled += 1;
-    }
+  const draftText = await callGeminiText({ apiKey, modelId: genModelId, prompt: draftPrompt, temperature: 0.75 });
+  const parsedLines = parsePlainDraftToLines(draftText);
+  if (!parsedLines.length) {
+    throw new Error('Model returned no parseable script lines.');
   }
 
-  const final = ev.ok ? ev : best;
-  return { lines: final.lines, qa: buildQAReport(final, retries) };
+  const linterErrors = lintScene(parsedLines, activeBannedWords);
+  const qa = {
+    passed: linterErrors.length === 0,
+    score: null,
+    mode: 'lean-linter',
+    retries: 0,
+    notes: linterErrors.map((e) => `L${e.lineIndex + 1} (${e.speaker || 'n/a'}) [${e.code}]: ${e.message}`),
+    issues: [],
+    at: new Date().toISOString(),
+  };
+
+  return { lines: parsedLines, qa };
 }
 
 function formatWorkshopScene(scene) {
@@ -1841,6 +2031,7 @@ export default function App() {
         setState((prev) => ({
           ...createInitialState(),
           ...parsed,
+          chapters: normalizeChaptersOnLoad(parsed.chapters),
           settings: {
             ...createInitialState().settings,
             ...migrateModelSettings(parsed.settings),
@@ -2094,7 +2285,7 @@ export default function App() {
           'STRICT RULES:',
           `- Extract ONLY what belongs to ${activeChapter.label} in the loaded Reference Vault. Do NOT invent scenes, locations, or plot beats that contradict story-thread.md.`,
           '- Use exact map IDs and scene ID conventions from workshop-and-map-spec.md (e.g. ch1_s1, ch1_s2...).',
-          '- For each scene, populate accurate requiredSpeakers, mandatoryBeats, knowledgeGate (what characters know entering that scene), physicalSegue to the next scene, and any combat/text/closeup triggers.',
+          '- For each scene, populate accurate comicPremise (1-sentence concrete comic situation for that scene), requiredSpeakers, mandatoryBeats (story facts only, never UI Goal toast labels), knowledgeGate (what characters know entering that scene), physicalSegue to the next scene, and any combat/text/closeup triggers.',
           '',
           vaultText,
         ].join('\n');
@@ -2113,6 +2304,7 @@ export default function App() {
             title: sc.title,
             mapId: sc.mapId,
             location: sc.location,
+            comicPremise: sc.comicPremise || '',
             requiredSpeakers: sc.requiredSpeakers || [],
             mandatoryBeats: sc.mandatoryBeats?.length ? sc.mandatoryBeats : [''],
             knowledgeGate: sc.knowledgeGate || '',
@@ -2227,9 +2419,9 @@ export default function App() {
         qa,
       }));
       showToast(
-        `Generated ${generatedLines.length} lines for ${activeScene.sceneId}. QA ${
-          qa.score == null ? 'unavailable' : `${qa.score}/10`
-        }, ${qa.retries} auto-fix${qa.retries === 1 ? '' : 'es'}.`
+        `Generated ${generatedLines.length} lines in 1 call (${genModelId}). Linter: ${
+          qa.notes.length === 0 ? 'clean' : `${qa.notes.length} note(s)`
+        }.`
       );
     } catch (err) {
       setErrorBanner(err.message || 'Scene generation failed.');
@@ -2360,10 +2552,21 @@ export default function App() {
     }
 
     setErrorBanner('');
-    setLoadingStatus('Compiling Reference Vault & Line Context...');
+    setLoadingStatus('Compiling lean scene dossiers & line context...');
     const note = epNote.trim();
     try {
-      const vaultText = compileVaultPrompt(state.vaultDocs);
+      const lineSpeakers = Array.from(
+        new Set([
+          ...(activeScene.requiredSpeakers || []),
+          ...activeScene.lines.map((l) => (l.speaker || '').trim()).filter(Boolean),
+        ])
+      );
+      const globalRules = extractGlobalComedyRules(state.vaultDocs);
+      const speakerDossiers = extractSpeakerDossiers(state.vaultDocs, lineSpeakers);
+      const vaultText = [
+        `=== GLOBAL COMEDY & DIRECT-ADDRESS RULES ===\n${globalRules || '(not loaded)'}\n=== END GLOBAL RULES ===`,
+        `=== SCENE SPEAKER DOSSIERS ===\n${speakerDossiers || '(none)'}\n=== END SPEAKER DOSSIERS ===`,
+      ].join('\n\n');
       const blueprintText = compileBlueprintPrompt(activeChapter, activeScene);
       const slidersText = compileSlidersPrompt(activeScene.sliders, activeBannedWords);
       const targetNums = new Set(targets.map((t) => t.lineNumber));
@@ -2391,6 +2594,8 @@ export default function App() {
         '1. Preserve ALL [LOCKED] and [KEEP VERBATIM] lines exactly as written.',
         `2. Rewrite ONLY these exact line numbers: ${Array.from(targetNums).join(', ')}.`,
         '3. Fix every listed flag and custom note while preserving strict line-to-line flow.',
+        '4. On screen, ALWAYS spell Tom\'s nickname "Tata" (no hyphen), never "Ta-Ta". Zero em dashes.',
+        ...WRITER_CRAFT_RULES,
         '',
         vaultText,
         '',
@@ -2419,23 +2624,39 @@ export default function App() {
         if (targetNums.has(p.lineNumber)) patchMap.set(p.lineNumber, p);
       }
 
-      updateActiveScene((sc) => ({
-        ...sc,
-        history: pushSceneSnapshot(sc, `Before Surgical Regen (${patchMap.size}L)`),
-        lines: sc.lines.map((l, idx) => {
+      updateActiveScene((sc) => {
+        const nextLines = sc.lines.map((l, idx) => {
           const patch = patchMap.get(idx + 1);
           if (!patch) return l;
+          const patchedText = String(patch.text ?? l.text)
+            .replace(/\bTA-TA\b/g, 'TATA')
+            .replace(/\bTa-Ta\b/gi, 'Tata');
           return {
             ...l,
             type: patch.type || l.type,
             speaker: patch.speaker ?? l.speaker,
             mood: patch.mood || l.mood,
-            text: patch.text ?? l.text,
+            text: patchedText,
             flags: [],
             customNote: '',
           };
-        }),
-      }));
+        });
+        const afterLinter = lintScene(nextLines, activeBannedWords);
+        return {
+          ...sc,
+          history: pushSceneSnapshot(sc, `Before Surgical Regen (${patchMap.size}L)`),
+          lines: nextLines,
+          qa: {
+            passed: afterLinter.length === 0,
+            score: null,
+            mode: 'lean-linter',
+            retries: sc.qa?.retries || 0,
+            notes: afterLinter.map((e) => `L${e.lineIndex + 1} (${e.speaker || 'n/a'}) [${e.code}]: ${e.message}`),
+            issues: [],
+            at: new Date().toISOString(),
+          },
+        };
+      });
 
       showToast(`Patched ${patchMap.size} line(s) in place.`);
     } catch (err) {
@@ -3196,7 +3417,11 @@ export default function App() {
                             sc.qa.passed ? 'text-emerald-300 border-emerald-500/40 bg-emerald-500/10' : 'text-amber-300 border-amber-500/40 bg-amber-500/10'
                           }`}
                         >
-                          QA: {sc.qa.score == null ? 'n/a' : `${sc.qa.score}/10`}
+                          {sc.qa.score == null
+                            ? sc.qa.passed
+                              ? 'Linter: Clean'
+                              : `Linter: ${(sc.qa.notes || []).length} note(s)`
+                            : `QA: ${sc.qa.score}/10`}
                         </button>
                       )}
                     </div>
@@ -3632,6 +3857,20 @@ export default function App() {
                         </div>
                       </div>
 
+                      {/* Comic Premise */}
+                      <div className="space-y-1">
+                        <label className="text-[11px] font-semibold uppercase text-amber-300">
+                          Comic Premise (The 1 Funny Situation)
+                        </label>
+                        <textarea
+                          value={activeScene.comicPremise || ''}
+                          onChange={(e) => updateActiveScene({ comicPremise: e.target.value })}
+                          rows={3}
+                          placeholder="1-sentence comic engine for this scene (what makes this interaction funny before any dialogue is written)..."
+                          className="w-full bg-slate-950 border border-amber-500/30 rounded-lg p-2 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-amber-400"
+                        />
+                      </div>
+
                       {/* Mandatory Beats */}
                       <div className="space-y-1.5">
                         <div className="flex items-center justify-between">
@@ -3906,9 +4145,23 @@ export default function App() {
                         onClick={handleGenerateScene}
                         disabled={Boolean(loadingStatus)}
                         className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white shadow transition"
+                        title="Single-pass generation + $0 instant JS linter"
                       >
                         <Sparkles className="w-4 h-4" />
                         Generate Scene
+                      </button>
+
+                      <button
+                        onClick={() => setSettingsOpen(true)}
+                        type="button"
+                        title="Click to switch Writer model in API Settings"
+                        className={`inline-flex items-center gap-1 px-2.5 py-2 rounded-lg text-[11px] font-mono font-semibold border transition ${
+                          genModelId.includes('carbon')
+                            ? 'bg-rose-500/15 text-rose-200 border-rose-500/40 hover:bg-rose-500/25'
+                            : 'bg-emerald-500/15 text-emerald-200 border-emerald-500/40 hover:bg-emerald-500/25'
+                        }`}
+                      >
+                        <span>Writer: {genModelId || 'unset'}</span>
                       </button>
 
                       <button
@@ -4006,13 +4259,18 @@ export default function App() {
                           }`}
                         >
                           <summary className="cursor-pointer select-none font-semibold flex flex-wrap items-center gap-x-3 gap-y-1">
-                            <span>{activeScene.qa.passed ? 'QA passed' : 'QA: needs a look'}</span>
-                            <span className="font-mono">
-                              Score {activeScene.qa.score == null ? 'n/a' : `${activeScene.qa.score}/10`}
+                            <span>
+                              {activeScene.qa.score == null
+                                ? activeScene.qa.passed
+                                  ? 'Linter clean (1-pass)'
+                                  : 'Linter: needs a look'
+                                : activeScene.qa.passed
+                                ? 'QA passed'
+                                : 'QA: needs a look'}
                             </span>
-                            <span className="font-mono">
-                              {activeScene.qa.retries} auto-fix{activeScene.qa.retries === 1 ? '' : 'es'}
-                            </span>
+                            {activeScene.qa.score != null && (
+                              <span className="font-mono">Score {activeScene.qa.score}/10</span>
+                            )}
                             <span className="font-mono">{(activeScene.qa.notes || []).length} note{(activeScene.qa.notes || []).length === 1 ? '' : 's'}</span>
                           </summary>
                           <ul className="mt-2 space-y-1 list-disc pl-5 text-slate-300">
