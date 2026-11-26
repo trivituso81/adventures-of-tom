@@ -9379,6 +9379,38 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done (the hitstop1 paragraph). Your first push is the commit \"board: start c-hitstoplab1\". p1Clock in engine/pass1-vfx.js holds a clip for hit_stop_frames * 1000 / 60 milliseconds. For a row from data/guide-manifest.json (from:'manifest', built by engine/guide-timing.js) the frames are at 24 fps, so the Battle Lab pass-1 review holds them about 2.5 times too short. Make p1Clock count a manifest row at 24 fps (hit_stop_frames * 1000 / 24) and leave rows from data/pass1-meta.js (measured on the baked video) at 60 fps. Do not change clips, impact times, the rules or engine/b3-vfx.js. Update the p1Clock check in tools/guide_timing_test.py and add a check that a pass1-meta row still holds at 60 fps. Run python3 -I tools/guide_timing_test.py, python3 tools/smoke.py and python3 tools/b3_hitstop_test.py. Update docs/BATTLE_GUIDE.md What is done and docs/CHANGES.md. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "done": "2026-11-26"
+  },
+  {
+   "id": "c-smokefix2",
+   "tag": "smokefix2",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Tools",
+   "title": "Fix the two failures smoke shows on main",
+   "next": "Fix board_sync_test (board4: board_check accepts a Tom card waiting on its fix) and add tools/hidebf_test.py to tools/night/tests.json, so python3 tools/smoke.py reports no failures.",
+   "chat": {
+    "url": "",
+    "opening": ""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Created: python3 tools/smoke.py shows two failures on main that hitstoplab1 did not cause (board_sync_test board4 check; night manifest missing tools/hidebf_test.py). Board: new card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Fixes the two failures python3 tools/smoke.py shows on main: the board4 check in board_sync_test and the night manifest row for hidebf_test.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the cause is not written down yet, tests catch mistakes)",
+    "effort": "medium (two small, named failures)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json. Your first push is the commit \"board: start c-smokefix2\". python3 tools/smoke.py ends with two failures that are on main without any recent change. (1) tools/board_sync_test.py fails the check \"board4: board_check accepts a Tom card waiting on its fix (not fyi, blocks nothing)\": find the cause and fix the test or the code it tests, whichever is wrong. (2) The night manifest check says tools/hidebf_test.py is not in tools/night/tests.json: add a row for it with the right group, minutes and cmd, or add it to skip with a reason, as the file's about line describes. Change nothing else. Run python3 tools/board_sync_test.py, python3 tools/night/manifest_check.py and python3 tools/smoke.py, and confirm smoke reports no failures. Update docs/CHANGES.md. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
@@ -11090,10 +11122,10 @@
    "first": "2026-11-22T02:18:26Z",
    "last": "2026-11-22T02:19:00Z",
    "tags": [
-    "smokefix1"
+    "smokefix2"
    ],
    "cards": [
-    "c-smokefix1"
+    "c-smokefix2"
    ]
   },
   {

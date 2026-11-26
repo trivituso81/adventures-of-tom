@@ -1,3 +1,7 @@
+## board-smokefix2 (2026-11-26): board card for the two smoke failures on main
+
+Added card c-smokefix2 (Claude lane, Tools theme): `python3 tools/smoke.py` fails on main on the board4 check in `board_sync_test` and on the night manifest, which lacks `tools/hidebf_test.py`. Board only; no game file changed.
+
 ## hitstoplab1 (2026-11-26): the Battle Lab review holds a move's hit stop at the right length
 
 Tom's card c-hitstoplab1 (the separate step hitstop1 left open). In the Battle Lab pass-1 review, `p1Clock` (`engine/pass1-vfx.js`) held a clip for `hit_stop_frames * 1000 / 60` ms for every row. A row that comes from `data/guide-manifest.json` (`from:'manifest'`, built by `engine/guide-timing.js`) has its frames at 24 fps, so the review held it about 2.5 times too short (3 frames: 50 ms instead of 125 ms; 7 frames: 117 ms instead of 292 ms). `p1Clock` now counts a manifest row at 24 fps (`hit_stop_frames * 1000 / 24`) and a row from `data/pass1-meta.js` (measured on the baked video) still at 60 fps. Nothing else changed: no clip, impact time, rule or `engine/b3-vfx.js`.

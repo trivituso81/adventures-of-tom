@@ -1,4 +1,9 @@
 [
+{"tag":"board-ready","at":"2026-11-19T15:34:51-08:00","what":"Board card added: green Ready badge on Claude cards that are unblocked","card":"b-board-ready","theme":"Tools","kind":"house"},
+{"tag":"ch1takes1","at":"2026-11-19T15:29:39-08:00","what":"31 phone voice takes merged (30 chapter 1 re-takes, 1 new Mr. Washington line); nothing heard on a phone","card":"b-ch1takes1","theme":"Voice Clips"},
+{"tag":"scene1fix1","at":"2026-11-19T15:26:33-08:00","what":"The girls' party banners wait until all of scene 1 is done, and the TATA bubble is smaller and sits above the running girls","card":"b-scene1fix1","theme":"Story and Dialogue"},
+{"tag":"clipgate2a","at":"2026-11-19T15:19:18-08:00","what":"The clip gate's vision check and the Action that runs it; nothing made, nothing spent yet","card":"c-clipgate2","theme":"Battle Animations"},
+{"tag":"clipgate1","at":"2026-11-19T15:05:02-08:00","what":"A measured quality gate for battle clips, replayed against Tom's chapter 1 review; nothing re-made, nothing spent","card":"b-clipgate1","theme":"Battle Animations"},
 {"tag":"artbake1489","at":"2026-11-19T22:42:21+00:00","what":"","kind":"house"},
 {"tag":"cutpolish4","at":"2026-11-19T13:48:29-08:00","what":"The kitchen heist, the Mudling bursts through the door, the camera finds the island, the parents keep their shock","card":"c-cutpolish4","theme":"Story and Dialogue"},
 {"tag":"cutpolish3","at":"2026-11-19T13:02:24-08:00","what":"Rose rides on Tom's shoulders from the Square to the kitchen, the hug sways, speakers face left or right, followers stop vanishing behind the half-wall","card":"b-cutpolish3","theme":"Game Shell"},
