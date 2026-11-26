@@ -577,12 +577,11 @@
     "n": 1
    },
    "use": {
-    "state": "applying",
+    "state": "live",
     "at": "2026-11-26T08:17:51Z",
-    "since": "2026-11-26T08:17:51Z",
-    "build": "",
-    "why": "",
-    "run": 45781979798
+    "since": "2026-11-26T08:21:52Z",
+    "build": "guideuse-45781979798",
+    "why": ""
    },
    "left": false,
    "dry": false,
