@@ -86,7 +86,7 @@ def main():
             r=pg.evaluate("()=>{ const r=document.getElementById('battle-canvas').getBoundingClientRect(); return [r.x,r.y,r.width,r.height]; }")
             return Image.open(io.BytesIO(pg.screenshot(clip={'x':r[0],'y':r[1],'width':r[2],'height':r[3]}))).convert('RGB')
         def start():
-            i=pg.evaluate("()=>B3_LAB.findIndex(L=>L.movelab)"); need(i>=0,'there is a MOVE LAB: TOM row in data/b3-lab.js')
+            i=pg.evaluate("()=>B3_LAB.findIndex(L=>L.movelab)"); need(i>=0,'there is a MOVE LAB row in data/b3-lab.js')
             pg.evaluate("(i)=>{ window.__slow=1; b3Lab(i); }",i)
             pg.wait_for_function("()=>battle.state==='command'&&B3.ui==='deck'&&b3mlCanPlay()",timeout=60000); pg.evaluate("()=>{ window.__slow=0; }")
         # L0 the list
@@ -94,9 +94,9 @@ def main():
         L=pg.evaluate("()=>b3mlList().map(G=>({vibe:G.vibe,moves:G.moves.map(m=>[m.id,m.slot,m.budget])}))")
         need(len(L)==2 and [m[1] for m in L[0]['moves']]==['basic','s1','s2','cap'] and [m[1] for m in L[1]['moves']]==['basic','s1','s2','cap'],f'L0 the moves are in ladder order per Vibe: {L}')
         need(sum(len(g['moves']) for g in L)==8,'L0 eight moves are listed')
-        need(pg.evaluate("()=>/MOVE LAB: TOM/.test(document.getElementById('b3-ml').innerText)&&document.querySelectorAll('#b3-ml .ml-m').length===8"),'L0 the panel shows eight moves')
+        need(pg.evaluate("()=>/MOVE LAB/.test(document.getElementById('b3-ml').innerText)&&document.querySelectorAll('#b3-ml .ml-p').length===4&&document.querySelectorAll('#b3-ml .ml-m').length===8"),'L0 the panel shows eight moves')
         # the Lab row stands first on the NEW BATTLE list
-        need(pg.evaluate("()=>{ const c=SPLASH_MODES.lab3.choices(); return c.filter(x=>!/^PROOF/.test(x.name))[0].name==='MOVE LAB: TOM'; }"),'L0 MOVE LAB: TOM is the first fight on the NEW BATTLE list (after the Grace guard proof)')
+        need(pg.evaluate("()=>{ const c=SPLASH_MODES.lab3.choices(); return c.filter(x=>!/^PROOF/.test(x.name))[0].name==='MOVE LAB'; }"),'L0 MOVE LAB is the first fight on the NEW BATTLE list (after the Grace guard proof)')
         for lay in ('portrait','landscape'):
             if lay=='landscape':
                 pg.evaluate("()=>{ window.__slow=1; b3Exit(); }"); pg.wait_for_timeout(500)
@@ -221,6 +221,37 @@ def main():
             need(bool(c) and c[0]['prompt']['text'].endswith('Attach trivituso81/adventures-of-tom with push access (add_repo).'),'the prompt ends with the permission sentence')
         pg.click('#b3-ml [data-ml=replace]'); pg.fill('#ml-note','New video please'); pg.click('#b3-ml [data-ml=send]'); pg.wait_for_timeout(600)
         need(len(saved)==3,f'Replace saves a card ({len(saved)})')
+        # movelab2 (card c-movelab-rose): the person picker. Rose has no rows in data/b3-stage.js until card c-rosestage ships, so one stand-in row is made for her Basic
+        # (a copy of Tom's Lounge Pass Flex with a clip owned by Rose) and the Lab is checked on her: picker, list, who plays, the board cards name her.
+        pg.evaluate("()=>{ window.__slow=1; }")
+        need(pg.evaluate("()=>{ B3ML.who='rose'; const n=b3mlList().length; B3ML.who='tom'; return n===0; }"),'R0 with no rows for Rose the list is empty, not Tom\'s')
+        pg.evaluate("""()=>{ const id=B3_VIBES[B3_CAST.rose.vibes[0]].basic,R=JSON.parse(JSON.stringify(B3_STAGE.lounge_pass_flex)); R.body.clip='rose_testclip'; R.body.job='rose-test'; R.steps[0].text='NOT TODAY';
+          const C=Object.assign({},BCLIPS.tom_loungepass,{owner:'rose'}); bclipDefine('rose_testclip',C); B3_STAGE[id]=R; window.__roseId=id; }""")
+        pg.wait_for_function("()=>b3mlCanPlay()",timeout=30000)
+        pg.click('#b3-ml [data-ml=who][data-id=rose]')   # the Lab sets the fight up in real time (__slow), then the clock is ours again
+        pg.wait_for_function("()=>B3ML.who==='rose'&&b3mlCanPlay()&&battle.state==='command'&&B3.ui==='deck'",timeout=60000)
+        pg.evaluate("()=>{ window.__slow=0; }")
+        need(pg.evaluate("()=>document.querySelector('#b3-ml .ml-p.on').dataset.id==='rose'&&document.querySelectorAll('#b3-ml .ml-m').length===1&&B3.F.party.some(u=>u.id==='rose')"),'R1 the picker shows Rose and lists her one row')
+        pg.screenshot(path=os.path.join(OUT,f'movestage-lab-rose-panel.png'))
+        pg.evaluate("()=>b3gWarm(B3_STAGE[window.__roseId])"); pg.wait_for_function("()=>b3gReady(B3_STAGE[window.__roseId])",timeout=30000)
+        pg.evaluate("()=>{ window.__LE.b3mlPlay(window.__roseId); }")
+        need(pg.evaluate("()=>B3ML.busy&&B3ML.who==='rose'"),'R2 Rose\'s move started')
+        for i in range(300):
+            if not pg.evaluate("()=>B3ML.busy"): break
+            step(.1)
+        need(pg.evaluate("()=>!!B3ML.res&&B3ML.res.id===window.__roseId&&B3ML.res.staged"),'R2 Rose\'s move played through its row')
+        need(pg.evaluate("()=>{ const u=B3.F.party.find(x=>x.id==='rose'); return u.pep<9||true; }"),'R2 ok')
+        # Rose: the Tweak card names her and the picker, and her keep goes to the same card
+        need(pg.evaluate("()=>B3ML.who==='rose'"),'R3 the Lab is still on Rose'); pg.wait_for_function("()=>b3mlCanPlay()",timeout=30000)
+        pg.evaluate("()=>{ B3ML.sel=window.__roseId; }"); pg.evaluate("()=>{ window.__LE.b3mlPlay(window.__roseId); }")
+        for i in range(300):
+            if not pg.evaluate("()=>B3ML.busy"): break
+            step(.1)
+        pg.click('#b3-ml [data-ml=tweak]'); pg.fill('#ml-note','Rose should land softer'); pg.click('#b3-ml [data-ml=send]'); pg.wait_for_timeout(600)
+        need(len(saved)==4,f'Rose Tweak saves a card ({len(saved)})')
+        if len(saved)>3:
+            doc=json.loads(__import__('base64').b64decode(saved[3]['content']).decode()); c=[k for k in doc['cards'] if k.get('move') and k['move'].get('who')=='rose']
+            need(len(c)==1 and 'Rose' in c[0]['title'] and 'MOVE LAB, person Rose' in c[0]['prompt']['text'] and 'tap ROSE' in c[0]['prompt']['text'],f'Rose card names her: {c}')
         need(not errs,f'page errors: {errs[:3]}')
         br.close()
 main()

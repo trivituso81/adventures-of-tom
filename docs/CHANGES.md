@@ -1,3 +1,10 @@
+## movelab2 (2026-11-26): the Move Lab has a person picker (Tom, Grace, Rose, Deedee)
+
+Card c-movelab-rose (follow-up to c-rosestage). Not seen on a phone yet.
+- ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB (the row is now just "MOVE LAB", id `moves-lab`) has four buttons in the panel header; the picked person's staged moves list in ladder order per Vibe, the fight restarts with that person's Vibes at top Rank, and Keep, Tweak and Replace work the same for them (`engine/b3-movelab.js`: `B3ML.who`, `b3mlList(who)`, `b3mlPick`).
+- The Tweak and Replace cards name the person (`move.who`, title and prompt say "MOVE LAB, person Rose" and "tap ROSE"); Keep still writes to `t-movestage-lab`. A person with no rows in `data/b3-stage.js` shows "No staged moves yet".
+- Rose's rows are not in `data/b3-stage.js` yet (c-rosestage is still in progress), so the test uses one stand-in row for her Basic. Tested: `python3 tools/movestage_lab_test.py` passes (Tom's eight moves unchanged, Rose plays through her row, the Rose Tweak card names her), portrait and landscape panel pictures in `tools/shots/`.
+- Not done: no bake, no real Rose video, nothing for Tom to judge until c-rosestage ships her rows.
 ## tomframes (2026-11-26): Tom's new walking, feelings, talking and listening pictures are in the game
 
 Card c-tomframes. Tom's words: "implement tom's new walking, emotions, and listening frames." Not seen on the phone yet.
