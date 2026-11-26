@@ -6847,6 +6847,16 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEwUSDJ9vQSuhgX1Q1",
+   "title": "Tom's new portrait for menus and turn order",
+   "first": "2026-11-26T00:29:29-08:00",
+   "last": "2026-11-26T00:29:29-08:00",
+   "tags": [],
+   "cards": [
+    "c-tomportrait1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCskdRQQ8jaXgjzwk7",
    "title": "Battle Guide: manifest crosswalk and per-ability needs",
    "first": "2026-11-25T23:38:33-08:00",
@@ -13290,8 +13300,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "6e27283cc11dc8a754827c70b381147c8bfc9a7c",
- "synced_at": "2026-11-26T08:28:02+00:00",
+ "synced": "9d31da0d171983adb46df3c767420792f9dea173",
+ "synced_at": "2026-11-26T08:30:17+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
