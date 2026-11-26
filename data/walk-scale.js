@@ -14,7 +14,7 @@ const WALK_SCALE={
   deedee:{inches:65,rows:41.8,k:0.9199},
   olivia:{inches:68,rows:42.444,k:0.9477},
   ellie:{inches:62,rows:43.111,k:0.8507},
-  grace:{inches:50,rows:39.3,k:0.7526},
+  grace:{inches:50,rows:39.4,k:0.7507},
   rose:{inches:40,rows:35.333,k:0.6697},
   nara:{inches:42,rows:31.0,k:0.8015},
 };

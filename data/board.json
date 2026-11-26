@@ -8726,7 +8726,7 @@
    "theme": "Characters",
    "lane": "claude",
    "col": "prog",
-   "next": "In progress: baking Grace's new walking (v3), feelings (v4), talking (v3) and listening (v2) sheets, the same way as Rose's.",
+   "next": "Shipped as graceframes: Grace's new walking, feelings, talking, thinking and listening pictures are in the game. Tom looks at them on his phone (card t-graceframesplay).",
    "blocks": [],
    "changed": "2026-11-26",
    "created": "2026-11-26",
@@ -8743,6 +8743,10 @@
     {
      "d": "2026-11-26",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Built graceframes: walk v3, feelings v4, talk v3 and listen v2 baked for Grace only (listen-v2 is a 4 up strip: cell 1 listening, cell 2 thinking). Plain dialogue face re-framed on the new walk. Tests: listening reaction test 0 misses, heights and pose editor tests pass."
     }
    ],
    "after": "t-graceframesplay",
@@ -8764,7 +8768,7 @@
    "col": "up",
    "ask": "play",
    "fyi": true,
-   "next": "Not ready yet: opens when Grace's frames are pushed.",
+   "next": "Open the game, RELOAD on the title (if it still looks old, close the home-screen app and open it again), then CHAPTERS > Chapter 1. Look at Grace in the story scenes and in dialogue: her walking, feelings, talking, thinking and listening poses should be the new purple hoodie and one size, matching her walking size. Her hero painting in menus and her battle videos are not part of this card. Tell me with the REPORT tab which pose is wrong.",
    "jump": {
     "chapter": 1
    },
@@ -8775,6 +8779,10 @@
     {
      "d": "2026-11-26",
      "t": "Made by graceframes."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Updated by graceframes: build is in."
     }
    ]
   },

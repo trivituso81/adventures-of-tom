@@ -11,8 +11,8 @@ grace	em_happy	f
 grace	em_loving	f
 grace	em_sad	f
 grace	em_angry	f
-grace	em_scared	r
-grace	em_surprised	r
+grace	em_scared	f
+grace	em_surprised	f
 grace	em_proud	r
 grace	em_unimpressed	r
 rose	em_happy	f
@@ -569,7 +569,7 @@ tnb	tk_point	r
 tnb	tk_ask	f
 tnb	tk_answer	r
 tnb	tk_think	f
-grace	tk_tell	r
+grace	tk_tell	f
 grace	tk_point	r
 grace	tk_ask	f
 grace	tk_answer	r

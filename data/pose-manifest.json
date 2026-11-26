@@ -4688,13 +4688,13 @@
    "name": "Grace",
    "inches": 50,
    "R": 29.577,
-   "standH": 465,
-   "sheet": "grace-walking-sheet-v2.png",
+   "standH": 385,
+   "sheet": "grace-walking-sheet-v3.png",
    "headTweak": 1.3,
    "now": {
     "f": 0.88904,
     "h": 1.3,
-    "anchor": 125.55
+    "anchor": 103.95
    },
    "locked": null,
    "frames": {
@@ -4703,22 +4703,22 @@
      "key": "down_stand",
      "label": "Grace, walking, front standing",
      "img": "art/poses/grace/walk-down_stand.webp",
-     "w": 218,
-     "h": 465,
-     "ax": 98.5,
+     "w": 188,
+     "h": 385,
+     "ax": 96.6,
      "link": null,
-     "sheet": "grace-walking-sheet-v2.png",
+     "sheet": "grace-walking-sheet-v3.png",
      "marks": {
-      "top": 18.6,
-      "chin": 123.7,
-      "feet": 465
+      "top": 12.5,
+      "chin": 104.0,
+      "feet": 385
      },
-     "conf": "high",
-     "s0": 0.063607,
+     "conf": "low",
+     "s0": 0.076825,
      "now": {
       "f": 0.88904,
       "h": 1.3,
-      "anchor": 125.55
+      "anchor": 103.95
      }
     },
     "down_step1": {
@@ -4726,22 +4726,22 @@
      "key": "down_step1",
      "label": "Grace, walking, front step 1",
      "img": "art/poses/grace/walk-down_step1.webp",
-     "w": 220,
-     "h": 467,
-     "ax": 99.5,
+     "w": 191,
+     "h": 388,
+     "ax": 98.4,
      "link": "down_stand",
-     "sheet": "grace-walking-sheet-v2.png",
+     "sheet": "grace-walking-sheet-v3.png",
      "marks": {
-      "top": 18.6,
-      "chin": 123.7,
-      "feet": 467
+      "top": 12.5,
+      "chin": 104.0,
+      "feet": 388
      },
-     "conf": "high",
-     "s0": 0.063607,
+     "conf": "low",
+     "s0": 0.076825,
      "now": {
       "f": 0.88904,
       "h": 1.3,
-      "anchor": 125.55
+      "anchor": 103.95
      }
     },
     "down_step2": {
@@ -4749,22 +4749,22 @@
      "key": "down_step2",
      "label": "Grace, walking, front step 2",
      "img": "art/poses/grace/walk-down_step2.webp",
-     "w": 217,
-     "h": 467,
-     "ax": 99.0,
+     "w": 194,
+     "h": 385,
+     "ax": 99.7,
      "link": "down_stand",
-     "sheet": "grace-walking-sheet-v2.png",
+     "sheet": "grace-walking-sheet-v3.png",
      "marks": {
-      "top": 18.6,
-      "chin": 123.7,
-      "feet": 467
+      "top": 12.5,
+      "chin": 104.0,
+      "feet": 385
      },
-     "conf": "high",
-     "s0": 0.063607,
+     "conf": "low",
+     "s0": 0.076825,
      "now": {
       "f": 0.88904,
       "h": 1.3,
-      "anchor": 125.55
+      "anchor": 103.95
      }
     },
     "up_stand": {
@@ -4772,22 +4772,22 @@
      "key": "up_stand",
      "label": "Grace, walking, back standing",
      "img": "art/poses/grace/walk-up_stand.webp",
-     "w": 201,
-     "h": 449,
-     "ax": 106.4,
+     "w": 160,
+     "h": 376,
+     "ax": 79.5,
      "link": null,
-     "sheet": "grace-walking-sheet-v2.png",
+     "sheet": "grace-walking-sheet-v3.png",
      "marks": {
-      "top": 18.6,
-      "chin": 123.7,
-      "feet": 449
+      "top": 12.5,
+      "chin": 104.0,
+      "feet": 376
      },
      "conf": "low",
-     "s0": 0.063607,
+     "s0": 0.076825,
      "now": {
       "f": 0.88904,
       "h": 1.3,
-      "anchor": 125.55
+      "anchor": 103.95
      }
     },
     "up_step1": {
@@ -4795,22 +4795,22 @@
      "key": "up_step1",
      "label": "Grace, walking, back step 1",
      "img": "art/poses/grace/walk-up_step1.webp",
-     "w": 197,
-     "h": 450,
-     "ax": 105.0,
+     "w": 160,
+     "h": 376,
+     "ax": 81.5,
      "link": "up_stand",
-     "sheet": "grace-walking-sheet-v2.png",
+     "sheet": "grace-walking-sheet-v3.png",
      "marks": {
-      "top": 18.6,
-      "chin": 123.7,
-      "feet": 450
+      "top": 12.5,
+      "chin": 104.0,
+      "feet": 376
      },
      "conf": "low",
-     "s0": 0.063607,
+     "s0": 0.076825,
      "now": {
       "f": 0.88904,
       "h": 1.3,
-      "anchor": 125.55
+      "anchor": 103.95
      }
     },
     "up_step2": {
@@ -4818,22 +4818,22 @@
      "key": "up_step2",
      "label": "Grace, walking, back step 2",
      "img": "art/poses/grace/walk-up_step2.webp",
-     "w": 204,
-     "h": 450,
-     "ax": 110.4,
+     "w": 165,
+     "h": 379,
+     "ax": 83.0,
      "link": "up_stand",
-     "sheet": "grace-walking-sheet-v2.png",
+     "sheet": "grace-walking-sheet-v3.png",
      "marks": {
-      "top": 18.6,
-      "chin": 123.7,
-      "feet": 450
+      "top": 12.5,
+      "chin": 104.0,
+      "feet": 379
      },
      "conf": "low",
-     "s0": 0.063607,
+     "s0": 0.076825,
      "now": {
       "f": 0.88904,
       "h": 1.3,
-      "anchor": 125.55
+      "anchor": 103.95
      }
     },
     "left_stand": {
@@ -4841,22 +4841,22 @@
      "key": "left_stand",
      "label": "Grace, walking, side standing",
      "img": "art/poses/grace/walk-left_stand.webp",
-     "w": 198,
-     "h": 494,
-     "ax": 99.3,
+     "w": 152,
+     "h": 380,
+     "ax": 80.7,
      "link": null,
-     "sheet": "grace-walking-sheet-v2.png",
+     "sheet": "grace-walking-sheet-v3.png",
      "marks": {
-      "top": 18.6,
-      "chin": 123.7,
-      "feet": 494
+      "top": 12.5,
+      "chin": 104.0,
+      "feet": 380
      },
      "conf": "low",
-     "s0": 0.063607,
+     "s0": 0.076825,
      "now": {
       "f": 0.88904,
       "h": 1.3,
-      "anchor": 125.55
+      "anchor": 103.95
      }
     },
     "left_step1": {
@@ -4864,22 +4864,22 @@
      "key": "left_step1",
      "label": "Grace, walking, side step 1",
      "img": "art/poses/grace/walk-left_step1.webp",
-     "w": 293,
-     "h": 490,
-     "ax": 184.8,
+     "w": 225,
+     "h": 379,
+     "ax": 147.2,
      "link": "left_stand",
-     "sheet": "grace-walking-sheet-v2.png",
+     "sheet": "grace-walking-sheet-v3.png",
      "marks": {
-      "top": 18.6,
-      "chin": 123.7,
-      "feet": 490
+      "top": 12.5,
+      "chin": 104.0,
+      "feet": 379
      },
      "conf": "low",
-     "s0": 0.063607,
+     "s0": 0.076825,
      "now": {
       "f": 0.88904,
       "h": 1.3,
-      "anchor": 125.55
+      "anchor": 103.95
      }
     },
     "left_step2": {
@@ -4887,22 +4887,22 @@
      "key": "left_step2",
      "label": "Grace, walking, side step 2",
      "img": "art/poses/grace/walk-left_step2.webp",
-     "w": 238,
-     "h": 503,
-     "ax": 137.3,
+     "w": 190,
+     "h": 380,
+     "ax": 114.6,
      "link": "left_stand",
-     "sheet": "grace-walking-sheet-v2.png",
+     "sheet": "grace-walking-sheet-v3.png",
      "marks": {
-      "top": 18.6,
-      "chin": 123.7,
-      "feet": 503
+      "top": 12.5,
+      "chin": 104.0,
+      "feet": 380
      },
      "conf": "low",
-     "s0": 0.063607,
+     "s0": 0.076825,
      "now": {
       "f": 0.88904,
       "h": 1.3,
-      "anchor": 125.55
+      "anchor": 103.95
      }
     },
     "em_happy": {
@@ -4910,22 +4910,22 @@
      "key": "em_happy",
      "label": "Grace, feeling happy",
      "img": "art/poses/grace/mood-em_happy.webp",
-     "w": 251,
-     "h": 518,
-     "ax": 122.2,
+     "w": 285,
+     "h": 516,
+     "ax": 137.1,
      "link": null,
-     "sheet": "grace-emotions-v3.png",
+     "sheet": "grace-emotions-v4.png",
      "marks": {
-      "top": 19.5,
-      "chin": 130.0,
-      "feet": 518
+      "top": 16.7,
+      "chin": 139.0,
+      "feet": 516
      },
      "conf": "low",
-     "s0": 0.050767,
+     "s0": 0.05049,
      "now": {
       "f": 1.0,
       "h": 1.3,
-      "anchor": 130.0
+      "anchor": 139.0
      }
     },
     "em_loving": {
@@ -4933,18 +4933,18 @@
      "key": "em_loving",
      "label": "Grace, feeling loving",
      "img": "art/poses/grace/mood-em_loving.webp",
-     "w": 249,
-     "h": 507,
-     "ax": 114.0,
+     "w": 257,
+     "h": 517,
+     "ax": 132.2,
      "link": null,
-     "sheet": "grace-emotions-v3.png",
+     "sheet": "grace-emotions-v4.png",
      "marks": {
-      "top": 21.4,
+      "top": 17.1,
       "chin": 142.0,
-      "feet": 507
+      "feet": 517
      },
      "conf": "low",
-     "s0": 0.050767,
+     "s0": 0.05049,
      "now": {
       "f": 1.0,
       "h": 1.3,
@@ -4956,22 +4956,22 @@
      "key": "em_sad",
      "label": "Grace, feeling sad",
      "img": "art/poses/grace/mood-em_sad.webp",
-     "w": 239,
-     "h": 510,
-     "ax": 121.4,
+     "w": 241,
+     "h": 513,
+     "ax": 120.5,
      "link": null,
-     "sheet": "grace-emotions-v3.png",
+     "sheet": "grace-emotions-v4.png",
      "marks": {
-      "top": 23.3,
-      "chin": 155.0,
-      "feet": 510
+      "top": 20.3,
+      "chin": 169.0,
+      "feet": 513
      },
      "conf": "low",
-     "s0": 0.050767,
+     "s0": 0.05049,
      "now": {
       "f": 1.0,
       "h": 1.3,
-      "anchor": 155.0
+      "anchor": 169.0
      }
     },
     "em_angry": {
@@ -4979,22 +4979,22 @@
      "key": "em_angry",
      "label": "Grace, feeling angry",
      "img": "art/poses/grace/mood-em_angry.webp",
-     "w": 335,
-     "h": 509,
-     "ax": 155.5,
+     "w": 324,
+     "h": 501,
+     "ax": 152.5,
      "link": null,
-     "sheet": "grace-emotions-v3.png",
+     "sheet": "grace-emotions-v4.png",
      "marks": {
-      "top": 23.8,
-      "chin": 158.0,
-      "feet": 509
+      "top": 19.7,
+      "chin": 164.0,
+      "feet": 501
      },
      "conf": "low",
-     "s0": 0.050767,
+     "s0": 0.05049,
      "now": {
       "f": 1.0,
       "h": 1.3,
-      "anchor": 158.0
+      "anchor": 164.0
      }
     },
     "em_scared": {
@@ -5002,22 +5002,22 @@
      "key": "em_scared",
      "label": "Grace, feeling scared",
      "img": "art/poses/grace/mood-em_scared.webp",
-     "w": 253,
-     "h": 521,
-     "ax": 125.1,
+     "w": 276,
+     "h": 496,
+     "ax": 133.9,
      "link": null,
-     "sheet": "grace-emotions-v3.png",
+     "sheet": "grace-emotions-v4.png",
      "marks": {
-      "top": 22.6,
-      "chin": 150.0,
-      "feet": 521
+      "top": 16.7,
+      "chin": 139.0,
+      "feet": 496
      },
      "conf": "low",
-     "s0": 0.050767,
+     "s0": 0.05049,
      "now": {
       "f": 1.0,
       "h": 1.3,
-      "anchor": 150.0
+      "anchor": 139.0
      }
     },
     "em_surprised": {
@@ -5025,22 +5025,22 @@
      "key": "em_surprised",
      "label": "Grace, feeling surprised",
      "img": "art/poses/grace/mood-em_surprised.webp",
-     "w": 272,
-     "h": 529,
-     "ax": 130.0,
+     "w": 277,
+     "h": 510,
+     "ax": 137.0,
      "link": null,
-     "sheet": "grace-emotions-v3.png",
+     "sheet": "grace-emotions-v4.png",
      "marks": {
-      "top": 20.6,
-      "chin": 137.0,
-      "feet": 529
+      "top": 18.4,
+      "chin": 153.0,
+      "feet": 510
      },
      "conf": "low",
-     "s0": 0.050767,
+     "s0": 0.05049,
      "now": {
       "f": 1.0,
       "h": 1.3,
-      "anchor": 137.0
+      "anchor": 153.0
      }
     },
     "em_proud": {
@@ -5048,22 +5048,22 @@
      "key": "em_proud",
      "label": "Grace, feeling proud",
      "img": "art/poses/grace/mood-em_proud.webp",
-     "w": 334,
-     "h": 535,
-     "ax": 139.0,
+     "w": 305,
+     "h": 517,
+     "ax": 132.6,
      "link": null,
-     "sheet": "grace-emotions-v3.png",
+     "sheet": "grace-emotions-v4.png",
      "marks": {
-      "top": 18.9,
-      "chin": 126.0,
-      "feet": 535
+      "top": 14.9,
+      "chin": 124.0,
+      "feet": 517
      },
      "conf": "low",
-     "s0": 0.050767,
+     "s0": 0.05049,
      "now": {
       "f": 1.0,
       "h": 1.3,
-      "anchor": 126.0
+      "anchor": 124.0
      }
     },
     "em_unimpressed": {
@@ -5071,22 +5071,22 @@
      "key": "em_unimpressed",
      "label": "Grace, feeling unimpressed",
      "img": "art/poses/grace/mood-em_unimpressed.webp",
-     "w": 243,
-     "h": 536,
-     "ax": 125.5,
+     "w": 306,
+     "h": 509,
+     "ax": 130.0,
      "link": null,
-     "sheet": "grace-emotions-v3.png",
+     "sheet": "grace-emotions-v4.png",
      "marks": {
-      "top": 20.6,
-      "chin": 137.0,
-      "feet": 536
+      "top": 15.9,
+      "chin": 132.0,
+      "feet": 509
      },
      "conf": "low",
-     "s0": 0.050767,
+     "s0": 0.05049,
      "now": {
       "f": 1.0,
       "h": 1.3,
-      "anchor": 137.0
+      "anchor": 132.0
      }
     },
     "tk_tell": {
@@ -5094,22 +5094,22 @@
      "key": "tk_tell",
      "label": "Grace, talking, telling",
      "img": "art/poses/grace/talk-tk_tell.webp",
-     "w": 341,
-     "h": 563,
-     "ax": 153.0,
+     "w": 309,
+     "h": 817,
+     "ax": 161.8,
      "link": null,
-     "sheet": "grace-talk-v2.png",
+     "sheet": "grace-talk-v3.png",
      "marks": {
-      "top": 20.0,
-      "chin": 133.0,
-      "feet": 563
+      "top": 25.2,
+      "chin": 209.5,
+      "feet": 817
      },
      "conf": "low",
-     "s0": 0.04579,
+     "s0": 0.032422,
      "now": {
       "f": 1.0,
-      "h": 1.55454,
-      "anchor": 133.0
+      "h": 1.3941,
+      "anchor": 209.52
      }
     },
     "tk_point": {
@@ -5117,22 +5117,22 @@
      "key": "tk_point",
      "label": "Grace, talking, pointing",
      "img": "art/poses/grace/talk-tk_point.webp",
-     "w": 411,
-     "h": 563,
-     "ax": 231.4,
+     "w": 384,
+     "h": 809,
+     "ax": 185.5,
      "link": null,
-     "sheet": "grace-talk-v2.png",
+     "sheet": "grace-talk-v3.png",
      "marks": {
-      "top": 20.0,
-      "chin": 133.0,
-      "feet": 563
+      "top": 24.9,
+      "chin": 207.5,
+      "feet": 809
      },
      "conf": "low",
-     "s0": 0.04579,
+     "s0": 0.032422,
      "now": {
       "f": 1.0,
-      "h": 1.55454,
-      "anchor": 133.0
+      "h": 1.3941,
+      "anchor": 207.47
      }
     },
     "tk_ask": {
@@ -5140,22 +5140,22 @@
      "key": "tk_ask",
      "label": "Grace, talking, asking",
      "img": "art/poses/grace/talk-tk_ask.webp",
-     "w": 333,
-     "h": 583,
-     "ax": 167.2,
+     "w": 349,
+     "h": 809,
+     "ax": 186.7,
      "link": null,
-     "sheet": "grace-talk-v2.png",
+     "sheet": "grace-talk-v3.png",
      "marks": {
-      "top": 20.7,
-      "chin": 137.7,
-      "feet": 583
+      "top": 24.9,
+      "chin": 207.5,
+      "feet": 809
      },
      "conf": "low",
-     "s0": 0.04579,
+     "s0": 0.032422,
      "now": {
       "f": 1.0,
-      "h": 1.55454,
-      "anchor": 137.72
+      "h": 1.3941,
+      "anchor": 207.47
      }
     },
     "tk_answer": {
@@ -5163,22 +5163,22 @@
      "key": "tk_answer",
      "label": "Grace, talking, answering",
      "img": "art/poses/grace/talk-tk_answer.webp",
-     "w": 332,
-     "h": 584,
-     "ax": 159.7,
+     "w": 325,
+     "h": 815,
+     "ax": 156.6,
      "link": null,
-     "sheet": "grace-talk-v2.png",
+     "sheet": "grace-talk-v3.png",
      "marks": {
-      "top": 20.7,
-      "chin": 138.0,
-      "feet": 584
+      "top": 25.1,
+      "chin": 209.0,
+      "feet": 815
      },
      "conf": "low",
-     "s0": 0.04579,
+     "s0": 0.032422,
      "now": {
       "f": 1.0,
-      "h": 1.55454,
-      "anchor": 137.96
+      "h": 1.3941,
+      "anchor": 209.01
      }
     }
    },

@@ -1,3 +1,14 @@
+## graceframes (2026-11-26): Grace's new walking, feelings, talking, thinking and listening pictures are in the game
+
+Card c-graceframes. Tom's words: "now do grace". Not seen on the phone yet. Same install as `roseframes`.
+- Sheets installed for Grace only (all uploaded 2026-11-26): `grace-walking-sheet-v3`, `grace-emotions-v4`, `grace-talk-v3` and `grace-listen-v2`. Not part of this card: her new hero painting (`grace-hero-v2`, shown only in menus). Nothing of anyone else changed (the story bake's rewrite of other people's sets with no art change was put back from main).
+- Walking: rebaked with `walk_splice.py grace` and `heights.py write` (a rebake with the old sheet first matched the repo byte for byte). Real height unchanged (50 inches), draw scale 0.7526 to 0.7507.
+- Feelings and talking: `emotion_frames.py grace`, `talk_frames.py grace` (the strip is cut 4 across, head x1.39 from the standing rule), `bake_story_poses.py` (only Grace's sets kept) and the dialogue faces. The chin reader was right for Grace (.256, painted chin about .27), so no hand-set share was needed.
+- `grace-listen-v2` is a 4 up strip like Rose's: cell 1 (hands clasped) is `tk_listen`, cell 2 (chin on hand) is `tk_think`, because her only other thinking picture is the old outfit. `STRIP_CELL` in `emotion_frames.py` now covers Rose and Grace.
+- Her plain dialogue face is framed on the new walk frame (`WALK_FRAMED`, and `NECK_SET` grace .38 because her hair hides the neck); the old hero ratios cut it at the forehead.
+- Facing rows (`docs/pose-facing.tsv`): scared, surprised and tell now `f`; the rest unchanged.
+- Her old Pose Editor lines are on the old sheets; the new sheets are baked as painted with the standing head rule.
+
 ## listengroup1 (2026-11-26): Listening poses sit in each character's section, and TNB, Amy and Justin have one
 
 Tom: "move the listening poses into each character's section instead of a separate listening section. ensure all main characters have a listening item (eg TNB is missing)". The Art Library section Listening poses is gone: `tom-listen`, `grace-listen`, `rose-listen`, `deedee-listen`, `boppy-listen` and `ellie-listen` now sit in Tom, Grace, Rose, Deedee, Boppy and Aunt Ellie (groups come from `groups.js`; `listen-prompts.js` sets none). New entries `tnb-listen`, `amy-listen` and `justin-listen` (drafts) use the same listening prompt and their approved hero and talking pictures as references, so every main character now has one. The six approved ones keep their status and pictures. No game art changed. Test: `node tools/art-library/validate.js`, `python3 tools/hidebf_test.py`.

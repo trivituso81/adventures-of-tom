@@ -35,7 +35,7 @@ def sheet_label(cid, i):
 
 # roseframes (2026-11-26): the newest Rose listening picture is a 4 up strip painted in her new outfit. Cell 0 (hands clasped, listening) is tk_listen; cell 1 (chin on hand)
 # is the thinking pose, so tk_think is cut from the same strip (rose-think has no new picture of its own and the old one is the old yellow dress). Other cells are unused.
-STRIP_CELL = {'rose-listen': 0, 'rose-think': 1}
+STRIP_CELL = {'rose-listen': 0, 'rose-think': 1, 'grace-listen': 0, 'grace-think': 1}   # graceframes: Grace's listen-v2 is the same kind of strip
 
 def _is_strip(sid):
     vs = sorted(glob.glob(os.path.join(RAW, f'{sid}-v*.png')), key=lambda p: int(re.search(r'-v(\d+)\.png$', p).group(1)))
@@ -44,11 +44,11 @@ def _is_strip(sid):
 
 def single_figure(sid):
     """The newest approved single picture art/raw/characters/<sid>-v<N>.png, keyed and cleaned like a sheet cell."""
-    src_sid = 'rose-listen' if sid == 'rose-think' and _is_strip('rose-listen') else sid
+    src_sid = sid.replace('-think', '-listen') if sid in ('rose-think', 'grace-think') and _is_strip(sid.replace('-think', '-listen')) else sid
     vs = sorted(glob.glob(os.path.join(RAW, f'{src_sid}-v*.png')), key=lambda p: int(re.search(r'-v(\d+)\.png$', p).group(1)))
     img = Image.open(vs[-1]).convert('RGB')
     cell = STRIP_CELL.get(sid)
-    if cell is not None and img.width > 1.3 * img.height:   # roseframes: Rose's listen-v2 is a 4 up strip (listen, think, arms crossed, finger on lip), not one figure
+    if cell is not None and img.width > 1.3 * img.height:   # roseframes: Rose's (and Grace's) listen-v2 is a 4 up strip (listen, think, arms crossed, finger on lip), not one figure
         i = cell; img = img.crop((i * img.width // 4, 0, (i + 1) * img.width // 4, img.height))
     a = np.array(img)
     ring = np.concatenate([a[0], a[-1], a[:, 0], a[:, -1]]).astype(float); bgc = np.median(ring, axis=0)
