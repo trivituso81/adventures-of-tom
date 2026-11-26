@@ -1459,6 +1459,15 @@
    "source": "clip-gen run (guide takes)",
    "at": "2026-11-26T18:37:55Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45877017620"
+  },
+  {
+   "service": "fal",
+   "date": "2026-11-26",
+   "amount": 1.0,
+   "what": "guide-work: family videos",
+   "source": "guide-work run",
+   "at": "2026-11-26T18:47:04Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45877017620"
   }
  ],
  "balances": [
