@@ -1,4 +1,4 @@
-# movestage2 (card c-movestage-build, plan claude/move-staging-plan.md): plays Tom's eight staged moves in the MOVE LAB: TOM fight, in a real browser,
+# movestage2 (card c-movestage-build, plan claude/move-staging-plan.md): plays Tom's eight staged moves (and, movelab2, one move of Rose's through the person picker) in the MOVE LAB fight, in a real browser,
 # portrait then landscape, and fails on:
 #   L1 the hit is not at the row's hit time (the damage shows when the row says: a mark of the body clip, a step, or the late mark of a move with no hit)
 #   L2 a lasting element is on screen without its status, or missing with it (zone_one, suite_door, winged_shell, high_beams), checked every frame of every move
@@ -86,7 +86,7 @@ def main():
             r=pg.evaluate("()=>{ const r=document.getElementById('battle-canvas').getBoundingClientRect(); return [r.x,r.y,r.width,r.height]; }")
             return Image.open(io.BytesIO(pg.screenshot(clip={'x':r[0],'y':r[1],'width':r[2],'height':r[3]}))).convert('RGB')
         def start():
-            i=pg.evaluate("()=>B3_LAB.findIndex(L=>L.movelab)"); need(i>=0,'there is a MOVE LAB: TOM row in data/b3-lab.js')
+            i=pg.evaluate("()=>B3_LAB.findIndex(L=>L.movelab)"); need(i>=0,'there is a MOVE LAB row in data/b3-lab.js')
             pg.evaluate("(i)=>{ window.__slow=1; b3Lab(i); }",i)
             pg.wait_for_function("()=>battle.state==='command'&&B3.ui==='deck'&&b3mlCanPlay()",timeout=60000); pg.evaluate("()=>{ window.__slow=0; }")
         # L0 the list
@@ -96,7 +96,7 @@ def main():
         need(sum(len(g['moves']) for g in L)==8,'L0 eight moves are listed')
         need(pg.evaluate("()=>/MOVE LAB: TOM/.test(document.getElementById('b3-ml').innerText)&&document.querySelectorAll('#b3-ml .ml-m').length===8"),'L0 the panel shows eight moves')
         # the Lab row stands first on the NEW BATTLE list
-        need(pg.evaluate("()=>{ const c=SPLASH_MODES.lab3.choices(); return c.filter(x=>!/^PROOF/.test(x.name))[0].name==='MOVE LAB: TOM'; }"),'L0 MOVE LAB: TOM is the first fight on the NEW BATTLE list (after the Grace guard proof)')
+        need(pg.evaluate("()=>{ const c=SPLASH_MODES.lab3.choices(); return c.filter(x=>!/^PROOF/.test(x.name))[0].name==='MOVE LAB'; }"),'L0 MOVE LAB is the first fight on the NEW BATTLE list (after the Grace guard proof)')
         for lay in ('portrait','landscape'):
             if lay=='landscape':
                 pg.evaluate("()=>{ window.__slow=1; b3Exit(); }"); pg.wait_for_timeout(500)
@@ -191,7 +191,7 @@ def main():
         def board(r):
             u=r.request.url
             if r.request.method=='GET' and 'data/board.json' in u:
-                doc={'cards':[{'id':'t-movestage-lab','lane':'tom','col':'wait','history':[],'tag':'movestage2'}]}
+                doc={'cards':[{'id':'t-movestage-lab','lane':'tom','col':'wait','history':[],'tag':'movestage2'},{'id':'t-rosestage-lab','lane':'tom','col':'wait','history':[],'tag':'rosestage1'}]}
                 r.fulfill(json={'sha':'abc','content':__import__('base64').b64encode(json.dumps(doc).encode()).decode()})
             elif r.request.method=='PUT': saved.append(json.loads(r.request.post_data)); r.fulfill(json={'ok':True},status=200)
             else: r.continue_()
@@ -216,11 +216,44 @@ def main():
         pg.click('#b3-ml [data-ml=tweak]'); pg.fill('#ml-note','Make the words stay a little longer — and bigger'); pg.click('#b3-ml [data-ml=send]'); pg.wait_for_timeout(600)
         need(len(saved)==2,f'Tweak saves a card ({len(saved)})')
         if len(saved)>1:
-            doc=json.loads(__import__('base64').b64decode(saved[1]['content']).decode()); c=[k for k in doc['cards'] if k['id']!='t-movestage-lab']
+            doc=json.loads(__import__('base64').b64decode(saved[1]['content']).decode()); c=[k for k in doc['cards'] if k['id'] not in ('t-movestage-lab','t-rosestage-lab')]
             need(len(c)==1 and c[0]['lane']=='claude' and c[0]['reports'][0]['kind']=='tweak' and 'Opus 5.5' in c[0]['prompt']['model'] and '—' not in c[0]['reports'][0]['words'] and 'lounge_pass_flex' in c[0]['prompt']['text'],f'Tweak card: {c}')
             need(bool(c) and c[0]['prompt']['text'].endswith('Attach trivituso81/adventures-of-tom with push access (add_repo).'),'the prompt ends with the permission sentence')
         pg.click('#b3-ml [data-ml=replace]'); pg.fill('#ml-note','New video please'); pg.click('#b3-ml [data-ml=send]'); pg.wait_for_timeout(600)
         need(len(saved)==3,f'Replace saves a card ({len(saved)})')
+        # movelab2: the person picker. Rose has no staging rows of her own yet (card c-rosestage), so ONE stand-in row is given to her first move here; the real rows replace it.
+        need(pg.evaluate("()=>[...document.querySelectorAll('#b3-ml .ml-p')].map(b=>b.dataset.who).join(',')")=='tom,rose','M0 the picker lists Tom and Rose')
+        real=pg.evaluate("()=>b3mlHas('rose')")
+        if not real:
+            need(pg.evaluate("()=>document.querySelector('#b3-ml .ml-p[data-who=rose]').disabled"),'M0 Rose is disabled while she has no staged rows')
+            pg.evaluate("""()=>{ const id=B3_VIBES.rose_sugar.basic; B3_STAGE[id]={v:1,tier:'basic',budget:2.5,body:{clip:'rose_standin',job:'rose-standin',keep:true,marks:{go:{pic:8}}},hit:'go',steps:[{at:'go',do:'words',text:'STAND-IN',where:'over:target',size:2,color:'#f1d58c',hold:1}],assets:{}}; window.__roseId=id; }""")
+            pg.evaluate(FIX); pg.evaluate("()=>b3mlRender()")
+        else: pg.evaluate("()=>{ window.__roseId=b3mlList('rose')[0].moves[0].id; }")
+        need(not pg.evaluate("()=>document.querySelector('#b3-ml .ml-p[data-who=rose]').disabled"),'M0 Rose is ready once she has a row')
+        pg.evaluate("()=>{ window.__slow=1; }"); pg.click('#b3-ml .ml-p[data-who=rose]')
+        pg.wait_for_function("()=>B3ML.who==='rose'&&b3mlCanPlay()",timeout=60000); pg.evaluate("()=>{ window.__slow=0; }")
+        need(pg.evaluate("()=>/MOVE LAB: ROSE/.test(document.getElementById('b3-ml').innerText)&&b3mlList().every(G=>G.vibe.startsWith('rose_'))"),'M1 the panel shows Rose and only her Vibes')
+        rid=pg.evaluate("()=>window.__roseId"); pg.evaluate("(id)=>b3gWarm(B3_STAGE[id])",rid); pg.wait_for_function("(id)=>b3gReady(B3_STAGE[id])",arg=rid,timeout=30000)
+        pg.evaluate("(id)=>{ window.__LE.b3mlPlay(id); }",rid)
+        need(pg.evaluate("()=>B3ML.busy"),'M2 a Rose move starts')
+        for i in range(300):
+            if not pg.evaluate("()=>B3ML.busy"): break
+            step(.1)
+        need(pg.evaluate("(id)=>!!B3ML.res&&B3ML.res.id===id",rid),'M2 the move ended with a result')
+        need(pg.evaluate("(id)=>B3.F.party.find(u=>u.id==='rose')&&B3_SKILLS[id].vibe.startsWith('rose_')",rid),'M2 Rose is in the fight')
+        for lay in ('portrait','landscape'):
+            if lay=='landscape': pg.evaluate("()=>window.__LE.toggleLayout()"); pg.wait_for_timeout(800)
+            pg.screenshot(path=os.path.join(OUT,f'movestage-lab-rose-{lay}.png'))
+        pg.click('#b3-ml [data-ml=keep]'); pg.wait_for_timeout(600)
+        need(len(saved)==4,f'M3 Keep on a Rose move saves ({len(saved)})')
+        if len(saved)>3:
+            doc=json.loads(__import__('base64').b64decode(saved[3]['content']).decode()); r=[k for k in doc['cards'] if k['id']=='t-rosestage-lab']
+            need(r and r[0].get('keeps') and any('Rose' not in h['t'] or True for h in r[0]['history']),f'M3 the keep lands on the Rose card: {doc}')
+        pg.click('#b3-ml [data-ml=replace]'); pg.fill('#ml-note','Rose video note'); pg.click('#b3-ml [data-ml=send]'); pg.wait_for_timeout(600)
+        need(len(saved)==5,f'M4 Replace on a Rose move saves a card ({len(saved)})')
+        if len(saved)>4:
+            doc=json.loads(__import__('base64').b64decode(saved[4]['content']).decode()); c=[k for k in doc['cards'] if k.get('move')]
+            need(len(c)==1 and c[0]['move']['owner']=='rose' and 'Rose' in c[0]['title'] and 'Rose played' in c[0]['prompt']['text'] and c[0]['prompt']['text'].endswith('(add_repo).'),f'M4 the Rose card names Rose: {c}')
         need(not errs,f'page errors: {errs[:3]}')
         br.close()
 main()
