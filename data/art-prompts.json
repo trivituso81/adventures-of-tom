@@ -6339,6 +6339,14 @@
      "from": "v7",
      "at": 1795682906763,
      "up": true
+    },
+    {
+     "n": 8,
+     "file": "art/raw/characters/tom-emotions-v9.png",
+     "date": "2026-11-26",
+     "from": "v9",
+     "at": 1795725629978,
+     "up": true
     }
    ],
    "rejects": [],
