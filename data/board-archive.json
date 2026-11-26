@@ -11185,6 +11185,139 @@
      "t": "Tom: all good."
     }
    ]
+  },
+  {
+   "id": "b-board-b3s23split",
+   "title": "the battle 2 purge is split into five ordered cards",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-b3s23split",
+   "done": "2026-11-23",
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Shipped as board-b3s23split. Added by board-sync because the build had no card."
+    }
+   ]
+  },
+  {
+   "id": "c-b3s23",
+   "title": "Battle stage 23: purge battle 2 and Kindness",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "b3s23",
+   "done": "2026-11-23",
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "ended without shipping as one change: the gate checks passed (chapters 1 to 21 on B3_STORY.chapters, c-b3s22ch12 to ch20 Done, Tom's yes on t-b3s23-confirm is in), but the purge touches about 1 MB of battle 2 code and 3,000 references in 266 files, and Battle 3 still reads battle 2 names (b2Esc, b2Thumb, b2Portrait, b2CanvasPt, b2Meter, b2BattleDef, b2Purse, startBattle, B2.result). One change would leave the live game broken. Split into c-b3s23a to c-b3s23e (shell, tables, story path, engine delete, voice and files with the final check); facts in claude/next-addendum-b3s23.md. This session's start commit was labelled with a mistyped Claude-Session id, so the chat link may be missing: https://claude.ai/code/session_01RXeukSjhwv6A84RqoDUvYS"
+    }
+   ]
+  },
+  {
+   "id": "c-b3s23a",
+   "title": "Stage 23a: Battle 3 gets its own shell (no battle 2 names)",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "tag": "b3s23a",
+   "done": "2026-11-23",
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Shipped as b3s23a: Battle 3 has its own shell, engine/bt-shell.js, and no longer reads a battle 2 name"
+    }
+   ]
+  },
+  {
+   "id": "c-guideflow-6",
+   "title": "Guide: upload my own start picture; make all poses",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guideflow6",
+   "done": "2026-11-23",
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Shipped as guideflow6: In the Battle Guide you can upload your own start picture, and one button makes all of a person's missing standard poses"
+    }
+   ]
+  },
+  {
+   "id": "c-guideflow-7",
+   "title": "Use this one: one batched job that tells the truth",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guideflow7",
+   "done": "2026-11-23",
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Shipped as guideflow7: Use this one in the Battle Guide is now one batched job that only says In the game after it checked the files are on main"
+    }
+   ]
+  },
+  {
+   "id": "c-guideflow-8",
+   "title": "Monster videos through the same Guide queue",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "guideflow8",
+   "done": "2026-11-23",
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Shipped as guideflow8: Monster videos in the Battle Guide now go through the same queue, worker and status lines as the family videos"
+    }
+   ]
+  },
+  {
+   "id": "c-movestage-build",
+   "title": "Build the move stage and Move Lab for Tom's eight moves",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "movestage2",
+   "done": "2026-11-23",
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Shipped as movestage2: the move stage and Move Lab are finished for Tom's eight moves; six play now, two wait on Tom's give-up cards"
+    }
+   ]
+  },
+  {
+   "id": "t-movestage-judge",
+   "title": "Judge six of Tom's staged moves in the Move Lab",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-23",
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Not needed: animations are awful"
+    }
+   ]
+  },
+  {
+   "id": "t-stuck-b3s23",
+   "title": "Stuck twice: Battle stage 23: purge battle 2 and Kindness",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-23",
+   "history": [
+    {
+     "d": "2026-11-23",
+     "t": "Done by the board: the card is being worked on again."
+    }
+   ]
   }
  ]
 }

@@ -2138,7 +2138,7 @@
   {
    "id": "t-lastnight",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Project Ops",
    "title": "Last night: what the night shift did",
    "ask": "setup",
@@ -2146,7 +2146,7 @@
    "blocks": [],
    "next": "Night of 2026-11-25. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: Watch the seven Pass-1 draft moves in a fight: Open ADMIN > BATTLE LAB and start PASS-1 DRAFT REVIEW (first page, under the chapter 1 reviews; or Take me there on the dashboard). Grace, TNB, Amy, Justin and Deedee stand on the field with a panel at the bottom: tap PLAY on a move to watch its video on that ... (full steps on the card); Stuck twice: Night QA: the test browser plays your check car: Card c-night-qa (Night QA: the test browser plays your check cards) stalled again after its one automatic rescue. The rescue started 7:45 AM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it. Starts used: 0 of 5. Limits of the night QA: the test browser is Chromium on a server, not Safari on the iPhone; it cannot hear, cannot judge touch, and cannot see the Duo fold.",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGbrHbR5tTUJoJwwSg",
+    "url": "https://claude.ai/code/cse_01RXeukGc4RgSvduvxoGRRV6",
     "opening": "board"
    },
    "history": [
@@ -2179,10 +2179,18 @@
     {
      "d": "2026-11-25",
      "t": "Night of 2026-11-25: Night of 2026-11-25. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: Watc"
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started by the night shift."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "created": "2026-11-21",
-   "changed": "2026-11-25",
+   "changed": "2026-11-26",
    "sections": [
     [
      "Ran",
@@ -2240,7 +2248,7 @@
     "effort": "medium (a handed-over card is usually one piece of work)",
     "text": "Read claude/handoff-rules.md. Tom handed you board card t-lastnight with this note: The what to do doesn't tell me what to do. Work out what is needed, rewrite the card, and do it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-22T17:03:19+00:00",
+   "started_at": "2026-11-26T08:16:31+00:00",
    "after": "nothing for Tom: end"
   },
   {
@@ -2248,13 +2256,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-25",
+   "changed": "2026-11-26",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGRWRcLWqN5bqexXNU",
+    "url": "",
     "opening": "not started"
    },
    "nightly": true,
@@ -2321,6 +2329,10 @@
     {
      "d": "2026-11-25",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
    "prompt": {
@@ -2335,8 +2347,7 @@
    "last_run": {
     "date": "2026-11-23",
     "build": ""
-   },
-   "started_at": "2026-11-26T07:39:23+00:00"
+   }
   },
   {
    "id": "c-night-qa",
@@ -4029,90 +4040,6 @@
    "after": "t-movefun-gen"
   },
   {
-   "id": "c-b3s23",
-   "title": "Battle stage 23: purge battle 2 and Kindness",
-   "theme": "Battle System",
-   "lane": "claude",
-   "col": "done",
-   "next": "Split into c-b3s23a to c-b3s23e (ordered slices). Retired: this card ended without shipping as one change.",
-   "blocks": [],
-   "changed": "2026-11-23",
-   "created": "2026-11-22",
-   "tag": "b3s23",
-   "prompt": {
-    "what": "Delete battle 2, Stampcards, Kindness in battle, Director's Cuts, Family Finishes, unused lines and clips, old Lab fights and old docs",
-    "before": [
-     "Answer the card Confirm the battle 2 purge on the board (ADMIN > BOARD) first. Nothing else."
-    ],
-    "model": "Claude Sonnet 5.5 (row B: the delete list is written in battle-architecture.md; checks catch mistakes)",
-    "effort": "medium (steps are known; checks are scripted)",
-    "text": "Read claude/battle-architecture.md section 5 row 23 and the stage 23 note near its end. First check that every chapter 11 to 20 is in `B3_STORY.chapters` (cards c-b3s22ch12 to c-b3s22ch20); if one is missing, stop and write one history line naming it. Then read Tom's answer on t-b3s23-confirm (its note and answer are on the card). If the answer is not \"yes\", stop and write one history line. If yes: delete battle 2 files, Stampcards, Kindness in battle, Director's Cuts, Family Finishes and the Tombo rows, then the unused lines and clips. Purge completely (standing rule: grep for the old names and ids and confirm zero references outside demo/). Run python3 tools/clip-audit/unused_voice.py (all checks 0), grep for B2, b2 and B8 (zero outside demo/), node tools/b3-sim.js check, python3 tools/smoke.py. Look at Chapter Select in portrait and landscape. Write the result into this card's history and end the battle system card series with a Tom Milestone card: the whole game on Battle 3 with ask play. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "history": [
-    {
-     "d": "2026-11-22",
-     "t": "Restored on 2026-11-22: stages 16 and 19 to 23 had no card on the board (claude/battle-build.md lists them as Not started), so the board showed no battle work after stage 18. Card written by the b3restore session."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Tom tapped START.",
-     "at": "2026-11-22T20:36:51.223Z"
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Started by START on Claude Sonnet 5.5, effort medium."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "ended without shipping: B3_STORY.chapters is [1..11, 21]; chapters 12 to 20 are not on Battle 3 yet (cards c-b3s22ch12 to c-b3s22ch20 still open). Tom's yes on t-b3s23-confirm is in. Start again after those nine ship.",
-     "at": "2026-11-22T20:50:00.000Z"
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Rescue started (A session ended without shipping). One automatic session decides: finish it, back to Tom, start next, or retire."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Rescue outcome: nothing to finish, the work is blocked on Claude cards c-b3s22ch12 to c-b3s22ch20 (all still Up next). Card moved to Wait; ch20 now blocks it. Not retired: the work is still wanted.",
-     "at": "2026-11-22T21:00:00.000Z"
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Started: the conversation claimed this card."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Note from the chapter 20 build (b3s22ch20): every chapter 1 to 21 is now on B3_STORY.chapters, so the stage 23 check passes. Battle 2 code that chapter 20 still carries and stage 23 may remove: SCENES.ch20Fight2 and the Julian A-press fight in data/scenes-ch20.js (on Battle 3 the scene uses SCENES.ch20Care and B3_CH_ON(20) picks between them), data/ch20-battle.js. New Battle 3 files: engine/b3-last.js (rules) and engine/b3-repick.js (screen); do not delete them. tools/battle_guide_test.py now serves a copy of the planned list that keeps the Collector planned (rule names a made-up id zzcollector); when stage 23 touches the guide, keep that fixture or retire the planned-monster cases."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Stuck twice: The rescue started 12:42 PM and went quiet for 2 hours. Waiting on Tom (card t-stuck-b3s23)."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Started: the conversation claimed this card."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "ended without shipping as one change: the gate checks passed (chapters 1 to 21 on B3_STORY.chapters, c-b3s22ch12 to ch20 Done, Tom's yes on t-b3s23-confirm is in), but the purge touches about 1 MB of battle 2 code and 3,000 references in 266 files, and Battle 3 still reads battle 2 names (b2Esc, b2Thumb, b2Portrait, b2CanvasPt, b2Meter, b2BattleDef, b2Purse, startBattle, B2.result). One change would leave the live game broken. Split into c-b3s23a to c-b3s23e (shell, tables, story path, engine delete, voice and files with the final check); facts in claude/next-addendum-b3s23.md. This session's start commit was labelled with a mistyped Claude-Session id, so the chat link may be missing: https://claude.ai/code/session_01RXeukSjhwv6A84RqoDUvYS",
-     "at": "2026-11-23T17:30:00.000Z"
-    }
-   ],
-   "started_at": "2026-11-22T20:42:04+00:00",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukeSjhwv6A84RqoDUvYS",
-    "opening": "started by START"
-   },
-   "rescue": {
-    "at": "2026-11-22T20:42:04+00:00",
-    "n": 1,
-    "why": "A session ended without shipping",
-    "url": "https://claude.ai/code/cse_01RXeukCdg3iThUrSmL1Dbc3",
-    "prev": "https://claude.ai/code/cse_01RXeukDNsLWPpd5nBjmXzvJ"
-   },
-   "done": "2026-11-23"
-  },
-  {
    "id": "t-stuck-svvoice-gen",
    "lane": "tom",
    "col": "done",
@@ -4225,99 +4152,6 @@
    "auto": true,
    "started_at": "2026-11-22T14:36:45+00:00",
    "done": "2026-11-22"
-  },
-  {
-   "id": "c-movestage-build",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Battle Animations",
-   "tag": "movestage2",
-   "title": "Build the move stage and Move Lab for Tom's eight moves",
-   "next": "Builds the stage layer in Battle 3, makes the props, object videos and six body videos for Tom's eight moves (inside the auto spending limits), and a Move Lab where Tom plays them in a real fight with Keep, Tweak, Replace. Copy the prompt into a new conversation in the Project on Sonnet 5.5, effort high.",
-   "blocks": [],
-   "created": "2026-11-22",
-   "changed": "2026-11-23",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukHFArSRw6d9FDNzjut",
-    "opening": "added by c-movestage"
-   },
-   "prompt": {
-    "what": "Builds the stage the engine draws for each move (props, flying things, monster reactions, set pieces), makes Tom's assets and six new body videos, and a Move Lab where Tom judges his eight moves in a real fight.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row C: a new engine layer and a Lab; the design, rows and every prompt are written in claude/move-staging-plan.md and data/b3-stage.js)",
-    "effort": "high (a large build across several engine files and the wan-gen Action, with nothing like it to copy)",
-    "text": "Read CLAUDE.md (sections No painted poses in battle, wanauto1, Fix a miss with the smallest change, Image and video prompts), claude/move-staging-plan.md (all of it), data/b3-stage.js, claude/video-battle-plan.md sections 4.12 and 4.14, docs/BATTLE3.md, engine/b3-play.js (b3PlayMove, b3Show, b3Draw), engine/b3-clips.js and engine/b3-lab.js, then card c-movestage-build in data/board.json. Your first push is the commit board: start c-movestage-build. The job: build the stage layer of the plan in Battle 3, make the assets and body videos of Tom's eight staged moves, and a Move Lab where Tom judges them in a real fight. Tom's only review is that Lab. 1 Assets and body videos. Add jobs to tools/art-library/wangen-jobs.json for the 12 assets the rows declare: a picture job per asset on the route that made the start pictures (Nano Banana 2.1 on fal, the asset's prompt file word for word, magenta or black as the row says), and for each kind obj a Wan 3.0 job that takes that picture as first frame (and as last frame when loop is true), 480p, 3 seconds, its motion file word for word. Make the wan-gen Action handle any job kind it does not handle in bulk yet, with stand-in tests first. Give the six new body jobs (tom-suitedoor, tom-porsche, tom-cartridge, tom-controller, tom-shell, tom-konami) bake settings copied from the header of data/clips/tom-loungepass.js and a wire that adds only the clip file and its script tag (never the kit row's anim). Start the run the wanauto1 way on the Tom card t-movestage-lab (wan field with every new job; wgen.want on it; last commit subject board: wan generate t-movestage-lab); never run wangen.py yourself; the first tries cost about 7 dollars, inside the auto limits. No separate watch card may reach Tom for these: close any the Action adds with a history line pointing at the Lab. A video that misses gets the smallest change (wanauto1 stop sessions); a prompt is never reworded beyond the fault named. Test black plus additive blend on bluebang and glare before any other glow asset is used; if it fails twice, stop-loss and write it into the plan. 2 Engine. In engine/b3-play.js (and a new engine/b3-stage.js loaded after engine/b3-clips.js), a move whose B3_STAGE row exists and whose body clip and assets are ready plays the row: the body clip at home, the steps on the battle clock (B3_TEMPO not applied), reveal at the row's hit, lasting elements tied to the view's statuses and to the react, intercept and statusEnd beats, and for a Capstone the set piece (dim, timeline, restore). Only the stage actions of plan 4.1; no move gets its own code. Monster reactions move, squash or tint the monster's own video picture; never a painted pose. Assets load per fight like clips and count toward the clip memory limit of b3_test s8. A row whose clip or assets are not ready plays what the move plays today. After the body videos are baked, measure every mark on the baked clip (pictures, and the hand point for steps that start at the hand) and write them into data/b3-stage.js. 3 Move Lab. ADMIN, BATTLE LAB, NEW BATTLE, MOVE LAB: TOM. A real fight (Tom, Grace, Rose, Deedee against Mudlings, and one against The Big One for the Capstones) that plays the eight moves in ladder order per Vibe, each with Keep, Tweak and Replace and its real length beside its budget. Keep records the move as approved (a history line on t-movestage-lab and keep true on its row); Tweak and Replace open a note box and save a Claude card the way the Battle Guide's Send a note does (Opus 5.5, medium, the note in reports), Replace meaning a new body video. Portrait and landscape. 4 Tests: a new tools/movestage_lab_test.py that plays all eight in the Lab in portrait and landscape and fails on: the hit not at the row's hit time, a lasting element present without its status or missing with it, a set piece that does not restore the backdrop, any painted pose drawn; look at its screenshots at every mark. Also python3 -I tools/movestage_test.py, python3 tools/b3_test.py s8, python3 -I tools/video_only_test.py, python3 tools/wanproof_test.py, python3 -I tools/art-library/wanbulk_test.py, python3 tools/smoke.py. Add the new test to tools/night/tests.json. 5 Close: give t-movestage-lab a jump to the Lab fight (proved in tools/dashboard_test.py), the CHANGES heading ## movestage2, after t-movestage-lab, and close by claude/handoff-rules.md. If the videos are still being made when the engine and Lab are done, push the engine and Lab as movestage2a and leave the card In progress with a history line saying what waits. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "history": [
-    {
-     "d": "2026-11-22",
-     "t": "Added by movestage1. Tom (09:53): each ability as it unlocks should be fun, funny and visually cool, the final one visually stunning; (10:09) longer animations for each rank are fine. Tom's only review is the Move Lab."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Started: the conversation claimed this card."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "movestage2a: the wan-gen Action now makes stage pictures and object videos (wanstage.py, bake_stage.py, stage wire); 26 jobs added to wangen-jobs.json and started on t-movestage-lab (about $6). Next: the stage engine and the Move Lab."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Part shipped as movestage2a: the video Action can make stage pictures and object videos, and the run for Tom's eight moves is started"
-    },
-    {
-     "d": "2026-11-22",
-     "t": "movestage2b pushed: the stage engine (engine/b3-stage.js), its hooks in b3-play.js and the Move Lab (MOVE LAB: TOM) are in the game and tested in portrait and landscape with stand-in pictures. Waiting: the videos (the run is started again now, the daily limit is gone) and then the measured marks and the Lab jump (movestage2)."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Part shipped as movestage2b: the stage layer and the Move Lab are in the game; Tom's eight moves play through them as soon as their videos are baked"
-    },
-    {
-     "d": "2026-11-22",
-     "t": "movestage2c pushed: five moves (Frequent Flier, Zone One, Suite Door, Cartridge Blow, Konami Code) are fully baked and their marks are measured; the Lab test passes with the real pictures. Waiting: Winged Shell (blue burst video given up), Controller Toss (body video given up) and Tarmac Porsche Transfer (glare and jetwash videos in their stop cards). Card stays In progress until those are baked or Tom decides."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Part shipped as movestage2c: the marks of five staged moves are measured on their baked videos"
-    },
-    {
-     "d": "2026-11-23",
-     "t": "movestage2d pushed: all videos for six moves are baked (Controller Toss body accepted by its stop card), marks measured, Lab test passes. The blue burst, headlight flare and jet wash object videos each failed the edge check four times (15, 36 and 36 of 90 pictures touch the edge): stop-loss, written into claude/move-staging-plan.md; the black plus additive proof was not run because there is no baked video to run it on. Tom judges six moves on t-movestage-judge; Winged Shell and Tarmac Porsche Transfer wait on his Give it 4 more tries cards."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Part shipped as movestage2d: six of Tom's eight staged moves are ready to judge in the Move Lab"
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Rescue chose FINISH: build is complete for the six ready moves; Winged Shell and Tarmac Porsche wait on the give-up cards for jetwash and glare. Shipped as movestage2."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Started: the conversation claimed this card."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Shipped as movestage2: the move stage and Move Lab are finished for Tom's eight moves; six play now, two wait on Tom's give-up cards"
-    }
-   ],
-   "after": "t-movestage-judge",
-   "rescue": {
-    "at": "2026-11-23T16:18:33+00:00",
-    "n": 1,
-    "why": "Quiet: the conversation may have stopped",
-    "url": "https://claude.ai/code/cse_01RXeukHFArSRw6d9FDNzjut",
-    "prev": "https://claude.ai/code/session_01RXeukHG6QtbCtw8Kjp1tPx"
-   },
-   "started_at": "2026-11-23T16:18:33+00:00",
-   "done": "2026-11-23"
   },
   {
    "id": "t-movestage-lab",
@@ -5192,190 +5026,6 @@
    }
   },
   {
-   "id": "c-guideflow-6",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Battle Animations",
-   "tag": "guideflow6",
-   "title": "Guide: upload my own start picture; make all poses",
-   "next": "Built as guideflow6: Upload my own start picture (refused at once for a non-picture, under 600 pixels tall or over 8 MB; a good one is shown, saved to branch guidegen on Use it, then one upload row and the poke), Go back to a generated picture (one confirm, force), and Make all N missing poses (one save, one poke, a confirm only above $2). 38 new page checks pass, pictures looked at in portrait and landscape. Nothing to play until the last card. Nothing for Tom: c-guideflow-7 starts by itself.",
-   "blocks": [
-    "c-guideflow-7"
-   ],
-   "after": "nothing for Tom: c-guideflow-7",
-   "created": "2026-11-22",
-   "changed": "2026-11-23",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukDPMNXDGNqnFvZpQod",
-    "opening": "not started"
-   },
-   "history": [
-    {
-     "d": "2026-11-22",
-     "t": "Made by the planning session (card c-guideflow-plan, plan claude/guide-flow-plan.md section 10, step 6 of 9).",
-     "at": "2026-11-22T22:56:03.000Z"
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Unblocked: Switch the Guide page to the one status file is done."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Started by the night shift."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Started by START on Claude Sonnet 5.5, effort medium."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Started: the conversation claimed this card."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Built by Claude Sonnet 5.5 as guideflow6 (plan section 10 step 6): Upload my own with its three instant refusals and confirm, Use it saving to guidegen/uploads and adding the upload row, Go back to a generated picture, Make all N missing poses. Page cases U1 to U9 and M1 to M7 pass; worker_test and board_check pass. Checks that already fail on main before this build (guide-anims count, What is coming, plan counts, board4 in smoke) are named in docs/CHANGES.md."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Shipped as guideflow6: In the Battle Guide you can upload your own start picture, and one button makes all of a person's missing standard poses"
-    }
-   ],
-   "prompt": {
-    "what": "Adds the Upload my own start picture screen and the Make all missing poses button to the Battle Guide.",
-    "before": [
-     "Nothing to do first. This card waits for card c-guideflow-5 to ship, then it is ready."
-    ],
-    "model": "Claude Sonnet 5.5 (row B: the steps are written in claude/guide-flow-plan.md and tests catch mistakes)",
-    "effort": "medium (the steps are known)",
-    "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guideflow-6 in data/board.json, then the whole of claude/guide-flow-plan.md. That plan is the design: build what it says and do not redesign it. If a step cannot be done as written, do the closest thing that keeps the plan's rules (sections 3.2 and 4.3), say so in docs/CHANGES.md, and go on. This card is plan section 10 step 6 (sections 3.2 D11, D13, 5.2, 5.5, section 6 rows X13 and X14, test T8 additions). Change battle-guide.html (plus its test and docs). (1) Upload my own, on a person's Animations screen beside the start picture and on a picture row that is done or failed: a file input (accept image/png, image/jpeg, image/webp). In the page, refuse at once with the words of plan section 5.5 when the file is not an image, is under 600 pixels tall (read it with an Image element) or is over 8 MB. Show the picture with the confirm words of 5.5. On Use it: save the bytes to branch guidegen at uploads/WHO-UNIX_SECONDS.EXT with the GitHub contents API (PUT, base64, message \"guide: upload WHO [skip ci]\"), then add the row {id u-WHO-UNIX_SECONDS, kind upload, lane pic, who, upload: that path} with storeUpdate and poke the worker. The status lines for kind upload are in plan section 5.1 (checking shows \"Checking your picture. About 30 seconds.\" with the clock). Upload a different one repeats this. Go back to a generated picture adds a kind picture row with force:true after one confirm: \"Replace your own picture of NAME with a generated one ($0.15)?\". (2) Make all N missing poses ($X.XX) above the standard poses of a person who has a start picture: N counts the standard poses (Idle, Guard, Hit, Dodge, Knocked out, Victory, Running) with no video in the game and no row that is queued, making, checking or done and not left; the price is N times the video price. A total of $2 or less adds the rows at once; above $2 it asks once: \"Make N videos for $X.XX?\" with Make them and Cancel. All rows are added in ONE storeUpdate and one poke. The button is hidden when N is 0. Tests in tools/battle_guide_test.py: the three instant refusals word for word; a good PNG is saved to the stand-in under uploads/ and its row added; the stand-in turns the row to done and the page shows \"Your picture is in use, exactly as you made it.\" and the video buttons; X13 and X14 lines shown from a failed row; Make all with 7 missing adds 7 rows in one save after the confirm, with 3 missing ($1.50) adds them with no confirm, and counts a queued row as not missing. Portrait and landscape pictures in tools/shots/guideflow-upload-*.png; look at them. Update docs/BATTLE_GUIDE.md. Tests to run and pass before pushing: python3 tools/battle_guide_test.py, python3 -I tools/guidegen/worker_test.py, python3 tools/smoke.py, python3 tools/board_check.py. You must NOT: make any paid run or call fal, xAI or ElevenLabs for real (every test uses stand-ins; the first paid run is Tom's tap); run wangen.py against the real services; create or change a doc in the claude.ai Project (notes go in the repo folder claude/, then run python3 tools/claude_index.py); make or propose a painted battle pose; touch the bulk video flow (wangen.py --bulk, wanbulk.py, wanqa.py, wanbake.py, the wan-gen-bulk line); hand Tom a yes or no check; write an em dash in anything Tom reads. Before every commit check that no file has git conflict markers (a line that starts with seven less-than signs; CLAUDE.md has the command). Push steps: write the heading \"## guideflow6 (the date of that day as YYYY-MM-DD): one plain line Tom can read\" at the top of docs/CHANGES.md with what was built, what was tested and what was not looked at, run python3 tools/workflow_check.py if it exists, run python3 tools/art-library/bump_tags.py guideflow6 --base origin/main, run python3 tools/board_check.py --push guideflow6, fetch and rebase on origin/main, then push to main. At the end write the result into this card's `next` and history, and check the next card (c-guideflow-7) still has its full prompt. Your first push is the commit board: start c-guideflow-6. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "auto": true,
-   "done": "2026-11-23"
-  },
-  {
-   "id": "c-guideflow-7",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Battle Animations",
-   "tag": "guideflow7",
-   "title": "Use this one: one batched job that tells the truth",
-   "next": "Built and pushed as guideflow7: Use this one is one batched job (guide-apply) that says In the game only after it checked the files on main. Next card c-guideflow-8 starts by itself. Nothing for Tom.",
-   "blocks": [
-    "c-guideflow-8"
-   ],
-   "after": "nothing for Tom: c-guideflow-8",
-   "created": "2026-11-22",
-   "changed": "2026-11-23",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGZLxZREfsCLURqeTW",
-    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md, then card c-guideflow-7 in data/board.json\""
-   },
-   "history": [
-    {
-     "d": "2026-11-22",
-     "t": "Made by the planning session (card c-guideflow-plan, plan claude/guide-flow-plan.md section 10, step 7 of 9).",
-     "at": "2026-11-22T22:56:03.000Z"
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Unblocked: Guide: upload my own start picture; make all poses is done."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Started: the conversation claimed this card."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Built by the session: apply.py, guide-apply.yml, the page lines, test apply_test.py (A1 to A9) and G13 to G15. guide-use is gone."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Shipped as guideflow7: Use this one in the Battle Guide is now one batched job that only says In the game after it checked the files are on main"
-    }
-   ],
-   "prompt": {
-    "what": "Replaces the Use this one job with one batched apply job, and shows its true status on the page.",
-    "before": [
-     "Nothing to do first. This card waits for card c-guideflow-6 to ship, then it is ready."
-    ],
-    "model": "Claude Sonnet 5.5 (row B: the steps are written in claude/guide-flow-plan.md and tests catch mistakes)",
-    "effort": "medium (the steps are known)",
-    "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guideflow-7 in data/board.json, then the whole of claude/guide-flow-plan.md. That plan is the design: build what it says and do not redesign it. If a step cannot be done as written, do the closest thing that keeps the plan's rules (sections 3.2 and 4.3), say so in docs/CHANGES.md, and go on. This card is plan section 10 step 7 (sections 3.2 D4, D9, D10, section 6 rows X17 to X19, test T9). Write tools/guidegen/apply.py and .github/workflows/guide-apply.yml. The workflow: triggers repository_dispatch (types: [guide-apply]) and workflow_dispatch (input dry_run, default true); concurrency on the job, group \"guide-apply\", cancel-in-progress false; permissions contents: write, actions: write. Steps: checkout main (start from what guide-use.yml does today and keep what use_take.py and bump_tags.py need; try fetch-depth 50 instead of 0 and keep it only if the tests and a dry run pass), python, node, the tools guide-use.yml installs, restore branch guidegen; then python3 -I tools/guidegen/apply.py. apply.py: with the store, move every item whose use.state is wanted to applying in one update (run id on it); also collect picture items that are done with result.main false. If there is nothing, exit 0. Write the list as the request file use_take.py reads (look at how it reads data/guide-use.json and call its functions with that list instead; change use_take.py as little as possible and keep tools/guidegen/take_test.py passing), run it for all of them with ONE tag guideuse-RUN_ID, copy each new start picture to art/clips/start/WHO-hero.png and rebuild data/guide-anims.json with node tools/guidegen/build_map.js, write the CHANGES entry (use_take.py --changes), stamp once with bump_tags.py, and push with the SAME loop guide-use.yml has now (startpics11: start every try from the newest main, re-apply the payload, put the entry back on top, stamp again, check for conflict markers, six tries); move that loop out of the YAML into apply.py or a shell script it calls, word for word in behaviour. After the push, confirm with the contents API on main that every clip file and picture of the batch is there; only then set use live with the build name (and result.main true for pictures); anything missing is use failed with X19; a take use_take could not cut is use failed with X18 and the others still ship; six failed pushes is X17 for all and the job pokes itself once more (repository_dispatch guide-apply) unless this run was itself a retry. Then start publish.yml as guide-use.yml does and rebuild the Video History once (the step wan-gen.yml uses, continue on error). With dry_run true do everything except the push and the store writes. The store sends the notifications. Page (battle-guide.html): Use this one calls storeUpdate to set use {state: wanted, at} on the take's row and pokes with event_type guide-apply; show the three Use lines of plan section 5.1 from the row; Keep the old one writes left:true. Remove doUse's old request, pollUse, data/guide-use.json reading and the aot-guide-* keys they used. Delete .github/workflows/guide-use.yml and data/guide-use.json and every reference (git grep guide-use, guideuse stays as the build name prefix); update tools/art-library/queue_test.py case Q5 to the new files; update CLAUDE.md where it names guide-use and docs/BATTLE_GUIDE.md. Write tools/guidegen/apply_test.py (local git repos as main and guidegen, the stand-in GitHub for the store): the T9 cases of plan section 7. Add G13 to G15 to tools/battle_guide_test.py: the three Use lines word for word, and that In the game never shows while the row says applying. Prove it free on GitHub: run guide-apply by hand with dry_run true and put the run id and step times in docs/CHANGES.md. Tests to run and pass before pushing: python3 -I tools/guidegen/apply_test.py, python3 -I tools/guidegen/take_test.py, python3 -I tools/guidegen/guidegen_test.py, python3 -I tools/art-library/queue_test.py, python3 tools/battle_guide_test.py, python3 tools/buildlog_test.py, python3 tools/workflow_check.py, python3 tools/smoke.py, python3 tools/board_check.py. You must NOT: make any paid run or call fal, xAI or ElevenLabs for real (every test uses stand-ins; the first paid run is Tom's tap); run wangen.py against the real services; create or change a doc in the claude.ai Project (notes go in the repo folder claude/, then run python3 tools/claude_index.py); make or propose a painted battle pose; touch the bulk video flow (wangen.py --bulk, wanbulk.py, wanqa.py, wanbake.py, the wan-gen-bulk line); hand Tom a yes or no check; write an em dash in anything Tom reads. Before every commit check that no file has git conflict markers (a line that starts with seven less-than signs; CLAUDE.md has the command). Push steps: write the heading \"## guideflow7 (the date of that day as YYYY-MM-DD): one plain line Tom can read\" at the top of docs/CHANGES.md with what was built, what was tested and what was not looked at, run python3 tools/workflow_check.py if it exists, run python3 tools/art-library/bump_tags.py guideflow7 --base origin/main, run python3 tools/board_check.py --push guideflow7, fetch and rebase on origin/main, then push to main. At the end write the result into this card's `next` and history, and check the next card (c-guideflow-8) still has its full prompt. Your first push is the commit board: start c-guideflow-7. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "auto": true,
-   "done": "2026-11-23"
-  },
-  {
-   "id": "c-guideflow-8",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Battle Animations",
-   "tag": "guideflow8",
-   "title": "Monster videos through the same Guide queue",
-   "next": "Built and pushed as guideflow8: monster videos are rows in the Guide queue (route xai) made by the worker. Next card c-guideflow-9. Nothing for Tom.",
-   "blocks": [
-    "c-guideflow-9"
-   ],
-   "after": "nothing for Tom: c-guideflow-9",
-   "created": "2026-11-22",
-   "changed": "2026-11-23",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGZLxZREfsCLURqeTW",
-    "opening": "Tom (17:09): \"Why can't you just kick off the next task?\" Started by hand in the conversation that shipped c-guideflow-7."
-   },
-   "history": [
-    {
-     "d": "2026-11-22",
-     "t": "Made by the planning session (card c-guideflow-plan, plan claude/guide-flow-plan.md section 10, step 8 of 9).",
-     "at": "2026-11-22T22:56:03.000Z"
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Unblocked: Use this one: one batched job that tells the truth is done."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Tom tapped START.",
-     "at": "2026-11-24T00:05:08.524Z"
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Started by START on Claude Sonnet 5.5, effort medium."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Started by hand: START pushed nothing, so the c-guideflow-7 conversation took this card."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Built by the session that shipped c-guideflow-7 (START had pushed nothing): run_xai in worker.py, the page button, clipgen guide path removed, tests T10 and D17-1 to D17-8."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Shipped as guideflow8: Monster videos in the Battle Guide now go through the same queue, worker and status lines as the family videos"
-    }
-   ],
-   "prompt": {
-    "what": "Moves the Battle Guide's monster videos (xAI) onto the same queue, worker and status lines as family videos.",
-    "before": [
-     "Nothing to do first. This card waits for card c-guideflow-7 to ship, then it is ready."
-    ],
-    "model": "Claude Sonnet 5.5 (row B: the steps are written in claude/guide-flow-plan.md and tests catch mistakes)",
-    "effort": "medium (the steps are known)",
-    "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guideflow-8 in data/board.json, then the whole of claude/guide-flow-plan.md. That plan is the design: build what it says and do not redesign it. If a step cannot be done as written, do the closest thing that keeps the plan's rules (sections 3.2 and 4.3), say so in docs/CHANGES.md, and go on. This card is plan section 10 step 8 (decision D17). Today a monster video asked for in the Battle Guide is a request in data/clip-requests.json with a `guide` field, made by tools/art-library/clipgen.py (search it for _guide and guide_rows) in the clip-gen Action, and kept as a take by tools/guidegen/make_take.py. In tools/guidegen/worker.py add route xai to lane vid: build the same entry clipgen builds for a guide request (model, res, dur, start picture, figRows from the row's `clip` field) and call clipgen's own functions to send it to xAI and download the video (add the smallest hook to clipgen.py if its guide path cannot be called for one entry; python3 tools/art-library/clipgen_test.py, clip_batch_test.py and keysecrets2_test.py must still pass). xAI only says pending, so the row goes queued, making, checking, done exactly like a family video, with the xAI request id written on the row as `fal` is for Wan (field name `svc` {name: \"xai\", request_id}); the reaper treats it the same. The per request cap is 0.15. Then the same make_take, keep and done steps as card 4. guide-work.yml already passes XAI_API_KEY. Page (battle-guide.html): the monster button becomes Make this video ($0.15) and adds a row {kind video, lane vid, route xai, anim, who, take, prompt, promptRev, cap 0.15, clip: {id, owner, kind, start, model, res, dur, figRows}} (the same values doGen puts in the old request today), with the same lines, Cancel and Activity. Remove the old monster branch of doGen and the reading of data/clip-requests.json for guide rows. In clipgen.py remove the guide request path that is now unused, and its progress.mark calls, keeping every Art Library path. Tests: worker_test.py with a stand-in xAI (queued to done, an error retried once then X6 words, picked up by request id after a dead run with one paid submit); battle_guide_test.py: a monster row shows the same lines. Tests to run and pass before pushing: python3 -I tools/guidegen/worker_test.py, python3 tools/art-library/clipgen_test.py, python3 tools/art-library/clip_batch_test.py, python3 tools/art-library/keysecrets2_test.py, python3 tools/battle_guide_test.py, python3 tools/workflow_check.py, python3 tools/smoke.py, python3 tools/board_check.py. You must NOT: make any paid run or call fal, xAI or ElevenLabs for real (every test uses stand-ins; the first paid run is Tom's tap); run wangen.py against the real services; create or change a doc in the claude.ai Project (notes go in the repo folder claude/, then run python3 tools/claude_index.py); make or propose a painted battle pose; touch the bulk video flow (wangen.py --bulk, wanbulk.py, wanqa.py, wanbake.py, the wan-gen-bulk line); hand Tom a yes or no check; write an em dash in anything Tom reads. Before every commit check that no file has git conflict markers (a line that starts with seven less-than signs; CLAUDE.md has the command). Push steps: write the heading \"## guideflow8 (the date of that day as YYYY-MM-DD): one plain line Tom can read\" at the top of docs/CHANGES.md with what was built, what was tested and what was not looked at, run python3 tools/workflow_check.py if it exists, run python3 tools/art-library/bump_tags.py guideflow8 --base origin/main, run python3 tools/board_check.py --push guideflow8, fetch and rebase on origin/main, then push to main. At the end write the result into this card's `next` and history, and check the next card (c-guideflow-9) still has its full prompt. Your first push is the commit board: start c-guideflow-8. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "auto": true,
-   "done": "2026-11-23"
-  },
-  {
    "id": "c-guideflow-9",
    "lane": "claude",
    "col": "done",
@@ -5679,40 +5329,6 @@
    }
   },
   {
-   "id": "t-movestage-judge",
-   "title": "Judge six of Tom's staged moves in the Move Lab",
-   "theme": "Battle Animations",
-   "lane": "tom",
-   "col": "done",
-   "ask": "play",
-   "next": "Open ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB: TOM (or tap Take me there on the dashboard). Play each of the six moves that have their videos: Frequent Flier, Zone One, Suite Door, Cartridge Blow, Controller Toss and Konami Code. For each, tap Keep, or Tweak or Replace and type what you saw (Replace means a new body video). Judge the look and the timing: does the move read as the idea, does the hit land with the picture, do the props and the screen effects belong. Winged Shell and Tarmac Porsche Transfer are still missing a video (blue burst, headlight flare, jet wash each failed the edge check four times) and show their old version; answer the Give it 4 more tries cards for them, or leave them. Then press All good on this card, or Something is wrong and type what you saw.",
-   "blocks": [],
-   "fyi": true,
-   "jump": {
-    "fight": "new",
-    "i": 86
-   },
-   "created": "2026-11-23",
-   "changed": "2026-11-23",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukHG6QtbCtw8Kjp1tPx",
-    "opening": "added by c-movestage-build"
-   },
-   "history": [
-    {
-     "d": "2026-11-23",
-     "t": "Added by c-movestage-build (movestage2d): six of the eight staged moves are fully baked and play through the stage layer; the other two wait on video decisions. Same review as t-movestage-lab (the Lab is the only review); Keep and Tweak still write to t-movestage-lab."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Not needed: animations are awful",
-     "at": "2026-11-23T17:22:47.105Z"
-    }
-   ],
-   "done": "2026-11-23",
-   "retired": true
-  },
-  {
    "id": "t-b3s22ch15",
    "title": "Milestone: play chapter 15 on the new battle",
    "theme": "Battle System",
@@ -5972,87 +5588,6 @@
    ]
   },
   {
-   "id": "t-stuck-b3s23",
-   "lane": "tom",
-   "col": "done",
-   "theme": "Battle System",
-   "ask": "unstick",
-   "unstick": {
-    "card": "c-b3s23",
-    "kind": "stuck"
-   },
-   "title": "Stuck twice: Battle stage 23: purge battle 2 and Kindness",
-   "next": "Card c-b3s23 (Battle stage 23: purge battle 2 and Kindness) stalled again after its one automatic rescue. The rescue started 12:42 PM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it.",
-   "blocks": [
-    "c-b3s23a"
-   ],
-   "chat": {
-    "url": "",
-    "opening": "board"
-   },
-   "history": [
-    {
-     "d": "2026-11-23",
-     "t": "Added by board-sync: card c-b3s23 stalled after its rescue"
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Done by the board: the card is being worked on again."
-    }
-   ],
-   "created": "2026-11-23",
-   "changed": "2026-11-23",
-   "done": "2026-11-23"
-  },
-  {
-   "id": "c-b3s23a",
-   "title": "Stage 23a: Battle 3 gets its own shell (no battle 2 names)",
-   "theme": "Battle System",
-   "lane": "claude",
-   "col": "done",
-   "next": "Slice 23a of the battle 2 purge: Battle 3 gets its own shell (no battle 2 names). Ready to start: the gate checks passed and Tom's yes is in.",
-   "blocks": [
-    "c-b3s23b"
-   ],
-   "changed": "2026-11-23",
-   "created": "2026-11-23",
-   "tag": "b3s23a",
-   "after": "nothing for Tom: c-b3s23b",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukCY8BBw577QYm3s41d",
-    "opening": "pasted by Tom from the board"
-   },
-   "history": [
-    {
-     "d": "2026-11-23",
-     "t": "Created by the session that took c-b3s23: the purge is too large for one change (about 1 MB of battle 2 code, 3,000 references in 266 files, and Battle 3 still borrows a dozen battle 2 helpers), so it is five ordered slices. Facts and rules: claude/next-addendum-b3s23.md."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Tom copied the prompt to paste it into a new conversation.",
-     "at": "2026-11-24T00:40:59.729Z"
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Shipped b3s23a (engine/bt-shell.js). Moved, not copied: startBattle (the fight door; asks b3sStart, then BT.oldFight), B2.result to BT.result, B2.active-as-lab to BT.lab, b2Esc/b2Thumb(s)/b2Portrait/b2CanvasPt to btEsc/btThumb(s)/btPortrait/btCanvasPt, B2_METER/b2Meter/b2MeterPath/b2MeterTag to BT_METER/btMeter/btMeterPath/btMeterTag, b2BattleDef/B2_FLIPPED/b2Purse to btBattleDef/BT_FLIPPED/btPurse, bpOn/bpIcon/bpWord from battle-pictures.js; CSS classes .b2-tk/.b2-rib-lbl/.b2-int to .bt-*. Proof: the word-boundary grep for b2/B2/battle2 over engine/b3-*.js and data/b3-*.js is empty; the literal grep still matches 4 hex colours in data/b3-status.js and the Tombo id tnb2 (a story flag, left alone). New test tools/bt_alone_test.py plays a chapter 1 story fight with every battle 2 file empty: passes (also in the night manifest). Passed: b3-sim check (5579), unused_voice all 0, b3_test subsets new1 s8 s7 s4 s16 s21, ch11_b3_test, smoke except the known board_sync_test board4. Fails the same way on unchanged main, so not from this slice: b3_story_test 'a save made on Battle 3 loads with the switch on Old, and chapter 1's scene fight plays on battle 2' (the scene intro is still active), and ch1_b3_test steps 6 spot, 7 boss, 8 after the boss, dragonfly coin. NOT run: the full b3_test.py over all 98 Lab fights (hours), ch20_b3_test. Battle 2 still plays under Settings OLD."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Shipped as b3s23a: Battle 3 has its own shell, engine/bt-shell.js, and no longer reads a battle 2 name"
-    }
-   ],
-   "prompt": {
-    "what": "Slice 23a of the battle 2 purge (Battle 3 gets its own shell (no battle 2 names))",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row C: a refactor across about 40 files with the list not yet written, tests catch mistakes)",
-    "effort": "high (many files with no written list of callers)",
-    "text": "Read claude/battle-architecture.md section 5 row 23, claude/next-addendum-b3s23.md (the facts, the five slices and the rules for every slice) and the history of cards c-b3s23 and the card before this one. Tom's yes on t-b3s23-confirm is in: do not ask again. Rules: purge completely (CLAUDE.md), never edit demo/, never edit a recorded voice line, no animation work, add a docs/CHANGES.md heading for the build tag and run python3 tools/art-library/bump_tags.py b3s23a --base origin/main on every push. Verify by loading the page (python3 tools/serve.py, headless Chromium, no ReferenceError or pageerror) as well as by grep. Every push ends green: node tools/b3-sim.js check, python3 tools/b3_test.py, python3 tools/b3_story_test.py, python3 tools/smoke.py (its one known failure on main before this work is board_sync_test board4 'board_check accepts a Tom card waiting on its fix'; do not fix it here, name it), python3 -I tools/clip-audit/unused_voice.py (all 0). Slice 23a. Create engine/bt-shell.js with what Battle 3 really borrows from battle 2 under neutral names (btEsc, btThumb, btPortrait, btCanvasPt, btMeter, btMeterTag, BT_METER, btBattleDef, btPurse, the one fight door `startBattle`'s Battle 3 part, BT.result) by moving the code, not copying it. Change every engine/b3-*.js and data/b3-*.js file, engine/battle-draw.js, engine/battle-pictures.js and engine/clips.js to the new names, load bt-shell.js before the Battle 3 files in index.html, and find any other borrowed name by running the page. Find the full list first with the dependency script described in claude/next-addendum-b3s23.md (names defined in engine/battle2*.js and data/battle2-data.js, read by a b3 file or by a shared engine file the Battle 3 screen loads). Delete nothing yet. Battle 2 must still work (Settings OLD on a save). Result: a list of every name moved, and the proof that `git grep -I -E 'b2|B2|battle2' -- 'engine/b3-*.js' 'data/b3-*.js'` is empty apart from prose comments you also reworded. Write the result into this card's history, and if the next slice's work is already done by this one, say so on the next card. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "done": "2026-11-23"
-  },
-  {
    "id": "c-b3s23b",
    "title": "Battle stage 23b: Re-home the tables other systems borrow",
    "theme": "Battle System",
@@ -6233,29 +5768,6 @@
     "text": "Read claude/battle-architecture.md section 5 row 23, claude/next-addendum-b3s23.md (the facts, the five slices and the rules for every slice) and the history of cards c-b3s23 and the card before this one. Tom's yes on t-b3s23-confirm is in: do not ask again. Rules: purge completely (CLAUDE.md), never edit demo/, never edit a recorded voice line, no animation work, add a docs/CHANGES.md heading for the build tag and run python3 tools/art-library/bump_tags.py b3s23e --base origin/main on every push. Verify by loading the page (python3 tools/serve.py, headless Chromium, no ReferenceError or pageerror) as well as by grep. Every push ends green: node tools/b3-sim.js check, python3 tools/b3_test.py, python3 tools/b3_story_test.py, python3 tools/smoke.py (its one known failure on main before this work is board_sync_test board4 'board_check accepts a Tom card waiting on its fix'; do not fix it here, name it), python3 -I tools/clip-audit/unused_voice.py (all 0). Slice 23e. Run python3 tools/clip-audit/unused_voice.py and purge every unused line and clip it lists (node tools/clip-audit/purge_unused.js with the spec file unused_voice.py names, using --apply, remove the lines from data/lines.js, python3 tools/voice-library/battle-scripts.py and node tools/voice-library/make-index.js, bump the ?v= tags, record in docs/PURGED_VOICE.md and docs/CHANGES.md); then delete the tests, tools, Art Library prompt files (tools/art-library/tombo-prompts.js and tombo-split, dc-prompts.js and the like only when no Library entry still needs them), docs and claude/ notes that only describe battle 2, rebuild claude/INDEX.md (python3 tools/claude_index.py) and the Voice Library index. Then run: python3 tools/clip-audit/unused_voice.py (all checks 0), git grep -I for B2, b2 and B8 (zero outside demo/; state the exact excluded paths), node tools/b3-sim.js check, python3 tools/smoke.py. Look at Chapter Select in portrait and landscape and say what you saw. Write the result into this card's history and into c-b3s23's history, then end the battle system card series with a Tom Milestone card: the whole game on Battle 3 (ask play, fyi true, jump {chapter: 1}, next naming the screen and what to judge: fun, pace, readable screen and turn bar, fight length, kits that feel like the family; no animations; `after` of this card points to it). Write the result into this card's history, and if the next slice's work is already done by this one, say so on the next card. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "waiting_on": "claude"
-  },
-  {
-   "id": "b-board-b3s23split",
-   "tag": "board-b3s23split",
-   "lane": "claude",
-   "col": "done",
-   "done": "2026-11-23",
-   "theme": "Battle System",
-   "title": "the battle 2 purge is split into five ordered cards",
-   "next": "Done: the battle 2 purge is split into five ordered cards",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukSjhwv6A84RqoDUvYS",
-    "opening": "unknown"
-   },
-   "history": [
-    {
-     "d": "2026-11-23",
-     "t": "Shipped as board-b3s23split. Added by board-sync because the build had no card."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-23",
-   "changed": "2026-11-23"
   },
   {
    "id": "c-pusher1",
@@ -7152,6 +6664,29 @@
     "effort": "high (a new generator script, a page change and a test, with six hand matches to resolve)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json, docs/BATTLE_GUIDE.md and the Battle Animation Pipeline Lock in CLAUDE.md. Your first push is the commit \"board: start c-guide-crosswalk\".\n\nTask: fully incorporate art-factory/aot-stage2-pass1-manifest-24fps.json, aot-stage2-pass2-manifest-24fps.json, aot-stage2-pass3-manifest-24fps.json and aot-stage2c-vfx-library-v11.json into the Battle Guide (battle-guide.html).\n1. Build tools/guidegen/manifest_crosswalk.py and commit its output data/guide-manifest.json: each manifest move id matched to its game skill id by name (117 of 123 match; resolve the other 6 by hand and list them), and each vfxPrimitives name matched to a library asset id (the library has 37 assets, the moves name about 170, and usedBy holds 39 stale move ids). Report every unmatched item.\n2. Show on each move's page in the Guide: the clip's motion text, duration and frame count, contact time, beats, hit-stop frames, the effects it uses, and whether those effects are built (buildStatus).\n3. Do not use the manifests' stylePrefix or negativePrompt for any clip (they carry the green screen and the banned painting word, which the pipeline lock bans). Keep only the motion text and engineSpec.\n4. For each ability, list exactly what Tom must supply or approve to implement it: the Hero or start frame status, the clip status, each effect not yet built, and any decision. Put this list in the Guide and in docs/BATTLE_GUIDE.md. Also make a one-page summary grouped by what Tom has to do.\n5. Add a test to tools/battle_guide_test.py that fails if any manifest move or effect is missing from the crosswalk. Run smoke and the guide tests, look at portrait and landscape, and push with a new build tag and a docs/CHANGES.md entry.\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "b-guideuse-45780590322",
+   "tag": "guideuse-45780590322",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-26",
+   "theme": "Battle System",
+   "title": "Getting hit (tom) now plays a video chosen in the Battle Guide",
+   "next": "Done: Getting hit (tom) now plays a video chosen in the Battle Guide",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as guideuse-45780590322. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26"
   }
  ],
  "sessions": [
@@ -13587,8 +13122,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "2bed71069ec80a1e56eca25134a6b11c502e9ca1",
- "synced_at": "2026-11-26T07:39:24+00:00",
+ "synced": "55e193ff5cb6fc9bbeb5e74510555f198e652f9e",
+ "synced_at": "2026-11-26T08:16:32+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -13669,6 +13204,11 @@
      "id": "c-night-clean",
      "at": "2026-11-26T07:39:23+00:00",
      "kind": "standing"
+    },
+    {
+     "id": "t-lastnight",
+     "at": "2026-11-26T08:16:31+00:00",
+     "kind": "queued"
     }
    ]
   },
