@@ -6975,7 +6975,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Justin production clip: #00FF00 start, new Kling prompt",
-   "next": "Session rolls Kling with Tom's new prompt from a fixed #00FF00 start.png, keys locally, checks 8 frames, and pushes preview.html only when all pass.",
+   "next": "Stopped by the stop-loss rule: roll 1 failed (turns to camera, scowl, 3 s clip, pastel green). Next: build the clip from four pinned pose keyframes, see claude/next-justinbb9.md.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukHG5RM8zrqSWjpjE8C",
     "opening": "UNCONSTRAINED PRODUCTION ORDER (REPO: trivituso81/adventures-of-tom)"
@@ -6988,19 +6988,23 @@
     {
      "d": "2026-11-25",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Roll 1 with Tom's new prompt from an exact #00FF00 start: failed (3.04 s long, background drifted to pastel green, he turns to camera and scowls, hammer swung at arm's length). Same miss as attempt 8, so stop-loss applied. Ended without shipping; nothing pushed to the game. Total fal spend $3.68. Handoff: claude/next-justinbb9.md."
     }
    ],
    "blocks": [],
    "created": "2026-11-25",
    "changed": "2026-11-25",
    "prompt": {
-    "what": "Continue the Justin production clip if this session ended early.",
+    "what": "Make the Justin clip from four pinned pose keyframes instead of one free Kling roll.",
     "before": [
      "Nothing to do first."
     ],
-    "model": "Claude Sonnet 5.5 (row B: written steps, QA gate catches mistakes)",
-    "effort": "medium (steps are known)",
-    "text": "Read the c-justinbb9 card and art-factory/sandbox-justin-test/README.txt. Continue the roll, key, 8-frame QA loop for justin-bb-basic. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "model": "Claude Opus 5.5 (row D: generator prompts judged by taste)",
+    "effort": "medium (the method is written in claude/next-justinbb9.md)",
+    "text": "Read the c-justinbb9 card and claude/next-justinbb9.md. Make four exact #00FF00 pose stills of Justin from art-factory/sandbox-justin-test/hero.png, pair them with first-last-frame video, key with key.py, then run the 8-frame checkerboard QA before anything is pushed. Do not roll Kling from one image again. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
   }
  ],
