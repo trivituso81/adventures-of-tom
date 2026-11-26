@@ -2374,12 +2374,11 @@
     "n": 2
    },
    "use": {
-    "state": "applying",
+    "state": "live",
     "at": "2026-11-26T09:22:55Z",
-    "since": "2026-11-26T09:22:55Z",
-    "build": "",
-    "why": "",
-    "run": 45791800597
+    "since": "2026-11-26T09:33:06Z",
+    "build": "guideuse-45791800597",
+    "why": ""
    },
    "left": false,
    "dry": false,
