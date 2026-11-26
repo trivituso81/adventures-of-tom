@@ -27154,8 +27154,17 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of Aunt Ellie from \"The Adventures of Tom\", a family role-playing game. This is exactly how Aunt Ellie looks.\n2) The approved talking sheet of Aunt Ellie, for the size of the head against the body and the painted finish.\n\nPAINT THIS ONE POSE\nAunt Ellie, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Listening closely to someone who stands off to the left of the picture: the three-quarter turn is toward the left, the eyes on that person, the head tipped slightly forward, both hands loosely clasped in front at the waist, the mouth closed in a small attentive smile, the eyebrows a little raised. Interested and warm, not sad, not bored.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments. The pose matches the attached talking sheet in size and finish, so it can sit next to those four poses.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tnb-listen-v1.png",
+     "date": "2026-11-26",
+     "from": "v1",
+     "at": 1795728786819,
+     "up": true
+    }
+   ],
    "rejects": [],
    "id": "tnb-listen",
    "tab": "Characters",
