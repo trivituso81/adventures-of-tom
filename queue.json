@@ -1241,6 +1241,40 @@
    "id": "u-olivia-1795680398",
    "kind": "upload",
    "upload": "uploads/olivia-1795680398.png"
+  },
+  "v-body-nara-idle-t2": {
+   "lane": "vid",
+   "anim": "body:nara:idle",
+   "who": "nara",
+   "take": 2,
+   "route": "wan",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving its exact face, proportions, fur, collar, markings, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with its feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BREATHING IDLE\nThe dog stands in its starting relaxed stance and breathes slowly and gently, its chest and flanks rising and falling softly, and blinks once. Its head, paws and tail stay where they are for the whole clip.",
+   "promptRev": 0,
+   "start": "nara",
+   "note": "",
+   "cap": 1,
+   "at": "2026-11-26T08:08:44Z",
+   "state": "queued",
+   "since": "2026-11-26T08:08:44Z",
+   "run": 0,
+   "fal": {
+    "endpoint": "alibaba/wan-3.0/image-to-video",
+    "request_id": "01a216d7-d108-7801-b484-4cafb75729ff",
+    "status_url": "https://queue.fal.run/alibaba/wan-3.0/requests/01a216d7-d108-7801-b484-4cafb75729ff/status",
+    "response_url": "https://queue.fal.run/alibaba/wan-3.0/requests/01a216d7-d108-7801-b484-4cafb75729ff",
+    "est": 0.5
+   },
+   "tries": 0,
+   "cost": 0,
+   "why": "",
+   "do": "",
+   "result": null,
+   "use": null,
+   "left": false,
+   "dry": false,
+   "replay": "",
+   "id": "v-body-nara-idle-t2",
+   "kind": "video"
   }
  }
 }
