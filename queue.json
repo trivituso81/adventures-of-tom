@@ -3346,8 +3346,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T08:58:47Z",
-   "state": "checking",
-   "since": "2026-11-26T09:21:45Z",
+   "state": "failed",
+   "since": "2026-11-26T09:55:47Z",
    "run": 45790862688,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -3357,9 +3357,9 @@
     "est": 0.5
    },
    "tries": 2,
-   "cost": 0,
-   "why": "",
-   "do": "",
+   "cost": 0.0,
+   "why": "It was made but could not be saved.",
+   "do": "Tap Try again; it costs nothing.",
    "result": null,
    "use": null,
    "left": false,
