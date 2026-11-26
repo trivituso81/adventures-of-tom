@@ -1,3 +1,10 @@
+## guideuse-45795371400 (2026-11-26): Dodge (tom), Victory (rose) now plays a video chosen in the Battle Guide
+
+Card c-guidegen, batched by c-guideflow-7. USE THIS ONE in the Battle Guide (the `use` of a row in queue.json, Action guide-apply). Not seen on the phone yet.
+- Dodge (`body:tom:dodge`, rev 3): Wan job tom-dodge is now rev 3 (prompt file tools/art-library/prompts/wan-tom-dodge-v3.txt); clip tom_dodge cut (55 pictures, 0 to 108 step 2); B3_BODY_CLIPS.tom.dodge = tom_dodge (was 'tom_dodge')
+- Victory (`body:rose:victory`, rev 2): Wan job rose-victory is now rev 2 (prompt file tools/art-library/prompts/wan-rose-victory-v2.txt); clip rose_victory cut (67 pictures, 0 to 132 step 2); B3_BODY_CLIPS.rose.victory = rose_victory (was 'rose_victory')
+- start picture of olivia is now in `art/clips/start/olivia-hero.png` (you uploaded it; used exactly as painted)
+
 ## guideuse-45793298334 (2026-11-26): Idle (standing and breathing) (tnb), Guard (tnb), Getting hit (tnb), Idle (standing and breathing) (amy) now plays a video chosen in the Battle Guide
 
 Card c-guidegen, batched by c-guideflow-7. USE THIS ONE in the Battle Guide (the `use` of a row in queue.json, Action guide-apply). Not seen on the phone yet.
