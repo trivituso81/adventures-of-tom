@@ -1,3 +1,7 @@
+## wanbulk-trosestagelab-45796453993 (2026-11-26): 6 battle videos made from board card t-rosestage-lab passed their checks and were put in the game
+
+The wan-gen Action made them (wanbulk, tools/art-library/wangen.py --bulk), measured them (height, feet, flat background, edges, last picture against first) and had a vision model check the motion and the person (tools/art-library/wanqa.py), then baked each with the settings stored on its job and wired it (tools/art-library/wanbake.py): stage-rose-cushion, stage-rose-lamby, stage-rose-backuplamby, stage-rose-cushionwall, stage-rose-castle, stage-rose-whoopee. Nobody has watched them yet; the card asks Tom to.
+
 ## rosestage1a (2026-11-26): the Battle Guide shows what is done for each move, from the three manifests and the effect library
 
 `tools/guidegen/manifest_crosswalk.py` writes `data/guide-manifest.json`: the 123 moves of the Stage 2A manifests tied to the game's moves (121 matched, the two team moves Double Team and Full Family Ruckus have no game skill) and to the 37 library effects. The Guide's move sheet has a What is done block (staging row, video wired, contact and hit stop, effects, sound effects, manifest motion text). Style prefix and negative prompt of the manifests are left out on purpose (pipeline lock). Contact, effects and sound read Not yet everywhere: nothing in the engine reads them and there are no sound files. Test: `python3 -I tools/guide_manifest_test.py`; `movestage_test.py` still passes.
