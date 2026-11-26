@@ -6972,10 +6972,10 @@
    "id": "c-justinbb9",
    "tag": "justinbb9",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Justin production clip: #00FF00 start, new Kling prompt",
-   "next": "Stopped by the stop-loss rule: roll 1 failed (turns to camera, scowl, 3 s clip, pastel green). Next: build the clip from four pinned pose keyframes, see claude/next-justinbb9.md.",
+   "next": "Ready for Opus 5.5 medium: build the Justin clip from four pinned pose keyframes (method in claude/next-justinbb9.md). Roll 1 from a single image failed twice the same way.",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukFJ3SQckykBNpN3Deq",
     "opening": "UNCONSTRAINED PRODUCTION ORDER (REPO: trivituso81/adventures-of-tom)"
@@ -6996,6 +6996,11 @@
     {
      "d": "2026-11-25",
      "t": "Rescue started (A session ended without shipping). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-26",
+     "at": "2026-11-26T00:20:31+00:00",
+     "t": "Rescue chose START NEXT: the method change (four pinned pose keyframes, first-last-frame video, key.py, 8-frame checkerboard QA) is taste work for Opus 5.5 and needs paid fal runs, so a Sonnet rescue does not run it. Prompt already carries the method from claude/next-justinbb9.md; card moved to Up next."
     }
    ],
    "blocks": [],
@@ -7016,8 +7021,7 @@
     "why": "A session ended without shipping",
     "url": "https://claude.ai/code/cse_01RXeukFJ3SQckykBNpN3Deq",
     "prev": "https://claude.ai/code/session_01RXeukHG5RM8zrqSWjpjE8C"
-   },
-   "started_at": "2026-11-26T00:19:22+00:00"
+   }
   }
  ],
  "sessions": [
