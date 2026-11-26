@@ -4766,7 +4766,13 @@
    "state": "making",
    "since": "2026-11-26T11:08:32Z",
    "run": 45798843411,
-   "fal": null,
+   "fal": {
+    "endpoint": "alibaba/wan-3.0/image-to-video",
+    "request_id": "01a2178b-00e0-7fe2-abd4-2ea444f208cf",
+    "status_url": "https://queue.fal.run/alibaba/wan-3.0/requests/01a2178b-00e0-7fe2-abd4-2ea444f208cf/status",
+    "response_url": "https://queue.fal.run/alibaba/wan-3.0/requests/01a2178b-00e0-7fe2-abd4-2ea444f208cf",
+    "est": 0.5
+   },
    "tries": 1,
    "cost": 0,
    "why": "",
