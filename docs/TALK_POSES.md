@@ -56,7 +56,7 @@ Test without art (engine only): a `reaction_test.py` case whose first `scenes` e
 
 Tom (card c-idea-implementlisteni): "implement listening/thinking poses (should be generated and approved in art library) for all chapter 1 talking interactions, including cut scenes."
 
-- While a chapter 1 line shows, everyone near the speaker who is not talking stands in `tk_listen` (Art Library `<id>-listen`, group Listening poses) or `tk_think` (the fifth talking pose, `<id>-think`). `engine/emotions.js` `emoListen`.
+- While a chapter 1 line shows, everyone near the speaker who is not talking stands in `tk_listen` (Art Library `<id>-listen`, in each person's own section; TNB, Amy and Justin added 2026-11-26) or `tk_think` (the fifth talking pose, `<id>-think`). `engine/emotions.js` `emoListen`.
 - Which one: `docs/listen-lines.tsv`, one hand-judged row per chapter 1 scene line: `listen`, `think` or `none`, optionally `<id>:<type>` for one person (`listen grace:think`). `python3 tools/listen-apply.py` writes `data/listen-types.js`; `--check` fails when a chapter 1 scene line has no row. A line with no row (press-A chats, shops) gets `listen` when its speaker stands on the map.
 - Rules: listener reactions win; skipped are monsters, Nara, hidden or seated people, Tom carrying Rose, anyone walking or in a story pose; 8 tiles from the speaker in scenes, only Tom and his followers in press-A chats; held 0.6 s between scene lines; the listener faces the speaker.
 - Frames: `talk_frames.py` appends `listen` after `think` when the picture is approved; Sal has no listening picture: he listens in his `em_loving` feeling frame (`LISTEN_FEEL` in `engine/emotions.js`, salslisten1). Install steps: `claude/next-addendum-listen1.md`.

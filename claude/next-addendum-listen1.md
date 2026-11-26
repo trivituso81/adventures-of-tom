@@ -9,9 +9,9 @@ Built in idea-implementlisteni (2026-11-20, card c-idea-implementlisteni). Tom's
 - The install code is written and switched off until the pictures exist: `talk_frames.py` appends `listen` after `think` (`SINGLES`), `bake_story_poses.py` names the frames by which pictures exist (`_talk_names`) and adds Sal's set `salls` when `art/story/salls.webp` exists, `report_singles.py` adds the strip `salls` when `sal-listen` is approved, `bake_talkpose_faces.py` divides the strip by 6 when a listen picture exists (no face is cut from it).
 - Tested: with no listen picture `talk_frames.py tom grace` rewrote `art/talk/*.webp` byte for byte; with a stand-in picture it wrote 6 frames and `_talk_names` gave `tk_listen` last.
 
-## Art Library entries (group "Listening poses", tab Characters)
+## Art Library entries (tab Characters, each in its person's own section since listengroup1, 2026-11-26)
 
-`tom-listen`, `grace-listen`, `rose-listen`, `deedee-listen`, `boppy-listen`, `ellie-listen`, `sal-listen` (`tools/art-library/listen-prompts.js`). The prompt is the approved `<id>-think` prompt (`pose()` in `ch2fix-prompts.js`, same references) with only the pose sentence changed. Amy (a window) and TNB (a phone text) never listen in chapter 1, so they have none. A rejected entry: change only what Tom's note names (repo CLAUDE.md "Fix a miss with the smallest change").
+`tom-listen`, `grace-listen`, `rose-listen`, `deedee-listen`, `boppy-listen`, `ellie-listen`, and since listengroup1 `tnb-listen`, `amy-listen`, `justin-listen` (drafts until Tom generates and approves them; installing `tk_listen` for those three is a later step). The old `sal-listen` has no entry (`tools/art-library/listen-prompts.js`). The prompt is the approved `<id>-think` prompt (`pose()` in `ch2fix-prompts.js`, same references) with only the pose sentence changed. (Before listengroup1 Amy and TNB had none because they never listen in chapter 1; Tom asked for every main character to have one.) A rejected entry: change only what Tom's note names (repo CLAUDE.md "Fix a miss with the smallest change").
 
 ## Install steps (after Tom approves; Sonnet 5.5, medium)
 

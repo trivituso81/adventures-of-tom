@@ -1,3 +1,7 @@
+## listengroup1 (2026-11-26): Listening poses sit in each character's section, and TNB, Amy and Justin have one
+
+Tom: "move the listening poses into each character's section instead of a separate listening section. ensure all main characters have a listening item (eg TNB is missing)". The Art Library section Listening poses is gone: `tom-listen`, `grace-listen`, `rose-listen`, `deedee-listen`, `boppy-listen` and `ellie-listen` now sit in Tom, Grace, Rose, Deedee, Boppy and Aunt Ellie (groups come from `groups.js`; `listen-prompts.js` sets none). New entries `tnb-listen`, `amy-listen` and `justin-listen` (drafts) use the same listening prompt and their approved hero and talking pictures as references, so every main character now has one. The six approved ones keep their status and pictures. No game art changed. Test: `node tools/art-library/validate.js`, `python3 tools/hidebf_test.py`.
+
 ## portraits5 (2026-11-26): Portraits baked from your saved crops: grace (made by the portrait-bake Action)
 
 - Tom saved crops in ADMIN > PORTRAIT CROPS (or approved a new hero painting); the Action baked `portraits/<id>.png` and moved `PORTRAIT_V` in `data/portrait-ver.js`, the one stamp every status screen, turn order, battle panel and the Battle Guide use for those pictures (tools/sprite-bake/portrait_autobake.py).

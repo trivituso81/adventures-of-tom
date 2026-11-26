@@ -8806,10 +8806,10 @@
    "id": "c-listengroup",
    "tag": "listengroup1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Art Library: listening poses move into each character",
-   "next": "Move the Listening poses section into each person's own section and add the missing listening pose for TNB, Amy and Justin.",
+   "next": "Done. Listening poses now sit in each person's own Art Library section, and TNB, Amy and Justin have a listening entry (drafts).",
    "created": "2026-11-26",
    "changed": "2026-11-26",
    "chat": {
@@ -8820,6 +8820,10 @@
     {
      "d": "2026-11-26",
      "t": "Tom: \"move the listening poses into each character's section instead of a separate listening section. ensure all main characters have a listening item (eg TNB is missing)\"."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as listengroup1: the Listening poses section is gone; all nine people have a -listen entry in their own section."
     }
    ],
    "prompt": {
@@ -8830,7 +8834,45 @@
     "model": "Claude Sonnet 5.5 (small data and tool edit)",
     "effort": "medium",
     "text": "Read data/board.json and claude/handoff-rules.md. Continue card c-listengroup (tag listengroup1): every entry in tools/art-library/listen-prompts.js takes its group from groups.js, data/art-prompts.json matches, and tnb-listen, amy-listen and justin-listen exist. Test, then push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-26",
+   "after": "t-listengen"
+  },
+  {
+   "id": "t-listengen",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Characters",
+   "ask": "pictures",
+   "fyi": true,
+   "title": "Generate listening poses for TNB, Amy and Justin",
+   "next": "Open ADMIN > ART LIBRARY > Characters, open the TNB, Amy and Justin sections, press Generate on each listening pose (tnb-listen, amy-listen, justin-listen), then Approve or Reject each.",
+   "done_when": {
+    "art_approved": [
+     "tnb-listen",
+     "amy-listen",
+     "justin-listen"
+    ]
+   },
+   "links": [
+    {
+     "to": "art",
+     "ids": [
+      "tnb-listen",
+      "amy-listen",
+      "justin-listen"
+     ],
+     "label": "Open the three listening poses"
+    }
+   ],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by listengroup1: the three new listening entries wait for you. After approval, installing them as listening frames is a later Claude card."
+    }
+   ]
   }
  ],
  "sessions": [
