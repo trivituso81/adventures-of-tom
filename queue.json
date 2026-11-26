@@ -4560,8 +4560,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:35:22Z",
-   "state": "checking",
-   "since": "2026-11-26T11:22:22Z",
+   "state": "done",
+   "since": "2026-11-26T12:04:06Z",
    "run": 45808903596,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -4574,7 +4574,27 @@
    "cost": 0.0,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-boppy-victory/t1.js",
+    "img": "takes/body-boppy-victory/t1.webp",
+    "frames": 75,
+    "kb": 1000,
+    "words": "0 to 148 step 2",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "vision v_big: Shows hand gestures and smile but lacks arms up, jump, cheer, or sufficiently big celebration.; Mild hand gesture and smile, not arms up, jump, cheer, or big celebration."
+     ],
+     "faults": [
+      "v_big"
+     ],
+     "vision_ran": true,
+     "spent": 0.0038,
+     "error": null,
+     "words": "The clip gate flags this take: vision v_big: Shows hand gestures and smile but lacks arms up, jump, cheer, or sufficiently big celebration.; Mild hand gesture and smile, not arms up, jump, cheer, or big celebration.."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
