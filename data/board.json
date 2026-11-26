@@ -9153,6 +9153,60 @@
     "effort": "medium (a small data change with validate and test runs)",
     "text": "Read claude/handoff-rules.md and data/board.json, then finish card c-deedeefart: confirm the four entries deedee-fart-bend, deedee-fart-hop, deedee-fart-shock and deedee-fart-battle exist in data/art-prompts.json as approved with art/raw/characters/deedee-fart-*-v1.png, run node tools/art-library/validate.js, and push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "c-boppyframes",
+   "title": "Install Boppy's newer frames: walk, feelings, talk, listen",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "up",
+   "next": "In progress: baking Boppy's newly approved walking v5, feelings v7, talking v4 and listening v2 pictures.",
+   "blocks": [],
+   "changed": "2026-11-26",
+   "created": "2026-11-26",
+   "tag": "boppyframes",
+   "chat": {
+    "url": "",
+    "opening": "\"check boppy next\""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by the session: Tom's words: \"check boppy next\"."
+    }
+   ],
+   "after": "t-boppyframesplay",
+   "prompt": {
+    "what": "Installs Boppy's newly approved walking, feelings, talking and listening pictures.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the bakes exist and tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md and docs/CHANGES.md roseframes, graceframes, tomframes4 and deedeeframes, then card c-boppyframes in data/board.json. Your first push is the commit board: start c-boppyframes. Install Boppy's newly approved pictures: boppy-walking-sheet-v5, boppy-emotions-v7, boppy-talk-v4 and boppy-listen-v2. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "t-boppyframesplay",
+   "title": "Look at Boppy's new walk, feelings, talk, listen frames",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Not ready yet: opens when the frames are pushed.",
+   "jump": {
+    "chapter": 1
+   },
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by boppyframes."
+    }
+   ]
   }
  ],
  "sessions": [
