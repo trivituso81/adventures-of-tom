@@ -28,11 +28,23 @@ def src_path(cid):
     return vs[-1] if vs else None
 
 
+GAP_SPLIT = {'tom'}   # people whose 2 x 2 talk sheet is split in the empty band between the rows; the others keep the half-way split their baked art was made with
+
+
+def _row_gap(rgba):
+    """Row inside the middle fifth of a 2 x 2 sheet with the least painted pixels (the empty band between the two rows); the half-way row when the sheet is tidy."""
+    H = rgba.shape[0]; cnt = (rgba[:, :, 3] > 40).sum(1); lo, hi = int(H * .40), int(H * .60)
+    best = min(range(lo, hi), key=lambda y: (int(cnt[y]), abs(y - H // 2)))
+    return best if cnt[best] == 0 else H // 2
+
+
 def cut(cid):
     rgba = _key(np.array(Image.open(src_path(cid)).convert('RGB')))
     H, W = rgba.shape[:2]
     if W < 1.5 * H:   # 2 x 2 sheet (newer talk sheets): tell, point / ask, answer, row by row
-        return [EF.clean_cell(rgba[r * H // 2:(r + 1) * H // 2, c * W // 2:(c + 1) * W // 2].copy()) for r in range(2) for c in range(2)]
+        cut_y = _row_gap(rgba) if cid in GAP_SPLIT else H // 2   # tomframes: Tom's talk-v3 paints the lower row's heads above the half-way line, so split in the empty band between the rows
+        rows = [(0, cut_y), (cut_y, H)]
+        return [EF.clean_cell(rgba[a:b, c * W // 2:(c + 1) * W // 2].copy()) for a, b in rows for c in range(2)]
     return [EF.clean_cell(rgba[:, c * W // 4:(c + 1) * W // 4].copy()) for c in range(4)]
 
 

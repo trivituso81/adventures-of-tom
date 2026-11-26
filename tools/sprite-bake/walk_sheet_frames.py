@@ -13,7 +13,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 RAW = os.path.join(ROOT, 'art/raw/characters')
 NAMES = [['down_stand', 'down_step1', 'down_step2'], ['up_stand', 'up_step1', 'up_step2'], ['left_stand', 'left_step1', 'left_step2']]
 
-def _key(rgb):
+GLOW_SHEETS = {'tom-walking-sheet-v4.png'}   # sheets the generator painted with a pale pink glow in the gaps between arms and body (tomframes): the glow joins the background
+
+
+def _key(rgb, glow=False):
     """Magenta sheet to RGBA. Background = magenta regions touching the border, plus enclosed magenta holes (between legs, between fingers,
     dark magenta in narrow gaps). Pixels within 5 px of the background are unmixed against magenta using the nearest solid figure colour
     and lose any leftover magenta tint (soft painted edge, no pink fringe). Pixels deeper inside keep their painted colour (pink flowers, lilac cloth)."""
@@ -29,6 +32,10 @@ def _key(rgb):
     mean_q = ndi.mean(g / np.maximum(np.minimum(r, b), 1), lab, idx)
     keep = border | {i + 1 for i in range(n) if sizes[i] >= 3 and (mean_m[i] > 95 and mean_g[i] < 80 or mean_q[i] < 0.4)}
     bg = np.isin(lab, list(keep))
+    if glow:   # pale pink (blue above green, not skin or cloth) touching the background is glow, not figure
+        cand = ~bg & (r > 190) & (b > 130) & (b - g > 20) & (r - g > 45)
+        l2, n2 = ndi.label(cand); sz = ndi.sum(cand, l2, range(1, n2 + 1))
+        bg = bg | np.isin(l2, [i + 1 for i in range(n2) if sz[i] >= 30])   # the glow sits in closed pockets (arm against hip), so size, not contact, picks it
     near = ndi.binary_dilation(bg, iterations=5) & ~bg
     solid = ~bg & ~near & (m < 60)
     _, (iy, ix) = ndi.distance_transform_edt(~solid, return_indices=True)
@@ -56,7 +63,7 @@ def _key(rgb):
 
 def grid(path, ncols, nrows):
     """Cut the ncols x nrows figures of one magenta pose sheet. Returns RGBA crops in reading order (row by row, left to right)."""
-    rgba = _key(np.array(Image.open(path).convert('RGB')))
+    rgba = _key(np.array(Image.open(path).convert('RGB')), glow=os.path.basename(path) in GLOW_SHEETS)
     A = rgba[:, :, 3] > 20
     lab, n = ndi.label(ndi.binary_dilation(A, iterations=6))
     objs = [s for s in ndi.find_objects(lab)]

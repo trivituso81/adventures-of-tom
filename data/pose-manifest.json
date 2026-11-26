@@ -26,13 +26,13 @@
    "name": "Tom",
    "inches": 71,
    "R": 42.0,
-   "standH": 476,
-   "sheet": "tom-walking-sheet-v3.png",
+   "standH": 482,
+   "sheet": "tom-walking-sheet-v4.png",
    "headTweak": 1.0,
    "now": {
     "f": 1.0,
     "h": 1.0,
-    "anchor": 126.61
+    "anchor": 128.2
    },
    "locked": null,
    "frames": {
@@ -41,23 +41,22 @@
      "key": "down_stand",
      "label": "Tom, walking, front standing",
      "img": "art/poses/tom/walk-down_stand.webp",
-     "w": 150,
-     "h": 476,
-     "ax": 73.5,
+     "w": 181,
+     "h": 482,
+     "ax": 91.5,
      "link": null,
-     "sheet": "tom-walking-sheet-v3.png",
+     "sheet": "tom-walking-sheet-v4.png",
      "marks": {
-      "top": 21.4,
-      "chin": 144.7,
-      "feet": 476
+      "top": 15.4,
+      "chin": 128.2,
+      "feet": 482
      },
-     "conf": "high",
-     "s0": 0.088235,
+     "conf": "low",
+     "s0": 0.087137,
      "now": {
       "f": 1.0,
       "h": 1.0,
-      "anchor": 144.7,
-      "page": 42.0
+      "anchor": 128.2
      }
     },
     "down_step1": {
@@ -65,23 +64,22 @@
      "key": "down_step1",
      "label": "Tom, walking, front step 1",
      "img": "art/poses/tom/walk-down_step1.webp",
-     "w": 180,
-     "h": 478,
-     "ax": 88.5,
+     "w": 197,
+     "h": 483,
+     "ax": 94.5,
      "link": "down_stand",
-     "sheet": "tom-walking-sheet-v3.png",
+     "sheet": "tom-walking-sheet-v4.png",
      "marks": {
-      "top": 21.4,
-      "chin": 144.7,
-      "feet": 478
+      "top": 15.4,
+      "chin": 128.2,
+      "feet": 483
      },
-     "conf": "high",
-     "s0": 0.088235,
+     "conf": "low",
+     "s0": 0.087137,
      "now": {
       "f": 1.0,
       "h": 1.0,
-      "anchor": 144.7,
-      "page": 42.0
+      "anchor": 128.2
      }
     },
     "down_step2": {
@@ -89,23 +87,22 @@
      "key": "down_step2",
      "label": "Tom, walking, front step 2",
      "img": "art/poses/tom/walk-down_step2.webp",
-     "w": 175,
-     "h": 477,
-     "ax": 89.5,
+     "w": 190,
+     "h": 483,
+     "ax": 89.0,
      "link": "down_stand",
-     "sheet": "tom-walking-sheet-v3.png",
+     "sheet": "tom-walking-sheet-v4.png",
      "marks": {
-      "top": 21.4,
-      "chin": 144.7,
-      "feet": 477
+      "top": 15.4,
+      "chin": 128.2,
+      "feet": 483
      },
-     "conf": "high",
-     "s0": 0.088235,
+     "conf": "low",
+     "s0": 0.087137,
      "now": {
       "f": 1.0,
       "h": 1.0,
-      "anchor": 144.7,
-      "page": 42.0
+      "anchor": 128.2
      }
     },
     "up_stand": {
@@ -113,23 +110,22 @@
      "key": "up_stand",
      "label": "Tom, walking, back standing",
      "img": "art/poses/tom/walk-up_stand.webp",
-     "w": 148,
-     "h": 461,
-     "ax": 72.0,
+     "w": 170,
+     "h": 459,
+     "ax": 85.5,
      "link": null,
-     "sheet": "tom-walking-sheet-v3.png",
+     "sheet": "tom-walking-sheet-v4.png",
      "marks": {
-      "top": 21.4,
-      "chin": 144.7,
-      "feet": 461
+      "top": 15.4,
+      "chin": 128.2,
+      "feet": 459
      },
      "conf": "low",
-     "s0": 0.088235,
+     "s0": 0.087137,
      "now": {
-      "f": 1.021,
-      "h": 1.033,
-      "anchor": 136.7,
-      "page": 41.688
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 128.2
      }
     },
     "up_step1": {
@@ -137,23 +133,22 @@
      "key": "up_step1",
      "label": "Tom, walking, back step 1",
      "img": "art/poses/tom/walk-up_step1.webp",
-     "w": 176,
-     "h": 462,
-     "ax": 96.0,
+     "w": 182,
+     "h": 458,
+     "ax": 97.0,
      "link": "up_stand",
-     "sheet": "tom-walking-sheet-v3.png",
+     "sheet": "tom-walking-sheet-v4.png",
      "marks": {
-      "top": 21.4,
-      "chin": 144.7,
-      "feet": 462
+      "top": 15.4,
+      "chin": 128.2,
+      "feet": 458
      },
      "conf": "low",
-     "s0": 0.088235,
+     "s0": 0.087137,
      "now": {
-      "f": 1.021,
-      "h": 1.033,
-      "anchor": 136.7,
-      "page": 41.688
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 128.2
      }
     },
     "up_step2": {
@@ -161,23 +156,22 @@
      "key": "up_step2",
      "label": "Tom, walking, back step 2",
      "img": "art/poses/tom/walk-up_step2.webp",
-     "w": 175,
-     "h": 461,
-     "ax": 92.0,
+     "w": 186,
+     "h": 458,
+     "ax": 95.0,
      "link": "up_stand",
-     "sheet": "tom-walking-sheet-v3.png",
+     "sheet": "tom-walking-sheet-v4.png",
      "marks": {
-      "top": 21.4,
-      "chin": 144.7,
-      "feet": 461
+      "top": 15.4,
+      "chin": 128.2,
+      "feet": 458
      },
      "conf": "low",
-     "s0": 0.088235,
+     "s0": 0.087137,
      "now": {
-      "f": 1.021,
-      "h": 1.033,
-      "anchor": 136.7,
-      "page": 41.688
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 128.2
      }
     },
     "left_stand": {
@@ -185,23 +179,22 @@
      "key": "left_stand",
      "label": "Tom, walking, side standing",
      "img": "art/poses/tom/walk-left_stand.webp",
-     "w": 137,
-     "h": 484,
-     "ax": 51.5,
+     "w": 154,
+     "h": 498,
+     "ax": 70.5,
      "link": null,
-     "sheet": "tom-walking-sheet-v3.png",
+     "sheet": "tom-walking-sheet-v4.png",
      "marks": {
-      "top": 14.3,
-      "chin": 135.7,
-      "feet": 484
+      "top": 15.4,
+      "chin": 128.2,
+      "feet": 498
      },
      "conf": "low",
-     "s0": 0.088235,
+     "s0": 0.087137,
      "now": {
-      "f": 0.949,
-      "h": 1.082,
-      "anchor": 135.7,
-      "page": 42.192
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 128.2
      }
     },
     "left_step1": {
@@ -209,23 +202,22 @@
      "key": "left_step1",
      "label": "Tom, walking, side step 1",
      "img": "art/poses/tom/walk-left_step1.webp",
-     "w": 279,
-     "h": 480,
-     "ax": 126.5,
+     "w": 254,
+     "h": 499,
+     "ax": 127.5,
      "link": "left_stand",
-     "sheet": "tom-walking-sheet-v3.png",
+     "sheet": "tom-walking-sheet-v4.png",
      "marks": {
-      "top": 14.3,
-      "chin": 135.7,
-      "feet": 480
+      "top": 15.4,
+      "chin": 128.2,
+      "feet": 499
      },
      "conf": "low",
-     "s0": 0.088235,
+     "s0": 0.087137,
      "now": {
-      "f": 0.949,
-      "h": 1.082,
-      "anchor": 135.7,
-      "page": 42.192
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 128.2
      }
     },
     "left_step2": {
@@ -233,23 +225,22 @@
      "key": "left_step2",
      "label": "Tom, walking, side step 2",
      "img": "art/poses/tom/walk-left_step2.webp",
-     "w": 202,
-     "h": 485,
-     "ax": 91.0,
+     "w": 198,
+     "h": 501,
+     "ax": 79.5,
      "link": "left_stand",
-     "sheet": "tom-walking-sheet-v3.png",
+     "sheet": "tom-walking-sheet-v4.png",
      "marks": {
-      "top": 14.3,
-      "chin": 135.7,
-      "feet": 485
+      "top": 15.4,
+      "chin": 128.2,
+      "feet": 501
      },
      "conf": "low",
-     "s0": 0.088235,
+     "s0": 0.087137,
      "now": {
-      "f": 0.949,
-      "h": 1.082,
-      "anchor": 135.7,
-      "page": 42.192
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 128.2
      }
     },
     "em_happy": {
@@ -257,22 +248,22 @@
      "key": "em_happy",
      "label": "Tom, feeling happy",
      "img": "art/poses/tom/mood-em_happy.webp",
-     "w": 171,
-     "h": 503,
-     "ax": 75.0,
+     "w": 132,
+     "h": 417,
+     "ax": 60.5,
      "link": null,
-     "sheet": "tom-emotions-v7.png",
+     "sheet": "tom-emotions-v8.png",
      "marks": {
-      "top": 17.6,
-      "chin": 119.0,
-      "feet": 503
+      "top": 11.1,
+      "chin": 92.0,
+      "feet": 417
      },
      "conf": "low",
      "s0": 0.079936,
      "now": {
-      "f": 1.028,
-      "h": 1.078,
-      "anchor": 147.4
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 92.0
      }
     },
     "em_loving": {
@@ -280,22 +271,22 @@
      "key": "em_loving",
      "label": "Tom, feeling loving",
      "img": "art/poses/tom/mood-em_loving.webp",
-     "w": 188,
-     "h": 497,
-     "ax": 78.0,
+     "w": 153,
+     "h": 416,
+     "ax": 63.5,
      "link": null,
-     "sheet": "tom-emotions-v7.png",
+     "sheet": "tom-emotions-v8.png",
      "marks": {
-      "top": 19.7,
-      "chin": 133.0,
-      "feet": 497
+      "top": 11.3,
+      "chin": 94.0,
+      "feet": 416
      },
      "conf": "low",
      "s0": 0.079936,
      "now": {
-      "f": 1.06,
-      "h": 1.06,
-      "anchor": 152.1
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 94.0
      }
     },
     "em_sad": {
@@ -303,22 +294,22 @@
      "key": "em_sad",
      "label": "Tom, feeling sad",
      "img": "art/poses/tom/mood-em_sad.webp",
-     "w": 148,
-     "h": 490,
-     "ax": 75.5,
+     "w": 149,
+     "h": 408,
+     "ax": 69.5,
      "link": null,
-     "sheet": "tom-emotions-v7.png",
+     "sheet": "tom-emotions-v8.png",
      "marks": {
-      "top": 22.9,
-      "chin": 155.0,
-      "feet": 490
+      "top": 14.5,
+      "chin": 121.0,
+      "feet": 408
      },
      "conf": "low",
      "s0": 0.079936,
      "now": {
-      "f": 1.163,
-      "h": 0.94,
-      "anchor": 174.5
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 121.0
      }
     },
     "em_angry": {
@@ -326,22 +317,22 @@
      "key": "em_angry",
      "label": "Tom, feeling angry",
      "img": "art/poses/tom/mood-em_angry.webp",
-     "w": 298,
-     "h": 482,
-     "ax": 142.0,
+     "w": 227,
+     "h": 408,
+     "ax": 108.0,
      "link": null,
-     "sheet": "tom-emotions-v7.png",
+     "sheet": "tom-emotions-v8.png",
      "marks": {
-      "top": 25.0,
-      "chin": 169.0,
-      "feet": 482
+      "top": 14.4,
+      "chin": 120.0,
+      "feet": 408
      },
      "conf": "low",
      "s0": 0.079936,
      "now": {
-      "f": 1.202,
-      "h": 0.909,
-      "anchor": 176.3
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 120.0
      }
     },
     "em_scared": {
@@ -349,22 +340,22 @@
      "key": "em_scared",
      "label": "Tom, feeling scared",
      "img": "art/poses/tom/mood-em_scared.webp",
-     "w": 195,
-     "h": 504,
-     "ax": 77.5,
+     "w": 153,
+     "h": 397,
+     "ax": 72.5,
      "link": null,
-     "sheet": "tom-emotions-v7.png",
+     "sheet": "tom-emotions-v8.png",
      "marks": {
-      "top": 20.0,
-      "chin": 135.0,
-      "feet": 504
+      "top": 13.0,
+      "chin": 108.0,
+      "feet": 397
      },
      "conf": "low",
      "s0": 0.079936,
      "now": {
-      "f": 1.047,
-      "h": 1.042,
-      "anchor": 154.8
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 108.0
      }
     },
     "em_surprised": {
@@ -372,22 +363,22 @@
      "key": "em_surprised",
      "label": "Tom, feeling surprised",
      "img": "art/poses/tom/mood-em_surprised.webp",
-     "w": 272,
-     "h": 515,
-     "ax": 126.7,
+     "w": 196,
+     "h": 420,
+     "ax": 94.2,
      "link": null,
-     "sheet": "tom-emotions-v7.png",
+     "sheet": "tom-emotions-v8.png",
      "marks": {
-      "top": 18.5,
-      "chin": 125.0,
-      "feet": 515
+      "top": 12.6,
+      "chin": 105.0,
+      "feet": 420
      },
      "conf": "low",
      "s0": 0.079936,
      "now": {
-      "f": 0.997,
-      "h": 1.072,
-      "anchor": 148.7
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 105.0
      }
     },
     "em_proud": {
@@ -395,22 +386,22 @@
      "key": "em_proud",
      "label": "Tom, feeling proud",
      "img": "art/poses/tom/mood-em_proud.webp",
-     "w": 245,
-     "h": 524,
-     "ax": 101.0,
+     "w": 205,
+     "h": 421,
+     "ax": 92.5,
      "link": null,
-     "sheet": "tom-emotions-v7.png",
+     "sheet": "tom-emotions-v8.png",
      "marks": {
-      "top": 18.2,
-      "chin": 123.0,
-      "feet": 524
+      "top": 11.4,
+      "chin": 95.0,
+      "feet": 421
      },
      "conf": "low",
      "s0": 0.079936,
      "now": {
-      "f": 0.946,
-      "h": 1.122,
-      "anchor": 138.4
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 95.0
      }
     },
     "em_unimpressed": {
@@ -418,22 +409,22 @@
      "key": "em_unimpressed",
      "label": "Tom, feeling unimpressed",
      "img": "art/poses/tom/mood-em_unimpressed.webp",
-     "w": 186,
-     "h": 522,
-     "ax": 89.5,
+     "w": 167,
+     "h": 418,
+     "ax": 77.5,
      "link": null,
-     "sheet": "tom-emotions-v7.png",
+     "sheet": "tom-emotions-v8.png",
      "marks": {
-      "top": 18.9,
-      "chin": 128.0,
-      "feet": 522
+      "top": 12.3,
+      "chin": 102.0,
+      "feet": 418
      },
      "conf": "low",
      "s0": 0.079936,
      "now": {
-      "f": 1.001,
-      "h": 1.016,
-      "anchor": 156.6
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 102.0
      }
     },
     "tk_tell": {
@@ -441,18 +432,18 @@
      "key": "tk_tell",
      "label": "Tom, talking, telling",
      "img": "art/poses/tom/talk-tk_tell.webp",
-     "w": 314,
+     "w": 358,
      "h": 582,
-     "ax": 106.0,
+     "ax": 138.5,
      "link": null,
-     "sheet": "tom-talk-v2.png",
+     "sheet": "tom-talk-v3.png",
      "marks": {
-      "top": 19.3,
-      "chin": 130.8,
+      "top": 15.8,
+      "chin": 131.3,
       "feet": 582
      },
      "conf": "low",
-     "s0": 0.068071,
+     "s0": 0.068182,
      "now": {
       "f": 0.969,
       "h": 1.125,
@@ -464,18 +455,18 @@
      "key": "tk_point",
      "label": "Tom, talking, pointing",
      "img": "art/poses/tom/talk-tk_point.webp",
-     "w": 397,
-     "h": 584,
-     "ax": 195.1,
+     "w": 432,
+     "h": 575,
+     "ax": 127.0,
      "link": null,
-     "sheet": "tom-talk-v2.png",
+     "sheet": "tom-talk-v3.png",
      "marks": {
-      "top": 19.4,
-      "chin": 131.2,
-      "feet": 584
+      "top": 15.6,
+      "chin": 129.7,
+      "feet": 575
      },
      "conf": "low",
-     "s0": 0.068071,
+     "s0": 0.068182,
      "now": {
       "f": 0.942,
       "h": 1.223,
@@ -487,18 +478,18 @@
      "key": "tk_ask",
      "label": "Tom, talking, asking",
      "img": "art/poses/tom/talk-tk_ask.webp",
-     "w": 266,
-     "h": 599,
-     "ax": 107.0,
+     "w": 282,
+     "h": 626,
+     "ax": 113.5,
      "link": null,
-     "sheet": "tom-talk-v2.png",
+     "sheet": "tom-talk-v3.png",
      "marks": {
-      "top": 19.9,
-      "chin": 134.6,
-      "feet": 599
+      "top": 17.0,
+      "chin": 141.2,
+      "feet": 626
      },
      "conf": "low",
-     "s0": 0.068071,
+     "s0": 0.068182,
      "now": {
       "f": 0.92,
       "h": 1.13,
@@ -510,18 +501,18 @@
      "key": "tk_answer",
      "label": "Tom, talking, answering",
      "img": "art/poses/tom/talk-tk_answer.webp",
-     "w": 271,
-     "h": 603,
-     "ax": 148.5,
+     "w": 286,
+     "h": 634,
+     "ax": 161.5,
      "link": null,
-     "sheet": "tom-talk-v2.png",
+     "sheet": "tom-talk-v3.png",
      "marks": {
-      "top": 20.0,
-      "chin": 135.5,
-      "feet": 603
+      "top": 17.2,
+      "chin": 143.0,
+      "feet": 634
      },
      "conf": "low",
-     "s0": 0.068071,
+     "s0": 0.068182,
      "now": {
       "f": 0.898,
       "h": 1.177,
@@ -1001,16 +992,16 @@
      "img": "art/poses/tnb/talk-tk_tell.webp",
      "w": 327,
      "h": 573,
-     "ax": 195.2,
+     "ax": 201.2,
      "link": null,
      "sheet": "tnb-talk-v2.png",
      "marks": {
-      "top": 23.5,
-      "chin": 132.4,
+      "top": 25.0,
+      "chin": 140.5,
       "feet": 573
      },
      "conf": "low",
-     "s0": 0.063089,
+     "s0": 0.064261,
      "now": {
       "f": 1.066,
       "h": 1.258,
@@ -1024,16 +1015,16 @@
      "img": "art/poses/tnb/talk-tk_point.webp",
      "w": 397,
      "h": 565,
-     "ax": 101.5,
+     "ax": 175.5,
      "link": null,
      "sheet": "tnb-talk-v2.png",
      "marks": {
-      "top": 23.2,
-      "chin": 130.6,
+      "top": 24.6,
+      "chin": 138.6,
       "feet": 565
      },
      "conf": "low",
-     "s0": 0.063089,
+     "s0": 0.064261,
      "now": {
       "f": 1.135,
       "h": 1.19,
@@ -1047,16 +1038,16 @@
      "img": "art/poses/tnb/talk-tk_ask.webp",
      "w": 311,
      "h": 592,
-     "ax": 141.8,
+     "ax": 147.2,
      "link": null,
      "sheet": "tnb-talk-v2.png",
      "marks": {
-      "top": 24.3,
-      "chin": 136.8,
+      "top": 25.8,
+      "chin": 145.2,
       "feet": 592
      },
      "conf": "low",
-     "s0": 0.063089,
+     "s0": 0.064261,
      "now": {
       "f": 0.974,
       "h": 1.227,
@@ -1070,16 +1061,16 @@
      "img": "art/poses/tnb/talk-tk_answer.webp",
      "w": 313,
      "h": 593,
-     "ax": 138.6,
+     "ax": 140.2,
      "link": null,
      "sheet": "tnb-talk-v2.png",
      "marks": {
-      "top": 24.3,
-      "chin": 137.0,
+      "top": 25.8,
+      "chin": 145.4,
       "feet": 593
      },
      "conf": "low",
-     "s0": 0.063089,
+     "s0": 0.064261,
      "now": {
       "f": 0.967,
       "h": 1.233,
@@ -1559,16 +1550,16 @@
      "img": "art/poses/justin/talk-tk_tell.webp",
      "w": 340,
      "h": 638,
-     "ax": 110.1,
+     "ax": 114.0,
      "link": null,
      "sheet": "justin-talk-v1.png",
      "marks": {
-      "top": 31.2,
-      "chin": 135.1,
+      "top": 29.4,
+      "chin": 127.6,
       "feet": 638
      },
      "conf": "low",
-     "s0": 0.062556,
+     "s0": 0.061532,
      "now": {
       "f": 1.034,
       "h": 1.549,
@@ -1582,16 +1573,16 @@
      "img": "art/poses/justin/talk-tk_point.webp",
      "w": 411,
      "h": 628,
-     "ax": 216.9,
+     "ax": 143.5,
      "link": null,
      "sheet": "justin-talk-v1.png",
      "marks": {
-      "top": 30.7,
-      "chin": 133.0,
+      "top": 29.0,
+      "chin": 125.6,
       "feet": 628
      },
      "conf": "low",
-     "s0": 0.062556,
+     "s0": 0.061532,
      "now": {
       "f": 1.044,
       "h": 1.516,
@@ -1605,16 +1596,16 @@
      "img": "art/poses/justin/talk-tk_ask.webp",
      "w": 298,
      "h": 646,
-     "ax": 142.7,
+     "ax": 126.4,
      "link": null,
      "sheet": "justin-talk-v1.png",
      "marks": {
-      "top": 31.6,
-      "chin": 136.8,
+      "top": 29.8,
+      "chin": 129.2,
       "feet": 646
      },
      "conf": "low",
-     "s0": 0.062556,
+     "s0": 0.061532,
      "now": {
       "f": 0.964,
       "h": 1.528,
@@ -1628,16 +1619,16 @@
      "img": "art/poses/justin/talk-tk_answer.webp",
      "w": 317,
      "h": 642,
-     "ax": 108.5,
+     "ax": 100.5,
      "link": null,
      "sheet": "justin-talk-v1.png",
      "marks": {
-      "top": 31.4,
-      "chin": 136.0,
+      "top": 29.6,
+      "chin": 128.4,
       "feet": 642
      },
      "conf": "low",
-     "s0": 0.062556,
+     "s0": 0.061532,
      "now": {
       "f": 0.985,
       "h": 1.572,
@@ -1936,7 +1927,7 @@
       "feet": 498
      },
      "conf": "low",
-     "s0": 0.068432,
+     "s0": 0.068433,
      "now": {
       "f": 1.149,
       "h": 1.088,
@@ -1959,7 +1950,7 @@
       "feet": 495
      },
      "conf": "low",
-     "s0": 0.068432,
+     "s0": 0.068433,
      "now": {
       "f": 1.122,
       "h": 1.083,
@@ -1982,7 +1973,7 @@
       "feet": 477
      },
      "conf": "low",
-     "s0": 0.068432,
+     "s0": 0.068433,
      "now": {
       "f": 1.189,
       "h": 1.074,
@@ -2005,7 +1996,7 @@
       "feet": 482
      },
      "conf": "low",
-     "s0": 0.068432,
+     "s0": 0.068433,
      "now": {
       "f": 1.059,
       "h": 0.947,
@@ -2028,7 +2019,7 @@
       "feet": 508
      },
      "conf": "low",
-     "s0": 0.068432,
+     "s0": 0.068433,
      "now": {
       "f": 1.046,
       "h": 1.045,
@@ -2051,7 +2042,7 @@
       "feet": 508
      },
      "conf": "low",
-     "s0": 0.068432,
+     "s0": 0.068433,
      "now": {
       "f": 1.054,
       "h": 1.035,
@@ -2074,7 +2065,7 @@
       "feet": 515
      },
      "conf": "low",
-     "s0": 0.068432,
+     "s0": 0.068433,
      "now": {
       "f": 1.089,
       "h": 1.122,
@@ -2086,22 +2077,22 @@
      "key": "em_unimpressed",
      "label": "Boppy, feeling unimpressed",
      "img": "art/poses/boppy/mood-em_unimpressed.webp",
-     "w": 268,
-     "h": 545,
-     "ax": 140.5,
+     "w": 270,
+     "h": 558,
+     "ax": 127.5,
      "link": null,
-     "sheet": "boppy-em-unimpressed-v1.png",
+     "sheet": "boppy-em-unimpressed-v2.png",
      "marks": {
-      "top": 19.0,
-      "chin": 164.0,
-      "feet": 545
+      "top": 20.1,
+      "chin": 173.0,
+      "feet": 558
      },
      "conf": "low",
-     "s0": 0.068432,
+     "s0": 0.068433,
      "now": {
       "f": 1.0,
       "h": 1.1,
-      "anchor": 164.0
+      "anchor": 173.0
      }
     },
     "tk_tell": {
@@ -2111,16 +2102,16 @@
      "img": "art/poses/boppy/talk-tk_tell.webp",
      "w": 365,
      "h": 582,
-     "ax": 190.2,
+     "ax": 191.6,
      "link": null,
      "sheet": "boppy-talk-v3.png",
      "marks": {
-      "top": 19.5,
-      "chin": 168.4,
+      "top": 18.7,
+      "chin": 161.4,
       "feet": 582
      },
      "conf": "low",
-     "s0": 0.065922,
+     "s0": 0.064843,
      "now": {
       "f": 0.962,
       "h": 1.069,
@@ -2134,16 +2125,16 @@
      "img": "art/poses/boppy/talk-tk_point.webp",
      "w": 426,
      "h": 589,
-     "ax": 220.8,
+     "ax": 215.8,
      "link": null,
      "sheet": "boppy-talk-v3.png",
      "marks": {
-      "top": 19.8,
-      "chin": 170.5,
+      "top": 18.9,
+      "chin": 163.4,
       "feet": 589
      },
      "conf": "low",
-     "s0": 0.065922,
+     "s0": 0.064843,
      "now": {
       "f": 0.977,
       "h": 1.072,
@@ -2157,16 +2148,16 @@
      "img": "art/poses/boppy/talk-tk_ask.webp",
      "w": 332,
      "h": 606,
-     "ax": 173.6,
+     "ax": 174.6,
      "link": null,
      "sheet": "boppy-talk-v3.png",
      "marks": {
-      "top": 20.3,
-      "chin": 175.4,
+      "top": 19.5,
+      "chin": 168.1,
       "feet": 606
      },
      "conf": "low",
-     "s0": 0.065922,
+     "s0": 0.064843,
      "now": {
       "f": 0.85,
       "h": 1.095,
@@ -2180,16 +2171,16 @@
      "img": "art/poses/boppy/talk-tk_answer.webp",
      "w": 325,
      "h": 608,
-     "ax": 203.2,
+     "ax": 199.5,
      "link": null,
      "sheet": "boppy-talk-v3.png",
      "marks": {
-      "top": 20.4,
-      "chin": 175.9,
+      "top": 19.6,
+      "chin": 168.6,
       "feet": 608
      },
      "conf": "low",
-     "s0": 0.065922,
+     "s0": 0.064843,
      "now": {
       "f": 0.827,
       "h": 1.136,
@@ -2669,12 +2660,12 @@
      "img": "art/poses/amy/talk-tk_tell.webp",
      "w": 312,
      "h": 587,
-     "ax": 133.1,
+     "ax": 135.5,
      "link": null,
      "sheet": "amy-talk-v1.png",
      "marks": {
-      "top": 20.3,
-      "chin": 133.6,
+      "top": 18.4,
+      "chin": 121.2,
       "feet": 587
      },
      "conf": "low",
@@ -2692,12 +2683,12 @@
      "img": "art/poses/amy/talk-tk_point.webp",
      "w": 387,
      "h": 591,
-     "ax": 129.1,
+     "ax": 131.5,
      "link": null,
      "sheet": "amy-talk-v1.png",
      "marks": {
-      "top": 20.5,
-      "chin": 134.5,
+      "top": 18.6,
+      "chin": 122.0,
       "feet": 591
      },
      "conf": "low",
@@ -2715,12 +2706,12 @@
      "img": "art/poses/amy/talk-tk_ask.webp",
      "w": 278,
      "h": 598,
-     "ax": 144.5,
+     "ax": 147.5,
      "link": null,
      "sheet": "amy-talk-v1.png",
      "marks": {
-      "top": 20.7,
-      "chin": 136.1,
+      "top": 18.8,
+      "chin": 123.4,
       "feet": 598
      },
      "conf": "low",
@@ -2738,12 +2729,12 @@
      "img": "art/poses/amy/talk-tk_answer.webp",
      "w": 300,
      "h": 604,
-     "ax": 136.0,
+     "ax": 134.9,
      "link": null,
      "sheet": "amy-talk-v1.png",
      "marks": {
-      "top": 20.9,
-      "chin": 137.4,
+      "top": 19.0,
+      "chin": 124.7,
       "feet": 604
      },
      "conf": "low",
@@ -4320,16 +4311,16 @@
      "link": null,
      "sheet": "ellie-talk-v1.png",
      "marks": {
-      "top": 15.4,
-      "chin": 121.0,
+      "top": 14.8,
+      "chin": 116.0,
       "feet": 578
      },
      "conf": "low",
-     "s0": 0.056978,
+     "s0": 0.057156,
      "now": {
       "f": 1.0,
       "h": 1.5,
-      "anchor": 121.0
+      "anchor": 116.0
      }
     },
     "tk_point": {
@@ -4343,16 +4334,16 @@
      "link": null,
      "sheet": "ellie-talk-v1.png",
      "marks": {
-      "top": 15.4,
-      "chin": 121.0,
+      "top": 14.8,
+      "chin": 116.0,
       "feet": 578
      },
      "conf": "low",
-     "s0": 0.056978,
+     "s0": 0.057156,
      "now": {
       "f": 1.0,
       "h": 1.5,
-      "anchor": 121.0
+      "anchor": 116.0
      }
     },
     "tk_ask": {
@@ -4362,20 +4353,20 @@
      "img": "art/poses/ellie/talk-tk_ask.webp",
      "w": 303,
      "h": 587,
-     "ax": 120.9,
+     "ax": 119.9,
      "link": null,
      "sheet": "ellie-talk-v1.png",
      "marks": {
-      "top": 15.7,
-      "chin": 122.9,
+      "top": 15.0,
+      "chin": 117.8,
       "feet": 587
      },
      "conf": "low",
-     "s0": 0.056978,
+     "s0": 0.057156,
      "now": {
       "f": 1.0,
       "h": 1.5,
-      "anchor": 122.88
+      "anchor": 117.81
      }
     },
     "tk_answer": {
@@ -4385,20 +4376,20 @@
      "img": "art/poses/ellie/talk-tk_answer.webp",
      "w": 309,
      "h": 588,
-     "ax": 136.5,
+     "ax": 135.6,
      "link": null,
      "sheet": "ellie-talk-v1.png",
      "marks": {
-      "top": 15.7,
-      "chin": 123.1,
+      "top": 15.1,
+      "chin": 118.0,
       "feet": 588
      },
      "conf": "low",
-     "s0": 0.056978,
+     "s0": 0.057156,
      "now": {
       "f": 1.0,
       "h": 1.5,
-      "anchor": 123.09
+      "anchor": 118.01
      }
     }
    },
@@ -5105,20 +5096,20 @@
      "img": "art/poses/grace/talk-tk_tell.webp",
      "w": 341,
      "h": 563,
-     "ax": 153.3,
+     "ax": 153.0,
      "link": null,
      "sheet": "grace-talk-v2.png",
      "marks": {
-      "top": 19.5,
-      "chin": 129.5,
+      "top": 20.0,
+      "chin": 133.0,
       "feet": 563
      },
      "conf": "low",
-     "s0": 0.045365,
+     "s0": 0.04579,
      "now": {
       "f": 1.0,
-      "h": 1.60955,
-      "anchor": 129.5
+      "h": 1.55454,
+      "anchor": 133.0
      }
     },
     "tk_point": {
@@ -5128,20 +5119,20 @@
      "img": "art/poses/grace/talk-tk_point.webp",
      "w": 411,
      "h": 563,
-     "ax": 228.7,
+     "ax": 231.4,
      "link": null,
      "sheet": "grace-talk-v2.png",
      "marks": {
-      "top": 19.5,
-      "chin": 129.5,
+      "top": 20.0,
+      "chin": 133.0,
       "feet": 563
      },
      "conf": "low",
-     "s0": 0.045365,
+     "s0": 0.04579,
      "now": {
       "f": 1.0,
-      "h": 1.60955,
-      "anchor": 129.5
+      "h": 1.55454,
+      "anchor": 133.0
      }
     },
     "tk_ask": {
@@ -5151,20 +5142,20 @@
      "img": "art/poses/grace/talk-tk_ask.webp",
      "w": 333,
      "h": 583,
-     "ax": 170.6,
+     "ax": 167.2,
      "link": null,
      "sheet": "grace-talk-v2.png",
      "marks": {
-      "top": 20.2,
-      "chin": 134.1,
+      "top": 20.7,
+      "chin": 137.7,
       "feet": 583
      },
      "conf": "low",
-     "s0": 0.045365,
+     "s0": 0.04579,
      "now": {
       "f": 1.0,
-      "h": 1.60955,
-      "anchor": 134.1
+      "h": 1.55454,
+      "anchor": 137.72
      }
     },
     "tk_answer": {
@@ -5174,20 +5165,20 @@
      "img": "art/poses/grace/talk-tk_answer.webp",
      "w": 332,
      "h": 584,
-     "ax": 162.6,
+     "ax": 159.7,
      "link": null,
      "sheet": "grace-talk-v2.png",
      "marks": {
-      "top": 20.2,
-      "chin": 134.3,
+      "top": 20.7,
+      "chin": 138.0,
       "feet": 584
      },
      "conf": "low",
-     "s0": 0.045365,
+     "s0": 0.04579,
      "now": {
       "f": 1.0,
-      "h": 1.60955,
-      "anchor": 134.33
+      "h": 1.55454,
+      "anchor": 137.96
      }
     }
    },
@@ -5654,20 +5645,20 @@
      "img": "art/poses/rose/talk-tk_tell.webp",
      "w": 326,
      "h": 598,
-     "ax": 110.0,
+     "ax": 111.0,
      "link": null,
      "sheet": "rose-talk-v2.png",
      "marks": {
-      "top": 20.7,
-      "chin": 146.1,
+      "top": 20.2,
+      "chin": 142.6,
       "feet": 598
      },
      "conf": "low",
-     "s0": 0.034938,
+     "s0": 0.034629,
      "now": {
       "f": 1.0,
-      "h": 1.48684,
-      "anchor": 146.13
+      "h": 1.53561,
+      "anchor": 142.59
      }
     },
     "tk_point": {
@@ -5677,20 +5668,20 @@
      "img": "art/poses/rose/talk-tk_point.webp",
      "w": 389,
      "h": 593,
-     "ax": 186.1,
+     "ax": 184.4,
      "link": null,
      "sheet": "rose-talk-v2.png",
      "marks": {
-      "top": 20.5,
-      "chin": 144.9,
+      "top": 20.0,
+      "chin": 141.4,
       "feet": 593
      },
      "conf": "low",
-     "s0": 0.034938,
+     "s0": 0.034629,
      "now": {
       "f": 1.0,
-      "h": 1.48684,
-      "anchor": 144.91
+      "h": 1.53561,
+      "anchor": 141.4
      }
     },
     "tk_ask": {
@@ -5700,20 +5691,20 @@
      "img": "art/poses/rose/talk-tk_ask.webp",
      "w": 287,
      "h": 629,
-     "ax": 136.0,
+     "ax": 131.5,
      "link": null,
      "sheet": "rose-talk-v2.png",
      "marks": {
-      "top": 21.7,
-      "chin": 153.7,
+      "top": 21.2,
+      "chin": 150.0,
       "feet": 629
      },
      "conf": "low",
-     "s0": 0.034938,
+     "s0": 0.034629,
      "now": {
       "f": 1.0,
-      "h": 1.48684,
-      "anchor": 153.7
+      "h": 1.53561,
+      "anchor": 149.99
      }
     },
     "tk_answer": {
@@ -5723,20 +5714,20 @@
      "img": "art/poses/rose/talk-tk_answer.webp",
      "w": 338,
      "h": 628,
-     "ax": 126.6,
+     "ax": 126.7,
      "link": null,
      "sheet": "rose-talk-v2.png",
      "marks": {
-      "top": 21.7,
-      "chin": 153.5,
+      "top": 21.2,
+      "chin": 149.7,
       "feet": 628
      },
      "conf": "low",
-     "s0": 0.034938,
+     "s0": 0.034629,
      "now": {
       "f": 1.0,
-      "h": 1.48684,
-      "anchor": 153.46
+      "h": 1.53561,
+      "anchor": 149.75
      }
     }
    },
