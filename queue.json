@@ -451,12 +451,11 @@
     "n": 1
    },
    "use": {
-    "state": "applying",
+    "state": "live",
     "at": "2026-11-26T08:07:53Z",
-    "since": "2026-11-26T08:07:53Z",
-    "build": "",
-    "why": "",
-    "run": 45780590322
+    "since": "2026-11-26T08:11:31Z",
+    "build": "guideuse-45780590322",
+    "why": ""
    },
    "left": false,
    "dry": false,
