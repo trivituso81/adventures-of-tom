@@ -1,0 +1,42 @@
+{
+ "at": "2026-11-22T22:16:53Z",
+ "reqs": [
+  "2026-11-22T22:13:42.543Z",
+  "2026-11-22T22:13:42.543Z"
+ ],
+ "tag": "guideuse-45076526823",
+ "done": [
+  {
+   "anim": "body:tnb:idle",
+   "name": "Idle (standing and breathing)",
+   "owner": "tnb",
+   "clip": "tnb_idle",
+   "rev": "rev 2",
+   "notes": [
+    "Wan job tnb-idle is now rev 2 (prompt file tools/art-library/prompts/wan-tnb-idle-v2.txt)",
+    "clip tnb_idle cut (50 pictures, 0 to 147 step 3, loop wrap)",
+    "B3_BODY_CLIPS.tnb.idle = tnb_idle (was 'tnb_idle')"
+   ],
+   "files": [
+    "art/raw/clips/wan-tnb-idle-v2.mp4"
+   ]
+  },
+  {
+   "anim": "body:tnb:guard",
+   "name": "Guard",
+   "owner": "tnb",
+   "clip": "tnb_guard",
+   "rev": "rev 1",
+   "notes": [
+    "Wan job tnb-guard is now rev 1 (prompt file tools/art-library/prompts/wan-tnb-guard-v1.txt)",
+    "clip tnb_guard cut (63 pictures, 0 to 124 step 2, hold 36, lowering 104)",
+    "script tag added to index.html",
+    "B3_BODY_CLIPS.tnb.guard = tnb_guard"
+   ],
+   "files": [
+    "art/raw/clips/wan-tnb-guard-v1.mp4"
+   ]
+  }
+ ],
+ "failed": []
+}

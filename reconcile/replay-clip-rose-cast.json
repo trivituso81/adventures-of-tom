@@ -1,0 +1,19 @@
+{
+ "ok": true,
+ "question": "What is the same comment as Grace?",
+ "prompt": null,
+ "kept": "",
+ "changed": "",
+ "unused": "the full note could not be used because it is unclear what change is wanted",
+ "check": false,
+ "why": [],
+ "spent": 0.0006,
+ "tries": 1,
+ "id": "replay:clip-rose-cast",
+ "at": "replay-11",
+ "note": "same comment as Grace",
+ "basedOn": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BIG TWO-ARM CALL\nFrom her starting relaxed stance, she draws both open hands in to her chest and then thrusts both palms forward once, as if casting a spell, holding them out for a moment. Without repeating the gesture, she lowers her arms. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+ "rev": 0,
+ "model": "grok-4.20-0309-non-reasoning",
+ "done": "2026-11-21T18:01:19Z"
+}

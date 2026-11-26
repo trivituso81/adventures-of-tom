@@ -1,0 +1,19 @@
+{
+ "ok": true,
+ "question": "Do you want her to put on the glasses without changing her eyes, or skip the glasses and use a different object instead of the scrub brush?",
+ "prompt": null,
+ "kept": "",
+ "changed": "",
+ "unused": "the note contradicts the current motion and asks about things the locked-camera silent clip cannot show or fix",
+ "check": false,
+ "why": [],
+ "spent": 0.0014,
+ "tries": 1,
+ "id": "replay:clip-deedee-scrub",
+ "at": "replay-17",
+ "note": "glasses look like clown classes that changes her eyes. why does she take out a rolling pin?",
+ "basedOn": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: GLASSES ON, BRUSH SCRUB\nFrom her starting relaxed stance, she slides a pair of small thin-framed reading glasses onto her nose with one hand, then grips a scrub brush in one hand and scrubs it forward once at chest height in one firm stroke. Without repeating the stroke, she tucks the brush behind her back and remains completely still in her starting relaxed stance, glasses on, for the rest of the clip.",
+ "rev": 0,
+ "model": "grok-4.20-0309-non-reasoning",
+ "done": "2026-11-21T18:01:31Z"
+}

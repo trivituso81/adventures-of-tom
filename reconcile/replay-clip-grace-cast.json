@@ -1,0 +1,19 @@
+{
+ "ok": true,
+ "question": null,
+ "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BIG TWO-ARM CALL\nFrom her starting relaxed stance, she draws both open hands in to her chest then thrusts both palms forward once with fingers spread as if casting a spell, holding them out for a moment. Without repeating the gesture, she lowers her arms. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+ "kept": "everything except the exact wording of the thrust action in MOTION",
+ "changed": "added with fingers spread to the thrust description so it reads more like casting a spell and less like waving",
+ "unused": "nothing",
+ "check": false,
+ "why": [],
+ "spent": 0.0018,
+ "tries": 1,
+ "id": "replay:clip-grace-cast",
+ "at": "replay-08",
+ "note": "doesn't look like casting, looks like she just waving her arms, same comment as Tom",
+ "basedOn": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BIG TWO-ARM CALL\nFrom her starting relaxed stance, she draws both open hands in to her chest and then thrusts both palms forward once, as if casting a spell, holding them out for a moment. Without repeating the gesture, she lowers her arms. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+ "rev": 0,
+ "model": "grok-4.20-0309-non-reasoning",
+ "done": "2026-11-21T18:01:13Z"
+}

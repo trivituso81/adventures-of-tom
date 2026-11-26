@@ -1,0 +1,99 @@
+{
+ "anims": {
+  "move:giddyup_tata_launch": {
+   "take": 1,
+   "stage": "checking",
+   "at": "2026-11-22T01:48:54Z"
+  },
+  "move:suite_door_slide": {
+   "take": 2,
+   "stage": "checking",
+   "at": "2026-11-22T08:25:15Z"
+  },
+  "move:winged_shell_lock_on": {
+   "take": 1,
+   "stage": "checking",
+   "at": "2026-11-22T15:16:31Z"
+  },
+  "move:tarmac_porsche_transfer": {
+   "take": 1,
+   "stage": "checking",
+   "at": "2026-11-22T15:18:21Z"
+  },
+  "move:cartridge_blow": {
+   "take": 1,
+   "stage": "checking",
+   "at": "2026-11-22T15:20:11Z"
+  },
+  "move:konami_code": {
+   "take": 1,
+   "stage": "checking",
+   "at": "2026-11-22T15:22:15Z"
+  },
+  "move:fifty_year_dust_tsunami": {
+   "take": 1,
+   "stage": "checking",
+   "at": "2026-11-22T15:24:04Z"
+  },
+  "move:little_pinch_syringe_poke": {
+   "take": 1,
+   "stage": "checking",
+   "at": "2026-11-22T15:25:50Z"
+  },
+  "move:deedee_makes_it_better": {
+   "take": 1,
+   "stage": "checking",
+   "at": "2026-11-22T15:27:53Z"
+  },
+  "move:bring_a_jacket_ward": {
+   "take": 1,
+   "stage": "checking",
+   "at": "2026-11-22T15:29:43Z"
+  },
+  "move:to_the_moon_and_back": {
+   "take": 1,
+   "stage": "checking",
+   "at": "2026-11-22T15:31:46Z"
+  },
+  "move:controller_toss": {
+   "take": 2,
+   "stage": "checking",
+   "at": "2026-11-22T15:33:37Z"
+  },
+  "body:tnb:idle": {
+   "take": 1,
+   "stage": "checking",
+   "at": "2026-11-22T20:59:10Z"
+  },
+  "body:amy:idle": {
+   "take": 1,
+   "stage": "checking",
+   "at": "2026-11-22T21:07:39Z"
+  },
+  "body:tnb:guard": {
+   "take": 1,
+   "stage": "checking",
+   "at": "2026-11-22T21:09:42Z"
+  },
+  "body:tnb:hit": {
+   "take": 1,
+   "stage": "checking",
+   "at": "2026-11-22T21:11:47Z"
+  },
+  "body:tnb:dodge": {
+   "take": 1,
+   "stage": "checking",
+   "at": "2026-11-22T21:13:50Z"
+  },
+  "body:tnb:ko": {
+   "take": 1,
+   "stage": "checking",
+   "at": "2026-11-22T21:15:57Z"
+  },
+  "body:tnb:victory": {
+   "take": 1,
+   "stage": "checking",
+   "at": "2026-11-22T21:18:01Z"
+  }
+ }
+}

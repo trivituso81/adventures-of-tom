@@ -1,0 +1,19 @@
+{
+ "ok": true,
+ "question": null,
+ "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: LOUNGE PASS FLEX\nFrom his starting relaxed stance, he gives a smug little smile, brings a small lounge pass card out from behind his back, and presents it forward at face height once with a little flourish, holding it there like a VIP badge for a longer moment while making a small adjustment to show it clearly. Without repeating the gesture, he tucks the card behind his back again. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+ "kept": "WHAT THIS IS, CAMERA AND BACKGROUND, and most of the MOTION wording including the smug smile, bringing the card out, presenting once with flourish, tucking it away, returning to stance, and staying still",
+ "changed": "extended the holding time in MOTION to a longer moment with a small adjustment to show it clearly so the presenting feels like more than just holding it up and putting it away",
+ "unused": "nothing",
+ "check": false,
+ "why": [],
+ "spent": 0.002,
+ "tries": 1,
+ "id": "replay:clip-tom-loungepass",
+ "at": "replay-06",
+ "note": "should be longer, he should be presenting the item not just holding it up and putting it away",
+ "basedOn": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: LOUNGE PASS FLEX\nFrom his starting relaxed stance, he gives a smug little smile, brings a small lounge pass card out from behind his back, and presents it forward at face height once with a little flourish, holding it there like a VIP badge for a moment. Without repeating the gesture, he tucks the card behind his back again. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+ "rev": 0,
+ "model": "grok-4.20-0309-non-reasoning",
+ "done": "2026-11-21T18:01:10Z"
+}

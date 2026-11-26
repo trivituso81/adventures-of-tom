@@ -1,0 +1,19 @@
+{
+ "ok": true,
+ "question": "What should the low pounce animation look like? Please describe the specific actions or pose you want.",
+ "prompt": null,
+ "kept": "",
+ "changed": "",
+ "unused": "the full note, because it is unclear with nothing to change",
+ "check": false,
+ "why": [],
+ "spent": 0.0014,
+ "tries": 1,
+ "id": "replay:clip-rose-tackle",
+ "at": "replay-12",
+ "note": "i dont know what this is supposed to look like",
+ "basedOn": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: LOW POUNCE\nFrom her starting relaxed stance, she brings a small white plush lamb out from behind her back, tucks it under one arm, and lunges forward low from the hips once, the other arm reaching out forward at ankle height to grab. Without repeating the lunge, she tucks the lamb behind her back again. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+ "rev": 0,
+ "model": "grok-4.20-0309-non-reasoning",
+ "done": "2026-11-21T18:01:20Z"
+}

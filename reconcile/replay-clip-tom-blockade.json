@@ -1,0 +1,19 @@
+{
+ "ok": true,
+ "question": "What specific change do you want in the hip check animation?",
+ "prompt": null,
+ "kept": "",
+ "changed": "",
+ "unused": "the entire note because it is unclear with nothing specific to change",
+ "check": false,
+ "why": [],
+ "spent": 0.0005,
+ "tries": 1,
+ "id": "replay:clip-tom-blockade",
+ "at": "replay-07",
+ "note": "dont know what this is but looks like a strange animation",
+ "basedOn": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HIP CHECK\nFrom his starting relaxed stance, he spreads both arms out wide to block the way and bumps one hip sharply forward once, as if guarding his place at the front of a boarding line. Without repeating the bump, he returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+ "rev": 0,
+ "model": "grok-4.20-0309-non-reasoning",
+ "done": "2026-11-21T18:01:11Z"
+}

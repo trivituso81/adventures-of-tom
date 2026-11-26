@@ -1,0 +1,19 @@
+{
+ "ok": true,
+ "question": "What specific change would you like in the animation?",
+ "prompt": null,
+ "kept": "",
+ "changed": "",
+ "unused": "\"complete fail\" provides no actionable note to carry",
+ "check": false,
+ "why": [],
+ "spent": 0.0013,
+ "tries": 1,
+ "id": "replay:clip-grace-squeeze",
+ "at": "replay-09",
+ "note": "complete fail",
+ "basedOn": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SQUISHY SQUEEZE\nFrom her starting relaxed stance, she brings a small round dumpling-shaped squishy toy out from behind her back, holds it out forward in both hands at chest height, and squeezes it hard once with a delighted grin. Without repeating the squeeze, she tucks the toy behind her back again. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+ "rev": 0,
+ "model": "grok-4.20-0309-non-reasoning",
+ "done": "2026-11-21T18:01:14Z"
+}

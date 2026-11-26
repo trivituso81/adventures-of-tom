@@ -1,0 +1,21 @@
+{
+ "ok": false,
+ "question": null,
+ "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BIG TWO-ARM CALL\nFrom his starting relaxed stance, he draws both open hands in to his chest and then thrusts both palms forward once, as if casting a spell, holding them out for a moment. Without repeating the gesture, he lowers his arms. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+ "kept": "all words in every part",
+ "changed": "nothing because the note only says it should be longer but the rules forbid changing length or adding repeats and the note gives no specific new actions",
+ "unused": "the request for a longer animation because the rules say a note about one fault is not a new rule for everything and do not turn a note into never X unless he said never",
+ "check": true,
+ "why": [
+  "nothing changed, so the note was not carried"
+ ],
+ "spent": 0.0031,
+ "tries": 2,
+ "id": "replay:clip-tom-cast",
+ "at": "replay-05",
+ "note": "should be a longer animation",
+ "basedOn": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BIG TWO-ARM CALL\nFrom his starting relaxed stance, he draws both open hands in to his chest and then thrusts both palms forward once, as if casting a spell, holding them out for a moment. Without repeating the gesture, he lowers his arms. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.",
+ "rev": 0,
+ "model": "grok-4.20-0309-non-reasoning",
+ "done": "2026-11-21T18:01:07Z"
+}
