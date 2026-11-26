@@ -4364,8 +4364,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:35:13Z",
-   "state": "checking",
-   "since": "2026-11-26T10:30:51Z",
+   "state": "done",
+   "since": "2026-11-26T10:48:27Z",
    "run": 45798843411,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -4378,7 +4378,29 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-boppy-hit/t1.js",
+    "img": "takes/body-boppy-hit/t1.webp",
+    "frames": 49,
+    "kb": 631,
+    "words": "0 to 96 step 2, 1.5x",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "hit_no_stumble: the body moves back only 0% of the height (should stumble backwards)",
+      "vision h_stagger: Body shows minor turns and poses but does not stagger backwards.; The body remains mostly stationary with only slight pose variations and no backward stagger."
+     ],
+     "faults": [
+      "h_stagger",
+      "hit_no_stumble"
+     ],
+     "vision_ran": true,
+     "spent": 0.0075,
+     "error": null,
+     "words": "The clip gate flags this take: hit_no_stumble: the body moves back only 0% of the height (should stumble backwards); vision h_stagger: Body shows minor turns and poses but does not stagger backwards.; The body remains mostly stationary with only slight pose variations and no backward stagger.."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
