@@ -7135,7 +7135,7 @@
    ],
    "wgen": {
     "want": true,
-    "at": "2026-11-26T12:49:42Z",
+    "at": "2026-11-26T12:50:15Z",
     "n": 1,
     "est": 0.5,
     "auto": true
@@ -7316,6 +7316,10 @@
     {
      "d": "2026-11-26",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "wanstop r2: both videos do the move; the feet check read the hop heights as sliding feet. One change: airborne true on the job (rev 2). Kept the prompt, seed, pad, start picture, bake and wire. Next try started on t-rosestage-lab."
     }
    ],
    "prompt": {

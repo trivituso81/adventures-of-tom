@@ -2297,7 +2297,7 @@
   }
  },
  "rose-lavahop": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -2321,7 +2321,8 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "airborne": true,
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. wanstop r2: failed twice on feet only. By eye both videos are right (gasp, look down, crouch, three hops, land and hold, hair and hands inside the frame); the feet check judged the hop heights (15 to 18 percent of the frame height up in the air) as sliding feet. One change: airborne true (feet judged in the first and last picture, the landing, like the jump jobs). Kept: prompt v1 word for word, seed, pad 0.8, start picture, model, bake and wire.",
   "bake": {
    "id": "rose-lavahop",
    "owner": "rose",

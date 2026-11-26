@@ -1,3 +1,7 @@
+## wanstop-rose-lavahop-r1 (2026-11-26): Rose's Floor Is Lava hop video is judged as a jump and its next try starts
+
+Both tries (rev 1) showed what the prompt asks for (gasp, look down, crouch, three hops, land and hold; hair and hands inside the frame), but the feet check read the hop heights (15 to 18 percent of the frame height in the air) as sliding feet and stopped it twice. One change: the job is `airborne: true`, so feet are judged in the first and last picture (the landing) like the other jump jobs. Prompt, seed, pad 0.8, start picture, model, bake and wire are kept. Job rev 2. Nothing for Tom.
+
 ## wanstop-rose-kingdom-r1 (2026-11-26): Rose's Kingdom of Ten-Thousand Blankets video gets one prompt change and its next try starts
 
 Both tries (rev 1) did the move (hug the Lamby plush, lift it high, lower it), but the plush flew in from and out through the left edge of the picture because the start picture has empty hands: an edge miss on the second try and a look-check miss on the first. One change: the prompt (`wan-rose-kingdom-v2.txt`) says the plush is already hugged to her chest from the first frame; pad, seed, start picture and model kept. Job rev 2. The next try is started by `wgen` on card t-rosestage-lab.
