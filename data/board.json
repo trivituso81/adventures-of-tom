@@ -7418,7 +7418,7 @@
   {
    "id": "c-wanstop-rose-boomerang-r1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "wanstop-rose-boomerang-r1",
    "title": "Fix the stopped video rose-boomerang",
@@ -7449,6 +7449,10 @@
     {
      "d": "2026-11-26",
      "t": "Looked at both videos: the throw, two lunges, catch and return all read as the move, but the lunges slide her feet (2.2 percent) and her reach touches the left edge in 7 pictures. Changed ONE sentence of the prompt (lunges with knees bent, feet planted); kept start picture, seed, pad. Rev 2, next try started."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as wanstop-rose-boomerang-r1: Rose's Lamby boomerang video is made again with her feet held planted in the lunges"
     }
    ],
    "prompt": {
@@ -7460,7 +7464,8 @@
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-rose-boomerang-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job rose-boomerang (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: feet, edge. Evidence: feet: lowest row of the figure in every picture: first picture row 1127; at most 28 px (2.2 percent of the frame height) away (79 pictures over); limit 1 percent; edge: the figure touches the left edge in 7 of 150 pictures (video frames 23, 49 to 54). This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: rose-boomerang-r1-result.json (every check with numbers and the look-check answers) and the videos rose-boomerang-r1.mp4, rose-boomerang-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-rosestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-rose-boomerang-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-rosestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-rose-boomerang-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-26T12:39:26+00:00"
+   "started_at": "2026-11-26T12:39:26+00:00",
+   "done": "2026-11-26"
   },
   {
    "id": "c-wanstop-rose-citadel-r1",
@@ -7568,7 +7573,7 @@
    "created": "2026-11-26",
    "changed": "2026-11-26",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukF3DCx432qkCQwsEyA",
+    "url": "https://claude.ai/code/session_01RXeukF3DCx432qkCQwsEyA",
     "opening": "added by the wan-gen job"
    },
    "history": [
@@ -7579,6 +7584,10 @@
     {
      "d": "2026-11-26",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -7617,6 +7626,29 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukF7s1TDjALWmhgeYc9",
+   "title": "Fix the stopped video rose-boomerang",
+   "first": "2026-11-26T12:41:27Z",
+   "last": "2026-11-26T12:46:08Z",
+   "tags": [
+    "wanstop-rose-boomerang-r1"
+   ],
+   "cards": [
+    "c-wanstop-rose-boomerang-r1",
+    "t-rosestage-lab"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukF3DCx432qkCQwsEyA",
+   "title": "Fix the stopped video rose-boop",
+   "first": "2026-11-26T12:45:03Z",
+   "last": "2026-11-26T12:45:03Z",
+   "tags": [],
+   "cards": [
+    "c-wanstop-rose-boop-r1"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFpdh5RK5hQ3kZE4T8",
    "title": "Fix the stopped video rose-doublelamby",
@@ -7661,16 +7693,6 @@
    "tags": [],
    "cards": [
     "c-wanstop-rose-tacklelunge-r1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukF7s1TDjALWmhgeYc9",
-   "title": "Fix the stopped video rose-boomerang",
-   "first": "2026-11-26T12:41:27Z",
-   "last": "2026-11-26T12:41:27Z",
-   "tags": [],
-   "cards": [
-    "c-wanstop-rose-boomerang-r1"
    ]
   },
   {
@@ -14167,8 +14189,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "91d1e36e062724040191ea9760d3b5c510917f36",
- "synced_at": "2026-11-26T12:44:49+00:00",
+ "synced": "93ffad667f04bc22fcd7102e20d41550ad30eb7e",
+ "synced_at": "2026-11-26T12:46:26+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
