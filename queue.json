@@ -1555,6 +1555,40 @@
    "replay": "",
    "id": "v-body-justin-run-t1",
    "kind": "video"
+  },
+  "v-body-tom-idle-t2": {
+   "lane": "vid",
+   "anim": "body:tom:idle",
+   "who": "tom",
+   "take": 2,
+   "route": "wan",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BREATHING IDLE\nHe stands in his starting relaxed stance and breathes slowly and gently, his chest and shoulders rising and falling softly, and blinks once. His arms, head and feet stay where they are for the whole clip.",
+   "promptRev": 1,
+   "start": "tom",
+   "note": "",
+   "cap": 1,
+   "at": "2026-11-26T08:12:11Z",
+   "state": "queued",
+   "since": "2026-11-26T08:12:11Z",
+   "run": 0,
+   "fal": {
+    "endpoint": "alibaba/wan-3.0/image-to-video",
+    "request_id": "01a216db-e318-7583-8753-ba18178a2fa0",
+    "status_url": "https://queue.fal.run/alibaba/wan-3.0/requests/01a216db-e318-7583-8753-ba18178a2fa0/status",
+    "response_url": "https://queue.fal.run/alibaba/wan-3.0/requests/01a216db-e318-7583-8753-ba18178a2fa0",
+    "est": 0.5
+   },
+   "tries": 0,
+   "cost": 0,
+   "why": "",
+   "do": "",
+   "result": null,
+   "use": null,
+   "left": false,
+   "dry": false,
+   "replay": "",
+   "id": "v-body-tom-idle-t2",
+   "kind": "video"
   }
  }
 }
