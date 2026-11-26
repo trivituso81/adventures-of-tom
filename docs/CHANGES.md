@@ -1,3 +1,7 @@
+## justinbb9k (2026-11-25): Justin's Stud-Finder Beep and Knock is now a Wan 3.0 clip with one held prop (hammer), stud finder on the belt
+
+Run bench-justinbb9-7 (WO-01H, $2.10 of $2.25, Wan 3.0 only): the new Direct-Hero start frame passed Gate 1 (head difference 0.0), 2 of 3 seeds passed the gate, seed 1 won (score 0.9439) and is baked into `pf-justin-bb-basic` (`?v=benchjustinbb97`). Strike frames checked by eye: one hammer, the stud finder stays on the belt, no floating or duplicate prop. One mid-swing frame of the raw video has faint grey whoosh streaks left of the hammer. The `justinbb9d` Mudling effects and shake are unchanged (WebKit stage test and Pass 1 review test pass). `scripts/matte_winner.py` now keeps keyed gaps between an arm and the body transparent after the clamp.
+
 ## justinbb9j (2026-11-25): WO-01H, one held prop (stud finder clipped on the belt), Justin start frame re-edited, Wan 3.0 only
 
 Tom's order WO-01H ($2.25 hard cap): Justin holds only the claw hammer, the stud finder is clipped flat on his belt, the other hand is empty. The Hero-locked start frame is edited again with that rule (head and face stay the Hero's pixels), Gate 1 now asks the three new yes or no questions (stud finder on the belt, one hammer, other hand empty), and the Wan prompt is the one hammer swing and return. Run bench-justinbb9-7, 3 Wan 3.0 seeds, no Kling. The rule is written into CLAUDE.md. Locked thresholds untouched.

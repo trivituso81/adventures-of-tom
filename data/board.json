@@ -6903,7 +6903,7 @@
     },
     {
      "d": "2026-11-25",
-     "t": "Tom: \"Implement the full-res Frame 0 split for prop_visible_frame1 and re-gate/bake the saved Render 2 video\". Stage 2 now sends Frame 0 at full size plus the 200 px sheet in each of 3 votes: all four checks 3 of 3 true. Baked at 1.5x into PASS-1 DRAFT REVIEW as art/clips/pf-justin-bb-basic.webp?v=justinpoc2regate5 (run justin-poc-2-regate5). Total renders for the proof: 2, 0 after poc-2."
+     "t": "Tom: \"Implement the full-res Frame 0 split for prop_visible_frame1 and re-gate/bake the saved Render 2 video\". Stage 2 now sends Frame 0 at full size plus the 200 px sheet in each of 3 votes: all four checks 3 of 3 true. Baked at 1.5x into PASS-1 DRAFT REVIEW as art/clips/pf-justin-bb-basic.webp?v=justinbb9k (run justin-poc-2-regate5). Total renders for the proof: 2, 0 after poc-2."
     },
     {
      "d": "2026-11-25",
@@ -6975,7 +6975,7 @@
    "col": "done",
    "theme": "Battle Animations",
    "title": "Justin benchmark: Wan 3.0 vs Kling v3 Pro, #808080",
-   "next": "Running bench-justinbb9-7 (new start frame, Wan 3.0, 3 seeds, $2.25 cap). Result lands in art-factory/benchmark/bench-justinbb9-7/.",
+   "next": "Shipped in justinbb9k: Justin Stud-Finder Beep and Knock clip (Wan 3.0, hammer only, stud finder on belt). Look at it in the Battle Lab.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukD88aZXMwDZ8KSAuK8",
     "opening": "UNCONSTRAINED PRODUCTION ORDER (REPO: trivituso81/adventures-of-tom)"
@@ -7081,6 +7081,10 @@
     {
      "d": "2026-11-25",
      "t": "Tom WO-01H: one held prop (stud finder clipped on belt), new Direct-Hero start frame, Wan only, $2.25 cap. Run bench-justinbb9-7, build justinbb9j."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "bench-justinbb9-7 (WO-01H): Wan 3.0 2/3, winner wan3_s1 score 0.9439, $2.10 of $2.25. Baked into pf-justin-bb-basic (one held prop, stud finder on belt). Build justinbb9k."
     }
    ],
    "blocks": [],

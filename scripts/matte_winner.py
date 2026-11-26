@@ -42,7 +42,7 @@ def ensure_alpha(rgba):
     """A frame whose alpha is fully opaque came from a matte model that painted the background black (birefnet video). Make the
     border-connected near-black region transparent, with a short ramp at its edge, so the cut-out has a real alpha."""
     if rgba[..., 3].min() < 250:
-        return rgba, False
+        return rgba, None
     mx = rgba[..., :3].max(2)
     bg = ndimage.binary_dilation(ndimage.label(mx <= BLACK_MAX)[0] > 0, iterations=0)
     lab, _ = ndimage.label(mx <= BLACK_MAX)
@@ -55,7 +55,7 @@ def ensure_alpha(rgba):
     ring = ndimage.binary_dilation(bg, iterations=2) & ~bg
     ramp = np.clip((mx.astype(np.float32) - BLACK_MAX) / 30.0, 0, 1) * 255
     out[..., 3][ring] = np.maximum(ramp[ring], 40).astype(np.uint8)
-    return out, True
+    return out, bg
 
 
 def clamp_frame(rgba):
@@ -144,6 +144,8 @@ def finish(alpha_webm, out_dir, fps):
         raw = np.asarray(Image.open(f).convert("RGBA"))
         raw, keyed = ensure_alpha(raw)
         cl, _ = clamp_frame(raw)
+        if keyed is not None:
+            cl[..., 3][keyed] = 0       # the clamp fills holes; a keyed gap between an arm and the body must stay transparent
         holes_fixed += int(((cl[..., 3] == 255) & (raw[..., 3] < 250)).sum())
         Image.fromarray(cl).save(work / f"c{i + 1:04d}.png")
         frames.append(cl)
