@@ -8576,7 +8576,7 @@
    "id": "c-vfxfight1",
    "tag": "vfxfight1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Draw library effects in a real Battle 3 fight",
    "next": "Shipped (vfxfight1): the Stage 2C library effects draw in a real Battle 3 fight at each move's contact moment, on the right foe and member, each at its own layer (ground_decal, behind_units, unit_overlay, foreground_sweep, screen_lighting) in the fight's draw order; an effect that throws is dropped for that cue and the fight goes on. Not done: sound effects for the library effects (source decision) and hit stop in fights. Test: python3 tools/b3_vfx_test.py (about 9 minutes, run by hand).",
@@ -8596,6 +8596,10 @@
     {
      "d": "2026-11-26",
      "t": "Built: engine/b3-vfx.js arms each move's library effects at its contact moment (the same moment the hit shows, 0.0 to 0.03 s) and draws them per layer from b3Draw. Tests: guide_timing_test, b3_vfx_test (all 119 manifest moves, 80 moves played by hand in four fights, portrait and landscape), smoke, b3_test. Ended with nothing for Tom."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as vfxfight1: the Stage 2C library effects draw in a real Battle 3 fight, each at its own layer"
     }
    ],
    "blocks": [],
@@ -8610,7 +8614,8 @@
     "model": "Claude Sonnet 5.5 (row C: a build whose steps are written in the task, tests catch mistakes)",
     "effort": "high (engine draw order across several layers, a safety wrapper, tests and a visual check)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done. Your first push is the commit \"board: start c-vfxfight1\". Draw the Stage 2C library effects of engine/vfx-library.js in a real Battle 3 fight, not only in the Battle Lab pass-1 review. A move's effects draw at its contact moment, using p1Meta and p1DrawVfx in engine/pass1-vfx.js, on the right foe and member. Honour the library layer (behind_units, unit_overlay, foreground_sweep, screen_lighting, ground_decal) from art-factory/aot-stage2c-vfx-library-v11.json by drawing each effect at its own point in the fight's draw order. A fight must never break if an effect throws. Run python3 -I tools/guide_timing_test.py, python3 tools/b3_test.py and python3 tools/smoke.py, and look at a fight in portrait and landscape in Chrome before pushing. Update docs/BATTLE_GUIDE.md What is done and docs/CHANGES.md. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-26"
   },
   {
    "id": "c-guide-animtabs",
@@ -8966,8 +8971,7 @@
    "tag": "svc-art-bake-fix",
    "service": "art-bake",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "prog",
    "theme": "Tools",
    "title": "art-bake failed",
    "next": "The art-bake run failed: finished as cancelled. A session has to look at the run log and fix it.",
@@ -8982,27 +8986,39 @@
     "text": "Read claude/handoff-rules.md. The art-bake GitHub Action failed (finished as cancelled). Open the run log at https://github.com/trivituso81/adventures-of-tom/actions/runs/45896194473, fix the cause, and run it again. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukEnwU78oqTm7PuFuL4",
     "opening": "service run"
    },
    "history": [
     {
      "d": "2026-11-26",
      "t": "art-bake failed: finished as cancelled"
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Rescue started (A run failed: The art-bake run failed: finished as cancelled. A session has to look at the run log a). One automatic session decides: finish it, back to Tom, start next, or retire."
     }
    ],
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26",
    "reruns": 1,
-   "rerun_at": "2026-11-26T21:05:53+00:00"
+   "rerun_at": "2026-11-26T21:05:53+00:00",
+   "rescue": {
+    "at": "2026-11-26T21:35:59+00:00",
+    "n": 1,
+    "why": "A run failed: The art-bake run failed: finished as cancelled. A session has to look at the run log and fix it.",
+    "url": "https://claude.ai/code/cse_01RXeukEnwU78oqTm7PuFuL4",
+    "prev": ""
+   },
+   "started_at": "2026-11-26T21:35:59+00:00"
   },
   {
    "id": "c-deedeeframes",
    "title": "Install Deedee's newer frames: walk, feelings, talk, listen",
    "theme": "Characters",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as build deedeeframes: Deedee's walking, feelings, talking and listening are baked and pushed.",
    "blocks": [],
    "changed": "2026-11-26",
@@ -9024,6 +9040,10 @@
     {
      "d": "2026-11-26",
      "t": "Updated by deedeeframes: pushed."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as deedeeframes: Deedee's new walking, feelings, talking, thinking and listening pictures are in the game"
     }
    ],
    "after": "t-deedeeframesplay",
@@ -9035,7 +9055,8 @@
     "model": "Claude Sonnet 5.5 (row B: the bakes exist and tests catch mistakes)",
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md and docs/CHANGES.md roseframes, graceframes and tomframes4, then card c-deedeeframes in data/board.json. Your first push is the commit board: start c-deedeeframes. Install Deedee's newly approved pictures: deedee-walking-sheet-v3, deedee-emotions-v4, deedee-talk-v5 and deedee-listen-v3. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-26"
   },
   {
    "id": "t-deedeeframesplay",
@@ -9159,20 +9180,24 @@
    "title": "Install Boppy's newer frames: walk, feelings, talk, listen",
    "theme": "Characters",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "In progress: baking Boppy's newly approved walking v5, feelings v7, talking v4 and listening v2 pictures.",
    "blocks": [],
    "changed": "2026-11-26",
    "created": "2026-11-26",
    "tag": "boppyframes",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
     "opening": "\"check boppy next\""
    },
    "history": [
     {
      "d": "2026-11-26",
      "t": "Made by the session: Tom's words: \"check boppy next\"."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "after": "t-boppyframesplay",
@@ -9214,17 +9239,51 @@
    "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
    "title": "Install Rose's new walk, feelings, talking, listen frames",
    "first": "2026-11-26T11:07:14-08:00",
-   "last": "2026-11-26T13:11:53-08:00",
+   "last": "2026-11-26T13:35:02-08:00",
    "tags": [
     "roseframes",
     "graceframes",
-    "tomframes4"
+    "tomframes4",
+    "deedeeframes"
    ],
    "cards": [
     "c-roseframes",
     "c-graceframes",
     "c-tomframes4",
-    "c-deedeeframes"
+    "c-deedeeframes",
+    "c-boppyframes"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGMYJgHrbA1WNfACNw",
+   "title": "Add Deedee's four fart poses to the Art Library, approved",
+   "first": "2026-11-26T13:34:20-08:00",
+   "last": "2026-11-26T13:34:20-08:00",
+   "tags": [],
+   "cards": [
+    "c-deedeefart"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFa5bNJ7yJ4ZRNZpa3",
+   "title": "Play hit stop in a real Battle 3 fight",
+   "first": "2026-11-26T13:32:07-08:00",
+   "last": "2026-11-26T13:32:07-08:00",
+   "tags": [],
+   "cards": [
+    "c-hitstop1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGJG774MKmrW8qNpsd",
+   "title": "Draw library effects in a real Battle 3 fight",
+   "first": "2026-11-26T10:02:28-08:00",
+   "last": "2026-11-26T13:14:20-08:00",
+   "tags": [
+    "vfxfight1"
+   ],
+   "cards": [
+    "c-vfxfight1"
    ]
   },
   {
@@ -9377,16 +9436,6 @@
    ],
    "cards": [
     "c-guide-animtabs"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGJG774MKmrW8qNpsd",
-   "title": "Draw library effects in a real Battle 3 fight",
-   "first": "2026-11-26T10:02:28-08:00",
-   "last": "2026-11-26T10:02:28-08:00",
-   "tags": [],
-   "cards": [
-    "c-vfxfight1"
    ]
   },
   {
@@ -15954,8 +16003,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "74fbc3177a726eebc37dc20fd0e94111bcf21414",
- "synced_at": "2026-11-26T21:12:17+00:00",
+ "synced": "5214107a4273aa0bd72703a6958ffb7273843c78",
+ "synced_at": "2026-11-26T21:36:00+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
