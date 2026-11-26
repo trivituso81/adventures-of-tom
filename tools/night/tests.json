@@ -1582,6 +1582,13 @@
    "cmd": "python3 -I tools/b3_hitstop_test.py",
    "group": "g6",
    "minutes": 3
+  },
+  {
+   "id": "hidebf_test",
+   "cmd": "python3 -I tools/hidebf_test.py",
+   "group": "g6",
+   "minutes": 1,
+   "outdir": true
   }
  ]
 }

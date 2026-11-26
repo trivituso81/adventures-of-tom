@@ -1,7 +1,12 @@
+## smokefix2 (2026-11-26): smoke reports no failures again (board4 test fixture, night manifest row)
+
+Card c-smokefix2. Two failures were on main with no recent change behind them. (1) `tools/board_sync_test.py`, check "board4: board_check accepts a Tom card waiting on its fix": the test copied the real board and one fix pair to `/tmp/board_fix.json` and ran `board_check.py` on it, but `board_check.py` reads `board-archive.json` from the folder of the board it checks (bigboard1), so cards that were archived looked like unknown ids (`blocks unknown id c-projclean` and four more). The code was right and the test was wrong: the test now writes the fixture to its own temp folder together with a copy of `data/board-archive.json`. (2) `tools/night/tests.json` had no row for `tools/hidebf_test.py`: added `hidebf_test` (group g6, the lightest at 88 minutes; 1 minute, it ran in 12 seconds; `outdir` true because the test takes an output folder). Each night group runs on its own machine, so the test's port 8096 cannot clash with another group. Nothing else changed; no game file.
+
+Checked: `python3 tools/board_sync_test.py` all passed; `python3 tools/night/manifest_check.py` ok (255 rows, 8 skipped); `python3 -I tools/hidebf_test.py` FAILS: []; `python3 tools/board_check.py` ok.
+
 ## heroframes1 (2026-11-26): the menu hero paintings of Tom, Grace and Boppy are the newest approved ones
 
 Tom: "Implement any other pending approved character pose sheets". Checked every approved Characters entry in the Art Library: nothing newer than what is in the game is waiting for Amy, Justin, Olivia, Ellie, Jojo or Michael (their last approvals are from 11-11 or earlier; amy-listen and justin-listen are not generated yet). What was left: the menu hero paintings. `bake_menu_heroes.py tom grace deedee boppy` now bakes `tom-hero-v4`, `grace-hero-v2` and `boppy-hero-v3` (Deedee's `deedee-hero-v2` was already in). `M2_V` moved to `menu2` so phones fetch the new pictures. Not done: the four Deedee fart poses (Tom said a later scene) and `tomride-title-v2` (no screen uses it). Portraits (`portraits/`) are baked by the portrait Action, not touched here.
-
 
 ## board-smokefix2 (2026-11-26): board card for the two smoke failures on main
 

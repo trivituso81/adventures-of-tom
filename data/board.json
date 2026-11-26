@@ -9387,7 +9387,7 @@
    "col": "prog",
    "theme": "Tools",
    "title": "Fix the two failures smoke shows on main",
-   "next": "Fix board_sync_test (board4: board_check accepts a Tom card waiting on its fix) and add tools/hidebf_test.py to tools/night/tests.json, so python3 tools/smoke.py reports no failures.",
+   "next": "Shipped as smokefix2. Nothing for Tom.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGWAy9zihymc3KiLZk",
     "opening": "unknown"
@@ -9400,6 +9400,10 @@
     {
      "d": "2026-11-26",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as smokefix2: board4 check fixed in the test (fixture needs a copy of board-archive.json next to it); hidebf_test added to the night manifest (g6, 1 minute). Smoke reports no failures. Nothing for Tom."
     }
    ],
    "blocks": [],

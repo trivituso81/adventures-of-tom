@@ -286,8 +286,13 @@ check('board4: when the fix ships the tested card comes back to Tom (Up next)', 
 d = json.load(open(os.path.join(HERE, '..', 'data', 'board.json'), encoding='utf-8')); fb = fx()
 d['cards'] += fb['cards']; d['cards'][-1]['chat'] = {'url': '', 'opening': 'x'}
 for k in d['cards'][-2:]: k['created'] = '2026-11-19'
-open('/tmp/board_fix.json', 'w').write(json.dumps(d))
-r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '/tmp/board_fix.json'], capture_output=True, text=True)
+# bigboard1: board_check reads board-archive.json from the folder of the board it checks, so the fixture goes in its own folder with a copy of the archive
+import shutil, tempfile
+fixdir = tempfile.mkdtemp(prefix='board_fix_')
+shutil.copy(os.path.join(HERE, '..', 'data', 'board-archive.json'), os.path.join(fixdir, 'board-archive.json'))
+open(os.path.join(fixdir, 'board.json'), 'w').write(json.dumps(d))
+r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), os.path.join(fixdir, 'board.json')], capture_output=True, text=True)
+shutil.rmtree(fixdir, ignore_errors=True)
 check('board4: board_check accepts a Tom card waiting on its fix (not fyi, blocks nothing)', r.returncode == 0, r.stdout[-300:])
 
 # --- boardwait1: a Tom card in Waiting that nothing blocks is opened; one with an open blocker, or a Claude card, stays
