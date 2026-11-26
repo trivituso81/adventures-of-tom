@@ -1,3 +1,7 @@
+## justinbb9g (2026-11-25): WO-01F, one beat per move, same Direct-Hero start frame, Wan 3.0 only
+
+Tom's order WO-01F ($2.00 hard cap): keep one clip per move, reuse the justinbb9f start frame (no picture is paid for again), and ask Wan for one physical beat (hold the stud finder steady, one hammer tap, settle). Run bench-justinbb9-5, Wan 3.0 only, 3 seeds. The Justin packet's pitch and expected action now describe the one beat; the stud finder beep stays the Battle Lab effect `vfx_red_stud_led_ping`. Locked thresholds untouched.
+
 ## justinbb9f (2026-11-25): the Hero-locked start frame now lines up with the Hero and joins at the neck
 
 Card c-justinbb9. Run `bench-justinbb9-3` stopped at Gate 1 (spent $0.38, no video): the hand edit was kept, but it came back about 1 percent larger and shifted, so the band spliced into the Hero showed seams through the arms. Fix: `register_edit` aligns the edit to the Hero by matching the head, the edit owns everything below the chin with a feathered join at the neck (head, face and expression stay the Hero's own pixels, measured difference 0), and the magenta fringe is pulled out. Checked free on the stored edit: Gate 1 measured passes, no seam. The run's own cap now follows the trigger (it showed $5.00 before; the $2.00 was enforced only by a rule of mine). Re-run `bench-justinbb9-4`.

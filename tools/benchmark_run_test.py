@@ -49,7 +49,7 @@ Image.fromarray(bad).save(tmp / "raw_bad.png")
 g2 = B.gate1_measured(tmp / "raw_bad.png", tmp / "comp.png", box)
 check("gate 1 rejects an unlocked redraw of the face", g2["passed"] is False and g2["head_mean_abs_diff_vs_hero"] > 0.5, str(g2["head_mean_abs_diff_vs_hero"]))
 check("wan-only run has 3 seeds and no Kling", len(B.seed_jobs(lock, ("wan",))) == 3 and all("kling" not in j["endpoint"] for j in B.seed_jobs(lock, ("wan",))))
-check("prompt has no style or proportion words", not any(w in B.BENCH_PROMPT.lower() for w in ("hand-drawn", "heads", "caricature", "tall", "pencil", "ink")))
+check("prompt has no style or proportion words", not any(w in B.BENCH_PROMPT.lower() for w in ("hand-drawn", "heads", "caricature", "scan", "glides", "tall", "pencil", "ink")))
 
 # 3. blocker path: a start frame that is never on #808080 stops the run before any video call
 class Fake:

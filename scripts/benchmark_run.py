@@ -29,8 +29,8 @@ LOCK_PATH = ROOT / "art-factory" / "PIPELINE_LOCK.json"
 PACKETS = ROOT / "art-factory" / "move-packets-pass1.json"
 
 BENCH_PROMPT = ("Static locked camera, zero zoom, zero scale drift. Remaining in three-quarters-left profile on a flat #808080 mid-grey background with the exact same face and "
-                "expression, he glides the yellow stud finder smoothly across in front of him, pauses briefly, delivers one crisp forward-left tap with the claw hammer, and settles "
-                "smoothly back into his exact starting stance.")
+                "expression, he holds the yellow stud finder steady in his front hand, delivers one crisp forward-left tap with the claw hammer, and settles smoothly back into "
+                "his exact starting stance.")
 BENCH_NEGATIVE = ("turning toward camera, facing right, blank stare, angry face, proportion change, realistic human proportions, hitting own props, duplicate hammer, belt drawing, "
                   "prop morphing, floating rings, target reticles, laser beams, sparks, floor circle, camera pan, zoom, 3D CGI, photorealistic")
 
@@ -493,7 +493,17 @@ def run(svc=None, trigger=None, run_dir_root=None):
         models = tuple(trig.get("models") or ("wan", "kling"))
         jobs = seed_jobs(lock, models)
         tail = sum(RATES[j["endpoint"]] for j in jobs) * float(lock["raw_duration_sec"]) + 3 * len(jobs) * JUDGE_CALL_EST + MATTE_FALLBACK_EST
-        start, g1 = make_start_frame(svc, ledger, hero, run_dir, judge_model, tail_cost=tail)
+        if trig.get("start_frame"):      # WO-01F: reuse a start frame that already passed Gate 1 (no picture is paid for again)
+            src = ROOT / trig["start_frame"]
+            start = run_dir / "start_frame.png"
+            shutil.copy2(src, start)
+            g1m = gate1_measured(start)
+            g1 = [{"reused_from": trig["start_frame"], "measured": g1m, "passed": bool(g1m["passed"])}]
+            (run_dir / "gate1.json").write_text(json.dumps({"attempts": g1, "passed": g1[0]["passed"]}, indent=2) + "\n")
+            if not g1m["passed"]:
+                start = None
+        else:
+            start, g1 = make_start_frame(svc, ledger, hero, run_dir, judge_model, tail_cost=tail)
         if not start:
             why = "Gate 1 never passed on the start frame: " + json.dumps(g1[-1] if g1 else {})[:600]
         else:
