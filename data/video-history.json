@@ -1,6 +1,6 @@
 {
  "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
- "built": "2026-11-26T09:55Z",
+ "built": "2026-11-26T10:18Z",
  "videos": [
   {
    "file": "deedee-cast-r3.mp4",
@@ -1248,6 +1248,72 @@
    "model": null
   },
   {
+   "file": "rose-boomerang-a2-r1.mp4",
+   "job": "rose-boomerang",
+   "rev": 1,
+   "attempt": 2,
+   "at": "2026-11-26T10:05:07.281671Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Her feet left their spot on the floor.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-boomerang-a2-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-boomerang-r1.mp4",
+   "job": "rose-boomerang",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-26T10:02:59.464667Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Her feet left their spot on the floor.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-boomerang-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-boop-a2-r1.mp4",
+   "job": "rose-boop",
+   "rev": 1,
+   "attempt": 2,
+   "at": "2026-11-26T10:08:51.598358Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Her feet left their spot on the floor."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-boop-a2-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-boop-r1.mp4",
+   "job": "rose-boop",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-26T10:06:58.914716Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Her feet left their spot on the floor."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-boop-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
    "file": "rose-cast-r3.mp4",
    "job": "rose-cast",
    "rev": 3,
@@ -1278,6 +1344,38 @@
    "strip": "art/video-history/rose-cast-r2.webp",
    "pad": null,
    "model": "kling"
+  },
+  {
+   "file": "rose-citadel-a2-r1.mp4",
+   "job": "rose-citadel",
+   "rev": 1,
+   "attempt": 2,
+   "at": "2026-11-26T10:05:01.765574Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"She holds her worn Lamby plush in one hand. She lifts both arms high like an architect planning a fort, then sweeps both arms out wide to frame a long protective wall, nodding happily. She holds the wide pose for a momen\" Its reason: no Lamby plush visible, action does not match description"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-citadel-a2-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-citadel-r1.mp4",
+   "job": "rose-citadel",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-26T10:03:02.203863Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"She holds her worn Lamby plush in one hand. She lifts both arms high like an architect planning a fort, then sweeps both arms out wide to frame a long protective wall, nodding happily. She holds the wide pose for a momen\" Its reason: no Lamby plush held or visible in any frame"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-citadel-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
   },
   {
    "file": "rose-cushion-kling-r1.mp4",
@@ -1325,6 +1423,38 @@
    "in_game": null,
    "strip": "art/video-history/rose-dodge-r2.webp",
    "pad": null,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-doublelamby-a2-r1.mp4",
+   "job": "rose-doublelamby",
+   "rev": 1,
+   "attempt": 2,
+   "at": "2026-11-26T10:00:53.657174Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Her feet left their spot on the floor."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-doublelamby-a2-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-doublelamby-r1.mp4",
+   "job": "rose-doublelamby",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-26T09:58:30.022963Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Her feet left their spot on the floor."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-doublelamby-r1.webp",
+   "pad": 0.8,
    "model": "alibaba"
   },
   {
@@ -1588,6 +1718,38 @@
    "model": "alibaba"
   },
   {
+   "file": "rose-kingdom-a2-r1.mp4",
+   "job": "rose-kingdom",
+   "rev": 1,
+   "attempt": 2,
+   "at": "2026-11-26T10:08:49.817217Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-kingdom-a2-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-kingdom-r1.mp4",
+   "job": "rose-kingdom",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-26T10:06:52.951570Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "The motion check said no to: \"She hugs her worn Lamby plush to her chest and looks up with wide, earnest wonder. She lifts the plush high above her head in a calm royal gesture and holds it there for one second like a tiny pajama queen, then lowers i\" Its reason: Sequence shows hugging then lifting plush but lacks holding high for 1s and gentle lowering to start pose"
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-kingdom-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
    "file": "rose-ko-r2.mp4",
    "job": "rose-ko",
    "rev": 2,
@@ -1700,6 +1862,88 @@
    "model": null
   },
   {
+   "file": "rose-lavahop-a2-r1.mp4",
+   "job": "rose-lavahop",
+   "rev": 1,
+   "attempt": 2,
+   "at": "2026-11-26T10:00:50.952842Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Her feet left their spot on the floor."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-lavahop-a2-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-lavahop-r1.mp4",
+   "job": "rose-lavahop",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-26T09:58:26.933985Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Her feet left their spot on the floor."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-lavahop-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-pretzel-a2-r1.mp4",
+   "job": "rose-pretzel",
+   "rev": 1,
+   "attempt": 2,
+   "at": "2026-11-26T10:04:59.750606Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Her feet left their spot on the floor.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-pretzel-a2-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-pretzel-r1.mp4",
+   "job": "rose-pretzel",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-26T10:02:51.402327Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Her feet left their spot on the floor.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-pretzel-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-raspberry-r1.mp4",
+   "job": "rose-raspberry",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-26T10:07:10.607488Z",
+   "price": 0.5,
+   "verdict": "unchecked",
+   "reasons": [
+    "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-raspberry-r1.webp",
+   "pad": null,
+   "model": "alibaba"
+  },
+  {
    "file": "rose-run-r1.mp4",
    "job": "rose-run",
    "rev": 1,
@@ -1778,6 +2022,40 @@
    "strip": "art/video-history/rose-tackle-r1.webp",
    "pad": null,
    "model": "kling"
+  },
+  {
+   "file": "rose-tacklelunge-a2-r1.mp4",
+   "job": "rose-tacklelunge",
+   "rev": 1,
+   "attempt": 2,
+   "at": "2026-11-26T10:00:42.925653Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Her feet left their spot on the floor.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-tacklelunge-a2-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
+  },
+  {
+   "file": "rose-tacklelunge-r1.mp4",
+   "job": "rose-tacklelunge",
+   "rev": 1,
+   "attempt": 1,
+   "at": "2026-11-26T09:58:18.985903Z",
+   "price": 0.5,
+   "verdict": "rejected",
+   "reasons": [
+    "Her feet left their spot on the floor.",
+    "Part of her went past the edge of the picture."
+   ],
+   "in_game": null,
+   "strip": "art/video-history/rose-tacklelunge-r1.webp",
+   "pad": 0.8,
+   "model": "alibaba"
   },
   {
    "file": "rose-victory-r1.mp4",
@@ -2746,6 +3024,15 @@
   "stage-tom-jetwash-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it. wanstop-r2: the start picture fills the width, so the video touched the edge in about half the pictures (bg 93 to 95 percent, edge 48 and 51 of 90); kept everything, changed only pad: 0.8 (the picture is shrunk to 80 percent on the same black).",
   "stage-tom-fireball-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
   "stage-tom-starbeam-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it. Rev 2: the star hardly moved in rev 1 (motion 0.6 of 255, needs 2.0, both tries). Kept: start picture, resolution, duration, seed, camera and background text. Changed one thing: the motion sentence now says the star pulses brighter and dimmer three times with the trail flickering.",
-  "stage-tom-meteor-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it."
+  "stage-tom-meteor-vid": "movestage2: object-only video of the stage asset. First frame = the passed picture as it is (and last frame too for a loop), 480p, 3 s, the motion file word for word. Nobody is in it.",
+  "rose-lavahop": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "rose-doublelamby": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "rose-pretzel": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "rose-boomerang": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "rose-citadel": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "rose-kingdom": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "rose-boop": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "rose-raspberry": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "rose-tacklelunge": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high."
  }
 }
