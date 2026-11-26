@@ -1926,6 +1926,34 @@
    "replay": "",
    "id": "v-body-tnb-run-t3",
    "kind": "video"
+  },
+  "v-body-tom-run-t2": {
+   "lane": "vid",
+   "anim": "body:tom:run",
+   "who": "tom",
+   "take": 2,
+   "route": "wan",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: RUNNING IN PLACE\nHe runs in place facing left, arms pumping and knees lifting in a steady jogging rhythm, without moving forward or backward from his spot. He keeps the same steady pace for the whole clip, then slows and stops in his starting stance at the very end.",
+   "promptRev": 1,
+   "start": "tom",
+   "note": "",
+   "cap": 1,
+   "at": "2026-11-26T08:20:00Z",
+   "state": "queued",
+   "since": "2026-11-26T08:20:00Z",
+   "run": 0,
+   "fal": null,
+   "tries": 0,
+   "cost": 0,
+   "why": "",
+   "do": "",
+   "result": null,
+   "use": null,
+   "left": false,
+   "dry": false,
+   "replay": "",
+   "id": "v-body-tom-run-t2",
+   "kind": "video"
   }
  }
 }
