@@ -9068,6 +9068,38 @@
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26"
+  },
+  {
+   "id": "c-hitstop1",
+   "tag": "hitstop1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "title": "Play hit stop in a real Battle 3 fight",
+   "next": "In progress: freezing the foe and the member for hitStopFrames / 24 seconds at the hit moment of a move in a real Battle 3 fight (engine/b3-vfx.js, b3PlayMove). The battle clock and the rules never wait on it.",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFa5bNJ7yJ4ZRNZpa3",
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done (the vfxfight1 paragraph). Add a card for this task first\""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Started: Tom asked for hit stop to play in a real Battle 3 fight (the 'Not done' item of vfxfight1). Board: new card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Plays each move's hit stop (a short freeze of the foe and the member at the hit) in a real Battle 3 fight.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build whose steps are written in the task, tests catch mistakes)",
+    "effort": "high (a timing change in the fight's draw path, a safety wrapper, four test suites and a visual check)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done (the vfxfight1 paragraph). Your first push is the commit \"board: start c-hitstop1\". Play hit stop in a real Battle 3 fight: data/guide-manifest.json gives each move a hitStopFrames value (frames at 24 fps); when a move's hit shows, freeze the foe and the member for about hitStopFrames / 24 seconds, then continue, using engine/b3-vfx.js and b3PlayMove in engine/b3-play.js. The battle clock and the rules never wait on it; a move with hitStopFrames 0 or no manifest row changes nothing; a fight must never break if the freeze throws; library effects keep drawing at their normal pace. Run python3 -I tools/guide_timing_test.py, python3 tools/b3_vfx_test.py, python3 tools/smoke.py and python3 tools/b3_test.py for new1 to new5, and look at a fight in portrait and landscape in Chrome before pushing. Update docs/BATTLE_GUIDE.md What is done and docs/CHANGES.md. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
