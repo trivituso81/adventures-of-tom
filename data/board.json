@@ -9248,7 +9248,7 @@
    "title": "Install TNB's newer frames: walk, feelings, talk, listen",
    "theme": "Characters",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as build tnbframes: TNB's walking, feelings, talking and listening are baked and pushed.",
    "blocks": [],
    "changed": "2026-11-26",
@@ -9270,6 +9270,10 @@
     {
      "d": "2026-11-26",
      "t": "Updated by tnbframes: pushed."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as tnbframes: TNB's new walking, feelings, talking, thinking and listening pictures are in the game"
     }
    ],
    "after": "t-tnbframesplay",
@@ -9281,7 +9285,8 @@
     "model": "Claude Sonnet 5.5 (row B: the bakes exist and tests catch mistakes)",
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md and docs/CHANGES.md deedeeframes and boppyframes, then card c-tnbframes in data/board.json. Your first push is the commit board: start c-tnbframes. Install TNB's newly approved pictures: tnb-walking-sheet-v3, tnb-emotions-v4, tnb-talk-v3 and tnb-listen-v1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-26"
   },
   {
    "id": "t-tnbframesplay",
@@ -9369,6 +9374,30 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
+   "title": "Install Rose's new walk, feelings, talking, listen frames",
+   "first": "2026-11-26T11:07:14-08:00",
+   "last": "2026-11-26T14:45:52-08:00",
+   "tags": [
+    "roseframes",
+    "graceframes",
+    "tomframes4",
+    "deedeeframes",
+    "boppyframes",
+    "ridepics1",
+    "tnbframes"
+   ],
+   "cards": [
+    "c-roseframes",
+    "c-graceframes",
+    "c-tomframes4",
+    "c-deedeeframes",
+    "c-boppyframes",
+    "c-ridepics1",
+    "c-tnbframes"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEMmPhXEHE2tFioPmh",
    "title": "Battle Lab review holds hit stop at the right length, 24 fps",
    "first": "2026-11-26T14:37:43-08:00",
@@ -9388,29 +9417,6 @@
    ],
    "cards": [
     "c-hitstop1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
-   "title": "Install Rose's new walk, feelings, talking, listen frames",
-   "first": "2026-11-26T11:07:14-08:00",
-   "last": "2026-11-26T14:23:13-08:00",
-   "tags": [
-    "roseframes",
-    "graceframes",
-    "tomframes4",
-    "deedeeframes",
-    "boppyframes",
-    "ridepics1"
-   ],
-   "cards": [
-    "c-roseframes",
-    "c-graceframes",
-    "c-tomframes4",
-    "c-deedeeframes",
-    "c-boppyframes",
-    "c-ridepics1",
-    "c-tnbframes"
    ]
   },
   {
@@ -16154,8 +16160,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "f887358c566940c90fede5ecc4338cd7bb32e69e",
- "synced_at": "2026-11-26T22:38:34+00:00",
+ "synced": "461ac5826a8e1859d67761ce815eb7db8d1ee6ac",
+ "synced_at": "2026-11-26T22:46:49+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
