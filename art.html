@@ -126,6 +126,7 @@ header{padding:10px 28px}
 <div class="card" id="spend"></div>
 <div class="card row"><span style="flex:1">Pictures made for you on the board</span><button class="small" id="artgenchk">Check for pictures made for you</button></div></div>
 <input type="search" id="q" placeholder="Search every tab by name or id" autocomplete="off" aria-label="Search">
+<label class="card row" id="hidebfrow" style="cursor:pointer"><input type="checkbox" id="hidebf" checked> <span>Hide painted battleframes</span></label>
 <div class="tabs" id="tabs"></div>
 <div class="tabs fil" id="filters"></div>
 </aside>
@@ -164,7 +165,7 @@ const toast=m=>{const t=$('toast');t.textContent=m;t.style.display='block';clear
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 let DATA={entries:[]}, EDITS={}, USE={}, MSG={}, NOTES={}, ARMED=null;
 // UX state that survives a reload: last tab and filter, which groups and pictures are open, scroll position per tab (never the search text)
-let UI={tab:'Characters',filter:'todo',q:'',open:{},grp:{},sy:{},po:{}};   // po = which prompt boxes are open
+let UI={tab:'Characters',filter:'todo',q:'',open:{},grp:{},sy:{},po:{},hideBF:true};   // po = which prompt boxes are open
 try{ const u=JSON.parse(LS.get('aot-art-ui')||'{}'); if(u&&typeof u==='object') Object.assign(UI,u,{q:''}); }catch(e){}
 const saveUI=()=>{ const o=Object.assign({},UI); delete o.q; LS.set('aot-art-ui',JSON.stringify(o)); };
 try{EDITS=JSON.parse(LS.get('aot-art-edits')||'{}')||{};}catch(e){}
@@ -249,19 +250,24 @@ async function probe(){
   await Promise.all(need.map(async p=>{ let ok=null; try{ ok=(await fetch(rawU(p),{method:'HEAD',cache:'no-store'})).ok; }catch(err){} if(ok===null) return; const was=EXISTS[p]; EXISTS[p]={ok,t:Date.now()}; if(!was||was.ok!==ok) changed=true; }));
   if(changed) paintList(true);
 }
+// hidebf1 (Tom 2026-11-26): "Hide painted battleframes" is ticked by default. Battle frames = every party character's battle stance sheets, young Boppy's battle sheets and every ability frame sheet (ids with -ab-). Hidden entries leave the list, the search, the tab and filter counts and the group counts.
+const BF_ID=/-ab-|-battle-stance-\d|-battle-sheet-\d/;
+const isBF=e=>e.tab==='Characters'&&BF_ID.test(e.id);
+const bfHidden=e=>UI.hideBF!==false&&isBF(e);
+const shownEntries=()=>DATA.entries.filter(e=>!bfHidden(e));
 const matchQ=(e,q)=>(e.title+' '+e.id+' '+(e.group||'')).toLowerCase().indexOf(q)>=0;
 const qNow=()=>UI.q.trim().toLowerCase();
 function visible(e){ const q=qNow(); if(q) return matchQ(e,q); const s=ST[e.id]; if(UI.filter==='all') return true; if(UI.filter==='todo') return s==='ready'||s==='wait'; if(UI.filter==='ingame') return !!inGame(e); return s===UI.filter; }
-function groupsOf(tab){ const m=new Map(); for(const e of DATA.entries){ if(e.tab!==tab) continue; const g=e.group||tab; if(!m.has(g)) m.set(g,[]); m.get(g).push(e); } return m; }
+function groupsOf(tab){ const m=new Map(); for(const e of shownEntries()){ if(e.tab!==tab) continue; const g=e.group||tab; if(!m.has(g)) m.set(g,[]); m.get(g).push(e); } return m; }
 const gkey=(tab,g)=>tab+'|'+g;
 function groupCount(items){ const done=items.filter(e=>ST[e.id]==='approved').length, wait=items.filter(e=>ST[e.id]==='wait').length; const ig=items.filter(inGame).length; return (wait?wait+' waiting, ':'')+done+' of '+items.length+' approved'+(ig?', '+ig+' in game not approved':''); }
 function paintTabs(){
   const q=qNow(); { let w=0; for(const id in ST) if(ST[id]==='wait') w++; $('rvopen').textContent=w?'Review '+w:'Review'; }
-  $('tabs').innerHTML=TABS.map(t=>{ const all=DATA.entries.filter(e=>e.tab===t); const hit=q?all.filter(e=>matchQ(e,q)).length:0;
+  $('tabs').innerHTML=TABS.map(t=>{ const all=shownEntries().filter(e=>e.tab===t); const hit=q?all.filter(e=>matchQ(e,q)).length:0;
     return '<button class="tab'+(t===UI.tab?' on':'')+(q&&!hit?' dim':'')+'" data-tab="'+t+'">'+t+' '+(q?hit+' found':all.filter(e=>ST[e.id]==='approved').length+'/'+all.length)+'</button>'; }).join('');
 }
 function paintFilters(){
-  const list=DATA.entries.filter(e=>e.tab===UI.tab), c={}; for(const e of list) c[ST[e.id]]=(c[ST[e.id]]||0)+1;
+  const list=shownEntries().filter(e=>e.tab===UI.tab), c={}; for(const e of list) c[ST[e.id]]=(c[ST[e.id]]||0)+1;
   const n=k=>k==='ingame'?list.filter(inGame).length:k==='all'?list.length:k==='todo'?(c.ready||0)+(c.wait||0):(c[k]||0);
   $('filters').style.display=qNow()?'none':'';
   $('filters').innerHTML=FILTERS.map(f=>'<button class="tab'+(f[0]===UI.filter?' on':'')+'" data-filter="'+f[0]+'">'+f[1]+' '+n(f[0])+'</button>').join('');
@@ -321,9 +327,11 @@ function toggleGroup(k){
 }
 $('tabs').addEventListener('click',e=>{ const t=e.target.closest('[data-tab]'); if(!t) return; UI.sy[UI.tab]=Math.round(scrollY); UI.tab=t.dataset.tab; saveUI(); paintList(); scrollTo(0,UI.sy[UI.tab]||0); });
 $('filters').addEventListener('click',e=>{ const t=e.target.closest('[data-filter]'); if(!t) return; UI.filter=t.dataset.filter; saveUI(); paintList(); });
+$('hidebf').checked=UI.hideBF!==false;
+$('hidebf').addEventListener('change',()=>{ UI.hideBF=$('hidebf').checked; saveUI(); paintList(); });
 $('q').addEventListener('input',()=>{
   UI.q=$('q').value; const q=qNow();
-  if(q&&!DATA.entries.some(e=>e.tab===UI.tab&&matchQ(e,q))){ const hit=TABS.find(t=>DATA.entries.some(e=>e.tab===t&&matchQ(e,q))); if(hit) UI.tab=hit; }
+  if(q&&!shownEntries().some(e=>e.tab===UI.tab&&matchQ(e,q))){ const hit=TABS.find(t=>shownEntries().some(e=>e.tab===t&&matchQ(e,q))); if(hit) UI.tab=hit; }
   paintList();
 });
 let scrollT; addEventListener('scroll',()=>{ clearTimeout(scrollT); scrollT=setTimeout(()=>{ UI.sy[UI.tab]=Math.round(scrollY); saveUI(); },400); },{passive:true});
@@ -696,6 +704,7 @@ function linkIds(ids){
 const LINKED={};
 function openIds(ids){
   const k=linkIds(ids); if(!k.length) return;
+  if(k.some(id=>isBF(ENTRY[id]))&&UI.hideBF!==false){ UI.hideBF=false; $('hidebf').checked=false; toast('Battle frames are shown now, because the link points at one.'); }   // hidebf1
   const e0=ENTRY[k[0]]; UI.tab=e0.tab; UI.filter='all'; UI.q=''; const qi=$('q'); if(qi) qi.value='';
   for(const id of k){ LINKED[id]=1; const e=ENTRY[id]; UI.grp[gkey(e.tab,e.group||e.tab)]=1; UI.open[id]=1; }
   saveUI(); paintList();

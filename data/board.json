@@ -8241,6 +8241,29 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done. Your first push is the commit \"board: start c-guidetime\".\n\nTask: engine/guide-timing.js reads contactSec and hitStopFrames from data/guide-manifest.json and gives p1Meta (engine/pass1-vfx.js) a row for every manifest move; a row baked from the video in data/pass1-meta.js wins. engine/vfx-library.js draws the first 8 effects of art-factory/aot-stage2c-vfx-library-v11.json in code. Run python3 -I tools/guide_timing_test.py and python3 -I tools/guide_manifest_test.py."
    },
    "done": "2026-11-26"
+  },
+  {
+   "id": "c-hidebf",
+   "tag": "hidebf1",
+   "lane": "claude",
+   "col": "done",
+   "theme": "Tools",
+   "title": "Art Library: Hide painted battleframes checkbox",
+   "next": "Done. In ADMIN > ART LIBRARY the left side has a ticked box, Hide painted battleframes. Ticked hides every battle stance sheet, young Boppy battle sheet and ability frame sheet for every character from the list, the search and the counts. Untick it to see them.",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "done": "2026-11-26",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukH7bSqAJrwdcNpCdR9",
+    "opening": "In the art library on the left side, there needs to be a checkbox"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Tom: \"there needs to be a checkbox that's selected by default that says hide painted battleframes ... every single entry for every single character that is a frame that is used in battle is not displayed in the art library at all\". Shipped as hidebf1: 158 entries (battle stance and battle sheets, every -ab- ability frame sheet) are hidden while ticked."
+    }
+   ],
+   "after": "nothing for Tom: end"
   }
  ],
  "sessions": [
