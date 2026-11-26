@@ -1,0 +1,10 @@
+IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.
+
+WHAT THIS IS
+A 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.
+
+CAMERA AND BACKGROUND
+Locked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.
+
+MOTION: FLINCH BACKWARD
+From her starting relaxed stance, she flinches backward once as if bumped from the front, stumbling one small step back away to the right with a wince and her arms pulled in. Without repeating the flinch, she steps back into place and returns to her starting relaxed stance, holding it for the rest of the clip.

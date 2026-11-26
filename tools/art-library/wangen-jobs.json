@@ -647,7 +647,7 @@
   }
  },
  "rose-guard": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -655,7 +655,7 @@
    "720p": 0.1,
    "1080p": 0.15
   },
-  "prompt_file": "tools/art-library/prompts/wan-rose-guard-v1.txt",
+  "prompt_file": "tools/art-library/prompts/wan-rose-guard-v2.txt",
   "frame": "art/clips/start/rose-hero.png",
   "fit": "720x1280",
   "frame_fields": [
@@ -672,7 +672,7 @@
   }
  },
  "rose-hit": {
-  "rev": 5,
+  "rev": 6,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -680,7 +680,7 @@
    "720p": 0.1,
    "1080p": 0.15
   },
-  "prompt_file": "tools/art-library/prompts/wan-rose-hit-v3.txt",
+  "prompt_file": "tools/art-library/prompts/wan-rose-hit-v6.txt",
   "frame": "art/clips/start/rose-hero.png",
   "fit": "720x1280",
   "frame_fields": [
@@ -698,7 +698,7 @@
   "pad": 0.65
  },
  "rose-dodge": {
-  "rev": 3,
+  "rev": 4,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -706,7 +706,7 @@
    "720p": 0.1,
    "1080p": 0.15
   },
-  "prompt_file": "tools/art-library/prompts/wan-rose-dodge-v2.txt",
+  "prompt_file": "tools/art-library/prompts/wan-rose-dodge-v4.txt",
   "frame": "art/clips/start/rose-hero.png",
   "fit": "720x1280",
   "frame_fields": [

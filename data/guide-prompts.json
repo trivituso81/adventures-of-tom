@@ -1702,6 +1702,21 @@
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BRACED GUARD\nFrom his starting relaxed stance, he bends his knees, tucks his chin and raises both arms once, crossing his forearms in an X in front of his face with both fists closed. He holds that braced guard, breathing gently, then lowers his arms and stands back up into his starting stance.",
    "rev": 2,
    "source": "used"
+  },
+  "body:rose:hit": {
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: FLINCH BACKWARD\nFrom her starting relaxed stance, she flinches backward once as if bumped from the front, stumbling one small step back away to the right with a wince and her arms pulled in. Without repeating the flinch, she steps back into place and returns to her starting relaxed stance, holding it for the rest of the clip.",
+   "rev": 6,
+   "source": "used"
+  },
+  "body:rose:dodge": {
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: DUCK\nFrom her starting relaxed stance, she quickly squats straight down once right where she stands, both hands on top of her head, as if something is flying over her, while both feet stay flat on the ground. Without repeating the duck, she pops back up and returns to her starting relaxed stance, holding it for the rest of the clip.",
+   "rev": 4,
+   "source": "used"
+  },
+  "body:rose:guard": {
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BRACED GUARD\nFrom her starting relaxed stance, she bends her knees, tucks her chin and raises both arms once, crossing her forearms in an X in front of her face with both fists closed. She holds that braced guard, breathing gently, then lowers her arms and stands back up into her starting stance.",
+   "rev": 2,
+   "source": "used"
   }
  }
 }
