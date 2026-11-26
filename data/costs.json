@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-25",
+ "updated": "2026-11-26",
  "timezone": "America/Los_Angeles",
  "about": "Every charge is taken from a receipt in email. Dates and times are Pacific time. Amounts are US dollars.",
  "services": [
@@ -1314,6 +1314,15 @@
    "what": "Battle Guide takes: clip gate look checks on 1 take",
    "source": "clip-gen run (guide takes)",
    "at": "2026-11-26T07:56:00Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45778513410"
+  },
+  {
+   "service": "fal",
+   "date": "2026-11-26",
+   "amount": 4.5,
+   "what": "guide-work: family videos",
+   "source": "guide-work run",
+   "at": "2026-11-26T08:12:07Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45778513410"
   }
  ],
