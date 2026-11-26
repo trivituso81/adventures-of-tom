@@ -8387,6 +8387,14 @@
      "date": "2026-11-11",
      "from": "v2",
      "at": 1794361581815
+    },
+    {
+     "n": 2,
+     "file": "art/raw/characters/rose-walking-sheet-v3.png",
+     "date": "2026-11-26",
+     "from": "v3",
+     "at": 1795719071301,
+     "up": true
     }
    ]
   },
