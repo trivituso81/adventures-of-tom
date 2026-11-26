@@ -3082,12 +3082,11 @@
     "n": 1
    },
    "use": {
-    "state": "applying",
+    "state": "live",
     "at": "2026-11-26T09:22:12Z",
-    "since": "2026-11-26T09:22:12Z",
-    "build": "",
-    "why": "",
-    "run": 45791800597
+    "since": "2026-11-26T09:33:02Z",
+    "build": "guideuse-45791800597",
+    "why": ""
    },
    "left": false,
    "dry": false,
