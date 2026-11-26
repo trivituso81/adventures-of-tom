@@ -6751,9 +6751,42 @@
     }
    ],
    "build": "guideedit1"
+  },
+  {
+   "id": "b-guideuse-45781979798",
+   "tag": "guideuse-45781979798",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-26",
+   "theme": "Battle System",
+   "title": "Knocked out (tom) now plays a video chosen in the Battle Guide",
+   "next": "Done: Knocked out (tom) now plays a video chosen in the Battle Guide",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as guideuse-45781979798. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukGEWPtNAyCyFc2nvtK",
+   "title": "Battle Guide: edit the animation prompt before generating",
+   "first": "2026-11-26T00:22:40-08:00",
+   "last": "2026-11-26T00:22:40-08:00",
+   "tags": [],
+   "cards": [
+    "c-guide-editprompt"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFJ3SQckykBNpN3Deq",
    "title": "Justin production clip: #00FF00 start, new Kling prompt",
@@ -13186,8 +13219,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "55e193ff5cb6fc9bbeb5e74510555f198e652f9e",
- "synced_at": "2026-11-26T08:16:32+00:00",
+ "synced": "2de946069989c87e4d596d7f2c09381677518d31",
+ "synced_at": "2026-11-26T08:23:29+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
