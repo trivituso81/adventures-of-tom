@@ -3357,7 +3357,7 @@
     "est": 0.5
    },
    "tries": 2,
-   "cost": 0.0,
+   "cost": 0,
    "why": "It was made but could not be saved.",
    "do": "Tap Try again; it costs nothing.",
    "result": null,
@@ -3391,7 +3391,7 @@
     "est": 0.5
    },
    "tries": 2,
-   "cost": 0.0,
+   "cost": 0,
    "why": "It was made but could not be saved.",
    "do": "Tap Try again; it costs nothing.",
    "result": null,
@@ -4022,7 +4022,7 @@
     "est": 0.5
    },
    "tries": 2,
-   "cost": 0.0,
+   "cost": 0,
    "why": "",
    "do": "",
    "result": {
@@ -4237,7 +4237,7 @@
     "est": 0.5
    },
    "tries": 2,
-   "cost": 0.0,
+   "cost": 0,
    "why": "",
    "do": "",
    "result": {
@@ -4287,7 +4287,7 @@
     "est": 0.5
    },
    "tries": 2,
-   "cost": 0.0,
+   "cost": 0,
    "why": "",
    "do": "",
    "result": {
@@ -4343,7 +4343,7 @@
     "est": 0.5
    },
    "tries": 2,
-   "cost": 0.0,
+   "cost": 0,
    "why": "",
    "do": "",
    "result": {
@@ -4571,7 +4571,7 @@
     "est": 0.5
    },
    "tries": 2,
-   "cost": 0.0,
+   "cost": 0,
    "why": "",
    "do": "",
    "result": {
@@ -4818,7 +4818,7 @@
     "est": 0.5
    },
    "tries": 2,
-   "cost": 0.0,
+   "cost": 0,
    "why": "",
    "do": "",
    "result": {
@@ -4872,7 +4872,7 @@
     "est": 0.5
    },
    "tries": 2,
-   "cost": 0.0,
+   "cost": 0,
    "why": "",
    "do": "",
    "result": {
@@ -4984,7 +4984,7 @@
     "est": 0.5
    },
    "tries": 2,
-   "cost": 0.0,
+   "cost": 0,
    "why": "",
    "do": "",
    "result": {
@@ -5348,6 +5348,35 @@
    "id": "u-olivia-1795686470",
    "kind": "upload",
    "upload": "uploads/olivia-1795686470.png"
+  },
+  "v-move-lounge-pass-flex-t2": {
+   "lane": "vid",
+   "anim": "move:lounge_pass_flex",
+   "who": "tom",
+   "take": 2,
+   "route": "wan",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects except the card's sparkle. Silent clip.\n\nMOTION: LOUNGE PASS FLEX\nFrom his starting relaxed stance, he quickly pulls a small gold lounge pass card out of his pocket and flashes it up beside his face with a smile at the viewer, while one small white star-shaped sparkle twinkles once on the top right corner of the card. Then he extends his arm out straight toward the left at full length and, chin raised and eyes half closed like a snooty fancy lady, swats the card once with a limp flick of the wrist, holds that pose, then tucks the card back into his pocket and returns to his starting relaxed stance.",
+   "promptRev": 6,
+   "start": "tom",
+   "note": "",
+   "cap": 1,
+   "at": "2026-11-26T18:30:32Z",
+   "state": "queued",
+   "since": "2026-11-26T18:30:32Z",
+   "run": 0,
+   "fal": null,
+   "tries": 0,
+   "cost": 0,
+   "why": "",
+   "do": "",
+   "result": null,
+   "use": null,
+   "left": false,
+   "dry": false,
+   "replay": "",
+   "id": "v-move-lounge-pass-flex-t2",
+   "kind": "video",
+   "pad": 0.8
   }
  }
 }
