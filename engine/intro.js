@@ -152,8 +152,8 @@ function stretchStep() {
   return {t:0,start(){ this.t=0; this.s2=false; player.facing='down'; player.scenePose={f:'st_stiff'}; snd.stretch(); },
     update(dt){ this.t+=dt; if(!this.s2&&this.t>STRETCH_DUR*.75) { this.s2=true; snd.stretch(); }
       const u=Math.min(1,this.t/STRETCH_DUR); let f='st_stiff',prev=null,at0=0,i=0; for(const [n,at] of STRETCH_SEQ) { if(u>=at) { prev=i?STRETCH_SEQ[i-1][0]:null; f=n; at0=at; } i++; }
-      // tomstretch4: each pose fades in over the first 0.06 of the stretch (eased) on top of the one before it, so the poses run into each other (Tom 11-26: "merge seamlessly")
-      const m=Math.min(1,(u-at0)/.06),mix=m*m*(3-2*m);
+      // tomstretch4: each pose fades in over the first 0.015 of the stretch (about 40 ms; tomstretch5 cut it from 0.06 because it looked strange) (eased) on top of the one before it, so the poses run into each other (Tom 11-26: "merge seamlessly")
+      const m=Math.min(1,(u-at0)/.015),mix=m*m*(3-2*m);
       player.scenePose=prev&&mix<1?{f,prev,mix}:{f};
       if(u>=1) { player.scenePose=null; return true; } return false; }};
 }

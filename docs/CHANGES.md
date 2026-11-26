@@ -89,6 +89,10 @@ Card c-guidegen, batched by c-guideflow-7. USE THIS ONE in the Battle Guide (the
 - Getting hit (`body:tnb:hit`, rev 1): Wan job tnb-hit is now rev 1 (prompt file tools/art-library/prompts/wan-tnb-hit-v1.txt); clip tnb_hit cut (48 pictures, 0 to 94 step 2, 1.5x); script tag added to index.html; B3_BODY_CLIPS.tnb.hit = tnb_hit
 - Idle (standing and breathing) (`body:amy:idle`, rev 1): Wan job amy-idle is now rev 1 (prompt file tools/art-library/prompts/wan-amy-idle-v1.txt); clip amy_idle cut (50 pictures, 0 to 147 step 3, loop wrap); script tag added to index.html; B3_BODY_CLIPS.amy.idle = amy_idle (new owner row)
 
+## tomstretch5 (2026-11-26): the stretch's pose fade is about 4 times shorter
+
+Tom (11-26 09:33): the fade between stretch poses "looks very strange and psychedelic"; no jolts, or make it about 10 times more subtle. Kept: no squash or hop on stretch poses, the 2.8 s length. Changed: the fade window is 0.015 of the stretch (about 40 ms, three frames) instead of 0.06 (170 ms), so two poses no longer show through each other for long.
+
 ## tomstretch4 (2026-11-26): Tom's stretch runs smoothly: no bounce, poses fade into each other, a little slower
 
 Tom (11-26 09:16): "stretch frames are too jolty ... he bounces up and down ... should all merge seamlessly ... slowed overall just very slightly". Cause: the scene life effect (squash on every pose change, `actorLife` in engine/emotions.js) fired at each of the 8 stretch poses. Now `st_` poses never squash, each pose fades in over the previous one for 6 percent of the stretch (eased; `stretchStep` in engine/intro.js, drawn in engine/town-render.js), and the stretch lasts 2.8 s instead of 2.4 (17 percent slower). Tested by sampling the pose state in a chapter 1 run (fades 0 to 1 between every pair, no squash, no errors); not looked at on a phone.
