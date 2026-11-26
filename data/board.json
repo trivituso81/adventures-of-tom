@@ -6811,6 +6811,38 @@
      "t": "Made by c-guide-crosswalk (guidecross1): the decisions the page lists for Tom."
     }
    ]
+  },
+  {
+   "id": "c-tomportrait1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Characters",
+   "tag": "tomportrait1",
+   "title": "Tom's new portrait for menus and turn order",
+   "next": "Crop Tom's face from his new painting (tom-hero-v3), bake portraits/tom.png, and check the status screen, turn order and Battle Guide show it.",
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEwUSDJ9vQSuhgX1Q1",
+    "opening": "use this to crop tom's portrait for the menu and turn order etc. i approve full repo access"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by Tom's request in this conversation: \"use this to crop tom's portrait for the menu and turn order etc.\""
+    }
+   ],
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Crops Tom's face from his new painting and bakes it as his portrait for the status screen, turn order, battle panels and Battle Guide.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the bake script and tests exist)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json. Your first push is the commit \"board: start c-tomportrait1\".\n\nTask: art/raw/characters/tom-hero-v3.png is Tom's new painting. Crop his face with tools/sprite-bake/bake_portraits.py (crop saved in data/portrait-crops.json), run python3 tools/portrait_test.py and python3 tools/portraits_test.py, look at the status screen, turn order and Battle Guide in portrait and landscape, add the docs/CHANGES.md entry and push.\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
