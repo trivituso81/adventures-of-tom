@@ -3622,8 +3622,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:23:17Z",
-   "state": "checking",
-   "since": "2026-11-26T09:37:36Z",
+   "state": "done",
+   "since": "2026-11-26T09:43:55Z",
    "run": 45790862688,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -3636,7 +3636,23 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/move-lounge-pass-flex/t1.js",
+    "img": "takes/move-lounge-pass-flex/t1.webp",
+    "frames": 48,
+    "kb": 937,
+    "words": "0 to 141 step 3, impact 105",
+    "gate": {
+     "hold": false,
+     "reasons": [],
+     "faults": [],
+     "vision_ran": true,
+     "spent": 0.0074,
+     "error": null,
+     "words": "The clip gate found nothing wrong."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
