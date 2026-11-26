@@ -1998,8 +1998,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T08:19:40Z",
-   "state": "checking",
-   "since": "2026-11-26T08:35:09Z",
+   "state": "done",
+   "since": "2026-11-26T08:38:57Z",
    "run": 45782279434,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -2012,7 +2012,27 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-tnb-guard/t3.js",
+    "img": "takes/body-tnb-guard/t3.webp",
+    "frames": 62,
+    "kb": 1378,
+    "words": "0 to 122 step 2, hold 36, lowering 104",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "size: shrinks to 0.84x the start picture while the game shows it"
+     ],
+     "faults": [
+      "size"
+     ],
+     "vision_ran": true,
+     "spent": 0.0071,
+     "error": null,
+     "words": "The clip gate flags this take: size: shrinks to 0.84x the start picture while the game shows it."
+    },
+    "n": 3
+   },
    "use": null,
    "left": false,
    "dry": false,
