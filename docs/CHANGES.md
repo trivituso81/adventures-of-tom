@@ -1,3 +1,7 @@
+## portraits7 (2026-11-26): Portraits baked from your saved crops: boppy (made by the portrait-bake Action)
+
+- Tom saved crops in ADMIN > PORTRAIT CROPS (or approved a new hero painting); the Action baked `portraits/<id>.png` and moved `PORTRAIT_V` in `data/portrait-ver.js`, the one stamp every status screen, turn order, battle panel and the Battle Guide use for those pictures (tools/sprite-bake/portrait_autobake.py).
+
 ## tomframes4 (2026-11-26): Tom's newer feelings, listening, thinking and the intro hug are in the game
 
 Card c-tomframes4. Tom's words: "now do Tom's newly approved frames, including hugging the girls in the intro". Not seen on the phone yet.
