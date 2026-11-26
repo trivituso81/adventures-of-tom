@@ -7734,7 +7734,7 @@
    "created": "2026-11-26",
    "changed": "2026-11-26",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukF1rbVFnoe1adhMEML",
+    "url": "https://claude.ai/code/session_01RXeukF1rbVFnoe1adhMEML",
     "opening": "added by the wan-gen job"
    },
    "history": [
@@ -7745,6 +7745,10 @@
     {
      "d": "2026-11-26",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -7773,7 +7777,7 @@
    "created": "2026-11-26",
    "changed": "2026-11-26",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDXGs3AAhsyHm7c3WV",
+    "url": "https://claude.ai/code/session_01RXeukDXGs3AAhsyHm7c3WV",
     "opening": "added by the wan-gen job"
    },
    "history": [
@@ -7788,6 +7792,10 @@
     {
      "d": "2026-11-26",
      "t": "Session started (board: start)."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -7826,6 +7834,26 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDXGs3AAhsyHm7c3WV",
+   "title": "Fix the stopped video rose-whoopee",
+   "first": "2026-11-26T13:05:56Z",
+   "last": "2026-11-26T13:05:56Z",
+   "tags": [],
+   "cards": [
+    "c-wanstop-rose-whoopee-r1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukF1rbVFnoe1adhMEML",
+   "title": "Fix the stopped video rose-raspberry",
+   "first": "2026-11-26T13:05:28Z",
+   "last": "2026-11-26T13:05:28Z",
+   "tags": [],
+   "cards": [
+    "c-wanstop-rose-raspberry-r1"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFamX7pxS3LbNcCVdd",
    "title": "Fix the stopped video rose-lavahop",
@@ -14424,8 +14452,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "5b82c1817a6c9520d88b5468792a00cdaf6144df",
- "synced_at": "2026-11-26T13:03:05+00:00",
+ "synced": "6e10f5cb0b5413beef122998e4e53f291f365a01",
+ "synced_at": "2026-11-26T13:06:16+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
