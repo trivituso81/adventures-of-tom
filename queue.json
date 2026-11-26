@@ -4490,8 +4490,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:35:22Z",
-   "state": "making",
-   "since": "2026-11-26T10:43:57Z",
+   "state": "checking",
+   "since": "2026-11-26T10:46:00Z",
    "run": 45798843411,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -4501,7 +4501,7 @@
     "est": 0.5
    },
    "tries": 1,
-   "cost": 0,
+   "cost": 0.5,
    "why": "",
    "do": "",
    "result": null,
