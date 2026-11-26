@@ -2543,7 +2543,7 @@
   }
  },
  "rose-boop": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -2551,7 +2551,7 @@
    "720p": 0.1,
    "1080p": 0.15
   },
-  "prompt_file": "tools/art-library/prompts/wan-rose-boop-v1.txt",
+  "prompt_file": "tools/art-library/prompts/wan-rose-boop-v2.txt",
   "frame": "art/clips/start/rose-hero.png",
   "fit": "720x1280",
   "frame_fields": [
@@ -2567,7 +2567,7 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. rev 2 (wanstop-rose-boop-r1): two tries failed on feet because she walked a step forward and back; kept all else, changed only that sentence to a lean on the spot with feet flat.",
   "bake": {
    "id": "rose-boop",
    "owner": "rose",

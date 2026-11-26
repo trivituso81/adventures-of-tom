@@ -1,3 +1,7 @@
+## wanstop-rose-boop-r1 (2026-11-26): rose-boop gets a second prompt (leans on the spot instead of stepping) and its next video try is started
+
+Both tries failed the feet check because Rose walked a full step forward and back (lowest row up to 44 px off, limit 1 percent). One sentence changed (`wan-rose-boop-v2.txt`), rev 1 to 2; pad, seed, start picture and the rest kept. No painted pose.
+
 ## wanstop-rose-tacklelunge-r1 (2026-11-26): Rose's tackle video is made again with one sentence changed
 
 The wan-gen Action stopped rose-tacklelunge twice (feet, edge). On the contact sheets she does the tackle but steps forward off her spot and Lamby leaves her arm and reaches the left edge. Changed one sentence of the prompt (`wan-rose-tacklelunge-v2.txt`: two tackle crouches with both feet planted and Lamby held under her arm, where v1 said two lunges to the left on the spot), raised rev to 2. Kept the start picture, seed, pad, bake and wire. The next try is started on card t-rosestage-lab. Nothing for Tom.
