@@ -669,7 +669,7 @@
    "ask": "play",
    "fyi": true,
    "title": "Play the Casa Alvarez scene (chapter 12)",
-   "next": "Press RELOAD, then CHAPTERS > Chapter 12. Visit Doña Carmen's pupuseria first if the game asks, then walk into Casa Alvarez on 2nd Ave. Check: Daisy runs down from the kitchen, the family walks up the hall and stands around Mrs. Alvarez's amber (Tom and Amy on either side of her), nobody moves or stands on an amber block for the rest of the scene, and everyone is on screen in portrait and in landscape. All good if it looks right; Something is wrong with what you saw.",
+   "next": "Press RELOAD, then CHAPTERS > Chapter 12. Visit Do\u00f1a Carmen's pupuseria first if the game asks, then walk into Casa Alvarez on 2nd Ave. Check: Daisy runs down from the kitchen, the family walks up the hall and stands around Mrs. Alvarez's amber (Tom and Amy on either side of her), nobody moves or stands on an amber block for the rest of the scene, and everyone is on screen in portrait and in landscape. All good if it looks right; Something is wrong with what you saw.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -1454,7 +1454,7 @@
     },
     {
      "d": "2026-11-21",
-     "t": "Gemini's Milestone B notes (build voicepurge221, full text in claude/ch1-gemini-report.md section 6.3): Q1 5/5 · Q2 4/5 · Q3 4/5 · Q4 5/5 (6 rounds, 0 KOs) · Q5 5/5 · Q6 4/5 · Q7 4/5. The Big One took exactly 6 rounds with 0 knock-outs. Fights: #1 3 Mudlings (Mudling A, Mudling B, Mudling C - 60 HP each), Grump Hollow (gate), 3 rounds, 0 KOs, ~3.0 min | #2 Bog Toad (106 HP), Skeeter Swarm (78 HP, Jitterflight), Grump Hollow (top left), 3 rounds, 0 KOs, ~2.0 min | #3 Pond Grump, Mudling, Grump Hollow (near middle clearing), 3 rounds, 0 KOs, ~2.0 min | #4 The Big One (610 HP, 6 Composure pips, Muffin-Tin Crown), Grump Hollow (east pond), 6 rounds, 0 KOs, ~4.0 min | #5 Log Lump (166 HP, 4 Composure pips, Mossy Brace), Skeeter Swarm (78 HP), Grump Hollow (middle clearing, post-boss), 3 rounds, 0 KOs, ~2.0 min. Things to act on: Q2, the opening gate fight at 1x speed felt slightly slow between multi-enemy turns (2x was right). Q3, in portrait the TURN label at the top edge looked cut in half (X-04; not reproduced on main at 430x860 in tools/b3_test.py s4, so it may depend on the phone shape). Q6, the BAG shows Not YET with no note on when it unlocks. Q7/X-07, equipment cards still show old Battle 2 stat names (GRIT, COOL, POW), now a fix card from the C11 FAIL. Tom's own Milestone B judgment is still open on t-milestoneb."
+     "t": "Gemini's Milestone B notes (build voicepurge221, full text in claude/ch1-gemini-report.md section 6.3): Q1 5/5 \u00b7 Q2 4/5 \u00b7 Q3 4/5 \u00b7 Q4 5/5 (6 rounds, 0 KOs) \u00b7 Q5 5/5 \u00b7 Q6 4/5 \u00b7 Q7 4/5. The Big One took exactly 6 rounds with 0 knock-outs. Fights: #1 3 Mudlings (Mudling A, Mudling B, Mudling C - 60 HP each), Grump Hollow (gate), 3 rounds, 0 KOs, ~3.0 min | #2 Bog Toad (106 HP), Skeeter Swarm (78 HP, Jitterflight), Grump Hollow (top left), 3 rounds, 0 KOs, ~2.0 min | #3 Pond Grump, Mudling, Grump Hollow (near middle clearing), 3 rounds, 0 KOs, ~2.0 min | #4 The Big One (610 HP, 6 Composure pips, Muffin-Tin Crown), Grump Hollow (east pond), 6 rounds, 0 KOs, ~4.0 min | #5 Log Lump (166 HP, 4 Composure pips, Mossy Brace), Skeeter Swarm (78 HP), Grump Hollow (middle clearing, post-boss), 3 rounds, 0 KOs, ~2.0 min. Things to act on: Q2, the opening gate fight at 1x speed felt slightly slow between multi-enemy turns (2x was right). Q3, in portrait the TURN label at the top edge looked cut in half (X-04; not reproduced on main at 430x860 in tools/b3_test.py s4, so it may depend on the phone shape). Q6, the BAG shows Not YET with no note on when it unlocks. Q7/X-07, equipment cards still show old Battle 2 stat names (GRIT, COOL, POW), now a fix card from the C11 FAIL. Tom's own Milestone B judgment is still open on t-milestoneb."
     }
    ],
    "chat": {
@@ -2906,7 +2906,7 @@
      "ask": "play",
      "words": "tons of extraenous, boring, and unfunny dialog. you have more than an enough info based on the comedy engine we built to do this well. / also, the griffith park area is boring - there is nothing to search for like in chapter 1 grumps hallow - we need a similar idea for this",
      "shot": "",
-     "asked": "Open the game, RELOAD on the title, then CHAPTERS ) Chapter 2 and play it start to finish. It is 73 lines now (was 93): the chapter 1 lessons cut 20 and rewrote 4. First make the voices (card t-ch2voices), so you hear the real takes. Listen for the 4 rewritten lines: (1) scene 4, the boulevard, after the smog pours from the Observatory, Tom: \"Oh, Observatory. Not you.\" (2) scene 6, the grey lemon tree, Tom's text: \"Grace, reporting in. There's a lemon stuck in an orange block, and Nara found a burnt flashbulb right next to it. I wrote it down.\" (3) Grace's text back: \"Tata, don't touch it! Send me a picture of both. And don't let Nara lick it.\" (4) scene 7, the Big Shake stands up, Tom: \"GAH! I've got you, Nara. We're fine. We're both fine.\" Check the cuts left no gaps: scene 1 has no \"Ha! It WOULD\" and no \"That is a very purple sky\"; scene 3 has no TNB line after Mr. Washington's third greeting and none after the first Smoglet; scene 4 ends on Tom's Observatory line; the Ticket Flurry fight starts right on \"Denied.\"; scene 6 has no \"Excuse me. Sorry. I had to check\", no flashbulb line before the text and no \"Two and a half\"; scene 7 goes from the Big Shake's first line straight to Tom's \"You're wearing the Observatory\"; scene 8 ends on TNB's \"Sour dough\"; scene 9 has no \"A second sentence!\", Doña Carmen's \"I never said that\" goes straight to Miss Odette, and the chapter ends on Nara's crumbs with no last line. Report anything off with the REPORT tab (a line you would cut, or a cut you want back). When you finish, the chapter 3 build (card c-ch3build) can start; your notes become lessons for chapter 4."
+     "asked": "Open the game, RELOAD on the title, then CHAPTERS ) Chapter 2 and play it start to finish. It is 73 lines now (was 93): the chapter 1 lessons cut 20 and rewrote 4. First make the voices (card t-ch2voices), so you hear the real takes. Listen for the 4 rewritten lines: (1) scene 4, the boulevard, after the smog pours from the Observatory, Tom: \"Oh, Observatory. Not you.\" (2) scene 6, the grey lemon tree, Tom's text: \"Grace, reporting in. There's a lemon stuck in an orange block, and Nara found a burnt flashbulb right next to it. I wrote it down.\" (3) Grace's text back: \"Tata, don't touch it! Send me a picture of both. And don't let Nara lick it.\" (4) scene 7, the Big Shake stands up, Tom: \"GAH! I've got you, Nara. We're fine. We're both fine.\" Check the cuts left no gaps: scene 1 has no \"Ha! It WOULD\" and no \"That is a very purple sky\"; scene 3 has no TNB line after Mr. Washington's third greeting and none after the first Smoglet; scene 4 ends on Tom's Observatory line; the Ticket Flurry fight starts right on \"Denied.\"; scene 6 has no \"Excuse me. Sorry. I had to check\", no flashbulb line before the text and no \"Two and a half\"; scene 7 goes from the Big Shake's first line straight to Tom's \"You're wearing the Observatory\"; scene 8 ends on TNB's \"Sour dough\"; scene 9 has no \"A second sentence!\", Do\u00f1a Carmen's \"I never said that\" goes straight to Miss Odette, and the chapter ends on Nara's crumbs with no last line. Report anything off with the REPORT tab (a line you would cut, or a cut you want back). When you finish, the chapter 3 build (card c-ch3build) can start; your notes become lessons for chapter 4."
     }
    ],
    "chat": {
@@ -2980,7 +2980,7 @@
     ],
     "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
     "effort": "medium (one report, a small piece of work)",
-    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch2play and t-ch2play in data/board.json, history included. Your first push is the commit board: start c-fix-ch2play.\n\nTom tested and found problems:\n1. Card t-ch2play (Play chapter 2 on your phone and report, ask play). He was asked: Open the game, RELOAD on the title, then CHAPTERS ) Chapter 2 and play it start to finish. It is 73 lines now (was 93): the chapter 1 lessons cut 20 and rewrote 4. First make the voices (card t-ch2voices), so you hear the real takes. Listen for the 4 rewritten lines: (1) scene 4, the boulevard, after the smog pours from the Observatory, Tom: \"Oh, Observatory. Not you.\" (2) scene 6, the grey lemon tree, Tom's text: \"Grace, reporting in. There's a lemon stuck in an orange block, and Nara found a burnt flashbulb right next to it. I wrote it down.\" (3) Grace's text back: \"Tata, don't touch it! Send me a picture of both. And don't let Nara lick it.\" (4) scene 7, the Big Shake stands up, Tom: \"GAH! I've got you, Nara. We're fine. We're both fine.\" Check the cuts left no gaps: scene 1 has no \"Ha! It WOULD\" and no \"That is a very purple sky\"; scene 3 has no TNB line after Mr. Washington's third greeting and none after the first Smoglet; scene 4 ends on Tom's Observatory line; the Ticket Flurry fight starts right on \"Denied.\"; scene 6 has no \"Excuse me. Sorry. I had to check\", no flashbulb line before the text and no \"Two and a half\"; scene 7 goes from the Big Shake's first line straight to Tom's \"You're wearing the Observatory\"; scene 8 ends on TNB's \"Sour dough\"; scene 9 has no \"A second sentence!\", Doña Carmen's \"I never said that\" goes straight to Miss Odette, and the chapter ends on Nara's crumbs with no last line. Report anything off with the REPORT tab (a line you would cut, or a cut you want back). When you finish, the chapter 3 build (card c-ch3build) can start; your notes become lessons for chapter 4. He wrote: tons of extraenous, boring, and unfunny dialog. you have more than an enough info based on the comedy engine we built to do this well. / also, the griffith park area is boring - there is nothing to search for like in chapter 1 grumps hallow - we need a similar idea for this\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T02:15:31.443Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch2play to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch2play, and give the build fix-ch2play a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch2play and t-ch2play in data/board.json, history included. Your first push is the commit board: start c-fix-ch2play.\n\nTom tested and found problems:\n1. Card t-ch2play (Play chapter 2 on your phone and report, ask play). He was asked: Open the game, RELOAD on the title, then CHAPTERS ) Chapter 2 and play it start to finish. It is 73 lines now (was 93): the chapter 1 lessons cut 20 and rewrote 4. First make the voices (card t-ch2voices), so you hear the real takes. Listen for the 4 rewritten lines: (1) scene 4, the boulevard, after the smog pours from the Observatory, Tom: \"Oh, Observatory. Not you.\" (2) scene 6, the grey lemon tree, Tom's text: \"Grace, reporting in. There's a lemon stuck in an orange block, and Nara found a burnt flashbulb right next to it. I wrote it down.\" (3) Grace's text back: \"Tata, don't touch it! Send me a picture of both. And don't let Nara lick it.\" (4) scene 7, the Big Shake stands up, Tom: \"GAH! I've got you, Nara. We're fine. We're both fine.\" Check the cuts left no gaps: scene 1 has no \"Ha! It WOULD\" and no \"That is a very purple sky\"; scene 3 has no TNB line after Mr. Washington's third greeting and none after the first Smoglet; scene 4 ends on Tom's Observatory line; the Ticket Flurry fight starts right on \"Denied.\"; scene 6 has no \"Excuse me. Sorry. I had to check\", no flashbulb line before the text and no \"Two and a half\"; scene 7 goes from the Big Shake's first line straight to Tom's \"You're wearing the Observatory\"; scene 8 ends on TNB's \"Sour dough\"; scene 9 has no \"A second sentence!\", Do\u00f1a Carmen's \"I never said that\" goes straight to Miss Odette, and the chapter ends on Nara's crumbs with no last line. Report anything off with the REPORT tab (a line you would cut, or a cut you want back). When you finish, the chapter 3 build (card c-ch3build) can start; your notes become lessons for chapter 4. He wrote: tons of extraenous, boring, and unfunny dialog. you have more than an enough info based on the comedy engine we built to do this well. / also, the griffith park area is boring - there is nothing to search for like in chapter 1 grumps hallow - we need a similar idea for this\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-22T02:15:31.443Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch2play to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch2play, and give the build fix-ch2play a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "t-ch2play",
    "auto": true,
@@ -5000,7 +5000,7 @@
    "lane": "tom",
    "col": "up",
    "ask": "play",
-   "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s22ch12 or a later name. Then CHAPTERS > Chapter 12 (or Take me there on the dashboard) and play to the last scene: Marlowe greys Jefferson Boulevard, Doña Carmen, the Alvarez house, then Gridlock Prime at the intersection (about 25 minutes). Judge the mechanics only: is the fight fun, is the pace right (aim 5 to 7 rounds), can you read the screen and the turn bar in portrait and landscape, does Four-Way Red Light read clearly (it takes 30% less damage and gains Defense and Attack for 2 turns and a Gridlock joins the Front; Panic Boil or a Break ends the guard), does Drench or Racket feel like the answer, do the tips on the message line tell you what to do. Known and left alone: recorded lines in the scenes still talk about Rush Hour and the old Tombo; recorded lines are never reworded. Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays chapter 12 on the old battle. The chapter 13 card (c-b3s22ch13) reads your note.",
+   "next": "Open the game, press RELOAD on the title screen, and check the build chip at the top left says b3s22ch12 or a later name. Then CHAPTERS > Chapter 12 (or Take me there on the dashboard) and play to the last scene: Marlowe greys Jefferson Boulevard, Do\u00f1a Carmen, the Alvarez house, then Gridlock Prime at the intersection (about 25 minutes). Judge the mechanics only: is the fight fun, is the pace right (aim 5 to 7 rounds), can you read the screen and the turn bar in portrait and landscape, does Four-Way Red Light read clearly (it takes 30% less damage and gains Defense and Attack for 2 turns and a Gridlock joins the Front; Panic Boil or a Break ends the guard), does Drench or Racket feel like the answer, do the tips on the message line tell you what to do. Known and left alone: recorded lines in the scenes still talk about Rush Hour and the old Tombo; recorded lines are never reworded. Do not review animations. Then press All good on this card, or Something is wrong and type what you saw. To compare, ADMIN > Battle system > Story battles > OLD plays chapter 12 on the old battle. The chapter 13 card (c-b3s22ch13) reads your note.",
    "blocks": [],
    "fyi": true,
    "jump": {
@@ -7085,7 +7085,7 @@
    "ask": "animations",
    "fyi": true,
    "title": "Rose's twelve moves are being made",
-   "next": "Nothing to tap. The wan-gen Action is making 8 prop pictures and 11 body videos for Rose (about $7, inside the auto limits). When this card shows done, start a Battle 3 fight with Rose in the party (ADMIN > BATTLE LAB > NEW BATTLE) and play her moves. A Move Lab for Rose does not exist yet; card c-movelab-rose adds it.",
+   "next": "Nothing to tap. The wan-gen Action is making 8 prop pictures and 11 body videos for Rose (about $7, inside the auto limits). When this card shows done, start a Battle 3 fight with Rose in the party (ADMIN > BATTLE LAB > NEW BATTLE) and play her moves. The Move Lab now has a ROSE picker (movelab2).",
    "wan": {
     "jobs": [
      "stage-rose-cushion",
@@ -7144,7 +7144,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Lab for any person, starting with Rose",
-   "next": "The Move Lab only loads Tom's loadout (engine/b3-movelab.js). Adds a person picker so Tom can judge Rose's twelve moves with Keep, Tweak or Replace.",
+   "next": "Shipped as movelab2: the Move Lab has a TOM / ROSE picker.",
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26",
@@ -7175,7 +7175,8 @@
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
-   "started_at": "2026-11-26T09:55:26+00:00"
+   "started_at": "2026-11-26T09:55:26+00:00",
+   "after": "t-movelab-rose-play"
   },
   {
    "id": "b-guideuse-45793298334",
@@ -7222,6 +7223,29 @@
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26"
+  },
+  {
+   "id": "t-movelab-rose-play",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "play",
+   "fyi": true,
+   "title": "Play Rose's moves in the Move Lab",
+   "next": "Open ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB, tap ROSE at the top of the panel, and tap one of her moves: it plays in the fight and shows its length. Most say 'video not baked yet' until the card 'Rose's twelve moves are being made' is done; then play each and press Keep, Tweak or Replace.",
+   "jump": {
+    "fight": "new",
+    "i": 98
+   },
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by c-movelab-rose (movelab2)."
+    }
+   ]
   }
  ],
  "sessions": [

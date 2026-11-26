@@ -96,7 +96,7 @@ def main():
         need(sum(len(g['moves']) for g in L)==8,'L0 eight moves are listed')
         need(pg.evaluate("()=>/MOVE LAB: TOM/.test(document.getElementById('b3-ml').innerText)&&document.querySelectorAll('#b3-ml .ml-m').length===8"),'L0 the panel shows eight moves')
         # the Lab row stands first on the NEW BATTLE list
-        need(pg.evaluate("()=>{ const c=SPLASH_MODES.lab3.choices(); return c.filter(x=>!/^PROOF/.test(x.name))[0].name==='MOVE LAB: TOM'; }"),'L0 MOVE LAB: TOM is the first fight on the NEW BATTLE list (after the Grace guard proof)')
+        need(pg.evaluate("()=>{ const c=SPLASH_MODES.lab3.choices(); return c.filter(x=>!/^PROOF/.test(x.name))[0].name==='MOVE LAB'; }"),'L0 MOVE LAB: TOM is the first fight on the NEW BATTLE list (after the Grace guard proof)')
         for lay in ('portrait','landscape'):
             if lay=='landscape':
                 pg.evaluate("()=>{ window.__slow=1; b3Exit(); }"); pg.wait_for_timeout(500)
