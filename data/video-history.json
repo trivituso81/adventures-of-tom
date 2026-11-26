@@ -1,6 +1,6 @@
 {
  "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
- "built": "2026-11-26T09:15Z",
+ "built": "2026-11-26T09:27Z",
  "videos": [
   {
    "file": "deedee-cast-r3.mp4",
@@ -1466,11 +1466,11 @@
    "attempt": 1,
    "at": "2026-11-21T17:30:03.172246Z",
    "price": 0.5,
-   "verdict": "in_game",
+   "verdict": "unchecked",
    "reasons": [
     "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
    ],
-   "in_game": "rose-give",
+   "in_game": null,
    "strip": "art/video-history/rose-give-r1.webp",
    "pad": null,
    "model": "alibaba"
@@ -1594,11 +1594,11 @@
    "attempt": 1,
    "at": "2026-11-21T04:18:54.236926Z",
    "price": 0.5,
-   "verdict": "in_game",
+   "verdict": "unchecked",
    "reasons": [
     "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
    ],
-   "in_game": "rose-ko",
+   "in_game": null,
    "strip": "art/video-history/rose-ko-r2.webp",
    "pad": null,
    "model": "alibaba"
@@ -1706,11 +1706,11 @@
    "attempt": 1,
    "at": "2026-11-21T03:12:03.153250Z",
    "price": 0.5,
-   "verdict": "in_game",
+   "verdict": "unchecked",
    "reasons": [
     "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
    ],
-   "in_game": "rose-run",
+   "in_game": null,
    "strip": "art/video-history/rose-run-r1.webp",
    "pad": null,
    "model": "alibaba"
