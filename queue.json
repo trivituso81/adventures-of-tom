@@ -4398,8 +4398,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:35:16Z",
-   "state": "checking",
-   "since": "2026-11-26T10:35:36Z",
+   "state": "done",
+   "since": "2026-11-26T10:43:50Z",
    "run": 45798843411,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -4412,7 +4412,31 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-boppy-dodge/t1.js",
+    "img": "takes/body-boppy-dodge/t1.webp",
+    "frames": 39,
+    "kb": 497,
+    "words": "0 to 76 step 2",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "edge: 13 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)",
+      "dodge_forward: the body goes forward 15% of the height (should go back or to the side)",
+      "vision d_back: Figure steps and leans forward multiple times with forward leg movement.; Mostly idle standing, side steps, and gestures; no clear backward dodge movement."
+     ],
+     "faults": [
+      "d_back",
+      "dodge_forward",
+      "edge"
+     ],
+     "vision_ran": true,
+     "spent": 0.0071,
+     "error": null,
+     "words": "The clip gate flags this take: edge: 13 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground); dodge_forward: the body goes forward 15% of the height (should go back or to the side); vision d_back: Figure steps and leans forward multiple times with forward leg movement.; Mostly idle standing, side steps, and gestures; no clear backward dodge movement.."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
