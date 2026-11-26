@@ -6820,7 +6820,7 @@
   {
    "id": "c-tomportrait1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Characters",
    "tag": "tomportrait1",
    "title": "Tom's new portrait for menus and turn order",
@@ -6840,6 +6840,10 @@
     {
      "d": "2026-11-26",
      "t": "Built tomportrait1: cropped tom-hero-v3, rebaked portraits/tom.png, looked at the turn bar and party panel in portrait. Not seen on the phone yet."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as tomportrait1: Tom's face in the status screen, turn order, battle panels and Battle Guide is now cropped from his new painting"
     }
    ],
    "after": "nothing for Tom: end",
@@ -6851,10 +6855,23 @@
     "model": "Claude Sonnet 5.5 (row B: the bake script and tests exist)",
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json. Your first push is the commit \"board: start c-tomportrait1\".\n\nTask: art/raw/characters/tom-hero-v3.png is Tom's new painting. Crop his face with tools/sprite-bake/bake_portraits.py (crop saved in data/portrait-crops.json), run python3 tools/portrait_test.py and python3 tools/portraits_test.py, look at the status screen, turn order and Battle Guide in portrait and landscape, add the docs/CHANGES.md entry and push.\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-26"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukEwUSDJ9vQSuhgX1Q1",
+   "title": "Tom's new portrait for menus and turn order",
+   "first": "2026-11-26T00:29:29-08:00",
+   "last": "2026-11-26T00:40:08-08:00",
+   "tags": [
+    "tomportrait1"
+   ],
+   "cards": [
+    "c-tomportrait1"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGEWPtNAyCyFc2nvtK",
    "title": "Battle Guide: edit the animation prompt before generating",
@@ -6865,16 +6882,6 @@
    ],
    "cards": [
     "c-guide-editprompt"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEwUSDJ9vQSuhgX1Q1",
-   "title": "Tom's new portrait for menus and turn order",
-   "first": "2026-11-26T00:29:29-08:00",
-   "last": "2026-11-26T00:29:29-08:00",
-   "tags": [],
-   "cards": [
-    "c-tomportrait1"
    ]
   },
   {
@@ -13311,8 +13318,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "d4f4cfbe132163dd0ac2665b8d1d45b7fa8985c9",
- "synced_at": "2026-11-26T08:36:39+00:00",
+ "synced": "30a2e613ee58fdb6a45a9fa6eef59a63fdab06e9",
+ "synced_at": "2026-11-26T08:41:04+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
