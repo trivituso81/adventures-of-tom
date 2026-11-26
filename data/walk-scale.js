@@ -15,7 +15,7 @@ const WALK_SCALE={
   olivia:{inches:68,rows:42.444,k:0.9477},
   ellie:{inches:62,rows:43.111,k:0.8507},
   grace:{inches:50,rows:39.3,k:0.7526},
-  rose:{inches:40,rows:35.222,k:0.6718},
+  rose:{inches:40,rows:35.333,k:0.6697},
   nara:{inches:42,rows:31.0,k:0.8015},
 };
 for(const id in WALK_SCALE) if(OW[id]) OW[id].k=WALK_SCALE[id].k;

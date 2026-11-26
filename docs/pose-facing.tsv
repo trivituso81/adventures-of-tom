@@ -15,14 +15,14 @@ grace	em_scared	r
 grace	em_surprised	r
 grace	em_proud	r
 grace	em_unimpressed	r
-rose	em_happy	r
+rose	em_happy	f
 rose	em_loving	f
 rose	em_sad	f
 rose	em_angry	f
-rose	em_scared	r
-rose	em_surprised	r
+rose	em_scared	f
+rose	em_surprised	f
 rose	em_proud	r
-rose	em_unimpressed	r
+rose	em_unimpressed	f
 deedee	em_happy	l
 deedee	em_loving	l
 deedee	em_sad	f
@@ -577,7 +577,7 @@ grace	tk_think	r
 rose	tk_tell	r
 rose	tk_point	r
 rose	tk_ask	f
-rose	tk_answer	r
+rose	tk_answer	f
 rose	tk_think	r
 amy	tk_tell	r
 amy	tk_point	r

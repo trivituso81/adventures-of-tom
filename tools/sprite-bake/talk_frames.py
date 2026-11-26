@@ -65,8 +65,14 @@ def walk_head_share(cid):
     return p * f / (1 - p + p * f) if p else None
 
 
+# roseframes (2026-11-26): the reader above takes the mouth for the chin on Rose's new big-headed talking sheet (reads .21; ruler on the painted figures: chin at .31 to .32 of
+# the height, the same as her walk stand frame), which sent the head growth to x1.77 and tore the hair. Hand-set, like TALK_FIX.
+TALK_SHARE = {'rose': .315}
+
+
 def talk_head_share(cid, figs):
     """Chin row over height on the painted Telling and Pointing figures (the two standing ones), or None when it cannot be read."""
+    if cid in TALK_SHARE: return TALK_SHARE[cid]
     import emotion_chin as EC
     try:
         bx = EC._boxes(cid, figs[:2]); raw = [EC._read(f, b) for f, b in zip(figs[:2], bx)]

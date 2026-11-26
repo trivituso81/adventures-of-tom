@@ -1,4 +1,7 @@
 [
+{"tag":"cutpolish1","at":"2026-11-19T11:40:17-08:00","what":"Cutscene lifecycle: the girls walk with Tom, popups queue, no (A) button between lines, speakers hold their pose","card":"b-cutpolish1","theme":"Story and Dialogue"},
+{"tag":"b3s8","at":"2026-11-19T11:26:07-08:00","what":"New battle: video clips play in fights, with the Big One's attacks (Lab only)","card":"b-b3s8","theme":"Battle Animations"},
+{"tag":"board1","at":"2026-11-19T10:44:16-08:00","what":"ADMIN > BOARD, a kanban of every open item by who has the next move","card":"b-board1","theme":"Tools"},
 {"tag":"b3s7","at":"2026-11-19T08:39:32-08:00","what":"New battle: tap to preview a move, the recommended move, and Rose Mode pictures (Lab only)","card":"b-b3s7","theme":"Battle System"},
 {"tag":"clipgen2b","at":"2026-11-19T08:32:36-08:00","what":"Chapter 1's 67 battle clips are made, approved and baked; a bake started by hand now starts the publish","card":"b-clipgen2b","theme":"Battle Animations"},
 {"tag":"artbake1488","at":"2026-11-19T16:28:48+00:00","what":"","kind":"house"},

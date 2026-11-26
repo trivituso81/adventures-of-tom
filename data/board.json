@@ -8656,7 +8656,7 @@
    "theme": "Characters",
    "lane": "claude",
    "col": "prog",
-   "next": "In progress: baking Rose's new walking (v3), feelings (v4), talking (v3) and listening (v2) sheets, the same way as Tom's.",
+   "next": "Shipped as roseframes: Rose's new walking, feelings, talking, thinking and listening pictures are in the game. Tom looks at them on his phone (card t-roseframesplay).",
    "blocks": [],
    "changed": "2026-11-26",
    "created": "2026-11-26",
@@ -8673,6 +8673,10 @@
     {
      "d": "2026-11-26",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Built roseframes: walk v3, feelings v4, talk v3 and listen v2 baked for Rose only. listen-v2 is a 4 up strip: cell 1 is her listening pose, cell 2 her thinking pose. Fixed a head-size misread on the new talking sheet (x1.77 tore the hair; now x1.30) and the framing of her plain dialogue face. Tests: listening reaction test 0 misses, heights and pose editor tests pass."
     }
    ],
    "after": "t-roseframesplay",
@@ -8694,7 +8698,7 @@
    "col": "up",
    "ask": "play",
    "fyi": true,
-   "next": "Not ready yet: opens when Rose's frames are pushed.",
+   "next": "Open the game, RELOAD on the title (if it still looks old, close the home-screen app and open it again), then CHAPTERS > Chapter 1. Look at Rose in the story scenes and in dialogue: her walking, her feelings and talking poses and her listening and thinking poses should be the new pink hoodie and one size, matching her walking size. Her hero painting, menu portrait and battle videos are still the old yellow dress. Tell me with the REPORT tab which pose is wrong.",
    "jump": {
     "chapter": 1
    },
@@ -8705,6 +8709,10 @@
     {
      "d": "2026-11-26",
      "t": "Made by roseframes."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Updated by roseframes: build is in."
     }
    ]
   },
