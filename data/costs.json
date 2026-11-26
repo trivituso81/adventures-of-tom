@@ -1450,6 +1450,15 @@
    "source": "wan-gen run",
    "at": "2026-11-26T13:17:56Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45823476031"
+  },
+  {
+   "service": "xai",
+   "date": "2026-11-26",
+   "amount": 0.0079,
+   "what": "Battle Guide takes: clip gate look checks on 1 take",
+   "source": "clip-gen run (guide takes)",
+   "at": "2026-11-26T18:37:55Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45877017620"
   }
  ],
  "balances": [
