@@ -8628,6 +8628,10 @@
     {
      "d": "2026-11-26",
      "t": "Tom: \"Nothing happens in the battle guide animation tabs.\" New card, first push of the session."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as guidefix1: the Battle Guide Animations tab works again (page read an old manifest format). Old C1 to C13 checks in tools/battle_guide_test.py still stop early; a Claude card should update them."
     }
    ],
    "prompt": {
@@ -8638,7 +8642,8 @@
     "model": "Claude Sonnet 5.5 (row C: small fix, tests catch mistakes)",
     "effort": "medium (one known place)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guide-animtabs in data/board.json. Fix battle-guide.html so the Animations tab loads with the newer guide-manifest.json format, and push with build guidefix1.\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "after": "nothing for Tom: end"
   }
  ],
  "sessions": [

@@ -168,3 +168,10 @@ Card c-guide-editprompt. Tom (11-26): "in the battle guide i need the ability to
 - Warns (second tap keeps) when an edit adds a word that pulls toward the wrong look (pixel art, 16-bit, sprite, gouache, green screen); refuses an empty prompt.
 - Checked on a phone-width screen: open, edit, save, reload (still there), warning, empty, reset. The `guideedit1` checks are in `tools/battle_guide_test.py`; the full Guide suite already stops earlier on live queue data (a fal out-of-credit row), the same with and without this change.
 
+
+## guidefix1 (2026-11-26): the Battle Guide Animations tab works again
+
+Card c-guide-animtabs. Tom: "Nothing happens in the battle guide animation tabs." The Animations list threw an error (`MANI.summary.decide` undefined) because the c-rosestage build rewrote `data/guide-manifest.json` in a new format while the page still read the old one, so the tab never drew.
+- `battle-guide.html`: the old crosswalk code (What Tom has to do, move manifest blocks) now loads only when the file is in the old format. The newer What is done block is unchanged.
+- Checked at phone width (466) and Duo unfolded (951): the Animations tab lists everything, a person's page opens, the player plays, no page errors. `tools/guide_manifest_test.py` passes.
+- Not fixed: the C1 to C13 checks in `tools/battle_guide_test.py` still expect the old manifest format and stop early (`MC.MANIFESTS` missing). They already failed before this build.

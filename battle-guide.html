@@ -252,7 +252,7 @@ async function boot(){
     fetch('tools/art-library/wangen-jobs.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{JOBS=j;planRefresh();}).catch(()=>{});   // animplan1: the video jobs and their rev, for the Plan view
     fetch('data/guide-manifest.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{if(j){j.by={};j.moves.forEach(m=>{if(m.moveId)j.by[m.moveId]=m;});MAN=j;}}).catch(()=>{});   // manifest1
     fetch('data/guide-words.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{GWORDS=j;}).catch(()=>{});   // guideflow5: the words of each failure (X1 and X2 are the page's own)
-    MANI_P=fetch('data/guide-manifest.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{MANI=j;try{if(tab==='anims'&&sel&&typeof renderDetailKeep==='function')renderDetailKeep();}catch(e){}return j;}).catch(()=>null);
+    MANI_P=fetch('data/guide-manifest.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{MANI=(j&&j.summary&&j.bySkill)?j:null;try{if(tab==='anims'&&sel&&typeof renderDetailKeep==='function')renderDetailKeep();}catch(e){}return j;}).catch(()=>null);
     PLAN_DOC=await fetch('data/guide-planned.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).catch(()=>null);   // battleguide2: everything planned and not built (tools/guide_planned.py)
     build();route();qStart();
   }catch(e){$('list').innerHTML='<div id="boot" class="err">'+esc(e.message)+'. Open this page again in a minute; if it stays, tell Claude.</div>';}
