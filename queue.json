@@ -1728,8 +1728,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T08:12:23Z",
-   "state": "checking",
-   "since": "2026-11-26T08:23:19Z",
+   "state": "done",
+   "since": "2026-11-26T08:29:48Z",
    "run": 45782279434,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -1739,10 +1739,30 @@
     "est": 0.5
    },
    "tries": 1,
-   "cost": 0,
+   "cost": 0.0,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-tom-guard/t2.js",
+    "img": "takes/body-tom-guard/t2.webp",
+    "frames": 62,
+    "kb": 1188,
+    "words": "0 to 122 step 2, hold 36, lowering 98",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "vision g_cover: Hands cover mouth/nose but forearms do not shield face and chest like a block.; Hands cover mouth but forearms do not shield face and chest like a block."
+     ],
+     "faults": [
+      "g_cover"
+     ],
+     "vision_ran": true,
+     "spent": 0.0039,
+     "error": null,
+     "words": "The clip gate flags this take: vision g_cover: Hands cover mouth/nose but forearms do not shield face and chest like a block.; Hands cover mouth but forearms do not shield face and chest like a block.."
+    },
+    "n": 2
+   },
    "use": null,
    "left": false,
    "dry": false,
