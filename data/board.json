@@ -8801,6 +8801,28 @@
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26"
+  },
+  {
+   "id": "c-listengroup",
+   "tag": "listengroup1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "Art Library: listening poses move into each character",
+   "next": "Move the Listening poses section into each person's own section and add the missing listening pose for TNB, Amy and Justin.",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGdxnKEdxCfrPSgRcK",
+    "opening": "in art library, move the listening poses into each character's section"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Tom: \"move the listening poses into each character's section instead of a separate listening section. ensure all main characters have a listening item (eg TNB is missing)\"."
+    }
+   ],
+   "prompt": "What this session does: moves the six Listening poses entries in the Art Library into each person's own section and adds listening entries for TNB, Amy and Justin.\nBefore you paste: nothing to do first.\nModel: Claude Sonnet 5.5 (row for small data and tool edits), effort medium.\nPrompt: Read data/board.json and claude/handoff-rules.md. Continue card c-listengroup (tag listengroup1): in tools/art-library/listen-prompts.js every entry takes its group from groups.js, data/art-prompts.json matches, tnb-listen, amy-listen and justin-listen exist, then test and push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
   }
  ],
  "sessions": [
