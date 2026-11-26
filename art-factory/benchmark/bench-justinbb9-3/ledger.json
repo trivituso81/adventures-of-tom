@@ -1,0 +1,21 @@
+{
+  "cap": 5.0,
+  "total": 0.378,
+  "rows": [
+    {
+      "label": "hero cutout (birefnet)",
+      "usd": 0.021,
+      "service": "fal"
+    },
+    {
+      "label": "start frame attempt 1: Gemini hand edit + 3 judge calls",
+      "usd": 0.1785,
+      "service": "google"
+    },
+    {
+      "label": "start frame attempt 2: Gemini hand edit + 3 judge calls",
+      "usd": 0.1785,
+      "service": "google"
+    }
+  ]
+}
