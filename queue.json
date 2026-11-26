@@ -4531,15 +4531,43 @@
    "note": "",
    "cap": 0,
    "at": "2026-11-26T09:47:53Z",
-   "state": "checking",
-   "since": "2026-11-26T09:48:00Z",
+   "state": "done",
+   "since": "2026-11-26T09:49:36Z",
    "run": 45795054908,
    "fal": null,
    "tries": 1,
    "cost": 0,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "path": "startpics/olivia-hero.png",
+    "mirrored": false,
+    "own": true,
+    "checks": [
+     {
+      "id": "magenta",
+      "ok": true,
+      "say": "the background is flat magenta (FF00FF is asked for)"
+     },
+     {
+      "id": "flat",
+      "ok": true,
+      "say": "the edges are clear (100.0 percent background)"
+     },
+     {
+      "id": "inside",
+      "ok": true,
+      "say": "the whole figure is inside the frame (smallest margin 1.9 percent of the picture)"
+     },
+     {
+      "id": "tall",
+      "ok": true,
+      "say": "the figure is 96 percent of the picture height (at least 60)"
+     }
+    ],
+    "main": false,
+    "note": ""
+   },
    "use": null,
    "left": false,
    "dry": false,
