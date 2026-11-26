@@ -6911,6 +6911,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFUy1ZAKH1RRjtXyko",
+   "title": "Install Tom's new walk, feelings, talking, listen frames",
+   "first": "2026-11-26T00:55:22-08:00",
+   "last": "2026-11-26T00:55:22-08:00",
+   "tags": [],
+   "cards": [
+    "c-tomframes"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEwUSDJ9vQSuhgX1Q1",
    "title": "Tom's new portrait for menus and turn order",
    "first": "2026-11-26T00:29:29-08:00",
@@ -13368,8 +13378,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "ec69c75f6936fdee36ea6d0f79488a0a0f94cc69",
- "synced_at": "2026-11-26T08:50:30+00:00",
+ "synced": "1a3ac354cad0ae658e2195c02653a65531e2b91a",
+ "synced_at": "2026-11-26T08:56:08+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
