@@ -16,7 +16,7 @@ P = lambda n: os.path.join(HERE, n)
 
 START = ("Keep this exact character from the reference image: same face, hair, beard, build, clothes, tool belt and hand-painted realistic caricature style; he is a tall man, 6 foot 4, slim build. Justin in a neutral idle battle stance: standing relaxed with feet planted flat, body turned three-quarters toward screen-left, facing three-quarters left. Expression: calm, deadpan contractor focus, mouth closed, relaxed eyebrows, no smile, no scowl, no open mouth. In his right hand he holds ONE flat, palm-sized yellow electronic stud finder: a flat rectangular yellow tool with a small screen, no antenna, not a walkie-talkie, held at waist height. ONE steel claw hammer is tucked into his tool belt at his hip. His left hand is empty and relaxed at his side. There is exactly one hammer in the picture and it is in the belt, not in either hand. 16:9 landscape frame, fixed camera: his full body from boots to hair fills about 55 percent of the frame height, centered horizontally, boots 12 percent above the bottom edge, wide margin of empty green on all four sides, nothing cropped. Background is one solid flat pure #00FF00 green, no floor, no ground shadow, no gradient. No glowing, no beams, no rings, no sparks, no effects.")
 MOTION = ("Locked static camera, zero zoom, zero scale drift. The tall contractor remains facing three-quarters left the entire time. He steps up with calm deadpan focus, glides the flat yellow stud finder smoothly across empty air in front of him and pauses briefly, draws the single claw hammer from his tool belt for one crisp rap forward into empty air with the flat of the hammer, tucks the hammer cleanly back into his tool belt, gives a brisk satisfied nod, and steps back into his exact starting neutral idle stance.")
-NEG = ("turning right, bobblehead proportions, hitting stud finder, smashing props, duplicate hammer, hand-swapping props, prop morphing, floating rings, target circles, reticles, chalk lines, glowing bursts, beams, sparks, comic stars, shouting, angry face, floor shadow, textured green, olive background, camera movement, zoom, scale drift")
+NEG = ("turning right, bobblehead proportions, hitting stud finder, smashing props, duplicate hammer, hand-swapping props, prop morphing, floating rings, target circles, reticles, chalk lines, glowing bursts, beams, sparks, comic stars, shouting, angry face, floor shadow, textured green, olive background, camera movement, zoom, scale drift, hammer in front of face, hammer blocking face, motion blur, hand on hip")
 
 def say(*a): print(time.strftime('%H:%M:%S'), *a, flush=True)
 def spent():
@@ -41,12 +41,12 @@ def main():
     keyframe('start.png', START, [hero])
     if os.environ.get('STAGE') == 'end': say('stage end only: stopping before the video, spent $%.4f' % spent()); return
     if not os.path.exists(P('raw.mp4')):
-        guard(EST_VID); say('making video (Kling v3 Pro image-to-video, 6 s, cfg 0.95, start image only)')
+        guard(EST_VID); say('making video (Kling v3 Pro image-to-video, 6 s, cfg 0.85, start image only)')
         live = fal.price(VID); est = falq.apply_live(EST_VID if not live else 0, live, 'video', 5) or EST_VID
         say('fal live price:', live, '-> booking', est)
         if spent() + est > CAP: sys.exit('STOP: live price too high for the cap')
         body = {'prompt': MOTION, 'negative_prompt': NEG, 'start_image_url': falq.data_uri(open(P('start.png'), 'rb').read()),
-                'duration': '6', 'generate_audio': False, 'cfg_scale': 0.95, 'shot_type': 'customize'}
+                'duration': '6', 'generate_audio': False, 'cfg_scale': 0.85, 'shot_type': 'customize'}
         res = fal.wait(fal.send(VID, body))
         say('fal response:', json.dumps({k: (v if k != 'video' else {a: b for a, b in v.items() if a != 'url'}) for k, v in res.items()})[:400])
         open(P('raw.mp4'), 'wb').write(fal.download(res['video']['url'])); book('raw.mp4', est)

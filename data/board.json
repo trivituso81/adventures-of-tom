@@ -7013,6 +7013,10 @@
     {
      "d": "2026-11-25",
      "t": "Roll 2 (cfg_scale 0.85, 6 s): green now true (7,241,3), chromakey works, clip 6.04 s. Failed QA: hammer smears over face in 2 of 8 frames, ends with hand on hip not exact idle. Roll 3: cfg_scale 0.95, nothing else changed. Total fal spend $4.10 before roll 3."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Roll 3 (cfg 0.95): worse, scowl and hammer blur over face, so cfg goes back to 0.85. Roll 4 changes only the negative prompt: adds hammer in front of face, hammer blocking face, motion blur, hand on hip. Spend $4.50 before roll 4."
     }
    ],
    "blocks": [],
