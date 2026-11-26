@@ -7110,8 +7110,19 @@
     {
      "d": "2026-11-26",
      "t": "Added by c-rosestage."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "rosestage1 shipped; started the run by the wanauto1 rule: 8 prop pictures and 11 body videos, about $6.70, inside the auto limits."
     }
-   ]
+   ],
+   "wgen": {
+    "want": true,
+    "at": "2026-11-26T09:55:07Z",
+    "n": 19,
+    "est": 6.7,
+    "auto": true
+   }
   },
   {
    "id": "c-movelab-rose",
