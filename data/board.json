@@ -8967,53 +8967,6 @@
    ]
   },
   {
-   "id": "svc-art-bake",
-   "tag": "svc-art-bake-fix",
-   "service": "art-bake",
-   "lane": "claude",
-   "col": "prog",
-   "theme": "Tools",
-   "title": "art-bake failed",
-   "next": "The art-bake run failed: finished as cancelled. A session has to look at the run log and fix it.",
-   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45896194473",
-   "prompt": {
-    "what": "Finds why the art-bake run failed and fixes it.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
-    "effort": "medium (steps are known)",
-    "text": "Read claude/handoff-rules.md. The art-bake GitHub Action failed (finished as cancelled). Open the run log at https://github.com/trivituso81/adventures-of-tom/actions/runs/45896194473, fix the cause, and run it again. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEnwU78oqTm7PuFuL4",
-    "opening": "service run"
-   },
-   "history": [
-    {
-     "d": "2026-11-26",
-     "t": "art-bake failed: finished as cancelled"
-    },
-    {
-     "d": "2026-11-26",
-     "t": "Rescue started (A run failed: The art-bake run failed: finished as cancelled. A session has to look at the run log a). One automatic session decides: finish it, back to Tom, start next, or retire."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-26",
-   "changed": "2026-11-26",
-   "reruns": 1,
-   "rerun_at": "2026-11-26T21:05:53+00:00",
-   "rescue": {
-    "at": "2026-11-26T21:35:59+00:00",
-    "n": 1,
-    "why": "A run failed: The art-bake run failed: finished as cancelled. A session has to look at the run log and fix it.",
-    "url": "https://claude.ai/code/cse_01RXeukEnwU78oqTm7PuFuL4",
-    "prev": ""
-   },
-   "started_at": "2026-11-26T21:35:59+00:00"
-  },
-  {
    "id": "c-deedeeframes",
    "title": "Install Deedee's newer frames: walk, feelings, talk, listen",
    "theme": "Characters",
