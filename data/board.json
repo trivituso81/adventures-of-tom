@@ -2144,7 +2144,7 @@
    "ask": "setup",
    "fyi": true,
    "blocks": [],
-   "next": "Night of 2026-11-25. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: Watch the seven Pass-1 draft moves in a fight: Open ADMIN > BATTLE LAB and start PASS-1 DRAFT REVIEW (first page, under the chapter 1 reviews; or Take me there on the dashboard). Grace, TNB, Amy, Justin and Deedee stand on the field with a panel at the bottom: tap PLAY on a move to watch its video on that ... (full steps on the card); Stuck twice: Night QA: the test browser plays your check car: Card c-night-qa (Night QA: the test browser plays your check cards) stalled again after its one automatic rescue. The rescue started 7:45 AM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it. Starts used: 0 of 5. Limits of the night QA: the test browser is Chromium on a server, not Safari on the iPhone; it cannot hear, cannot judge touch, and cannot see the Duo fold.",
+   "next": "Night of 2026-11-26. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: nothing. Starts used: 0 of 5. Limits of the night QA: the test browser is Chromium on a server, not Safari on the iPhone; it cannot hear, cannot judge touch, and cannot see the Duo fold.",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukEJLmj5a5ydSskzMGQ",
     "opening": "board"
@@ -2236,8 +2236,7 @@
     [
      "Needs you",
      [
-      "Watch the seven Pass-1 draft moves in a fight: Open ADMIN > BATTLE LAB and start PASS-1 DRAFT REVIEW (first page, under the chapter 1 reviews; or Take me there on the dashboard). Grace, TNB, Amy, Justin and Deedee stand on the field with a panel at the bottom: tap PLAY on a move to watch its video on that ... (full steps on the card)",
-      "Stuck twice: Night QA: the test browser plays your check car: Card c-night-qa (Night QA: the test browser plays your check cards) stalled again after its one automatic rescue. The rescue started 7:45 AM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it."
+      "nothing"
      ]
     ],
     [
@@ -2253,7 +2252,7 @@
      ]
     ]
    ],
-   "night_key": "2026-11-25",
+   "night_key": "2026-11-26",
    "tag": "t-lastnight",
    "note": "The what to do doesn't tell me what to do",
    "after": "nothing for Tom: end",
@@ -9005,6 +9004,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGdxnKEdxCfrPSgRcK",
+   "title": "Art Library: listening poses move into each character",
+   "first": "2026-11-26T11:59:14-08:00",
+   "last": "2026-11-26T12:04:19-08:00",
+   "tags": [
+    "listengroup1"
+   ],
+   "cards": [
+    "c-listengroup"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
    "title": "Install Rose's new walk, feelings, talking, listen frames",
    "first": "2026-11-26T11:07:14-08:00",
@@ -15604,8 +15615,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "a40349230718bda5323e9754ad4f6cd2cd4516f6",
- "synced_at": "2026-11-26T19:58:04+00:00",
+ "synced": "dc2e328d3a286030185f99a91b768c0f636b3a81",
+ "synced_at": "2026-11-26T20:05:20+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -15704,6 +15715,6 @@
     }
    ]
   },
-  "reported": "2026-11-25"
+  "reported": "2026-11-26"
  }
 }
