@@ -8604,6 +8604,37 @@
     "effort": "high (engine draw order across several layers, a safety wrapper, tests and a visual check)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done. Your first push is the commit \"board: start c-vfxfight1\". Draw the Stage 2C library effects of engine/vfx-library.js in a real Battle 3 fight, not only in the Battle Lab pass-1 review. A move's effects draw at its contact moment, using p1Meta and p1DrawVfx in engine/pass1-vfx.js, on the right foe and member. Honour the library layer (behind_units, unit_overlay, foreground_sweep, screen_lighting, ground_decal) from art-factory/aot-stage2c-vfx-library-v11.json by drawing each effect at its own point in the fight's draw order. A fight must never break if an effect throws. Run python3 -I tools/guide_timing_test.py, python3 tools/b3_test.py and python3 tools/smoke.py, and look at a fight in portrait and landscape in Chrome before pushing. Update docs/BATTLE_GUIDE.md What is done and docs/CHANGES.md. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "c-guide-animtabs",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "tag": "guidefix1",
+   "title": "Battle Guide: Animations tab does nothing",
+   "next": "Fix the crash that stopped the Animations tab from drawing (the page read the old manifest format).",
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDwxR9ZuRHnWPoGUN5",
+    "opening": "\"Nothing happens in the battle guide animation tabs. I give you full approval to repo\""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Tom: \"Nothing happens in the battle guide animation tabs.\" New card, first push of the session."
+    }
+   ],
+   "prompt": {
+    "what": "Fix the Battle Guide Animations tab crash.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: small fix, tests catch mistakes)",
+    "effort": "medium (one known place)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guide-animtabs in data/board.json. Fix battle-guide.html so the Animations tab loads with the newer guide-manifest.json format, and push with build guidefix1.\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
