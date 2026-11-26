@@ -4953,8 +4953,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:46:48Z",
-   "state": "checking",
-   "since": "2026-11-26T11:22:19Z",
+   "state": "done",
+   "since": "2026-11-26T12:01:27Z",
    "run": 45808903596,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -4967,7 +4967,37 @@
    "cost": 0.0,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-amy-ko/t2.js",
+    "img": "takes/body-amy-ko/t2.webp",
+    "frames": 75,
+    "kb": 1342,
+    "words": "0 to 148 step 2, 1.5x",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "edge: 29 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)",
+      "ko_forward: ends 0% of the height in front of where it stood (falls forward, should fall backwards)",
+      "vision p_same: Final frame shows a glitchy, distorted, semi-transparent overlay of the character with purple artifacts.; Later frames show a different, damaged version with purple effects and altered hair/outfit.",
+      "vision p_parts: Eyes change shape and state (open to closed); final frame has distorted, glitched skin and hair.; Eyes change shape and expression; final frames alter skin, hair, and outfit with glitch effects.",
+      "vision k_dizzy: Face shows sad/tired expressions but no dizziness like swirls, crossed eyes, or wobbling.; Face shows sadness and concern, not dizziness like swirls or crossed eyes.",
+      "vision k_back: Character sits forward on the ground, not falling backwards to lie on its back.; Figure ends sitting or lying on side, not on back with head to the right."
+     ],
+     "faults": [
+      "edge",
+      "k_back",
+      "k_dizzy",
+      "ko_forward",
+      "p_parts",
+      "p_same"
+     ],
+     "vision_ran": true,
+     "spent": 0.0079,
+     "error": null,
+     "words": "The clip gate flags this take: edge: 29 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground); ko_forward: ends 0% of the height in front of where it stood (falls forward, should fall backwards); vision p_same: Final frame shows a glitchy, distorted, semi-transparent overlay of the character with purple artifacts.; Later frames show a different, damaged version with purple effects and altered hair/outfit.; vision p_parts: Eyes change shape and state (open to closed); final frame has distorted, glitched skin and hair.; Eyes change shape and expression; final frames alter skin, hair, and outfit with glitch effects.."
+    },
+    "n": 2
+   },
    "use": null,
    "left": false,
    "dry": false,
