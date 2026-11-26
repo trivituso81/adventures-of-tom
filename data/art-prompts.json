@@ -6473,6 +6473,14 @@
      "date": "2026-11-14",
      "from": "v1",
      "at": 1794689920473
+    },
+    {
+     "n": 2,
+     "file": "art/raw/characters/tnb-talk-v3.png",
+     "date": "2026-11-26",
+     "from": "v2",
+     "at": 1795728760334,
+     "up": true
     }
    ],
    "rejects": [],
