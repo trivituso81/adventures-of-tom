@@ -7245,9 +7245,10 @@
    "url": "https://claude.ai/code/session_01RXeukEQEES7HckHBnqBmQg",
    "title": "Rose's twelve moves: staging rows and body videos",
    "first": "2026-11-26T01:45:29-08:00",
-   "last": "2026-11-26T01:55:15-08:00",
+   "last": "2026-11-26T01:58:55-08:00",
    "tags": [
-    "rosestage1"
+    "rosestage1",
+    "rosestage1a"
    ],
    "cards": [
     "c-rosestage",
@@ -13724,8 +13725,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "88df3164be10f51bde7b14933ca6bda257ecf781",
- "synced_at": "2026-11-26T09:55:27+00:00",
+ "synced": "0f1044ad5ca8d7621f65d9b8e554f5e828ff6510",
+ "synced_at": "2026-11-26T09:59:46+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
