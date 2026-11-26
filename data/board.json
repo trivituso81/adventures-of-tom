@@ -8726,20 +8726,24 @@
    "title": "Install Grace's new walk, feelings, talking, listen frames",
    "theme": "Characters",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "In progress: baking Grace's new walking (v3), feelings (v4), talking (v3) and listening (v2) sheets, the same way as Rose's.",
    "blocks": [],
    "changed": "2026-11-26",
    "created": "2026-11-26",
    "tag": "graceframes",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
     "opening": "\"now do grace\""
    },
    "history": [
     {
      "d": "2026-11-26",
      "t": "Made by the session: Tom's words: \"now do grace\" (after c-roseframes)."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "after": "t-graceframesplay",
@@ -8774,6 +8778,29 @@
      "t": "Made by graceframes."
     }
    ]
+  },
+  {
+   "id": "b-portraits5",
+   "tag": "portraits5",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-26",
+   "theme": "Tools",
+   "title": "Portraits baked from your saved crops: grace (made by the portrait-bake Action)",
+   "next": "Done: Portraits baked from your saved crops: grace (made by the portrait-bake Action)",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as portraits5. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26"
   }
  ],
  "sessions": [
@@ -8909,12 +8936,13 @@
    "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
    "title": "Install Rose's new walk, feelings, talking, listen frames",
    "first": "2026-11-26T11:07:14-08:00",
-   "last": "2026-11-26T11:46:44-08:00",
+   "last": "2026-11-26T11:57:15-08:00",
    "tags": [
     "roseframes"
    ],
    "cards": [
-    "c-roseframes"
+    "c-roseframes",
+    "c-graceframes"
    ]
   },
   {
@@ -15504,8 +15532,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "8822b84feb6b7b96580e178e4f7258168d35d86c",
- "synced_at": "2026-11-26T19:46:57+00:00",
+ "synced": "a40349230718bda5323e9754ad4f6cd2cd4516f6",
+ "synced_at": "2026-11-26T19:58:04+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
