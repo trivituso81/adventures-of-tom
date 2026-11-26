@@ -7135,7 +7135,7 @@
    ],
    "wgen": {
     "want": true,
-    "at": "2026-11-26T12:43:46Z",
+    "at": "2026-11-26T12:45:46Z",
     "n": 1,
     "est": 0.5,
     "auto": true
@@ -7445,6 +7445,10 @@
     {
      "d": "2026-11-26",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Looked at both videos: the throw, two lunges, catch and return all read as the move, but the lunges slide her feet (2.2 percent) and her reach touches the left edge in 7 pictures. Changed ONE sentence of the prompt (lunges with knees bent, feet planted); kept start picture, seed, pad. Rev 2, next try started."
     }
    ],
    "prompt": {

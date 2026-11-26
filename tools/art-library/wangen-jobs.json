@@ -2420,7 +2420,7 @@
   }
  },
  "rose-boomerang": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -2428,7 +2428,7 @@
    "720p": 0.1,
    "1080p": 0.15
   },
-  "prompt_file": "tools/art-library/prompts/wan-rose-boomerang-v1.txt",
+  "prompt_file": "tools/art-library/prompts/wan-rose-boomerang-v2.txt",
   "frame": "art/clips/start/rose-hero.png",
   "fit": "720x1280",
   "frame_fields": [
@@ -2444,7 +2444,7 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. wanstop r1: both tries failed feet and edge (the two lunges slid her feet and she reached off the left edge); kept the whole prompt, start picture, seed and pad, changed ONE sentence: the lunges now bend the knees and lean the shoulders with both feet planted.",
   "bake": {
    "id": "rose-boomerang",
    "owner": "rose",

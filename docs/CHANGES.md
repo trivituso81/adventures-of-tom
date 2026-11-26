@@ -1,3 +1,7 @@
+## wanstop-rose-boomerang-r1 (2026-11-26): Rose's Lamby boomerang video is made again with her feet held planted in the lunges
+
+The bulk run stopped rose-boomerang after two tries (feet, edge): the move reads right, but the two lunges slid her feet (2.2 percent) and her reach touched the left edge in 7 pictures. One sentence of the prompt changed (lunges bend the knees and lean the shoulders with both feet planted); start picture, seed and pad kept. Rev 2, next try started on card t-rosestage-lab.
+
 ## wanstop-rose-doublelamby-r1 (2026-11-26): Rose's Double Lamby video tried again with her feet kept on the ground
 The first two tries did the move but lifted her feet off the spot. One sentence of the prompt changed (the bounce onto the balls of her feet became a knee dip with both feet flat); nothing else.
 
