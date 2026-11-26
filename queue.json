@@ -3712,8 +3712,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:27:45Z",
-   "state": "checking",
-   "since": "2026-11-26T09:46:05Z",
+   "state": "done",
+   "since": "2026-11-26T09:52:00Z",
    "run": 45790862688,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -3726,7 +3726,29 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-grace-hit/t1.js",
+    "img": "takes/body-grace-hit/t1.webp",
+    "frames": 49,
+    "kb": 1016,
+    "words": "0 to 96 step 2, 1.5x",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "hit_no_stumble: the body moves back only 0% of the height (should stumble backwards)",
+      "vision h_stagger: No body stagger backwards; only minor pose shifts occur.; Body remains in the same standing position with no backward stagger."
+     ],
+     "faults": [
+      "h_stagger",
+      "hit_no_stumble"
+     ],
+     "vision_ran": true,
+     "spent": 0.0073,
+     "error": null,
+     "words": "The clip gate flags this take: hit_no_stumble: the body moves back only 0% of the height (should stumble backwards); vision h_stagger: No body stagger backwards; only minor pose shifts occur.; Body remains in the same standing position with no backward stagger.."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
