@@ -13,8 +13,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T02:15:51Z",
-   "state": "checking",
-   "since": "2026-11-26T02:18:33Z",
+   "state": "done",
+   "since": "2026-11-26T02:19:45Z",
    "run": 45741255715,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -27,7 +27,27 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/move-suite-door-slide/t5.js",
+    "img": "takes/move-suite-door-slide/t5.webp",
+    "frames": 47,
+    "kb": 970,
+    "words": "0 to 138 step 3, impact 48, 1.5x",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "edge: 13 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)"
+     ],
+     "faults": [
+      "edge"
+     ],
+     "vision_ran": true,
+     "spent": 0.0076,
+     "error": null,
+     "words": "The clip gate flags this take: edge: 13 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)."
+    },
+    "n": 5
+   },
    "use": null,
    "left": false,
    "dry": false,
