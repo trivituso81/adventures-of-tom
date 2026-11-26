@@ -3184,8 +3184,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T08:58:17Z",
-   "state": "checking",
-   "since": "2026-11-26T09:14:02Z",
+   "state": "done",
+   "since": "2026-11-26T09:20:45Z",
    "run": 45782279434,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -3198,7 +3198,29 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-tnb-hit/t4.js",
+    "img": "takes/body-tnb-hit/t4.webp",
+    "frames": 48,
+    "kb": 1008,
+    "words": "0 to 94 step 2, 1.5x",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "hit_no_stumble: the body moves back only 4% of the height (should stumble backwards)",
+      "vision h_stagger: No visible body stagger backwards; only minor hand and posture shifts occur.; Body shows only slight pose changes, no clear backward stagger."
+     ],
+     "faults": [
+      "h_stagger",
+      "hit_no_stumble"
+     ],
+     "vision_ran": true,
+     "spent": 0.0074,
+     "error": null,
+     "words": "The clip gate flags this take: hit_no_stumble: the body moves back only 4% of the height (should stumble backwards); vision h_stagger: No visible body stagger backwards; only minor hand and posture shifts occur.; Body shows only slight pose changes, no clear backward stagger.."
+    },
+    "n": 4
+   },
    "use": null,
    "left": false,
    "dry": false,
