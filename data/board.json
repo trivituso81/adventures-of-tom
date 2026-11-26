@@ -9384,7 +9384,7 @@
    "id": "c-smokefix2",
    "tag": "smokefix2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Fix the two failures smoke shows on main",
    "next": "Shipped as smokefix2. Nothing for Tom.",
@@ -9404,6 +9404,10 @@
     {
      "d": "2026-11-26",
      "t": "Shipped as smokefix2: board4 check fixed in the test (fixture needs a copy of board-archive.json next to it); hidebf_test added to the night manifest (g6, 1 minute). Smoke reports no failures. Nothing for Tom."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as smokefix2: smoke reports no failures again (board4 test fixture, night manifest row)"
     }
    ],
    "blocks": [],
@@ -9418,7 +9422,8 @@
     "model": "Claude Sonnet 5.5 (row C: the cause is not written down yet, tests catch mistakes)",
     "effort": "medium (two small, named failures)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json. Your first push is the commit \"board: start c-smokefix2\". python3 tools/smoke.py ends with two failures that are on main without any recent change. (1) tools/board_sync_test.py fails the check \"board4: board_check accepts a Tom card waiting on its fix (not fyi, blocks nothing)\": find the cause and fix the test or the code it tests, whichever is wrong. (2) The night manifest check says tools/hidebf_test.py is not in tools/night/tests.json: add a row for it with the right group, minutes and cmd, or add it to skip with a reason, as the file's about line describes. Change nothing else. Run python3 tools/board_sync_test.py, python3 tools/night/manifest_check.py and python3 tools/smoke.py, and confirm smoke reports no failures. Update docs/CHANGES.md. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-26"
   },
   {
    "id": "b-board-smokefix2",
@@ -9503,6 +9508,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGWAy9zihymc3KiLZk",
+   "title": "Fix the two failures smoke shows on main",
+   "first": "2026-11-26T15:42:38-08:00",
+   "last": "2026-11-26T15:51:39-08:00",
+   "tags": [
+    "smokefix2"
+   ],
+   "cards": [
+    "c-smokefix2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
    "title": "Install Rose's new walk, feelings, talking, listen frames",
    "first": "2026-11-26T11:07:14-08:00",
@@ -9526,16 +9543,6 @@
     "c-ridepics1",
     "c-tnbframes",
     "c-heroframes1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGWAy9zihymc3KiLZk",
-   "title": "Fix the two failures smoke shows on main",
-   "first": "2026-11-26T15:42:38-08:00",
-   "last": "2026-11-26T15:42:38-08:00",
-   "tags": [],
-   "cards": [
-    "c-smokefix2"
    ]
   },
   {
@@ -16305,8 +16312,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "683a9618e7cf5a6f769d0399289cacee9ac9a3ed",
- "synced_at": "2026-11-26T23:46:11+00:00",
+ "synced": "ca2969cbdf4c5c90743122a402d15c746ac150b9",
+ "synced_at": "2026-11-26T23:52:26+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
