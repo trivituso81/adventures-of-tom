@@ -8971,10 +8971,10 @@
    "tag": "svc-art-bake-fix",
    "service": "art-bake",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "art-bake failed",
-   "next": "The art-bake run failed: finished as cancelled. A session has to look at the run log and fix it.",
+   "next": "Retired: the run was cancelled by a newer push (concurrency), not a failure. Later art-bake runs succeeded.",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45896194473",
    "prompt": {
     "what": "Finds why the art-bake run failed and fixes it.",
@@ -8997,6 +8997,10 @@
     {
      "d": "2026-11-26",
      "t": "Rescue started (A run failed: The art-bake run failed: finished as cancelled. A session has to look at the run log a). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Retired by rescue: run 45896194473 was cancelled by newer pushes (concurrency); runs 45898838605 and 45898208653 on later pushes succeeded. Nothing to fix."
     }
    ],
    "blocks": [],
@@ -9011,7 +9015,8 @@
     "url": "https://claude.ai/code/cse_01RXeukEnwU78oqTm7PuFuL4",
     "prev": ""
    },
-   "started_at": "2026-11-26T21:35:59+00:00"
+   "started_at": "2026-11-26T21:35:59+00:00",
+   "done": "2026-11-26"
   },
   {
    "id": "c-deedeeframes",
