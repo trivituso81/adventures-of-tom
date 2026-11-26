@@ -1,3 +1,7 @@
+## portraits5 (2026-11-26): Portraits baked from your saved crops: grace (made by the portrait-bake Action)
+
+- Tom saved crops in ADMIN > PORTRAIT CROPS (or approved a new hero painting); the Action baked `portraits/<id>.png` and moved `PORTRAIT_V` in `data/portrait-ver.js`, the one stamp every status screen, turn order, battle panel and the Battle Guide use for those pictures (tools/sprite-bake/portrait_autobake.py).
+
 ## roseframes (2026-11-26): Rose's new walking, feelings, talking, thinking and listening pictures are in the game
 
 Card c-roseframes. Tom's words: "implement all the new approved rose frames". Not seen on the phone yet.
