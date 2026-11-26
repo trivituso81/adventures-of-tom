@@ -6633,7 +6633,7 @@
   {
    "id": "c-guide-crosswalk",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "guidecross1",
    "title": "Battle Guide: manifest crosswalk and per-ability needs",
@@ -6657,6 +6657,10 @@
     {
      "d": "2026-11-26",
      "t": "Shipped as guidecross1. Found: the moves name 284 distinct effects (not about 170) and the library usedBy holds 0 stale move ids (not 39; 33 usedBy entries name no matching effect). Left alone: guide test checks that already failed (animation count 713 vs 679, plan counts, no-engine check) and board_sync_test board4."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as guidecross1: The Battle Guide now shows every Stage 2 manifest move with its clip facts and effects, and lists what Tom has to do per ability"
     }
    ],
    "prompt": {
@@ -6668,7 +6672,8 @@
     "effort": "high (a new generator script, a page change and a test, with six hand matches to resolve)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json, docs/BATTLE_GUIDE.md and the Battle Animation Pipeline Lock in CLAUDE.md. Your first push is the commit \"board: start c-guide-crosswalk\".\n\nTask: fully incorporate art-factory/aot-stage2-pass1-manifest-24fps.json, aot-stage2-pass2-manifest-24fps.json, aot-stage2-pass3-manifest-24fps.json and aot-stage2c-vfx-library-v11.json into the Battle Guide (battle-guide.html).\n1. Build tools/guidegen/manifest_crosswalk.py and commit its output data/guide-manifest.json: each manifest move id matched to its game skill id by name (117 of 123 match; resolve the other 6 by hand and list them), and each vfxPrimitives name matched to a library asset id (the library has 37 assets, the moves name about 170, and usedBy holds 39 stale move ids). Report every unmatched item.\n2. Show on each move's page in the Guide: the clip's motion text, duration and frame count, contact time, beats, hit-stop frames, the effects it uses, and whether those effects are built (buildStatus).\n3. Do not use the manifests' stylePrefix or negativePrompt for any clip (they carry the green screen and the banned painting word, which the pipeline lock bans). Keep only the motion text and engineSpec.\n4. For each ability, list exactly what Tom must supply or approve to implement it: the Hero or start frame status, the clip status, each effect not yet built, and any decision. Put this list in the Guide and in docs/BATTLE_GUIDE.md. Also make a one-page summary grouped by what Tom has to do.\n5. Add a test to tools/battle_guide_test.py that fails if any manifest move or effect is missing from the crosswalk. Run smoke and the guide tests, look at portrait and landscape, and push with a new build tag and a docs/CHANGES.md entry.\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-guidecross-decide"
+   "after": "t-guidecross-decide",
+   "done": "2026-11-26"
   },
   {
    "id": "b-guideuse-45780590322",
@@ -6810,6 +6815,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukCskdRQQ8jaXgjzwk7",
+   "title": "Battle Guide: manifest crosswalk and per-ability needs",
+   "first": "2026-11-25T23:38:33-08:00",
+   "last": "2026-11-26T00:27:16-08:00",
+   "tags": [
+    "guidecross1"
+   ],
+   "cards": [
+    "c-guide-crosswalk"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGEWPtNAyCyFc2nvtK",
    "title": "Battle Guide: edit the animation prompt before generating",
    "first": "2026-11-26T00:22:40-08:00",
@@ -6827,16 +6844,6 @@
    "tags": [],
    "cards": [
     "c-justinbb9"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCskdRQQ8jaXgjzwk7",
-   "title": "Battle Guide: manifest crosswalk and per-ability needs",
-   "first": "2026-11-25T23:38:33-08:00",
-   "last": "2026-11-25T23:38:33-08:00",
-   "tags": [],
-   "cards": [
-    "c-guide-crosswalk"
    ]
   },
   {
@@ -13251,8 +13258,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "2de946069989c87e4d596d7f2c09381677518d31",
- "synced_at": "2026-11-26T08:23:29+00:00",
+ "synced": "6e27283cc11dc8a754827c70b381147c8bfc9a7c",
+ "synced_at": "2026-11-26T08:28:02+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
