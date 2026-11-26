@@ -1,0 +1,41 @@
+{
+  "cap": 2.25,
+  "total": 2.0979,
+  "rows": [
+    {
+      "label": "hero cutout (birefnet)",
+      "usd": 0.021,
+      "service": "fal"
+    },
+    {
+      "label": "start frame attempt 1: Gemini hand edit + 3 judge calls",
+      "usd": 0.1785,
+      "service": "google"
+    },
+    {
+      "label": "Stage B judge calls: 3 seeds x 3 runs",
+      "usd": 0.1134,
+      "service": "google"
+    },
+    {
+      "label": "wan3_s2: 5 s at $0.100/s",
+      "usd": 0.525,
+      "service": "fal"
+    },
+    {
+      "label": "wan3_s3: 5 s at $0.100/s",
+      "usd": 0.525,
+      "service": "fal"
+    },
+    {
+      "label": "wan3_s1: 5 s at $0.100/s",
+      "usd": 0.525,
+      "service": "fal"
+    },
+    {
+      "label": "matte winner wan3_s1: birefnet v2 video (estimate)",
+      "usd": 0.21,
+      "service": "fal"
+    }
+  ]
+}

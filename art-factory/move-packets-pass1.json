@@ -2487,7 +2487,7 @@
       "pep_cost": 0,
       "base_recovery": 80,
       "flavor": "Clobber",
-      "lifecycle_state": "ANCHORED",
+      "lifecycle_state": "DRAFT_REVIEW",
       "pitch": {
         "windup": "Justin, standing in place in three-quarters-left profile, holds one claw hammer in his striking hand, his other hand empty, the yellow stud finder clipped flat on his tool belt.",
         "peak": "Justin swings the claw hammer once cleanly into empty air toward the far left edge of the frame.",
@@ -2548,16 +2548,16 @@
         "strike": "one crisp forward-left tap with the claw hammer after the stud finder scan"
       },
       "qa_gate": {
-        "run_id": "bench-justinbb9-6",
-        "winner": "wan3_s2",
+        "run_id": "bench-justinbb9-7",
+        "winner": "wan3_s1",
         "stage_a": {
           "raw_duration_sec": 5.0,
-          "trimmed_sec": 4.0,
-          "cut_frame": 119,
-          "peak_mask_churn": 0.4694,
-          "left_reach_ratio": 1.9,
+          "trimmed_sec": 4.033,
+          "cut_frame": 120,
+          "peak_mask_churn": 0.4856,
+          "left_reach_ratio": 0.9012,
           "foot_retreat_ratio": 0.0,
-          "end_to_start_iou": 0.9634,
+          "end_to_start_iou": 0.9662,
           "failures": [],
           "passed": true
         },
@@ -2573,7 +2573,7 @@
           "rejected_on": [],
           "passed": true,
           "failure_reason": "",
-          "true_votes": 15,
+          "true_votes": 18,
           "total_votes": 18
         },
         "passed": true

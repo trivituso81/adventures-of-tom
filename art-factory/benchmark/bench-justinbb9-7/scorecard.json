@@ -1,0 +1,78 @@
+{
+  "run_id": "bench-justinbb9-7",
+  "wan_3_0": {
+    "passes": 2,
+    "of": 3,
+    "seeds": [
+      {
+        "id": "wan3_s1",
+        "measured_duration": 5.0,
+        "passed": true,
+        "failure": "",
+        "score": 0.9439
+      },
+      {
+        "id": "wan3_s2",
+        "measured_duration": 5.0,
+        "passed": true,
+        "failure": "",
+        "score": 0.9296
+      },
+      {
+        "id": "wan3_s3",
+        "measured_duration": 5.0,
+        "passed": false,
+        "failure": "Stage B: Tile 5 contains drawn yellow impact lines at the hammer head.",
+        "score": 0.0
+      }
+    ]
+  },
+  "kling_v3_pro": {
+    "passes": 0,
+    "of": 0,
+    "seeds": []
+  },
+  "winner": {
+    "id": "wan3_s1",
+    "model": "wan-3.0",
+    "score": 0.9439,
+    "stage_a": {
+      "raw_duration_sec": 5.0,
+      "trimmed_sec": 4.033,
+      "cut_frame": 120,
+      "peak_mask_churn": 0.4856,
+      "left_reach_ratio": 0.9012,
+      "foot_retreat_ratio": 0.0,
+      "end_to_start_iou": 0.9662,
+      "failures": [],
+      "passed": true
+    },
+    "stage_b": {
+      "matches_hero_ink_pencil_style": true,
+      "locked_3q_left_facing": true,
+      "single_prop_integrity": true,
+      "zero_baked_vfx_or_rings": true,
+      "clean_strike_and_idle_return": true,
+      "strict_quadruped": true,
+      "judge": "gemini-4-neon",
+      "runs": 3,
+      "rejected_on": [],
+      "passed": true,
+      "failure_reason": "",
+      "true_votes": 18,
+      "total_votes": 18
+    }
+  },
+  "spend_usd": 2.0979,
+  "spend_by_service": {
+    "fal": 1.806,
+    "google": 0.2919
+  },
+  "spend_basis": "fal published per-second rates (live price read, higher booked) x seconds, plus Gemini estimates; the run reserves each cost before the call",
+  "notes": [
+    "vision judge: gemini-4-neon",
+    "bria matting did not fit under the cap; used birefnet v2 video, cost is an estimate",
+    "matted only wan3_s1 with fal-ai/birefnet/v2/video"
+  ],
+  "baked_into_pass1_draft_review": true
+}
