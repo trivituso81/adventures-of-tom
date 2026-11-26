@@ -3422,8 +3422,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:00:04Z",
-   "state": "checking",
-   "since": "2026-11-26T09:23:58Z",
+   "state": "done",
+   "since": "2026-11-26T09:31:57Z",
    "run": 45790862688,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -3436,7 +3436,29 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-tom-idle/t4.js",
+    "img": "takes/body-tom-idle/t4.webp",
+    "frames": 50,
+    "kb": 663,
+    "words": "0 to 147 step 3, loop wrap",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "blink_none: no blink in the stretch the game loops (blinks in the whole video: 0.77 s)",
+      "vision i_relaxed: Head turns and mouth moves; not a static relaxed stance.; Head turns and facial expression changes violate the fixed relaxed pose."
+     ],
+     "faults": [
+      "blink_none",
+      "i_relaxed"
+     ],
+     "vision_ran": true,
+     "spent": 0.0082,
+     "error": null,
+     "words": "The clip gate flags this take: blink_none: no blink in the stretch the game loops (blinks in the whole video: 0.77 s); vision i_relaxed: Head turns and mouth moves; not a static relaxed stance.; Head turns and facial expression changes violate the fixed relaxed pose.."
+    },
+    "n": 4
+   },
    "use": null,
    "left": false,
    "dry": false,
