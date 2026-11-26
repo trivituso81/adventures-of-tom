@@ -1,0 +1,9 @@
+{
+  "run_id": "bench-justinbb9-4",
+  "move_id": "justin-bb-basic",
+  "started": "2026-11-26T04:22:00Z",
+  "state": "blocked",
+  "finished": "2026-11-26T04:27:06Z",
+  "why": "all budgeted seeds failed qa_gate_v2",
+  "spend_usd": 1.8879
+}

@@ -1,0 +1,45 @@
+{
+  "run_id": "bench-justinbb9-4",
+  "wan_3_0": {
+    "passes": 0,
+    "of": 3,
+    "seeds": [
+      {
+        "id": "wan3_s1",
+        "measured_duration": 5.0,
+        "passed": false,
+        "failure": "Stage A: no_return_to_ready_stance",
+        "score": 0.0
+      },
+      {
+        "id": "wan3_s2",
+        "measured_duration": 5.0,
+        "passed": false,
+        "failure": "Stage B: The character lacks a clear forward-left strike and fails to return to the starting stance in the final tile.",
+        "score": 0.0
+      },
+      {
+        "id": "wan3_s3",
+        "measured_duration": 5.0,
+        "passed": false,
+        "failure": "Stage A: no_return_to_ready_stance",
+        "score": 0.0
+      }
+    ]
+  },
+  "kling_v3_pro": {
+    "passes": 0,
+    "of": 0,
+    "seeds": []
+  },
+  "winner": null,
+  "spend_usd": 1.8879,
+  "spend_by_service": {
+    "fal": 1.596,
+    "google": 0.2919
+  },
+  "spend_basis": "fal published per-second rates (live price read, higher booked) x seconds, plus Gemini estimates; the run reserves each cost before the call",
+  "notes": [
+    "vision judge: gemini-4-neon"
+  ]
+}
