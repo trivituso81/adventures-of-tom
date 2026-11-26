@@ -2262,31 +2262,6 @@
    "after": "nothing for Tom: end",
    "history": [
     {
-     "d": "2026-11-22",
-     "t": "Tom tapped START.",
-     "at": "2026-11-22T17:02:49.104Z"
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Started by START on Claude Sonnet 5.5, effort medium."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Started by the night shift."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Started by START on Claude Sonnet 5.5, effort medium."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
-    },
-    {
      "d": "2026-11-23",
      "t": "Started by the night shift."
     },
@@ -2321,6 +2296,10 @@
     {
      "d": "2026-11-25",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Night run ended without shipping: this environment has Python older than 3.12 (bump_tags.py has an f-string syntax error here) and no playwright, so smoke and the build stamp could not run. Bucket C change was reverted. Needs an environment with Python 3.12 and playwright."
     }
    ],
    "prompt": {
