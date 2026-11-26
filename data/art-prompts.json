@@ -26780,6 +26780,14 @@
      "srv": "tom-listen@20261120T192340",
      "qa": 1,
      "qaFail": []
+    },
+    {
+     "n": 1,
+     "file": "art/raw/characters/tom-listen-v2.png",
+     "date": "2026-11-26",
+     "from": "v2",
+     "at": 1795722158184,
+     "up": true
     }
    ],
    "rejects": [],
