@@ -2146,7 +2146,7 @@
    "blocks": [],
    "next": "Night of 2026-11-25. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: Watch the seven Pass-1 draft moves in a fight: Open ADMIN > BATTLE LAB and start PASS-1 DRAFT REVIEW (first page, under the chapter 1 reviews; or Take me there on the dashboard). Grace, TNB, Amy, Justin and Deedee stand on the field with a panel at the bottom: tap PLAY on a move to watch its video on that ... (full steps on the card); Stuck twice: Night QA: the test browser plays your check car: Card c-night-qa (Night QA: the test browser plays your check cards) stalled again after its one automatic rescue. The rescue started 7:45 AM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it. Starts used: 0 of 5. Limits of the night QA: the test browser is Chromium on a server, not Safari on the iPhone; it cannot hear, cannot judge touch, and cannot see the Duo fold.",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGc4RgSvduvxoGRRV6",
+    "url": "https://claude.ai/code/cse_01RXeukEJLmj5a5ydSskzMGQ",
     "opening": "board"
    },
    "history": [
@@ -2179,6 +2179,18 @@
     {
      "d": "2026-11-25",
      "t": "Night of 2026-11-25: Night of 2026-11-25. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: Watc"
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started by the night shift."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     },
     {
      "d": "2026-11-26",
@@ -2248,8 +2260,8 @@
     "effort": "medium (a handed-over card is usually one piece of work)",
     "text": "Read claude/handoff-rules.md. Tom handed you board card t-lastnight with this note: The what to do doesn't tell me what to do. Work out what is needed, rewrite the card, and do it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-26T08:16:31+00:00",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "started_at": "2026-11-26T08:48:13+00:00"
   },
   {
    "id": "c-night-clean",
@@ -13318,8 +13330,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "30a2e613ee58fdb6a45a9fa6eef59a63fdab06e9",
- "synced_at": "2026-11-26T08:41:04+00:00",
+ "synced": "d17a1ea7c79dcda9395e29617387e10e9575cf83",
+ "synced_at": "2026-11-26T08:48:13+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -13404,6 +13416,11 @@
     {
      "id": "t-lastnight",
      "at": "2026-11-26T08:16:31+00:00",
+     "kind": "queued"
+    },
+    {
+     "id": "t-lastnight",
+     "at": "2026-11-26T08:48:13+00:00",
      "kind": "queued"
     }
    ]
