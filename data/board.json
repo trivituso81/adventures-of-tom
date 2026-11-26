@@ -9030,7 +9030,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Play hit stop in a real Battle 3 fight",
-   "next": "In progress: freezing the foe and the member for hitStopFrames / 24 seconds at the hit moment of a move in a real Battle 3 fight (engine/b3-vfx.js, b3PlayMove). The battle clock and the rules never wait on it.",
+   "next": "Shipped (hitstop1): in a real Battle 3 fight the member and the foes a move hits are held on the hit picture for hitStopFrames / 24 seconds, then show where the clock is; the battle clock, the rules, the clips and the library effects are untouched, and a hold that throws is dropped. Not done: sound effects (a decision on where they come from is still open). Tests: guide_timing_test, b3_hitstop_test (new), b3_vfx_test, smoke, b3_test new1 to new5.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFa5bNJ7yJ4ZRNZpa3",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done (the vfxfight1 paragraph). Add a card for this task first\""
@@ -9039,6 +9039,10 @@
     {
      "d": "2026-11-26",
      "t": "Started: Tom asked for hit stop to play in a real Battle 3 fight (the 'Not done' item of vfxfight1). Board: new card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Built: engine/b3-vfx.js holds the member and the foes a move hits on the hit picture for hitStopFrames / 24 s (b3vUnit, armed by b3PlayMove with the effects). Tests: guide_timing_test (hit stop checks added), new tools/b3_hitstop_test.py (real fights, portrait and landscape), b3_vfx_test, smoke, b3_test new1 to new5. Ended with nothing for Tom."
     }
    ],
    "blocks": [],

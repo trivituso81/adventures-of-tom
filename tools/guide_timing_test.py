@@ -144,6 +144,61 @@ out.throwing={calls:first,again:cvc.length,dead:Object.keys(ctx.__dead),faults:c
 ctx.__S={id:'pf_amy_fq_basic'}; E("P1_VFX['vfx_core_clobber_impact']=(g)=>{ throw new Error('boom2'); }"); ctx.__faults.length=0;
 let thr=null; try{ E("p1DrawVfx(__g,__S,1050+100,{x:90,y:210,h:100})"); E("p1DrawVfx(__g,__S,1050+120,{x:90,y:210,h:100})"); }catch(e){ thr=e.message; }
 out.reviewThrow={thrown:thr,dead:Object.keys(ctx.__S._vfxDead||{}),faults:ctx.__faults.length};
+// hitstop1: hit stop in a real fight (engine/b3-vfx.js): the manifest's hitStopFrames at 24 fps hold the member and the foes a move hits, only in what is drawn
+E("var B3P={t:0,foe:{f0:{},f1:{}},at:{p0:{cx:100,base:200,h:80}}}; var B3={F:{party:[{key:'p0',side:'party'},{key:'p1',side:'party'}],foes:[{key:'f0',side:'foe'},{key:'f1',side:'foe'}]},view:{u:{}}}; function b3Unit(F,k){ return [...F.party,...F.foes].find(u=>u.key===k)||null; } function b3Spot(k){ return {x:300,y:150,top:100,base:200}; } var gfx={};");
+run('engine/b3-vfx.js');
+ctx.__faults.length=0;
+const mvs=doc.moves.filter(m=>m.moveId);
+const secOf=id=>E("b3vHitStopSec({id:'"+id+"'})");
+const stopMove=mvs.find(m=>m.hitStopFrames===3), zeroMove=mvs.find(m=>m.hitStopFrames===0), maxMove=mvs.reduce((a,b)=>b.hitStopFrames>a.hitStopFrames?b:a);
+out.hs={secs:[secOf(stopMove.moveId),secOf(maxMove.moveId),secOf(zeroMove.moveId),secOf('no_such_move')],want:[3/24,maxMove.hitStopFrames/24,0,0],ids:[stopMove.moveId,zeroMove.moveId]};
+out.hsAll=mvs.every(m=>Math.abs(secOf(m.moveId)-(m.hitStopFrames>0?Math.min(.5,m.hitStopFrames/24):0))<1e-12);
+const head=(id,src,tgts)=>({t:'act',id,src,tgts});
+const holds=()=>E("B3V.holds.map(h=>({src:h.src,keys:h.keys.slice(),t0:h.t0,dur:h.dur,start:h.start}))");
+const arm=(h,sec,hit)=>{ E("b3vReset()"); ctx.__h=h; E("B3P.t=10"); E("b3vArm(__h,null,"+sec+","+hit+")"); return holds(); };
+out.hsArm=arm(head(stopMove.moveId,'p0',['f0','f1']),.5,true);
+out.hsNoHit=arm(head(stopMove.moveId,'p0',['f0']),.5,false);
+out.hsNoArg=arm(head(stopMove.moveId,'p0',['f0']),.5,'undefined');
+out.hsZero=arm(head(zeroMove.moveId,'p0',['f0']),.5,true);
+out.hsUnknown=arm(head('no_such_move','p0',['f0']),.5,true);
+out.hsFoeMove=arm(head(stopMove.moveId,'f0',['p0']),.5,true);
+out.hsAlly=arm(head(stopMove.moveId,'p0',['p1']),.5,true);
+out.hsBadSec=[arm(head(stopMove.moveId,'p0',['f0']),'NaN',true),arm(head(stopMove.moveId,'p0',['f0']),'Infinity',true)];
+// time: nothing before the hit, a hold from the first frame at or after it, the held picture for the whole hold, the clock again after it; units that are not in the hold keep the clock
+arm(head(stopMove.moveId,'p0',['f0']),.5,true);
+const T=(k,t)=>{ ctx.__k=k; ctx.__t=t; return E("(()=>{const r=b3vTimeOf(__k,__t);return [r.t,!!r.h];})()"); };
+out.hsTime={before:T('p0',10.4),first:T('p0',10.52),foeFirst:T('f0',10.52),held:T('p0',10.55),heldFoe:T('f0',10.6),other:T('f1',10.55),other2:T('p1',10.55),lastHeld:T('p0',10.52+.125-.001),after:T('p0',10.52+.125),later:T('p0',11),left:holds().length};
+// a stall: the clock is already past the hold when it is first drawn: dropped, never played late
+arm(head(stopMove.moveId,'p0',['f0']),.5,true); out.hsStall=[T('p0',11),holds().length];
+// two moves in a row of the same member: the older hold goes
+arm(head(stopMove.moveId,'p0',['f0']),.5,true); ctx.__h=head(stopMove.moveId,'p0',['f1']); E("B3P.t=12; b3vArm(__h,null,.5,true)"); out.hsReplaced=holds().map(h=>[h.src,h.keys.join(),h.t0]);
+// b3vUnit: the unit is drawn at the held time, its shake stands still (one random number for the whole call), and the real random comes back
+arm(head(stopMove.moveId,'p0',['f0']),.5,true); T('p0',10.52);
+ctx.__calls=[]; ctx.__fn=(t)=>{ ctx.__calls.push([t,Math.random(),Math.random()]); };
+const realRandom=Math.random; E("b3vUnit('p0',10.55,__fn)"); E("b3vUnit('f0',10.56,__fn)"); E("b3vUnit('p1',10.57,__fn)"); E("b3vUnit('p0',10.7,__fn)");
+out.hsUnit={calls:ctx.__calls.slice(),restored:Math.random===realRandom,sameShake:ctx.__calls[0][1]===ctx.__calls[0][2]&&ctx.__calls[0][1]===ctx.__calls[1][1]};
+// a held draw that throws: the hold is dropped, the fault logged once, and the unit is drawn at the clock as before
+arm(head(stopMove.moveId,'p0',['f0']),.5,true); T('p0',10.52);
+ctx.__seen=[]; ctx.__fn2=(t)=>{ ctx.__seen.push(t); if(t===10.52) throw new Error('held draw'); }; ctx.__faults.length=0;
+E("b3vUnit('p0',10.55,__fn2)"); const firstSeen=ctx.__seen.slice(); E("b3vUnit('p0',10.56,__fn2)");
+out.hsThrow={seen:firstSeen,seen2:ctx.__seen.slice(2),holds:holds().length,faults:ctx.__faults.map(f=>f[0])};
+// a throw with no hold on is the draw's own and passes through (as it always did)
+let thrown=null; ctx.__fn3=()=>{ throw new Error('plain'); }; E("b3vReset()"); try{ E("b3vUnit('p0',5,__fn3)"); }catch(e){ thrown=e.message; } out.hsPlain=thrown;
+// a hold that cannot be armed (no fight) is logged and the move's effects are armed all the same; a manifest row that throws gives no hold
+E("b3vReset()"); ctx.__faults.length=0; E("var __F=B3.F; B3.F=null"); ctx.__h=head(stopMove.moveId,'p0',['f0']); E("B3P.t=10; b3vArm(__h,null,.5,true)");
+out.hsNoFight={holds:holds().length,cues:E("B3V.cues.length"),faults:ctx.__faults.map(f=>f[0])}; E("B3.F=__F; b3vReset()");
+E("var __g0=gtMetaMove; gtMetaMove=()=>{ throw new Error('row'); }"); out.hsRowThrows=E("b3vHitStopSec({id:'x'})"); E("gtMetaMove=__g0");
+// the effects keep their own pace: an effect is told ms = impact_ms + (t - hit moment) x 1000 whether a hold is on or not
+{ const mm=mvs.find(m=>m.hitStopFrames>0&&(m.libraryAssets||[]).some(a=>/^vfx_core_(racket_rings|clobber_impact|sizzle_wave)/.test(a))&&m.moveId);
+  E("b3vReset()"); const recd=[]; ctx.__recd=recd; ctx.__faults.length=0; E("var __p1=p1DrawVfx; p1DrawVfx=(g,S,ms,A,O)=>__recd.push([Math.round(ms*1000)/1000,O&&O.layer])"); ctx.__h=head(mm.moveId,'p0',['f0']); E("B3P.t=10; B3V.dummy=b3vArm(__h,null,.5,true)");
+  const row=E("gtMetaMove('"+mm.moveId+"')"); const ts=[10.45,10.52,10.55,10.6,10.62,10.7,10.9];
+  for(const t of ts){ ctx.__t=t; T('p0',t); for(const L of E("P1_LAYERS")) { ctx.__L=L; E("b3vDraw(__L,__t)"); } }
+  const byT={}; ts.forEach(t=>byT[t]=[]);
+  // each b3vDraw pass logs one entry per drawn effect; split the log back into the frames by order
+  out.hsFx={faults:ctx.__faults.length,impact:row.impact_ms,ms:[...new Set(recd.map(r=>r[0]))],ts,hold:holds().length,drawnLayers:[...new Set(recd.map(r=>r[1]))]};
+  E("p1DrawVfx=__p1"); E("b3vReset()"); }
+// the move's with-no-effect case still gets its hit stop: arm with a move that has no library effect row at all
+out.hsNoFx=(()=>{ const mm=mvs.find(m=>m.hitStopFrames>0&&!(m.libraryAssets||[]).length); if(!mm) return 'none'; return arm(head(mm.moveId,'p0',['f0']),.5,true).length; })();
 for(const id in keep) ctx.__id=id, E("P1_VFX[__id]=__keep[__id]");
 console.log(JSON.stringify(out));
 """
@@ -219,4 +274,39 @@ rt = o.get('reviewThrow') or {}
 check('vfxfight1: the Battle Lab review\'s call survives a throwing effect too: nothing is thrown, the effect is remembered on the clip and logged once', rt.get('thrown') is None and rt.get('dead') == ['vfx_core_clobber_impact'] and rt.get('faults') == 1, rt)
 i4, i5, i6 = (html.find(n) for n in ('engine/b3-stage.js?v=', 'engine/b3-vfx.js?v=', 'engine/b3-play.js?v='))
 check('vfxfight1: index.html loads b3-vfx.js between b3-stage.js and b3-play.js, with a cache tag', 0 < i4 < i5 < i6 and i1 < i5, (i4, i5, i6))
+
+hs = o.get('hs') or {}
+check('hitstop1: a move\'s hold is its manifest hitStopFrames at 24 fps (3 frames = 0.125 s; the longest, 7 frames = 0.292 s); 0 frames, an unknown move and a row that throws give no hold', all(abs(a - b) < 1e-12 for a, b in zip(hs.get('secs', []), hs.get('want', []))) and len(hs.get('secs', [])) == 4 and o.get('hsRowThrows') == 0, hs)
+check('hitstop1: all %d manifest moves with a move id get min(0.5, hitStopFrames / 24) s' % len([m for m in man['moves'] if m.get('moveId')]), o.get('hsAll') is True, o.get('hsAll'))
+check('hitstop1: no manifest row has a hitStopFrames over 12 (the 0.5 s cap is never what limits a move)', max(m['hitStopFrames'] for m in man['moves']) <= 12, max(m['hitStopFrames'] for m in man['moves']))
+ha = o.get('hsArm') or []
+check('hitstop1: a family move\'s hit arms one hold on the member and each foe it hits, from the hit moment (fight time 10 + 0.5 s), for hitStopFrames / 24 s',
+      len(ha) == 1 and ha[0]['src'] == 'p0' and ha[0]['keys'] == ['p0', 'f0', 'f1'] and abs(ha[0]['t0'] - 10.5) < 1e-9 and abs(ha[0]['dur'] - 3 / 24) < 1e-9 and ha[0]['start'] is None, ha)
+check('hitstop1: a move with no hit, a move with hitStopFrames 0, a move with no manifest row, a foe\'s move and a bad time arm no hold; a move aimed at an ally holds only the member',
+      o.get('hsNoHit') == [] and o.get('hsNoArg') == [] and o.get('hsZero') == [] and o.get('hsUnknown') == [] and o.get('hsFoeMove') == [] and o.get('hsBadSec') == [[], []] and [h['keys'] for h in (o.get('hsAlly') or [])] == [['p0']],
+      {k: o.get(k) for k in ('hsNoHit', 'hsNoArg', 'hsZero', 'hsUnknown', 'hsFoeMove', 'hsBadSec', 'hsAlly')})
+ht = o.get('hsTime') or {}
+check('hitstop1: before the hit the unit is drawn at the clock; from the first frame at or after it the member and the foe it hits are held on that frame\'s time for the whole hold',
+      ht.get('before') == [10.4, False] and ht.get('first') == [10.52, True] and ht.get('foeFirst') == [10.52, True] and ht.get('held') == [10.52, True] and ht.get('heldFoe') == [10.52, True] and ht.get('lastHeld') == [10.52, True], ht)
+check('hitstop1: a unit that is not in the hold keeps the clock, and after the hold every unit is drawn at the clock again (the held time is skipped, not played later); the hold is then gone',
+      ht.get('other') == [10.55, False] and ht.get('other2') == [10.55, False] and ht.get('after') == [10.52 + .125, False] and ht.get('later') == [11, False] and ht.get('left') == 0, ht)
+check('hitstop1: a clock that is already past the hold when it is first drawn (a stall) does not play the hold late', o.get('hsStall') == [[11, False], 0], o.get('hsStall'))
+check('hitstop1: a unit plays one move at a time: arming a second hold for the same member drops the first', o.get('hsReplaced') == [['p0', 'p0,f1', 12.5]], o.get('hsReplaced'))
+hu = o.get('hsUnit') or {}
+hc = hu.get('calls') or []
+check('hitstop1: b3vUnit draws a held unit at the held time (10.52) and any other call at the time it is given; the held draw\'s shake stands still (Math.random is one number for the call) and the real Math.random is back after',
+      len(hc) == 4 and hc[0][0] == 10.52 and hc[1][0] == 10.52 and hc[2][0] == 10.57 and hc[3][0] == 10.7 and hu.get('sameShake') is True and hu.get('restored') is True and hc[2][1] != hc[2][2], hu)
+th2 = o.get('hsThrow') or {}
+check('hitstop1: a held draw that throws is logged once, the hold is dropped, and the unit is drawn at the clock instead; the next frame has no hold', th2.get('seen') == [10.52, 10.55] and th2.get('seen2') == [10.56] and th2.get('holds') == 0 and th2.get('faults') == ['hit stop'], th2)
+check('hitstop1: a draw that throws with no hold on is the draw\'s own error and passes through as it always did', o.get('hsPlain') == 'plain', o.get('hsPlain'))
+nf = o.get('hsNoFight') or {}
+check('hitstop1: a hold that cannot be armed is logged and the move\'s effects are armed all the same', nf.get('holds') == 0 and nf.get('cues') == 1 and nf.get('faults') == ['hit stop armed'], nf)
+fxh = o.get('hsFx') or {}
+check('hitstop1: library effects keep their own pace during a hold: the effect is told impact_ms + (clock - hit moment) x 1000 at every frame, held or not (%s)' % (fxh.get('ms'),),
+      fxh.get('faults') == 0 and len(fxh.get('ms') or []) >= 5 and all(any(abs(m - (fxh['impact'] + (t - 10.5) * 1000)) < 1e-6 for m in fxh['ms']) for t in fxh['ts'] if 10.45 < t < 10.7), fxh)
+check('hitstop1: a move with a hit stop and no library effect still gets its hold', o.get('hsNoFx') in (1, 'none'), o.get('hsNoFx'))
+bp = open(os.path.join(R, 'engine/b3-play.js'), encoding='utf-8').read()
+check('hitstop1: b3PlayMove arms the hit stop only for a move that has a hit (hits.length > 0), and b3Draw draws every foe and every member through b3vUnit',
+      "b3vArm(head,own,sec,hits.length>0)" in bp and "b3vUnit(f.key,t,tt=>b3DrawFoe(f,tt," in bp and "b3vUnit(u.key,t,tt=>b3DrawMember(u,tt," in bp, 'b3-play.js')
+check('hitstop1: nothing outside b3-vfx.js reads a hold (the battle clock, the queue and the rules do not know about it)', all('B3V.holds' not in open(os.path.join(R, 'engine', f), encoding='utf-8').read() for f in os.listdir(os.path.join(R, 'engine')) if f.endswith('.js') and f != 'b3-vfx.js'), 'engine')
 print('FAILS:', fails); sys.exit(1 if fails else 0)

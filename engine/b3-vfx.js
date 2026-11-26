@@ -8,9 +8,15 @@
 // Where an effect lands: the effects that draw on the foe land on the move's target (the foe it hits; an ally when the move is aimed at one) and the unit-sized ones (clobber, pops, composure,
 // chevrons, badges) once on each target; the heal and the shield land on each ally the move names; a set-piece that draws on the member plays on the caster, where it stands at that moment.
 // A fight never breaks because of an effect: p1DrawVfx guards each one (a throw is logged once and that effect stops for the cue), and the draw here is wrapped again, so a cue that fails is dropped.
-// Nothing here changes the fight: the rules finished before the first beat played, and nothing waits on an effect. Hit stop is not applied (the fight's clock runs on).
-const B3V={cues:[],fault:0};
-function b3vReset(){ B3V.cues.length=0; }
+// Nothing here changes the fight: the rules finished before the first beat played, and nothing waits on an effect.
+// Hit stop (hitstop1, 2026-11-26): when a family move's first hit shows, the member who made the move and the foes it hits are held on the picture they show at that moment for
+// hitStopFrames / 24 seconds (data/guide-manifest.json: frames at the 24 fps the clips were made at; the row is the move's own, found by move id through gtMetaMove), then they show where the
+// fight's clock is. Only what is DRAWN is held: b3Draw draws those units at a held time (b3vUnit); the battle clock, the queue of beats, the rules, the clips and every other effect (library
+// effects, numbers, bursts, the other units) run at their normal pace, and nothing waits for a hold. A move with hitStopFrames 0, with no manifest row, with no hit, or a foe's move changes nothing.
+// A hold that throws is dropped and the unit is drawn as it always was.
+const B3V={cues:[],holds:[],fault:0};
+const B3V_FPS=24, B3V_HOLD_MAX=.5;   // the manifest's frames are at 24 per second; the longest manifest row is 8 frames (.33 s), never hold more than half a second
+function b3vReset(){ B3V.cues.length=0; B3V.holds.length=0; }
 // The effects that draw on every target the move names (unit-sized, library layer unit_overlay); every other effect draws once, on the first target.
 const B3V_EACH=new Set(['vfx_core_clobber_impact','vfx_core_detonation_pops','vfx_core_composure_break','vfx_core_timeline_chevrons','vfx_core_status_debuff_badges']);
 // The two effects that are drawn on the member in the Lab but belong on the ally a move is aimed at: each ally the move names gets one.
@@ -22,9 +28,44 @@ function b3vMeta(head,cid){
   try { M=(cid&&typeof p1Meta==='function'&&p1Meta(cid))||null; if(!(M&&M.vfx&&M.vfx.length)) M=typeof gtMetaMove==='function'?gtMetaMove(head.id):null; } catch(e) { M=null; }
   return M&&M.vfx&&M.vfx.length&&typeof P1_VFX!=='undefined'&&M.vfx.some(id=>P1_VFX[id])?M:null;
 }
+// The hold, in seconds, the manifest gives this move (0 for none). The manifest's own row only: a row measured on a baked clip (data/pass1-meta.js) counts frames at 60 fps for the Battle Lab review.
+function b3vHitStopSec(head){
+  try { const R=typeof gtMetaMove==='function'?gtMetaMove(head.id):null,f=R&&R.hit_stop_frames; return typeof f==='number'&&isFinite(f)&&f>0?Math.min(B3V_HOLD_MAX,f/B3V_FPS):0; } catch(e) { return 0; }
+}
+// Arm a hold for a family move whose first hit shows at fight time t0: the member and the foes the move is aimed at. A unit plays one move at a time: its older hold is dropped.
+function b3vHold(head,t0){
+  if(!head||head.t!=='act'||!head.src||head.src[0]==='f'||!isFinite(t0)) return;
+  const dur=b3vHitStopSec(head); if(!(dur>0)) return;
+  const keys=[head.src]; for(const k of (head.tgts||[])){ const u=b3Unit(B3.F,k); if(u&&u.side==='foe'&&keys.indexOf(k)<0) keys.push(k); }
+  B3V.holds=B3V.holds.filter(h=>h.src!==head.src);
+  B3V.holds.push({src:head.src,keys,t0,dur,start:null,r:Math.random()});   // r: the one shake the held picture keeps
+}
+// The time a unit is drawn at: the held moment while a hold of theirs is on, else the clock. A hold starts at the first frame drawn at or after its hit moment (so the hit's own state is already
+// set), and one that the clock has already passed (a long stall) is dropped, never played late. Returns {t, h} where h is the hold that is on, or null.
+function b3vTimeOf(key,t){
+  let on=null;
+  B3V.holds=B3V.holds.filter(h=>{
+    if(h.start==null&&t>=h.t0) { if(t>=h.t0+h.dur) return false; h.start=t; }
+    if(h.start!=null&&t>=h.start+h.dur) return false;   // over: the unit shows where the clock is
+    if(!on&&h.start!=null&&t>=h.start&&h.keys.indexOf(key)>=0) on=h;
+    return true;
+  });
+  return {t:on?on.start:t,h:on};
+}
+// Draw one unit with fn(time). While a hold is on, the unit's picture is that of the held moment and its shake stands still (Math.random answers one fixed number for the call). If the held draw
+// throws, the hold is dropped, the fault is logged, and the unit is drawn at the clock as it was before this existed.
+function b3vUnit(key,t,fn){
+  let r; try { r=b3vTimeOf(key,t); } catch(e) { r=null; }
+  if(!r||!r.h||r.t===t) return fn(t);
+  const h=r.h,R=Math.random; let err=null;
+  try { Math.random=()=>h.r; fn(r.t); } catch(e) { err=e; } finally { Math.random=R; }
+  if(err) { B3V.holds=B3V.holds.filter(q=>q!==h); B3V.fault++; try { gameFault('hit stop',err); } catch(e) {} return fn(t); }
+}
 // Arm the move's effects to play from the moment its first hit lands, `sec` seconds from now (the same number the move's own timeline reveals the hit at). Returns true when a library
-// projectile (proj_*) is armed, so the default ball that a throw or a cast sends across is left out. Never throws.
-function b3vArm(head,cid,sec){
+// projectile (proj_*) is armed, so the default ball that a throw or a cast sends across is left out. hit: the move has a hit that shows at `sec` (then its hit stop is armed too, even when
+// the move has no effect). Never throws.
+function b3vArm(head,cid,sec,hit){
+  try { if(hit&&typeof sec==='number'&&isFinite(sec)) b3vHold(head,B3P.t+Math.max(0,sec)); } catch(err) { try { gameFault('hit stop armed',err); } catch(e) {} }
   try {
     const M=b3vMeta(head,cid); if(!M||typeof sec!=='number'||!isFinite(sec)) return false;
     const tg=(head.tgts&&head.tgts.length?head.tgts:[head.src]).slice(), t0=B3P.t+Math.max(0,sec); let maxLen=0;

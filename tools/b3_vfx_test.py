@@ -61,18 +61,18 @@ SWEEP="""(doc)=>{
   for(const m of doc.moves){ if(!m.moveId||!(m.libraryAssets||[]).length) continue;
     for(const k in drawn) delete drawn[k];
     const ally=m.libraryAssets.some(a=>/heal_cleanse|shield_ward/.test(a)),head={t:'act',id:m.moveId,src:party[0],tgts:ally?[party[1]]:foes.slice()};
-    B3P.t=t0; B3V.cues.length=0; b3vArm(head,null,1); const c=B3V.cues[0];
+    B3P.t=t0; B3V.cues.length=0; B3V.holds.length=0; b3vArm(head,null,1,!ally); const c=B3V.cues[0];   // hitstop1: the sweep also draws every move through its hit stop
     if(!c){ rows.push({id:m.moveId,err:'no cue'}); continue; }
     for(let s=-1.5;s<=(c.end-c.t0)+.2;s+=.1){ B3P.t=c.t0+s; try { b3Draw(); } catch(e) { rows.push({id:m.moveId,err:'b3Draw threw '+e.message}); break; } }
     const want=m.libraryAssets.filter(a=>P1_VFX[a]),missing=want.filter(a=>!drawn[a]);
     rows.push({id:m.moveId,want:want.length,missing,dead:Object.keys(c.dead)});
   }
-  Object.assign(P1_VFX,real); B3V.cues.length=0; B3P.t=t0;
+  Object.assign(P1_VFX,real); B3V.cues.length=0; B3V.holds.length=0; B3P.t=t0;
   const tr2=fightCtx.getTransform();
   return {rows,faults:(window.__faults||[]).length-f0,transform:[tr.a,tr.b,tr.c,tr.d,tr.e,tr.f].join()===[tr2.a,tr2.b,tr2.c,tr2.d,tr2.e,tr2.f].join()}; }"""
 INSTR="""()=>{ if(window.__I) return; window.__I=true; window.__L=[]; const L=window.__L,r=x=>Math.round(x*1000)/1000;
   for(const id of Object.keys(P1_VFX)){ const f=P1_VFX[id]; P1_VFX[id]=function(g,x,y,u,z,p){ L.push(['fx',id,r(B3P.t),Math.round(x),Math.round(y),r(u)]); return f.apply(this,arguments); }; }
-  const A=b3vArm; window.b3vArm=function(h,c,s){ const ret=A(h,c,s),cu=B3V.cues[B3V.cues.length-1]; L.push(['arm',h.id,r(B3P.t),r(s),ret,cu&&cu.src===h.src?cu.M.vfx:null,cu&&cu.src===h.src?r(cu.t0):null,h.tgts]); return ret; };
+  const A=b3vArm; window.b3vArm=function(h,c,s,hit){ const ret=A(h,c,s,hit),cu=B3V.cues[B3V.cues.length-1]; L.push(['arm',h.id,r(B3P.t),r(s),ret,cu&&cu.src===h.src?cu.M.vfx:null,cu&&cu.src===h.src?r(cu.t0):null,h.tgts]); return ret; };
   const S=b3Show; window.b3Show=function(b){ if(b.t==='act'||b.t==='hit'||b.t==='dmg'||b.t==='heal'||b.t==='miss') L.push(['show',b.t,r(B3P.t),b.id||null]); return S(b); }; }"""
 def play_all(pg,fid,rot,frames):
     """Uses every move of every family member of a Lab fight, once each, from the deck (a number key highlights a move, Enter uses it, as a player does)."""

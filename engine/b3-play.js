@@ -326,7 +326,7 @@ function b3PlayMove(beats,done,mid,waited) {   // mid: the first move of a Famil
   const finish=s=>at(s,finishNow);
   const shape=head.shape,foe=src[0]==='f',fl=B3_FLAVORS[head.flavor[0]]||B3_FLAVORS.support;
   // vfxfight1 (engine/b3-vfx.js): the move's library effects play from the moment its first hit lands; vfx(sec) arms them for `sec` seconds from now and says whether a library projectile will fly (then no default ball).
-  const vfx=sec=>typeof b3vArm==='function'?b3vArm(head,own,sec):false;
+  const vfx=sec=>typeof b3vArm==='function'?b3vArm(head,own,sec,hits.length>0):false;   // hitstop1: a move with a hit also arms its hit stop for that moment
   if(SR&&b3gReady(SR)) { b3gPlay(SR,{head,hits,late,reveal,finishNow,cue:vfx}); return; }   // movestage2: the row's body clip, stage steps and set piece (engine/b3-stage.js)
   // A video clip plays the move (the move's or act's row says which, engine/b3-clips.js). It plays at the clock's own pace, not B3_TEMPO's:
   // the hit shows on the clip's impact frame (a clip with no impact lands at `at` of its length). A family member crosses to the monster first.
@@ -423,9 +423,9 @@ function b3Draw() {
   // vfxfight1 (engine/b3-vfx.js): a library effect is drawn at its own layer's point: the ones on the floor and the ones standing behind the units come first.
   b3vDraw('ground_decal',t); b3vDraw('behind_units',t);
   // Enemies, back to front.
-  for(const f of F.foes.filter(f=>B3P.foe[f.key]).sort((a,b)=>B3P.foe[a.key].py-B3P.foe[b.key].py)) b3DrawFoe(f,t,picked.includes(f.key));   // an add shows once its `summon` beat has played
+  for(const f of F.foes.filter(f=>B3P.foe[f.key]).sort((a,b)=>B3P.foe[a.key].py-B3P.foe[b.key].py)) b3vUnit(f.key,t,tt=>b3DrawFoe(f,tt,picked.includes(f.key)));   // hitstop1: b3vUnit holds a unit at the hit for its hit stop   // an add shows once its `summon` beat has played
   // Party, back to front (slot order runs up-screen to down-screen).
-  for(const u of F.party) b3DrawMember(u,t,picked.includes(u.key));
+  for(const u of F.party) b3vUnit(u.key,t,tt=>b3DrawMember(u,tt,picked.includes(u.key)));
   b3vDraw('unit_overlay',t);   // vfxfight1: bursts, badges, shields and heals, over the units that stand behind them
   // Things in flight and bursts.
   for(const e of B3P.fx) {

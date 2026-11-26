@@ -1576,6 +1576,12 @@
    "cmd": "python3 -I tools/guide_timing_test.py",
    "group": "g1",
    "minutes": 1
+  },
+  {
+   "id": "b3_hitstop_test",
+   "cmd": "python3 -I tools/b3_hitstop_test.py",
+   "group": "g6",
+   "minutes": 3
   }
  ]
 }

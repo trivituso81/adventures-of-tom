@@ -1,3 +1,13 @@
+## hitstop1 (2026-11-26): a move's hit stop plays in a real Battle 3 fight
+
+Tom's card c-hitstop1 (the "Not done" item of vfxfight1). When a family move's first hit shows in a real fight, the member who made the move and the foes it hits are held on the picture they show at that moment for `hitStopFrames / 24` seconds (`data/guide-manifest.json`, frames at the 24 fps the clips were made at: 3 frames is 0.125 s, the longest row is 7 frames, 0.29 s), then they show where the battle clock is. Nothing else waits: the battle clock, the queue of beats, the rules, the clips, the library effects, the numbers and every other unit run as before (the hit beat shows at the same moment with or without a hold; the held time is skipped after the hold, not played again).
+
+How: `b3PlayMove` already armed each move's effects at its hit moment through `b3vArm`; it now also tells `b3vArm` whether the move has a hit (`hits.length>0`), and `engine/b3-vfx.js` arms a hold for that moment from the manifest's own row for the move id (`gtMetaMove`; a row measured on a baked clip in `data/pass1-meta.js` counts 60 fps frames for the Battle Lab review and is not used). `b3Draw` draws every foe and every family member through `b3vUnit`, which gives a held unit the held time (and one fixed random number, so its hit shake stands still) and every other call the clock. A move with `hitStopFrames` 0, no manifest row, no hit (a pass, a ward) or a foe's move holds nobody; a move aimed at an ally holds only the member. A hold starts at the first frame drawn at or after the hit and is dropped, not played late, when a stall has already carried the clock past it. A held draw that throws is dropped, logged once as `hit stop`, and the unit is drawn at the clock; a hold that cannot be armed is logged as `hit stop armed` and the move's effects are armed all the same. No clip, animation timing or rule changed. The Battle Lab review's `p1Clock` is untouched (it still counts the manifest's frames at 60 fps, which does not agree with the 24 fps of this step; left for a separate decision).
+
+Checked: `python3 -I tools/guide_timing_test.py` (new hit stop checks: the hold of every manifest move, who is held, the held time, a stall, a second hold for the same member, a throwing held draw, a hold that cannot be armed, library effects told impact_ms + clock distance at every frame of a hold, and that nothing outside `b3-vfx.js` reads a hold); new `python3 tools/b3_hitstop_test.py` in Chrome (fight new1, portrait and landscape, 6 moves each played by hand: one held time for each hold from the first frame after the hit to hitStopFrames / 24 s, only the member and the foe held, every other unit at the clock, the hit beat within 0.15 s of the hold's moment, moves with hitStopFrames 0 or no hit hold nobody, a throwing held draw is dropped and the fight reaches its next command; sheets `tools/shots/b3-hitstop-portrait.png` and `-landscape.png` look right: the foe sits on its hit picture and the effects keep moving inside the hold); `python3 tools/b3_vfx_test.py` (117 checks: all 119 moves swept through their effects and hit stops in a real `b3Draw`, four Lab fights in portrait and one in landscape played by hand, throwing effects); `python3 tools/b3_test.py new1 new2 new3 new4 new5` (every fight, same turns as the simulator, no failure). `tools/b3_hitstop_test.py` is in `tools/night/tests.json`. A frame stall of 0.2 s at Grace's Soup-Dumpling Squeeze (the dumpling effect's first draw, with or without a hold) swallows its 0.125 s hold in a real fight; the test accepts that case and says so.
+
+Not done: sound effects (a decision on where they come from is still open). Found and left alone, not from this build (both fail on a plain checkout of main too): `board_sync_test.py` ("board4: board_check accepts a Tom card waiting on its fix", so `python3 tools/smoke.py` ends with that failure) and `tools/hidebf_test.py` is not in `tools/night/tests.json`. Everything else in smoke passes.
+
 ## ridepics1 (2026-11-26): Tom and Rose ride: the new walk, the opening's ride frames and the Lamby night-light picture are in the game
 
 Card c-ridepics1. Tom's words: "implement the newest approved Tom + Rose pictures (meaning, the ones in the section Tom and Rose ride)". Not seen on the phone yet.
@@ -8,6 +18,7 @@ Card c-ridepics1. Tom's words: "implement the newest approved Tom + Rose picture
 - The ride baker now writes at the sharpness the repo art already had (battle 3, overworld 7; `NEW_F` follows `KB`, atlas 6 frames wide), so the grid the game reads is unchanged (160 x 152) and nothing else moved. Battle frames other than the night-light one are the same pictures as before.
 - Battle 2 only: the ride frames in the new battle (Battle 3) are not touched.
 - Looked at the baked overworld walk, the night-light frame next to hoist and boop, and the six opening frames; not played in the game. Tests: smoke has the two failures that already fail on main.
+
 
 ## boppyframes (2026-11-26): Boppy's new walking, feelings, talking, thinking and listening pictures are in the game
 
@@ -36,6 +47,7 @@ Card c-deedeeframes. Tom's words: "when you're done, do deedee next". Not seen o
 - Facing rows (`docs/pose-facing.tsv`): angry and proud now `f`, scared, answer and think `l`, listen `r`.
 - `walk_sheet_frames.grid` now retries with a tighter merge distance when two neighbouring figures touch (Boppy's new walking sheet v5 read as 7 figures and stopped `pose-editor/manifest.py`). Boppy is the next card.
 - Tests: `heights_test.py` and `pose_editor_test.py` pass; smoke has the two failures that already fail on main.
+
 
 ## vfxfight1 (2026-11-26): the Stage 2C library effects draw in a real Battle 3 fight, each at its own layer
 
