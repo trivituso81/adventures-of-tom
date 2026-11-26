@@ -1,3 +1,14 @@
 {
- "requests": []
+ "requests": [
+  {
+   "id": "body:grace:idle",
+   "at": "2026-11-26T09:23:59.567Z",
+   "note": "she must breathe gently AND blink once",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BREATHING IDLE\nShe stands in her starting relaxed stance and breathes slowly and gently, her chest and shoulders rising and falling softly, and blinks once. Her arms, head and feet stay where they are for the whole clip.",
+   "hasVideo": true,
+   "kind": "family",
+   "rev": 1,
+   "cap": 0.1
+  }
+ ]
 }
