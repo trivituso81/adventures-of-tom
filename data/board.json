@@ -7040,7 +7040,7 @@
    "id": "c-rosestage",
    "tag": "rosestage1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Rose's twelve moves: staging rows and body videos",
    "next": "Writes the staging rows, body prompts and prop pictures for all twelve of Rose's moves so Generate works for them, then the wan-gen Action makes the videos and pictures inside the auto limits.",
@@ -7048,7 +7048,7 @@
    "created": "2026-11-26",
    "changed": "2026-11-26",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEQEES7HckHBnqBmQg",
     "opening": "\"are you missing plans for some of the battle animations?\" and \"why dont i get the button to create the animation\""
    },
    "prompt": {
@@ -7064,9 +7064,18 @@
     {
      "d": "2026-11-26",
      "t": "Tom (about Rose's special moves): \"Waits for staging. ... Its staging row is not written yet, so no video can be made for it.\" and \"why dont i get the button to create the animation\". Cause: only Tom's eight moves had staging rows. Added rows for Rose's twelve, ten new body prompts plus one replacement for the tackle (the old tackle prompt pulls Lamby from behind her back), eight prop pictures, and build_map now uses a row's own body job when the row makes a new body."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as rosestage1: Rose's twelve moves have staging rows, so Generate works for them"
     }
    ],
-   "after": "t-rosestage-lab"
+   "after": "t-rosestage-lab",
+   "done": "2026-11-26"
   },
   {
    "id": "t-rosestage-lab",
@@ -7122,13 +7131,17 @@
     "n": 19,
     "est": 6.7,
     "auto": true
+   },
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEQEES7HckHBnqBmQg",
+    "opening": "unknown"
    }
   },
   {
    "id": "c-movelab-rose",
    "tag": "movelab2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Lab for any person, starting with Rose",
    "next": "The Move Lab only loads Tom's loadout (engine/b3-movelab.js). Adds a person picker so Tom can judge Rose's twelve moves with Keep, Tweak or Replace.",
@@ -7136,7 +7149,7 @@
    "created": "2026-11-26",
    "changed": "2026-11-26",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGMZ3XGBEsESifGZx2",
     "opening": "added by c-rosestage"
    },
    "prompt": {
@@ -7152,8 +7165,63 @@
     {
      "d": "2026-11-26",
      "t": "Added by c-rosestage: Rose's moves have staging rows but the Move Lab is Tom-only."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started by the night shift."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
-   ]
+   ],
+   "started_at": "2026-11-26T09:55:26+00:00"
+  },
+  {
+   "id": "b-guideuse-45793298334",
+   "tag": "guideuse-45793298334",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-26",
+   "theme": "Battle System",
+   "title": "Idle (standing and breathing) (tnb), Guard (tnb), Getting hit (tnb), Idle (standing and breathing) (amy) now plays a video chosen in the Bat",
+   "next": "Done: Idle (standing and breathing) (tnb), Guard (tnb), Getting hit (tnb), Idle (standing and breathing) (amy) now plays a video chosen in the Battle Guide",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as guideuse-45793298334. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26"
+  },
+  {
+   "id": "b-guideuse-45795371400",
+   "tag": "guideuse-45795371400",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-26",
+   "theme": "Battle System",
+   "title": "Dodge (tom), Victory (rose) now plays a video chosen in the Battle Guide",
+   "next": "Done: Dodge (tom), Victory (rose) now plays a video chosen in the Battle Guide",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as guideuse-45795371400. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26"
   }
  ],
  "sessions": [
@@ -7165,6 +7233,19 @@
    "tags": [],
    "cards": [
     "t-lastnight"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEQEES7HckHBnqBmQg",
+   "title": "Rose's twelve moves: staging rows and body videos",
+   "first": "2026-11-26T01:45:29-08:00",
+   "last": "2026-11-26T01:55:15-08:00",
+   "tags": [
+    "rosestage1"
+   ],
+   "cards": [
+    "c-rosestage",
+    "t-rosestage-lab"
    ]
   },
   {
@@ -13637,8 +13718,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "b956009c41cc6a6616c21e05ef240bafe3dcfb83",
- "synced_at": "2026-11-26T09:38:13+00:00",
+ "synced": "88df3164be10f51bde7b14933ca6bda257ecf781",
+ "synced_at": "2026-11-26T09:55:27+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -13728,6 +13809,11 @@
     {
      "id": "t-lastnight",
      "at": "2026-11-26T08:48:13+00:00",
+     "kind": "queued"
+    },
+    {
+     "id": "c-movelab-rose",
+     "at": "2026-11-26T09:55:26+00:00",
      "kind": "queued"
     }
    ]
