@@ -8406,6 +8406,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukH7bSqAJrwdcNpCdR9",
+   "title": "Art Library: Hide painted battleframes checkbox",
+   "first": "2026-11-26T08:44:51-08:00",
+   "last": "2026-11-26T08:44:51-08:00",
+   "tags": [
+    "hidebf1"
+   ],
+   "cards": [
+    "c-hidebf"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCyrFfWfcWhho82Amx",
    "title": "Engine reads move contact time and hit stop; 8 effects",
    "first": "2026-11-26T08:41:12-08:00",
@@ -14901,8 +14913,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "30bda147258632a09c841f47591d8a513fe75151",
- "synced_at": "2026-11-26T16:42:04+00:00",
+ "synced": "438e1088c01de1b30357babcd8ad856a6f5ab779",
+ "synced_at": "2026-11-26T16:45:37+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
