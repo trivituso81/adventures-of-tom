@@ -1570,8 +1570,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T08:09:39Z",
-   "state": "checking",
-   "since": "2026-11-26T08:23:07Z",
+   "state": "done",
+   "since": "2026-11-26T08:28:17Z",
    "run": 45782279434,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -1584,7 +1584,27 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-justin-victory/t1.js",
+    "img": "takes/body-justin-victory/t1.webp",
+    "frames": 75,
+    "kb": 1346,
+    "words": "0 to 148 step 2",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "vision v_big: Only thumbs-up gestures and smiles; no arms up, jump or big cheer.; Mild thumbs-up gesture, not arms up, jump or big cheer."
+     ],
+     "faults": [
+      "v_big"
+     ],
+     "vision_ran": true,
+     "spent": 0.0072,
+     "error": null,
+     "words": "The clip gate flags this take: vision v_big: Only thumbs-up gestures and smiles; no arms up, jump or big cheer.; Mild thumbs-up gesture, not arms up, jump or big cheer.."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
