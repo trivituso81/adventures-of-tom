@@ -7145,9 +7145,13 @@
     {
      "d": "2026-11-26",
      "t": "Built the person picker in the Move Lab (Tom, Grace, Rose, Deedee). Tested with a stand-in Rose row; her real rows come with c-rosestage."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "ended without shipping: code and test are done and pushed to branch claude/magical-planck-1h8mad, but bump_tags stops on card t-rosestage-lab (its wan.jobs name rose-* jobs that are not in wangen-jobs.json until c-rosestage lands), so no build stamp and no push to main. Next: after c-rosestage ships, merge that branch, run bump_tags movelab2."
     }
    ],
-   "after": "nothing for Tom: c-rosestage (its Rose rows make the Move Lab show her moves)"
+   "after": "nothing for Tom: c-rosestage"
   }
  ],
  "sessions": [
