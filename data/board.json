@@ -6865,6 +6865,38 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json. Your first push is the commit \"board: start c-tomportrait1\".\n\nTask: art/raw/characters/tom-hero-v3.png is Tom's new painting. Crop his face with tools/sprite-bake/bake_portraits.py (crop saved in data/portrait-crops.json), run python3 tools/portrait_test.py and python3 tools/portraits_test.py, look at the status screen, turn order and Battle Guide in portrait and landscape, add the docs/CHANGES.md entry and push.\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "done": "2026-11-26"
+  },
+  {
+   "id": "c-tomframes",
+   "title": "Install Tom's new walk, feelings, talking, listen frames",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "prog",
+   "next": "Installing Tom's new sheets (walking v4, feelings v8, talking v3, listening v1) with the existing bakes; look at frames in portrait and landscape before the push.",
+   "blocks": [],
+   "changed": "2026-11-26",
+   "created": "2026-11-26",
+   "tag": "tomframes",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFUy1ZAKH1RRjtXyko",
+    "opening": "\"implement tom's new walking, emotions, and listening frames\""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by the session: Tom's words: \"implement tom's new walking, emotions, and listening frames. full approval to repo granted\"."
+    }
+   ],
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Installs Tom's new walking, feelings, talking and listening sheets for Tom.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the bakes exist and tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md (Pose Editor, Tom's painted frames are used as painted, One head multiplier, Real heights) and claude/next-addendum-listen1.md, then card c-tomframes in data/board.json. Your first push is the commit board: start c-tomframes. Tom uploaded new painted sheets for Tom on 2026-11-26: tom-walking-sheet-v4, tom-emotions-v8, tom-talk-v3, and tom-listen-v1 is approved. Install them for Tom only. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
