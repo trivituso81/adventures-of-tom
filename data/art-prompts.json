@@ -8748,6 +8748,14 @@
      "date": "2026-11-11",
      "from": "v2",
      "at": 1794361615083
+    },
+    {
+     "n": 2,
+     "file": "art/raw/characters/deedee-walking-sheet-v3.png",
+     "date": "2026-11-26",
+     "from": "v3",
+     "at": 1795727071840,
+     "up": true
     }
    ]
   },
