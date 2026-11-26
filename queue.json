@@ -3265,12 +3265,11 @@
     "n": 4
    },
    "use": {
-    "state": "applying",
+    "state": "live",
     "at": "2026-11-26T09:32:50Z",
-    "since": "2026-11-26T09:32:50Z",
-    "build": "",
-    "why": "",
-    "run": 45793298334
+    "since": "2026-11-26T09:46:50Z",
+    "build": "guideuse-45793298334",
+    "why": ""
    },
    "left": false,
    "dry": false,
