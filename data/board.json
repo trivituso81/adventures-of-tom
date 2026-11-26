@@ -8204,6 +8204,38 @@
      "t": "Added by the wan-gen job (45823476031): rose-boop used 4 tries ($2.00)."
     }
    ]
+  },
+  {
+   "id": "c-guidetime",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "tag": "guidetime1",
+   "title": "Engine reads move contact time and hit stop; 8 effects",
+   "next": "Builds the engine step that reads contactSec and hitStopFrames from data/guide-manifest.json (engine/guide-timing.js) and the first 8 effects of the Stage 2C library (engine/vfx-library.js). Next Claude card: the other 29 library effects, then drawing effects in a real fight.",
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukCyrFfWfcWhho82Amx",
+    "opening": "Read docs/BATTLE_GUIDE.md section 'What is done'. Build the engine step that reads contactSec and hitStopFrames from data/guide-manifest.json, then build the first 8 effects of aot-stage2c-vfx-library-v11.json"
+   },
+   "after": "nothing for Tom: end",
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Started: Tom asked for the engine step and the first 8 library effects in this conversation. Board: new card."
+    }
+   ],
+   "prompt": {
+    "what": "Makes the game read each move's contact moment and hit stop from the manifest, and draws the first 8 library effects in code.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build whose steps are written in the task, tests catch mistakes)",
+    "effort": "high (a new engine step, 8 drawn effects, a crosswalk change and a test)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done. Your first push is the commit \"board: start c-guidetime\".\n\nTask: engine/guide-timing.js reads contactSec and hitStopFrames from data/guide-manifest.json and gives p1Meta (engine/pass1-vfx.js) a row for every manifest move; a row baked from the video in data/pass1-meta.js wins. engine/vfx-library.js draws the first 8 effects of art-factory/aot-stage2c-vfx-library-v11.json in code. Run python3 -I tools/guide_timing_test.py and python3 -I tools/guide_manifest_test.py."
+   }
   }
  ],
  "sessions": [
