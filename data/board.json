@@ -7778,9 +7778,9 @@
    "theme": "Battle Animations",
    "tag": "wanstop-rose-whoopee-r1",
    "title": "Fix the stopped video rose-whoopee",
-   "next": "The bulk run stopped rose-whoopee (failed twice: p1) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "next": "Accepted by eye: the video shows the whole move; baked and wired. Tom has one watch card.",
    "blocks": [],
-   "after": "nothing for Tom: end",
+   "after": "t-wanwatch-rose-raspberry-r1",
    "auto": true,
    "wan_card": "t-rosestage-lab",
    "created": "2026-11-26",
@@ -7805,6 +7805,10 @@
     {
      "d": "2026-11-26",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Accepted rose-whoopee-a2-r1 by eye (purpose met, all measured checks passed, only the look check missed): baked, wired, watch card t-wanwatch-rose-raspberry-r1. No new try."
     }
    ],
    "prompt": {
@@ -7849,7 +7853,7 @@
    "ask": "animations",
    "fyi": true,
    "title": "Watch 1 new battle video",
-   "next": "Open ADMIN > BATTLE GUIDE, find each animation named below, press PLAY and watch it once on your phone. Tap All good, or Something is wrong and say what you saw. New: rose-raspberry. Build wanstop-rose-raspberry-r1.",
+   "next": "Open ADMIN > BATTLE GUIDE, find each animation named below, press PLAY and watch it once on your phone. Tap All good, or Something is wrong and say what you saw. New: rose-raspberry; rose-whoopee. Newest build wanstop-rose-whoopee-r1.",
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26",
@@ -7864,7 +7868,8 @@
     }
    ],
    "wanwatch": [
-    "rose-raspberry"
+    "rose-raspberry",
+    "rose-whoopee"
    ]
   }
  ],

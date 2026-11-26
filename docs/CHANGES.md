@@ -1,3 +1,7 @@
+## wanstop-rose-whoopee-r1 (2026-11-26): Rose's whoopee cushion trap video accepted by eye and put in the game
+
+The wan-gen checks stopped rose-whoopee twice on the look check only (p1; every measured check passed: height, feet, flat background, edges, last picture against first). I made a contact sheet of the second video: Rose slides both palms forward, clamps her ears, pops into the hands-on-hips pose and returns to her stance. That is the move's main action (Tom 2026-11-21: complete the purpose and theme, not perfect). Baked it (`rose_whoopee`, `wanbake.bake`); the staging row in data/b3-stage.js already named the clip. One small difference: she smiles through it instead of a deadpan face. No new try started, nothing painted.
+
 ## wanstop-rose-raspberry-r1 (2026-11-26): Rose's raspberry video is accepted and put in the game
 
 The wan-gen checks stopped rose-raspberry only on the literal look check (p1); height, feet, background, edges and ends all passed. By eye the second try shows hands on hips, puffed cheeks, a lean, arms crossed and a return to idle, which is the move (Tom 2026-11-21: the overall purpose counts). Baked as clip rose_raspberry (29 frames, tools/art-library/wanbake.py, job settings) and wired to the staged move supersonic_raspberry. No new try, no money spent. Watch card t-wanwatch-rose-raspberry-r1.
