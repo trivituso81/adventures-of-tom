@@ -9325,6 +9325,38 @@
    "changed": "2026-11-26",
    "reruns": 1,
    "rerun_at": "2026-11-21T21:31:38+00:00"
+  },
+  {
+   "id": "c-hitstoplab1",
+   "tag": "hitstoplab1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "title": "Battle Lab review holds hit stop at the right length, 24 fps",
+   "next": "Make p1Clock count a manifest row's hit_stop_frames at 24 fps and keep pass1-meta rows at 60 fps; update tools/guide_timing_test.py, docs/BATTLE_GUIDE.md and docs/CHANGES.md; run guide_timing_test, smoke and b3_hitstop_test.",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEMmPhXEHE2tFioPmh",
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done (the hitstop1 paragraph). Add a card for this task first\""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Started: Tom asked to fix the Battle Lab pass-1 clip clock (p1Clock) so a manifest row's hit stop frames count at 24 fps, the separate step left open by hitstop1. Board: new card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Makes the Battle Lab pass-1 review hold a manifest move's hit stop for hit_stop_frames / 24 seconds instead of / 60.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: one known edit with a test that catches mistakes)",
+    "effort": "medium (the change and the tests are written in the task)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done (the hitstop1 paragraph). Your first push is the commit \"board: start c-hitstoplab1\". p1Clock in engine/pass1-vfx.js holds a clip for hit_stop_frames * 1000 / 60 milliseconds. For a row from data/guide-manifest.json (from:'manifest', built by engine/guide-timing.js) the frames are at 24 fps, so the Battle Lab pass-1 review holds them about 2.5 times too short. Make p1Clock count a manifest row at 24 fps (hit_stop_frames * 1000 / 24) and leave rows from data/pass1-meta.js (measured on the baked video) at 60 fps. Do not change clips, impact times, the rules or engine/b3-vfx.js. Update the p1Clock check in tools/guide_timing_test.py and add a check that a pass1-meta row still holds at 60 fps. Run python3 -I tools/guide_timing_test.py, python3 tools/smoke.py and python3 tools/b3_hitstop_test.py. Update docs/BATTLE_GUIDE.md What is done and docs/CHANGES.md. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
