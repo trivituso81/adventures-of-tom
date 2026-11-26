@@ -8628,6 +8628,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEWDdsXz8MszJbLSbb",
+   "title": "Chapter 1 opening: zoom into the taxi office, then fade",
+   "first": "2026-11-26T09:23:15-08:00",
+   "last": "2026-11-26T09:23:15-08:00",
+   "tags": [],
+   "cards": [
+    "c-openzoom"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGgFC33g99gnexTkK9",
    "title": "Library set-pieces: the 22 setpiece_* effects",
    "first": "2026-11-26T09:20:08-08:00",
@@ -15174,8 +15184,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "60f7c5916b64355d7c9ac0650a35ee5a0f190daf",
- "synced_at": "2026-11-26T17:20:46+00:00",
+ "synced": "7a562ccc12995b70beb5cefe4b5fe63542aae269",
+ "synced_at": "2026-11-26T17:24:00+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
