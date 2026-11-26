@@ -11,7 +11,7 @@ const WALK_SCALE={
   boppy:{inches:67,rows:41.714,k:0.9501},
   jojo:{inches:66,rows:42.333,k:0.9223},
   amy:{inches:65,rows:41.556,k:0.9253},
-  deedee:{inches:65,rows:41.8,k:0.9199},
+  deedee:{inches:65,rows:41.9,k:0.9177},
   olivia:{inches:68,rows:42.444,k:0.9477},
   ellie:{inches:62,rows:43.111,k:0.8507},
   grace:{inches:50,rows:39.4,k:0.7507},

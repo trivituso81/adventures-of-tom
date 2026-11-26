@@ -1,3 +1,14 @@
+## deedeeframes (2026-11-26): Deedee's new walking, feelings, talking, thinking and listening pictures are in the game
+
+Card c-deedeeframes. Tom's words: "when you're done, do deedee next". Not seen on the phone yet. Same install as `roseframes`, `graceframes` and `tomframes4`.
+- Sheets installed for Deedee only: `deedee-walking-sheet-v3`, `deedee-emotions-v4`, `deedee-talk-v5` and `deedee-listen-v3`. Not part of this card: her new hero painting (`deedee-hero-v2`, shown only in menus).
+- Walking: `walk_splice.py deedee` and `heights.py write` (real height unchanged). Feelings and talking: `emotion_frames.py deedee`, `talk_frames.py deedee` (head x1.37 from the standing rule; looked at the strip, no torn hair), `bake_story_poses.py` (only Deedee's sets kept; the drift on Boppy, Ellie and Pip restored from main), and the dialogue faces.
+- `deedee-listen-v3` is a 4 up strip like Rose's and Grace's: cell 1 (hands clasped) is `tk_listen`, cell 2 (chin on hand) is `tk_think`, because her only other thinking picture is the old one (`STRIP_CELL`).
+- Her plain dialogue face is framed on the new walk frame (`WALK_FRAMED`); the hero ratios clipped her hair.
+- Facing rows (`docs/pose-facing.tsv`): angry and proud now `f`, scared, answer and think `l`, listen `r`.
+- `walk_sheet_frames.grid` now retries with a tighter merge distance when two neighbouring figures touch (Boppy's new walking sheet v5 read as 7 figures and stopped `pose-editor/manifest.py`). Boppy is the next card.
+- Tests: `heights_test.py` and `pose_editor_test.py` pass; smoke has the two failures that already fail on main.
+
 ## vfxfight1 (2026-11-26): the Stage 2C library effects draw in a real Battle 3 fight, each at its own layer
 
 Until now the 37 library effects drew only in the Battle Lab pass-1 review. A family move played in a real Battle 3 fight (NEW BATTLE, the story fights) now draws the effects its row names, from the moment its first hit lands, on the foe it hits and the member who plays it. New file `engine/b3-vfx.js` (loaded between `b3-stage.js` and `b3-play.js`); `b3PlayMove` arms one cue per move in every path (a staged move's body clip, a move's own clip, a two-person clip, the default strike, throw, cast and give, and a move with no hit), at the same second the move's own timeline reveals the hit, so the effect and the hit land together (a projectile such as the boomerang starts its flight before it, `P1_VFX_LEAD`). A move's row is its clip's measured row when it has one (`p1Meta`) and otherwise the Battle Guide manifest's row for that move id (`gtMetaMove`, new in `engine/guide-timing.js`). A foe's move never draws one.

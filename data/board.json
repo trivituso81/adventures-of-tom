@@ -9003,7 +9003,7 @@
    "theme": "Characters",
    "lane": "claude",
    "col": "prog",
-   "next": "In progress: baking Deedee's newly approved walking v3, feelings v4, talking v5 and listening v3 pictures.",
+   "next": "Shipped as build deedeeframes: Deedee's walking, feelings, talking and listening are baked and pushed.",
    "blocks": [],
    "changed": "2026-11-26",
    "created": "2026-11-26",
@@ -9020,9 +9020,22 @@
     {
      "d": "2026-11-26",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Updated by deedeeframes: pushed."
     }
    ],
-   "after": "t-deedeeframesplay"
+   "after": "t-deedeeframesplay",
+   "prompt": {
+    "what": "Installs Deedee's newly approved walking, feelings, talking and listening pictures.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the bakes exist and tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md and docs/CHANGES.md roseframes, graceframes and tomframes4, then card c-deedeeframes in data/board.json. Your first push is the commit board: start c-deedeeframes. Install Deedee's newly approved pictures: deedee-walking-sheet-v3, deedee-emotions-v4, deedee-talk-v5 and deedee-listen-v3. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   },
   {
    "id": "t-deedeeframesplay",
@@ -9032,7 +9045,7 @@
    "col": "up",
    "ask": "play",
    "fyi": true,
-   "next": "Not ready yet: opens when the frames are pushed.",
+   "next": "Open the game, RELOAD on the title (if it still looks old, close the home-screen app and open it again), then CHAPTERS > Chapter 1. Look at Deedee in the story scenes and in dialogue: her walking, feelings, talking, thinking and listening poses should be one size and match her walking size. Her hero painting in menus is not part of this card. Tell me with the REPORT tab which pose is wrong.",
    "jump": {
     "chapter": 1
    },
@@ -9043,6 +9056,10 @@
     {
      "d": "2026-11-26",
      "t": "Made by deedeeframes."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Updated by deedeeframes: build is in."
     }
    ]
   },

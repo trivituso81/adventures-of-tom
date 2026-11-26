@@ -26,10 +26,10 @@ rose	em_unimpressed	f
 deedee	em_happy	l
 deedee	em_loving	l
 deedee	em_sad	f
-deedee	em_angry	r
-deedee	em_scared	r
+deedee	em_angry	f
+deedee	em_scared	l
 deedee	em_surprised	r
-deedee	em_proud	r
+deedee	em_proud	f
 deedee	em_unimpressed	r
 boppy	em_happy	f
 boppy	em_loving	l
@@ -592,8 +592,8 @@ justin	tk_think	f
 deedee	tk_tell	r
 deedee	tk_point	r
 deedee	tk_ask	f
-deedee	tk_answer	r
-deedee	tk_think	r
+deedee	tk_answer	l
+deedee	tk_think	l
 boppy	tk_tell	l
 boppy	tk_point	r
 boppy	tk_ask	f
@@ -612,6 +612,6 @@ olivia	tk_think	f
 tom	tk_listen	l
 grace	tk_listen	r
 rose	tk_listen	r
-deedee	tk_listen	f
+deedee	tk_listen	r
 boppy	tk_listen	l
 ellie	tk_listen	r

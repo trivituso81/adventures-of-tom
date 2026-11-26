@@ -65,11 +65,13 @@ def grid(path, ncols, nrows):
     """Cut the ncols x nrows figures of one magenta pose sheet. Returns RGBA crops in reading order (row by row, left to right)."""
     rgba = _key(np.array(Image.open(path).convert('RGB')), glow=os.path.basename(path) in GLOW_SHEETS)
     A = rgba[:, :, 3] > 20
-    lab, n = ndi.label(ndi.binary_dilation(A, iterations=6))
-    objs = [s for s in ndi.find_objects(lab)]
-    sizes = ndi.sum(A, lab, range(1, n + 1))
     N = ncols * nrows
-    big = sorted([i for i in range(n) if sizes[i] > 3000], key=lambda i: sizes[i])[-N:]
+    for dil in (6, 4, 2, 1):   # deedeeframes: a sheet whose neighbouring figures nearly touch (Boppy walk v5, bottom row) joins two figures at 6; a tighter merge distance keeps them apart
+        lab, n = ndi.label(ndi.binary_dilation(A, iterations=dil))
+        objs = [s for s in ndi.find_objects(lab)]
+        sizes = ndi.sum(A, lab, range(1, n + 1))
+        big = sorted([i for i in range(n) if sizes[i] > 3000], key=lambda i: sizes[i])[-N:]
+        if len(big) == N: break
     assert len(big) == N, (path, len(big))
     boxes = [(objs[i], i + 1) for i in big]
     boxes.sort(key=lambda b: (b[0][0].start + b[0][0].stop) / 2)

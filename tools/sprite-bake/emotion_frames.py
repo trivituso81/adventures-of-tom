@@ -35,7 +35,7 @@ def sheet_label(cid, i):
 
 # roseframes (2026-11-26): the newest Rose listening picture is a 4 up strip painted in her new outfit. Cell 0 (hands clasped, listening) is tk_listen; cell 1 (chin on hand)
 # is the thinking pose, so tk_think is cut from the same strip (rose-think has no new picture of its own and the old one is the old yellow dress). Other cells are unused.
-STRIP_CELL = {'rose-listen': 0, 'rose-think': 1, 'grace-listen': 0, 'grace-think': 1, 'tom-listen': 0}   # graceframes: Grace's listen-v2 is the same kind of strip
+STRIP_CELL = {'rose-listen': 0, 'rose-think': 1, 'grace-listen': 0, 'grace-think': 1, 'tom-listen': 0, 'deedee-listen': 0, 'deedee-think': 1}   # graceframes: Grace's listen-v2 is the same kind of strip
 
 # tomframes4 (2026-11-26): Tom's newest listen picture (tom-listen-v2) is a 4 up strip (cell 0 hands clasped = tk_listen), and tom-think-v2 is a 2 x 2 sheet of four poses;
 # its top right cell (chin on hand) is tk_think. (column, row) of the cell, used only while the newest file is a 2 x 2 sheet (taller than wide).
@@ -48,7 +48,7 @@ def _is_strip(sid):
 
 def single_figure(sid):
     """The newest approved single picture art/raw/characters/<sid>-v<N>.png, keyed and cleaned like a sheet cell."""
-    src_sid = sid.replace('-think', '-listen') if sid in ('rose-think', 'grace-think') and _is_strip(sid.replace('-think', '-listen')) else sid
+    src_sid = sid.replace('-think', '-listen') if sid in ('rose-think', 'grace-think', 'deedee-think') and _is_strip(sid.replace('-think', '-listen')) else sid
     vs = sorted(glob.glob(os.path.join(RAW, f'{src_sid}-v*.png')), key=lambda p: int(re.search(r'-v(\d+)\.png$', p).group(1)))
     img = Image.open(vs[-1]).convert('RGB')
     cell = STRIP_CELL.get(sid)
