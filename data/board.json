@@ -9100,6 +9100,42 @@
     "effort": "high (a timing change in the fight's draw path, a safety wrapper, four test suites and a visual check)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done (the vfxfight1 paragraph). Your first push is the commit \"board: start c-hitstop1\". Play hit stop in a real Battle 3 fight: data/guide-manifest.json gives each move a hitStopFrames value (frames at 24 fps); when a move's hit shows, freeze the foe and the member for about hitStopFrames / 24 seconds, then continue, using engine/b3-vfx.js and b3PlayMove in engine/b3-play.js. The battle clock and the rules never wait on it; a move with hitStopFrames 0 or no manifest row changes nothing; a fight must never break if the freeze throws; library effects keep drawing at their normal pace. Run python3 -I tools/guide_timing_test.py, python3 tools/b3_vfx_test.py, python3 tools/smoke.py and python3 tools/b3_test.py for new1 to new5, and look at a fight in portrait and landscape in Chrome before pushing. Update docs/BATTLE_GUIDE.md What is done and docs/CHANGES.md. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "c-deedeefart",
+   "title": "Add Deedee's four fart poses to the Art Library, approved",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "prog",
+   "next": "In progress: adding 4 Deedee pose entries (Art Library, approved) from the pictures Tom attached. Held for a later scene, not wired into the game.",
+   "blocks": [],
+   "changed": "2026-11-26",
+   "created": "2026-11-26",
+   "tag": "deedeefart1",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGMYJgHrbA1WNfACNw",
+    "opening": "\"create 4 pose entries of deedee making a fart in the art library\""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by the session: Tom's words: \"create 4 pose entries of deedee making a fart in the art library. am attaching them here, you can flag them as approved. they will be used at a later point in the game that we haven't decided on yet.\""
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
+    }
+   ],
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Finishes the four Deedee fart pose entries (deedee-fart-bend, -hop, -shock, -battle) in the Art Library as approved uploads. Nothing is wired into the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written down and tests catch mistakes)",
+    "effort": "medium (a small data change with validate and test runs)",
+    "text": "Read claude/handoff-rules.md and data/board.json, then finish card c-deedeefart: confirm the four entries deedee-fart-bend, deedee-fart-hop, deedee-fart-shock and deedee-fart-battle exist in data/art-prompts.json as approved with art/raw/characters/deedee-fart-*-v1.png, run node tools/art-library/validate.js, and push. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
