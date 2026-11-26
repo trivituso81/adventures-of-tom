@@ -6972,7 +6972,7 @@
    "id": "c-justinbb9",
    "tag": "justinbb9",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Justin benchmark: Wan 3.0 vs Kling v3 Pro, #808080",
    "next": "Phase 0 (lock, gate v2, Kettlebell prompt, Battle Lab review extras, workflow) shipped as justinbb9a. Phase 1 benchmark is started by art-factory/benchmark-trigger.json; read art-factory/benchmark/<run_id>/scorecard.json or BLOCKER_REPORT.md.",
@@ -7029,6 +7029,14 @@
     {
      "d": "2026-11-25",
      "t": "Tom: \"i approve full repo access\" and replaced the green-screen plan with the Board order (Hero-style lock, #808080, Wan 3.0 vs Kling v3 Pro, $5.00 cap). Phase 0 built as justinbb9a."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Part shipped as justinbb9a: Battle animation pipeline lock, Hero-style prompts on #808080, gate v2, and the Battle Lab review extras"
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as justinbb9: Phase 1 benchmark started: Wan 3.0 and Kling v3 Pro, 3 seeds each, $5.00 cap"
     }
    ],
    "blocks": [],
@@ -7050,7 +7058,8 @@
     "url": "https://claude.ai/code/cse_01RXeukFJ3SQckykBNpN3Deq",
     "prev": "https://claude.ai/code/session_01RXeukHG5RM8zrqSWjpjE8C"
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-25"
   }
  ],
  "sessions": [
@@ -7076,10 +7085,13 @@
   },
   {
    "url": "https://claude.ai/code/session_01RXeukD88aZXMwDZ8KSAuK8",
-   "title": "Justin production clip: #00FF00 start, new Kling prompt",
+   "title": "Justin benchmark: Wan 3.0 vs Kling v3 Pro, #808080",
    "first": "2026-11-25T17:11:15-08:00",
-   "last": "2026-11-25T17:11:15-08:00",
-   "tags": [],
+   "last": "2026-11-25T17:37:58-08:00",
+   "tags": [
+    "justinbb9a",
+    "justinbb9"
+   ],
    "cards": [
     "c-justinbb9"
    ]
@@ -13463,8 +13475,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "52c48df37d55fad4c2e3ba499805ccc1fe34c534",
- "synced_at": "2026-11-26T01:11:59+00:00",
+ "synced": "c452f1c71df55f954634572c35aa796e2e4b3a29",
+ "synced_at": "2026-11-26T01:38:16+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
