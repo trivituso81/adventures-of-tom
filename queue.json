@@ -2224,8 +2224,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T08:19:40Z",
-   "state": "checking",
-   "since": "2026-11-26T08:42:20Z",
+   "state": "done",
+   "since": "2026-11-26T08:46:04Z",
    "run": 45782279434,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -2238,7 +2238,29 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-tnb-victory/t3.js",
+    "img": "takes/body-tnb-victory/t3.webp",
+    "frames": 75,
+    "kb": 1651,
+    "words": "0 to 148 step 2",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "vision p_parts: Eyes change (winking in multiple frames), and hands shift from open to crossed.; Eyes change shape during winks and blinks; hands appear briefly with different shape at the end.",
+      "vision v_big: No arms up, jump, cheer, or big celebration; only minor winks and pose shifts.; Shows only minor head movements and smiles, not arms up, jump, cheer, or big celebration."
+     ],
+     "faults": [
+      "p_parts",
+      "v_big"
+     ],
+     "vision_ran": true,
+     "spent": 0.0113,
+     "error": null,
+     "words": "The clip gate flags this take: vision p_parts: Eyes change (winking in multiple frames), and hands shift from open to crossed.; Eyes change shape during winks and blinks; hands appear briefly with different shape at the end.; vision v_big: No arms up, jump, cheer, or big celebration; only minor winks and pose shifts.; Shows only minor head movements and smiles, not arms up, jump, cheer, or big celebration.."
+    },
+    "n": 3
+   },
    "use": null,
    "left": false,
    "dry": false,
