@@ -8891,7 +8891,7 @@
    "title": "Install Tom's newer frames: feelings, listen, crouch, hug",
    "theme": "Characters",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as build tomframes4: Tom's feelings v9, listen v2, think v2 and hug v3 are baked and pushed.",
    "blocks": [],
    "changed": "2026-11-26",
@@ -8913,6 +8913,10 @@
     {
      "d": "2026-11-26",
      "t": "Updated by tomframes4: pushed."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as tomframes4: Tom's newer feelings, listening, thinking and the intro hug are in the game"
     }
    ],
    "after": "t-tomframes4play",
@@ -8924,7 +8928,8 @@
     "model": "Claude Sonnet 5.5 (row B: the bakes exist and tests catch mistakes)",
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md and docs/CHANGES.md tomframes, tomframes2, tomstretch3 and roseframes, then card c-tomframes4 in data/board.json. Your first push is the commit board: start c-tomframes4. Install Tom's newly approved pictures: tom-emotions-v9, tom-listen-v2, tom-think-v2, tom-greeting-crouch-v2 and tom-grace-rose-greeting-hug-v3. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-26"
   },
   {
    "id": "t-tomframes4play",
@@ -8993,20 +8998,24 @@
    "title": "Install Deedee's newer frames: walk, feelings, talk, listen",
    "theme": "Characters",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "In progress: baking Deedee's newly approved walking v3, feelings v4, talking v5 and listening v3 pictures.",
    "blocks": [],
    "changed": "2026-11-26",
    "created": "2026-11-26",
    "tag": "deedeeframes",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
     "opening": "\"when you're done, do deedee next\""
    },
    "history": [
     {
      "d": "2026-11-26",
      "t": "Made by the session: Tom's words: \"when you're done, do deedee next\"."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "after": "t-deedeeframesplay"
@@ -9032,9 +9041,49 @@
      "t": "Made by deedeeframes."
     }
    ]
+  },
+  {
+   "id": "b-portraits7",
+   "tag": "portraits7",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-26",
+   "theme": "Tools",
+   "title": "Portraits baked from your saved crops: boppy (made by the portrait-bake Action)",
+   "next": "Done: Portraits baked from your saved crops: boppy (made by the portrait-bake Action)",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as portraits7. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
+   "title": "Install Rose's new walk, feelings, talking, listen frames",
+   "first": "2026-11-26T11:07:14-08:00",
+   "last": "2026-11-26T13:11:53-08:00",
+   "tags": [
+    "roseframes",
+    "graceframes",
+    "tomframes4"
+   ],
+   "cards": [
+    "c-roseframes",
+    "c-graceframes",
+    "c-tomframes4",
+    "c-deedeeframes"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDXGs3AAhsyHm7c3WV",
    "title": "Fix the stopped video rose-whoopee",
@@ -9148,21 +9197,6 @@
    "cards": [
     "c-wanstop-rose-doublelamby-r1",
     "t-rosestage-lab"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
-   "title": "Install Rose's new walk, feelings, talking, listen frames",
-   "first": "2026-11-26T11:07:14-08:00",
-   "last": "2026-11-26T12:43:21-08:00",
-   "tags": [
-    "roseframes",
-    "graceframes"
-   ],
-   "cards": [
-    "c-roseframes",
-    "c-graceframes",
-    "c-tomframes4"
    ]
   },
   {
@@ -15777,8 +15811,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "82103e296f2bb072fceeea2e6fd04a27d4c7a609",
- "synced_at": "2026-11-26T21:05:53+00:00",
+ "synced": "74fbc3177a726eebc37dc20fd0e94111bcf21414",
+ "synced_at": "2026-11-26T21:12:17+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
