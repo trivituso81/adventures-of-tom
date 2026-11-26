@@ -5091,8 +5091,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:46:55Z",
-   "state": "checking",
-   "since": "2026-11-26T11:43:42Z",
+   "state": "done",
+   "since": "2026-11-26T11:51:55Z",
    "run": 45808903596,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -5105,7 +5105,23 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-justin-guard/t2.js",
+    "img": "takes/body-justin-guard/t2.webp",
+    "frames": 65,
+    "kb": 1130,
+    "words": "0 to 128 step 2, hold 36, lowering 104",
+    "gate": {
+     "hold": false,
+     "reasons": [],
+     "faults": [],
+     "vision_ran": true,
+     "spent": 0.0076,
+     "error": null,
+     "words": "The clip gate found nothing wrong."
+    },
+    "n": 2
+   },
    "use": null,
    "left": false,
    "dry": false,
