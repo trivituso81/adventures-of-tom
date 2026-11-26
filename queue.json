@@ -5141,8 +5141,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:46:55Z",
-   "state": "checking",
-   "since": "2026-11-26T11:47:15Z",
+   "state": "done",
+   "since": "2026-11-26T11:57:25Z",
    "run": 45808903596,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -5155,7 +5155,29 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-justin-hit/t2.js",
+    "img": "takes/body-justin-hit/t2.webp",
+    "frames": 39,
+    "kb": 679,
+    "words": "0 to 76 step 2, 1.5x",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "hit_no_stumble: the body moves back only 0% of the height (should stumble backwards)",
+      "vision h_stagger: No backwards stagger; only slight turn and fighting pose.; Body stays mostly upright with only minor pose shifts, no backwards stagger."
+     ],
+     "faults": [
+      "h_stagger",
+      "hit_no_stumble"
+     ],
+     "vision_ran": true,
+     "spent": 0.0073,
+     "error": null,
+     "words": "The clip gate flags this take: hit_no_stumble: the body moves back only 0% of the height (should stumble backwards); vision h_stagger: No backwards stagger; only slight turn and fighting pose.; Body stays mostly upright with only minor pose shifts, no backwards stagger.."
+    },
+    "n": 2
+   },
    "use": null,
    "left": false,
    "dry": false,
