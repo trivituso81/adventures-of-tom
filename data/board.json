@@ -6882,38 +6882,6 @@
    "done": "2026-11-26"
   },
   {
-   "id": "c-tomframes",
-   "title": "Install Tom's new walk, feelings, talking, listen frames",
-   "theme": "Characters",
-   "lane": "claude",
-   "col": "prog",
-   "next": "Installing Tom's new sheets (walking v4, feelings v8, talking v3, listening v1) with the existing bakes; look at frames in portrait and landscape before the push.",
-   "blocks": [],
-   "changed": "2026-11-26",
-   "created": "2026-11-26",
-   "tag": "tomframes",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukFUy1ZAKH1RRjtXyko",
-    "opening": "\"implement tom's new walking, emotions, and listening frames\""
-   },
-   "history": [
-    {
-     "d": "2026-11-26",
-     "t": "Made by the session: Tom's words: \"implement tom's new walking, emotions, and listening frames. full approval to repo granted\"."
-    }
-   ],
-   "after": "nothing for Tom: end",
-   "prompt": {
-    "what": "Installs Tom's new walking, feelings, talking and listening sheets for Tom.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row B: the bakes exist and tests catch mistakes)",
-    "effort": "medium (steps are known)",
-    "text": "Read CLAUDE.md (Pose Editor, Tom's painted frames are used as painted, One head multiplier, Real heights) and claude/next-addendum-listen1.md, then card c-tomframes in data/board.json. Your first push is the commit board: start c-tomframes. Tom uploaded new painted sheets for Tom on 2026-11-26: tom-walking-sheet-v4, tom-emotions-v8, tom-talk-v3, and tom-listen-v1 is approved. Install them for Tom only. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
-  },
-  {
    "id": "b-guideuse-45787096926",
    "tag": "guideuse-45787096926",
    "lane": "claude",
@@ -7004,6 +6972,64 @@
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26"
+  },
+  {
+   "id": "c-tomframes",
+   "title": "Install Tom's new walk, feelings, talking, listen frames",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "prog",
+   "next": "Shipped as tomframes: Tom's new walking, feelings, talking and listening pictures are in the game for Tom only. Tom looks at them on his phone (card t-tomframesplay).",
+   "blocks": [],
+   "changed": "2026-11-26",
+   "created": "2026-11-26",
+   "tag": "tomframes",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFUy1ZAKH1RRjtXyko",
+    "opening": "\"implement tom's new walking, emotions, and listening frames\""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by the session: Tom's words: \"implement tom's new walking, emotions, and listening frames. full approval to repo granted\"."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Built tomframes: walk v4, feelings v8, talk v3 and listen v1 baked for Tom. Fixed two bake problems on the new sheets (pink glow between arms and body; ask and answer hair sliced by the even 2 x 2 split). Tom's Pose Editor lines are on the old sheets, so the new ones have none yet."
+    }
+   ],
+   "after": "t-tomframesplay",
+   "prompt": {
+    "what": "Installs Tom's new walking, feelings, talking and listening sheets for Tom.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the bakes exist and tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md (Pose Editor, Tom's painted frames are used as painted, One head multiplier, Real heights) and claude/next-addendum-listen1.md, then card c-tomframes in data/board.json. Your first push is the commit board: start c-tomframes. Tom uploaded new painted sheets for Tom on 2026-11-26: tom-walking-sheet-v4, tom-emotions-v8, tom-talk-v3, and tom-listen-v1 is approved. Install them for Tom only. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "t-tomframesplay",
+   "title": "Look at Tom's new walk, feelings, talking and listen frames",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open the game, RELOAD on the title, then CHAPTERS > Chapter 1 and play the opening. Look at Tom walking in all four directions (no pink between his arms and body), his talking poses and feelings in conversations, and Tom standing in his listening pose while someone else talks. Tell me with the REPORT tab if a pose is too big, too small or faces the wrong way.",
+   "jump": {
+    "chapter": 1
+   },
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by tomframes."
+    }
+   ]
   }
  ],
  "sessions": [
