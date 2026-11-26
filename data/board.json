@@ -8725,7 +8725,7 @@
    "title": "Install Grace's new walk, feelings, talking, listen frames",
    "theme": "Characters",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as graceframes: Grace's new walking, feelings, talking, thinking and listening pictures are in the game. Tom looks at them on his phone (card t-graceframesplay).",
    "blocks": [],
    "changed": "2026-11-26",
@@ -8747,6 +8747,10 @@
     {
      "d": "2026-11-26",
      "t": "Built graceframes: walk v3, feelings v4, talk v3 and listen v2 baked for Grace only (listen-v2 is a 4 up strip: cell 1 listening, cell 2 thinking). Plain dialogue face re-framed on the new walk. Tests: listening reaction test 0 misses, heights and pose editor tests pass."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as graceframes: Grace's new walking, feelings, talking, thinking and listening pictures are in the game"
     }
    ],
    "after": "t-graceframesplay",
@@ -8758,7 +8762,8 @@
     "model": "Claude Sonnet 5.5 (row B: the bakes exist and tests catch mistakes)",
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md and docs/CHANGES.md roseframes and tomframes, then card c-graceframes in data/board.json. Your first push is the commit board: start c-graceframes. Tom uploaded new painted sheets for Grace on 2026-11-26: grace-walking-sheet-v3, grace-emotions-v4, grace-talk-v3 and grace-listen-v2. Install them for Grace only. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-26"
   },
   {
    "id": "t-graceframesplay",
@@ -9012,6 +9017,20 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
+   "title": "Install Rose's new walk, feelings, talking, listen frames",
+   "first": "2026-11-26T11:07:14-08:00",
+   "last": "2026-11-26T12:31:31-08:00",
+   "tags": [
+    "roseframes",
+    "graceframes"
+   ],
+   "cards": [
+    "c-roseframes",
+    "c-graceframes"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGdxnKEdxCfrPSgRcK",
    "title": "Art Library: listening poses move into each character",
    "first": "2026-11-26T11:59:14-08:00",
@@ -9021,19 +9040,6 @@
    ],
    "cards": [
     "c-listengroup"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
-   "title": "Install Rose's new walk, feelings, talking, listen frames",
-   "first": "2026-11-26T11:07:14-08:00",
-   "last": "2026-11-26T11:57:15-08:00",
-   "tags": [
-    "roseframes"
-   ],
-   "cards": [
-    "c-roseframes",
-    "c-graceframes"
    ]
   },
   {
@@ -15623,8 +15629,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "dc2e328d3a286030185f99a91b768c0f636b3a81",
- "synced_at": "2026-11-26T20:05:20+00:00",
+ "synced": "bd0a4eadffc44121983111d442fdabafec6da880",
+ "synced_at": "2026-11-26T20:32:20+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
