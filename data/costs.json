@@ -1198,6 +1198,15 @@
    "source": "art-factory benchmark run",
    "at": "2026-11-26T02:16:29Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45739239489"
+  },
+  {
+   "service": "xai",
+   "date": "2026-11-25",
+   "amount": 0.0076,
+   "what": "Battle Guide takes: clip gate look checks on 1 take",
+   "source": "clip-gen run (guide takes)",
+   "at": "2026-11-26T02:19:15Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45741255715"
   }
  ],
  "balances": [
