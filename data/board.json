@@ -6687,6 +6687,70 @@
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26"
+  },
+  {
+   "id": "c-guide-editprompt",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Battle Animations",
+   "tag": "guideedit1",
+   "title": "Battle Guide: edit the animation prompt before generating",
+   "next": "Add an Edit this prompt box to each animation in the Battle Guide, so Tom changes the video prompt by hand, saves it, and the next Generate uses his text. Reset brings back the original.",
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "after": "t-guideedit-try",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGEWPtNAyCyFc2nvtK",
+    "opening": "\"in the battle guide i need the ability to edit the prompts for animations before i generate. i approve full repo access\""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Tom: \"in the battle guide i need the ability to edit the prompts for animations before i generate.\" New card, first push of the session."
+    }
+   ],
+   "prompt": {
+    "what": "Adds a hand edit box for the video prompt in the Battle Guide.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small page change, tests catch mistakes)",
+    "effort": "medium (one page, known place)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guide-editprompt in data/board.json. Your first push is the commit \"board: start c-guide-editprompt\". Add an Edit this prompt box to each animation's prompt in battle-guide.html (save in the browser, Reset to original, used by every Generate), add a test in tools/battle_guide_test.py, and push with build guideedit1.\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "t-guideedit-try",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "play",
+   "fyi": true,
+   "where": "phone",
+   "title": "Try editing an animation prompt in the Battle Guide",
+   "first": "Wait for Battle Guide: edit the animation prompt before generating to ship (build guideedit1).",
+   "next": "On your phone open ADMIN > BATTLE GUIDE > Family > Justin > Idle. Under Prompt tap Edit this prompt, change a few words, tap Save prompt, and check the prompt above now shows your words. Do not tap Make this video unless you want to spend $0.50. Then All good or Something is wrong.",
+   "steps": [
+    "Open ADMIN > BATTLE GUIDE > Family > Justin and tap Idle.",
+    "Under Prompt tap Edit this prompt, change a few words in the box, then tap Save prompt.",
+    "Check the gray prompt box now shows your words and a line says you changed it. Tap Reset to original and check the old words come back.",
+    "Tap All good, or Something is wrong and say what you saw."
+   ],
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "",
+    "opening": "made by c-guide-editprompt"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made with its Claude card so the check is ready when the build ships."
+    }
+   ],
+   "build": "guideedit1"
   }
  ],
  "sessions": [
