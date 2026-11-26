@@ -2379,7 +2379,7 @@
   }
  },
  "rose-pretzel": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -2387,7 +2387,7 @@
    "720p": 0.1,
    "1080p": 0.15
   },
-  "prompt_file": "tools/art-library/prompts/wan-rose-pretzel-v1.txt",
+  "prompt_file": "tools/art-library/prompts/wan-rose-pretzel-v2.txt",
   "frame": "art/clips/start/rose-hero.png",
   "fit": "720x1280",
   "frame_fields": [
@@ -2403,7 +2403,7 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. rev 2 (wanstop r1): both tries moved her feet (up to 1.7 percent) and put her on the left edge, from the sentence she darts one quick step forward; the one change is that sentence (now she leans forward from the waist with her feet planted); the bonk, the pretzel pat, pad, seed, frame and model are kept.",
   "bake": {
    "id": "rose-pretzel",
    "owner": "rose",

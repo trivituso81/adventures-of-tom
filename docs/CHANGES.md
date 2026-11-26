@@ -1,3 +1,6 @@
+## wanstop-rose-pretzel-r1 (2026-11-26): Rose's Pocket Pretzel video gets one prompt change and its next try starts
+
+Both tries (rev 1) showed the right move (Lamby bonk, pretzel from the pocket, held out, back to stance) but Rose took a real step forward, so her feet slid up to 1.7 percent of the frame and she touched the left edge in 31 to 34 pictures. One change: the prompt (`wan-rose-pretzel-v2.txt`) replaces "darts one quick step forward" with "leans forward from the waist with her feet planted"; the rest, pad, seed, start picture and model are kept. Job rev 2. The next try is started by `wgen` on card t-rosestage-lab.
 ## wanstop-rose-boop-r1 (2026-11-26): rose-boop gets a second prompt (leans on the spot instead of stepping) and its next video try is started
 
 Both tries failed the feet check because Rose walked a full step forward and back (lowest row up to 44 px off, limit 1 percent). One sentence changed (`wan-rose-boop-v2.txt`), rev 1 to 2; pad, seed, start picture and the rest kept. No painted pose.
