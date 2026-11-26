@@ -3675,8 +3675,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:23:20Z",
-   "state": "checking",
-   "since": "2026-11-26T09:43:16Z",
+   "state": "done",
+   "since": "2026-11-26T09:55:29Z",
    "run": 45790862688,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -3689,7 +3689,31 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/move-zone-one-blockade/t1.js",
+    "img": "takes/move-zone-one-blockade/t1.webp",
+    "frames": 39,
+    "kb": 771,
+    "words": "0 to 114 step 3, impact 57, 1.5x",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "edge: 6 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)",
+      "vision p_same: Facial expression, hairline, and outfit details vary across frames.; Head and face change across frames, including expression and gaze direction.",
+      "vision p_parts: Hand shapes, skin tones, and eye expressions change between frames.; Eyes and facial features change shape and expression between frames."
+     ],
+     "faults": [
+      "edge",
+      "p_parts",
+      "p_same"
+     ],
+     "vision_ran": true,
+     "spent": 0.0109,
+     "error": null,
+     "words": "The clip gate flags this take: edge: 6 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground); vision p_same: Facial expression, hairline, and outfit details vary across frames.; Head and face change across frames, including expression and gaze direction.; vision p_parts: Hand shapes, skin tones, and eye expressions change between frames.; Eyes and facial features change shape and expression between frames.."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
