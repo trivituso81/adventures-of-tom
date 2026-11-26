@@ -3902,8 +3902,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:27:52Z",
-   "state": "checking",
-   "since": "2026-11-26T09:58:21Z",
+   "state": "done",
+   "since": "2026-11-26T10:05:58Z",
    "run": 45790862688,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -3916,7 +3916,31 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-grace-dodge/t1.js",
+    "img": "takes/body-grace-dodge/t1.webp",
+    "frames": 61,
+    "kb": 1150,
+    "words": "0 to 120 step 2",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "edge: 2 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)",
+      "dodge_forward: the body goes forward 6% of the height (should go back or to the side)",
+      "vision d_back: She squats in place and stands up without moving back or to the side.; Character squats and leans forward with hand gestures, not clearly moving back or sideways."
+     ],
+     "faults": [
+      "d_back",
+      "dodge_forward",
+      "edge"
+     ],
+     "vision_ran": true,
+     "spent": 0.007,
+     "error": null,
+     "words": "The clip gate flags this take: edge: 2 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground); dodge_forward: the body goes forward 6% of the height (should go back or to the side); vision d_back: She squats in place and stands up without moving back or to the side.; Character squats and leans forward with hand gestures, not clearly moving back or sideways.."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
