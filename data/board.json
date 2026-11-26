@@ -5578,7 +5578,7 @@
     "fight": "new",
     "i": 97
    },
-   "changed": "2026-11-23",
+   "changed": "2026-11-26",
    "created": "2026-11-23",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFjdpaLbEHxXqoqcgd",
@@ -5592,8 +5592,17 @@
     {
      "d": "2026-11-23",
      "t": "Jump set to the Lab fight NEW 98: the chapter 20 jump lands in the Vault in chapter 19's state (the chapter becomes 20 only when the lift plays), so the dashboard cannot confirm a chapter 20 landing."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Tom sent this to the backlog.",
+     "at": "2026-11-26T09:21:11.208Z"
     }
-   ]
+   ],
+   "backlog": {
+    "at": "2026-11-26",
+    "from": "up"
+   }
   },
   {
    "id": "c-b3s23b",
