@@ -1,0 +1,45 @@
+{
+  "run_id": "bench-justinbb9-5",
+  "wan_3_0": {
+    "passes": 0,
+    "of": 3,
+    "seeds": [
+      {
+        "id": "wan3_s1",
+        "measured_duration": 5.0,
+        "passed": false,
+        "failure": "Stage B: He taps his own yellow stud finder with the hammer instead of delivering a clear strike toward screen-left.",
+        "score": 0.0
+      },
+      {
+        "id": "wan3_s2",
+        "measured_duration": 5.0,
+        "passed": false,
+        "failure": "Stage B: Tile 6 contains baked-in yellow sparks around the stud finder and hammer.",
+        "score": 0.0
+      },
+      {
+        "id": "wan3_s3",
+        "measured_duration": 5.0,
+        "passed": false,
+        "failure": "Stage B: Yellow spark lines are drawn around the stud finder in tiles 5 and 6.",
+        "score": 0.0
+      }
+    ]
+  },
+  "kling_v3_pro": {
+    "passes": 0,
+    "of": 0,
+    "seeds": []
+  },
+  "winner": null,
+  "spend_usd": 1.6884,
+  "spend_by_service": {
+    "google": 0.1134,
+    "fal": 1.575
+  },
+  "spend_basis": "fal published per-second rates (live price read, higher booked) x seconds, plus Gemini estimates; the run reserves each cost before the call",
+  "notes": [
+    "vision judge: gemini-4-neon"
+  ]
+}
