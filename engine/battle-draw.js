@@ -96,6 +96,7 @@ function drawBattle() {
   // Tom is drawn last while blocking so he stands in front of whoever he is shielding.
   const order=party.map((_,i)=>i);
   if(battle.block) { const ti=party.findIndex(p=>p.id==='tom'); if(ti>=0) { order.splice(order.indexOf(ti),1); order.push(ti); } }
+  if(typeof B2!=='undefined'&&B2.labReview&&B2.clipShow&&B2.clipShow.slide>0) { const ci=party.findIndex(p=>p.id===B2.clipShow.owner); if(ci>=0) { order.splice(order.indexOf(ci),1); order.push(ci); } }   // pass-1 review: the member sliding to the foe is drawn on top of everyone
   if(battle.v2) b2RideOrder(order,party);   // Rose sits on Tom's shoulders (engine/battle2-traits.js)
   battle.drawnAt=battle.drawnAt||[];
   order.forEach(i=>{

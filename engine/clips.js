@@ -47,7 +47,7 @@ function bclipFrameAt(C,ms) { let i=0; while(i<C.n-1&&ms>=C.ms[i+1]) i++; return
 function bclipWanted() {
   const out=[]; if(typeof B3!=='undefined'&&B3.active) return b3cWanted();   // Battle 3 (engine/b3-clips.js): idle loops for the fight, the rest as asked
   if(typeof B2==='undefined'||!B2.active||!B2.labClip) return out;
-  if(B2.labReview) { for(const id in BCLIPS) if(BCLIPS[id].kind==='loop'&&B2.foes.some(f=>f.id===BCLIPS[id].owner)) out.push(id); if(B2.clipShow) out.push(B2.clipShow.id); return out; }
+  if(B2.labReview) { for(const id in BCLIPS) if(BCLIPS[id].kind==='loop'&&(B2.foes.some(f=>f.id===BCLIPS[id].owner)||(/^pf_/.test(id)&&B2.party.some(u=>u.id===BCLIPS[id].owner)))) out.push(id); if(B2.clipShow) out.push(B2.clipShow.id); return out; }
   // clipch1: a Lab fight that names its clips (L.clips, B2.labClips) loads only those: once chapter 1 is baked, Tom, Grace and Rose have about
   // ten clips each, and loading every clip of everyone on the field would not fit in a phone's memory.
   if(B2.labClips) { for(const id of B2.labClips) if(BCLIPS[id]) out.push(id); return out; }
@@ -70,12 +70,18 @@ function bclipReady(id) { const a=PAINTED['clip_'+id]; return !!(a&&a.ready); }
 // or null. The clip plays in place, in the real fight, over the real backdrop: a loop goes forward and back once, a one-shot plays once and
 // its last picture stays a moment, then the review is told (B2.clipShow.onEnd) so it can start the next one. t is battle.time in seconds.
 function bclipShowFrame(owner,t) {
-  const S=typeof B2!=='undefined'&&B2.active&&B2.labReview&&B2.clipShow; if(!S||S.owner!==owner) return null;
+  const S=typeof B2!=='undefined'&&B2.active&&B2.labReview&&B2.clipShow;
+  if(!S||S.owner!==owner) {   // pass-1 review: a member with a video idle (pf_<who>_idle) rests on it, no painted frame (engine/pass1-vfx.js)
+    if(typeof B2==='undefined'||!B2.active||!B2.labReview||!B2.party||!B2.party.some(u=>u.id===owner)) return null;
+    const I=BCLIPS['pf_'+owner+'_idle']; if(!I||!bclipReady(I.id)) return null;
+    return bclipLoopFrame(I,t*1000);
+  }
   const C=BCLIPS[S.id]; if(!C||!bclipReady(S.id)) return null;
   if(S.t0==null) S.t0=t;   // the clock starts when the first picture can be drawn
-  const wall=(t-S.t0)*1000, ms=typeof p1Clock==='function'?p1Clock(S,wall):wall, len=C.kind==='loop'?bclipLoopLen(C):C.dur+(C.kind==='state'?1500:500);
-  if(typeof p1Slide==='function') { S.slide=p1Slide(S,wall,len+(p1Meta(S.id)&&p1Meta(S.id).hit_stop_frames?p1Meta(S.id).hit_stop_frames*1000/60:0)); S.shake=p1Shake(S,wall); S.ms=wall; }
-  if(ms>=len) { if(!S.over) { S.over=true; const f=S.onEnd; setTimeout(()=>{ if(B2.clipShow===S) B2.clipShow=null; if(f) f(S.id); },0); } return C.kind==='loop'?bclipLoopFrame(C,0):bclipFrameAt(C,C.dur); }
+  const P=typeof p1Lead==='function', lead=P?p1Lead(S):0, wall0=(t-S.t0)*1000, wall=wall0-lead, ms=P?p1Clock(S,Math.max(0,wall)):wall0;   // pass-1 review: slide out first (lead), then the clip, then slide back (engine/pass1-vfx.js)
+  const len=C.kind==='loop'?bclipLoopLen(C):C.dur+(C.kind==='state'?1500:500);
+  if(P) { S.slide=p1Slide(S,wall0,lead,ms,len); S.shake=p1Shake(S,Math.max(0,wall)); S.ms=Math.max(0,wall); }
+  if(ms>=len+lead) { if(!S.over) { S.over=true; const f=S.onEnd; setTimeout(()=>{ if(B2.clipShow===S) B2.clipShow=null; if(f) f(S.id); },0); } return C.kind==='loop'?bclipLoopFrame(C,0):bclipFrameAt(C,C.dur); }
   return C.kind==='loop'?bclipLoopFrame(C,ms):bclipFrameAt(C,Math.min(ms,C.dur));
 }
 // ST.clip(id,{onImpact}): onImpact runs once, the moment the impact frame is first drawn. The body path runs on the

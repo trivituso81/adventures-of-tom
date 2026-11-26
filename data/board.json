@@ -7041,6 +7041,10 @@
     {
      "d": "2026-11-25",
      "t": "Benchmark bench-justinbb9-2 finished: Wan 3.0 3/3, Kling v3 Pro 0/3, winner wan3_s1 matted and baked, $4.98 spent. Results in art-factory/benchmark/bench-justinbb9-2/."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Tom (WO-01C): live review still showed the old clip. The winner was already baked; fixed the clip-key mismatch (slide, shake, effects now fire), wired his video idle into the resting slot, put the sliding member on top. Build justinbb9c, $0.00 spent."
     }
    ],
    "blocks": [],

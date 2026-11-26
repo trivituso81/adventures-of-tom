@@ -1,3 +1,9 @@
+## justinbb9c (2026-11-25): Justin's benchmark winner is what the review plays, with his video idle, slide, top layer and effects
+
+Card c-justinbb9, work order WO-01C ($0.00, no paid call). Fact: the winner `wan3_s1` was already baked into `data/clips/pf-justin-bb-basic.js` by the benchmark run (`?v=benchjustinbb92`); the capture that showed the old clip was an older cached build. Fixed here: (1) Justin rests on his existing `battle_idle` video (`tools/clip-bake/bake_pass1_idle.py` makes the loop clip `pf_justin_idle` from `art-factory/staging/justin/battle_idle/raw_alpha.webm`; `bclipShowFrame` shows it for a member with a `pf_<who>_idle` clip, so no painted frame is drawn). (2) The meta lookup used the packet id with dashes while the clip key has underscores, so slide, hit-stop, shake and effects never fired; it now matches. (3) The move first slides out of the huddle for 350 ms, plays at native speed, and slides back; the sliding member is drawn on top of everyone. (4) Justin's cues include `vfx_red_stud_led_ping` with `vfx_core_clobber_impact`.
+
+Tests: `python3 tools/justin_stages_test.py` (idle, slide, impact with effects, return, in portrait and landscape; frames in `tools/shots/justin-stage-*.png`), `python3 tools/pass1_review_test.py`.
+
 ## justinbb9b (2026-11-25): the benchmark trigger now finds its file with git, so the benchmark job starts
 
 Card c-justinbb9. The first push of the trigger was skipped: the job condition on `head_commit.added` never matched. A `detect` job now lists the files of the push (`git diff HEAD~1 HEAD`) and the single clip and benchmark jobs wait on it. Run id is now `bench-justinbb9-2`; the skipped run spent nothing.
