@@ -8257,7 +8257,7 @@
    "theme": "Battle Animations",
    "tag": "vfxlib2",
    "title": "Library effects: shield, chevrons, badges, 4 projectiles",
-   "next": "Builds the next 7 Stage 2C library effects in engine/vfx-library.js (shield_ward, timeline_chevrons, status_debuff_badges, proj_arc_single, proj_boomerang_return, proj_ally_handoff_party, proj_ground_hazard_mat), replaces the old chevrons and badges in pass1-vfx.js, adds them to the timing test, regenerates the manifest. Set pieces and sound are not touched.",
+   "next": "Shipped as vfxlib2: 15 of 37 library effects are built (shield, timeline chevrons, debuff badges, four projectiles added). Next Claude card: the other 22 effects (set-pieces among them), then drawing effects in a real fight.",
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26",
@@ -8274,6 +8274,10 @@
     {
      "d": "2026-11-26",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as vfxlib2: the 7 effects are built, tested (84 params variants, no NaN) and looked at on a contact sheet in Chrome"
     }
    ],
    "prompt": {
