@@ -1,4 +1,8 @@
 [
+{"tag":"voicegen1c","at":"2026-11-18T19:17:13-08:00","what":"Voice take job: first real result noted (5 lines made, 245 credits); notes only, no game change","card":"b-voicegen1c","theme":"Voice Clips"},
+{"tag":"voicegen1b","at":"2026-11-18T19:13:07-08:00","what":"Voice take job fixed after its first real run: ffmpeg installed on the runner, a preflight before any paid request, a paid take is never thrown away (tools only, no game change)","card":"b-voicegen1b","theme":"Voice Clips"},
+{"tag":"voicegen1","at":"2026-11-18T19:05:51-08:00","what":"A manual GitHub Action that makes one checked voice take for each line with no clip (not run yet; nothing in the game changed)"},
+{"tag":"b3s5b","at":"2026-11-18T18:42:52-08:00","what":"New battle, stage 5b: Tom's Gamer Geek and Grace's Craft Artist are complete","card":"b-b3s5b","theme":"Battle System"},
 {"tag":"clipbatch1","at":"2026-11-18T18:36:37-08:00","what":"Battle clips by the chapter: GENERATE CHAPTER, marks found by themselves, CHAPTER 1 REVIEW in the Battle Lab","card":"b-clipbatch1","theme":"Battle Animations"},
 {"tag":"voicelearn4","at":"2026-11-18T18:21:59-08:00","what":"Voice failure guard: a take checker, a first-tag lint, a loudness report and the plan for a take-making job (tools only, no game change)","card":"b-voicelearn4","theme":"Voice Clips"},
 {"tag":"b3s5a","at":"2026-11-18T17:59:12-08:00","what":"New battle, stage 5a: Traits, Quirks and Grand Capstones for the first Vibes of Tom, Grace, Rose and Deedee","card":"b-b3s5a","theme":"Battle System"},

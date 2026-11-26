@@ -65,6 +65,9 @@ function bclipFor(owner,kind) {
   for(const id in BCLIPS) { const C=BCLIPS[id]; if(C.owner===owner&&C.kind===kind&&bclipReady(id)) return C; }
   return null;
 }
+// Make every frame's canvas now (no outfit tint). A pass-1 clip is played from its first picture to its last, and building the pictures one by one
+// while the clock runs is what could make a slow phone sit on the first one.
+function bclipWarm(C) { C._warm=true; const keep=activeTint; activeTint=null; try { for(const rows of C.frames) paintedCanvas(rows,false); } catch(e) { gameFault('clip',e); } activeTint=keep; }
 function bclipReady(id) { const a=PAINTED['clip_'+id]; return !!(a&&a.ready); }
 // The frame of the clip a chapter review is showing for this party member or monster (Battle Lab > CHAPTER n REVIEW, engine/clip-review.js),
 // or null. The clip plays in place, in the real fight, over the real backdrop: a loop goes forward and back once, a one-shot plays once and
@@ -74,9 +77,11 @@ function bclipShowFrame(owner,t) {
   if(!S||S.owner!==owner) {   // pass-1 review: a member with a video idle (pf_<who>_idle) rests on it, no painted frame (engine/pass1-vfx.js)
     if(typeof B2==='undefined'||!B2.active||!B2.labReview||!B2.party||!B2.party.some(u=>u.id===owner)) return null;
     const I=BCLIPS['pf_'+owner+'_idle']; if(!I||!bclipReady(I.id)) return null;
+    if(!I._warm) bclipWarm(I);
     return bclipLoopFrame(I,t*1000);
   }
   const C=BCLIPS[S.id]; if(!C||!bclipReady(S.id)) return null;
+  if(!C._warm) { bclipWarm(C); return bclipFrameAt(C,0); }   // every picture is made into a canvas first, so the clock never waits on one (iPhone)
   if(S.t0==null) S.t0=t;   // the clock starts when the first picture can be drawn
   const P=typeof p1Lead==='function', lead=P?p1Lead(S):0, wall0=(t-S.t0)*1000, wall=wall0-lead, ms=P?p1Clock(S,Math.max(0,wall)):wall0;   // pass-1 review: slide out first (lead), then the clip, then slide back (engine/pass1-vfx.js)
   const len=C.kind==='loop'?bclipLoopLen(C):C.dur+(C.kind==='state'?1500:500);

@@ -143,6 +143,7 @@ function drawBattle() {
     }
     const shownClip=!down&&typeof bclipShowFrame==='function'?bclipShowFrame(m.id,t):null;   // a chapter review shows this member's clip in place (engine/clips.js)
     if(shownClip) frame=shownClip;
+    if(shownClip&&shownClip._paint&&/^clip_pf_/.test(shownClip._paint.a)) activeTint=null;   // a pass-1 video frame already has its real clothes: no outfit recolour (a getImageData pass per frame stalls iPhone Safari)
     if(!down&&!shownClip&&battle.v2&&roseSeatBattle(m,i,frame,sp,fx,hurt,t)) { activeTint=null; return; }   // sitting on Tom (engine/rose-ride.js)
     const w=frame[0].length*sp.scale,h=frame.length*sp.scale;
     let hop=cheering?Math.round(Math.abs(Math.sin(t*6))*20):dancing?Math.round(Math.abs(Math.sin(t*9))*16):(twirling?Math.round(Math.abs(Math.sin(t*9))*10):(silly?Math.round(Math.abs(Math.sin(t*10))*22):0));
@@ -261,7 +262,7 @@ function drawBattle() {
       rideBodyDraw(m,fr3,sp.pal,(poking?x-sp.scale*3:x)+wig,y+(fx.tickle>0?Math.abs(wig):0),sp.scale,{flash:fx.flash>0,alpha:1,lean:guarding?-7:0});
       if(stretch) gfx.restore();
       activeKneelCut=0;
-      if(shownClip&&B2.clipShow&&B2.clipShow.owner===m.id&&typeof p1DrawVfx==='function') p1DrawVfx(gfx,B2.clipShow,B2.clipShow.ms||0,cx-Math.round(w*.5)-26,base-Math.round(h*.55));   // pass-1 impact effects, drawn in code
+      if(shownClip&&B2.clipShow&&B2.clipShow.owner===m.id&&typeof p1DrawVfx==='function') p1DrawVfx(gfx,B2.clipShow,B2.clipShow.ms||0);   // pass-1 impact effects on the foe, drawn in code (engine/pass1-vfx.js)
       if(sp.handAt) RFX.postParty(i,sp,fr3,(poking?x-sp.scale*3:x)+wig,y+(fx.tickle>0?Math.abs(wig):0));
     }
     if(battle.v2) roseSeatFront(m);   // Rose's shoes on Tom's shoulders
