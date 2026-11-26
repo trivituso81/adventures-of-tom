@@ -6701,7 +6701,7 @@
   {
    "id": "c-guide-editprompt",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "tag": "guideedit1",
    "title": "Battle Guide: edit the animation prompt before generating",
@@ -6718,6 +6718,10 @@
     {
      "d": "2026-11-26",
      "t": "Tom: \"in the battle guide i need the ability to edit the prompts for animations before i generate.\" New card, first push of the session."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as guideedit1: the Battle Guide lets you edit an animation's prompt by hand before you make the video"
     }
    ],
    "prompt": {
@@ -6728,7 +6732,8 @@
     "model": "Claude Sonnet 5.5 (row C: a small page change, tests catch mistakes)",
     "effort": "medium (one page, known place)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-guide-editprompt in data/board.json. Your first push is the commit \"board: start c-guide-editprompt\". Add an Edit this prompt box to each animation's prompt in battle-guide.html (save in the browser, Reset to original, used by every Generate), add a test in tools/battle_guide_test.py, and push with build guideedit1.\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-26"
   },
   {
    "id": "t-guideedit-try",
@@ -6847,6 +6852,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGEWPtNAyCyFc2nvtK",
+   "title": "Battle Guide: edit the animation prompt before generating",
+   "first": "2026-11-26T00:22:40-08:00",
+   "last": "2026-11-26T00:35:55-08:00",
+   "tags": [
+    "guideedit1"
+   ],
+   "cards": [
+    "c-guide-editprompt"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEwUSDJ9vQSuhgX1Q1",
    "title": "Tom's new portrait for menus and turn order",
    "first": "2026-11-26T00:29:29-08:00",
@@ -6866,16 +6883,6 @@
    ],
    "cards": [
     "c-guide-crosswalk"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGEWPtNAyCyFc2nvtK",
-   "title": "Battle Guide: edit the animation prompt before generating",
-   "first": "2026-11-26T00:22:40-08:00",
-   "last": "2026-11-26T00:22:40-08:00",
-   "tags": [],
-   "cards": [
-    "c-guide-editprompt"
    ]
   },
   {
@@ -13300,8 +13307,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "9d31da0d171983adb46df3c767420792f9dea173",
- "synced_at": "2026-11-26T08:30:17+00:00",
+ "synced": "d4f4cfbe132163dd0ac2665b8d1d45b7fa8985c9",
+ "synced_at": "2026-11-26T08:36:39+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
