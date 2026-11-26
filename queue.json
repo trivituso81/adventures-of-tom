@@ -5419,8 +5419,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T18:34:26Z",
-   "state": "checking",
-   "since": "2026-11-26T18:36:59Z",
+   "state": "done",
+   "since": "2026-11-26T18:42:04Z",
    "run": 45877017620,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -5433,7 +5433,27 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/move-lounge-pass-flex/t3.js",
+    "img": "takes/move-lounge-pass-flex/t3.webp",
+    "frames": 48,
+    "kb": 941,
+    "words": "0 to 141 step 3, impact 96",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "edge: 8 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)"
+     ],
+     "faults": [
+      "edge"
+     ],
+     "vision_ran": true,
+     "spent": 0.0076,
+     "error": null,
+     "words": "The clip gate flags this take: edge: 8 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)."
+    },
+    "n": 3
+   },
    "use": null,
    "left": false,
    "dry": false,
