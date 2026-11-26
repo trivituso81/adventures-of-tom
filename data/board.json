@@ -8655,7 +8655,7 @@
    "title": "Install Rose's new walk, feelings, talking, listen frames",
    "theme": "Characters",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as roseframes: Rose's new walking, feelings, talking, thinking and listening pictures are in the game. Tom looks at them on his phone (card t-roseframesplay).",
    "blocks": [],
    "changed": "2026-11-26",
@@ -8677,6 +8677,10 @@
     {
      "d": "2026-11-26",
      "t": "Built roseframes: walk v3, feelings v4, talk v3 and listen v2 baked for Rose only. listen-v2 is a 4 up strip: cell 1 is her listening pose, cell 2 her thinking pose. Fixed a head-size misread on the new talking sheet (x1.77 tore the hair; now x1.30) and the framing of her plain dialogue face. Tests: listening reaction test 0 misses, heights and pose editor tests pass."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as roseframes: Rose's new walking, feelings, talking, thinking and listening pictures are in the game"
     }
    ],
    "after": "t-roseframesplay",
@@ -8688,7 +8692,8 @@
     "model": "Claude Sonnet 5.5 (row B: the bakes exist and tests catch mistakes)",
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md and claude/next-addendum-listen1.md and docs/CHANGES.md tomframes, then card c-roseframes in data/board.json. Your first push is the commit board: start c-roseframes. Tom uploaded new painted sheets for Rose on 2026-11-26: rose-walking-sheet-v3, rose-emotions-v4, rose-talk-v3 and rose-listen-v2. Install them for Rose only. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-26"
   },
   {
    "id": "t-roseframesplay",
@@ -8873,8 +8878,10 @@
    "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
    "title": "Install Rose's new walk, feelings, talking, listen frames",
    "first": "2026-11-26T11:07:14-08:00",
-   "last": "2026-11-26T11:07:14-08:00",
-   "tags": [],
+   "last": "2026-11-26T11:46:44-08:00",
+   "tags": [
+    "roseframes"
+   ],
    "cards": [
     "c-roseframes"
    ]
@@ -15466,8 +15473,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "5cbe1572c058eec03f3bfed05af3669b08507239",
- "synced_at": "2026-11-26T19:08:04+00:00",
+ "synced": "8822b84feb6b7b96580e178e4f7258168d35d86c",
+ "synced_at": "2026-11-26T19:46:57+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
