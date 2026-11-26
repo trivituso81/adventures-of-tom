@@ -3555,8 +3555,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:05:05Z",
-   "state": "checking",
-   "since": "2026-11-26T09:33:51Z",
+   "state": "done",
+   "since": "2026-11-26T09:41:12Z",
    "run": 45790862688,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -3569,7 +3569,29 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-rose-victory/t2.js",
+    "img": "takes/body-rose-victory/t2.webp",
+    "frames": 67,
+    "kb": 960,
+    "words": "0 to 132 step 2",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "size: shrinks to 0.90x the start picture while the game shows it",
+      "edge: 13 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)"
+     ],
+     "faults": [
+      "edge",
+      "size"
+     ],
+     "vision_ran": true,
+     "spent": 0.0072,
+     "error": null,
+     "words": "The clip gate flags this take: size: shrinks to 0.90x the start picture while the game shows it; edge: 13 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)."
+    },
+    "n": 2
+   },
    "use": null,
    "left": false,
    "dry": false,
