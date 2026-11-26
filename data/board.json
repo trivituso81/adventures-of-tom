@@ -6978,7 +6978,7 @@
    "title": "Install Tom's new walk, feelings, talking, listen frames",
    "theme": "Characters",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as tomframes: Tom's new walking, feelings, talking and listening pictures are in the game for Tom only. Tom looks at them on his phone (card t-tomframesplay).",
    "blocks": [],
    "changed": "2026-11-26",
@@ -6996,6 +6996,10 @@
     {
      "d": "2026-11-26",
      "t": "Built tomframes: walk v4, feelings v8, talk v3 and listen v1 baked for Tom. Fixed two bake problems on the new sheets (pink glow between arms and body; ask and answer hair sliced by the even 2 x 2 split). Tom's Pose Editor lines are on the old sheets, so the new ones have none yet."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as tomframes: Tom's new walking, feelings, talking and listening pictures are in the game"
     }
    ],
    "after": "t-tomframesplay",
@@ -7007,7 +7011,8 @@
     "model": "Claude Sonnet 5.5 (row B: the bakes exist and tests catch mistakes)",
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md (Pose Editor, Tom's painted frames are used as painted, One head multiplier, Real heights) and claude/next-addendum-listen1.md, then card c-tomframes in data/board.json. Your first push is the commit board: start c-tomframes. Tom uploaded new painted sheets for Tom on 2026-11-26: tom-walking-sheet-v4, tom-emotions-v8, tom-talk-v3, and tom-listen-v1 is approved. Install them for Tom only. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-26"
   },
   {
    "id": "t-tomframesplay",
@@ -7047,8 +7052,10 @@
    "url": "https://claude.ai/code/session_01RXeukFUy1ZAKH1RRjtXyko",
    "title": "Install Tom's new walk, feelings, talking, listen frames",
    "first": "2026-11-26T00:55:22-08:00",
-   "last": "2026-11-26T00:55:22-08:00",
-   "tags": [],
+   "last": "2026-11-26T01:37:19-08:00",
+   "tags": [
+    "tomframes"
+   ],
    "cards": [
     "c-tomframes"
    ]
@@ -13511,8 +13518,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "955b55d79fc331f44d058254caa3a66232c71b8e",
- "synced_at": "2026-11-26T09:34:12+00:00",
+ "synced": "b956009c41cc6a6616c21e05ef240bafe3dcfb83",
+ "synced_at": "2026-11-26T09:38:13+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
