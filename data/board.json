@@ -6975,7 +6975,7 @@
    "col": "done",
    "theme": "Battle Animations",
    "title": "Justin benchmark: Wan 3.0 vs Kling v3 Pro, #808080",
-   "next": "Benchmark bench-justinbb9-2 done: Wan 3.0 passed 3 of 3, Kling v3 Pro 0 of 3; winner wan3_s1 (score 0.9575) is baked into PASS-1 DRAFT REVIEW. $4.98 of $5.00 spent. Open points: Justin has no idle video yet (the Hero still is not allowed in battle), and Kling needs its own prompt work if it is wanted.",
+   "next": "BLOCKED after bench-justinbb9-4 ($1.89 of $2.00): Hero-locked start frame passed Gate 1, but all 3 Wan seeds did the stud-finder scan and never did the hammer tap or the return (Stage A no_return x2, Stage B no strike). Tom decides the one change: raise the cap, or split the move (scan clip and tap clip), or drop one beat. Evidence: art-factory/benchmark/bench-justinbb9-4/BLOCKER_REPORT.md.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukD88aZXMwDZ8KSAuK8",
     "opening": "UNCONSTRAINED PRODUCTION ORDER (REPO: trivituso81/adventures-of-tom)"
@@ -7057,6 +7057,10 @@
     {
      "d": "2026-11-25",
      "t": "Run bench-justinbb9-3 stopped at Gate 1 (seams from a misaligned hand edit, $0.38). Fixed by registering the edit to the Hero and joining at the neck; re-run bench-justinbb9-4. Build justinbb9f."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "bench-justinbb9-4: Gate 1 passed on the Hero-locked start frame (head diff 0); Wan 3.0 0/3, the scan played but not the tap or return. Halted per the order, $1.89 spent. Build justinbb9f, ended without shipping a baked clip: the previous clip (wan3_s1 of bench-justinbb9-2) stays in the review."
     }
    ],
    "blocks": [],
