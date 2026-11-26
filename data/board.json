@@ -8448,7 +8448,7 @@
    "title": "Chapter 1 opening: zoom into the taxi office, then fade",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "openzoom1",
    "blocks": [],
    "created": "2026-11-26",
@@ -8462,6 +8462,10 @@
     {
      "d": "2026-11-26",
      "t": "Tom (09:18): \"At the very beginning of chapter 1, before displaying Tom inside the taxi company, the camera should zoom into the taxi company instead of just cutting, and then the transition should be a medium fade.\""
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as openzoom1: Chapter 1 opens with a camera zoom into the taxi company and a medium fade"
     }
    ],
    "after": "t-openzoomplay",
@@ -8473,7 +8477,8 @@
     "model": "Claude Sonnet 5.5 (row C: small change, tests and frames catch mistakes)",
     "effort": "medium (the piece is small)",
     "text": "Read CLAUDE.md, then card c-openzoom in data/board.json. Your first push is the commit board: start c-openzoom. In SCENES.opening in data/scenes.js the chapter opens on the Square, the camera zooms into Long Island Taxi Co. over 1.6 seconds, then a 0.8 second fade to the office with Tom. Check it in portrait and landscape. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-26"
   },
   {
    "id": "t-openzoomplay",
@@ -8631,8 +8636,10 @@
    "url": "https://claude.ai/code/session_01RXeukEWDdsXz8MszJbLSbb",
    "title": "Chapter 1 opening: zoom into the taxi office, then fade",
    "first": "2026-11-26T09:23:15-08:00",
-   "last": "2026-11-26T09:23:15-08:00",
-   "tags": [],
+   "last": "2026-11-26T09:27:37-08:00",
+   "tags": [
+    "openzoom1"
+   ],
    "cards": [
     "c-openzoom"
    ]
@@ -15184,8 +15191,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "7a562ccc12995b70beb5cefe4b5fe63542aae269",
- "synced_at": "2026-11-26T17:24:00+00:00",
+ "synced": "e573b96bee8f8610ed2a86e83ebb16c93e180631",
+ "synced_at": "2026-11-26T17:28:22+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
