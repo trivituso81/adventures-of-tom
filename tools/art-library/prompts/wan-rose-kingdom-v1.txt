@@ -1,0 +1,10 @@
+IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.
+
+WHAT THIS IS
+A 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.
+
+CAMERA AND BACKGROUND
+Locked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.
+
+MOTION: KINGDOM OF TEN-THOUSAND BLANKETS
+She hugs her worn Lamby plush to her chest and looks up with wide, earnest wonder. She lifts the plush high above her head in a calm royal gesture and holds it there for one second like a tiny pajama queen, then lowers it gently and returns to her starting relaxed stance.

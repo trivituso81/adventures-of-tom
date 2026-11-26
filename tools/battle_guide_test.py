@@ -1016,9 +1016,10 @@ vm.runInContext(code,ctx);console.log(JSON.stringify(ctx.OUT));"""
         ready(pg); pg.click('#tabs [data-tab=anims]'); pg.wait_for_selector('.plangrp', timeout=30000); pg.wait_for_timeout(1200)
         c = pg.eval_on_selector_all('.plansum b', 'a=>a.map(x=>+x.textContent)')
         check('plan (%s): counts Making %d, Next %d, Done %d match the data' % (name, wm, wn, wd), c == [wm, wn, wd] and sum(c) == len(G), c)
-        try: rr = pg.locator('.plangrp[data-plan=making] .row', has_text='Giddyup').inner_text(timeout=4000)
-        except Exception as e: rr = 'no Making row for Giddyup'  # guidecross1: a miss here is a failed check, not a crash that skips every test after it
-        check('plan (%s): rose-giddyup is a Making row with rev %s' % (name, JB['rose-giddyup']['rev']), 'REV %s' % JB['rose-giddyup']['rev'] in rr, rr)
+        mk1 = next(v for v in G.values() if not v.get('video') and mk(v) and v.get('job') in JB)   # movestage3: not a pinned move; Giddyup got its video and left Making
+        try: rr = pg.locator('.plangrp[data-plan=making] .row', has_text=mk1['name']).first.inner_text(timeout=4000)
+        except Exception as e: rr = 'no Making row for ' + mk1['name']  # guidecross1: a miss here is a failed check, not a crash that skips every test after it
+        check('plan (%s): %s is a Making row with rev %s' % (name, mk1['job'], JB[mk1['job']]['rev']), 'REV %s' % JB[mk1['job']]['rev'] in rr, rr)
         check('plan (%s): one row per animation in each group' % name, pg.eval_on_selector_all('.plangrp', 'a=>a.map(d=>d.querySelectorAll(".row").length)') == [wm, wn, wd])
         check('plan (%s): no sideways scroll, no script errors' % name, pg.evaluate("document.documentElement.scrollWidth<=innerWidth") and not perr, perr)
         pg.screenshot(path=os.path.join(HERE, 'shots', 'guide-plan-%s.png' % name)); cx.close()

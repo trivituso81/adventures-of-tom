@@ -126,3 +126,148 @@ B3_STAGE.konami_code={v:1,tier:'cap',budget:7.5,
   assets:{'tom/fireball':{kind:'obj',bg:'black',loop:true,size:{h:.2},prompt:'tools/art-library/prompts/stage-tom-fireball-v1.txt',motion:'tools/art-library/prompts/stage-tom-fireball-motion-v1.txt'},
     'tom/starbeam':{kind:'obj',bg:'black',loop:true,size:{h:.3},prompt:'tools/art-library/prompts/stage-tom-starbeam-v1.txt',motion:'tools/art-library/prompts/stage-tom-starbeam-motion-v1.txt'},
     'tom/meteor':{kind:'obj',bg:'black',loop:true,size:{h:.3},prompt:'tools/art-library/prompts/stage-tom-meteor-v1.txt',motion:'tools/art-library/prompts/stage-tom-meteor-motion-v1.txt'}}};
+
+// ================= Rose (movestage3, 2026-11-26) =================
+// Rose's twelve moves in three layers, written with the ladder of plan section 3. Marks are {f: share of the clip} from the manifest beats
+// (art-factory/aot-stage2-pass*-manifest-24fps.json) until the build measures them. Rose holds at most ONE prop in a video (her tattered Lamby);
+// anything else is a stage picture. Sounds use only the names the engine already has (whoosh, thud, ding, charge).
+
+// ----- Sugar Rush -----
+// Basic. New body: the old clip brings Lamby out from behind her back (the move-staging finding), so it is replaced. Accents only: two thuds and a verdict on the second tackle.
+B3_STAGE.lamb_tuck_ankle_tackle={v:1,tier:'basic',budget:2.7,
+  body:{clip:'rose_tacklelunge',job:'rose-tacklelunge',keep:false,marks:{dash:{f:.22},hit1:{f:.37},hit2:{f:.56}}},
+  hit:'hit1',
+  steps:[{at:'hit1',do:'sfx',sfx:'thud'},{at:'hit1',do:'shake',amp:2,dur:.15},{at:'hit2',do:'sfx',sfx:'thud'},
+    {at:'hit2',do:'words',text:'TACKLED!',where:'over:target',size:2,color:'#ffe08a',hold:.9}],
+  assets:{}};
+
+// Skill 1. New body (three hops). One stage element: a sofa cushion lands under each hop, the foe takes it.
+B3_STAGE.the_floor_is_lava={v:1,tier:'s1',budget:3.5,
+  body:{clip:'rose_lavahop',job:'rose-lavahop',keep:false,marks:{gasp:{f:.15},hop1:{f:.33},hop2:{f:.5},hop3:{f:.67}}},
+  hit:'hop1',
+  steps:[{at:'gasp',do:'words',text:'THE FLOOR IS LAVA!',where:'over:self',size:2,color:'#ff9a4a',hold:1.0},
+    {id:'hop1',at:'hop1',do:'drop',asset:'rose/cushion',onto:'target',dur:.25,hit:true},
+    {at:'hop2',do:'drop',asset:'rose/cushion',onto:'target',dur:.25,hit:true},
+    {at:'hop3',do:'drop',asset:'rose/cushion',onto:'target',dur:.25,hit:true},
+    {at:'hop1',do:'sfx',sfx:'thud'},{at:'hop2',do:'sfx',sfx:'thud'},{at:'hop3',do:'sfx',sfx:'thud'},
+    {at:{step:'hop1',plus:.25},do:'foe',react:'squash'}],
+  assets:{'rose/cushion':{kind:'prop',bg:'magenta',size:{h:.3},prompt:'tools/art-library/prompts/stage-rose-cushion-v1.txt'}}};
+
+// Skill 2. Approved clip kept (it is in the game, paired with Tom's). Bigger stage: the ally glows, then a comet carries her to the foe.
+B3_STAGE.giddyup_tata_launch={v:1,tier:'s2',budget:4.4,
+  body:{clip:'rose_giddyup',job:'rose-giddyup',keep:true,marks:{tap:{f:.2},launch:{f:.53}}},
+  hit:'launch',
+  steps:[{at:'tap',do:'words',text:'GIDDYUP!',where:'over:ally',size:2,color:'#ffd27a',hold:1.0},
+    {at:'tap',do:'sfx',sfx:'charge'},
+    {id:'launch',at:'launch',do:'fly',asset:'rose/comet',from:'above_self',to:'target',arc:40,dur:.4,blend:'add',hit:true},
+    {at:{step:'launch',plus:.4},do:'foe',react:'knock',px:20},{at:{step:'launch',plus:.4},do:'shake',amp:4,dur:.3},{at:'launch',do:'sfx',sfx:'whoosh'}],
+  lasting:[{while:'giddyup',on:'carrier',do:'glow',color:'#ffd27a'}],
+  assets:{'rose/comet':{kind:'prop',bg:'black',size:{h:.3},prompt:'tools/art-library/prompts/stage-rose-comet-v1.txt'}}};
+
+// Capstone. New body. Set piece: two Lambies ricochet off six monsters, each hit a note higher, then the hero pose.
+B3_STAGE.double_lamby_return_cart_blitz={v:1,tier:'cap',budget:7.2,
+  body:{clip:'rose_doublelamby',job:'rose-doublelamby',keep:false,marks:{hoist:{f:.18},launch:{f:.33},hero:{f:.85}}},
+  hit:'r1',
+  setpiece:{dur:7.2,dim:.7,steps:[
+    {at:0,do:'dim',amount:.7,in:.4},
+    {at:'hoist',do:'sfx',sfx:'charge'},
+    {id:'r1',at:2.3,do:'fly',asset:'rose/backuplamby',from:'above_self',to:'target',arc:30,dur:.35,hit:true},
+    {at:2.9,do:'fly',asset:'rose/lamby',from:'target',to:'target',arc:50,dur:.35,hit:true},
+    {at:3.5,do:'fly',asset:'rose/backuplamby',from:'target',to:'target',arc:50,dur:.35,hit:true},
+    {at:4.1,do:'fly',asset:'rose/lamby',from:'target',to:'target',arc:50,dur:.35,hit:true},
+    {at:4.7,do:'fly',asset:'rose/backuplamby',from:'target',to:'target',arc:50,dur:.35,hit:true},
+    {at:5.3,do:'fly',asset:'rose/lamby',from:'target',to:'above_self',arc:50,dur:.35,hit:true},
+    {at:2.3,do:'sfx',sfx:'ding'},{at:2.9,do:'sfx',sfx:'ding'},{at:3.5,do:'sfx',sfx:'ding'},{at:4.1,do:'sfx',sfx:'ding'},{at:4.7,do:'sfx',sfx:'ding'},{at:5.3,do:'sfx',sfx:'ding'},
+    {at:2.6,do:'foe',react:'knock',px:10},{at:4.4,do:'foe',react:'knock',px:16},{at:5.6,do:'foe',react:'knock',px:24},{at:5.6,do:'shake',amp:5,dur:.5},
+    {at:'hero',do:'words',text:'DOUBLE LAMBY!',where:'screen_center',size:3,color:'#fff1cb',hold:1.2},
+    {at:6.6,do:'dim',amount:0,out:.5}]},
+  assets:{'rose/lamby':{kind:'prop',bg:'magenta',size:{h:.2},prompt:'tools/art-library/prompts/stage-rose-lamby-v1.txt'},
+    'rose/backuplamby':{kind:'prop',bg:'magenta',size:{h:.2},prompt:'tools/art-library/prompts/stage-rose-backuplamby-v1.txt'}}};
+
+// ----- Cozy Rosie -----
+// Basic. New body. Accents only: a thud on the bonk, then PAT PAT over the family member who is hurt most.
+B3_STAGE.pocket_pretzel_and_pat={v:1,tier:'basic',budget:2.7,
+  body:{clip:'rose_pretzel',job:'rose-pretzel',keep:false,marks:{bonk:{f:.35},pretzel:{f:.55}}},
+  hit:'bonk',
+  steps:[{at:'bonk',do:'sfx',sfx:'thud'},{at:'bonk',do:'shake',amp:2,dur:.15},
+    {at:'pretzel',do:'words',text:'PAT PAT',where:'over:ally',size:2,color:'#ffe9b0',hold:.9},{at:'pretzel',do:'sfx',sfx:'ding'}],
+  assets:{}};
+
+// Skill 1. New body (a toss, two tackle lunges, a catch). One stage element: Lamby flies out, stays stuck on the monster, and comes home.
+B3_STAGE.tattered_lamby_boomerang={v:1,tier:'s1',budget:3.5,
+  body:{clip:'rose_boomerang',job:'rose-boomerang',keep:false,marks:{throw:{f:.23},lunge:{f:.44},catch:{f:.75}}},
+  hit:'toss',
+  steps:[{id:'toss',at:'throw',do:'fly',asset:'rose/lamby',from:'hand',to:'target',arc:30,spin:3,dur:.45,hit:true},
+    {at:{step:'toss',plus:.45},do:'foe',react:'squash'},{at:'throw',do:'sfx',sfx:'whoosh'},
+    {at:'lunge',do:'sfx',sfx:'thud'},{at:'catch',do:'sfx',sfx:'ding'}],
+  lasting:[{while:'lamby_stuck',on:'carrier',do:'hover',asset:'rose/lamby',amp:3,rate:1,enter:{at:{step:'toss',plus:.45},dur:.2},
+    exit:{do:'fly',to:'self',dur:.4}}],
+  assets:{'rose/lamby':{kind:'prop',bg:'magenta',size:{h:.2},prompt:'tools/art-library/prompts/stage-rose-lamby-v1.txt'}}};
+
+// Skill 2. New body. Bigger and lasting: a wall of cushions and blankets rises around every family member while the fort lasts.
+B3_STAGE.sofa_cushion_citadel={v:1,tier:'s2',budget:4.3,
+  body:{clip:'rose_citadel',job:'rose-citadel',keep:false,marks:{lift:{f:.25},sweep:{f:.5}}},
+  hit:'late',late:'sweep',
+  steps:[{at:'lift',do:'sfx',sfx:'charge'},{at:'sweep',do:'sfx',sfx:'thud'},
+    {at:'sweep',do:'words',text:'FORT TIME!',where:'over:each_ally',size:2,color:'#ffe9b0',hold:1.2}],
+  lasting:[{while:'pillow_fort',on:'carrier',do:'place',asset:'rose/cushionwall',side:'front',enter:{at:'sweep',from:'behind',dur:.5},
+    exit:{do:'cross',to:'screen_right',lane:'floor',dur:.4}}],
+  assets:{'rose/cushionwall':{kind:'prop',bg:'magenta',size:{h:.5},prompt:'tools/art-library/prompts/stage-rose-cushionwall-v1.txt'}}};
+
+// Capstone. New body. Set piece: the night goes starlit, a blanket castle rises, warmth for the family.
+B3_STAGE.kingdom_of_ten_thousand_blankets={v:1,tier:'cap',budget:7.1,
+  body:{clip:'rose_kingdom',job:'rose-kingdom',keep:false,marks:{wonder:{f:.2},raise:{f:.5},hold:{f:.7}}},
+  hit:'late',late:'raise',
+  setpiece:{dur:7.1,dim:.75,steps:[
+    {at:0,do:'dim',amount:.75,in:.4},
+    {at:'wonder',do:'sfx',sfx:'charge'},
+    {id:'rise',at:'raise',do:'drop',asset:'rose/castle',onto:'screen_center',dur:.7},
+    {at:{step:'rise',plus:.7},do:'sfx',sfx:'thud'},{at:{step:'rise',plus:.7},do:'shake',amp:3,dur:.3},
+    {at:{step:'rise',plus:.9},do:'flash',color:'#ffd27a',dur:.5},{at:{step:'rise',plus:.9},do:'sfx',sfx:'ding'},
+    {at:{step:'rise',plus:1.2},do:'words',text:'LONG LIVE THE BLANKET KINGDOM',where:'screen_center',size:3,color:'#ffe9b0',hold:1.8},
+    {at:6.5,do:'dim',amount:0,out:.5}]},
+  lasting:[{while:'blanket_castle',on:'self',do:'glow',color:'#ffd27a'}],
+  assets:{'rose/castle':{kind:'prop',bg:'magenta',size:{sw:.55},prompt:'tools/art-library/prompts/stage-rose-castle-v1.txt'}}};
+
+// ----- Prankster -----
+// Basic. New body. Accent only: BOOP over the monster, a squash, a tiny ding.
+B3_STAGE.sneaky_nose_boop={v:1,tier:'basic',budget:2.5,
+  body:{clip:'rose_boop',job:'rose-boop',keep:false,marks:{boop:{f:.4}}},
+  hit:'boop',
+  steps:[{at:'boop',do:'words',text:'BOOP!',where:'over:target',size:2,color:'#ffb3d9',hold:.8},{at:'boop',do:'sfx',sfx:'ding'},
+    {at:'boop',do:'foe',react:'squash'}],
+  assets:{}};
+
+// Skill 1. New body. One stage element: pink sound rings roll out of her mouth into the monster.
+B3_STAGE.supersonic_raspberry={v:1,tier:'s1',budget:3.3,
+  body:{clip:'rose_raspberry',job:'rose-raspberry',keep:false,marks:{blow:{f:.44}}},
+  hit:'blow',
+  steps:[{id:'blow',at:'blow',do:'fly',asset:'rose/ripple',from:'self_front',to:'target',dur:.4,blend:'add',hit:true},
+    {at:'blow',do:'sfx',sfx:'whoosh'},{at:{step:'blow',plus:.4},do:'words',text:'PBBBBBT!',where:'over:target',size:3,color:'#ffb3d9',hold:1.0},
+    {at:{step:'blow',plus:.4},do:'shake',amp:4,dur:.3},{at:{step:'blow',plus:.4},do:'foe',react:'knock',px:14}],
+  assets:{'rose/ripple':{kind:'prop',bg:'black',size:{h:.4},prompt:'tools/art-library/prompts/stage-rose-ripple-v1.txt'}}};
+
+// Skill 2. New body. Bigger and lasting: Backup Lamby sits as bait in front of her while she is hidden (the leap out next turn is a later card).
+B3_STAGE.backup_lamby_bait_and_switch={v:1,tier:'s2',budget:4.3,
+  body:{clip:'rose_baitswitch',job:'rose-baitswitch',keep:false,marks:{place:{f:.25},peek:{f:.5}}},
+  hit:'late',late:'place',
+  steps:[{at:'place',do:'sfx',sfx:'thud'},{at:'peek',do:'words',text:'SHHHH...',where:'over:self',size:2,color:'#ffe9b0',hold:1.2}],
+  lasting:[{while:'lamby_hide',on:'self',do:'place',asset:'rose/backuplamby',side:'front',enter:{at:'place',from:'above',dur:.3},
+    exit:{do:'fly',to:'top',dur:.35}}],
+  assets:{'rose/backuplamby':{kind:'prop',bg:'magenta',size:{h:.2},prompt:'tools/art-library/prompts/stage-rose-backuplamby-v1.txt'}}};
+
+// Capstone. New body. Set piece: a giant whoopee cushion slides under every monster, the whole field goes PBBBBBT.
+B3_STAGE.mega_whoopee_cushion_trap={v:1,tier:'cap',budget:7,
+  body:{clip:'rose_whoopee',job:'rose-whoopee',keep:false,marks:{slide:{f:.25},brace:{f:.45},pose:{f:.82}}},
+  hit:'splat',
+  setpiece:{dur:7,dim:.6,steps:[
+    {at:0,do:'dim',amount:.6,in:.4},
+    {at:'slide',do:'sfx',sfx:'whoosh'},
+    {id:'slide',at:'slide',do:'cross',asset:'rose/whoopee',from:'screen_left',to:'screen_right',lane:'foes',dur:1.0},
+    {id:'splat',at:{step:'slide',plus:1.6},do:'drop',asset:'rose/whoopee',onto:'each_target',dur:.25,hit:true},
+    {at:{step:'splat',plus:.25},do:'sfx',sfx:'thud'},{at:{step:'splat',plus:.25},do:'flash',color:'#ffd0ec',dur:.35},{at:{step:'splat',plus:.25},do:'shake',amp:7,dur:.7},
+    {at:{step:'splat',plus:.25},do:'foe',react:'knock',px:32},
+    {at:{step:'splat',plus:.5},do:'words',text:'PBBBBBBBBT!',where:'screen_center',size:4,color:'#ffb3d9',hold:1.6},
+    {at:'pose',do:'words',text:'MASTER OF MISCHIEF',where:'over:self',size:2,color:'#fff1cb',hold:1.2},
+    {at:6.4,do:'dim',amount:0,out:.5}]},
+  assets:{'rose/whoopee':{kind:'prop',bg:'magenta',size:{sw:.35},prompt:'tools/art-library/prompts/stage-rose-whoopee-v1.txt'}}};

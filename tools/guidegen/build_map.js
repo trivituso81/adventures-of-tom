@@ -279,7 +279,7 @@ function build() {
     if (fam && made && made.route === 'wan' && made.job !== job && S.jobs[made.job]) { job = made.job; used.jobs.add(job); }   // rose-lava-xftr: the job that made the clip the game plays now (rose-cushion-kling for rose_lava) wins over the job named like the clip
     // movestage1 (claude/move-staging-plan.md): a family move is body + stage. Its staging row (data/b3-stage.js) names the body job; a move with no row waits.
     const stg = fam && a.kind === 'move' ? G.STAGE[a.src.id] || null : null, waits = fam && a.kind === 'move' && !stg;
-    if (stg && stg.body && stg.body.job && S.jobs[stg.body.job] && !job) { job = stg.body.job; used.jobs.add(job); }
+    if (stg && stg.body && stg.body.job && S.jobs[stg.body.job] && (!job || (!stg.body.keep && job !== stg.body.job))) { job = stg.body.job; used.jobs.add(job); }   // movestage3: a move whose row makes a NEW body (keep false) uses the row's job even when an older clip of the move was made by another job (rose_lava)
     // 2 the prompt
     let prompt = '', source = '', rev = 0, promptFile = null, laterTries = 0, madeNote = '';
     const ov = over[a.id];
@@ -308,7 +308,7 @@ function build() {
     if (a.kind === 'state') rname = recipe.byBodyState[a.state] || 'pose';
     else if (a.kind === 'wind') rname = 'windup';
     else rname = recipe.at1x.some(k => entKey && entKey.endsWith('-' + k)) ? 'strike1x' : 'strike';
-    const newClip = a.clip ? a.clip : stg && stg.body && stg.body.clip ? stg.body.clip : ent ? under(ent.key) : a.kind === 'state' ? a.owner + '_' + a.state : a.kind === 'wind' ? a.owner + '_' + a.id.split(':')[2] + '_wind' : a.owner + '_' + (a.kind === 'move' ? a.src.id : a.id.split(':')[2]);
+    const newClip = stg && stg.body && !stg.body.keep && stg.body.clip ? stg.body.clip : a.clip ? a.clip : stg && stg.body && stg.body.clip ? stg.body.clip : ent ? under(ent.key) : a.kind === 'state' ? a.owner + '_' + a.state : a.kind === 'wind' ? a.owner + '_' + a.id.split(':')[2] + '_wind' : a.owner + '_' + (a.kind === 'move' ? a.src.id : a.id.split(':')[2]);
     const lr = a.kind === 'move' ? rows[norm(a.name)] : null;
     const start = ow.start;
     anims[a.id] = {

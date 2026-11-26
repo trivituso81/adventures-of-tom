@@ -2295,5 +2295,616 @@
    "enable_prompt_expansion": true,
    "seed": 81
   }
+ },
+ "rose-lavahop": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-lavahop-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "pad": 0.8,
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "bake": {
+   "id": "rose-lavahop",
+   "owner": "rose",
+   "kind": "strike",
+   "fps": 24,
+   "step": 4,
+   "speed": 2,
+   "fig_rows": 83
+  },
+  "wire": {
+   "stage": {
+    "move": "the_floor_is_lava"
+   }
+  }
+ },
+ "rose-doublelamby": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-doublelamby-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "pad": 0.8,
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "bake": {
+   "id": "rose-doublelamby",
+   "owner": "rose",
+   "kind": "strike",
+   "fps": 24,
+   "step": 4,
+   "speed": 2,
+   "fig_rows": 83
+  },
+  "wire": {
+   "stage": {
+    "move": "double_lamby_return_cart_blitz"
+   }
+  }
+ },
+ "rose-pretzel": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-pretzel-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "pad": 0.8,
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "bake": {
+   "id": "rose-pretzel",
+   "owner": "rose",
+   "kind": "strike",
+   "fps": 24,
+   "step": 4,
+   "speed": 2,
+   "fig_rows": 83
+  },
+  "wire": {
+   "stage": {
+    "move": "pocket_pretzel_and_pat"
+   }
+  }
+ },
+ "rose-boomerang": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-boomerang-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "pad": 0.8,
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "bake": {
+   "id": "rose-boomerang",
+   "owner": "rose",
+   "kind": "strike",
+   "fps": 24,
+   "step": 4,
+   "speed": 2,
+   "fig_rows": 83
+  },
+  "wire": {
+   "stage": {
+    "move": "tattered_lamby_boomerang"
+   }
+  }
+ },
+ "rose-citadel": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-citadel-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "pad": 0.8,
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "bake": {
+   "id": "rose-citadel",
+   "owner": "rose",
+   "kind": "strike",
+   "fps": 24,
+   "step": 4,
+   "speed": 2,
+   "fig_rows": 83
+  },
+  "wire": {
+   "stage": {
+    "move": "sofa_cushion_citadel"
+   }
+  }
+ },
+ "rose-kingdom": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-kingdom-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "pad": 0.8,
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "bake": {
+   "id": "rose-kingdom",
+   "owner": "rose",
+   "kind": "strike",
+   "fps": 24,
+   "step": 4,
+   "speed": 2,
+   "fig_rows": 83
+  },
+  "wire": {
+   "stage": {
+    "move": "kingdom_of_ten_thousand_blankets"
+   }
+  }
+ },
+ "rose-boop": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-boop-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "pad": 0.8,
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "bake": {
+   "id": "rose-boop",
+   "owner": "rose",
+   "kind": "strike",
+   "fps": 24,
+   "step": 4,
+   "speed": 2,
+   "fig_rows": 83
+  },
+  "wire": {
+   "stage": {
+    "move": "sneaky_nose_boop"
+   }
+  }
+ },
+ "rose-raspberry": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-raspberry-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "pad": 0.8,
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "bake": {
+   "id": "rose-raspberry",
+   "owner": "rose",
+   "kind": "strike",
+   "fps": 24,
+   "step": 4,
+   "speed": 2,
+   "fig_rows": 83
+  },
+  "wire": {
+   "stage": {
+    "move": "supersonic_raspberry"
+   }
+  }
+ },
+ "rose-baitswitch": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-baitswitch-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "pad": 0.8,
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "bake": {
+   "id": "rose-baitswitch",
+   "owner": "rose",
+   "kind": "strike",
+   "fps": 24,
+   "step": 4,
+   "speed": 2,
+   "fig_rows": 83
+  },
+  "wire": {
+   "stage": {
+    "move": "backup_lamby_bait_and_switch"
+   }
+  }
+ },
+ "rose-whoopee": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-whoopee-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "pad": 0.8,
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "bake": {
+   "id": "rose-whoopee",
+   "owner": "rose",
+   "kind": "strike",
+   "fps": 24,
+   "step": 4,
+   "speed": 2,
+   "fig_rows": 83
+  },
+  "wire": {
+   "stage": {
+    "move": "mega_whoopee_cushion_trap"
+   }
+  }
+ },
+ "stage-rose-cushion": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-rose-cushion-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "rose/cushion",
+   "kind": "prop",
+   "bg": "magenta",
+   "px": 256
+  },
+  "why": "movestage3: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "stage-rose-lamby": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-rose-lamby-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "rose/lamby",
+   "kind": "prop",
+   "bg": "magenta",
+   "px": 256
+  },
+  "why": "movestage3: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "stage-rose-backuplamby": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-rose-backuplamby-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "rose/backuplamby",
+   "kind": "prop",
+   "bg": "magenta",
+   "px": 256
+  },
+  "why": "movestage3: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "stage-rose-comet": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-rose-comet-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "rose/comet",
+   "kind": "prop",
+   "bg": "black",
+   "px": 256
+  },
+  "why": "movestage3: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "stage-rose-ripple": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-rose-ripple-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "rose/ripple",
+   "kind": "prop",
+   "bg": "black",
+   "px": 256
+  },
+  "why": "movestage3: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "stage-rose-cushionwall": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-rose-cushionwall-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "rose/cushionwall",
+   "kind": "prop",
+   "bg": "magenta",
+   "px": 256
+  },
+  "why": "movestage3: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "stage-rose-castle": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-rose-castle-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "rose/castle",
+   "kind": "prop",
+   "bg": "magenta",
+   "px": 256
+  },
+  "why": "movestage3: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "stage-rose-whoopee": {
+  "rev": 1,
+  "kind": "image",
+  "endpoint": "google/nano-banana-2.1",
+  "est": 0.15,
+  "prompt_file": "tools/art-library/prompts/stage-rose-whoopee-v1.txt",
+  "input": {
+   "aspect_ratio": "1:1",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  },
+  "stage": {
+   "key": "rose/whoopee",
+   "kind": "prop",
+   "bg": "magenta",
+   "px": 256
+  },
+  "why": "movestage3: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
+ },
+ "rose-tacklelunge": {
+  "rev": 1,
+  "kind": "video",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "est_per_s": {
+   "480p": 0.05,
+   "720p": 0.1,
+   "1080p": 0.15
+  },
+  "prompt_file": "tools/art-library/prompts/wan-rose-tacklelunge-v1.txt",
+  "frame": "art/clips/start/rose-hero.png",
+  "fit": "720x1280",
+  "frame_fields": [
+   "start_image_url",
+   "end_image_url"
+  ],
+  "input": {
+   "resolution": "720p",
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "audio": false,
+   "enable_prompt_expansion": true,
+   "seed": 81
+  },
+  "pad": 0.8,
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "bake": {
+   "id": "rose-tacklelunge",
+   "owner": "rose",
+   "kind": "strike",
+   "fps": 24,
+   "step": 4,
+   "speed": 2,
+   "fig_rows": 83
+  },
+  "wire": {
+   "stage": {
+    "move": "lamb_tuck_ankle_tackle"
+   }
+  }
  }
 }

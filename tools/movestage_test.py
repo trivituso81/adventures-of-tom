@@ -23,7 +23,9 @@ TIER = {'basic': 'basic', 's1': 's1', 's2': 's2', 'cap': 'cap'}
 BUDGET = {'basic': (2, 3), 's1': (3, 4), 's2': (4, 5), 'cap': (6, 8)}
 ACTIONS = {'fly', 'hover', 'drop', 'cross', 'rain', 'surround', 'place', 'pop', 'words', 'foe', 'shake', 'flash', 'dim', 'glow', 'sfx'}
 ACCENTS = {'words', 'foe', 'shake', 'flash', 'dim', 'glow', 'sfx'}
-HEAD = rd('tools/art-library/prompts/wan-tom-idle-v1.txt'); HEAD = HEAD[:HEAD.index('MOTION:')]
+def head_of(owner):
+    # movestage3: the person pattern is that person's own idle prompt up to MOTION (Tom's says his, Rose's says her)
+    h = rd('tools/art-library/prompts/wan-%s-idle-v1.txt' % owner); return h[:h.index('MOTION:')]
 
 check('Tom\'s eight signature moves have rows', set(ST) >= {'lounge_pass_flex', 'zone_one_blockade', 'suite_door_slide', 'tarmac_porsche_transfer', 'cartridge_blow', 'controller_toss', 'winged_shell_lock_on', 'konami_code'}, sorted(ST))
 def steps_of(row):
@@ -43,7 +45,7 @@ for mid, row in ST.items():
     check(n + ': S1 body names a clip and an existing Wan job', bool(B.get('clip')) and bool(J), B)
     if J:
         p = rd(J['prompt_file']) if os.path.exists(os.path.join(ROOT, J['prompt_file'])) else ''
-        check(n + ': S1 body prompt keeps the person pattern word for word (an approved, kept prompt is never reworded), one MOTION part, never behind the back', (B.get('keep') or p.startswith(HEAD)) and p.count('MOTION:') == 1 and 'behind' not in p.lower(), J['prompt_file'])
+        check(n + ': S1 body prompt keeps the person pattern word for word (an approved, kept prompt is never reworded), one MOTION part, never behind the back', (B.get('keep') or p.startswith(head_of(VB[S['vibe']]['owner']))) and p.count('MOTION:') == 1 and 'behind' not in p.lower(), J['prompt_file'])
     if B.get('keep'): check(n + ': S1 a kept body clip is baked', os.path.exists(os.path.join(ROOT, 'data', 'clips', B['clip'].replace('_', '-') + '.js')) and (S.get('anim') or {}).get('clip') == B['clip'], B['clip'])
     marks = set((B.get('marks') or {}).keys()); ids = {s.get('id') for s in steps_of(row) if s.get('id')}; assets = set((row.get('assets') or {}).keys())
     bad = []

@@ -1,0 +1,10 @@
+IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.
+
+WHAT THIS IS
+A 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.
+
+CAMERA AND BACKGROUND
+Locked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.
+
+MOTION: POCKET PRETZEL AND PAT
+She darts one quick step forward holding her worn Lamby plush and gives one earnest bonk straight left with it. She turns her head toward her right side, takes one tiny pretzel from her pocket with her free hand, and holds it out in front of her with a gentle pat of the air. Then she settles back into her starting relaxed stance. She stays on the same spot.
