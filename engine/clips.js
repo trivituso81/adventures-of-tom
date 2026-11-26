@@ -73,7 +73,8 @@ function bclipShowFrame(owner,t) {
   const S=typeof B2!=='undefined'&&B2.active&&B2.labReview&&B2.clipShow; if(!S||S.owner!==owner) return null;
   const C=BCLIPS[S.id]; if(!C||!bclipReady(S.id)) return null;
   if(S.t0==null) S.t0=t;   // the clock starts when the first picture can be drawn
-  const ms=(t-S.t0)*1000, len=C.kind==='loop'?bclipLoopLen(C):C.dur+(C.kind==='state'?1500:500);
+  const wall=(t-S.t0)*1000, ms=typeof p1Clock==='function'?p1Clock(S,wall):wall, len=C.kind==='loop'?bclipLoopLen(C):C.dur+(C.kind==='state'?1500:500);
+  if(typeof p1Slide==='function') { S.slide=p1Slide(S,wall,len+(p1Meta(S.id)&&p1Meta(S.id).hit_stop_frames?p1Meta(S.id).hit_stop_frames*1000/60:0)); S.shake=p1Shake(S,wall); S.ms=wall; }
   if(ms>=len) { if(!S.over) { S.over=true; const f=S.onEnd; setTimeout(()=>{ if(B2.clipShow===S) B2.clipShow=null; if(f) f(S.id); },0); } return C.kind==='loop'?bclipLoopFrame(C,0):bclipFrameAt(C,C.dur); }
   return C.kind==='loop'?bclipLoopFrame(C,ms):bclipFrameAt(C,Math.min(ms,C.dur));
 }

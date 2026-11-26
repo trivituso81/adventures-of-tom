@@ -26,7 +26,7 @@ FOOT_BAND = 0.15
 ALPHA_T = 128
 SHEET_PCTS = (0.0, 0.2, 0.4, 0.6, 0.8, 1.0)
 SHEET_H = 200
-STAGE2_BOOLS = ("prop_visible_frame1", "prop_visible_at_sprite_scale", "action_reads_leftward", "feet_planted")
+STAGE2_BOOLS = ("prop_visible_frame1", "prop_visible_at_battle_scale", "action_reads_leftward", "feet_planted")
 THRESHOLDS = {"min_peak_mask_churn": MIN_PEAK_CHURN, "min_left_reach_ratio": MIN_LEFT_REACH, "max_foot_retreat_ratio": MAX_FOOT_RETREAT}
 
 
@@ -170,11 +170,11 @@ def stage2_prompt(prop, action):
         "each shown at true in-game size (the figure is about 200 pixels tall). The enemies are to the LEFT of the screen. "
         f"EXPECTED PROPS: {prop}. EXPECTED ACTION: {action}. "
         "Answer ONLY with strict JSON with exactly these keys: "
-        '{"pass": bool, "prop_visible_frame1": bool, "prop_visible_at_sprite_scale": bool, "action_reads_leftward": bool, '
+        '{"pass": bool, "prop_visible_frame1": bool, "prop_visible_at_battle_scale": bool, "action_reads_leftward": bool, '
         '"feet_planted": bool, "failure_reason": string}. '
         "Judge prop_visible_frame1 ONLY on IMAGE 1 (Frame 0): true when BOTH expected props are already gripped or held in the character's hands, "
         "including held low at the hip or side before the windup; false when a prop is on a belt, in a pocket, or missing. "
-        "Judge the other three ONLY on IMAGE 2 (the contact sheet). prop_visible_at_sprite_scale: each prop is still recognizable at this "
+        "Judge the other three ONLY on IMAGE 2 (the contact sheet). prop_visible_at_battle_scale: each prop is still recognizable at this "
         "size in the later tiles. action_reads_leftward: one bold strike clearly aimed toward screen-left. feet_planted: the character stays "
         "anchored in their battle spot during the strike. TRUE even when a foot lifts or steps a little, a natural forward bracing step, "
         "weight shift or heel pivot into the swing. FALSE only if the character retreats to the right behind the party, wanders across the "
@@ -253,7 +253,7 @@ def run_gate(video, move_meta, client, model, sheet_path=None):
         ok = bool(s2["passed"])
         tags = [] if ok else ["gate2_" + k for k in s2.get("hard_rejected_on", [])] or ["gate2_pass_false"]
         return {"stage1": s1, "stage2": s2, "passed": ok,
-                "failure_reason": "" if ok else "Stage 2 sprite-scale check: " + (s2.get("failure_reason") or ", ".join(s2.get("hard_rejected_on", [])) or "pass was false"),
+                "failure_reason": "" if ok else "Stage 2 battle-scale check: " + (s2.get("failure_reason") or ", ".join(s2.get("hard_rejected_on", [])) or "pass was false"),
                 "failure_tags": tags}
 
 
@@ -270,7 +270,7 @@ def retry_feedback(gate):
     if s2:
         if "prop_visible_frame1" in s2.get("hard_rejected_on", []):
             notes.append("Both props are already gripped in the hands in frame 1")
-        if "prop_visible_at_sprite_scale" in s2.get("hard_rejected_on", []):
+        if "prop_visible_at_battle_scale" in s2.get("hard_rejected_on", []):
             notes.append("Draw the props larger and keep them in view")
         if "action_reads_leftward" in s2.get("hard_rejected_on", []):
             notes.append("Aim the strike clearly toward screen-left")

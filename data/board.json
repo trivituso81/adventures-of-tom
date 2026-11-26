@@ -6974,8 +6974,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Battle Animations",
-   "title": "Justin production clip: #00FF00 start, new Kling prompt",
-   "next": "Roll 4 is the best so far but still fails QA (draw smear, ends with hand near hip). Next: Kling multi_prompt shots from the same start.png. See claude/next-justinbb9.md.",
+   "title": "Justin benchmark: Wan 3.0 vs Kling v3 Pro, #808080",
+   "next": "Phase 0 (lock, gate v2, Kettlebell prompt, Battle Lab review extras, workflow) shipped as justinbb9a. Phase 1 benchmark is started by art-factory/benchmark-trigger.json; read art-factory/benchmark/<run_id>/scorecard.json or BLOCKER_REPORT.md.",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukD88aZXMwDZ8KSAuK8",
     "opening": "UNCONSTRAINED PRODUCTION ORDER (REPO: trivituso81/adventures-of-tom)"
@@ -7025,6 +7025,10 @@
     {
      "d": "2026-11-25",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Tom: \"i approve full repo access\" and replaced the green-screen plan with the Board order (Hero-style lock, #808080, Wan 3.0 vs Kling v3 Pro, $5.00 cap). Phase 0 built as justinbb9a."
     }
    ],
    "blocks": [],
@@ -7045,7 +7049,8 @@
     "why": "A session ended without shipping",
     "url": "https://claude.ai/code/cse_01RXeukFJ3SQckykBNpN3Deq",
     "prev": "https://claude.ai/code/session_01RXeukHG5RM8zrqSWjpjE8C"
-   }
+   },
+   "after": "nothing for Tom: end"
   }
  ],
  "sessions": [

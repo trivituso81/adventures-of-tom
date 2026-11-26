@@ -19,7 +19,7 @@
     "fps": 24,
     "backdropMode": "mid_grey",
     "bgHex": "#808080",
-    "stylePrefix": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames.",
+    "stylePrefix": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames.",
     "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
   },
   "summary": {
@@ -85,7 +85,7 @@
         "durationSec": 2.6,
         "fps": 24,
         "numFrames": 61,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tom-ff-basic | 2.6s | 61 frames @ 24fps] Tom (5'11\" man with short trimmed beard and hair combed horizontally left to right, no glasses, no blazer, dark indigo-purple short-sleeve t-shirt with small game controller graphic, olive-brown utility pants, cream sneakers) takes two crisp brisk forward steps in-place, tilts his chin up with deadpan airline-VIP pride holding his laminated Sky Club pass and metal brag tag, executes one sharp snooty wrist-flick forward to tap an off-screen foe with the card edge, then smoothly walks backward in-place into idle stance.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: tom-ff-basic | 2.6s | 61 frames @ 24fps] Tom (5'11\" man with short trimmed beard and hair combed horizontally left to right, no glasses, no blazer, dark indigo-purple short-sleeve t-shirt with small game controller graphic, olive-brown utility pants, cream sneakers) takes two crisp brisk forward steps in-place, tilts his chin up with deadpan airline-VIP pride holding his laminated Sky Club pass and metal brag tag, executes one sharp snooty wrist-flick forward to tap an off-screen foe with the card edge, then smoothly walks backward in-place into idle stance.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -160,7 +160,7 @@
         "durationSec": 3.3,
         "fps": 24,
         "numFrames": 81,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tom-ff-s1 | 3.3s | 81 frames @ 24fps] Tom (5'11\" man with short trimmed beard, horizontal left-to-right hair, no glasses, no blazer) stays in-place, crisply snaps the telescoping handle of his black hard-shell rolling carry-on shut, swings the suitcase sideways in front of his knees like a riot shield, plants his sneakers wide, and locks into an immovable guardian brace.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: tom-ff-s1 | 3.3s | 81 frames @ 24fps] Tom (5'11\" man with short trimmed beard, horizontal left-to-right hair, no glasses, no blazer) stays in-place, crisply snaps the telescoping handle of his black hard-shell rolling carry-on shut, swings the suitcase sideways in front of his knees like a riot shield, plants his sneakers wide, and locks into an immovable guardian brace.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": {
@@ -181,7 +181,7 @@
         ],
         "hit_stop_frames": 5,
         "screen_shake_px": 8,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tom-ff-s1_counter | 2.2s | 53 frames @ 24fps] From his braced carry-on stance, Tom (5'11\" man with short trimmed beard, horizontal left-to-right hair, no glasses, no blazer) steps a sharp half-pace left, drives his hip and black hard-shell suitcase forcefully forward in a solid deadpan hip-check collision, then smoothly resets to idle stance.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: tom-ff-s1_counter | 2.2s | 53 frames @ 24fps] From his braced carry-on stance, Tom (5'11\" man with short trimmed beard, horizontal left-to-right hair, no glasses, no blazer) steps a sharp half-pace left, drives his hip and black hard-shell suitcase forcefully forward in a solid deadpan hip-check collision, then smoothly resets to idle stance.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "engineSpec": {
@@ -251,7 +251,7 @@
         "durationSec": 4.2,
         "fps": 24,
         "numFrames": 101,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tom-ff-s2 | 4.2s | 101 frames @ 24fps] Tom (5'11\" man with short trimmed beard, horizontal left-to-right hair, no glasses, no blazer) stays in-place, raises two fingers calmly in a practiced flight-crew signal, sweeps his open palm horizontally across his chest as if sliding cabin doors shut, steps firmly into a stoic protective guard stance, and settles cleanly back to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: tom-ff-s2 | 4.2s | 101 frames @ 24fps] Tom (5'11\" man with short trimmed beard, horizontal left-to-right hair, no glasses, no blazer) stays in-place, raises two fingers calmly in a practiced flight-crew signal, sweeps his open palm horizontally across his chest as if sliding cabin doors shut, steps firmly into a stoic protective guard stance, and settles cleanly back to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -326,7 +326,7 @@
         "durationSec": 7.0,
         "fps": 24,
         "numFrames": 169,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tom-ff-cap | 7.0s | 169 frames @ 24fps] Tom (5'11\" man with short trimmed beard, horizontal left-to-right hair, no glasses, no blazer, dark indigo-purple short-sleeve t-shirt) stays in-place, squares his shoulders solemnly, raises his black invite-only 360 medallion skyward with intense JRPG focus, points decisively straight left as wind ripples his shirt hem, holds a rock-solid 1-second wind-swept hero pose, and lowers his arm smoothly to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: tom-ff-cap | 7.0s | 169 frames @ 24fps] Tom (5'11\" man with short trimmed beard, horizontal left-to-right hair, no glasses, no blazer, dark indigo-purple short-sleeve t-shirt) stays in-place, squares his shoulders solemnly, raises his black invite-only 360 medallion skyward with intense JRPG focus, points decisively straight left as wind ripples his shirt hem, holds a rock-solid 1-second wind-swept hero pose, and lowers his arm smoothly to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -404,7 +404,7 @@
         "durationSec": 2.6,
         "fps": 24,
         "numFrames": 61,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: grace-sc-basic | 2.6s | 61 frames @ 24fps] Grace stays in-place, holds a palm-sized white soup-dumpling squishy between thumb and forefinger, gives it one earnest concentrated pinch, flicks it crisply forward left, then catches the returning toy cleanly and settles to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: grace-sc-basic | 2.6s | 61 frames @ 24fps] Grace stays in-place, holds a palm-sized white soup-dumpling squishy between thumb and forefinger, gives it one earnest concentrated pinch, flicks it crisply forward left, then catches the returning toy cleanly and settles to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -481,7 +481,7 @@
         "durationSec": 3.4,
         "fps": 24,
         "numFrames": 81,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: grace-sc-s1 | 3.4s | 81 frames @ 24fps] Grace stays in-place, stretches a bright neon-teal gel NeeDoh ball taut between both hands with intense tactical focus, turns slightly toward an adjacent ally, lobs a crisp underhand pass, and returns cleanly to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: grace-sc-s1 | 3.4s | 81 frames @ 24fps] Grace stays in-place, stretches a bright neon-teal gel NeeDoh ball taut between both hands with intense tactical focus, turns slightly toward an adjacent ally, lobs a crisp underhand pass, and returns cleanly to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -553,7 +553,7 @@
         "durationSec": 4.1,
         "fps": 24,
         "numFrames": 97,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: grace-sc-s2 | 4.1s | 97 frames @ 24fps] Grace stays in-place, raises a translucent ice-cube sugar squishy overhead between both palms like priming a thunderbolt, leans forward with fierce focus, crushes it decisively between her hands, dusts her palms, and settles to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: grace-sc-s2 | 4.1s | 97 frames @ 24fps] Grace stays in-place, raises a translucent ice-cube sugar squishy overhead between both palms like priming a thunderbolt, leans forward with fierce focus, crushes it decisively between her hands, dusts her palms, and settles to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -626,7 +626,7 @@
         "durationSec": 6.8,
         "fps": 24,
         "numFrames": 165,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: grace-sc-cap | 6.8s | 165 frames @ 24fps] Grace stays in-place, looks skyward clasping both hands overhead as if turning a celestial steamer latch, sweeps both arms gracefully downward to guide an enormous drop, holds a beaming 1-second collector hero pose, and relaxes cleanly to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: grace-sc-cap | 6.8s | 165 frames @ 24fps] Grace stays in-place, looks skyward clasping both hands overhead as if turning a celestial steamer latch, sweeps both arms gracefully downward to guide an enormous drop, holds a beaming 1-second collector hero pose, and relaxes cleanly to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -701,7 +701,7 @@
         "durationSec": 2.7,
         "fps": 24,
         "numFrames": 65,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: rose-sr-basic | 2.7s | 65 frames @ 24fps] Rose (six-year-old) tucks her worn tattered plush Lamby securely under one arm like a football, drops her shoulder in a fierce running-back crouch, performs two rapid low tackle-step lunges in-place, then hops lightly back to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: rose-sr-basic | 2.7s | 65 frames @ 24fps] Rose (six-year-old) tucks her worn tattered plush Lamby securely under one arm like a football, drops her shoulder in a fierce running-back crouch, performs two rapid low tackle-step lunges in-place, then hops lightly back to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -777,7 +777,7 @@
         "durationSec": 3.5,
         "fps": 24,
         "numFrames": 85,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: rose-sr-s1 | 3.5s | 85 frames @ 24fps] Rose clutches tattered Lamby tightly, gasps looking down at her sneakers, crouches like a coiled spring, performs three crisp rhythmic high-knee rebound hops in-place with fierce determination, and lands neatly on her toes back in idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: rose-sr-s1 | 3.5s | 85 frames @ 24fps] Rose clutches tattered Lamby tightly, gasps looking down at her sneakers, crouches like a coiled spring, performs three crisp rhythmic high-knee rebound hops in-place with fierce determination, and lands neatly on her toes back in idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -855,7 +855,7 @@
         "durationSec": 4.4,
         "fps": 24,
         "numFrames": 105,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: rose-sr-s2 | 4.4s | 105 frames @ 24fps] Rose snaps tiny aviator goggles onto tattered Lamby, hops enthusiastically upward tapping an ally shoulder gesture, curls tightly into a compact airborne cannonball tuck in-place, then uncurls and sticks a crisp sneaker landing back to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: rose-sr-s2 | 4.4s | 105 frames @ 24fps] Rose snaps tiny aviator goggles onto tattered Lamby, hops enthusiastically upward tapping an ally shoulder gesture, curls tightly into a compact airborne cannonball tuck in-place, then uncurls and sticks a crisp sneaker landing back to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -933,7 +933,7 @@
         "durationSec": 7.2,
         "fps": 24,
         "numFrames": 173,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: rose-sr-cap | 7.2s | 173 frames @ 24fps] Rose holds worn tattered Lamby in her left hand and spotless white Backup Lamby in her right, hoists both Lambies skyward in solemn twin-plushie focus, tucks both Lambies forward into a rapid tucked pinball roll cycle in-place, then springs upright holding both Lambies high in a 1-second hero pose before settling to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: rose-sr-cap | 7.2s | 173 frames @ 24fps] Rose holds worn tattered Lamby in her left hand and spotless white Backup Lamby in her right, hoists both Lambies skyward in solemn twin-plushie focus, tucks both Lambies forward into a rapid tucked pinball roll cycle in-place, then springs upright holding both Lambies high in a 1-second hero pose before settling to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -943,7 +943,7 @@
           3.8,
           1.5
         ],
-        "translationPath": "pinball_6hit_enemy_ricochet (Engine zips tucked Rose sprite across foes 6x during Beat 2)",
+        "translationPath": "pinball_6hit_enemy_ricochet (Engine zips tucked Rose figure across foes 6x during Beat 2)",
         "contactTriggerSec": 2.3,
         "hitStopFrames": 4,
         "vfxPrimitives": [
@@ -1007,7 +1007,7 @@
         "durationSec": 2.5,
         "fps": 24,
         "numFrames": 61,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: amy-fq-basic | 2.5s | 61 frames @ 24fps] Amy jogs two crisp steps forward in-place gripping a cast-iron kettlebell with both hands, hinges cleanly at the hips with textbook athletic form, snaps her hips forward driving the kettlebell straight up in a fierce strike arc, and steps briskly back to ready stance.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: amy-fq-basic | 2.5s | 61 frames @ 24fps] Amy jogs two crisp steps forward in-place gripping a cast-iron kettlebell with both hands, hinges cleanly at the hips with textbook athletic form, snaps her hips forward driving the kettlebell straight up in a fierce strike arc, and steps briskly back to ready stance.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -1077,7 +1077,7 @@
         "durationSec": 3.2,
         "fps": 24,
         "numFrames": 77,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: amy-fq-s1 | 3.2s | 77 frames @ 24fps] Amy drops swiftly into a crisp textbook push-up plank in-place, explodes upward into a high flying jump-kick aimed left, and lands lightly bouncing on the balls of her sneakers ready for a follow-up.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: amy-fq-s1 | 3.2s | 77 frames @ 24fps] Amy drops swiftly into a crisp textbook push-up plank in-place, explodes upward into a high flying jump-kick aimed left, and lands lightly bouncing on the balls of her sneakers ready for a follow-up.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -1149,7 +1149,7 @@
         "durationSec": 4.0,
         "fps": 24,
         "numFrames": 97,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: amy-fq-s2 | 4.0s | 97 frames @ 24fps] Amy taps her wrist fitness watch decisively, beckons a teammate forward with a brisk coach gesture, jogs smoothly in high-knee rhythm in-place with steady arm pumps, and settles back into ready stance.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: amy-fq-s2 | 4.0s | 97 frames @ 24fps] Amy taps her wrist fitness watch decisively, beckons a teammate forward with a brisk coach gesture, jogs smoothly in high-knee rhythm in-place with steady arm pumps, and settles back into ready stance.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -1224,7 +1224,7 @@
         "durationSec": 7.0,
         "fps": 24,
         "numFrames": 169,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: amy-fq-cap | 7.0s | 169 frames @ 24fps] Amy locks eyes intensely on an invisible timer holding her kettlebell, executes an explosive rapid-fire lunge, squat-press, and overhead slam circuit in-place with zero fatigue, snaps into a fierce 1-second hands-on-hips hero stance, and resets smoothly to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: amy-fq-cap | 7.0s | 169 frames @ 24fps] Amy locks eyes intensely on an invisible timer holding her kettlebell, executes an explosive rapid-fire lunge, squat-press, and overhead slam circuit in-place with zero fatigue, snaps into a fierce 1-second hands-on-hips hero stance, and resets smoothly to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -1302,7 +1302,7 @@
         "durationSec": 2.6,
         "fps": 24,
         "numFrames": 61,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: deedee-nf-basic | 2.6s | 61 frames @ 24fps] Deedee marches briskly forward in-place with no-nonsense posture, raises a bright blue Windex spray bottle straight out at eye level, squeezes the trigger twice in sharp point-blank bursts left, and steps neatly back into idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: deedee-nf-basic | 2.6s | 61 frames @ 24fps] Deedee marches briskly forward in-place with no-nonsense posture, raises a bright blue Windex spray bottle straight out at eye level, squeezes the trigger twice in sharp point-blank bursts left, and steps neatly back into idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -1379,7 +1379,7 @@
         "durationSec": 3.4,
         "fps": 24,
         "numFrames": 81,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: deedee-nf-s1 | 3.4s | 81 frames @ 24fps] Deedee marches forward holding a classic wooden-handle string mop, executes two brisk figure-eight mopping sweeps right at floor level in front of her, sets down a small folded yellow caution sign with one hand, and walks cleanly back to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: deedee-nf-s1 | 3.4s | 81 frames @ 24fps] Deedee marches forward holding a classic wooden-handle string mop, executes two brisk figure-eight mopping sweeps right at floor level in front of her, sets down a small folded yellow caution sign with one hand, and walks cleanly back to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": {
@@ -1398,7 +1398,7 @@
         ],
         "hit_stop_frames": 3,
         "screen_shake_px": 5,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: deedee-nf-s1_counter | 2.0s | 49 frames @ 24fps] Deedee stands in-place with hands on her hips, giving one brisk \"I told you so\" head-shake and point toward the wet floor.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: deedee-nf-s1_counter | 2.0s | 49 frames @ 24fps] Deedee stands in-place with hands on her hips, giving one brisk \"I told you so\" head-shake and point toward the wet floor.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "engineSpec": {
@@ -1477,7 +1477,7 @@
         "durationSec": 4.3,
         "fps": 24,
         "numFrames": 105,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: deedee-nf-s2 | 4.3s | 105 frames @ 24fps] Deedee reaches up to pull her reading glasses smoothly down from the top of her head onto her nose, grips a wooden rolling pin with both hands, steps forward into a vigorous brisk scrubbing-smack motion left, nods in crisp approval, and resets to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: deedee-nf-s2 | 4.3s | 105 frames @ 24fps] Deedee reaches up to pull her reading glasses smoothly down from the top of her head onto her nose, grips a wooden rolling pin with both hands, steps forward into a vigorous brisk scrubbing-smack motion left, nods in crisp approval, and resets to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -1552,7 +1552,7 @@
         "durationSec": 6.9,
         "fps": 24,
         "numFrames": 165,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: deedee-nf-cap | 6.9s | 165 frames @ 24fps] Deedee stays in-place, snaps bright yellow rubber cleaning gloves firmly onto both wrists with solemn finality, lifts her wooden mop overhead like an ocean staff, sweeps it powerfully downward left, holds a radiant 1-second matriarch hero pose, and lowers the mop to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: deedee-nf-cap | 6.9s | 165 frames @ 24fps] Deedee stays in-place, snaps bright yellow rubber cleaning gloves firmly onto both wrists with solemn finality, lifts her wooden mop overhead like an ocean staff, sweeps it powerfully downward left, holds a radiant 1-second matriarch hero pose, and lowers the mop to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -1628,7 +1628,7 @@
         "durationSec": 2.7,
         "fps": 24,
         "numFrames": 65,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: boppy-dep-basic | 2.7s | 65 frames @ 24fps] Boppy (older grandfather wearing his fishing rod and wicker creel strapped securely across his back) raps a sturdy wooden warden nightstick once calmly against his open left palm, steps forward into a crisp low horizontal shin-crack swing, and steps unhurriedly back to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: boppy-dep-basic | 2.7s | 65 frames @ 24fps] Boppy (older grandfather wearing his fishing rod and wicker creel strapped securely across his back) raps a sturdy wooden warden nightstick once calmly against his open left palm, steps forward into a crisp low horizontal shin-crack swing, and steps unhurriedly back to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -1705,7 +1705,7 @@
         "durationSec": 3.5,
         "fps": 24,
         "numFrames": 85,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: boppy-dep-s1 | 3.5s | 85 frames @ 24fps] Boppy (with his fishing rod and wicker creel strapped across his back) plants his boots wide in an immovable stance, braces his wooden nightstick diagonally across his chest, leans his chin forward delivering a gruff deadpan shout left, and holds rock-steady guard.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: boppy-dep-s1 | 3.5s | 85 frames @ 24fps] Boppy (with his fishing rod and wicker creel strapped across his back) plants his boots wide in an immovable stance, braces his wooden nightstick diagonally across his chest, leans his chin forward delivering a gruff deadpan shout left, and holds rock-steady guard.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": {
@@ -1722,7 +1722,7 @@
         "secondary_vfx_cue_ids": [],
         "hit_stop_frames": 3,
         "screen_shake_px": 4,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: boppy-dep-s1_counter | 2.1s | 49 frames @ 24fps] Boppy (fishing rod and creel on his back) stands completely unmoved, points one blunt finger left with a grumpy furrowed-brow bark, and settles back into his guard.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: boppy-dep-s1_counter | 2.1s | 49 frames @ 24fps] Boppy (fishing rod and creel on his back) stands completely unmoved, points one blunt finger left with a grumpy furrowed-brow bark, and settles back into his guard.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "engineSpec": {
@@ -1795,7 +1795,7 @@
         "durationSec": 4.4,
         "fps": 24,
         "numFrames": 105,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: boppy-dep-s2 | 4.4s | 105 frames @ 24fps] Boppy (wearing his fishing rod and wicker creel on his back) adjusts his creel strap comfortably, shifts his weight onto one hip, gestures slowly and earnestly with one hand tracing an imaginary hill as he launches into a long unhurried story, and settles calmly back to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: boppy-dep-s2 | 4.4s | 105 frames @ 24fps] Boppy (wearing his fishing rod and wicker creel on his back) adjusts his creel strap comfortably, shifts his weight onto one hip, gestures slowly and earnestly with one hand tracing an imaginary hill as he launches into a long unhurried story, and settles calmly back to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -1872,7 +1872,7 @@
         "durationSec": 7.1,
         "fps": 24,
         "numFrames": 169,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: boppy-dep-cap | 7.1s | 169 frames @ 24fps] Boppy (wearing his fishing rod and wicker creel strapped across his back) lifts a heavy brass warden key ring high overhead with stoic gravity, slams his fist firmly downward like a gavel, holds a rock-solid 1-second immovable guardian pose, and lowers his hand calmly to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: boppy-dep-cap | 7.1s | 169 frames @ 24fps] Boppy (wearing his fishing rod and wicker creel strapped across his back) lifts a heavy brass warden key ring high overhead with stoic gravity, slams his fist firmly downward like a gavel, holds a rock-solid 1-second immovable guardian pose, and lowers his hand calmly to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -1949,7 +1949,7 @@
         "durationSec": 2.6,
         "fps": 24,
         "numFrames": 61,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tnb-cer-basic | 2.6s | 61 frames @ 24fps] TNB (calm relaxed potter in studio apron) scoops a hefty lump of wet gray stoneware clay in one hand with totally unhurried poise, lobs a smooth effortless underhand toss left, wipes his thumb calmly on his apron, and settles to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: tnb-cer-basic | 2.6s | 61 frames @ 24fps] TNB (calm relaxed potter in studio apron) scoops a hefty lump of wet gray stoneware clay in one hand with totally unhurried poise, lobs a smooth effortless underhand toss left, wipes his thumb calmly on his apron, and settles to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -2020,7 +2020,7 @@
         "durationSec": 3.5,
         "fps": 24,
         "numFrames": 85,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tnb-cer-s1 | 3.5s | 85 frames @ 24fps] TNB stays in-place, gently cups both clay-dusted hands in front of his torso, performs smooth meditative vessel-centering motions with relaxed serene focus, gives one quiet satisfied nod, and returns to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: tnb-cer-s1 | 3.5s | 85 frames @ 24fps] TNB stays in-place, gently cups both clay-dusted hands in front of his torso, performs smooth meditative vessel-centering motions with relaxed serene focus, gives one quiet satisfied nod, and returns to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -2096,7 +2096,7 @@
         "durationSec": 4.3,
         "fps": 24,
         "numFrames": 105,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tnb-cer-s2 | 4.3s | 105 frames @ 24fps] TNB slips on one quilted kiln mitt with completely unhurried calm, reaches out to unlatch and swing open an invisible loft kiln door, takes a relaxed half-step back as warm orange light washes over him, and settles smoothly to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: tnb-cer-s2 | 4.3s | 105 frames @ 24fps] TNB slips on one quilted kiln mitt with completely unhurried calm, reaches out to unlatch and swing open an invisible loft kiln door, takes a relaxed half-step back as warm orange light washes over him, and settles smoothly to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -2169,7 +2169,7 @@
         "durationSec": 6.8,
         "fps": 24,
         "numFrames": 165,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: tnb-cer-cap | 6.8s | 165 frames @ 24fps] TNB stays in-place with unflappable serenity, takes one calm breath, sweeps both hands gracefully upward as if guiding a monument into place, delivers one gentle deadpan knuckle-tap forward, holds a mellow 1-second gallery-artist pose, and relaxes cleanly to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: tnb-cer-cap | 6.8s | 165 frames @ 24fps] TNB stays in-place with unflappable serenity, takes one calm breath, sweeps both hands gracefully upward as if guiding a monument into place, delivers one gentle deadpan knuckle-tap forward, holds a mellow 1-second gallery-artist pose, and relaxes cleanly to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -2242,7 +2242,7 @@
         "durationSec": 2.5,
         "fps": 24,
         "numFrames": 61,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: nara-ap-basic | 2.5s | 61 frames @ 24fps] Nara (real 40-lb black curly-coated labradoodle strictly on all four paws, zero human posture) perks both curly ears straight up in sudden startle, hops backward on all four paws, accidentally catches a stainless steel water bowl with her front right paw flipping it left, and settles blinking on all fours.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: nara-ap-basic | 2.5s | 61 frames @ 24fps] Nara (real 40-lb black curly-coated labradoodle strictly on all four paws, zero human posture) perks both curly ears straight up in sudden startle, hops backward on all four paws, accidentally catches a stainless steel water bowl with her front right paw flipping it left, and settles blinking on all fours.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anthropomorphic dog, speaking dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -2312,7 +2312,7 @@
         "durationSec": 3.3,
         "fps": 24,
         "numFrames": 81,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: nara-ap-s1 | 3.3s | 81 frames @ 24fps] Nara (real 40-lb black curly labradoodle strictly on all four paws) trots briskly forward in-place, plants all four paws wide, unleashes an intense authentic nose-to-tail ear-flapping full-body wet-dog shake, then scampers lightly back into ready quadruped stance.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: nara-ap-s1 | 3.3s | 81 frames @ 24fps] Nara (real 40-lb black curly labradoodle strictly on all four paws) trots briskly forward in-place, plants all four paws wide, unleashes an intense authentic nose-to-tail ear-flapping full-body wet-dog shake, then scampers lightly back into ready quadruped stance.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anthropomorphic dog, speaking dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -2383,7 +2383,7 @@
         "durationSec": 4.1,
         "fps": 24,
         "numFrames": 97,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: nara-ap-s2 | 4.1s | 97 frames @ 24fps] Nara (real 40-lb black curly labradoodle strictly on all four paws) freezes wide-eyed staring left, scrambles frantically in a four-paw traction burnout kicking paws backward in panic, then darts low and tucks tightly sideways behind an ally's legs on all fours.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: nara-ap-s2 | 4.1s | 97 frames @ 24fps] Nara (real 40-lb black curly labradoodle strictly on all four paws) freezes wide-eyed staring left, scrambles frantically in a four-paw traction burnout kicking paws backward in panic, then darts low and tucks tightly sideways behind an ally's legs on all fours.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anthropomorphic dog, speaking dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -2455,7 +2455,7 @@
         "durationSec": 6.9,
         "fps": 24,
         "numFrames": 165,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: nara-ap-cap | 6.9s | 165 frames @ 24fps] Nara (real 40-lb black curly labradoodle strictly on all four paws, silent mouth-open canine howl, zero speech) sits alert looking right, tips her curly black snout straight skyward in a soulful operatic dog howl, spins three tight frantic quadruped circles in-place, and finishes in a proud 1-second panting good-girl sit.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: nara-ap-cap | 6.9s | 165 frames @ 24fps] Nara (real 40-lb black curly labradoodle strictly on all four paws, silent mouth-open canine howl, zero speech) sits alert looking right, tips her curly black snout straight skyward in a soulful operatic dog howl, spins three tight frantic quadruped circles in-place, and finishes in a proud 1-second panting good-girl sit.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anthropomorphic dog, speaking dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -2487,18 +2487,18 @@
       "pep_cost": 0,
       "base_recovery": 80,
       "flavor": "Clobber",
-      "lifecycle_state": "DRAFT_REVIEW",
+      "lifecycle_state": "ANCHORED",
       "pitch": {
-        "windup": "Justin, feet planted, leans back in one bold anticipation with the hammer raised overhead and the stud finder held out front.",
-        "peak": "Justin drives one huge overhead-to-horizontal hammer slam straight toward screen-left while thrusting the flashing stud finder forward.",
-        "recovery": "Justin follows through, then settles back to his planted idle stance."
+        "windup": "Justin, standing in place in three-quarters-left profile, coils slightly with the claw hammer already in his front hand and the yellow stud finder clipped stationary at his chest belt line.",
+        "peak": "Justin delivers one crisp forward-left tap into empty air with the claw hammer.",
+        "recovery": "Justin settles smoothly back into his exact starting ready stance."
       },
       "held_props": [
-        "oversized bright-yellow electronic stud finder (flashing red LED)",
-        "heavy steel claw hammer"
+        "bright-yellow electronic stud finder clipped stationary at the chest belt line",
+        "single steel claw hammer gripped in the lead hand"
       ],
-      "expected_prop": "oversized bright-yellow electronic stud finder with a flashing red LED in the off-hand and a heavy steel claw hammer in the striking hand, both gripped from frame 1",
-      "expected_action": "with feet planted, Justin leans forward toward screen-left and drives one huge overhead-to-horizontal hammer slam straight toward screen-left while thrusting the flashing stud finder forward",
+      "expected_prop": "a bright-yellow electronic stud finder clipped stationary at the chest belt line and ONE steel claw hammer gripped in the lead hand from frame 0, no second hammer on the belt",
+      "expected_action": "standing in place in three-quarters-left profile, Justin coils slightly, delivers one crisp forward-left tap into empty air with the claw hammer, and settles back into his exact starting ready stance",
       "needs_custom_start_frame": true,
       "prop_kit_id": "justin-studfinder-hammer",
       "safe_padding_pct": {
@@ -2511,38 +2511,32 @@
         920,
         560
       ],
-      "impact_ms": 1300,
+      "impact_ms": 1700,
       "vfx_cue_id": "vfx_core_clobber_impact",
       "secondary_vfx_cue_ids": [
+        "vfx_red_stud_led_ping",
         "vfx_core_status_debuff_badges"
       ],
       "hit_stop_frames": 4,
       "screen_shake_px": 6,
-      "qa_scores": {
-        "likeness": 10.0,
-        "prop_integrity": 10.0,
-        "motion_fluidity": 9.0,
-        "staging_cleanliness": 10.0,
-        "overall": 9.75
-      },
       "failure_tags": [],
       "wanClip": {
         "filename": "justin-bb-basic.mp4",
-        "durationSec": 2.7,
+        "durationSec": 5.0,
         "fps": 24,
-        "numFrames": 65,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: justin-bb-basic | 2.7s | 65 frames @ 24fps] Justin holds oversized bright-yellow electronic stud finder with a flashing red LED in the off-hand and a heavy steel claw hammer in the striking hand, both gripped from frame 1. With feet planted, Justin leans forward toward screen-left and drives one huge overhead-to-horizontal hammer slam straight toward screen-left while thrusting the flashing stud finder forward.",
-        "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines, pulling a prop from a belt or pocket, walking, stepping backward, idle breathing, looking at camera"
+        "numFrames": 120,
+        "positivePrompt": "Static locked camera, zero zoom, zero scale drift. Standing in place on a flat #808080 mid-grey background and remaining in three-quarters-left profile the entire clip with calm deadpan focus, the tall hand-drawn character coils slightly, delivers one crisp forward-left tap into empty air with the claw hammer held in his front hand, and settles smoothly back into his exact starting ready stance.",
+        "negativePrompt": "turning toward camera, facing right, body rotation, hitting own body or props, duplicate hammer, belt drawing, prop morphing, floating rings, target reticles, laser beams, sparks, floor circle, shouting, angry open mouth, camera pan, zoom, 3D CGI, photorealistic, airbrushed shading"
       },
       "reactiveCounterClip": null,
       "engineSpec": {
         "beatsSec": [
-          0.8,
-          1.1,
-          0.8
+          1.2,
+          1.5,
+          2.3
         ],
-        "translationPath": "approach_enemy (0.0s-0.8s walk to foe; 0.8s-1.9s scan & hammer knock; 1.9s-2.7s return)",
-        "contactTriggerSec": 1.3,
+        "translationPath": "approach_enemy (slide to the foe); coil, one leftward tap, settle; return (slide back)",
+        "contactTriggerSec": 1.7,
         "hitStopFrames": 4,
         "vfxPrimitives": [
           "vfx_core_clobber_impact",
@@ -2550,70 +2544,10 @@
         ],
         "v11Hook": "Basic (0 Pep / +2 Pep, 80 Rec): 0.5x Clobber (+15% Clobber dmg taken 1t; +15% slower Clobber rec via Trait)"
       },
-      "qa_gate": {
-        "stage1": {
-          "frames_sampled": 10,
-          "thresholds": {
-            "min_peak_mask_churn": 0.22,
-            "min_left_reach_ratio": 0.12,
-            "max_foot_retreat_ratio": 0.15
-          },
-          "peak_mask_churn": 0.753,
-          "left_reach_ratio": 0.452,
-          "foot_retreat_ratio": 0.1423,
-          "failures": [],
-          "passed": true
-        },
-        "stage2": {
-          "prop_visible_frame1": true,
-          "prop_visible_at_sprite_scale": true,
-          "action_reads_leftward": true,
-          "feet_planted": true,
-          "pass": true,
-          "votes": {
-            "prop_visible_frame1": [
-              true,
-              true,
-              true
-            ],
-            "prop_visible_at_sprite_scale": [
-              true,
-              true,
-              true
-            ],
-            "action_reads_leftward": [
-              true,
-              true,
-              true
-            ],
-            "feet_planted": [
-              true,
-              true,
-              true
-            ],
-            "pass": [
-              true,
-              true,
-              true
-            ]
-          },
-          "failure_reason": "",
-          "hard_rejected_on": [],
-          "passed": true,
-          "runs": 3,
-          "contact_sheet_frames": [
-            0,
-            30,
-            60,
-            89,
-            119,
-            149
-          ],
-          "contact_sheet": "art-factory/staging/justin/battle_move_draft_justin-bb-basic/regate_contact_sheet_200px.png"
-        },
-        "passed": true,
-        "failure_reason": "",
-        "failure_tags": []
+      "kettlebell": {
+        "in_hand": "the claw hammer in his front hand",
+        "fixed_prop": "the yellow stud finder clipped stationary at his chest belt line",
+        "strike": "one crisp forward-left tap into empty air with the claw hammer"
       }
     },
     {
@@ -2671,7 +2605,7 @@
         "durationSec": 3.5,
         "fps": 24,
         "numFrames": 85,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: justin-bb-s1 | 3.5s | 85 frames @ 24fps] Justin chokes up on a heavy forged steel crowbar with both hands, wedges it forward with solid contractor footing, heaves powerfully backward in a decisive ripping motion, rests the prybar briefly on his shoulder, and resets to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: justin-bb-s1 | 3.5s | 85 frames @ 24fps] Justin chokes up on a heavy forged steel crowbar with both hands, wedges it forward with solid contractor footing, heaves powerfully backward in a decisive ripping motion, rests the prybar briefly on his shoulder, and resets to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -2745,7 +2679,7 @@
         "durationSec": 4.3,
         "fps": 24,
         "numFrames": 105,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: justin-bb-s2 | 4.3s | 105 frames @ 24fps] Justin stays in-place, sights carefully along a small carpenter level, raises his cordless impact driver, drives four crisp rhythmic screws into four corners in front of him, gives an invisible finished wall one approving pat, and settles to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: justin-bb-s2 | 4.3s | 105 frames @ 24fps] Justin stays in-place, sights carefully along a small carpenter level, raises his cordless impact driver, drives four crisp rhythmic screws into four corners in front of him, gives an invisible finished wall one approving pat, and settles to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -2818,7 +2752,7 @@
         "durationSec": 7.2,
         "fps": 24,
         "numFrames": 173,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: justin-bb-cap | 7.2s | 173 frames @ 24fps] Justin stays in-place, squares up heroically beside his boots, flinches sharply clutching his foot in silent agonized restraint after dropping a tiny screw, hops three times on one leg, channels his pain into one thunderous straight-faced right-footed punt left, then composes himself into a stoic 1-second hero stance before resetting.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: justin-bb-cap | 7.2s | 173 frames @ 24fps] Justin stays in-place, squares up heroically beside his boots, flinches sharply clutching his foot in silent agonized restraint after dropping a tiny screw, hops three times on one leg, channels his pain into one thunderous straight-faced right-footed punt left, then composes himself into a stoic 1-second hero stance before resetting.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -2894,7 +2828,7 @@
         "durationSec": 2.5,
         "fps": 24,
         "numFrames": 61,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: olivia-rc-basic | 2.5s | 61 frames @ 24fps] Olivia darts briskly forward in-place gripping her speed-rope handles, twirls the cord once overhead to shake off the rust, snaps a razor-crisp forward whip-crack straight left, and bounces lightly back into an athletic jump-ready idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: olivia-rc-basic | 2.5s | 61 frames @ 24fps] Olivia darts briskly forward in-place gripping her speed-rope handles, twirls the cord once overhead to shake off the rust, snaps a razor-crisp forward whip-crack straight left, and bounces lightly back into an athletic jump-ready idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -2969,7 +2903,7 @@
         "durationSec": 3.4,
         "fps": 24,
         "numFrames": 81,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: olivia-rc-s1 | 3.4s | 81 frames @ 24fps] Olivia bounds forward in-place, launches into an ultra-crisp rapid criss-cross double-under jump-rope flurry on her toes with blurring wrist crosses, lands lightly, and springs back into ready stance.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: olivia-rc-s1 | 3.4s | 81 frames @ 24fps] Olivia bounds forward in-place, launches into an ultra-crisp rapid criss-cross double-under jump-rope flurry on her toes with blurring wrist crosses, lands lightly, and springs back into ready stance.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -3044,7 +2978,7 @@
         "durationSec": 4.0,
         "fps": 24,
         "numFrames": 97,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: olivia-rc-s2 | 4.0s | 97 frames @ 24fps] Olivia stays in-place jumping rope in an effortless, rhythmic cadence while earnestly ticking off competitive points on her fingers and talking trash left toward an off-screen foe about beating her brother Bobby, finishing with a sharp confident hop into idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: olivia-rc-s2 | 4.0s | 97 frames @ 24fps] Olivia stays in-place jumping rope in an effortless, rhythmic cadence while earnestly ticking off competitive points on her fingers and talking trash left toward an off-screen foe about beating her brother Bobby, finishing with a sharp confident hop into idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -3121,7 +3055,7 @@
         "durationSec": 7.3,
         "fps": 24,
         "numFrames": 177,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: olivia-rc-cap | 7.3s | 177 frames @ 24fps] Olivia salutes invisible judges with intense championship gravity, sprints forward in-place, explodes into a dazzling seven-beat close-range freestyle criss-cross jump-rope showcase ending in a dramatic downward whip-snap split finish, holds a triumphant 1-second gold-medal hero pose, and springs back to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: olivia-rc-cap | 7.3s | 177 frames @ 24fps] Olivia salutes invisible judges with intense championship gravity, sprints forward in-place, explodes into a dazzling seven-beat close-range freestyle criss-cross jump-rope showcase ending in a dramatic downward whip-snap split finish, holds a triumphant 1-second gold-medal hero pose, and springs back to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -3192,7 +3126,7 @@
         "durationSec": 3.4,
         "fps": 24,
         "numFrames": 81,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: univ-pick-me-up | 3.4s | 81 frames @ 24fps] Acting party member (swap per character reference image) leans earnestly toward an adjacent ally slot, extends a firm helping hand downward, pulls steadily upward as if lifting a fallen relative back onto their feet, gives a warm shoulder pat, and resets to idle.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: univ-pick-me-up | 3.4s | 81 frames @ 24fps] Acting party member (swap per character reference image) leans earnestly toward an adjacent ally slot, extends a firm helping hand downward, pulls steadily upward as if lifting a fallen relative back onto their feet, gives a warm shoulder pat, and resets to idle.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -3263,7 +3197,7 @@
         "durationSec": 4.3,
         "fps": 24,
         "numFrames": 105,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: univ-double-team | 4.3s | 105 frames @ 24fps] Single acting character (reuses each character's Basic Action clip in Beat 2) turns their head briefly toward their adjacent teammate for a sharp synchronized nod, snaps into ready-relay focus, and hands off cleanly to their Main Vibe Basic Action clip.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: univ-double-team | 4.3s | 105 frames @ 24fps] Single acting character (reuses each character's Basic Action clip in Beat 2) turns their head briefly toward their adjacent teammate for a sharp synchronized nod, snaps into ready-relay focus, and hands off cleanly to their Main Vibe Basic Action clip.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,
@@ -3336,7 +3270,7 @@
         "durationSec": 7.4,
         "fps": 24,
         "numFrames": 177,
-        "positivePrompt": "2D hand-painted storybook gouache and ink RPG battle sprite animation, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, crisp consistent linework, earnest straight-faced dramatic commitment, clean return to idle battle stance on final frames. [Clip: univ-full-ruckus | 7.4s | 177 frames @ 24fps] Single acting character (reuses both allies' highest unlocked Main Vibe Skill clips in Beat 2) steps into dramatic spotlight focus, raises one hand in unified family determination, then finishes in a proud 1-second side-by-side family hero pose.",
+        "positivePrompt": "Hand-drawn colored-pencil storybook illustration with fine dark-brown ink contours, visible colored-pencil hatching and paper grain, warm highlights, about three heads tall caricature proportions, single character full-body framing, facing three-quarters left, strictly locked static tripod camera, isolated on a completely flat solid #808080 mid-grey studio background with zero ground shadows and zero scenery, calm deadpan focus, clean return to the starting ready stance on final frames. [Clip: univ-full-ruckus | 7.4s | 177 frames @ 24fps] Single acting character (reuses both allies' highest unlocked Main Vibe Skill clips in Beat 2) steps into dramatic spotlight focus, raises one hand in unified family determination, then finishes in a proud 1-second side-by-side family hero pose.",
         "negativePrompt": "camera pan, camera zoom, camera shake, rotating camera, multiple characters, enemy monster in frame, background scenery, grass, trees, shadows on backdrop, speech bubbles, text overlays, UI bars, giant vehicles, explosions, magic beams, rubber-hose stretch, squash-and-stretch cartoon physics, winking at camera, 3D CGI render, photorealistic photography, blurry limbs, extra fingers, morphed props, bipedal standing dog, anime speedlines"
       },
       "reactiveCounterClip": null,

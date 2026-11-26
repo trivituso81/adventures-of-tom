@@ -2,30 +2,46 @@ import json
 import re
 from pathlib import Path
 
-ANTI_RING_NEG = "glowing ring, neon halo, aura outline, rim glow, spotlight, stage lighting, light beam, light cone, floor glow, lens flare, muted desaturated sketch, photorealistic 3D, 16-bit, 32-bit, 8-bit, pixel art, retro, sprite, SNES, Final Fantasy, hurt, knocked out"
+ANTI_RING_NEG = "glowing ring, neon halo, aura outline, rim glow, spotlight, stage lighting, light beam, light cone, floor glow, lens flare, muted desaturated sketch, photorealistic 3D, 16-bit, 32-bit, 8-bit, pixel art, retro, SNES, Final Fantasy, hurt, knocked out"
 IDLE_NEG = "frozen start, static pause, motionless opening, delayed animation, repeated blinking, double blink, fluttering eyelids, mouth opening, sighing, pursing lips, speaking, camera movement, blur, distort"
 
-BATTLE_MOVE_DRAFT_NEG = (
-    "subtle idle breathing, standing still, motionless, waist fidgeting, looking at the camera, gentle passive gesture, small hand gestures, "
-    "pulling a prop from a pocket or belt, prop appearing mid-clip, multi-step choreography, walking, stepping backward, backing away, "
-    "wandering off-center, camera pan, camera zoom, camera orbit"
+
+KETTLEBELL_NEG = (
+    "turning toward camera, facing right, body rotation, hitting own body or props, duplicate prop, belt drawing, re-tucking a prop, prop morphing, "
+    "walking, stepping backward, backing away, wandering off-center, floating rings, target reticles, laser beams, sparks, floor circle, shouting, "
+    "angry open mouth, camera pan, zoom, 3D CGI, photorealistic, airbrushed shading"
 )
+GREY_PROP_WORDS = ("silver", "grey", "gray", "chrome", "pewter", "aluminum", "aluminium")
+
+def bg_for_move(move, cfg):
+    """#5B6E8C for a move whose held props are grey or silver, else the default #808080 (PIPELINE_LOCK.json)."""
+    props = " ".join((move or {}).get("held_props", [])).lower()
+    if any(w in props for w in GREY_PROP_WORDS):
+        return cfg.get("grey_prop_bg_hex", "#5B6E8C")
+    return cfg.get("bg_hex", "#808080")
+
+def build_kettlebell_prompt(move, char_name, bg_hex="#808080"):
+    """The Kettlebell Rule: zero in-video walking, zero belt-draws or re-tucks (the active prop is in the hand on Frame 0), a locked
+    three-quarters-left profile, calm deadpan focus, and exactly three beats: coil, one leftward strike, settle to the Frame 0 ready stance."""
+    kb = (move or {}).get("kettlebell") or {}
+    in_hand = kb.get("in_hand") or "the active prop held in his front hand"
+    fixed = kb.get("fixed_prop")
+    strike = kb.get("strike") or "one crisp forward-left strike into empty air"
+    fixed_txt = f" with {fixed}" if fixed else ""
+    return (
+        f"Static locked camera, zero zoom, zero scale drift. {char_name} stands in place on a flat {bg_hex} mid-grey background{fixed_txt} and remains in "
+        f"three-quarters-left profile the entire clip with calm deadpan focus, no walking, holding {in_hand} from the very first frame. "
+        f"He coils slightly, delivers {strike}, and settles smoothly back into his exact starting ready stance."
+    )
 
 def battle_move_draft_rules(move):
-    """Staging rules every battle_move_draft prompt carries (one Single Exaggerated Leftward Action, planted feet, props from Frame 1).
-    No banned words here: sanitize_prompt strips them (sprite, retro, hurt, ...)."""
-    props = "the props named above" if move else "the named props"
+    """Kept for callers: the Kettlebell Rule as one staging sentence (no walking, no belt-draws, locked profile, three beats)."""
     return (
-        "STAGING RULES. "
-        "1) Anchored stance and locked camera: grounded on one fixed floor plane and anchored in one battle spot for the whole clip; torso lean, weight shift, a small forward bracing step or heel pivot and arm extension are fine; "
-        "no backing up behind the party, no wandering off-center, no sliding, zero camera pan, zoom or orbit. "
-        f"2) Props in hand from frame 1: {props} are already gripped and clearly visible in the very first frame, drawn slightly oversized so they read at small on-screen battle size; "
-        "never pulled from a pocket or belt and never appearing mid-clip. "
-        "3) One exaggerated leftward action: exactly one bold anticipation, strike and follow-through arc aimed decisively toward screen-left, toward the enemies; "
-        "no multi-step choreography, no waist-level fumbling. "
-        "4) Silhouette readability: wide arm extension, clear torso turn, readable negative space around the figure when seen about 200 pixels tall. "
-        "5) Forbidden: subtle idle breathing, standing still, waist fidgeting, looking at the camera, gentle passive gestures."
+        "STAGING RULES. Locked camera, one fixed floor plane, zero walking, zero belt-draws or re-tucks: the active prop is already held in the hand on Frame 0. "
+        "Locked three-quarters-left profile, calm deadpan focus. Exactly three beats: coil, one single leftward strike, settle back into the Frame 0 ready stance."
     )
+
+BATTLE_MOVE_DRAFT_NEG = KETTLEBELL_NEG
 
 PASS1_MOVES_PATH = Path("art-factory/move-packets-pass1.json")
 PASS1_START_FRAMES_PATH = Path("art-factory/start-frame-queue-pass1.json")
@@ -49,13 +65,12 @@ def normalize_backdrop_for_grey(text, bg_hex="#808080"):
     if not text:
         return ""
     out = re.sub(
-        r"solid chroma-key green \(#00FF00\) background",
+        r"solid chroma-key green \(#[0-9A-Fa-f]{6}\) background",
         f"solid {bg_hex} mid-grey studio background",
         text,
         flags=re.IGNORECASE,
     )
     out = re.sub(r"chroma-key green", f"{bg_hex} mid-grey", out, flags=re.IGNORECASE)
-    out = re.sub(r"#00FF00", bg_hex, out, flags=re.IGNORECASE)
     return out
 
 def load_all_move_manifests():
@@ -153,16 +168,16 @@ def resolve_move_prompts(stage, char, cfg, move_id="", feedback=""):
         pos = normalize_backdrop_for_grey(pos, bg_hex)
         pos = pos.replace("Acting party member (swap per character reference image)", char["name"])
         pos = pos.replace("Single acting character", char["name"])
-        if stage == "battle_move_draft":
-            pos = f"{pos} {battle_move_draft_rules(found['move'])}"
+        if stage in ("battle_move_draft", "battle_move_final"):
+            pos = build_kettlebell_prompt(found["move"], char["name"], bg_for_move(found["move"], cfg))
         if feedback and feedback.strip() and feedback.strip() not in pos:
             clean_fb = normalize_backdrop_for_grey(feedback.strip(), bg_hex)
             pos = f"{pos} Director notes: {clean_fb}"
         pos = sanitize_prompt(pos, cfg["banned_words"])
         neg_base = clip.get("negativePrompt") or defaults.get("negativePrompt") or ""
         neg = f"{neg_base}, {ANTI_RING_NEG}".strip(", ")
-        if stage == "battle_move_draft":
-            neg = f"{neg}, {BATTLE_MOVE_DRAFT_NEG}"
+        if stage in ("battle_move_draft", "battle_move_final"):
+            neg = f"{neg}, {KETTLEBELL_NEG}"
         return pos, neg
     clean_fb = normalize_backdrop_for_grey(feedback, bg_hex)
     pos = build_prompt(stage, char, cfg, move_id=move_id, feedback=clean_fb)
@@ -175,18 +190,18 @@ def build_prompt(stage, char, cfg, move_id="", feedback="", extra_hint=""):
     base = f"{char['name']} ({char['height_in']} inches tall, head-to-body ratio {lo}%-{hi}%). {char.get('notes', '')} {cfg['style_lock']}"
     if stage == "hero":
         p = (
-            f"Paint {base} Translate only the key facial features, hair, and age from the subject photo into the EXACT painted art style of the game style reference. "
-            f"Keep the exact bold dark contour lines, chunky brushed shading in clear tones, warm golden top-left lighting, vibrant color saturation, and large gentle simplified eyes of the style reference. "
+            f"Paint {base} Translate only the key facial features, hair, and age from the subject photo into the EXACT colored-pencil art style of the game style reference. "
+            f"Keep the exact fine dark-brown ink contours, visible colored-pencil hatching and grain, warm highlights and about three heads tall proportions of the style reference. "
             f"Use the outfit described above rather than copying casual clothes from the subject photo unless no outfit is specified. "
             f"Pose: full body from top of hair to sturdy shoes with full head visible and unclipped, standing ready facing the viewer, arms loose, both feet on the ground. "
             f"Single character alone on a flat {cfg['bg_hex']} mid-grey studio background with zero glowing halo or rim ring."
         )
     elif stage == "turnaround":
-        p = f"4K 4-view orthographic turnaround sheet (front, left profile, back, right profile) of {base} Identical outfit, exact shared baseline, bold dark contour lines and chunky brushed shading matching the style reference, flat {cfg['bg_hex']} background."
+        p = f"4K 4-view orthographic turnaround sheet (front, left profile, back, right profile) of {base} Identical outfit, exact shared baseline, fine dark-brown ink contours and colored-pencil hatching matching the Hero PNG reference, flat {cfg['bg_hex']} background."
     elif stage == "sheets":
         moods = ", ".join(cfg["moods"])
         poses = ", ".join(cfg["talking_poses"])
-        p = f"4K character animation sheet for {base} Row 1: 8-frame side walk cycle. Row 2: 8 expression portraits ({moods}). Row 3: 4 talking poses ({poses}). Bold dark contour lines and chunky brushed shading matching the style reference, flat {cfg['bg_hex']} background."
+        p = f"4K character animation sheet for {base} Row 1: 8-frame side walk cycle. Row 2: 8 expression portraits ({moods}). Row 3: 4 talking poses ({poses}). Fine dark-brown ink contours and colored-pencil hatching matching the Hero PNG reference, flat {cfg['bg_hex']} background."
     elif stage == "battle_idle":
         p = (
             f"Seamless 2D RPG battle idle loop of {char['name']}. "

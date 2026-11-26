@@ -31,6 +31,7 @@
   }
  ],
  "tests": [
+  {"id": "benchmark_run_test", "cmd": "python3 -I tools/benchmark_run_test.py", "group": "g1", "minutes": 1},
   {
    "id": "amber_test",
    "cmd": "python3 -I tools/amber_test.py",

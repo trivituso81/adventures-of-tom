@@ -305,3 +305,20 @@ The game must be served over http. Opening `index.html` as a file will not work.
 ## Debug handle
 
 `window.__LE` exposes the engine to tests and to you in the browser console (`__LE.b2Start`, `__LE.B2`, `__LE.go(mapId)`, `__LE.setFlag`, `__LE.chapterJump`). Extend it in `engine/main.js` or at the end of the file that owns the thing.
+
+## Battle Animation Pipeline Lock (standing rule, Board order for card c-justinbb9, 2026-11-25)
+
+The Hero PNGs in `art-factory/refs/` are the sole visual authority for every battle animation: about 3 heads tall proportions, fine dark-brown ink contours, visible colored-pencil hatching and grain, warm highlights. Flat `#808080` mid-grey is the default background and `#5B6E8C` is the background for grey or silver props.
+
+Disallowed in the pipeline files (`scripts/`, `art-factory/characters.json`, `art-factory/move-packets-pass1.json`, `art-factory/PIPELINE_LOCK.json`, `.github/workflows/art-factory.yml`, `tools/clip-bake/bake_factory.py`); `scripts/verify_lock.py` fails a run that contains any of them:
+
+| Disallowed | Why |
+|---|---|
+| a `#00FF00` green screen, or an `ffmpeg chromakey` | the matte is neural video matting of the winning seed only |
+| multi-keyframe pose stitching (`A->B->C->A`) | one start frame, one clip |
+| `Veo 3.1 Lite` | not the benchmark route |
+| `start.png == end.png` on combat moves | a combat clip starts from the start frame and is free to end where it ends |
+| `1.5x` playback stretch, or any playback multiplier other than 1.0 | native speed only |
+| the strings `"4 heads tall"`, `"gouache"`, `"bobblehead"` and `"sprite"` | they pull the generator away from the Hero PNG style |
+
+Never weaken `art-factory/PIPELINE_LOCK.json` or the thresholds in `scripts/qa_gate_v2.py`. `scripts/verify_lock.py` is Step 1 of `.github/workflows/art-factory.yml` and aborts any run that changes the lock file or a threshold. A change to either is Tom's decision, in his words, in a conversation.

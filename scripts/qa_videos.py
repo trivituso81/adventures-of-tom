@@ -97,7 +97,7 @@ def grade_video(client, model, item, move_meta):
         imgs = [Image.open(p).convert("RGB") for p in frame_paths]
         props = move_meta.get("held_props", [])
         prompt_text = (
-            "You are an automated QA judge for 2D hand-painted JRPG battle sprite animations. "
+            "You are an automated QA judge for 2D hand-painted JRPG battle animations. "
             f"Character: {item.get('character_id')}. Move: {item.get('move_id')}. "
             f"Expected held props: {props}. "
             "Inspect these 3 frames (start, middle, end) and return ONLY valid JSON with keys: "

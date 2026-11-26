@@ -17,31 +17,31 @@ BATTLE_STATES = ("dodge", "cast", "hit", "ko")
 
 BATTLE_STATE_PROMPTS = {
     "dodge": (
-        "Deadpan 2D hand-painted storybook JRPG battle sprite animation on solid #808080 mid-grey studio background. "
+        "Deadpan hand-drawn colored-pencil storybook battle animation with fine dark-brown ink contours on a solid #808080 mid-grey studio background. "
         "The character performs a crisp, nimble sidestep and lean-back dodge, briefly evading an incoming attack, "
         "then settles smoothly back into their exact starting neutral battle stance. "
-        "Keep exact character proportions, outfit, props, bold dark ink outlines, and flat #808080 background. "
+        "Keep exact character proportions, outfit, props, fine dark-brown ink contours, colored-pencil hatching, and flat #808080 background. "
         "No camera movement, no text, no extra characters."
     ),
     "cast": (
-        "Deadpan 2D hand-painted storybook JRPG battle sprite animation on solid #808080 mid-grey studio background. "
+        "Deadpan hand-drawn colored-pencil storybook battle animation with fine dark-brown ink contours on a solid #808080 mid-grey studio background. "
         "The character raises a hand or signature prop in a focused, poised channel pose as subtle golden-white energy gathers briefly around them, "
         "then returns cleanly to their exact starting neutral battle stance. "
-        "Keep exact character proportions, outfit, props, bold dark ink outlines, and flat #808080 background. "
+        "Keep exact character proportions, outfit, props, fine dark-brown ink contours, colored-pencil hatching, and flat #808080 background. "
         "No camera movement, no text, no extra characters."
     ),
     "hit": (
-        "Deadpan 2D hand-painted storybook JRPG battle sprite animation on solid #808080 mid-grey studio background. "
+        "Deadpan hand-drawn colored-pencil storybook battle animation with fine dark-brown ink contours on a solid #808080 mid-grey studio background. "
         "The character recoils backward with a sharp, comedic wince and braced shoulders as if struck by an impact, "
         "then recovers steadily back into their exact starting neutral battle stance. "
-        "Keep exact character proportions, outfit, props, bold dark ink outlines, and flat #808080 background. "
+        "Keep exact character proportions, outfit, props, fine dark-brown ink contours, colored-pencil hatching, and flat #808080 background. "
         "No camera movement, no text, no extra characters."
     ),
     "ko": (
-        "Deadpan 2D hand-painted storybook JRPG battle sprite animation on solid #808080 mid-grey studio background. "
+        "Deadpan hand-drawn colored-pencil storybook battle animation with fine dark-brown ink contours on a solid #808080 mid-grey studio background. "
         "The character slumps downward dramatically in comical exhaustion and sits or lies dazed on the ground with drooped shoulders, "
         "staying down at the end of the clip. "
-        "Keep exact character proportions, outfit, props, bold dark ink outlines, and flat #808080 background. "
+        "Keep exact character proportions, outfit, props, fine dark-brown ink contours, colored-pencil hatching, and flat #808080 background. "
         "No blood, no gore, no camera movement, no text, no extra characters."
     ),
 }
@@ -87,13 +87,13 @@ def build_ref_contents(prompt, char, cfg):
     tom_p = Path(cfg["tom_hero_path"])
     char_p = Path(cfg["refs_dir"]) / f"{char['id']}.png"
     if style_p.exists():
-        contents.append("GAME STYLE REFERENCE (replicate this EXACT hand-painted art style: bold dark ink contour lines, chunky brushed shading in clear tones, warm golden top-left light, rich saturated colors, large gentle simplified eyes, and ~4-heads-tall storybook proportions. Ignore its magenta background; use flat #808080 mid-grey):")
+        contents.append("GAME STYLE REFERENCE (replicate this EXACT hand-drawn colored-pencil style: fine dark-brown ink contours, visible colored-pencil hatching and grain, warm highlights, about three heads tall proportions. Ignore its magenta background; use flat #808080 mid-grey):")
         contents.append(Image.open(style_p))
     if tom_p.exists() and (not style_p.exists() or tom_p.read_bytes() != style_p.read_bytes()):
-        contents.append("PROPORTION ANCHOR CHARACTER (match head scale and painted finish; do NOT copy face, hair, clothes, or background color):")
+        contents.append("PROPORTION ANCHOR CHARACTER (match head scale and drawn finish; do NOT copy face, hair, clothes, or background color):")
         contents.append(Image.open(tom_p))
     if char_p.exists():
-        contents.append("SUBJECT PHOTO OF THE PERSON TO PAINT (extract only facial likeness, hair, and age; translate into the exact bold-outline chunky painted style above, and follow the specified outfit):")
+        contents.append("SUBJECT PHOTO OF THE PERSON TO PAINT (extract only facial likeness, hair, and age; translate into the exact fine-ink colored-pencil style above, and follow the specified outfit):")
         contents.append(Image.open(char_p))
     contents.append(prompt)
     return contents
@@ -214,7 +214,7 @@ def generate_video_item(stage, char, cfg, move_id, feedback, hero_src):
         prompt = build_prompt(stage, char, cfg, move_id=move_id, feedback=feedback)
         print(f"[video:{char['id']}] calling {cfg['models']['video_idle']} (4s, audio off)", flush=True)
         try:
-            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "negative_prompt": IDLE_NEG, "start_image_url": img_url, "end_image_url": img_url, "duration": "4", "generate_audio": False})
+            res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "negative_prompt": IDLE_NEG, "start_image_url": img_url, "end_image_url": img_url, "duration": "4", "generate_audio": False})  # lock-allow: idle
         except Exception as e1:
             print(f"[video:{char['id']}] kling start/end retry: {e1}", flush=True)
             res = fal_client.subscribe(cfg["models"]["video_idle"], arguments={"prompt": prompt, "negative_prompt": IDLE_NEG, "start_image_url": img_url, "duration": "4", "generate_audio": False})

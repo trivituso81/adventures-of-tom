@@ -1,0 +1,8 @@
+{
+  "default_bg_hex": "#808080",
+  "grey_prop_bg_hex": "#5B6E8C",
+  "seeds_per_move": 3,
+  "raw_duration_sec": 5.0,
+  "playback_speed": 1.0,
+  "active_spend_cap_usd": 5.00
+}

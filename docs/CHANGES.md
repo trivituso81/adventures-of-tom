@@ -1,3 +1,17 @@
+## justinbb9a (2026-11-25): Battle animation pipeline lock, Hero-style prompts on #808080, gate v2, and the Battle Lab review extras
+
+Card c-justinbb9. Tom replaced the green-screen plan with the Board order: Hero PNGs in `art-factory/refs/` are the only style authority, no green screen or chromakey, native 1.0x playback, three seeds per model, a $5.00 hard cap.
+
+Lock: `CLAUDE.md` section Battle Animation Pipeline Lock, `art-factory/PIPELINE_LOCK.json`, `scripts/verify_lock.py` (Step 1 of every `art-factory.yml` job; it fails on a disallowed string, a changed lock or a weaker threshold).
+
+Prompts: `characters.json`, `move-packets-pass1.json` and `scripts/art_director_agent.py` use the fine-ink colored-pencil style on `#808080` (`#5B6E8C` for grey or silver props). Justin's packet is the Kettlebell Rule version: prop held on frame 0, no walking, locked 3/4-left, three beats.
+
+Gate: `scripts/qa_gate_v2.py` (Stage A measured, Stage B full-resolution vision with six booleans), `scripts/auto_trim.py` (hard cut, no crossfade), `scripts/matte_winner.py` (matte only the winner, alpha clamp, webm and hvc1 mp4, 8-frame checkerboard), `scripts/benchmark_run.py` (spend ledger under the cap).
+
+Battle Lab: PASS-1 DRAFT REVIEW plays at 1.0x with approach and return slides, hit-stop, screen shake and code-drawn impact effects (`engine/pass1-vfx.js`, `data/pass1-meta.js` from `tools/clip-bake/pass1_meta.py`). Not done: a painted Hero or idle still in Justin's resting slot, because the no-painted-poses-in-battle rule forbids it; his idle will be a video.
+
+Tests: `python3 tools/benchmark_run_test.py`, `python3 tools/pass1_review_test.py`, `python3 scripts/verify_lock.py`.
+
 ## justinpoc1a (2026-11-25): Justin's Stud-Finder Beep & Knock gets stricter draft rules, a two-stage QA gate and one 480p proof run
 
 Card c-justinpoc1. Tom: fix the `battle_move_draft` prompt so the move reads at battle size, make cutout cleanliness alone never pass a clip, and run ONLY `pf-justin-bb-basic` at 480p with at most one retry (2 renders), no batch, the other 6 Pass-1 clips untouched.

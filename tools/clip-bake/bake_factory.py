@@ -23,16 +23,16 @@ FIG = json.load(open(os.path.join(ROOT, 'tools', 'guidegen', 'figrows.json')))
 FIG['tom'] = 99.3                                   # the number Tom's baked Wan clips use (wangen-jobs.json)
 # packet id: (owner, kit file id, kit move id, shape, playback speed)
 PREVIEW = {
-    'grace-sc-cap':    ('grace', 'grace', 'colossal_diamond_gold_dumpling', 'give', 1.25),
-    'tnb-cer-s1':      ('tnb', 'tnb', 'center_the_bowl', 'give', 1.5),
-    'tnb-cer-cap':     ('tnb', 'tnb', 'grand_amphora_masterpiece', 'cast', 1.25),
-    'amy-fq-basic':    ('amy', 'amy', 'kettlebell_swing', 'strike', 1.5),
-    'amy-fq-s1':       ('amy', 'amy', 'burpee_blitz', 'strike', 1.5),
-    'justin-bb-basic': ('justin', 'justin', 'stud_finder_beep_and_knock', 'strike', 1.5),
-    'deedee-nf-cap':   ('deedee', 'deedee', 'fifty_year_dust_tsunami', 'cast', 1.25),
+    'grace-sc-cap':    ('grace', 'grace', 'colossal_diamond_gold_dumpling', 'give', 1.0),
+    'tnb-cer-s1':      ('tnb', 'tnb', 'center_the_bowl', 'give', 1.0),
+    'tnb-cer-cap':     ('tnb', 'tnb', 'grand_amphora_masterpiece', 'cast', 1.0),
+    'amy-fq-basic':    ('amy', 'amy', 'kettlebell_swing', 'strike', 1.0),
+    'amy-fq-s1':       ('amy', 'amy', 'burpee_blitz', 'strike', 1.0),
+    'justin-bb-basic': ('justin', 'justin', 'stud_finder_beep_and_knock', 'strike', 1.0),
+    'deedee-nf-cap':   ('deedee', 'deedee', 'fifty_year_dust_tsunami', 'cast', 1.0),
 }
 STEP = 3
-SLOW = float(os.environ.get('PASS1_DURATION_MULT') or 1.5)    # pass1slow1 (Tom 2026-11-25): every preview plays 1.5 times longer than its speed above
+SLOW = float(os.environ.get('PASS1_DURATION_MULT') or 1.0)    # native speed (pipeline lock): previews play at 1.0, no stretch
 
 
 def clip_id(packet):

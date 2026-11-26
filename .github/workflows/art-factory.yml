@@ -1,11 +1,12 @@
 name: AoT Art Factory
-run-name: "${{ github.event_name == 'push' && 'AoT Art Factory: single clip (push trigger)' || format('AoT Art Factory: {0} / {1}{2}', inputs.stage, inputs.character_id, inputs.move_id != '' && format(' / {0}', inputs.move_id) || '') }}"
+run-name: "${{ github.event_name == 'push' && 'AoT Art Factory: push trigger (single clip or benchmark)' || format('AoT Art Factory: {0} / {1}{2}', inputs.stage, inputs.character_id, inputs.move_id != '' && format(' / {0}', inputs.move_id) || '') }}"
 
 on:
   push:
     branches: [main]
     paths:
       - art-factory/single-clip-trigger.json
+      - art-factory/benchmark-trigger.json
   workflow_dispatch:
     inputs:
       stage:
@@ -52,19 +53,22 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: aot-art-factory
-  cancel-in-progress: false
-
 jobs:
   generate:
     runs-on: ubuntu-latest
+    concurrency:
+      group: aot-art-factory
+      cancel-in-progress: false
     if: ${{ github.event_name == 'workflow_dispatch' && inputs.stage != 'encode_alpha' }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Step 1, verify the pipeline lock
+        run: python3 scripts/verify_lock.py
       - name: Install pipeline dependencies
         run: pip install --quiet google-genai fal-client pillow mediapipe opencv-python-headless numpy requests scipy
       - name: Run Art Factory stage
@@ -156,12 +160,19 @@ jobs:
   single_clip:
     # Push to art-factory/single-clip-trigger.json: ONE 480p clip (the move_ids in that file), max 2 renders, Python only.
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' }}
+    concurrency:
+      group: aot-art-factory
+      cancel-in-progress: false
+    if: ${{ github.event_name == 'push' && (contains(github.event.head_commit.modified, 'art-factory/single-clip-trigger.json') || contains(github.event.head_commit.added, 'art-factory/single-clip-trigger.json')) }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Step 1, verify the pipeline lock
+        run: python3 scripts/verify_lock.py
       - name: Install ffmpeg (with libvpx for the alpha video)
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - name: Install pipeline dependencies
@@ -186,3 +197,48 @@ jobs:
       - name: Fail the job when the clip did not pass the gate
         if: ${{ steps.run.outcome == 'failure' }}
         run: echo "Gate failed after the allowed renders (see art-factory/qa-single-clip-*.json)" && exit 1
+
+  benchmark:
+    # Push to art-factory/benchmark-trigger.json: Phase 1 benchmark, 3 Wan 3.0 seeds and 3 Kling v3 Pro seeds, hard cap in PIPELINE_LOCK.json.
+    # macOS so the Safari hvc1 .mp4 can be encoded; only the winning seed is matted.
+    runs-on: macos-latest
+    timeout-minutes: 90
+    concurrency:
+      group: aot-art-factory
+      cancel-in-progress: false
+    if: ${{ github.event_name == 'push' && (contains(github.event.head_commit.modified, 'art-factory/benchmark-trigger.json') || contains(github.event.head_commit.added, 'art-factory/benchmark-trigger.json')) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Step 1, verify the pipeline lock
+        run: python3 scripts/verify_lock.py
+      - name: Install ffmpeg
+        run: brew install ffmpeg
+      - name: Install pipeline dependencies
+        run: pip install --quiet google-genai fal-client pillow opencv-python-headless numpy requests scipy
+      - name: Benchmark, gate, matte the winner, bake
+        id: run
+        continue-on-error: true
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          FAL_KEY: ${{ secrets.FAL_KEY }}
+          COSTS_LOG_REPO: ${{ github.workspace }}   # costs2: tools/costlog.py writes this run's spend to data/costs.json
+        run: python3 scripts/benchmark_run.py
+      - name: Commit results to main
+        if: always()
+        run: |
+          git config user.name "aot-art-factory[bot]"
+          git config user.email "aot-art-factory@users.noreply.github.com"
+          git add art-factory data/clips art/clips index.html data/costs.json data/pass1-meta.js
+          if ! git diff --cached --quiet; then
+            git commit -m "art-factory: benchmark $(python3 -c 'import json;print(json.load(open("art-factory/benchmark-trigger.json"))["run_id"])') (outcome ${{ steps.run.outcome }})"
+            git pull --rebase -X theirs origin main
+            git push origin main
+          fi
+      - name: Fail the job when no seed passed
+        if: ${{ steps.run.outcome == 'failure' }}
+        run: echo "Benchmark ended with a blocker (see art-factory/benchmark/*/BLOCKER_REPORT.md)" && exit 1
