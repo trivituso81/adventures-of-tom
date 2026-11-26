@@ -3498,8 +3498,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:02:15Z",
-   "state": "checking",
-   "since": "2026-11-26T09:28:39Z",
+   "state": "done",
+   "since": "2026-11-26T09:35:49Z",
    "run": 45790862688,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -3512,7 +3512,29 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-tom-dodge/t2.js",
+    "img": "takes/body-tom-dodge/t2.webp",
+    "frames": 55,
+    "kb": 977,
+    "words": "0 to 108 step 2",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "dodge_forward: the body goes forward 7% of the height (should go back or to the side)",
+      "vision d_back: Crouches in place with forward lean and no clear backward or sideways movement.; Mostly static poses with crouching; no clear backward or sideways evasion movement."
+     ],
+     "faults": [
+      "d_back",
+      "dodge_forward"
+     ],
+     "vision_ran": true,
+     "spent": 0.0075,
+     "error": null,
+     "words": "The clip gate flags this take: dodge_forward: the body goes forward 7% of the height (should go back or to the side); vision d_back: Crouches in place with forward lean and no clear backward or sideways movement.; Mostly static poses with crouching; no clear backward or sideways evasion movement.."
+    },
+    "n": 2
+   },
    "use": null,
    "left": false,
    "dry": false,
