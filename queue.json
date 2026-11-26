@@ -220,12 +220,11 @@
     "n": 2
    },
    "use": {
-    "state": "applying",
+    "state": "live",
     "at": "2026-11-26T09:35:43Z",
-    "since": "2026-11-26T09:35:43Z",
-    "build": "",
-    "why": "",
-    "run": 45793298334
+    "since": "2026-11-26T09:46:53Z",
+    "build": "guideuse-45793298334",
+    "why": ""
    },
    "left": false,
    "dry": false,
