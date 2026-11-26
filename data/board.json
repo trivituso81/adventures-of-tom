@@ -8655,20 +8655,24 @@
    "title": "Install Rose's new walk, feelings, talking, listen frames",
    "theme": "Characters",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "In progress: baking Rose's new walking (v3), feelings (v4), talking (v3) and listening (v2) sheets, the same way as Tom's.",
    "blocks": [],
    "changed": "2026-11-26",
    "created": "2026-11-26",
    "tag": "roseframes",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
     "opening": "\"impelement all the new approved rose frames\""
    },
    "history": [
     {
      "d": "2026-11-26",
      "t": "Made by the session: Tom's words: \"impelement all the new approved rose frames. i approve full repo access\"."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "after": "t-roseframesplay",
@@ -8832,6 +8836,16 @@
    "cards": [
     "c-wanstop-rose-citadel-r1",
     "t-rosestage-lab"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
+   "title": "Install Rose's new walk, feelings, talking, listen frames",
+   "first": "2026-11-26T11:07:14-08:00",
+   "last": "2026-11-26T11:07:14-08:00",
+   "tags": [],
+   "cards": [
+    "c-roseframes"
    ]
   },
   {
@@ -15421,8 +15435,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "62b35b3708bd5bac459657aca27e2c8edb17f58f",
- "synced_at": "2026-11-26T18:08:15+00:00",
+ "synced": "5cbe1572c058eec03f3bfed05af3669b08507239",
+ "synced_at": "2026-11-26T19:08:04+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
