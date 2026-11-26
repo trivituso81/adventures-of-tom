@@ -2164,8 +2164,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T08:19:40Z",
-   "state": "checking",
-   "since": "2026-11-26T08:40:02Z",
+   "state": "done",
+   "since": "2026-11-26T08:42:08Z",
    "run": 45782279434,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -2178,7 +2178,33 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-tnb-ko/t3.js",
+    "img": "takes/body-tnb-ko/t3.webp",
+    "frames": 75,
+    "kb": 1622,
+    "words": "0 to 148 step 2, 1.5x",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "edge: 39 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)",
+      "ko_forward: ends 3% of the height in front of where it stood (falls forward, should fall backwards)",
+      "vision k_dizzy: Face shows sad or concerned expressions but no dizzy, swirly, or crossed eyes.; No dizzy or woozy facial expressions before falling; only subtle concern.",
+      "vision k_back: Figure sits then lies on its side, not falling backwards onto its back.; Figure ends sitting/lying sideways, not fully on back with head to right."
+     ],
+     "faults": [
+      "edge",
+      "k_back",
+      "k_dizzy",
+      "ko_forward"
+     ],
+     "vision_ran": true,
+     "spent": 0.0074,
+     "error": null,
+     "words": "The clip gate flags this take: edge: 39 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground); ko_forward: ends 3% of the height in front of where it stood (falls forward, should fall backwards); vision k_dizzy: Face shows sad or concerned expressions but no dizzy, swirly, or crossed eyes.; No dizzy or woozy facial expressions before falling; only subtle concern.; vision k_back: Figure sits then lies on its side, not falling backwards onto its back.; Figure ends sitting/lying sideways, not fully on back with head to right.."
+    },
+    "n": 3
+   },
    "use": null,
    "left": false,
    "dry": false,
