@@ -1,3 +1,7 @@
+## movelab2 (2026-11-26): The Move Lab has a person picker, Tom and Rose
+
+Card c-movelab-rose. Not seen on the phone yet. ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB now has TOM and ROSE buttons at the top of the panel; picking one restarts the fight with that person's Vibes at top Rank and lists their staged moves from `data/b3-stage.js`. Keep, Tweak and Replace work for either (a card names the person, `move.owner`; Keep lands on `t-movestage-lab` for Tom and `t-rosestage-lab` for Rose). Rose's button stays greyed with "(not staged yet)" until `c-rosestage` writes her rows. The Lab row is now named MOVE LAB (was MOVE LAB: TOM). Tested in `tools/movestage_lab_test.py` (M0 to M4: one stand-in row for Rose, portrait and landscape frames `tools/shots/movestage-lab-rose-*.png`); all of it passes.
+
 ## guideuse-45793298334 (2026-11-26): Idle (standing and breathing) (tnb), Guard (tnb), Getting hit (tnb), Idle (standing and breathing) (amy) now plays a video chosen in the Battle Guide
 
 Card c-guidegen, batched by c-guideflow-7. USE THIS ONE in the Battle Guide (the `use` of a row in queue.json, Action guide-apply). Not seen on the phone yet.
