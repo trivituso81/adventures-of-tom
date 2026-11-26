@@ -1,3 +1,7 @@
+## justinbb9b (2026-11-25): the benchmark trigger now finds its file with git, so the benchmark job starts
+
+Card c-justinbb9. The first push of the trigger was skipped: the job condition on `head_commit.added` never matched. A `detect` job now lists the files of the push (`git diff HEAD~1 HEAD`) and the single clip and benchmark jobs wait on it. Run id is now `bench-justinbb9-2`; the skipped run spent nothing.
+
 ## justinbb9 (2026-11-25): Phase 1 benchmark started: Wan 3.0 and Kling v3 Pro, 3 seeds each, $5.00 cap
 
 Card c-justinbb9. A push of `art-factory/benchmark-trigger.json` starts the `benchmark` job in `art-factory.yml` (`scripts/benchmark_run.py`): one Gate-1 start frame on #808080, 6 seeds, `qa_gate_v2` on every raw video, only the winner matted. Results are committed to `art-factory/benchmark/<run_id>/` (scorecard.json, alpha_checkerboard_8.png, or BLOCKER_REPORT.md).
