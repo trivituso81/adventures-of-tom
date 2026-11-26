@@ -1204,6 +1204,37 @@ function keepPrompt(){
   $('gprompt').textContent=v;$('gres').innerHTML='<p class="hint" id="gkept">Kept. This is the prompt a new video of '+esc(a.name)+' will use.</p>';
   let e=$('gedited');if(!e){e=document.createElement('p');e.className='hint';e.id='gedited';$('gprompt').after(e);}e.textContent='You changed this prompt here ('+GW[a.id].at.slice(0,10)+'). The version above is the one a new video would use.';
 }
+// Edit the prompt by hand (guideedit1): the box is filled with the prompt a new video would use; Save keeps it in this browser like Keep this prompt does.
+const PROMPT_WARN=[/\b16-bit\b/i,/\b32-bit\b/i,/\bSNES\b/i,/pixel art/i,/\bsprite\b/i,/gouache/i,/bobblehead/i,/4 heads tall/i,/green screen|#00FF00/i,/Final Fantasy|Chrono Trigger/i];
+function editPrompt(){
+  const a=PL.a;if(!a||!G(a))return;const box=$('gedbox');
+  if($('gedtext')){box.innerHTML='';return;}   // a second tap closes the box
+  box.innerHTML='<textarea id="gedtext" class="big" spellcheck="true">'+esc(workPrompt(a))+'</textarea><p class="err" id="gedwarn" style="font-size:14px;margin:6px 0"></p>'
+    +'<div class="row2"><button type="button" class="gold" id="gedsave">Save prompt</button><button type="button" id="gedcancel">Cancel</button></div>'
+    +'<p class="hint">Edit the words, then Save. Nothing is made until you tap Make this video. Keep the labelled parts (WHAT THIS IS, CAMERA AND BACKGROUND, MOTION) and change only what you mean to.</p>';
+  $('gedtext').focus();
+}
+function savePromptEdit(){
+  const a=PL.a,t=$('gedtext');if(!a||!t)return;const v=String(t.value||'').trim();
+  if(!v){$('gedwarn').textContent='The prompt cannot be empty. Tap Cancel to keep the old one.';return;}
+  const cur=workPrompt(a),orig=(G(a)||{}).prompt||'';
+  const hit=PROMPT_WARN.filter(r=>r.test(v)&&!r.test(cur)).map(r=>(v.match(r)||[''])[0]);   // only words this edit adds (the approved prompts already say "sprite")
+  if(v===cur){$('gedbox').innerHTML='';return;}
+  if(hit.length&&$('gedwarn').dataset.ok!==v){$('gedwarn').dataset.ok=v;$('gedwarn').textContent='These words pull the generator toward the wrong look: '+hit.join(', ')+'. Tap Save prompt again to keep them anyway.';return;}
+  const old=GW[a.id]||{};
+  if(v===orig){delete old.prompt;delete old.at;delete old.from;if(old.note)GW[a.id]=old;else delete GW[a.id];}
+  else GW[a.id]=Object.assign(old,{prompt:v,at:new Date().toISOString(),from:'hand'});
+  saveGW();$('gedbox').innerHTML='';repaintPrompt(a);
+}
+function resetPromptEdit(){
+  const a=PL.a;if(!a||!GW[a.id])return;const old=GW[a.id];delete old.prompt;delete old.at;delete old.from;
+  if(old.note)GW[a.id]=old;else delete GW[a.id];saveGW();repaintPrompt(a);
+}
+function repaintPrompt(a){   // show the prompt a new video would use, with the line that says it was changed and the Reset button
+  const w=GW[a.id],wp=w&&w.prompt;$('gprompt').textContent=wp||(G(a)||{}).prompt||'';
+  let e=$('gedited');if(wp){if(!e){e=document.createElement('p');e.className='hint';e.id='gedited';$('gprompt').after(e);}e.textContent='You changed this prompt here ('+w.at.slice(0,10)+'). The version above is the one a new video would use.';}else if(e)e.remove();
+  const r=$('gedreset');if(wp&&!r){const b=document.createElement('button');b.type='button';b.id='gedreset';b.textContent='Reset to original';$('gedit').after(b);}else if(!wp&&r)r.remove();
+}
 // ---------- making a video, comparing it, using it (guidegen1) ----------
 // Every tap is a request committed to the repo; an Action does the work with the repo's secrets and keeps the take on the branch guidegen.
 const genWords=g=>g.route==='wan'?'Wan 3.0, 5 seconds at 720p':'xAI Grok lite, 3 seconds at 480p';
@@ -1319,8 +1350,10 @@ function genBlock(a){
   if(g.waits==='staging')h+='<div class="cant" id="gstagewait"><b>Waits for staging.</b> '+esc(g.waitsWhy||'')+'</div>';   // movestage1: a family move with no staging row (data/b3-stage.js)
   if(!g.canMake&&!g.canStart&&g.missing)h+='<div class="cant" id="gcant"><b>Cannot be made yet.</b> '+esc(g.missing)+'</div>';
   const w=GW[a.id];
-  h+='<pre class="prompt" id="gprompt">'+esc(w?w.prompt:g.prompt)+'</pre>';
-  if(w)h+='<p class="hint" id="gedited">You changed this prompt here ('+esc(w.at.slice(0,10))+'). The version above is the one a new video would use.</p>';
+  const wp=w&&w.prompt;
+  h+='<pre class="prompt" id="gprompt">'+esc(wp||g.prompt)+'</pre>';
+  if(wp)h+='<p class="hint" id="gedited">You changed this prompt here ('+esc(w.at.slice(0,10))+'). The version above is the one a new video would use.</p>';
+  h+='<div class="row2" id="gedrow"><button type="button" id="gedit">Edit this prompt</button>'+(wp?'<button type="button" id="gedreset">Reset to original</button>':'')+'</div><div id="gedbox"></div>';
   if(!g.waits){   // the note box shows even when it cannot be made yet: the prompt can still be worked on (not while a move waits for staging: its old draft is never used)
     const tok=!!(lsGet(TOKEN)||Q.get('gh'));
     h+='<h3>'+(g.video?'What should change':'Anything to add')+'</h3>'
@@ -1541,6 +1574,10 @@ document.addEventListener('click',e=>{
   if(t.id==='gupd'){updatePrompt();return;}
   if(t.id==='gask'){const v=cleanWords(($('gans')||{}).value);if(v&&GASK)updatePrompt(GASK.note+' (Your question: '+GASK.q+' My answer: '+v+')');return;}
   if(t.id==='gkeep'){keepPrompt();return;}
+  if(t.id==='gedit'){editPrompt();return;}
+  if(t.id==='gedsave'){savePromptEdit();return;}
+  if(t.id==='gedcancel'){$('gedbox').innerHTML='';return;}
+  if(t.id==='gedreset'){resetPromptEdit();return;}
   if(t.id==='gdisc'){$('gres').innerHTML='';return;}
   if(t.id==='guse'){askUse();return;}
   if(t.id==='gusecan'){$('guseconf').innerHTML='';return;}

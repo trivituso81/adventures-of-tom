@@ -365,3 +365,7 @@ One row per manifest move. Hero and Start frame are the status of the picture th
 | `olivia-na-cap` (livnews_breaking_exclusive) LivNews Breaking Exclusive | approved: art-factory/refs/olivia.png is the visual authority | no start frame plan yet: the held-prop queue [Claude first] | draft failed the factory QA [Claude first] | 3: setpiece_michael_sprint_and_chopper, composure_break, status_debuff_badges | Length |
 
 <!-- manifest-crosswalk:end -->
+
+## Edit the prompt by hand (guideedit1, 2026-11-26)
+
+Tom (11-26): "in the battle guide i need the ability to edit the prompts for animations before i generate." Under each animation's Prompt, Edit this prompt opens a box with the prompt a new video would use. Save prompt keeps it in this browser (`aot-guide-work`, the same place Keep this prompt writes); every Make this video, Retry and Make all missing poses reads it through `workPrompt`, so the row saved to `queue.json` carries his words. Reset to original removes the change; saving the original text again does the same. Words that pull the generator toward the wrong look (16-bit, pixel art, sprite, gouache, green screen and the others in `PROMPT_WARN`) are warned about only when the edit adds them, and a second tap on Save keeps them. An empty prompt is refused. Test: the `guideedit1` checks in `tools/battle_guide_test.py`.
