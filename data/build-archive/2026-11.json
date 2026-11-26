@@ -291,7 +291,6 @@
 {"tag":"welcome1","at":"2026-11-01T01:31:32-04:00","what":"Shorter Choose how to play panel"},
 {"tag":"amyportrait1","at":"2026-11-01T01:21:29-04:00","what":"Amy's portrait cropped tighter"},
 {"tag":"olivia5","at":"2026-11-01T01:18:22-04:00","what":"CHANGES entry"},
-{"tag":"tomportrait1","at":"2026-11-01T01:18:05-04:00","what":"Painted Tom portrait","card":"c-tomportrait1","theme":"Characters"},
 {"tag":"olivia4","at":"2026-11-01T01:08:13-04:00","what":"Olivia's painted battle stances (bake, atlas, BATTLE_SPRITES.olivia, KO), not a party member yet"},
 {"tag":"tomposes1","at":"2026-11-01T01:05:06-04:00","what":"Tom's 24 custom battle poses, 13 new poses and the arrival stretch in the new painted style (nine 5-frame sheets)"},
 {"tag":"olivia15src","at":"2026-11-01T00:59:04-04:00","what":"Save Olivia LACHLAN, NO! ability sheet source (5 frames, hit frame 3); all 11 move sheets now in repo"},

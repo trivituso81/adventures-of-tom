@@ -6824,7 +6824,7 @@
    "theme": "Characters",
    "tag": "tomportrait1",
    "title": "Tom's new portrait for menus and turn order",
-   "next": "Crop Tom's face from his new painting (tom-hero-v3), bake portraits/tom.png, and check the status screen, turn order and Battle Guide show it.",
+   "next": "Shipped as build tomportrait1: Tom's face crop is baked from his new painting. Nothing more to do.",
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26",
@@ -6836,6 +6836,10 @@
     {
      "d": "2026-11-26",
      "t": "Made by Tom's request in this conversation: \"use this to crop tom's portrait for the menu and turn order etc.\""
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Built tomportrait1: cropped tom-hero-v3, rebaked portraits/tom.png, looked at the turn bar and party panel in portrait. Not seen on the phone yet."
     }
    ],
    "after": "nothing for Tom: end",

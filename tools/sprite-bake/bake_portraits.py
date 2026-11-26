@@ -35,7 +35,7 @@ EYE_AT = 0.52    # eye line, share of the square from the top
 # id: (left pupil x, right pupil x, eye line y, chin y) in source pixels (chin = bottom of beard).
 FACE = {
     # walkv2 (11-10): measured on the new hero paintings (art/raw/characters/<id>-hero-vN.png); 11-11: Tom hero-v2 and Boppy hero-v1 (new Paso Robles cap) re-measured.
-    'tom': (440, 572, 275, 445),
+    'tom': (445, 578, 270, 432),   # 11-26: measured on tom-hero-v3 (Tom's new Retro Guardian painting)
     'tnb': (428, 546, 248, 405),
     'grace': (438, 558, 276, 412),
     'rose': (478, 601, 311, 440),
