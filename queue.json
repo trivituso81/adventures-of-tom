@@ -2614,8 +2614,9 @@
       "say": "the figure is 97 percent of the picture height (at least 60)"
      }
     ],
-    "main": false,
-    "note": ""
+    "main": true,
+    "note": "",
+    "build": "guideuse-45787096926"
    },
    "use": null,
    "left": false,
