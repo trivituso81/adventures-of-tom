@@ -6977,13 +6977,17 @@
    "title": "Justin production clip: #00FF00 start, new Kling prompt",
    "next": "Session rolls Kling with Tom's new prompt from a fixed #00FF00 start.png, keys locally, checks 8 frames, and pushes preview.html only when all pass.",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukHG5RM8zrqSWjpjE8C",
     "opening": "UNCONSTRAINED PRODUCTION ORDER (REPO: trivituso81/adventures-of-tom)"
    },
    "history": [
     {
      "d": "2026-11-25",
      "t": "Tom: \"Remove the sandbox spend cap and produce ONE 100% production-grade transparent .webm for justin-bb-basic ... Loop and re-roll autonomously until EVERY QA gate passes.\" Attempt 8 inspected: fails Gate 1 (pastel green) and Gate 2 (turns, face smear, hammer overhead). Cap raised to a $60 runaway guard."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "blocks": [],
@@ -7009,6 +7013,16 @@
    "tags": [],
    "cards": [
     "c-justinpoc1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukHG5RM8zrqSWjpjE8C",
+   "title": "Justin production clip: #00FF00 start, new Kling prompt",
+   "first": "2026-11-25T16:11:08-08:00",
+   "last": "2026-11-25T16:11:08-08:00",
+   "tags": [],
+   "cards": [
+    "c-justinbb9"
    ]
   },
   {
@@ -13378,8 +13392,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "49ff3355a504d85f77a5ef0ab8c9fd9f8b53f3f6",
- "synced_at": "2026-11-26T00:04:53+00:00",
+ "synced": "b18427241046d9e41d40568eb95f1a6f05a0e632",
+ "synced_at": "2026-11-26T00:11:55+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
