@@ -1432,6 +1432,24 @@
    "source": "wan-gen run",
    "at": "2026-11-26T12:55:31Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45822234075"
+  },
+  {
+   "service": "fal",
+   "date": "2026-11-26",
+   "amount": 7.0,
+   "what": "wan-gen Action: stage-rose-cushion, stage-rose-lamby, stage-rose-backuplamby, stage-rose-comet, stage-rose-ripple, stage-rose-cushionwall, stage-rose-castle, stage-rose-whoopee, rose-tacklelunge, rose-lavahop, rose-d",
+   "source": "wan-gen run",
+   "at": "2026-11-26T13:17:56Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45823476031"
+  },
+  {
+   "service": "xai",
+   "date": "2026-11-26",
+   "amount": 0.057,
+   "what": "wan-gen bulk look checks: t-rosestage-lab",
+   "source": "wan-gen run",
+   "at": "2026-11-26T13:17:56Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45823476031"
   }
  ],
  "balances": [
