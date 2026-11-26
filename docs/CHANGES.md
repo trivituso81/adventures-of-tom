@@ -1,3 +1,12 @@
+## tomframes4 (2026-11-26): Tom's newer feelings, listening, thinking and the intro hug are in the game
+
+Card c-tomframes4. Tom's words: "now do Tom's newly approved frames, including hugging the girls in the intro". Not seen on the phone yet.
+- Sheets installed: `tom-emotions-v9` (8 feelings), `tom-listen-v2` (4 up strip, cell 1 hands clasped is `tk_listen`), `tom-think-v2` (a 2 x 2 sheet of four poses, its top right cell, chin on hand, is `tk_think`; `GRID_CELL` in `emotion_frames.py`) and `tom-grace-rose-greeting-hug-v3` for the intro hug. Not part of this card: `tom-hero-v4` (menus only) and `tom-greeting-crouch-v2` (the game plays the crouch cell of the hug sheet, it does not load that standalone picture).
+- Baked with `emotion_frames.py tom`, `talk_frames.py tom` (head x1.24), `bake_story_poses.py` (only Tom's sets `tomemo`, `tomtalk`, `hug` kept; other people's drift restored from main), `bake_emotion_faces.py`, `bake_talk_faces.py`, `bake_talkpose_faces.py`. Walk sheet and real height untouched.
+- Intro hug: the set `hug` now reads v3. v3 paints Tom's first three frames (hear, delight, crouch) facing the camera, so the mirror that v2 needed (`flip`) is gone. Tom's feet anchors for run, crash and group were re-measured (249, 170, 162 source px), so he stays on one spot through the hug. Looked at the baked atlas: all six frames, one scale, feet on one spot. The title menu covered the live scene in my browser run, so the real intro was not screenshotted.
+- Facing rows (`docs/pose-facing.tsv`): happy and loving now `f`, scared `l`, listen `l`; the rest unchanged.
+- Tests: `heights_test.py` and `pose_editor_test.py` pass; smoke has the two failures that already fail on main (board_sync_test board4, night manifest hidebf).
+
 ## graceframes (2026-11-26): Grace's new walking, feelings, talking, thinking and listening pictures are in the game
 
 Card c-graceframes. Tom's words: "now do grace". Not seen on the phone yet. Same install as `roseframes`.

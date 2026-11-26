@@ -1,9 +1,9 @@
 id	frame	lean
-tom	em_happy	r
-tom	em_loving	r
+tom	em_happy	f
+tom	em_loving	f
 tom	em_sad	f
 tom	em_angry	f
-tom	em_scared	r
+tom	em_scared	l
 tom	em_surprised	r
 tom	em_proud	r
 tom	em_unimpressed	r
@@ -609,7 +609,7 @@ olivia	tk_point	r
 olivia	tk_ask	f
 olivia	tk_answer	r
 olivia	tk_think	f
-tom	tk_listen	r
+tom	tk_listen	l
 grace	tk_listen	r
 rose	tk_listen	r
 deedee	tk_listen	f

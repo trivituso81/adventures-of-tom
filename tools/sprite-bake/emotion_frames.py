@@ -35,7 +35,11 @@ def sheet_label(cid, i):
 
 # roseframes (2026-11-26): the newest Rose listening picture is a 4 up strip painted in her new outfit. Cell 0 (hands clasped, listening) is tk_listen; cell 1 (chin on hand)
 # is the thinking pose, so tk_think is cut from the same strip (rose-think has no new picture of its own and the old one is the old yellow dress). Other cells are unused.
-STRIP_CELL = {'rose-listen': 0, 'rose-think': 1, 'grace-listen': 0, 'grace-think': 1}   # graceframes: Grace's listen-v2 is the same kind of strip
+STRIP_CELL = {'rose-listen': 0, 'rose-think': 1, 'grace-listen': 0, 'grace-think': 1, 'tom-listen': 0}   # graceframes: Grace's listen-v2 is the same kind of strip
+
+# tomframes4 (2026-11-26): Tom's newest listen picture (tom-listen-v2) is a 4 up strip (cell 0 hands clasped = tk_listen), and tom-think-v2 is a 2 x 2 sheet of four poses;
+# its top right cell (chin on hand) is tk_think. (column, row) of the cell, used only while the newest file is a 2 x 2 sheet (taller than wide).
+GRID_CELL = {'tom-think': (1, 0)}
 
 def _is_strip(sid):
     vs = sorted(glob.glob(os.path.join(RAW, f'{sid}-v*.png')), key=lambda p: int(re.search(r'-v(\d+)\.png$', p).group(1)))
@@ -50,6 +54,9 @@ def single_figure(sid):
     cell = STRIP_CELL.get(sid)
     if cell is not None and img.width > 1.3 * img.height:   # roseframes: Rose's (and Grace's) listen-v2 is a 4 up strip (listen, think, arms crossed, finger on lip), not one figure
         i = cell; img = img.crop((i * img.width // 4, 0, (i + 1) * img.width // 4, img.height))
+    gc = GRID_CELL.get(sid)
+    if gc is not None and img.height > 1.2 * img.width:   # tomframes4: a 2 x 2 sheet, cut the one cell
+        cw, ch = img.width // 2, img.height // 2; img = img.crop((gc[0] * cw, gc[1] * ch, (gc[0] + 1) * cw, (gc[1] + 1) * ch))
     a = np.array(img)
     ring = np.concatenate([a[0], a[-1], a[:, 0], a[:, -1]]).astype(float); bgc = np.median(ring, axis=0)
     if np.abs(bgc - np.array([255., 0., 255.])).max() > 40:   # the generator sometimes paints the key colour crimson (187,17,88) instead of #FF00FF: make the border-connected background pure magenta so the keyer sees it

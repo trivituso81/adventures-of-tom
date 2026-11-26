@@ -120,7 +120,7 @@ const S={
     update(dt){ while(this.i<list.length) { const s=list[this.i]; if(!this.started) { s.start(); this.started=true; } if(!s.update(dt)) return false; this.i++; this.started=false; } return true; }})
 };
 
-// The greeting (painted, data/story-poses.js set "hug", the approved Library sheet tom-grace-rose-greeting-hug v2): Tom hears the girls shout (hg_hear), lights up (hg_delight) and crouches with his arms open (hg_crouch, held while they run in);
+// The greeting (painted, data/story-poses.js set "hug", the approved Library sheet tom-grace-rose-greeting-hug v3): Tom hears the girls shout (hg_hear), lights up (hg_delight) and crouches with his arms open (hg_crouch, held while they run in);
 // then one painted group picture at Tom's tile replaces the three of them (hg_run, hg_crash, then hg_group, held under the greeting lines).
 // hugEndStep() brings the girls and Tom's walking figure back.
 function hugHearStep() {

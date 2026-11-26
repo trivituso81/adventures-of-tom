@@ -36,18 +36,15 @@ SETS = {
     # stays with its cell). Tom's body is 42 rows (his overworld stand), so the whole figure with Rose is 53.9 rows (727 px of the sit cell, of which Tom's body is 566).
     'tomride': {'member': 'tom', 'sheet': 'tomride-intro-v1.png', 'cut': (3, 2), 'k': 9, 'h': 53.9, 'ref': 'tr_sit',
                 'names': ['tr_kneel', 'tr_lift', 'tr_cheer', 'tr_laugh', 'tr_hopoff', 'tr_sit']},
-    # Greeting hug (hugv2, 2026-11-14, Tom: the approved sheet has everything): Tom's approved Library picture `tom-grace-rose-greeting-hug`, version 2
-    # (tom-grace-rose-greeting-hug-v2.png, 4 x 2 cells on magenta). Cells 1 to 3 are Tom alone (hear, delight, crouch with arms open), cells 4 to 6 are Tom with Grace and Rose
+    # Greeting hug (hugv2, 2026-11-14; v3 in tomframes4, 2026-11-26): Tom's approved Library picture `tom-grace-rose-greeting-hug`, version 3
+    # (tom-grace-rose-greeting-hug-v3.png, 4 x 2 cells on magenta). Cells 1 to 3 are Tom alone (hear, delight, crouch with arms open), cells 4 to 6 are Tom with Grace and Rose
     # (run in, crash, group hug). Cells 7 (squeeze) and 8 (looking up) are not played. Stored under member 'tom'. The figures overlap their cell edges, so they are cut by
-    # piece (cut_cells with merge distance 'dil' 4; the default 6 joins the crash and group frames), and the darkened ground between the feet is keyed with the looser
-    # hue test 'dark_cos' .88 (the default .985 leaves purple crumbs). One size factor: Tom's standing figure (cell 1) is his 42 overworld rows.
+    # piece (cut_cells with merge distance 'dil' 4), and the darkened ground between the feet is keyed with the looser hue test 'dark_cos' .88 (the default .985 leaves purple crumbs).
+    # One size factor: Tom's standing figure (cell 1) is his 42 overworld rows. v3 paints Tom's first three frames facing the camera (v2 faced screen-right and was mirrored), so no flip.
     # 'feet' = x of Tom's own feet in each group frame's cut picture, in source pixels (measured with a ruler on the cut frames), so he stays on one spot from frame 4 to 6.
-    'hug': {'member': 'tom', 'sheet': 'tom-grace-rose-greeting-hug-v2.png', 'ground': (255, 0, 255), 'dark_cos': .88, 'dil': 4, 'cut': (4, 2), 'k': 9, 'h': 42, 'ref': 'hg_hear',
+    'hug': {'member': 'tom', 'sheet': 'tom-grace-rose-greeting-hug-v3.png', 'ground': (255, 0, 255), 'dark_cos': .88, 'dil': 4, 'cut': (4, 2), 'k': 9, 'h': 42, 'ref': 'hg_hear',
             'names': ['hg_hear', 'hg_delight', 'hg_crouch', 'hg_run', 'hg_crash', 'hg_group'],
-            # hugface1 (Tom 16:47: "Tom is facing right instead of left before he hugs the girls"): the girls run in from the left, but v2 paints Tom's first three frames turned toward
-            # screen-right, so these three are mirrored (the only flip in this set; named to Tom). The group frames are as painted.
-            'flip': ['hg_hear', 'hg_delight', 'hg_crouch'],
-            'feet': {'hg_run': 267, 'hg_crash': 194, 'hg_group': 175}},
+            'feet': {'hg_run': 249, 'hg_crash': 170, 'hg_group': 162}},
 }
 
 # Emotion poses (emo7, 2026-11-06): the 8 full-body emotion frames of each character (art/emotions/<id>.webp strips, cut by emotion_frames.py), drawn on the

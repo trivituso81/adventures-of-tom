@@ -248,22 +248,22 @@
      "key": "em_happy",
      "label": "Tom, feeling happy",
      "img": "art/poses/tom/mood-em_happy.webp",
-     "w": 132,
-     "h": 417,
-     "ax": 60.5,
+     "w": 165,
+     "h": 511,
+     "ax": 68.5,
      "link": null,
-     "sheet": "tom-emotions-v8.png",
+     "sheet": "tom-emotions-v9.png",
      "marks": {
-      "top": 11.1,
-      "chin": 92.0,
-      "feet": 417
+      "top": 13.3,
+      "chin": 111.0,
+      "feet": 511
      },
      "conf": "low",
      "s0": 0.098328,
      "now": {
       "f": 1.0,
       "h": 1.0,
-      "anchor": 92.0
+      "anchor": 111.0
      }
     },
     "em_loving": {
@@ -271,22 +271,22 @@
      "key": "em_loving",
      "label": "Tom, feeling loving",
      "img": "art/poses/tom/mood-em_loving.webp",
-     "w": 153,
-     "h": 416,
-     "ax": 63.5,
+     "w": 198,
+     "h": 507,
+     "ax": 75.5,
      "link": null,
-     "sheet": "tom-emotions-v8.png",
+     "sheet": "tom-emotions-v9.png",
      "marks": {
-      "top": 11.3,
-      "chin": 94.0,
-      "feet": 416
+      "top": 15.0,
+      "chin": 125.0,
+      "feet": 507
      },
      "conf": "low",
      "s0": 0.098328,
      "now": {
       "f": 1.0,
       "h": 1.0,
-      "anchor": 94.0
+      "anchor": 125.0
      }
     },
     "em_sad": {
@@ -294,22 +294,22 @@
      "key": "em_sad",
      "label": "Tom, feeling sad",
      "img": "art/poses/tom/mood-em_sad.webp",
-     "w": 149,
-     "h": 408,
-     "ax": 69.5,
+     "w": 155,
+     "h": 497,
+     "ax": 76.0,
      "link": null,
-     "sheet": "tom-emotions-v8.png",
+     "sheet": "tom-emotions-v9.png",
      "marks": {
-      "top": 14.5,
-      "chin": 121.0,
-      "feet": 408
+      "top": 17.4,
+      "chin": 145.0,
+      "feet": 497
      },
      "conf": "low",
      "s0": 0.098328,
      "now": {
       "f": 1.0,
       "h": 1.0,
-      "anchor": 121.0
+      "anchor": 145.0
      }
     },
     "em_angry": {
@@ -317,15 +317,38 @@
      "key": "em_angry",
      "label": "Tom, feeling angry",
      "img": "art/poses/tom/mood-em_angry.webp",
-     "w": 227,
-     "h": 408,
-     "ax": 108.0,
+     "w": 272,
+     "h": 496,
+     "ax": 122.5,
      "link": null,
-     "sheet": "tom-emotions-v8.png",
+     "sheet": "tom-emotions-v9.png",
+     "marks": {
+      "top": 17.7,
+      "chin": 147.0,
+      "feet": 496
+     },
+     "conf": "low",
+     "s0": 0.098328,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 147.0
+     }
+    },
+    "em_scared": {
+     "set": "mood",
+     "key": "em_scared",
+     "label": "Tom, feeling scared",
+     "img": "art/poses/tom/mood-em_scared.webp",
+     "w": 215,
+     "h": 492,
+     "ax": 84.0,
+     "link": null,
+     "sheet": "tom-emotions-v9.png",
      "marks": {
       "top": 14.4,
       "chin": 120.0,
-      "feet": 408
+      "feet": 492
      },
      "conf": "low",
      "s0": 0.098328,
@@ -335,43 +358,43 @@
       "anchor": 120.0
      }
     },
-    "em_scared": {
+    "em_surprised": {
      "set": "mood",
-     "key": "em_scared",
-     "label": "Tom, feeling scared",
-     "img": "art/poses/tom/mood-em_scared.webp",
-     "w": 153,
-     "h": 397,
-     "ax": 72.5,
+     "key": "em_surprised",
+     "label": "Tom, feeling surprised",
+     "img": "art/poses/tom/mood-em_surprised.webp",
+     "w": 279,
+     "h": 512,
+     "ax": 131.0,
      "link": null,
-     "sheet": "tom-emotions-v8.png",
+     "sheet": "tom-emotions-v9.png",
      "marks": {
-      "top": 13.0,
-      "chin": 108.0,
-      "feet": 397
+      "top": 14.8,
+      "chin": 123.0,
+      "feet": 512
      },
      "conf": "low",
      "s0": 0.098328,
      "now": {
       "f": 1.0,
       "h": 1.0,
-      "anchor": 108.0
+      "anchor": 123.0
      }
     },
-    "em_surprised": {
+    "em_proud": {
      "set": "mood",
-     "key": "em_surprised",
-     "label": "Tom, feeling surprised",
-     "img": "art/poses/tom/mood-em_surprised.webp",
-     "w": 196,
-     "h": 420,
-     "ax": 94.2,
+     "key": "em_proud",
+     "label": "Tom, feeling proud",
+     "img": "art/poses/tom/mood-em_proud.webp",
+     "w": 281,
+     "h": 523,
+     "ax": 130.0,
      "link": null,
-     "sheet": "tom-emotions-v8.png",
+     "sheet": "tom-emotions-v9.png",
      "marks": {
       "top": 12.6,
       "chin": 105.0,
-      "feet": 420
+      "feet": 523
      },
      "conf": "low",
      "s0": 0.098328,
@@ -381,50 +404,27 @@
       "anchor": 105.0
      }
     },
-    "em_proud": {
-     "set": "mood",
-     "key": "em_proud",
-     "label": "Tom, feeling proud",
-     "img": "art/poses/tom/mood-em_proud.webp",
-     "w": 205,
-     "h": 421,
-     "ax": 92.5,
-     "link": null,
-     "sheet": "tom-emotions-v8.png",
-     "marks": {
-      "top": 11.4,
-      "chin": 95.0,
-      "feet": 421
-     },
-     "conf": "low",
-     "s0": 0.098328,
-     "now": {
-      "f": 1.0,
-      "h": 1.0,
-      "anchor": 95.0
-     }
-    },
     "em_unimpressed": {
      "set": "mood",
      "key": "em_unimpressed",
      "label": "Tom, feeling unimpressed",
      "img": "art/poses/tom/mood-em_unimpressed.webp",
-     "w": 167,
-     "h": 418,
-     "ax": 77.5,
+     "w": 218,
+     "h": 516,
+     "ax": 74.5,
      "link": null,
-     "sheet": "tom-emotions-v8.png",
+     "sheet": "tom-emotions-v9.png",
      "marks": {
-      "top": 12.3,
-      "chin": 102.0,
-      "feet": 418
+      "top": 15.1,
+      "chin": 126.0,
+      "feet": 516
      },
      "conf": "low",
      "s0": 0.098328,
      "now": {
       "f": 1.0,
       "h": 1.0,
-      "anchor": 102.0
+      "anchor": 126.0
      }
     },
     "tk_tell": {
