@@ -8406,6 +8406,38 @@
     "text": "Read CLAUDE.md (Pose Editor, Tom's painted frames are used as painted, One head multiplier, Real heights) and claude/next-addendum-listen1.md, then card c-tomframes in data/board.json. Your first push is the commit board: start c-tomframes. Tom uploaded new painted sheets for Tom on 2026-11-26: tom-walking-sheet-v4, tom-emotions-v8, tom-talk-v3, and tom-listen-v1 is approved. Install them for Tom only. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "done": "2026-11-26"
+  },
+  {
+   "id": "c-vfxlib3",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "vfxlib3",
+   "title": "Library set-pieces: the 22 setpiece_* effects",
+   "next": "Builds the 22 set-piece effects of the Stage 2C library (engine/vfx-library.js) in library order, wires them into P1_VFX, P1_VFX_MS, P1_VFX_SELF and P1_VFX_LEAD, marks them built, and tests them. After this, all 37 library effects are built; the next step is drawing effects in a real fight.",
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGgFC33g99gnexTkK9",
+    "opening": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done. Add a card for this task first"
+   },
+   "after": "nothing for Tom: end",
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Started: Tom asked for the next library effects. All 15 non-set-piece effects were already built, so Tom confirmed in the conversation: build all 22 set-pieces. Board: new card."
+    }
+   ],
+   "prompt": {
+    "what": "Draws the 22 Stage 2C library set-piece effects in code and tests them.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build whose steps are written in the task, tests catch mistakes)",
+    "effort": "high (22 drawn effects, engine wiring, test and manifest change)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then data/board.json and docs/BATTLE_GUIDE.md section What is done. Your first push is the commit \"board: start c-vfxlib3\". Build the 22 setpiece_* effects of art-factory/aot-stage2c-vfx-library-v11.json in library order in engine/vfx-library.js; add them to P1_VFX, P1_VFX_MS, P1_VFX_SELF and P1_VFX_LEAD; set buildStatus to built; add them to tools/guide_timing_test.py; run python3 -I tools/guidegen/manifest_crosswalk.py; update docs/BATTLE_GUIDE.md What is done and docs/CHANGES.md (vfxlib3). Look at a contact sheet in Chrome before pushing. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
