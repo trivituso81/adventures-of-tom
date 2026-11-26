@@ -1,6 +1,6 @@
 {
  "about": "videohist1: every battle video the wan-gen Action made (branch wangen), why it passed or was rejected, and whether it is in the game. Built by tools/videohist/build.py.",
- "built": "2026-11-26T08:23Z",
+ "built": "2026-11-26T09:05Z",
  "videos": [
   {
    "file": "deedee-cast-r3.mp4",
@@ -1578,11 +1578,11 @@
    "attempt": 1,
    "at": "2026-11-21T03:09:45.616760Z",
    "price": 0.5,
-   "verdict": "in_game",
+   "verdict": "unchecked",
    "reasons": [
     "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
    ],
-   "in_game": "rose-idle",
+   "in_game": null,
    "strip": "art/video-history/rose-idle-r1.webp",
    "pad": null,
    "model": "alibaba"
@@ -2370,11 +2370,11 @@
    "attempt": 1,
    "at": "2026-11-21T02:15:26.613180Z",
    "price": 0.5,
-   "verdict": "in_game",
+   "verdict": "unchecked",
    "reasons": [
     "Made before the automatic checks existed (or as a Battle Guide take). Claude checked it by eye; the job notes below say what was decided."
    ],
-   "in_game": "tom-guard",
+   "in_game": null,
    "strip": "art/video-history/tom-guard-r1.webp",
    "pad": null,
    "model": "alibaba"
