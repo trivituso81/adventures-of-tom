@@ -1,3 +1,14 @@
 {
- "requests": []
+ "requests": [
+  {
+   "id": "tom-grace-rose-greeting-hug",
+   "prompt": "Draw Tom (first attached picture), Grace (second) and Rose (third) as a greeting pose sheet. Grace is the older girl and Rose the little one; keep the size difference between all three exactly as in the pictures.\n\nCopy the attached pictures as exactly as possible in every frame: the same people, faces, hair, beard, clothes, shoes, colors, linework, painting style, level of detail and head size compared to the body. Only the poses change. Do not redesign anything.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells (8 frames, numbered left to right, top to bottom), the same scale in every cell, feet on the same ground line in every cell.\n\n1. Hearing them. Tom alone, standing, eyebrows raised, head lifted as if he just heard his name called.\n2. Delighted. Tom alone, a huge smile, arms starting to open.\n3. Crouching. Tom alone, crouched low, arms wide open.\n4. Girls running in. Tom crouched with arms open, Grace running in on one side and Rose on the other, both beaming.\n5. Crash hug. Both girls throw their arms around Tom at once.\n6. Group hug. The three of them in one tight hug, eyes closed, big smiles.\n7. Squeeze. The same hug, Rose's feet just off the ground.\n8. Looking up. A loose hug, all three looking at each other, laughing.\n\nBackground: one flat solid magenta #FF00FF filling the whole image. No magenta anywhere on the characters: pink shoes stay clearly pink. No grid lines, borders, numbers, labels, text, shadows, dust, motion lines, sparkles or glow effects. Nothing touches a cell edge. Family friendly.",
+   "refs": [
+    "art/raw/characters/tom-hero-v2.png",
+    "art/raw/characters/grace-hero-v1.png",
+    "art/raw/characters/rose-hero-v1.png"
+   ],
+   "at": 1795683389617
+  }
+ ]
 }
