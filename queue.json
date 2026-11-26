@@ -471,6 +471,35 @@
    "replay": "",
    "id": "v-body-tom-run-t1",
    "kind": "video"
+  },
+  "v-body-tom-cast-t1": {
+   "lane": "vid",
+   "anim": "body:tom:cast",
+   "who": "tom",
+   "take": 1,
+   "route": "wan",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: CASTING A SPELL\nFrom his starting relaxed stance, he cups both hands together in front of his chest and closes his eyes for a moment as if gathering a little magic, then sweeps both open hands forward to the left once and holds them out there, fingers spread, looking ahead with focus. Then he lowers his arms and returns to his starting relaxed stance.",
+   "promptRev": 3,
+   "start": "tom",
+   "note": "",
+   "cap": 1,
+   "at": "2026-11-26T07:57:45Z",
+   "state": "queued",
+   "since": "2026-11-26T07:57:45Z",
+   "run": 0,
+   "fal": null,
+   "tries": 0,
+   "cost": 0,
+   "why": "",
+   "do": "",
+   "result": null,
+   "use": null,
+   "left": false,
+   "dry": false,
+   "replay": "",
+   "id": "v-body-tom-cast-t1",
+   "kind": "video",
+   "pad": 0.65
   }
  }
 }
