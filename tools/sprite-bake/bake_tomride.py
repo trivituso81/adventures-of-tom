@@ -2,8 +2,9 @@
 """Bake Tom carrying Rose on his shoulders (seven painted pose sheets) into the game: painted atlases (webp) plus small quantized row strings.
 
 Input : art/raw/characters/tomride-poses-v2.png (4 x 3 painted cells, Tom's new outfit, 2026-11-06): idle, walk, run, hurt, kneel, defend, proud, celeb, leap
-        art/raw/characters/tomride-press-start-v1.png, tomride-toss-v1.png, tomride-walk-v1.png, tomride-combo-<name>-v1.png (six single pictures) (approved Library sheets, 2026-11-12)
-        tools/sprite-bake/src/tomride-s5-combo-v3.png (night-light frame only, until the tomride-night picture arrives), tomride-s7-hero-v3.png (hero)
+        art/raw/characters/tomride-press-start-v1.png, tomride-toss-v1.png, tomride-combo-<name>-v1.png (six single pictures) (approved Library sheets, 2026-11-12)
+        art/raw/characters/tomride-walk-v2.png (walk, 4 x 3) and tomride-night-v2.png (the Lamby night-light frame, one picture) (approved 2026-11-26, ridepics1)
+        tools/sprite-bake/src/tomride-s7-hero-v3.png (hero)
 Output: art/chars/tomride-battle.webp, tomride-rose.webp (Rose alone, after the toss), tomride-ow.webp, tomride-hero.webp (title)
         data/tomride-hires.js                                     (rows, palettes, outfit info, atlas rects; do not hand-edit)
 
@@ -25,15 +26,13 @@ SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
 OUT = os.path.join(ROOT, 'data/tomride-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-KB, KW = 2, int(os.environ.get("OW_K", "3"))   # painted resolution multiples: battle, overworld (OW_K env raises the overworld one)
+KB, KW = 3, int(os.environ.get("OW_K", "7"))   # painted resolution multiples: battle, overworld (the repo art is battle 3, overworld 7; ridepics1 matched the defaults to it so a rebake keeps the sharpness)
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--battle-h', type=int, default=140)   # idle height in grid rows: Tom's body is 100 of them (his own sheet), Rose adds the rest
 ap.add_argument('--ow-h', type=int, default=57)        # standing height of the overworld sprite in rows
-ap.add_argument('--combo-k', type=float, default=1.0)   # fine tune for the combo sheet size
 ap.add_argument('--colors', type=int, default=46)
 args = ap.parse_args()
-COMBO_K = args.combo_k
 os.makedirs(ART, exist_ok=True)
 
 poses = {}
@@ -42,25 +41,26 @@ def _load(fn, rows, pre):
 # The 12 painted cells of the new ride sheet, in reading order (kneel and lift are used by the chapter 1 story poses, bake_story_poses.py).
 NEW_NAMES = ['kneel', 'lift', 'cheer', 'laugh', 'hopoff', 'sit', 'wobble', 'tired', 'walk', 'run', 'defend', 'proud']
 for nm, im in _cut(os.path.join(ROOT, 'art/raw/characters/tomride-poses-v2.png'), 4, 3, NEW_NAMES).items(): poses['n_' + nm[2:]] = im
-# Approved Library sheets (Tom 2026-11-12, claude/next-addendum-tomride2.md): Press Start 4 x 1, toss 5 x 1, walk 4 x 3.
+# Approved Library sheets (Tom 2026-11-12, claude/next-addendum-tomride2.md): Press Start 4 x 1, toss 5 x 1; the walk 4 x 3 is v2 (ridepics1, 2026-11-26).
 for nm, im in _cut(os.path.join(ROOT, 'art/raw/characters/tomride-press-start-v1.png'), 4, 1, ['hold', 'annoyed', 'tw_windup', 'tw_follow']).items(): poses[nm] = im
 for nm, im in _cut(os.path.join(ROOT, 'art/raw/characters/tomride-toss-v1.png'), 5, 1, ['grab', 'rlift', 'toss', 'roseair', 'roseland']).items(): poses[nm] = im
 # Team-move poses came back from the generator as six single pictures (one figure each, flat magenta): hoist, biplane, biplane2 (banked), boop, cloud, phones.
 for k in ('hoist', 'biplane', 'biplane2', 'boop', 'cloud', 'phones'):
     poses['c_' + k] = _cut(os.path.join(ROOT, 'art/raw/characters/tomride-combo-%s-v1.png' % k), 1, 1, [k])['b_' + k]
-# The night-light frame is still the old sheet's (no new picture yet): tomride-night entry in the Art Library.
-poses['c_night'] = slice_sheet(os.path.join(SRC, 'tomride-s5-combo-v3.png'), [['hoist', 'biplane', 'biplane2', 'boop'], ['cloud', 'phones', 'night']])['night']
+# The night-light frame is Tom's approved picture `tomride-night` v2 (ridepics1, 2026-11-26): one figure, Tom's body about 1140 px like the other combo pictures.
+poses['c_night'] = _cut(os.path.join(ROOT, 'art/raw/characters/tomride-night-v2.png'), 1, 1, ['night'])['b_night']
 walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
-for nm, im in _cut(os.path.join(ROOT, 'art/raw/characters/tomride-walk-v1.png'), 4, 3, walk_names).items(): poses['w_' + nm[2:]] = im
+for nm, im in _cut(os.path.join(ROOT, 'art/raw/characters/tomride-walk-v2.png'), 4, 3, walk_names).items(): poses['w_' + nm[2:]] = im
 poses['hero'] = Image.open(os.path.join(SRC, 'tomride-s7-hero-v3.png')).convert('RGBA')
-# The generator drew these frames with Tom facing the right edge; the party faces left in battle and the walk's side frames face left (the game mirrors them for the other way).
-# They are mirrored once here (Tom 2026-11-12 install; named to him in the reply). Frames facing the viewer are used as painted.
-FACES_RIGHT = ['b_tw_windup', 'b_tw_follow', 'b_toss', 'b_roseair', 'c_hoist', 'c_boop', 'c_cloud', 'c_phones', 'w_left_stand', 'w_left_step1', 'w_left_stand2', 'w_left_step2']
+# The generator drew these frames with Tom facing the right edge; the party faces left in battle (the game mirrors them for the other way).
+# They are mirrored once here (Tom 2026-11-12 install; named to him in the reply). Frames facing the viewer are used as painted. Walk v2 paints its side frames facing
+# left already, so they are no longer mirrored (ridepics1); the night-light picture looks toward the right edge, so it is mirrored like the other combo pictures.
+FACES_RIGHT = ['b_tw_windup', 'b_tw_follow', 'b_toss', 'b_roseair', 'c_hoist', 'c_boop', 'c_cloud', 'c_phones', 'c_night']
 for k in FACES_RIGHT: poses[k] = poses[k].transpose(Image.FLIP_LEFT_RIGHT)
 # The new art already faces left (Rose looks toward the enemy), so no mirroring is needed (the old ROSE_FLIP table is gone).
-H0b, H0w = 689, poses['w_down_stand'].height   # 689 = the old idle frame's height in px: the kept old night-light frame is scaled from it
+H0w = poses['w_down_stand'].height
 # One scale for the new cells: Tom's body (top of head to soles) is about 366 px in them and 100 rows in battle, as for his own sheet.
-NEW_F = 100 * 2 / 366.0
+NEW_F = 100 * KB / 366.0   # ridepics1: was 100 * 2 (KB 2); the repo art is KB 3, which gives the grid the game reads (160 x 152) and a sharper picture
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):
@@ -127,7 +127,7 @@ def rows_of(frames, k, ncolors):
 def pack(frames, path):
     """Write all frames into one webp atlas. Returns {name: [x, y, w, h]}."""
     names = list(frames); w0, h0 = frames[names[0]].size
-    per = max(1, 2048 // w0)
+    per = max(1, 3072 // w0)   # ridepics1: the repo atlas is 6 frames wide (2880), as before
     nrows = -(-len(names) // per)
     atlas = Image.new('RGBA', (min(per, len(names)) * w0, nrows * h0), (0, 0, 0, 0))
     rects = {}
@@ -203,15 +203,12 @@ def fmt_rows(rows, indent='    '):
 # press start 670, toss 462, combo pictures 1140. The ride sheet itself is NEW_F (366).
 TOM_PX = {'b_hold': 670, 'b_annoyed': 670, 'b_tw_windup': 670, 'b_tw_follow': 670, 'b_grab': 462, 'b_rlift': 462, 'b_toss': 462}
 SHEET_K = {k: 366.0 / v for k, v in TOM_PX.items()}
-fb = args.battle_h * KB / H0b   # only the old night-light frame and Rose's alone frames below still use this
-fc = fb * H0b / poses['c_night'].height * COMBO_K
 battle_names = {'idle': 'n_sit', 'run1': 'n_walk', 'run2': 'n_run', 'hurt': 'n_wobble', 'kneel': 'n_tired', 'defend': 'n_defend',
                 'proud': 'n_proud', 'celeb': 'n_cheer', 'leap': 'n_hopoff', 'hold': 'b_hold', 'annoyed': 'b_annoyed',
                 'tw_windup': 'b_tw_windup', 'tw_follow': 'b_tw_follow', 'grab': 'b_grab', 'rlift': 'b_rlift', 'toss': 'b_toss',
                 'hoist': 'c_hoist', 'biplane': 'c_biplane', 'biplane2': 'c_biplane2', 'boop': 'c_boop', 'cloud': 'c_cloud',
                 'phones': 'c_phones', 'night': 'c_night'}
 def _f(v):
-    if v == 'c_night': return fc
     if v.startswith('c_'): return NEW_F * 366.0 / 1140
     if v.startswith('n_'): return NEW_F
     return NEW_F * SHEET_K[v]

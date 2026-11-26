@@ -33,8 +33,8 @@ SETS = {
               'names': ['sq_hide', 'sq_reveal', 'sq_raise', 'sq_show', 'sq_hug', 'sq_squeeze', 'sq_careful', 'sq_wave']},
     # Tom carrying Rose in the opening (introride1, 2026-11-13: Tom's approved Library picture `tomride-intro`, 3 x 2 cells, replaces the Nov 6 sheet tomride-poses-v2.png,
     # which stays only for the battle ride frames, bake_tomride.py). Stored under member 'tom'. Cut with _cut (a piece detached from its figure, Rose jumping in cell 5,
-    # stays with its cell). Tom's body is 42 rows (his overworld stand), so the whole figure with Rose is 53.9 rows (727 px of the sit cell, of which Tom's body is 566).
-    'tomride': {'member': 'tom', 'sheet': 'tomride-intro-v1.png', 'cut': (3, 2), 'k': 9, 'h': 53.9, 'ref': 'tr_sit',
+    # stays with its cell). Tom's body is 42 rows (his overworld stand), so the whole figure with Rose is 55.0 rows in v3 (ridepics1, 2026-11-26: about 635 px of the sit cell, of which Tom's body is 485; v1 was 53.9: 727 and 566).
+    'tomride': {'member': 'tom', 'sheet': 'tomride-intro-v3.png', 'cut': (3, 2), 'k': 9, 'h': 55.0, 'ref': 'tr_sit',
                 'names': ['tr_kneel', 'tr_lift', 'tr_cheer', 'tr_laugh', 'tr_hopoff', 'tr_sit']},
     # Greeting hug (hugv2, 2026-11-14; v3 in tomframes4, 2026-11-26): Tom's approved Library picture `tom-grace-rose-greeting-hug`, version 3
     # (tom-grace-rose-greeting-hug-v3.png, 4 x 2 cells on magenta). Cells 1 to 3 are Tom alone (hear, delight, crouch with arms open), cells 4 to 6 are Tom with Grace and Rose

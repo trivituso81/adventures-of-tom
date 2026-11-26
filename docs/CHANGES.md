@@ -1,3 +1,14 @@
+## ridepics1 (2026-11-26): Tom and Rose ride: the new walk, the opening's ride frames and the Lamby night-light picture are in the game
+
+Card c-ridepics1. Tom's words: "implement the newest approved Tom + Rose pictures (meaning, the ones in the section Tom and Rose ride)". Not seen on the phone yet.
+- Installed (all uploaded 2026-11-26): `tomride-walk-v2` (Rose up on Tom's shoulders walking in the overworld, 4 x 3), `tomride-intro-v3` (the six ride frames of the opening: kneel, squat, cheer, hold, hop off, sit; set `tomride`, the whole figure is now 55.0 rows, Tom's body still 42), `tomride-night-v2` (the Lamby night-light team move in Battle 2).
+- Not wired: `tomride-title-v2` (no screen uses a ride pose on the welcome screen any more; the old note in `claude/next-addendum-tomride3.md` still holds).
+- Walk v2 paints its side frames facing left already, so the mirror on those four frames is gone. The night-light picture looks toward the right edge, so it is mirrored once like the other team-move pictures (hoist, boop, cloud, phones). Named to Tom: if the lamb should be on the other side, that is one entry in `FACES_RIGHT` of `bake_tomride.py`.
+- The old night-light slice (`tools/sprite-bake/src/tomride-s5-combo-v3.png`) is deleted with the code that read it (`--combo-k`, `COMBO_K`, `fc`, `H0b`).
+- The ride baker now writes at the sharpness the repo art already had (battle 3, overworld 7; `NEW_F` follows `KB`, atlas 6 frames wide), so the grid the game reads is unchanged (160 x 152) and nothing else moved. Battle frames other than the night-light one are the same pictures as before.
+- Battle 2 only: the ride frames in the new battle (Battle 3) are not touched.
+- Looked at the baked overworld walk, the night-light frame next to hoist and boop, and the six opening frames; not played in the game. Tests: smoke has the two failures that already fail on main.
+
 ## boppyframes (2026-11-26): Boppy's new walking, feelings, talking, thinking and listening pictures are in the game
 
 Card c-boppyframes. Tom's words: "check boppy next". Not seen on the phone yet. Same install as `deedeeframes`.

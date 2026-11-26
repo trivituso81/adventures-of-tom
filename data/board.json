@@ -9207,6 +9207,64 @@
      "t": "Updated by boppyframes: build is in."
     }
    ]
+  },
+  {
+   "id": "c-ridepics1",
+   "title": "Install Tom and Rose ride pictures: walk, intro, night",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "up",
+   "next": "Shipped as build ridepics1: the ride walk v2, intro v3 and night-light v2 are baked and pushed.",
+   "blocks": [],
+   "changed": "2026-11-26",
+   "created": "2026-11-26",
+   "tag": "ridepics1",
+   "chat": {
+    "url": "",
+    "opening": "\"implement the newest approved Tom + Rose pictures (meaning, the ones in the section Tom and Rose ride\""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by the session: Tom's words: \"implement the newest approved Tom + Rose pictures (meaning, the ones in the section Tom and Rose ride\"."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Updated by ridepics1: pushed."
+    }
+   ],
+   "after": "t-ridepics1play",
+   "prompt": {
+    "what": "Installs the newly approved Tom and Rose ride walk, opening and night-light pictures.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the bakes exist and tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md and docs/CHANGES.md tomframes4 and ridepics1, then card c-ridepics1 in data/board.json. Your first push is the commit board: start c-ridepics1. Install tomride-walk-v2, tomride-intro-v3 and tomride-night-v2 (bake_tomride.py and bake_story_poses.py). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "t-ridepics1play",
+   "title": "Look at Tom carrying Rose: walk, opening, night-light",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open the game, RELOAD on the title (if it still looks old, close the home-screen app and open it again), then NEW GAME and watch the opening: Tom kneels, lifts Rose onto his shoulders, cheers, hugs her, tosses her and catches her. Then walk around with Rose up: down, up and sideways should be the new painted pair, side steps facing the way you walk. In a Battle 2 fight (chapter 5 onward), the Lamby night-light team move shows Tom holding the lamb up. Tell me with the REPORT tab which picture is wrong, or if the lamb should be on the other side.",
+   "jump": {
+    "chapter": 1
+   },
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by ridepics1."
+    }
+   ]
   }
  ],
  "sessions": [
