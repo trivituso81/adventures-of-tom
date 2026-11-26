@@ -3758,6 +3758,35 @@
    "replay": "",
    "id": "v-body-grace-give-t1",
    "kind": "video"
+  },
+  "v-body-grace-cast-t1": {
+   "lane": "vid",
+   "anim": "body:grace:cast",
+   "who": "grace",
+   "take": 1,
+   "route": "wan",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: CASTING A SPELL\nFrom her starting relaxed stance, she cups both hands together in front of her chest and closes her eyes for a moment as if gathering a little magic, then sweeps both open hands forward to the left once and holds them out there, fingers spread, looking ahead with focus. Then she lowers her arms and returns to her starting relaxed stance.",
+   "promptRev": 4,
+   "start": "grace",
+   "note": "",
+   "cap": 1,
+   "at": "2026-11-26T09:29:53Z",
+   "state": "queued",
+   "since": "2026-11-26T09:29:53Z",
+   "run": 0,
+   "fal": null,
+   "tries": 0,
+   "cost": 0,
+   "why": "",
+   "do": "",
+   "result": null,
+   "use": null,
+   "left": false,
+   "dry": false,
+   "replay": "",
+   "id": "v-body-grace-cast-t1",
+   "kind": "video",
+   "pad": 0.8
   }
  }
 }
