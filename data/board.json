@@ -6958,6 +6958,52 @@
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26"
+  },
+  {
+   "id": "b-guideuse-45790051267",
+   "tag": "guideuse-45790051267",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-26",
+   "theme": "Battle System",
+   "title": "Giving (support moves) (rose), Running in (rose), Knocked out (rose) now plays a video chosen in the Battle Guide",
+   "next": "Done: Giving (support moves) (rose), Running in (rose), Knocked out (rose) now plays a video chosen in the Battle Guide",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as guideuse-45790051267. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26"
+  },
+  {
+   "id": "b-guideuse-45791800597",
+   "tag": "guideuse-45791800597",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-26",
+   "theme": "Battle System",
+   "title": "Cast (rose), Victory (tom), Running in (tom), Cast (tom) now plays a video chosen in the Battle Guide",
+   "next": "Done: Cast (rose), Victory (tom), Running in (tom), Cast (tom) now plays a video chosen in the Battle Guide",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as guideuse-45791800597. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26"
   }
  ],
  "sessions": [
@@ -13439,8 +13485,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "6544968edd9330ac320922796ad9e5ae0ff3ec9b",
- "synced_at": "2026-11-26T09:22:01+00:00",
+ "synced": "955b55d79fc331f44d058254caa3a66232c71b8e",
+ "synced_at": "2026-11-26T09:34:12+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
