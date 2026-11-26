@@ -6897,6 +6897,29 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md (Pose Editor, Tom's painted frames are used as painted, One head multiplier, Real heights) and claude/next-addendum-listen1.md, then card c-tomframes in data/board.json. Your first push is the commit board: start c-tomframes. Tom uploaded new painted sheets for Tom on 2026-11-26: tom-walking-sheet-v4, tom-emotions-v8, tom-talk-v3, and tom-listen-v1 is approved. Install them for Tom only. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "b-guideuse-45787096926",
+   "tag": "guideuse-45787096926",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-26",
+   "theme": "Battle System",
+   "title": "Idle (standing and breathing) (rose), Guard (tom) now plays a video chosen in the Battle Guide",
+   "next": "Done: Idle (standing and breathing) (rose), Guard (tom) now plays a video chosen in the Battle Guide",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as guideuse-45787096926. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26"
   }
  ],
  "sessions": [
@@ -13378,8 +13401,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "1a3ac354cad0ae658e2195c02653a65531e2b91a",
- "synced_at": "2026-11-26T08:56:08+00:00",
+ "synced": "340d1fec12ed4c8b217dd85715f77ce172bfa17a",
+ "synced_at": "2026-11-26T09:11:22+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
