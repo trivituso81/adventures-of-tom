@@ -3790,8 +3790,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:27:48Z",
-   "state": "checking",
-   "since": "2026-11-26T09:54:05Z",
+   "state": "done",
+   "since": "2026-11-26T09:58:06Z",
    "run": 45790862688,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -3804,7 +3804,27 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-grace-guard/t1.js",
+    "img": "takes/body-grace-guard/t1.webp",
+    "frames": 65,
+    "kb": 1320,
+    "words": "0 to 128 step 2, hold 32, lowering 120",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "vision g_cover: Arms briefly raise to cover mouth but not chest like a shield.; Arms raise to cover mouth/nose but not chest; more like hiding than shielding."
+     ],
+     "faults": [
+      "g_cover"
+     ],
+     "vision_ran": true,
+     "spent": 0.0073,
+     "error": null,
+     "words": "The clip gate flags this take: vision g_cover: Arms briefly raise to cover mouth but not chest like a shield.; Arms raise to cover mouth/nose but not chest; more like hiding than shielding.."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
