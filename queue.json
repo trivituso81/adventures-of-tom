@@ -1589,6 +1589,40 @@
    "replay": "",
    "id": "v-body-tom-idle-t2",
    "kind": "video"
+  },
+  "v-body-tom-guard-t2": {
+   "lane": "vid",
+   "anim": "body:tom:guard",
+   "who": "tom",
+   "take": 2,
+   "route": "wan",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BRACED GUARD\nFrom his starting relaxed stance, he bends his knees, tucks his chin and raises both arms once, crossing his forearms in an X in front of his face with both fists closed. He holds that braced guard, breathing gently, then lowers his arms and stands back up into his starting stance.",
+   "promptRev": 1,
+   "start": "tom",
+   "note": "",
+   "cap": 1,
+   "at": "2026-11-26T08:12:23Z",
+   "state": "queued",
+   "since": "2026-11-26T08:12:23Z",
+   "run": 0,
+   "fal": {
+    "endpoint": "alibaba/wan-3.0/image-to-video",
+    "request_id": "01a216dc-6355-7f11-8023-33e620e1bfc3",
+    "status_url": "https://queue.fal.run/alibaba/wan-3.0/requests/01a216dc-6355-7f11-8023-33e620e1bfc3/status",
+    "response_url": "https://queue.fal.run/alibaba/wan-3.0/requests/01a216dc-6355-7f11-8023-33e620e1bfc3",
+    "est": 0.5
+   },
+   "tries": 0,
+   "cost": 0,
+   "why": "",
+   "do": "",
+   "result": null,
+   "use": null,
+   "left": false,
+   "dry": false,
+   "replay": "",
+   "id": "v-body-tom-guard-t2",
+   "kind": "video"
   }
  }
 }
