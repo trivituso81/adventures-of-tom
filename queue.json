@@ -1057,6 +1057,35 @@
    "id": "u-tnb-1795680329",
    "kind": "upload",
    "upload": "uploads/tnb-1795680329.png"
+  },
+  "u-boppy-1795680359": {
+   "lane": "pic",
+   "anim": "",
+   "who": "boppy",
+   "take": 0,
+   "route": "",
+   "prompt": "",
+   "promptRev": 0,
+   "start": "",
+   "note": "",
+   "cap": 0,
+   "at": "2026-11-26T08:06:03Z",
+   "state": "queued",
+   "since": "2026-11-26T08:06:03Z",
+   "run": 0,
+   "fal": null,
+   "tries": 0,
+   "cost": 0,
+   "why": "",
+   "do": "",
+   "result": null,
+   "use": null,
+   "left": false,
+   "dry": false,
+   "replay": "",
+   "id": "u-boppy-1795680359",
+   "kind": "upload",
+   "upload": "uploads/boppy-1795680359.png"
   }
  }
 }
