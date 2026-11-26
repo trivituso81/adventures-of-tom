@@ -7131,14 +7131,103 @@
     {
      "d": "2026-11-26",
      "t": "wan-gen bulk run 45796453993: 16 made (8 passed and in the game, build wanbulk-trosestagelab-45796453993, 8 stopped); waiting for the next tap (spending limit): rose-raspberry, rose-baitswitch, rose-whoopee."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "wan-gen run 45822234075: rose-baitswitch passed and are in the game (build wanbulk-trosestagelab-45822234075). No watch card: Tom judges them by playing Rose's moves in a Battle 3 fight until the Move Lab handles Rose (card c-movelab-rose)."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "wan-gen bulk run 45822234075: 4 made (1 passed and in the game, build wanbulk-trosestagelab-45822234075, 3 stopped); already made, nothing sent: stage-rose-cushion, stage-rose-lamby, stage-rose-backuplamby, stage-rose-comet, stage-rose-ripple, stage-rose-cushionwall, stage-rose-castle, stage-rose-whoopee, rose-tacklelunge, rose-lavahop, rose-doublelamby, rose-pretzel, rose-boomerang, rose-kingdom, rose-boop."
     }
    ],
    "wgen": {
-    "want": true,
+    "want": false,
     "at": "2026-11-26T12:50:15Z",
     "n": 1,
     "est": 0.5,
-    "auto": true
+    "auto": true,
+    "run": {
+     "state": "done",
+     "at": "2026-11-26T12:56:21Z",
+     "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45822234075",
+     "n": 19,
+     "merged": [
+      "rose-baitswitch"
+     ],
+     "passed_not_baked": [],
+     "retried": [
+      "rose-citadel",
+      "rose-raspberry",
+      "rose-whoopee"
+     ],
+     "stopped": [
+      {
+       "what": "rose-citadel",
+       "why": "failed twice: p1",
+       "card": "t-wangaveup-rose-citadel-r2"
+      },
+      {
+       "what": "rose-raspberry",
+       "why": "failed twice: p1",
+       "card": "c-wanstop-rose-raspberry-r1"
+      },
+      {
+       "what": "rose-whoopee",
+       "why": "failed twice: p1",
+       "card": "c-wanstop-rose-whoopee-r1"
+      }
+     ],
+     "waiting": [],
+     "capped": [],
+     "unchecked": [],
+     "errors": [],
+     "already": [
+      "stage-rose-cushion",
+      "stage-rose-lamby",
+      "stage-rose-backuplamby",
+      "stage-rose-comet",
+      "stage-rose-ripple",
+      "stage-rose-cushionwall",
+      "stage-rose-castle",
+      "stage-rose-whoopee",
+      "rose-tacklelunge",
+      "rose-lavahop",
+      "rose-doublelamby",
+      "rose-pretzel",
+      "rose-boomerang",
+      "rose-kingdom",
+      "rose-boop"
+     ],
+     "gaveup": [
+      "rose-citadel"
+     ],
+     "bake_failed": {},
+     "spent": 3.04,
+     "build": "wanbulk-trosestagelab-45822234075",
+     "watch": "",
+     "revs": {
+      "stage-rose-cushion": 1,
+      "stage-rose-lamby": 1,
+      "stage-rose-backuplamby": 1,
+      "stage-rose-comet": 1,
+      "stage-rose-ripple": 1,
+      "stage-rose-cushionwall": 1,
+      "stage-rose-castle": 1,
+      "stage-rose-whoopee": 1,
+      "rose-tacklelunge": 1,
+      "rose-lavahop": 1,
+      "rose-doublelamby": 1,
+      "rose-pretzel": 1,
+      "rose-boomerang": 1,
+      "rose-citadel": 2,
+      "rose-kingdom": 1,
+      "rose-boop": 1,
+      "rose-raspberry": 1,
+      "rose-baitswitch": 1,
+      "rose-whoopee": 1
+     }
+    }
    },
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukEQEES7HckHBnqBmQg",
@@ -7672,6 +7761,108 @@
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26"
+  },
+  {
+   "id": "t-wangaveup-rose-citadel-r2",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle Animations",
+   "ask": "decide",
+   "fyi": true,
+   "title": "The video rose-citadel did not pass in 4 tries",
+   "next": "The Action stopped making rose-citadel: it used 4 tries ($2.00). Last reason: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Arms do not li. Pick one.",
+   "choices": [
+    "Give it 4 more tries (Recommended)",
+    "Keep the move without a video for now"
+   ],
+   "leads": [
+    "A Claude session changes one thing and the Action tries up to 4 more times (at most $3.20), no tap needed.",
+    "The move plays with its stand-in until a later card picks it up."
+   ],
+   "blocks": [],
+   "wan_card": "t-rosestage-lab",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by the wan-gen job (45822234075): rose-citadel used 4 tries ($2.00)."
+    }
+   ]
+  },
+  {
+   "id": "c-wanstop-rose-raspberry-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-rose-raspberry-r1",
+   "title": "Fix the stopped video rose-raspberry",
+   "next": "The bulk run stopped rose-raspberry (failed twice: p1) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-rosestage-lab",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by the wan-gen job (45822234075): rose-raspberry stopped at rev 1. attempt 1 (pad 0.8) p1; attempt 2 (pad 0.8) p1. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Missing cheek puff, lean left, and raspberry; shows ar"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-rose-raspberry-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job rose-raspberry (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1. Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Missing cheek puff, lean left, and raspberry; shows ar. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: rose-raspberry-r1-result.json (every check with numbers and the look-check answers) and the videos rose-raspberry-r1.mp4, rose-raspberry-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-rosestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-rose-raspberry-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-rosestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-rose-raspberry-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
+  },
+  {
+   "id": "c-wanstop-rose-whoopee-r1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "tag": "wanstop-rose-whoopee-r1",
+   "title": "Fix the stopped video rose-whoopee",
+   "next": "The bulk run stopped rose-whoopee (failed twice: p1) after a re-roll. This card starts by itself: it changes one thing in the job and starts the next try. Nothing for Tom.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "auto": true,
+   "start": true,
+   "wan_card": "t-rosestage-lab",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "",
+    "opening": "added by the wan-gen job"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by the wan-gen job (45822234075): rose-whoopee stopped at rev 1. attempt 1 (pad 0.8) f_same, p1; attempt 2 (pad 0.8) p1. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Missing deadpan face, mat push, ear clamp, and Master-"
+    }
+   ],
+   "prompt": {
+    "what": "Finds the cause of one video the checks stopped, changes one thing in its job and starts the next try.",
+    "before": [
+     "Nothing: the evidence is in the result file on branch wangen."
+    ],
+    "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
+    "effort": "medium (one video; the checks say what failed)",
+    "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-rose-whoopee-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job rose-whoopee (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1. Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Missing deadpan face, mat push, ear clamp, and Master-. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: rose-whoopee-r1-result.json (every check with numbers and the look-check answers) and the videos rose-whoopee-r1.mp4, rose-whoopee-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-rosestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-rose-whoopee-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-rosestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-rose-whoopee-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
