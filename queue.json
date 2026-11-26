@@ -2671,8 +2671,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T08:54:15Z",
-   "state": "checking",
-   "since": "2026-11-26T08:56:36Z",
+   "state": "done",
+   "since": "2026-11-26T09:01:09Z",
    "run": 45782279434,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -2685,7 +2685,31 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-rose-hit/t1.js",
+    "img": "takes/body-rose-hit/t1.webp",
+    "frames": 55,
+    "kb": 811,
+    "words": "0 to 108 step 2, 1.5x",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "size: shrinks to 0.91x the start picture while the game shows it",
+      "edge: 13 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)",
+      "vision h_stagger: Body shows minor shifts but does not stagger backwards to the right.; Body poses show minor stance shifts but no backward stagger to the right."
+     ],
+     "faults": [
+      "edge",
+      "h_stagger",
+      "size"
+     ],
+     "vision_ran": true,
+     "spent": 0.0075,
+     "error": null,
+     "words": "The clip gate flags this take: size: shrinks to 0.91x the start picture while the game shows it; edge: 13 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground); vision h_stagger: Body shows minor shifts but does not stagger backwards to the right.; Body poses show minor stance shifts but no backward stagger to the right.."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
