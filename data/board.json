@@ -9145,7 +9145,7 @@
    "theme": "Characters",
    "lane": "claude",
    "col": "prog",
-   "next": "In progress: adding 4 Deedee pose entries (Art Library, approved) from the pictures Tom attached. Held for a later scene, not wired into the game.",
+   "next": "Shipped as deedeefart1: four Deedee fart poses are in ADMIN > ART LIBRARY > Characters > Deedee, approved. Not used in the game yet; Tom decides the scene later. Nothing for Tom to do.",
    "blocks": [],
    "changed": "2026-11-26",
    "created": "2026-11-26",
@@ -9162,6 +9162,10 @@
     {
      "d": "2026-11-26",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Added deedee-fart-bend, -hop, -shock and -battle (sheet of 3) as approved uploads, build deedeefart1. No game wiring."
     }
    ],
    "after": "nothing for Tom: end",
