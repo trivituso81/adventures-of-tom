@@ -1288,6 +1288,24 @@
    "source": "art-factory benchmark run",
    "at": "2026-11-26T05:08:35Z",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45758163287"
+  },
+  {
+   "service": "fal",
+   "date": "2026-11-25",
+   "amount": 1.806,
+   "what": "art-factory benchmark bench-justinbb9-7: Wan 3.0 x3, Kling v3 Pro x3, start frame, matting of the winner",
+   "source": "art-factory benchmark run",
+   "at": "2026-11-26T05:38:45Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45761134320"
+  },
+  {
+   "service": "google",
+   "date": "2026-11-25",
+   "amount": 0.2919,
+   "what": "art-factory benchmark bench-justinbb9-7: Wan 3.0 x3, Kling v3 Pro x3, start frame, matting of the winner",
+   "source": "art-factory benchmark run",
+   "at": "2026-11-26T05:38:45Z",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45761134320"
   }
  ],
  "balances": [
