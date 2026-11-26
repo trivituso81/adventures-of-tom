@@ -7135,7 +7135,7 @@
    ],
    "wgen": {
     "want": true,
-    "at": "2026-11-26T12:45:46Z",
+    "at": "2026-11-26T12:46:43Z",
     "n": 1,
     "est": 0.5,
     "auto": true
@@ -7264,6 +7264,10 @@
     {
      "d": "2026-11-26",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Looked at both stopped videos: Rose does the crouching tackle but steps forward off her spot (feet 4 to 7 percent away) and Lamby leaves her arm and reaches the left edge. Changed one sentence of the prompt (two tackle lunges to the left on the spot, now two tackle crouches with both feet planted and Lamby held tight under her arm; prompt file v2, rev 2). Kept the start picture, seed 81, pad 0.8, settings, bake and wire. Started the next try on t-rosestage-lab."
     }
    ],
    "prompt": {

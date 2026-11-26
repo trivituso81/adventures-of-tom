@@ -1,3 +1,7 @@
+## wanstop-rose-tacklelunge-r1 (2026-11-26): Rose's tackle video is made again with one sentence changed
+
+The wan-gen Action stopped rose-tacklelunge twice (feet, edge). On the contact sheets she does the tackle but steps forward off her spot and Lamby leaves her arm and reaches the left edge. Changed one sentence of the prompt (`wan-rose-tacklelunge-v2.txt`: two tackle crouches with both feet planted and Lamby held under her arm, where v1 said two lunges to the left on the spot), raised rev to 2. Kept the start picture, seed, pad, bake and wire. The next try is started on card t-rosestage-lab. Nothing for Tom.
+
 ## wanstop-rose-boomerang-r1 (2026-11-26): Rose's Lamby boomerang video is made again with her feet held planted in the lunges
 
 The bulk run stopped rose-boomerang after two tries (feet, edge): the move reads right, but the two lunges slid her feet (2.2 percent) and her reach touched the left edge in 7 pictures. One sentence of the prompt changed (lunges bend the knees and lean the shoulders with both feet planted); start picture, seed and pad kept. Rev 2, next try started on card t-rosestage-lab.

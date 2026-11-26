@@ -2867,7 +2867,7 @@
   "why": "movestage3: stage asset of a staged move (claude/move-staging-plan.md section 5). Picture: Nano Banana 2.1 text to image, the prompt file word for word, 1:1."
  },
  "rose-tacklelunge": {
-  "rev": 1,
+  "rev": 2,
   "kind": "video",
   "endpoint": "alibaba/wan-3.0/image-to-video",
   "est_per_s": {
@@ -2875,7 +2875,7 @@
    "720p": 0.1,
    "1080p": 0.15
   },
-  "prompt_file": "tools/art-library/prompts/wan-rose-tacklelunge-v1.txt",
+  "prompt_file": "tools/art-library/prompts/wan-rose-tacklelunge-v2.txt",
   "frame": "art/clips/start/rose-hero.png",
   "fit": "720x1280",
   "frame_fields": [
@@ -2891,7 +2891,7 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. rev 2: kept the start picture, seed, pad 0.8 and all but one sentence; the two stopped tries lunged forward off her spot (feet up to 7 percent away) and threw Lamby out of her arm to the left edge, so the lunges are now crouches with feet planted and Lamby held under her arm.",
   "bake": {
    "id": "rose-tacklelunge",
    "owner": "rose",
