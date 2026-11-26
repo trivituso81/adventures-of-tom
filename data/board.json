@@ -2138,7 +2138,7 @@
   {
    "id": "t-lastnight",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Project Ops",
    "title": "Last night: what the night shift did",
    "ask": "setup",
@@ -2199,6 +2199,11 @@
     {
      "d": "2026-11-26",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Ended without shipping: the work in Tom's note (steps in Needs you lines) shipped on 2026-11-22; this is the nightly report card, so the stale prompt was removed to stop the night shift and START from starting it again.",
+     "at": "2026-11-26T12:00:00Z"
     }
    ],
    "created": "2026-11-21",
@@ -2251,17 +2256,8 @@
    "night_key": "2026-11-25",
    "tag": "t-lastnight",
    "note": "The what to do doesn't tell me what to do",
-   "prompt": {
-    "what": "Works out what Tom wants from his note, rewrites this card, and does the work.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row C: the steps are not written yet)",
-    "effort": "medium (a handed-over card is usually one piece of work)",
-    "text": "Read claude/handoff-rules.md. Tom handed you board card t-lastnight with this note: The what to do doesn't tell me what to do. Work out what is needed, rewrite the card, and do it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
    "after": "nothing for Tom: end",
-   "started_at": "2026-11-26T08:48:13+00:00"
+   "done": "2026-11-26"
   },
   {
    "id": "c-night-clean",
