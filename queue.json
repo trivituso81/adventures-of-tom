@@ -4272,8 +4272,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:35:11Z",
-   "state": "checking",
-   "since": "2026-11-26T10:22:00Z",
+   "state": "done",
+   "since": "2026-11-26T10:28:45Z",
    "run": 45798843411,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -4286,7 +4286,27 @@
    "cost": 0.0,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-boppy-guard/t1.js",
+    "img": "takes/body-boppy-guard/t1.webp",
+    "frames": 62,
+    "kb": 763,
+    "words": "0 to 122 step 2, hold 20, lowering 94",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "vision g_cover: Forearms raise to cover face in some frames but not consistently across the clip, and not always shielding chest like a guard brace.; Forearms raise to cover face in some frames but not consistently as a shield block in all, and not for chest."
+     ],
+     "faults": [
+      "g_cover"
+     ],
+     "vision_ran": true,
+     "spent": 0.0074,
+     "error": null,
+     "words": "The clip gate flags this take: vision g_cover: Forearms raise to cover face in some frames but not consistently across the clip, and not always shielding chest like a guard brace.; Forearms raise to cover face in some frames but not consistently as a shield block in all, and not for chest.."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
