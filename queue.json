@@ -2086,8 +2086,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T08:19:40Z",
-   "state": "checking",
-   "since": "2026-11-26T08:33:29Z",
+   "state": "done",
+   "since": "2026-11-26T08:39:57Z",
    "run": 45782279434,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -2100,7 +2100,29 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-tnb-dodge/t4.js",
+    "img": "takes/body-tnb-dodge/t4.webp",
+    "frames": 37,
+    "kb": 823,
+    "words": "0 to 72 step 2",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "edge: 13 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground)",
+      "vision d_back: Figure stays mostly in place with side shifts and forward-leaning poses, not clearly dodging back or sideways.; Character mostly sways in place with side turns; does not clearly dodge back or aside, shows some forward lean."
+     ],
+     "faults": [
+      "d_back",
+      "edge"
+     ],
+     "vision_ran": true,
+     "spent": 0.0073,
+     "error": null,
+     "words": "The clip gate flags this take: edge: 13 shown pictures run off the edge of the video (something is cut off, e.g. a prop into the ground); vision d_back: Figure stays mostly in place with side shifts and forward-leaning poses, not clearly dodging back or sideways.; Character mostly sways in place with side turns; does not clearly dodge back or aside, shows some forward lean.."
+    },
+    "n": 4
+   },
    "use": null,
    "left": false,
    "dry": false,
