@@ -28,15 +28,16 @@ TRIGGER = ROOT / "art-factory" / "benchmark-trigger.json"
 LOCK_PATH = ROOT / "art-factory" / "PIPELINE_LOCK.json"
 PACKETS = ROOT / "art-factory" / "move-packets-pass1.json"
 
-BENCH_PROMPT = ("Static locked camera, zero zoom, zero scale drift. Standing in place on a flat #808080 mid-grey background and remaining in three-quarters-left profile "
-                "the entire clip with calm deadpan focus, the tall hand-drawn character coils slightly, delivers one crisp forward-left tap into empty air with the claw hammer "
-                "held in his front hand, and settles smoothly back into his exact starting ready stance.")
-BENCH_NEGATIVE = ("turning toward camera, facing right, body rotation, hitting own body or props, duplicate hammer, belt drawing, prop morphing, floating rings, target reticles, "
-                  "laser beams, sparks, floor circle, shouting, angry open mouth, camera pan, zoom, 3D CGI, photorealistic, airbrushed shading")
+BENCH_PROMPT = ("Static locked camera, zero zoom, zero scale drift. Remaining in three-quarters-left profile on a flat #808080 mid-grey background with the exact same face and "
+                "expression, he glides the yellow stud finder smoothly across in front of him, pauses briefly, delivers one crisp forward-left tap with the claw hammer, and settles "
+                "smoothly back into his exact starting stance.")
+BENCH_NEGATIVE = ("turning toward camera, facing right, blank stare, angry face, proportion change, realistic human proportions, hitting own props, duplicate hammer, belt drawing, "
+                  "prop morphing, floating rings, target reticles, laser beams, sparks, floor circle, camera pan, zoom, 3D CGI, photorealistic")
 
 WAN = "alibaba/wan-3.0/image-to-video"
 KLING = "fal-ai/kling-video/v3/pro/image-to-video"
 RATES = {WAN: 0.10, KLING: 0.112}          # dollars per output second, published (Wan 720p, Kling with audio off)
+MATTE_FALLBACK_EST = 0.20                 # fal birefnet v2 video, booked at this estimate when bria does not fit under the cap
 MATTE_RATE = 0.14                         # bria video background removal, dollars per second
 GEMINI_IMAGE_EST = 0.134                  # one 2K image
 JUDGE_CALL_EST = 0.012                    # one vision judge call with three images
@@ -137,9 +138,12 @@ class Services:
         Path(dest).write_bytes(r.content)
         return dest
 
-    def matte(self, trimmed, out_path):
+    def matte(self, trimmed, out_path, cheap=False):
         import matte_winner
-        return matte_winner.matte_remote(trimmed, out_path, self.fal, self.cfg["models"])
+        models = dict(self.cfg["models"])
+        if cheap:
+            models["cutout_video"] = models["cutout_video_fallback"]
+        return matte_winner.matte_remote(trimmed, out_path, self.fal, models)
 
     def judge(self):
         return self.client
@@ -151,35 +155,61 @@ def load_lock():
 
 # ---------------------------------------------------------------------------------------------------------------- start frame (Gate 1)
 
+# Direct-Hero lock (WO-01E): the start frame is the approved Hero PNG pixels on #808080. Gemini only edits the hands and props, and only the hand band of the
+# result is used; everything above it (head, face, expression, shoulders) and below it (legs, boots) is the Hero's own pixels, never regenerated.
 START_PROMPT = (
-    "Redraw the character in the reference image exactly: same face, spiky brown hair, short beard, cream henley shirt, blue jeans, brown leather tool belt and work boots, "
-    "in the same fine dark-brown ink contours, visible colored-pencil hatching and grain and warm highlights, about three heads tall caricature proportions. "
-    "Full body from hair to boots, fully visible, standing in place facing three-quarters to the left (body and face turned toward the left of the frame), "
-    "calm deadpan focused expression with a closed mouth and no smile. "
-    "One steel claw hammer is gripped in his front hand (the hand toward the left of the frame), held low and forward at hip height. "
-    "One bright-yellow electronic stud finder is clipped, stationary, to the belt at the chest-belt line. There is no other hammer anywhere: the belt pouch holds no hammer. "
-    "Flat solid #808080 mid-grey background, no floor shadow, no scenery, no text. The reference's magenta background must not appear."
+    "Edit this image. Change ONLY the hands and what they hold; every other pixel stays exactly as it is: do not change the face, the expression, the hair, the head size, "
+    "the body proportions, the clothes, the colors, the line work or the position of the figure. "
+    "Put a flat palm-sized bright-yellow electronic stud finder in his hand on the left side of the image, held low in front of him, and one steel claw hammer in his hand "
+    "on the right side of the image, held low at hip height. Remove the hammer from the belt pouch so the only hammer is the one in his hand. "
+    "Keep the flat solid grey background exactly as it is, with no shadow, scenery or text."
 )
-GATE1_BOOLS = ("matches_hero_ink_pencil_style", "three_quarter_left_profile", "calm_deadpan_closed_mouth", "stud_finder_clipped_stationary_at_chest_belt",
-               "single_claw_hammer_in_front_hand", "zero_duplicate_belt_hammer", "full_body_unclipped")
+HAND_BAND = (0.50, 0.76)      # the part of the figure's height that may be edited (arms, hands, belt, pouches); props may extend beyond the figure sideways
+HEAD_BAND = 0.40              # the top share of the figure's height that must stay pixel-identical to the Hero
+GATE1_BOOLS = ("matches_hero_ink_pencil_style", "three_quarter_left_profile", "same_face_and_expression_as_hero", "stud_finder_held_in_one_hand",
+               "single_claw_hammer_in_other_hand", "zero_duplicate_belt_hammer", "full_body_unclipped")
+
+
+def figure_box(rgba_img):
+    return rgba_img.getchannel("A").point(lambda v: 255 if v > 128 else 0).getbbox()
 
 
 def compose_start(rgba_path, out_path, size=(1344, 768), fig_frac=0.86):
-    """The cut-out figure scaled to fig_frac of the frame height, centred on an EXACT #808080 canvas."""
+    """The cut-out figure scaled to fig_frac of the frame height, centred on an EXACT #808080 canvas. Returns (path, figure box on the canvas)."""
     from PIL import Image
     fg = Image.open(rgba_path).convert("RGBA")
-    box = fg.getchannel("A").point(lambda v: 255 if v > 128 else 0).getbbox()
-    fg = fg.crop(box)
+    fg = fg.crop(figure_box(fg))
     h = int(size[1] * fig_frac)
     w = max(1, int(fg.width * h / fg.height))
     fg = fg.resize((w, h), Image.LANCZOS)
     canvas = Image.new("RGBA", size, (128, 128, 128, 255))
-    canvas.alpha_composite(fg, ((size[0] - w) // 2, int(size[1] * 0.07)))
+    x, y = (size[0] - w) // 2, int(size[1] * 0.07)
+    canvas.alpha_composite(fg, (x, y))
     canvas.convert("RGB").save(out_path)
+    return out_path, (x, y, x + w, y + h)
+
+
+def lock_hero_pixels(hero_comp, edited, box, out_path, tol=14):
+    """Final start frame: the Hero composite everywhere except the hand band; inside the band the edited picture, with its near-grey background snapped to exact #808080."""
+    import numpy as np
+    from PIL import Image
+    base = np.asarray(Image.open(hero_comp).convert("RGB")).copy()
+    ed = Image.open(edited).convert("RGB")
+    if ed.size != (base.shape[1], base.shape[0]):
+        ed = ed.resize((base.shape[1], base.shape[0]), Image.LANCZOS)
+    ed = np.asarray(ed).astype(int)
+    x0, y0, x1, y1 = box
+    fh = y1 - y0
+    by0, by1 = y0 + int(fh * HAND_BAND[0]), y0 + int(fh * HAND_BAND[1])
+    band = ed[by0:by1].copy()
+    near = (np.abs(band - 128).max(axis=2) <= tol) & ((band.max(axis=2) - band.min(axis=2)) <= tol)
+    band[near] = 128
+    base[by0:by1] = band.astype(np.uint8)
+    Image.fromarray(base).save(out_path)
     return out_path
 
 
-def gate1_measured(path):
+def gate1_measured(path, hero_comp=None, box=None):
     """Exact #808080 border (every pixel of a 6 px frame), figure not touching the edge, figure fills at least 70 percent of the height."""
     import numpy as np
     from PIL import Image
@@ -191,8 +221,14 @@ def gate1_measured(path):
     fg = np.any(a != 128, axis=2)
     ys, xs = np.where(fg)
     fig_h = (ys.max() - ys.min() + 1) / h if fg.any() else 0.0
-    ok = exact >= 0.9999 and fg.any() and ys.min() > b and ys.max() < h - b and xs.min() > b and xs.max() < w - b and fig_h >= 0.70
-    return {"border_exact_808080_fraction": round(exact, 6), "figure_height_fraction": round(fig_h, 3), "passed": bool(ok)}
+    head_diff = None
+    if hero_comp is not None and box is not None:
+        h0 = np.asarray(Image.open(hero_comp).convert("RGB")).astype(int)
+        x0, y0, x1, y1 = box
+        yb = y0 + int((y1 - y0) * HEAD_BAND)
+        head_diff = float(np.abs(a[y0:yb] - h0[y0:yb]).mean())
+    ok = (head_diff is None or head_diff <= 0.5) and exact >= 0.9999 and fg.any() and ys.min() > b and ys.max() < h - b and xs.min() > b and xs.max() < w - b and fig_h >= 0.70
+    return {"border_exact_808080_fraction": round(exact, 6), "figure_height_fraction": round(fig_h, 3), "head_mean_abs_diff_vs_hero": head_diff, "passed": bool(ok)}
 
 
 def gate1_vision(client, model, hero, start):
@@ -201,11 +237,11 @@ def gate1_vision(client, model, hero, start):
     prompt = ("You are a strict QA judge. IMAGE 1 is the HERO PNG (the style and likeness authority; ignore its magenta background). IMAGE 2 is a candidate START FRAME for a battle animation. "
               "Answer ONLY with strict JSON with exactly these keys, each a boolean: "
               + ", ".join(f'"{k}"' for k in GATE1_BOOLS) + ', and "failure_reason" a string. '
-              "matches_hero_ink_pencil_style: same fine dark-brown ink contours, colored-pencil hatching and grain, warm highlights, about three heads tall, same face and outfit as IMAGE 1. "
+              "matches_hero_ink_pencil_style: same fine dark-brown ink contours, colored-pencil hatching and grain, warm highlights, about three heads tall, same outfit as IMAGE 1. "
               "three_quarter_left_profile: body and face turned three-quarters toward the left of the frame. "
-              "calm_deadpan_closed_mouth: neutral focused face, mouth closed, no smile, no shouting. "
-              "stud_finder_clipped_stationary_at_chest_belt: exactly one bright-yellow stud finder clipped to the belt at chest-belt level, not held. "
-              "single_claw_hammer_in_front_hand: exactly one claw hammer, gripped in the hand toward screen-left. "
+              "same_face_and_expression_as_hero: the face, expression, hair, head size and body proportions are identical to IMAGE 1, not redrawn. "
+              "stud_finder_held_in_one_hand: exactly one flat palm-sized bright-yellow stud finder held in one hand. "
+              "single_claw_hammer_in_other_hand: exactly one claw hammer gripped in the other hand. "
               "zero_duplicate_belt_hammer: no second hammer on the belt or anywhere else. "
               "full_body_unclipped: hair to boots fully visible. Be strict: when unsure answer false.")
     last = ""
@@ -231,20 +267,27 @@ def gate1_vision(client, model, hero, start):
     return out
 
 
-def make_start_frame(svc, ledger, hero, run_dir, judge_model):
+def make_start_frame(svc, ledger, hero, run_dir, judge_model, tail_cost=0.0):
     notes = []
+    # the Hero cut out once and set on exact #808080: these are the pixels everything else is checked against
+    ledger.reserve("hero cutout (birefnet)", CUTOUT_EST, service="fal")
+    hero_rgba, hero_comp = run_dir / "hero_rgba.png", run_dir / "hero_on_808080.png"
+    svc.cutout_still(hero, hero_rgba)
+    _, box = compose_start(hero_rgba, hero_comp)
     for attempt in range(1, STILL_ATTEMPTS + 1):
+        cost = GEMINI_IMAGE_EST + 3 * JUDGE_CALL_EST
+        if attempt > 1 and ledger.total + cost * BUFFER + tail_cost > ledger.cap:
+            notes.append("no budget left for another start frame attempt")
+            break
         try:
-            ledger.reserve(f"start frame attempt {attempt}: Gemini image + 3 judge calls", GEMINI_IMAGE_EST + 3 * JUDGE_CALL_EST, service="google")
-            ledger.reserve(f"start frame attempt {attempt}: fal cutout", CUTOUT_EST, service="fal")
+            ledger.reserve(f"start frame attempt {attempt}: Gemini hand edit + 3 judge calls", cost, service="google")
         except CapExceeded as exc:
             notes.append(str(exc))
             break
-        raw, rgba, start = run_dir / f"start_raw_{attempt}.png", run_dir / f"start_rgba_{attempt}.png", run_dir / "start_frame.png"
-        svc.gen_still(START_PROMPT, [("HERO PNG (sole style and likeness authority; ignore its magenta background):", hero)], raw)
-        svc.cutout_still(raw, rgba)
-        compose_start(rgba, start)
-        g1m = gate1_measured(start)
+        edited, start = run_dir / f"start_edit_{attempt}.png", run_dir / "start_frame.png"
+        svc.gen_still(START_PROMPT, [("HERO ON GREY (edit only the hands and what they hold):", hero_comp)], edited)
+        lock_hero_pixels(hero_comp, edited, box, start)
+        g1m = gate1_measured(start, hero_comp, box)
         g1v = gate1_vision(svc.judge(), judge_model, hero, start) if g1m["passed"] else {"passed": False, "failure_reason": "measured gate failed"}
         rep = {"attempt": attempt, "measured": g1m, "vision": g1v, "passed": bool(g1m["passed"] and g1v["passed"])}
         notes.append(rep)
@@ -257,14 +300,16 @@ def make_start_frame(svc, ledger, hero, run_dir, judge_model):
 
 # ------------------------------------------------------------------------------------------------------------------------- seeds
 
-def seed_jobs(lock):
+def seed_jobs(lock, models=("wan", "kling")):
     n = int(lock["seeds_per_move"])
     wan_seeds = [101, 202, 303, 404, 505][:n]
     jobs = []
-    for i in range(n):
-        jobs.append({"id": f"wan3_s{i + 1}", "model": "wan-3.0", "endpoint": WAN, "seed": wan_seeds[i]})
-    for i in range(n):
-        jobs.append({"id": f"kling3pro_s{i + 1}", "model": "kling-v3-pro", "endpoint": KLING, "seed": None})
+    if "wan" in models:
+        for i in range(n):
+            jobs.append({"id": f"wan3_s{i + 1}", "model": "wan-3.0", "endpoint": WAN, "seed": wan_seeds[i]})
+    if "kling" in models:
+        for i in range(n):
+            jobs.append({"id": f"kling3pro_s{i + 1}", "model": "kling-v3-pro", "endpoint": KLING, "seed": None})
     return jobs
 
 
@@ -405,14 +450,16 @@ def run(svc=None, trigger=None, run_dir_root=None):
     try:
         judge_model = qa_gate_v2.pick_judge(svc.judge())
         notes.append(f"vision judge: {judge_model}")
-        start, g1 = make_start_frame(svc, ledger, hero, run_dir, judge_model)
+        models = tuple(trig.get("models") or ("wan", "kling"))
+        jobs = seed_jobs(lock, models)
+        tail = sum(RATES[j["endpoint"]] for j in jobs) * float(lock["raw_duration_sec"]) + 3 * len(jobs) * JUDGE_CALL_EST + MATTE_FALLBACK_EST
+        start, g1 = make_start_frame(svc, ledger, hero, run_dir, judge_model, tail_cost=tail)
         if not start:
             why = "Gate 1 never passed on the start frame: " + json.dumps(g1[-1] if g1 else {})[:600]
         else:
-            ledger.reserve("Stage B judge calls: 6 seeds x 3 runs", 18 * JUDGE_CALL_EST, service="google")
+            ledger.reserve(f"Stage B judge calls: {len(jobs)} seeds x 3 runs", 3 * len(jobs) * JUDGE_CALL_EST, service="google")
             img_url = svc.upload(start)
             duration = float(lock["raw_duration_sec"])
-            jobs = seed_jobs(lock)
             say(f"[seeds] {len(jobs)} in parallel, {duration} s each")
             with ThreadPoolExecutor(max_workers=len(jobs)) as ex:
                 seeds = list(ex.map(lambda j: run_seed(svc, ledger, j, img_url, duration, seeds_dir), jobs))
@@ -429,10 +476,15 @@ def run(svc=None, trigger=None, run_dir_root=None):
                 winner = max(passed, key=lambda s: (s["gate"]["score"], -seeds.index(s)))
                 trimmed = winner["gate"]["trimmed"]
                 secs = probe(trimmed)["duration"]
-                ledger.reserve(f"matte winner {winner['id']}: {secs:.1f} s at ${MATTE_RATE}/s", MATTE_RATE * secs)
                 import matte_winner
                 alpha_raw = run_dir / "winner_matte_raw.webm"
-                _, used = svc.matte(trimmed, alpha_raw)
+                if ledger.total + MATTE_RATE * secs * BUFFER <= ledger.cap:
+                    ledger.reserve(f"matte winner {winner['id']}: {secs:.1f} s at ${MATTE_RATE}/s", MATTE_RATE * secs)
+                    _, used = svc.matte(trimmed, alpha_raw)
+                else:     # bria does not fit under this run's cap: the cheaper neural video matte (fal birefnet v2 video), booked at a conservative estimate
+                    ledger.reserve(f"matte winner {winner['id']}: birefnet v2 video (estimate)", MATTE_FALLBACK_EST)
+                    notes.append("bria matting did not fit under the cap; used birefnet v2 video, cost is an estimate")
+                    _, used = svc.matte(trimmed, alpha_raw, cheap=True)
                 rep = matte_winner.finish(alpha_raw, run_dir, probe(trimmed)["fps"])
                 rep["matte_model"] = used
                 (run_dir / "matte.json").write_text(json.dumps(rep, indent=2) + "\n")

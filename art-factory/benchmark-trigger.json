@@ -1,5 +1,8 @@
 {
-  "run_id": "bench-justinbb9-2",
+  "run_id": "bench-justinbb9-3",
   "move_id": "justin-bb-basic",
-  "cap_usd": 5.0
+  "cap_usd": 2.0,
+  "models": [
+    "wan"
+  ]
 }

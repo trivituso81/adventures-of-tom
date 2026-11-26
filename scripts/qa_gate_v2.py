@@ -161,7 +161,7 @@ def stage_b_prompt(move_meta):
         '"clean_strike_and_idle_return": bool, "strict_quadruped": bool, "failure_reason": string}. '
         "matches_hero_ink_pencil_style: every tile keeps the Hero PNG look (fine dark-brown ink contours, colored-pencil hatching and grain, about three heads tall) with no airbrushed, 3D, painted or photographic drift. "
         "locked_3q_left_facing: the character stays in three-quarters-left profile in ALL 8 tiles, never turning to the camera or to the right. "
-        "single_prop_integrity: exactly ONE of each expected prop in every tile, no duplicated, morphing, vanishing or belt-drawn props, and the clipped prop stays put. "
+        "single_prop_integrity: exactly ONE of each expected prop in every tile, no duplicated, morphing, vanishing or belt-drawn props, and each prop stays in the hand that held it in IMAGE 2. "
         "zero_baked_vfx_or_rings: no rings, reticles, beams, sparks, glows, speed lines or floor circles drawn into any tile. "
         "clean_strike_and_idle_return: one clear strike toward screen-left, and the last tile shows the same ready stance as IMAGE 2. "
         "strict_quadruped: if the character is a four-legged animal it stays on four legs; for a human character answer true only when the body keeps exactly two arms and two legs in every tile, with no extra or missing limbs. "

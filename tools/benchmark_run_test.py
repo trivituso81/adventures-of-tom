@@ -26,6 +26,31 @@ eps = [j["endpoint"] for j in jobs]
 check("3 Wan 3.0 and 3 Kling v3 Pro seeds", sum("wan-3.0" in e for e in eps) == 3 and sum("kling-video/v3/pro" in e for e in eps) == 3, str(eps))
 check("lock says 1.0x and a $5.00 cap", lock["playback_speed"] == 1.0 and lock["active_spend_cap_usd"] == 5.00)
 
+# 2b. direct-Hero lock: a "redrawn" edit that changes the face is thrown away outside the hand band, and the head gate measures it
+import numpy as np
+from PIL import Image
+tmp = Path(tempfile.mkdtemp())
+hero = Image.open(ROOT / "art-factory" / "refs" / "justin.png").convert("RGB")
+a = np.asarray(hero).astype(int)
+key = (a[..., 0] > 200) & (a[..., 2] > 200) & (a[..., 1] < 110)
+rgba = np.dstack([a, np.where(key, 0, 255)]).astype(np.uint8)
+Image.fromarray(rgba, "RGBA").save(tmp / "h.png")
+_, box = B.compose_start(tmp / "h.png", tmp / "comp.png")
+comp = np.asarray(Image.open(tmp / "comp.png").convert("RGB")).copy()
+bad = comp.copy(); bad[:, :, 0] = np.clip(bad[:, :, 0].astype(int) + 60, 0, 255)      # a model that tinted and redrew everything, face included
+Image.fromarray(bad).save(tmp / "bad.png")
+B.lock_hero_pixels(tmp / "comp.png", tmp / "bad.png", box, tmp / "final.png")
+fin = np.asarray(Image.open(tmp / "final.png").convert("RGB")).astype(int)
+x0, y0, x1, y1 = box; yb = y0 + int((y1 - y0) * B.HEAD_BAND)
+check("head area of the final frame is the Hero's own pixels", np.abs(fin[y0:yb] - comp[y0:yb].astype(int)).max() == 0)
+g = B.gate1_measured(tmp / "final.png", tmp / "comp.png", box)
+check("gate 1 head difference is 0 after the lock", g["head_mean_abs_diff_vs_hero"] == 0.0, str(g))
+Image.fromarray(bad).save(tmp / "raw_bad.png")
+g2 = B.gate1_measured(tmp / "raw_bad.png", tmp / "comp.png", box)
+check("gate 1 rejects an unlocked redraw of the face", g2["passed"] is False and g2["head_mean_abs_diff_vs_hero"] > 0.5, str(g2["head_mean_abs_diff_vs_hero"]))
+check("wan-only run has 3 seeds and no Kling", len(B.seed_jobs(lock, ("wan",))) == 3 and all("kling" not in j["endpoint"] for j in B.seed_jobs(lock, ("wan",))))
+check("prompt has no style or proportion words", not any(w in B.BENCH_PROMPT.lower() for w in ("hand-drawn", "heads", "caricature", "tall", "pencil", "ink")))
+
 # 3. blocker path: a start frame that is never on #808080 stops the run before any video call
 class Fake:
     videos = 0

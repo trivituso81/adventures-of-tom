@@ -7049,6 +7049,10 @@
     {
      "d": "2026-11-25",
      "t": "Tom (WO-01D): on iPhone Justin froze on frame 0 and the effects were missing. Not reproduced in WebKit; removed the per-frame tint and pre-render every frame, and moved the effects onto the Mudling (they were drawn beside Justin). Build justinbb9d, $0.00."
+    },
+    {
+     "d": "2026-11-25",
+     "t": "Tom (WO-01E): wan3_s1 failed visual QA (start frame redrawn, no stud-finder scan, effects unseen). Start frame now locks the Hero pixels, prompt restored to both beats, Wan 3.0 re-run with a $2.00 cap. Build justinbb9e."
     }
    ],
    "blocks": [],

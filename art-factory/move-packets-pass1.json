@@ -2489,16 +2489,16 @@
       "flavor": "Clobber",
       "lifecycle_state": "DRAFT_REVIEW",
       "pitch": {
-        "windup": "Justin, standing in place in three-quarters-left profile, coils slightly with the claw hammer already in his front hand and the yellow stud finder clipped stationary at his chest belt line.",
-        "peak": "Justin delivers one crisp forward-left tap into empty air with the claw hammer.",
-        "recovery": "Justin settles smoothly back into his exact starting ready stance."
+        "windup": "Justin, standing in place in three-quarters-left profile, holds the yellow stud finder in one hand and the claw hammer in the other from frame 0, and glides the stud finder smoothly across in front of him.",
+        "peak": "Justin pauses briefly, then delivers one crisp forward-left tap with the claw hammer.",
+        "recovery": "Justin settles smoothly back into his exact starting stance."
       },
       "held_props": [
-        "bright-yellow electronic stud finder clipped stationary at the chest belt line",
-        "single steel claw hammer gripped in the lead hand"
+        "flat palm-sized bright-yellow electronic stud finder held in one hand",
+        "single steel claw hammer gripped in the other hand"
       ],
-      "expected_prop": "a bright-yellow electronic stud finder clipped stationary at the chest belt line and ONE steel claw hammer gripped in the lead hand from frame 0, no second hammer on the belt",
-      "expected_action": "standing in place in three-quarters-left profile, Justin coils slightly, delivers one crisp forward-left tap into empty air with the claw hammer, and settles back into his exact starting ready stance",
+      "expected_prop": "a flat palm-sized bright-yellow electronic stud finder held in one hand and ONE steel claw hammer gripped in the other hand from frame 0, no second hammer on the belt",
+      "expected_action": "standing in place in three-quarters-left profile with the exact Hero face and expression, Justin glides the stud finder across in front of him, pauses, delivers one crisp forward-left tap with the claw hammer, and settles back into his exact starting stance",
       "needs_custom_start_frame": true,
       "prop_kit_id": "justin-studfinder-hammer",
       "safe_padding_pct": {
@@ -2545,9 +2545,8 @@
         "v11Hook": "Basic (0 Pep / +2 Pep, 80 Rec): 0.5x Clobber (+15% Clobber dmg taken 1t; +15% slower Clobber rec via Trait)"
       },
       "kettlebell": {
-        "in_hand": "the claw hammer in his front hand",
-        "fixed_prop": "the yellow stud finder clipped stationary at his chest belt line",
-        "strike": "one crisp forward-left tap into empty air with the claw hammer"
+        "in_hand": "the stud finder in one hand and the claw hammer in the other",
+        "strike": "one crisp forward-left tap with the claw hammer after the stud finder scan"
       },
       "qa_gate": {
         "run_id": "bench-justinbb9-2",
