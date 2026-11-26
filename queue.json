@@ -3844,8 +3844,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T09:27:50Z",
-   "state": "checking",
-   "since": "2026-11-26T09:58:02Z",
+   "state": "done",
+   "since": "2026-11-26T10:01:59Z",
    "run": 45790862688,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -3858,7 +3858,31 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-grace-ko/t1.js",
+    "img": "takes/body-grace-ko/t1.webp",
+    "frames": 75,
+    "kb": 1426,
+    "words": "0 to 148 step 2, 1.5x",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "ko_forward: ends 2% of the height in front of where it stood (falls forward, should fall backwards)",
+      "vision k_dizzy: Face shows sadness and concern, not dizziness, swirls, or crossed eyes.; Face shows sadness, not dizziness like swirls or crossed eyes.",
+      "vision k_back: Falls to side/sitting then lies on side, not backwards onto back with head to right.; No backwards fall; she crouches and sits facing forward."
+     ],
+     "faults": [
+      "k_back",
+      "k_dizzy",
+      "ko_forward"
+     ],
+     "vision_ran": true,
+     "spent": 0.0075,
+     "error": null,
+     "words": "The clip gate flags this take: ko_forward: ends 2% of the height in front of where it stood (falls forward, should fall backwards); vision k_dizzy: Face shows sadness and concern, not dizziness, swirls, or crossed eyes.; Face shows sadness, not dizziness like swirls or crossed eyes.; vision k_back: Falls to side/sitting then lies on side, not backwards onto back with head to right.; No backwards fall; she crouches and sits facing forward.."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
