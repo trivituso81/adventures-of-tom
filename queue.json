@@ -322,8 +322,9 @@
       "say": "the figure is 94 percent of the picture height (at least 60)"
      }
     ],
-    "main": false,
-    "note": ""
+    "main": true,
+    "note": "",
+    "build": "guideuse-45780590322"
    },
    "use": null,
    "left": false,
@@ -687,8 +688,9 @@
       "say": "the figure is 94 percent of the picture height (at least 60)"
      }
     ],
-    "main": false,
-    "note": ""
+    "main": true,
+    "note": "",
+    "build": "guideuse-45780590322"
    },
    "use": null,
    "left": false,
@@ -800,8 +802,9 @@
       "say": "the figure is 94 percent of the picture height (at least 60)"
      }
     ],
-    "main": false,
-    "note": ""
+    "main": true,
+    "note": "",
+    "build": "guideuse-45780590322"
    },
    "use": null,
    "left": false,
@@ -1140,8 +1143,9 @@
       "say": "the figure is 94 percent of the picture height (at least 60)"
      }
     ],
-    "main": false,
-    "note": ""
+    "main": true,
+    "note": "",
+    "build": "guideuse-45780590322"
    },
    "use": null,
    "left": false,
@@ -1197,8 +1201,9 @@
       "say": "the figure is 96 percent of the picture height (at least 60)"
      }
     ],
-    "main": false,
-    "note": ""
+    "main": true,
+    "note": "",
+    "build": "guideuse-45780590322"
    },
    "use": null,
    "left": false,
@@ -1254,8 +1259,9 @@
       "say": "the figure is 95 percent of the picture height (at least 60)"
      }
     ],
-    "main": false,
-    "note": ""
+    "main": true,
+    "note": "",
+    "build": "guideuse-45780590322"
    },
    "use": null,
    "left": false,
