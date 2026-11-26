@@ -5182,48 +5182,6 @@
    ]
   },
   {
-   "id": "svc-voice-gen",
-   "service": "voice-gen",
-   "lane": "elevenlabs",
-   "col": "wait",
-   "theme": "Tools",
-   "title": "voice-gen is running",
-   "next": "voice-gen is running",
-   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45087299032",
-   "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukHBwsjvxw8Cni8T7TE",
-    "opening": "service run"
-   },
-   "history": [
-    {
-     "d": "2026-11-22",
-     "t": "voice-gen started."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
-    },
-    {
-     "d": "2026-11-23",
-     "t": "Stuck twice: The rescue started 8:18 AM and went quiet for 2 hours. Waiting on Tom (card t-stuck-svvoice-gen)."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-22",
-   "changed": "2026-11-23",
-   "reruns": 1,
-   "rerun_at": "2026-11-21T21:31:38+00:00",
-   "rescue": {
-    "at": "2026-11-23T16:18:33+00:00",
-    "n": 1,
-    "why": "Quiet: the conversation may have stopped",
-    "url": "https://claude.ai/code/cse_01RXeukHBwsjvxw8Cni8T7TE",
-    "prev": ""
-   },
-   "started_at": "2026-11-23T16:18:33+00:00",
-   "waiting_on": "tom"
-  },
-  {
    "id": "t-wangaveup-stage-tom-glare-vid-r2",
    "lane": "tom",
    "col": "up",
@@ -5498,7 +5456,7 @@
   {
    "id": "t-stuck-svvoice-gen-2",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "unstick",
    "unstick": {
@@ -5522,11 +5480,16 @@
     {
      "d": "2026-11-23",
      "t": "Made fyi by the board: the work this card blocked is finished, so it no longer holds anything up."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Done by the board: the card is being worked on again."
     }
    ],
    "created": "2026-11-23",
-   "changed": "2026-11-23",
-   "fyi": true
+   "changed": "2026-11-26",
+   "fyi": true,
+   "done": "2026-11-26"
   },
   {
    "id": "t-b3s22ch19",
@@ -9213,14 +9176,14 @@
    "title": "Install Tom and Rose ride pictures: walk, intro, night",
    "theme": "Characters",
    "lane": "claude",
-   "col": "up",
+   "col": "done",
    "next": "Shipped as build ridepics1: the ride walk v2, intro v3 and night-light v2 are baked and pushed.",
    "blocks": [],
    "changed": "2026-11-26",
    "created": "2026-11-26",
    "tag": "ridepics1",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
     "opening": "\"implement the newest approved Tom + Rose pictures (meaning, the ones in the section Tom and Rose ride\""
    },
    "history": [
@@ -9231,6 +9194,10 @@
     {
      "d": "2026-11-26",
      "t": "Updated by ridepics1: pushed."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as ridepics1: Tom and Rose ride: the new walk, the opening's ride frames and the Lamby night-light picture are in the game"
     }
    ],
    "after": "t-ridepics1play",
@@ -9242,7 +9209,8 @@
     "model": "Claude Sonnet 5.5 (row B: the bakes exist and tests catch mistakes)",
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md and docs/CHANGES.md tomframes4 and ridepics1, then card c-ridepics1 in data/board.json. Your first push is the commit board: start c-ridepics1. Install tomride-walk-v2, tomride-intro-v3 and tomride-night-v2 (bake_tomride.py and bake_story_poses.py). Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-26"
   },
   {
    "id": "t-ridepics1play",
@@ -9271,20 +9239,24 @@
    "title": "Install TNB's newer frames: walk, feelings, talk, listen",
    "theme": "Characters",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "In progress: baking TNB's newly approved walking v3, feelings v4, talking v3 and listening v1 pictures.",
    "blocks": [],
    "changed": "2026-11-26",
    "created": "2026-11-26",
    "tag": "tnbframes",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
     "opening": "\"and finally once those are all done, do TNB's\""
    },
    "history": [
     {
      "d": "2026-11-26",
      "t": "Made by the session: Tom's words: \"and finally once those are all done, do TNB's\"."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "after": "t-tnbframesplay",
@@ -9319,6 +9291,31 @@
      "t": "Made by tnbframes."
     }
    ]
+  },
+  {
+   "id": "svc-voice-gen",
+   "service": "voice-gen",
+   "lane": "elevenlabs",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "voice-gen is running",
+   "next": "voice-gen is running",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45904459655",
+   "chat": {
+    "url": "",
+    "opening": "service run"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "voice-gen started."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "reruns": 1,
+   "rerun_at": "2026-11-21T21:31:38+00:00"
   }
  ],
  "sessions": [
@@ -9326,20 +9323,23 @@
    "url": "https://claude.ai/code/session_01RXeukEgRJmqHfC9UN7skQ3",
    "title": "Install Rose's new walk, feelings, talking, listen frames",
    "first": "2026-11-26T11:07:14-08:00",
-   "last": "2026-11-26T13:55:31-08:00",
+   "last": "2026-11-26T14:23:13-08:00",
    "tags": [
     "roseframes",
     "graceframes",
     "tomframes4",
     "deedeeframes",
-    "boppyframes"
+    "boppyframes",
+    "ridepics1"
    ],
    "cards": [
     "c-roseframes",
     "c-graceframes",
     "c-tomframes4",
     "c-deedeeframes",
-    "c-boppyframes"
+    "c-boppyframes",
+    "c-ridepics1",
+    "c-tnbframes"
    ]
   },
   {
@@ -16093,8 +16093,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "92f6b9041d220fbb8c0600ae52ac1bf86d63a5e4",
- "synced_at": "2026-11-26T21:56:23+00:00",
+ "synced": "c69b06532f28e0be34eed29702a6131549526547",
+ "synced_at": "2026-11-26T22:24:07+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
