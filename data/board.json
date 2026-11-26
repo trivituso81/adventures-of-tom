@@ -7436,7 +7436,7 @@
    "created": "2026-11-26",
    "changed": "2026-11-26",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFpdh5RK5hQ3kZE4T8",
+    "url": "https://claude.ai/code/session_01RXeukFpdh5RK5hQ3kZE4T8",
     "opening": "added by the wan-gen job"
    },
    "history": [
@@ -7451,6 +7451,10 @@
     {
      "d": "2026-11-26",
      "t": "Session started on this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -7518,7 +7522,7 @@
    "created": "2026-11-26",
    "changed": "2026-11-26",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukF7s1TDjALWmhgeYc9",
+    "url": "https://claude.ai/code/session_01RXeukF7s1TDjALWmhgeYc9",
     "opening": "added by the wan-gen job"
    },
    "history": [
@@ -7529,6 +7533,10 @@
     {
      "d": "2026-11-26",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -7557,7 +7565,7 @@
    "created": "2026-11-26",
    "changed": "2026-11-26",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukD7GEcmLtBCPMpBzQR",
+    "url": "https://claude.ai/code/session_01RXeukD7GEcmLtBCPMpBzQR",
     "opening": "added by the wan-gen job"
    },
    "history": [
@@ -7568,6 +7576,10 @@
     {
      "d": "2026-11-26",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -7684,6 +7696,36 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFpdh5RK5hQ3kZE4T8",
+   "title": "Fix the stopped video rose-doublelamby",
+   "first": "2026-11-26T12:42:01Z",
+   "last": "2026-11-26T12:42:01Z",
+   "tags": [],
+   "cards": [
+    "c-wanstop-rose-doublelamby-r1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukD7GEcmLtBCPMpBzQR",
+   "title": "Fix the stopped video rose-citadel",
+   "first": "2026-11-26T12:41:39Z",
+   "last": "2026-11-26T12:41:39Z",
+   "tags": [],
+   "cards": [
+    "c-wanstop-rose-citadel-r1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukF7s1TDjALWmhgeYc9",
+   "title": "Fix the stopped video rose-boomerang",
+   "first": "2026-11-26T12:41:27Z",
+   "last": "2026-11-26T12:41:27Z",
+   "tags": [],
+   "cards": [
+    "c-wanstop-rose-boomerang-r1"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukEJLmj5a5ydSskzMGQ",
    "title": "Last night: what the night shift did",
@@ -14178,8 +14220,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "61f1becadc80b30ca614357ffa6f01230b48a6ad",
- "synced_at": "2026-11-26T12:39:37+00:00",
+ "synced": "f1a6704354c26884fdff9580106a807727fccefb",
+ "synced_at": "2026-11-26T12:42:16+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
