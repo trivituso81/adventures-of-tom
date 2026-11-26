@@ -250,6 +250,7 @@ async function boot(){
     fetch('data/notify.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{NOTIFY=j;planRefresh();}).catch(()=>{});   // startpics10: the phone notification topic
     GUIDE_P=fetch('data/guide-anims.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{GUIDE=j;try{if(typeof buildAnims==='function'&&B3_CAST)buildAnims();}catch(e){}planRefresh();try{if(tab==='anims'&&sel&&typeof renderDetailKeep==='function')renderDetailKeep();}catch(e){}}).catch(()=>{});
     fetch('tools/art-library/wangen-jobs.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{JOBS=j;planRefresh();}).catch(()=>{});   // animplan1: the video jobs and their rev, for the Plan view
+    fetch('data/guide-manifest.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{if(j){j.by={};j.moves.forEach(m=>{if(m.moveId)j.by[m.moveId]=m;});MAN=j;}}).catch(()=>{});   // manifest1
     fetch('data/guide-words.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{GWORDS=j;}).catch(()=>{});   // guideflow5: the words of each failure (X1 and X2 are the page's own)
     MANI_P=fetch('data/guide-manifest.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{MANI=j;try{if(tab==='anims'&&sel&&typeof renderDetailKeep==='function')renderDetailKeep();}catch(e){}return j;}).catch(()=>null);
     PLAN_DOC=await fetch('data/guide-planned.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).catch(()=>null);   // battleguide2: everything planned and not built (tools/guide_planned.py)
@@ -705,7 +706,7 @@ const UP={pend:{},back:{},who:'',key:''},ALLC={};   // UP: a picture chosen to u
 const W_UP1='That file is not a picture.',W_UP2='That picture is too small. It needs to be at least 600 pixels tall.',W_UP3='That file is over 8 MB.',UP_MAX=8*1024*1024;
 const W_X1='Could not send. Nothing was made. Tap again.';
 const W_X2='This browser is not signed in to GitHub. Open the Board, tap the three dots, paste the token, then come back.';
-let GWORDS=null;
+let GWORDS=null,MAN=null;   // MAN: data/guide-manifest.json (tools/guidegen/manifest_crosswalk.py), the Stage 2A manifests tied to the game's moves
 const W_X21=()=>{const w=GWORDS&&GWORDS.words&&GWORDS.words.X21;return w?w.why+' '+w.do:'Cannot read the status right now. Trying again.';};
 class QRefused extends Error{}
 const tms=t=>{const v=Date.parse(t||'');return isNaN(v)?0:v;};
@@ -1301,6 +1302,17 @@ async function showTake(a,t){
   else{const c=$('cvc');if(c)c.parentNode.innerHTML='<div class="hint" style="padding:12px;text-align:center">No video yet</div>';}
   if(items.length)mpStart(items);
 }
+function manBlock(a){   // manifest1: what the manifests plan for a move and what of it is done (data/guide-manifest.json)
+  if(!MAN||!a||a.kind!=='move')return '';const m=MAN.by[a.id.replace(/^move:/,'')];if(!m)return '';const c=m.check,g=G(a)||{};
+  const yes=v=>v?'<b style="color:#6fd08c">Done</b>':'<b style="color:#e0a050">Not yet</b>';
+  const rows=[['Staging row written (data/b3-stage.js)',c.staged],['Video made and wired',c.clipWired&&g.video!==false],['Contact moment and hit stop applied ('+m.contactSec+' s, '+m.hitStopFrames+' frames)',c.contactApplied],['Effects built ('+(m.effects.length)+' named)',c.effectsBuilt],['Sound effects attached',c.sfxWired]];
+  const all=rows.every(r=>r[1]);
+  let h='<div class="gen" id="gman"><h3>What is done</h3><p class="hint">'+(all?'Everything below is done. Play it once in a fight to judge it.':'A move is finished when every line below says Done and you have played it once in a fight.')+'</p><table style="width:100%;border-collapse:collapse">';
+  rows.forEach(r=>{h+='<tr><td style="padding:3px 6px">'+esc(r[0])+'</td><td style="padding:3px 6px;text-align:right">'+yes(r[1])+'</td></tr>';});
+  h+='</table><p class="hint">The manifest plans '+m.seconds+' s: '+esc(m.motion)+'</p>';
+  if(m.effects.length)h+='<p class="hint">Effects it names: '+m.effects.map(esc).join(', ')+'.'+(m.libraryAssets.length?' Library assets: '+m.libraryAssets.map(esc).join(', ')+'.':' No library asset is assigned to it yet.')+'</p>';
+  return h+'</div>';
+}
 function askUse(){
   const a=GCUR.a,t=GCUR.t;if(!a||!t)return;
   if(!(lsGet(TOKEN)||Q.get('gh'))){$('guseconf').innerHTML='<p class="err">This browser has no GitHub token. Open the Board, tap the three dots, paste the token there, then come back.</p>';return;}
@@ -1347,6 +1359,7 @@ function genBlock(a){
   let h='<div class="gen" id="gen">'+((fam||g.canMake)&&!g.waits?'<div id="gq"></div><div id="gtake"></div>':'')+'<h3>Prompt</h3>';
   h+='<div class="meta" id="gmeta"><span class="chip">'+(g.oldDraft?'OLD DRAFT, NOT FOR USE':draft?'DRAFT':'Prompt v'+(g.promptRev||0))+'</span>'+(g.stage?'<span class="chip" id="gstage">'+esc(STAGE_TIER[g.stage.tier]||g.stage.tier)+', about '+g.stage.budget+' s'+(g.stage.keep?', video kept':'')+'</span>':'')+'<span class="chip">'+esc(g.route==='wan'?'Wan 3.0':'xAI Grok lite')+'</span><span class="chip">$'+g.price.toFixed(2)+' a try</span><span class="chip" id="gtk">Takes made: ...</span><span class="chip" id="gsp">Spent: ...</span></div>';
   h+='<p class="hint" id="gsrc">'+esc(src)+(g.madeBy?' ('+esc(g.madeBy)+')':'')+(g.video?'. It made the video above.':'. This animation has no video yet.')+'</p>';
+  h+=manBlock(a);
   if(g.waits==='staging')h+='<div class="cant" id="gstagewait"><b>Waits for staging.</b> '+esc(g.waitsWhy||'')+'</div>';   // movestage1: a family move with no staging row (data/b3-stage.js)
   if(!g.canMake&&!g.canStart&&g.missing)h+='<div class="cant" id="gcant"><b>Cannot be made yet.</b> '+esc(g.missing)+'</div>';
   const w=GW[a.id];
