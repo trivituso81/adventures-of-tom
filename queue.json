@@ -2738,8 +2738,8 @@
    "note": "",
    "cap": 1,
    "at": "2026-11-26T08:54:18Z",
-   "state": "checking",
-   "since": "2026-11-26T08:56:38Z",
+   "state": "done",
+   "since": "2026-11-26T09:03:22Z",
    "run": 45782279434,
    "fal": {
     "endpoint": "alibaba/wan-3.0/image-to-video",
@@ -2752,7 +2752,29 @@
    "cost": 0.5,
    "why": "",
    "do": "",
-   "result": null,
+   "result": {
+    "js": "takes/body-rose-dodge/t1.js",
+    "img": "takes/body-rose-dodge/t1.webp",
+    "frames": 58,
+    "kb": 805,
+    "words": "0 to 114 step 2",
+    "gate": {
+     "hold": true,
+     "reasons": [
+      "dodge_forward: the body goes forward 11% of the height (should go back or to the side)",
+      "vision d_back: She crouches in place without moving back or to the side.; Character crouches in place and stands without clear backward or side movement."
+     ],
+     "faults": [
+      "d_back",
+      "dodge_forward"
+     ],
+     "vision_ran": true,
+     "spent": 0.0074,
+     "error": null,
+     "words": "The clip gate flags this take: dodge_forward: the body goes forward 11% of the height (should go back or to the side); vision d_back: She crouches in place without moving back or to the side.; Character crouches in place and stands without clear backward or side movement.."
+    },
+    "n": 1
+   },
    "use": null,
    "left": false,
    "dry": false,
