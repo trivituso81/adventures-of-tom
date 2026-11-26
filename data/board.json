@@ -7797,7 +7797,7 @@
   {
    "id": "c-wanstop-rose-raspberry-r1",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "wanstop-rose-raspberry-r1",
    "title": "Fix the stopped video rose-raspberry",
@@ -7805,18 +7805,21 @@
    "blocks": [],
    "after": "nothing for Tom: end",
    "auto": true,
-   "start": true,
    "wan_card": "t-rosestage-lab",
    "created": "2026-11-26",
    "changed": "2026-11-26",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukF1rbVFnoe1adhMEML",
     "opening": "added by the wan-gen job"
    },
    "history": [
     {
      "d": "2026-11-26",
      "t": "Added by the wan-gen job (45822234075): rose-raspberry stopped at rev 1. attempt 1 (pad 0.8) p1; attempt 2 (pad 0.8) p1. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Missing cheek puff, lean left, and raspberry; shows ar"
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -7827,12 +7830,13 @@
     "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-rose-raspberry-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job rose-raspberry (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1. Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Missing cheek puff, lean left, and raspberry; shows ar. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: rose-raspberry-r1-result.json (every check with numbers and the look-check answers) and the videos rose-raspberry-r1.mp4, rose-raspberry-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-rosestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-rose-raspberry-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-rosestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-rose-raspberry-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "started_at": "2026-11-26T13:03:02+00:00"
   },
   {
    "id": "c-wanstop-rose-whoopee-r1",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "tag": "wanstop-rose-whoopee-r1",
    "title": "Fix the stopped video rose-whoopee",
@@ -7840,18 +7844,21 @@
    "blocks": [],
    "after": "nothing for Tom: end",
    "auto": true,
-   "start": true,
    "wan_card": "t-rosestage-lab",
    "created": "2026-11-26",
    "changed": "2026-11-26",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDXGs3AAhsyHm7c3WV",
     "opening": "added by the wan-gen job"
    },
    "history": [
     {
      "d": "2026-11-26",
      "t": "Added by the wan-gen job (45822234075): rose-whoopee stopped at rev 1. attempt 1 (pad 0.8) f_same, p1; attempt 2 (pad 0.8) p1. This animation has used 2 of its 4 tries ($1.00 of $3.20). Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Missing deadpan face, mat push, ear clamp, and Master-"
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -7862,7 +7869,31 @@
     "model": "Claude Sonnet 5.5 (wanauto1: the automatic route; one change from measured evidence)",
     "effort": "medium (one video; the checks say what failed)",
     "text": "Read CLAUDE.md (section wanauto1) and claude/handoff-rules.md, then card c-wanstop-rose-whoopee-r1 in data/board.json, claude/video-battle-plan.md sections 4.4, 4.12 and 4.14 and the job rose-whoopee (rev 1) in tools/art-library/wangen-jobs.json. The wan-gen Action stopped this video after its own checks, a re-roll included: failed twice: p1. Evidence: p1: Reading the pictures in order, does the video show the main action of this description well enough to be used as this battle move in a game? (Missing deadpan face, mat push, ear clamp, and Master-. This animation has used 2 of its 4 tries ($1.00 of $3.20). Its files are on branch wangen: rose-whoopee-r1-result.json (every check with numbers and the look-check answers) and the videos rose-whoopee-r1.mp4, rose-whoopee-a2-r1.mp4. First look at the pictures yourself (ffmpeg contact sheet of each video) and say in one line what really happens. Then change ONE thing in the job by that cause (the prompt sentence that causes it, the pad, or the start picture), keeping everything else (CLAUDE.md, Fix a miss with the smallest change), raise rev by one and say in `why` what was kept and what changed. But first: if a video does the move's main action and reads as the move (Tom 2026-11-21: it does not have to be perfect in every single way, it has to complete the overall purpose and theme), accept it instead of trying again: bake and wire it with tools/art-library/wanbake.py (bake() and wire() with the job's own settings), add its job to the open Tom watch card (field wanwatch) or make one, write the CHANGES heading and push, and start no new try. Only the measured faults that break the game picture (cut off at the edge, background not flat, feet sliding, a different person) always need a new try. Never make a painted pose and never run wangen.py yourself. Start the next try in the same push: set `wgen` on card t-rosestage-lab to {\"want\": true, \"at\": now, \"n\": 1, \"est\": 0.50, \"auto\": true}, keep the job in its `wan.jobs`, write the CHANGES heading `## wanstop-rose-whoopee-r1` and run bump_tags, and make the LAST commit of the push have exactly the subject `board: wan generate t-rosestage-lab` (that starts the wan-gen Action). Your first push is the commit board: start c-wanstop-rose-whoopee-r1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "started_at": "2026-11-26T13:03:02+00:00"
+  },
+  {
+   "id": "b-wanbulk-trosestagelab-45822234075",
+   "tag": "wanbulk-trosestagelab-45822234075",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-26",
+   "theme": "Battle System",
+   "title": "1 battle videos made from board card t-rosestage-lab passed their checks and were put in the game",
+   "next": "Done: 1 battle videos made from board card t-rosestage-lab passed their checks and were put in the game",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as wanbulk-trosestagelab-45822234075. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26"
   }
  ],
  "sessions": [
@@ -14464,8 +14495,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "ef87c45548c5295aea73c7d60e0bb045e8941487",
- "synced_at": "2026-11-26T12:50:53+00:00",
+ "synced": "5b82c1817a6c9520d88b5468792a00cdaf6144df",
+ "synced_at": "2026-11-26T13:03:05+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
