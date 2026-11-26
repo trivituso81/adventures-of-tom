@@ -7087,10 +7087,11 @@
    "url": "https://claude.ai/code/session_01RXeukD88aZXMwDZ8KSAuK8",
    "title": "Justin benchmark: Wan 3.0 vs Kling v3 Pro, #808080",
    "first": "2026-11-25T17:11:15-08:00",
-   "last": "2026-11-25T17:37:58-08:00",
+   "last": "2026-11-25T17:57:54-08:00",
    "tags": [
     "justinbb9a",
-    "justinbb9"
+    "justinbb9",
+    "justinbb9b"
    ],
    "cards": [
     "c-justinbb9"
@@ -13475,8 +13476,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "c452f1c71df55f954634572c35aa796e2e4b3a29",
- "synced_at": "2026-11-26T01:38:16+00:00",
+ "synced": "8c8193e20c44727776092fdc608361d824cb9fb9",
+ "synced_at": "2026-11-26T01:58:41+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
