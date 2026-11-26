@@ -8704,6 +8704,27 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFUy1ZAKH1RRjtXyko",
+   "title": "Install Tom's new walk, feelings, talking, listen frames",
+   "first": "2026-11-26T00:55:22-08:00",
+   "last": "2026-11-26T09:52:36-08:00",
+   "tags": [
+    "tomframes",
+    "tomframes2",
+    "tomstretch3",
+    "tomstretch4",
+    "tomstretch5",
+    "tomframes3"
+   ],
+   "cards": [
+    "c-tomframes",
+    "c-tomstretch3",
+    "c-tomstretch4",
+    "c-tomstretch5",
+    "c-tomframes3"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGgFC33g99gnexTkK9",
    "title": "Library set-pieces: the 22 setpiece_* effects",
    "first": "2026-11-26T09:20:08-08:00",
@@ -8713,25 +8734,6 @@
    ],
    "cards": [
     "c-vfxlib3"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFUy1ZAKH1RRjtXyko",
-   "title": "Install Tom's new walk, feelings, talking, listen frames",
-   "first": "2026-11-26T00:55:22-08:00",
-   "last": "2026-11-26T09:33:45-08:00",
-   "tags": [
-    "tomframes",
-    "tomframes2",
-    "tomstretch3",
-    "tomstretch4",
-    "tomstretch5"
-   ],
-   "cards": [
-    "c-tomframes",
-    "c-tomstretch3",
-    "c-tomstretch4",
-    "c-tomstretch5"
    ]
   },
   {
@@ -15266,8 +15268,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "973cf020df79d1670d4d577e9423eb57d9352f0b",
- "synced_at": "2026-11-26T17:39:40+00:00",
+ "synced": "a905a2d5a0d513c57321b8b3a01e2b5ffc657283",
+ "synced_at": "2026-11-26T17:53:26+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
