@@ -1,3 +1,7 @@
+## wanbulk-trosestagelab-45822234075 (2026-11-26): 1 battle videos made from board card t-rosestage-lab passed their checks and were put in the game
+
+The wan-gen Action made them (wanbulk, tools/art-library/wangen.py --bulk), measured them (height, feet, flat background, edges, last picture against first) and had a vision model check the motion and the person (tools/art-library/wanqa.py), then baked each with the settings stored on its job and wired it (tools/art-library/wanbake.py): rose-baitswitch. Nobody has watched them yet; the card asks Tom to.
+
 ## wanstop-rose-lavahop-r1 (2026-11-26): Rose's Floor Is Lava hop video is judged as a jump and its next try starts
 
 Both tries (rev 1) showed what the prompt asks for (gasp, look down, crouch, three hops, land and hold; hair and hands inside the frame), but the feet check read the hop heights (15 to 18 percent of the frame height in the air) as sliding feet and stopped it twice. One change: the job is `airborne: true`, so feet are judged in the first and last picture (the landing) like the other jump jobs. Prompt, seed, pad 0.8, start picture, model, bake and wire are kept. Job rev 2. Nothing for Tom.
