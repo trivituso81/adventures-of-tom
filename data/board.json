@@ -9775,7 +9775,7 @@
    "id": "c-movebench-8",
    "tag": "movebench8",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Move Workbench 8: the engine reads the stage",
    "next": "The game takes each move's stage steps, lasting objects and set piece from its settings file. The old staging file is deleted, and a family move with no stage can now be made. Starts by itself when Move Workbench 7 ships.",
@@ -9819,16 +9819,20 @@
     {
      "d": "2026-11-27",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as movebench8: the game plays each move's stage from its settings file; the old staging file is deleted and a family move with no stage can be made"
     }
    ],
-   "started_at": "2026-11-27T10:31:01+00:00"
+   "started_at": "2026-11-27T10:31:01+00:00",
+   "done": "2026-11-27"
   },
   {
    "id": "c-movebench-9",
    "tag": "movebench9",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 9: stage editor: words and accents",
    "next": "The Stage section: add, change, reorder and remove steps that need no picture (words on screen, shake, flash, dim, glow, knocking the monster back, a sound), each tied to a moment you pick in the preview. The Sound section. Starts by itself when Move Workbench 8 ships.",
@@ -9837,10 +9841,10 @@
    ],
    "after": "nothing for Tom: c-movebench-10",
    "created": "2026-11-26",
-   "changed": "2026-11-26",
+   "changed": "2026-11-27",
    "auto": true,
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDDtc1BVG2EiEUQ55d",
     "opening": "not started"
    },
    "prompt": {
@@ -9856,8 +9860,21 @@
     {
      "d": "2026-11-26",
      "t": "Added by c-movebench-design: phase 9 of claude/movebench-plan.md section g."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Unblocked: Move Workbench 8: the engine reads the stage is done."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started by the night shift."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
-   ]
+   ],
+   "started_at": "2026-11-27T11:38:51+00:00"
   },
   {
    "id": "c-movebench-10",
@@ -10170,8 +10187,10 @@
    "url": "https://claude.ai/code/session_01RXeukGMpRRocMwXoJ8sTFd",
    "title": "Move Workbench 8: the engine reads the stage",
    "first": "2026-11-27T10:37:41Z",
-   "last": "2026-11-27T10:37:41Z",
-   "tags": [],
+   "last": "2026-11-27T11:36:15Z",
+   "tags": [
+    "movebench8"
+   ],
    "cards": [
     "c-movebench-8"
    ]
@@ -17087,8 +17106,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "93507f51732e0db077aee23b04006fa5e28e8367",
- "synced_at": "2026-11-27T10:38:39+00:00",
+ "synced": "1a145a8ce1894b29541ff4609cca295d6c75897a",
+ "synced_at": "2026-11-27T11:38:53+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -17205,6 +17224,11 @@
     {
      "id": "c-movebench-8",
      "at": "2026-11-27T10:31:01+00:00",
+     "kind": "queued"
+    },
+    {
+     "id": "c-movebench-9",
+     "at": "2026-11-27T11:38:51+00:00",
      "kind": "queued"
     }
    ]
