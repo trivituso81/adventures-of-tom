@@ -11,17 +11,28 @@ HEAD="""'use strict';
 // MOVE_SPECS[<Guide animation id>] is what the game plays for that animation; an animation with no entry plays the defaults (engine/b3-spec.js msLive).
 const MOVE_SPECS={
 """
-def files():
-    out={}
-    for f in sorted(os.listdir(DIR)):
+def files(root=ROOT):
+    out={}; d0=os.path.join(root,'data','moves')
+    for f in sorted(os.listdir(d0)):
         if f.endswith('.json') and f!='index.json':
-            d=json.load(open(os.path.join(DIR,f),encoding='utf8')); out[f]=d
+            d=json.load(open(os.path.join(d0,f),encoding='utf8')); out[f]=d
     return out
-def build():
-    rows=[]
-    for f,d in sorted(files().items(),key=lambda x:x[1]['id']):
-        if d.get('live'): rows.append(' %s:%s'%(json.dumps(d['id']),json.dumps(d['live'],ensure_ascii=False,separators=(',',':'))))
-    return HEAD+',\n'.join(rows)+'\n};\n', len(rows)
+def row_text(d): return ' %s:%s'%(json.dumps(d['id']),json.dumps(d['live'],ensure_ascii=False,separators=(',',':')))
+def build_rows(root=ROOT):
+    """{animation id: the script line of its live part}, for every file that has a live part (movebench6: move-apply compares this with the script on disk)."""
+    return {d['id']:row_text(d) for f,d in sorted(files(root).items(),key=lambda x:x[1]['id']) if d.get('live')}
+def read_rows(root=ROOT):
+    """The same table read back from data/move-specs.js as it is on disk."""
+    p=os.path.join(root,'data','move-specs.js'); out={}
+    if not os.path.exists(p): return out
+    for line in open(p,encoding='utf8').read().split('\n'):
+        if line.startswith(' "'):
+            t=line.rstrip(',')
+            out[json.loads(t[1:t.index('":')+1])]=t
+    return out
+def build(root=ROOT):
+    rows=build_rows(root)
+    return HEAD+',\n'.join(rows.values())+'\n};\n', len(rows)
 def main():
     txt,n=build()
     if '--check' in sys.argv:

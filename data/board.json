@@ -9664,7 +9664,7 @@
    "blocks": [
     "c-movebench-7"
    ],
-   "after": "nothing for Tom: c-movebench-7",
+   "after": "t-movebench-6-try",
    "created": "2026-11-26",
    "changed": "2026-11-27",
    "auto": true,
@@ -9701,6 +9701,10 @@
     {
      "d": "2026-11-27",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Built movebench6: Save draft, Undo, Earlier versions, Finished, the statuses and progress list, and the move-apply Action. Hands Tom the card t-movebench-6-try."
     }
    ],
    "started_at": "2026-11-27T09:22:45+00:00"
@@ -10089,6 +10093,32 @@
     {
      "d": "2026-11-26",
      "t": "Made by c-movebench-2 (movebench2): the bar, step, body states, wind-ups, answers and moves with no video yet."
+    }
+   ]
+  },
+  {
+   "id": "t-movebench-6-try",
+   "title": "Change a move's timing and finish it",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "where": "phone",
+   "fyi": true,
+   "next": "Open ADMIN > BATTLE GUIDE > Animations and pick any family move that has a video. Change Freeze on the hit and Screen shake, watch the preview, tap Save draft, then Finished. Wait for the bar to say In the game with a build name, then tap In a fight and watch the move in a real fight. Press All good, or Something is wrong and say which move and what you saw.",
+   "steps": [
+    "Open ADMIN > BATTLE GUIDE > Animations and pick any family move that has a video.",
+    "Change Freeze on the hit and Screen shake, watch the preview, tap Save draft, then Finished.",
+    "Wait for the bar to say In the game with a build name, then tap In a fight and watch the move in a real fight.",
+    "Press All good, or Something is wrong and say which move and what you saw."
+   ],
+   "blocks": [],
+   "created": "2026-11-27",
+   "changed": "2026-11-27",
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Made by c-movebench-6 (movebench6): Save draft, Undo, Earlier versions, Finished and the move-apply Action. The Action has not run for real yet: your first Finished tap is its first run."
     }
    ]
   }

@@ -7,13 +7,14 @@
   "unsaved_none": "Nothing changed yet",
   "unsaved_one": "1 change, kept in this browser",
   "unsaved_many": "{n} changes, kept in this browser",
-  "unsaved_hint": "The game still plays the version it has. Saving to the game comes next.",
+  "unsaved_hint": "Save draft keeps them on every device. Finished puts them in the game.",
   "undo": "Undo",
   "reset": "Reset",
   "jump": "Jump to",
   "preview_off": "This animation has no preview yet.",
   "the_old": "The game plays: ",
-  "reset_hint": "Put back the version the game plays"
+  "reset_hint": "Put back the version the game plays",
+  "none_hint": "The game plays this animation as it is saved."
  },
  "kind": {
   "move": "Move",
@@ -29,8 +30,14 @@
  },
  "status": {
   "novideo": "No video yet",
-  "ingame": "As in the game",
-  "changed": "Changed here, not saved"
+  "changed": "Changed here, not saved",
+  "todo": "To do",
+  "inprogress": "In progress",
+  "waitvideo": "Waiting on a video",
+  "waitpicture": "Waiting on a picture",
+  "waitclaude": "Waiting on Claude",
+  "finished": "Finished by you, {date}",
+  "changed_since": "Changed since you finished it"
  },
  "runs": {
   "line": "Runs {len} s",
@@ -42,17 +49,19 @@
   "stage": "Stage and objects",
   "effects": "Effects",
   "sound": "Sound",
-  "answer": "When it answers"
+  "answer": "When it answers",
+  "versions": "Saved versions"
  },
  "nav": {
   "video": "Video",
   "timing": "Timing",
   "stage": "Stage",
   "effects": "Effects",
-  "sound": "Sound"
+  "sound": "Sound",
+  "versions": "Saves"
  },
  "timing": {
-  "note_draft": "Changes play in the preview at once. Nothing is saved to the game yet.",
+  "note_draft": "Changes play in the preview at once. Save draft keeps them; Finished puts them in the game.",
   "none_for_state": "This animation has no timing to set.",
   "hit": {
    "label": "The hit lands",
@@ -232,5 +241,64 @@
   "dim": "Dim the field",
   "glow": "Glow",
   "sfx": "Play a sound"
+ },
+ "chips": {
+  "all": "All",
+  "todo": "To do",
+  "inprogress": "In progress",
+  "waiting": "Waiting",
+  "finished": "Finished",
+  "novideo": "No video yet"
+ },
+ "list": {
+  "finished_of": "Finished {f} of {n}",
+  "hint": "Tap a name to see its animations",
+  "filter": "Show",
+  "person": "Finished {f} of {n}",
+  "match": "{k} match",
+  "none": "No animation matches this filter."
+ },
+ "save": {
+  "draft": "Save draft",
+  "finished": "Finished",
+  "yes": "Yes, put it in the game",
+  "not_yet_btn": "Not yet",
+  "confirm": "This changes the game.",
+  "confirm_hint": "Finished puts this version in the game as a new build and marks the animation Finished by you.",
+  "saving": "Saving...",
+  "no_token": "This browser has no GitHub token. Open the Board, tap the three dots and paste it there.",
+  "clash": "The file kept changing while saving. Nothing was lost: tap Save draft again.",
+  "failed": "Could not save: {why}.",
+  "draft_kept": "Draft saved",
+  "draft_hint": "It is on every device. The game still plays the version it has.",
+  "putting": "Putting it in the game. About 4 minutes.",
+  "putting_hint": "You can leave this page. The build name shows here when it is in.",
+  "in_game": "In the game (build {build}).",
+  "finished_by": "Finished by you, {date}.",
+  "changed_since": "Changed since you finished it",
+  "changed_hint": "A session changed this animation after you finished it. Open Saved versions to see what changed.",
+  "merged": "merged with a newer save",
+  "automatic": "Automatic",
+  "what_finished": "finished with no change",
+  "what_draft": "saved with no change",
+  "finished_line": "Finished by you, {date}. Build: {build}.",
+  "not_yet": "not in the game yet",
+  "never": "You have not finished this animation yet.",
+  "novideo_hint": "Make its video first",
+  "latest_change": "Latest change, by {who}: {what}."
+ },
+ "versions": {
+  "show": "Earlier versions",
+  "loading": "Loading...",
+  "none": "No earlier versions yet.",
+  "you": "You",
+  "claude": "Claude",
+  "migration": "Written from the old tables",
+  "finished": "finished",
+  "draft": "draft",
+  "bring": "Bring back",
+  "brought": "Brought back into your draft.",
+  "brought_hint": "Save draft to keep it, or Undo.",
+  "failed": "Could not read the versions: {why}."
  }
 }

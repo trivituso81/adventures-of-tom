@@ -1,0 +1,57 @@
+name: move-apply
+
+# movebench6 (plan claude/movebench-plan.md f.4; modelled on guide-apply.yml). Save draft and Finished in the Battle Guide's Move Workbench commit a file of data/moves/ and poke this
+# workflow (repository dispatch, event type move-apply). One run puts EVERY animation Tom finished since the last build in the game as ONE build (movespec-<run>): it rewrites
+# data/move-specs.js from the `live` parts, writes the CHANGES heading, stamps the build and pushes to main with the loop that starts every try from the newest main
+# (tools/movebench/apply.py). It rebuilds data/moves/index.json on every run (the statuses and the list's progress). Only after the contents API on main holds the script does it write
+# finished.build into the files. Nothing here calls a paid service and no secret but the Actions token is used.
+# A ten minute timer starts it anyway, so a lost poke or a dead run loses nothing. Manual runs (workflow_dispatch) are dry by default.
+# The concurrency sits on the JOB (wanstuck1): a push that has nothing to do with the workbench can never cancel a waiting run.
+on:
+  repository_dispatch:
+    types: [move-apply]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Do everything except the push and the writes to main'
+        type: boolean
+        default: true
+  schedule:
+    - cron: '*/10 * * * *'
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: "move-apply"
+      cancel-in-progress: false
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DRY: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && 'true' || 'false' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 50
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply
+        id: apply
+        run: |
+          set -o pipefail
+          ARGS=()
+          [ "$DRY" = "true" ] && ARGS+=(--dry-run)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rc=0
+          python3 -I tools/movebench/apply.py "${ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/apply.log" || rc=$?
+          { echo '### move-apply'; echo '```'; tail -30 "$RUNNER_TEMP/apply.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          exit $rc
+      - name: Publish
+        if: ${{ steps.apply.outputs.pushed == 'true' }}
+        run: gh api repos/${{ github.repository }}/actions/workflows/publish.yml/dispatches -f ref=main

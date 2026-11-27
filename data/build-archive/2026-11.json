@@ -1,4 +1,8 @@
 [
+{"tag":"b3s9c","at":"2026-11-20T01:49:58-08:00","what":"New battle: Nara and Boppy join the Battle Lab with both of their Vibes, and late joiners start from a Vibe Point pool","card":"c-b3s9c","theme":"Battle System"},
+{"tag":"ch1leftovers","at":"2026-11-20T01:37:02-08:00","what":"Chapter 1 staging leftovers checked: Amy and Aunt Ellie already stand clear and near, Gus and Bean wait for amber pictures","card":"c-ch1leftovers","theme":"Story and Dialogue"},
+{"tag":"boardux3","at":"2026-11-20T09:33:34+00:00","what":"The board is four tabs (For you, Claude, Chats, Shipped) with search, the same at every screen size","card":"c-boardux3","theme":"Tools"},
+{"tag":"alvareza","at":"2026-11-20T01:30:28-08:00","what":"Casa Alvarez scene: everyone walks into the living room and stays on one spot for the whole scene, nobody on the amber","card":"c-alvarez","theme":"Areas"},
 {"tag":"itembanner1","at":"2026-11-20T09:16:06+00:00","what":"An ITEM GAINED banner shows when the party gets an item from a talk, a gift or a defeated monster","card":"c-itembanner1","theme":"Game Shell"},
 {"tag":"artgen2","at":"2026-11-20T09:10:48+00:00","what":"QA for generated pictures is finished: measured on 40 pictures you approved, f_same made advisory","card":"c-artgen2","theme":"Tools"},
 {"tag":"boardux2","at":"2026-11-20T01:09:30-08:00","what":"Board cards read without opening them, and the card panel keeps its main button in view","card":"c-boardux2","theme":"Tools"},

@@ -55,7 +55,8 @@ function bnRng(seed) { let a=seed>>>0; return ()=>{ a=(a+0x6D2B79F5)>>>0; let t=
 // 'body:<owner>:<state>' a body state (one of BN_STATES).
 function bnParse(id) {
   const p=String(id||'').split(':');
-  if(p[0]==='move'&&B3_SKILLS[p[1]]) { const S=B3_SKILLS[p[1]],V=B3_VIBES[S.vibe]; return V?{kind:'move',S,V,owner:V.owner,skill:S.id}:null; }
+  if(p[0]==='move'&&B3_SKILLS[p[1]]) { const S=B3_SKILLS[p[1]],V=B3_VIBES[S.vibe]; if(V) return {kind:'move',S,V,owner:V.owner,skill:S.id};
+    return S.common&&!S.vibe?{kind:'move',S,V:null,owner:BN_FILL[0],skill:S.id}:null; }   // movebench6: Pick-Me-Up, the move every family member has, is shown on the first of them
   if(p[0]==='act'&&B3_FOES[p[1]]) { const A=B3_FOES[p[1]].acts.find(a=>a.id===p[2]); return A&&A.hits!=='attacker'?{kind:'act',foe:B3_FOES[p[1]],A,foeId:p[1],act:A.id}:null; }
   if(p[0]==='wind'&&B3_FOES[p[1]]) { const f=B3_FOES[p[1]],A=f.acts.find(a=>a.id===p[2]);
     return A&&A.hits!=='attacker'&&(A.wind||f.acts.some(a=>a.then===A.id))?{kind:'wind',foe:f,A,foeId:p[1],act:A.id}:null; }
@@ -73,7 +74,7 @@ function bnConfig(P) {
   if(P.kind==='move'||(P.kind==='state'&&!P.isFoe)) {
     const party=[P.owner].concat(BN_FILL.filter(x=>x!==P.owner&&B3_CAST[x]&&b3HasKit(x))).slice(0,BN_PARTY);
     cfg.party=party; cfg.formation=P.kind==='move'&&P.S.slot==='cap'?'bigone':'mudling';
-    for(const id of party) { const L=b3NewLoadout(id,B3_RULES.rankVp.length); if(P.kind==='move'&&id===P.owner) b3SetMain(id,L,P.V.id); cfg.loadouts[id]=L; }
+    for(const id of party) { const L=b3NewLoadout(id,B3_RULES.rankVp.length); if(P.kind==='move'&&P.V&&id===P.owner) b3SetMain(id,L,P.V.id); cfg.loadouts[id]=L; }
     cfg.keepLoadout=party.slice();
   } else {
     const party=BN_FILL.filter(x=>B3_CAST[x]&&b3HasKit(x)).slice(0,BN_PARTY); cfg.party=party;

@@ -94,10 +94,14 @@ th{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--mute
 .hero{display:flex;gap:14px;align-items:center;margin-top:14px}
 .hero img{flex:none;width:92px;height:92px;border-radius:18px;object-fit:cover;object-position:top;background:var(--well)}
 .hero h2{margin:0}
-.plansum{display:flex;gap:8px;margin:0 0 8px}
-.plansum div{flex:1 1 0;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px;text-align:center}
-.plansum b{display:block;font-size:22px}.plansum span{font-size:12px;color:var(--muted)}
-.plangrp{margin:0 0 8px}.plangrp summary{cursor:pointer;font-weight:800;padding:8px 2px;min-height:36px}.plangrp summary .hint{font-weight:400;font-size:12px}
+.mprog{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:0 0 10px}
+.mprog .mt{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.mprog .mt b{font-size:18px}.mprog .mt span{font-size:12px;color:var(--muted)}
+.mbar{height:10px;border-radius:999px;background:var(--well);border:1px solid var(--line);overflow:hidden;margin:8px 0 10px}.mbar i{display:block;height:100%;background:var(--good);min-width:0}
+.mchips{display:flex;flex-wrap:wrap;gap:6px}.mchips button{min-height:40px;padding:4px 12px;border-radius:999px;font-size:13px;font-weight:700}.mchips button[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}.mchips button b{margin-left:5px;font-weight:900}
+.sdot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:baseline;background:var(--muted)}
+.sword{font-size:12px;font-weight:700;color:var(--muted);margin-left:4px}
+.s-novideo .sdot,.sdot.s-novideo{background:var(--prob)}.s-todo .sdot,.sdot.s-todo{background:#8fd3ff}.s-inprogress .sdot,.sdot.s-inprogress,.sdot.s-changed{background:#d9a82b}
+.sdot.s-waitvideo,.sdot.s-waitpicture,.sdot.s-waitclaude{background:#b69cff}.sdot.s-finished{background:var(--good)}
 .seg{display:flex;gap:6px;margin:10px 0}
 .seg button{flex:1 1 0;min-width:0;background:var(--surface);border:1px solid var(--line);font-size:14px;padding:8px 6px}
 .seg button[aria-pressed=true]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
@@ -252,10 +256,14 @@ a.play.fight{background:var(--surface);border:1px solid var(--accent);color:var(
 .wbrep{margin:8px 0 0;font-size:12px;color:var(--muted);line-height:1.5}.wbrep b{color:var(--text)}
 .wbl{list-style:none;margin:0;padding:0}.wbl li{display:flex;gap:10px;align-items:baseline;padding:8px 0;border-top:1px solid var(--line);font-size:14px}.wbl li:first-child{border-top:0}
 .wbl .tm{flex:none;min-width:58px;font-weight:800;color:var(--accent);font-size:13px}.wbl .dt{color:var(--muted);font-size:12px}
-.wb-bottom{flex:none;border-top:1px solid var(--line);padding:8px 12px calc(8px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center;flex-wrap:nowrap;background:var(--surface)}
-.wb-bottom .wbu{flex:1 1 auto;min-width:0;font-size:13px;line-height:1.25}.wb-bottom .wbu b{display:block;font-size:14px}.wb-bottom .wbu span{color:var(--muted);font-size:12px}
+.wb-bottom{flex:none;border-top:1px solid var(--line);padding:8px 12px calc(8px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--surface)}
+.wb-bottom .wbu{flex:1 1 180px;min-width:0;font-size:13px;line-height:1.25}.wb-bottom .wbu b{display:block;font-size:14px}.wb-bottom .wbu span{color:var(--muted);font-size:12px}
 .wb-bottom button{flex:none;min-height:44px;padding:8px 14px;font-weight:700}
 .wb-bottom button:disabled{opacity:.45}
+.wb-bottom #wbfin{background:var(--accent);color:var(--on-accent)}.wb-bottom .wbu.err b{color:var(--prob-text)}
+@media (max-width:560px){.wb-bottom{padding-top:6px;padding-bottom:calc(6px + env(safe-area-inset-bottom));gap:6px}.wb-bottom .wbu{flex:1 1 100%}.wb-bottom .wbu span{display:none}.wb-bottom button{flex:1 1 0;padding:6px;min-height:42px}}
+.wbver{list-style:none;margin:8px 0 0;padding:0}.wbver li{display:flex;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:14px}.wbver li:first-child{border-top:0}
+.wbver .vw{flex:1 1 auto;min-width:0}.wbver .vw b{display:block;font-size:13px}.wbver .vw span{display:block;font-size:12px;color:var(--muted)}.wbver button{flex:none;min-height:40px;padding:4px 12px}
 /* upright: the preview shrinks to a small player while the page is scrolled to a setting */
 .wb-prev.small .btag{display:none}
 .wb-prev.small{display:grid;grid-template-columns:minmax(0,42%) minmax(0,1fr);gap:0 10px;align-items:start}
@@ -326,7 +334,7 @@ const CLIP_SRC={};         // clip id -> the address of its data file, read from
 function bclipDefine(id,D){CLIPS[id]=D;}
 let WORDS=null,WORDS_P=null;   // movebench5: data/movebench-words.json, every label of the workbench
 let MANI=null,MANI_P=null;   // guidecross1: data/guide-manifest.json (tools/guidegen/manifest_crosswalk.py)
-let BUILD='',BOARD_DOC=null,GUIDE=null,GUIDE_P=null,JOBS=null,PLAN_DOC=null,INDEX_SRCS=[];   // GUIDE: data/guide-anims.json (guidegen1a): per animation its prompt, start picture, price and what is missing
+let BUILD='',BOARD_DOC=null,GUIDE=null,GUIDE_P=null,PLAN_DOC=null,INDEX_SRCS=[];   // GUIDE: data/guide-anims.json (guidegen1a): per animation its prompt, start picture, price and what is missing
 function addScript(src){return new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=()=>no(new Error('Could not load '+src));document.head.appendChild(s);});}
 async function boot(){
   try{
@@ -345,15 +353,15 @@ async function boot(){
     for(const s of srcs) if(/^engine\/clip-ground\.js/.test(s)) await addScript(s).catch(()=>{});   // rose-lava-xftr: the game's ground effects (lava) for the player
     await addScript('data/portrait-ver.js?t='+Date.now()).catch(()=>{});   // portrait1: PORTRAIT_V, the stamp of the face pictures
     fetch('engine/main.js?t='+Date.now(),{cache:'no-store'}).then(x=>x.text()).then(t=>{const m=t.match(/textContent='build ([^']+)'/);if(m){BUILD=m[1];const bp=$('buildline');bp.textContent=BUILD;bp.href='builds.html?build='+encodeURIComponent(BUILD);bp.hidden=false;}}).catch(()=>{});
-    fetch(BOARD+'?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{BOARD_DOC=j;planRefresh();}).catch(()=>{});
-    fetch('data/notify.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{NOTIFY=j;planRefresh();}).catch(()=>{});   // startpics10: the phone notification topic
-    GUIDE_P=fetch('data/guide-anims.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{GUIDE=j;try{if(typeof buildAnims==='function'&&B3_CAST)buildAnims();}catch(e){}planRefresh();try{if(tab==='anims'&&sel&&typeof renderDetailKeep==='function')renderDetailKeep();}catch(e){}}).catch(()=>{});
-    fetch('tools/art-library/wangen-jobs.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{JOBS=j;planRefresh();}).catch(()=>{});   // animplan1: the video jobs and their rev, for the Plan view
+    fetch(BOARD+'?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{BOARD_DOC=j;moveRefresh();}).catch(()=>{});
+    fetch('data/notify.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{NOTIFY=j;moveRefresh();}).catch(()=>{});   // startpics10: the phone notification topic
+    GUIDE_P=fetch('data/guide-anims.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{GUIDE=j;try{if(typeof buildAnims==='function'&&B3_CAST)buildAnims();}catch(e){}moveRefresh();try{if(tab==='anims'&&sel&&typeof renderDetailKeep==='function')renderDetailKeep();}catch(e){}}).catch(()=>{});
+    moveIdxLoad();   // movebench6: data/moves/index.json, the statuses and the list's progress
     fetch('data/guide-manifest.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{if(j){j.by={};j.moves.forEach(m=>{if(m.moveId)j.by[m.moveId]=m;});MAN=j;}}).catch(()=>{});   // manifest1
     fetch('data/guide-words.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{GWORDS=j;}).catch(()=>{});   // guideflow5: the words of each failure (X1 and X2 are the page's own)
     MANI_P=fetch('data/guide-manifest.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{MANI=(j&&j.summary&&j.bySkill)?j:null;try{if(tab==='anims'&&sel&&typeof renderDetailKeep==='function')renderDetailKeep();}catch(e){}return j;}).catch(()=>null);
     PLAN_DOC=await fetch('data/guide-planned.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).catch(()=>null);   // battleguide2: everything planned and not built (tools/guide_planned.py)
-    build();route();qStart();
+    await WORDS_P;build();route();qStart();
   }catch(e){$('list').innerHTML='<div id="boot" class="err">'+esc(e.message)+'. Open this page again in a minute; if it stays, tell Claude.</div>';}
 }
 
@@ -392,7 +400,7 @@ function statusesOf(effects){const out=[];(function walk(a){(a||[]).forEach(e=>{
 // An animation is: a body state of someone (idle, hit...), a family move, or a monster act (plus its wind-up). `clip` is its video's id when it has one.
 let ANIMS=[],ANIM_BY={};
 function owners(){return Object.keys(B3_CAST).concat(Object.keys(B3_FOES));}
-const ownerName=id=>((GUIDE&&GUIDE.owners&&GUIDE.owners[id])||{}).name||(B3_CAST[id]||B3_FOES[id]||{}).name||cap(id);
+const ownerName=id=>((GUIDE&&GUIDE.owners&&GUIDE.owners[id])||{}).name||(B3_CAST[id]||B3_FOES[id]||{}).name||(id==='team'?'Everyone':cap(id));   // movebench6: team holds Pick-Me-Up, the move every family member has
 function buildAnims(){
   ANIMS=[];ANIM_BY={};
   const add=a=>{a.video=!!(a.clip&&CLIP_SRC[a.clip]);ANIMS.push(a);ANIM_BY[a.id]=a;};
@@ -409,6 +417,7 @@ function buildAnims(){
     Object.values(B3_SKILLS).filter(s=>s.vibe&&B3_VIBES[s.vibe]&&B3_VIBES[s.vibe].owner===id).forEach(s=>{const a=s.anim||{};
       add({id:'move:'+s.id,owner:id,kind:'move',name:s.name,clip:a.kind==='clip'?a.clip:null,shape:a.shape||'',what:'move '+s.id+' in data/b3-kit-'+id+'.js',vibe:B3_VIBES[s.vibe].name});});
   });
+  if(B3_SKILLS.pick_me_up)add({id:'move:pick_me_up',owner:'team',kind:'move',name:B3_SKILLS.pick_me_up.name,clip:null,shape:'',what:'move pick_me_up in data/b3-rules.js'});   // movebench6: the universal move gets a row of its own
   Object.values(B3_FOES).forEach(f=>{body(f.id);
     f.acts.forEach(act=>{const a=act.anim||{};
       add({id:'act:'+f.id+':'+act.id,owner:f.id,kind:'act',name:act.name,clip:a.kind==='clip'?a.clip:null,what:'act '+act.id+' of '+f.id+' in data/b3-foes-ch'+String(f.ch).padStart(2,'0')+'.js'});
@@ -554,42 +563,65 @@ function renderList(){
     const rows=glossRows().filter(s=>!glossKind||s.kind===glossKind);
     h+='<div class="grp">'+rows.length+' entries</div>'+rows.map(s=>rowHtml('glossary',s.id,s.name,esc(s.desc||''),'','<span class="badge">'+esc(s.kind)+'</span>')).join('');
   }else if(tab==='anims'){
-    const tot=ANIMS.length,v=ANIMS.filter(a=>a.video).length;
-    h=(MANI?rowHtml('anims','todo','What Tom has to do',esc(MANI.summary.decide.reduce((n,g)=>n+(g.count?1:0),0)+' decisions waiting, '+MANI.counts.moves+' moves in the manifests'),''):'')+notifyHtml()+planHtml()+'<p class="hint" style="margin:0 2px 10px">'+v+' of '+tot+' animations are videos. Tap a name, play an animation, and send Claude a note on it.</p>';
-    const line=id=>{const A=animsOf(id),n=A.filter(a=>a.video).length;return A.length?rowHtml('anims',id,ownerName(id),n+' video'+(n===1?'':'s')+', '+(A.length-n)+' without',facePic(id)):'';};
-    h+='<div class="grp">Family</div>'+Object.keys(B3_CAST).map(line).join('');
+    const tot=ANIMS.length,v=ANIMS.filter(a=>a.video).length,cn=moveCounts();
+    h=(MANI?rowHtml('anims','todo','What Tom has to do',esc(MANI.summary.decide.reduce((n,g)=>n+(g.count?1:0),0)+' decisions waiting, '+MANI.counts.moves+' moves in the manifests'),''):'')+notifyHtml()+moveSummaryHtml(cn)+'<p class="hint" style="margin:0 2px 10px">'+v+' of '+tot+' animations are videos. Tap a name, play an animation, and send Claude a note on it.</p>';
+    const line=id=>{const A=animsOf(id);if(!A.length)return '';const o=cn.own[id]||{n:A.length,fin:0,by:{}},g=MS_GROUP[MF],k=g?g.reduce((n,x)=>n+(o.by[x]||0),0):0;if(g&&!k)return '';
+      return rowHtml('anims',id,ownerName(id),esc(W('list.person',{f:o.fin,n:o.n}))+(g?' &middot; '+esc(W('list.match',{k})):''),facePic(id));};
+    const grp=(t,ids)=>{const r=ids.map(line).join('');return r?'<div class="grp">'+t+'</div>'+r:'';};
+    h+=grp('Family',Object.keys(B3_CAST).concat(['team']));
     const by={};Object.values(B3_FOES).forEach(f=>{(by[f.ch]=by[f.ch]||[]).push(f);});
-    h+=Object.keys(by).map(ch=>'<div class="grp">'+(isNaN(ch)?cap(ch)+' chapter':'Chapter '+ch)+' monsters</div>'+by[ch].map(f=>line(f.id)).join('')).join('');
+    h+=Object.keys(by).map(ch=>grp((isNaN(ch)?cap(ch)+' chapter':'Chapter '+ch)+' monsters',by[ch].map(f=>f.id))).join('');
+    if(MS_GROUP[MF]&&!h.includes('class="row'))h+='<p class="hint">'+esc(W('list.none'))+'</p>';
   }
   L.innerHTML=h;
   const on=L.querySelector('.row.on');if(on&&wide())on.scrollIntoView({block:'nearest'});
 }
-// ---------- the Plan view (animplan1) ----------
-// Every animation in one of three places. DONE: a baked video is in the game. MAKING: a video job (tools/art-library/wangen-jobs.json, shown with its rev) or an open
-// c-wanstop card on the board has it and no baked clip yet. NEXT: no video and no job. Read from the same data as the rest of the guide, so it moves by itself.
-function planRefresh(){try{if(tab==='anims'&&!sel&&typeof ANIMS!=='undefined'&&ANIMS.length){const o=[...document.querySelectorAll('.plangrp')].map(d=>d.open);renderList();document.querySelectorAll('.plangrp').forEach((d,i)=>{if(o[i]!==undefined)d.open=o[i];});}}catch(e){}}
-function planGroups(){
-  const cards=((BOARD_DOC||{}).cards||[]).filter(c=>/^c-wanstop-/.test(c.id)&&c.col!=='done'),g={done:[],making:[],next:[]};
-  ANIMS.forEach(a=>{
-    if(a.video){g.done.push({a});return;}
-    const job=((GUIDE&&GUIDE.anims&&GUIDE.anims[a.id])||{}).job||'',jr=job&&JOBS&&JOBS[job]?JOBS[job].rev:null;
-    const stop=job?cards.find(c=>c.id.indexOf('c-wanstop-'+job+'-r')===0):null;
-    if(jr!=null||stop||(job&&!JOBS)){
-      const rev=jr!=null?jr:stop?+stop.id.split('-r').pop():null;
-      g.making.push({a,rev,stopped:!!stop});
-    }else g.next.push({a});
-  });
-  return g;
+// ---------- statuses and the list's progress (movebench6, claude/movebench-plan.md d.4 and d.5) ----------
+// One status per animation. The files answer five of the eight (No video yet, To do, In progress, Finished, Changed since you finished it): the move-apply Action writes them to
+// data/moves/index.json. This page adds the three that live in other data (Waiting on a video: his row in the queue; Waiting on a picture: a start picture being made; Waiting on
+// Claude: an open c-anim card). The words are in data/movebench-words.json.
+let MOVEIDX=null,MF='all';
+const MS_GROUP={all:null,todo:['todo'],inprogress:['inprogress','changed'],waiting:['waitvideo','waitpicture','waitclaude'],finished:['finished'],novideo:['novideo']};
+async function moveIdxLoad(){
+  try{
+    let j=null;const tok=lsGet(TOKEN);
+    if(tok||Q.get('gh')){try{const g=await ghGetJson('data/moves/index.json','main',tok);j=g&&g.doc;}catch(e){}}
+    if(!j){const r=await fetch('data/moves/index.json?t='+Date.now(),{cache:'no-store'});if(r.ok)j=await r.json();}
+    if(j&&j.anims){MOVEIDX=j;moveRefresh();if(typeof WB!=='undefined'&&WB.a&&typeof wbPaint==='function')wbPaint();}
+  }catch(e){}
 }
-function planHtml(){
-  const g=planGroups(),n=ANIMS.length;
-  const grp=[['making','Making','A video job has it, no baked video yet',x=>'<span class="badge w">'+(x.rev!=null?'REV '+x.rev:'JOB')+'</span>'+(x.stopped?' <span class="badge o">STOPPED</span>':'')],
-    ['next','Next','No video and no job yet',()=>'<span class="badge n">NEXT</span>'],
-    ['done','Done','A baked video is in the game',()=>'<span class="badge v">DONE</span>']];
-  let h='<div class="grp">Plan: '+n+' animations</div><div class="plansum">'+grp.map(x=>'<div><b>'+g[x[0]].length+'</b><span>'+x[1]+'</span></div>').join('')+'</div>';
-  h+=grp.map(x=>'<details class="plangrp" data-plan="'+x[0]+'"'+(x[0]==='making'?' open':'')+'><summary>'+x[1]+' ('+g[x[0]].length+') <span class="hint">'+x[2]+'</span></summary>'
-    +(g[x[0]].length?g[x[0]].map(r=>rowHtml('anims',r.a.owner,r.a.name,esc(ownerName(r.a.owner)),'',x[3](r))).join(''):'<p class="hint">Nothing here.</p>')+'</details>').join('');
-  return h;
+function moveRefresh(){try{if(tab==='anims'&&!sel&&typeof ANIMS!=='undefined'&&ANIMS.length)renderList();}catch(e){}}
+const movePicBusy=a=>typeof qItems==='function'&&qItems().some(i=>i.kind==='picture'&&i.who===a.owner&&!['done','failed','cancelled'].includes(i.state));
+const moveCardOpen=a=>!!((BOARD_DOC||{}).cards||[]).find(c=>/^c-anim-/.test(c.id)&&c.anim===a.id&&c.col!=='done');
+function moveStatus(a){
+  if(typeof qBusy==='function'&&qBusy(a))return 'waitvideo';
+  if(movePicBusy(a))return 'waitpicture';
+  if(moveCardOpen(a))return 'waitclaude';
+  const e=MOVEIDX&&MOVEIDX.anims&&MOVEIDX.anims[a.id];
+  if(typeof WB!=='undefined'&&WB.a&&WB.id===a.id){
+    if(wbChanges()>0)return 'inprogress';
+    const d=WB.file;   // the file as just read answers before the index does (the index is rebuilt only when move-apply runs); the same rules as status_of in tools/movebench/apply.py
+    if(d)return d.draft!=null?'inprogress':d.finished?(d.finished.rev===d.rev?'finished':'changed'):(a.video?'todo':'novideo');
+  }
+  return e?e.status:(a.video?'todo':'novideo');
+}
+const moveEntry=a=>MOVEIDX&&MOVEIDX.anims&&MOVEIDX.anims[a.id]||null;
+function moveStatusText(a,s){
+  if(s==='finished'){const e=moveEntry(a),f=(typeof WB!=='undefined'&&WB.a&&WB.id===a.id&&WB.file&&WB.file.finished)||(e&&e.finished);return W('status.finished',{date:f&&f.at?wbDate(f.at):''});}
+  return W('status.'+(s==='changed'?'changed_since':s));
+}
+function moveCounts(){
+  const c={n:0,fin:0,by:{},own:{}};
+  ANIMS.forEach(a=>{const s=moveStatus(a),o=c.own[a.owner]=c.own[a.owner]||{n:0,fin:0,by:{}};c.n++;o.n++;c.by[s]=(c.by[s]||0)+1;o.by[s]=(o.by[s]||0)+1;if(s==='finished'){c.fin++;o.fin++;}});
+  return c;
+}
+const moveMatch=a=>{const g=MS_GROUP[MF];return !g||g.includes(moveStatus(a));};
+function moveSummaryHtml(c){
+  const pct=c.n?Math.round(c.fin*1000/c.n)/10:0,tot=g=>g?g.reduce((n,k)=>n+(c.by[k]||0),0):c.n;
+  const chips=[['all','all'],['todo','todo'],['inprogress','inprogress'],['waiting','waiting'],['finished','finished'],['novideo','novideo']];
+  return '<div class="mprog" id="mprog"><div class="mt"><b>'+esc(W('list.finished_of',{f:c.fin,n:c.n}))+'</b><span>'+esc(W('list.hint'))+'</span></div>'
+    +'<div class="mbar" role="progressbar" aria-valuemin="0" aria-valuemax="'+c.n+'" aria-valuenow="'+c.fin+'"><i style="width:'+pct+'%"></i></div>'
+    +'<div class="mchips" role="group" aria-label="'+esc(W('list.filter'))+'">'+chips.map(x=>'<button type="button" data-mf="'+x[0]+'" aria-pressed="'+(MF===x[0])+'">'+esc(W('chips.'+x[1]))+'<b>'+tot(MS_GROUP[x[0]])+'</b></button>').join('')+'</div></div>';
 }
 function glossRows(){
   const a=Object.values(B3_STATUS).map(s=>s);
@@ -1156,10 +1188,11 @@ function openActivity(){
   qPaint();
 }
 function animRow(a){
-  return '<div class="anim"><span class="t"><b>'+esc(a.name)+'</b><div class="qrow" data-qrow="'+esc(a.id)+'"></div></span>'+playBtn(a.id,true)+'</div>';
+  const st=moveStatus(a);
+  return '<div class="anim"><span class="t"><b>'+esc(a.name)+'</b> <span class="mst" data-mst="'+st+'"><i class="sdot s-'+st+'"></i><span class="sword">'+esc(moveStatusText(a,st))+'</span></span><div class="qrow" data-qrow="'+esc(a.id)+'"></div></span>'+playBtn(a.id,true)+'</div>';
 }
 function animsHtml(id){
-  const A=animsOf(id),f=animFilter,show=A.filter(a=>f==='all'||(f==='work'?qBusy(a):(f==='video')===a.video));
+  const A=animsOf(id),f=animFilter,show=A.filter(a=>f==='all'||(f==='work'?qBusy(a):(f==='video')===a.video)).filter(moveMatch);
   const o=(GUIDE&&GUIDE.owners&&GUIDE.owners[id])||{};
   let h='<div class="hero"><img alt="" src="'+facePic(id)+'" onerror="this.style.visibility=\'hidden\'"><div><h2>'+esc(ownerName(id))+'</h2><div class="hint">'+A.filter(a=>a.video).length+' of '+A.length+' animations are videos</div></div></div>';
   if(o.route==='wan')h+='<div class="card qtop" data-qtop="'+esc(id)+'"></div>';
@@ -1174,7 +1207,7 @@ function animsHtml(id){
 // ---------- the player ----------
 // Plays a clip the way the game holds it: one packed picture (D.src) and, per frame, where it sits in the picture (x,y,w,h) and inside the full frame (ox,oy).
 const PL={a:null,D:null,img:null,t:0,last:0,on:false,speed:1,raf:0,hold:0};
-function closeSheet(){benchPause();MP.on=false;GCUR.tok++;delete $('sheet').dataset.mode;$('sheet').classList.remove('open');$('dim').classList.remove('open');PL.on=false;cancelAnimationFrame(PL.raf);PL.a=null;}
+function closeSheet(){clearTimeout(WB.poll);benchPause();MP.on=false;GCUR.tok++;delete $('sheet').dataset.mode;$('sheet').classList.remove('open');$('dim').classList.remove('open');PL.on=false;cancelAnimationFrame(PL.raf);PL.a=null;}
 function clipLen(D){return D.kind==='loop'&&!D.wrap?2*D.dur:D.dur+(D.kind==='loop'?0:700);}   // a one-shot holds its last picture a moment, then repeats
 function frameAt(D,t){
   let ms=t;if(D.kind==='loop'){ms=D.wrap?t%D.dur:(t%(2*D.dur));if(!D.wrap&&ms>=D.dur)ms=2*D.dur-ms-1;}else ms=Math.min(t,D.dur-1);
@@ -1664,7 +1697,7 @@ document.addEventListener('pointerup',benchDragEnd);document.addEventListener('p
 // Keep the old one, unchanged), Timing (the first section Tom can change) and, read-only, what the spec holds for the stage, the effects and the sounds. Every label comes from
 // data/movebench-words.json. A change goes into the draft, which is kept in this browser (aot-movebench) and sent to the frame (postMessage {bench:'spec'}): the frame puts it in the table the game's
 // move-specs fill (msSet) and plays the move again. Nothing is saved to the repo yet and the game does not see the draft.
-const WB={id:'',a:null,base:null,draft:null,undo:[],small:false};
+const WB={id:'',a:null,base:null,draft:null,undo:[],small:false,file:null,fsha:null,src:'',busy:false,msg:null,confirm:false,poll:0};   // base: the saved version (the file's draft, else its live part); draft: the working copy; file: the file as read from GitHub
 const WB_KEY='aot-movebench',WB_FIELDS=['contact','hitStop','shake','approach','approachSec','returnSec','gap'];
 function W(path,vars){let v=WORDS;for(const k of path.split('.'))v=v&&v[k];
   if(typeof v!=='string')return path.split('.').pop().replace(/_/g,' ');
@@ -1672,32 +1705,163 @@ function W(path,vars){let v=WORDS;for(const k of path.split('.'))v=v&&v[k];
 function WA(path){let v=WORDS;for(const k of path.split('.'))v=v&&v[k];return Array.isArray(v)?v:[];}
 const wbClone=o=>JSON.parse(JSON.stringify(o==null?{}:o));
 function wbStoreRead(){try{const j=JSON.parse(localStorage.getItem(WB_KEY)||'null');return j&&j.drafts?j:{v:1,drafts:{}};}catch(e){return {v:1,drafts:{}};}}
-function wbStoreWrite(id,live){const st=wbStoreRead();if(live==null)delete st.drafts[id];else st.drafts[id]={live,at:Date.now()};try{localStorage.setItem(WB_KEY,JSON.stringify(st));}catch(e){}}
+function wbStoreWrite(id,live,base){const st=wbStoreRead();if(live==null)delete st.drafts[id];else st.drafts[id]={live,base:base||null,at:Date.now()};try{localStorage.setItem(WB_KEY,JSON.stringify(st));}catch(e){}}
 const wbSpecOf=id=>{try{return typeof msLive==='function'?msLive(id):null;}catch(e){return null;}};
-// How many of the Timing settings differ from what the game plays.
-function wbChanges(){
-  if(!WB.draft||!WB.base)return 0;const a=WB.draft.timing||{},b=WB.base.timing||{};
-  return WB_FIELDS.filter(f=>JSON.stringify(a[f])!==JSON.stringify(b[f])).length;
+// The Timing fields Tom changed since the saved version: {field: value, or null when it went back to automatic}. His changes are kept as this list, so a save that meets a newer file
+// (a second device, a session) puts them on top of it instead of overwriting it (plan f.3).
+function wbDiff(){
+  const a=(WB.draft&&WB.draft.timing)||{},b=(WB.base&&WB.base.timing)||{},o={};
+  WB_FIELDS.forEach(f=>{if(JSON.stringify(a[f])!==JSON.stringify(b[f]))o[f]=a[f]===undefined?null:a[f];});return o;
 }
+const wbChanges=()=>(WB.draft&&WB.base)?Object.keys(wbDiff()).length:0;
+const wbPath=a=>'data/moves/'+slugOf(a.id)+'.json';
+const wbBlank=a=>({v:1,id:a.id,rev:0,live:null,draft:null,finished:null,log:[]});
+function wbNow(){const d=new Date(),p=n=>String(n).padStart(2,'0'),o=-d.getTimezoneOffset(),s=o>=0?'+':'-';
+  return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'T'+p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds())+s+p(Math.floor(Math.abs(o)/60))+':'+p(Math.abs(o)%60);}
+function wbDate(at){try{return new Date(at).toLocaleDateString(undefined,{month:'short',day:'numeric'});}catch(e){return '';}}
 function wbOpen(a){
-  WB.id=a.id;WB.a=a;WB.base=wbClone(wbSpecOf(a.id));WB.undo=[];
-  const kept=wbStoreRead().drafts[a.id];WB.draft=kept&&kept.live?wbClone(kept.live):wbClone(WB.base);
+  clearTimeout(WB.poll);
+  WB.id=a.id;WB.a=a;WB.undo=[];WB.file=null;WB.fsha=null;WB.src='';WB.busy=false;WB.msg=null;WB.confirm=false;
+  const kept=wbStoreRead().drafts[a.id],live=wbClone(wbSpecOf(a.id));
+  WB.base=kept&&kept.base?wbClone(kept.base):wbClone(live);if(!WB.base.timing)WB.base.timing={};
+  WB.draft=kept&&kept.live?wbClone(kept.live):wbClone(WB.base);
   if(!WB.draft.timing)WB.draft.timing={};
-  if(wbChanges()===0&&!kept)WB.draft=wbClone(WB.base);
+  if(wbChanges()===0)WB.draft=wbClone(WB.base);
 }
-// Send the draft to the frame (null when nothing differs: the frame puts the file's own back).
+// Read the file of this animation (the contents API with a token, else the copy the site serves) and put what Tom changed on top of it.
+async function wbLoadFile(a){
+  const id=a.id,path=wbPath(a),tok=lsGet(TOKEN);let doc=null,sha=null,src='';
+  try{if(tok||Q.get('gh')){const g=await ghGetJson(path,'main',tok);doc=g?g.doc:null;sha=g?g.sha:null;src='api';}}catch(e){src='';}
+  if(!src){try{const r=await fetch(path+'?t='+Date.now(),{cache:'no-store'});if(r.ok){doc=await r.json();src='site';}else if(r.status===404)src='site';}catch(e){}}
+  if(WB.id!==id||!src)return;
+  WB.src=src;WB.file=doc||wbBlank(a);WB.fsha=sha;
+  const fresh=wbClone((doc&&(doc.draft!=null?doc.draft:doc.live))||wbSpecOf(id));if(!fresh.timing)fresh.timing={};
+  wbRebase(fresh);wbSend();wbPaint();
+}
+// Fields Tom did not touch take the file's value; fields he changed stay his.
+function wbRebase(fresh){
+  const mine=wbDiff();WB_FIELDS.forEach(f=>{if(!(f in mine)){if(fresh.timing[f]===undefined)delete WB.draft.timing[f];else WB.draft.timing[f]=wbClone(fresh.timing[f]);}});
+  WB.base=wbClone(fresh);
+}
+// Send the draft to the frame (null when it is what the game plays: the frame puts its own table's back).
 function wbSend(){
-  const n=wbChanges();wbStoreWrite(WB.id,n?WB.draft:null);
-  benchSend({bench:'spec',id:WB.id,live:n?WB.draft:null});
+  const n=wbChanges();wbStoreWrite(WB.id,n?WB.draft:null,n?WB.base:null);
+  const ml=(wbSpecOf(WB.id)||{}).timing||{},t=(WB.draft&&WB.draft.timing)||{},differs=WB_FIELDS.some(f=>JSON.stringify(t[f])!==JSON.stringify(ml[f]));
+  benchSend({bench:'spec',id:WB.id,live:differs?WB.draft:null});
 }
 function wbEdit(patch){
-  WB.undo.push(JSON.stringify(WB.draft));if(WB.undo.length>60)WB.undo.shift();
+  WB.undo.push(JSON.stringify(WB.draft));if(WB.undo.length>60)WB.undo.shift();WB.confirm=false;WB.msg=null;
   const t=Object.assign({},WB.draft.timing||{});
   for(const k in patch){if(patch[k]==null)delete t[k];else t[k]=patch[k];}
   WB.draft.timing=t;wbSend();wbPaint();
 }
-function wbUndo(){if(!WB.undo.length)return;WB.draft=JSON.parse(WB.undo.pop());wbSend();wbPaint();}
-function wbReset(){WB.undo.push(JSON.stringify(WB.draft));WB.draft=wbClone(WB.base);if(!WB.draft.timing)WB.draft.timing={};wbSend();wbPaint();}
+function wbUndo(){if(!WB.undo.length)return;WB.draft=JSON.parse(WB.undo.pop());WB.confirm=false;WB.msg=null;wbSend();wbPaint();}
+function wbReset(){WB.undo.push(JSON.stringify(WB.draft));WB.draft=wbClone(WB.base);if(!WB.draft.timing)WB.draft.timing={};WB.confirm=false;WB.msg=null;wbSend();wbPaint();}
+// ---- Save draft, Finished (plan d.3, f.3, f.4) ----
+// Both write ONE file, data/moves/<slug>.json, through the contents API with the sha of the file as just read. A 409 (the file moved: a second device, a session, the apply job) reads it
+// again and puts Tom's field changes on top of the newer file. Save draft writes `draft`; Finished makes the draft `live`, clears `draft` and sets `finished` to him and now. The
+// game changes only when the move-apply Action has made a build from `live` (it writes finished.build after the script is on main).
+function wbWhat(ch){
+  const lab={hitStop:'timing.freeze.label',shake:'timing.shake.label',approach:'timing.approach.label',approachSec:'timing.pace.label',returnSec:'timing.pace.label',gap:'timing.gap.label',contact:'timing.hit.label'},p=[];
+  for(const f in ch){const x=ch[f];let v;
+    if(x==null)v=W('save.automatic');
+    else if(f==='hitStop')v=W('timing.freeze.frames',{n:x});else if(f==='shake')v=W('timing.shake.px',{n:x});
+    else if(f==='approach')v=(WA('timing.approach.options').find(o=>o.k===x)||{label:x}).label;
+    else if(f==='contact')v=(x&&x.sec!=null?wbFmt(x.sec)+' s':W('timing.hit.auto'));else v=wbFmt(x)+' s';
+    const l=W(lab[f]);if(!p.some(q=>q.startsWith(l+':')))p.push(l+': '+v);}
+  return p.join('; ');
+}
+function wbMerge(cur,ch,kind,now,replayed){
+  const d=wbClone(cur);d.v=1;d.id=d.id||WB.id;
+  const sec=wbClone((d.draft!=null?d.draft:d.live)||{});const t=Object.assign({},sec.timing||{});
+  for(const f in ch){if(ch[f]==null)delete t[f];else t[f]=wbClone(ch[f]);}
+  if(Object.keys(t).length)sec.timing=t;else delete sec.timing;
+  d.rev=(d.rev||0)+1;
+  const what=(wbWhat(ch)||W(kind==='finished'?'save.what_finished':'save.what_draft'))+(replayed?' ('+W('save.merged')+')':'');
+  if(kind==='draft'){d.draft=sec;}else{d.live=sec;d.draft=null;d.finished={rev:d.rev,at:now,by:'tom',build:null};}
+  if(!('live' in d))d.live=null;if(!('draft' in d))d.draft=null;if(!('finished' in d))d.finished=null;
+  d.log=(d.log||[]).concat([{rev:d.rev,at:now,by:'tom',what}]).slice(-20);
+  return d;
+}
+function wbMsg(t,err,s){WB.msg=t?{t,s:s||'',err:!!err}:null;wbPaint();}
+function wbPoke(){const tok=lsGet(TOKEN);try{fetch(GH()+'/repos/'+REPO+'/dispatches',{method:'POST',headers:{Authorization:'Bearer '+(tok||'test'),Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify({event_type:'move-apply'})}).catch(()=>{});}catch(e){}}
+async function wbSave(kind){
+  const a=WB.a;if(!a||WB.busy)return;
+  const tok=lsGet(TOKEN);if(!tok&&!Q.get('gh')){wbMsg(W('save.no_token'),true);return;}
+  WB.busy=true;WB.confirm=false;wbMsg(W('save.saving'));
+  const path=wbPath(a),ch=wbDiff();let res=null,replayed=false,err='';
+  try{
+    for(let tries=0;tries<5&&!res;tries++){
+      const g=await ghGetJson(path,'main',tok),cur=g?g.doc:wbBlank(a),doc=wbMerge(cur,ch,kind,wbNow(),replayed);
+      const body={message:'move: '+kind+' '+a.id+' rev '+doc.rev+' [skip ci]',content:b64t(JSON.stringify(doc,null,1)+'\n'),branch:'main'};if(g)body.sha=g.sha;
+      const w=await fetch(GH()+'/repos/'+REPO+'/contents/'+path,{method:'PUT',headers:{Authorization:'Bearer '+(tok||'test'),Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify(body)});
+      if(w.status===409||(w.status===422&&!g)){replayed=true;continue;}
+      if(!w.ok)throw new Error('GitHub '+w.status);
+      const wj=await w.json();res={doc,sha:wj&&wj.content&&wj.content.sha||null};
+    }
+    if(!res)err=W('save.clash');
+  }catch(e){err=W('save.failed',{why:e.message});}
+  WB.busy=false;
+  if(err){wbMsg(err,true);return;}
+  WB.file=res.doc;WB.fsha=res.sha;WB.undo=[];
+  const saved=wbClone((kind==='draft'?res.doc.draft:res.doc.live)||{});if(!saved.timing)saved.timing={};
+  WB.base=saved;WB.draft=wbClone(saved);
+  const e=MOVEIDX&&MOVEIDX.anims&&MOVEIDX.anims[a.id];if(e){e.rev=res.doc.rev;e.status=kind==='draft'?'inprogress':'finished';if(kind==='draft')e.draft=true;else{delete e.draft;e.finished={rev:res.doc.rev,at:res.doc.finished.at,build:null};}}
+  wbSend();wbPoke();wbMsg(null);moveRefresh();
+  if(kind==='finished')wbWatchBuild();
+}
+// After Finished: look at the file every 15 seconds until move-apply has written finished.build (about 4 minutes).
+function wbWatchBuild(){
+  clearTimeout(WB.poll);const id=WB.id,t0=Date.now(),every=+(Q.get('wbpoll')||15000);
+  const look=async()=>{
+    if(WB.id!==id||!WB.a)return;
+    try{const g=await ghGetJson(wbPath(WB.a),'main',lsGet(TOKEN));
+      if(g&&g.doc&&g.doc.finished&&g.doc.finished.rev===g.doc.rev&&g.doc.finished.build){WB.file=g.doc;WB.fsha=g.sha;const e=MOVEIDX&&MOVEIDX.anims&&MOVEIDX.anims[id];if(e&&e.finished)e.finished.build=g.doc.finished.build;wbPaint();moveRefresh();return;}}catch(e){}
+    if(Date.now()-t0<30*60000)WB.poll=setTimeout(look,every);
+  };
+  WB.poll=setTimeout(look,every);
+}
+// What the bar at the bottom says: the newest thing that happened, else where the move stands.
+function wbBarText(){
+  const n=wbChanges(),d=WB.file,f=d&&d.finished;
+  if(WB.msg)return {b:WB.msg.t,s:WB.msg.s,err:WB.msg.err};
+  if(WB.confirm)return {b:W('save.confirm'),s:W('save.confirm_hint')};
+  if(n)return {b:n===1?W('page.unsaved_one'):W('page.unsaved_many',{n}),s:W('page.unsaved_hint')};
+  if(d&&d.draft!=null)return {b:W('save.draft_kept'),s:W('save.draft_hint')};
+  if(f&&f.rev===d.rev){
+    if(f.build)return {b:W('save.in_game',{build:f.build}),s:W('save.finished_by',{date:wbDate(f.at)})};
+    return {b:W('save.putting'),s:W('save.putting_hint')};
+  }
+  if(f&&f.rev<d.rev)return {b:W('save.changed_since'),s:W('save.changed_hint')};
+  return {b:W('page.unsaved_none'),s:W('page.none_hint')};
+}
+// Earlier versions: the commits of this file (newest first), each with who and what in plain words from the file's own log; Bring back copies that version's Timing into the draft.
+async function wbVersions(){
+  const a=WB.a,box=$('wbvers');if(!a||!box)return;
+  const tok=lsGet(TOKEN);if(!tok&&!Q.get('gh')){box.innerHTML='<p class="hint">'+esc(W('save.no_token'))+'</p>';return;}
+  box.innerHTML='<p class="hint">'+esc(W('versions.loading'))+'</p>';
+  try{
+    const H={Authorization:'Bearer '+(tok||'test'),Accept:'application/vnd.github+json'};
+    const r=await fetch(GH()+'/repos/'+REPO+'/commits?path='+encodeURIComponent(wbPath(a))+'&sha=main&per_page=30&t='+Date.now(),{cache:'no-store',headers:H});
+    if(!r.ok)throw new Error('GitHub '+r.status);
+    const list=(await r.json()).filter(c=>!/^move-apply: /.test(c.commit.message)),log=(WB.file&&WB.file.log)||[];
+    if(!list.length){box.innerHTML='<p class="hint">'+esc(W('versions.none'))+'</p>';return;}
+    box.innerHTML='<ul class="wbver">'+list.map(c=>{
+      const msg=c.commit.message.split('\n')[0],m=/ rev (\d+)/.exec(msg),lg=m?log.find(l=>l.rev===+m[1]):null,tom=/^move: (draft|finished) /.test(msg),fin=/^move: finished /.test(msg);
+      const who=tom?W('versions.you'):lg?(lg.by==='claude'?W('versions.claude'):lg.by==='migration'?W('versions.migration'):W('versions.you')):W('versions.claude');
+      const what=lg?lg.what:msg.replace(/ \[skip ci\]$/,'');
+      return '<li><span class="vw"><b>'+esc(wbDate(c.commit.author&&c.commit.author.date)+', '+who+(tom?', '+W(fin?'versions.finished':'versions.draft'):''))+'</b><span>'+esc(what)+'</span></span><button type="button" data-wbver="'+esc(c.sha)+'">'+esc(W('versions.bring'))+'</button></li>';}).join('')+'</ul>';
+  }catch(e){box.innerHTML='<p class="hint">'+esc(W('versions.failed',{why:e.message}))+'</p>';}
+}
+async function wbBringBack(sha){
+  const a=WB.a;if(!a)return;
+  try{const g=await ghGetJson(wbPath(a),sha,lsGet(TOKEN));if(!g||!g.doc)throw new Error('no file');
+    const src=(g.doc.draft!=null?g.doc.draft:g.doc.live)||{},t=src.timing||{};
+    WB.undo.push(JSON.stringify(WB.draft));WB.draft.timing=Object.assign({},WB.draft.timing||{});
+    WB_FIELDS.forEach(f=>{if(t[f]===undefined)delete WB.draft.timing[f];else WB.draft.timing[f]=wbClone(t[f]);});
+    wbSend();wbMsg(W('versions.brought'),false,W('versions.brought_hint'));
+  }catch(e){wbMsg(W('versions.failed',{why:e.message}),true);}
+}
 // What the Timing rows show for each field: the draft's value, else the game's default (MS_DEFAULTS, engine/b3-spec.js).
 function wbVal(f){const t=(WB.draft&&WB.draft.timing)||{};const v=t[f];return v==null?(typeof MS_DEFAULTS!=='undefined'?MS_DEFAULTS[f]:undefined):v;}
 const wbRun=()=>(BENCH.tl&&BENCH.tl.id===WB.id&&BENCH.tl.run)||null;
@@ -1731,9 +1895,14 @@ function wbTimingHtml(a){
 function wbPaint(){
   const a=WB.a;if(!a||!$('wb'))return;
   const n=wbChanges(),run=wbRun(),t=(WB.draft&&WB.draft.timing)||{};
-  const st=$('wbstat');if(st){const nov=!a.clip&&a.kind!=='state'&&a.kind!=='wind'&&!a.video;st.textContent=n?W('status.changed'):nov?W('status.novideo'):W('status.ingame');st.className='wbstat'+(n?' chg':nov?' nov':'');}
-  const un=$('wbunsaved');if(un)un.innerHTML='<b>'+esc(n===0?W('page.unsaved_none'):n===1?W('page.unsaved_one'):W('page.unsaved_many',{n})+'')+'</b><span>'+esc(W('page.unsaved_hint'))+'</span>';
-  const ub=$('wbundo'),rb=$('wbreset');if(ub)ub.disabled=!WB.undo.length;if(rb)rb.disabled=!n;
+  const ms=moveStatus(a),st=$('wbstat');if(st){st.textContent=n?W('status.changed'):moveStatusText(a,ms);st.className='wbstat'+(n?' chg':ms==='novideo'?' nov':'');st.dataset.status=n?'unsaved':ms;}
+  const un=$('wbunsaved'),bt=wbBarText();if(un){un.className='wbu'+(bt.err?' err':'');un.innerHTML='<b>'+esc(bt.b)+'</b>'+(bt.s?'<span>'+esc(bt.s)+'</span>':'');}
+  const ub=$('wbundo'),rb=$('wbreset'),sv=$('wbsave'),fb=$('wbfin'),nb=$('wbno'),fin=WB.file&&WB.file.finished,done=!!fin&&fin.rev===WB.file.rev&&!n&&WB.file.draft==null;
+  if(ub)ub.disabled=!WB.undo.length||WB.busy;if(rb)rb.disabled=!n||WB.busy;if(sv){sv.disabled=!n||WB.busy;sv.hidden=WB.confirm;}
+  if(fb){fb.textContent=W(WB.confirm?'save.yes':'save.finished');fb.disabled=WB.busy||done||ms==='novideo'&&!n&&!(WB.file&&WB.file.live);fb.title=ms==='novideo'?W('save.novideo_hint'):'';}
+  if(nb)nb.hidden=!WB.confirm;if(ub)ub.hidden=WB.confirm;if(rb)rb.hidden=WB.confirm;
+  const vf=$('wbfinline');if(vf){const lg=WB.file&&WB.file.log&&WB.file.log[WB.file.log.length-1];
+    vf.textContent=(fin?W('save.finished_line',{date:wbDate(fin.at),build:fin.build||W('save.not_yet')}):W('save.never'))+(fin&&fin.rev<WB.file.rev&&lg?' '+W('save.latest_change',{who:W('versions.'+(lg.by==='tom'?'you':lg.by==='claude'?'claude':'migration')),what:lg.what}):'');}
   const hc=$('wbhitc');
   if(hc){
     if(wbStaged()){const c=WB.base.timing.contact;hc.innerHTML='<span class="wbval" id="wbhitval">'+(run&&run.hit!=null?esc(wbFmt(run.hit)+' '+W('timing.hit.unit')):'')+'</span>';
@@ -1798,14 +1967,17 @@ function wbSpecCounts(a){
 function wbHtml(a,videoHtml){
   const nav=[['video','nav.video',0],['timing','nav.timing',0]],C=a.kind==='move'?wbSpecCounts(a):null;
   if(C)nav.push(['stage','nav.stage',C.stage],['effects','nav.effects',C.effects],['sound','nav.sound',C.sound]);
+  nav.push(['versions','nav.versions',0]);
   return '<div class="wb" id="wb" data-kind="'+esc(a.kind)+'"><div class="wb-top"><button type="button" class="back" id="bclose" aria-label="'+esc(W('page.back'))+'">&lsaquo; '+esc(ownerName(a.owner))+'</button>'
    +'<div class="wt"><h2>'+esc(a.name)+'</h2><p class="wsub" id="wbsub"></p></div><span class="wbstat" id="wbstat"></span></div>'
    +'<div class="wb-body" id="wbbody"><div class="wb-prev" id="wbprev">'+benchBox(a)+'</div><div class="wb-secs" id="wbsecs">'
    +'<nav class="wb-nav" id="wbnav" aria-label="'+esc(W('page.jump'))+'">'+nav.map(n=>'<button type="button" data-wbgo="'+n[0]+'">'+esc(W(n[1]))+(n[2]?'<b>'+n[2]+'</b>':'')+'</button>').join('')+'</nav>'
    +'<section class="wbs" id="s-video"><h3 class="wbh"><span>'+esc(W('sections.video'))+'</span></h3>'+videoHtml+'</section>'
    +'<section class="wbs" id="s-timing"><h3 class="wbh"><span>'+esc(W('sections.timing'))+'</span></h3>'+wbTimingHtml(a)+'</section>'
-   +wbReadonly(a)+'<section class="wbs" id="s-note">'+noteForm(a)+'</section>'+(maniOf(a)?'<section class="wbs" id="s-mani">'+manifestBlock(maniOf(a))+'</section>':'')
-   +'</div></div><div class="wb-bottom"><div class="wbu" id="wbunsaved"></div><button type="button" id="wbundo" data-wb="undo">'+esc(W('page.undo'))+'</button><button type="button" id="wbreset" data-wb="reset" title="'+esc(W('page.reset_hint'))+'">'+esc(W('page.reset'))+'</button></div></div>';
+   +wbReadonly(a)+'<section class="wbs" id="s-versions"><h3 class="wbh"><span>'+esc(W('sections.versions'))+'</span></h3><p class="hint" id="wbfinline" style="margin:0 0 8px"></p>'
+   +'<button type="button" data-wb="versions">'+esc(W('versions.show'))+'</button><div id="wbvers"></div></section><section class="wbs" id="s-note">'+noteForm(a)+'</section>'+(maniOf(a)?'<section class="wbs" id="s-mani">'+manifestBlock(maniOf(a))+'</section>':'')
+   +'</div></div><div class="wb-bottom"><div class="wbu" id="wbunsaved"></div><button type="button" id="wbundo" data-wb="undo">'+esc(W('page.undo'))+'</button><button type="button" id="wbreset" data-wb="reset" title="'+esc(W('page.reset_hint'))+'">'+esc(W('page.reset'))+'</button>'
+   +'<button type="button" id="wbsave" data-wb="save">'+esc(W('save.draft'))+'</button><button type="button" id="wbfin" data-wb="fin">'+esc(W('save.finished'))+'</button><button type="button" id="wbno" data-wb="no" hidden>'+esc(W('save.not_yet_btn'))+'</button></div></div>';
 }
 // The scroller of the sections: the column on the right when the page is wider than tall, else the whole body.
 function wbScroller(){const c=$('wbsecs');return c&&getComputedStyle(c).overflowY==='auto'?c:$('wbbody');}
@@ -1822,10 +1994,15 @@ function wbScroll(){
   pv.classList.toggle('small',WB.small);
 }
 function wbClick(e){
-  const b=e.target.closest&&e.target.closest('[data-wb],[data-wbgo]');if(!b||!WB.a)return;
+  const b=e.target.closest&&e.target.closest('[data-wb],[data-wbgo],[data-wbver]');if(!b||!WB.a)return;
+  if(b.dataset.wbver){wbBringBack(b.dataset.wbver);return;}
   if(b.dataset.wbgo){wbGo(b.dataset.wbgo);return;}
   const k=b.dataset.wb,i=k.indexOf(':'),f=i<0?k:k.slice(0,i),v=i<0?'':k.slice(i+1);
   if(f==='undo')return wbUndo();if(f==='reset')return wbReset();
+  if(f==='save')return wbSave('draft');
+  if(f==='fin'){if(!WB.confirm){WB.confirm=true;WB.msg=null;return wbPaint();}return wbSave('finished');}
+  if(f==='no'){WB.confirm=false;return wbPaint();}
+  if(f==='versions')return wbVersions();
   if(f==='hitStop'||f==='hitStop-'||f==='hitStop+'||f==='shake'||f==='shake-'||f==='shake+'){
     const fld=f.replace(/[-+]$/,''),cur=+wbVal(fld)||0,nv=/[-+]$/.test(f)?cur+(f.slice(-1)==='+'?1:-1):+v;
     return wbEdit({[fld]:Math.max(0,Math.min(12,Math.round(nv)))});
@@ -1850,7 +2027,7 @@ async function openPlayer(animId){
   const stage=msg=>'<div id="stage"><canvas id="cv" width="2" height="2"></canvas><div id="hitflag">HIT</div>'+(msg?'<div class="msg">'+msg+'</div>':'')+'</div>';
   const S=$('sheet');S.dataset.mode='bench';S.classList.add('open');$('dim').classList.add('open');S.scrollTop=0;
   wbOpen(a);WB.small=false;
-  const done=()=>{benchAttach(a);initMake(a);wbPaint();wbScroll();wbSend();const bd=$('wbbody');if(bd)bd.scrollTop=0;};
+  const done=()=>{benchAttach(a);initMake(a);wbPaint();wbScroll();wbSend();wbLoadFile(a);const bd=$('wbbody');if(bd)bd.scrollTop=0;};
   if(!a.clip){
     S.innerHTML=wbHtml(a,stage(a.kind==='state'?'No video yet. In a fight this moment shows one of their other videos until its own is made.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+genBlock(a));
     done();return;
@@ -1987,6 +2164,7 @@ document.addEventListener('click',e=>{
   if(t.dataset.sf){sFilter=t.dataset.sf;document.querySelectorAll('#sflt .chip').forEach(b=>b.setAttribute('aria-pressed',b===t?'true':'false'));doSearch();return;}
   if(t.dataset.kind!=null&&t.classList.contains('chip')){glossKind=t.dataset.kind;renderList();return;}
   if(t.dataset.af){animFilter=t.dataset.af;renderDetailKeep();return;}
+  if(t.dataset.mf){MF=t.dataset.mf;renderList();if(sel&&tab==='anims')renderDetailKeep();return;}
   if(t.id==='bsearch'){const b=$('searchbar');b.hidden=!b.hidden;if(!b.hidden)$('q').focus();else{$('q').value='';sFilter='all';document.querySelectorAll('#sflt .chip').forEach(x=>x.setAttribute('aria-pressed',x.dataset.sf==='all'?'true':'false'));renderList();}return;}
   if(t.id==='bclose'){closeSheet();return;}
   if(t.id==='bnstart'){benchStart();return;}if(t.id==='bnplay'){benchToggle();return;}if(t.classList&&t.classList.contains('bsp')){benchSpeed(+t.dataset.s);return;}if(t.id==='bnloop'){benchLoop(!BENCH.loop);return;}if(t.id==='bnmute'){benchMute(!BENCH.mute);return;}if(t.id==='bnstepb'){benchStep(-1);return;}if(t.id==='bnstepf'){benchStep(1);return;}if(t.id==='bnans'){benchAnswer(!BENCH.answer);return;}

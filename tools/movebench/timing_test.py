@@ -166,7 +166,7 @@ check('the engine files load and run in Node', r.returncode == 0, r.stderr)
 o = json.loads(r.stdout.strip().splitlines()[-1]) if r.returncode == 0 else {}
 specs = json.load(open(os.path.join(R, 'tools/movebench/golden.json'), encoding='utf-8'))
 DEF = {'contact': 'auto', 'noHit': False, 'impactMs': None, 'hitStop': 0, 'shake': 0, 'approach': 'auto', 'approachSec': .55, 'returnSec': .5, 'gap': .35}
-check('the spec bundle holds every animation file (223)', o.get('n') == 223 == len([f for f in os.listdir(os.path.join(R, 'data/moves')) if f.endswith('.json')]), o.get('n'))
+check('the spec bundle holds every animation file (223)', o.get('n') == 223 == len([f for f in os.listdir(os.path.join(R, 'data/moves')) if f.endswith('.json') and f != 'index.json']), o.get('n'))
 check('a beat finds its spec: a family move is move:<id>, a monster attack act:<monster>:<act>, anything else none', o.get('idMove') == 'move:lounge_pass_flex' and o.get('idAct') == 'act:mudling:bite' and o.get('idNone') == [None, None, None], (o.get('idMove'), o.get('idAct'), o.get('idNone')))
 check('a move with no spec plays every default and no effects, and a null beat cannot break it', o.get('dflt') == DEF and o.get('nullHead') == DEF and o.get('dfltFx') == [], (o.get('dflt'), o.get('nullHead')))
 cl = o.get('clamp') or {}

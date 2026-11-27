@@ -27,12 +27,19 @@ for f in files:
     E,W=schema.validate(d,C)
     for e in E[:6]: fail('%s: %s'%(f,e))
     warns+=['%s: %s'%(f,w) for w in W]
-    if f[:-5]=='move-pick-me-up' and d.get('id')=='move:pick_me_up': pass   # a team move the Guide does not list yet (phase 6 lists it); movebench4 wrote its file so it keeps the heal it had
+    if f[:-5]=='move-pick-me-up' and d.get('id')=='move:pick_me_up': pass   # a team move that data/guide-anims.json has no row for (the Guide page lists it from movebench6, owner team); movebench4 wrote its file so it keeps the heal it had
     elif f[:-5] not in slug2id: fail('%s: no animation of the Guide has this slug'%f)
     elif slug2id[f[:-5]]!=d.get('id'): fail('%s: id %s but the Guide says %s'%(f,d.get('id'),slug2id[f[:-5]]))
     txt=open(os.path.join(D,f),encoding='utf8').read()
     if chr(0x2014) in txt: fail('%s: em dash'%f)
 notes.append('%d files in data/moves/'%len(docs))
+# movebench6: only Tom finishes a move. A file whose `finished.by` is anyone else must fail the schema (a session never sets it).
+_probe=json.loads(json.dumps(next(d for d in docs.values() if d.get('finished') is None)))
+for _who in ('claude','migration','tom'):
+    _probe['finished']={'rev':_probe['rev'],'at':'2026-11-27T10:00:00-08:00','by':_who,'build':None}
+    _E,_W=schema.validate(_probe,C)
+    if (_who=='tom')==any('only tom can finish' in e for e in _E): fail('the schema %s a file finished by %s' % ('refuses' if _who=='tom' else 'accepts',_who))
+
 # ---- the script and the migration are fresh ----
 for cmd in (['bundle.py','--check'],['migrate.py','--check']):
     r=subprocess.run([sys.executable,'-I',os.path.join(HERE,cmd[0])]+cmd[1:],capture_output=True,text=True,cwd=ROOT)
@@ -45,7 +52,7 @@ byid={d['id']:d for d in docs.values()}
 def live(aid): d=byid.get(aid); return (d or {}).get('live') or {}
 for sid,S in G['SKILLS'].items():
     aid='move:'+sid
-    if aid not in A: notes.append('%s is not in the Guide (no file; phase 6 lists it)'%aid); continue
+    if aid not in A: notes.append('%s is not in data/guide-anims.json (the page lists it, its file is data/moves/move-pick-me-up.json)'%aid); continue
     an=S.get('anim') or {}; L=live(aid); mrow=mby.get(sid)
     has=bool(an.get('kind')=='clip' or an.get('shape') or sid in G['STAGE'] or mrow)
     if has and aid not in byid: fail('%s has something today and no file'%aid)

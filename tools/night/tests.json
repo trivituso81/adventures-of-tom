@@ -39,6 +39,7 @@
   {"id": "movebench_realfight_test", "cmd": "python3 -I tools/movebench/realfight_test.py", "group": "g1", "minutes": 2, "outdir": true},
   {"id": "movebench_spec_test", "cmd": "python3 -I tools/movebench/spec_test.py", "group": "g1", "minutes": 1},
   {"id": "movebench_page_test", "cmd": "python3 -I tools/movebench/page_test.py", "group": "g1", "minutes": 6, "outdir": true},
+  {"id": "movebench_apply_test", "cmd": "python3 -I tools/movebench/apply_test.py", "group": "g1", "minutes": 3},
   {"id": "movebench_golden_test", "cmd": "python3 -I tools/movebench/golden_test.py", "group": "g1", "minutes": 3, "outdir": true},
   {"id": "benchmark_run_test", "cmd": "python3 -I tools/benchmark_run_test.py", "group": "g1", "minutes": 1},
   {
