@@ -9657,7 +9657,7 @@
    "id": "c-movebench-2",
    "tag": "movebench2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 2: drag to any moment, every kind",
    "next": "The preview gains a bar you drag to any moment, one-picture steps, lanes for video, stage, effects and sound, and plays body states, wind-ups, answers and moves that have no video yet. Starts by itself when Move Workbench 1 ships.",
@@ -9669,7 +9669,7 @@
    "changed": "2026-11-26",
    "auto": true,
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukECBgnxBZp8d9JQrAb",
     "opening": "not started"
    },
    "prompt": {
@@ -9689,6 +9689,10 @@
     {
      "d": "2026-11-26",
      "t": "Unblocked: Move Workbench 1: preview the whole move is done."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -10196,6 +10200,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukECBgnxBZp8d9JQrAb",
+   "title": "Move Workbench 2: drag to any moment, every kind",
+   "first": "2026-11-26T20:22:09-08:00",
+   "last": "2026-11-26T20:22:09-08:00",
+   "tags": [],
+   "cards": [
+    "c-movebench-2"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukH64fYhe1CjPi6dUdA",
    "title": "Move Workbench 1: preview the whole move",
@@ -17025,8 +17039,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "62df40354db8b572d65e6e2f1fa1e6cc9e84748e",
- "synced_at": "2026-11-27T04:09:22+00:00",
+ "synced": "3915914fe40343a8fdefbe504477190bb1a05594",
+ "synced_at": "2026-11-27T04:23:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
