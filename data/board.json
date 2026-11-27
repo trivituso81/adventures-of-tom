@@ -9993,7 +9993,7 @@
    "id": "c-movebench-12",
    "tag": "movebench12",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Move Workbench 12: the spec names the video",
    "next": "Shipped as movebench12: the spec names the video, the rows hold no video, and the Workbench trims a video. Use this one works as before. Move Workbench 13 starts by itself.",
@@ -10033,15 +10033,19 @@
     {
      "d": "2026-11-27",
      "t": "Built by claude: the spec's body.clip, motion, pair, trim and until are what the game plays; anim, wind and B3_BODY_CLIPS are deleted; use_take and wanbake write the spec; the Trim control is in the Workbench. Golden test matched value for value (219, 0 differ)."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as movebench12: which video an animation plays is in its settings file, and the Workbench can trim a video's first and last picture"
     }
-   ]
+   ],
+   "done": "2026-11-27"
   },
   {
    "id": "c-movebench-13",
    "tag": "movebench13",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Move Workbench 13: start picture, held and worn",
    "next": "Each move can have its own start picture: you say the one thing that is held and what is worn, make the picture in the Art Library, and Make this video uses it. Starts by itself when Move Workbench 12 ships.",
@@ -10050,7 +10054,7 @@
    ],
    "after": "nothing for Tom: c-movebench-14",
    "created": "2026-11-26",
-   "changed": "2026-11-26",
+   "changed": "2026-11-27",
    "auto": true,
    "chat": {
     "url": "",
@@ -10069,6 +10073,10 @@
     {
      "d": "2026-11-26",
      "t": "Added by c-movebench-design: phase 13 of claude/movebench-plan.md section g."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Unblocked: Move Workbench 12: the spec names the video is done."
     }
    ]
   },
@@ -10359,8 +10367,10 @@
    "url": "https://claude.ai/code/session_01RXeukETPEFvyNWmZVZeXym",
    "title": "Move Workbench 12: the spec names the video",
    "first": "2026-11-27T13:01:49-08:00",
-   "last": "2026-11-27T13:01:49-08:00",
-   "tags": [],
+   "last": "2026-11-27T14:37:56-08:00",
+   "tags": [
+    "movebench12"
+   ],
    "cards": [
     "c-movebench-12"
    ]
@@ -17337,8 +17347,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "d2ef0ca04fc728a73d75958156fb1da02a072c32",
- "synced_at": "2026-11-27T21:02:53+00:00",
+ "synced": "9e7578795087ef157b19de88bfc1a6bad03b46d8",
+ "synced_at": "2026-11-27T22:42:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
