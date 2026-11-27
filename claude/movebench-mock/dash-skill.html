@@ -1,0 +1,23 @@
+<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0b0a18;font-family:-apple-system,system-ui,"Segoe UI",sans-serif;color:#f4f1ff}
+.top{height:44px;display:flex;align-items:center;gap:14px;padding:0 16px;background:#14122b;border-bottom:1px solid #2c2852;box-sizing:border-box}
+.top b{font-size:17px}.top small{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#a9a3d6}
+.lay{display:flex;gap:2px;padding:2px;border-radius:10px;background:#0f0d24;border:1px solid #2c2852;margin-left:12px;align-items:center}
+.lay span{font-size:13px;font-weight:700;padding:7px 14px;border-radius:8px}.lay span.on{background:#ffd34d;color:#241b00}.lay em{font-style:normal;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#a9a3d6;padding:0 8px 0 10px}
+.panes{display:flex;gap:8px;padding:8px;height:1396px;box-sizing:border-box}
+.pane{display:flex;flex-direction:column;border:1px solid #2c2852;border-radius:10px;overflow:hidden;background:#14122b}
+.pane.keys{border:2px solid #ffd34d}
+.ph{height:40px;flex:none;display:flex;align-items:center;gap:10px;padding:0 12px;border-bottom:1px solid #2c2852;font-size:13px;font-weight:700}
+.ph i{font-style:normal;width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff}
+.ph u{margin-left:auto;text-decoration:none;font-size:11px;color:#241b00;background:#ffd34d;padding:2px 8px;border-radius:6px}
+.pane iframe{flex:1;border:0;width:100%}
+.stub{flex:1;display:flex;align-items:center;justify-content:center;color:#a9a3d6;font-size:14px;text-align:center;line-height:1.5;padding:20px}
+.game{flex:none;height:648px;background:#000 url(img/preview-skill.jpg) center/cover}
+</style>
+<div style="width:3440px;height:1440px;overflow:hidden">
+<div class="top"><b>Admin Dashboard</b><small>The Adventures of Tom</small><div class="lay"><em>Layout</em><span>All four</span><span>Battle</span><span class="on">Animations</span></div></div>
+<div class="panes">
+<div class="pane" style="width:420px"><div class="ph"><i style="background:#6d5bd0">1</i>Board</div><div class="stub">The Board, as today</div></div>
+<div class="pane" style="width:951px"><div class="ph"><i style="background:#2f8f5b">2</i>Game</div><div class="game"></div><div class="stub">The strip under the game, as today.<br>In a fight opens here.</div></div>
+<div class="pane keys" style="width:1589px"><div class="ph"><i style="background:#1f8f8f">3</i>Battle Guide: Animations<u>KEYS HERE</u></div><iframe src="skill.html"></iframe></div>
+<div class="pane" style="flex:1"><div class="ph"><i style="background:#b07a2a">4</i>Admin</div><div class="stub">Admin, as today.<br>The Art Library opens here from an object that needs a picture.</div></div>
+</div></div>

@@ -1,0 +1,163 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Move Workbench mock: Tarmac Porsche Transfer</title><style>
+:root{--bg:#0f1f24;--surface:#16303a;--card:#1a3742;--line:#28505c;--text:#f1fbfa;--muted:#9cc3c4;--accent:#ffd34d;--on-accent:#241b00;--good:#2fb06a;--prob:#b4414f;--prob-text:#ff9aa5;--btn:#2c5b68;--well:#0a161a;
+ --body:#7cc4f2;--stage:#d7a4f5;--fx:#ff8c5a;--snd:#8fe3a6;--hit:#ffd34d}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font:15px/1.4 -apple-system,system-ui,"Segoe UI",Roboto,sans-serif}
+body{display:flex;flex-direction:column;overflow:hidden}
+button{font:inherit;border:0;border-radius:12px;padding:8px 12px;min-height:44px;background:var(--btn);color:#fff;font-weight:600}
+button.gold{background:var(--accent);color:var(--on-accent)}
+button.ghost{background:none;border:1px solid var(--line)}
+button.sm{min-height:36px;padding:5px 10px;font-size:13px;border-radius:10px}
+.gh{flex:none;display:flex;align-items:center;gap:8px;height:48px;padding:0 10px 0 14px;border-bottom:1px solid var(--line)}
+.gh h1{font-size:18px;margin:0;white-space:nowrap}
+.pill{padding:2px 10px;border:1px solid #4fae7a;border-radius:13px;background:#143324;color:#9be3bb;font:700 12px/1.5 ui-monospace,Menlo,monospace;white-space:nowrap}
+.gh .sp{flex:1}
+.gh .hb{display:flex;align-items:center;justify-content:center;min-width:44px;height:38px;padding:0 10px;border-radius:10px;background:var(--surface);border:1px solid var(--line);font-weight:700;font-size:13px}
+.tabs{display:none;flex:none;gap:4px;padding:5px 8px;background:var(--well);border-bottom:1px solid var(--line)}
+.tabs span{flex:0 0 auto;padding:7px 16px;border-radius:10px;color:var(--muted);font-size:13px;font-weight:700}
+.tabs span.on{background:var(--accent);color:var(--on-accent)}
+/* ---------- the workbench: stacked when the page is upright, side by side when it is sideways ---------- */
+.wb{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:1fr;grid-template-rows:auto auto 1fr auto;grid-template-areas:"top" "prev" "set" "fin"}
+.wl{display:none}
+.wtop{grid-area:top;display:flex;align-items:center;gap:8px;padding:5px 10px;border-bottom:1px solid var(--line);min-width:0}
+.wtop .back{color:var(--accent);font-weight:700;font-size:14px;white-space:nowrap}
+.wtop .ttl{flex:1 1 auto;min-width:0}
+.wtop .ttl b{display:block;font-size:16px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wtop .ttl small{display:block;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st{flex:none;font-size:12px;font-weight:800;padding:4px 9px;border-radius:999px;border:1px solid var(--line);background:var(--well);white-space:nowrap}
+.st i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;background:var(--muted)}
+.st.prog{border-color:#8a6d10;color:#ffe08a}.st.prog i{background:var(--accent)}
+.st.fin{border-color:#2a7a52;color:#9be3bb}.st.fin i{background:var(--good)}
+.st.wait{border-color:#7a3a44;color:var(--prob-text)}.st.wait i{background:var(--prob-text)}
+.wprev{grid-area:prev;background:var(--well);border-bottom:1px solid var(--line);min-width:0}
+.cv{position:relative;aspect-ratio:16/9;background:#000 center/cover no-repeat;max-height:44vh;margin:0 auto}
+.cv .tag{position:absolute;left:6px;top:6px;font-size:10px;font-weight:800;letter-spacing:.06em;padding:3px 7px;border-radius:6px;background:rgba(10,22,26,.82);color:var(--muted)}
+.cv .warn{position:absolute;right:6px;top:6px;font-size:10px;font-weight:800;letter-spacing:.04em;padding:3px 7px;border-radius:6px;background:#ff5bd2;color:#2a0020}
+.cv .ph{position:absolute;border:2px dashed #ff5bd2;background:rgba(255,91,210,.16);color:#ffd0f3;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.15;padding:2px;border-radius:6px}
+.ctl{display:flex;align-items:center;gap:6px;padding:6px 8px}
+.ctl .play{min-width:74px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--well)}
+.seg span{padding:8px 11px;font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap}
+.seg span.on{background:var(--accent);color:var(--on-accent)}
+.ctl .tm{margin-left:auto;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tog{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--text);white-space:nowrap}
+.tog i{width:34px;height:20px;border-radius:10px;background:var(--good);position:relative;display:inline-block}
+.tog i::after{content:"";position:absolute;right:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff}
+.tog.off i{background:var(--line)}.tog.off i::after{right:auto;left:2px}
+/* the timeline: one lane per layer, the same clock for all of them */
+.tl{position:relative;padding:2px 8px 8px}
+.ln{display:flex;align-items:center;height:18px;margin-top:3px}
+.ln .lb{flex:none;width:54px;white-space:nowrap;overflow:hidden;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.ln .tr{position:relative;flex:1 1 auto;height:100%;background:#12272e;border-radius:5px}
+.ln .it{position:absolute;top:2px;bottom:2px;border-radius:4px;font-size:10px;font-weight:700;line-height:14px;padding:0 4px;color:#08161a;white-space:nowrap;overflow:hidden}
+.ln.body .it{background:var(--body)}.ln.stage .it{background:var(--stage)}.ln.fx .it{background:var(--fx)}.ln.snd .it{background:var(--snd);border-radius:7px;width:auto!important;padding:0 6px}
+.ln .it.need{background:repeating-linear-gradient(45deg,#ff5bd2,#ff5bd2 5px,#c23a9c 5px,#c23a9c 10px);color:#fff}
+.ln .it.hold{background:repeating-linear-gradient(90deg,#3d6f8a,#3d6f8a 4px,#2c5468 4px,#2c5468 8px);color:#d6efff}
+.tl .hit,.tl .head{position:absolute;top:0;bottom:6px;width:0;margin-left:62px}
+.tl .hw{position:absolute;left:62px;right:8px;top:0;bottom:6px;pointer-events:none}
+.tl .hw b{position:absolute;top:0;bottom:0;width:2px;background:var(--hit)}
+.tl .hw b::after{content:"HIT";position:absolute;top:-1px;right:5px;font-size:9px;font-weight:900;color:var(--hit)}
+.tl .hw u{position:absolute;top:0;bottom:0;width:2px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.5)}
+.tl .hw u::after{content:"";position:absolute;top:-2px;left:-5px;border:6px solid transparent;border-top-color:#fff}
+.sc{display:flex;justify-content:space-between;margin:1px 0 0 62px;font-size:9px;color:var(--muted);font-variant-numeric:tabular-nums}
+.wset{grid-area:set;overflow-y:auto;padding:8px 10px 14px;min-width:0}
+.jump{display:flex;gap:6px;overflow:hidden;margin:0 0 8px}
+.jump span{flex:none;font-size:12px;font-weight:700;padding:4px 9px;border-radius:999px;background:var(--well);border:1px solid var(--line);white-space:nowrap}
+.jump span b{color:var(--accent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:0 0 10px;break-inside:avoid}
+.card h3{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.card h3 i{width:10px;height:10px;border-radius:3px}
+.card h3 em{margin-left:auto;font-style:normal;letter-spacing:0;text-transform:none;font-size:12px;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:7px 0;border-top:1px solid rgba(40,80,92,.6)}
+.row:first-of-type{border-top:0;padding-top:0}
+.row .q{flex:1 1 130px;min-width:0;font-weight:700}
+.row .q small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.row .a{flex:0 1 auto;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.val{font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums}
+.step{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid rgba(40,80,92,.6)}
+.step:first-of-type{border-top:0;padding-top:0}
+.step .t{flex:none;width:58px;text-align:center;font-size:12px;font-weight:800;padding:5px 2px;border-radius:8px;background:var(--well);border:1px solid var(--line);font-variant-numeric:tabular-nums}
+.step .t small{display:block;font-weight:600;color:var(--muted);font-size:10px}
+.step .d{flex:1 1 auto;min-width:0}
+.step .d b{display:block}
+.step .d span{display:block;font-size:13px;color:var(--muted)}
+.step .sw{flex:none;width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.25)}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.chips u{text-decoration:none;font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--well);border:1px solid var(--line);white-space:nowrap}
+.add{display:block;width:100%;margin-top:8px;background:none;border:1px dashed var(--line);color:var(--accent)}
+.objs{display:grid;grid-template-columns:repeat(auto-fill,minmax(124px,1fr));gap:8px}
+.obj{border:1px solid var(--line);border-radius:12px;padding:8px;background:var(--well);font-size:13px}
+.obj .pic{height:54px;border-radius:8px;margin-bottom:6px;display:flex;align-items:center;justify-content:center;font-size:22px;background:#1d3d49}
+.obj.need{border:2px dashed #ff5bd2}.obj.need .pic{background:rgba(255,91,210,.16);color:#ffd0f3;font-size:11px;font-weight:800;text-align:center;line-height:1.2}
+.obj b{display:block}.obj small{color:var(--muted)}.obj .lnk{display:block;margin-top:4px;color:var(--accent);font-weight:700;font-size:12px}
+.startp{display:flex;gap:10px;align-items:flex-start}
+.startp img,.startp .nop{flex:none;width:62px;height:84px;border-radius:10px;object-fit:cover;object-position:top;background:#1d3d49}
+.startp .nop{border:2px dashed #ff5bd2;background:rgba(255,91,210,.16);color:#ffd0f3;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;text-align:center;padding:3px}
+.startp .tx{flex:1 1 auto;min-width:0;font-size:13px}
+.startp .tx b{font-size:15px}
+.prompt{margin:8px 0 0;padding:8px 10px;border-radius:10px;background:var(--well);border:1px solid var(--line);font-size:12px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;padding-bottom:0;border-bottom-width:8px;border-bottom-color:var(--well)}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.note{font-size:12px;color:var(--muted);margin:6px 0 0}
+.wfin{grid-area:fin;display:flex;align-items:center;gap:8px;padding:8px 10px;border-top:1px solid var(--line);background:var(--surface)}
+.wfin .say{flex:1 1 auto;min-width:0;font-size:12px;color:var(--muted);line-height:1.25}
+.wfin .say b{display:block;color:var(--text);font-size:13px}
+.wfin button{flex:none}
+.cols{columns:1}
+/* a phone held upright while a setting is changed: the preview shrinks to a small player that stays on screen */
+body.mini .cv{width:46%;margin:0;float:left}
+body.mini .cv .tag,body.mini .cv .warn{display:none}
+body.mini .ctl{flex-wrap:wrap;padding-left:10px}
+body.mini .ctl .tm{margin-left:0}
+body.mini .tl{clear:both}
+body.mini .ln:not(.pick){display:none}
+body.mini .jump{display:none}
+/* the whole page at once (for the long picture): nothing scrolls, nothing is cut */
+body.long{overflow:visible;height:auto}
+body.long .wb{display:block}
+body.long .wset{overflow:visible}
+body.long .cv{max-height:none}
+/* sideways (any size): preview on the left, settings on the right */
+@media (min-aspect-ratio:1/1){
+ .wb{grid-template-columns:minmax(0,54fr) minmax(0,46fr);grid-template-rows:auto 1fr auto;grid-template-areas:"top top" "prev set" "prev fin"}
+ .wprev{border-bottom:0;border-right:1px solid var(--line);overflow:hidden}
+ .cv{max-height:none}
+}
+@media (min-aspect-ratio:1/1) and (max-height:500px){
+ .wb{grid-template-areas:"top top" "prev set" "fin fin"}
+ .gh{height:40px}.gh h1{font-size:16px}.gh .hb{height:32px}
+ .wtop{padding:3px 10px}.wtop .ttl small{display:none}
+ .ctl{padding:4px 6px;gap:4px}.ctl button{min-height:36px;padding:4px 10px}.seg span{padding:6px 9px}
+ .cv{max-height:190px}
+ .ln{height:13px;margin-top:2px}.ln .it{line-height:10px;font-size:9px}.sc{display:none}.tl{padding-bottom:4px}
+ .wfin{padding:5px 8px}.wfin button{min-height:38px;padding:4px 10px}.wfin .say{font-size:11px}.wfin .say b{display:inline;font-size:12px;margin-right:6px}
+ .card{padding:8px 10px;margin-bottom:8px}
+}
+/* the wide monitor (a pane of the Admin Dashboard): the list stays on the left, settings in two columns */
+@media (min-width:1300px){
+ .tabs{display:flex}
+ .wb{grid-template-columns:300px minmax(0,46fr) minmax(0,54fr);grid-template-areas:"list top top" "list prev set" "list prev fin"}
+ .wl{display:block;grid-area:list;border-right:1px solid var(--line);overflow:hidden;padding:10px}
+ .cols{columns:2;column-gap:10px}
+ .ln{height:24px;margin-top:4px}.ln .it{line-height:20px;font-size:12px}.ln .lb{width:70px;font-size:11px}
+ .tl .hw{left:78px}.sc{margin-left:78px;font-size:11px}
+ .wprev{padding:10px;overflow:auto}.cv{border-radius:10px}
+ .wtop{padding:8px 14px}.wtop .ttl b{font-size:19px}
+}
+.wl .prog{font-size:13px;color:var(--muted);margin:0 0 4px}.wl .prog b{color:var(--text);font-size:16px}
+.bar{height:8px;border-radius:4px;background:var(--well);overflow:hidden;margin:0 0 10px;display:flex}
+.bar i{background:var(--good)}.bar u{background:var(--accent)}
+.flt{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 10px}
+.flt span{font-size:12px;font-weight:700;padding:4px 9px;border-radius:999px;border:1px solid var(--line);background:var(--well)}
+.flt span.on{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.grp{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:10px 2px 6px}
+.li{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--line);border-radius:12px;background:var(--card);margin:0 0 6px;font-size:14px}
+.li.on{outline:2px solid var(--accent)}
+.li b{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li small{flex:none;color:var(--muted);font-size:11px}
+.li i{flex:none;width:9px;height:9px;border-radius:50%;background:var(--line)}
+.li i.p{background:var(--accent)}.li i.f{background:var(--good)}.li i.w{background:var(--prob-text)}
+.ver{font-size:13px}.ver div{display:flex;gap:8px;padding:5px 0;border-top:1px solid rgba(40,80,92,.6)}.ver div:first-child{border-top:0}
+.ver b{flex:1}.ver span{color:var(--muted)}.ver u{color:var(--accent);text-decoration:none;font-weight:700}
+.onlywide{display:none}
+@media (min-width:1300px){.onlywide{display:block}}
+</style></head><body class="long"><header class="gh"><h1>Battle Guide</h1><span class="pill">build movebench8</span><span class="sp"></span><span class="hb">Search</span><span class="hb">Admin</span></header><nav class="tabs"><span>Rules</span><span>Family</span><span>Monsters</span><span>Statuses</span><span class="on">Animations</span></nav><main class="wb"><aside class="wl"><p class="prog"><b>Finished 14 of 679</b><br>9 in progress, 3 waiting, 653 to do</p><div class="bar"><i style="width:2.1%"></i><u style="width:1.3%"></u></div><div class="flt"><span class="on">All</span><span>To do</span><span>In progress</span><span>Waiting</span><span>Finished</span></div><div class="grp">Tom: Frequent Flier</div><div class="li"><i class="p"></i><b>Lounge Pass Flex</b><small>In progress</small></div><div class="li"><i class="f"></i><b>Zone One Blockade</b><small>Finished</small></div><div class="li"><i class=""></i><b>Suite Door Slide</b><small>To do</small></div><div class="li on"><i class="w"></i><b>Tarmac Porsche Transfer</b><small>Waiting on 2 pictures</small></div><div class="grp">Tom: Gamer</div><div class="li"><i class="f"></i><b>Cartridge Blow</b><small>Finished</small></div><div class="li"><i class="p"></i><b>Controller Toss</b><small>In progress</small></div><div class="li"><i class=""></i><b>Winged Shell Lock-On</b><small>To do</small></div><div class="li"><i class=""></i><b>Konami Code</b><small>No video yet</small></div><div class="grp">Tom: standing poses</div><div class="li"><i class="f"></i><b>Idle (standing and breathing)</b><small>Finished</small></div><div class="li"><i class="f"></i><b>Guard</b><small>Finished</small></div><div class="li"><i class=""></i><b>Getting hit</b><small>To do</small></div><div class="li"><i class=""></i><b>Dodge</b><small>To do</small></div><div class="li"><i class=""></i><b>Knocked out</b><small>To do</small></div><div class="li"><i class=""></i><b>Victory</b><small>To do</small></div><div class="li"><i class=""></i><b>Running in</b><small>To do</small></div></aside><div class="wtop"><span class="back">&lsaquo; Tom</span><div class="ttl"><b>Tarmac Porsche Transfer</b><small>Capstone. Runs 7.5 s (target 6 to 8 s). Used on every monster.</small></div><span class="st wait"><i></i>Waiting on 2 pictures</span></div><section class="wprev"><div class="cv" style="background-image:url(img/preview-capstone.jpg)"><span class="tag">PREVIEW: THE WHOLE MOVE, PLAYED BY THE GAME</span><span class="ph" style="left:30%;top:34%;width:15%;height:30%">HIGH-BEAM GLARE</span><span class="ph" style="left:2%;top:52%;width:60%;height:16%">JET WASH</span><span class="warn">2 PINK BOXES ARE NOT FINAL</span></div><div class="ctl"><button class="gold play">&#9654; Play</button><span class="seg"><span class="on">1x</span><span>½</span><span>¼</span></span><span class="tog"><i></i>Loop</span><span class="tm">3.4 of 7.5 s</span></div><div class="tl"><div class="ln body pick"><span class="lb">Video</span><span class="tr"><span class="it" style="left:0.0%;width:30.0%">Tom&#x27;s video, take 1</span><span class="it hold" style="left:30.0%;width:70.0%">holds his last pose</span></span></div><div class="ln stage"><span class="lb">Scene</span><span class="tr"><span class="it" style="left:0.0%;width:100.0%">Night falls (80% dark)</span></span></div><div class="ln stage"><span class="lb">Objects</span><span class="tr"><span class="it" style="left:5.3%;width:17.3%">Runway lights</span><span class="it" style="left:24.0%;width:20.0%">Porsche arrives</span><span class="it need" style="left:44.0%;width:10.7%">Glare</span><span class="it need" style="left:57.3%;width:10.7%">Jet wash</span><span class="it" style="left:80.0%;width:9.3%">Drives off</span></span></div><div class="ln fx"><span class="lb">Effects</span><span class="tr"><span class="it" style="left:44.0%;width:12.0%">Black Porsche high beams</span><span class="it" style="left:73.3%;width:18.7%">Words</span></span></div><div class="ln snd"><span class="lb">Sound</span><span class="tr"><span class="it" style="left:0.0%;width:2.7%">charge</span><span class="it" style="left:40.0%;width:2.7%">thud</span></span></div><div class="hw"><b style="left:44.0%"></b><u style="left:44.7%"></u></div><div class="sc"><span>0.0 s</span><span>1.9 s</span><span>3.8 s</span><span>5.6 s</span><span>7.5 s</span></div></div><div class="onlywide" style="padding:6px 0 0"><div class="card" style="margin:0"><h3><i style="background:var(--muted)"></i>Earlier versions</h3><div class="ver"><div><b>Today 5:12 pm, you</b><span>freeze on the hit: Short</span><u>Bring back</u></div><div><b>Today 4:40 pm, you</b><span>added Brass rings</span><u>Bring back</u></div><div><b>Nov 26, Claude</b><span>copied from the old files</span><u>Bring back</u></div></div></div></div></section><section class="wset"><div class="jump"><span>Video</span><span>Timing</span><span>Set piece <b>11</b></span><span>Objects <b>4</b></span><span>Effects <b>2</b></span><span>Sound <b>2</b></span></div><div class="cols"><div class="card"><h3><i style="background:var(--stage)"></i>Set piece: the whole screen<em>7.5 s</em></h3><div class="row"><div class="q">How long it lasts<small>a Capstone runs 6 to 8 s</small></div><div class="a"><span class="val">7.5 s</span><button class="ghost sm">&minus;</button><button class="ghost sm">+</button></div></div><div class="row"><div class="q">How dark the field goes</div><div class="a"><span class="seg"><span>Off</span><span>Dusk</span><span class="on">Night</span></span></div></div><div class="step"><div class="t">0.0 s<small>start</small></div><div class="d"><b>Night falls</b><span>The field dims over 0.4 s</span></div><button class="ghost sm">Change</button></div><div class="step"><div class="t">0.4 s<small></small></div><div class="d"><b>Runway lights switch on</b><span>Along the floor, glowing, for 6.2 s</span></div><button class="ghost sm">Change</button></div><div class="step"><div class="t">1.8 s<small>after his wave</small></div><div class="d"><b>The Porsche drives in</b><span>From the right edge, stops in front of the monsters, 0.9 s, skids</span></div><button class="ghost sm">Change</button></div><div class="step"><div class="t">3.3 s<small>the hit</small></div><div class="d"><b>High beams flash</b><span>White flash, glare on every monster, they are knocked back</span></div><button class="ghost sm">Change</button></div><div class="note">7 more steps: jet wash, shake, PLEASE ENJOY YOUR TRANSFER, drives off, day returns.</div><button class="add">+ Add a step</button></div><div class="card"><h3><i style="background:var(--stage)"></i>Objects on the stage<em>2 of 4 have a picture</em></h3><div class="objs"><div class="obj"><div class="pic">&#128663;</div><b>Black Porsche</b><small>Half the screen wide</small></div><div class="obj"><div class="pic">&#10024;</div><b>Runway lights</b><small>Loops, glows</small></div><div class="obj need"><div class="pic">NO PICTURE YET<br>shown as a pink box</div><b>High-beam glare</b><small>A burst of light</small><span class="lnk">Open in the Art Library</span></div><div class="obj need"><div class="pic">NO PICTURE YET<br>shown as a pink box</div><b>Jet wash</b><small>A gust crossing the field</small><span class="lnk">Open in the Art Library</span></div></div><div class="note">An object with no picture shows in the preview as a pink box with its name. It is never put in the game that way.</div></div><div class="card"><h3><i style="background:var(--body)"></i>Body video<em>take 1 is in the game</em></h3><div class="startp"><img src="img/start-tom.jpg" alt=""><div class="tx"><b>Starts from Tom's standard picture</b><br>Holds: the 360 medallion (the one thing in his hand)<br>Wears: nothing else</div></div><div class="note">His video is 2.3 s. He holds his last pose while the set piece plays out.</div><div class="btns"><button class="sm">Make another ($0.50)</button><button class="ghost sm">Edit this prompt</button></div></div><div class="card"><h3><i style="background:var(--hit)"></i>Timing</h3><div class="row"><div class="q">The hit lands<small>when the high beams flash</small></div><div class="a"><span class="val">3.3 s</span><button class="sm">Set to where the preview is</button></div></div><div class="row"><div class="q">Freeze on the hit</div><div class="a"><span class="seg"><span>None</span><span>Short</span><span>Medium</span><span class="on">Long</span></span></div></div><div class="row"><div class="q">Screen shake</div><div class="a"><span class="seg"><span>None</span><span>Light</span><span class="on">Medium</span><span>Heavy</span></span></div></div></div><div class="card"><h3><i style="background:var(--fx)"></i>Effects<em>2 of the 37</em></h3><div class="step"><div class="t">3.3 s<small>at the hit</small></div><div class="d"><b>Black Porsche high beams</b><span>Across the whole field</span><div class="chips"><u>Speed: fast</u><u>High beams: 85%</u><u>Dust trail: on</u></div></div><span class="sw" style="background:#e5e7eb"></span><button class="ghost sm">Change</button></div><div class="step"><div class="t">3.6 s<small>0.3 s after</small></div><div class="d"><b>Status badge: Dazzled</b><span>On every monster</span><div class="chips"><u>Kind: weakened</u></div></div><span class="sw" style="background:#ffd34d"></span><button class="ghost sm">Change</button></div><button class="add">+ Add an effect</button></div><div class="card"><h3><i style="background:var(--snd)"></i>Sound<em>2 cues</em></h3><div class="step"><div class="t">0.0 s<small>start</small></div><div class="d"><b>Charge</b><span>A rising hum</span></div><button class="ghost sm">Change</button></div><div class="step"><div class="t">3.0 s<small></small></div><div class="d"><b>Thud</b><span>The car stops</span></div><button class="ghost sm">Change</button></div><button class="add">+ Add a sound</button></div></div></section><footer class="wfin"><div class="say"><b>Waiting on 2 pictures</b>Glare and Jet wash are made in the Art Library. You can finish it without them: they are left out of the game.</div><button class="ghost">Undo</button><button>Save draft</button><button class="gold">Finished</button></footer></main></body></html>

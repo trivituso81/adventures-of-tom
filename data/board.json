@@ -7237,10 +7237,10 @@
    "id": "c-movelab-rose",
    "tag": "movelab2",
    "lane": "claude",
-   "col": "up",
+   "col": "wait",
    "theme": "Battle Animations",
    "title": "Move Lab for any person, starting with Rose",
-   "next": "The Move Lab only loads Tom's loadout (engine/b3-movelab.js). Adds a person picker so Tom can judge Rose's twelve moves with Keep, Tweak or Replace.",
+   "next": "Held: the Move Workbench plan replaces the Move Lab with a preview for every person. Waits on your answer to the card Approve the Move Workbench plan and drawings. If you approve, Move Workbench 1 retires this card; if you stop the plan, it goes back to Up next.",
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26",
@@ -7273,8 +7273,14 @@
     {
      "d": "2026-11-26",
      "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Held by c-movebench-design: it would add to engine/b3-movelab.js, which claude/movebench-plan.md deletes in phase 16. Night start switched off."
     }
-   ]
+   ],
+   "waiting_on": "tom",
+   "night": false
   },
   {
    "id": "b-guideuse-45793298334",
@@ -9512,9 +9518,9 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Design the Move Workbench in the Battle Guide",
-   "next": "Design only: a plan (claude/movebench-plan.md), a visual mock (claude/movebench-mock/) and the build cards for one page per animation in ADMIN > BATTLE GUIDE > Animations where Tom sets every variable of a move and previews the whole move. Nothing in the game changes in this session.",
+   "next": "Done: the plan is claude/movebench-plan.md, the drawings are in claude/movebench-mock/ (32 pictures), and sixteen build cards wait behind your card Approve the Move Workbench plan and drawings. Nothing in the game was changed.",
    "blocks": [],
-   "after": "nothing for Tom: end",
+   "after": "t-movebench-plan",
    "created": "2026-11-26",
    "changed": "2026-11-26",
    "chat": {
@@ -9538,6 +9544,624 @@
     {
      "d": "2026-11-26",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as movebench-design. The prompt on this card is Tom's message with one change: the four animation id patterns are written with round brackets, because the board check refuses angle brackets in a prompt. `after` is the Tom card t-movebench-plan (the board check does not accept the sentence the message gave). Corrections to the handed facts are at the top of the plan: 679 animations, not about 346; all 37 library effects are built in code."
+    }
+   ]
+  },
+  {
+   "id": "t-movebench-plan",
+   "title": "Approve the Move Workbench plan and drawings",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "decide",
+   "next": "Open the drawings: https://github.com/trivituso81/adventures-of-tom/tree/main/claude/movebench-mock and scroll down past the file list (32 pictures of the page: your phone upright and sideways, the Duo open both ways, and the wide monitor; the same pictures are in the chat that made this card). Then open claude/movebench-plan.md in the same place and read only the first table, What you get. Tap one answer here; type any change in the note box. This card blocks the first build card, Move Workbench 1: preview the whole move (c-movebench-1), and holds the card Move Lab for any person, starting with Rose (c-movelab-rose), which this plan replaces.",
+   "steps": [
+    "Open https://github.com/trivituso81/adventures-of-tom/tree/main/claude/movebench-mock and scroll down past the file list. The pictures show one Basic, one Skill that holds a prop, one Capstone and one monster attack at every screen size.",
+    "Open https://github.com/trivituso81/adventures-of-tom/blob/main/claude/movebench-plan.md and read the first table, What you get. The rest is for the build sessions.",
+    "Tap one answer on this card. If you want changes, type them in the note box first."
+   ],
+   "choices": [
+    "Approve the plan and the drawings as they are (Recommended)",
+    "Approve, with the changes in my note",
+    "Stop: do not build this"
+   ],
+   "leads": [
+    "The first build card starts by itself and puts Preview the whole move on your phone. Fifteen more follow in order; you get a card to try it after phases 2, 6, 11 and 16.",
+    "The first build session reads your note, changes the plan and the drawings to match, then builds in the same order.",
+    "Nothing is built. The sixteen build cards are retired and the Move Lab card goes back to Up next."
+   ],
+   "blocks": [
+    "c-movebench-1",
+    "c-movelab-rose"
+   ],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDPakuV4EMmLKJKdoF",
+    "opening": "\"You are designing a feature for The Adventures of Tom. This session is DESIGN ONLY.\""
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by c-movebench-design (movebench-design): the plan claude/movebench-plan.md, the mock claude/movebench-mock/ and sixteen build cards wait on this answer."
+    }
+   ]
+  },
+  {
+   "id": "c-movebench-1",
+   "tag": "movebench1",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "theme": "Battle Animations",
+   "title": "Move Workbench 1: preview the whole move",
+   "next": "A Preview the whole move box on every family move and monster attack in the Battle Guide: the game's own battle code plays the video, stage, effects, freeze and sounds together, with Play, Pause, half and quarter speed, Loop and Mute. Waits on your answer to the card Approve the Move Workbench plan and drawings.",
+   "blocks": [
+    "c-movebench-2"
+   ],
+   "after": "nothing for Tom: c-movebench-2",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "auto": true,
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "A Preview the whole move box on every family move and monster attack in the Battle Guide: the game's own battle code plays the video, stage, effects, freeze and sounds together, with Play, Pause, half and quarter speed, Loop and Mute.",
+    "before": [
+     "Answer the card Approve the Move Workbench plan and drawings. This card then starts by itself; if it does not, open a NEW conversation, choose Claude Sonnet 5.5, set effort to medium, and paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the next phase of a written plan, tests catch mistakes; none of the three Fable conditions holds)",
+    "effort": "medium (the steps, files and tests are written in claude/movebench-plan.md)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md (the whole of sections b to f once, then the row of this phase in section g and the Built notes of the phases before it), and look at the pictures in claude/movebench-mock/ (README.md lists them; the .html files beside it hold every drawn size and colour). Read cards c-movebench-1 and t-movebench-plan in data/board.json: Tom's answer and note on t-movebench-plan come first, and a change he typed that touches this phase is applied to the plan and the mock before you build. Your first push is the commit board: start c-movebench-1. Phase 1 (section c). Build bench.html (the preview stage: it reads index.html and adds its script tags in order, leaving out data/voice-clips.js and data/voice/*.js; voice off) and engine/b3-bench.js (starts a stub fight the way b3LabGuardProof and b3mlPrepare do, plays a family move through b3Act and b3Play the way b3mlPlay does and a monster attack through b3FoeTurn with e.force, and owns the clock by calling b3Update itself for Play, Pause, 1x, half, quarter and Loop). In battle-guide.html add the box above the existing player on the sheet of every family move and monster attack; the frame is made on the first tap, reused between animations and removed on leaving the Animations tab. It reads today's tables; there is no spec yet. Your first job is to load the frame at 466 x 657 and write down how long it takes and how many megabytes of script it loads (risk 2 of section h); if it cannot hold, stop and follow the stop-loss rule. Also in your first push: retire card c-movelab-rose with a history line (the workbench preview replaces the Move Lab). Delete nothing else. New test tools/movebench/preview_test.py with the checks the phase row lists (four sizes, under 25 MB of scripts, a staged move, a clip-only move, a default-motion move and a monster attack with a wind-up each play to the end, 16 or fewer clips in memory, no request to a dispatch, fal or xAI address, the frame removed on leaving); add it to tools/night/tests.json. Rules that hold for every phase: the preview and the game run the same engine files, never a second implementation; a move with no spec plays the defaults and the battle rules never wait on an animation; no painted poses in battle; never weaken art-factory/PIPELINE_LOCK.json or the lock files; no API key on any page; images only in the Art Library; no step may make a video or spend money without Tom's tap, and a session never runs a paid generation; phone first, at 466 x 657, 678 x 445, 951 x 648 and 669 x 869; purge what the phase replaces and grep for zero references. Look at every picture your tests write before you push. Run python3 tools/smoke.py. Add a short Built notes block for this phase under section g of claude/movebench-plan.md (what was built, what differs from the plan and why, what the next phase must know), update docs/BATTLE_GUIDE.md, write the docs/CHANGES.md heading and run bump_tags. Build name movebench1. This phase hands Tom nothing to judge: test every fact yourself and put the pictures in docs/CHANGES.md. The next card, c-movebench-2, starts when this build ships. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by c-movebench-design: phase 1 of claude/movebench-plan.md section g."
+    }
+   ]
+  },
+  {
+   "id": "c-movebench-2",
+   "tag": "movebench2",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Battle Animations",
+   "title": "Move Workbench 2: drag to any moment, every kind",
+   "next": "The preview gains a bar you drag to any moment, one-picture steps, lanes for video, stage, effects and sound, and plays body states, wind-ups, answers and moves that have no video yet. Starts by itself when Move Workbench 1 ships.",
+   "blocks": [
+    "c-movebench-3"
+   ],
+   "after": "nothing for Tom: c-movebench-3",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "auto": true,
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "The preview gains a bar you drag to any moment, one-picture steps, lanes for video, stage, effects and sound, and plays body states, wind-ups, answers and moves that have no video yet.",
+    "before": [
+     "Nothing to do first. It starts by itself when Move Workbench 1 ships; if it does not, open a NEW conversation, choose Claude Sonnet 5.5, set effort to medium, and paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the next phase of a written plan, tests catch mistakes; none of the three Fable conditions holds)",
+    "effort": "medium (the steps, files and tests are written in claude/movebench-plan.md)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md (the whole of sections b to f once, then the row of this phase in section g and the Built notes of the phases before it), and look at the pictures in claude/movebench-mock/ (README.md lists them; the .html files beside it hold every drawn size and colour). Read cards c-movebench-2 and t-movebench-plan in data/board.json: Tom's answer and note on t-movebench-plan come first, and a change he typed that touches this phase is applied to the plan and the mock before you build. Your first push is the commit board: start c-movebench-2. Phase 2 (section c, the table Scrub, slow, loop). Drag to a moment by resetting the stub fight with the same seed and stepping b3Update without drawing; pin the fight clock's start and Math.random so a replay to the same moment draws the same picture (risk 3: it differed at 0.9 s in the design test). Step one picture. The bar with its lanes and HIT line, read from the run itself (B3G.run marks, ids, hitAt, len and the armed cues of engine/b3-vfx.js). Body states (guard on and off, a braced hit, a dodge, a knock-out, victory, running), a wind-up alone, an answer (one monster attack after the move, as the Move Lab's MONSTER ACTS does). cfg.bench: in the preview fight only, a move whose body video is missing plays its stage and effects over the idle video with the label NO VIDEO YET: SHOWN ON THE STANDING VIDEO. Extend tools/movebench/preview_test.py as the phase row lists. Rules that hold for every phase: the preview and the game run the same engine files, never a second implementation; a move with no spec plays the defaults and the battle rules never wait on an animation; no painted poses in battle; never weaken art-factory/PIPELINE_LOCK.json or the lock files; no API key on any page; images only in the Art Library; no step may make a video or spend money without Tom's tap, and a session never runs a paid generation; phone first, at 466 x 657, 678 x 445, 951 x 648 and 669 x 869; purge what the phase replaces and grep for zero references. Look at every picture your tests write before you push. Run python3 tools/smoke.py. Add a short Built notes block for this phase under section g of claude/movebench-plan.md (what was built, what differs from the plan and why, what the next phase must know), update docs/BATTLE_GUIDE.md, write the docs/CHANGES.md heading and run bump_tags. Build name movebench2. This phase hands Tom a card: in the same push add the Tom card t-movebench-2-try (lane tom, ask play, fyi true, title \"Try the whole-move preview on your phone\") with these steps as its next: Open ADMIN > BATTLE GUIDE > Animations > Tom > Lounge Pass Flex and tap Preview the whole move. Play it, slow it to quarter speed, drag the bar to the hit, switch Loop on. Then do the same on Zone One Blockade, on Tom's Guard and on the Mudling's Mud Pie. Press All good, or Something is wrong and say which animation and what you saw. Then set after on c-movebench-2 to t-movebench-2-try. The next card, c-movebench-3, starts when this build ships. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by c-movebench-design: phase 2 of claude/movebench-plan.md section g."
+    }
+   ]
+  },
+  {
+   "id": "c-movebench-3",
+   "tag": "movebench3",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Battle Animations",
+   "title": "Move Workbench 3: the spec files",
+   "next": "Writes one settings file per animation from what the game plays today, and records every move's timeline so later phases can prove nothing changed. No screen changes. Starts by itself when Move Workbench 2 ships.",
+   "blocks": [
+    "c-movebench-4"
+   ],
+   "after": "nothing for Tom: c-movebench-4",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "auto": true,
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Writes one settings file per animation from what the game plays today, and records every move's timeline so later phases can prove nothing changed. No screen changes.",
+    "before": [
+     "Nothing to do first. It starts by itself when Move Workbench 2 ships; if it does not, open a NEW conversation, choose Claude Sonnet 5.5, set effort to medium, and paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the next phase of a written plan, tests catch mistakes; none of the three Fable conditions holds)",
+    "effort": "medium (the steps, files and tests are written in claude/movebench-plan.md)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md (the whole of sections b to f once, then the row of this phase in section g and the Built notes of the phases before it), and look at the pictures in claude/movebench-mock/ (README.md lists them; the .html files beside it hold every drawn size and colour). Read cards c-movebench-3 and t-movebench-plan in data/board.json: Tom's answer and note on t-movebench-plan come first, and a change he typed that touches this phase is applied to the plan and the mock before you build. Your first push is the commit board: start c-movebench-3. Phase 3 (section b, all of it). Build tools/movebench/ (schema.py, migrate.py, bundle.py with --check, golden.py), a file in data/moves/ for every animation that has anything today (the 20 rows of data/b3-stage.js, the timing, effects and effectParams of data/guide-manifest.json, the 7 rows of data/pass1-meta.js with their frames turned from 60 a second to 24, every anim and wind of the kit and monster files, B3_BODY_CLIPS), data/move-specs.js as a script tag in index.html, and engine/b3-spec.js (msLive, msSet). The engine does not read the spec yet. Before anything else look at card c-pass1final (risk 10). Record tools/movebench/golden.json on the untouched engine with the stub fight of engine/b3-bench.js (b.6 says exactly what a timeline holds). New tests tools/movebench/spec_test.py and tools/movebench/golden_test.py; bundle.py --check goes into tools/smoke.py. Add data/moves/** to paths-ignore of .github/workflows/publish.yml only if nothing the site serves reads those files (the game reads data/move-specs.js). Rules that hold for every phase: the preview and the game run the same engine files, never a second implementation; a move with no spec plays the defaults and the battle rules never wait on an animation; no painted poses in battle; never weaken art-factory/PIPELINE_LOCK.json or the lock files; no API key on any page; images only in the Art Library; no step may make a video or spend money without Tom's tap, and a session never runs a paid generation; phone first, at 466 x 657, 678 x 445, 951 x 648 and 669 x 869; purge what the phase replaces and grep for zero references. Look at every picture your tests write before you push. Run python3 tools/smoke.py. Add a short Built notes block for this phase under section g of claude/movebench-plan.md (what was built, what differs from the plan and why, what the next phase must know), update docs/BATTLE_GUIDE.md, write the docs/CHANGES.md heading and run bump_tags. Build name movebench3. This phase hands Tom nothing to judge: test every fact yourself and put the pictures in docs/CHANGES.md. The next card, c-movebench-4, starts when this build ships. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by c-movebench-design: phase 3 of claude/movebench-plan.md section g."
+    }
+   ]
+  },
+  {
+   "id": "c-movebench-4",
+   "tag": "movebench4",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Battle Animations",
+   "title": "Move Workbench 4: the engine reads timing and effects",
+   "next": "The game takes each move's hit moment, freeze, shake and effects from its settings file. The old timing files and the Pass-1 draft review are deleted. Moves look the same. Starts by itself when Move Workbench 3 ships.",
+   "blocks": [
+    "c-movebench-5"
+   ],
+   "after": "nothing for Tom: c-movebench-5",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "auto": true,
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "The game takes each move's hit moment, freeze, shake and effects from its settings file. The old timing files and the Pass-1 draft review are deleted. Moves look the same.",
+    "before": [
+     "Nothing to do first. It starts by itself when Move Workbench 3 ships; if it does not, open a NEW conversation, choose Claude Sonnet 5.5, set effort to medium, and paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the next phase of a written plan, tests catch mistakes; none of the three Fable conditions holds)",
+    "effort": "medium (the steps, files and tests are written in claude/movebench-plan.md)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md (the whole of sections b to f once, then the row of this phase in section g and the Built notes of the phases before it), and look at the pictures in claude/movebench-mock/ (README.md lists them; the .html files beside it hold every drawn size and colour). Read cards c-movebench-4 and t-movebench-plan in data/board.json: Tom's answer and note on t-movebench-plan come first, and a change he typed that touches this phase is applied to the plan and the mock before you build. Your first push is the commit board: start c-movebench-4. Phase 4 (b.5 step 2). engine/b3-vfx.js and b3PlayMove read contact, hitStop, shake, approach, gap and the effects list (with at, on, params, off) from msLive; shake and the run-in now play in a real fight. Delete everything b.5 step 2 lists (engine/guide-timing.js, data/pass1-meta.js, tools/clip-bake/pass1_meta.py, p1Meta and its helpers, EFFECT_PARAMS, B3V_EACH and B3V_ALLY as tables, the Battle Lab row PASS-1 DRAFT REVIEW, engine/pass1-vfx.js after moving p1DrawVfx, p1Guard and the layer table into engine/b3-vfx.js) and close card t-pass1draftplay with a line saying the workbench preview replaces it. tools/movebench/golden_test.py must match value for value; a difference is a bug in this phase, never a new golden. Rewrite tools/guide_timing_test.py as tools/movebench/timing_test.py; run tools/b3_vfx_test.py, tools/b3_hitstop_test.py and tools/b3_test.py new1 to new5. Rules that hold for every phase: the preview and the game run the same engine files, never a second implementation; a move with no spec plays the defaults and the battle rules never wait on an animation; no painted poses in battle; never weaken art-factory/PIPELINE_LOCK.json or the lock files; no API key on any page; images only in the Art Library; no step may make a video or spend money without Tom's tap, and a session never runs a paid generation; phone first, at 466 x 657, 678 x 445, 951 x 648 and 669 x 869; purge what the phase replaces and grep for zero references. Look at every picture your tests write before you push. Run python3 tools/smoke.py. Add a short Built notes block for this phase under section g of claude/movebench-plan.md (what was built, what differs from the plan and why, what the next phase must know), update docs/BATTLE_GUIDE.md, write the docs/CHANGES.md heading and run bump_tags. Build name movebench4. This phase hands Tom nothing to judge: test every fact yourself and put the pictures in docs/CHANGES.md. The next card, c-movebench-5, starts when this build ships. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by c-movebench-design: phase 4 of claude/movebench-plan.md section g."
+    }
+   ]
+  },
+  {
+   "id": "c-movebench-5",
+   "tag": "movebench5",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Battle Animations",
+   "title": "Move Workbench 5: the workbench page and Timing",
+   "next": "Opening an animation shows the new workbench page as drawn, with the first section you can change: Timing. A change plays in the preview at once. Nothing is saved to the game yet. Starts by itself when Move Workbench 4 ships.",
+   "blocks": [
+    "c-movebench-6"
+   ],
+   "after": "nothing for Tom: c-movebench-6",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "auto": true,
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Opening an animation shows the new workbench page as drawn, with the first section you can change: Timing. A change plays in the preview at once. Nothing is saved to the game yet.",
+    "before": [
+     "Nothing to do first. It starts by itself when Move Workbench 4 ships; if it does not, open a NEW conversation, choose Claude Sonnet 5.5, set effort to medium, and paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the next phase of a written plan, tests catch mistakes; none of the three Fable conditions holds)",
+    "effort": "medium (the steps, files and tests are written in claude/movebench-plan.md)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md (the whole of sections b to f once, then the row of this phase in section g and the Built notes of the phases before it), and look at the pictures in claude/movebench-mock/ (README.md lists them; the .html files beside it hold every drawn size and colour). Read cards c-movebench-5 and t-movebench-plan in data/board.json: Tom's answer and note on t-movebench-plan come first, and a change he typed that touches this phase is applied to the plan and the mock before you build. Your first push is the commit board: start c-movebench-5. Phase 5 (sections d.1, d.2, d.6 and the mock). The workbench replaces the sheet body: top bar, the preview with its small player on an upright phone, Body video (today's start picture, prompt, Make this video, takes, Use this one and Keep the old one moved in with the same buttons, words and queue code, unchanged), and the Timing section (The hit lands with Set to where the preview is, Freeze on the hit, Screen shake, How he gets there, Time between hits). The draft is kept in this browser (aot-movebench) and sent to the frame with postMessage; the frame calls msSet and plays again. Every label comes from a new file data/movebench-words.json. The other sections show read-only what the spec holds. New test tools/movebench/page_test.py (the five layouts with pictures, each Timing control changes the run the preview reports); every check of tools/battle_guide_test.py about making and using a video must still pass. Rules that hold for every phase: the preview and the game run the same engine files, never a second implementation; a move with no spec plays the defaults and the battle rules never wait on an animation; no painted poses in battle; never weaken art-factory/PIPELINE_LOCK.json or the lock files; no API key on any page; images only in the Art Library; no step may make a video or spend money without Tom's tap, and a session never runs a paid generation; phone first, at 466 x 657, 678 x 445, 951 x 648 and 669 x 869; purge what the phase replaces and grep for zero references. Look at every picture your tests write before you push. Run python3 tools/smoke.py. Add a short Built notes block for this phase under section g of claude/movebench-plan.md (what was built, what differs from the plan and why, what the next phase must know), update docs/BATTLE_GUIDE.md, write the docs/CHANGES.md heading and run bump_tags. Build name movebench5. This phase hands Tom nothing to judge: test every fact yourself and put the pictures in docs/CHANGES.md. The next card, c-movebench-6, starts when this build ships. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by c-movebench-design: phase 5 of claude/movebench-plan.md section g."
+    }
+   ]
+  },
+  {
+   "id": "c-movebench-6",
+   "tag": "movebench6",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Battle Animations",
+   "title": "Move Workbench 6: save, finished and progress",
+   "next": "Save draft, Undo, Earlier versions and Finished work. Finished puts the move in the game as a new build and marks it Finished by you. The list shows progress across every animation. Starts by itself when Move Workbench 5 ships.",
+   "blocks": [
+    "c-movebench-7"
+   ],
+   "after": "nothing for Tom: c-movebench-7",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "auto": true,
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Save draft, Undo, Earlier versions and Finished work. Finished puts the move in the game as a new build and marks it Finished by you. The list shows progress across every animation.",
+    "before": [
+     "Nothing to do first. It starts by itself when Move Workbench 5 ships; if it does not, open a NEW conversation, choose Claude Sonnet 5.5, set effort to medium, and paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the next phase of a written plan, tests catch mistakes; none of the three Fable conditions holds)",
+    "effort": "medium (the steps, files and tests are written in claude/movebench-plan.md)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md (the whole of sections b to f once, then the row of this phase in section g and the Built notes of the phases before it), and look at the pictures in claude/movebench-mock/ (README.md lists them; the .html files beside it hold every drawn size and colour). Read cards c-movebench-6 and t-movebench-plan in data/board.json: Tom's answer and note on t-movebench-plan come first, and a change he typed that touches this phase is applied to the plan and the mock before you build. Your first push is the commit board: start c-movebench-6. Phase 6 (sections d.3, d.4, d.5 and f). Save draft and Finished write data/moves/ files through the GitHub contents API with the file's sha and replay Tom's field changes after a 409 (f.3); Undo; Earlier versions from the file's log and its commits, with Bring back. New Action .github/workflows/move-apply.yml and tools/movebench/apply.py, modelled on guide-apply.yml and tools/guidegen/apply.py (repository dispatch plus a 10 minute timer, concurrency on the job, no paid secret, one build movespec- with the run number for every animation finished since the last one, finished.build written only after the contents API confirms the script on main, data/moves/index.json rebuilt on every run). The eight statuses of d.4, the progress bar and chips of d.5, a row for Pick-Me-Up. Delete the Plan block at the top of the Animations tab. Tests: tools/movebench/page_test.py against the stand-in GitHub of tools/battle_guide_test.py (the cases the phase row lists), tools/movebench/apply_test.py, tools/workflow_check.py. A session never sets finished: spec_test.py must fail a file where anyone but tom did. Rules that hold for every phase: the preview and the game run the same engine files, never a second implementation; a move with no spec plays the defaults and the battle rules never wait on an animation; no painted poses in battle; never weaken art-factory/PIPELINE_LOCK.json or the lock files; no API key on any page; images only in the Art Library; no step may make a video or spend money without Tom's tap, and a session never runs a paid generation; phone first, at 466 x 657, 678 x 445, 951 x 648 and 669 x 869; purge what the phase replaces and grep for zero references. Look at every picture your tests write before you push. Run python3 tools/smoke.py. Add a short Built notes block for this phase under section g of claude/movebench-plan.md (what was built, what differs from the plan and why, what the next phase must know), update docs/BATTLE_GUIDE.md, write the docs/CHANGES.md heading and run bump_tags. Build name movebench6. This phase hands Tom a card: in the same push add the Tom card t-movebench-6-try (lane tom, ask play, fyi true, title \"Change a move's timing and finish it\") with these steps as its next: Open ADMIN > BATTLE GUIDE > Animations and pick any family move that has a video. Change Freeze on the hit and Screen shake, watch the preview, tap Save draft, then Finished. Wait for the bar to say In the game with a build name, then tap In a fight and watch the move in a real fight. Press All good, or Something is wrong and say which move and what you saw. Then set after on c-movebench-6 to t-movebench-6-try. The next card, c-movebench-7, starts when this build ships. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by c-movebench-design: phase 6 of claude/movebench-plan.md section g."
+    }
+   ]
+  },
+  {
+   "id": "c-movebench-7",
+   "tag": "movebench7",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Battle Animations",
+   "title": "Move Workbench 7: effects",
+   "next": "The Effects section: add any of the 37 library effects to a move, set when it plays, on whom, and each effect's own settings with sliders, buttons and switches. Starts by itself when Move Workbench 6 ships.",
+   "blocks": [
+    "c-movebench-8"
+   ],
+   "after": "nothing for Tom: c-movebench-8",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "auto": true,
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "The Effects section: add any of the 37 library effects to a move, set when it plays, on whom, and each effect's own settings with sliders, buttons and switches.",
+    "before": [
+     "Nothing to do first. It starts by itself when Move Workbench 6 ships; if it does not, open a NEW conversation, choose Claude Sonnet 5.5, set effort to medium, and paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the next phase of a written plan, tests catch mistakes; none of the three Fable conditions holds)",
+    "effort": "medium (the steps, files and tests are written in claude/movebench-plan.md)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md (the whole of sections b to f once, then the row of this phase in section g and the Built notes of the phases before it), and look at the pictures in claude/movebench-mock/ (README.md lists them; the .html files beside it hold every drawn size and colour). Read cards c-movebench-7 and t-movebench-plan in data/board.json: Tom's answer and note on t-movebench-plan come first, and a change he typed that touches this phase is applied to the plan and the mock before you build. Your first push is the commit board: start c-movebench-7. Phase 7 (section e.1 and e.3). tools/movebench/fxparams.py reads art-factory/aot-stage2c-vfx-library-v11.json and writes data/movebench-fx.json (per effect its name, layer, colour, summary and each param's kind, range and default); plain words for every param and every choice go into data/movebench-words.json. The Effects section: the list, Change, the picker of 37 as a grid with a small moving sample drawn by the real drawer in engine/vfx-library.js, a control per param by its kind (the table of e.1), When, On whom, switch off, an optional sound. An effect id with no drawer shows as the pink dashed box in the preview only. tools/movebench/spec_test.py fails when a param has no control kind or no words; tools/movebench/page_test.py sets one param of each control kind and reads it back from the armed cue. Rules that hold for every phase: the preview and the game run the same engine files, never a second implementation; a move with no spec plays the defaults and the battle rules never wait on an animation; no painted poses in battle; never weaken art-factory/PIPELINE_LOCK.json or the lock files; no API key on any page; images only in the Art Library; no step may make a video or spend money without Tom's tap, and a session never runs a paid generation; phone first, at 466 x 657, 678 x 445, 951 x 648 and 669 x 869; purge what the phase replaces and grep for zero references. Look at every picture your tests write before you push. Run python3 tools/smoke.py. Add a short Built notes block for this phase under section g of claude/movebench-plan.md (what was built, what differs from the plan and why, what the next phase must know), update docs/BATTLE_GUIDE.md, write the docs/CHANGES.md heading and run bump_tags. Build name movebench7. This phase hands Tom nothing to judge: test every fact yourself and put the pictures in docs/CHANGES.md. The next card, c-movebench-8, starts when this build ships. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by c-movebench-design: phase 7 of claude/movebench-plan.md section g."
+    }
+   ]
+  },
+  {
+   "id": "c-movebench-8",
+   "tag": "movebench8",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Battle Animations",
+   "title": "Move Workbench 8: the engine reads the stage",
+   "next": "The game takes each move's stage steps, lasting objects and set piece from its settings file. The old staging file is deleted, and a family move with no stage can now be made. Starts by itself when Move Workbench 7 ships.",
+   "blocks": [
+    "c-movebench-9"
+   ],
+   "after": "nothing for Tom: c-movebench-9",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "auto": true,
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "The game takes each move's stage steps, lasting objects and set piece from its settings file. The old staging file is deleted, and a family move with no stage can now be made.",
+    "before": [
+     "Nothing to do first. It starts by itself when Move Workbench 7 ships; if it does not, open a NEW conversation, choose Claude Sonnet 5.5, set effort to medium, and paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the next phase of a written plan, tests catch mistakes; none of the three Fable conditions holds)",
+    "effort": "medium (the steps, files and tests are written in claude/movebench-plan.md)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md (the whole of sections b to f once, then the row of this phase in section g and the Built notes of the phases before it), and look at the pictures in claude/movebench-mock/ (README.md lists them; the .html files beside it hold every drawn size and colour). Read cards c-movebench-8 and t-movebench-plan in data/board.json: Tom's answer and note on t-movebench-plan come first, and a change he typed that touches this phase is applied to the plan and the mock before you build. Your first push is the commit board: start c-movebench-8. Phase 8 (b.5 step 3). engine/b3-stage.js reads steps, lasting, setpiece, objects, marks and budget from msLive (b3gRowFor and everything that read B3_STAGE). Delete data/b3-stage.js (b3gDefine and B3G_DATA move into engine/b3-stage.js), staging_waits in tools/art-library/wangen.py and failure X15, Waits for staging in battle-guide.html and tools/guidegen/build_map.js, the stage field and waitsStaging count of data/guide-anims.json. tools/movebench/golden_test.py must match value for value. Rewrite tools/movestage_test.py against the spec, add the old names to tools/guidegen/purge_test.py, run tools/guidegen/build_map_test.py, tools/battle_guide_test.py and tools/b3_test.py new1 to new5. Rules that hold for every phase: the preview and the game run the same engine files, never a second implementation; a move with no spec plays the defaults and the battle rules never wait on an animation; no painted poses in battle; never weaken art-factory/PIPELINE_LOCK.json or the lock files; no API key on any page; images only in the Art Library; no step may make a video or spend money without Tom's tap, and a session never runs a paid generation; phone first, at 466 x 657, 678 x 445, 951 x 648 and 669 x 869; purge what the phase replaces and grep for zero references. Look at every picture your tests write before you push. Run python3 tools/smoke.py. Add a short Built notes block for this phase under section g of claude/movebench-plan.md (what was built, what differs from the plan and why, what the next phase must know), update docs/BATTLE_GUIDE.md, write the docs/CHANGES.md heading and run bump_tags. Build name movebench8. This phase hands Tom nothing to judge: test every fact yourself and put the pictures in docs/CHANGES.md. The next card, c-movebench-9, starts when this build ships. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by c-movebench-design: phase 8 of claude/movebench-plan.md section g."
+    }
+   ]
+  },
+  {
+   "id": "c-movebench-9",
+   "tag": "movebench9",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Battle Animations",
+   "title": "Move Workbench 9: stage editor: words and accents",
+   "next": "The Stage section: add, change, reorder and remove steps that need no picture (words on screen, shake, flash, dim, glow, knocking the monster back, a sound), each tied to a moment you pick in the preview. The Sound section. Starts by itself when Move Workbench 8 ships.",
+   "blocks": [
+    "c-movebench-10"
+   ],
+   "after": "nothing for Tom: c-movebench-10",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "auto": true,
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "The Stage section: add, change, reorder and remove steps that need no picture (words on screen, shake, flash, dim, glow, knocking the monster back, a sound), each tied to a moment you pick in the preview. The Sound section.",
+    "before": [
+     "Nothing to do first. It starts by itself when Move Workbench 8 ships; if it does not, open a NEW conversation, choose Claude Sonnet 5.5, set effort to medium, and paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the next phase of a written plan, tests catch mistakes; none of the three Fable conditions holds)",
+    "effort": "medium (the steps, files and tests are written in claude/movebench-plan.md)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md (the whole of sections b to f once, then the row of this phase in section g and the Built notes of the phases before it), and look at the pictures in claude/movebench-mock/ (README.md lists them; the .html files beside it hold every drawn size and colour). Read cards c-movebench-9 and t-movebench-plan in data/board.json: Tom's answer and note on t-movebench-plan come first, and a change he typed that touches this phase is applied to the plan and the mock before you build. Your first push is the commit board: start c-movebench-9. Phase 9 (sections d.1 rows 4 and 8, d.2). The step list in time order with each step as a sentence and Change; Add a step with the action tiles; moments (Start, a named moment, The hit, After another step, Set to where the preview is, Name this moment); the seven actions with no object: words, shake, flash, dim, glow, foe, sfx, each field as a named control with the ranges of b.2; places as words from the list of d.2; the Sound section listing every sfx step and effect sound with Play and the 61 sounds of engine/audio.js by name. tools/movebench/page_test.py adds, changes, reorders and removes each of the seven and checks the step fires at its moment in the preview. Rules that hold for every phase: the preview and the game run the same engine files, never a second implementation; a move with no spec plays the defaults and the battle rules never wait on an animation; no painted poses in battle; never weaken art-factory/PIPELINE_LOCK.json or the lock files; no API key on any page; images only in the Art Library; no step may make a video or spend money without Tom's tap, and a session never runs a paid generation; phone first, at 466 x 657, 678 x 445, 951 x 648 and 669 x 869; purge what the phase replaces and grep for zero references. Look at every picture your tests write before you push. Run python3 tools/smoke.py. Add a short Built notes block for this phase under section g of claude/movebench-plan.md (what was built, what differs from the plan and why, what the next phase must know), update docs/BATTLE_GUIDE.md, write the docs/CHANGES.md heading and run bump_tags. Build name movebench9. This phase hands Tom nothing to judge: test every fact yourself and put the pictures in docs/CHANGES.md. The next card, c-movebench-10, starts when this build ships. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by c-movebench-design: phase 9 of claude/movebench-plan.md section g."
+    }
+   ]
+  },
+  {
+   "id": "c-movebench-10",
+   "tag": "movebench10",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Battle Animations",
+   "title": "Move Workbench 10: stage editor: objects",
+   "next": "Steps that use an object (throw, drop, drive across, rain, put in front, float over, surround, pop up). A new object is asked for in the Art Library and appears when you approve its picture; until then the preview shows a pink box. Starts by itself when Move Workbench 9 ships.",
+   "blocks": [
+    "c-movebench-11"
+   ],
+   "after": "nothing for Tom: c-movebench-11",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "auto": true,
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Steps that use an object (throw, drop, drive across, rain, put in front, float over, surround, pop up). A new object is asked for in the Art Library and appears when you approve its picture; until then the preview shows a pink box.",
+    "before": [
+     "Nothing to do first. It starts by itself when Move Workbench 9 ships; if it does not, open a NEW conversation, choose Claude Sonnet 5.5, set effort to medium, and paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the next phase of a written plan, tests catch mistakes; none of the three Fable conditions holds)",
+    "effort": "medium (the steps, files and tests are written in claude/movebench-plan.md)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md (the whole of sections b to f once, then the row of this phase in section g and the Built notes of the phases before it), and look at the pictures in claude/movebench-mock/ (README.md lists them; the .html files beside it hold every drawn size and colour). Read cards c-movebench-10 and t-movebench-plan in data/board.json: Tom's answer and note on t-movebench-plan come first, and a change he typed that touches this phase is applied to the plan and the mock before you build. Your first push is the commit board: start c-movebench-10. Phase 10 (sections e.2, e.3 and d.1 row 4). The eight object actions (fly, drop, cross, rain, place, hover, surround, pop) with their fields; the objects grid; New object (Tom types what it is); tools/art-library/stage-prompts.js in the shape of gate-prompts.js builds the Art Library entry under Props > Battle stage from his words and the asset pattern of claude/move-staging-plan.md section 5 (no model writes the prompt, nothing is generated); tools/movebench/apply.py adds the entry when a saved draft names an object with none; the tile shows NO PICTURE YET with Open in the Art Library (art.html?open= with the entry id); trace and, if needed, connect the art-bake Action to tools/clip-bake/bake_stage.py for this entry kind (h.3 says this link was not traced); the pink dashed box of the object's size on its real path, preview only, with the tag PINK BOXES ARE NOT FINAL. Tests as the phase row lists. Rules that hold for every phase: the preview and the game run the same engine files, never a second implementation; a move with no spec plays the defaults and the battle rules never wait on an animation; no painted poses in battle; never weaken art-factory/PIPELINE_LOCK.json or the lock files; no API key on any page; images only in the Art Library; no step may make a video or spend money without Tom's tap, and a session never runs a paid generation; phone first, at 466 x 657, 678 x 445, 951 x 648 and 669 x 869; purge what the phase replaces and grep for zero references. Look at every picture your tests write before you push. Run python3 tools/smoke.py. Add a short Built notes block for this phase under section g of claude/movebench-plan.md (what was built, what differs from the plan and why, what the next phase must know), update docs/BATTLE_GUIDE.md, write the docs/CHANGES.md heading and run bump_tags. Build name movebench10. This phase hands Tom nothing to judge: test every fact yourself and put the pictures in docs/CHANGES.md. The next card, c-movebench-11, starts when this build ships. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by c-movebench-design: phase 10 of claude/movebench-plan.md section g."
+    }
+   ]
+  },
+  {
+   "id": "c-movebench-11",
+   "tag": "movebench11",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Battle Animations",
+   "title": "Move Workbench 11: lasting objects, answers, set pieces",
+   "next": "The last editing sections: objects that stay while a status lasts and how they answer a hit, the counter video of a move, and the set piece of a Capstone (length, how dark, its steps). Starts by itself when Move Workbench 10 ships.",
+   "blocks": [
+    "c-movebench-12"
+   ],
+   "after": "nothing for Tom: c-movebench-12",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "auto": true,
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "The last editing sections: objects that stay while a status lasts and how they answer a hit, the counter video of a move, and the set piece of a Capstone (length, how dark, its steps).",
+    "before": [
+     "Nothing to do first. It starts by itself when Move Workbench 10 ships; if it does not, open a NEW conversation, choose Claude Sonnet 5.5, set effort to medium, and paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the next phase of a written plan, tests catch mistakes; none of the three Fable conditions holds)",
+    "effort": "medium (the steps, files and tests are written in claude/movebench-plan.md)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md (the whole of sections b to f once, then the row of this phase in section g and the Built notes of the phases before it), and look at the pictures in claude/movebench-mock/ (README.md lists them; the .html files beside it hold every drawn size and colour). Read cards c-movebench-11 and t-movebench-plan in data/board.json: Tom's answer and note on t-movebench-plan come first, and a change he typed that touches this phase is applied to the plan and the mock before you build. Your first push is the commit board: start c-movebench-11. Phase 11 (d.1 rows 5 and 7, b.2 stage.lasting, stage.setpiece and answer). Lasting things: while which status, on whom, how it enters, how it answers a react or intercept beat, how it leaves. When it answers: the counter video (the 7 counter clips of the manifests) made through the same Make this video flow as a row of its own, and the effects that play with it. The Set piece section: length (3 to 10 s), how dark the field goes (Off, Dusk, Night and in between), its steps with the same step editor. tools/movebench/page_test.py: a ward's object enters, answers a monster attack in the preview and leaves; a set piece's length and dim change the run. Rules that hold for every phase: the preview and the game run the same engine files, never a second implementation; a move with no spec plays the defaults and the battle rules never wait on an animation; no painted poses in battle; never weaken art-factory/PIPELINE_LOCK.json or the lock files; no API key on any page; images only in the Art Library; no step may make a video or spend money without Tom's tap, and a session never runs a paid generation; phone first, at 466 x 657, 678 x 445, 951 x 648 and 669 x 869; purge what the phase replaces and grep for zero references. Look at every picture your tests write before you push. Run python3 tools/smoke.py. Add a short Built notes block for this phase under section g of claude/movebench-plan.md (what was built, what differs from the plan and why, what the next phase must know), update docs/BATTLE_GUIDE.md, write the docs/CHANGES.md heading and run bump_tags. Build name movebench11. This phase hands Tom a card: in the same push add the Tom card t-movebench-11-try (lane tom, ask play, fyi true, title \"Stage a move from start to finish\") with these steps as its next: Open ADMIN > BATTLE GUIDE > Animations > Tom > Tarmac Porsche Transfer. Change one step of its set piece, add words on screen, add one effect and change its settings, and add a new object (it shows as a pink box until you make its picture in the Art Library). Save draft, then Finished. Press All good, or Something is wrong and say what you tried and what you saw. Then set after on c-movebench-11 to t-movebench-11-try. The next card, c-movebench-12, starts when this build ships. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by c-movebench-design: phase 11 of claude/movebench-plan.md section g."
+    }
+   ]
+  },
+  {
+   "id": "c-movebench-12",
+   "tag": "movebench12",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Battle Animations",
+   "title": "Move Workbench 12: the spec names the video",
+   "next": "Which video an animation plays moves into its settings file, for moves, monster attacks, wind-ups and body states, and you can trim a video's first and last picture. Use this one works as before. Starts by itself when Move Workbench 11 ships.",
+   "blocks": [
+    "c-movebench-13"
+   ],
+   "after": "nothing for Tom: c-movebench-13",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "auto": true,
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Which video an animation plays moves into its settings file, for moves, monster attacks, wind-ups and body states, and you can trim a video's first and last picture. Use this one works as before.",
+    "before": [
+     "Nothing to do first. It starts by itself when Move Workbench 11 ships; if it does not, open a NEW conversation, choose Claude Sonnet 5.5, set effort to medium, and paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the next phase of a written plan, tests catch mistakes; none of the three Fable conditions holds)",
+    "effort": "medium (the steps, files and tests are written in claude/movebench-plan.md)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md (the whole of sections b to f once, then the row of this phase in section g and the Built notes of the phases before it), and look at the pictures in claude/movebench-mock/ (README.md lists them; the .html files beside it hold every drawn size and colour). Read cards c-movebench-12 and t-movebench-plan in data/board.json: Tom's answer and note on t-movebench-plan come first, and a change he typed that touches this phase is applied to the plan and the mock before you build. Your first push is the commit board: start c-movebench-12. Phase 12 (b.5 step 4, risk 4). b3PlayMove, engine/b3-clips.js and b3cOf read body.clip, body.motion, body.pair and body.trim from msLive for moves, attacks, wind-ups and body states; tools/guidegen/use_take.py writes the spec file (and runs tools/movebench/bundle.py) in place of editing kit and monster rows; the Trim control (first and last picture, by dragging the ends of the Video lane). Delete anim and wind from every row of data/b3-kit-*.js and data/b3-foes-ch*.js and B3_BODY_CLIPS with its comment block from data/b3-clips.js (B3_VIDEO_ONLY stays). tools/movebench/golden_test.py must match value for value; tools/guidegen/apply_test.py, take_test.py, tools/video_only_test.py, tools/b3_test.py new1 to new5, node tools/b3-sim.js check. If the golden cannot be matched in two tries, stop: leave the rows as they are, write why, and hand on (the editing features do not depend on this phase). Rules that hold for every phase: the preview and the game run the same engine files, never a second implementation; a move with no spec plays the defaults and the battle rules never wait on an animation; no painted poses in battle; never weaken art-factory/PIPELINE_LOCK.json or the lock files; no API key on any page; images only in the Art Library; no step may make a video or spend money without Tom's tap, and a session never runs a paid generation; phone first, at 466 x 657, 678 x 445, 951 x 648 and 669 x 869; purge what the phase replaces and grep for zero references. Look at every picture your tests write before you push. Run python3 tools/smoke.py. Add a short Built notes block for this phase under section g of claude/movebench-plan.md (what was built, what differs from the plan and why, what the next phase must know), update docs/BATTLE_GUIDE.md, write the docs/CHANGES.md heading and run bump_tags. Build name movebench12. This phase hands Tom nothing to judge: test every fact yourself and put the pictures in docs/CHANGES.md. The next card, c-movebench-13, starts when this build ships. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by c-movebench-design: phase 12 of claude/movebench-plan.md section g."
+    }
+   ]
+  },
+  {
+   "id": "c-movebench-13",
+   "tag": "movebench13",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Battle Animations",
+   "title": "Move Workbench 13: start picture, held and worn",
+   "next": "Each move can have its own start picture: you say the one thing that is held and what is worn, make the picture in the Art Library, and Make this video uses it. Starts by itself when Move Workbench 12 ships.",
+   "blocks": [
+    "c-movebench-14"
+   ],
+   "after": "nothing for Tom: c-movebench-14",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "auto": true,
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Each move can have its own start picture: you say the one thing that is held and what is worn, make the picture in the Art Library, and Make this video uses it.",
+    "before": [
+     "Nothing to do first. It starts by itself when Move Workbench 12 ships; if it does not, open a NEW conversation, choose Claude Sonnet 5.5, set effort to medium, and paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the next phase of a written plan, tests catch mistakes; none of the three Fable conditions holds)",
+    "effort": "medium (the steps, files and tests are written in claude/movebench-plan.md)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md (the whole of sections b to f once, then the row of this phase in section g and the Built notes of the phases before it), and look at the pictures in claude/movebench-mock/ (README.md lists them; the .html files beside it hold every drawn size and colour). Read cards c-movebench-13 and t-movebench-plan in data/board.json: Tom's answer and note on t-movebench-plan come first, and a change he typed that touches this phase is applied to the plan and the mock before you build. Your first push is the commit board: start c-movebench-13. Phase 13 (b.2 start, e.2 last paragraph, risk 5). Holds (one thing) and Wears on the Body video section, with the line that a video can hold one thing only. The Art Library entry start- plus who and move under Characters > Battle start pictures, made from the Hero picture with only the hand band edited: read scripts/benchmark_run.py (lock_hero_pixels) and CLAUDE.md Direct-Hero start frames first, reuse that code, change no lock file, and scripts/verify_lock.py must pass untouched. A video row may carry its own start picture: tools/guidegen/store.py gains that one allowed field and the worker uses it. Remove the seven two-held-prop lines from the To do screen and rewrite card t-guidecross-decide to the four decisions that are left. Tests: tools/guidegen/store_test.py, worker_test.py, tools/movebench/spec_test.py (one held prop), tools/movebench/page_test.py. If the Library cannot run the hand-band edit, stop and say so on the card. Rules that hold for every phase: the preview and the game run the same engine files, never a second implementation; a move with no spec plays the defaults and the battle rules never wait on an animation; no painted poses in battle; never weaken art-factory/PIPELINE_LOCK.json or the lock files; no API key on any page; images only in the Art Library; no step may make a video or spend money without Tom's tap, and a session never runs a paid generation; phone first, at 466 x 657, 678 x 445, 951 x 648 and 669 x 869; purge what the phase replaces and grep for zero references. Look at every picture your tests write before you push. Run python3 tools/smoke.py. Add a short Built notes block for this phase under section g of claude/movebench-plan.md (what was built, what differs from the plan and why, what the next phase must know), update docs/BATTLE_GUIDE.md, write the docs/CHANGES.md heading and run bump_tags. Build name movebench13. This phase hands Tom nothing to judge: test every fact yourself and put the pictures in docs/CHANGES.md. The next card, c-movebench-14, starts when this build ships. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by c-movebench-design: phase 13 of claude/movebench-plan.md section g."
+    }
+   ]
+  },
+  {
+   "id": "c-movebench-14",
+   "tag": "movebench14",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Battle Animations",
+   "title": "Move Workbench 14: monster attacks get effects and stage",
+   "next": "Monster attacks can have effects, stage steps, a freeze on the hit and a shake, set on the same page as family moves. Starts by itself when Move Workbench 13 ships.",
+   "blocks": [
+    "c-movebench-15"
+   ],
+   "after": "nothing for Tom: c-movebench-15",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "auto": true,
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Monster attacks can have effects, stage steps, a freeze on the hit and a shake, set on the same page as family moves.",
+    "before": [
+     "Nothing to do first. It starts by itself when Move Workbench 13 ships; if it does not, open a NEW conversation, choose Claude Sonnet 5.5, set effort to medium, and paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the next phase of a written plan, tests catch mistakes; none of the three Fable conditions holds)",
+    "effort": "medium (the steps, files and tests are written in claude/movebench-plan.md)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md (the whole of sections b to f once, then the row of this phase in section g and the Built notes of the phases before it), and look at the pictures in claude/movebench-mock/ (README.md lists them; the .html files beside it hold every drawn size and colour). Read cards c-movebench-14 and t-movebench-plan in data/board.json: Tom's answer and note on t-movebench-plan come first, and a change he typed that touches this phase is applied to the plan and the mock before you build. Your first push is the commit board: start c-movebench-14. Phase 14 (a.6, the monster attack row). Remove the rule that a foe's move draws nothing (b3vMeta in engine/b3-vfx.js, b3gRowFor in engine/b3-stage.js): a monster attack with a spec arms its effects and hit stop at its hit and plays its stage steps, with targets and anchors mirrored for a mover that stands on the left. The page shows Timing, Stage, Effects and Sound for attacks. A new golden for attacks that have a spec; tools/b3_vfx_test.py, tools/b3_hitstop_test.py, tools/b3_test.py new1 to new5. An attack with no spec must play exactly as before. Rules that hold for every phase: the preview and the game run the same engine files, never a second implementation; a move with no spec plays the defaults and the battle rules never wait on an animation; no painted poses in battle; never weaken art-factory/PIPELINE_LOCK.json or the lock files; no API key on any page; images only in the Art Library; no step may make a video or spend money without Tom's tap, and a session never runs a paid generation; phone first, at 466 x 657, 678 x 445, 951 x 648 and 669 x 869; purge what the phase replaces and grep for zero references. Look at every picture your tests write before you push. Run python3 tools/smoke.py. Add a short Built notes block for this phase under section g of claude/movebench-plan.md (what was built, what differs from the plan and why, what the next phase must know), update docs/BATTLE_GUIDE.md, write the docs/CHANGES.md heading and run bump_tags. Build name movebench14. This phase hands Tom nothing to judge: test every fact yourself and put the pictures in docs/CHANGES.md. The next card, c-movebench-15, starts when this build ships. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by c-movebench-design: phase 14 of claude/movebench-plan.md section g."
+    }
+   ]
+  },
+  {
+   "id": "c-movebench-15",
+   "tag": "movebench15",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Battle Animations",
+   "title": "Move Workbench 15: Family Ruckus",
+   "next": "Double Team and Full Family Ruckus get their own two rows in the list, with stage steps, effects and sound played at the moment the two members link up. Starts by itself when Move Workbench 14 ships.",
+   "blocks": [
+    "c-movebench-16"
+   ],
+   "after": "nothing for Tom: c-movebench-16",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "auto": true,
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Double Team and Full Family Ruckus get their own two rows in the list, with stage steps, effects and sound played at the moment the two members link up.",
+    "before": [
+     "Nothing to do first. It starts by itself when Move Workbench 14 ships; if it does not, open a NEW conversation, choose Claude Sonnet 5.5, set effort to medium, and paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the next phase of a written plan, tests catch mistakes; none of the three Fable conditions holds)",
+    "effort": "medium (the steps, files and tests are written in claude/movebench-plan.md)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md (the whole of sections b to f once, then the row of this phase in section g and the Built notes of the phases before it), and look at the pictures in claude/movebench-mock/ (README.md lists them; the .html files beside it hold every drawn size and colour). Read cards c-movebench-15 and t-movebench-plan in data/board.json: Tom's answer and note on t-movebench-plan come first, and a change he typed that touches this phase is applied to the plan and the mock before you build. Your first push is the commit board: start c-movebench-15. Phase 15 (a.6, the Family Ruckus row). Two animations, ruckus:double and ruckus:full (files data/moves/ruckus-double.json and ruckus-full.json), listed under Family Ruckus in the Animations tab; their stage, effects and sound play on the ruckusSpend beat in engine/b3-play.js, before the two members' own moves; migrate the library set piece setpiece_gym_bleachers_and_ruckus_crest with its modes (ruckus_50_link, ruckus_100_crest) as their first effect. The preview plays the spend with two members. tools/movebench/preview_test.py plays both; tools/b3_test.py. Rules that hold for every phase: the preview and the game run the same engine files, never a second implementation; a move with no spec plays the defaults and the battle rules never wait on an animation; no painted poses in battle; never weaken art-factory/PIPELINE_LOCK.json or the lock files; no API key on any page; images only in the Art Library; no step may make a video or spend money without Tom's tap, and a session never runs a paid generation; phone first, at 466 x 657, 678 x 445, 951 x 648 and 669 x 869; purge what the phase replaces and grep for zero references. Look at every picture your tests write before you push. Run python3 tools/smoke.py. Add a short Built notes block for this phase under section g of claude/movebench-plan.md (what was built, what differs from the plan and why, what the next phase must know), update docs/BATTLE_GUIDE.md, write the docs/CHANGES.md heading and run bump_tags. Build name movebench15. This phase hands Tom nothing to judge: test every fact yourself and put the pictures in docs/CHANGES.md. The next card, c-movebench-16, starts when this build ships. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by c-movebench-design: phase 15 of claude/movebench-plan.md section g."
+    }
+   ]
+  },
+  {
+   "id": "c-movebench-16",
+   "tag": "movebench16",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Battle Animations",
+   "title": "Move Workbench 16: wide monitor layout and clean-up",
+   "next": "A new Admin Dashboard layout, Animations, gives the workbench most of the wide monitor. The Move Lab and the old animation sheet are deleted. Starts by itself when Move Workbench 15 ships.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "auto": true,
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "A new Admin Dashboard layout, Animations, gives the workbench most of the wide monitor. The Move Lab and the old animation sheet are deleted.",
+    "before": [
+     "Nothing to do first. It starts by itself when Move Workbench 15 ships; if it does not, open a NEW conversation, choose Claude Sonnet 5.5, set effort to medium, and paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the next phase of a written plan, tests catch mistakes; none of the three Fable conditions holds)",
+    "effort": "medium (the steps, files and tests are written in claude/movebench-plan.md)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md (the whole of sections b to f once, then the row of this phase in section g and the Built notes of the phases before it), and look at the pictures in claude/movebench-mock/ (README.md lists them; the .html files beside it hold every drawn size and colour). Read cards c-movebench-16 and t-movebench-plan in data/board.json: Tom's answer and note on t-movebench-plan come first, and a change he typed that touches this phase is applied to the plan and the mock before you build. Your first push is the commit board: start c-movebench-16. Phase 16 (d.6 last row, b.5 step 5). dashboard.html: the layout Animations with pane widths 420, 951, 1589 and 440 (read docs/DASHBOARD.md and claude/dashboard-plan.md first; pane order and the game frame are unchanged), and the workbench's wide layout checked at 1589 and at 829. Delete engine/b3-movelab.js, b3-movelab.css, the movelab row of data/b3-lab.js, tools/movestage_lab_test.py, what is left of the old sheet in battle-guide.html and NOTE OPEN as a separate badge; grep zero for b3ml. Update docs/BATTLE_GUIDE.md, docs/BATTLE3.md and the Where things live table of CLAUDE.md. Then add one Tom decide card for the board's bulk video path with the recommendation of section g.1 of the plan (do not change that path yourself). Tests: tools/dashboard_test.py, tools/movebench/page_test.py. Rules that hold for every phase: the preview and the game run the same engine files, never a second implementation; a move with no spec plays the defaults and the battle rules never wait on an animation; no painted poses in battle; never weaken art-factory/PIPELINE_LOCK.json or the lock files; no API key on any page; images only in the Art Library; no step may make a video or spend money without Tom's tap, and a session never runs a paid generation; phone first, at 466 x 657, 678 x 445, 951 x 648 and 669 x 869; purge what the phase replaces and grep for zero references. Look at every picture your tests write before you push. Run python3 tools/smoke.py. Add a short Built notes block for this phase under section g of claude/movebench-plan.md (what was built, what differs from the plan and why, what the next phase must know), update docs/BATTLE_GUIDE.md, write the docs/CHANGES.md heading and run bump_tags. Build name movebench16. This phase hands Tom a card: in the same push add the Tom card t-movebench-16-try (lane tom, ask play, fyi true, title \"Try the Animations layout on the wide monitor\") with these steps as its next: Open the Admin Dashboard on the wide monitor and switch Layout to Animations. Open three animations from the list, play each preview and change one setting in each. Press All good, or Something is wrong and say what you saw. Then set after on c-movebench-16 to t-movebench-16-try. This is the last phase. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Added by c-movebench-design: phase 16 of claude/movebench-plan.md section g."
     }
    ]
   }
