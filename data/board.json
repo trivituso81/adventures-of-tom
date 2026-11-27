@@ -9889,7 +9889,7 @@
    "id": "c-movebench-10",
    "tag": "movebench10",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Move Workbench 10: stage editor: objects",
    "next": "Built as movebench10 (waiting on the push to main). Next: c-movebench-11 starts when this ships.",
@@ -9929,15 +9929,19 @@
     {
      "d": "2026-11-27",
      "t": "Built as movebench10: eight object steps, objects grid, New object, Art Library entry from his words (stage-prompts.js, move-apply), art-bake reaches bake_stage.py, pink box in the preview only. Tests pass; the golden record is unchanged. Nothing for Tom to judge."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as movebench10: the Move Workbench has the eight steps that use an object, an objects grid, New object, and a pink box until the picture exists"
     }
-   ]
+   ],
+   "done": "2026-11-27"
   },
   {
    "id": "c-movebench-11",
    "tag": "movebench11",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Move Workbench 11: lasting objects, answers, set pieces",
    "next": "The last editing sections: objects that stay while a status lasts and how they answer a hit, the counter video of a move, and the set piece of a Capstone (length, how dark, its steps). Starts by itself when Move Workbench 10 ships.",
@@ -9946,7 +9950,7 @@
    ],
    "after": "nothing for Tom: c-movebench-12",
    "created": "2026-11-26",
-   "changed": "2026-11-26",
+   "changed": "2026-11-27",
    "auto": true,
    "chat": {
     "url": "",
@@ -9965,6 +9969,10 @@
     {
      "d": "2026-11-26",
      "t": "Added by c-movebench-design: phase 11 of claude/movebench-plan.md section g."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Unblocked: Move Workbench 10: stage editor: objects is done."
     }
    ]
   },
@@ -10352,6 +10360,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFTGoqCTNzxmrqNn6f",
+   "title": "Move Workbench 10: stage editor: objects",
+   "first": "2026-11-27T07:59:17-08:00",
+   "last": "2026-11-27T08:46:38-08:00",
+   "tags": [
+    "movebench10"
+   ],
+   "cards": [
+    "c-movebench-10"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGg8ziJ383NrBWAmSb",
    "title": "NEW QUEST banner whenever a new quest is given",
    "first": "2026-11-27T08:05:35-08:00",
@@ -10361,16 +10381,6 @@
    ],
    "cards": [
     "c-questbanner"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFTGoqCTNzxmrqNn6f",
-   "title": "Move Workbench 10: stage editor: objects",
-   "first": "2026-11-27T07:59:17-08:00",
-   "last": "2026-11-27T07:59:17-08:00",
-   "tags": [],
-   "cards": [
-    "c-movebench-10"
    ]
   },
   {
@@ -17251,8 +17261,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "2588b1f797d1dae5ae29b641f0346014e4b60cbd",
- "synced_at": "2026-11-27T16:20:58+00:00",
+ "synced": "0cf12d5d155b5fb840a4e666af0e2ce00b57c575",
+ "synced_at": "2026-11-27T16:47:30+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
