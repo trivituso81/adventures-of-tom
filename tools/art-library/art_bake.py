@@ -11,6 +11,7 @@ A CLIP entry (field `clip`, tab Clips: a short video of a character, see tools/a
 field: its approved file is art/raw/clips/<id>-v<n>.mp4 (or a .json holding the video's address when the phone could not keep
 a copy; the video is then downloaded next to it), and the newest version carries Tom's three marks in seconds
 (`marks`: first, hit, last). bake_clip() turns the marks into frame numbers and runs tools/clip-bake/bake_clip.py.
+A STAGE entry (field `stage`, movebench10: a Battle stage object picture, tools/art-library/stage-prompts.js) is baked by tools/clip-bake/bake_stage.py.
 An entry with no `bake` field is reported and left alone (art that only lives in art/raw/ until a bake is wired for it).
 
 The `bake` object in data/art-prompts.json (set by Claude in tools/art-library/make-prompts.js, never by Tom):
@@ -106,6 +107,33 @@ def bake_clip(e, p):
         html = html.replace(tags[-1], tags[-1] + tagline + '\n'); open(ix, 'w', encoding='utf-8').write(html)
     return f'{e["id"]}: clip `{c["id"]}` cut from {p} ({fps:g} pictures a second; video frames {first} to {kept[-1]}, every {step}, {"hit at frame " + str(impact) if kind == "strike" else kind}; {len(kept)} pictures kept; played at {speed:g}x). {r.stdout.strip().splitlines()[-1] if r.stdout.strip() else ""}' + (' Calm stretch: ' + next((l for l in r.stdout.splitlines() if l.startswith('calm stretch')), '?') if c.get('calm') and kind == 'loop' else '')
 
+def bake_stage(e, p):
+    """movebench10: one approved Battle stage object picture (field `stage`, tab Props, tools/art-library/stage-prompts.js) -> art/stage/<owner>-<name>.webp + data/stage/<owner>-<name>.js
+    through tools/clip-bake/bake_stage.py (the magenta key reads its colour from the corners, so the generator's crimson is fine) and its <script> tag in index.html after the other stage assets."""
+    s = e['stage']; key = s.get('key', '')
+    if not re.fullmatch(r'[a-z0-9]+/[a-z0-9]+', key) or s.get('kind') != 'prop' or s.get('bg') != 'magenta': raise SystemExit(f'{e["id"]}: odd stage entry {s!r} (a picture is a prop on magenta, key owner/name)')
+    if not p.startswith('art/raw/') or '..' in p: raise SystemExit(f'{e["id"]}: odd picture path {p!r}')
+    r = sh(sys.executable, '-I', os.path.join('tools', 'clip-bake', 'bake_stage.py'), os.path.join(ROOT, p), key, '--kind', 'prop', '--bg', 'magenta', '--px', str(s.get('px') or 384), '--tag', 'stage0')
+    print(r.stdout[-1200:]); print(r.stderr[-1200:], file=sys.stderr)
+    if r.returncode: raise SystemExit(f'art_bake: bake_stage.py failed for {e["id"]}')
+    fk = key.replace('/', '-'); ix = os.path.join(ROOT, 'index.html'); html = open(ix, encoding='utf-8').read()
+    if f'data/stage/{fk}.js' not in html:
+        tags = re.findall(r'<script src="data/stage/[^"]+"></script>\n', html)
+        anchor = tags[-1] if tags else (re.search(r'<script src="engine/b3-stage\.js[^"]*"></script>\n', html) or [None])[0]
+        if not anchor: raise SystemExit('art_bake: index.html has no engine/b3-stage.js script tag to put the stage asset after')
+        open(ix, 'w', encoding='utf-8').write(html.replace(anchor, anchor + f'<script src="data/stage/{fk}.js?v=stage0"></script>\n', 1))
+    return f'{e["id"]}: stage object `{key}` baked from {p}. {r.stdout.strip().splitlines()[-1] if r.stdout.strip() else ""}'
+
+def stale_stage(entries):
+    """Approved stage objects the game does not have yet (a cancelled run would leave one uncut; clipbatch1's reason, for pictures)."""
+    out = set()
+    for e in entries:
+        s = e.get('stage'); vs = e.get('versions') or []
+        if not s or e.get('status') != 'approved' or not vs or not isinstance(s, dict) or not re.fullmatch(r'[a-z0-9]+/[a-z0-9]+', s.get('key', '')): continue
+        newest = vs[-1].get('file') or vs[-1].get('path') or ''
+        if newest and os.path.exists(os.path.join(ROOT, newest)) and not os.path.exists(os.path.join(ROOT, 'data', 'stage', s['key'].replace('/', '-') + '.js')): out.add(e['id'])
+    return out
+
 def clip_stamp(e):
     """What a baked clip was cut from: the newest approved file and its marks. bake_clip.py writes it into data/clips/<id>.js."""
     v = e['versions'][-1]
@@ -148,7 +176,7 @@ def main():
     files = changed_files(argv)
     raws = [p for p in files if p.startswith('art/raw/') and (p.lower().endswith('.png') or (p.startswith('art/raw/clips/') and p.lower().endswith(('.mp4', '.json')))) and os.path.exists(os.path.join(ROOT, p))]
     entries = json.load(open(DATA, encoding='utf-8'))['entries']
-    catchup = stale_clips(entries)
+    catchup = stale_clips(entries) | stale_stage(entries)
     if not raws and not catchup:
         print('art_bake: no art/raw picture changed, nothing to do'); return 0
     todo, skipped = [], []
@@ -157,7 +185,7 @@ def main():
         if e.get('status') != 'approved' or not vs: continue
         newest = vs[-1].get('file') or vs[-1].get('path')
         if newest not in raws and e['id'] not in catchup: continue
-        (todo if e.get('bake') or e.get('clip') else skipped).append((e, newest))
+        (todo if e.get('bake') or e.get('clip') or e.get('stage') else skipped).append((e, newest))
     for e, p in skipped: print(f'art_bake: {e["id"]} ({p}) has no `bake` field yet: stored only, nothing baked')
     # a picture in art/raw that no approved entry claims (e.g. committed by hand)
     claimed = {p for _, p in todo + skipped}
@@ -173,6 +201,13 @@ def main():
                 try: notes.append(bake_clip(e, p)); ids.append(e['id'])
                 except (SystemExit, Exception) as x:   # one bad clip must not stop the other 69 (clipbatch1); it is named in the CHANGES entry and tried again by the next run
                     failed.append(e['id']); notes.append(f'FAILED to cut {e["id"]} ({p}): {x}'); print(f'art_bake: FAILED {e["id"]}: {x}', file=sys.stderr)
+            continue
+        if e.get('stage'):
+            print(f'art_bake: {e["id"]}: stage object picture {p} -> data/stage/' + e['stage']['key'].replace('/', '-') + '.js')
+            if not dry:
+                try: notes.append(bake_stage(e, p)); ids.append(e['id'])
+                except (SystemExit, Exception) as x:
+                    failed.append(e['id']); notes.append(f'FAILED to bake {e["id"]} ({p}): {x}'); print(f'art_bake: FAILED {e["id"]}: {x}', file=sys.stderr)
             continue
         b = e['bake']; src = b['src']
         if not src.startswith('tools/sprite-bake/src/') or '..' in src or '..' in b['script'] or '/' in b['script']:

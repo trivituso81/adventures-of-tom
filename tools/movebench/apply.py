@@ -8,6 +8,9 @@ What it does, in order (every step starts from the newest main, so a save by Tom
      finished (or a session changed) since the last build. A `draft` never reaches the script.
   2. When any differ: rewrites the script (bundle.py), writes ONE `## movespec-<run>` heading in docs/CHANGES.md naming them all, stamps the build (bump_tags.py) and pushes
      with the loop the guide job uses (every try is made again from the newest main, six tries).
+  2b. movebench10: when a saved draft (or a live part) names an object that has Tom's words (`words`) and no Art Library entry, adds ONE entry per object under Props > Battle stage
+     (tools/art-library/stage-prompts.js, run with node: the prompt is his words inside the fixed asset pattern; nothing is generated, no model writes it). An entry-only change is its own
+     commit with no build (and starts the publish, so the Art Library page has the entry). Tom then presses Generate and Approve in the Library; art-bake cuts the picture.
   3. Rebuilds data/moves/index.json on every run (the statuses of d.4: No video yet, To do, In progress, Finished, Changed since you finished it; the page adds
      Waiting on a video, a picture or Claude from its own data). An index-only change is its own commit with no build.
   4. Only after the contents API on main has the script (its blob sha equals the local one) is `finished.build` written, one field, into each file that Tom finished
@@ -27,6 +30,7 @@ STAMP = ('engine/main.js', 'index.html', 'data/build-history.js', 'docs/CHANGES.
 BOT = ['-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com']
 EXTRA = {'move:pick_me_up': {'slug': 'move-pick-me-up', 'video': False, 'owner': 'team'}}   # the universal move has no row in data/guide-anims.json (movebench6 lists it)
 INDEX = 'data/moves/index.json'
+NOTE = {'entries': []}   # what the last prepare() added to the Art Library (the commit message names it)
 FIRST_BUILD = 'movebench3'   # the build that first wrote data/move-specs.js: the name of a script no move-apply build has changed yet
 
 
@@ -104,12 +108,22 @@ def stamp(root, tag):
     return r.returncode == 0
 
 
+def add_entries(root):
+    """movebench10: runs tools/art-library/stage-prompts.js on the tree. Returns the ids of the Art Library entries it added or changed (the lines it prints that end in a bracket)."""
+    js = os.path.join(root, 'tools', 'art-library', 'stage-prompts.js')
+    if not os.path.exists(js) or not os.path.exists(os.path.join(root, 'data', 'art-prompts.json')): return []
+    p = subprocess.run(['node', js, '--root', root], cwd=root, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    if p.returncode: say('stage-prompts.js failed:', p.stdout[-300:]); return []
+    return [l.strip().split(' ')[0] for l in p.stdout.splitlines() if l.strip().startswith('stage-') and l.strip().endswith('(new)')]
+
+
 def prepare(root, tag, do_stamp, allow_build=True):
     """Make the tree what main should be. Returns ('build', ids), ('index', []) or (None, []). allow_build is False for the second pass of a run (the statuses after finished.build
     was written): an animation Tom finished meanwhile waits for the next run, so one build name is never made twice."""
     ids = changed_ids(root) if allow_build else []; ix0 = read_index(root); build = tag if ids else (ix0.get('script_build') or FIRST_BUILD)
     if ids:
         txt, _ = bundle.build(root); open(os.path.join(root, 'data', 'move-specs.js'), 'w', encoding='utf-8').write(txt)
+    new_entries = add_entries(root); NOTE['entries'] = new_entries
     ix = index_text(build_index(root, build)); p = os.path.join(root, INDEX)
     cur = open(p, encoding='utf-8').read() if os.path.exists(p) else ''
     if ix != cur: open(p, 'w', encoding='utf-8').write(ix)
@@ -117,6 +131,7 @@ def prepare(root, tag, do_stamp, allow_build=True):
         write_changes(root, tag, ids)
         if do_stamp and not stamp(root, tag): return None, ids
         return 'build', ids
+    if new_entries: return 'entries', []
     return ('index', []) if ix != cur else (None, [])
 
 
@@ -131,7 +146,7 @@ def push_loop(root, a, tag):
         if kind is None: return None, []
         if git(root, 'grep', '-q', '^<<<<<<<', check=False).returncode == 0: say('conflict markers, try %d' % i); continue
         git(root, 'add', '-A')
-        git(root, *BOT, 'commit', '-q', '-m', ('move-apply: %s, %d animation%s finished in the Move Workbench [skip ci]' % (tag, len(ids), '' if len(ids) == 1 else 's')) if kind == 'build' else 'move-apply: statuses [skip ci]')
+        git(root, *BOT, 'commit', '-q', '-m', ('move-apply: %s, %d animation%s finished in the Move Workbench [skip ci]' % (tag, len(ids), '' if len(ids) == 1 else 's')) if kind == 'build' else ('move-apply: Art Library entries for new stage objects: %s [skip ci]' % ', '.join(NOTE['entries'])) if kind == 'entries' else 'move-apply: statuses [skip ci]')
         if a.dry_run: say('dry run: would push %s on try %d' % (kind, i)); return kind, ids
         p = git(root, 'push', a.remote, 'HEAD:' + a.branch, check=False)
         if p.returncode == 0: say('pushed %s on try %d' % (kind, i)); return kind, ids
@@ -197,7 +212,7 @@ def run(a):
     if kind == 'failed': return 1
     if a.dry_run: say('dry run done: %s, %d animation(s) would be in the game as build %s' % (kind or 'nothing', len(ids), tag)); return 0
     if kind is None: say('nothing new to put in the game, the statuses are current')
-    out(pushed='true' if kind == 'build' else 'false', tag=tag)
+    out(pushed='true' if kind in ('build', 'entries') else 'false', tag=tag)
     if kind == 'build':
         if not script_on_main(root, a.branch): say('NOT ON MAIN: data/move-specs.js; finished.build is not written'); return 1
         say('on main:', len(ids), 'animation(s)')

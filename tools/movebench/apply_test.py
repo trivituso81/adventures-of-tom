@@ -82,7 +82,7 @@ seed = os.path.join(TMP, 'seed'); os.makedirs(seed)
 shutil.copytree(ROOT + '/tools', seed + '/tools', ignore=shutil.ignore_patterns('shots', '__pycache__', 'node_modules', 'sprite-bake', 'voice-learn', 'voice-library'))
 shutil.copytree(ROOT + '/.github', seed + '/.github')
 for d in ('data', 'docs', 'engine'): os.makedirs(os.path.join(seed, d), exist_ok=True)
-for f in ('guide-anims.json', 'build-history.js', 'portrait-ver.js', 'gate-art.js', 'item-art.js', 'flight-art.js', 'move-specs.js'):
+for f in ('art-prompts.json', 'guide-anims.json', 'build-history.js', 'portrait-ver.js', 'gate-art.js', 'item-art.js', 'flight-art.js', 'move-specs.js'):
     if os.path.exists(ROOT + '/data/' + f): shutil.copy(ROOT + '/data/' + f, seed + '/data/' + f)
 shutil.copytree(ROOT + '/data/moves', seed + '/data/moves')
 shutil.copy(ROOT + '/index.html', seed)
@@ -240,6 +240,26 @@ rc3, root3 = run_case(grab, tag='movespec-t10b')
 after = doc_of(BB); w = tom_wrote['d']
 same = {k: after[k] for k in after if k != 'finished'} == {k: w[k] for k in w if k != 'finished'} and {k: v for k, v in after['finished'].items() if k != 'build'} == {k: v for k, v in w['finished'].items() if k != 'build'}
 check('M10 the job changed nothing in the file except finished.build (live, draft, rev, log, finished.rev and at are Tom\'s)', rc3 == 0 and same and after['finished']['build'] == 'movespec-t10b', (after['finished'], w['finished']))
+
+# ---------------------------------------------------------------- M13 a new object makes one Art Library entry and generates nothing (movebench10)
+def new_object():
+    def fn(d):
+        d['rev'] += 1; live = d.get('live') or {}; st = dict(live.get('stage') or {})
+        st['objects'] = dict(st.get('objects') or {}, **{'amy/wetfloor': {'name': 'Wet floor sign', 'words': 'a yellow folding "WET FLOOR" sign', 'kind': 'prop', 'bg': 'magenta', 'size': {'h': 0.3}, 'entry': 'stage-amy-wetfloor'}})
+        d['draft'] = dict(live, stage=st); d['log'].append({'rev': d['rev'], 'at': NOW, 'by': 'tom', 'what': 'draft'})
+    tom_edit(LJ, fn)
+before_prompts = json.loads(show('data/art-prompts.json', BASE))
+rc, root = run_case(new_object, tag='movespec-t13')
+after_prompts = json.loads(show('data/art-prompts.json'))
+ids_b = {e['id'] for e in (before_prompts if isinstance(before_prompts, list) else before_prompts.get('entries', before_prompts))} if not isinstance(before_prompts, dict) or 'entries' in before_prompts else set(before_prompts)
+ids_a = {e['id'] for e in (after_prompts if isinstance(after_prompts, list) else after_prompts.get('entries', after_prompts))} if not isinstance(after_prompts, dict) or 'entries' in after_prompts else set(after_prompts)
+check('M13 a saved draft naming an object with words adds exactly one Art Library entry, stage-amy-wetfloor', rc == 0 and ids_a - ids_b == {'stage-amy-wetfloor'} and not (ids_b - ids_a), (rc, sorted(ids_a - ids_b)[:5], sorted(ids_b - ids_a)[:5]))
+ent = [e for e in (after_prompts if isinstance(after_prompts, list) else after_prompts.get('entries', [])) if e.get('id') == 'stage-amy-wetfloor']
+e0 = ent[0] if ent else {}
+check('M13 the entry is under Props > Battle stage, holds his words and the magenta pattern, and is not made yet (no picture, not approved, no generation field)', e0.get('tab') == 'Props' and e0.get('group') == 'Battle stage' and 'WET FLOOR' in e0.get('prompt', '') and 'magenta' in e0.get('prompt', '').lower() and e0.get('status') in (None, 'draft', 'todo') and not e0.get('versions') and not e0.get('gen') and e0.get('stage'), json.dumps({k: (v if k != 'prompt' else v[:60]) for k, v in e0.items()})[:300])
+check('M13 no build, no CHANGES entry, no generation request, one commit for the entry', not any('movespec-t13' in s for s in subjects()) and 'movespec-t13' not in show('docs/CHANGES.md') and any(s.startswith('move-apply: Art Library entries for new stage objects: stage-amy-wetfloor') for s in subjects()) and not API_PUTS, (subjects()[:3], API_PUTS))
+cnt = commits(); rc2 = A.main(['--root', root, '--tag', 'movespec-t13b', '--tries', '6'])
+check('M13 a second run adds nothing (the entry exists)', rc2 == 0 and commits() == cnt, (rc2, commits() - cnt))
 
 # ---------------------------------------------------------------- M12 the workflow file
 wf = open(os.path.join(ROOT, '.github/workflows/move-apply.yml'), encoding='utf-8').read()

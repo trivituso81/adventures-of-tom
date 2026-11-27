@@ -144,13 +144,14 @@ def check_stage(st,path,C,E,W):
         q='%s.objects.%s'%(path,oid)
         if not isinstance(o,dict): E.append(q+': must be an object'); continue
         for k in o:
-            if k not in ('name','kind','bg','size','loop','entry','prompt','motion'): E.append('%s: unknown field %s'%(q,k))
+            if k not in ('name','kind','bg','size','loop','entry','prompt','motion','words'): E.append('%s: unknown field %s'%(q,k))
         if o.get('kind') not in ('prop','obj'): E.append(q+'.kind: prop or obj')
         if o.get('bg') not in ('magenta','black'): E.append(q+'.bg: magenta or black')
         sz=o.get('size')
         if not (isinstance(sz,dict) and len(sz)==1 and (isnum(sz.get('h')) or isnum(sz.get('sw')))): E.append(q+'.size: {h} or {sw}')
         if not isinstance(o.get('name'),str) or not o['name']: E.append(q+'.name: needs words')
         if not isinstance(o.get('entry'),str) or not o['entry']: E.append(q+'.entry: needs an Art Library entry id')
+        if 'words' in o and not (isinstance(o['words'],str) and 1<=len(o['words'])<=140 and not re.search(r'[<>]',o['words'])): E.append(q+'.words: Tom\'s words about what it is, 1 to 140 letters')
     for q,a in refs:
         if a not in objs: E.append('%s: the object %r is not in objects'%(q,a))
 def check_section_set(S,path,C,E,W):

@@ -120,6 +120,7 @@ function b3vGeo(key){
 // movebench7: an effect id with no drawer (a library entry that is not built) is a pink dashed box in the workbench preview only (cfg.bench; claude/movebench-plan.md section e.3). It sits on the target for 0.9 s from the
 // effect's moment and says what it is and that it is not final. The game never draws it.
 function b3vPink(id,e,c,t,aim){
+  if(typeof B3G!=='undefined') B3G.pink=true;
   const st=c.t0+b3vAtSec(c,e), u=(t-st)/.9; if(!(u>=0&&u<=1)||!aim) return;
   const w=84,h=54,x=aim.x-w/2,y=aim.y-h/2; gfx.save(); gfx.globalAlpha=u<.8?1:(1-u)/.2; gfx.fillStyle='rgba(255,91,210,.22)'; gfx.fillRect(x,y,w,h); gfx.strokeStyle='#ff5bd2'; gfx.lineWidth=2; gfx.setLineDash([6,4]); gfx.strokeRect(x,y,w,h);
   gfx.setLineDash([]); gfx.fillStyle='#ff5bd2'; gfx.font='700 9px sans-serif'; gfx.textAlign='center'; gfx.textBaseline='middle';

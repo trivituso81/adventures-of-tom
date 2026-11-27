@@ -282,6 +282,13 @@ a.play.fight{background:var(--surface);border:1px solid var(--accent);color:var(
 .fxacts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.fxacts button{min-height:44px;padding:6px 14px}
 .wbpink{margin:4px 0 0;padding:4px 8px;text-align:center;font-size:12px;font-weight:800;letter-spacing:.04em;color:#ff5bd2;border:1px dashed #ff5bd2;border-radius:8px}
 .stic{flex:none;width:40px;height:40px;color:var(--accent);display:flex;align-items:center;justify-content:center}.stic svg{width:34px;height:34px}
+.obsec{margin:14px 0 4px;padding-top:8px;border-top:1px solid var(--line)}.obh{margin:0 0 4px;font-size:15px}
+.obgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:0 0 8px}
+.obt{display:flex;flex-direction:column;gap:5px;border:1px solid var(--line);border-radius:12px;padding:8px;background:var(--surface)}
+.obpic{aspect-ratio:1/1;border-radius:8px;background:var(--bg);display:flex;align-items:center;justify-content:center;overflow:hidden}.obpic img{max-width:100%;max-height:100%;object-fit:contain}
+.obpic.nopic{border:2px dashed #ff5bd2;background:rgba(255,91,210,.12);color:#c23a9c;font:800 12px/1.2 system-ui,sans-serif;text-align:center;padding:6px}
+.oblink{display:inline-flex;align-items:center;justify-content:center;min-height:44px;text-decoration:none}
+.obform{border:1px solid var(--accent);border-radius:12px;padding:8px;margin:0 0 8px}.obform textarea{width:100%;box-sizing:border-box}
 .sttile{flex-direction:row;align-items:center;gap:10px}.sttile .stic{width:36px;height:36px}
 .stt{font-style:normal;font-weight:800;color:var(--accent)}
 .sndl li{flex-wrap:wrap;align-items:center}.sndn{flex:1 1 160px;min-width:0}.sndn b{font-size:12px;color:var(--muted);margin-right:6px}
@@ -1662,7 +1669,7 @@ function benchBarRender(){
   if(!tl){bar.hidden=true;if(el)el.innerHTML='';return;}
   const len=tl.len||1,cls={video:'body',wind:'body',stage:'stage',fx:'fx',snd:'snd'};
   el.innerHTML=tl.lanes.map(L=>'<div class="ln '+(cls[L.id]||'body')+'" data-lane="'+esc(L.id)+'"><span class="lb">'+esc(L.name)+'</span><span class="tr">'
-    +L.segs.map(g=>'<span class="it'+(g.k==='need'?' need':g.k==='hold'?' hold':'')+'" data-a="'+g.a.toFixed(3)+'" data-b="'+g.b.toFixed(3)+'" style="left:'+(g.a/len*100).toFixed(2)+'%;width:'+Math.max(1.6,(g.b-g.a)/len*100).toFixed(2)+'%">'+esc(g.label)+'</span>').join('')+'</span></div>').join('');
+    +L.segs.map(g=>'<span class="it'+(g.k==='need'||g.pink?' need':g.k==='hold'?' hold':'')+'" data-a="'+g.a.toFixed(3)+'" data-b="'+g.b.toFixed(3)+'" style="left:'+(g.a/len*100).toFixed(2)+'%;width:'+Math.max(1.6,(g.b-g.a)/len*100).toFixed(2)+'%">'+esc(g.label)+'</span>').join('')+'</span></div>').join('');
   const hw=document.getElementById('bnhw'),ht=document.getElementById('bnhit');
   if(ht){ht.hidden=tl.hit==null;if(tl.hit!=null)ht.style.left=(tl.hit/len*100)+'%';}
   hw.querySelectorAll('i').forEach(n=>n.remove());
@@ -1751,6 +1758,7 @@ function wbDiff(){
   const bs=(WB.base&&WB.base.stage&&WB.base.stage.steps)||[],bm=(WB.base&&WB.base.body&&WB.base.body.marks)||{};   // movebench9: the stage steps are one field, and so are the named moments
   if(JSON.stringify(stgList())!==JSON.stringify(bs))o.steps=wbClone(stgList());
   if(JSON.stringify(stgMarks())!==JSON.stringify(bm))o.marks=wbClone(stgMarks());
+  if(JSON.stringify(stgObjs())!==JSON.stringify((WB.base&&WB.base.stage&&WB.base.stage.objects)||{}))o.objects=wbClone(stgObjs());   // movebench10: the objects of the move are one field too
   return o;
 }
 const wbChanges=()=>(WB.draft&&WB.base)?Object.keys(wbDiff()).length:0;
@@ -1782,8 +1790,8 @@ async function wbLoadFile(a){
 function wbRebase(fresh){
   const mine=wbDiff();WB_FIELDS.forEach(f=>{if(!(f in mine)){if(fresh.timing[f]===undefined)delete WB.draft.timing[f];else WB.draft.timing[f]=wbClone(fresh.timing[f]);}});
   if(!('effects' in mine)){if(fresh.effects===undefined)delete WB.draft.effects;else WB.draft.effects=wbClone(fresh.effects);}
-  {const mySteps=wbClone(stgList()),myMarks=wbClone(stgMarks());   // movebench9: the rest of the stage and of the body is the file's; his steps and moments stay his
-    if(fresh.stage||'steps' in mine){const st=fresh.stage?wbClone(fresh.stage):{};if('steps' in mine)st.steps=mySteps;WB.draft.stage=st;}else delete WB.draft.stage;
+  {const mySteps=wbClone(stgList()),myMarks=wbClone(stgMarks()),myObjs=wbClone(stgObjs());   // movebench9: the rest of the stage and of the body is the file's; his steps and moments stay his (movebench10: and his objects)
+    if(fresh.stage||'steps' in mine||'objects' in mine){const st=fresh.stage?wbClone(fresh.stage):{};if('steps' in mine)st.steps=mySteps;if('objects' in mine){if(Object.keys(myObjs).length)st.objects=myObjs;else delete st.objects;}WB.draft.stage=st;}else delete WB.draft.stage;
     const bd=fresh.body?wbClone(fresh.body):{};if('marks' in mine){if(Object.keys(myMarks).length)bd.marks=myMarks;else delete bd.marks;}WB.draft.body=bd;}
   WB.base=wbClone(fresh);
 }
@@ -1791,7 +1799,7 @@ function wbRebase(fresh){
 function wbSend(){
   const n=wbChanges();wbStoreWrite(WB.id,n?WB.draft:null,n?WB.base:null);
   const sp=wbSpecOf(WB.id)||{},ml=sp.timing||{},t=(WB.draft&&WB.draft.timing)||{},differs=WB_FIELDS.some(f=>JSON.stringify(t[f])!==JSON.stringify(ml[f]))||JSON.stringify((WB.draft&&WB.draft.effects)||[])!==JSON.stringify(sp.effects||[])
-    ||JSON.stringify(stgList())!==JSON.stringify((sp.stage&&sp.stage.steps)||[])||JSON.stringify(stgMarks())!==JSON.stringify((sp.body&&sp.body.marks)||{});
+    ||JSON.stringify(stgList())!==JSON.stringify((sp.stage&&sp.stage.steps)||[])||JSON.stringify(stgObjs())!==JSON.stringify((sp.stage&&sp.stage.objects)||{})||JSON.stringify(stgMarks())!==JSON.stringify((sp.body&&sp.body.marks)||{});
   benchSend({bench:'spec',id:WB.id,live:differs?WB.draft:null});
 }
 function wbEdit(patch){
@@ -1811,6 +1819,7 @@ function wbWhat(ch){
   for(const f in ch){const x=ch[f];let v;
     if(f==='effects'){p.push(W('fx.p.title')+': '+(x&&x.length?x.map(e=>fxName(e.fx)+(e.off?' ('+W('fx.p.off')+')':'')).join(', '):W('fx.p.empty')));continue;}
     if(f==='steps'){p.push(W('sections.stage')+': '+(x&&x.length?x.map(s=>stgSentence(s)).join('; '):W('stage.empty')));continue;}
+    if(f==='objects'){p.push(W('stage.o.title')+': '+(x&&Object.keys(x).length?Object.values(x).map(o=>o.name).join(', '):'-'));continue;}
     if(f==='marks'){p.push(W('stage.name_label')+': '+(x&&Object.keys(x).length?Object.keys(x).join(', '):'-'));continue;}
     if(x==null)v=W('save.automatic');
     else if(f==='hitStop')v=W('timing.freeze.frames',{n:x});else if(f==='shake')v=W('timing.shake.px',{n:x});
@@ -1822,10 +1831,11 @@ function wbWhat(ch){
 function wbMerge(cur,ch,kind,now,replayed){
   const d=wbClone(cur);d.v=1;d.id=d.id||WB.id;
   const sec=wbClone((d.draft!=null?d.draft:d.live)||{});const t=Object.assign({},sec.timing||{});
-  for(const f in ch){if(f==='effects'||f==='steps'||f==='marks')continue;if(ch[f]==null)delete t[f];else t[f]=wbClone(ch[f]);}
+  for(const f in ch){if(f==='effects'||f==='steps'||f==='marks'||f==='objects')continue;if(ch[f]==null)delete t[f];else t[f]=wbClone(ch[f]);}
   if(Object.keys(t).length)sec.timing=t;else delete sec.timing;
   if('effects' in ch)sec.effects=wbClone(ch.effects||[]);
   if('steps' in ch){const had=!!sec.stage,st=Object.assign({},sec.stage||{});st.steps=wbClone(ch.steps||[]);if(!st.steps.length&&!had)delete sec.stage;else sec.stage=st;}
+  if('objects' in ch){const st=Object.assign({},sec.stage||{});if(Object.keys(ch.objects||{}).length)st.objects=wbClone(ch.objects);else delete st.objects;if(Object.keys(st).length||sec.stage)sec.stage=st;}
   if('marks' in ch){sec.body=Object.assign({},sec.body||{});if(Object.keys(ch.marks||{}).length)sec.body.marks=wbClone(ch.marks);else delete sec.body.marks;}
   d.rev=(d.rev||0)+1;
   const what=(wbWhat(ch)||W(kind==='finished'?'save.what_finished':'save.what_draft'))+(replayed?' ('+W('save.merged')+')':'');
@@ -1911,14 +1921,15 @@ async function wbBringBack(sha){
     WB.undo.push(JSON.stringify(WB.draft));WB.draft.timing=Object.assign({},WB.draft.timing||{});
     WB_FIELDS.forEach(f=>{if(t[f]===undefined)delete WB.draft.timing[f];else WB.draft.timing[f]=wbClone(t[f]);});
     if(src.effects===undefined)delete WB.draft.effects;else WB.draft.effects=wbClone(src.effects);
-    {const sst=(src.stage&&src.stage.steps)||[];stgWrite(wbClone(sst));if(!sst.length&&!(src.stage))delete WB.draft.stage;const bd=Object.assign({},WB.draft.body||{}),mk=(src.body&&src.body.marks)||{};if(Object.keys(mk).length)bd.marks=wbClone(mk);else delete bd.marks;WB.draft.body=bd;}
+    {const sst=(src.stage&&src.stage.steps)||[];stgWrite(wbClone(sst));if(!sst.length&&!(src.stage))delete WB.draft.stage;
+      const so=(src.stage&&src.stage.objects)||{};if(Object.keys(so).length){WB.draft.stage=Object.assign({},WB.draft.stage||{});WB.draft.stage.objects=wbClone(so);}else if(WB.draft.stage){delete WB.draft.stage.objects;}const bd=Object.assign({},WB.draft.body||{}),mk=(src.body&&src.body.marks)||{};if(Object.keys(mk).length)bd.marks=wbClone(mk);else delete bd.marks;WB.draft.body=bd;}
     wbSend();wbAllPaint();wbMsg(W('versions.brought'),false,W('versions.brought_hint'));
   }catch(e){wbMsg(W('versions.failed',{why:e.message}),true);}
 }
 // What the Timing rows show for each field: the draft's value, else the game's default (MS_DEFAULTS, engine/b3-spec.js).
 function wbVal(f){const t=(WB.draft&&WB.draft.timing)||{};const v=t[f];return v==null?(typeof MS_DEFAULTS!=='undefined'?MS_DEFAULTS[f]:undefined):v;}
 const wbRun=()=>(BENCH.tl&&BENCH.tl.id===WB.id&&BENCH.tl.run)||null;
-const wbStaged=()=>{const c=((WB.base&&WB.base.timing)||{}).contact;return !!c&&typeof c==='object'&&(c.mark!=null||c.step!=null);};
+const wbStaged=()=>{const c=(((WB.draft||WB.base)&&(WB.draft||WB.base).timing)||{}).contact;return !!c&&typeof c==='object'&&(c.mark!=null||c.step!=null);};
 const wbHasClip=()=>!!(WB.a&&WB.a.clip);
 // Where the clip starts on the preview's clock: the first picture of the move's own video (the run in before it is not part of the clip).
 function wbClipStart(){const tl=BENCH.tl;if(!tl)return 0;const L=tl.lanes.find(l=>l.id==='video'||l.id==='wind');const g=L&&L.segs.find(x=>x.k==='video');return g?g.a:0;}
@@ -1958,8 +1969,8 @@ function wbPaint(){
     vf.textContent=(fin?W('save.finished_line',{date:wbDate(fin.at),build:fin.build||W('save.not_yet')}):W('save.never'))+(fin&&fin.rev<WB.file.rev&&lg?' '+W('save.latest_change',{who:W('versions.'+(lg.by==='tom'?'you':lg.by==='claude'?'claude':'migration')),what:lg.what}):'');}
   const hc=$('wbhitc');
   if(hc){
-    if(wbStaged()){const c=WB.base.timing.contact;hc.innerHTML='<span class="wbval" id="wbhitval">'+(run&&run.hit!=null?esc(wbFmt(run.hit)+' '+W('timing.hit.unit')):'')+'</span>';
-      $('wbhithint').textContent=W('timing.hit.staged_hint',{at:c.mark!=null?'"'+c.mark+'"':'step '+(+c.step+1)});}
+    if(wbStaged()){const c=(WB.draft||WB.base).timing.contact,si=stgList().findIndex(s=>s.id===c.step);hc.innerHTML='<span class="wbval" id="wbhitval">'+(run&&run.hit!=null?esc(wbFmt(run.hit)+' '+W('timing.hit.unit')):'')+'</span>';
+      $('wbhithint').textContent=W('timing.hit.staged_hint',{at:c.mark!=null?'"'+c.mark+'"':'step '+(si>=0?si+1:(+c.step+1)||'?')});}
     else{
       const auto=t.contact==null||t.contact==='auto',shown=run&&run.hit!=null?wbFmt(run.hit):'';
       hc.innerHTML='<input type="number" class="wbnum" id="wbhit" min="0" max="14" step="0.05" inputmode="decimal" aria-label="'+esc(W('timing.hit.label'))+'" value="'+esc(shown)+'"><span class="hint">'+esc(W('timing.hit.unit'))+'</span>'
@@ -2212,6 +2223,8 @@ document.addEventListener('change',e=>{const t=e.target;if(!t||!t.dataset||!WB.a
 // (the one field `steps` of the diff) and draft.body.marks (the one field `marks`); Save draft and Finished write them through the same path as the Timing fields. Steps that use a picture
 // (throw, drop, drive across, rain, put in front, float over, surround, pop up) are shown as the game holds them and can be moved in time or removed; their settings are the next step.
 const STG7=['words','shake','flash','dim','glow','foe','sfx'];
+// movebench10: the eight steps that use an object (a picture): throw, drop, drive across, rain, put in front, float over, surround, pop up.
+const STG8=['fly','drop','cross','rain','place','hover','surround','pop'],STGALL=STG7.concat(STG8);
 const STG_ICON={
  words:'<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 12h28v16H17l-7 6v-6H6z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M12 18h16M12 23h10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>',
  shake:'<svg viewBox="0 0 40 40" aria-hidden="true"><rect x="12" y="10" width="16" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M5 14l-3 6 3 6M35 14l3 6-3 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
@@ -2219,12 +2232,26 @@ const STG_ICON={
  dim:'<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="13" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M20 7a13 13 0 0 1 0 26z" fill="currentColor"/></svg>',
  glow:'<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="6" fill="currentColor"/><path d="M20 4v6M20 30v6M4 20h6M30 20h6M9 9l4 4M27 27l4 4M31 9l-4 4M13 27l-4 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>',
  foe:'<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="26" cy="18" r="9" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M4 18h9M7 12h6M7 24h6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>',
- sfx:'<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 15h7l9-8v26l-9-8H5z" fill="currentColor"/><path d="M27 14q5 6 0 12M31 10q9 10 0 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>'};
-const STG_NUM={hold:{lo:.1,hi:8,st:.1,def:1},dur:{lo:.05,hi:6,st:.05,def:.3},amp:{lo:1,hi:12,st:1,def:3},amount:{lo:0,hi:.95,st:.05,def:0},in:{lo:.05,hi:4,st:.05,def:.3},size:{lo:1,hi:4,st:1,def:2},px:{lo:1,hi:40,st:2,def:14}};
+ sfx:'<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 15h7l9-8v26l-9-8H5z" fill="currentColor"/><path d="M27 14q5 6 0 12M31 10q9 10 0 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>',
+ fly:'<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 30Q20 2 35 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="4 4" stroke-linecap="round"/><rect x="29" y="9" width="9" height="9" rx="2" fill="currentColor"/></svg>',
+ drop:'<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3v14M14 11l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="11" y="22" width="18" height="12" rx="2" fill="currentColor"/></svg>',
+ cross:'<svg viewBox="0 0 40 40" aria-hidden="true"><rect x="4" y="17" width="16" height="10" rx="3" fill="currentColor"/><path d="M24 22h12M31 16l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 32h34" stroke="currentColor" stroke-width="2"/></svg>',
+ rain:'<svg viewBox="0 0 40 40" aria-hidden="true"><g fill="currentColor"><rect x="5" y="4" width="7" height="7" rx="1.5"/><rect x="17" y="12" width="7" height="7" rx="1.5"/><rect x="29" y="5" width="7" height="7" rx="1.5"/><rect x="9" y="23" width="7" height="7" rx="1.5"/><rect x="26" y="26" width="7" height="7" rx="1.5"/></g></svg>',
+ place:'<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="27" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M27 17v12M22 34l5-5 5 5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><rect x="5" y="22" width="12" height="12" rx="2" fill="currentColor"/></svg>',
+ hover:'<svg viewBox="0 0 40 40" aria-hidden="true"><rect x="12" y="4" width="16" height="10" rx="3" fill="currentColor"/><path d="M14 19v3M20 19v3M26 19v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="20" cy="29" r="5" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>',
+ surround:'<svg viewBox="0 0 40 40" aria-hidden="true"><rect x="3" y="9" width="7" height="22" rx="2" fill="currentColor"/><rect x="30" y="9" width="7" height="22" rx="2" fill="currentColor"/><circle cx="20" cy="20" r="5" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>',
+ pop:'<svg viewBox="0 0 40 40" aria-hidden="true"><rect x="13" y="13" width="14" height="14" rx="3" fill="currentColor"/><path d="M20 3v5M8 8l4 4M32 8l-4 4M3 20h5M32 20h5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>'};
+const STG_NUM={n:{lo:1,hi:40,st:1,def:12},arc:{lo:0,hi:120,st:5,def:0},hold:{lo:.1,hi:8,st:.1,def:1},dur:{lo:.05,hi:6,st:.05,def:.3},amp:{lo:1,hi:12,st:1,def:3},amount:{lo:0,hi:.95,st:.05,def:0},in:{lo:.05,hi:4,st:.05,def:.3},size:{lo:1,hi:4,st:1,def:2},px:{lo:1,hi:40,st:2,def:14}};
 const STG_NEW={words:{do:'words',text:'BOOM',where:'over:target',size:2,color:'#eab308',hold:1.1},shake:{do:'shake',amp:6,dur:.3},flash:{do:'flash',color:'#f8fafc',dur:.3},dim:{do:'dim',amount:.35,in:.3},
- glow:{do:'glow',color:'#eab308',dur:1},foe:{do:'foe',react:'knock',px:14},sfx:{do:'sfx',sfx:'thud'}};
+ glow:{do:'glow',color:'#eab308',dur:1},foe:{do:'foe',react:'knock',px:14},sfx:{do:'sfx',sfx:'thud'},
+ fly:{do:'fly',from:'hand',to:'target',arc:40,dur:.4},drop:{do:'drop',onto:'target',dur:.5},cross:{do:'cross',from:'screen_right',to:'screen_left',lane:'floor',dur:1.5},rain:{do:'rain',n:12,dur:2},
+ place:{do:'place',on:'self',hold:2},hover:{do:'hover',on:'self',hold:2},surround:{do:'surround',on:'self',hold:2,pair:true},pop:{do:'pop',on:'target',hold:.8}};
+// what the engine plays when a step names no value (engine/b3-stage.js b3gDo): a thing takes .4 s to fly, drop or cross, a rain lasts 2 s, a held thing stays 2 s (a pop .8 s)
+const STG_OD={fly:{dur:.4},drop:{dur:.4},cross:{dur:.4},rain:{dur:2},place:{hold:2},hover:{hold:2},surround:{hold:2},pop:{hold:.8}};
+const stgNumO=(s,f)=>{const v=s[f];if(typeof v==='number'&&isFinite(v)&&(v>0||f==='arc'))return v;const o=STG_OD[s.do];return o&&o[f]!=null?o[f]:STG_NUM[f].def;};
 const stgR=x=>Math.round(x*100)/100;
 const stgList=()=>((WB.draft&&WB.draft.stage&&WB.draft.stage.steps)||[]);
+const stgObjs=()=>((WB.draft&&WB.draft.stage&&WB.draft.stage.objects)||{});
 const stgMarks=()=>((WB.draft&&WB.draft.body&&WB.draft.body.marks)||{});
 const stgNum=(s,f)=>{const v=s[f];return typeof v==='number'&&isFinite(v)&&(v!==0||f==='amount')?v:(s.do==='glow'&&f==='dur'?1:STG_NUM[f].def);};
 const stgColorName=c=>{const sw=((WORDS.fx&&WORDS.fx.swatches)||[]),h=x=>{const m=/^#([0-9a-f]{6})$/i.exec(String(x||''));return m?[0,2,4].map(i=>parseInt(m[1].substr(i,2),16)):null;},t=h(c);if(!t)return String(c||'');
@@ -2291,8 +2318,21 @@ function stgSentence(s){
   if(s.do==='glow')return T('glow',{color:col(s.color||'#ffd27a'),dur:stgR(stgNum(s,'dur'))});
   if(s.do==='foe'){if(s.react==='squash')return T('foe_squash');const p=stgPick('stage.pxs',stgNum(s,'px'));return T('foe_knock',{px:p?p.label.toLowerCase():stgNum(s,'px')+' px'});}
   if(s.do==='sfx')return T('sfx',{name:words(s.sfx||'')});
+  if(STG8.includes(s.do))return stgObjSentence(s);
   return T('other',{name:W('stage_do.'+s.do)});
 }
+// movebench10: the sentence of a step that uses an object
+const stgAnchorWord=k=>{const o=WA('stage.anchors').find(x=>x.k===k);return (o?o.label:String(k||'').replace(/_/g,' ')).toLowerCase();};
+const stgObjName=s=>{const o=stgObjs()[s.asset];return o&&o.name?o.name:(s.asset?String(s.asset).split('/').pop():W('stage.obj').toLowerCase());};
+function stgObjSentence(s){
+  const T=(k,v)=>W('stage.s2.'+k,v),d=s.do,obj=stgObjName(s);let x='';
+  if(d==='fly'){if(s.back)x+=T('x_back');if(+s.spin>0)x+=T('x_spin');if(s.hit)x+=T('x_hit');if(s.blend==='add')x+=T('x_glow');return T('fly',{obj,from:stgAnchorWord(s.from||'self'),to:stgAnchorWord(s.to||s.onto||'target'),dur:stgR(stgNumO(s,'dur')),extra:x});}
+  if(d==='drop'){if(s.hit)x+=T('x_hit');if(s.blend==='add')x+=T('x_glow');return T('drop',{obj,onto:stgAnchorWord(s.onto||s.to||'target'),dur:stgR(stgNumO(s,'dur')),extra:x});}
+  if(d==='cross'){if(+s.skid>0)x+=T('x_skid');if(s.blend==='add')x+=T('x_glow');return T('cross',{obj,dir:(WA('stage.dirs').find(o=>o.k===stgDir(s))||{label:''}).label.toLowerCase(),dur:stgR(stgNumO(s,'dur')),extra:x});}
+  if(d==='rain'){if(s.hit)x+=T('x_hit');if(s.blend==='add')x+=T('x_glow');return T('rain',{obj,n:Math.round(stgNumO(s,'n')),dur:stgR(stgNumO(s,'dur')),extra:x});}
+  return T(d,{obj,on:stgAnchorWord(s.on||(d==='pop'?'target':'self')),hold:stgR(stgNumO(s,'hold'))})+(d==='surround'&&s.pair?T('x_pair'):'')+(s.blend==='add'?T('x_glow'):'');
+}
+const stgDir=s=>((s.from||'screen_right')==='screen_left')?'lr':'rl';
 // ---- the section ----
 function wbStageSection(a){
   if(a.kind!=='move')return '';
@@ -2345,11 +2385,55 @@ function stgFieldsHtml(s){
     if(s.react!=='squash')h+=stgSeg(W('stage.px'),'','px',WA('stage.pxs'),stgNum(s,'px'),stgBump('px',stgNum(s,'px')));
   }else if(d==='sfx'){
     h+='<div class="wbrow"><div class="wl"><b>'+esc(W('stage.sound'))+'</b></div><div class="wc"><select class="fxsel" data-st="sound" aria-label="'+esc(W('stage.sound'))+'">'+((FXD&&FXD.sounds)||[]).map(n=>'<option value="'+esc(n)+'"'+(s.sfx===n?' selected':'')+'>'+esc(words(n))+'</option>').join('')+'</select><button type="button" class="wbc" data-st="play" data-n="'+esc(s.sfx||'')+'">'+esc(W('stage.play'))+'</button></div></div>';
+  }else if(STG8.includes(d)){
+    h+=stgObjFields(s);
   }else h+='<p class="hint">'+esc(W('stage.kept'))+'</p>';
   return h;
 }
+// movebench10: the settings of the eight steps that use an object
+function stgSel(label,f,opts,cur){
+  const have=opts.includes(cur)||cur==null;
+  return '<div class="wbrow"><div class="wl"><b>'+esc(label)+'</b></div><div class="wc"><select class="fxsel" data-st="sel" data-f="'+f+'" aria-label="'+esc(label)+'">'
+   +opts.map(k=>'<option value="'+esc(k)+'"'+(k===cur?' selected':'')+'>'+esc(stgAnchorWord(k).replace(/^./,c=>c.toUpperCase()))+'</option>').join('')+(have?'':'<option value="'+esc(cur)+'" selected>'+esc(stgAnchorWord(cur))+'</option>')+'</select></div></div>';
+}
+function stgTog(label,f,on){return '<div class="wbrow"><div class="wl"><b>'+esc(label)+'</b></div><div class="wc"><button type="button" class="wbc" data-st="tog" data-f="'+f+'" role="switch" aria-checked="'+(on?'true':'false')+'" aria-pressed="'+(on?'true':'false')+'">'+esc(on?W('stage.yes'):W('stage.no'))+'</button></div></div>';}
+function stgObjSel(s){
+  const o=stgObjs(),keys=Object.keys(o);
+  return '<div class="wbrow"><div class="wl"><b>'+esc(W('stage.obj'))+'</b></div><div class="wc"><select class="fxsel" data-st="sel" data-f="asset" aria-label="'+esc(W('stage.obj'))+'">'
+   +keys.map(k=>'<option value="'+esc(k)+'"'+(k===s.asset?' selected':'')+'>'+esc(o[k].name)+'</option>').join('')+(s.asset&&!o[s.asset]?'<option value="'+esc(s.asset)+'" selected>'+esc(String(s.asset))+'</option>':'')
+   +'<option value="__new">+ '+esc(W('stage.o.new'))+'</option></select></div></div>';
+}
+function stgObjFields(s){
+  const d=s.do;let h=stgObjSel(s);
+  if(d==='fly'){
+    h+=stgSel(W('stage.from'),'from',WORDS.stage.from_opts,s.from||'self')+stgSel(W('stage.to'),'to',WORDS.stage.to_opts,s.to||s.onto||'target');
+    h+=stgSeg(W('stage.arc'),'','arc',WA('stage.arcs'),stgNumO(s,'arc'));
+    h+=stgSeg(W('stage.spin'),'','spin',WA('stage.spins'),+s.spin||0);
+    h+=stgSeg(W('stage.otime'),'','dur',WA('stage.odurs'),stgNumO(s,'dur'),stgBump('dur',stgNumO(s,'dur')));
+    h+=stgTog(W('stage.back'),'back',!!s.back)+stgTog(W('stage.hitfly'),'hit',!!s.hit);
+  }else if(d==='drop'){
+    h+=stgSel(W('stage.onto'),'onto',WORDS.stage.onto_opts,s.onto||s.to||'target');
+    h+=stgSeg(W('stage.otime'),'','dur',WA('stage.odurs'),stgNumO(s,'dur'),stgBump('dur',stgNumO(s,'dur')));
+    h+=stgTog(W('stage.hitfly'),'hit',!!s.hit);
+  }else if(d==='cross'){
+    h+=stgSeg(W('stage.dir'),'','dir',WA('stage.dirs'),stgDir(s));
+    h+=stgSeg(W('stage.lane'),'','lane',WA('stage.lanes'),s.lane||'floor');
+    h+=stgSeg(W('stage.otime'),'','dur',WA('stage.cdurs'),stgNumO(s,'dur')===.4?1.5:stgNumO(s,'dur'),stgBump('dur',stgNumO(s,'dur')));
+    h+=stgTog(W('stage.skid'),'skid',+s.skid>0);
+  }else if(d==='rain'){
+    h+=stgSeg(W('stage.n'),'','n',WA('stage.ns'),stgNumO(s,'n'),stgBump('n',stgNumO(s,'n')));
+    h+=stgSeg(W('stage.otime'),'','dur',WA('stage.rdurs'),stgNumO(s,'dur'),stgBump('dur',stgNumO(s,'dur')));
+    h+=stgTog(W('stage.hitrain'),'hit',!!s.hit);
+  }else{
+    h+=stgSel(d==='pop'?W('stage.popon'):W('stage.on'),'on',d==='pop'?WORDS.stage.pop_opts:WORDS.stage.unit_opts,s.on||(d==='pop'?'target':'self'));
+    if(d==='surround')h+=stgTog(W('stage.pair'),'pair',!!s.pair);
+    h+=stgSeg(W('stage.ostay'),'','hold',WA(d==='pop'?'stage.pholds':'stage.oholds'),stgNumO(s,'hold'),stgBump('hold',stgNumO(s,'hold')));
+  }
+  if(d==='fly'||d==='drop'||d==='cross'||d==='rain'||d==='pop')h+=stgTog(W('stage.glow'),'glow',s.blend==='add');
+  return h;
+}
 function stgRowHtml(i,l,times){
-  const s=l[i],open=WB.stgOpen===i,known=STG7.includes(s.do),ord=stgOrder(l),pos=ord.indexOf(i),isStep=x=>stgKind(x.at,l).k==='step',nbU=l[ord[pos-1]],nbD=l[ord[pos+1]],noU=pos<=0||isStep(s)||isStep(nbU),noD=pos>=l.length-1||isStep(s)||isStep(nbD);
+  const s=l[i],open=WB.stgOpen===i,known=STGALL.includes(s.do),ord=stgOrder(l),pos=ord.indexOf(i),isStep=x=>stgKind(x.at,l).k==='step',nbU=l[ord[pos-1]],nbD=l[ord[pos+1]],noU=pos<=0||isStep(s)||isStep(nbU),noD=pos>=l.length-1||isStep(s)||isStep(nbD);
   const tm=times?W('stage.time_at',{s:stgR(times[i])}).replace(/^at /,''):'';
   let h='<div class="fxc stc'+(open?' open':'')+'" data-i="'+i+'"><div class="fxtop"><span class="stic" aria-hidden="true">'+(STG_ICON[s.do]||'')+'</span><div class="fxm"><b>'+esc(stgSentence(s))+'</b><span><em class="stt">'+esc(tm)+'</em>'+(tm?' · ':'')+esc(stgAtText(s.at,l))+'</span></div>'
    +'<button type="button" class="fxch" data-st="open" data-i="'+i+'" aria-expanded="'+(open?'true':'false')+'">'+esc(W(open?'stage.close':'stage.change'))+'</button></div>';
@@ -2366,8 +2450,8 @@ function wbStagePaint(keepFocus){
   if(keepFocus&&el.contains(document.activeElement)&&/^(INPUT|SELECT)$/.test(document.activeElement.tagName)){stgTimesPaint();return;}
   const times=stgTimes(),ord=stgOrder(l);
   el.innerHTML=(l.length?ord.map(i=>stgRowHtml(i,l,times)).join(''):'<p class="hint">'+esc(W('stage.empty'))+'</p>')
-   +(WB.stgPick?'<div class="fxpick"><p class="hint" style="margin:0 0 6px">'+esc(W('stage.adding'))+'</p><div class="fxgrid">'+STG7.map(k=>'<button type="button" class="fxtile sttile" data-st="pick" data-v="'+k+'"><span class="stic" aria-hidden="true">'+STG_ICON[k]+'</span><b>'+esc(W('stage.tiles.'+k))+'</b></button>').join('')+'</div><button type="button" data-st="pickno">'+esc(W('stage.cancel'))+'</button></div>'
-     :'<button type="button" class="fxadd" data-st="add">+ '+esc(W('stage.add'))+'</button>');
+   +(WB.stgPick?'<div class="fxpick"><p class="hint" style="margin:0 0 6px">'+esc(W('stage.adding'))+'</p><div class="fxgrid">'+STGALL.map(k=>'<button type="button" class="fxtile sttile" data-st="pick" data-v="'+k+'"><span class="stic" aria-hidden="true">'+STG_ICON[k]+'</span><b>'+esc(W('stage.tiles.'+k))+'</b></button>').join('')+'</div><button type="button" data-st="pickno">'+esc(W('stage.cancel'))+'</button></div>'
+     :'<button type="button" class="fxadd" data-st="add">+ '+esc(W('stage.add'))+'</button>')+stgObjectsHtml();
   wbStgCounts();
 }
 // The times shown beside each step follow the run the frame just reported; the rows are not rebuilt while a box is being typed in.
@@ -2416,7 +2500,10 @@ function stgAct(b){
   const a=b.dataset.st,i=+b.dataset.i,v=b.dataset.v,f=b.dataset.f,l0=stgList();
   if(a==='add'){WB.stgPick=true;return wbStagePaint();}
   if(a==='pickno'){WB.stgPick=false;return wbStagePaint();}
-  if(a==='pick'){if(!STG7.includes(v))return;WB.stgPick=false;WB.stgOpen=l0.length;wbEditStage(l=>l.push(Object.assign({at:stgHitAt()},wbClone(STG_NEW[v]))));return wbStagePaint();}
+  if(a==='pick'){if(!STGALL.includes(v))return;WB.stgPick=false;
+    if(STG8.includes(v)){const ks=Object.keys(stgObjs());if(!ks.length){WB.objForm={then:v,open:true};return wbStagePaint();}   // a step that uses an object needs one: the form asks for it first
+      WB.stgOpen=l0.length;const last=[...l0].reverse().find(s=>s.asset&&stgObjs()[s.asset]);wbEditStage(l=>l.push(Object.assign({at:stgHitAt(),asset:last?last.asset:ks[0]},wbClone(STG_NEW[v]))));return wbStagePaint();}
+    WB.stgOpen=l0.length;wbEditStage(l=>l.push(Object.assign({at:stgHitAt()},wbClone(STG_NEW[v]))));return wbStagePaint();}
   if(a==='open'){WB.stgOpen=WB.stgOpen===i?-1:i;return wbStagePaint();}
   if(a==='close'){WB.stgOpen=-1;return wbStagePaint();}
   const k=WB.stgOpen;if(k==null||k<0)return;
@@ -2464,10 +2551,103 @@ function stgAct(b){
   }
   if(a==='bump'){const N=STG_NUM[f];if(!N)return;wbEditStage(l=>{const s=l[k],cur=f==='in'?(s.in!=null?s.in:N.def):stgNum(s,f);s[f]=Math.max(N.lo,Math.min(N.hi,stgR(cur+(+v)*N.st)));},'bump'+k+f);return wbStagePaint();}
   if(a==='set'){
-    wbEditStage(l=>{const s=l[k];if(f==='color'||f==='react')s[f]=v;else s[f]=+v;if(f==='react'&&v==='squash')delete s.px;});return wbStagePaint();
+    wbEditStage(l=>{const s=l[k];
+      if(f==='dir'){s.from=v==='lr'?'screen_left':'screen_right';s.to=v==='lr'?'screen_right':'screen_left';delete s.stop;}
+      else if(f==='color'||f==='react'||f==='lane')s[f]=v;else s[f]=+v;
+      if(f==='react'&&v==='squash')delete s.px;});return wbStagePaint();
   }
+  if(a==='tog'){stgToggle(k,f);return wbStagePaint();}
   if(a==='play')return stgPlay(b.dataset.n);
 }
+// ---- movebench10: toggles, the objects of the move, New object ----
+function stgToggle(k,f){
+  const s0=stgList()[k];if(!s0)return;
+  if(f==='hit')return stgHitToggle(k);
+  wbEditStage(l=>{const s=l[k];
+    if(f==='back'){if(s.back)delete s.back;else s.back=true;}
+    else if(f==='pair'){if(s.pair)delete s.pair;else s.pair=true;}
+    else if(f==='skid'){if(+s.skid>0)delete s.skid;else s.skid=1;}
+    else if(f==='glow'){if(s.blend==='add')delete s.blend;else s.blend='add';}});
+}
+// "The hit lands when it arrives": the step carries the hit (hit:true, or 'first' for a rain) and the move's contact names the step, the pattern the 20 staged moves already use (engine/b3-stage.js b3gPlay).
+function stgHitToggle(k){
+  WB.undo.push(JSON.stringify(WB.draft));if(WB.undo.length>60)WB.undo.shift();WB.fxk=null;WB.confirm=false;WB.msg=null;
+  const l=wbClone(stgList()),s=l[k],t=Object.assign({},(WB.draft&&WB.draft.timing)||{}),c=t.contact,on=!s.hit;
+  if(on){if(!s.id)s.id=stgNewId(l);s.hit=s.do==='rain'?'first':true;t.contact={step:s.id};}
+  else{delete s.hit;if(c&&typeof c==='object'&&c.step===s.id)delete t.contact;}
+  WB.draft.timing=t;stgWrite(l);wbSend();wbPaint();
+}
+// one undo step that may change both the steps and the objects
+function wbEditStageObj(fn){
+  WB.undo.push(JSON.stringify(WB.draft));if(WB.undo.length>60)WB.undo.shift();WB.fxk=null;WB.confirm=false;WB.msg=null;
+  const l=wbClone(stgList()),o=wbClone(stgObjs());fn(l,o);
+  const st=wbClone((WB.draft&&WB.draft.stage)||{});st.steps=l;if(Object.keys(o).length)st.objects=o;else delete st.objects;
+  if(!l.length&&!Object.keys(o).length&&Object.keys(st).length===1&&!(WB.base&&WB.base.stage))delete WB.draft.stage;else WB.draft.stage=st;
+  wbSend();wbPaint();
+}
+const obOwner=()=>String((WB.a&&WB.a.owner)||'move').toLowerCase().replace(/[^a-z0-9]/g,'')||'move';
+// A short name from his words: without a leading a, an or the, up to the first with, of or that, and the last two words of what is left.
+function obShortName(w){
+  let x=String(w||'').replace(/[<>"\u201c\u201d]/g,'').trim().replace(/^(a|an|the|some)\s+/i,'');
+  x=x.split(/\s+(?:with|of|that|which|in|on|holding|made|for|and)\s+/i)[0];
+  const p=x.split(/\s+/).filter(Boolean);return p.slice(-2).join(' ').slice(0,24);
+}
+function stgPicState(key){
+  const P=WB.pics||(WB.pics={});
+  if(P[key]===undefined){P[key]=null;const im=new Image();im.onload=()=>{P[key]=true;if(WB.a)wbStagePaint(true);};im.onerror=()=>{P[key]=false;if(WB.a)wbStagePaint(true);};im.src='art/stage/'+key.replace('/','-')+'.webp';}
+  return P[key];
+}
+function stgObjUsed(key){
+  const st=(WB.draft&&WB.draft.stage)||{};let n=0;
+  (st.steps||[]).forEach(s=>{if(s.asset===key||(Array.isArray(s.assets)&&s.assets.includes(key)))n++;});
+  (st.setpiece&&st.setpiece.steps||[]).forEach(s=>{if(s.asset===key)n++;});(st.lasting||[]).forEach(s=>{if(s.asset===key)n++;});
+  return n;
+}
+function stgObjectsHtml(){
+  const o=stgObjs(),keys=Object.keys(o),baseO=(WB.base&&WB.base.stage&&WB.base.stage.objects)||{};
+  let h='<div class="obsec" id="wbobjs"><h4 class="obh">'+esc(W('stage.o.title'))+'</h4><p class="hint" style="margin:0 0 6px">'+esc(W('stage.o.hint'))+'</p>';
+  if(!keys.length)h+='<p class="hint">'+esc(W('stage.o.empty'))+'</p>';
+  h+='<div class="obgrid">'+keys.map(k=>{
+    const ob=o[k],pic=stgPicState(k),used=stgObjUsed(k),saved=!!baseO[k],sz=ob.size&&ob.size.h!=null?ob.size.h:null;
+    return '<div class="obt" data-k="'+esc(k)+'"><div class="obpic'+(pic?'':' nopic')+'">'+(pic&&ob.kind==='prop'?'<img src="art/stage/'+esc(k.replace('/','-'))+'.webp" alt="'+esc(ob.name)+'">':pic?'<span>'+esc(W('stage.o.haspic'))+'</span>':'<span>'+esc(W('stage.o.nopic'))+'</span>')+'</div>'
+     +'<b>'+esc(ob.name)+'</b>'+(ob.words?'<span class="hint">'+esc(W('stage.o.wordsline',{words:ob.words}))+'</span>':'')
+     +'<span class="hint">'+esc(used?(used===1?W('stage.o.used_one'):W('stage.o.used_many',{n:used})):W('stage.o.unused'))+'</span>'
+     +(sz!=null?'<div class="wbseg wrap" role="group" aria-label="'+esc(W('stage.o.size'))+'">'+WA('stage.osizes').map(x=>'<button type="button" data-ob="size" data-k="'+esc(k)+'" data-v="'+x.k+'" aria-pressed="'+(Math.abs(x.k-sz)<1e-9?'true':'false')+'">'+esc(x.label)+'</button>').join('')+'</div>':'')
+     +(pic?'':'<a class="wbc oblink" href="art.html?open='+encodeURIComponent(ob.entry||'')+'">'+esc(W('stage.o.open'))+'</a>'+(saved||!ob.words?'':'<span class="hint">'+esc(W('stage.o.savefirst'))+'</span>'))
+     +(used?'':'<button type="button" class="wbc" data-ob="remove" data-k="'+esc(k)+'">'+esc(W('stage.o.remove'))+'</button>')+'</div>';}).join('')+'</div>';
+  const F=WB.objForm;
+  if(F&&F.open)h+='<div class="obform" id="obform"><div class="wbrow"><div class="wl"><b>'+esc(W('stage.o.what'))+'</b><span>'+esc(W('stage.o.lettering'))+'</span></div><div class="wc"><textarea class="fxt" id="obwhat" rows="2" maxlength="140" placeholder="'+esc(W('stage.o.whatph'))+'" aria-label="'+esc(W('stage.o.what'))+'">'+esc(F.words||'')+'</textarea></div></div>'
+    +'<div class="wbrow"><div class="wl"><b>'+esc(W('stage.o.short'))+'</b></div><div class="wc"><input type="text" class="fxt" id="obshort" maxlength="24" aria-label="'+esc(W('stage.o.short'))+'" value="'+esc(F.short||'')+'"></div></div>'
+    +'<div class="fxacts"><button type="button" data-ob="add">'+esc(W('stage.o.add'))+'</button><button type="button" data-ob="cancel">'+esc(W('stage.o.cancel'))+'</button></div><p class="hint" id="obmsg"></p></div>';
+  else h+='<button type="button" class="fxadd" data-ob="new">+ '+esc(W('stage.o.new'))+'</button>';
+  return h+'<p class="hint">'+esc(W('stage.o.pinknote'))+'</p></div>';
+}
+function obAct(b){
+  const a=b.dataset.ob,k=b.dataset.k;
+  if(a==='new'){WB.objForm={open:true,then:null};return wbStagePaint();}
+  if(a==='cancel'){WB.objForm=null;return wbStagePaint();}
+  if(a==='size'){const v=+b.dataset.v;wbEditStageObj((l,o)=>{if(o[k])o[k].size={h:v};});return wbStagePaint();}
+  if(a==='remove'){if(stgObjUsed(k))return;wbEditStageObj((l,o)=>{delete o[k];});return wbStagePaint();}
+  if(a==='add'){
+    const F=WB.objForm||{},words=String(($('obwhat')||{}).value||'').replace(/[<>]/g,'').replace(/\s+/g,' ').trim(),msg=$('obmsg');
+    let nm=String(($('obshort')||{}).value||'').replace(/[<>]/g,'').trim()||obShortName(words);
+    if(words.length<3||words.length>140||!nm){if(msg)msg.textContent=W('stage.o.bad');return;}
+    const own=obOwner(),slug0=nm.toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,16)||'thing',objs=stgObjs();
+    if(Object.values(objs).some(x=>String(x.name).toLowerCase()===nm.toLowerCase())){if(msg)msg.textContent=W('stage.o.dup');return;}
+    let slug=slug0,i=2;while(objs[own+'/'+slug])slug=slug0.slice(0,14)+i++;
+    const key=own+'/'+slug,ob={name:nm,words,kind:'prop',bg:'magenta',size:{h:.3},entry:'stage-'+own+'-'+slug};
+    const then=F.then,ch=F.change,l0=stgList();WB.objForm=null;
+    if(then)WB.stgOpen=l0.length;
+    wbEditStageObj((l,o)=>{o[key]=ob;
+      if(then)l.push(Object.assign({at:stgHitAt(),asset:key},wbClone(STG_NEW[then])));
+      else if(ch!=null&&l[ch])l[ch].asset=key;});
+    return wbStagePaint();
+  }
+}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-ob]');if(b&&WB.a&&b.tagName==='BUTTON')obAct(b);});
+document.addEventListener('input',e=>{const t=e.target;if(!t||!WB.a||!WB.objForm)return;
+  if(t.id==='obwhat'){WB.objForm.words=t.value;const s=$('obshort');if(s&&!WB.objForm.shortEdit){s.value=obShortName(t.value);WB.objForm.short=s.value;}}
+  if(t.id==='obshort'){WB.objForm.shortEdit=true;WB.objForm.short=t.value;}});
 function stgNewId(l){let n=1;const ids=new Set(l.map(s=>s.id));while(ids.has('s'+n))n++;return 's'+n;}
 function wbEditMarks(fn){
   const m=wbClone((WB.draft.body&&WB.draft.body.marks)||{});fn(m);
@@ -2481,7 +2661,10 @@ document.addEventListener('input',e=>{const t=e.target;if(!t||!t.dataset||!WB.a)
 document.addEventListener('change',e=>{const t=e.target;if(!t||!t.dataset||!WB.a)return;const k=WB.stgOpen;
   if(t.dataset.st&&k>=0){
     if(t.dataset.st==='text'&&!String(t.value).trim()){t.value=stgList()[k].text||'';return;}
-    if(t.dataset.st==='where')wbEditStage(l=>{l[k].where=t.value;});
+    if(t.dataset.st==='sel'){const f=t.dataset.f;
+      if(f==='asset'&&t.value==='__new'){WB.objForm={then:null,open:true,change:k};return wbStagePaint();}
+      wbEditStage(l=>{const s=l[k];if(f==='to'&&s.onto!=null&&s.do==='fly')delete s.onto;s[f]=t.value;});}
+    else if(t.dataset.st==='where')wbEditStage(l=>{l[k].where=t.value;});
     else if(t.dataset.st==='sound')wbEditStage(l=>{l[k].sfx=t.value;});
     else if(t.dataset.st==='mark')wbEditStage(l=>{l[k].at=Object.assign({mark:t.value},(typeof l[k].at==='object'&&l[k].at.plus)?{plus:l[k].at.plus}:{});});
     else if(t.dataset.st==='after')wbEditStage(l=>{const x=l[+t.value];if(!x.id)x.id=stgNewId(l);l[k].at=Object.assign({step:x.id},(typeof l[k].at==='object'&&l[k].at.plus)?{plus:l[k].at.plus}:{});});

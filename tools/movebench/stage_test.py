@@ -108,7 +108,7 @@ with sync_playwright() as pw:
     if sorted(opts) != sorted(FX['sounds']): fail('the Add a sound list holds %d sounds, engine/audio.js has %d' % (len(opts), len(FX['sounds'])))
     tiles = lambda: pg.evaluate("()=>[...document.querySelectorAll('.sttile')].map(t=>t.dataset.v)")
     click(pg, '[data-st=add]'); pg.wait_for_selector('.sttile')
-    if sorted(tiles()) != sorted(['words', 'shake', 'flash', 'dim', 'glow', 'foe', 'sfx']): fail('Add a step offers %r, not the seven' % tiles())
+    if sorted(tiles()) != sorted(['words', 'shake', 'flash', 'dim', 'glow', 'foe', 'sfx', 'fly', 'drop', 'cross', 'rain', 'place', 'hover', 'surround', 'pop']): fail('Add a step offers %r, not the fifteen' % tiles())
     pg.screenshot(path=os.path.join(OUT, 'stage-tiles-951x648.png'))
     click(pg, '[data-st=pickno]')
     # ---------- 2. the seven: add, change, time, fire, remove ----------

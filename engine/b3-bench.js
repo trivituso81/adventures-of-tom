@@ -70,7 +70,7 @@ const bnCan=id=>!!bnParse(id);
 
 // ---------- the stub fight ----------
 function bnConfig(P) {
-  const cfg={lab:true,seed:11,plain:true,mods:{foeHp:1,taken:1,foeSpeed:1},bench:true,loadouts:{}};
+  const cfg={lab:true,seed:11,plain:true,mods:{foeHp:1,taken:1,foeSpeed:1},bench:true,pink:!BN.golden,loadouts:{}};   // movebench10: pink boxes for an object with no picture; the golden recorder leaves them off so it records what the game plays
   if(P.kind==='move'||(P.kind==='state'&&!P.isFoe)) {
     const party=[P.owner].concat(BN_FILL.filter(x=>x!==P.owner&&B3_CAST[x]&&b3HasKit(x))).slice(0,BN_PARTY);
     cfg.party=party; cfg.formation=P.kind==='move'&&P.S.slot==='cap'?'bigone':'mudling';
@@ -96,6 +96,7 @@ function bnSubject(P) {
 function bnFight(P) {
   const cfg=bnConfig(P); BN.cfg=cfg;
   if(B3.active) { B3P.q.length=0; }
+  if(typeof B3G!=='undefined') B3G.pink=false;
   b3Start(cfg);
   B3P.q.length=0; B7.speed=0; B3.artWait=false;   /* b3Start held the opening on the backdrop until its sheets came; bnGo waits for them itself */
   B3P.t=0; battle.time=0;
@@ -247,7 +248,7 @@ const bnRound=sec=>Math.round(sec/BN_STEP);
 // ---------- the bar, read from the run ----------
 const bnFxName=id=>String(id).replace(/^(vfx_core_|vfx_|proj_|setpiece_)/,'').replace(/_/g,' ');
 const bnClipName=id=>String(id||'').replace(/_/g,' ');
-const bnStageName=s=>({words:'Words: '+(s.text||''),shake:'Shake',flash:'Flash',dim:'Dim',glow:'Glow',fly:'Thing flies',drop:'Thing drops',cross:'Thing crosses',rain:'Things rain',pop:'Thing pops',foe:'Monster pushed',sfx:'Sound: '+(s.sfx||'')}[s.do]||s.do);
+const bnStageName=s=>({words:'Words: '+(s.text||''),shake:'Shake',flash:'Flash',dim:'Dim',glow:'Glow',fly:'Thing flies',drop:'Thing drops',cross:'Thing crosses',rain:'Things rain',pop:'Thing pops',place:'Thing put in front',hover:'Thing floats',surround:'Things close around',foe:'Monster pushed',sfx:'Sound: '+(s.sfx||'')}[s.do]||s.do);
 function bnRecNew() { return {lanes:{video:[],wind:[],stage:[],fx:[],snd:[]},cur:{},cues:new Set(),holds:new Set(),snd:[],hit:null,run:null,stageDone:false,rep:{hold:null,shake:null,runIn:null,back:false,hits:[]}}; }
 function bnSeg(lane,key,label,k,t) {
   const R=BN.rec,L=R.cur[lane+'|'+key];
@@ -284,7 +285,7 @@ function bnSample() {
   if(typeof B3G!=='undefined'&&B3G.run&&BN.P&&BN.P.kind==='move'&&B3G.run.id===BN.P.skill&&!R.stageDone) {
     R.stageDone=true; const run=B3G.run,row=msStageRow('move:'+BN.P.skill),off=run.t0-BN.t0;
     R.run={hitAt:run.hitAt+off,off,marks:run.marks,ids:run.ids,noVideo:!!run.noVideo,budget:run.budget,clipSec:run.clipSec,times:(row&&row.steps||[]).map(s=>s._T)};   // movebench9: times is each step's moment, seconds from the start of the move, in the order of the spec's steps
-    if(row) for(const s of [].concat(row.steps||[],row.setpiece&&row.setpiece.steps||[])) if(s._T!=null) R.lanes.stage.push({a:s._T+off,b:s._T+off+(s.dur||s.hold||.3),label:bnStageName(s),k:'stage'});
+    if(row) for(const s of [].concat(row.steps||[],row.setpiece&&row.setpiece.steps||[])) if(s._T!=null) R.lanes.stage.push({a:s._T+off,b:s._T+off+(s.dur||s.hold||.3),label:bnStageName(s),k:'stage',pink:typeof B3G!=='undefined'&&[].concat(s.assets||s.asset||[]).some(k=>!B3G.A[k])});
   }
   if(typeof B3V!=='undefined') {
     for(const c of B3V.cues) if(!R.cues.has(c)) { R.cues.add(c);
@@ -373,6 +374,7 @@ function bngWait(P,ms) {
 }
 async function bngRun(id) {
   const P=bnParse(id); if(!P) return {id,error:'no preview for this kind'};
+  BN.golden=true;
   clearTimeout(BN.timer); BN.gen++; BN.on=true; BN.id=id; BN.P=P; BN.kind=P.kind; BN.answer=false; BN.loop=false; BN.ended=false; BN.playing=false; BN.hold=false;
   if(typeof B3C!=='undefined') B3C.need.clear();
   Math.random=BN.upd=bnRng(BN_SEED); bnFight(P);
@@ -391,7 +393,7 @@ async function bngRun(id) {
       run:R.run?{hitAt:r3(R.run.hitAt-R.run.off),marks:Object.fromEntries(Object.entries(R.run.marks||{}).map(([k,v])=>[k,r3(v)])),budget:R.run.budget==null?null:R.run.budget,noVideo:!!R.run.noVideo}:null,
       beats:G.beats,hold:G.hold,effects:G.effects,stage:G.stage,sound:R.snd.map(s=>({t:r3(s.t),name:s.name})),
       video:lane('video'),wind:lane('wind'),ticks:tl.ticks.map(t=>({name:t.name,t:r3(t.t)})),faults:(window.__faults||[]).slice(faults0)};
-  } finally { BN.rec=null; BNG.rec=null; BN.gen++; BN.playing=false; try { bnStop(); } catch(e) {} }
+  } finally { BN.golden=false; BN.rec=null; BNG.rec=null; BN.gen++; BN.playing=false; try { bnStop(); } catch(e) {} }
   return out;
 }
 // The animations the golden record covers: every family move, every monster attack with a video or a wind-up, every wind-up alone, every body state that has a video.
@@ -451,7 +453,7 @@ function bnStatus() {
   return {bench:'status',id:BN.id,state:BN.state,speed:BN.speed,loop:BN.loop,mute:BN.mute,answer:BN.answer,t:cur,len:BN.len,msg:BN.msg,kind:BN.kind,
     noVideo:BN.kind==='move'&&typeof B3G!=='undefined'&&!!B3G.run&&!!B3G.run.noVideo,clips:typeof b3cLoaded==='function'?b3cLoaded():0,seeks:BN.seeks};
 }
-function bnSend() { const st=bnStatus(); try { const el=document.getElementById('bench-tag'); if(el) el.hidden=!st.noVideo||BN.state==='idle'; } catch(e) {}
+function bnSend() { const st=bnStatus(); try { const el=document.getElementById('bench-tag'); if(el) el.hidden=!st.noVideo||BN.state==='idle'; const pk=document.getElementById('bench-pink'); if(pk) pk.hidden=!(typeof B3G!=='undefined'&&B3G.pink)||BN.state==='idle'; } catch(e) {}
   try { if(parent&&parent!==window) parent.postMessage(st,location.origin); } catch(e) {} }
 function bnSendTl() { try { if(BN.tl&&parent&&parent!==window) parent.postMessage(BN.tl,location.origin); } catch(e) {} }
 // movebench5: the page sends a draft of a spec; it goes into the same table the game's data/move-specs.js fills (msSet) and the move plays again from the start. null puts the file's own back.

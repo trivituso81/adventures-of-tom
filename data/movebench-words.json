@@ -1128,7 +1128,7 @@
   }
  },
  "stage": {
-  "note_draft": "Steps that need no picture. Each one happens at a moment of the move. Nothing reaches the game until you tap Finished.",
+  "note_draft": "Each step happens at a moment of the move. A step that uses an object needs that object's picture, which is made in the Art Library. Nothing reaches the game until you tap Finished.",
   "empty": "No steps yet.",
   "count_one": "1 step",
   "count_many": "{n} steps",
@@ -1142,7 +1142,7 @@
   "later": "Move later",
   "no_swap": "A step that follows another step cannot trade places.",
   "no_video": "This move has no video yet. The preview plays these steps over the standing video; the game plays them once the move has its video.",
-  "kept": "Kept as it is. Its settings come in the next step.",
+  "kept": "Kept as it is.",
   "when": "When it happens",
   "when_hint": "Pick a moment, then fine tune it.",
   "kinds": [
@@ -1375,7 +1375,15 @@
    "dim": "Dim the field",
    "glow": "Glow",
    "foe": "Knock the monster back",
-   "sfx": "Play a sound"
+   "sfx": "Play a sound",
+   "fly": "Throw an object",
+   "drop": "Drop an object",
+   "cross": "Drive an object across",
+   "rain": "Rain objects down",
+   "place": "Put an object in front",
+   "hover": "Float an object over",
+   "surround": "Surround with objects",
+   "pop": "Pop an object up"
   },
   "s": {
    "words": "Words on screen \"{text}\", {where}, {color}, stays {hold} s",
@@ -1387,6 +1395,341 @@
    "foe_squash": "Squash the monster flat",
    "sfx": "Play a sound: {name}",
    "other": "{name}"
-  }
+  },
+  "anchors": [
+   {
+    "k": "hand",
+    "label": "His or her hand"
+   },
+   {
+    "k": "self",
+    "label": "The one acting"
+   },
+   {
+    "k": "self_front",
+    "label": "In front of the one acting"
+   },
+   {
+    "k": "above_self",
+    "label": "Over the one acting"
+   },
+   {
+    "k": "target",
+    "label": "The monster"
+   },
+   {
+    "k": "each_target",
+    "label": "Each monster hit"
+   },
+   {
+    "k": "above_target",
+    "label": "Over the monster"
+   },
+   {
+    "k": "ally",
+    "label": "A family member beside"
+   },
+   {
+    "k": "each_ally",
+    "label": "Each family member beside"
+   },
+   {
+    "k": "attacker",
+    "label": "The monster that hit"
+   },
+   {
+    "k": "foes_front",
+    "label": "In front of the monsters"
+   },
+   {
+    "k": "screen_center",
+    "label": "The middle of the screen"
+   },
+   {
+    "k": "screen_left",
+    "label": "The left edge"
+   },
+   {
+    "k": "screen_right",
+    "label": "The right edge"
+   },
+   {
+    "k": "top",
+    "label": "Straight up, off the screen"
+   },
+   {
+    "k": "floor",
+    "label": "The floor"
+   }
+  ],
+  "from_opts": [
+   "hand",
+   "self",
+   "self_front",
+   "above_self",
+   "ally",
+   "screen_left",
+   "screen_right",
+   "top"
+  ],
+  "to_opts": [
+   "target",
+   "above_target",
+   "foes_front",
+   "attacker",
+   "ally",
+   "screen_center",
+   "screen_left",
+   "screen_right",
+   "top"
+  ],
+  "onto_opts": [
+   "target",
+   "foes_front",
+   "self",
+   "ally",
+   "screen_center",
+   "floor"
+  ],
+  "unit_opts": [
+   "self",
+   "target",
+   "each_target",
+   "ally",
+   "each_ally",
+   "attacker"
+  ],
+  "pop_opts": [
+   "target",
+   "each_target",
+   "above_target",
+   "self",
+   "each_ally",
+   "foes_front",
+   "screen_center",
+   "floor"
+  ],
+  "obj": "Which object",
+  "from": "It starts at",
+  "to": "It goes to",
+  "onto": "It lands on",
+  "on": "On whom",
+  "popon": "Where",
+  "dir": "It goes",
+  "lane": "Along the",
+  "arc": "The curve",
+  "spin": "It spins",
+  "n": "How many",
+  "ostay": "Stays for",
+  "otime": "How long it takes",
+  "dirs": [
+   {
+    "k": "rl",
+    "label": "Right to left"
+   },
+   {
+    "k": "lr",
+    "label": "Left to right"
+   }
+  ],
+  "lanes": [
+   {
+    "k": "floor",
+    "label": "Floor"
+   },
+   {
+    "k": "mid",
+    "label": "Middle"
+   },
+   {
+    "k": "foes",
+    "label": "Monsters' feet"
+   }
+  ],
+  "arcs": [
+   {
+    "k": 0,
+    "label": "Straight"
+   },
+   {
+    "k": 25,
+    "label": "Low"
+   },
+   {
+    "k": 60,
+    "label": "High"
+   },
+   {
+    "k": 100,
+    "label": "Very high"
+   }
+  ],
+  "spins": [
+   {
+    "k": 0,
+    "label": "None"
+   },
+   {
+    "k": 1,
+    "label": "Once"
+   },
+   {
+    "k": 2,
+    "label": "Twice"
+   }
+  ],
+  "ns": [
+   {
+    "k": 6,
+    "label": "A few"
+   },
+   {
+    "k": 12,
+    "label": "Some"
+   },
+   {
+    "k": 24,
+    "label": "Lots"
+   }
+  ],
+  "odurs": [
+   {
+    "k": 0.25,
+    "label": "Quick"
+   },
+   {
+    "k": 0.4,
+    "label": "Normal"
+   },
+   {
+    "k": 0.8,
+    "label": "Slow"
+   }
+  ],
+  "cdurs": [
+   {
+    "k": 1,
+    "label": "Quick"
+   },
+   {
+    "k": 1.5,
+    "label": "Normal"
+   },
+   {
+    "k": 2.5,
+    "label": "Slow"
+   }
+  ],
+  "rdurs": [
+   {
+    "k": 1,
+    "label": "Short"
+   },
+   {
+    "k": 2,
+    "label": "Normal"
+   },
+   {
+    "k": 3.5,
+    "label": "Long"
+   }
+  ],
+  "oholds": [
+   {
+    "k": 0.8,
+    "label": "Short"
+   },
+   {
+    "k": 2,
+    "label": "Normal"
+   },
+   {
+    "k": 4,
+    "label": "Long"
+   }
+  ],
+  "pholds": [
+   {
+    "k": 0.5,
+    "label": "Short"
+   },
+   {
+    "k": 0.8,
+    "label": "Normal"
+   },
+   {
+    "k": 1.5,
+    "label": "Long"
+   }
+  ],
+  "back": "It comes back",
+  "pair": "One on each side",
+  "skid": "It skids to a stop",
+  "glow": "Glows (light adds up)",
+  "hitfly": "The hit lands when it arrives",
+  "hitrain": "The hit lands when the first one lands",
+  "noobj": "Add an object first. Type what it is and its picture is asked for in the Art Library.",
+  "osizes": [
+   {
+    "k": 0.15,
+    "label": "Small"
+   },
+   {
+    "k": 0.3,
+    "label": "Medium"
+   },
+   {
+    "k": 0.5,
+    "label": "Large"
+   },
+   {
+    "k": 0.9,
+    "label": "Huge"
+   }
+  ],
+  "s2": {
+   "fly": "Throw {obj} from {from} to {to}, {dur} s{extra}",
+   "drop": "Drop {obj} onto {onto}, {dur} s{extra}",
+   "cross": "Drive {obj} across the screen, {dir}, {dur} s{extra}",
+   "rain": "Rain {n} of {obj} down, over {dur} s{extra}",
+   "place": "Put {obj} in front of {on}, stays {hold} s",
+   "hover": "Float {obj} over {on}, stays {hold} s",
+   "surround": "Close {obj} around {on}, stays {hold} s",
+   "pop": "Pop {obj} up at {on}, stays {hold} s",
+   "x_back": ", it comes back",
+   "x_spin": ", it spins",
+   "x_hit": ", the hit lands with it",
+   "x_skid": ", skids to a stop",
+   "x_glow": ", glowing",
+   "x_pair": ", one on each side"
+  },
+  "o": {
+   "title": "Objects of this move",
+   "hint": "Each object is one picture. Its picture is made in the Art Library: you press Generate, then Approve, and it appears here and in the preview.",
+   "empty": "No objects yet.",
+   "new": "New object",
+   "what": "What is it? Type it in your words",
+   "whatph": "for example, a yellow folding \"WET FLOOR\" sign",
+   "short": "Short name",
+   "add": "Add object",
+   "cancel": "Cancel",
+   "nopic": "NO PICTURE YET",
+   "haspic": "Picture ready",
+   "open": "Open in the Art Library",
+   "savefirst": "Save draft first: the Art Library entry is made from your saved words (about 10 minutes).",
+   "remove": "Remove",
+   "used_one": "Used by 1 step",
+   "used_many": "Used by {n} steps",
+   "unused": "Not used by a step yet",
+   "size": "Size",
+   "bad": "Type what it is first (3 to 140 letters).",
+   "dup": "This move already has an object with that name.",
+   "wordsline": "\"{words}\"",
+   "pinknote": "Pink boxes are not final: until the picture is approved the preview shows a pink box of the object's size.",
+   "lettering": "Put any lettering in quotes or capitals.",
+   "kindobj": "Moves by itself (a video)"
+  },
+  "yes": "On",
+  "no": "Off"
  }
 }

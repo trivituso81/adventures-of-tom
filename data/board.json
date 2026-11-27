@@ -9892,7 +9892,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 10: stage editor: objects",
-   "next": "Steps that use an object (throw, drop, drive across, rain, put in front, float over, surround, pop up). A new object is asked for in the Art Library and appears when you approve its picture; until then the preview shows a pink box. Starts by itself when Move Workbench 9 ships.",
+   "next": "Built as movebench10 (waiting on the push to main). Next: c-movebench-11 starts when this ships.",
    "blocks": [
     "c-movebench-11"
    ],
@@ -9925,6 +9925,10 @@
     {
      "d": "2026-11-27",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Built as movebench10: eight object steps, objects grid, New object, Art Library entry from his words (stage-prompts.js, move-apply), art-bake reaches bake_stage.py, pink box in the preview only. Tests pass; the golden record is unchanged. Nothing for Tom to judge."
     }
    ]
   },

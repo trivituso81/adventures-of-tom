@@ -33,7 +33,10 @@ function b3gStandIn(R) {
 }
 const b3gClipOf=R=>BCLIPS[R.body.clip]||(b3gNoVideo(R)?b3gStandIn(R):null);
 // A row is usable when its body clip and every asset are baked into this build (otherwise the move plays what it plays today).
-const b3gDefined=R=>!!(R&&R.body&&((BCLIPS[R.body.clip]&&b3gAssetsOf(R).every(k=>B3G.A[k]))||b3gNoVideo(R)));
+// movebench10: in the workbench preview only (cfg.pink, set by engine/b3-bench.js; never by the game or the golden recorder) an object with no baked picture is a pink dashed box of its size, so a row whose picture is
+// not made yet still plays its stage. The game plays a row only when every picture is baked, as before.
+const b3gPink=()=>!!(typeof B3!=='undefined'&&B3.active&&B3.cfg&&B3.cfg.pink);
+const b3gDefined=R=>!!(R&&R.body&&((BCLIPS[R.body.clip]&&(b3gPink()||b3gAssetsOf(R).every(k=>B3G.A[k])))||b3gNoVideo(R)));
 function b3gWarm(R) {
   b3cWant(R.body.clip,B3G_KEEP);
   for(const k of b3gAssetsOf(R)) if(B3G.A[k]) B3C.need.set('stage_'+B3G.A[k].fk,performance.now()+B3G_KEEP);
@@ -41,7 +44,7 @@ function b3gWarm(R) {
 // The move is over: its video and pictures are no longer asked for, so paintedTick lets them go 3 s later (a phone holds about 16 clip pictures; the next move's own are loading by then).
 // A lasting element that is still on screen asks again every frame (b3gWarmDef), so it keeps what it draws.
 function b3gLetGo(R) { B3C.need.delete(R.body.clip); for(const k of b3gAssetsOf(R)) if(B3G.A[k]) B3C.need.delete('stage_'+B3G.A[k].fk); }
-const b3gReady=R=>b3gDefined(R)&&(b3gNoVideo(R)?b3gAssetsOf(R).every(k=>!B3G.A[k]||B3G.A[k].atlas.ready):b3cReady(R.body.clip)&&b3gAssetsOf(R).every(k=>B3G.A[k].atlas.ready));
+const b3gReady=R=>b3gDefined(R)&&(b3gNoVideo(R)||b3gPink()?b3gAssetsOf(R).every(k=>!B3G.A[k]||B3G.A[k].atlas.ready)&&(b3gNoVideo(R)||b3cReady(R.body.clip)):b3cReady(R.body.clip)&&b3gAssetsOf(R).every(k=>B3G.A[k].atlas.ready));
 // The row of the move this `act` beat plays, or null (a monster's move, a move with no row, a row that is not baked yet).
 function b3gRowFor(head) {
   if(!head||head.t!=='act'||!head.id||!head.src||head.src[0]==='f') return null;
@@ -91,6 +94,20 @@ function b3gPts(name,ctx) {
   }
 }
 const b3gPt=(name,ctx)=>(b3gPts(name,ctx)[0]||{x:288,y:162});
+// The units an anchor names (movebench10: who a placed, floating or surrounding object belongs to).
+function b3gKeysOf(name,ctx) {
+  const n=String(name||'self').replace(/^above_/,''),others=()=>B3.F.party.filter(u=>u.key!==ctx.src&&!B3.view.u[u.key].ko).map(u=>u.key);
+  switch(n) {
+    case 'self': return [ctx.src];
+    case 'target': return (ctx.tgts||[]).slice(0,1);
+    case 'each_target': return (ctx.tgts||[]).slice();
+    case 'attacker': return ctx.attacker?[ctx.attacker]:[];
+    case 'carrier': return ctx.carrier?[ctx.carrier]:[];
+    case 'ally': return others().slice(0,1);
+    case 'each_ally': return others();
+    default: return [ctx.src];
+  }
+}
 // Where a `words` sits: 'over:<anchor>' is above it, anything else is the anchor itself.
 function b3gWordsAt(where,ctx) {
   const m=/^over:(.+)$/.exec(where||'screen_center'),out=[];
@@ -101,9 +118,9 @@ function b3gLane(lane,ctx) { return lane==='floor'?300:lane==='mid'?250:lane==='
 
 // ---------- sizes and drawing ----------
 function b3gSize(key,spec,ctx) {   // {h: share of the mover's standing height} or {sw: share of the screen width}
-  const A=B3G.A[key],D=A&&A.D; if(!D) return {w:0,h:0};
-  const s=spec||{h:.3}; let h,w;
-  if(s.sw!=null) { w=s.sw*576; h=w*D.h/D.w; } else { h=(s.h||.3)*b3gH(ctx.src); w=h*D.w/D.h; }
+  const A=B3G.A[key],D=A&&A.D; if(!D&&!b3gPink()) return {w:0,h:0};
+  const s=spec||{h:.3}; let h,w;   // movebench10: a pink box (no picture yet) is square
+  if(s.sw!=null) { w=s.sw*576; h=D?w*D.h/D.w:w; } else { h=(s.h||.3)*b3gH(ctx.src); w=D?h*D.w/D.h:h; }
   return {w,h};
 }
 function b3gFrameAt(A,ms) { const D=A.D; if(D.n<2) return 0; const L=D.dur||1; const t=D.loop?ms%L:Math.max(0,Math.min(ms,D.dur-1)); let i=0; while(i<D.n-1&&t>=D.ms[i+1]) i++; return i; }
@@ -143,7 +160,12 @@ function b3gDo(a,ctx,t0) {
       for(const k of aim) if(B3P.fa[k]) B3P.fa[k].stage={t0:now,dur:a.react==='squash'?.5:.55,kind:a.react||'knock',px:a.px||14}; break; }
     case 'pop': {
       const pts=a.on==='floor'?[{x:288,y:300}]:b3gPts(a.on,ctx),sz=k=>b3gSize(a.asset,R.assets[a.asset].size,ctx);
-      for(const p of pts) push({kind:'pop',asset:a.asset,x:p.x,y:p.y,dur:a.hold||.8,blend:a.blend,size:sz()}); break; }
+      for(const p of pts) push({kind:'pop',asset:a.asset,name:(R.assets[a.asset]||{}).name,x:p.x,y:p.y,dur:a.hold||.8,blend:a.blend,size:sz()}); break; }
+    case 'place': case 'hover': case 'surround': {   // movebench10: the three lasting actions as timed steps: the object stands in front of, floats over or closes around each one for `hold` seconds
+      const asset=a.asset; if(!asset||!R.assets[asset]) break;
+      const sz=b3gSize(asset,R.assets[asset].size,ctx);
+      for(const k of b3gKeysOf(a.on||'self',ctx)) push({kind:a.do,asset,name:R.assets[asset].name,key:k,dur:a.hold||2,size:sz,pair:!!a.pair,blend:a.blend});
+      break; }
     case 'fly': case 'drop': case 'cross': {
       const asset=a.asset||(ctx.el&&ctx.el.L.asset); if(!asset||!R.assets[asset]) break;
       const fromP=a.do==='drop'?null:b3gPt(a.from||'self',ctx),toName=a.to||a.onto,toP=b3gPt(toName,ctx);
@@ -154,7 +176,7 @@ function b3gDo(a,ctx,t0) {
         const y=a.lane?b3gLane(a.lane,ctx):b3gPt(a.from,ctx).y; const f=b3gPt(a.from||'screen_right',ctx),tt=b3gPt(a.stop||a.to||'screen_left',ctx);
         from={x:f.x,y}; to={x:tt.x,y}; }
       else { from=fromP; to=toP; if(toName==='top') to={x:from.x,y:-60}; }
-      const o={kind:a.do,asset,from,to,dur:a.dur||.4,arc:a.arc||0,spin:a.spin||0,blend:a.blend,size:sz,back:a.back||null,skid:a.skid||0,id:a.id};
+      const o={kind:a.do,asset,name:(R.assets[asset]||{}).name,from,to,dur:a.dur||.4,arc:a.arc||0,spin:a.spin||0,blend:a.blend,size:sz,back:a.back||null,skid:a.skid||0,id:a.id};
       if(a.back===true) o.back={to:a.from||'self_front'}; else if(a.back&&a.back.to) o.back={to:a.back.to,at:a.back.at};
       if(a.hide&&ctx.el) ctx.el.hideUntil=now+(a.dur||.4)*(o.back?2:1)+.2;
       if(o.back) { o.backTo=b3gPt(o.back.to,ctx);
@@ -165,7 +187,7 @@ function b3gDo(a,ctx,t0) {
       const xs=ks.map(k=>b3FoeBox(k).x),x0=Math.min.apply(null,xs.concat([300]))-60,x1=Math.max.apply(null,xs.concat([200]))+60;
       for(let i=0;i<n;i++) { const k=ks.length?ks[i%ks.length]:null,tx=k?b3FoeBox(k).x+(Math.random()-.5)*40:x0+(x1-x0)*Math.random(),ty=k?b3Spot(k).y+(Math.random()-.5)*30:230,asset=list[i%list.length];
         if(!R.assets[asset]) continue;
-        push({kind:'fall',asset,from:{x:tx+60,y:-70},to:{x:tx,y:ty},t0:now+(dur*.7)*i/n,dur:dur*.3+.15,blend:a.blend,size:b3gSize(asset,R.assets[asset].size,ctx),burst:true}); }
+        push({kind:'fall',asset,name:(R.assets[asset]||{}).name,from:{x:tx+60,y:-70},to:{x:tx,y:ty},t0:now+(dur*.7)*i/n,dur:dur*.3+.15,blend:a.blend,size:b3gSize(asset,R.assets[asset].size,ctx),burst:true}); }
       break; }
     default: break;
   }
@@ -260,6 +282,24 @@ function b3gPosOf(i,q) {   // position of a flying instance at q (0 to 1) with t
   let x=i.from.x+(i.to.x-i.from.x)*q,y=i.from.y+(i.to.y-i.from.y)*q;
   if(i.arc) y-=Math.sin(Math.PI*q)*i.arc; return {x,y};
 }
+// movebench10: the pink dashed box of an object with no picture yet (workbench preview only). It is the object's size, moves along the object's real path at the real moments, and says what it is and that it is not final.
+function b3gDrawPink(i,x,y,rot,sq,alpha) {
+  const w=Math.max(14,i.size.w),h=Math.max(14,i.size.h); B3G.pink=true;
+  gfx.save(); gfx.translate(x,y); if(rot) gfx.rotate(rot); if(sq!==1) gfx.scale(1,sq); gfx.globalAlpha=Math.max(0,Math.min(1,alpha));
+  gfx.fillStyle='rgba(255,91,210,.22)'; gfx.fillRect(-w/2,-h/2,w,h); gfx.strokeStyle='#ff5bd2'; gfx.lineWidth=2; gfx.setLineDash([6,4]); gfx.strokeRect(-w/2,-h/2,w,h); gfx.setLineDash([]);
+  gfx.rotate(-(rot||0)); gfx.fillStyle='#ff5bd2'; gfx.font='700 9px sans-serif'; gfx.textAlign='center'; gfx.textBaseline='middle';
+  gfx.fillText(String(i.name||'object').slice(0,18),0,h>26?-5:0); if(h>26) gfx.fillText('NOT FINAL',0,9);
+  gfx.restore();
+}
+// movebench10: a placed, floating or surrounding object (a step, not a lasting thing): slides or drops in over .3 s, stays for `dur`, fades out over the last .25 s.
+function b3gDrawHeld(i,t,e) {
+  const s=b3Spot(i.key); if(!s) return;
+  const inq=b3gEase(Math.min(1,e/.3)),out=i.dur-e<.25?Math.max(0,(i.dur-e)/.25):1,al=Math.min(inq*1.3,1)*out;
+  const draw=(x,y,flip)=>{ if(!b3gDraw1(i.asset,x,y,i.size,e*1000,{alpha:al,flip,blend:i.blend})&&b3gPink()&&!B3G.A[i.asset]) b3gDrawPink(i,x,y,0,1,al); };
+  if(i.kind==='place') draw(s.x-38+(1-inq)*40,s.base-i.size.h*.5-2,false);
+  else if(i.kind==='surround') for(const side of i.pair?[-1,1]:[0]) draw(s.x+side*(26+(1-inq)*40),s.base-i.size.h*.5,side>0);
+  else draw(s.x,s.top-i.size.h*.55+Math.sin(t*1.2*Math.PI*2)*4-(1-inq)*70,false);
+}
 function b3gDrawIns(t) {
   const keep=[];
   for(const i of B3G.ins) {
@@ -267,6 +307,7 @@ function b3gDrawIns(t) {
     let x,y,alpha=1,rot=0,sq=1,flip=false;
     const total=i.back?i.dur*2+(i.hold||0):i.dur;
     if(e>total+(i.kind==='pop'?0:.05)) { if(i.kind==='fall'&&i.burst&&!i.burstDone) { i.burstDone=true; B3P.fx.push({kind:'burst',x:i.to.x,y:i.to.y,color:'#ffd27a',t0:t,dur:.35}); } continue; }
+    if(i.kind==='place'||i.kind==='hover'||i.kind==='surround') { b3gDrawHeld(i,t,e); keep.push(i); continue; }
     if(i.kind==='pop') { x=i.x; y=i.y; alpha=e<.08?e/.08:1; if(i.dur>0&&e>i.dur-.12) alpha=Math.max(0,(i.dur-e)/.12); }
     else if(i.kind==='fall') { const q=Math.min(1,e/i.dur); ({x,y}=b3gPosOf(i,q*q)); rot=q*2; }
     else if(i.kind==='drop') { const q=Math.min(1,e/i.dur); ({x,y}=b3gPosOf(i,q*q)); if(q>.9) sq=1-(q-.9)*1.2; }
@@ -275,7 +316,7 @@ function b3gDrawIns(t) {
       const out=e<i.dur,hd=i.hold||0,held=!out&&e<i.dur+hd; const q=out?b3gEase(e/i.dur):held?1:b3gEase((e-i.dur-hd)/i.dur);
       if(out) ({x,y}=b3gPosOf(i,q)); else if(held) { x=i.to.x; y=i.to.y; } else { const f=i.to,t2=i.backTo||i.from; x=f.x+(t2.x-f.x)*q; y=f.y+(t2.y-f.y)*q-Math.sin(Math.PI*q)*(i.arc||0); }
       rot=i.spin?i.spin*Math.PI*2*(e/total):0; }
-    b3gDraw1(i.asset,x,y,i.size,e*1000,{blend:i.blend,alpha,rot,sq,flip});
+    if(!b3gDraw1(i.asset,x,y,i.size,e*1000,{blend:i.blend,alpha,rot,sq,flip})&&b3gPink()&&!B3G.A[i.asset]) b3gDrawPink(i,x,y,rot,sq,alpha);
     keep.push(i);
   }
   B3G.ins=keep.filter(i=>t-i.t0<=(i.back?i.dur*2+(i.hold||0):i.dur)+(i.kind==='pop'?0:.05)||t<i.t0);

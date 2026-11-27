@@ -1,4 +1,10 @@
 [
+{"tag":"gem-bug08","at":"2026-11-20T16:32:18+00:00","what":"Amy's House door is locked in chapter 1, with a note on it","card":"c-gem-bug08","theme":"Areas"},
+{"tag":"gem-bug10","at":"2026-11-20T16:31:49+00:00","what":"Battle text no longer cut off, banner and quest panel stay clear","card":"c-gem-bug10","theme":"Game Shell"},
+{"tag":"gem-bug09","at":"2026-11-20T16:30:19+00:00","what":"The Big One no longer wears a flat grey plate over its painted pan hat","card":"c-gem-bug09","theme":"Areas"},
+{"tag":"gem-bug01","at":"2026-11-20T16:27:32+00:00","what":"Losing to The Big One now heals the party and starts the fight again at once, so nobody is stuck on the shore","card":"c-gem-bug01","theme":"Battle System"},
+{"tag":"gem-bug05","at":"2026-11-20T16:26:49+00:00","what":"Chapter select faces, battle faces and dialogue faces no longer show a blank or wrong picture for a frame","card":"c-gem-bug05","theme":"Game Shell"},
+{"tag":"gem-bug06","at":"2026-11-20T16:23:30+00:00","what":"The quest log no longer says \"Go to\" in front of a full sentence","card":"c-gem-bug06","theme":"Game Shell"},
 {"tag":"b3s10","at":"2026-11-20T08:08:42-08:00","what":"New battle: Amy, Justin and Olivia join the Battle Lab with both of their Vibes","card":"c-b3s10","theme":"Battle System"},
 {"tag":"fix-heist1play-3","at":"2026-11-20T16:06:40+00:00","what":"The mud blob hops up onto the kitchen counter for the muffins and hops back down, and Deedee gets shoved back a step, shocked, without falling","card":"c-fix-heist1play-3","theme":"Story and Dialogue"},
 {"tag":"boardbar1","at":"2026-11-20T08:04:14-08:00","what":"Board has no empty bar above the header in landscape","card":"c-boardbar1","theme":"Tools"},
