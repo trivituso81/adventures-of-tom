@@ -10219,6 +10219,38 @@
    "blocks": [],
    "created": "2026-11-27",
    "changed": "2026-11-27"
+  },
+  {
+   "id": "c-questbanner",
+   "tag": "questbanner1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Game Shell",
+   "title": "NEW QUEST banner whenever a new quest is given",
+   "next": "Building: a NEW QUEST banner like the item, chapter and join/leave banners, shown each time the story gives a new goal or Aunt Ellie makes a bet.",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGg8ziJ383NrBWAmSb",
+    "opening": "\"After a new quest is given, display a new quest interstitial\""
+   },
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Tom: \"After a new quest is given, display a new quest interstitial similar to the item, new chapter, or party join/leave interstitial.\""
+    }
+   ],
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "created": "2026-11-27",
+   "changed": "2026-11-27",
+   "prompt": {
+    "what": "Add a NEW QUEST banner, in the same queue and style as the item and join/leave banners, each time the story gives a new goal or Aunt Ellie makes a bet.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build whose steps are not written yet)",
+    "effort": "medium (the piece is small: one engine file, one style block, two call sites)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-questbanner in data/board.json. Your first push is the commit board: start c-questbanner. Add a NEW QUEST banner to engine/party-banner.js (same queue, hold and dismiss as itemBanner, its own short original jingle, styles beside #party-banner in index.html), called from storySetGoal in engine/story.js when the goal text changes in the full story, and from Aunt Ellie's bet in data/ellie-quests.js. It waits while a fight or a chapter card is on screen, and a newer goal replaces one still waiting. Test portrait and landscape with screenshots, run python3 tools/smoke.py, push as build questbanner1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
