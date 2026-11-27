@@ -9515,7 +9515,7 @@
    "id": "c-movebench-design",
    "tag": "movebench-design",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Design the Move Workbench in the Battle Guide",
    "next": "Done: the plan is claude/movebench-plan.md, the drawings are in claude/movebench-mock/ (32 pictures), and sixteen build cards wait behind your card Approve the Move Workbench plan and drawings. Nothing in the game was changed.",
@@ -9548,8 +9548,13 @@
     {
      "d": "2026-11-26",
      "t": "Shipped as movebench-design. The prompt on this card is Tom's message with one change: the four animation id patterns are written with round brackets, because the board check refuses angle brackets in a prompt. `after` is the Tom card t-movebench-plan (the board check does not accept the sentence the message gave). Corrections to the handed facts are at the top of the plan: 679 animations, not about 346; all 37 library effects are built in code."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as movebench-design: a plan and drawings for the Move Workbench in the Battle Guide; nothing in the game changed"
     }
-   ]
+   ],
+   "done": "2026-11-26"
   },
   {
    "id": "t-movebench-plan",
@@ -10171,8 +10176,10 @@
    "url": "https://claude.ai/code/session_01RXeukDPakuV4EMmLKJKdoF",
    "title": "Design the Move Workbench in the Battle Guide",
    "first": "2026-11-26T17:35:33-08:00",
-   "last": "2026-11-26T17:35:33-08:00",
-   "tags": [],
+   "last": "2026-11-26T18:07:31-08:00",
+   "tags": [
+    "movebench-design"
+   ],
    "cards": [
     "c-movebench-design"
    ]
@@ -16982,8 +16989,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "37baca1a5ccf3f8f641df41fe4bb252c16457ac0",
- "synced_at": "2026-11-27T01:36:31+00:00",
+ "synced": "207a9d4f032bd451abc55e8b3bb53ed4e0d78371",
+ "synced_at": "2026-11-27T02:08:36+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
