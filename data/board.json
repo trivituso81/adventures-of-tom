@@ -9832,7 +9832,7 @@
    "id": "c-movebench-9",
    "tag": "movebench9",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Move Workbench 9: stage editor: words and accents",
    "next": "The Stage section: add, change, reorder and remove steps that need no picture (words on screen, shake, flash, dim, glow, knocking the monster back, a sound), each tied to a moment you pick in the preview. The Sound section. Starts by itself when Move Workbench 8 ships.",
@@ -9876,16 +9876,20 @@
     {
      "d": "2026-11-27",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as movebench9: the Move Workbench has a Stage editor for steps that need no picture, and a Sound section"
     }
    ],
-   "started_at": "2026-11-27T11:38:51+00:00"
+   "started_at": "2026-11-27T11:38:51+00:00",
+   "done": "2026-11-27"
   },
   {
    "id": "c-movebench-10",
    "tag": "movebench10",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Move Workbench 10: stage editor: objects",
    "next": "Steps that use an object (throw, drop, drive across, rain, put in front, float over, surround, pop up). A new object is asked for in the Art Library and appears when you approve its picture; until then the preview shows a pink box. Starts by itself when Move Workbench 9 ships.",
@@ -9894,7 +9898,7 @@
    ],
    "after": "nothing for Tom: c-movebench-11",
    "created": "2026-11-26",
-   "changed": "2026-11-26",
+   "changed": "2026-11-27",
    "auto": true,
    "chat": {
     "url": "",
@@ -9913,6 +9917,10 @@
     {
      "d": "2026-11-26",
      "t": "Added by c-movebench-design: phase 10 of claude/movebench-plan.md section g."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Unblocked: Move Workbench 9: stage editor: words and accents is done."
     }
    ]
   },
@@ -10191,8 +10199,10 @@
    "url": "https://claude.ai/code/session_01RXeukDDtc1BVG2EiEUQ55d",
    "title": "Move Workbench 9: stage editor: words and accents",
    "first": "2026-11-27T11:40:37Z",
-   "last": "2026-11-27T11:40:37Z",
-   "tags": [],
+   "last": "2026-11-27T12:10:48Z",
+   "tags": [
+    "movebench9"
+   ],
    "cards": [
     "c-movebench-9"
    ]
@@ -17120,8 +17130,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "9fb6e819c907d26fd07b3225eb0a8ea6be4e617a",
- "synced_at": "2026-11-27T11:41:27+00:00",
+ "synced": "1dc285d90689c0b49191dbdf703393b12e389123",
+ "synced_at": "2026-11-27T12:11:46+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
