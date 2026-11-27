@@ -299,7 +299,7 @@ function b3PlayMove(beats,done,mid,waited) {   // mid: the first move of a Famil
   const head=beats[0];
   // Clips (engine/b3-clips.js): ask for what this move will show. A move whose clip is still loading waits for it (2.5 s at most), then plays its default animation.
   b3cWarmBeats(beats);
-  const SR=typeof b3gRowFor==='function'?b3gRowFor(head):null;   // movestage2: a staged move (data/b3-stage.js) waits for its body clip and stage assets like any clip, then plays its row
+  const SR=typeof b3gRowFor==='function'?b3gRowFor(head):null;   // movestage2: a staged move (its spec's stage section, engine/b3-spec.js msStageRow) waits for its body clip and stage assets like any clip, then plays its row
   if(SR) { b3gWarm(SR); if(!b3gReady(SR)&&(waited||0)<B3C.waitMax) { b3After(.1,()=>b3PlayMove(beats,done,mid,(waited||0)+.1)); return; } }
   let PR=b3cPair(head);   // pairmove1: a two-person video when the partner is standing (engine/b3-clips.js)
   const own=head.t==='act'&&head.anim&&head.anim.kind==='clip'?head.anim.clip:null,cid=PR?PR.clip:own;

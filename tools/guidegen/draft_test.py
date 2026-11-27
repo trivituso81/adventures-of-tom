@@ -18,8 +18,8 @@ A = G['anims']
 work = D.todo(G)
 check('only rule-draft animations are picked', work and all(a['promptSource'] == 'rule-draft' for _, a in work), len(work))
 check('a job, entry or used prompt is never picked', not any(a['promptSource'] in ('job', 'entry', 'used', 'model-draft') for _, a in work))
-check('movestage1: a family move that waits for staging is never picked', not any(a.get('waits') for _, a in work) and any(a.get('waits') and a['promptSource'] == 'rule-draft' for a in A.values()))
-fam = next(a for a in A.values() if a['route'] == 'wan' and a['kind'] == 'move' and a.get('waits'))   # the family prompt shape, for the MOTION checks below
+check('movebench8: no move waits for staging, so a family move with a rule draft can be picked', not any('waits' in a for a in A.values()) and any(a['route'] == 'wan' and a['kind'] == 'move' and a['promptSource'] == 'rule-draft' for a in A.values()))
+fam = next(a for a in A.values() if a['route'] == 'wan' and a['kind'] == 'move' and a['promptSource'] == 'rule-draft')   # the family prompt shape, for the MOTION checks below
 PICK = next(k for k, a in work if a['route'] == 'xai')
 mon = next(a for _, a in work if a['route'] == 'xai')
 for a in (fam, mon):

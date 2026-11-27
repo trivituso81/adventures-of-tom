@@ -9,7 +9,7 @@ T5 uploads: a good picture is used byte for byte; a see-through background is fi
 no fal call and no vision call. Plus the lanes: an empty vid line exits at once, a failed row never makes the run fail, the linger ends the run.
 T6 videos (guideflow4): queued to done through the REAL make_take.py on a stored test video (marks, preview, the take and the mp4 kept on guidegen and confirmed there);
 four at a time with a fifth waiting; a row added while working; the worker dying after the fal number is written and a second worker picking the request up (one paid send);
-X5, X6 (one automatic retry), X7 (429: back in line, no try counted), X9, X10 (a gate hold is still done), X15, X16, X22; replay (free, real checks); dry; no start picture; monsters not yet.
+X5, X6 (one automatic retry), X7 (429: back in line, no try counted), X9, X10 (a gate hold is still done), X16, X22; replay (free, real checks); dry; no start picture; monsters not yet.
 Prints FAILS: []."""
 import base64, hashlib, http.server, io, json, os, re, socketserver, sys, threading, time
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
@@ -456,9 +456,9 @@ check('T6 X16: a save that fails twice fails the row with the X16 words and keep
 vreset(); S.add(vrow('v-tnb-idle-k2', take=91)); keep_fail[0] = 1; fal = vfal(); vworker(fal).run(); keep_fail[0] = 0
 check('T6 ...and a save that fails once is tried again (one paid send)', doc()['items']['v-tnb-idle-k2']['state'] == 'done' and fal.sent == 1)
 
-# X15, X22, no start picture, monsters, no prompt
+# a move with no stage, X22, no start picture, monsters, no prompt
 vreset(); S.add(vrow('v-tnb-wait', anim='move:starter_splash', take=1)); fal = vfal(); vworker(fal).run(); r = doc()['items']['v-tnb-wait']
-check('T6 X15: a move that waits for staging fails with the X15 words and nothing is sent', r['state'] == 'failed' and r['why'] == S.WORDS['X15']['why'] and fal.sent == 0, r)
+check('T6 a family move with no stage is made like any other (movebench8: nothing waits for staging)', r['state'] != 'failed' and fal.sent == 1, r)
 vreset(); S.add(vrow('v-tnb-cap', take=2, cap=0.3)); fal = vfal(); vworker(fal).run(); r = doc()['items']['v-tnb-cap']
 check('T6 X22: a request whose cap is below the price ($0.50) fails with the X22 words and nothing is sent', r['state'] == 'failed' and r['why'] == S.WORDS['X22']['why'] and fal.sent == 0, r)
 vreset(); S.add(vrow('v-tnb-cap2', take=3, cap=5)); fal = vfal(); vworker(fal).run(); r = doc()['items']['v-tnb-cap2']

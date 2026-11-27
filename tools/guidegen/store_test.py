@@ -304,7 +304,7 @@ check('a dry row sends no phone message when it is done', sent == [], sent)
 row('making', dry=True); S.fail('x', 'X6'); check('...or when it fails', sent == [], sent)
 
 # ---- the words table ----
-check('WORDS has X5 to X22, each with a why and a do', sorted(S.WORDS, key=lambda k: int(k[1:])) == ['X%d' % i for i in range(5, 23)] and all('why' in v and 'do' in v for v in S.WORDS.values()))
+check('WORDS has X5 to X22 except X15 (movebench8: nothing waits for staging), each with a why and a do', sorted(S.WORDS, key=lambda k: int(k[1:])) == ['X%d' % i for i in range(5, 23) if i != 15] and all('why' in v and 'do' in v for v in S.WORDS.values()))
 check('no em dash in any words', not any('—' in v['why'] + v['do'] + v.get('do_paid', '') for v in S.WORDS.values()))
 gw = json.load(open(os.path.join(ROOT, 'data', 'guide-words.json'), encoding='utf-8'))
 check('data/guide-words.json is the same table (run python3 tools/guidegen/store.py words)', gw.get('words') == S.WORDS)

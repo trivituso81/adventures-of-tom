@@ -55,7 +55,6 @@ WORDS = {
     'X12': {'why': 'It faced right, so it was flipped. Lettering and anything worn on one side are now reversed.', 'do': 'Make another or Upload my own.'},
     'X13': {'why': 'The background is not one flat magenta.', 'do': 'Paint the background plain magenta, or send a picture with a see-through background, then tap Upload my own.'},
     'X14': {'why': 'The figure touches the edge of the picture.', 'do': 'Leave a little empty space on every side, then tap Upload my own.'},
-    'X15': {'why': 'This move is being rebuilt in layers. It cannot be made yet.', 'do': ''},
     'X16': {'why': 'It was made but could not be saved.', 'do': 'Tap Try again; it costs nothing.'},
     'X17': {'why': 'GitHub was too busy to save it.', 'do': 'Tap Use this one again.'},
     'X18': {'why': 'The take could not be cut: {reason}.', 'do': 'Send a note to Claude from this sheet.'},

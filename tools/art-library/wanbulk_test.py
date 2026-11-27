@@ -22,18 +22,18 @@ a local bare git remote plays GitHub. The run is the real script on a depth 1 cl
   B16 fix-pairmove1-gen-2: after "Give it 4 more tries", a rev stopped before the answer goes to a Claude stop card instead of "already"
   B15 fix-pairmove1-gen-2: the card's history line counts only videos actually made and names already made, out of tries and errors in plain words
   B17 movestage2: a stage PICTURE job (text-to-image endpoint, prompt word for word) is measured (background colour, object whole and centred) and judged, then baked as a prop
-      (art/stage webp, data/stage js, a script tag after data/b3-stage.js, the source in art/raw/stage); a wrong background or a vision miss is re-rolled once, then stopped
+      (art/stage webp, data/stage js, a script tag after engine/b3-stage.js, the source in art/raw/stage); a wrong background or a vision miss is re-rolled once, then stopped
   B18 movestage2: an OBJECT VIDEO starts from its picture as sent (no frame fitting), end_image_url only for a loop, 480p; measured (flat background, edges, it moves, a loop
       closes) and judged (nobody in it); baked into one packed sheet; a video whose picture was stopped waits (nothing sent); a person in it, a still video and a loop that
       does not close are stopped
-  B19 movestage2: the stage wire of a body job adds only the clip and its script tag (the row in data/b3-stage.js and the kit files are untouched); a row that names another
+  B19 movestage2: the stage wire of a body job adds only the clip and its script tag (the spec of the move in data/moves/ and the kit files are untouched); a spec that names another
       job is refused; wan.watch false leaves no watch card
   B17 movestage2: a stage PICTURE job (text-to-image endpoint, prompt word for word) is measured (background colour, object whole and centred) and judged, then baked as a prop
-      (art/stage webp, data/stage js, a script tag after data/b3-stage.js, the source in art/raw/stage); a wrong background or a vision miss is re-rolled once, then stopped
+      (art/stage webp, data/stage js, a script tag after engine/b3-stage.js, the source in art/raw/stage); a wrong background or a vision miss is re-rolled once, then stopped
   B18 movestage2: an OBJECT VIDEO starts from its picture as sent (no frame fitting), end_image_url only for a loop, 480p; measured (flat background, edges, it moves, a loop
       closes) and judged (nobody in it); baked into one packed sheet; a video whose picture was stopped waits (nothing sent); a person in it, a still video and a loop that
       does not close are stopped
-  B19 movestage2: the stage wire of a body job adds only the clip and its script tag (the row in data/b3-stage.js and the kit files are untouched); a row that names another
+  B19 movestage2: the stage wire of a body job adds only the clip and its script tag (the spec of the move in data/moves/ and the kit files are untouched); a spec that names another
       job is refused; wan.watch false leaves no watch card
 Prints ALL PASS."""
 import os, sys, io, json, re, shutil, subprocess, tempfile, threading, base64, time, urllib.request
@@ -170,9 +170,9 @@ def cp(rel):
 for rel in ['wangen', 'falq', 'wanqa', 'wanbulk', 'wanbake', 'wanstage', 'artgen', 'artqa', 'clipmarks']: cp('tools/art-library/%s.py' % rel)
 for f in os.listdir(os.path.join(ROOT, 'tools', 'clip-gate')):
     if f.endswith('.py'): cp('tools/clip-gate/' + f)
-for rel in ['tools/clip-bake/bake_clip.py', 'tools/clip-bake/bake_stage.py', 'tools/costlog.py', 'data/b3-clips.js', 'data/b3-kit-rose.js', 'data/b3-stage.js']: cp(rel)
+for rel in ['tools/clip-bake/bake_clip.py', 'tools/clip-bake/bake_stage.py', 'tools/costlog.py', 'data/b3-clips.js', 'data/b3-kit-rose.js', 'data/guide-anims.json', 'data/moves/move-suite-door-slide.json', 'data/moves/move-lounge-pass-flex.json']: cp(rel)
 open(os.path.join(seed, 'tools/art-library/bump_tags.py'), 'w').write("import sys; open('bump.log', 'a').write(' '.join(sys.argv[1:]) + '\\n')\n")   # the real one runs in the Action; its own tests are tag_check and buildlog
-open(os.path.join(seed, 'index.html'), 'w').write('<html><body>\n<script src="data/clips/rose-boop.js?v=clip0"></script>\n<script src="data/b3-stage.js?v=movestage1"></script>\n</body></html>\n')
+open(os.path.join(seed, 'index.html'), 'w').write('<html><body>\n<script src="data/clips/rose-boop.js?v=clip0"></script>\n<script src="engine/b3-stage.js?v=movebench8"></script>\n</body></html>\n')
 os.makedirs(os.path.join(seed, 'docs'), exist_ok=True); open(os.path.join(seed, 'docs/CHANGES.md'), 'w').write('## old (2026-11-01): an old entry\n\n')
 os.makedirs(os.path.join(seed, 'art/clips/start'), exist_ok=True)
 fig = Image.new('RGB', (848, 1264), (255, 0, 255)); ImageDraw.Draw(fig).rectangle((330, 120, 520, 1180), fill=(90, 60, 40)); ImageDraw.Draw(fig).ellipse((350, 60, 500, 200), fill=(200, 150, 120)); fig.save(os.path.join(seed, 'art/clips/start/test-hero.png'))
@@ -421,7 +421,7 @@ ok(hl2 == 'wan-gen bulk run R2: 2 made (1 passed and in the game, build wanbulk-
 
 # ------------------------------------------------------------------ B17 B18 B19: movestage2, the stage jobs
 S['sent'].clear()
-kit0 = main_file('data/b3-kit-rose.js'); stage0 = main_file('data/b3-stage.js')
+kit0 = main_file('data/b3-kit-rose.js'); stage0 = (main_file('data/moves/move-suite-door-slide.json'), main_file('data/moves/move-lounge-pass-flex.json'), main_file('data/guide-anims.json'))
 c, o, repo_s = run('t-stage1')
 ok(c == 0, 'B17 the stage run exits 0', o[-2500:])
 def sent_stage(name):
@@ -460,7 +460,7 @@ ok(D.get('kind') == 'obj' and D.get('bg') == 'black' and D.get('loop') is True a
 sp_ = json.loads(re.search(r'b3gDefine\("tom/sprop",(\{.*\})\);', main_file('data/stage/tom-sprop.js')).group(1))
 ok(sp_['kind'] == 'prop' and sp_['n'] == 1 and sp_['w'] <= 384 and sp_['h'] <= 384, 'B17 the prop data file: one picture, long side at most 384 px', sp_)
 ix = main_file('index.html')
-ok(ix.count('data/stage/tom-sprop.js') == 1 and ix.count('data/stage/tom-sglow.js') == 1 and ix.index('data/b3-stage.js') < ix.index('data/stage/tom-sprop.js'), 'B17/B18 index.html loads each stage file once, after data/b3-stage.js', ix)
+ok(ix.count('data/stage/tom-sprop.js') == 1 and ix.count('data/stage/tom-sglow.js') == 1 and ix.index('engine/b3-stage.js') < ix.index('data/stage/tom-sprop.js'), 'B17/B18 index.html loads each stage file once, after engine/b3-stage.js', ix)
 cd = {x['id']: x for x in main_board()['cards']}
 ok(sorted(x for x in cd if x.startswith('c-wanstop-s-')) == ['c-wanstop-s-bad-r1', 'c-wanstop-s-loopbad-r1', 'c-wanstop-s-pvid-r1', 'c-wanstop-s-still-r1', 'c-wanstop-s-vision-r1'], 'B17/B18 one Claude card per stopped asset, none for the one that waited', sorted(x for x in cd if x.startswith('c-wanstop-')))
 wr = cd['t-stage1']['wgen']['run']
@@ -477,7 +477,7 @@ c, o, repo_w = run('t-stage2')
 ok(c == 0, 'B19 the stage wire run exits 0', o[-1500:])
 tree = sh('git', '--git-dir', bare, 'ls-tree', '-r', '--name-only', 'main').stdout.split()
 ok('art/clips/tom-suitedoor.webp' in tree and 'data/clips/tom-suitedoor.js' in tree and 'data/clips/tom-suitedoor.js' in main_file('index.html'), 'B19 the body clip and its script tag are added')
-ok(main_file('data/b3-stage.js') == stage0 and main_file('data/b3-kit-rose.js') == kit0, 'B19 the stage wire edits nothing else: data/b3-stage.js and the kit file are byte for byte as before')
+ok((main_file('data/moves/move-suite-door-slide.json'), main_file('data/moves/move-lounge-pass-flex.json'), main_file('data/guide-anims.json')) == stage0 and main_file('data/b3-kit-rose.js') == kit0, 'B19 the stage wire edits nothing else: the specs of the two moves, the Guide map and the kit file are byte for byte as before')
 ok('art/clips/tom-lounge.webp' not in tree and 'data/clips/tom-lounge.js' not in tree, 'B19 a row that names another clip and job is refused: the body clip is not baked either')
 wr2 = [x for x in main_board()['cards'] if x['id'] == 't-stage2'][0]['wgen']['run']
 ok('tom-suitedoor' in wr2['merged'] and 'tom-lounge' in wr2['bake_failed'] and 'tom_loungepass' in wr2['bake_failed']['tom-lounge'], 'B19 the refusal is on the card in plain words', wr2)

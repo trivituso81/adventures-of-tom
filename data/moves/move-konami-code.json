@@ -1,9 +1,10 @@
 {
  "v": 1,
  "id": "move:konami_code",
- "rev": 1,
+ "rev": 2,
  "live": {
   "body": {
+   "clip": "tom_konami",
    "motion": "cast",
    "marks": {
     "tap": {
@@ -190,6 +191,12 @@
    "at": "2026-11-26T22:00:00-08:00",
    "by": "migration",
    "what": "written from the tables the engine reads today"
+  },
+  {
+   "rev": 2,
+   "at": "2026-11-27T12:00:00-08:00",
+   "by": "claude",
+   "what": "movebench8: body.clip is the video the stage plays over (the old staging row's clip)"
   }
  ]
 }

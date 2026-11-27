@@ -49,7 +49,7 @@ check('a monster draft keeps its parts and ends with the length line', mon and a
 # start pictures
 check('start pictures named exist', all(os.path.exists(os.path.join(ROOT, o['start'])) for o in D['owners'].values() if o['start']))
 check('no start picture means cannot make, with the words', all((not a['canMake']) and 'start picture' in a['missing'] for a in A.values() if not D['owners'][a['owner']]['start']))
-check('with a start picture the move can be made (movestage1: unless it waits for staging, which says so)', all((a['canMake'] != bool(a.get('waits'))) and not a['missing'] for a in A.values() if D['owners'][a['owner']]['start'] and D['owners'][a['owner']]['figRows'] is not None) and all(a.get('waitsWhy') for a in A.values() if a.get('waits')))
+check('with a start picture the move can be made (movebench8: nothing waits for staging)', all(a['canMake'] and not a['missing'] for a in A.values() if D['owners'][a['owner']]['start'] and D['owners'][a['owner']]['figRows'] is not None) and not any('waits' in a for a in A.values()))
 check('Tom, Grace, Rose, Deedee and the six chapter 1 monsters have start pictures', sorted(o for o, v in D['owners'].items() if v['start']) == sorted(['tom', 'grace', 'rose', 'deedee', 'mudling', 'skeeter', 'grump', 'toad', 'log', 'bigone']), [o for o, v in D['owners'].items() if v['start']])
 # prices against the Actions' own arithmetic
 sys.path.insert(0, os.path.join(ROOT, 'tools', 'art-library'))

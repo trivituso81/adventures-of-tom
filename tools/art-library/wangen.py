@@ -250,13 +250,6 @@ def stale_pending(pend, now=None):
     return (now - t).total_seconds() > STALE_S
 
 
-def staging_waits(repo):
-    """movestage1: the animation ids the Battle Guide marks Waits for staging (data/guide-anims.json `waits`). An unreadable file waits nothing."""
-    try: A = json.load(open(os.path.join(repo, 'data', 'guide-anims.json'), encoding='utf-8'))['anims']
-    except (OSError, ValueError, KeyError): return set()
-    return {k for k, v in A.items() if v.get('waits') == 'staging'}
-
-
 def log_run_spend(state, spent0, a, names, extra=None):
     """costs2: what this run booked on fal (the estimate, or fal's live unit price when that is higher) goes to usage in data/costs.json.
     wanbulk: `extra` rows (the xAI money of the vision checks) go with it."""

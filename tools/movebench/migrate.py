@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # tools/movebench/migrate.py (movebench3): writes data/moves/<slug>.json, one file per animation that has anything today, from the places the engine reads now (claude/movebench-plan.md b.5 step 1):
-#   data/b3-stage.js rows (stage, marks, the hit, the budget, objects)   data/guide-manifest.json (contact, hit stop, effects, their settings, the ward's answer)
+#   (movebench8: the staging table was copied into the files and deleted; a file that exists is never read from the tables again)   data/guide-manifest.json (contact, hit stop, effects, their settings, the ward's answer)
 #   anim and wind of data/b3-kit-*.js and data/b3-foes-ch*.js   B3_BODY_CLIPS (data/b3-clips.js)
 # The engine does not read these files yet. A file whose rev is above 1, or whose log has a line by tom or claude, is Tom's or a session's work and is never overwritten.
 #   python3 -I tools/movebench/migrate.py            writes the files (and removes none)
@@ -11,34 +11,12 @@ HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.dirname(os.path.di
 sys.path.insert(0,HERE)
 OUT=os.path.join(ROOT,'data','moves')
 AT='2026-11-26T22:00:00-08:00'   # the migration's own stamp; fixed so the same tables always give the same files
-NAMES={'carryon':'Carry-on bag','suitedoor':'Suite doors','porsche':'Black Porsche','runwaylights':'Runway lights','glare':'High-beam glare','jetwash':'Jet wash','controller':'Game controller','wingedshell':'Winged shell','bluebang':'Blue blast','fireball':'Fireball','starbeam':'Star beam','meteor':'Meteor','cushion':'Floor cushion','comet':'Comet','lamby':'Lamby','backuplamby':'Backup Lamby','cushionwall':'Cushion wall','castle':'Blanket castle','ripple':'Ripple','whoopee':'Whoopee cushion'}
 BODY_ALIAS={'defeated':'die'}   # the Guide's id says defeated, the game's table says die
 def game():
     r=subprocess.run(['node',os.path.join(HERE,'export_game.js')],capture_output=True,text=True,cwd=ROOT)
     if r.returncode: raise RuntimeError('export_game.js failed: '+r.stderr[:400])
     return json.loads(r.stdout)
 def jread(f): return json.load(open(os.path.join(ROOT,f),encoding='utf8'))
-def ref(row,name):
-    """A hit named in a stage row is a mark of its body clip or the id of one of its steps."""
-    if name in (row['body'].get('marks') or {}): return {'mark':name}
-    ids=[s.get('id') for s in (row.get('steps') or [])+((row.get('setpiece') or {}).get('steps') or [])]
-    if name in ids: return {'step':name}
-    raise ValueError('hit %r is neither a mark nor a step id'%name)
-def stage_section(row):
-    st={}
-    if row.get('steps'): st['steps']=row['steps']
-    if row.get('lasting'): st['lasting']=row['lasting']
-    if row.get('setpiece'): st['setpiece']=row['setpiece']
-    objs={}
-    for oid,a in (row.get('assets') or {}).items():
-        tail=oid.split('/')[-1]; o={'name':NAMES.get(tail,tail),'kind':a['kind'],'bg':a['bg'],'size':a['size']}
-        if a.get('loop'): o['loop']=True
-        o['entry']='stage-'+oid.replace('/','-')
-        for k in ('prompt','motion'):
-            if a.get(k): o[k]=a[k]
-        objs[oid]=o
-    if objs: st['objects']=objs
-    return st
 def own_live(aid):
     """The live part of the file this animation already has on disk, or None when it has no file."""
     try: A=jread('data/guide-anims.json')['anims']; return (json.load(open(os.path.join(OUT,A[aid]['slug']+'.json'),encoding='utf8')).get('live'))
@@ -50,19 +28,17 @@ def build():
     def put(aid,live,log=None):
         if not live: return
         slug=A[aid]['slug']
+        if os.path.exists(os.path.join(OUT,slug+'.json')): docs[slug]=json.load(open(os.path.join(OUT,slug+'.json'),encoding='utf8')); return   # a file that exists owns everything it says
         docs[slug]={'v':1,'id':aid,'rev':1,'live':live,'draft':None,'finished':None,
                     'log':[{'rev':1,'at':AT,'by':'migration','what':'written from the tables the engine reads today'}]+(log or [])}
     for aid in A:
         kind=aid.split(':')[0]; p=aid.split(':')
         if kind=='move':
-            S=G['SKILLS'][p[1]]; an=S.get('anim') or {}; row=G['STAGE'].get(S['id']); mrow=mby.get(S['id'])
+            S=G['SKILLS'][p[1]]; an=S.get('anim') or {}; mrow=mby.get(S['id'])
             live={}; log=[]
             body={}
             if an.get('kind')=='clip': body['clip']=an['clip']
             if an.get('shape'): body['motion']=an['shape']
-            if row:
-                if row['body'].get('marks'): body['marks']=row['body']['marks']
-                if row['body'].get('hand'): body['hand']=row['body']['hand']
             if an.get('pair'): body['pair']=an['pair']
             if an.get('sound'): body['sound']=an['sound']
             if body: live['body']=body
@@ -71,11 +47,7 @@ def build():
             # 7 Pass-1 rows, and the manifest's effectParams are gone); only a move with no file yet is filled from the manifest
             ol=own_live(aid); ot=(ol or {}).get('timing') or {}
             valid=mrow is not None and isinstance(mrow.get('contactSec'),(int,float)) and mrow['contactSec']>=0
-            if row:
-                if row['hit']=='late': t['contact']=ref(row,row['late'])
-                else: t['contact']=ref(row,row['hit'])
-                t['budget']=row['budget']
-            elif an.get('at') is not None: t['contact']={'share':an['at']}
+            if an.get('at') is not None: t['contact']={'share':an['at']}
             if not S.get('hits') or (any(e.get('op')=='later' for e in S['effects']) and not any(e.get('op')=='damage' for e in S['effects'])): t['noHit']=True   # no swing in its own beats (a ward, a pass, a hit that comes later): b3PlayMove arms no hit stop for it
             if ol is not None:
                 for k in ('impactMs','hitStop','shake','approach'):
@@ -85,9 +57,6 @@ def build():
                 f=int(round(mrow.get('hitStopFrames') or 0))
                 if f>0: t['hitStop']=f
             if t: live['timing']=t
-            if row:
-                st=stage_section(row)
-                if st: live['stage']=st
             fx=[]
             if ol is not None: fx=[dict(e) for e in (ol.get('effects') or [])]
             elif valid: fx=[{'fx':i} for i in (mrow.get('libraryAssets') or [])]

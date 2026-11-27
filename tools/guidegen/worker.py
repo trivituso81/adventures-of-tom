@@ -317,7 +317,6 @@ class Worker:
             store.set_state(it['id'], 'checking', actor='worker', cost=0)
             return self.finish_video(it, p, 0.0)
         if route == 'xai': return self.run_xai(it)
-        if it['anim'] in wangen.staging_waits(self.repo): return self.fail_code(it, 'X15')   # X15: a move still being rebuilt in layers is never made
         who = it.get('start') or it.get('who') or ''
         frame = self.start_picture(who)
         if not frame: return self.fail_row(it, NO_START)

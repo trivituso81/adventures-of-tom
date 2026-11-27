@@ -3,7 +3,7 @@
 #   - a file in data/moves/ does not match the schema (tools/movebench/schema.py: types, ranges, ONE held prop, effect ids of the library, the library's own setting names and ranges,
 #     sounds of engine/audio.js, finished.by only ever tom), holds an em dash, or is not named by the slug the Guide gives its animation id;
 #   - data/move-specs.js is not what the files give (bundle.py --check), or the files are not what the old tables give (migrate.py --check);
-#   - an animation that has something today (a clip, a stage row, a manifest row, a Pass-1 row, a body clip) has no file, or a file says something the old tables do not;
+#   - an animation that has something today (a clip, a stage, a manifest row, a Pass-1 row, a body clip) has no file, or a file says something the old tables do not;
 #   - engine/b3-spec.js is not loaded after data/move-specs.js, or msLive, msSet and msReset do not answer as documented (checked in node, no browser);
 #   - (movebench7) data/movebench-fx.json is not what fxparams.py gives; a setting of any of the 37 effects has no control kind or no words in data/movebench-words.json (fx.params, fx.choices),
 #     an effect has no name or line of words, or a drawer's default is outside its own range;
@@ -56,17 +56,23 @@ for sid,S in G['SKILLS'].items():
     aid='move:'+sid
     if aid not in A: notes.append('%s is not in data/guide-anims.json (the page lists it, its file is data/moves/move-pick-me-up.json)'%aid); continue
     an=S.get('anim') or {}; L=live(aid); mrow=mby.get(sid)
-    has=bool(an.get('kind')=='clip' or an.get('shape') or sid in G['STAGE'] or mrow)
+    has=bool(an.get('kind')=='clip' or an.get('shape') or 'stage' in L or mrow)
     if has and aid not in byid: fail('%s has something today and no file'%aid)
-    if an.get('kind')=='clip' and (L.get('body') or {}).get('clip')!=an['clip']: fail('%s: body.clip %r but the kit row plays %r'%(aid,(L.get('body') or {}).get('clip'),an['clip']))
-    if an.get('kind')!='clip' and (L.get('body') or {}).get('clip'): fail('%s: names a clip the kit row does not play'%aid)
-    if sid in G['STAGE']:
-        row=G['STAGE'][sid]
-        for k in ('steps','lasting','setpiece'):
-            if (row.get(k) or None)!=((L.get('stage') or {}).get(k) or None): fail('%s: stage.%s is not the row of data/b3-stage.js'%(aid,k))
-        if set((L.get('stage') or {}).get('objects',{}))!=set(row.get('assets',{})): fail('%s: objects are not the row\'s assets'%aid)
-        if (L.get('timing') or {}).get('budget')!=row['budget']: fail('%s: budget differs from the row'%aid)
-    elif 'stage' in L: fail('%s: has a stage and no row in data/b3-stage.js'%aid)
+    if an.get('kind')=='clip' and 'stage' not in L and (L.get('body') or {}).get('clip')!=an['clip']: fail('%s: body.clip %r but the kit row plays %r'%(aid,(L.get('body') or {}).get('clip'),an['clip']))
+    if an.get('kind')!='clip' and 'stage' not in L and (L.get('body') or {}).get('clip'): fail('%s: names a clip the kit row does not play'%aid)
+    if 'stage' in L:   # movebench8: the stage is the spec's own (the old staging table is gone); check it hangs together
+        st=L['stage']; b=L.get('body') or {}; t=L.get('timing') or {}
+        if not (st.get('steps') or st.get('lasting') or st.get('setpiece')): fail('%s: a stage with no steps, lasting thing or set piece'%aid)
+        if not b.get('clip'): fail('%s: a stage and no body.clip (the video it plays over)'%aid)
+        if not isinstance(t.get('budget'),(int,float)): fail('%s: a stage and no timing.budget'%aid)
+        c=t.get('contact'); names=set(b.get('marks') or {})|{x.get('id') for x in (st.get('steps') or [])+((st.get('setpiece') or {}).get('steps') or []) if x.get('id')}
+        if not(isinstance(c,dict) and (c.get('mark') or c.get('step')) in names): fail('%s: contact %r is not a mark or a step of this move'%(aid,c))
+        used=set()
+        for x in (st.get('steps') or [])+((st.get('setpiece') or {}).get('steps') or [])+[y for l in (st.get('lasting') or []) for y in [l]]:
+            if x.get('asset'): used.add(x['asset'])
+        if used-set(st.get('objects') or {}): fail('%s: steps use objects that are not listed: %s'%(aid,sorted(used-set(st.get('objects') or {}))))
+        for oid,o in (st.get('objects') or {}).items():
+            if not o.get('entry'): fail('%s: object %s has no Art Library entry'%(aid,oid))
     if mrow and isinstance(mrow.get('counterClip'),bool) and bool(mrow['counterClip'])!=('answer' in L): fail('%s: answer does not follow the manifest counterClip'%aid)
 for o,states in G['BODY_CLIPS'].items():
     for st,clip in states.items():
@@ -87,8 +93,8 @@ for aid,v in A.items():
     if v.get('video') and v.get('clip') and aid.split(':')[0] in('move','act','wind','body') and aid not in byid: fail('%s has a video (%s) and no file'%(aid,v['clip']))
 c=collections.Counter(aid.split(':')[0] for aid in byid); notes.append('files by kind: '+', '.join('%s %d'%(k,n) for k,n in sorted(c.items())))
 n_eff=sum(1 for d in docs.values() if (d.get('live') or {}).get('effects')); n_stage=sum(1 for d in docs.values() if (d.get('live') or {}).get('stage')); n_ans=sum(1 for d in docs.values() if (d.get('live') or {}).get('answer'))
-notes.append('with effects %d, with a stage %d (of 20 rows), with an answer %d (of 7 counter clips)'%(n_eff,n_stage,n_ans))
-if n_stage!=len(G['STAGE']): fail('%d stage rows but %d files with a stage'%(len(G['STAGE']),n_stage))
+notes.append('with effects %d, with a stage %d, with an answer %d (of 7 counter clips)'%(n_eff,n_stage,n_ans))
+if n_stage<20: fail('only %d files have a stage (the 20 moves staged when the table was deleted)'%n_stage)
 # ---- engine/b3-spec.js, in node ----
 html=open(os.path.join(ROOT,'index.html'),encoding='utf8').read()
 tags=re.findall(r'<script src="([^"?]+)\?v=[^"]*"></script>',html)

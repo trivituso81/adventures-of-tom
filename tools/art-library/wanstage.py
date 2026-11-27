@@ -193,19 +193,23 @@ def bake(root, job, path, n, fps, tag):
     fk = st['key'].replace('/', '-')
     if 'data/stage/%s.js' % fk not in html:
         tags = re.findall(r'<script src="data/stage/[^"]+"></script>\n', html)
-        anchor = tags[-1] if tags else re.search(r'<script src="data/b3-stage\.js[^"]*"></script>\n', html)
-        if anchor is None: raise BakeError('index.html has no data/b3-stage.js script tag to put the stage asset after')
+        anchor = tags[-1] if tags else re.search(r'<script src="engine/b3-stage\.js[^"]*"></script>\n', html)
+        if anchor is None: raise BakeError('index.html has no engine/b3-stage.js script tag to put the stage asset after')
         a = anchor if isinstance(anchor, str) else anchor.group(0)
         open(ix, 'w', encoding='utf-8').write(html.replace(a, a + '<script src="data/stage/%s.js?v=stage0"></script>\n' % fk, 1))
     return '%s: %s' % (st['key'], (r.stdout.strip().splitlines() or [''])[-1])
 
 
 def wire_stage(root, job):
-    """The stage wire of a body job: it adds no kit row and no `anim`; it only checks that the row in data/b3-stage.js names this job and clip,
+    """The stage wire of a body job: it adds no kit row and no `anim`; it only checks that the spec of the move (data/moves/<slug>.json, body.clip) names this job's clip,
     so the engine finds the clip by itself (the clip file and its script tag came with the bake). Returns a note."""
     w = job['wire']['stage']; mv = w['move']
-    t = open(os.path.join(root, 'data', 'b3-stage.js'), encoding='utf-8').read()
-    m = re.search(r"B3_STAGE\.%s=\{.*?body:\{clip:'([a-z0-9_]+)',job:'([a-z0-9-]+)'" % re.escape(mv), t, re.S)
-    if not m: raise BakeError('data/b3-stage.js has no row for %s' % mv)
-    if m.group(2) != job.get('bake', {}).get('id') or m.group(1) != m.group(2).replace('-', '_'): raise BakeError('the row %s names clip %s and job %s, not this job' % (mv, m.group(1), m.group(2)))
-    return 'the row %s plays clip %s (nothing else edited)' % (mv, m.group(1))
+    anims = json.load(open(os.path.join(root, 'data', 'guide-anims.json'), encoding='utf-8'))['anims']
+    a = anims.get('move:' + mv)
+    if not a: raise BakeError('data/guide-anims.json has no animation move:%s' % mv)
+    try: spec = json.load(open(os.path.join(root, 'data', 'moves', a['slug'] + '.json'), encoding='utf-8'))
+    except OSError: raise BakeError('data/moves/%s.json does not exist' % a['slug'])
+    clip = (((spec.get('live') or {}).get('body')) or {}).get('clip')
+    bid = job.get('bake', {}).get('id') or ''
+    if not clip or clip != bid.replace('-', '_'): raise BakeError('the spec of %s names clip %s, not the clip of this job (%s)' % (mv, clip, bid.replace('-', '_')))
+    return 'the spec of %s plays clip %s (nothing else edited)' % (mv, clip)

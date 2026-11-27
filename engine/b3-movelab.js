@@ -16,7 +16,7 @@ const B3ML_PERM=' Attach trivituso81/adventures-of-tom with push access (add_rep
 // Tom's moves, ladder order per Vibe: [{vibe, name, moves:[{id,name,slot,tier,budget,row}]}]
 function b3mlList() {
   return (B3_CAST.tom.vibes||[]).map(v=>B3_VIBES[v]).filter(V=>V&&V.basic&&B3_SKILLS[V.basic]).map(V=>({vibe:V.id,name:V.name,
-    moves:[V.basic].concat(V.skills).filter(id=>B3_SKILLS[id]&&B3_STAGE[id]).map(id=>{ const S=B3_SKILLS[id],R=B3_STAGE[id];
+    moves:[V.basic].concat(V.skills).filter(id=>B3_SKILLS[id]&&msStageRow('move:'+id)).map(id=>{ const S=B3_SKILLS[id],R=msStageRow('move:'+id);
       return {id,name:S.name,slot:S.slot,tier:B3ML_TIER[S.slot]||S.slot,budget:R.budget,row:R}; })})).filter(G=>G.moves.length);
 }
 const b3mlMove=id=>{ for(const G of b3mlList()) for(const m of G.moves) if(m.id===id) return m; return null; };
@@ -120,13 +120,13 @@ async function b3mlSave(msg,fn) {
   }
 }
 function b3mlPrompt(c) {
-  const k=c.move,rep=k.kind==='replace',R=B3_STAGE[k.id];
-  return 'Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/move-staging-plan.md, data/b3-stage.js and card '+c.id+' in data/board.json with its history. Your first push is the commit board: start '+c.id+'.\n\n'
-   +'Tom played '+k.name+' ('+k.tier+', row '+k.id+' of data/b3-stage.js) in the Move Lab (ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB: TOM) and sent '+(c.reports.length===1?'this note':'these notes')+':\n'
+  const k=c.move,rep=k.kind==='replace',R=msStageRow('move:'+k.id);
+  return 'Read CLAUDE.md (the rules No painted poses in battle, Fix a miss with the smallest change, and Image and video prompts), claude/move-staging-plan.md, the spec file of the move in data/moves/ and card '+c.id+' in data/board.json with its history. Your first push is the commit board: start '+c.id+'.\n\n'
+   +'Tom played '+k.name+' ('+k.tier+', spec move:'+k.id+' in data/moves/) in the Move Lab (ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB: TOM) and sent '+(c.reports.length===1?'this note':'these notes')+':\n'
    +c.reports.map((n,i)=>(i+1)+'. ('+n.at.slice(0,10)+(n.build?', game build '+n.build:'')+', '+n.kind+') '+n.words).join('\n')
    +'\n\nIt ran '+(k.len!=null?k.len.toFixed(1)+' s':'(not measured)')+' against a budget of '+k.budget+' s.\n\n'
-   +(rep?'Make a NEW BODY VIDEO of '+k.name+' and nothing else new: the family route of the plan (Wan 3.0 through the wan-gen Action, the job '+((R&&R.body&&R.body.job)||'')+' in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. After it is baked, measure the marks again on the baked clip and write them into the row. Spend at most $3 and never run wangen.py yourself (wanauto1: start the run with the board commit).'
-        :'TWEAK the stage of '+k.name+' and keep its body video: change only the steps, timing, sizes or words of the row '+k.id+' in data/b3-stage.js that the notes name (the stage actions of plan section 4.1 only, no code of its own for this move). Say in docs/CHANGES.md what was kept and what was changed.')
+   +(rep?'Make a NEW BODY VIDEO of '+k.name+' and nothing else new: the family route of the plan (Wan 3.0 through the wan-gen Action, the job '+(((R&&R.body&&R.body.clip)||'').replace(/_/g,'-'))+' in tools/art-library/wangen-jobs.json). Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed. After it is baked, measure the marks again on the baked clip and write them into the row. Spend at most $3 and never run wangen.py yourself (wanauto1: start the run with the board commit).'
+        :'TWEAK the stage of '+k.name+' and keep its body video: change only the steps, timing, sizes or words of the stage section of the spec of '+k.id+' (data/moves/, then python3 tools/movebench/bundle.py) that the notes name (the stage actions of plan section 4.1 only, no code of its own for this move). Say in docs/CHANGES.md what was kept and what was changed.')
    +' Run python3 -I tools/movestage_test.py, python3 tools/movestage_lab_test.py, python3 tools/b3_test.py s8 and python3 tools/smoke.py and look at the frames in portrait and landscape. Build tag '+c.tag+'. End with a Tom card (ask play, a jump to the Move Lab fight) whose next step is: open ADMIN > BATTLE LAB > NEW BATTLE > MOVE LAB: TOM, play '+k.name+', then Keep, Tweak or Replace; set this card\'s after to it.'+B3ML_PERM;
 }
 async function b3mlSend(kind,words) {

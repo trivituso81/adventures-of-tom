@@ -140,7 +140,7 @@ import use_take as UT
 root = os.path.join(TMP, 'urepo'); os.makedirs(root + '/data'); os.makedirs(root + '/art/clips'); os.makedirs(root + '/art/raw/clips'); os.makedirs(root + '/docs')
 shutil.copytree(ROOT + '/tools', root + '/tools', ignore=shutil.ignore_patterns('shots', '__pycache__', 'node_modules'))
 for f in os.listdir(ROOT + '/data'):
-    if f.startswith('b3-') and f.endswith('.js') or f in ('art-prompts.json', 'guide-anims.json'): shutil.copy(ROOT + '/data/' + f, root + '/data/' + f)
+    if f.startswith('b3-') and f.endswith('.js') or f in ('art-prompts.json', 'guide-anims.json', 'move-specs.js'): shutil.copy(ROOT + '/data/' + f, root + '/data/' + f)
 shutil.copytree(ROOT + '/data/clips', root + '/data/clips'); shutil.copy(ROOT + '/index.html', root); shutil.copy(ROOT + '/docs/CHANGES.md', root + '/docs/CHANGES.md')
 shutil.copytree(ROOT + '/art/clips/start', root + '/art/clips/start')
 sh('git', 'init', '-q', '-b', 'main', cwd=root)

@@ -1,9 +1,10 @@
 {
  "v": 1,
  "id": "move:kingdom_of_ten_thousand_blankets",
- "rev": 1,
+ "rev": 2,
  "live": {
   "body": {
+   "clip": "rose_kingdom",
    "motion": "give",
    "marks": {
     "wonder": {
@@ -144,6 +145,12 @@
    "at": "2026-11-26T22:00:00-08:00",
    "by": "migration",
    "what": "written from the tables the engine reads today"
+  },
+  {
+   "rev": 2,
+   "at": "2026-11-27T12:00:00-08:00",
+   "by": "claude",
+   "what": "movebench8: body.clip is the video the stage plays over (the old staging row's clip)"
   }
  ]
 }

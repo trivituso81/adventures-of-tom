@@ -111,7 +111,7 @@ function bnRefill() {
 // time for a clip and then plays its default motion, which would show Tom a move that is not the move; the preview asks first and waits (10 s at most).
 function bnWarm(P) {
   const ids=[]; let SR=null;
-  if(P.kind==='move') { SR=typeof B3_STAGE!=='undefined'&&B3_STAGE[P.skill]&&typeof b3gDefined==='function'&&b3gDefined(B3_STAGE[P.skill])?B3_STAGE[P.skill]:null;
+  if(P.kind==='move') { SR=typeof msStageRow==='function'&&msStageRow('move:'+P.skill)&&typeof b3gDefined==='function'&&b3gDefined(msStageRow('move:'+P.skill))?msStageRow('move:'+P.skill):null;
     if(SR) b3gWarm(SR); const a=P.S.anim; if(a&&a.kind==='clip') ids.push(a.clip); if(a&&a.pair&&a.pair.clip) ids.push(a.pair.clip); }
   else if(P.kind==='act') { const a=P.A.anim; if(a&&a.kind==='clip') ids.push(a.clip); if(P.A.wind) ids.push(P.A.wind); }
   else if(P.kind==='wind') { const w=P.foe.acts.find(a=>a.then===P.act); if(w&&w.wind) ids.push(w.wind); if(P.A.wind) ids.push(P.A.wind); }
@@ -282,7 +282,7 @@ function bnSample() {
   } else if(u) bnSampleFoe(BN.sub,'video','');
   if(BN.ansKey&&BN.phase==='answer') bnSampleFoe(BN.ansKey,'video','Answer: ');
   if(typeof B3G!=='undefined'&&B3G.run&&BN.P&&BN.P.kind==='move'&&B3G.run.id===BN.P.skill&&!R.stageDone) {
-    R.stageDone=true; const run=B3G.run,row=B3_STAGE[BN.P.skill],off=run.t0-BN.t0;
+    R.stageDone=true; const run=B3G.run,row=msStageRow('move:'+BN.P.skill),off=run.t0-BN.t0;
     R.run={hitAt:run.hitAt+off,off,marks:run.marks,ids:run.ids,noVideo:!!run.noVideo,budget:run.budget};
     if(row) for(const s of [].concat(row.steps||[],row.setpiece&&row.setpiece.steps||[])) if(s._T!=null) R.lanes.stage.push({a:s._T+off,b:s._T+off+(s.dur||s.hold||.3),label:bnStageName(s),k:'stage'});
   }

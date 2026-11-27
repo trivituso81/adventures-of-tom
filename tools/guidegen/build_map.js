@@ -22,8 +22,9 @@ function loadGame() {
   const files = [...html.matchAll(/<script[^>]+src="(data\/b3-[^"?]+\.js)/g)].map(m => m[1]);
   const ctx = vm.createContext({ Math, JSON, Object, Array, String, Number, Error, console: { log() {}, error() {} } });
   for (const f of files) vm.runInContext(rd(f), ctx, { filename: f });
+  vm.runInContext(rd('data/move-specs.js'), ctx, { filename: 'data/move-specs.js' });   // movebench8: what a move's stage plays over comes from its spec
   const g = n => vm.runInContext('typeof ' + n + '!=="undefined"?' + n + ':null', ctx);
-  return { CAST: g('B3_CAST'), SKILLS: g('B3_SKILLS'), VIBES: g('B3_VIBES'), FOES: g('B3_FOES'), BODY_CLIPS: g('B3_BODY_CLIPS') || {}, VIDEO_ONLY: g('B3_VIDEO_ONLY') || [], STAGE: g('B3_STAGE') || {} };
+  return { CAST: g('B3_CAST'), SKILLS: g('B3_SKILLS'), VIBES: g('B3_VIBES'), FOES: g('B3_FOES'), BODY_CLIPS: g('B3_BODY_CLIPS') || {}, VIDEO_ONLY: g('B3_VIDEO_ONLY') || [], SPECS: g('MOVE_SPECS') || {} };
 }
 
 const cap = s => String(s).charAt(0).toUpperCase() + String(s).slice(1);
@@ -277,9 +278,10 @@ function build() {
     if (job) used.jobs.add(job);
     if (clipFile && !made && ent && ((S.artBy[ent.e.id] || {}).status === 'approved')) made = { route: 'xai', entry: ent.key, rev: 1 };   // baked before the stamps existed: the approved entry made it
     if (fam && made && made.route === 'wan' && made.job !== job && S.jobs[made.job]) { job = made.job; used.jobs.add(job); }   // rose-lava-xftr: the job that made the clip the game plays now (rose-cushion-kling for rose_lava) wins over the job named like the clip
-    // movestage1 (claude/move-staging-plan.md): a family move is body + stage. Its staging row (data/b3-stage.js) names the body job; a move with no row waits.
-    const stg = fam && a.kind === 'move' ? G.STAGE[a.src.id] || null : null, waits = fam && a.kind === 'move' && !stg;
-    if (stg && stg.body && stg.body.job && S.jobs[stg.body.job] && (!job || (!stg.body.keep && job !== stg.body.job))) { job = stg.body.job; used.jobs.add(job); }   // movestage3: a move whose row makes a NEW body (keep false) uses the row's job even when an older clip of the move was made by another job (rose_lava)
+    // movebench8: a staged family move's spec (data/moves/<slug>.json) names the video the stage plays over (body.clip); its job is that clip with dashes. The clip is kept
+    // (the approved video stays) when the kit row names the same clip; nothing waits for a stage any more.
+    const sp = fam && a.kind === 'move' ? G.SPECS['move:' + a.src.id] || null : null, stg = sp && sp.stage && sp.body && sp.body.clip ? { clip: sp.body.clip, job: dash(sp.body.clip), keep: a.clip === sp.body.clip } : null;
+    if (stg && S.jobs[stg.job] && (!job || (!stg.keep && job !== stg.job))) { job = stg.job; used.jobs.add(job); }   // movestage3: a move whose row makes a NEW body (keep false) uses the row's job even when an older clip of the move was made by another job (rose_lava)
     // 2 the prompt
     let prompt = '', source = '', rev = 0, promptFile = null, laterTries = 0, madeNote = '';
     const ov = over[a.id];
@@ -291,7 +293,7 @@ function build() {
       prompt = rd(pick.file).trim(); source = 'job'; rev = clipFile && made && made.route === 'wan' ? made.rev : S.jobs[job].rev; promptFile = pick.file;
     } else if (ent) {
       prompt = ent.e.prompt.trim(); source = 'entry'; rev = (S.artBy[ent.e.id] || {}).promptRev || 0; promptFile = 'tools/art-library/clip-prompts.js (' + ent.e.id + ')';
-    } else if (ov && ov.source === 'model-draft' && ov.prompt && (!ov.notForUse || waits)) { prompt = ov.prompt; source = 'model-draft'; rev = ov.rev || 0; }
+    } else if (ov && ov.source === 'model-draft' && ov.prompt && !ov.notForUse) { prompt = ov.prompt; source = 'model-draft'; rev = ov.rev || 0; }
     else {
       const lr = a.kind === 'move' ? rows[norm(a.name)] : null;
       prompt = (fam && a.kind === 'state' && STATE_NAME[a.state] ? stateDraft(a, ow.patternHead) : fam ? personDraft(a, ow.patternHead) : foeDraft(a, ow.patternHead, ow.patternTail)).trim(); source = 'rule-draft'; rev = 0;
@@ -308,16 +310,14 @@ function build() {
     if (a.kind === 'state') rname = recipe.byBodyState[a.state] || 'pose';
     else if (a.kind === 'wind') rname = 'windup';
     else rname = recipe.at1x.some(k => entKey && entKey.endsWith('-' + k)) ? 'strike1x' : 'strike';
-    const newClip = stg && stg.body && !stg.body.keep && stg.body.clip ? stg.body.clip : a.clip ? a.clip : stg && stg.body && stg.body.clip ? stg.body.clip : ent ? under(ent.key) : a.kind === 'state' ? a.owner + '_' + a.state : a.kind === 'wind' ? a.owner + '_' + a.id.split(':')[2] + '_wind' : a.owner + '_' + (a.kind === 'move' ? a.src.id : a.id.split(':')[2]);
+    const newClip = stg && !stg.keep ? stg.clip : a.clip ? a.clip : stg ? stg.clip : ent ? under(ent.key) : a.kind === 'state' ? a.owner + '_' + a.state : a.kind === 'wind' ? a.owner + '_' + a.id.split(':')[2] + '_wind' : a.owner + '_' + (a.kind === 'move' ? a.src.id : a.id.split(':')[2]);
     const lr = a.kind === 'move' ? rows[norm(a.name)] : null;
     const start = ow.start;
     anims[a.id] = {
       owner: a.owner, kind: a.kind, name: a.name, state: a.state || undefined, clip: a.clip || null, video: !!clipFile,
       newClip, route: ow.route, job, entry: ent ? ent.e.id : null, prompt, promptSource: source, promptRev: rev, promptFile,
       madeBy: made ? (made.route === 'wan' ? 'wan job ' + made.job + ' rev ' + made.rev : 'entry clip-' + made.entry + ' v' + made.rev) : null, laterTries: laterTries || undefined, madeNote: madeNote || undefined,
-      start, canStart: !start && !!ow.canStart, startWho: !start && ow.canStart ? a.owner : undefined, startCost: !start && ow.canStart ? ow.startCost : undefined, canMake: !!start && ow.figRows != null && !waits, missing: !start ? ow.missing : ow.figRows == null ? 'The sprite height (figRows) of ' + ow.name + ' is not known yet, so a take cannot be cut into a clip.' : '',
-      waits: waits ? 'staging' : undefined, waitsWhy: waits ? `This move is now made in three layers: a video of ${ow.name} acting, plus what the game draws across the battlefield (claude/move-staging-plan.md). Its staging row is not written yet, so no video can be made for it.` + (/draft/.test(source) ? ' The prompt below is an old draft, kept for the record and not used.' : '') : undefined,
-      oldDraft: waits && /draft/.test(source) ? true : undefined, stage: stg ? { tier: stg.tier, budget: stg.budget, keep: !!(stg.body && stg.body.keep) } : undefined,
+      start, canStart: !start && !!ow.canStart, startWho: !start && ow.canStart ? a.owner : undefined, startCost: !start && ow.canStart ? ow.startCost : undefined, canMake: !!start && ow.figRows != null, missing: !start ? ow.missing : ow.figRows == null ? 'The sprite height (figRows) of ' + ow.name + ' is not known yet, so a take cannot be cut into a clip.' : '',
       price, priceNote, pad: pad || undefined, recipe: rname, figRows: ow.figRows, brief: briefOf(a, lr), what: a.what, slug: slug(a.id),
     };
   }
@@ -330,8 +330,6 @@ function build() {
   counts.none = counts.total - counts.video;
   counts.withPrompt = Object.values(anims).filter(x => x.promptSource !== 'rule-draft').length;
   counts.canMake = Object.values(anims).filter(x => x.canMake).length;
-  counts.waitsStaging = Object.values(anims).filter(x => x.waits === 'staging').length;
-  counts.staged = Object.values(anims).filter(x => x.stage).length;
   return { about: 'GENERATED by tools/guidegen/build_map.js (claude/guidegen-plan.md); do not hand-edit. One row per animation id of battle-guide.html.', counts, unmapped, routes: ROUTES, recipes: recipe.recipes, owners, anims };
 }
 

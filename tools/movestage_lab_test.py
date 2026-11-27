@@ -47,7 +47,7 @@ def route(r):
     else: r.fulfill(body=stage_sheet('prop'),content_type='image/png')
 
 FIX="""()=>{ const made={clips:[],assets:[]};
-  for(const id in B3_STAGE){ const R=B3_STAGE[id];
+  for(const id of msStagedIds().map(i=>i.slice(5))){ const R=msStageRow('move:'+id);
     if(!BCLIPS[R.body.clip]){ const n=24,dur=Math.round(R.budget*1000*.8),ms=[...Array(n).keys()].map(i=>Math.round(i*dur/n)),cw=120,ch=300,rects=[...Array(n).keys()].map(i=>[i*(cw+2),0,cw,ch,136,60]);
       bclipDefine(R.body.clip,{owner:'tom',src:'art/clips/test-'+R.body.clip+'.webp?v=t',k:4,w:98,h:101,n,rects,ms,dur,kind:'state',feet:ms.map(()=>[0,40])}); made.clips.push(R.body.clip); }
     for(const key in R.assets){ if(B3G.A[key]) continue; const A=R.assets[key],fk=key.replace('/','-');
@@ -112,8 +112,8 @@ def main():
                         pg.evaluate("(b)=>{ window.__slow=1; window.__LE.b3mlRestart?0:0; b3mlRestart(b); }",big)
                         pg.wait_for_function("(b)=>b3mlCanPlay()&&B3ML.fight===(b?'big':'mud')",arg=big,timeout=60000); pg.evaluate("()=>{ window.__slow=0; }")
                     if not pg.evaluate("()=>b3mlCanPlay()"): pg.wait_for_function("()=>b3mlCanPlay()",timeout=30000)
-                    pg.evaluate("(id)=>b3gWarm(B3_STAGE[id])",mid)   # the pictures load in real time; the move waits for them 2.5 s of battle clock at most, which a stepped clock would not give
-                    pg.wait_for_function("(id)=>b3gReady(B3_STAGE[id])",arg=mid,timeout=30000)
+                    pg.evaluate("(id)=>b3gWarm(msStageRow('move:'+id))",mid)   # the pictures load in real time; the move waits for them 2.5 s of battle clock at most, which a stepped clock would not give
+                    pg.wait_for_function("(id)=>b3gReady(msStageRow('move:'+id))",arg=mid,timeout=30000)
                     pg.evaluate("(id)=>{ B3ML.sel=id; window.__LE.b3mlPlay(id); }",mid)
                     need(pg.evaluate("(id)=>B3ML.busy&&!!B3G.run&&B3G.run.id===id",mid) or pg.evaluate("()=>B3ML.busy"),f'L1 {lay} {mid}: the move did not start')
                     for i in range(120):   # the row starts when the move's lead beats (the cost) have played
@@ -140,13 +140,13 @@ def main():
                                 got=min(hits)-run['t0']
                                 need(abs(got-res['hitAt'])<=.12,f'L1 {lay} {mid}: the hit shows at {got:.2f} s, the row says {res["hitAt"]:.2f} s')
                         # the row's hit against the row itself: a mark of the body clip, or the late mark
-                        exp=pg.evaluate("(id)=>{ const R=B3_STAGE[id],CL=BCLIPS[R.body.clip],ids=(B3G.run&&B3G.run.ids)||{}; const nm=R.hit==='late'?R.late:R.hit; if(typeof nm==='string'&&!ids[nm]&&R.body.marks[nm]) return b3gMarkMs(R,CL,nm)/1000; if(nm&&ids[nm]!=null) { const S=(R.steps||[]).concat((R.setpiece||{}).steps||[]).find(s=>s.id===nm)||{}; return ids[nm]+(S.hit===true?(S.dur||0):S.hit==='first'?(S.dur||2)*.3+.15:0); } return null; }   /* a thing that lands hits at its end, a rain when its first thing lands (plan 4.1) */",mid)
+                        exp=pg.evaluate("(id)=>{ const R=msStageRow('move:'+id),CL=BCLIPS[R.body.clip],ids=(B3G.run&&B3G.run.ids)||{}; const nm=R.hit==='late'?R.late:R.hit; if(typeof nm==='string'&&!ids[nm]&&R.body.marks[nm]) return b3gMarkMs(R,CL,nm)/1000; if(nm&&ids[nm]!=null) { const S=(R.steps||[]).concat((R.setpiece||{}).steps||[]).find(s=>s.id===nm)||{}; return ids[nm]+(S.hit===true?(S.dur||0):S.hit==='first'?(S.dur||2)*.3+.15:0); } return null; }   /* a thing that lands hits at its end, a rain when its first thing lands (plan 4.1) */",mid)
                         if exp is not None and run: need(abs(run['hitAt']-exp)<=.5,f'L1 {lay} {mid}: the hit is planned at {run["hitAt"]:.2f} s, the row names {exp:.2f} s')
                         need(res['len']<=budget+1.5 and res['len']>=.5,f'L1 {lay} {mid}: real length {res["len"]:.1f} s against a budget of {budget} s')
                     bad=pg.evaluate("()=>window.__lbad.slice(0,3)"); need(not bad,f'L2 {lay} {mid}: a lasting element and its status disagree: {bad}')
                     if slot=='cap':
                         step(1.2)
-                        st=pg.evaluate("()=>({dim:b3gDimAt(B3P.t),max:window.__dimMax,shake:B3G.shake,flash:B3P.flash,row:B3_STAGE[B3ML.sel].setpiece.dim})")
+                        st=pg.evaluate("()=>({dim:b3gDimAt(B3P.t),max:window.__dimMax,shake:B3G.shake,flash:B3P.flash,row:msStageRow('move:'+B3ML.sel).setpiece.dim})")
                         need(st['dim']<.01,f'L3 {lay} {mid}: the backdrop is still dimmed ({st["dim"]:.2f}) after the set piece')
                         need(st['max']>=st['row']*.85,f'L3 {lay} {mid}: the set piece never dimmed the backdrop (most {st["max"]:.2f}, row {st["row"]})')
                         need(st['shake'] is None and st['flash'] is None,f'L3 {lay} {mid}: a shake or a flash is left behind: {st}')
@@ -185,7 +185,7 @@ def main():
         need(r['shellEl']==1 and r['shellDrop'] and r['shellGone']==0,f'L2 winged shell: {r}')
         # a row that is not baked plays the old way
         pg.evaluate("()=>{ window.__slow=1; B3G.A['tom/carryon'].atlas.failed=true; }")
-        need(pg.evaluate("()=>{ const R=B3_STAGE.zone_one_blockade; const keep=B3G.A['tom/carryon']; delete B3G.A['tom/carryon']; const ok=b3gRowFor({t:'act',id:'zone_one_blockade',src:'p1'})===null; B3G.A['tom/carryon']=keep; return ok; }"),'a row with an asset that is not baked is not played')
+        need(pg.evaluate("()=>{ const R=msStageRow('move:zone_one_blockade'); const keep=B3G.A['tom/carryon']; delete B3G.A['tom/carryon']; const ok=b3gRowFor({t:'act',id:'zone_one_blockade',src:'p1'})===null; B3G.A['tom/carryon']=keep; return ok; }"),'a row with an asset that is not baked is not played')
         # the board: Keep, Tweak and Replace
         saved=[]
         def board(r):
@@ -202,7 +202,7 @@ def main():
         # drive through the buttons: play, then Keep (the last move above was a Capstone, so the Lab sets the Mudling fight up again first)
         if pg.evaluate("()=>B3ML.fight")!='mud':
             pg.evaluate("()=>{ window.__slow=1; b3mlRestart(false); }"); pg.wait_for_function("()=>b3mlCanPlay()&&B3ML.fight==='mud'",timeout=60000); pg.evaluate("()=>{ window.__slow=0; }")
-        pg.evaluate("()=>b3gWarm(B3_STAGE.lounge_pass_flex)"); pg.wait_for_function("()=>b3gReady(B3_STAGE.lounge_pass_flex)",timeout=30000)
+        pg.evaluate("()=>b3gWarm(msStageRow('move:lounge_pass_flex'))"); pg.wait_for_function("()=>b3gReady(msStageRow('move:lounge_pass_flex'))",timeout=30000)
         pg.evaluate("()=>{ window.__LE.b3mlPlay('lounge_pass_flex'); }")
         for i in range(300):
             if not pg.evaluate("()=>B3ML.busy"): break

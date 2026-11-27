@@ -1,5 +1,5 @@
 'use strict';
-// engine/b3-stage.js: the stage layer of a move (movestage2, plan claude/move-staging-plan.md; rows in data/b3-stage.js).
+// engine/b3-stage.js: the stage layer of a move (movestage2, plan claude/move-staging-plan.md). movebench8: the steps, lasting things, set piece, objects, marks and budget come from the move's spec (engine/b3-spec.js msStageRow).
 // A move has three layers: BODY (the baked video of the person acting, engine/b3-clips.js), STAGE (what this file draws across the battlefield from the
 // row, timed to marks on the body clip) and, for a Capstone, a SET PIECE (the row's `setpiece`: dim, the stage fills the screen, restore).
 // Drawing and timing only: nothing here changes the fight (Battle 3 resolved the whole result before this plays). A move whose row exists but whose body clip or
@@ -11,12 +11,14 @@
 const B3G={stand:{},A:{},els:[],ins:[],words:[],dim:{from:0,to:0,t0:0,dur:0},shake:null,glows:[],run:null,hits:0};
 const B3G_KEEP=9000;   // ms an asset stays wanted after it was last asked for
 
+// The baked stage assets (data/stage/*.js, written by tools/clip-bake/bake_stage.py) call b3gDefine; those files load right after this one (index.html).
+const B3G_DATA={};
+function b3gDefine(key,D){ B3G_DATA[key]=D; b3gRegister(key,D); }
 // One stage asset (a data/stage/*.js file calls b3gDefine; the tests register their own through this).
 function b3gRegister(key,D) {
   const fk=key.replace('/','-'),rects={}; D.rects.forEach((r,i)=>{ rects[i]=r; });
   B3G.A[key]={key,fk,D,atlas:paintedAtlas('clip_stage_'+fk,D.src,rects,1)};
 }
-for(const key in B3G_DATA) b3gRegister(key,B3G_DATA[key]);
 
 const b3gAssetsOf=R=>Object.keys(R.assets||{});
 // movebench2: cfg.bench is set only by the Move Workbench preview fight (engine/b3-bench.js). There, a row whose body video is not made yet plays its stage steps,
@@ -42,8 +44,8 @@ function b3gLetGo(R) { B3C.need.delete(R.body.clip); for(const k of b3gAssetsOf(
 const b3gReady=R=>b3gDefined(R)&&(b3gNoVideo(R)?b3gAssetsOf(R).every(k=>!B3G.A[k]||B3G.A[k].atlas.ready):b3cReady(R.body.clip)&&b3gAssetsOf(R).every(k=>B3G.A[k].atlas.ready));
 // The row of the move this `act` beat plays, or null (a monster's move, a move with no row, a row that is not baked yet).
 function b3gRowFor(head) {
-  if(!head||head.t!=='act'||!head.id||!head.src||head.src[0]==='f'||typeof B3_STAGE==='undefined') return null;
-  const R=B3_STAGE[head.id]; return R&&b3gDefined(R)?R:null;
+  if(!head||head.t!=='act'||!head.id||!head.src||head.src[0]==='f') return null;
+  const R=msStageRow('move:'+head.id); return R&&b3gDefined(R)?R:null;
 }
 
 // ---------- time and place ----------
@@ -215,7 +217,7 @@ function b3gPlay(R,env) {
 // ---------- lasting elements: tied to the view's statuses ----------
 // An element exists exactly while a unit's status (vu.st) names it. The status beat's show gives it its entrance; a statusEnd gives it its exit; a react or an
 // intercept beat sets off its `then`. Reconciled every frame, so a fight that starts with the status on shows it too.
-function b3gLastingDefs() { const out=[]; for(const id in B3_STAGE) { const R=B3_STAGE[id]; if(R.lasting&&b3gDefined(R)) for(const L of R.lasting) out.push({id,R,L}); } return out; }
+function b3gLastingDefs() { const out=[]; for(const sid of msStagedIds()) { const R=msStageRow(sid),id=sid.slice(5); if(R&&R.lasting&&b3gDefined(R)) for(const L of R.lasting) out.push({id,R,L}); } return out; }
 function b3gCarriers(def) {
   const F=B3.F,V=B3.view,out=[];
   for(const u of F.units) { const vu=V.u[u.key]; if(vu&&!vu.ko&&vu.st.includes(def.L.while)) out.push(u.key); }

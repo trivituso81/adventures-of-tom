@@ -37,3 +37,19 @@ function msEffects(head) {
   const s=msLive(msIdOf(head)); if(!s||!Array.isArray(s.effects)) return [];
   return s.effects.filter(e=>e&&typeof e.fx==='string'&&!e.off).map(e=>({fx:e.fx,at:e.at==null?'contact':e.at,on:e.on||'auto',params:e.params&&typeof e.params==='object'?e.params:null,sfx:e.sfx||null}));
 }
+
+// ---------- the stage of a move (movebench8) ----------
+// A move is staged when its spec has a `stage` section. msStageRow answers the row engine/b3-stage.js plays, built from the spec: {body:{clip,marks,hand}, budget, hit, late, steps, lasting, setpiece, assets}.
+// `hit` is the mark or step id of timing.contact; a move with no hit of its own (timing.noHit) shows its results at that moment, which is hit 'late' with `late` naming it.
+// The row is kept for as long as the spec object is the same one, so msSet (a draft in the preview) makes a new one. null for a move with no stage.
+const MS_ROWS=new WeakMap();
+function msStageRow(id) {
+  const s=msLive(id); if(!s||!s.stage) return null;
+  let R=MS_ROWS.get(s); if(R) return R;
+  const b=s.body||{},t=s.timing||{},st=s.stage,c=t.contact,name=c&&typeof c==='object'?(c.mark||c.step||null):null;
+  R={body:{clip:b.clip||null,marks:b.marks||{},hand:b.hand||null},budget:typeof t.budget==='number'?t.budget:3,steps:st.steps||null,lasting:st.lasting||null,setpiece:st.setpiece||null,assets:st.objects||{}};
+  if(name) { if(t.noHit) { R.hit='late'; R.late=name; } else R.hit=name; }
+  MS_ROWS.set(s,R); return R;
+}
+// The spec ids that have a stage, in the table's order.
+function msStagedIds() { const out=[]; for(const id in MS.by) if(MS.by[id]&&MS.by[id].stage&&id.slice(0,5)==='move:') out.push(id); return out; }

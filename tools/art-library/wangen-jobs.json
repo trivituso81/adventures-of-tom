@@ -1502,7 +1502,7 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
+  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, stage section of its spec in data/moves/). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the spec of the move in data/moves/ names the clip (movestage2).",
   "bake": {
    "id": "tom-suitedoor",
    "owner": "tom",
@@ -1543,7 +1543,7 @@
    "seed": 81
   },
   "pad": 0.65,
-  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2). wanstop-tom-controller-r1: both rev 1 videos do the move by eye (the open hand flings left, then a fist is raised beside the shoulder), but the hand touched the left edge in 14 to 15 pictures. One change: pad 0.8 to 0.65 (the next pad of _bulk.pads); prompt, start picture and settings kept.",
+  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, stage section of its spec in data/moves/). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the spec of the move in data/moves/ names the clip (movestage2). wanstop-tom-controller-r1: both rev 1 videos do the move by eye (the open hand flings left, then a fist is raised beside the shoulder), but the hand touched the left edge in 14 to 15 pictures. One change: pad 0.8 to 0.65 (the next pad of _bulk.pads); prompt, start picture and settings kept.",
   "bake": {
    "id": "tom-controller",
    "owner": "tom",
@@ -1584,7 +1584,7 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
+  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, stage section of its spec in data/moves/). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the spec of the move in data/moves/ names the clip (movestage2).",
   "bake": {
    "id": "tom-shell",
    "owner": "tom",
@@ -1625,7 +1625,7 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
+  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, stage section of its spec in data/moves/). The person acting only; what leaves the hand is drawn by the stage. pad 0.8: arms reach wide or high (as tom-blockade r4 and the casts). bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the spec of the move in data/moves/ names the clip (movestage2).",
   "bake": {
    "id": "tom-konami",
    "owner": "tom",
@@ -1665,7 +1665,7 @@
    "enable_prompt_expansion": true,
    "seed": 81
   },
-  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
+  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, stage section of its spec in data/moves/). The person acting only; what leaves the hand is drawn by the stage. bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the spec of the move in data/moves/ names the clip (movestage2).",
   "bake": {
    "id": "tom-porsche",
    "owner": "tom",
@@ -1705,7 +1705,7 @@
    "enable_prompt_expansion": true,
    "seed": 81
   },
-  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, staging row in data/b3-stage.js). The person acting only; what leaves the hand is drawn by the stage. bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the row in data/b3-stage.js finds the clip (movestage2).",
+  "why": "movestage1: body layer of a staged move (claude/move-staging-plan.md section 8, stage section of its spec in data/moves/). The person acting only; what leaves the hand is drawn by the stage. bake: the settings of data/clips/tom-loungepass.js (every 4th picture, played at 2x, kind strike; marks found from the video); wire: only the clip and its script tag, the spec of the move in data/moves/ names the clip (movestage2).",
   "bake": {
    "id": "tom-cartridge",
    "owner": "tom",
@@ -2322,7 +2322,7 @@
   },
   "pad": 0.8,
   "airborne": true,
-  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. wanstop r2: failed twice on feet only. By eye both videos are right (gasp, look down, crouch, three hops, land and hold, hair and hands inside the frame); the feet check judged the hop heights (15 to 18 percent of the frame height up in the air) as sliding feet. One change: airborne true (feet judged in the first and last picture, the landing, like the jump jobs). Kept: prompt v1 word for word, seed, pad 0.8, start picture, model, bake and wire.",
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, stage section of its spec in data/moves/). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. wanstop r2: failed twice on feet only. By eye both videos are right (gasp, look down, crouch, three hops, land and hold, hair and hands inside the frame); the feet check judged the hop heights (15 to 18 percent of the frame height up in the air) as sliding feet. One change: airborne true (feet judged in the first and last picture, the landing, like the jump jobs). Kept: prompt v1 word for word, seed, pad 0.8, start picture, model, bake and wire.",
   "bake": {
    "id": "rose-lavahop",
    "owner": "rose",
@@ -2363,7 +2363,7 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. r2: r1 failed twice on feet (the bounce onto the balls of the feet lifted her off the spot for about 6 pictures, up to 98 px); the move itself read well. Changed ONE sentence: 'bounces forward onto the balls of her feet twice' became 'dips her knees twice with both feet flat on the ground'. Kept the picture, pad, seed and the rest of the prompt.",
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, stage section of its spec in data/moves/). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. r2: r1 failed twice on feet (the bounce onto the balls of the feet lifted her off the spot for about 6 pictures, up to 98 px); the move itself read well. Changed ONE sentence: 'bounces forward onto the balls of her feet twice' became 'dips her knees twice with both feet flat on the ground'. Kept the picture, pad, seed and the rest of the prompt.",
   "bake": {
    "id": "rose-doublelamby",
    "owner": "rose",
@@ -2404,7 +2404,7 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. rev 2 (wanstop r1): both tries moved her feet (up to 1.7 percent) and put her on the left edge, from the sentence she darts one quick step forward; the one change is that sentence (now she leans forward from the waist with her feet planted); the bonk, the pretzel pat, pad, seed, frame and model are kept.",
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, stage section of its spec in data/moves/). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. rev 2 (wanstop r1): both tries moved her feet (up to 1.7 percent) and put her on the left edge, from the sentence she darts one quick step forward; the one change is that sentence (now she leans forward from the waist with her feet planted); the bonk, the pretzel pat, pad, seed, frame and model are kept.",
   "bake": {
    "id": "rose-pretzel",
    "owner": "rose",
@@ -2445,7 +2445,7 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. wanstop r1: both tries failed feet and edge (the two lunges slid her feet and she reached off the left edge); kept the whole prompt, start picture, seed and pad, changed ONE sentence: the lunges now bend the knees and lean the shoulders with both feet planted.",
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, stage section of its spec in data/moves/). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. wanstop r1: both tries failed feet and edge (the two lunges slid her feet and she reached off the left edge); kept the whole prompt, start picture, seed and pad, changed ONE sentence: the lunges now bend the knees and lean the shoulders with both feet planted.",
   "bake": {
    "id": "rose-boomerang",
    "owner": "rose",
@@ -2486,7 +2486,7 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. rev 2 (wanstop r1): the start picture has empty hands and the plush popped in and out in both tries, so the one change is the prompt: the plush sentence is replaced by both hands stay empty (the tom-controller wording); pad, seed, frame, model kept.",
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, stage section of its spec in data/moves/). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. rev 2 (wanstop r1): the start picture has empty hands and the plush popped in and out in both tries, so the one change is the prompt: the plush sentence is replaced by both hands stay empty (the tom-controller wording); pad, seed, frame, model kept.",
   "bake": {
    "id": "rose-citadel",
    "owner": "rose",
@@ -2527,7 +2527,7 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. rev 2 (wanstop-rose-kingdom-r1): both rev 1 tries did the move but the plush flew in from, and left through, the left edge because the start picture has empty hands (edge miss, one look-check miss on holding it). One sentence changed: the plush is already hugged to her chest from the first frame. Kept: seed, pad, start picture, model, the rest of the prompt.",
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, stage section of its spec in data/moves/). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. rev 2 (wanstop-rose-kingdom-r1): both rev 1 tries did the move but the plush flew in from, and left through, the left edge because the start picture has empty hands (edge miss, one look-check miss on holding it). One sentence changed: the plush is already hugged to her chest from the first frame. Kept: seed, pad, start picture, model, the rest of the prompt.",
   "bake": {
    "id": "rose-kingdom",
    "owner": "rose",
@@ -2568,7 +2568,7 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. rev 2 (wanstop-rose-boop-r1): two tries failed on feet because she walked a step forward and back; kept all else, changed only that sentence to a lean on the spot with feet flat.",
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, stage section of its spec in data/moves/). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. rev 2 (wanstop-rose-boop-r1): two tries failed on feet because she walked a step forward and back; kept all else, changed only that sentence to a lean on the spot with feet flat.",
   "bake": {
    "id": "rose-boop",
    "owner": "rose",
@@ -2609,7 +2609,7 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, stage section of its spec in data/moves/). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
   "bake": {
    "id": "rose-raspberry",
    "owner": "rose",
@@ -2650,7 +2650,7 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, stage section of its spec in data/moves/). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
   "bake": {
    "id": "rose-baitswitch",
    "owner": "rose",
@@ -2691,7 +2691,7 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, stage section of its spec in data/moves/). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high.",
   "bake": {
    "id": "rose-whoopee",
    "owner": "rose",
@@ -2892,7 +2892,7 @@
    "seed": 81
   },
   "pad": 0.8,
-  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, staging row in data/b3-stage.js). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. rev 2: kept the start picture, seed, pad 0.8 and all but one sentence; the two stopped tries lunged forward off her spot (feet up to 7 percent away) and threw Lamby out of her arm to the left edge, so the lunges are now crouches with feet planted and Lamby held under her arm.",
+  "why": "movestage3: body layer of a staged move (claude/move-staging-plan.md, stage section of its spec in data/moves/). Rose acting only; what leaves her hand is drawn by the stage. Pattern of tom-controller (wan-tom-controller-v1.txt). pad 0.8: arms reach wide or high. rev 2: kept the start picture, seed, pad 0.8 and all but one sentence; the two stopped tries lunged forward off her spot (feet up to 7 percent away) and threw Lamby out of her arm to the left edge, so the lunges are now crouches with feet planted and Lamby held under her arm.",
   "bake": {
    "id": "rose-tacklelunge",
    "owner": "rose",

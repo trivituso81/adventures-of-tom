@@ -167,7 +167,6 @@ def todo(guide, ids=None):
     out = []
     for k, a in guide['anims'].items():
         if a.get('promptSource') != 'rule-draft': continue
-        if a.get('waits'): continue   # movestage1: a family move waits for its staging row (claude/move-staging-plan.md); a text model never drafts it again
         if ids and k not in ids: continue
         out.append((k, a))
     return out

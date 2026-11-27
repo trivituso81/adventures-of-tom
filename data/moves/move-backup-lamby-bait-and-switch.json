@@ -1,9 +1,10 @@
 {
  "v": 1,
  "id": "move:backup_lamby_bait_and_switch",
- "rev": 1,
+ "rev": 2,
  "live": {
   "body": {
+   "clip": "rose_baitswitch",
    "motion": "cast",
    "marks": {
     "place": {
@@ -93,6 +94,12 @@
    "at": "2026-11-26T22:00:00-08:00",
    "by": "migration",
    "what": "written from the tables the engine reads today"
+  },
+  {
+   "rev": 2,
+   "at": "2026-11-27T12:00:00-08:00",
+   "by": "claude",
+   "what": "movebench8: body.clip is the video the stage plays over (the old staging row's clip)"
   }
  ]
 }

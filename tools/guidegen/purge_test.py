@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """guideflow9 (plan T10): the old Battle Guide request path is gone. Fails when any name of it appears anywhere in the repo outside docs/CHANGES.md, claude/,
-data/board*.json and this file. Run: python3 -I tools/guidegen/purge_test.py"""
+data/board*.json, this file and tools/movestage_test.py (which checks the old names are gone). Run: python3 -I tools/guidegen/purge_test.py"""
 import os, subprocess, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 NAMES = ['startpic-requests', 'wan-requests.json', 'guide-use.json', 'startpic-gen', 'run_guide_requests', 'next_guide_run', 'GUIDE_STATUS', 'progress.mark',
-         'aot-guide-pend', 'aot-guide-kept', 'queueLine', 'waitTake', 'pollUse', 'stageBadge']
+         'aot-guide-pend', 'aot-guide-kept', 'queueLine', 'waitTake', 'pollUse', 'stageBadge',
+         # movebench8: the staging table and everything that waited on it
+         'data/b3-stage.js', 'B3_STAGE', 'staging_waits', 'waitsStaging', 'Waits for staging', 'WAITS FOR STAGING', 'gstagewait']
 FILES = ['.github/workflows/startpic-gen.yml', '.github/workflows/guide-use.yml', 'data/startpic-requests.json', 'data/wan-requests.json', 'data/guide-use.json', 'tools/guidegen/progress.py']
 bad = []
 for n in NAMES:
-    p = subprocess.run(['git', 'grep', '-l', '-F', n, '--', '.', ':!docs/CHANGES.md', ':!claude', ':!data/board*.json', ':!tools/guidegen/purge_test.py'], cwd=ROOT, stdout=subprocess.PIPE, text=True)
+    p = subprocess.run(['git', 'grep', '-l', '-F', n, '--', '.', ':!docs/CHANGES.md', ':!claude', ':!data/board*.json', ':!tools/guidegen/purge_test.py', ':!tools/movestage_test.py'], cwd=ROOT, stdout=subprocess.PIPE, text=True)
     for f in p.stdout.split():
         bad.append('%s in %s' % (n, f))
 for f in FILES:

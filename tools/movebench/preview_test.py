@@ -73,7 +73,7 @@ with sync_playwright() as pw:
     if r['moves']<100 or r['acts']<300: fail('far fewer animations than expected: %s moves, %s attacks'%(r['moves'],r['acts']))
     # ---------- 3. samples play to the end ----------
     S=pg.evaluate("""()=>{ const sk=Object.values(B3_SKILLS).filter(S=>S.vibe&&B3_VIBES[S.vibe]);
-      const staged=sk.find(S=>B3_STAGE[S.id]&&b3gDefined(B3_STAGE[S.id])&&S.slot!=='cap'),clip=sk.find(S=>!(B3_STAGE[S.id]&&b3gDefined(B3_STAGE[S.id]))&&S.anim&&S.anim.kind==='clip'),def=sk.find(S=>S.slot!=='cap'&&!(B3_STAGE[S.id]&&b3gDefined(B3_STAGE[S.id]))&&!(S.anim&&S.anim.kind==='clip'));
+      const staged=sk.find(S=>msStageRow('move:'+S.id)&&b3gDefined(msStageRow('move:'+S.id))&&S.slot!=='cap'),clip=sk.find(S=>!(msStageRow('move:'+S.id)&&b3gDefined(msStageRow('move:'+S.id)))&&S.anim&&S.anim.kind==='clip'),def=sk.find(S=>S.slot!=='cap'&&!(msStageRow('move:'+S.id)&&b3gDefined(msStageRow('move:'+S.id)))&&!(S.anim&&S.anim.kind==='clip'));
       let wind=null; for(const f of Object.values(B3_FOES)) for(const a of f.acts) if(!wind&&a.wind&&a.hits!=='attacker') wind=f.id+':'+a.id;
       const cap=sk.find(S=>S.slot==='cap');
       return {staged:'move:'+staged.id,clip:'move:'+clip.id,default:'move:'+def.id,wind:'act:'+wind,capstone:'move:'+cap.id}; }""")
@@ -109,7 +109,7 @@ with sync_playwright() as pw:
       window.__play=async(id,ans)=>{ const N=B3BENCH.BN; N.loop=false; N.turbo=4; N.answer=!!ans; B3BENCH.go(id); const t=performance.now(); let st=null;
         while(performance.now()-t<90000){ st=B3BENCH.status(); if(st.state==='ended'||st.state==='none') break; await new Promise(r=>setTimeout(r,150)); } return {st,tl:B3BENCH.timeline()}; }; }""")
     moves=pg.evaluate("""()=>{ const sk=Object.values(B3_SKILLS).filter(S=>S.vibe&&B3_VIBES[S.vibe]);
-      const clip=sk.find(S=>S.id!=='lounge_pass_flex'&&S.id!=='zone_one_blockade'&&!(B3_STAGE[S.id]&&b3gDefined(B3_STAGE[S.id]))&&S.slot!=='cap'&&S.anim&&S.anim.kind==='clip');
+      const clip=sk.find(S=>S.id!=='lounge_pass_flex'&&S.id!=='zone_one_blockade'&&!(msStageRow('move:'+S.id)&&b3gDefined(msStageRow('move:'+S.id)))&&S.slot!=='cap'&&S.anim&&S.anim.kind==='clip');
       return ['move:lounge_pass_flex','move:zone_one_blockade','move:'+clip.id]; }""")
     notes.append('same-moment moves: '+', '.join(moves))
     for mv in moves:
@@ -178,7 +178,7 @@ with sync_playwright() as pw:
         notes.append('%s: %.2f s, bar %s'%(sid,r['tl']['len'],labs[:4]))
         pg.screenshot(path=os.path.join(OUT,'state-%s.png'%sid.replace(':','-')))
     # a move whose body video is not made yet plays its stage and effects over the standing video
-    nv=pg.evaluate("""()=>{ const out=[]; for(const id of Object.keys(B3_STAGE)) { const R=B3_STAGE[id],S=B3_SKILLS[id]; if(S&&S.vibe&&R.body&&!BCLIPS[R.body.clip]) out.push(id); } return out; }""")
+    nv=pg.evaluate("""()=>{ const out=[]; for(const id of msStagedIds().map(i=>i.slice(5))) { const R=msStageRow('move:'+id),S=B3_SKILLS[id]; if(S&&S.vibe&&R.body&&!BCLIPS[R.body.clip]) out.push(id); } return out; }""")
     notes.append('stage rows with no body video: %s'%nv)
     if not nv: fail('no stage row without a body video was found to play (expected Tarmac Porsche Transfer or another)')
     for mid in nv[:3]:
@@ -187,7 +187,7 @@ with sync_playwright() as pw:
         steps=[g for l in r['tl']['lanes'] if l['id']=='stage' for g in l['segs']]
         vid=[g for l in r['tl']['lanes'] if l['id']=='video' for g in l['segs']]
         if not r['tl']['noVideo']: fail('%s: the timeline does not say NO VIDEO YET'%mid)
-        if not steps and (B3_STAGE_HAS_STEPS:=pg.evaluate("(a)=>((B3_STAGE[a].steps||[]).length+((B3_STAGE[a].setpiece&&B3_STAGE[a].setpiece.steps)||[]).length)>0",mid)): fail('%s: the stage lane is empty over the standing video'%mid)
+        if not steps and (has_steps:=pg.evaluate("(a)=>((msStageRow('move:'+a).steps||[]).length+((msStageRow('move:'+a).setpiece&&msStageRow('move:'+a).setpiece.steps)||[]).length)>0",mid)): fail('%s: the stage lane is empty over the standing video'%mid)
         if not any(g['k']=='need' for g in vid): fail('%s: the video lane has no NO VIDEO segment: %s'%(mid,vid))
         notes.append('%s with no video: stage %s, video lane %s'%(mid,[g['label'] for g in steps][:3],[g['label'] for g in vid][:2]))
         pg.screenshot(path=os.path.join(OUT,'novideo-%s.png'%mid))
@@ -201,7 +201,7 @@ with sync_playwright() as pw:
         if txt!='NO VIDEO YET: SHOWN ON THE STANDING VIDEO': fail('the label reads %r'%txt)
         pg.screenshot(path=os.path.join(OUT,'novideo-label.png'))
         # the game never sets cfg.bench: without it the row is not played (the move keeps what it plays today)
-        g=pg.evaluate("(a)=>{ const R=B3_STAGE[a],keep=B3.cfg.bench; B3.cfg.bench=false; const off=b3gDefined(R); B3.cfg.bench=true; const on=b3gDefined(R); B3.cfg.bench=keep; return {off,on}; }",mid)
+        g=pg.evaluate("(a)=>{ const R=msStageRow('move:'+a),keep=B3.cfg.bench; B3.cfg.bench=false; const off=b3gDefined(R); B3.cfg.bench=true; const on=b3gDefined(R); B3.cfg.bench=keep; return {off,on}; }",mid)
         if g['off'] or not g['on']: fail('cfg.bench does not decide the no-video row (%s)'%g)
         pg.evaluate("()=>B3BENCH.stop()")
     faults=pg.evaluate('()=>window.__faults')
