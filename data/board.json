@@ -9657,7 +9657,7 @@
    "id": "c-movebench-2",
    "tag": "movebench2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Move Workbench 2: drag to any moment, every kind",
    "next": "The preview gains a bar you drag to any moment, one-picture steps, lanes for video, stage, effects and sound, and plays body states, wind-ups, answers and moves that have no video yet. Starts by itself when Move Workbench 1 ships.",
@@ -9697,15 +9697,19 @@
     {
      "d": "2026-11-26",
      "t": "movebench2 built: bar and drag to any moment, one-picture steps, body states, wind-ups, answers, moves with no video yet. Hands t-movebench-2-try to Tom."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as movebench2: drag the preview to any moment, step one picture, and play body states, wind-ups, answers and moves with no video yet"
     }
-   ]
+   ],
+   "done": "2026-11-26"
   },
   {
    "id": "c-movebench-3",
    "tag": "movebench3",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Move Workbench 3: the spec files",
    "next": "Writes one settings file per animation from what the game plays today, and records every move's timeline so later phases can prove nothing changed. No screen changes. Starts by itself when Move Workbench 2 ships.",
@@ -9733,6 +9737,10 @@
     {
      "d": "2026-11-26",
      "t": "Added by c-movebench-design: phase 3 of claude/movebench-plan.md section g."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Unblocked: Move Workbench 2: drag to any moment, every kind is done."
     }
    ]
   },
@@ -10237,8 +10245,10 @@
    "url": "https://claude.ai/code/session_01RXeukECBgnxBZp8d9JQrAb",
    "title": "Move Workbench 2: drag to any moment, every kind",
    "first": "2026-11-26T20:22:09-08:00",
-   "last": "2026-11-26T20:22:09-08:00",
-   "tags": [],
+   "last": "2026-11-26T21:14:16-08:00",
+   "tags": [
+    "movebench2"
+   ],
    "cards": [
     "c-movebench-2"
    ]
@@ -17072,8 +17082,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "3915914fe40343a8fdefbe504477190bb1a05594",
- "synced_at": "2026-11-27T04:23:03+00:00",
+ "synced": "af07f0925c4b5058efb0c48539fd2a62f52e8995",
+ "synced_at": "2026-11-27T05:15:27+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
