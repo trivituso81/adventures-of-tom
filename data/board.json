@@ -9669,7 +9669,7 @@
    "changed": "2026-11-27",
    "auto": true,
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDBRG7sKzYyzp5eNpp",
+    "url": "https://claude.ai/code/session_01RXeukDBRG7sKzYyzp5eNpp",
     "opening": "not started"
    },
    "prompt": {
@@ -9697,6 +9697,10 @@
     {
      "d": "2026-11-27",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "started_at": "2026-11-27T09:22:45+00:00"
@@ -10090,6 +10094,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDBRG7sKzYyzp5eNpp",
+   "title": "Move Workbench 6: save, finished and progress",
+   "first": "2026-11-27T09:23:58Z",
+   "last": "2026-11-27T09:23:58Z",
+   "tags": [],
+   "cards": [
+    "c-movebench-6"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDoRTv4JhJghg7amKk",
    "title": "voice-gen run finished (skipped, nothing to do)",
@@ -16977,8 +16991,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "325689488fb9435bb7ebe9208d3e1e94138f82a6",
- "synced_at": "2026-11-27T09:22:46+00:00",
+ "synced": "d9e97301fc8c7caaf9ba3223872d98c5fafddb62",
+ "synced_at": "2026-11-27T09:24:49+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
