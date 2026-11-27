@@ -9765,7 +9765,7 @@
    "id": "c-movebench-4",
    "tag": "movebench4",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 4: the engine reads timing and effects",
    "next": "The game takes each move's hit moment, freeze, shake and effects from its settings file. The old timing files and the Pass-1 draft review are deleted. Moves look the same. Starts by itself when Move Workbench 3 ships.",
@@ -9777,7 +9777,7 @@
    "changed": "2026-11-26",
    "auto": true,
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEu9Y6GqqUWHqK9Pfb",
     "opening": "not started"
    },
    "prompt": {
@@ -9797,6 +9797,10 @@
     {
      "d": "2026-11-26",
      "t": "Unblocked: Move Workbench 3: the spec files is done."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -10261,6 +10265,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukEu9Y6GqqUWHqK9Pfb",
+   "title": "Move Workbench 4: the engine reads timing and effects",
+   "first": "2026-11-26T22:11:52-08:00",
+   "last": "2026-11-26T22:11:52-08:00",
+   "tags": [],
+   "cards": [
+    "c-movebench-4"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDAbfqqsB5gUSXAvTk",
    "title": "Move Workbench 3: the spec files",
@@ -17114,8 +17128,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "569676a4c43e624bc6d71bcb806ce99115a9aeab",
- "synced_at": "2026-11-27T06:04:00+00:00",
+ "synced": "6805e281d94c3e6e70e8b200d5d26cdad0068327",
+ "synced_at": "2026-11-27T06:12:39+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
