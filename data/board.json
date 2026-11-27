@@ -7237,10 +7237,10 @@
    "id": "c-movelab-rose",
    "tag": "movelab2",
    "lane": "claude",
-   "col": "wait",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Move Lab for any person, starting with Rose",
-   "next": "Held: the Move Workbench plan replaces the Move Lab with a preview for every person. Waits on your answer to the card Approve the Move Workbench plan and drawings. If you approve, Move Workbench 1 retires this card; if you stop the plan, it goes back to Up next.",
+   "next": "Retired: the Move Workbench preview (movebench1) plays any person's moves in the Battle Guide and replaces the Move Lab. Nothing was built for this card.",
    "blocks": [],
    "created": "2026-11-26",
    "changed": "2026-11-26",
@@ -7277,10 +7277,14 @@
     {
      "d": "2026-11-26",
      "t": "Held by c-movebench-design: it would add to engine/b3-movelab.js, which claude/movebench-plan.md deletes in phase 16. Night start switched off."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Retired by c-movebench-1: the workbench preview replaces the Move Lab (claude/movebench-plan.md, phase 16 deletes engine/b3-movelab.js)."
     }
    ],
-   "waiting_on": "tom",
-   "night": false
+   "night": false,
+   "done": "2026-11-26"
   },
   {
    "id": "b-guideuse-45793298334",
@@ -9600,8 +9604,7 @@
    "id": "c-movebench-1",
    "tag": "movebench1",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 1: preview the whole move",
    "next": "A Preview the whole move box on every family move and monster attack in the Battle Guide: the game's own battle code plays the video, stage, effects, freeze and sounds together, with Play, Pause, half and quarter speed, Loop and Mute. Waits on your answer to the card Approve the Move Workbench plan and drawings.",
@@ -9613,8 +9616,8 @@
    "changed": "2026-11-26",
    "auto": true,
    "chat": {
-    "url": "",
-    "opening": "not started"
+    "url": "https://claude.ai/code/session_01RXeukH64fYhe1CjPi6dUdA",
+    "opening": "\"Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md\""
    },
    "prompt": {
     "what": "A Preview the whole move box on every family move and monster attack in the Battle Guide: the game's own battle code plays the video, stage, effects, freeze and sounds together, with Play, Pause, half and quarter speed, Loop and Mute.",
@@ -9629,6 +9632,10 @@
     {
      "d": "2026-11-26",
      "t": "Added by c-movebench-design: phase 1 of claude/movebench-plan.md section g."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started by Tom pasting the prompt (card t-movebench-plan had no answer or note recorded on the board when the session read it)."
     }
    ]
   },
