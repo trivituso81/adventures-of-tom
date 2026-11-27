@@ -676,6 +676,16 @@ What differs from the plan, and why:
 
 What phase 12 must know: `lsList`, `spGet`, `anGet` read the draft; `wbEditStageKey` is the one undo step for lasting and the set piece; `wbSecPaint` repaints all three sections. A `diff` field is `lasting`, `setpiece` or `answer` (the whole value, null for none), merged in `wbMerge` and kept through the 409 replay in `wbRebase`. Pictures: `tools/shots/movebench/lasting-*.png`.
 
+**Phase 12, `movebench12` (2026-11-27).** What exists: the spec names the video. `body.clip`, `body.motion`, `body.pair`, `body.sound` and the new `body.trim` and `body.until` of an animation's spec are what `b3PlayMove`, `engine/b3-clips.js` (`b3cOf`, `b3cWindOf`, `b3cTrimmed`) and `engine/b3-stage.js` play, through `msAnimOf`, `msClipOf`, `msStateClip`, `msWindClip`, `msShapeOf` and `msTrimOf` in `engine/b3-spec.js`. `anim` and `wind` are gone from every row of `data/b3-kit-*.js` and `data/b3-foes-ch*.js`, and `B3_BODY_CLIPS` and its comment block from `data/b3-clips.js` (146 row edits; `B3_VIDEO_ONLY` stays). `tools/guidegen/use_take.py` and `tools/art-library/wanbake.py` write the spec through the new `tools/movebench/specwrite.py`; `tools/movebench/migrate.py` is deleted (its tables are gone and the files own everything). The Workbench has the Trim control (the Video lane's two ends, and a Trim row with the buttons). The golden test matched on its second run: 219 animations, 0 differ.
+
+What differs from the plan, and why:
+- `body.until` is new. A staged move plays its stage clip once the stage picture exists, and until then the video its kit row named. One `clip` cannot be both, and the golden test records the old video for those moves, so `until` holds the old one. Lamb Tuck and The Floor Is Lava need it; Lounge Pass Flex, Zone One Blockade and Giddyup Tata Launch have `until` equal to `clip` (their kit rows named the stage's own clip). A move with no stage plays `clip` if it is made, else `until` if that is made, else it names `clip` and the standard motion plays. `schema.py` checks that `until` is made.
+- Pick-Me-Up's shape (give) came from `anim.shape` in `data/b3-rules.js`; its spec now has `body.motion: give`. Family Ruckus beats (`head.via` ruckus) never played clips; `msAnimOf` keeps that.
+- A trim whose hit picture is cut away puts the hit on the nearest kept picture (the plan did not say). The Guide's `data/guide-anims.json` `clip` field now follows the spec, so the two Rose moves with a stage show their stage clip there.
+- `tools/movebench/spec_test.py` lost its comparison with the old tables (they are gone) and now checks that no kit or monster row has `anim` or `wind`, that `B3_BODY_CLIPS` is gone, and that every `until` is made.
+
+What phase 13 must know: a start picture is a part of `body` too; `specwrite.edit_body(root, anim_id, fn, why)` is the one way a session changes a spec's live part (it makes the file when there is none). The Guide page reads clip numbers from `CLIPS` (loaded on demand by `wbTrimEnsure`), not from `BCLIPS`, which only the game and the preview frame have. Pictures: `tools/shots/movebench/golden-timelines.png`, `trim-buttons.png`, `trim-dragged.png`.
+
 ### g.1 The board's bulk video path (a recommendation; this session did not touch it)
 
 Recommended: **pause now, retire in phase 16.**

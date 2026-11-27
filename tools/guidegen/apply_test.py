@@ -106,7 +106,8 @@ shutil.copytree(ROOT + '/tools', seed + '/tools', ignore=shutil.ignore_patterns(
 shutil.copytree(ROOT + '/.github', seed + '/.github')
 for d in ('data', 'docs', 'engine', 'art/clips', 'art/raw/clips'): os.makedirs(os.path.join(seed, d), exist_ok=True)
 for f in os.listdir(ROOT + '/data'):
-    if (f.startswith('b3-') and f.endswith('.js')) or f in ('art-prompts.json', 'guide-anims.json', 'build-history.js', 'portrait-ver.js', 'gate-art.js', 'item-art.js', 'flight-art.js', 'guide-prompts.json'): shutil.copy(ROOT + '/data/' + f, seed + '/data/' + f)
+    if (f.startswith('b3-') and f.endswith('.js')) or f in ('art-prompts.json', 'guide-anims.json', 'build-history.js', 'portrait-ver.js', 'gate-art.js', 'item-art.js', 'flight-art.js', 'guide-prompts.json', 'move-specs.js'): shutil.copy(ROOT + '/data/' + f, seed + '/data/' + f)
+shutil.copytree(ROOT + '/data/moves', seed + '/data/moves')   # movebench12: a used take writes the spec files
 shutil.copytree(ROOT + '/data/clips', seed + '/data/clips'); shutil.copytree(ROOT + '/art/clips/start', seed + '/art/clips/start')
 for f in ('index.html',): shutil.copy(ROOT + '/' + f, seed)
 for f in ('main.js', 'painted.js', 'battle-draw.js', 'prop-art.js'): shutil.copy(ROOT + '/engine/' + f, seed + '/engine/' + f)

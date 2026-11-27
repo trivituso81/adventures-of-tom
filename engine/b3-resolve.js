@@ -408,7 +408,7 @@ function b3Act(F,u,skillId,optKey) {
   if(u.custom&&u.custom.mailbox&&['s1','s2','cap'].includes(S.slot)) u.lastSkill=S.id;   // "The Mailbox Moved": counters copy this Skill (engine/b3-custom.js)
   F.grant=null;
   const c={F,actor:u,src:u,skill:S,rec,targets:O.units.slice(),hit:[],beats,g:'pre',detonated:{},reacted:{},tags:S.tags||[],ledger:{}};
-  beats.push({t:'act',src:u.key,id:S.id,name:S.name,flavor:S.flavor,shape:(S.target==='either'&&O.ally)?'give':(S.anim&&S.anim.shape)||'strike',anim:(S.anim&&S.anim.kind==='clip')?S.anim:null,hits:b3HitsOf(u,S),tgts:O.units.map(t=>t.key),free:!!G,g:'pre'});
+  beats.push({t:'act',src:u.key,id:S.id,name:S.name,flavor:S.flavor,shape:(S.target==='either'&&O.ally)?'give':msShapeOf(S.id)||'strike',hits:b3HitsOf(u,S),tgts:O.units.map(t=>t.key),free:!!G,g:'pre'});
   if(cost) { b3Pep(F,u,-cost,'cost'); beats.push({t:'pep',tgt:u.key,n:-cost,pep:u.pep,g:'pre'}); }
   if(S.slot==='basic') { const got=b3Pep(F,u,B3_RULES.pep.basic,'basic'); if(got) beats.push({t:'pep',tgt:u.key,n:got,pep:u.pep,g:'pre'}); }
   b3Fire(F,'actionDeclared',{src:u,g:'pre'},beats);

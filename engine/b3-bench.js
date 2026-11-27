@@ -59,7 +59,7 @@ function bnParse(id) {
     return S.common&&!S.vibe?{kind:'move',S,V:null,owner:BN_FILL[0],skill:S.id}:null; }   // movebench6: Pick-Me-Up, the move every family member has, is shown on the first of them
   if(p[0]==='act'&&B3_FOES[p[1]]) { const A=B3_FOES[p[1]].acts.find(a=>a.id===p[2]); return A&&A.hits!=='attacker'?{kind:'act',foe:B3_FOES[p[1]],A,foeId:p[1],act:A.id}:null; }
   if(p[0]==='wind'&&B3_FOES[p[1]]) { const f=B3_FOES[p[1]],A=f.acts.find(a=>a.id===p[2]);
-    return A&&A.hits!=='attacker'&&(A.wind||f.acts.some(a=>a.then===A.id))?{kind:'wind',foe:f,A,foeId:p[1],act:A.id}:null; }
+    return A&&A.hits!=='attacker'&&(msWindClip(p[1],A.id)||f.acts.some(a=>a.then===A.id))?{kind:'wind',foe:f,A,foeId:p[1],act:A.id}:null; }
   if(p[0]==='body') { const o=p[1],st=p[2];
     if(B3_FOES[o]&&BN_STATES.foe.includes(st)) return {kind:'state',owner:o,state:st,isFoe:true,foe:B3_FOES[o],foeId:o};
     if(B3_CAST[o]&&typeof b3HasKit==='function'&&b3HasKit(o)&&BN_STATES.family.includes(st)) return {kind:'state',owner:o,state:st,isFoe:false}; }
@@ -113,13 +113,13 @@ function bnRefill() {
 function bnWarm(P) {
   const ids=[]; let SR=null;
   if(P.kind==='move') { SR=typeof msStageRow==='function'&&msStageRow('move:'+P.skill)&&typeof b3gDefined==='function'&&b3gDefined(msStageRow('move:'+P.skill))?msStageRow('move:'+P.skill):null;
-    if(SR) b3gWarm(SR); const a=P.S.anim; if(a&&a.kind==='clip') ids.push(a.clip); if(a&&a.pair&&a.pair.clip) ids.push(a.pair.clip); }
-  else if(P.kind==='act') { const a=P.A.anim; if(a&&a.kind==='clip') ids.push(a.clip); if(P.A.wind) ids.push(P.A.wind); }
-  else if(P.kind==='wind') { const w=P.foe.acts.find(a=>a.then===P.act); if(w&&w.wind) ids.push(w.wind); if(P.A.wind) ids.push(P.A.wind); }
+    if(SR) b3gWarm(SR); const mid='move:'+P.skill,mc=msClipOf(mid),mp=msPairOf(mid); if(mc) ids.push(mc); if(mp) ids.push(mp.clip); }
+  else if(P.kind==='act') { const ac=msClipOf('act:'+P.foeId+':'+P.act),wc=msWindClip(P.foeId,P.act); if(ac) ids.push(ac); if(wc) ids.push(wc); }
+  else if(P.kind==='wind') { const w=P.foe.acts.find(a=>a.then===P.act),wc=w&&msWindClip(P.foeId,w.id),wa=msWindClip(P.foeId,P.act); if(wc) ids.push(wc); if(wa) ids.push(wa); }
   else if(P.kind==='state') { const st=P.state;
     for(const k of st==='run'?['run','idle']:st==='guard'?['guard','idle']:[st,'idle']) { const c=typeof b3cOf==='function'?b3cOf(P.owner,k):null; if(c) ids.push(c); } }
   if(P.kind==='move'){ const an=typeof msAnswer==='function'?msAnswer('move:'+P.skill):null; if(an&&an.clip) ids.push(an.clip); }   // movebench11: the counter video is loaded before the run starts
-  if(BN.answer&&P.kind==='move'&&B3.F) { const X=bnAnswerAct(B3.F); if(X&&X.A) { const a=X.A.anim; if(a&&a.kind==='clip') ids.push(a.clip); if(X.A.wind) ids.push(X.A.wind); } }   // the answer's own videos are loaded before the run starts
+  if(BN.answer&&P.kind==='move'&&B3.F) { const X=bnAnswerAct(B3.F); if(X&&X.A) { const ac=msClipOf('act:'+X.e.id+':'+X.A.id),wc=msWindClip(X.e.id,X.A.id); if(ac) ids.push(ac); if(wc) ids.push(wc); } }   // the answer's own videos are loaded before the run starts
   for(const id of ids) if(typeof b3cWant==='function') b3cWant(id,30000);
   return ()=>ids.every(id=>!BCLIPS[id]||b3cReady(id))&&(!SR||b3gReady(SR));
 }
@@ -149,7 +149,7 @@ function bnWhy(m) { BN.why=m||''; BN.msg=m||''; }
 function bnMark(st) { BN.state=st; bnSend(); }
 const bnBusy=()=>{ B3.actor=null; B3.ui='busy'; battle.state='busy'; B3.look=null; B3.sheet=null; B3.note=''; B3.deck=[]; };
 // One monster attack after the move, as the Move Lab's MONSTER ACTS plays one: the first monster standing, the first act that is a plain attack.
-function bnAnswerAct(F) { const e=F&&F.foes.find(f=>!f.ko); return e?{e,A:e.D.acts.find(a=>a.hits!=='attacker'&&!a.then&&!a.wind)||e.D.acts.find(a=>a.hits!=='attacker'&&!a.then)}:null; }
+function bnAnswerAct(F) { const e=F&&F.foes.find(f=>!f.ko); return e?{e,A:e.D.acts.find(a=>a.hits!=='attacker'&&!a.then&&!msWindClip(e.id,a.id))||e.D.acts.find(a=>a.hits!=='attacker'&&!a.then)}:null; }
 function bnAnswer(done) {
   const F=B3.F,X=bnAnswerAct(F); if(!X) { done(); return; }
   const e=X.e,A=X.A;
@@ -405,9 +405,9 @@ function bngIds() {
   const ids=[];
   for(const S of Object.values(B3_SKILLS)) if(S.vibe&&B3_VIBES[S.vibe]) ids.push('move:'+S.id);
   for(const f of Object.values(B3_FOES)) for(const a of f.acts) { if(a.hits==='attacker') continue;
-    if((a.anim&&a.anim.kind==='clip')||a.wind) ids.push('act:'+f.id+':'+a.id);
-    if(a.wind&&bnParse('wind:'+f.id+':'+a.id)) ids.push('wind:'+f.id+':'+a.id); }
-  for(const o of Object.keys(B3_BODY_CLIPS)) for(const st of Object.keys(B3_BODY_CLIPS[o])) { const id='body:'+o+':'+st; if(bnParse(id)) ids.push(id); }
+    if(msClipOf('act:'+f.id+':'+a.id)||msWindClip(f.id,a.id)) ids.push('act:'+f.id+':'+a.id);
+    if(msWindClip(f.id,a.id)&&bnParse('wind:'+f.id+':'+a.id)) ids.push('wind:'+f.id+':'+a.id); }
+  for(const id of msStateIds()) if(bnParse(id)) ids.push(id);
   return ids;
 }
 // ---------- the clock ----------

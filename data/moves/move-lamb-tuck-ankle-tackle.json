@@ -1,7 +1,7 @@
 {
  "v": 1,
  "id": "move:lamb_tuck_ankle_tackle",
- "rev": 2,
+ "rev": 3,
  "live": {
   "body": {
    "clip": "rose_tacklelunge",
@@ -16,7 +16,8 @@
     "hit2": {
      "f": 0.56
     }
-   }
+   },
+   "until": "rose_tackle"
   },
   "timing": {
    "contact": {
@@ -75,6 +76,12 @@
    "at": "2026-11-27T12:00:00-08:00",
    "by": "claude",
    "what": "movebench8: body.clip is the video the stage plays over (the old staging row's clip; the kit row's was rose_tackle)"
+  },
+  {
+   "rev": 3,
+   "by": "claude",
+   "at": "2026-11-27T13:07:53-08:00",
+   "what": "movebench12: body.until rose_tackle: the video the kit row named, which plays until rose_tacklelunge (the stage video) is made"
   }
  ]
 }

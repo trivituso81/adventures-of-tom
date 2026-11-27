@@ -205,7 +205,24 @@
    "norun": "did not run in",
    "gap": "{s} s between hits"
   },
-  "act_note": "For a monster attack only the freeze can be set for now. The rest arrives in a later step."
+  "act_note": "For a monster attack only the freeze can be set for now. The rest arrives in a later step.",
+  "trim": {
+   "label": "Trim",
+   "hint": "the first and last picture of the video that play",
+   "what": "pictures {from} to {to}",
+   "whole": "the whole video",
+   "of": "of {n}",
+   "novideo": "This animation has no video yet.",
+   "first_less": "first picture, one earlier",
+   "first_more": "first picture, one later",
+   "last_less": "last picture, one earlier",
+   "last_more": "last picture, one later",
+   "reset": "Whole video",
+   "first_end": "Drag: first picture of the video",
+   "last_end": "Drag: last picture of the video",
+   "first": "first",
+   "last": "last"
+  }
  },
  "stage_do": {
   "words": "Words on screen",

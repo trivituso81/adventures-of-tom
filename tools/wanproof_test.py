@@ -1,6 +1,6 @@
 # wanproof (claude/video-battle-plan.md 4.5), extended by wanch1 to every family clip kind in the real NEW BATTLE fights, portrait and landscape.
 # Usage (repo root): python3 -I tools/wanproof_test.py [ids]     prints FAILS: [] when all pass. ids: comma list of fighters (default: every
-# family member with an idle video in B3_BODY_CLIPS). Env: CHROMIUM (optional), OUT = folder for the pictures (default tools/shots).
+# family member with an idle video in the body specs). Env: CHROMIUM (optional), OUT = folder for the pictures (default tools/shots).
 # It measures the battle picture itself (the canvas, with the fighter drawn and not drawn). For each fighter, alone against one Mudling:
 #   W1 the idle is the video (every picture drawn in the stance is a clip picture), and no code breath or painted fidget is left for them
 #   W2 the idle video's standing height is the fighter's battle size today (the painted standing figure, measured in the same fight with
@@ -8,7 +8,7 @@
 #   W3 the feet stay on the standing ground row (1 battle px) through the idle loop, the guard (rise, hold, braced hit, lowering) and the
 #      dodge, 3 px in the hit and 2 in the victory (a flinch or a cheer may rise onto the toes); the guard hold is at least 4 px lower than the stance and the knock-out ends on the ground (4 px: sitting)
 #   W4 no jump over 2 battle px where a one-shot clip starts or ends against the idle, or where a guard rise starts or a lowering ends
-#   W5 every clip named in B3_BODY_CLIPS and in the kits exists, its run
+#   W5 every clip named in the body specs and in the kits exists, its run
 #      loop and its move clips load
 #   P6 the Lab row PROOF: GRACE'S GUARD (VIDEO) as Tom plays it, portrait and landscape (STANDING, GUARD, BRACED HIT, GUARD DOWN three times)
 # Pictures: wanproof-<id>-strip.png (stance, rise, hold, braced hit, lowering, hit, dodge, victory, ko), wanproof-portrait-*.png,
@@ -55,7 +55,7 @@ with sync_playwright() as pw:
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e)))
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start&&window.__LE.b3LabGuardProof',timeout=180000); pg.wait_for_timeout(1500)
     pg.evaluate("()=>{ B7.speed=1; b7SetDiff('grace'); b3LabReset(); splash.active=false; document.getElementById('splash').hidden=true; }")
-    if not IDS: IDS=pg.evaluate("()=>['tom','grace','rose','deedee'].filter(i=>(B3_BODY_CLIPS[i]||{}).idle)")
+    if not IDS: IDS=pg.evaluate("()=>['tom','grace','rose','deedee'].filter(i=>msStateClip(i,'idle'))")
     def step(dt):
         while dt>1e-6:
             c=min(1/30,dt); pg.evaluate("(dt)=>window.__step(dt)",c); dt-=c
@@ -67,19 +67,19 @@ with sync_playwright() as pw:
     def leave():
         pg.evaluate("()=>{ window.__slow=1; }"); pg.click('#b3-exit'); pg.wait_for_timeout(700)
     for who in IDS:
-        T=pg.evaluate("(w)=>({clips:B3_BODY_CLIPS[w]||{}})",who)
+        T=pg.evaluate("(w)=>({clips:msStatesOf(w)})",who)
         # W5 the tables
         for st,id in T['clips'].items():
             need(pg.evaluate("(id)=>!!BCLIPS[id]",id),f'W5 {who}: clip {id} ({st}) is not defined')
-        kit=pg.evaluate("(w)=>Object.values(B3_SKILLS).filter(s=>B3_VIBES[s.vibe]&&B3_VIBES[s.vibe].owner===w&&s.anim&&s.anim.kind==='clip').map(s=>s.anim.clip)",who)
+        kit=pg.evaluate("(w)=>Object.values(B3_SKILLS).filter(s=>B3_VIBES[s.vibe]&&B3_VIBES[s.vibe].owner===w&&msClipOf('move:'+s.id)).map(s=>msClipOf('move:'+s.id))",who)
         for id in kit: need(pg.evaluate("(id)=>!!BCLIPS[id]",id),f'W5 {who}: the kit names clip {id}, which is not defined')
         # Battle size today: the painted standing figure, clips switched off for this one measure.
-        pg.evaluate("(w)=>{ window.__keep=B3_BODY_CLIPS[w]; B3_BODY_CLIPS[w]={idle:'__none'}; window.__vo=B3_VIDEO_ONLY.slice(); B3_VIDEO_ONLY.length=0; }",who)   # no clip drawn, and no code breath to blur the measure (video-only switched off for this measure, idea-tomgrace)
+        pg.evaluate("(w)=>{ window.__keep=msStatesOf(w); for(const st in window.__keep) msSet('body:'+w+':'+st,st==='idle'?{body:{clip:'__none'}}:{}); window.__vo=B3_VIDEO_ONLY.slice(); B3_VIDEO_ONLY.length=0; }",who)   # no clip drawn, and no code breath to blur the measure (video-only switched off for this measure, idea-tomgrace)
         key=fight(who); M=lambda: pg.evaluate("(k)=>window.__measure(k)",key)
         step(.5); S=M(); k=pg.evaluate("()=>window.__k"); tol=k*1.01
-        leave(); pg.evaluate("(w)=>{ B3_BODY_CLIPS[w]=window.__keep; B3_VIDEO_ONLY.push(...window.__vo); }",who)
+        leave(); pg.evaluate("(w)=>{ for(const st in window.__keep) msSet('body:'+w+':'+st,null); B3_VIDEO_ONLY.push(...window.__vo); }",who)
         key=fight(who); M=lambda: pg.evaluate("(k)=>window.__measure(k)",key)
-        pg.wait_for_function("(w)=>bclipReady(B3_BODY_CLIPS[w].idle)",arg=who,timeout=40000); step(.2)
+        pg.wait_for_function("(w)=>bclipReady(msStateClip(w,'idle'))",arg=who,timeout=40000); step(.2)
         strip=[]; box=crop_of(pg,key)
         def snap(): strip.append(shot(pg).crop(box))
         idle=[]
@@ -94,8 +94,8 @@ with sync_playwright() as pw:
         feet(idle,'idle loop')
         base=idle[-1]
         # guard
-        if pg.evaluate("(w)=>{ const id=(B3_BODY_CLIPS[w]||{}).guard; return !!id&&BCLIPS[id]&&BCLIPS[id].kind==='guard'; }",who):
-            pg.evaluate("(w)=>b3cWant(B3_BODY_CLIPS[w].guard,30000)",who); pg.wait_for_function("(w)=>bclipReady(B3_BODY_CLIPS[w].guard)",arg=who,timeout=40000)
+        if pg.evaluate("(w)=>{ const id=msStateClip(w,'guard'); return !!id&&BCLIPS[id]&&BCLIPS[id].kind==='guard'; }",who):
+            pg.evaluate("(w)=>b3cWant(msStateClip(w,'guard'),30000)",who); pg.wait_for_function("(w)=>bclipReady(msStateClip(w,'guard'))",arg=who,timeout=40000)
             pg.evaluate("()=>{ window.__g=true; }")
             rise=[]
             for i in range(30): step(1/30); rise.append(M()); (i==16) and snap()
@@ -113,7 +113,7 @@ with sync_playwright() as pw:
             for i in range(75): step(1/30); low.append(M())
             feet(low,'guard lowering')
             need(set(low[-1]['drawn'])=={'clip'} and abs(low[-1]['h']-base['h'])<=2*tol,f"W4 {who}: not back to the idle video after the lowering: {low[-1]}")
-            lw=pg.evaluate("(w)=>{ const C=BCLIPS[B3_BODY_CLIPS[w].guard]; return C.dur-C.ms[C.lower]; }",who)
+            lw=pg.evaluate("(w)=>{ const C=BCLIPS[msStateClip(w,'guard')]; return C.dur-C.ms[C.lower]; }",who)
             ie=min(len(low)-2,int(lw/1000*30))   # the step where the lowering ends and the idle video takes over
             for i in range(max(0,ie-2),min(len(low)-1,ie+4)): jump(low[i],low[i+1],'where the lowering ends and the idle starts (step %d)'%i)
         # one-shot states

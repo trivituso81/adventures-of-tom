@@ -6,6 +6,7 @@
 //   msReset()   puts every file's own back
 // movebench4: the engine reads the timing and the effects from this table (engine/b3-vfx.js, engine/b3-play.js, engine/b3-stage.js, engine/b3-clips.js through msTiming and msEffects below). Phases 8 and 12 move the stage and the clips onto it,
 // each under tools/movebench/golden_test.py.
+// movebench12: which video an animation plays is the spec's `body` (msClipOf, msMotion, msPairOf, msTrimOf, msAnimOf, msStateClip, msWindClip below): a move, an attack, a wind-up ('wind:<monster>:<act>') or a body state ('body:<owner>:<state>').
 const MS={by:Object.assign({},typeof MOVE_SPECS!=='undefined'?MOVE_SPECS:{}),n:typeof MOVE_SPECS!=='undefined'?Object.keys(MOVE_SPECS).length:0};
 function msLive(id) { const s=MS.by[String(id)]; return s?s:null; }
 function msSet(id,live) {
@@ -47,7 +48,7 @@ function msStageRow(id) {
   const s=msLive(id); if(!s||!s.stage) return null;
   let R=MS_ROWS.get(s); if(R) return R;
   const b=s.body||{},t=s.timing||{},st=s.stage,c=t.contact,name=c&&typeof c==='object'?(c.mark||c.step||null):null;
-  R={body:{clip:b.clip||null,marks:b.marks||{},hand:b.hand||null},budget:typeof t.budget==='number'?t.budget:3,steps:st.steps||null,lasting:st.lasting||null,setpiece:st.setpiece||null,assets:st.objects||{}};
+  R={body:{clip:b.clip||null,marks:b.marks||{},hand:b.hand||null,trim:msTrimOf(id)},budget:typeof t.budget==='number'?t.budget:3,steps:st.steps||null,lasting:st.lasting||null,setpiece:st.setpiece||null,assets:st.objects||{}};
   if(name) { if(t.noHit) { R.hit='late'; R.late=name; } else R.hit=name; }
   MS_ROWS.set(s,R); return R;
 }
@@ -62,3 +63,39 @@ function msAnswer(id) {
   const clip=typeof a.clip==='string'&&a.clip?a.clip:null,E=(Array.isArray(a.effects)?a.effects:[]).filter(e=>e&&typeof e.fx==='string'&&!e.off).map(e=>({fx:e.fx,at:e.at==null?'contact':e.at,on:e.on||'auto',params:e.params&&typeof e.params==='object'?e.params:null,sfx:e.sfx||null}));
   return clip||E.length?{clip,effects:E}:null;
 }
+
+// ---------- which video plays (movebench12) ----------
+// The `body` of a spec (section b.2): clip (the video's id in data/clips/), motion (strike, cast, throw or give: the default motion while there is no clip), pair ({with, clip}: a two-person video), trim ({from, to}: the first
+// and last picture that play), sound ({at: picture, sfx}) and until (the baked video a move plays while its `clip` is not baked yet, or, for a staged move, while its stage is not ready: so a move keeps the video it had until the new one is made). Nothing here ever waits: no spec, no body or
+// a clip that is not baked answer null and the game plays the default motion or the stand-in, as before.
+const MS_MOTIONS=['strike','cast','throw','give'];
+function msBodyOf(id) { const s=msLive(id),b=s&&s.body; return b&&typeof b==='object'?b:null; }
+const msStr=v=>typeof v==='string'&&v?v:null;
+// The clip an animation plays on its own (not through a stage row). A staged move (it has a `stage`) plays its clip inside its stage when the stage is ready (engine/b3-stage.js); when it is not ready it plays `until`, the
+// video it played before its stage was made, or nothing (the default motion). Any other animation plays its own `clip` when baked, else `until` when that is baked, else the clip's name (null when it has none).
+function msClipOf(id) {
+  const b=msBodyOf(id); if(!b) return null;
+  const c=msStr(b.clip),u=msStr(b.until),have=typeof BCLIPS!=='undefined'?BCLIPS:{},s=msLive(id);
+  if(s.stage) return u;
+  return c&&have[c]?c:u&&have[u]?u:c;
+}
+function msMotion(id) { const b=msBodyOf(id),m=b&&b.motion; return MS_MOTIONS.includes(m)?m:null; }
+function msPairOf(id) { const b=msBodyOf(id),p=b&&b.pair; return p&&typeof p==='object'&&msStr(p.with)&&msStr(p.clip)?{with:p.with,clip:p.clip}:null; }
+function msTrimOf(id) { const b=msBodyOf(id),t=b&&b.trim; return t&&typeof t==='object'&&Number.isInteger(t.from)&&Number.isInteger(t.to)&&t.from>=0&&t.to>t.from?{from:t.from,to:t.to}:null; }
+// What a move beat plays (what the row's `anim` was): {kind:'clip', clip, pair, sound, trim, own}, or null when the animation has no clip. `own` is the clip the move's own `clip` names (the pair video is separate).
+function msAnimOf(head) {
+  const id=head&&head.via==='ruckus'?null:msIdOf(head); if(!id) return null;   // a Family Ruckus move plays its default motion, as it always did
+  const clip=msClipOf(id); if(!clip) return null;
+  const b=msBodyOf(id),sn=b&&b.sound&&typeof b.sound==='object'&&msStr(b.sound.sfx)&&typeof b.sound.at==='number'?b.sound:null;
+  return {kind:'clip',clip,pair:msPairOf(id),sound:sn,trim:msTrimOf(id)};
+}
+// The default motion a move plays while it has no clip: its `motion`, else null (the caller says strike).
+const msShapeOf=skillId=>msMotion('move:'+skillId);
+// A body state's clip id (data/clips): the owner's idle, hit, guard... or null.
+const msStateClip=(owner,state)=>msClipOf('body:'+owner+':'+state);
+// The wind-up clip of a monster's act that charges ('wind:<monster>:<act>'), or null.
+const msWindClip=(foeId,actId)=>msClipOf('wind:'+foeId+':'+actId);
+// The body states of an owner that have a clip, {state: clip id}, in the table's order.
+function msStatesOf(owner) { const out={},pre='body:'+owner+':'; for(const id in MS.by) if(id.slice(0,pre.length)===pre) { const c=msStr(MS.by[id]&&MS.by[id].body&&MS.by[id].body.clip); if(c) out[id.slice(pre.length)]=c; } return out; }
+// The spec ids of the body states, in the table's order (the workbench and the golden list them).
+function msStateIds() { const out=[]; for(const id in MS.by) if(id.slice(0,5)==='body:'&&MS.by[id]&&MS.by[id].body&&MS.by[id].body.clip) out.push(id); return out; }

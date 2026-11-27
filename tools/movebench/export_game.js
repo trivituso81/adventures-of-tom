@@ -11,4 +11,4 @@ const ctx = vm.createContext({ Math, JSON, Object, Array, String, Number, Error,
 for (const f of files) vm.runInContext(rd(f), ctx, { filename: f });
 const g = n => JSON.parse(vm.runInContext('JSON.stringify(typeof ' + n + '!=="undefined"?' + n + ':null)', ctx));
 const clips = fs.readdirSync(path.join(ROOT, 'data', 'clips')).filter(f => f.endsWith('.js')).map(f => f.replace(/\.js$/, '')).sort();
-process.stdout.write(JSON.stringify({ SKILLS: g('B3_SKILLS'), VIBES: g('B3_VIBES'), FOES: g('B3_FOES'), BODY_CLIPS: g('B3_BODY_CLIPS'), CLIPS: clips }));
+process.stdout.write(JSON.stringify({ SKILLS: g('B3_SKILLS'), VIBES: g('B3_VIBES'), FOES: g('B3_FOES'), CLIPS: clips }));

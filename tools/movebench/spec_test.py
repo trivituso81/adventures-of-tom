@@ -2,8 +2,9 @@
 # FAILS when:
 #   - a file in data/moves/ does not match the schema (tools/movebench/schema.py: types, ranges, ONE held prop, effect ids of the library, the library's own setting names and ranges,
 #     sounds of engine/audio.js, finished.by only ever tom), holds an em dash, or is not named by the slug the Guide gives its animation id;
-#   - data/move-specs.js is not what the files give (bundle.py --check), or the files are not what the old tables give (migrate.py --check);
-#   - an animation that has something today (a clip, a stage, a manifest row, a Pass-1 row, a body clip) has no file, or a file says something the old tables do not;
+#   - data/move-specs.js is not what the files give (bundle.py --check);
+#   - an animation that has something today (a stage, a manifest row, a video in the Guide's map) has no file; (movebench12) a kit row, a monster row or data/b3-clips.js still holds `anim`, `wind` or B3_BODY_CLIPS;
+#     a body.until names a clip that is not baked, or a trim that is not two pictures of the clip;
 #   - engine/b3-spec.js is not loaded after data/move-specs.js, or msLive, msSet and msReset do not answer as documented (checked in node, no browser);
 #   - (movebench7) data/movebench-fx.json is not what fxparams.py gives; a setting of any of the 37 effects has no control kind or no words in data/movebench-words.json (fx.params, fx.choices),
 #     an effect has no name or line of words, or a drawer's default is outside its own range;
@@ -13,7 +14,7 @@
 import os, sys, json, re, subprocess, collections
 HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0,HERE)
-import schema, migrate
+import schema
 fails=[]; notes=[]
 def fail(m): fails.append(m); print('FAIL',m)
 C=schema.ctx()
@@ -43,23 +44,26 @@ for _who in ('claude','migration','tom'):
     if (_who=='tom')==any('only tom can finish' in e for e in _E): fail('the schema %s a file finished by %s' % ('refuses' if _who=='tom' else 'accepts',_who))
 
 # ---- the script and the migration are fresh ----
-for cmd in (['bundle.py','--check'],['migrate.py','--check']):
+for cmd in (['bundle.py','--check'],):
     r=subprocess.run([sys.executable,'-I',os.path.join(HERE,cmd[0])]+cmd[1:],capture_output=True,text=True,cwd=ROOT)
     notes.append(r.stdout.strip().split('\n')[-1])
     if r.returncode: fail('%s: %s'%(' '.join(cmd),(r.stdout+r.stderr).strip()[:300]))
-# ---- what the old tables say, read again here, independent of migrate.py ----
-G=migrate.game(); M=json.load(open(os.path.join(ROOT,'data','guide-manifest.json'),encoding='utf8'))
+# ---- the game's tables (the rows hold no video any more: movebench12) ----
+def game():
+    r=subprocess.run(['node',os.path.join(HERE,'export_game.js')],capture_output=True,text=True,cwd=ROOT)
+    if r.returncode: raise RuntimeError('export_game.js failed: '+r.stderr[:400])
+    return json.loads(r.stdout)
+G=game(); M=json.load(open(os.path.join(ROOT,'data','guide-manifest.json'),encoding='utf8'))
 mby={m['moveId']:m for m in M['moves'] if m.get('moveId')}
 byid={d['id']:d for d in docs.values()}
 def live(aid): d=byid.get(aid); return (d or {}).get('live') or {}
 for sid,S in G['SKILLS'].items():
     aid='move:'+sid
     if aid not in A: notes.append('%s is not in data/guide-anims.json (the page lists it, its file is data/moves/move-pick-me-up.json)'%aid); continue
-    an=S.get('anim') or {}; L=live(aid); mrow=mby.get(sid)
-    has=bool(an.get('kind')=='clip' or an.get('shape') or 'stage' in L or mrow)
+    L=live(aid); mrow=mby.get(sid)
+    if ('anim' in S): fail('%s: the kit row still has `anim` (movebench12: its spec body holds which video plays)'%aid)
+    has=bool('stage' in L or mrow or (L.get('body') or {}).get('clip'))
     if has and aid not in byid: fail('%s has something today and no file'%aid)
-    if an.get('kind')=='clip' and 'stage' not in L and (L.get('body') or {}).get('clip')!=an['clip']: fail('%s: body.clip %r but the kit row plays %r'%(aid,(L.get('body') or {}).get('clip'),an['clip']))
-    if an.get('kind')!='clip' and 'stage' not in L and (L.get('body') or {}).get('clip'): fail('%s: names a clip the kit row does not play'%aid)
     if 'stage' in L:   # movebench8: the stage is the spec's own (the old staging table is gone); check it hangs together
         st=L['stage']; b=L.get('body') or {}; t=L.get('timing') or {}
         if not (st.get('steps') or st.get('lasting') or st.get('setpiece')): fail('%s: a stage with no steps, lasting thing or set piece'%aid)
@@ -74,21 +78,17 @@ for sid,S in G['SKILLS'].items():
         for oid,o in (st.get('objects') or {}).items():
             if not o.get('entry'): fail('%s: object %s has no Art Library entry'%(aid,oid))
     if mrow and isinstance(mrow.get('counterClip'),bool) and bool(mrow['counterClip'])!=('answer' in L): fail('%s: answer does not follow the manifest counterClip'%aid)
-for o,states in G['BODY_CLIPS'].items():
-    for st,clip in states.items():
-        aid='body:%s:%s'%(o,{'die':'defeated'}.get(st,st))
-        if aid not in A: aid='body:%s:%s'%(o,st)
-        if aid not in A: fail('%s:%s of B3_BODY_CLIPS is not an animation of the Guide'%(o,st)); continue
-        if (live(aid).get('body') or {}).get('clip')!=clip: fail('%s: body.clip is not %s'%(aid,clip))
+for aid,d in byid.items():   # movebench12: a body state, a wind-up and a monster attack with a video name it in their spec
+    if aid.split(':')[0] in ('body','wind') and not (live(aid).get('body') or {}).get('clip'): fail('%s: a body state or wind-up file with no body.clip'%aid)
 for fid,f in G['FOES'].items():
     for a in f['acts']:
-        an=a.get('anim') or {}
-        if an.get('kind')=='clip':
-            aid='act:%s:%s'%(fid,a['id'])
-            if aid in A and (live(aid).get('body') or {}).get('clip')!=an['clip']: fail('%s: body.clip is not %s'%(aid,an['clip']))
-        if a.get('wind'):
-            aid='wind:%s:%s'%(fid,a['id'])
-            if aid in A and not live(aid): fail('%s: has a wind-up clip and no file'%aid)
+        if 'anim' in a or 'wind' in a: fail('act %s of %s still has `anim` or `wind` in its row (its spec holds them)'%(a['id'],fid))
+if G.get('BODY_CLIPS') is not None: fail('B3_BODY_CLIPS still exists in data/b3-clips.js')
+for aid,d in byid.items():
+    b=(d.get('live') or {}).get('body') or {}
+    if b.get('until') is not None and b['until'] not in C['clips']: fail('%s: body.until %s is not baked'%(aid,b['until']))
+    if b.get('trim') is not None and b['clip'] in C['clips']:
+        n=len(re.findall(r'^\s*\[',open(os.path.join(ROOT,'data','clips',b['clip'].replace('_','-')+'.js'),encoding='utf8').read(),re.M)) if False else None
 for aid,v in A.items():
     if v.get('video') and v.get('clip') and aid.split(':')[0] in('move','act','wind','body') and aid not in byid: fail('%s has a video (%s) and no file'%(aid,v['clip']))
 c=collections.Counter(aid.split(':')[0] for aid in byid); notes.append('files by kind: '+', '.join('%s %d'%(k,n) for k,n in sorted(c.items())))

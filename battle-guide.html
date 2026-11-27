@@ -151,6 +151,9 @@ textarea{min-height:92px;resize:vertical}
 .bbar .ln .tr{position:relative;flex:1 1 auto;height:100%;background:#12272e;border-radius:5px}
 .bbar .ln .it{position:absolute;top:2px;bottom:2px;border-radius:4px;font-size:10px;font-weight:700;line-height:16px;padding:0 4px;color:#08161a;white-space:nowrap;overflow:hidden;box-sizing:border-box}
 .bbar .ln.body .it{background:var(--body)}.bbar .ln.stage .it{background:var(--stage)}.bbar .ln.fx .it{background:var(--fx)}.bbar .ln.snd .it{background:var(--snd);border-radius:7px}
+.bbar .ln .trh{position:absolute;top:0;bottom:0;width:16px;margin-left:-8px;z-index:4;cursor:ew-resize;touch-action:none;background:linear-gradient(90deg,transparent 6px,#fff 6px,#fff 10px,transparent 10px);border-radius:3px}
+.bbar .ln .trh:hover,.bbar .ln .trh:focus{background:linear-gradient(90deg,transparent 4px,#ffd24a 4px,#ffd24a 12px,transparent 12px)}
+.wbtrimtx{font-weight:700;margin-right:6px}
 .bbar .ln .it.need{background:repeating-linear-gradient(45deg,#ff5bd2,#ff5bd2 5px,#c23a9c 5px,#c23a9c 10px);color:#fff}
 .bbar .ln .it.hold{background:repeating-linear-gradient(90deg,#3d6f8a,#3d6f8a 4px,#2c5468 4px,#2c5468 8px);color:#d6efff}
 .bbar .hw{position:absolute;left:62px;right:8px;top:0;bottom:16px;pointer-events:none}
@@ -442,11 +445,13 @@ function statusesOf(effects){const out=[];(function walk(a){(a||[]).forEach(e=>{
 let ANIMS=[],ANIM_BY={};
 function owners(){return Object.keys(B3_CAST).concat(Object.keys(B3_FOES));}
 const ownerName=id=>((GUIDE&&GUIDE.owners&&GUIDE.owners[id])||{}).name||(B3_CAST[id]||B3_FOES[id]||{}).name||(id==='team'?'Everyone':cap(id));   // movebench6: team holds Pick-Me-Up, the move every family member has
+// movebench12: the spec's body of an animation, {clip, motion} (null clip when it has none)
+const msBodyClipOf=id=>{const b=typeof msLive==='function'&&msLive(id);return {clip:(b&&b.body&&b.body.clip)||null,motion:(b&&b.body&&b.body.motion)||''};};
 function buildAnims(){
   ANIMS=[];ANIM_BY={};
   const add=a=>{a.video=!!(a.clip&&CLIP_SRC[a.clip]);ANIMS.push(a);ANIM_BY[a.id]=a;};
   const body=id=>{
-    const C=(typeof B3_BODY_CLIPS!=='undefined'&&B3_BODY_CLIPS[id])||{};
+    const C=typeof msStatesOf==='function'?msStatesOf(id):{};   // movebench12: a state's video is its spec's body.clip
     const VO=(typeof B3_VIDEO_ONLY!=='undefined'&&B3_VIDEO_ONLY.includes(id))||!!(GUIDE&&GUIDE.anims&&GUIDE.anims['body:'+id+':idle']);   // startpics5: a person the data file lists the family states for (Amy, Boppy, Justin, Olivia, TNB, Nara) lists them here too
     const order=['idle','guard','hit','dodge','ko','victory','run','give','slip','flustered','die'];
     order.concat(Object.keys(C).filter(k=>!order.includes(k))).forEach(st=>{
@@ -455,16 +460,16 @@ function buildAnims(){
     });
   };
   Object.keys(B3_CAST).forEach(id=>{body(id);
-    Object.values(B3_SKILLS).filter(s=>s.vibe&&B3_VIBES[s.vibe]&&B3_VIBES[s.vibe].owner===id).forEach(s=>{const a=s.anim||{};
-      add({id:'move:'+s.id,owner:id,kind:'move',name:s.name,clip:a.kind==='clip'?a.clip:null,shape:a.shape||'',what:'move '+s.id+' in data/b3-kit-'+id+'.js',vibe:B3_VIBES[s.vibe].name});
+    Object.values(B3_SKILLS).filter(s=>s.vibe&&B3_VIBES[s.vibe]&&B3_VIBES[s.vibe].owner===id).forEach(s=>{const a=msBodyClipOf('move:'+s.id);
+      add({id:'move:'+s.id,owner:id,kind:'move',name:s.name,clip:a.clip,shape:a.motion||'',what:'move '+s.id+' in data/b3-kit-'+id+'.js',vibe:B3_VIBES[s.vibe].name});
       const ga=GUIDE&&GUIDE.anims&&GUIDE.anims['answer:'+s.id];   // movebench11: a move with a counter video has a row of its own (data/guide-anims.json), made through the same Make this video flow
       if(ga){const sp=typeof msLive==='function'?msLive('move:'+s.id):null,c=sp&&sp.answer&&sp.answer.clip||null;add({id:'answer:'+s.id,owner:id,kind:'answer',name:ga.name,clip:c,what:'counter video of move '+s.id,vibe:B3_VIBES[s.vibe].name});}});
   });
   if(B3_SKILLS.pick_me_up)add({id:'move:pick_me_up',owner:'team',kind:'move',name:B3_SKILLS.pick_me_up.name,clip:null,shape:'',what:'move pick_me_up in data/b3-rules.js'});   // movebench6: the universal move gets a row of its own
   Object.values(B3_FOES).forEach(f=>{body(f.id);
-    f.acts.forEach(act=>{const a=act.anim||{};
-      add({id:'act:'+f.id+':'+act.id,owner:f.id,kind:'act',name:act.name,clip:a.kind==='clip'?a.clip:null,what:'act '+act.id+' of '+f.id+' in data/b3-foes-ch'+String(f.ch).padStart(2,'0')+'.js'});
-      if(act.wind) add({id:'wind:'+f.id+':'+act.id,owner:f.id,kind:'wind',name:act.name+' (wind-up)',clip:act.wind,what:'wind-up of act '+act.id+' of '+f.id});});
+    f.acts.forEach(act=>{const a=msBodyClipOf('act:'+f.id+':'+act.id),wc=msBodyClipOf('wind:'+f.id+':'+act.id).clip;
+      add({id:'act:'+f.id+':'+act.id,owner:f.id,kind:'act',name:act.name,clip:a.clip,what:'act '+act.id+' of '+f.id+' in data/b3-foes-ch'+String(f.ch).padStart(2,'0')+'.js'});
+      if(wc) add({id:'wind:'+f.id+':'+act.id,owner:f.id,kind:'wind',name:act.name+' (wind-up)',clip:wc,what:'wind-up of act '+act.id+' of '+f.id});});
   });
 }
 const animsOf=id=>ANIMS.filter(a=>a.owner===id);
@@ -850,7 +855,7 @@ function foeHtml(id){
      +'<span class="chip">Hits '+esc(HITS[a.hits]||words(a.hits))+(a.aim==='back'?' in the Back row':'')+'</span><span class="chip">Wait '+a.recovery+'</span>'+(a.tags||[]).map(t=>'<span class="chip">'+esc(TAG[t]||words(t))+'</span>').join('')+'</div>'
      +(wn?'<p class="hint">When: '+wn+'.</p>':'')+(a.then?'<p class="hint">Sets up: '+esc((f.acts.find(x=>x.id===a.then)||{}).name||words(a.then))+' on its next turn.</p>':'')
      +(st.length?'<p class="hint">Leaves: '+st.map(stLink).join(', ')+'</p>':'')
-     +(a.wind?'<p style="margin-top:8px">'+playBtn('wind:'+f.id+':'+a.id)+' <span class="hint">its wind-up</span></p>':'')+'</div>';}).join('');
+     +(msWindClip(f.id,a.id)?'<p style="margin-top:8px">'+playBtn('wind:'+f.id+':'+a.id)+' <span class="hint">its wind-up</span></p>':'')+'</div>';}).join('');
   const where=Object.values(B3_FORMATIONS).filter(F=>(F.foes||[]).some(x=>x.id===id)),lab=typeof B3_LAB!=='undefined'?B3_LAB.filter(l=>where.some(F=>F.id===l.formation)):[];
   if(lab.length) h+='<h3>Test it in the Battle Lab</h3>'+lab.map(l=>'<div class="card"><h4>'+esc(l.name)+'</h4><p>'+esc(l.sub||'')+'</p></div>').join('');
   const body=animsOf(id).filter(a=>a.kind==='state');
@@ -1269,7 +1274,7 @@ function drawFrame(i){
 let ACX=null;
 function playNotes(key){try{const N=(typeof B3_SFX_NOTES!=='undefined'&&B3_SFX_NOTES[key])||[];if(!N.length)return;ACX=ACX||new (window.AudioContext||window.webkitAudioContext)();if(ACX.state==='suspended')ACX.resume();
   for(const n of N){const t=ACX.currentTime+(n.delay||0),o=ACX.createOscillator(),g=ACX.createGain();o.type=n.type||'sine';o.frequency.setValueAtTime(n.f0,t);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(n.vol,t+.005);g.gain.exponentialRampToValueAtTime(.001,t+n.dur);o.connect(g);g.connect(ACX.destination);o.start(t);o.stop(t+n.dur+.05);}}catch(e){}}
-function soundOf(a){const m=a&&a.kind==='move'?B3_SKILLS[a.id.replace(/^move:/,'')]:null;return m&&m.anim&&m.anim.sound||null;}
+function soundOf(a){const s=a&&a.kind==='move'&&typeof msLive==='function'?msLive(a.id):null;return s&&s.body&&s.body.sound||null;}   // movebench12: the sound on a clip picture is the spec's body.sound
 function tick(now){
   if(!PL.on)return;const dt=Math.min(100,now-PL.last);PL.last=now;PL.t+=dt*PL.speed;const L=clipLen(PL.D);if(PL.t>=L)PL.t%=L;
   const fi=frameAt(PL.D,PL.t),SN=soundOf(PL.a);if(SN&&fi===SN.at&&PL.sfxAt!==SN.at)playNotes(SN.sfx);PL.sfxAt=fi;drawFrame(fi);PL.raf=requestAnimationFrame(tick);
@@ -1620,7 +1625,7 @@ function benchOk(a){
   if(!a)return false;if(a.kind==='move')return !!B3_SKILLS[a.id.slice(5)];
   const p=String(a.id).split(':');
   if(a.kind==='act'){const f=B3_FOES[p[1]],A=f&&f.acts.find(x=>x.id===p[2]);return !!A&&A.hits!=='attacker';}
-  if(a.kind==='wind'){const f=B3_FOES[p[1]],A=f&&f.acts.find(x=>x.id===p[2]);return !!A&&A.hits!=='attacker'&&!!(A.wind||f.acts.some(x=>x.then===A.id));}
+  if(a.kind==='wind'){const f=B3_FOES[p[1]],A=f&&f.acts.find(x=>x.id===p[2]);return !!A&&A.hits!=='attacker'&&!!(msWindClip(p[1],A.id)||f.acts.some(x=>x.then===A.id));}
   if(a.kind==='state'){const o=p[1],st=p[2];if(B3_FOES[o])return ['idle','hit','die'].indexOf(st)>=0;
     return !!(B3_CAST[o]&&B3_CAST[o].vibes.length)&&['idle','guard','hit','dodge','ko','victory','run','cast','give'].indexOf(st)>=0;}
   return false;
@@ -1671,9 +1676,10 @@ function benchBarRender(){
   if(!tl){bar.hidden=true;if(el)el.innerHTML='';return;}
   const len=tl.len||1,cls={video:'body',wind:'body',stage:'stage',fx:'fx',snd:'snd'};
   el.innerHTML=tl.lanes.map(L=>'<div class="ln '+(cls[L.id]||'body')+'" data-lane="'+esc(L.id)+'"><span class="lb">'+esc(L.name)+'</span><span class="tr">'
-    +L.segs.map(g=>'<span class="it'+(g.k==='need'||g.pink?' need':g.k==='hold'?' hold':'')+'" data-a="'+g.a.toFixed(3)+'" data-b="'+g.b.toFixed(3)+'" style="left:'+(g.a/len*100).toFixed(2)+'%;width:'+Math.max(1.6,(g.b-g.a)/len*100).toFixed(2)+'%">'+esc(g.label)+'</span>').join('')+'</span></div>').join('');
+    +L.segs.map(g=>'<span class="it'+(g.k==='need'||g.pink?' need':g.k==='hold'?' hold':'')+'" data-k="'+esc(g.k||'')+'" data-a="'+g.a.toFixed(3)+'" data-b="'+g.b.toFixed(3)+'" style="left:'+(g.a/len*100).toFixed(2)+'%;width:'+Math.max(1.6,(g.b-g.a)/len*100).toFixed(2)+'%">'+esc(g.label)+'</span>').join('')+'</span></div>').join('');
   const hw=document.getElementById('bnhw'),ht=document.getElementById('bnhit');
   if(ht){ht.hidden=tl.hit==null;if(tl.hit!=null)ht.style.left=(tl.hit/len*100)+'%';}
+  benchTrimHandles();
   hw.querySelectorAll('i').forEach(n=>n.remove());
   (tl.ticks||[]).forEach(k=>{const i=document.createElement('i');i.style.left=(k.t/len*100)+'%';i.title=k.name;hw.appendChild(i);});
   const sc=document.getElementById('bnsc');if(sc)sc.innerHTML=[0,.25,.5,.75,1].map(f=>'<span>'+(len*f).toFixed(1)+' s</span>').join('');
@@ -1760,6 +1766,7 @@ function wbDiff(){
   const bs=(WB.base&&WB.base.stage&&WB.base.stage.steps)||[],bm=(WB.base&&WB.base.body&&WB.base.body.marks)||{};   // movebench9: the stage steps are one field, and so are the named moments
   if(JSON.stringify(stgStage())!==JSON.stringify(bs))o.steps=wbClone(stgStage());
   if(JSON.stringify(stgMarks())!==JSON.stringify(bm))o.marks=wbClone(stgMarks());
+  {const bt=(WB.base&&WB.base.body&&WB.base.body.trim)||null,dt=(WB.draft&&WB.draft.body&&WB.draft.body.trim)||null;if(JSON.stringify(dt)!==JSON.stringify(bt))o.trim=dt?wbClone(dt):null;}   // movebench12: the first and last picture of the video are one field
   if(JSON.stringify(stgObjs())!==JSON.stringify((WB.base&&WB.base.stage&&WB.base.stage.objects)||{}))o.objects=wbClone(stgObjs());   // movebench10: the objects of the move are one field too
   {const bl=(WB.base&&WB.base.stage&&WB.base.stage.lasting)||[];if(JSON.stringify(lsList())!==JSON.stringify(bl))o.lasting=wbClone(lsList());   // movebench11: lasting things, the set piece and the answer are one field each
     const bp=(WB.base&&WB.base.stage&&WB.base.stage.setpiece)||null;if(JSON.stringify(spGet())!==JSON.stringify(bp))o.setpiece=spGet()?wbClone(spGet()):null;
@@ -1798,14 +1805,14 @@ function wbRebase(fresh){
   {const mySteps=wbClone(stgStage()),myLs=wbClone(lsList()),mySp=spGet()?wbClone(spGet()):null,myAn=anGet()?wbClone(anGet()):null,myMarks=wbClone(stgMarks()),myObjs=wbClone(stgObjs());   // movebench9: the rest of the stage and of the body is the file's; his steps and moments stay his (movebench10: and his objects)
     if(fresh.stage||'steps' in mine||'objects' in mine||'lasting' in mine||'setpiece' in mine){const st=fresh.stage?wbClone(fresh.stage):{};if('steps' in mine)st.steps=mySteps;if('lasting' in mine){if(myLs.length)st.lasting=myLs;else delete st.lasting;}if('setpiece' in mine){if(mySp)st.setpiece=mySp;else delete st.setpiece;}if('objects' in mine){if(Object.keys(myObjs).length)st.objects=myObjs;else delete st.objects;}WB.draft.stage=st;}else delete WB.draft.stage;
     if('answer' in mine){if(myAn)WB.draft.answer=myAn;else delete WB.draft.answer;}else{if(fresh.answer)WB.draft.answer=wbClone(fresh.answer);else delete WB.draft.answer;}
-    const bd=fresh.body?wbClone(fresh.body):{};if('marks' in mine){if(Object.keys(myMarks).length)bd.marks=myMarks;else delete bd.marks;}WB.draft.body=bd;}
+    const myTrim=(WB.draft.body&&WB.draft.body.trim)||null,bd=fresh.body?wbClone(fresh.body):{};if('marks' in mine){if(Object.keys(myMarks).length)bd.marks=myMarks;else delete bd.marks;}if('trim' in mine){if(myTrim)bd.trim=wbClone(myTrim);else delete bd.trim;}WB.draft.body=bd;}
   WB.base=wbClone(fresh);
 }
 // Send the draft to the frame (null when it is what the game plays: the frame puts its own table's back).
 function wbSend(){
   const n=wbChanges();wbStoreWrite(WB.id,n?WB.draft:null,n?WB.base:null);
   const sp=wbSpecOf(WB.id)||{},ml=sp.timing||{},t=(WB.draft&&WB.draft.timing)||{},differs=WB_FIELDS.some(f=>JSON.stringify(t[f])!==JSON.stringify(ml[f]))||JSON.stringify((WB.draft&&WB.draft.effects)||[])!==JSON.stringify(sp.effects||[])
-    ||JSON.stringify(stgStage())!==JSON.stringify((sp.stage&&sp.stage.steps)||[])||JSON.stringify(lsList())!==JSON.stringify((sp.stage&&sp.stage.lasting)||[])||JSON.stringify(spGet())!==JSON.stringify((sp.stage&&sp.stage.setpiece)||null)||JSON.stringify(anGet())!==JSON.stringify(sp.answer||null)||JSON.stringify(stgObjs())!==JSON.stringify((sp.stage&&sp.stage.objects)||{})||JSON.stringify(stgMarks())!==JSON.stringify((sp.body&&sp.body.marks)||{});
+    ||JSON.stringify(stgStage())!==JSON.stringify((sp.stage&&sp.stage.steps)||[])||JSON.stringify(lsList())!==JSON.stringify((sp.stage&&sp.stage.lasting)||[])||JSON.stringify(spGet())!==JSON.stringify((sp.stage&&sp.stage.setpiece)||null)||JSON.stringify(anGet())!==JSON.stringify(sp.answer||null)||JSON.stringify(stgObjs())!==JSON.stringify((sp.stage&&sp.stage.objects)||{})||JSON.stringify(stgMarks())!==JSON.stringify((sp.body&&sp.body.marks)||{})||JSON.stringify((WB.draft&&WB.draft.body&&WB.draft.body.trim)||null)!==JSON.stringify((sp.body&&sp.body.trim)||null);
   benchSend({bench:'spec',id:WB.id,live:differs?WB.draft:null});
 }
 function wbEdit(patch){
@@ -1829,6 +1836,7 @@ function wbWhat(ch){
     if(f==='lasting'){p.push(W('sections.lasting')+': '+(x&&x.length?x.map(r=>lsSentence(r)).join('; '):'-'));continue;}
     if(f==='setpiece'){p.push(W('sections.setpiece')+': '+(x?W('sp.what',{dur:x.dur,dim:Math.round((x.dim||0)*100)}):'-'));continue;}
     if(f==='answer'){p.push(W('sections.answer')+': '+(x?(x.clip?W('an.what_clip')+(x.effects&&x.effects.length?', ':''):'')+(x.effects&&x.effects.length?x.effects.map(e=>fxName(e.fx)).join(', '):''):'-'));continue;}
+    if(f==='trim'){p.push(W('timing.trim.label')+': '+(x?W('timing.trim.what',{from:x.from+1,to:x.to+1}):W('timing.trim.whole')));continue;}
     if(f==='marks'){p.push(W('stage.name_label')+': '+(x&&Object.keys(x).length?Object.keys(x).join(', '):'-'));continue;}
     if(x==null)v=W('save.automatic');
     else if(f==='hitStop')v=W('timing.freeze.frames',{n:x});else if(f==='shake')v=W('timing.shake.px',{n:x});
@@ -1840,7 +1848,7 @@ function wbWhat(ch){
 function wbMerge(cur,ch,kind,now,replayed){
   const d=wbClone(cur);d.v=1;d.id=d.id||WB.id;
   const sec=wbClone((d.draft!=null?d.draft:d.live)||{});const t=Object.assign({},sec.timing||{});
-  for(const f in ch){if(f==='effects'||f==='steps'||f==='marks'||f==='objects'||f==='lasting'||f==='setpiece'||f==='answer')continue;if(ch[f]==null)delete t[f];else t[f]=wbClone(ch[f]);}
+  for(const f in ch){if(f==='effects'||f==='steps'||f==='marks'||f==='objects'||f==='lasting'||f==='setpiece'||f==='answer'||f==='trim')continue;if(ch[f]==null)delete t[f];else t[f]=wbClone(ch[f]);}
   if(Object.keys(t).length)sec.timing=t;else delete sec.timing;
   if('effects' in ch)sec.effects=wbClone(ch.effects||[]);
   if('steps' in ch){const had=!!sec.stage,st=Object.assign({},sec.stage||{});st.steps=wbClone(ch.steps||[]);if(!st.steps.length&&!had)delete sec.stage;else sec.stage=st;}
@@ -1848,6 +1856,7 @@ function wbMerge(cur,ch,kind,now,replayed){
   if('lasting' in ch){const st=Object.assign({},sec.stage||{});if((ch.lasting||[]).length)st.lasting=wbClone(ch.lasting);else delete st.lasting;if(Object.keys(st).length||sec.stage)sec.stage=st;}   // movebench11
   if('setpiece' in ch){const st=Object.assign({},sec.stage||{});if(ch.setpiece)st.setpiece=wbClone(ch.setpiece);else delete st.setpiece;if(Object.keys(st).length||sec.stage)sec.stage=st;}
   if('answer' in ch){if(ch.answer)sec.answer=wbClone(ch.answer);else delete sec.answer;}
+  if('trim' in ch){sec.body=Object.assign({},sec.body||{});if(ch.trim)sec.body.trim=wbClone(ch.trim);else delete sec.body.trim;}
   if('marks' in ch){sec.body=Object.assign({},sec.body||{});if(Object.keys(ch.marks||{}).length)sec.body.marks=wbClone(ch.marks);else delete sec.body.marks;}
   d.rev=(d.rev||0)+1;
   const what=(wbWhat(ch)||W(kind==='finished'?'save.what_finished':'save.what_draft'))+(replayed?' ('+W('save.merged')+')':'');
@@ -1934,7 +1943,7 @@ async function wbBringBack(sha){
     WB_FIELDS.forEach(f=>{if(t[f]===undefined)delete WB.draft.timing[f];else WB.draft.timing[f]=wbClone(t[f]);});
     if(src.effects===undefined)delete WB.draft.effects;else WB.draft.effects=wbClone(src.effects);
     {const sst=(src.stage&&src.stage.steps)||[];stgWrite(wbClone(sst));if(!sst.length&&!(src.stage))delete WB.draft.stage;
-      const so=(src.stage&&src.stage.objects)||{};if(Object.keys(so).length){WB.draft.stage=Object.assign({},WB.draft.stage||{});WB.draft.stage.objects=wbClone(so);}else if(WB.draft.stage){delete WB.draft.stage.objects;}const bd=Object.assign({},WB.draft.body||{}),mk=(src.body&&src.body.marks)||{};if(Object.keys(mk).length)bd.marks=wbClone(mk);else delete bd.marks;WB.draft.body=bd;}
+      const so=(src.stage&&src.stage.objects)||{};if(Object.keys(so).length){WB.draft.stage=Object.assign({},WB.draft.stage||{});WB.draft.stage.objects=wbClone(so);}else if(WB.draft.stage){delete WB.draft.stage.objects;}const bd=Object.assign({},WB.draft.body||{}),mk=(src.body&&src.body.marks)||{};if(Object.keys(mk).length)bd.marks=wbClone(mk);else delete bd.marks;if(src.body&&src.body.trim)bd.trim=wbClone(src.body.trim);else delete bd.trim;WB.draft.body=bd;}
     wbSend();wbAllPaint();wbMsg(W('versions.brought'),false,W('versions.brought_hint'));
   }catch(e){wbMsg(W('versions.failed',{why:e.message}),true);}
 }
@@ -1969,7 +1978,7 @@ function wbTimingHtml(a){
 }
 // Redraw what the controls show, in place (the sheet is not rebuilt, so nothing the Body video section holds is lost).
 function wbPaint(){
-  const a=WB.a;if(!a||!$('wb'))return;
+  const a=WB.a;if(!a||!$('wb'))return;wbTrimPaint();
   const n=wbChanges(),run=wbRun(),t=(WB.draft&&WB.draft.timing)||{};
   const ms=moveStatus(a),st=$('wbstat');if(st){st.textContent=n?W('status.changed'):moveStatusText(a,ms);st.className='wbstat'+(n?' chg':ms==='novideo'?' nov':'');st.dataset.status=n?'unsaved':ms;}
   const un=$('wbunsaved'),bt=wbBarText();if(un){un.className='wbu'+(bt.err?' err':'');un.innerHTML='<b>'+esc(bt.b)+'</b>'+(bt.s?'<span>'+esc(bt.s)+'</span>':'');}
@@ -2040,7 +2049,7 @@ function wbHtml(a,videoHtml){
    +'<div class="wt"><h2>'+esc(a.name)+'</h2><p class="wsub" id="wbsub"></p></div><span class="wbstat" id="wbstat"></span></div>'
    +'<div class="wb-body" id="wbbody"><div class="wb-prev" id="wbprev">'+benchBox(a)+'<div class="wbpink" id="wbpink" hidden>'+esc(W('fx.p.pink_tag'))+'</div></div><div class="wb-secs" id="wbsecs">'
    +'<nav class="wb-nav" id="wbnav" aria-label="'+esc(W('page.jump'))+'">'+nav.map(n=>'<button type="button" data-wbgo="'+n[0]+'">'+esc(W(n[1]))+(n[2]?'<b id="wbnav'+(n[0]==='effects'?'fx':n[0])+'">'+n[2]+'</b>':'')+'</button>').join('')+'</nav>'
-   +'<section class="wbs" id="s-video"><h3 class="wbh"><span>'+esc(W('sections.video'))+'</span></h3>'+videoHtml+'</section>'
+   +'<section class="wbs" id="s-video"><h3 class="wbh"><span>'+esc(W('sections.video'))+'</span></h3>'+videoHtml+wbTrimHtml()+'</section>'
    +'<section class="wbs" id="s-timing"><h3 class="wbh"><span>'+esc(W('sections.timing'))+'</span></h3>'+wbTimingHtml(a)+'</section>'
    +wbStageSection(a)+wbLastingSection(a)+wbFxSection(a)+wbAnswerSection(a)+wbSetSection(a)+wbSoundSection(a)+'<section class="wbs" id="s-versions"><h3 class="wbh"><span>'+esc(W('sections.versions'))+'</span></h3><p class="hint" id="wbfinline" style="margin:0 0 8px"></p>'
    +'<button type="button" data-wb="versions">'+esc(W('versions.show'))+'</button><div id="wbvers"></div></section><section class="wbs" id="s-note">'+noteForm(a)+'</section>'+(maniOf(a)?'<section class="wbs" id="s-mani">'+manifestBlock(maniOf(a))+'</section>':'')
@@ -2066,6 +2075,7 @@ function wbClick(e){
   if(b.dataset.wbver){wbBringBack(b.dataset.wbver);return;}
   if(b.dataset.wbgo){wbGo(b.dataset.wbgo);return;}
   const k=b.dataset.wb,i=k.indexOf(':'),f=i<0?k:k.slice(0,i),v=i<0?'':k.slice(i+1);
+  if(f==='trim')return wbTrimStep(v);
   if(f==='undo')return wbUndo();if(f==='reset')return wbReset();
   if(f==='save')return wbSave('draft');
   if(f==='fin'){if(!WB.confirm){WB.confirm=true;WB.msg=null;return wbPaint();}return wbSave('finished');}
@@ -2669,6 +2679,51 @@ document.addEventListener('input',e=>{const t=e.target;if(!t||!WB.a||!WB.objForm
   if(t.id==='obwhat'){WB.objForm.words=t.value;const s=$('obshort');if(s&&!WB.objForm.shortEdit){s.value=obShortName(t.value);WB.objForm.short=s.value;}}
   if(t.id==='obshort'){WB.objForm.shortEdit=true;WB.objForm.short=t.value;}});
 function stgNewId(l){let n=1;const ids=new Set(l.map(s=>s.id));while(ids.has('s'+n))n++;return 's'+n;}
+// ---------- movebench12: Trim (the first and last picture of the video; spec body.trim {from,to}, 0-based, both kept) ----------
+// Written like the moments (marks): into the draft body, and the frame plays it through the same engine (b3cTrimmed, engine/b3-clips.js). Dragging the two ends of the Video lane
+// moves them one picture at a time; the Trim row says the same in words and has + and - buttons for a finger that misses a handle.
+const wbTrimClip=()=>{const b=WB.draft&&WB.draft.body,id=b&&b.clip;return id&&CLIPS[id]&&CLIPS[id].ms?CLIPS[id]:null;};   // the clip's numbers (loaded by wbTrimEnsure; this page keeps only the numbers)
+const TRIMLOAD={};
+function wbTrimEnsure(){const b=WB.draft&&WB.draft.body,id=b&&b.clip;if(!id||CLIPS[id]||!CLIP_SRC[id]||TRIMLOAD[id])return;TRIMLOAD[id]=1;addScript(CLIP_SRC[id]).then(()=>{wbTrimPaint();benchBarRender();}).catch(()=>{});}
+function wbTrimOf(){const C=wbTrimClip();if(!C)return null;const n=C.ms.length,t=WB.draft.body.trim;return {C,n,from:t?t.from:0,to:t?t.to:n-1,set:!!t};}
+function wbSetTrim(from,to,quiet){
+  const T=wbTrimOf();if(!T)return;from=Math.max(0,Math.min(from,T.n-2));to=Math.max(from+1,Math.min(to,T.n-1));
+  if(!quiet){WB.undo.push(JSON.stringify(WB.draft));if(WB.undo.length>60)WB.undo.shift();WB.confirm=false;WB.msg=null;}
+  const bd=Object.assign({},WB.draft.body||{});if(from<=0&&to>=T.n-1)delete bd.trim;else bd.trim={from,to};WB.draft.body=bd;
+}
+function wbTrimPaint(){
+  const el=$('wbtrim');if(!el)return;wbTrimEnsure();const T=wbTrimOf();
+  if(!T){el.innerHTML='<span class="hint">'+esc(W('timing.trim.novideo'))+'</span>';return;}
+  const b=(k,txt,lab,dis)=>'<button type="button" data-wb="trim:'+k+'" aria-label="'+esc(lab)+'"'+(dis?' disabled':'')+'>'+txt+'</button>';
+  el.innerHTML='<span class="wbtrimtx" id="wbtrimtx">'+esc(T.set?W('timing.trim.what',{from:T.from+1,to:T.to+1})+' ('+W('timing.trim.of',{n:T.n})+')':W('timing.trim.whole')+' ('+W('timing.trim.of',{n:T.n})+')')+'</span> '
+   +'<span class="hint">'+esc(W('timing.trim.first'))+'</span> '+b('from-','&minus;',W('timing.trim.first_less'),T.from<=0)+b('from+','+',W('timing.trim.first_more'),T.from>=T.to-1)+' <span class="hint">'+esc(W('timing.trim.last'))+'</span> '+b('to-','&minus;',W('timing.trim.last_less'),T.to<=T.from+1)+b('to+','+',W('timing.trim.last_more'),T.to>=T.n-1)+' '
+   +b('reset',esc(W('timing.trim.reset')),W('timing.trim.reset'),!T.set);
+}
+function wbTrimHtml(){return '<div class="wbrow" data-row="trim"><div class="wl"><b>'+esc(W('timing.trim.label'))+'</b><span>'+esc(W('timing.trim.hint'))+'</span></div><div class="wc" id="wbtrim"></div></div>';}
+function wbTrimStep(v){
+  const T=wbTrimOf();if(!T)return;let f=T.from,t=T.to;
+  if(v==='from-')f--;else if(v==='from+')f++;else if(v==='to-')t--;else if(v==='to+')t++;else if(v==='reset'){f=0;t=T.n-1;}
+  wbSetTrim(f,t);wbSend();wbPaint();benchReplay();
+}
+function benchReplay(){if(BENCH.ready&&WB.a&&WB.id===BENCH.id){BENCH.want=WB.id;benchPlay();}}
+// The two ends sit on the first piece of the Video lane; the pointer moves them by the lane's own scale (seconds), so a drag of one second moves a second of picture.
+let TRIMDRAG=null;
+function benchTrimHandles(){
+  const el=document.getElementById('bnlanes');if(!el||typeof WB==='undefined'||!WB.a||WB.id!==BENCH.id||!BENCH.tl)return;
+  const T=wbTrimOf();if(!T)return;const ln=el.querySelector('.ln[data-lane="video"]')||el.querySelector('.ln[data-lane="wind"]');if(!ln)return;
+  const segs=[...ln.querySelectorAll('.it')].filter(s=>s.dataset.k==='video');if(!segs.length)return;const sg=segs.reduce((m,s)=>parseFloat(s.dataset.a)<parseFloat(m.dataset.a)?s:m,segs[0]),tr=ln.querySelector('.tr'),len=BENCH.tl.len||1;
+  const a=parseFloat(sg.dataset.a),b=parseFloat(sg.dataset.b);
+  [['from',a,W('timing.trim.first_end')],['to',b,W('timing.trim.last_end')]].forEach(h=>{const i=document.createElement('span');i.className='trh';i.dataset.trim=h[0];i.style.left=(h[1]/len*100)+'%';i.title=h[2];i.setAttribute('role','slider');i.setAttribute('aria-label',h[2]);tr.appendChild(i);});
+}
+document.addEventListener('pointerdown',e=>{const h=e.target.closest&&e.target.closest('.trh');if(!h||typeof WB==='undefined'||!WB.a)return;const T=wbTrimOf(),tr=h.parentNode;if(!T||!BENCH.tl)return;
+  e.stopPropagation();e.preventDefault();WB.undo.push(JSON.stringify(WB.draft));WB.confirm=false;WB.msg=null;
+  TRIMDRAG={end:h.dataset.trim,x0:e.clientX,w:tr.getBoundingClientRect().width||1,len:BENCH.tl.len||1,from:T.from,to:T.to,ms:T.C.ms,n:T.n,moved:false};try{h.setPointerCapture(e.pointerId);}catch(_){}
+},true);
+document.addEventListener('pointermove',e=>{if(!TRIMDRAG)return;const D=TRIMDRAG,dt=(e.clientX-D.x0)/D.w*D.len,ms=D.ms,at=D.end==='from'?ms[D.from]:ms[D.to],want=at+dt*1000;let k=0,best=1e9;
+  for(let i=0;i<ms.length;i++){const d=Math.abs(ms[i]-want);if(d<best){best=d;k=i;}}
+  if(D.end==='from')wbSetTrim(k,D.to,true);else wbSetTrim(D.from,k,true);D.moved=true;wbTrimPaint();},true);
+function wbTrimEnd(){if(!TRIMDRAG)return;const m=TRIMDRAG.moved;TRIMDRAG=null;if(m){wbSend();wbPaint();benchReplay();}else{WB.undo.pop();}}
+document.addEventListener('pointerup',wbTrimEnd,true);document.addEventListener('pointercancel',wbTrimEnd,true);
 function wbEditMarks(fn){
   const m=wbClone((WB.draft.body&&WB.draft.body.marks)||{});fn(m);
   WB.draft.body=Object.assign({},WB.draft.body||{});if(Object.keys(m).length)WB.draft.body.marks=m;else delete WB.draft.body.marks;
@@ -2967,7 +3022,7 @@ function notePrompt(c){
    +'\n\nMake it again as a video and nothing else: '+(fam?'the family route of the plan (Wan 3.0 through the wan-gen Action, jobs in tools/art-library/wangen-jobs.json)':'the monster route of the plan (xAI through the clip-gen Action, entries in tools/art-library/clip-prompts.js)')+'. '
    +(a.clip?'Start from the prompt and start picture that made the current clip and change only what the notes name; say in docs/CHANGES.md what was kept and what was changed.':'Write its prompt in the pattern of the approved clips of the same person, from what the move does and what the notes ask for.')
    +' Check every picture of the result against the list in the plan (section 4.4) and run the clip gate before Tom sees anything; a clip that fails is not handed to him. Two misses the same way is the stop-loss: stop and say what is wrong. Spend at most $3.'
-   +' Bake it, point the row at it (anim kind clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape.'
+   +' Bake it, point its spec at it (data/moves, body.clip), run python3 tools/b3_test.py s8, python3 tools/battle_guide_test.py and python3 tools/smoke.py, and look at it in portrait and landscape.'
    +' Build tag '+c.tag+'. End with one Tom card (ask animations) whose next step is: open ADMIN > BATTLE GUIDE > Animations > '+a.ownerName+', play '+a.name+', then All good or Something is wrong; set this card\'s after to it.'+PERM;
 }
 async function sendNote(){

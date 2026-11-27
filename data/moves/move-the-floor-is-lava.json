@@ -1,7 +1,7 @@
 {
  "v": 1,
  "id": "move:the_floor_is_lava",
- "rev": 2,
+ "rev": 3,
  "live": {
   "body": {
    "clip": "rose_lavahop",
@@ -19,7 +19,8 @@
     "hop3": {
      "f": 0.67
     }
-   }
+   },
+   "until": "rose_lava"
   },
   "timing": {
    "contact": {
@@ -122,6 +123,12 @@
    "at": "2026-11-27T12:00:00-08:00",
    "by": "claude",
    "what": "movebench8: body.clip is the video the stage plays over (the old staging row's clip; the kit row's was rose_lava)"
+  },
+  {
+   "rev": 3,
+   "by": "claude",
+   "at": "2026-11-27T13:07:53-08:00",
+   "what": "movebench12: body.until rose_lava: the video the kit row named, which plays until rose_lavahop (the stage video) is made"
   }
  ]
 }

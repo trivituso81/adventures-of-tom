@@ -8,8 +8,8 @@ Each request {anim, take, at, prompt} (guideflow7: tools/guidegen/apply.py write
   2. the video is cut into art/clips/<clip>.webp and data/clips/<clip>.js (tools/clip-bake/bake_clip.py, the recipe of its kind) and its <script> tag is added to index.html;
   3. the source and the prompt are kept where the next try starts from: family clips as tools/art-library/prompts/wan-<job>-v<rev>.txt and art/raw/clips/wan-<job>-v<rev>.mp4
      with the job's `rev` raised in tools/art-library/wangen-jobs.json; monster clips as a new version of the entry in data/art-prompts.json (promptRev raised, status approved);
-  4. the animation points at the clip: B3_BODY_CLIPS for a body state (and the painted row of that state is removed from B3_BODY_PAINT), `anim:{kind:'clip',clip}` on a move or
-     act row, `wind:` on a wind-up (data/b3-*.js);
+  4. the animation points at the clip: its spec file (data/moves/<slug>.json, `body.clip`, tools/movebench/specwrite.py) for a move, a monster attack, a wind-up or a body state, then
+     data/move-specs.js is rewritten (movebench12: no kit row, monster row or body table holds a clip any more);
   5. data/guide-prompts.json records the used prompt (source `used`), data/guide-anims.json is rebuilt, and the build is named, tagged and logged (bump_tags.py, docs/CHANGES.md).
 It changes files only; tools/guidegen/apply.py (workflow guide-apply) commits and pushes them, one build for every take of the batch."""
 import argparse, datetime, json, os, re, shutil, subprocess, sys, time
@@ -18,6 +18,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT0 = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(ROOT0, 'tools', 'art-library'))
 import recipe as RC
+sys.path.insert(0, os.path.join(ROOT0, 'tools', 'movebench'))
+import specwrite as SW
 
 
 def say(*a): print(time.strftime('%H:%M:%S'), *a, flush=True)
@@ -27,42 +29,17 @@ def jread(p, d=None):
 def jdump(d, indent=1): return json.dumps(d, indent=indent, ensure_ascii=False) + '\n'
 
 
-def wire_state(root, owner, state, clip_key, purge=True):
-    """B3_BODY_CLIPS[owner][state] = clip; the painted row of that state goes (no painted pose in battle, CLAUDE.md). Returns notes."""
-    f = os.path.join(root, 'data', 'b3-clips.js'); t = open(f, encoding='utf-8').read(); notes = []
-    m = re.search(r"const B3_BODY_CLIPS=\{(.*?)\n\};", t, re.S)
-    if not m: raise RuntimeError('B3_BODY_CLIPS not found in data/b3-clips.js')
-    body = m.group(1)
-    om = re.search(r"(\n  %s:\s*\{)([^}]*)(\})" % re.escape(owner), body)
-    if om:
-        items = [x for x in om.group(2).split(',') if x.strip()]
-        kept = [x for x in items if x.split(':')[0].strip() != state]
-        had = [x for x in items if x.split(':')[0].strip() == state]
-        new = kept + ["%s:'%s'" % (state, clip_key)]
-        body2 = body[:om.start(2)] + ','.join(new) + body[om.end(2):]
-        notes.append('B3_BODY_CLIPS.%s.%s = %s%s' % (owner, state, clip_key, ' (was %s)' % had[0].split(':')[1].strip() if had else ''))
-    else:
-        body2 = body.rstrip() + ",\n  %s:{%s:'%s'}" % (owner, state, clip_key); notes.append('B3_BODY_CLIPS.%s.%s = %s (new owner row)' % (owner, state, clip_key))
-    t = t[:m.start(1)] + body2 + t[m.end(1):]
-    if purge:
-        pm = re.search(r"const B3_BODY_PAINT=\{(.*?)\n\};", t, re.S)
-        if pm and re.search(r"\b%s\s*:\s*\{[^}]*\b%s\s*:" % (re.escape(owner), re.escape(state)), pm.group(1)):
-            pb = pm.group(1)
-            om2 = re.search(r"(\b%s\s*:\s*\{)([^}]*)(\})" % re.escape(owner), pb)
-            items = [x for x in om2.group(2).split(',') if x.strip() and x.split(':')[0].strip() != state]
-            pb2 = pb[:om2.start(2)] + ','.join(items) + pb[om2.end(2):]
-            t = t[:pm.start(1)] + pb2 + t[pm.end(1):]; notes.append('removed the painted %s.%s from B3_BODY_PAINT' % (owner, state))
-    open(f, 'w', encoding='utf-8').write(t)
-    return notes
+def wire_state(root, owner, state, clip_key, slug=None):
+    """The body state's spec (body:<owner>:<state>) plays the clip. Returns notes."""
+    return SW.set_clip(root, 'body:%s:%s' % (owner, state), clip_key, slug)
 
 
-def wire_row(root, anim_id, clip_key):
-    """A move or act row points at the clip (a foe's wind-up through `wind:`). The row is found from the animation id
-    (move:<skill>, act:<foe>:<act>, wind:<foe>:<act>). Returns notes."""
-    import glob
+def wire_row(root, anim_id, clip_key, slug=None):
+    """A move, an act or a wind-up plays the clip: its spec file's body.clip (move:<skill>, act:<foe>:<act>, wind:<foe>:<act>). A counter video (answer:<skill>) is the move spec's
+    `answer.clip`: the spec is rewritten the way the workbench's Finished does (rev + 1, a log line by claude) and bundled. Returns notes."""
     parts = anim_id.split(':'); kind = parts[0]
     if kind == 'answer':
-        # movebench11: the counter video is the spec's `answer.clip` (data/moves/move-<skill>.json); the spec is rewritten the way the workbench's Finished does (rev + 1, a log line by claude) and bundled
+        # movebench11: the counter video is the spec's `answer.clip` (data/moves/move-<skill>.json)
         f = os.path.join(root, 'data', 'moves', 'move-%s.json' % parts[1].replace('_', '-'))
         if not os.path.exists(f): raise RuntimeError('the move %s has no spec file (%s) to put the counter video in' % (parts[1], os.path.relpath(f, root)))
         d = json.load(open(f, encoding='utf-8')); live = d.setdefault('live', {}); an = live.setdefault('answer', {})
@@ -72,46 +49,8 @@ def wire_row(root, anim_id, clip_key):
         r = subprocess.run([sys.executable, '-I', os.path.join(root, 'tools', 'movebench', 'bundle.py')], capture_output=True, text=True, cwd=root)
         if r.returncode: raise RuntimeError('bundle.py failed: ' + (r.stderr or r.stdout)[-300:])
         return ['move %s answer.clip = %s (%s)' % (parts[1], clip_key, os.path.relpath(f, root))]
-    if kind == 'move':
-        key = parts[1]
-        for f in sorted(glob.glob(os.path.join(root, 'data', 'b3-kit-*.js'))):
-            lines = open(f, encoding='utf-8').read().split('\n')
-            for i, ln in enumerate(lines):
-                if ln.startswith('B3_SKILLS.%s={' % key):
-                    end = i
-                    for j in range(i, min(i + 12, len(lines))):
-                        end = j
-                        if lines[j].rstrip().endswith('};') or (j > i and lines[j].startswith('B3_SKILLS.')): break
-                    for j in range(i, end + 1):
-                        am = re.search(r"anim:\{([^}]*)\}", lines[j])
-                        if am:
-                            rest = [x for x in am.group(1).split(',') if x.strip() and x.split(':')[0].strip() not in ('kind', 'clip')]
-                            lines[j] = lines[j][:am.start()] + "anim:{kind:'clip',clip:'%s'%s}" % (clip_key, ''.join(',' + x for x in rest)) + lines[j][am.end():]
-                            open(f, 'w', encoding='utf-8').write('\n'.join(lines)); return ['move %s anim = clip %s (%s)' % (key, clip_key, os.path.relpath(f, root))]
-                    for j in range(i, end + 1):          # a move with no anim: put one in before its closing
-                        if lines[j].rstrip().endswith('};'):
-                            lines[j] = lines[j].rstrip()[:-2].rstrip().rstrip(',') + ",anim:{kind:'clip',clip:'%s'}};" % clip_key
-                            open(f, 'w', encoding='utf-8').write('\n'.join(lines)); return ['move %s got anim = clip %s (%s)' % (key, clip_key, os.path.relpath(f, root))]
-        raise RuntimeError('did not find the move %s (or its anim) in data/b3-kit-*.js' % key)
-    foe, act = parts[1], parts[2]
-    for f in sorted(glob.glob(os.path.join(root, 'data', 'b3-foes-ch*.js'))):
-        lines = open(f, encoding='utf-8').read().split('\n'); inside = False
-        for i, ln in enumerate(lines):
-            if ln.startswith('B3_FOES.'): inside = ln.startswith('B3_FOES.%s=' % foe)
-            if inside and re.search(r"\{id:'%s'," % re.escape(act), ln):
-                if kind == 'wind':
-                    if not re.search(r"\bwind:'[a-z0-9_]+'", ln): raise RuntimeError('act %s has no wind: to change' % act)
-                    lines[i] = re.sub(r"\bwind:'[a-z0-9_]+'", "wind:'%s'" % clip_key, ln, 1); note = '%s:%s wind = %s' % (foe, act, clip_key)
-                else:
-                    am = re.search(r"anim:\{([^}]*)\}", ln)
-                    if am:
-                        rest = [x for x in am.group(1).split(',') if x.strip() and x.split(':')[0].strip() not in ('kind', 'clip')]
-                        lines[i] = ln[:am.start()] + "anim:{kind:'clip',clip:'%s'%s}" % (clip_key, ''.join(',' + x for x in rest)) + ln[am.end():]; note = '%s:%s anim = clip %s' % (foe, act, clip_key)
-                    elif re.search(r"\beffects:\[", ln):
-                        lines[i] = re.sub(r"\beffects:\[", "anim:{kind:'clip',clip:'%s'},effects:[" % clip_key, ln, 1); note = '%s:%s got anim = clip %s' % (foe, act, clip_key)
-                    else: raise RuntimeError('act %s has no anim: or effects: to put the clip next to' % act)
-                open(f, 'w', encoding='utf-8').write('\n'.join(lines)); return [note + ' (%s)' % os.path.relpath(f, root)]
-    raise RuntimeError('did not find act %s of %s in data/b3-foes-ch*.js' % (act, foe))
+    if kind not in ('move', 'act', 'wind'): raise RuntimeError('do not know how to point %s at a clip' % anim_id)
+    return SW.set_clip(root, anim_id, clip_key, slug)
 
 
 def ensure_script_tag(root, clip_id):
@@ -126,10 +65,10 @@ def _snapshot(root):
     """What a use may touch: the bytes of the files it edits, the names in the folders it adds to."""
     import glob
     files = {}
-    for pat in ('data/art-prompts.json', 'tools/art-library/wangen-jobs.json', 'index.html', 'data/b3-clips.js', 'data/b3-kit-*.js', 'data/b3-foes-ch*.js', 'data/guide-prompts.json'):
+    for pat in ('data/art-prompts.json', 'tools/art-library/wangen-jobs.json', 'index.html', 'data/move-specs.js', 'data/moves/*.json', 'data/guide-prompts.json'):
         for f in glob.glob(os.path.join(root, pat)): files[f] = open(f, 'rb').read()
     dirs = {d: set(os.listdir(os.path.join(root, d))) if os.path.isdir(os.path.join(root, d)) else None
-            for d in ('art/raw/clips', 'tools/art-library/prompts', 'data/clips', 'art/clips')}
+            for d in ('art/raw/clips', 'tools/art-library/prompts', 'data/clips', 'art/clips', 'data/moves')}
     return files, dirs
 
 
@@ -207,9 +146,9 @@ def _use(req, state, root, G, tag):
     if ensure_script_tag(root, c['id']): notes.append('script tag added to index.html')
     # point the animation at it, and purge what it replaces
     if a['kind'] == 'state':
-        notes += wire_state(root, a['owner'], a['state'], clip_key)
+        notes += wire_state(root, a['owner'], a['state'], clip_key, a.get('slug'))
     else:
-        notes += wire_row(root, req['anim'], clip_key)
+        notes += wire_row(root, req['anim'], clip_key, a.get('slug'))
     gp = jread(os.path.join(root, 'data', 'guide-prompts.json'), {'anims': {}}); gp.setdefault('anims', {})[req['anim']] = {'prompt': prompt, 'rev': (existing or {}).get('promptRev', 0) if a['route'] == 'xai' else rev, 'source': 'used'}
     open(os.path.join(root, 'data', 'guide-prompts.json'), 'w', encoding='utf-8').write(jdump(gp))
     t['used'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())   # guidestatus1: the list stops showing Ready to review

@@ -22,20 +22,20 @@ B3_TRAITS.workout_streak={id:'workout_streak',vibe:'amy_fitness',name:'Workout S
   desc:'Every turn Amy takes builds a Rep, up to 4. Each Rep gives her 5% more Speed and 5% more damage on Clobber hits.'};
 // The spec says "ultra-fast recovery": Base Recovery 60 instead of 80 (my call).
 B3_SKILLS.kettlebell_swing={id:'kettlebell_swing',vibe:'amy_fitness',slot:'basic',name:'Kettlebell Swing',pep:0,flavor:['clobber'],power:'light',hits:1,
-  target:'foe',tags:[],composure:0,rec:60,effects:[{op:'damage'},{op:'counter',id:'reps',n:1,max:4,to:'self'}],line:null,anim:{kind:'clip',clip:'pf_amy_fq_basic',shape:'strike'},
+  target:'foe',tags:[],composure:0,rec:60,effects:[{op:'damage'},{op:'counter',id:'reps',n:1,max:4,to:'self'}],line:null,
   short:'Light hit. Builds a Rep, and Amy’s next turn comes sooner.',
   desc:'Light Clobber swing. Builds a Rep, and Amy waits much less than after any other Basic.'};
 // Burpee Blitz: a standard Clobber hit. With 3 or more Reps it also gives Amy a bonus mini-turn at once: one Basic or one Skill that costs
 // 2 Pep or less, paid for in the normal way (only the spec's Colossal Dumpling says "for free", my call). It is her one free action this round.
 B3_SKILLS.burpee_blitz={id:'burpee_blitz',vibe:'amy_fitness',slot:'s1',name:'Burpee Blitz',pep:2,flavor:['clobber'],power:'standard',hits:1,
   target:'foe',tags:[],composure:0,counter:'reps',
-  effects:[{op:'damage'},{op:'grant',to:'self',maxPep:2,basic:true,needCounter:{id:'reps',min:3}}],line:null,anim:{kind:'clip',clip:'pf_amy_fq_s1',shape:'strike'},
+  effects:[{op:'damage'},{op:'grant',to:'self',maxPep:2,basic:true,needCounter:{id:'reps',min:3}}],line:null,
   short:'Hit. With 3 Reps, Amy gets a bonus turn right away.',
   desc:'Standard Clobber jump-kick. With 3 or more Reps, Amy also gets an extra mini-turn right away: a Basic, or a Skill that costs 2 Pep or less. Once a round.'};
 // Pace-Partner Run: the ally's Speed is raised to Amy's Speed as it is when she calls them (a copied value, not a percent) for 2 turns.
 // My call: it never lowers a faster ally's Speed. The Skill does no damage.
 B3_SKILLS.pace_partner_run={id:'pace_partner_run',vibe:'amy_fitness',slot:'s2',name:'Pace-Partner Run',pep:3,flavor:['support'],power:0,hits:0,
-  target:'ally',tags:[],composure:0,effects:[{op:'status',id:'pace_run',to:'target'}],line:null,anim:{kind:'default',shape:'give'},
+  target:'ally',tags:[],composure:0,effects:[{op:'status',id:'pace_run',to:'target'}],line:null,
   short:'One family member keeps up with Amy’s speed for 2 turns.',
   desc:'Amy calls a family member onto a run beside her. For 2 turns their Speed is raised to match hers. It never slows anyone down.'};
 // "Walk It Off, Hydrate": two listeners on one row. When a Rep takes her to 4 (the `counterFull` hook), and at the start of every 3rd turn
@@ -48,7 +48,7 @@ B3_QUIRKS.walk_it_off_hydrate={id:'walk_it_off_hydrate',vibe:'amy_fitness',name:
 // family waits 20% less after every move for 2 turns (my call on the length).
 B3_SKILLS.follow_along_finale_burnout={id:'follow_along_finale_burnout',vibe:'amy_fitness',slot:'cap',name:'Follow-Along Finale Burnout',pep:6,flavor:['clobber'],power:'capstone',hits:1,
   target:'all_foes',tags:[],composure:0,counter:'reps',
-  effects:[{op:'damage',pierce:true,bonus:{counter:'reps',add:.25,spend:true}},{op:'status',id:'finale_pace',to:'allies'}],line:null,anim:{kind:'default',shape:'cast'},
+  effects:[{op:'damage',pierce:true,bonus:{counter:'reps',add:.25,spend:true}},{op:'status',id:'finale_pace',to:'allies'}],line:null,
   short:'Huge hit on every monster. Each Rep makes it stronger.',
   desc:'The workout stream counts down and Amy burns it all out: a capstone Clobber wave that goes through shields and Evasion. Every Rep is spent for 25% more damage each. The whole family waits 20% less after each move for 2 turns.'};
 // Active Recovery: a Skill that costs 2 Pep or less waits 40% less, the first time each round (the mod's `oncePerRound`, engine/b3-core.js).
@@ -69,7 +69,7 @@ B3_TRAITS.counting_to_three={id:'counting_to_three',vibe:'amy_classroom',name:'�
   effects:[{op:'status',id:'detention',to:'attacker'},{op:'composure',n:1,to:'attacker'}],
   desc:'A monster that takes a second turn before anyone in the family has acted gets Detention: 20% less Attack for 2 turns and 1 Composure pip off.'};
 B3_SKILLS.eyes_on_me_clap={id:'eyes_on_me_clap',vibe:'amy_classroom',slot:'basic',name:'“Eyes on Me” Clap',pep:0,flavor:['racket'],power:'light',hits:1,
-  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'strip',kind:'buff',n:1,stat:['spd','eva'],to:'target'}],line:null,anim:{kind:'default',shape:'cast'},
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'strip',kind:'buff',n:1,stat:['spd','eva'],to:'target'}],line:null,
   short:'Light hit. Knocks off one of its speed or dodge boosts.',
   desc:'Light Racket hit. It knocks 1 Speed or Evasion buff off the monster.'};
 // Four-Tab Binder: a light Racket slam (my call: the spec prints no damage, and a Racket Skill that hits nothing has nothing to set off)
@@ -77,13 +77,13 @@ B3_SKILLS.eyes_on_me_clap={id:'eyes_on_me_clap',vibe:'amy_classroom',slot:'basic
 // inside one round (a Mix, engine/b3-ruckus.js), it loses 1 pip, 2 if either hit struck a Pet Peeve or set off a Detonation, and everyone
 // in the party gains 1 Pep. The Binder is used up when it goes off.
 B3_SKILLS.four_tab_binder={id:'four_tab_binder',vibe:'amy_classroom',slot:'s1',name:'Four-Tab Binder',pep:3,flavor:['racket'],power:'light',hits:1,
-  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'binder',to:'target'}],line:null,anim:{kind:'default',shape:'strike'},
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'binder',to:'target'}],line:null,
   short:'Light hit. Two different flavors on it in a round earn Pep.',
   desc:'A light Racket slam with a color-coded binder that marks the monster for 2 of its turns. The first time two family members hit it with two different flavors in one round, it loses 1 Composure pip (2 if either hit struck a Pet Peeve or set off a Detonation) and the whole party gains 1 Pep.'};
 // Gold-Star Sticker: +35% damage and +35% healing and shields given, for 2 turns (my call: "potency" is both, as in Sensory Satisfying),
 // and "guaranteed accuracy": their hits ignore accuracy penalties and the monster's Evasion (not a Blind: that stays).
 B3_SKILLS.gold_star_sticker={id:'gold_star_sticker',vibe:'amy_classroom',slot:'s2',name:'Gold-Star Sticker',pep:3,flavor:['razzle'],power:0,hits:0,
-  target:'family',tags:[],composure:0,effects:[{op:'status',id:'gold_star',to:'target'}],line:null,anim:{kind:'default',shape:'give'},
+  target:'family',tags:[],composure:0,effects:[{op:'status',id:'gold_star',to:'target'}],line:null,
   short:'One family member’s moves get stronger and can’t miss.',
   desc:'A giant gold star on a family member. For 2 turns their hits, heals and shields are 35% stronger and cannot miss.'};
 // "Good Try" Margin Note: whoever breaks a monster that carries one of Amy's debuffs (a Binder, a Detention) heals 15% of their HP and gains
@@ -94,7 +94,7 @@ B3_QUIRKS.good_try_margin_note={id:'good_try_margin_note',vibe:'amy_classroom',n
 // Classroom Lights-Out Reset: a heavy Racket wave on every monster (the tier is my call, as for the other 5 Pep Capstones), which locks each
 // one out of party-wide acts for 1 of its turns (a wound-up one is lost), and every buff on the family is set back to its full length.
 B3_SKILLS.classroom_lights_out_reset={id:'classroom_lights_out_reset',vibe:'amy_classroom',slot:'cap',name:'Classroom Lights-Out Reset',pep:5,flavor:['racket'],power:'heavy',hits:1,
-  target:'all_foes',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'lights_out',to:'foes'},{op:'interrupt',to:'foes',aoeOnly:true},{op:'refresh',to:'allies'}],line:null,anim:{kind:'default',shape:'cast'},
+  target:'all_foes',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'lights_out',to:'foes'},{op:'interrupt',to:'foes',aoeOnly:true},{op:'refresh',to:'allies'}],line:null,
   short:'Heavy hit on every monster. Stops whole-family attacks.',
   desc:'Amy flicks the lights off and the room goes quiet. A heavy Racket wave hits every monster. For 1 turn none of them can use an attack on the whole family. Every buff on the family goes back to its full length.'};
 // Never Late Once: a buff Amy puts on a family member pulls them 15 ticks up the turn bar, once per action for each of them.
@@ -113,21 +113,21 @@ B3_TRAITS.eyes_in_back_of_her_head={id:'eyes_in_back_of_her_head',vibe:'amy_supe
   on:'allyBelowHp',tgtOther:true,cooldown:2,show:true,effects:[{op:'pull',n:25,to:'self'}],
   desc:'When a family member drops under 35% HP, Amy moves 25 ticks up the turn bar. It cannot happen again for 2 rounds.'};
 B3_SKILLS.backup_iced_coffee={id:'backup_iced_coffee',vibe:'amy_super',slot:'basic',name:'Backup Iced Coffee',pep:0,flavor:['drench'],power:'light',hits:1,
-  target:'either',tags:[],composure:0,effects:[{op:'damage'}],allyEffects:[{op:'heal',pct:'small'},{op:'status',id:'iced_up',to:'target'}],line:null,anim:{kind:'default',shape:'throw'},
+  target:'either',tags:[],composure:0,effects:[{op:'damage'}],allyEffects:[{op:'heal',pct:'small'},{op:'status',id:'iced_up',to:'target'}],line:null,
   short:'Light Drench hit, or a small heal and Speed for an ally.',
   desc:'On a monster, a light Drench hit. On a family member, a small heal and 15% more Speed for 2 turns.'};
 // Mom-Arm Seatbelt Stop: a fast move (Base Recovery 70, my call for "fast"). It deals no damage (the spec gives the lunge no power); the Seatbelt on the
 // two allies halves an act that reaches the whole family for 2 turns (my call for the length).
 B3_SKILLS.mom_arm_seatbelt_stop={id:'mom_arm_seatbelt_stop',vibe:'amy_super',slot:'s1',name:'Mom-Arm Seatbelt Stop',pep:2,flavor:['clobber'],power:0,hits:0,rec:70,
-  target:'ally_pair',tags:[],composure:0,effects:[{op:'status',id:'seatbelt',to:'target'}],line:null,anim:{kind:'default',shape:'give'},
+  target:'ally_pair',tags:[],composure:0,effects:[{op:'status',id:'seatbelt',to:'target'}],line:null,
   short:'Fast. Two allies take half from whole-family acts.',
   desc:'A fast protective lunge across the formation. Two family members take half damage from any act that reaches the whole family, for 2 turns.'};
 B3_SKILLS.dairy_free_snack_pack={id:'dairy_free_snack_pack',vibe:'amy_super',slot:'s2',name:'Dairy-Free Snack Pack',pep:4,flavor:['support'],power:0,hits:0,
-  target:'self',tags:[],composure:0,party:true,effects:[{op:'heal',pct:'party',to:'allies'},{op:'cleanse',ids:['slow','fatigue'],to:'allies'}],line:null,anim:{kind:'default',shape:'give'},
+  target:'self',tags:[],composure:0,party:true,effects:[{op:'heal',pct:'party',to:'allies'},{op:'cleanse',ids:['slow','fatigue'],to:'allies'}],line:null,
   short:'Heals the family and clears Slow and Fatigue.',
   desc:'Fruit leather, apple slices and protein bites: a party heal that also clears Slow and Fatigue.'};
 B3_SKILLS.act_one_inside_voice_belt={id:'act_one_inside_voice_belt',vibe:'amy_super',slot:'cap',name:'Act-One "Inside Voice" Belt',pep:5,flavor:['racket'],power:'heavy',hits:1,
-  target:'all_foes',tags:[],composure:0,party:true,effects:[{op:'damage'},{op:'status',id:'inside_voice',to:'allies'}],line:null,anim:{kind:'default',shape:'cast'},
+  target:'all_foes',tags:[],composure:0,party:true,effects:[{op:'damage'},{op:'status',id:'inside_voice',to:'allies'}],line:null,
   short:'Heavy hit on all. Family: +25% Defense, no debuffs.',
   desc:'A chandelier-rattling belt: heavy Racket hit on every monster. The whole family gets 25% more Defense and cannot be given bad effects by monsters for 2 turns.'};
 // Emergency Purse Tissue: Amy's heals grow 35% on a family member under 40% HP (the heal op reads `healGiven` with the target in view).

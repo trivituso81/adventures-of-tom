@@ -24,7 +24,7 @@ function loadGame() {
   for (const f of files) vm.runInContext(rd(f), ctx, { filename: f });
   vm.runInContext(rd('data/move-specs.js'), ctx, { filename: 'data/move-specs.js' });   // movebench8: what a move's stage plays over comes from its spec
   const g = n => vm.runInContext('typeof ' + n + '!=="undefined"?' + n + ':null', ctx);
-  return { CAST: g('B3_CAST'), SKILLS: g('B3_SKILLS'), VIBES: g('B3_VIBES'), FOES: g('B3_FOES'), BODY_CLIPS: g('B3_BODY_CLIPS') || {}, VIDEO_ONLY: g('B3_VIDEO_ONLY') || [], SPECS: g('MOVE_SPECS') || {} };
+  return { CAST: g('B3_CAST'), SKILLS: g('B3_SKILLS'), VIBES: g('B3_VIBES'), FOES: g('B3_FOES'), VIDEO_ONLY: g('B3_VIDEO_ONLY') || [], SPECS: g('MOVE_SPECS') || {} };
 }
 
 const cap = s => String(s).charAt(0).toUpperCase() + String(s).slice(1);
@@ -46,10 +46,13 @@ const JOB_ALIAS = { 'grace-guard': 'video' };   // the guard proof's job is name
 const WAN_JOBS = jread('tools/art-library/wangen-jobs.json', {});   // startpics2: a person with a start-<id> job lists every family state, like the video-only four, so their standard animations can be made
 const COUNTERS = new Set(((jread('data/guide-manifest.json', {}).moves) || []).filter(m => m.counterClip && m.moveId).map(m => m.moveId));   // movebench11
 const FAMILY_STATES = ['idle', 'guard', 'hit', 'dodge', 'ko', 'victory', 'run'];
+// movebench12: which video an animation plays is its spec's body.clip (data/moves/*.json), not a row of a data file.
+const specBody = (G, id) => (G.SPECS[id] && G.SPECS[id].body) || {};
+const statesOf = (G, owner) => { const out = {}, pre = 'body:' + owner + ':'; for (const id of Object.keys(G.SPECS)) if (id.startsWith(pre) && specBody(G, id).clip) out[id.slice(pre.length)] = specBody(G, id).clip; return out; };
 function listAnims(G) {
   const A = [];
   const body = id => {
-    const C = G.BODY_CLIPS[id] || {}, VO = G.VIDEO_ONLY.includes(id) || !!(WAN_JOBS['start-' + id] && G.CAST[id]);   // wanch2a: a video-only member lists every family state; one with no clip has no video yet
+    const C = statesOf(G, id), VO = G.VIDEO_ONLY.includes(id) || !!(WAN_JOBS['start-' + id] && G.CAST[id]);   // wanch2a: a video-only member lists every family state; one with no clip has no video yet
     const order = ['idle', 'guard', 'hit', 'dodge', 'ko', 'victory', 'run', 'give', 'slip', 'flustered', 'die'];
     order.concat(Object.keys(C).filter(k => !order.includes(k))).forEach(st => {
       if (C[st]) A.push({ id: 'body:' + id + ':' + st, owner: id, kind: 'state', state: st, name: STATE[st] || cap(st), clip: C[st], what: 'body state ' + st });
@@ -59,8 +62,9 @@ function listAnims(G) {
   Object.keys(G.CAST).forEach(id => {
     body(id);
     Object.values(G.SKILLS).filter(s => s.vibe && G.VIBES[s.vibe] && G.VIBES[s.vibe].owner === id).forEach(s => {
-      const a = s.anim || {};
-      A.push({ id: 'move:' + s.id, owner: id, kind: 'move', name: s.name, clip: a.kind === 'clip' ? a.clip : null, shape: a.shape || '', what: 'move ' + s.id + ' in data/b3-kit-' + id + '.js', src: s });
+      const a = specBody(G, 'move:' + s.id);
+      const sp = G.SPECS['move:' + s.id] || {};   // movebench12: the video the game plays now: a staged move plays `until` while its stage picture is not made, so that is the one the Guide shows
+      A.push({ id: 'move:' + s.id, owner: id, kind: 'move', name: s.name, clip: (sp.stage && a.until) || a.clip || null, shape: a.motion || '', what: 'move ' + s.id + ' in data/b3-kit-' + id + '.js', src: s });
       // movebench11: a move the manifests give a counter video (data/guide-manifest.json counterClip) has a row of its own, `answer:<skill id>`: the video the owner plays when the thing the move left answers a hit
       if (COUNTERS.has(s.id)) A.push({ id: 'answer:' + s.id, owner: id, kind: 'answer', name: s.name + ' counter', clip: (G.SPECS['move:' + s.id] && G.SPECS['move:' + s.id].answer && G.SPECS['move:' + s.id].answer.clip) || null, what: 'counter video of move ' + s.id + ' (the answer of its spec, data/moves/)', src: s });
     });
@@ -68,9 +72,9 @@ function listAnims(G) {
   Object.values(G.FOES).forEach(f => {
     body(f.id);
     f.acts.forEach(act => {
-      const a = act.anim || {};
-      A.push({ id: 'act:' + f.id + ':' + act.id, owner: f.id, kind: 'act', name: act.name, clip: a.kind === 'clip' ? a.clip : null, what: 'act ' + act.id + ' of ' + f.id + ' in data/b3-foes-ch' + String(f.ch).padStart(2, '0') + '.js', src: act, foe: f });
-      if (act.wind) A.push({ id: 'wind:' + f.id + ':' + act.id, owner: f.id, kind: 'wind', name: act.name + ' (wind-up)', clip: act.wind, what: 'wind-up of act ' + act.id + ' of ' + f.id, src: act, foe: f });
+      const a = specBody(G, 'act:' + f.id + ':' + act.id), w = specBody(G, 'wind:' + f.id + ':' + act.id);
+      A.push({ id: 'act:' + f.id + ':' + act.id, owner: f.id, kind: 'act', name: act.name, clip: a.clip || null, what: 'act ' + act.id + ' of ' + f.id + ' in data/b3-foes-ch' + String(f.ch).padStart(2, '0') + '.js', src: act, foe: f });
+      if (w.clip) A.push({ id: 'wind:' + f.id + ':' + act.id, owner: f.id, kind: 'wind', name: act.name + ' (wind-up)', clip: w.clip, what: 'wind-up of act ' + act.id + ' of ' + f.id, src: act, foe: f });
     });
   });
   return A;
@@ -287,7 +291,7 @@ function build() {
     if (fam && made && made.route === 'wan' && made.job !== job && S.jobs[made.job]) { job = made.job; used.jobs.add(job); }   // rose-lava-xftr: the job that made the clip the game plays now (rose-cushion-kling for rose_lava) wins over the job named like the clip
     // movebench8: a staged family move's spec (data/moves/<slug>.json) names the video the stage plays over (body.clip); its job is that clip with dashes. The clip is kept
     // (the approved video stays) when the kit row names the same clip; nothing waits for a stage any more.
-    const sp = fam && a.kind === 'move' ? G.SPECS['move:' + a.src.id] || null : null, stg = sp && sp.stage && sp.body && sp.body.clip ? { clip: sp.body.clip, job: dash(sp.body.clip), keep: a.clip === sp.body.clip } : null;
+    const sp = fam && a.kind === 'move' ? G.SPECS['move:' + a.src.id] || null : null, stg = sp && sp.stage && sp.body && sp.body.clip ? { clip: sp.body.clip, job: dash(sp.body.clip), keep: sp.body.until === sp.body.clip } : null;
     if (stg && S.jobs[stg.job] && (!job || (!stg.keep && job !== stg.job))) { job = stg.job; used.jobs.add(job); }   // movestage3: a move whose row makes a NEW body (keep false) uses the row's job even when an older clip of the move was made by another job (rose_lava)
     // 2 the prompt
     let prompt = '', source = '', rev = 0, promptFile = null, laterTries = 0, madeNote = '';

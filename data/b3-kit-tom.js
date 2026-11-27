@@ -15,23 +15,23 @@ B3_VIBES.tom_flier={id:'tom_flier',owner:'tom',name:'Frequent Flier',sig:1,lean:
   trait:'priority_boarding',basic:'lounge_pass_flex',skills:['zone_one_blockade','suite_door_slide','tarmac_porsche_transfer'],
   quirks:['upgrade_certificate','million_miler_status'],counter:null};
 B3_SKILLS.lounge_pass_flex={id:'lounge_pass_flex',vibe:'tom_flier',slot:'basic',name:'Lounge Pass Flex',pep:0,flavor:['racket'],power:'light',hits:1,
-  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'eyes_on_me',to:'self'}],line:null,anim:{kind:'clip',clip:'tom_loungepass',shape:'cast',sound:{at:9,sfx:'ding'}},
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'eyes_on_me',to:'self'}],line:null,
   short:'Light hit. Monsters aim at Tom more.',
   desc:'Light Racket hit. Eyes On Me: monsters aim at Tom more until his next turn ends.'};
 B3_SKILLS.zone_one_blockade={id:'zone_one_blockade',vibe:'tom_flier',slot:'s1',name:'Zone One Blockade',pep:2,flavor:['clobber'],power:0,hits:0,
-  target:'self',tags:[],composure:0,effects:[{op:'status',id:'zone_one',to:'self'}],line:null,anim:{kind:'clip',clip:'tom_blockade',shape:'cast',at:.5},
+  target:'self',tags:[],composure:0,effects:[{op:'status',id:'zone_one',to:'self'}],line:null,
   short:'For 2 turns, Tom hip-checks any monster that hits him.',
   desc:'For 2 turns, any monster that hits Tom with a melee or thrown attack gets a Clobber hip-check back.'};
 // The family next to Tom when he slides the doors shut are the ones covered (the status sits on them, engine/b3-ops.js `intercept`).
 B3_SKILLS.suite_door_slide={id:'suite_door_slide',vibe:'tom_flier',slot:'s2',name:'Suite Door Slide',pep:3,flavor:['support'],power:0,hits:0,
-  target:'adjacent_allies',tags:[],composure:0,effects:[{op:'intercept',id:'suite_door'}],line:null,anim:{kind:'default',shape:'give'},
+  target:'adjacent_allies',tags:[],composure:0,effects:[{op:'intercept',id:'suite_door'}],line:null,
   short:'For 2 turns, Tom takes hits for the family beside him.',
   desc:'For 2 turns, a hit aimed only at the family next to Tom lands on Tom instead, 35% weaker. Each one he takes gives him 1 Pep.'};
 
 // Tarmac Porsche Transfer (Grand Capstone): the spec prints "heavy AoE" (heavy tier at the all-monsters share), "strips 1 buff"
 // and "locks aggro". My calls: 1 buff comes off each monster it hits, and the lock is a taunt that lasts 2 turns.
 B3_SKILLS.tarmac_porsche_transfer={id:'tarmac_porsche_transfer',vibe:'tom_flier',slot:'cap',name:'Tarmac Porsche Transfer',pep:5,flavor:['racket'],power:'heavy',hits:1,
-  target:'all_foes',tags:[],composure:0,effects:[{op:'damage'},{op:'strip',kind:'buff',n:1,to:'target'},{op:'taunt',id:'high_beams',to:'self'}],line:null,anim:{kind:'default',shape:'cast'},
+  target:'all_foes',tags:[],composure:0,effects:[{op:'damage'},{op:'strip',kind:'buff',n:1,to:'target'},{op:'taunt',id:'high_beams',to:'self'}],line:null,
   short:'Heavy hit on every monster. Then they all aim at Tom.',
   desc:'Heavy Racket hit on every monster. Each one it hits loses 1 buff. For 2 turns, any attack aimed at one family member has to aim at Tom.'};
 // Priority Boarding: the Guard Stance is put on as the fight begins and is counted like one Tom put on during his own turn,
@@ -84,24 +84,24 @@ B3_QUIRKS.new_game_plus={id:'new_game_plus',vibe:'tom_gamer',name:'New Game Plus
 // Cartridge Blow: the light Racket hit, then the `foresee` op (engine/b3-custom.js, claude/battle-kit-ops.md line 9) picks the
 // monster's next target early and holds it to that choice. The screen marks that family member NEXT TARGET.
 B3_SKILLS.cartridge_blow={id:'cartridge_blow',vibe:'tom_gamer',slot:'basic',name:'Cartridge Blow',pep:0,flavor:['racket'],power:'light',hits:1,
-  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'foresee'}],line:null,anim:{kind:'default',shape:'cast'},
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'foresee'}],line:null,
   short:'Light hit. Shows who the monster will attack next.',
   desc:'Light Racket hit. Shows who the monster will aim its next attack at, and it keeps to that.'};
 B3_SKILLS.controller_toss={id:'controller_toss',vibe:'tom_gamer',slot:'s1',name:'Controller Toss',pep:2,flavor:['clobber'],power:'standard',hits:1,
-  target:'foe',tags:[],composure:0,effects:[{op:'damage',bonus:{if:'tookHit',add:.40}}],line:null,anim:{kind:'default',shape:'throw'},
+  target:'foe',tags:[],composure:0,effects:[{op:'damage',bonus:{if:'tookHit',add:.40}}],line:null,
   short:'Hit. Stronger if Tom just took a hit.',
   desc:'Clobber hit. 40% stronger if Tom took or blocked a hit since his last turn.'};
 // Winged Shell Lock-On: the spec says "Smacks foe" (Clobber, 4 Pep) and a free Razzle explosion if it attacks. Both are standard
 // power (my call: the spec names no tier). The explosion is the shell's own status row (data/b3-status.js winged_shell).
 B3_SKILLS.winged_shell_lock_on={id:'winged_shell_lock_on',vibe:'tom_gamer',slot:'s2',name:'Winged Shell Lock-On',pep:4,flavor:['clobber'],power:'standard',hits:1,
-  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'winged_shell',to:'target'}],line:null,anim:{kind:'default',shape:'throw'},
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'winged_shell',to:'target'}],line:null,
   short:'Hit. If it attacks before Tom’s turn, the shell explodes.',
   desc:'Clobber hit. A blue winged shell hovers over the monster until Tom’s next turn. If it attacks before then, the shell slams down in a free Razzle explosion.'};
 // Konami Code (Grand Capstone): 6 Pep, Razzle, heavy at the all-monsters share, 2 Composure pips, and each monster's crit chance
 // rises 15% for every Prime on it. "Tom glows rainbow-invincible" is the picture only (my call: nothing acts during his own
 // action, so a rule would change nothing; it is not a turn of untargetable).
 B3_SKILLS.konami_code={id:'konami_code',vibe:'tom_gamer',slot:'cap',name:'Konami Code',pep:6,flavor:['razzle'],power:'heavy',hits:1,
-  target:'all_foes',tags:[],composure:2,effects:[{op:'damage',critPerPrime:.15}],line:null,anim:{kind:'default',shape:'cast'},
+  target:'all_foes',tags:[],composure:2,effects:[{op:'damage',critPerPrime:.15}],line:null,
   short:'Heavy hit on every monster. Knocks 2 Composure off each.',
   desc:'Heavy Razzle hit on every monster, knocking 2 Composure pips off each. Each monster is 15% more likely to crit for every Prime on it.'};
 
@@ -119,26 +119,26 @@ B3_TRAITS.preheated_oven={id:'preheated_oven',vibe:'tom_baker',name:'Preheated O
 // Starter Splash: on a monster a light Drench hit (it leaves Drenched); on a family member it makes one buff or regen last 1 turn longer
 // (the `extend` op, engine/b3-ops.js). My call: "an active buff/regen" is every buff the member wears, each 1 turn longer.
 B3_SKILLS.starter_splash={id:'starter_splash',vibe:'tom_baker',slot:'basic',name:'Starter Splash',pep:0,flavor:['drench'],power:'light',hits:1,
-  target:'either',tags:[],composure:0,effects:[{op:'damage'}],allyEffects:[{op:'extend',n:1,to:'target'}],line:null,anim:{kind:'default',shape:'throw'},
+  target:'either',tags:[],composure:0,effects:[{op:'damage'}],allyEffects:[{op:'extend',n:1,to:'target'}],line:null,
   short:'Light hit, or makes a family member’s buffs last longer.',
   desc:'Tosses bubbly sourdough starter. On a monster it is a light Drench hit. On a family member it makes every buff and regen they have last 1 turn longer.'};
 // Sheet-Pan Bribe: heals now; Sugar Kick comes on Tom's next turn (my call for "in 2 turns": the `later` op runs at the start of Tom's next
 // turn, which is 2 turns after the heal counting the ally's own).
 B3_SKILLS.sheet_pan_bribe={id:'sheet_pan_bribe',vibe:'tom_baker',slot:'s1',name:'Sheet-Pan Bribe',pep:2,flavor:['support'],power:0,hits:0,
   target:'ally',tags:[],composure:0,effects:[{op:'heal',pct:'small'},
-    {op:'later',name:'Sugar Kick',who:'target',effects:[{op:'heal',pct:'small',to:'target'},{op:'pep',n:2,to:'target'}]}],line:null,anim:{kind:'default',shape:'give'},
+    {op:'later',name:'Sugar Kick',who:'target',effects:[{op:'heal',pct:'small',to:'target'},{op:'pep',n:2,to:'target'}]}],line:null,
   short:'Heals a family member now, and again next turn with +2 Pep.',
   desc:'Slides a warm cinnamon roll to a family member: a small heal now. Sugar Kick comes at the start of Tom’s next turn: a second small heal and 2 Pep for them.'};
 // Five-Hundred-Degree Boule: standard Sizzle on every monster (the hit leaves them Toasty), then every family member gets a golden-crust
 // shield of 10% Max HP for each Oven Temp Stage (a shield op with `perCounter`).
 B3_SKILLS.five_hundred_degree_boule={id:'five_hundred_degree_boule',vibe:'tom_baker',slot:'s2',name:'Five-Hundred-Degree Boule',pep:4,flavor:['sizzle'],power:'standard',hits:1,
-  target:'all_foes',tags:[],composure:0,effects:[{op:'damage'},{op:'shield',pct:0,perCounter:{counter:'oven',add:.10},to:'allies'}],line:null,anim:{kind:'default',shape:'cast'},
+  target:'all_foes',tags:[],composure:0,effects:[{op:'damage'},{op:'shield',pct:0,perCounter:{counter:'oven',add:.10},to:'allies'}],line:null,
   short:'Sizzle on all monsters. Shields the family.',
   desc:'Uncovers a 500 degree Dutch oven: Sizzle hit on every monster, which leaves them Toasty. Every family member gets a golden-crust shield of 10% Max HP for each Oven Temp Stage.'};
 // Three-Tier Showstopper Cake: party heal, cleanse, and the sparkler status (data/b3-status.js sparklers) that adds Sizzle to each
 // family member's next hit. That needed no one-off: the status listens for the hit and splashes a share of it.
 B3_SKILLS.three_tier_showstopper={id:'three_tier_showstopper',vibe:'tom_baker',slot:'cap',name:'Three-Tier Showstopper Cake',pep:5,flavor:['sizzle'],power:0,hits:0,
-  target:'self',tags:[],composure:0,party:true,effects:[{op:'heal',pct:'party',to:'allies'},{op:'cleanse',to:'allies'},{op:'status',id:'sparklers',to:'allies'}],line:null,anim:{kind:'default',shape:'cast'},
+  target:'self',tags:[],composure:0,party:true,effects:[{op:'heal',pct:'party',to:'allies'},{op:'cleanse',to:'allies'},{op:'status',id:'sparklers',to:'allies'}],line:null,
   short:'Heals the family, clears debuffs, adds Sizzle.',
   desc:'Rolls out a three-layer cake blazing with sparklers. Heals the whole family, clears their bad effects, and each of them adds Sizzle damage to their next hit.'};
 // Parchment Lined: any heal, shield or other support Skill of Tom's leaves him waiting 25% less (`moveRec` with `supportSkill`).

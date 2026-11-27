@@ -1,7 +1,7 @@
 {
  "v": 1,
  "id": "move:giddyup_tata_launch",
- "rev": 1,
+ "rev": 2,
  "live": {
   "body": {
    "clip": "rose_giddyup",
@@ -17,7 +17,8 @@
    "pair": {
     "with": "tom",
     "clip": "tom_rose_giddyup"
-   }
+   },
+   "until": "rose_giddyup"
   },
   "timing": {
    "contact": {
@@ -117,6 +118,12 @@
    "at": "2026-11-26T22:00:00-08:00",
    "by": "migration",
    "what": "written from the tables the engine reads today"
+  },
+  {
+   "rev": 2,
+   "by": "claude",
+   "at": "2026-11-27T13:10:03-08:00",
+   "what": "movebench12: body.until = the clip: the video this staged move plays while its stage is not ready (the kit row named it)"
   }
  ]
 }

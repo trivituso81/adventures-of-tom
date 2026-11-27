@@ -31,7 +31,7 @@ function b3gStandIn(R) {
   const dur=Math.round((R.budget||3)*1000),n=Math.max(2,Math.round(dur/1000*24)),ms=[]; for(let i=0;i<n;i++) ms.push(Math.min(i*1000/24,dur*.95));
   return B3G.stand[key]={id:null,dur,n,ms,standIn:true};
 }
-const b3gClipOf=R=>BCLIPS[R.body.clip]||(b3gNoVideo(R)?b3gStandIn(R):null);
+const b3gClipOf=R=>BCLIPS[R.body.clip]?b3cTrimmed(BCLIPS[R.body.clip],R.body.trim):(b3gNoVideo(R)?b3gStandIn(R):null);   // movebench12: a spec's trim
 // A row is usable when its body clip and every asset are baked into this build (otherwise the move plays what it plays today).
 // movebench10: in the workbench preview only (cfg.pink, set by engine/b3-bench.js; never by the game or the golden recorder) an object with no baked picture is a pink dashed box of its size, so a row whose picture is
 // not made yet still plays its stage. The game plays a row only when every picture is baked, as before.
@@ -53,7 +53,7 @@ function b3gRowFor(head) {
 
 // ---------- time and place ----------
 const b3gEase=q=>{ q=Math.max(0,Math.min(1,q)); return q*q*(3-2*q); };
-function b3gMarkMs(R,CL,name) { const m=R.body.marks&&R.body.marks[name]; if(!m) return null; return m.pic!=null?(CL.ms[Math.min(CL.n-1,m.pic)]||0):m.f!=null?m.f*CL.dur:m.ms!=null?m.ms:null; }
+function b3gMarkMs(R,CL,name) { const m=R.body.marks&&R.body.marks[name]; if(!m) return null; return m.pic!=null?(CL.ms[Math.max(0,Math.min(CL.n-1,m.pic-(CL.trimmed?CL.trimmed.from:0)))]||0):m.f!=null?m.f*CL.dur:m.ms!=null?m.ms:null; }
 // Seconds from the start of the move for an `at`: a number, a mark name, a step id, {mark,plus} or {step,plus}.
 function b3gAt(R,CL,at,ids) {
   if(typeof at==='number') return at;

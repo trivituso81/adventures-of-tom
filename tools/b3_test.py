@@ -1210,7 +1210,7 @@ S8_TRACE="""()=>{ if(window.__c8) { window.__c8.hits=[]; window.__c8.moves=[]; r
   b3Show=function(b){ if(b.t==='hit'){ const cur=[]; for(const k in B3P.body){ const B=B3P.body[k]; if(B&&B.kind==='cmove') cur.push({who:k,t0:B.t0,T0:B.T0,id:B.C.id,imp:B.C.kind==='strike'?B.C.ms[B.C.impact]/1000:null,dur:B.C.dur/1000}); }
       for(const k in B3P.fa){ const A=B3P.fa[k]; if(A&&A.cl&&B3P.t<A.cl.t0+A.cl.dur) cur.push({who:k,t0:A.cl.t0,T0:0,id:A.cl.id,imp:BCLIPS[A.cl.id].kind==='strike'?BCLIPS[A.cl.id].ms[BCLIPS[A.cl.id].impact]/1000:null,dur:A.cl.dur}); }
       window.__c8.hits.push({t:B3P.t,tgt:b.tgt,cur}); } return os.apply(this,arguments); };
-  b3PlayMove=function(beats,done,mid,waited){ const h=beats[0]; if(h.t==='act'&&!waited) window.__c8.moves.push({src:h.src,id:h.id,clip:h.anim&&h.anim.clip||null,ready:h.anim?b3cReady(h.anim.clip):null,foe:!!h.foe}); return om.apply(this,arguments); }; }"""
+  b3PlayMove=function(beats,done,mid,waited){ const h=beats[0]; if(h.t==='act'&&!waited) { const an=msAnimOf(h); window.__c8.moves.push({src:h.src,id:h.id,clip:an&&an.clip||null,ready:an?b3cReady(an.clip):null,foe:!!h.foe}); }; return om.apply(this,arguments); }; }"""
 def s8(pg): return pg.evaluate("""()=>({ui:B3.ui,actor:B3.actor&&B3.actor.id,over:B3.F.over,loaded:b3cLoaded(),peak:B3C.peak,
   idle:B3.F.foes.map(u=>{ const id=b3cOf(u.id,'idle'); return id+':'+b3cReady(id); }),moves:window.__c8?window.__c8.moves.length:0})""")
 def shoot_move(pg,frames,n=10,gap=170):
@@ -1240,7 +1240,7 @@ def stage8(pg,lab,landscape=False):
         key=pg.evaluate('(m)=>B3.F.party.find(u=>u.id===m).key',member)
         first=[h for h in H if any(c['who']==key and c['imp'] is not None for c in h['cur'])]
         need(len(H)>=1,f'{member}: the Basic should land a hit: {H[:2]}')
-        hasclip=pg.evaluate("(m)=>{ const v=B3_VIBES[B3_CAST[m].vibes[0]]; return Object.values(B3_SKILLS).some(s=>s.vibe===v.id&&s.slot==='basic'&&s.anim&&s.anim.kind==='clip'); }",member)   # wanch1: the kit row says
+        hasclip=pg.evaluate("(m)=>{ const v=B3_VIBES[B3_CAST[m].vibes[0]]; return Object.values(B3_SKILLS).some(s=>s.vibe===v.id&&s.slot==='basic'&&msClipOf('move:'+s.id)); }",member)   # movebench12: the move's spec says
         if not hasclip: need(not first,f'{member}: the Basic has no clip in its kit row, yet one played: {H[:2]}')
         else: need(len(first)>=1,f'{member}: the Basic should be played by its clip and show a hit: {H[:2]}')
         if first:

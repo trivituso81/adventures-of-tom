@@ -5,7 +5,7 @@ moves, or touches the left edge, or leaves the ground, as the SCENARIO word in t
 a local bare git remote plays GitHub. The run is the real script on a depth 1 clone of that remote.
   B1  pass: one video, every measurement and look check passes, it is baked (art/clips, data/clips, index.html) and wired (a move row of data/b3-kit-rose.js) and merged
       into main as one commit with a docs/CHANGES.md heading named wanbulk-<card>-<run>
-  B2  edge retry: a video that fails ONLY the edge check is made once more with the next pad (0.8: the sent picture is smaller), passes, is baked and wired (B3_BODY_CLIPS)
+  B2  edge retry: a video that fails ONLY the edge check is made once more with the next pad (0.8: the sent picture is smaller), passes, is baked and wired (the spec of the body state)
   B3  stop: a video that fails the feet check is stopped at once (no retry), and one that fails the look check too (the checker is only asked after the measurements pass);
       an edge miss on both pads is stopped after two videos; each stopped job gets ONE Claude card (Opus 5.5, medium) with the evidence; a second tap makes nothing again
   B4  cap: the run cap stops exactly the job that would pass it (nothing booked, nothing sent), the job is made at the next tap
@@ -170,7 +170,7 @@ def cp(rel):
 for rel in ['wangen', 'falq', 'wanqa', 'wanbulk', 'wanbake', 'wanstage', 'artgen', 'artqa', 'clipmarks']: cp('tools/art-library/%s.py' % rel)
 for f in os.listdir(os.path.join(ROOT, 'tools', 'clip-gate')):
     if f.endswith('.py'): cp('tools/clip-gate/' + f)
-for rel in ['tools/clip-bake/bake_clip.py', 'tools/clip-bake/bake_stage.py', 'tools/costlog.py', 'data/b3-clips.js', 'data/b3-kit-rose.js', 'data/guide-anims.json', 'data/moves/move-suite-door-slide.json', 'data/moves/move-lounge-pass-flex.json']: cp(rel)
+for rel in ['tools/clip-bake/bake_clip.py', 'tools/clip-bake/bake_stage.py', 'tools/costlog.py', 'data/b3-clips.js', 'data/b3-kit-rose.js', 'data/guide-anims.json', 'data/moves/move-suite-door-slide.json', 'data/moves/move-lounge-pass-flex.json', 'data/moves/move-lamb-tuck-ankle-tackle.json', 'data/moves/body-rose-guard.json', 'tools/movebench/specwrite.py', 'tools/movebench/bundle.py', 'tools/movebench/schema.py', 'data/move-specs.js']: cp(rel)   # movebench12: a wire writes the spec files
 open(os.path.join(seed, 'tools/art-library/bump_tags.py'), 'w').write("import sys; open('bump.log', 'a').write(' '.join(sys.argv[1:]) + '\\n')\n")   # the real one runs in the Action; its own tests are tag_check and buildlog
 open(os.path.join(seed, 'index.html'), 'w').write('<html><body>\n<script src="data/clips/rose-boop.js?v=clip0"></script>\n<script src="engine/b3-stage.js?v=movebench8"></script>\n</body></html>\n')
 os.makedirs(os.path.join(seed, 'docs'), exist_ok=True); open(os.path.join(seed, 'docs/CHANGES.md'), 'w').write('## old (2026-11-01): an old entry\n\n')
@@ -295,9 +295,9 @@ ok(all(f in tree for f in ('art/clips/t-pass.webp', 'data/clips/t-pass.js', 'art
 ix = main_file('index.html')
 ok('data/clips/t-pass.js' in ix and 'data/clips/t-edge.js' in ix and ix.count('data/clips/t-pass.js') == 1, 'B1 index.html loads both new clip files once', ix)
 ok("bclipDefine(\"t_pass\"" in main_file('data/clips/t-pass.js') and 'wanbulk t-wan run' in main_file('data/clips/t-pass.js'), 'B1 the clip file is the real baker output (key t_pass) with a Baked from stamp')
-kit = main_file('data/b3-kit-rose.js'); bc = main_file('data/b3-clips.js')
-ok("clip:'t_pass'" in kit and "clip:'rose_tackle'" not in kit.split("B3_SKILLS.lamb_tuck_ankle_tackle")[1].split('B3_SKILLS.')[0], 'B1 the move row of the Lamb-Tuck Ankle Tackle now plays t_pass', kit.split('B3_SKILLS.lamb_tuck_ankle_tackle')[1][:400])
-ok("dance:'t_edge'" in bc, 'B2 B3_BODY_CLIPS.rose.dance = t_edge (a body state wired)', [l for l in bc.splitlines() if l.strip().startswith('rose')])
+def spec_live(f): return json.loads(main_file('data/moves/' + f))['live']['body']
+ok(spec_live('move-lamb-tuck-ankle-tackle.json').get('clip') == 't_pass' and "t_pass" in main_file('data/move-specs.js'), 'B1 the spec of the Lamb-Tuck Ankle Tackle now names t_pass (movebench12: the kit row holds no video)', spec_live('move-lamb-tuck-ankle-tackle.json'))
+ok(spec_live('body-rose-dance.json').get('clip') == 't_edge', 'B2 the spec body:rose:dance names t_edge (a body state wired)', spec_live('body-rose-dance.json'))
 ok(sh('git', '--git-dir', bare, 'log', '--format=%s', '-3', 'main').stdout.count('wan: 2 battle videos from board card t-wan baked and wired') == 1, 'B1 one commit for the whole run')
 ok(open(os.path.join(repo1, 'bump.log')).read().strip().startswith('wanbulk-twan-'), 'B1 bump_tags was called with the build name')
 w = cards['t-wan']['wgen']
@@ -322,7 +322,7 @@ OUT2 = os.path.join(tmp, 'out2'); os.makedirs(OUT2)
 c, o, _ = run('t-wan2', out=OUT2)
 r2 = json.load(open(os.path.join(OUT2, 't-edge2-r1-result.json')))
 ok(len(sent_of('t-edge2')) == 2 and r2['verdict'] == 'stopped' and [a['failed'] for a in r2['attempts']] == [['edge'], ['edge']] and 'failed twice' in r2['why'], 'B3 an edge miss on both pads is stopped after exactly two videos', (len(sent_of('t-edge2')), r2.get('why')))
-ok("guard:'t_pass2'" in main_file('data/b3-clips.js'), 'B1 a body wire on an existing state replaces the clip key (guard)', [l for l in main_file('data/b3-clips.js').splitlines() if l.strip().startswith('rose')])
+ok(spec_live('body-rose-guard.json').get('clip') == 't_pass2', 'B1 a body wire on an existing state replaces the clip key (guard)', spec_live('body-rose-guard.json'))
 ok(bcard('c-wanstop-t-edge2-r1')['tag'] == 'wanstop-t-edge2-r1', 'B3 the stop card names its tag')
 
 # ------------------------------------------------------------------ cap

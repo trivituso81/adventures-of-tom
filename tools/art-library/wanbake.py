@@ -11,8 +11,8 @@ A job carries two fields:
       (clipmarks.py auto_marks: START the first picture, END half a second after the last movement, HIT where the figure reaches farthest;
       a loop is the whole video). A `guard` clip has no automatic marks: give marks {first, last, rise_end, lower_start}.
   "wire": one of
-      {"body": {"owner": "rose", "state": "guard"}}                               B3_BODY_CLIPS[owner][state] in data/b3-clips.js
-      {"move": {"file": "data/b3-kit-rose.js", "id": "lamb_tuck_ankle_tackle", "shape": "strike"}}   the row's anim becomes {kind:'clip', clip:<key>}
+      {"body": {"owner": "rose", "state": "guard"}}                               the spec body:rose:guard (data/moves) plays the clip (movebench12: tools/movebench/specwrite.py)
+      {"move": {"file": "data/b3-kit-rose.js", "id": "lamb_tuck_ankle_tackle", "shape": "strike"}}   the move's spec plays the clip (`file` and `id` find the animation; `shape` is no longer used)
       (a monster's act is the same: its file is data/b3-foes-chNN.js)
 
 A job without `bake` is made and checked but not baked; a job without `wire` is baked but not wired. Both are said on the card.
@@ -111,41 +111,6 @@ def bake(root, job, mp4, nframes, fps, stamp=''):
 
 
 # ------------------------------------------------------------------ wiring
-def _scan_string(t, i):
-    q = t[i]; i += 1
-    while i < len(t) and t[i] != q:
-        i += 2 if t[i] == '\\' else 1
-    return i + 1
-
-
-def _match(t, i):
-    """Index just past the brace that closes the one at t[i] (strings skipped)."""
-    d = 0
-    while i < len(t):
-        c = t[i]
-        if c in '\'"`': i = _scan_string(t, i); continue
-        if c == '{': d += 1
-        elif c == '}':
-            d -= 1
-            if d == 0: return i + 1
-        i += 1
-    raise BakeError('unbalanced braces in the file')
-
-
-def _row(t, ident):
-    """(start, end) of the object literal that holds `id:'<ident>'`: the innermost brace pair around it."""
-    m = re.search(r"\bid:\s*'%s'" % re.escape(ident), t)
-    if not m: raise BakeError('no row with id %r in the file' % ident)
-    at = m.start(); j = at
-    while j > 0:
-        j = t.rfind('{', 0, j)
-        if j < 0: break
-        try: e = _match(t, j)
-        except BakeError: continue
-        if e > at: return j, e
-    raise BakeError('could not find the object around id %r' % ident)
-
-
 def wire(root, job):
     """Edits the game's data file named by job['wire'] to play the job's clip. Returns a note. Raises BakeError."""
     w, key = job['wire'], key_of(job['bake']['id'])
@@ -153,33 +118,25 @@ def wire(root, job):
         import wanstage
         try: return wanstage.wire_stage(root, job)
         except wanstage.BakeError as x: raise BakeError(str(x))
+    sys.path.insert(0, os.path.join(root, 'tools', 'movebench')); import specwrite
     if 'body' in w:
-        f = os.path.join(root, 'data', 'b3-clips.js'); t = open(f, encoding='utf-8').read()
         o, st = w['body']['owner'], w['body']['state']
-        mm = re.search(r'(const B3_BODY_CLIPS=\{.*?\n\};)', t, re.S)
-        if not mm: raise BakeError('data/b3-clips.js has no B3_BODY_CLIPS table')
-        blk = mm.group(1)
-        mo = re.search(r'(\n\s*%s:\s*\{)([^}]*)(\})' % re.escape(o), blk)
-        if not mo: raise BakeError('B3_BODY_CLIPS has no row for %s' % o)
-        body = mo.group(2)
-        if re.search(r'\b%s\s*:\s*\'[^\']*\'' % re.escape(st), body): body2 = re.sub(r'(\b%s\s*:\s*)\'[^\']*\'' % re.escape(st), lambda x: x.group(1) + "'%s'" % key, body, count=1)
-        else: body2 = body.rstrip() + (',' if body.strip() else '') + "%s:'%s'" % (st, key)
-        blk2 = blk[:mo.start(2)] + body2 + blk[mo.end(2):]
-        open(f, 'w', encoding='utf-8').write(t.replace(blk, blk2, 1))
-        return 'B3_BODY_CLIPS.%s.%s = %s' % (o, st, key)
-    mv = w['move']; f = os.path.join(root, mv['file']); t = open(f, encoding='utf-8').read()
-    s, e = _row(t, mv['id']); row = t[s:e]
-    shape = (",shape:'%s'" % mv['shape']) if mv.get('shape') else ''
-    ma = re.search(r'\banim:\s*\{', row)
-    if ma:
-        ae = _match(row, ma.end() - 1); old = row[ma.start():ae]
-        if re.search(r"kind:\s*'clip'", old): new = re.sub(r"(clip:\s*)'[^']*'", lambda x: x.group(1) + "'%s'" % key, old, count=1)
-        else: new = "anim:{kind:'clip',clip:'%s'%s}" % (key, shape)
-        row2 = row[:ma.start()] + new + row[ae:]
-    else:
-        row2 = row[:-1].rstrip().rstrip(',') + ",anim:{kind:'clip',clip:'%s'%s}}" % (key, shape)
-    open(f, 'w', encoding='utf-8').write(t[:s] + row2 + t[e:])
-    return '%s: %s now plays %s' % (mv['file'], mv['id'], key)
+        try: specwrite.set_clip(root, 'body:%s:%s' % (o, st), key, why='from a board video job')
+        except RuntimeError as x: raise BakeError(str(x))
+        return 'body:%s:%s plays %s (data/moves)' % (o, st, key)
+    mv = w['move']; aid = _anim_id(root, mv)
+    try: specwrite.set_clip(root, aid, key, why='from a board video job')
+    except RuntimeError as x: raise BakeError(str(x))
+    return '%s now plays %s (data/moves)' % (aid, key)
+
+
+def _anim_id(root, mv):
+    """The spec id of a wire's move: move:<skill> for a family kit file, act:<monster>:<act> for a monster file (found in data/guide-anims.json by the act's id and its file)."""
+    if 'kit' in mv['file']: return 'move:' + mv['id']
+    A = json.load(open(os.path.join(root, 'data', 'guide-anims.json'), encoding='utf-8'))['anims']
+    c = [k for k, a in A.items() if k.startswith('act:') and k.endswith(':' + mv['id']) and os.path.basename(mv['file']) in (a.get('what') or '')]
+    if len(c) != 1: raise BakeError('the act %s of %s is not one animation of data/guide-anims.json (%d found)' % (mv['id'], mv['file'], len(c)))
+    return c[0]
 
 
 def syntax_ok(root, rel):

@@ -36,7 +36,7 @@ with sync_playwright() as p:
         pg.on('requestfailed', lambda r: bad.append(r.url))
         pg.on('response', lambda r: r.status >= 400 and bad.append('%d %s' % (r.status, r.url)))
         pg.goto('http://127.0.0.1:%d/index.html' % port); pg.wait_for_function("()=>typeof B3_LAB!=='undefined'&&typeof b3Lab==='function'", timeout=60000)
-        row = pg.evaluate("([m,k])=>{ const S=B3_SKILLS[m]; return {anim:S&&S.anim, def:!!BCLIPS[k], fight:B3_LAB.findIndex(L=>L.party.includes(B3_VIBES[S.vibe].owner))}; }", [move, key])
+        row = pg.evaluate("([m,k])=>{ const S=B3_SKILLS[m]; const sp=msLive('move:'+m),c=sp&&sp.body&&sp.body.clip; return {anim:c?{kind:'clip',clip:c}:null, def:!!BCLIPS[k], fight:B3_LAB.findIndex(L=>L.party.includes(B3_VIBES[S.vibe].owner))}; }", [move, key])
         need(row['anim'] and row['anim'].get('kind') == 'clip' and row['anim'].get('clip') == key and row['def'], f'P1 {move}: row {row}')
         i = row['fight']; need(i >= 0, f'P1 {move}: no Lab fight has {owner}')
         pg.goto('http://127.0.0.1:%d/index.html?go=new&i=%d&move=%s' % (port, i, move))

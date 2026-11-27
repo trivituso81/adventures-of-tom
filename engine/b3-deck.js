@@ -296,7 +296,7 @@ function b3Nope(text) { b3Sfx('nope'); if(text) { B3.note=text; b3Say(text); b3R
 function b3Select(i) {
   if(!B3.active||battle.state!=='command'||B3.ui!=='deck'||!B3.deck[i]) return;
   const e=B3.deck[i]; B3.sel=i; B3.look=null; B3.note=''; B3.sheet=null; b3AimDefault(e); b3Sfx('move');
-  if(e.S&&e.S.anim&&e.S.anim.kind==='clip') { b3cWant(e.S.anim.clip,12000); b3cWant(b3cOf(B3.actor.id,'run'),12000); }   // start loading the move's clip while the player reads it
+  const MC=e.S?msClipOf('move:'+e.S.id):null; if(MC) { b3cWant(MC,12000); b3cWant(b3cOf(B3.actor.id,'run'),12000); }   // start loading the move's clip while the player reads it
   b3Render();
 }
 // The second tap, Enter or A: use the highlighted move on its aim.

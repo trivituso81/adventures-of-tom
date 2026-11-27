@@ -9996,7 +9996,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 12: the spec names the video",
-   "next": "Which video an animation plays moves into its settings file, for moves, monster attacks, wind-ups and body states, and you can trim a video's first and last picture. Use this one works as before. Starts by itself when Move Workbench 11 ships.",
+   "next": "Shipped as movebench12: the spec names the video, the rows hold no video, and the Workbench trims a video. Use this one works as before. Move Workbench 13 starts by itself.",
    "blocks": [
     "c-movebench-13"
    ],
@@ -10029,6 +10029,10 @@
     {
      "d": "2026-11-27",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Built by claude: the spec's body.clip, motion, pair, trim and until are what the game plays; anim, wind and B3_BODY_CLIPS are deleted; use_take and wanbake write the spec; the Trim control is in the Workbench. Golden test matched value for value (219, 0 differ)."
     }
    ]
   },

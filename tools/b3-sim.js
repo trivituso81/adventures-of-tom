@@ -24,7 +24,7 @@ const DATA=['data/b3-rules.js','data/b3-gear.js','data/b3-status.js',
   ...fs.readdirSync(path.join(ROOT,'data')).filter(f=>/^b3-kit-.*\.js$/.test(f)).sort().map(f=>'data/'+f),
   ...fs.readdirSync(path.join(ROOT,'data')).filter(f=>/^b3-foes-.*\.js$/.test(f)).sort().map(f=>'data/'+f),
   'data/b3-lab.js','data/b3-story.js'];
-const RULES=['engine/b3-core.js','engine/b3-progress.js','engine/b3-timeline.js','engine/b3-hooks.js','engine/b3-ops.js','engine/b3-last.js','engine/b3-custom.js','engine/b3-resolve.js','engine/b3-ruckus.js','engine/b3-preview.js','engine/b3-foe.js','engine/b3-script.js'];
+const RULES=['data/move-specs.js','engine/b3-spec.js','engine/b3-core.js','engine/b3-progress.js','engine/b3-timeline.js','engine/b3-hooks.js','engine/b3-ops.js','engine/b3-last.js','engine/b3-custom.js','engine/b3-resolve.js','engine/b3-ruckus.js','engine/b3-preview.js','engine/b3-foe.js','engine/b3-script.js'];
 function load() {
   const ctx=vm.createContext({Math,JSON,Object,Array,String,Number,Error,console:{log(){},error(){}}});
   for(const f of [...DATA,...RULES]) vm.runInContext(fs.readFileSync(path.join(ROOT,f),'utf8'),ctx,{filename:f});

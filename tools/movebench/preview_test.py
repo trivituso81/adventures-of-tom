@@ -73,8 +73,8 @@ with sync_playwright() as pw:
     if r['moves']<100 or r['acts']<300: fail('far fewer animations than expected: %s moves, %s attacks'%(r['moves'],r['acts']))
     # ---------- 3. samples play to the end ----------
     S=pg.evaluate("""()=>{ const sk=Object.values(B3_SKILLS).filter(S=>S.vibe&&B3_VIBES[S.vibe]);
-      const staged=sk.find(S=>msStageRow('move:'+S.id)&&b3gDefined(msStageRow('move:'+S.id))&&S.slot!=='cap'),clip=sk.find(S=>!(msStageRow('move:'+S.id)&&b3gDefined(msStageRow('move:'+S.id)))&&S.anim&&S.anim.kind==='clip'),def=sk.find(S=>S.slot!=='cap'&&!(msStageRow('move:'+S.id)&&b3gDefined(msStageRow('move:'+S.id)))&&!(S.anim&&S.anim.kind==='clip'));
-      let wind=null; for(const f of Object.values(B3_FOES)) for(const a of f.acts) if(!wind&&a.wind&&a.hits!=='attacker') wind=f.id+':'+a.id;
+      const staged=sk.find(S=>msStageRow('move:'+S.id)&&b3gDefined(msStageRow('move:'+S.id))&&S.slot!=='cap'),clip=sk.find(S=>!(msStageRow('move:'+S.id)&&b3gDefined(msStageRow('move:'+S.id)))&&msClipOf('move:'+S.id)),def=sk.find(S=>S.slot!=='cap'&&!(msStageRow('move:'+S.id)&&b3gDefined(msStageRow('move:'+S.id)))&&!msClipOf('move:'+S.id));
+      let wind=null; for(const f of Object.values(B3_FOES)) for(const a of f.acts) if(!wind&&msWindClip(f.id,a.id)&&a.hits!=='attacker') wind=f.id+':'+a.id;
       const cap=sk.find(S=>S.slot==='cap');
       return {staged:'move:'+staged.id,clip:'move:'+clip.id,default:'move:'+def.id,wind:'act:'+wind,capstone:'move:'+cap.id}; }""")
     notes.append('samples: '+json.dumps(S))
@@ -109,7 +109,7 @@ with sync_playwright() as pw:
       window.__play=async(id,ans)=>{ const N=B3BENCH.BN; N.loop=false; N.turbo=4; N.answer=!!ans; B3BENCH.go(id); const t=performance.now(); let st=null;
         while(performance.now()-t<90000){ st=B3BENCH.status(); if(st.state==='ended'||st.state==='none') break; await new Promise(r=>setTimeout(r,150)); } return {st,tl:B3BENCH.timeline()}; }; }""")
     moves=pg.evaluate("""()=>{ const sk=Object.values(B3_SKILLS).filter(S=>S.vibe&&B3_VIBES[S.vibe]);
-      const clip=sk.find(S=>S.id!=='lounge_pass_flex'&&S.id!=='zone_one_blockade'&&!(msStageRow('move:'+S.id)&&b3gDefined(msStageRow('move:'+S.id)))&&S.slot!=='cap'&&S.anim&&S.anim.kind==='clip');
+      const clip=sk.find(S=>S.id!=='lounge_pass_flex'&&S.id!=='zone_one_blockade'&&!(msStageRow('move:'+S.id)&&b3gDefined(msStageRow('move:'+S.id)))&&S.slot!=='cap'&&msClipOf('move:'+S.id));
       return ['move:lounge_pass_flex','move:zone_one_blockade','move:'+clip.id]; }""")
     notes.append('same-moment moves: '+', '.join(moves))
     for mv in moves:

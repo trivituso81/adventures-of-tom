@@ -85,7 +85,7 @@ function b3Ruckus(F,u,kind,optKey) {
     const opts=i===0?pt.opts:b3RkOpts(F,x,S); if(!opts.length) return;
     const O=opts.find(o=>o.key===optKey)||opts.slice().sort((a,b)=>b3AutoScore(F,x,S,b)-b3AutoScore(F,x,S,a))[0];
     Object.assign(c,{actor:x,src:x,skill:S,targets:O.units.slice(),hit:[],landed:0,didDamage:false,tags:S.tags||[],g:'pre'});
-    const act={t:'act',src:x.key,id:S.id,name:S.name,flavor:S.flavor,shape:(S.anim&&S.anim.shape)||'strike',hits:b3HitsOf(x,S),tgts:O.units.map(t=>t.key),free:true,via:'ruckus',g:'pre'};
+    const act={t:'act',src:x.key,id:S.id,name:S.name,flavor:S.flavor,shape:msShapeOf(S.id)||'strike',hits:b3HitsOf(x,S),tgts:O.units.map(t=>t.key),free:true,via:'ruckus',g:'pre'};
     if(ran.length) act.part2=true;
     beats.push(act);
     b3Fire(F,'actionDeclared',{src:x,g:'pre'},beats);

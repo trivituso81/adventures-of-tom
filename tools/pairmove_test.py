@@ -53,7 +53,7 @@ with sync_playwright() as pw:
         return pg.evaluate("()=>{ const o={}; for(const u of B3.F.party) { const B=B3P.body[u.key]; o[u.id]=B?(B.kind+(B.C?':'+B.C.id:'')):'none'; } return o; }")
     def leave(): pg.evaluate("()=>{ window.__slow=1; }"); pg.click('#b3-exit'); pg.wait_for_timeout(700)
 
-    need(pg.evaluate("()=>{ const a=B3_SKILLS.giddyup_tata_launch.anim; return a.kind==='clip'&&a.clip==='rose_giddyup'&&a.pair&&a.pair.with==='tom'&&a.pair.clip==='tom_rose_giddyup'; }"),
+    need(pg.evaluate("()=>{ const a=msAnimOf({t:'act',id:'giddyup_tata_launch',src:'p0'}); return !!a&&a.clip==='rose_giddyup'&&a.pair&&a.pair.with==='tom'&&a.pair.clip==='tom_rose_giddyup'; }"),
          'the move row names the solo clip and the two-person clip')
     # P1: no two-person clip
     start(); has=pg.evaluate("()=>!!BCLIPS.tom_rose_giddyup")

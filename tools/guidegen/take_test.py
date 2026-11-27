@@ -145,6 +145,7 @@ shutil.copytree(ROOT + '/data/clips', root + '/data/clips'); shutil.copy(ROOT + 
 shutil.copytree(ROOT + '/art/clips/start', root + '/art/clips/start')
 sh('git', 'init', '-q', '-b', 'main', cwd=root)
 state_dir = outdir; state_json = json.load(open(state_dir + '/takes.json')); state_json['_dir'] = state_dir
+shutil.copytree(ROOT + '/data/moves', root + '/data/moves')   # movebench12: a used take writes the spec files
 G2 = RC.load(root); G2['root'] = root
 def use(anim, take, prompt=''):
     return UT.use({'anim': anim, 'take': take, 'prompt': prompt}, state_json, root, G2, 'guideuse-test')
@@ -153,13 +154,13 @@ res = use('move:lounge_pass_flex', 1, 'USED PROMPT for the lounge pass, once.')
 jobs1 = json.load(open(root + '/tools/art-library/wangen-jobs.json'))
 check('T5 a family move: the job rev goes up and the prompt file holds the prompt', jobs1['tom-loungepass']['rev'] == jobs0['tom-loungepass']['rev'] + 1 and open(root + '/' + jobs1['tom-loungepass']['prompt_file']).read().strip() == 'USED PROMPT for the lounge pass, once.', res)
 check('T5 the video is kept as wan-<job>-v<rev> and the clip is cut with its stamp', os.path.exists(root + '/' + res['files'][0]) and res['files'][0].endswith('wan-tom-loungepass-v%d.mp4' % jobs1['tom-loungepass']['rev']) and 'wan-gen tom-loungepass rev %d' % jobs1['tom-loungepass']['rev'] in open(root + '/data/clips/tom-loungepass.js').read(), res)
-check('T5 the move row still points at the clip and kept its other fields', "anim:{kind:'clip',clip:'tom_loungepass'" in open(root + '/data/b3-kit-tom.js').read(), res['notes'])
+def spec(slug): return json.load(open(root + '/data/moves/%s.json' % slug))
+sp = spec('move-lounge-pass-flex')
+check('T5 the move spec names the clip (body.clip), the log says who, data/move-specs.js has it, the kit row has no `anim`', sp['live']['body']['clip'] == 'tom_loungepass' and sp['log'][-1]['by'] == 'claude' and "tom_loungepass" in open(root + '/data/move-specs.js').read() and 'anim:' not in open(root + '/data/b3-kit-tom.js').read().split('B3_SKILLS.lounge_pass_flex')[1].split('B3_SKILLS.')[0], res['notes'])
 res = use('body:tom:idle', 1)
-bc = open(root + '/data/b3-clips.js').read()
-check('T5 a body state: B3_BODY_CLIPS names the clip and the script tag exists', "idle:'tom_idle'" in bc.replace(' ', '') and 'data/clips/tom-idle.js' in open(root + '/index.html').read(), res['notes'])
+check('T5 a body state: the spec body:tom:idle names the clip and the script tag exists', spec('body-tom-idle')['live']['body']['clip'] == 'tom_idle' and 'data/clips/tom-idle.js' in open(root + '/index.html').read(), res['notes'])
 res = use('act:skeeter:darting_bite', 2, 'USED MONSTER PROMPT, once.')
-foes = open(root + '/data/b3-foes-ch01.js').read()
-check('T5 a monster act with no clip gets anim:{kind:clip}', "id:'darting_bite'" in foes and "anim:{kind:'clip',clip:'skeeter_bite'}" in foes.split("id:'darting_bite'")[1].split('\n')[0], res['notes'])
+check('T5 a monster act with no clip gets body.clip in its spec', spec('act-skeeter-darting-bite')['live']['body']['clip'] == 'skeeter_bite', res['notes'])
 arts = {e['id']: e for e in json.load(open(root + '/data/art-prompts.json'))['entries']}
 e = arts['clip-skeeter-bite']
 check('T5 the Art Library entry has the prompt, a new version, promptRev raised and is approved', e['prompt'] == 'USED MONSTER PROMPT, once.' and e['status'] == 'approved' and e['versions'][-1].get('from') == 'guide' and e['promptRev'] >= 2, {k: e.get(k) for k in ('status', 'promptRev')})
@@ -172,7 +173,7 @@ t = MT.process(row('move:giddyup_tata_launch', 1, MOVING), state_json, G2, outdi
 json.dump(state_json, open(os.path.join(outdir, 'takes.json'), 'w')); state_json['_dir'] = outdir
 ffdir = os.path.join(TMP, 'ffonly'); os.makedirs(ffdir); os.symlink(shutil.which('ffmpeg'), os.path.join(ffdir, 'ffmpeg'))
 path0 = os.environ['PATH']; node_dir = os.path.dirname(shutil.which('node'))
-snap_files = {f: open(root + '/' + f, 'rb').read() for f in ('tools/art-library/wangen-jobs.json', 'data/b3-kit-rose.js', 'index.html')}
+snap_files = {f: open(root + '/' + f, 'rb').read() for f in ('tools/art-library/wangen-jobs.json', 'data/moves/move-giddyup-tata-launch.json', 'data/move-specs.js', 'index.html')}
 os.environ['PATH'] = ffdir + os.pathsep + node_dir
 try: check('T5 probe_fps works with no ffprobe on the machine', abs(RC.probe_fps(MOVING) - 24) < 1.5 or RC.probe_fps(MOVING) > 0, RC.probe_fps(MOVING))
 finally: os.environ['PATH'] = path0
@@ -188,8 +189,8 @@ now = {f: open(root + '/' + f, 'rb').read() for f in snap_files}
 check('T5 a use that fails half way puts every file back (no saved video, no job rev, no prompt file)', failed_use is not None and now == snap_files and not os.path.exists(root + '/art/raw/clips/wan-rose-giddyup-v10.mp4') and not os.path.exists(root + '/tools/art-library/prompts/wan-rose-giddyup-v10.txt'), (failed_use, [f for f in snap_files if now[f] != snap_files[f]]))
 rev0 = json.load(open(root + '/tools/art-library/wangen-jobs.json'))['rose-giddyup']['rev']
 res = use('move:giddyup_tata_launch', 1, 'GIDDYUP PROMPT, once.')
-kit = open(root + '/data/b3-kit-rose.js').read()
-check('T5 rose-giddyup: the clip files, the script tag and the wire are all there', os.path.exists(root + '/data/clips/rose-giddyup.js') and any(f.startswith('rose-giddyup') for f in os.listdir(root + '/art/clips')) and 'data/clips/rose-giddyup.js' in open(root + '/index.html').read() and "clip:'rose_giddyup'" in kit.replace(' ', '') or "clip:'rose-giddyup'" in kit, (res['notes'], [f for f in os.listdir(root + '/art/clips') if 'giddyup' in f]))
+kit = json.dumps(spec('move-giddyup-tata-launch')['live']['body'])
+check('T5 rose-giddyup: the clip files, the script tag and the wire are all there', os.path.exists(root + '/data/clips/rose-giddyup.js') and any(f.startswith('rose-giddyup') for f in os.listdir(root + '/art/clips')) and 'data/clips/rose-giddyup.js' in open(root + '/index.html').read() and '"clip": "rose_giddyup"' in kit, (res['notes'], [f for f in os.listdir(root + '/art/clips') if 'giddyup' in f]))
 check('T5 rose-giddyup: the job rev went up by one and the video is kept as wan-rose-giddyup-v<rev>', json.load(open(root + '/tools/art-library/wangen-jobs.json'))['rose-giddyup']['rev'] == rev0 + 1 and os.path.exists(root + '/art/raw/clips/wan-rose-giddyup-v%d.mp4' % (rev0 + 1)), res['files'])
 res = use("act:skeeter:darting_bite", 2, "USED MONSTER PROMPT, once.")
 json.dump({'done': [res], 'failed': []}, open(os.path.join(TMP, 'rep.json'), 'w'))
@@ -197,7 +198,7 @@ UT.write_changes(os.path.join(TMP, 'rep.json'), 'guideuse-test', root)
 check('T5 CHANGES.md starts with the build heading', open(root + '/docs/CHANGES.md').read().startswith('## guideuse-test ('), open(root + '/docs/CHANGES.md').read()[:200])
 node = sh('node', root + '/tools/guidegen/build_map.js', cwd=root)
 check('T5 guide-anims.json rebuilds and shows the used prompt', node.returncode == 0 and 'USED PROMPT' in json.load(open(root + '/data/guide-anims.json'))['anims']['move:lounge_pass_flex']['prompt'], node.stdout[-300:])
-bad = [f for f in ('data/b3-clips.js', 'data/b3-kit-tom.js', 'data/b3-foes-ch01.js', 'data/clips/tom-loungepass.js', 'data/clips/skeeter-bite.js') if sh('node', '--check', root + '/' + f).returncode]
+bad = [f for f in ('data/b3-clips.js', 'data/b3-kit-tom.js', 'data/b3-foes-ch01.js', 'data/move-specs.js', 'data/clips/tom-loungepass.js', 'data/clips/skeeter-bite.js') if sh('node', '--check', root + '/' + f).returncode]
 check('T5 every file the job touched is still valid JavaScript', not bad, bad)
 
 check('T5 Use marks the take used (the list stops showing Ready to review)', state_json['anims']['act:skeeter:darting_bite']['takes'][1].get('used'), state_json['anims']['act:skeeter:darting_bite']['takes'][1])

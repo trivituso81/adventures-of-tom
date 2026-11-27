@@ -9,18 +9,18 @@ B3_VIBES.rose_sugar={id:'rose_sugar',owner:'rose',name:'Sugar Rush',sig:1,lean:'
   trait:'bouncy_physics',basic:'lamb_tuck_ankle_tackle',skills:['the_floor_is_lava','giddyup_tata_launch','double_lamby_return_cart_blitz'],
   quirks:['twin_lamb_relay','its_our_longboard_now'],counter:null};
 B3_SKILLS.lamb_tuck_ankle_tackle={id:'lamb_tuck_ankle_tackle',vibe:'rose_sugar',slot:'basic',name:'Lamb-Tuck Ankle Tackle',pep:0,flavor:['clobber'],power:'light',hits:2,
-  target:'foe',tags:[],composure:0,effects:[{op:'damage'}],line:null,anim:{kind:'clip',clip:'rose_tackle',shape:'strike'},
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'}],line:null,
   short:'Two quick hits on one monster.',
   desc:'Two quick Clobber hits on one monster.'};
 B3_SKILLS.the_floor_is_lava={id:'the_floor_is_lava',vibe:'rose_sugar',slot:'s1',name:'The Floor Is Lava!',pep:3,flavor:['clobber'],power:'standard',hits:3,
-  target:'random_foes',tags:[],composure:0,effects:[{op:'damage',bonus:{if:'targetHas',ids:['toasty','dazzled'],add:.25}}],line:null,anim:{kind:'clip',clip:'rose_lava',shape:'strike'},
+  target:'random_foes',tags:[],composure:0,effects:[{op:'damage',bonus:{if:'targetHas',ids:['toasty','dazzled'],add:.25}}],line:null,
   short:'Three hops onto random monsters.',
   desc:'Three Clobber hops onto random monsters. Each hop hits 25% harder on a Toasty or Dazzled monster.'};
 // "Giddyup, Tata!" Launch: the spec's header says Sizzle and its text says "heavy Clobber + Sizzle friction", so it is a two-flavor
 // move, Sizzle first (it leaves Toasty), heavy in total. My calls: the shoulders Rose climbs are the next family member due on the
 // turn bar, and their +20% Attack lasts the common 2 turns.
 B3_SKILLS.giddyup_tata_launch={id:'giddyup_tata_launch',vibe:'rose_sugar',slot:'s2',name:'"Giddyup, Tata!" Launch',pep:4,flavor:['sizzle','clobber'],power:'heavy',hits:1,
-  target:'foe',tags:[],composure:0,effects:[{op:'status',id:'giddyup',to:'nextAlly'},{op:'damage'}],line:null,anim:{kind:'clip',clip:'rose_giddyup',pair:{with:'tom',clip:'tom_rose_giddyup'},shape:'strike'},
+  target:'foe',tags:[],composure:0,effects:[{op:'status',id:'giddyup',to:'nextAlly'},{op:'damage'}],line:null,
   short:'Powers up the next family member, then a heavy hit.',
   desc:'Rose climbs the next family member in line: they get 20% more Attack for 2 turns. Then she cannonballs one monster for a heavy Sizzle and Clobber hit.'};
 
@@ -28,7 +28,7 @@ B3_SKILLS.giddyup_tata_launch={id:'giddyup_tata_launch',vibe:'rose_sugar',slot:'
 // "+10% escalating dmg/hit vs Flustered": a hit that lands on a Flustered monster is 10% stronger for every hit of the move so
 // far (the 1st +10%, the 6th +60%).
 B3_SKILLS.double_lamby_return_cart_blitz={id:'double_lamby_return_cart_blitz',vibe:'rose_sugar',slot:'cap',name:'Double-Lamby Return-Cart Blitz',pep:6,flavor:['clobber'],power:'capstone',hits:6,
-  target:'random_foes',tags:[],composure:0,effects:[{op:'damage',bonus:{if:'targetHas',ids:['flustered'],add:.10,grow:true}}],line:null,anim:{kind:'default',shape:'strike'},
+  target:'random_foes',tags:[],composure:0,effects:[{op:'damage',bonus:{if:'targetHas',ids:['flustered'],add:.10,grow:true}}],line:null,
   short:'Six bounces onto random monsters.',
   desc:'Six Clobber ricochets onto random monsters. On a Flustered monster each one hits harder than the last: 10% more for the 1st, up to 60% more for the 6th.'};
 // Bouncy Physics: +2% Family Ruckus for every hit that lands of a move that hits more than once. The gauge is counted now; the
@@ -68,7 +68,7 @@ B3_QUIRKS.emergency_stuffy_swap={id:'emergency_stuffy_swap',vibe:'rose_cozy',nam
 // Pocket Pretzel & Pat: the pretzel goes to whoever in the family has the smallest share of their HP left, Rose included
 // (my call: a six-year-old eats her own pretzel when she is the one who is hurt). A tiny heal is 5% of Max HP.
 B3_SKILLS.pocket_pretzel_and_pat={id:'pocket_pretzel_and_pat',vibe:'rose_cozy',slot:'basic',name:'Pocket Pretzel & Pat',pep:0,flavor:['clobber'],power:'light',hits:1,
-  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'heal',pct:'tiny',to:'lowestAlly'}],line:null,anim:{kind:'default',shape:'strike'},
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'heal',pct:'tiny',to:'lowestAlly'}],line:null,
   short:'Light hit, then a tiny heal for whoever is hurt most.',
   desc:'Light Clobber bonk with Lamby. Then a pocket pretzel for whoever in the family is hurt the most: a tiny heal.'};
 
@@ -79,13 +79,13 @@ B3_SKILLS.tattered_lamby_boomerang={id:'tattered_lamby_boomerang',vibe:'rose_coz
   target:'foe',tags:[],composure:0,
   effects:[{op:'damage'},{op:'status',id:'lamby_stuck',to:'target'},
     {op:'later',name:'Give Lamby Back!',effects:[{op:'damage',flavor:['clobber'],power:'standard',hits:2,to:'target'},{op:'shield',pct:.10,to:'self'}]}],
-  line:null,anim:{kind:'default',shape:'strike'},
+  line:null,
   short:'Light hit now, two more next turn, and a small shield.',
   desc:'Rose throws scruffy Lamby at a monster: a light Clobber hit. When her next turn begins she tackles it to get him back: two quick Clobber hits, and a small shield on her.'};
 // Sofa-Cushion Citadel: a 25% Max HP shield on every family member, and nobody can be pushed back for 3 turns. 3-round cooldown.
 B3_SKILLS.sofa_cushion_citadel={id:'sofa_cushion_citadel',vibe:'rose_cozy',slot:'s2',name:'Sofa-Cushion Citadel',pep:3,flavor:['support'],power:0,hits:0,
   target:'self',tags:[],composure:0,cooldown:3,
-  effects:[{op:'shield',pct:.25,to:'allies'},{op:'status',id:'pillow_fort',to:'allies'}],line:null,anim:{kind:'default',shape:'give'},
+  effects:[{op:'shield',pct:.25,to:'allies'},{op:'status',id:'pillow_fort',to:'allies'}],line:null,
   short:'Shields the whole family. Nobody gets pushed back.',
   desc:'Cushions and blankets make a fort: every family member gets a shield of 25% of their HP and cannot be pushed back on the turn bar for 3 turns. Rose needs 3 rounds before she can build it again.'};
 // Kingdom of Ten-Thousand Blankets (Grand Capstone): one family member heals 60% and is cleansed now; the Sizzle wave comes when Rose's next turn
@@ -94,7 +94,7 @@ B3_SKILLS.kingdom_of_ten_thousand_blankets={id:'kingdom_of_ten_thousand_blankets
   target:'family',tags:[],composure:0,
   effects:[{op:'heal',pct:.60,to:'target'},{op:'cleanse',to:'target'},{op:'status',id:'blanket_castle',to:'self'},
     {op:'later',name:'Warmth Wave',who:'foes',effects:[{op:'damage',flavor:['sizzle'],power:'heavy',aoe:true,to:'foes'}]}],
-  line:null,anim:{kind:'default',shape:'give'},
+  line:null,
   short:'Big heal for one family member, then a hit on every monster.',
   desc:'A star-lit blanket castle: one family member heals 60% of their HP and every debuff on them clears. When Rose\u2019s next turn begins, a wave of Sizzle warmth hits every monster.'};
 
@@ -108,24 +108,24 @@ B3_TRAITS.too_loud_for_secrets={id:'too_loud_for_secrets',vibe:'rose_prank',name
   mods:[{stat:'reduce',kind:'loud',v:.20,when:{attackerPips:.5}}],
   desc:'A monster that has less than half its Composure left is so rattled by Rose\u2019s volume that it deals 20% less damage to her.'};
 B3_SKILLS.sneaky_nose_boop={id:'sneaky_nose_boop',vibe:'rose_prank',slot:'basic',name:'Sneaky Nose Boop',pep:0,flavor:['racket'],power:'light',hits:1,
-  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'nose_boop',to:'target'},{op:'status',id:'nose_swift',to:'self'}],line:null,anim:{kind:'default',shape:'strike'},
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'nose_boop',to:'target'},{op:'status',id:'nose_swift',to:'self'}],line:null,
   short:'Light hit. Steals 10% Speed for a turn.',
   desc:'Light Racket hit. The monster is 10% slower and Rose 10% faster until their next turns end.'};
 // Supersonic Raspberry: light Racket (my call). 1 Composure pip if the monster is winding up an act; a second if the hit was a Pet Peeve hit or a Detonation.
 B3_SKILLS.supersonic_raspberry={id:'supersonic_raspberry',vibe:'rose_prank',slot:'s1',name:'Supersonic Raspberry',pep:2,flavor:['racket'],power:'light',hits:1,
-  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'composure',n:1,to:'target',when:'targetCharging'},{op:'composure',n:1,to:'target',when:'chargingBoost'}],line:null,anim:{kind:'default',shape:'cast'},
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'composure',n:1,to:'target',when:'targetCharging'},{op:'composure',n:1,to:'target',when:'chargingBoost'}],line:null,
   short:'Light hit. Pips off a monster winding up an act.',
   desc:'Light Racket hit. If the monster is winding up an act it loses 1 Composure pip, 2 if this was a Pet Peeve hit or set off a Prime.'};
 // Backup-Lamby Bait & Switch: standard Racket (my call). The bait draws the monsters\u2019 aim: Rose cannot be aimed at until her next turn begins, then
 // the later part (the `later` op, as Give Lamby Back! is) hits with a push of 35.
 B3_SKILLS.backup_lamby_bait_and_switch={id:'backup_lamby_bait_and_switch',vibe:'rose_prank',slot:'s2',name:'Backup-Lamby Bait & Switch',pep:4,flavor:['racket'],power:'standard',hits:1,
   target:'foe',tags:[],composure:0,
-  effects:[{op:'status',id:'lamby_hide',to:'self'},{op:'later',name:'BOOOOO!',effects:[{op:'damage',flavor:['racket'],power:'standard',to:'target'},{op:'push',n:35,to:'target'}]}],line:null,anim:{kind:'default',shape:'cast'},
+  effects:[{op:'status',id:'lamby_hide',to:'self'},{op:'later',name:'BOOOOO!',effects:[{op:'damage',flavor:['racket'],power:'standard',to:'target'},{op:'push',n:35,to:'target'}]}],line:null,
   short:'Hide now, leap out next turn: hit and push 35.',
   desc:'Rose sets Backup Lamby down as bait and hides: monsters cannot aim at her until her next turn begins. Then she leaps out for a standard Racket hit that pushes the monster back 35 ticks.'};
 B3_SKILLS.mega_whoopee_cushion_trap={id:'mega_whoopee_cushion_trap',vibe:'rose_prank',slot:'cap',name:'Mega Whoopee-Cushion Trap',pep:5,flavor:['racket'],power:'standard',hits:1,
   target:'all_foes',tags:[],composure:0,
-  effects:[{op:'damage'},{op:'strip',kind:'stance',to:'target'},{op:'status',id:'embarrassed',to:'target'},{op:'status',id:'shamed',to:'bossTargets'},{op:'composure',n:1,to:'bossTargets'}],line:null,anim:{kind:'default',shape:'cast'},
+  effects:[{op:'damage'},{op:'strip',kind:'stance',to:'target'},{op:'status',id:'embarrassed',to:'target'},{op:'status',id:'shamed',to:'bossTargets'},{op:'composure',n:1,to:'bossTargets'}],line:null,
   short:'Hits all, drops stances, fumbles multi-hit acts.',
   desc:'Standard Racket hit on every monster. Each loses its stance and fumbles multi-hit acts (only the first hit lands) for 2 turns. A Boss also gets 25% less Attack and loses 1 Composure pip.'};
 // Nana's Card Trick: delaying a monster (a push on the turn bar from Rose) takes 1 minor buff off it for Rose; if there is none, a Pep candy goes to a random family member (once an action).

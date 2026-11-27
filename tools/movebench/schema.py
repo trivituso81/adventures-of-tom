@@ -60,7 +60,7 @@ def ctx():
     lib=json.load(open(LIB,encoding='utf8'))
     fx={a['id']:parse_params(a['params']) for a in lib['assets']}
     for e in EXTRA_FX: fx[e]={}
-    clips=sorted(f[:-3] for f in os.listdir(os.path.join(ROOT,'data','clips')) if f.endswith('.js'))
+    clips=sorted(f[:-3].replace('-','_') for f in os.listdir(os.path.join(ROOT,'data','clips')) if f.endswith('.js'))
     return {'fx':fx,'sounds':set(sound_names()),'clips':set(clips)}
 def isnum(x): return isinstance(x,(int,float)) and not isinstance(x,bool)
 def isint(x): return isinstance(x,int) and not isinstance(x,bool)
@@ -204,11 +204,15 @@ def check_section_set(S,path,C,E,W):
         if not isinstance(b,dict): E.append(p+': must be an object')
         else:
             for k in b:
-                if k not in ('clip','motion','trim','marks','pair','hand','sound'): E.append('%s: unknown field %s'%(p,k))
+                if k not in ('clip','until','motion','trim','marks','pair','hand','sound'): E.append('%s: unknown field %s'%(p,k))
             c=b.get('clip')
             if c is not None:
                 if not isinstance(c,str): E.append(p+'.clip: a clip id or null')
                 elif c not in C['clips']: W.append('%s.clip: %s is not baked in data/clips/'%(p,c))
+            u=b.get('until')   # movebench12: a baked video that plays while `clip` is not baked yet
+            if u is not None:
+                if not isinstance(u,str): E.append(p+'.until: a clip id or absent')
+                elif u not in C['clips']: E.append('%s.until: %s is not baked in data/clips/ (it is the video that plays until `clip` is made)'%(p,u))
             if 'motion' in b and b['motion'] not in MOTIONS: E.append('%s.motion: %r is not one of %s'%(p,b['motion'],MOTIONS))
             if b.get('trim') is not None:
                 t=b['trim']

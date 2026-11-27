@@ -56,10 +56,10 @@ with sync_playwright() as pw:
         tag('start'); start([who],[{'id':'mudling','row':'front'}]); pg.evaluate("()=>{ window.__slow=0; }")
         need(pg.evaluate("()=>['B3_BODY_PAINT','b3PaintState','b3GuardDraw','B3_GUARD','B3_PAINT','b3GetUp','b3LabPaintedStates'].every(n=>{ try { return eval('typeof '+n)==='undefined'; } catch(e) { return true; } })"),f'V2 {who}: painted-state code is still in the game')
         key=pg.evaluate("()=>B3.F.party[0].key")
-        pg.wait_for_function("(w)=>bclipReady(B3_BODY_CLIPS[w].idle)",arg=who,timeout=40000)
+        pg.wait_for_function("(w)=>bclipReady(msStateClip(w,'idle'))",arg=who,timeout=40000)
         for st in ('give','hit','run','victory','ko'):
-            pg.evaluate("([w,s])=>{ const id=(B3_BODY_CLIPS[w]||{})[s]; if(id) b3cWant(id,60000); }",[who,st])
-        pg.wait_for_function("(w)=>['give','hit','run','victory','ko'].every(s=>{ const id=(B3_BODY_CLIPS[w]||{})[s]; return !id||bclipReady(id); })",arg=who,timeout=60000)
+            pg.evaluate("([w,s])=>{ const id=msStateClip(w,s); if(id) b3cWant(id,60000); }",[who,st])
+        pg.wait_for_function("(w)=>['give','hit','run','victory','ko'].every(s=>{ const id=msStateClip(w,s); return !id||bclipReady(id); })",arg=who,timeout=60000)
         strip=[]
         rect=pg.evaluate("(k)=>{ const u=B3.F.units.find(x=>x.key===k),h=b3PartyHome(u),r=document.getElementById('battle-canvas').getBoundingClientRect(),q=r.width/576*2; return [r.x*2+(h.cx-90)*q,r.y*2+(h.base-200)*q,r.x*2+(h.cx+90)*q,r.y*2+(h.base+12)*q].map(Math.round); }",key)
         def snap(): strip.append(shot(pg).crop(tuple(rect)))

@@ -1,7 +1,7 @@
 {
  "v": 1,
  "id": "move:lounge_pass_flex",
- "rev": 1,
+ "rev": 2,
  "live": {
   "body": {
    "clip": "tom_loungepass",
@@ -17,7 +17,8 @@
    "sound": {
     "at": 9,
     "sfx": "ding"
-   }
+   },
+   "until": "tom_loungepass"
   },
   "timing": {
    "contact": {
@@ -57,6 +58,12 @@
    "at": "2026-11-26T22:00:00-08:00",
    "by": "migration",
    "what": "written from the tables the engine reads today"
+  },
+  {
+   "rev": 2,
+   "by": "claude",
+   "at": "2026-11-27T13:10:03-08:00",
+   "what": "movebench12: body.until = the clip: the video this staged move plays while its stage is not ready (the kit row named it)"
   }
  ]
 }

@@ -102,6 +102,6 @@ const B3_CAST={},B3_VIBES={},B3_SKILLS={},B3_SOON={},B3_TRAITS={},B3_QUIRKS={},B
 
 // Pick-Me-Up (spec 2.9): every family member has this command in every Vibe. It shows in SKILLS while someone is knocked out.
 B3_SKILLS.pick_me_up={id:'pick_me_up',vibe:null,common:true,slot:'s1',name:'Pick-Me-Up',pep:B3_RULES.pickMeUp.pep,flavor:['support'],power:0,hits:0,
-  target:'ko_ally',tags:[],composure:0,effects:[{op:'revive',hp:B3_RULES.pickMeUp.hp}],line:null,anim:{kind:'default',shape:'give'},
+  target:'ko_ally',tags:[],composure:0,effects:[{op:'revive',hp:B3_RULES.pickMeUp.hp}],line:null,
   short:'Gets a knocked-out family member back on their feet.',
   desc:'Gets a knocked-out family member back on their feet with a quarter of their HP.'};

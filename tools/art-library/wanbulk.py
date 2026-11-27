@@ -323,7 +323,7 @@ def apply_all(root, items, jobs, out, card, run, notes, bad):
             note = wanbake.bake(root, job, os.path.join(out, r['file']), r['n'], r['fps'], 'wanbulk %s run %s: %s' % (card, run, r['file']))
             if job.get('wire'):
                 wnote = wanbake.wire(root, job)
-                rel = job['wire']['move']['file'] if 'move' in job['wire'] else ('data/b3-clips.js' if 'body' in job['wire'] else None)
+                rel = 'data/move-specs.js' if ('move' in job['wire'] or 'body' in job['wire']) else None   # movebench12: a wire writes the animation's spec file and the script made from it
                 if rel and not wanbake.syntax_ok(root, rel): raise wanbake.BakeError('%s does not parse after the wire edit' % rel)
                 note += '; wired: ' + wnote
             else: note += '; not wired (the job has no `wire` field)'

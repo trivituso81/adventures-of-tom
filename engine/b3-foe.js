@@ -206,7 +206,7 @@ function b3FoeTurn(F,e) {
   // A charged act is announced this turn and fires on the foe's next turn. (An act with `then` is itself the wind-up: it runs now.)
   if(A.tags.includes('charge_up')&&!P.fire&&!A.then) {
     e.charge=A;
-    beats.push({t:'telegraph',src:e.key,id:A.id,name:A.name,mark:null,wind:A.wind||null,g:'pre'});
+    beats.push({t:'telegraph',src:e.key,id:A.id,name:A.name,mark:null,g:'pre'});
     b3Fire(F,'foeTelegraph',{src:e,g:'pre'},beats);
     b3EndTurn(F,e,B3_RULES.telegraph,beats);
     return beats;
@@ -225,7 +225,7 @@ function b3FoeTurn(F,e) {
   if(T.wide&&!A.tags.includes('aoe')) c.tags=A.tags.concat('aoe');
   const S={id:A.id,name:A.name,flavor:A.flavor,power:A.power,hits:1,target:T.single?'foe':A.hits==='self'?'self':'all_foes',effects:A.effects};
   c.skill=S; c.targets=targets;
-  beats.push({t:'act',src:e.key,id:A.id,name:A.name,flavor:A.flavor,shape:A.tags.includes('melee')?'strike':A.power>0?'throw':'self',anim:A.anim||null,hits:1,tgts:targets.map(t=>t.key),foe:true,g:'pre'});
+  beats.push({t:'act',src:e.key,id:A.id,name:A.name,flavor:A.flavor,shape:A.tags.includes('melee')?'strike':A.power>0?'throw':'self',hits:1,tgts:targets.map(t=>t.key),foe:true,g:'pre'});
   b3Fire(F,'actionDeclared',{src:e,g:'pre',c},beats);
   if(T.hidden) beats.push({t:'miss',src:e.key,tgt:targets[0].key,why:'hidden',g:'pre'});
   else {
@@ -241,7 +241,7 @@ function b3FoeTurn(F,e) {
   if(A.then&&b3Alive(e)&&!e.broken) {
     const N=e.D.acts.find(x=>x.id===A.then);
     e.charge=N;
-    beats.push({t:'telegraph',src:e.key,id:N.id,name:N.name,mark:e.mark,wind:N.wind||null,g:'post'});
+    beats.push({t:'telegraph',src:e.key,id:N.id,name:N.name,mark:e.mark,g:'post'});
     b3Fire(F,'foeTelegraph',{src:e,g:'post'},beats);
   } else if(A.then) e.mark=null;
   b3RunReactions(F,beats);

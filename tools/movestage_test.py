@@ -21,7 +21,7 @@ ST = {}
 for sid, sp in G['SPECS'].items():
     if sid.startswith('move:') and sp.get('stage'):
         st, b, t = sp['stage'], sp.get('body') or {}, sp.get('timing') or {}; c = t.get('contact') or {}
-        ST[sid[5:]] = {'body': {'clip': b.get('clip'), 'job': (b.get('clip') or '').replace('_', '-'), 'marks': b.get('marks') or {}}, 'budget': t.get('budget'), 'steps': st.get('steps'), 'lasting': st.get('lasting'), 'setpiece': st.get('setpiece'), 'assets': st.get('objects') or {},
+        ST[sid[5:]] = {'body': {'clip': b.get('clip'), 'until': b.get('until'), 'job': (b.get('clip') or '').replace('_', '-'), 'marks': b.get('marks') or {}}, 'budget': t.get('budget'), 'steps': st.get('steps'), 'lasting': st.get('lasting'), 'setpiece': st.get('setpiece'), 'assets': st.get('objects') or {},
                       'hit': ('late' if t.get('noHit') else c.get('mark') or c.get('step')), 'late': c.get('mark') or c.get('step'), 'slot': (SK.get(sid[5:]) or {}).get('slot')}
 jobs = json.load(open(os.path.join(ROOT, 'tools', 'art-library', 'wangen-jobs.json'), encoding='utf-8'))
 rd = lambda f: open(os.path.join(ROOT, f), encoding='utf-8').read()
@@ -47,7 +47,7 @@ for mid, row in ST.items():
     if not S: continue
     row['tier'] = TIER.get(S['slot']); check(n + ': S1 the move has a tier (its kit row\'s slot)', bool(row['tier']), S['slot'])
     lo, hi = BUDGET[row['tier']]; check(n + ': S1 budget inside the ladder (%s to %s s)' % (lo, hi), lo <= row['budget'] <= hi, row['budget'])
-    B = row.get('body') or {}; J = jobs.get(B.get('job') or ''); keep = (S.get('anim') or {}).get('clip') == B.get('clip')
+    B = row.get('body') or {}; J = jobs.get(B.get('job') or ''); keep = B.get('until') == B.get('clip')   # movebench12: a spec's `until` is the video the move plays while its stage is not ready; the three moves whose kit row named the stage's own clip have until = clip
     check(n + ': S1 body names a clip and an existing Wan job', bool(B.get('clip')) and bool(J), B)
     if J:
         p = rd(J['prompt_file']) if os.path.exists(os.path.join(ROOT, J['prompt_file'])) else ''
