@@ -140,6 +140,24 @@ textarea{min-height:92px;resize:vertical}
 .bctl #bnplay{background:var(--accent);color:var(--on-accent);font-weight:800;min-width:96px}
 .bctl #bnclock{margin-left:auto;color:var(--muted);font-size:13px}
 #benchframe{position:fixed;z-index:22;border:0;border-radius:12px;background:#0b1a16;display:none}
+/* movebench2: the bar under the preview. One lane per layer on one clock, the HIT line and the playhead you drag. */
+.bbar{--body:#7cc4f2;--stage:#d7a4f5;--fx:#ff8c5a;--snd:#8fe3a6;--hit:#ffd34d;position:relative;padding:2px 8px 8px;margin:2px 0 0;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:ew-resize}
+.bbar .ln{display:flex;align-items:center;height:20px;margin-top:3px}
+.bbar .ln .lb{flex:none;width:54px;white-space:nowrap;overflow:hidden;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.bbar .ln .tr{position:relative;flex:1 1 auto;height:100%;background:#12272e;border-radius:5px}
+.bbar .ln .it{position:absolute;top:2px;bottom:2px;border-radius:4px;font-size:10px;font-weight:700;line-height:16px;padding:0 4px;color:#08161a;white-space:nowrap;overflow:hidden;box-sizing:border-box}
+.bbar .ln.body .it{background:var(--body)}.bbar .ln.stage .it{background:var(--stage)}.bbar .ln.fx .it{background:var(--fx)}.bbar .ln.snd .it{background:var(--snd);border-radius:7px}
+.bbar .ln .it.need{background:repeating-linear-gradient(45deg,#ff5bd2,#ff5bd2 5px,#c23a9c 5px,#c23a9c 10px);color:#fff}
+.bbar .ln .it.hold{background:repeating-linear-gradient(90deg,#3d6f8a,#3d6f8a 4px,#2c5468 4px,#2c5468 8px);color:#d6efff}
+.bbar .hw{position:absolute;left:62px;right:8px;top:0;bottom:16px;pointer-events:none}
+.bbar .hw b{position:absolute;top:0;bottom:0;width:2px;background:var(--hit)}
+.bbar .hw b::after{content:"HIT";position:absolute;top:-1px;right:5px;font-size:9px;font-weight:900;color:var(--hit)}
+.bbar .hw u{position:absolute;top:0;bottom:0;width:2px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.5);text-decoration:none}
+.bbar .hw u::after{content:"";position:absolute;top:-2px;left:-5px;border:6px solid transparent;border-top-color:#fff}
+.bbar .hw i{position:absolute;top:0;bottom:0;width:1px;background:#ffffff44}
+.bbar .sc{display:flex;justify-content:space-between;margin:1px 0 0 54px;font-size:9px;color:var(--muted);font-variant-numeric:tabular-nums;padding-left:8px}
+.bctl .bst{min-width:44px}
+.bctl #bnans[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}
 .ctl{display:flex;align-items:center;gap:8px;margin:10px 0}
 .ctl input[type=range]{flex:1 1 auto;min-width:0;accent-color:var(--accent);height:44px}
 .ctl button{padding:8px 12px}
@@ -1453,18 +1471,30 @@ function todoHtml(){
 // The box plays the move in bench.html, a frame that loads the game's own scripts (not the baked voice) and starts a stub fight (engine/b3-bench.js).
 // Nothing here draws a move: this page only holds the frame, the controls and what the frame reports. The frame is made on the first tap of the
 // start button, reused from one animation to the next and removed when the Animations tab is left. Phase 2 adds the bar and the moments.
-const BENCH={fr:null,ready:false,st:null,id:'',want:'',speed:1,loop:true,mute:false,raf:0,boot:null,clip:''};
+const BENCH={fr:null,ready:false,st:null,stAt:0,tl:null,id:'',want:'',speed:1,loop:true,mute:false,answer:false,raf:0,boot:null,clip:'',drag:false,dragT:0,seekWant:0,seekRaf:0};
 function benchOk(a){
   if(!a)return false;if(a.kind==='move')return !!B3_SKILLS[a.id.slice(5)];
-  if(a.kind!=='act')return false;const p=a.id.split(':'),f=B3_FOES[p[1]],A=f&&f.acts.find(x=>x.id===p[2]);return !!A&&A.hits!=='attacker';
+  const p=String(a.id).split(':');
+  if(a.kind==='act'){const f=B3_FOES[p[1]],A=f&&f.acts.find(x=>x.id===p[2]);return !!A&&A.hits!=='attacker';}
+  if(a.kind==='wind'){const f=B3_FOES[p[1]],A=f&&f.acts.find(x=>x.id===p[2]);return !!A&&A.hits!=='attacker'&&!!(A.wind||f.acts.some(x=>x.then===A.id));}
+  if(a.kind==='state'){const o=p[1],st=p[2];if(B3_FOES[o])return ['idle','hit','die'].indexOf(st)>=0;
+    return !!(B3_CAST[o]&&B3_CAST[o].vibes.length)&&['idle','guard','hit','dodge','ko','victory','run','cast','give'].indexOf(st)>=0;}
+  return false;
 }
+function benchWord(a){return a.kind==='act'?'attack':a.kind==='wind'?'wind-up':a.kind==='state'?'body state':'move';}
 function benchBox(a){
-  if(!benchOk(a))return '';const w=a.kind==='act'?'attack':'move';
-  return '<div class="bench" id="bench"><div class="btag">PREVIEW: THE WHOLE '+w.toUpperCase()+', PLAYED BY THE GAME</div>'
-   +'<div class="bslot" id="benchslot" data-anim="'+esc(a.id)+'" data-on="0"><button type="button" class="bgo" id="bnstart">Preview the whole '+w+'</button><div class="bmsg" id="bnmsg"></div></div>'
+  if(!benchOk(a))return '';const w=benchWord(a);
+  const tag=a.kind==='move'||a.kind==='act'?'THE WHOLE '+w.toUpperCase():a.kind==='wind'?'THE WIND-UP':'THIS BODY STATE';
+  const go=a.kind==='move'||a.kind==='act'?'Preview the whole '+w:a.kind==='wind'?'Preview the wind-up':'Preview this body state';
+  return '<div class="bench" id="bench"><div class="btag">PREVIEW: '+tag+', PLAYED BY THE GAME</div>'
+   +'<div class="bslot" id="benchslot" data-anim="'+esc(a.id)+'" data-on="0"><button type="button" class="bgo" id="bnstart">'+go+'</button><div class="bmsg" id="bnmsg"></div></div>'
    +'<div class="ctl bctl" id="bnctl" hidden><button type="button" id="bnplay">Pause</button>'
    +'<button type="button" class="bsp" data-s="1" aria-pressed="true">1x</button><button type="button" class="bsp" data-s="0.5" aria-pressed="false">&frac12;</button><button type="button" class="bsp" data-s="0.25" aria-pressed="false">&frac14;</button>'
-   +'<button type="button" id="bnloop" aria-pressed="true">Loop</button><button type="button" id="bnmute" aria-pressed="false">Mute</button><span id="bnclock"></span></div></div>';
+   +'<button type="button" class="bst" id="bnstepb" title="Back one picture" aria-label="Back one picture">&lsaquo; 1</button><button type="button" class="bst" id="bnstepf" title="Forward one picture" aria-label="Forward one picture">1 &rsaquo;</button>'
+   +'<button type="button" id="bnloop" aria-pressed="true">Loop</button><button type="button" id="bnmute" aria-pressed="false">Mute</button>'
+   +(a.kind==='move'?'<button type="button" id="bnans" aria-pressed="false" title="After the move, one monster attacks, as the Move Lab\'s MONSTER ACTS does">Then a monster answers</button>':'')
+   +'<span id="bnclock"></span></div>'
+   +'<div class="tl bbar" id="bnbar" hidden aria-label="The move on one clock: drag to any moment"><div id="bnlanes"></div><div class="hw" id="bnhw"><b id="bnhit" hidden></b><u id="bnhead" style="left:0"></u></div><div class="sc" id="bnsc"></div></div></div>';
 }
 // After the sheet is built: show this animation's state (a frame that is still on another animation is paused and hidden).
 function benchAttach(a){
@@ -1481,16 +1511,46 @@ function benchFrame(){
 }
 function benchStart(){
   const sl=document.getElementById('benchslot');if(!sl)return;const id=sl.dataset.anim;
-  BENCH.want=id;BENCH.id=id;BENCH.st=null;sl.dataset.on='1';benchFrame();benchPlay();benchUi();
+  BENCH.want=id;BENCH.id=id;BENCH.st=null;BENCH.tl=null;benchBarRender();sl.dataset.on='1';benchFrame();benchPlay();benchUi();
 }
-function benchPlay(){if(BENCH.ready&&BENCH.want){benchSend({bench:'play',id:BENCH.want,speed:BENCH.speed,loop:BENCH.loop,mute:BENCH.mute});BENCH.want='';}}
+function benchPlay(){if(BENCH.ready&&BENCH.want){benchSend({bench:'play',id:BENCH.want,speed:BENCH.speed,loop:BENCH.loop,mute:BENCH.mute,answer:BENCH.answer});BENCH.want='';}}
 function benchToggle(){const s=BENCH.st&&BENCH.st.state;if(s==='playing')benchSend({bench:'pause'});else if(s==='paused'||s==='ended')benchSend({bench:'resume'});}
 function benchPause(){if(BENCH.fr&&BENCH.st&&BENCH.st.state==='playing')benchSend({bench:'pause'});}
 function benchSpeed(v){BENCH.speed=v;benchSend({bench:'speed',v});benchUi();}
 function benchLoop(on){BENCH.loop=on;benchSend({bench:'loop',on});benchUi();}
 function benchMute(on){BENCH.mute=on;benchSend({bench:'mute',on});benchUi();}
+function benchAnswer(on){BENCH.answer=on;BENCH.tl=null;benchBarRender();benchSend({bench:'answer',on});benchUi();}
+function benchStep(d){benchSend({bench:'step',d});}
+// The bar: lanes read from the run by the frame (bench:'timeline'), the HIT line, and the playhead. Dragging sends the moment; the frame draws that moment and holds there.
+function benchBarRender(){
+  const tl=BENCH.tl,el=document.getElementById('bnlanes'),bar=document.getElementById('bnbar');if(!bar)return;
+  if(!tl){bar.hidden=true;if(el)el.innerHTML='';return;}
+  const len=tl.len||1,cls={video:'body',wind:'body',stage:'stage',fx:'fx',snd:'snd'};
+  el.innerHTML=tl.lanes.map(L=>'<div class="ln '+(cls[L.id]||'body')+'" data-lane="'+esc(L.id)+'"><span class="lb">'+esc(L.name)+'</span><span class="tr">'
+    +L.segs.map(g=>'<span class="it'+(g.k==='need'?' need':g.k==='hold'?' hold':'')+'" data-a="'+g.a.toFixed(3)+'" data-b="'+g.b.toFixed(3)+'" style="left:'+(g.a/len*100).toFixed(2)+'%;width:'+Math.max(1.6,(g.b-g.a)/len*100).toFixed(2)+'%">'+esc(g.label)+'</span>').join('')+'</span></div>').join('');
+  const hw=document.getElementById('bnhw'),ht=document.getElementById('bnhit');
+  if(ht){ht.hidden=tl.hit==null;if(tl.hit!=null)ht.style.left=(tl.hit/len*100)+'%';}
+  hw.querySelectorAll('i').forEach(n=>n.remove());
+  (tl.ticks||[]).forEach(k=>{const i=document.createElement('i');i.style.left=(k.t/len*100)+'%';i.title=k.name;hw.appendChild(i);});
+  const sc=document.getElementById('bnsc');if(sc)sc.innerHTML=[0,.25,.5,.75,1].map(f=>'<span>'+(len*f).toFixed(1)+' s</span>').join('');
+  bar.hidden=document.getElementById('benchslot').dataset.on!=='1';
+}
+// The playhead follows the clock between the frame's reports; while a finger is on the bar it follows the finger.
+function benchHead(){
+  const hd=document.getElementById('bnhead'),tl=BENCH.tl;if(!hd||!tl)return;
+  const st=BENCH.st;let t;
+  if(BENCH.drag)t=BENCH.dragT;else{if(!st)return;t=st.t||0;if(st.state==='playing')t+=Math.min(.2,(performance.now()-BENCH.stAt)/1000*(st.speed||1));}
+  const len=tl.len||1;t=Math.max(0,Math.min(len,t));hd.style.left=(t/len*100)+'%';
+  const ck=document.getElementById('bnclock');if(ck&&st&&st.state!=='loading')ck.textContent=t.toFixed(1)+' of '+len.toFixed(1)+' s';
+}
+function benchDrag(e){
+  const hw=document.getElementById('bnhw'),tl=BENCH.tl;if(!hw||!tl)return;
+  const r=hw.getBoundingClientRect(),f=Math.max(0,Math.min(1,(e.clientX-r.left)/Math.max(1,r.width)));
+  BENCH.dragT=f*(tl.len||1);BENCH.seekWant=BENCH.dragT;benchHead();
+  if(!BENCH.seekRaf)BENCH.seekRaf=requestAnimationFrame(()=>{BENCH.seekRaf=0;benchSend({bench:'seek',t:BENCH.seekWant});});
+}
 function benchRemove(){
-  if(!BENCH.fr)return;cancelAnimationFrame(BENCH.raf);BENCH.raf=0;BENCH.fr.remove();BENCH.fr=null;BENCH.ready=false;BENCH.st=null;BENCH.id='';BENCH.want='';
+  if(!BENCH.fr)return;cancelAnimationFrame(BENCH.raf);BENCH.raf=0;BENCH.fr.remove();BENCH.fr=null;BENCH.ready=false;BENCH.st=null;BENCH.tl=null;BENCH.drag=false;BENCH.id='';BENCH.want='';
 }
 function benchUi(){
   const sl=document.getElementById('benchslot');if(!sl)return;
@@ -1501,11 +1561,13 @@ function benchUi(){
   const pl=document.getElementById('bnplay'),ck=document.getElementById('bnclock');
   if(pl)pl.textContent=!st?'Loading':st.state==='playing'?'Pause':st.state==='ended'?'Play again':st.state==='loading'?'Loading':'Play';
   if(ck)ck.textContent=st&&st.state!=='loading'?(st.len!=null?Math.min(st.t,st.len):st.t).toFixed(1)+(st.len!=null?' of '+st.len.toFixed(1):'')+' s':'';
+  const an=document.getElementById('bnans');if(an)an.setAttribute('aria-pressed',BENCH.answer?'true':'false');
+  const bar=document.getElementById('bnbar');if(bar)bar.hidden=!(on&&BENCH.tl);
   if(msg)msg.textContent=on&&st&&st.msg?st.msg:'';
 }
 // The frame floats over the box: fixed to the box's place, cut off at the sheet's edges.
 function benchPlace(){
-  const f=BENCH.fr;if(!f)return;BENCH.raf=requestAnimationFrame(benchPlace);
+  const f=BENCH.fr;if(!f)return;BENCH.raf=requestAnimationFrame(benchPlace);benchHead();
   const sl=document.getElementById('benchslot'),S=document.getElementById('sheet');
   if(!sl||!S.classList.contains('open')||sl.dataset.on!=='1'){if(f.style.display!=='none')f.style.display='none';return;}
   const r=sl.getBoundingClientRect(),q=S.getBoundingClientRect();
@@ -1518,8 +1580,13 @@ addEventListener('message',e=>{
   if(e.origin!==location.origin||!BENCH.fr||e.source!==BENCH.fr.contentWindow)return;
   const m=e.data;if(!m||typeof m.bench!=='string')return;
   if(m.bench==='ready'){BENCH.ready=true;BENCH.boot=m;benchPlay();}
-  else if(m.bench==='status'){BENCH.st=m;benchUi();}
+  else if(m.bench==='status'){BENCH.st=m;BENCH.stAt=performance.now();benchUi();}
+  else if(m.bench==='timeline'&&m.id===BENCH.id){BENCH.tl=m;benchBarRender();benchUi();}
 });
+document.addEventListener('pointerdown',e=>{const bar=e.target.closest&&e.target.closest('#bnbar');if(!bar||!BENCH.tl)return;BENCH.drag=true;benchDrag(e);try{bar.setPointerCapture(e.pointerId);}catch(_){}});
+document.addEventListener('pointermove',e=>{if(BENCH.drag)benchDrag(e);});
+function benchDragEnd(){if(!BENCH.drag)return;BENCH.drag=false;if(BENCH.seekRaf){cancelAnimationFrame(BENCH.seekRaf);BENCH.seekRaf=0;}benchSend({bench:'seek',t:BENCH.seekWant});}
+document.addEventListener('pointerup',benchDragEnd);document.addEventListener('pointercancel',benchDragEnd);
 
 async function openPlayer(animId){
   if(!GUIDE&&GUIDE_P)await GUIDE_P;
@@ -1666,7 +1733,7 @@ document.addEventListener('click',e=>{
   if(t.dataset.af){animFilter=t.dataset.af;renderDetailKeep();return;}
   if(t.id==='bsearch'){const b=$('searchbar');b.hidden=!b.hidden;if(!b.hidden)$('q').focus();else{$('q').value='';sFilter='all';document.querySelectorAll('#sflt .chip').forEach(x=>x.setAttribute('aria-pressed',x.dataset.sf==='all'?'true':'false'));renderList();}return;}
   if(t.id==='bclose'){closeSheet();return;}
-  if(t.id==='bnstart'){benchStart();return;}if(t.id==='bnplay'){benchToggle();return;}if(t.classList&&t.classList.contains('bsp')){benchSpeed(+t.dataset.s);return;}if(t.id==='bnloop'){benchLoop(!BENCH.loop);return;}if(t.id==='bnmute'){benchMute(!BENCH.mute);return;}
+  if(t.id==='bnstart'){benchStart();return;}if(t.id==='bnplay'){benchToggle();return;}if(t.classList&&t.classList.contains('bsp')){benchSpeed(+t.dataset.s);return;}if(t.id==='bnloop'){benchLoop(!BENCH.loop);return;}if(t.id==='bnmute'){benchMute(!BENCH.mute);return;}if(t.id==='bnstepb'){benchStep(-1);return;}if(t.id==='bnstepf'){benchStep(1);return;}if(t.id==='bnans'){benchAnswer(!BENCH.answer);return;}
   if(t.id==='bplay'){setPlaying(!PL.on);return;}
   if(t.classList.contains('spd')){PL.speed=+t.dataset.s;document.querySelectorAll('.spd').forEach(b=>b.setAttribute('aria-pressed',b===t?'true':'false'));return;}
   if(t.id==='nsend'){sendNote();return;}

@@ -539,6 +539,18 @@ What differs from the plan, and why:
 
 What phase 2 must know: the frame is one iframe, created on the first tap, floating over `#benchslot` (positioned each frame by `benchPlace`), so rebuilding the sheet does not reload it; it is removed when the tab leaves Animations. The parent talks to it with `postMessage` (play, pause, resume, speed, loop, mute, stop, ask; replies `{bench:'status'}` and `{bench:'ready'}`), to the same origin only. In the frame, `window.B3BENCH` holds `BN`, `preflight`, `go`, `pause`, `resume`, `speed`, `loop`, `mute`, `stop`, `can`, `parse`, `status`. Switching animation clears `B3C.need` and builds a new fight; the clock start and `Math.random` are not pinned yet (phase 2 needs that for same-moment replays). Capstone (`slot cap`) uses the `bigone` formation, other moves the `mudling` one.
 
+**Phase 2, `movebench2` (2026-11-26).** What exists: the bar (lanes Video or Wind-up, Stage, Effects, Sound, HIT line, playhead you drag), `< 1` and `1 >`, Then a monster answers, boxes on body states and wind-ups, and `cfg.bench` in `engine/b3-stage.js` (stand-in clip for a missing body video; the label comes from `bench.html`). Test: `tools/movebench/preview_test.py` extended.
+
+What differs from the plan, and why:
+- Every seek rebuilds the fight from the start and steps 1/60 s silently. The first design let a forward seek carry on from the current run; the pictures then differed because a picture drawn on the way spawns bursts. Replays are fast, so always rebuilding is simple and exact.
+- Math.random is seeded at each begin and re-seeded around every drawn picture (`b3Draw` is wrapped), so drawing never consumes the update sequence.
+- The bar is read by a silent survey run before the first play (`bnSurvey`), not from a spec, because no spec exists until phase 3.
+- The preview fight sets `B3C.waitMax=12` (the game's 2.5 s wait would show the default motion). The same animation asked again keeps its clip needs; before this a restart freed the clips and the live run started on the default.
+- Counter acts (hit the attacker) are still not previewable. The answer is the first monster's first plain attack, not necessarily aimed at the mover.
+- Safari on the phone was never measured (risk 2 stays open). Sounds do not follow slow speed.
+
+What phase 3 must know: `window.B3BENCH` also has `seek(sec)`, `step(dir)`, `timeline()`, `answerSet(on)`; the frame posts `{bench:'timeline', id, len, hit, lanes, ticks, noVideo, answer}` once per animation and answer setting, and `status` carries `t`, `len`, `answer`, `noVideo`, `seeks`. Animation ids are `move:`, `act:`, `wind:` and `body:<owner>:<state>`. Stage rows with no body video today: lamb_tuck_ankle_tackle, the_floor_is_lava, double_lamby_return_cart_blitz, pocket_pretzel_and_pat, tattered_lamby_boomerang, sofa_cushion_citadel, kingdom_of_ten_thousand_blankets.
+
 ### g.1 The board's bulk video path (a recommendation; this session did not touch it)
 
 Recommended: **pause now, retire in phase 16.**

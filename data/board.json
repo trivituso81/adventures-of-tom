@@ -9664,7 +9664,7 @@
    "blocks": [
     "c-movebench-3"
    ],
-   "after": "nothing for Tom: c-movebench-3",
+   "after": "t-movebench-2-try",
    "created": "2026-11-26",
    "changed": "2026-11-26",
    "auto": true,
@@ -9693,6 +9693,10 @@
     {
      "d": "2026-11-26",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "movebench2 built: bar and drag to any moment, one-picture steps, body states, wind-ups, answers, moves with no video yet. Hands t-movebench-2-try to Tom."
     }
    ]
   },
@@ -10195,6 +10199,35 @@
     {
      "d": "2026-11-26",
      "t": "Added by c-movebench-design: phase 16 of claude/movebench-plan.md section g."
+    }
+   ]
+  },
+  {
+   "id": "t-movebench-2-try",
+   "title": "Try the whole-move preview on your phone",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "where": "phone",
+   "fyi": true,
+   "next": "Open ADMIN > BATTLE GUIDE > Animations > Tom > Lounge Pass Flex and tap Preview the whole move. Play it, slow it to quarter speed, drag the bar to the hit, switch Loop on. Then do the same on Zone One Blockade, on Tom's Guard and on the Mudling's Mud Pie. Press All good, or Something is wrong and say which animation and what you saw.",
+   "steps": [
+    "Open ADMIN > BATTLE GUIDE > Animations > Tom > Lounge Pass Flex and tap Preview the whole move. Play it, slow it to quarter speed, drag the bar to the hit, switch Loop on.",
+    "Then do the same on Zone One Blockade, on Tom's Guard and on the Mudling's Mud Pie.",
+    "Press All good, or Something is wrong and say which animation and what you saw."
+   ],
+   "blocks": [],
+   "created": "2026-11-26",
+   "changed": "2026-11-26",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukECBgnxBZp8d9JQrAb",
+    "opening": "Move Workbench phase 2"
+   },
+   "history": [
+    {
+     "d": "2026-11-26",
+     "t": "Made by c-movebench-2 (movebench2): the bar, step, body states, wind-ups, answers and moves with no video yet."
     }
    ]
   }

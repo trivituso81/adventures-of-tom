@@ -8,7 +8,7 @@
 // Assets (data/stage/*.js, baked by tools/clip-bake/bake_stage.py) are lazy atlases named clip_stage_<owner>-<name>: they are asked for through B3C.need like a clip,
 // so they count toward the clip memory limit (b3cLoaded) and are released with the clips.
 // Field: the monsters stand on the LEFT, the party on the right; a fighter faces left.
-const B3G={A:{},els:[],ins:[],words:[],dim:{from:0,to:0,t0:0,dur:0},shake:null,glows:[],run:null,hits:0};
+const B3G={stand:{},A:{},els:[],ins:[],words:[],dim:{from:0,to:0,t0:0,dur:0},shake:null,glows:[],run:null,hits:0};
 const B3G_KEEP=9000;   // ms an asset stays wanted after it was last asked for
 
 // One stage asset (a data/stage/*.js file calls b3gDefine; the tests register their own through this).
@@ -19,8 +19,19 @@ function b3gRegister(key,D) {
 for(const key in B3G_DATA) b3gRegister(key,B3G_DATA[key]);
 
 const b3gAssetsOf=R=>Object.keys(R.assets||{});
+// movebench2: cfg.bench is set only by the Move Workbench preview fight (engine/b3-bench.js). There, a row whose body video is not made yet plays its stage steps,
+// effects, freeze, shake and sounds over the mover's idle video, and the pictures of its marks fall at 24 pictures a second inside its budget. The game never sets it.
+const b3gBench=()=>!!(typeof B3!=='undefined'&&B3.active&&B3.cfg&&B3.cfg.bench);
+const b3gNoVideo=R=>!!(R&&R.body&&!BCLIPS[R.body.clip]&&b3gBench());
+// The stand-in for the missing clip: as long as the row's budget, with a picture every 1/24 s (a mark {pic:n} is n/24 s, never past 95% of the budget).
+function b3gStandIn(R) {
+  const key=R.body.clip+'|'+(R.budget||3); if(B3G.stand[key]) return B3G.stand[key];
+  const dur=Math.round((R.budget||3)*1000),n=Math.max(2,Math.round(dur/1000*24)),ms=[]; for(let i=0;i<n;i++) ms.push(Math.min(i*1000/24,dur*.95));
+  return B3G.stand[key]={id:null,dur,n,ms,standIn:true};
+}
+const b3gClipOf=R=>BCLIPS[R.body.clip]||(b3gNoVideo(R)?b3gStandIn(R):null);
 // A row is usable when its body clip and every asset are baked into this build (otherwise the move plays what it plays today).
-const b3gDefined=R=>!!(R&&R.body&&BCLIPS[R.body.clip]&&b3gAssetsOf(R).every(k=>B3G.A[k]));
+const b3gDefined=R=>!!(R&&R.body&&((BCLIPS[R.body.clip]&&b3gAssetsOf(R).every(k=>B3G.A[k]))||b3gNoVideo(R)));
 function b3gWarm(R) {
   b3cWant(R.body.clip,B3G_KEEP);
   for(const k of b3gAssetsOf(R)) if(B3G.A[k]) B3C.need.set('stage_'+B3G.A[k].fk,performance.now()+B3G_KEEP);
@@ -28,7 +39,7 @@ function b3gWarm(R) {
 // The move is over: its video and pictures are no longer asked for, so paintedTick lets them go 3 s later (a phone holds about 16 clip pictures; the next move's own are loading by then).
 // A lasting element that is still on screen asks again every frame (b3gWarmDef), so it keeps what it draws.
 function b3gLetGo(R) { B3C.need.delete(R.body.clip); for(const k of b3gAssetsOf(R)) if(B3G.A[k]) B3C.need.delete('stage_'+B3G.A[k].fk); }
-const b3gReady=R=>b3gDefined(R)&&b3cReady(R.body.clip)&&b3gAssetsOf(R).every(k=>B3G.A[k].atlas.ready);
+const b3gReady=R=>b3gDefined(R)&&(b3gNoVideo(R)?b3gAssetsOf(R).every(k=>!B3G.A[k]||B3G.A[k].atlas.ready):b3cReady(R.body.clip)&&b3gAssetsOf(R).every(k=>B3G.A[k].atlas.ready));
 // The row of the move this `act` beat plays, or null (a monster's move, a move with no row, a row that is not baked yet).
 function b3gRowFor(head) {
   if(!head||head.t!=='act'||!head.id||!head.src||head.src[0]==='f'||typeof B3_STAGE==='undefined') return null;
@@ -169,11 +180,11 @@ function b3gFoeOffset(key,t) {
 // ---------- playing a move's row (b3PlayMove hands over here) ----------
 // env: the pieces of b3PlayMove: head, hits, late, reveal, finishNow, cue (arms the move's library effects). Returns true when the row plays the move.
 function b3gPlay(R,env) {
-  const head=env.head,src=head.src,CL=BCLIPS[R.body.clip],home=b3gHome(src),dur=CL.dur/1000,now=B3P.t;
+  const head=env.head,src=head.src,CL=b3gClipOf(R),standIn=!!CL.standIn,home=b3gHome(src),dur=CL.dur/1000,now=B3P.t;
   const tg0=env.hits.length?env.hits[0].swing.tgts:head.tgts||[];
   const ctx={R,CL,src,tgts:tg0.length?tg0:(head.tgts||[]),attacker:null,carrier:null};
   // BODY: the clip plays where the fighter stands, on the clip's own clock.
-  B3P.body[src]={kind:'cmove',t0:now,T0:0,jx:home.cx,jy:home.base,C:CL,back:0,dur:dur+.12};
+  if(!standIn) B3P.body[src]={kind:'cmove',t0:now,T0:0,jx:home.cx,jy:home.base,C:CL,back:0,dur:dur+.12};   // a stand-in leaves the mover on the idle video
   // STAGE: the steps of the row and, for a Capstone, of its set piece, each at its moment.
   const ids={},steps=[].concat(R.steps||[],R.setpiece?R.setpiece.steps:[]);
   const marks={}; for(const m in (R.body.marks||{})) marks[m]=(b3gMarkMs(R,CL,m)||0)/1000;
@@ -186,7 +197,7 @@ function b3gPlay(R,env) {
   for(const s of steps) if(s.id&&s.id===hitName&&hitT!=null) { if(s.hit===true) hitT=s._T+(s.dur||0); else if(s.hit==='first') hitT=s._T+(s.dur||2)*.3+.15; }
   const lateT=b3gAt(R,CL,(hitName==='late'?R.late:hitName)||0,ids);
   if(hitT==null) hitT=lateT;
-  const run=B3G.run={id:head.id,t0:now,hitAt:env.hits.length?hitT:lateT,hitReal:null,marks,ids:Object.assign({},ids),setpiece:!!R.setpiece,budget:R.budget,end:null,len:null};
+  const run=B3G.run={id:head.id,t0:now,hitAt:env.hits.length?hitT:lateT,hitReal:null,marks,ids:Object.assign({},ids),setpiece:!!R.setpiece,budget:R.budget,end:null,len:null,noVideo:standIn};
   ctx.ids=ids;
   if(env.cue) env.cue(env.hits.length?hitT:lateT);   // vfxfight1: the move's library effects play from the hit's moment (engine/b3-vfx.js)
   for(const s of steps) { b3After(s._T,()=>{ ctx.stepT=s._T; b3gDo(s,ctx); }); }
@@ -229,7 +240,7 @@ function b3gBeat(b) {
     // react: the status named by the beat (b.id) and a holder that is one of its two units (the ward's owner, or the monster carrying a shell).
     // intercept: the family member the hit was aimed at (b.tgt) holds the status.
     if(kind==='react'?(e.L.while!==b.id||(e.key!==b.src&&e.key!==b.tgt)):e.key!==b.tgt) continue;
-    const R=e.def.R,ctx={R,CL:BCLIPS[R.body.clip],src:b.src,tgts:[b.tgt],attacker:kind==='react'?b.tgt:null,carrier:e.key,el:e};
+    const R=e.def.R,ctx={R,CL:b3gClipOf(R),src:b.src,tgts:[b.tgt],attacker:kind==='react'?b.tgt:null,carrier:e.key,el:e};
     b3gDo(Object.assign({},T,{hide:true,asset:T.asset||e.L.asset}),ctx);
     for(const a of T.also||[]) b3gDo(a,ctx);
     e.thenAt=B3P.t; }
@@ -265,7 +276,7 @@ function b3gDrawEls(t) {
   for(const e of B3G.els) {
     const L=e.L,R=e.def.R,asset=L.asset; if(!asset||t<e.hideUntil) { if(L.do!=='glow') continue; }
     const key=e.key,vu=B3.view.u[key]; if(!vu) continue;
-    const ctx={R,CL:BCLIPS[R.body.clip],src:key,carrier:key,tgts:[]};
+    const ctx={R,CL:b3gClipOf(R),src:key,carrier:key,tgts:[]};
     let q=1,qx=0; const age=t-e.t0; if(L.enter) q=Math.min(1,age/(L.enter.dur||.4));
     let al=1; if(e.leaving) { const lq=(t-e.leaving.t0)/e.leaving.dur; al=1-lq; q=1; }
     if(L.do==='glow') { const s=b3Spot(key); gfx.save(); gfx.globalCompositeOperation='lighter'; gfx.globalAlpha=.35+.1*Math.sin(t*5); const g=gfx.createRadialGradient(s.x,s.y,4,s.x,s.y,b3gH(key)*.8); g.addColorStop(0,L.color||'#ffd27a'); g.addColorStop(1,'rgba(0,0,0,0)'); gfx.fillStyle=g; gfx.fillRect(s.x-70,s.y-70,140,140); gfx.restore(); continue; }

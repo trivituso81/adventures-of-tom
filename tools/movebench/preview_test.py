@@ -9,6 +9,15 @@
 #   - at 466 x 657, 678 x 445, 951 x 648 and 669 x 869 the Guide's box is not fully on screen, is covered, is not 16:9, or a control is cut off or missing;
 #   - Pause does not hold the clock, a speed button does not reach the frame, or the frame is not the same one for the next animation;
 #   - the frame is still there after leaving the Animations tab.
+# Phase 2 (movebench2) adds, and FAILS when:
+#   - a replay to the same moment is not the same picture: three moments of each of three moves, drawn after a seek, after going away and back (the run is built again
+#     from the start), and after going on from an earlier moment (the run is not built again);
+#   - the bar is missing its lanes, its HIT line or its playhead, or dragging it does not stop the preview at that moment, or one picture on / back is not 1/24 s;
+#   - a body state (guard up and down with a braced hit, a hit, a dodge, a knock-out, victory, running, a monster's hit and fall), a wind-up alone (the attack must never land)
+#     or a move with a monster's answer after it does not play to its end, or the answer is not in the bar;
+#   - a move whose body video is not made yet does not show its stage steps and effects over the standing video with the label NO VIDEO YET: SHOWN ON THE STANDING VIDEO,
+#     or the game (cfg.bench not set) plays it any other way than before, or anything but engine/b3-bench.js sets cfg.bench;
+#   - every body state and wind-up the frame says it can play can be set up in the stub fight (they are checked, nothing is played for that).
 # Usage (repo root): python3 -I tools/movebench/preview_test.py [outdir]     Pictures go to outdir (default tools/shots/movebench). Prints FAILS: [] when all pass.
 import threading, http.server, socketserver, functools, os, sys, re, time, json
 from playwright.sync_api import sync_playwright
@@ -24,7 +33,7 @@ threading.Thread(target=srv.serve_forever,daemon=True).start()
 BASE=f'http://127.0.0.1:{PORT}'
 FORBID=re.compile(r'api\.github\.com/.*dispatches|fal\.(ai|run)|queue\.fal|api\.x\.ai|(^|\.)x\.ai/',re.I)
 SIZES=[('duo-folded-up',466,657),('duo-folded-side',678,445),('duo-unfolded',951,648),('duo-unfolded-up',669,869)]
-fails=[]; notes=[]; seen_urls=set()
+fails=[]; notes=[]; seen_urls=set(); frame_voice=[]
 def fail(m): fails.append(m); print('FAIL',m,flush=True)
 frame_out=[]
 def watch(pg):
@@ -32,6 +41,7 @@ def watch(pg):
         seen_urls.add(r.url)
         try:
             if 'bench.html' in r.frame.url and not r.url.startswith(BASE) and not r.url.startswith('data:') and not r.url.startswith('blob:'): frame_out.append(r.url)
+            if 'bench.html' in r.frame.url and re.search(r'/data/voice',r.url): frame_voice.append(r.url)
         except Exception: pass
     pg.on('request',req)
     pg.on('pageerror',lambda e: fail('page error: '+str(e)[:200]))
@@ -52,7 +62,7 @@ with sync_playwright() as pw:
     pg,b=boot_bench(br)
     notes.append('boot: %d scripts, %.1f MB, %d ms'%(b['scripts'],b['bytes']/1e6,b['ms']))
     if b['bytes']>=25e6: fail('bench.html loaded %.1f MB of script (limit 25 MB)'%(b['bytes']/1e6))
-    if any('/data/voice' in u for u in seen_urls): fail('bench.html asked for a voice file')
+    if frame_voice: fail('bench.html asked for a voice file: %s'%frame_voice[:2])
     # ---------- 2. every move and attack can be set up ----------
     r=pg.evaluate("""()=>{ const out={moves:0,acts:0,bad:[]};
       for(const S of Object.values(B3_SKILLS)){ if(!S.vibe||!B3_VIBES[S.vibe]) continue; out.moves++; const w=B3BENCH.preflight('move:'+S.id); if(w) out.bad.push(['move:'+S.id,w]); }
@@ -88,6 +98,117 @@ with sync_playwright() as pw:
     if peak>16: fail('%d clips were in memory at once (limit 16)'%peak)
     faults=pg.evaluate('()=>window.__faults')
     if faults: fail('the game logged battle faults: %s'%faults[:3])
+
+    # ---------- 3b. movebench2: the same moment is the same picture; states, winds, answers, no video yet ----------
+    ids=json.load(open(os.path.join(ROOT,'data','guide-anims.json')))['anims']
+    pg.evaluate("""()=>{ window.__h=async()=>{ await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(r))));
+        const u=fightCtx.canvas.toDataURL('image/png'); let h=2166136261; for(let i=0;i<u.length;i+=5){ h^=u.charCodeAt(i); h=Math.imul(h,16777619)>>>0; } return h+':'+u.length; };
+      window.__ready=async(id,ans)=>{ const N=B3BENCH.BN; N.loop=false; N.turbo=1; N.answer=!!ans; B3BENCH.go(id); const t=performance.now();
+        while(performance.now()-t<70000){ const s=B3BENCH.status(),tl=B3BENCH.timeline(); if(s.state==='playing'&&tl&&tl.id===id&&tl.answer===!!ans){ B3BENCH.pause(); return true; } if(s.state==='none') return false; await new Promise(r=>setTimeout(r,100)); }
+        return false; };
+      window.__play=async(id,ans)=>{ const N=B3BENCH.BN; N.loop=false; N.turbo=4; N.answer=!!ans; B3BENCH.go(id); const t=performance.now(); let st=null;
+        while(performance.now()-t<90000){ st=B3BENCH.status(); if(st.state==='ended'||st.state==='none') break; await new Promise(r=>setTimeout(r,150)); } return {st,tl:B3BENCH.timeline()}; }; }""")
+    moves=pg.evaluate("""()=>{ const sk=Object.values(B3_SKILLS).filter(S=>S.vibe&&B3_VIBES[S.vibe]);
+      const clip=sk.find(S=>S.id!=='lounge_pass_flex'&&S.id!=='zone_one_blockade'&&!(B3_STAGE[S.id]&&b3gDefined(B3_STAGE[S.id]))&&S.slot!=='cap'&&S.anim&&S.anim.kind==='clip');
+      return ['move:lounge_pass_flex','move:zone_one_blockade','move:'+clip.id]; }""")
+    notes.append('same-moment moves: '+', '.join(moves))
+    for mv in moves:
+        if not pg.evaluate("(a)=>__ready(a[0],a[1])",[mv,False]): fail('%s did not start for the same-moment test'%mv); continue
+        info=pg.evaluate("()=>{ const tl=B3BENCH.timeline(); return {len:tl.len,hit:tl.hit,lanes:tl.lanes.map(l=>l.id+':'+l.segs.length)}; }")
+        notes.append('%s: bar len %.2f s, hit %s, lanes %s'%(mv,info['len'],info['hit'],' '.join(info['lanes'])))
+        hs={}
+        for frac in (.15,.35,.6):
+            t=round(info['len']*frac*60)/60
+            a=pg.evaluate("async(t)=>{ B3BENCH.seek(t); return __h(); }",t)
+            pg.screenshot(path=os.path.join(OUT,'moment-%s-%d.png'%(mv.split(':')[1],int(frac*100))))
+            b=pg.evaluate("async(t)=>{ B3BENCH.seek(Math.max(0,t-.5)); await __h(); B3BENCH.seek(t); return __h(); }",t)          # built again from the start
+            c=pg.evaluate("async(t)=>{ B3BENCH.seek(Math.max(0,t-.4)); await __h(); B3BENCH.seek(t); return __h(); }",t)          # going on from an earlier moment
+            if not (a==b==c): fail('%s at %.2f s: the picture is not the same (%s, %s, %s)'%(mv,t,a,b,c))
+            st=pg.evaluate("()=>B3BENCH.status()")
+            if st['state']!='paused' or abs(st['t']-t)>.02: fail('%s: after a seek to %.3f the status is %s at %.3f'%(mv,t,st['state'],st['t']))
+            hs[frac]=a
+        if len(set(hs.values()))<3: fail('%s: three moments gave fewer than three different pictures (%s)'%(mv,hs))
+        # one picture on, one back
+        t1=pg.evaluate("()=>{ B3BENCH.seek(.5); return B3BENCH.status().t; }"); pg.evaluate("()=>B3BENCH.step(1)"); t2=pg.evaluate("()=>B3BENCH.status().t"); pg.evaluate("()=>B3BENCH.step(-1)"); t3=pg.evaluate("()=>B3BENCH.status().t")
+        if not (.017<t2-t1<.067): fail('%s: one picture on moved the clock %.3f s'%(mv,t2-t1))
+        if abs(t3-t1)>.06: fail('%s: one picture on and back did not come home (%.3f, %.3f)'%(mv,t1,t3))
+    # a move with a stage row, its bar
+    tl=pg.evaluate("()=>B3BENCH.timeline()")
+    # the bar of a staged move: video, stage, effects and sound lanes, a hit inside the run
+    if not pg.evaluate("(a)=>__ready(a,false)",'move:lounge_pass_flex'): fail('lounge_pass_flex did not start for the bar')
+    tl=pg.evaluate("()=>B3BENCH.timeline()")
+    lanes={l['id']:l['segs'] for l in tl['lanes']}
+    if sorted(lanes)!=['fx','snd','stage','video']: fail('lounge_pass_flex bar lanes are %s'%sorted(lanes))
+    if not any('NOT ON THE LIST' in g['label'] for g in lanes.get('stage',[])): fail('the stage lane of Lounge Pass Flex has no Words step: %s'%lanes.get('stage'))
+    if not lanes.get('video'): fail('the video lane of Lounge Pass Flex is empty')
+    if tl['hit'] is None or not (.3<tl['hit']<tl['len']): fail('the HIT line of Lounge Pass Flex is at %s of %s'%(tl['hit'],tl['len']))
+    # the answer: one monster attack after the move
+    base=tl['len']
+    r=pg.evaluate("(a)=>__play(a,true)",'move:lounge_pass_flex')
+    if r['st']['state']!='ended': fail('the move with an answer did not play to the end: %s'%r['st'])
+    ans=[g for l in r['tl']['lanes'] for g in l['segs'] if g['label'].startswith('Answer: ')]
+    if not ans: fail('the bar of a move with an answer has no Answer segment: %s'%json.dumps(r['tl']['lanes'])[:300])
+    if r['tl']['len']<base+.8: fail('the answer added only %.2f s (%.2f to %.2f)'%(r['tl']['len']-base,base,r['tl']['len']))
+    notes.append('answer: %.2f s with, %.2f s without; segments %s'%(r['tl']['len'],base,[g['label'] for g in ans][:3]))
+    pg.screenshot(path=os.path.join(OUT,'answer-lounge.png'))
+    pg.evaluate("()=>{ B3BENCH.BN.answer=false; B3BENCH.BN.tlKey=''; }")
+    # a wind-up alone: plays to the end and the attack never lands
+    r=pg.evaluate("(a)=>__play(a,false)",'wind:mudling:mud_pie')
+    if r['st']['state']!='ended': fail('the wind-up alone did not play to the end: %s'%r['st'])
+    elif r['tl']['hit'] is not None: fail('the wind-up alone showed a hit at %s'%r['tl']['hit'])
+    elif not [g for l in r['tl']['lanes'] if l['id']=='wind' for g in l['segs']]: fail('the wind-up alone has nothing in its Wind-up lane')
+    notes.append('wind-up alone: %.2f s, lanes %s'%(r['tl']['len'],' '.join('%s:%d'%(l['id'],len(l['segs'])) for l in r['tl']['lanes'])))
+    pg.screenshot(path=os.path.join(OUT,'wind-mudling.png'))
+    # every body state and wind-up the frame says it can play
+    pf=pg.evaluate("""(L)=>{ const out={ok:0,bad:[],no:[]}; for(const id of L){ if(!B3BENCH.can(id)){ out.no.push(id); continue; } const w=B3BENCH.preflight(id); if(w) out.bad.push([id,w]); else out.ok++; } return out; }""",[k for k,v in ids.items() if v['kind'] in ('state','wind')])
+    notes.append('body states and wind-ups: %d can be set up, %d the preview does not play (%s)'%(pf['ok'],len(pf['no']),', '.join(sorted({x.split(':')[2] for x in pf['no'] if x.startswith('body')}))))
+    for x in pf['bad']: fail('cannot be set up: %s (%s)'%tuple(x))
+    if pf['ok']<60: fail('only %d body states and wind-ups can be set up (expected 60 or more)'%pf['ok'])
+    for need in ('body:tom:guard','body:tom:hit','body:tom:dodge','body:tom:ko','body:tom:victory','body:tom:run','body:tom:idle','body:mudling:hit','body:mudling:idle','wind:mudling:mud_pie'):
+        if need in pf['no']: fail('the preview cannot play %s'%need)
+    # each body state plays; the bar shows what the engine did
+    for sid in ('body:tom:idle','body:tom:guard','body:tom:hit','body:tom:dodge','body:tom:ko','body:tom:victory','body:tom:run','body:grace:guard','body:mudling:hit','body:mudling:die'):
+        if sid not in ids: continue
+        r=pg.evaluate("(a)=>__play(a,false)",sid)
+        if r['st']['state']!='ended': fail('%s did not play to the end: %s %s'%(sid,r['st']['state'],r['st']['msg'])); continue
+        if r['tl']['len']<1.5: fail('%s ran only %.2f s'%(sid,r['tl']['len']))
+        labs=[g['label'] for l in r['tl']['lanes'] for g in l['segs']]
+        if sid.endswith(':guard') and not any(('Guard' in x or 'guard' in x or 'Braced' in x) for x in labs): fail('%s: the bar shows no guard (%s)'%(sid,labs))
+        if sid.endswith(':run') and not labs: fail('%s: the bar is empty'%sid)
+        notes.append('%s: %.2f s, bar %s'%(sid,r['tl']['len'],labs[:4]))
+        pg.screenshot(path=os.path.join(OUT,'state-%s.png'%sid.replace(':','-')))
+    # a move whose body video is not made yet plays its stage and effects over the standing video
+    nv=pg.evaluate("""()=>{ const out=[]; for(const id of Object.keys(B3_STAGE)) { const R=B3_STAGE[id],S=B3_SKILLS[id]; if(S&&S.vibe&&R.body&&!BCLIPS[R.body.clip]) out.push(id); } return out; }""")
+    notes.append('stage rows with no body video: %s'%nv)
+    if not nv: fail('no stage row without a body video was found to play (expected Tarmac Porsche Transfer or another)')
+    for mid in nv[:3]:
+        r=pg.evaluate("(a)=>__play(a,false)",'move:'+mid)
+        if r['st']['state']!='ended': fail('%s (no video yet) did not play to the end: %s %s'%(mid,r['st']['state'],r['st']['msg'])); continue
+        steps=[g for l in r['tl']['lanes'] if l['id']=='stage' for g in l['segs']]
+        vid=[g for l in r['tl']['lanes'] if l['id']=='video' for g in l['segs']]
+        if not r['tl']['noVideo']: fail('%s: the timeline does not say NO VIDEO YET'%mid)
+        if not steps and (B3_STAGE_HAS_STEPS:=pg.evaluate("(a)=>((B3_STAGE[a].steps||[]).length+((B3_STAGE[a].setpiece&&B3_STAGE[a].setpiece.steps)||[]).length)>0",mid)): fail('%s: the stage lane is empty over the standing video'%mid)
+        if not any(g['k']=='need' for g in vid): fail('%s: the video lane has no NO VIDEO segment: %s'%(mid,vid))
+        notes.append('%s with no video: stage %s, video lane %s'%(mid,[g['label'] for g in steps][:3],[g['label'] for g in vid][:2]))
+        pg.screenshot(path=os.path.join(OUT,'novideo-%s.png'%mid))
+    if nv:
+        mid=nv[0]
+        pg.evaluate("(a)=>{ B3BENCH.BN.loop=false; B3BENCH.BN.turbo=1; B3BENCH.go('move:'+a); }",mid)
+        pg.wait_for_function("()=>B3BENCH.status().state==='playing'&&B3BENCH.status().noVideo",timeout=60000)
+        pg.wait_for_timeout(500)
+        if pg.evaluate("()=>document.getElementById('bench-tag').hidden"): fail('the label NO VIDEO YET is not shown while a move with no video plays')
+        txt=pg.evaluate("()=>document.getElementById('bench-tag').textContent")
+        if txt!='NO VIDEO YET: SHOWN ON THE STANDING VIDEO': fail('the label reads %r'%txt)
+        pg.screenshot(path=os.path.join(OUT,'novideo-label.png'))
+        # the game never sets cfg.bench: without it the row is not played (the move keeps what it plays today)
+        g=pg.evaluate("(a)=>{ const R=B3_STAGE[a],keep=B3.cfg.bench; B3.cfg.bench=false; const off=b3gDefined(R); B3.cfg.bench=true; const on=b3gDefined(R); B3.cfg.bench=keep; return {off,on}; }",mid)
+        if g['off'] or not g['on']: fail('cfg.bench does not decide the no-video row (%s)'%g)
+        pg.evaluate("()=>B3BENCH.stop()")
+    faults=pg.evaluate('()=>window.__faults')
+    if faults: fail('the game logged battle faults in phase 2: %s'%faults[:3])
+    import glob
+    setters=[f for f in glob.glob(os.path.join(ROOT,'engine','b3-*.js'))+glob.glob(os.path.join(ROOT,'data','b3-*.js'))+[os.path.join(ROOT,'index.html')] if re.search(r'bench\s*:\s*true|cfg\.bench\s*=',open(f,encoding='utf-8',errors='ignore').read()) and not f.endswith('b3-bench.js')]
+    if setters: fail('cfg.bench is set outside engine/b3-bench.js: %s'%setters)
     pg.close()
     # ---------- 4. the Guide: box, controls, reuse, removal ----------
     for name,w,h in SIZES:
@@ -124,6 +245,41 @@ with sync_playwright() as pw:
         if L['miss']: fail('%s: controls missing, cut off or too small: %s'%(name,L['miss']))
         if L['scroll']: fail('%s: the page scrolls sideways'%name)
         pg.screenshot(path=os.path.join(OUT,'guide-%s-%dx%d.png'%(name,w,h)))
+
+        # movebench2: the bar, its lanes, the playhead you drag, one picture on, the answer button
+        try: pg.wait_for_selector('#bnbar:not([hidden])',timeout=90000)
+        except Exception: fail('%s: the bar did not appear'%name)
+        else:
+            pg.evaluate("()=>document.getElementById('bnbar').scrollIntoView({block:'center'})"); pg.wait_for_timeout(300)
+            B=pg.evaluate("""()=>{ const b=document.getElementById('bnbar'),r=b.getBoundingClientRect(),hw=document.getElementById('bnhw').getBoundingClientRect(),
+                lanes=[...b.querySelectorAll('.ln')].map(l=>l.dataset.lane),sb={};
+              for(const i of ['bnstepb','bnstepf','bnans']){ const e=document.getElementById(i),q=e&&e.getBoundingClientRect(); sb[i]=e?[Math.round(q.width),Math.round(q.height),q.left>=-1&&q.right<=innerWidth+1]:null; }
+              return {l:r.left,r:r.right,t:r.top,b:r.bottom,lanes,hw:[hw.left,hw.top,hw.width,hw.height],sb,sw:document.documentElement.scrollWidth,iw:innerWidth,ih:innerHeight,hit:!document.getElementById('bnhit').hidden}; }""")
+            if B['l']<-1 or B['r']>B['iw']+1 or B['sw']>B['iw']+1: fail('%s: the bar is cut off sideways (%s)'%(name,B))
+            if B['b']>B['ih']+1 or B['t']<-1: fail('%s: the bar is not on screen after scrolling to it (%s)'%(name,B))
+            for need in ('video','stage','fx','snd'):
+                if need not in B['lanes']: fail('%s: the bar has no %s lane (%s)'%(name,need,B['lanes']))
+            if not B['hit']: fail('%s: the bar has no HIT line'%name)
+            if B['hw'][2]<120: fail('%s: the bar is only %d px wide'%(name,B['hw'][2]))
+            for i,v in B['sb'].items():
+                if v is None: fail('%s: the control %s is missing'%(name,i))
+                elif v[1]<30 or v[0]<36 or not v[2]: fail('%s: the control %s is too small or cut off (%s)'%(name,i,v))
+            # drag to the middle
+            x0=B['hw'][0]; y0=B['hw'][1]+B['hw'][3]/2; wdt=B['hw'][2]
+            pg.mouse.move(x0+wdt*.1,y0); pg.mouse.down(); pg.mouse.move(x0+wdt*.3,y0,steps=4); pg.mouse.move(x0+wdt*.5,y0,steps=4); pg.mouse.up()
+            try: pg.wait_for_function("()=>{ const s=document.getElementById('bnplay'); return s&&s.textContent==='Play'; }",timeout=15000)
+            except Exception: fail('%s: dragging the bar did not stop the preview (button says %s)'%(name,pg.evaluate("()=>document.getElementById('bnplay').textContent")))
+            fs=fr.evaluate("()=>({s:B3BENCH.status(),len:B3BENCH.timeline().len})")
+            if fs['s']['state']!='paused' or abs(fs['s']['t']-fs['len']*.5)>fs['len']*.04: fail('%s: dragging to the middle left the clock at %.2f of %.2f (%s)'%(name,fs['s']['t'],fs['len'],fs['s']['state']))
+            head=pg.evaluate("()=>parseFloat(document.getElementById('bnhead').style.left)")
+            if abs(head-50)>5: fail('%s: the playhead is at %s%% after dragging to the middle'%(name,head))
+            pg.screenshot(path=os.path.join(OUT,'guide-drag-%s-%dx%d.png'%(name,w,h)))
+            t_a=fs['s']['t']; pg.click('#bnstepf'); pg.wait_for_timeout(500); t_b=fr.evaluate("()=>B3BENCH.status().t")
+            if not (.017<t_b-t_a<.067): fail('%s: One picture on moved the clock %.3f s'%(name,t_b-t_a))
+            pg.click('#bnstepb'); pg.wait_for_timeout(500); t_c=fr.evaluate("()=>B3BENCH.status().t")
+            if abs(t_c-t_a)>.06: fail('%s: One picture back did not come home (%.3f then %.3f)'%(name,t_a,t_c))
+            notes.append('%s: bar lanes %s, drag to the middle left the clock at %.2f of %.2f s, one picture %.3f s'%(name,','.join(B['lanes']),fs['s']['t'],fs['len'],t_b-t_a))
+            fr.evaluate("()=>{ B3BENCH.BN.turbo=4; }"); pg.click('#bnplay')   # play on from there
         if name=='duo-folded-up':
             # pause holds the clock; speed and loop and mute reach the frame; the next animation reuses the frame; leaving removes it
             pg.click('#bnplay'); pg.wait_for_function("()=>document.getElementById('bnplay').textContent==='Play'",timeout=5000)

@@ -22,10 +22,14 @@ body{display:block!important}
 #bench-msg{position:fixed;z-index:99;left:0;right:0;top:0;padding:8px 10px;font:700 12px/1.3 system-ui,sans-serif;color:#d7e7e0;background:#0b1a16e8;text-align:center}
 #bench-msg.err{color:#ffb4a8}
 #bench-msg[hidden]{display:none}
+/* movebench2: a move whose body video is not made yet plays its stage and effects over the standing video, and says so */
+#bench-tag{position:fixed;z-index:98;left:8px;top:8px;padding:4px 9px;border-radius:8px;font:800 11px/1.3 system-ui,sans-serif;letter-spacing:.04em;color:#fff;background:repeating-linear-gradient(45deg,#d4309f,#d4309f 8px,#a82a80 8px,#a82a80 16px);box-shadow:0 0 0 1px #0008}
+#bench-tag[hidden]{display:none}
 </style>
 </head>
 <body>
 <div id="bench-msg">Loading the game's battle code...</div>
+<div id="bench-tag" hidden>NO VIDEO YET: SHOWN ON THE STANDING VIDEO</div>
 <script>
 /* bench.html reads index.html (so it is always the version being played), takes its style sheets and its page, and adds its script tags in
    order, leaving out the baked voice audio (data/voice-clips.js and data/voice/*.js: 38 MB). Voice is off in this frame. Then engine/b3-bench.js. */
@@ -44,10 +48,11 @@ fetch('index.html?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)t
   [].forEach.call(doc.body.querySelectorAll('script'),function(s){s.remove();});
   while(doc.body.firstChild) document.body.appendChild(document.adoptNode(doc.body.firstChild));
   document.body.insertBefore(msg,document.body.firstChild);
+  var tag=document.getElementById('bench-tag');if(tag)document.body.insertBefore(tag,msg.nextSibling);
   document.documentElement.className=doc.documentElement.className;
   srcs.push('engine/b3-bench.js');
   var left=srcs.length,failed=null;
-  function one(src){return new Promise(function(ok){var s=document.createElement('script');s.src=src;s.async=false;s.onload=function(){left--;ok();};s.onerror=function(){failed=failed||src;left--;ok();};document.head.appendChild(s);});}
+  function one(src){return new Promise(function(ok){var s=document.createElement('script');s.src=src;s.async=false;s.onload=function(){if(/data\/dialog-cast\.js/.test(src)){try{DIALOG_CAST.files=[];}catch(e){}}/* the game loads its chapter voice files after startup; this frame has no voice */left--;ok();};s.onerror=function(){failed=failed||src;left--;ok();};document.head.appendChild(s);});}
   /* async=false: the files download together and run in the order of the page */
   return Promise.all(srcs.map(one)).then(function(){
     if(failed) throw new Error('Could not load '+failed);

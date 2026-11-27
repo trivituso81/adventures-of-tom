@@ -383,3 +383,12 @@ The sheet of every family move and monster attack on the Animations tab has a bo
 - No key and no spend: the frame asks only its own site, never a dispatch, fal or xAI address.
 - Test: `python3 -I tools/movebench/preview_test.py` (four Duo sizes, under 25 MB of script, five samples played to the end, 16 or fewer clips in memory, frame removed on leaving). Pictures: `docs/movebench1/`.
 
+## The bar, body states, wind-ups, answers and moves with no video (movebench2, 2026-11-26)
+
+The preview box gained, under its buttons, a bar of four lanes on one clock (Video or Wind-up, Stage, Effects, Sound) with a yellow HIT line and a white playhead. Drag the playhead (or tap the bar) to any moment: the preview stops and shows that moment. `< 1` and `1 >` move one picture (1/24 s). Then a monster answers (moves only) plays one monster attack after the move.
+
+- Same moment, same picture: every seek builds the stub fight again from the start (fixed seed, clock at 0, `Math.random` re-seeded for each drawn picture) and steps the clock 1/60 s without drawing. Sounds follow the clock's triggers but not slow speed; a burst that a picture spawns when it is drawn (a fall's landing) starts at the first picture drawn after a seek.
+- The bar is read from the engine's own structures (`B3G.run`, `B3V.cues` and holds, the sounds the run called), never from a second copy of the move. A first play runs the animation once silently to read it.
+- Body states (`body:<who>:<state>`: family idle, guard, hit, dodge, ko, victory, run, cast, give; monster idle, hit, die) and wind-ups alone (`wind:<foe>:<act>`; the attack never lands) have a box. `flustered` and `slip` states are not played.
+- `cfg.bench` (set only in the preview fight): a move whose body video is missing plays its stage and effects over the standing video, labelled NO VIDEO YET: SHOWN ON THE STANDING VIDEO. The game never sets it.
+- Test: `python3 -I tools/movebench/preview_test.py` (same moment at three moments of three moves, each body state, a wind-up alone, an answer, a move with no video, the bar and drag at four Duo sizes). Pictures: `docs/movebench2/`.

@@ -1,3 +1,18 @@
+## movebench2 (2026-11-26): drag the preview to any moment, step one picture, and play body states, wind-ups, answers and moves with no video yet
+
+Card c-movebench-2 (phase 2 of `claude/movebench-plan.md`). The preview box now has a bar with four lanes on one clock (Video, Stage, Effects, Sound), a HIT line and a white playhead you drag to any moment; the picture stops there. One picture back and one picture on (a twenty-fourth of a second each), a Then a monster answers button on moves, and a box on every body state (guard up and down with a braced hit, a hit, a dodge, a knock-out, victory, running; a monster's hit and fall) and on every wind-up alone. A move whose body video is not made yet plays its stage steps and effects over the standing video under the label NO VIDEO YET: SHOWN ON THE STANDING VIDEO (seven moves today: Lamb-Tuck Ankle Tackle, The Floor Is Lava, Double Lamby Return Cart Blitz and four more).
+
+Same moment, same picture: the stub fight is built again from the start for every seek with a fixed seed, the clock starts at 0, Math.random is re-seeded for every drawn picture, and the replay steps 1/60 s without drawing. The test draws three moments of three moves three ways (after a seek, after going away and back, and after going on from an earlier moment) and the pictures match. The bar is read from the run itself: `B3G.run` marks and ids, the armed effect cues of `engine/b3-vfx.js`, the freeze and the sounds the run played. Changed: `engine/b3-stage.js` (`cfg.bench` stand-in, set only by `engine/b3-bench.js`; the game plays rows exactly as before), `engine/b3-bench.js`, `bench.html`, `battle-guide.html`, `tools/movebench/preview_test.py`. The chapter voice files are no longer asked for by the frame. Tested: `python3 -I tools/movebench/preview_test.py` passes at 466 x 657, 678 x 445, 951 x 648 and 669 x 869; `video_only_test.py`, `b3_vfx_test.py`, `b3_hitstop_test.py` pass. `tools/battle_guide_test.py` stops on `manifest_crosswalk` having no `MANIFESTS` (not touched by this build).
+
+![466 x 657](movebench2/guide-drag-duo-folded-up-466x657.png)
+![678 x 445](movebench2/guide-drag-duo-folded-side-678x445.png)
+![951 x 648](movebench2/guide-drag-duo-unfolded-951x648.png)
+![669 x 869](movebench2/guide-drag-duo-unfolded-up-669x869.png)
+![a moment of Zone One Blockade](movebench2/moment-zone_one_blockade-35.png)
+![no video yet](movebench2/novideo-label.png)
+![a wind-up alone](movebench2/wind-mudling.png)
+![a body state](movebench2/state-body-tom-guard.png)
+
 ## movebench1 (2026-11-26): the Battle Guide plays the whole move, with the game's own battle code, above the video player
 
 Card c-movebench-1 (phase 1 of `claude/movebench-plan.md`). Every family move (120) and monster attack (457) has a box on its sheet, Preview the whole move, with Play, Pause, 1x, half, quarter, Loop and Mute. New: `bench.html`, `engine/b3-bench.js`, `tools/movebench/preview_test.py` (also in `tools/night/tests.json`). `battle-guide.html` makes the frame on the first tap, reuses it and removes it on leaving the Animations tab. Card `c-movelab-rose` is retired (the preview replaces the Move Lab). Nothing deleted, no spec yet, no paid run.
