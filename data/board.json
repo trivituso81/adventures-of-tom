@@ -2263,13 +2263,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-26",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukD1Q1QTy3or9mC3Aqr",
     "opening": "not started"
    },
    "nightly": true,
@@ -2340,6 +2340,14 @@
     {
      "d": "2026-11-26",
      "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started by the night shift."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -2354,7 +2362,8 @@
    "last_run": {
     "date": "2026-11-23",
     "build": ""
-   }
+   },
+   "started_at": "2026-11-27T07:56:00+00:00"
   },
   {
    "id": "c-night-qa",
@@ -9766,7 +9775,7 @@
    "id": "c-movebench-4",
    "tag": "movebench4",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Move Workbench 4: the engine reads timing and effects",
    "next": "The game takes each move's hit moment, freeze, shake and effects from its settings file. The old timing files and the Pass-1 draft review are deleted. Moves look the same. Starts by itself when Move Workbench 3 ships.",
@@ -9802,15 +9811,19 @@
     {
      "d": "2026-11-26",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as movebench4: the game plays each move's hit moment, freeze, shake, run-in and effects from its settings file; the old timing files and the Pass-1 draft review are deleted"
     }
-   ]
+   ],
+   "done": "2026-11-26"
   },
   {
    "id": "c-movebench-5",
    "tag": "movebench5",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Move Workbench 5: the workbench page and Timing",
    "next": "Opening an animation shows the new workbench page as drawn, with the first section you can change: Timing. A change plays in the preview at once. Nothing is saved to the game yet. Starts by itself when Move Workbench 4 ships.",
@@ -9838,6 +9851,10 @@
     {
      "d": "2026-11-26",
      "t": "Added by c-movebench-design: phase 5 of claude/movebench-plan.md section g."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Unblocked: Move Workbench 4: the engine reads timing and effects is done."
     }
    ]
   },
@@ -10270,8 +10287,10 @@
    "url": "https://claude.ai/code/session_01RXeukEu9Y6GqqUWHqK9Pfb",
    "title": "Move Workbench 4: the engine reads timing and effects",
    "first": "2026-11-26T22:11:52-08:00",
-   "last": "2026-11-26T22:11:52-08:00",
-   "tags": [],
+   "last": "2026-11-26T23:53:07-08:00",
+   "tags": [
+    "movebench4"
+   ],
    "cards": [
     "c-movebench-4"
    ]
@@ -17129,8 +17148,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "6805e281d94c3e6e70e8b200d5d26cdad0068327",
- "synced_at": "2026-11-27T06:12:39+00:00",
+ "synced": "62f56cd793fbc055a8f550393aee0184c322d0f8",
+ "synced_at": "2026-11-27T07:56:02+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -17226,6 +17245,13 @@
      "id": "c-movelab-rose",
      "at": "2026-11-26T09:55:26+00:00",
      "kind": "queued"
+    }
+   ],
+   "2026-11-26": [
+    {
+     "id": "c-night-clean",
+     "at": "2026-11-27T07:56:00+00:00",
+     "kind": "standing"
     }
    ]
   },
