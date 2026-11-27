@@ -2263,13 +2263,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
-   "changed": "2026-11-26",
+   "changed": "2026-11-27",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukD1Q1QTy3or9mC3Aqr",
+    "url": "",
     "opening": "not started"
    },
    "nightly": true,
@@ -2348,6 +2348,10 @@
     {
      "d": "2026-11-26",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
     }
    ],
    "prompt": {
@@ -2362,8 +2366,7 @@
    "last_run": {
     "date": "2026-11-23",
     "build": ""
-   },
-   "started_at": "2026-11-27T07:56:00+00:00"
+   }
   },
   {
    "id": "c-night-qa",
@@ -5758,117 +5761,6 @@
    "waiting_on": "claude"
   },
   {
-   "id": "c-pusher1",
-   "tag": "pusher1",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Tools",
-   "title": "Host the Art Factory GitHub pusher page on the site",
-   "next": "Done: hosted at /aot-pusher.html",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukDiptdfSViWowh4C6s",
-    "opening": "Can you host this on our site"
-   },
-   "history": [
-    {
-     "d": "2026-11-24",
-     "t": "Tom: \"Can you host this on our site I give you approval for full repo access\". New card; started."
-    },
-    {
-     "d": "2026-11-24",
-     "t": "Shipped as pusher1. Three edits Tom named: robots noindex, Pass 1 removed, token and commit logic untouched."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-24",
-   "changed": "2026-11-24",
-   "after": "nothing for Tom: end",
-   "prompt": {
-    "what": "Hosts the Art Factory GitHub pusher page at the site root and links it from Admin.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row B: copy a finished file and wire a link, tests catch mistakes)",
-    "effort": "medium (steps are known)",
-    "text": "Host art-factory-pusher.html at the site root and link it from admin.html. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "done": "2026-11-24"
-  },
-  {
-   "id": "c-scriptstudio1",
-   "tag": "scriptstudio1",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Tools",
-   "title": "Host Script Studio with its six reference docs loaded",
-   "next": "Done: hosted at /script-studio/",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukDiptdfSViWowh4C6s",
-    "opening": "Can you host this on our site"
-   },
-   "history": [
-    {
-     "d": "2026-11-24",
-     "t": "Tom: \"Separate request once you're done: I have a standalone single-file React component (aot-script-studio.jsx)... host it on my website and wire it up to auto-load my six reference .md files\". New card; started."
-    },
-    {
-     "d": "2026-11-24",
-     "t": "Shipped as scriptstudio1."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-24",
-   "changed": "2026-11-24",
-   "after": "nothing for Tom: end",
-   "prompt": {
-    "what": "Builds Script Studio into script-studio/ with the six reference docs auto-loaded and Sync Hosted Defaults.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row C: a build with a few unknowns, tests catch mistakes)",
-    "effort": "medium (steps are known)",
-    "text": "Read the c-scriptstudio1 card and tools/script-studio/README.md, then continue the Script Studio build. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "done": "2026-11-24"
-  },
-  {
-   "id": "c-scriptstudio2",
-   "tag": "scriptstudio2",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Tools",
-   "title": "Script Studio v2: replace app, keep hosted vault",
-   "next": "Done: v2 live at /script-studio/",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukDiptdfSViWowh4C6s",
-    "opening": "Here is an updated aot-script-studio.jsx (v2)"
-   },
-   "history": [
-    {
-     "d": "2026-11-24",
-     "t": "Tom: \"Please replace the previous Script Studio component with this updated file, and re-apply the same auto-loading hook for my 6 hosted Reference Vault .md files\". New card; started."
-    },
-    {
-     "d": "2026-11-24",
-     "t": "Shipped as scriptstudio2."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-24",
-   "changed": "2026-11-24",
-   "after": "nothing for Tom: end",
-   "prompt": {
-    "what": "Replaces Script Studio with v2 and re-applies the vault auto-load.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row B: the same patch as scriptstudio1, tests catch mistakes)",
-    "effort": "medium (steps are known)",
-    "text": "Replace tools/script-studio/src/App.jsx with Tom's v2, re-apply the vault auto-load patch, rebuild and run tools/script-studio/e2e_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "done": "2026-11-24"
-  },
-  {
    "id": "t-stuck-b3s23c",
    "lane": "tom",
    "col": "up",
@@ -5895,88 +5787,6 @@
    ],
    "created": "2026-11-24",
    "changed": "2026-11-24"
-  },
-  {
-   "id": "c-scriptstudio3",
-   "tag": "scriptstudio3",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Tools",
-   "title": "Script Studio: auto QA and rewrite inside Generate Scene",
-   "next": "Shipped: Generate Scene now drafts, QA-checks and auto-fixes. Next: try it on a real scene with your Gemini key.",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
-    "opening": "Locate the AoT Script Studio app in the trivituso81/adventures-of-tom repo"
-   },
-   "history": [
-    {
-     "d": "2026-11-24",
-     "t": "Tom: \"upgrade its scene generation flow so it automatically quality-checks and fixes its own dialogue before showing it to me\". New card; started."
-    },
-    {
-     "d": "2026-11-24",
-     "t": "Shipped as scriptstudio3 (4-pass pipeline inside Generate Scene, QA badge, qa_test.py)."
-    },
-    {
-     "d": "2026-11-24",
-     "t": "Shipped as scriptstudio3: Script Studio's Generate Scene now drafts, checks and fixes its own dialogue before showing it"
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-24",
-   "changed": "2026-11-24",
-   "after": "nothing for Tom: end",
-   "prompt": {
-    "what": "Adds the 4-pass generate, format, QA gate and auto-rewrite flow to Script Studio's Generate Scene button.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row C: a build where the design is worked out in the session)",
-    "effort": "medium (the pipeline is specified in the card)",
-    "text": "Read the c-scriptstudio3 card and tools/script-studio/README.md, then finish the Script Studio QA pipeline in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/e2e_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "done": "2026-11-24"
-  },
-  {
-   "id": "c-scriptstudio4",
-   "tag": "scriptstudio4",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Tools",
-   "title": "Script Studio: new audits and Gemini 4 presets",
-   "next": "Shipped: both audits upgraded, Gemini 4 presets in. Next: run them on a real chapter with your key; if a model id is rejected, use Custom Model ID.",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
-    "opening": "Upgrade the Storyline Audit and Trajectory Audit inside AoT Script Studio"
-   },
-   "history": [
-    {
-     "d": "2026-11-24",
-     "t": "Tom: \"Upgrade the Storyline Audit and Trajectory Audit ... update the default model presets to Gemini 4\". New card; started."
-    },
-    {
-     "d": "2026-11-24",
-     "t": "Shipped as scriptstudio4."
-    },
-    {
-     "d": "2026-11-24",
-     "t": "Shipped as scriptstudio4: Script Studio audits upgraded (chapter coherence report card, cross-chapter tie-in ledger) and Gemini 4 model presets"
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-24",
-   "changed": "2026-11-24",
-   "after": "nothing for Tom: end",
-   "prompt": {
-    "what": "Upgrades Script Studio's two audits and switches the model presets to Gemini 4.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row C: a build with the design in the card)",
-    "effort": "medium (the audits are specified in the card)",
-    "text": "Read the c-scriptstudio4 card and tools/script-studio/README.md, then finish the Script Studio audits in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/audit_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "done": "2026-11-24"
   },
   {
    "id": "c-scriptstudio5",
@@ -9348,20 +9158,32 @@
    "next": "voice-gen is running",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45904459655",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDoRTv4JhJghg7amKk",
     "opening": "service run"
    },
    "history": [
     {
      "d": "2026-11-26",
      "t": "voice-gen started."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
     }
    ],
    "blocks": [],
    "created": "2026-11-26",
-   "changed": "2026-11-26",
+   "changed": "2026-11-27",
    "reruns": 1,
-   "rerun_at": "2026-11-21T21:31:38+00:00"
+   "rerun_at": "2026-11-21T21:31:38+00:00",
+   "rescue": {
+    "at": "2026-11-27T08:46:45+00:00",
+    "n": 1,
+    "why": "Quiet: the conversation may have stopped",
+    "url": "https://claude.ai/code/cse_01RXeukDoRTv4JhJghg7amKk",
+    "prev": ""
+   },
+   "started_at": "2026-11-27T08:46:45+00:00"
   },
   {
    "id": "c-hitstoplab1",
@@ -9823,7 +9645,7 @@
    "id": "c-movebench-5",
    "tag": "movebench5",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 5: the workbench page and Timing",
    "next": "Opening an animation shows the new workbench page as drawn, with the first section you can change: Timing. A change plays in the preview at once. Nothing is saved to the game yet. Starts by itself when Move Workbench 4 ships.",
@@ -9832,10 +9654,10 @@
    ],
    "after": "nothing for Tom: c-movebench-6",
    "created": "2026-11-26",
-   "changed": "2026-11-26",
+   "changed": "2026-11-27",
    "auto": true,
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDjjTT12gnCoXtVe6r",
     "opening": "not started"
    },
    "prompt": {
@@ -9855,6 +9677,10 @@
     {
      "d": "2026-11-26",
      "t": "Unblocked: Move Workbench 4: the engine reads timing and effects is done."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -10283,6 +10109,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDjjTT12gnCoXtVe6r",
+   "title": "Move Workbench 5: the workbench page and Timing",
+   "first": "2026-11-27T00:45:53-08:00",
+   "last": "2026-11-27T00:45:53-08:00",
+   "tags": [],
+   "cards": [
+    "c-movebench-5"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukEu9Y6GqqUWHqK9Pfb",
    "title": "Move Workbench 4: the engine reads timing and effects",
@@ -17148,8 +16984,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "62f56cd793fbc055a8f550393aee0184c322d0f8",
- "synced_at": "2026-11-27T07:56:02+00:00",
+ "synced": "f397c2824697587fdaf94daace7fc97c2e0f3910",
+ "synced_at": "2026-11-27T08:46:47+00:00",
  "routines": [
   {
    "id": "sonnet-medium",

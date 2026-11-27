@@ -11318,6 +11318,81 @@
      "t": "Done by the board: the card is being worked on again."
     }
    ]
+  },
+  {
+   "id": "c-pusher1",
+   "title": "Host the Art Factory GitHub pusher page on the site",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "pusher1",
+   "done": "2026-11-24",
+   "history": [
+    {
+     "d": "2026-11-24",
+     "t": "Shipped as pusher1. Three edits Tom named: robots noindex, Pass 1 removed, token and commit logic untouched."
+    }
+   ]
+  },
+  {
+   "id": "c-scriptstudio1",
+   "title": "Host Script Studio with its six reference docs loaded",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "scriptstudio1",
+   "done": "2026-11-24",
+   "history": [
+    {
+     "d": "2026-11-24",
+     "t": "Shipped as scriptstudio1."
+    }
+   ]
+  },
+  {
+   "id": "c-scriptstudio2",
+   "title": "Script Studio v2: replace app, keep hosted vault",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "scriptstudio2",
+   "done": "2026-11-24",
+   "history": [
+    {
+     "d": "2026-11-24",
+     "t": "Shipped as scriptstudio2."
+    }
+   ]
+  },
+  {
+   "id": "c-scriptstudio3",
+   "title": "Script Studio: auto QA and rewrite inside Generate Scene",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "scriptstudio3",
+   "done": "2026-11-24",
+   "history": [
+    {
+     "d": "2026-11-24",
+     "t": "Shipped as scriptstudio3: Script Studio's Generate Scene now drafts, checks and fixes its own dialogue before showing it"
+    }
+   ]
+  },
+  {
+   "id": "c-scriptstudio4",
+   "title": "Script Studio: new audits and Gemini 4 presets",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "scriptstudio4",
+   "done": "2026-11-24",
+   "history": [
+    {
+     "d": "2026-11-24",
+     "t": "Shipped as scriptstudio4: Script Studio audits upgraded (chapter coherence report card, cross-chapter tie-in ledger) and Gemini 4 model presets"
+    }
+   ]
   }
  ]
 }
