@@ -9718,7 +9718,7 @@
    "id": "c-movebench-7",
    "tag": "movebench7",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Move Workbench 7: effects",
    "next": "The Effects section: add any of the 37 library effects to a move, set when it plays, on whom, and each effect's own settings with sliders, buttons and switches. Starts by itself when Move Workbench 6 ships.",
@@ -9762,16 +9762,20 @@
     {
      "d": "2026-11-27",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as movebench7: the Move Workbench has an Effects section: add any of the 37 effects to a move, set when it plays, on whom, and every setting of it"
     }
    ],
-   "started_at": "2026-11-27T09:58:25+00:00"
+   "started_at": "2026-11-27T09:58:25+00:00",
+   "done": "2026-11-27"
   },
   {
    "id": "c-movebench-8",
    "tag": "movebench8",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 8: the engine reads the stage",
    "next": "The game takes each move's stage steps, lasting objects and set piece from its settings file. The old staging file is deleted, and a family move with no stage can now be made. Starts by itself when Move Workbench 7 ships.",
@@ -9780,10 +9784,10 @@
    ],
    "after": "nothing for Tom: c-movebench-9",
    "created": "2026-11-26",
-   "changed": "2026-11-26",
+   "changed": "2026-11-27",
    "auto": true,
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGMpRRocMwXoJ8sTFd",
     "opening": "not started"
    },
    "prompt": {
@@ -9799,8 +9803,21 @@
     {
      "d": "2026-11-26",
      "t": "Added by c-movebench-design: phase 8 of claude/movebench-plan.md section g."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Unblocked: Move Workbench 7: effects is done."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started by the night shift."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
-   ]
+   ],
+   "started_at": "2026-11-27T10:31:01+00:00"
   },
   {
    "id": "c-movebench-9",
@@ -10149,8 +10166,10 @@
    "url": "https://claude.ai/code/session_01RXeukEqG7kgsoNKup5rty2",
    "title": "Move Workbench 7: effects",
    "first": "2026-11-27T09:59:34Z",
-   "last": "2026-11-27T09:59:34Z",
-   "tags": [],
+   "last": "2026-11-27T10:29:40Z",
+   "tags": [
+    "movebench7"
+   ],
    "cards": [
     "c-movebench-7"
    ]
@@ -17054,8 +17073,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "88390f1aa4de59b76238369cb4b73ae3d2ae526a",
- "synced_at": "2026-11-27T10:00:38+00:00",
+ "synced": "71d8104df05fdecf209513cb0f9d4cf56d5d4b27",
+ "synced_at": "2026-11-27T10:31:02+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -17167,6 +17186,11 @@
     {
      "id": "c-movebench-7",
      "at": "2026-11-27T09:58:25+00:00",
+     "kind": "queued"
+    },
+    {
+     "id": "c-movebench-8",
+     "at": "2026-11-27T10:31:01+00:00",
      "kind": "queued"
     }
    ]
