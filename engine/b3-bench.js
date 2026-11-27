@@ -283,7 +283,7 @@ function bnSample() {
   if(BN.ansKey&&BN.phase==='answer') bnSampleFoe(BN.ansKey,'video','Answer: ');
   if(typeof B3G!=='undefined'&&B3G.run&&BN.P&&BN.P.kind==='move'&&B3G.run.id===BN.P.skill&&!R.stageDone) {
     R.stageDone=true; const run=B3G.run,row=msStageRow('move:'+BN.P.skill),off=run.t0-BN.t0;
-    R.run={hitAt:run.hitAt+off,off,marks:run.marks,ids:run.ids,noVideo:!!run.noVideo,budget:run.budget};
+    R.run={hitAt:run.hitAt+off,off,marks:run.marks,ids:run.ids,noVideo:!!run.noVideo,budget:run.budget,clipSec:run.clipSec,times:(row&&row.steps||[]).map(s=>s._T)};   // movebench9: times is each step's moment, seconds from the start of the move, in the order of the spec's steps
     if(row) for(const s of [].concat(row.steps||[],row.setpiece&&row.setpiece.steps||[])) if(s._T!=null) R.lanes.stage.push({a:s._T+off,b:s._T+off+(s.dur||s.hold||.3),label:bnStageName(s),k:'stage'});
   }
   if(typeof B3V!=='undefined') {
@@ -310,7 +310,8 @@ function bnTimeline(len) {
   // movebench5: what the engine really did in this run (the page's Timing controls are checked against it): the hit, each hit's moment, the freeze, the shake, the run in and home
   const r3=x=>x==null?null:Math.round(x*1000)/1000,rp=R.rep||{},hits=(rp.hits||[]).slice(),hold=rp.hold,sk=rp.shake;
   const run={hit:r3(hit),hits:hits,holdSec:hold?r3(hold.dur):0,holdAt:hold?r3(hold.at):null,shakePx:sk?sk.px:0,shakeAt:sk?r3(sk.at):null,runInSec:rp.runIn==null?null:r3(rp.runIn),
-    gap:hits.length>1?r3(hits[1]-hits[0]):null,len:r3(len)};
+    gap:hits.length>1?r3(hits[1]-hits[0]):null,len:r3(len),
+    staged:!!R.run,off:R.run?r3(R.run.off):null,marks:R.run?Object.fromEntries(Object.entries(R.run.marks||{}).map(([k,v])=>[k,r3(v)])):null,steps:R.run?(R.run.times||[]).map(r3):null,noVideoRun:!!(R.run&&R.run.noVideo),clipSec:R.run?r3(R.run.clipSec):null};
   return {bench:'timeline',id:BN.id,len,hit:hit==null?null:Math.max(0,Math.min(len,hit)),lanes,ticks,noVideo:!!(R.run&&R.run.noVideo),answer:BN.answer&&P.kind==='move',run};
 }
 // Run the animation once to its end, silently, and read the bar from what the engine did.
@@ -469,6 +470,7 @@ window.addEventListener('message',ev=>{
   else if(m.bench==='answer') bnAnswerSet(m.on);
   else if(m.bench==='seek') bnSeek(m.t); else if(m.bench==='step') bnStep(m.d);
   else if(m.bench==='spec') bnSpecSet(m.id,m.live);
+  else if(m.bench==='sfx') { BN.sfxLog=(BN.sfxLog||[]).concat([String(m.name)]); if(!BN.mute) b3Sfx(String(m.name)); }   // movebench9: the page's Play button for a sound
   else if(m.bench==='stop') bnStop(); else if(m.bench==='ask') { bnSend(); bnSendTl(); }
 });
 requestAnimationFrame(bnLoop);

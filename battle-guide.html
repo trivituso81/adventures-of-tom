@@ -281,6 +281,10 @@ a.play.fight{background:var(--surface);border:1px solid var(--accent);color:var(
 .fxchg{font-style:normal;font-size:11px;color:var(--accent);margin-left:6px}
 .fxacts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.fxacts button{min-height:44px;padding:6px 14px}
 .wbpink{margin:4px 0 0;padding:4px 8px;text-align:center;font-size:12px;font-weight:800;letter-spacing:.04em;color:#ff5bd2;border:1px dashed #ff5bd2;border-radius:8px}
+.stic{flex:none;width:40px;height:40px;color:var(--accent);display:flex;align-items:center;justify-content:center}.stic svg{width:34px;height:34px}
+.sttile{flex-direction:row;align-items:center;gap:10px}.sttile .stic{width:36px;height:36px}
+.stt{font-style:normal;font-weight:800;color:var(--accent)}
+.sndl li{flex-wrap:wrap;align-items:center}.sndn{flex:1 1 160px;min-width:0}.sndn b{font-size:12px;color:var(--muted);margin-right:6px}
 .wbl{list-style:none;margin:0;padding:0}.wbl li{display:flex;gap:10px;align-items:baseline;padding:8px 0;border-top:1px solid var(--line);font-size:14px}.wbl li:first-child{border-top:0}
 .wbl .tm{flex:none;min-width:58px;font-weight:800;color:var(--accent);font-size:13px}.wbl .dt{color:var(--muted);font-size:12px}
 .wb-bottom{flex:none;border-top:1px solid var(--line);padding:8px 12px calc(8px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--surface)}
@@ -1744,6 +1748,9 @@ function wbDiff(){
   const a=(WB.draft&&WB.draft.timing)||{},b=(WB.base&&WB.base.timing)||{},o={};
   WB_FIELDS.forEach(f=>{if(JSON.stringify(a[f])!==JSON.stringify(b[f]))o[f]=a[f]===undefined?null:a[f];});
   if(JSON.stringify((WB.draft&&WB.draft.effects)||[])!==JSON.stringify((WB.base&&WB.base.effects)||[]))o.effects=wbClone((WB.draft&&WB.draft.effects)||[]);   // movebench7: the effects list is one field, the whole list
+  const bs=(WB.base&&WB.base.stage&&WB.base.stage.steps)||[],bm=(WB.base&&WB.base.body&&WB.base.body.marks)||{};   // movebench9: the stage steps are one field, and so are the named moments
+  if(JSON.stringify(stgList())!==JSON.stringify(bs))o.steps=wbClone(stgList());
+  if(JSON.stringify(stgMarks())!==JSON.stringify(bm))o.marks=wbClone(stgMarks());
   return o;
 }
 const wbChanges=()=>(WB.draft&&WB.base)?Object.keys(wbDiff()).length:0;
@@ -1754,7 +1761,7 @@ function wbNow(){const d=new Date(),p=n=>String(n).padStart(2,'0'),o=-d.getTimez
 function wbDate(at){try{return new Date(at).toLocaleDateString(undefined,{month:'short',day:'numeric'});}catch(e){return '';}}
 function wbOpen(a){
   clearTimeout(WB.poll);
-  WB.fxOpen=-1;WB.fxPick=false;WB.fxk=null;WB.id=a.id;WB.a=a;WB.undo=[];WB.file=null;WB.fsha=null;WB.src='';WB.busy=false;WB.msg=null;WB.confirm=false;
+  WB.fxOpen=-1;WB.fxPick=false;WB.stgOpen=-1;WB.stgPick=false;WB.fxk=null;WB.id=a.id;WB.a=a;WB.undo=[];WB.file=null;WB.fsha=null;WB.src='';WB.busy=false;WB.msg=null;WB.confirm=false;
   const kept=wbStoreRead().drafts[a.id],live=wbClone(wbSpecOf(a.id));
   WB.base=kept&&kept.base?wbClone(kept.base):wbClone(live);if(!WB.base.timing)WB.base.timing={};
   WB.draft=kept&&kept.live?wbClone(kept.live):wbClone(WB.base);
@@ -1769,18 +1776,22 @@ async function wbLoadFile(a){
   if(WB.id!==id||!src)return;
   WB.src=src;WB.file=doc||wbBlank(a);WB.fsha=sha;
   const fresh=wbClone((doc&&(doc.draft!=null?doc.draft:doc.live))||wbSpecOf(id));if(!fresh.timing)fresh.timing={};
-  wbRebase(fresh);wbSend();wbPaint();wbFxPaint();
+  wbRebase(fresh);wbSend();wbPaint();wbAllPaint();
 }
 // Fields Tom did not touch take the file's value; fields he changed stay his.
 function wbRebase(fresh){
   const mine=wbDiff();WB_FIELDS.forEach(f=>{if(!(f in mine)){if(fresh.timing[f]===undefined)delete WB.draft.timing[f];else WB.draft.timing[f]=wbClone(fresh.timing[f]);}});
   if(!('effects' in mine)){if(fresh.effects===undefined)delete WB.draft.effects;else WB.draft.effects=wbClone(fresh.effects);}
+  {const mySteps=wbClone(stgList()),myMarks=wbClone(stgMarks());   // movebench9: the rest of the stage and of the body is the file's; his steps and moments stay his
+    if(fresh.stage||'steps' in mine){const st=fresh.stage?wbClone(fresh.stage):{};if('steps' in mine)st.steps=mySteps;WB.draft.stage=st;}else delete WB.draft.stage;
+    const bd=fresh.body?wbClone(fresh.body):{};if('marks' in mine){if(Object.keys(myMarks).length)bd.marks=myMarks;else delete bd.marks;}WB.draft.body=bd;}
   WB.base=wbClone(fresh);
 }
 // Send the draft to the frame (null when it is what the game plays: the frame puts its own table's back).
 function wbSend(){
   const n=wbChanges();wbStoreWrite(WB.id,n?WB.draft:null,n?WB.base:null);
-  const ml=(wbSpecOf(WB.id)||{}).timing||{},t=(WB.draft&&WB.draft.timing)||{},differs=WB_FIELDS.some(f=>JSON.stringify(t[f])!==JSON.stringify(ml[f]))||JSON.stringify((WB.draft&&WB.draft.effects)||[])!==JSON.stringify((wbSpecOf(WB.id)||{}).effects||[]);
+  const sp=wbSpecOf(WB.id)||{},ml=sp.timing||{},t=(WB.draft&&WB.draft.timing)||{},differs=WB_FIELDS.some(f=>JSON.stringify(t[f])!==JSON.stringify(ml[f]))||JSON.stringify((WB.draft&&WB.draft.effects)||[])!==JSON.stringify(sp.effects||[])
+    ||JSON.stringify(stgList())!==JSON.stringify((sp.stage&&sp.stage.steps)||[])||JSON.stringify(stgMarks())!==JSON.stringify((sp.body&&sp.body.marks)||{});
   benchSend({bench:'spec',id:WB.id,live:differs?WB.draft:null});
 }
 function wbEdit(patch){
@@ -1789,8 +1800,8 @@ function wbEdit(patch){
   for(const k in patch){if(patch[k]==null)delete t[k];else t[k]=patch[k];}
   WB.draft.timing=t;wbSend();wbPaint();
 }
-function wbUndo(){if(!WB.undo.length)return;WB.draft=JSON.parse(WB.undo.pop());WB.confirm=false;WB.msg=null;WB.fxk=null;wbSend();wbPaint();wbFxPaint();}
-function wbReset(){WB.undo.push(JSON.stringify(WB.draft));WB.draft=wbClone(WB.base);if(!WB.draft.timing)WB.draft.timing={};WB.confirm=false;WB.msg=null;WB.fxk=null;wbSend();wbPaint();wbFxPaint();}
+function wbUndo(){if(!WB.undo.length)return;WB.draft=JSON.parse(WB.undo.pop());WB.confirm=false;WB.msg=null;WB.fxk=null;wbSend();wbPaint();wbAllPaint();}
+function wbReset(){WB.undo.push(JSON.stringify(WB.draft));WB.draft=wbClone(WB.base);if(!WB.draft.timing)WB.draft.timing={};WB.confirm=false;WB.msg=null;WB.fxk=null;wbSend();wbPaint();wbAllPaint();}
 // ---- Save draft, Finished (plan d.3, f.3, f.4) ----
 // Both write ONE file, data/moves/<slug>.json, through the contents API with the sha of the file as just read. A 409 (the file moved: a second device, a session, the apply job) reads it
 // again and puts Tom's field changes on top of the newer file. Save draft writes `draft`; Finished makes the draft `live`, clears `draft` and sets `finished` to him and now. The
@@ -1799,6 +1810,8 @@ function wbWhat(ch){
   const lab={hitStop:'timing.freeze.label',shake:'timing.shake.label',approach:'timing.approach.label',approachSec:'timing.pace.label',returnSec:'timing.pace.label',gap:'timing.gap.label',contact:'timing.hit.label'},p=[];
   for(const f in ch){const x=ch[f];let v;
     if(f==='effects'){p.push(W('fx.p.title')+': '+(x&&x.length?x.map(e=>fxName(e.fx)+(e.off?' ('+W('fx.p.off')+')':'')).join(', '):W('fx.p.empty')));continue;}
+    if(f==='steps'){p.push(W('sections.stage')+': '+(x&&x.length?x.map(s=>stgSentence(s)).join('; '):W('stage.empty')));continue;}
+    if(f==='marks'){p.push(W('stage.name_label')+': '+(x&&Object.keys(x).length?Object.keys(x).join(', '):'-'));continue;}
     if(x==null)v=W('save.automatic');
     else if(f==='hitStop')v=W('timing.freeze.frames',{n:x});else if(f==='shake')v=W('timing.shake.px',{n:x});
     else if(f==='approach')v=(WA('timing.approach.options').find(o=>o.k===x)||{label:x}).label;
@@ -1809,9 +1822,11 @@ function wbWhat(ch){
 function wbMerge(cur,ch,kind,now,replayed){
   const d=wbClone(cur);d.v=1;d.id=d.id||WB.id;
   const sec=wbClone((d.draft!=null?d.draft:d.live)||{});const t=Object.assign({},sec.timing||{});
-  for(const f in ch){if(f==='effects')continue;if(ch[f]==null)delete t[f];else t[f]=wbClone(ch[f]);}
+  for(const f in ch){if(f==='effects'||f==='steps'||f==='marks')continue;if(ch[f]==null)delete t[f];else t[f]=wbClone(ch[f]);}
   if(Object.keys(t).length)sec.timing=t;else delete sec.timing;
   if('effects' in ch)sec.effects=wbClone(ch.effects||[]);
+  if('steps' in ch){const had=!!sec.stage,st=Object.assign({},sec.stage||{});st.steps=wbClone(ch.steps||[]);if(!st.steps.length&&!had)delete sec.stage;else sec.stage=st;}
+  if('marks' in ch){sec.body=Object.assign({},sec.body||{});if(Object.keys(ch.marks||{}).length)sec.body.marks=wbClone(ch.marks);else delete sec.body.marks;}
   d.rev=(d.rev||0)+1;
   const what=(wbWhat(ch)||W(kind==='finished'?'save.what_finished':'save.what_draft'))+(replayed?' ('+W('save.merged')+')':'');
   if(kind==='draft'){d.draft=sec;}else{d.live=sec;d.draft=null;d.finished={rev:d.rev,at:now,by:'tom',build:null};}
@@ -1896,7 +1911,8 @@ async function wbBringBack(sha){
     WB.undo.push(JSON.stringify(WB.draft));WB.draft.timing=Object.assign({},WB.draft.timing||{});
     WB_FIELDS.forEach(f=>{if(t[f]===undefined)delete WB.draft.timing[f];else WB.draft.timing[f]=wbClone(t[f]);});
     if(src.effects===undefined)delete WB.draft.effects;else WB.draft.effects=wbClone(src.effects);
-    wbSend();wbFxPaint();wbMsg(W('versions.brought'),false,W('versions.brought_hint'));
+    {const sst=(src.stage&&src.stage.steps)||[];stgWrite(wbClone(sst));if(!sst.length&&!(src.stage))delete WB.draft.stage;const bd=Object.assign({},WB.draft.body||{}),mk=(src.body&&src.body.marks)||{};if(Object.keys(mk).length)bd.marks=wbClone(mk);else delete bd.marks;WB.draft.body=bd;}
+    wbSend();wbAllPaint();wbMsg(W('versions.brought'),false,W('versions.brought_hint'));
   }catch(e){wbMsg(W('versions.failed',{why:e.message}),true);}
 }
 // What the Timing rows show for each field: the draft's value, else the game's default (MS_DEFAULTS, engine/b3-spec.js).
@@ -1974,7 +1990,7 @@ function wbPaint(){
     if(a.kind==='move'){parts.push(R.shakePx>0?W('timing.report.shake',{px:R.shakePx}):W('timing.report.noshake'));parts.push(R.runInSec!=null?W('timing.report.run',{s:wbFmt(R.runInSec)}):W('timing.report.norun'));}
     if(R.gap!=null)parts.push(W('timing.report.gap',{s:wbFmt(R.gap)}));
     rp.innerHTML='<b>'+esc(W('timing.report.label'))+':</b> '+parts.map(esc).join(', ');}}
-  wbSubline();wbFxCounts();
+  wbSubline();wbFxCounts();wbStagePaint(true);wbSoundPaint();
 }
 function wbSubline(){
   const el=$('wbsub'),a=WB.a;if(!el||!a)return;const g=typeof G==='function'?G(a):null,tl=BENCH.tl&&BENCH.tl.id===a.id?BENCH.tl:null;
@@ -1982,18 +1998,6 @@ function wbSubline(){
   if(tl)t+=' '+W('runs.line',{len:wbFmt(tl.len)});
   if(sg&&sg.budget){const b=sg.budget;t+=' '+W('runs.target',{lo:Math.max(0,Math.round((b-1)*10)/10),hi:b});}
   el.textContent=t;
-}
-function wbReadonly(a,part){
-  if(a.kind!=='move')return '';const sp=wbSpecOf(a.id)||{};
-  const when=at=>at==null||at==='contact'?W('readonly.at_contact'):typeof at==='number'?W('readonly.at_sec',{s:wbFmt(at)}):typeof at==='string'?W('readonly.at_mark',{mark:at}):at&&at.plus!=null&&at.mark==null&&at.step==null?W('readonly.at_plus',{s:wbFmt(at.plus)}):at&&at.mark!=null?W('readonly.at_mark',{mark:at.mark})+(at.plus?' +'+wbFmt(at.plus)+' s':''):at&&at.sec!=null?W('readonly.at_sec',{s:wbFmt(at.sec)}):W('readonly.at_contact');
-  const st=(sp.stage&&sp.stage.steps)||[],fx=sp.effects||[],snd=[];
-  if(sp.body&&sp.body.sound)snd.push({at:W('readonly.at_sec',{s:'picture '+sp.body.sound.at}),n:sp.body.sound.sfx});
-  st.forEach(s=>{if(s.do==='sfx')snd.push({at:when(s.at),n:s.sfx});});fx.forEach(e=>{if(e.sfx)snd.push({at:when(e.at),n:e.sfx});});
-  const sec=(id,title,count,items)=>'<section class="wbs" id="s-'+id+'"><h3 class="wbh"><span>'+esc(title)+'</span><span class="wbcount">'+esc(count)+'</span></h3>'
-    +(items.length?'<ul class="wbl">'+items.join('')+'</ul>':'<p class="hint">'+esc(W('readonly.empty'))+'</p>')+'<p class="hint">'+esc(W('readonly.title_hint'))+'</p></section>';
-  const cnt=(n,one,many)=>n===1?W(one):W(many,{n});
-  if(part==='stage')return sec('stage',W('sections.stage'),cnt(st.length,'readonly.stage_one','readonly.stage_many'),st.map(s=>'<li><span class="tm">'+esc(when(s.at))+'</span><span>'+esc(W('stage_do.'+s.do))+(s.text?': '+esc(s.text):'')+(s.hold?' <span class="dt">'+esc(wbFmt(s.hold)+' s')+'</span>':'')+'</span></li>'))
-  ;return sec('sound',W('sections.sound'),cnt(snd.length,'readonly.snd_one','readonly.snd_many'),snd.map(s=>'<li><span class="tm">'+esc(s.at)+'</span><span>'+esc(words(s.n))+'</span></li>'));
 }
 function wbSpecCounts(a){
   const sp=wbSpecOf(a.id)||{},st=((sp.stage&&sp.stage.steps)||[]).length,fx=(sp.effects||[]).length;let sn=(sp.body&&sp.body.sound?1:0);
@@ -2007,10 +2011,10 @@ function wbHtml(a,videoHtml){
   return '<div class="wb" id="wb" data-kind="'+esc(a.kind)+'"><div class="wb-top"><button type="button" class="back" id="bclose" aria-label="'+esc(W('page.back'))+'">&lsaquo; '+esc(ownerName(a.owner))+'</button>'
    +'<div class="wt"><h2>'+esc(a.name)+'</h2><p class="wsub" id="wbsub"></p></div><span class="wbstat" id="wbstat"></span></div>'
    +'<div class="wb-body" id="wbbody"><div class="wb-prev" id="wbprev">'+benchBox(a)+'<div class="wbpink" id="wbpink" hidden>'+esc(W('fx.p.pink_tag'))+'</div></div><div class="wb-secs" id="wbsecs">'
-   +'<nav class="wb-nav" id="wbnav" aria-label="'+esc(W('page.jump'))+'">'+nav.map(n=>'<button type="button" data-wbgo="'+n[0]+'">'+esc(W(n[1]))+(n[2]?'<b'+(n[0]==='effects'?' id="wbnavfx"':'')+'>'+n[2]+'</b>':'')+'</button>').join('')+'</nav>'
+   +'<nav class="wb-nav" id="wbnav" aria-label="'+esc(W('page.jump'))+'">'+nav.map(n=>'<button type="button" data-wbgo="'+n[0]+'">'+esc(W(n[1]))+(n[2]?'<b id="wbnav'+(n[0]==='effects'?'fx':n[0])+'">'+n[2]+'</b>':'')+'</button>').join('')+'</nav>'
    +'<section class="wbs" id="s-video"><h3 class="wbh"><span>'+esc(W('sections.video'))+'</span></h3>'+videoHtml+'</section>'
    +'<section class="wbs" id="s-timing"><h3 class="wbh"><span>'+esc(W('sections.timing'))+'</span></h3>'+wbTimingHtml(a)+'</section>'
-   +wbReadonly(a,'stage')+wbFxSection(a)+wbReadonly(a,'sound')+'<section class="wbs" id="s-versions"><h3 class="wbh"><span>'+esc(W('sections.versions'))+'</span></h3><p class="hint" id="wbfinline" style="margin:0 0 8px"></p>'
+   +wbStageSection(a)+wbFxSection(a)+wbSoundSection(a)+'<section class="wbs" id="s-versions"><h3 class="wbh"><span>'+esc(W('sections.versions'))+'</span></h3><p class="hint" id="wbfinline" style="margin:0 0 8px"></p>'
    +'<button type="button" data-wb="versions">'+esc(W('versions.show'))+'</button><div id="wbvers"></div></section><section class="wbs" id="s-note">'+noteForm(a)+'</section>'+(maniOf(a)?'<section class="wbs" id="s-mani">'+manifestBlock(maniOf(a))+'</section>':'')
    +'</div></div><div class="wb-bottom"><div class="wbu" id="wbunsaved"></div><button type="button" id="wbundo" data-wb="undo">'+esc(W('page.undo'))+'</button><button type="button" id="wbreset" data-wb="reset" title="'+esc(W('page.reset_hint'))+'">'+esc(W('page.reset'))+'</button>'
    +'<button type="button" id="wbsave" data-wb="save">'+esc(W('save.draft'))+'</button><button type="button" id="wbfin" data-wb="fin">'+esc(W('save.finished'))+'</button><button type="button" id="wbno" data-wb="no" hidden>'+esc(W('save.not_yet_btn'))+'</button></div></div>';
@@ -2159,6 +2163,7 @@ function fxPickerHtml(){
   const ids=FXD?Object.keys(FXD.fx):[];
   return '<div class="fxpick"><p class="hint" style="margin:0 0 6px">'+esc(W('fx.p.adding'))+'</p><div class="fxgrid">'+ids.map(id=>'<button type="button" class="fxtile" data-fx="pick" data-v="'+esc(id)+'">'+fxSample(id)+'<b>'+esc(fxName(id))+'</b></button>').join('')+'</div><button type="button" data-fx="pickno">'+esc(W('fx.p.cancel'))+'</button></div>';
 }
+function wbAllPaint(){wbFxPaint();wbStagePaint();wbSoundPaint();}
 function wbFxPaint(){
   const el=$('wbfx');if(!el||!WB.a||!FXD)return;
   const l=fxList();if(WB.fxOpen>=l.length)WB.fxOpen=-1;
@@ -2201,6 +2206,300 @@ document.addEventListener('change',e=>{const t=e.target;if(!t||!t.dataset||!WB.a
   if(t.dataset.fx==='snd'){const i=+t.dataset.i;wbEditFx(l=>{if(t.value)l[i].sfx=t.value;else delete l[i].sfx;});wbFxPaint();}
   if(t.dataset.fx==='p'&&t.type==='range')wbFxPaint();});
 
+// ---------- Stage and Sound (movebench9, claude/movebench-plan.md d.1 rows 4 and 8, d.2) ----------
+// The steps that need no picture: words on screen, shake, flash, dim, glow, knock the monster back, a sound. Each is one sentence in a list in time order, with Change; Add a step opens seven tiles.
+// A step happens at a moment: the start, the hit, a moment Tom named on the preview (a mark of the move's video), after another step, or a time; each with a fine tune. The draft is draft.stage.steps
+// (the one field `steps` of the diff) and draft.body.marks (the one field `marks`); Save draft and Finished write them through the same path as the Timing fields. Steps that use a picture
+// (throw, drop, drive across, rain, put in front, float over, surround, pop up) are shown as the game holds them and can be moved in time or removed; their settings are the next step.
+const STG7=['words','shake','flash','dim','glow','foe','sfx'];
+const STG_ICON={
+ words:'<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 12h28v16H17l-7 6v-6H6z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M12 18h16M12 23h10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>',
+ shake:'<svg viewBox="0 0 40 40" aria-hidden="true"><rect x="12" y="10" width="16" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M5 14l-3 6 3 6M35 14l3 6-3 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+ flash:'<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M22 4L10 22h9l-3 14 14-20h-9z" fill="currentColor"/></svg>',
+ dim:'<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="13" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M20 7a13 13 0 0 1 0 26z" fill="currentColor"/></svg>',
+ glow:'<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="6" fill="currentColor"/><path d="M20 4v6M20 30v6M4 20h6M30 20h6M9 9l4 4M27 27l4 4M31 9l-4 4M13 27l-4 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>',
+ foe:'<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="26" cy="18" r="9" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M4 18h9M7 12h6M7 24h6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>',
+ sfx:'<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 15h7l9-8v26l-9-8H5z" fill="currentColor"/><path d="M27 14q5 6 0 12M31 10q9 10 0 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>'};
+const STG_NUM={hold:{lo:.1,hi:8,st:.1,def:1},dur:{lo:.05,hi:6,st:.05,def:.3},amp:{lo:1,hi:12,st:1,def:3},amount:{lo:0,hi:.95,st:.05,def:0},in:{lo:.05,hi:4,st:.05,def:.3},size:{lo:1,hi:4,st:1,def:2},px:{lo:1,hi:40,st:2,def:14}};
+const STG_NEW={words:{do:'words',text:'BOOM',where:'over:target',size:2,color:'#eab308',hold:1.1},shake:{do:'shake',amp:6,dur:.3},flash:{do:'flash',color:'#f8fafc',dur:.3},dim:{do:'dim',amount:.35,in:.3},
+ glow:{do:'glow',color:'#eab308',dur:1},foe:{do:'foe',react:'knock',px:14},sfx:{do:'sfx',sfx:'thud'}};
+const stgR=x=>Math.round(x*100)/100;
+const stgList=()=>((WB.draft&&WB.draft.stage&&WB.draft.stage.steps)||[]);
+const stgMarks=()=>((WB.draft&&WB.draft.body&&WB.draft.body.marks)||{});
+const stgNum=(s,f)=>{const v=s[f];return typeof v==='number'&&isFinite(v)&&(v!==0||f==='amount')?v:(s.do==='glow'&&f==='dur'?1:STG_NUM[f].def);};
+const stgColorName=c=>{const sw=((WORDS.fx&&WORDS.fx.swatches)||[]),h=x=>{const m=/^#([0-9a-f]{6})$/i.exec(String(x||''));return m?[0,2,4].map(i=>parseInt(m[1].substr(i,2),16)):null;},t=h(c);if(!t)return String(c||'');
+  let best=null,bd=1e9;for(const q of sw){const r=h(q.k);if(!r)continue;const d=(r[0]-t[0])**2+(r[1]-t[1])**2+(r[2]-t[2])**2;if(d<bd){bd=d;best=q;}}return best&&bd<9000?best.label.toLowerCase():String(c||'');};   // the nearest of the eight swatches
+const stgPick=(arr,v)=>(WA(arr).find(o=>Math.abs(+o.k-v)<1e-9)||null);
+// What the stage section of the draft looks like when its steps are replaced. A move that had no stage and has no steps again has none; one that had a stage keeps it, so its hit still means what it did.
+function stgWrite(l){
+  const st=wbClone(WB.draft.stage||{});st.steps=l;
+  if(!l.length&&Object.keys(st).length===1&&!(WB.base&&WB.base.stage))delete WB.draft.stage;else WB.draft.stage=st;
+}
+function wbEditStage(fn,key){
+  const now=Date.now(),same=key&&WB.fxk&&WB.fxk.k===key&&now-WB.fxk.t<1500;
+  if(!same){WB.undo.push(JSON.stringify(WB.draft));if(WB.undo.length>60)WB.undo.shift();}
+  WB.fxk=key?{k:key,t:now}:null;WB.confirm=false;WB.msg=null;
+  const l=wbClone(stgList());fn(l);stgWrite(l);wbSend();wbPaint();
+}
+// ---- moments ----
+function stgContact(){const c=((WB.draft&&WB.draft.timing)||{}).contact;return c&&typeof c==='object'?c:null;}
+function stgHitAt(){const c=stgContact();return c&&c.step!=null?{step:c.step}:{hit:true};}
+// {kind, plus, ...} for an `at`
+function stgKind(at,l){
+  const c=stgContact(),marks=stgMarks(),ids=l.map(s=>s.id).filter(Boolean);
+  if(typeof at==='number')return at===0?{k:'start',plus:0}:{k:'time',sec:at};
+  if(typeof at==='string')return marks[at]!=null?{k:'mark',mark:at,plus:0}:ids.includes(at)?{k:'step',step:at,plus:0}:{k:'time',sec:null,raw:at};
+  if(at&&typeof at==='object'){
+    const p=typeof at.plus==='number'?at.plus:0;
+    if(at.hit)return{k:'hit',plus:p};
+    if(at.mark!=null)return c&&c.mark===at.mark&&!p?{k:'hit',plus:0}:{k:'mark',mark:at.mark,plus:p};
+    if(at.step!=null)return c&&c.step===at.step&&!p?{k:'hit',plus:0}:{k:'step',step:at.step,plus:p};
+    if(at.sec!=null)return{k:'time',sec:at.sec};
+    return{k:'time',sec:null,raw:'?'};
+  }
+  return{k:'hit',plus:0};
+}
+function stgAtText(at,l){
+  const q=stgKind(at,l),pl=q.plus?(q.plus>0?W('stage.plus_after',{s:stgR(q.plus)}):W('stage.plus_before',{s:stgR(-q.plus)}))+' ':'';
+  if(q.k==='start')return W('stage.start_at');
+  if(q.k==='hit')return pl+W('stage.hit_at');
+  if(q.k==='mark')return pl+W('stage.mark_at',{mark:q.mark});
+  if(q.k==='step'){const n=l.findIndex(s=>s.id===q.step)+1;return pl+W('stage.step_at',{n:n||'?'});}
+  return q.sec!=null?W('stage.time_at',{s:stgR(q.sec)}):String(q.raw||'');
+}
+// An `at` as an object or a number (a bare string is a named moment or a step), and shifted by `plus` seconds: for the steps that followed a step that was removed.
+function stgShift(at,plus,l){
+  if(typeof at==='string')at=stgMarks()[at]!=null?{mark:at}:{step:at};
+  if(!plus)return at;
+  if(typeof at==='number')return Math.max(0,stgR(at+plus));
+  const o=Object.assign({},at);if(o.sec!=null)o.sec=Math.max(0,stgR(o.sec+plus));else{const p=stgR((o.plus||0)+plus);if(p)o.plus=p;else delete o.plus;}return o;
+}
+function stgRun(){const r=wbRun();return r&&r.staged?r:null;}
+function stgTimes(){const r=stgRun(),l=stgList();return r&&r.steps&&r.steps.length===l.length?r.steps:null;}
+// seconds from the start of the move at the preview's moment (the preview clock starts a little before the move)
+function stgNowSec(){const m=wbMoment(),r=wbRun();if(m==null)return null;const off=r&&r.off!=null?r.off:0;return Math.max(0,stgR(m-off));}
+function stgOrder(l){const t=stgTimes();return l.map((s,i)=>i).sort((a,b)=>t?(t[a]-t[b]||a-b):a-b);}
+// ---- the sentence ----
+function stgSentence(s){
+  const T=(k,v)=>W('stage.s.'+k,v),col=c=>stgColorName(c);
+  if(s.do==='words'){const pl=WA('stage.places').find(o=>o.k===(s.where||'screen_center'));
+    if(s.glyphs)return T('other',{name:W('stage_do.words')+': '+s.glyphs.length+' buttons'});
+    return T('words',{text:s.text||'',where:(pl?pl.label:String(s.where||'screen_center').replace(/[:_]/g,' ')).toLowerCase(),color:col(s.color||'#fff1cb'),hold:stgR(stgNum(s,'hold'))});}
+  if(s.do==='shake'){const a=stgNum(s,'amp'),p=stgPick('stage.amps',a);return T('shake',{amp:(p?p.label:a+' px').toLowerCase(),dur:stgR(stgNum(s,'dur'))});}
+  if(s.do==='flash')return T('flash',{color:col(s.color||'#ffffff'),dur:stgR(stgNum(s,'dur'))});
+  if(s.do==='dim'){const a=stgNum(s,'amount'),p=stgPick('stage.amounts',a);return T('dim',{amount:(p?p.label:Math.round(a*100)+'%').toLowerCase(),in:stgR(s.in!=null?s.in:s.out!=null?s.out:.3)});}
+  if(s.do==='glow')return T('glow',{color:col(s.color||'#ffd27a'),dur:stgR(stgNum(s,'dur'))});
+  if(s.do==='foe'){if(s.react==='squash')return T('foe_squash');const p=stgPick('stage.pxs',stgNum(s,'px'));return T('foe_knock',{px:p?p.label.toLowerCase():stgNum(s,'px')+' px'});}
+  if(s.do==='sfx')return T('sfx',{name:words(s.sfx||'')});
+  return T('other',{name:W('stage_do.'+s.do)});
+}
+// ---- the section ----
+function wbStageSection(a){
+  if(a.kind!=='move')return '';
+  return '<section class="wbs" id="s-stage"><h3 class="wbh"><span>'+esc(W('sections.stage'))+'</span><span class="wbcount" id="wbstgcount"></span></h3><p class="hint" style="margin:0 0 6px">'+esc(W('stage.note_draft'))+'</p><p class="hint" id="wbstgnov" hidden>'+esc(W('stage.no_video'))+'</p><div id="wbstg"></div></section>';
+}
+function stgSeg(label,hint,f,opts,cur,attr){
+  return '<div class="wbrow"><div class="wl"><b>'+esc(label)+'</b><span>'+esc(hint||'')+'</span></div><div class="wc"><div class="wbseg wrap" role="group" aria-label="'+esc(label)+'">'
+   +opts.map(o=>'<button type="button" data-st="set" data-f="'+f+'" data-v="'+esc(o.k)+'" aria-pressed="'+((typeof o.k==='number'?Math.abs(o.k-cur)<1e-9:o.k===cur)?'true':'false')+'">'+esc(o.label)+'</button>').join('')+'</div>'+(attr||'')+'</div></div>';
+}
+function stgBump(f,cur){return '<button type="button" class="wbc wbstep" data-st="bump" data-f="'+f+'" data-v="-1" aria-label="-">-</button><button type="button" class="wbc wbstep" data-st="bump" data-f="'+f+'" data-v="1" aria-label="+">+</button><span class="wbval">'+esc(stgR(cur))+'</span>';}
+function stgColors(label,cur){
+  const sw=(WORDS.fx&&WORDS.fx.swatches)||[],all=sw.some(x=>x.k.toLowerCase()===String(cur).toLowerCase())?sw:[{k:cur,label:''}].concat(sw);
+  return '<div class="wbrow"><div class="wl"><b>'+esc(label)+'</b></div><div class="wc"><div class="fxsws" role="group" aria-label="'+esc(label)+'">'+all.map(x=>'<button type="button" class="fxsw2" data-st="set" data-f="color" data-v="'+esc(x.k)+'" style="background:'+esc(x.k)+'" aria-label="'+esc(x.label||x.k)+'" aria-pressed="'+(String(cur).toLowerCase()===x.k.toLowerCase()?'true':'false')+'"></button>').join('')+'</div></div></div>';
+}
+function stgWhenHtml(s,i,l){
+  const q=stgKind(s.at,l),marks=Object.keys(stgMarks()),earlier=l.slice(0,i).map((x,k)=>({k,s:x}));
+  let h='<div class="wbrow"><div class="wl"><b>'+esc(W('stage.when'))+'</b><span>'+esc(W('stage.when_hint'))+'</span></div><div class="wc"><div class="wbseg wrap" role="group" aria-label="'+esc(W('stage.when'))+'">'
+   +WA('stage.kinds').map(o=>'<button type="button" data-st="kind" data-v="'+o.k+'" aria-pressed="'+(q.k===o.k||(o.k==='time'&&q.k==='time')?'true':'false')+'">'+esc(o.label)+'</button>').join('')+'</div>';
+  if(q.k==='mark'){h+=marks.length?'<select class="fxsel" data-st="mark" aria-label="'+esc(W('stage.pick_mark'))+'">'+marks.map(m=>'<option value="'+esc(m)+'"'+(m===q.mark?' selected':'')+'>'+esc(m)+'</option>').join('')+'</select>':'<span class="hint">'+esc(W('stage.no_marks'))+'</span>';}
+  if(q.k==='step'){h+=earlier.length?'<select class="fxsel" data-st="after" aria-label="'+esc(W('stage.pick_step'))+'">'+earlier.map(e=>'<option value="'+e.k+'"'+(e.s.id===q.step?' selected':'')+'>'+esc((e.k+1)+'. '+stgSentence(e.s))+'</option>').join('')+'</select>':'<span class="hint">'+esc(W('stage.no_steps'))+'</span>';}
+  if(q.k==='time'&&q.sec!=null)h+='<input type="number" class="wbnum" data-st="sec" min="0" max="12" step="0.05" inputmode="decimal" value="'+esc(stgR(q.sec))+'" aria-label="'+esc(W('stage.time_at',{s:''}).trim())+'"><span class="hint">s</span>';
+  if(q.k==='hit'||q.k==='mark'||q.k==='step')h+='<button type="button" class="wbc wbstep" data-st="plus" data-v="-1" aria-label="'+esc(W('stage.less'))+'">-</button><button type="button" class="wbc wbstep" data-st="plus" data-v="1" aria-label="'+esc(W('stage.more'))+'">+</button><span class="wbval">'+esc(q.plus?stgAtText(s.at,l):'')+'</span>';
+  h+='<button type="button" class="wbc" data-st="setnow">'+esc(W('stage.set'))+'</button></div></div>';
+  h+='<div class="wbrow"><div class="wl"><b>'+esc(W('stage.name_label'))+'</b><span>'+esc(W('stage.name_hint'))+'</span></div><div class="wc"><input type="text" class="fxt" id="stgname" maxlength="16" placeholder="'+esc(W('stage.name_ph'))+'" aria-label="'+esc(W('stage.name_label'))+'"><button type="button" class="wbc" data-st="name">'+esc(W('stage.name_btn'))+'</button><span class="hint" id="stgnamemsg"></span></div></div>';
+  return h;
+}
+function stgFieldsHtml(s){
+  const d=s.do;let h='';
+  if(d==='words'){
+    h+='<div class="wbrow"><div class="wl"><b>'+esc(W('stage.text'))+'</b><span>'+esc(W('stage.text_hint'))+'</span></div><div class="wc"><input type="text" class="fxt" data-st="text" maxlength="30" value="'+esc(s.text||'')+'" aria-label="'+esc(W('stage.text'))+'"></div></div>';
+    h+='<div class="wbrow"><div class="wl"><b>'+esc(W('stage.where'))+'</b></div><div class="wc"><select class="fxsel" data-st="where" aria-label="'+esc(W('stage.where'))+'">'
+      +WA('stage.places').map(o=>'<option value="'+esc(o.k)+'"'+(o.k===(s.where||'screen_center')?' selected':'')+'>'+esc(o.label)+'</option>').join('')+(WA('stage.places').some(o=>o.k===(s.where||'screen_center'))?'':'<option value="'+esc(s.where)+'" selected>'+esc(words(s.where))+'</option>')+'</select></div></div>';
+    h+=stgSeg(W('stage.size'),'','size',WA('stage.sizes'),stgNum(s,'size'));
+    h+=stgColors(W('stage.color'),s.color||'#fff1cb');
+    h+=stgSeg(W('stage.hold'),'','hold',WA('stage.holds'),stgNum(s,'hold'),stgBump('hold',stgNum(s,'hold')));
+  }else if(d==='shake'){
+    h+=stgSeg(W('stage.amp'),'','amp',WA('stage.amps'),stgNum(s,'amp'),stgBump('amp',stgNum(s,'amp')));
+    h+=stgSeg(W('stage.dur'),'','dur',WA('stage.durs'),stgNum(s,'dur'),stgBump('dur',stgNum(s,'dur')));
+  }else if(d==='flash'){
+    h+=stgColors(W('stage.color'),s.color||'#ffffff');
+    h+=stgSeg(W('stage.dur'),'','dur',WA('stage.durs'),stgNum(s,'dur'),stgBump('dur',stgNum(s,'dur')));
+  }else if(d==='dim'){
+    h+=stgSeg(W('stage.amount'),'','amount',WA('stage.amounts'),stgNum(s,'amount'),stgBump('amount',stgNum(s,'amount')));
+    h+=stgSeg(W('stage.fade'),'','in',WA('stage.fades'),s.in!=null?s.in:.3,stgBump('in',s.in!=null?s.in:.3));
+  }else if(d==='glow'){
+    h+=stgColors(W('stage.color'),s.color||'#ffd27a');
+    const cur=stgNum(s,'dur');h+=stgSeg(W('stage.dur'),'','dur',WA('stage.glowdurs'),cur,stgBump('dur',cur));
+  }else if(d==='foe'){
+    h+=stgSeg(W('stage.react'),'','react',WA('stage.reacts'),s.react||'knock');
+    if(s.react!=='squash')h+=stgSeg(W('stage.px'),'','px',WA('stage.pxs'),stgNum(s,'px'),stgBump('px',stgNum(s,'px')));
+  }else if(d==='sfx'){
+    h+='<div class="wbrow"><div class="wl"><b>'+esc(W('stage.sound'))+'</b></div><div class="wc"><select class="fxsel" data-st="sound" aria-label="'+esc(W('stage.sound'))+'">'+((FXD&&FXD.sounds)||[]).map(n=>'<option value="'+esc(n)+'"'+(s.sfx===n?' selected':'')+'>'+esc(words(n))+'</option>').join('')+'</select><button type="button" class="wbc" data-st="play" data-n="'+esc(s.sfx||'')+'">'+esc(W('stage.play'))+'</button></div></div>';
+  }else h+='<p class="hint">'+esc(W('stage.kept'))+'</p>';
+  return h;
+}
+function stgRowHtml(i,l,times){
+  const s=l[i],open=WB.stgOpen===i,known=STG7.includes(s.do),ord=stgOrder(l),pos=ord.indexOf(i),isStep=x=>stgKind(x.at,l).k==='step',nbU=l[ord[pos-1]],nbD=l[ord[pos+1]],noU=pos<=0||isStep(s)||isStep(nbU),noD=pos>=l.length-1||isStep(s)||isStep(nbD);
+  const tm=times?W('stage.time_at',{s:stgR(times[i])}).replace(/^at /,''):'';
+  let h='<div class="fxc stc'+(open?' open':'')+'" data-i="'+i+'"><div class="fxtop"><span class="stic" aria-hidden="true">'+(STG_ICON[s.do]||'')+'</span><div class="fxm"><b>'+esc(stgSentence(s))+'</b><span><em class="stt">'+esc(tm)+'</em>'+(tm?' · ':'')+esc(stgAtText(s.at,l))+'</span></div>'
+   +'<button type="button" class="fxch" data-st="open" data-i="'+i+'" aria-expanded="'+(open?'true':'false')+'">'+esc(W(open?'stage.close':'stage.change'))+'</button></div>';
+  if(open){
+    h+='<div class="fxpanel" data-i="'+i+'">'+stgWhenHtml(s,i,l)+(known?stgFieldsHtml(s):'<p class="hint">'+esc(W('stage.kept'))+'</p>')
+     +'<div class="fxacts"><button type="button" data-st="up" data-i="'+i+'"'+(noU?' disabled':'')+'>'+esc(W('stage.earlier'))+'</button><button type="button" data-st="down" data-i="'+i+'"'+(noD?' disabled':'')+'>'+esc(W('stage.later'))+'</button>'
+     +'<button type="button" data-st="remove" data-i="'+i+'">'+esc(W('stage.remove'))+'</button><button type="button" data-st="close">'+esc(W('stage.close'))+'</button></div></div>';
+  }
+  return h+'</div>';
+}
+function wbStagePaint(keepFocus){
+  const el=$('wbstg');if(!el||!WB.a)return;
+  const l=stgList();if(WB.stgOpen>=l.length)WB.stgOpen=-1;
+  if(keepFocus&&el.contains(document.activeElement)&&/^(INPUT|SELECT)$/.test(document.activeElement.tagName)){stgTimesPaint();return;}
+  const times=stgTimes(),ord=stgOrder(l);
+  el.innerHTML=(l.length?ord.map(i=>stgRowHtml(i,l,times)).join(''):'<p class="hint">'+esc(W('stage.empty'))+'</p>')
+   +(WB.stgPick?'<div class="fxpick"><p class="hint" style="margin:0 0 6px">'+esc(W('stage.adding'))+'</p><div class="fxgrid">'+STG7.map(k=>'<button type="button" class="fxtile sttile" data-st="pick" data-v="'+k+'"><span class="stic" aria-hidden="true">'+STG_ICON[k]+'</span><b>'+esc(W('stage.tiles.'+k))+'</b></button>').join('')+'</div><button type="button" data-st="pickno">'+esc(W('stage.cancel'))+'</button></div>'
+     :'<button type="button" class="fxadd" data-st="add">+ '+esc(W('stage.add'))+'</button>');
+  wbStgCounts();
+}
+// The times shown beside each step follow the run the frame just reported; the rows are not rebuilt while a box is being typed in.
+function stgTimesPaint(){
+  const times=stgTimes();if(!times)return;
+  document.querySelectorAll('#wbstg .fxc').forEach(c=>{const t=c.querySelector('.stt');if(t)t.textContent=W('stage.time_at',{s:stgR(times[+c.dataset.i])}).replace(/^at /,'');});
+}
+function stgSounds(){
+  const l=stgList(),sp=WB.draft||{},out=[];
+  l.forEach((s,i)=>{if(s.do==='sfx')out.push({src:'stage',i,at:stgAtText(s.at,l),n:s.sfx});});
+  fxList().forEach((e,i)=>{if(e.sfx)out.push({src:'fx',i,at:fxWhenText(e),n:e.sfx,name:fxName(e.fx)});});
+  if(sp.body&&sp.body.sound)out.push({src:'body',i:0,at:W('sound.sec.body',{n:sp.body.sound.at}),n:sp.body.sound.sfx});
+  return out;
+}
+function wbSoundSection(a){
+  if(a.kind!=='move')return '';
+  return '<section class="wbs" id="s-sound"><h3 class="wbh"><span>'+esc(W('sections.sound'))+'</span><span class="wbcount" id="wbsndcount"></span></h3><div id="wbsnd"></div></section>';
+}
+function wbSoundPaint(){
+  const el=$('wbsnd');if(!el||!WB.a)return;
+  if(el.contains(document.activeElement)&&document.activeElement.tagName==='SELECT'&&document.activeElement.dataset.snd==='pick')return;
+  const L=stgSounds(),names=(FXD&&FXD.sounds)||[];
+  const opt=cur=>names.map(n=>'<option value="'+esc(n)+'"'+(cur===n?' selected':'')+'>'+esc(words(n))+'</option>').join('');
+  el.innerHTML=(L.length?'<ul class="wbl sndl">'+L.map(q=>'<li data-src="'+q.src+'" data-i="'+q.i+'"><span class="tm">'+esc(q.at)+'</span><span class="sndn"><b>'+esc(q.src==='stage'?W('sound.sec.stage_tag'):q.src==='fx'?W('sound.sec.fx_tag')+': '+q.name:W('sound.sec.body_tag'))+'</b> '
+     +(q.src==='body'?esc(words(q.n)):'<select class="fxsel" data-snd="chg" aria-label="'+esc(W('sound.label'))+'">'+opt(q.n)+'</select>')
+     +'</span><button type="button" class="wbc" data-snd="play" data-n="'+esc(q.n)+'">'+esc(W('stage.play'))+'</button>'
+     +(q.src==='stage'?'<button type="button" class="wbc" data-snd="rm">'+esc(W('sound.sec.remove'))+'</button>':'')+'</li>').join('')+'</ul>':'<p class="hint">'+esc(W('sound.sec.empty'))+'</p>')
+   +'<div class="wbrow"><div class="wl"><b>'+esc(W('sound.sec.add'))+'</b><span>'+esc(W('sound.sec.adding'))+'</span></div><div class="wc"><select class="fxsel" id="sndpick" data-snd="pick" aria-label="'+esc(W('sound.sec.pick'))+'">'+opt(WB.sndPick||'thud')+'</select>'
+   +'<button type="button" class="wbc" data-snd="play" data-n="" id="sndpickplay">'+esc(W('stage.play'))+'</button><button type="button" class="fxadd" style="width:auto;padding:0 16px" data-snd="add">+ '+esc(W('sound.sec.add'))+'</button></div></div><p class="hint" id="sndmsg"></p>';
+  wbStgCounts();
+}
+function wbStgCounts(){
+  const l=stgList(),c=$('wbstgcount'),nb=$('wbnavstage'),S=stgSounds().length,sc=$('wbsndcount'),sb=$('wbnavsound');
+  if(c)c.textContent=l.length===1?W('stage.count_one'):W('stage.count_many',{n:l.length});if(nb)nb.textContent=l.length;
+  if(sc)sc.textContent=S===1?W('sound.sec.count_one'):W('sound.sec.count_many',{n:S});if(sb)sb.textContent=S;
+  const nv=$('wbstgnov');if(nv){const r=wbRun();nv.hidden=!(l.length&&r&&r.noVideoRun);}
+}
+function stgPlay(name){
+  const msg=$('sndmsg');
+  if(!name)return;
+  if(!BENCH.fr){const m=W('stage.play_first');if(msg)msg.textContent=m;WB.sndLast={name,sent:false};return;}
+  benchSend({bench:'sfx',name});WB.sndLast={name,sent:true};if(msg)msg.textContent='';
+}
+// ---- what a tap does ----
+function stgAct(b){
+  const a=b.dataset.st,i=+b.dataset.i,v=b.dataset.v,f=b.dataset.f,l0=stgList();
+  if(a==='add'){WB.stgPick=true;return wbStagePaint();}
+  if(a==='pickno'){WB.stgPick=false;return wbStagePaint();}
+  if(a==='pick'){if(!STG7.includes(v))return;WB.stgPick=false;WB.stgOpen=l0.length;wbEditStage(l=>l.push(Object.assign({at:stgHitAt()},wbClone(STG_NEW[v]))));return wbStagePaint();}
+  if(a==='open'){WB.stgOpen=WB.stgOpen===i?-1:i;return wbStagePaint();}
+  if(a==='close'){WB.stgOpen=-1;return wbStagePaint();}
+  const k=WB.stgOpen;if(k==null||k<0)return;
+  if(a==='remove'){
+    WB.stgOpen=-1;
+    wbEditStage(l=>{const s=l[k];
+      if(s.id)l.forEach(o=>{const oq=stgKind(o.at,l);if(oq.k==='step'&&oq.step===s.id)o.at=stgShift(s.at,oq.plus||0,l);});   // a step that followed it follows what it followed
+      l.splice(k,1);});
+    return wbStagePaint();
+  }
+  if(a==='kind'){
+    const marks=Object.keys(stgMarks()),mm=$('stgnamemsg');
+    if(v==='mark'&&!marks.length){if(mm)mm.textContent=W('stage.no_marks');return;}
+    if(v==='step'&&k<1){if(mm)mm.textContent=W('stage.no_steps');return;}
+    wbEditStage(l=>{const s=l[k];
+      if(v==='start')s.at=0;
+      else if(v==='hit')s.at=stgHitAt();
+      else if(v==='mark')s.at={mark:marks[0]};
+      else if(v==='step'){const t=l[k-1];if(!t.id)t.id=stgNewId(l);s.at={step:t.id};}
+      else if(v==='time'){const t=stgNowSec();s.at=t!=null?t:0.5;}
+    });return wbStagePaint();
+  }
+  if(a==='plus'){
+    wbEditStage(l=>{const s=l[k],q=stgKind(s.at,l),nx=Math.max(-2,Math.min(6,stgR((q.plus||0)+(+v)*.1)));
+      const base=q.k==='hit'?stgHitAt():q.k==='mark'?{mark:q.mark}:q.k==='step'?{step:q.step}:null;if(!base)return;
+      s.at=nx?Object.assign(base,{plus:nx}):base;},'plus'+k);
+    return wbStagePaint();
+  }
+  if(a==='setnow'){const t=stgNowSec();if(t==null)return;wbEditStage(l=>{l[k].at=t===0?0:t;});return wbStagePaint();}
+  if(a==='name'){
+    const inp=$('stgname'),msg=$('stgnamemsg'),nm=String(inp&&inp.value||'').toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'').slice(0,16),r=wbRun(),t=stgNowSec();
+    if(!nm){if(msg)msg.textContent=W('stage.name_bad');return;}
+    if(stgMarks()[nm]!=null){if(msg)msg.textContent=W('stage.name_taken');return;}
+    if(!r||!r.clipSec||t==null){if(msg)msg.textContent=W('stage.name_novideo');return;}
+    wbEditMarks(m=>{m[nm]={f:Math.max(0,Math.min(1,Math.round(t/r.clipSec*1000)/1000))};});
+    wbEditStage(l=>{l[k].at={mark:nm};});wbStagePaint();const m2=$('stgnamemsg');if(m2)m2.textContent=W('stage.name_done',{name:nm,s:stgR(t)});return;
+  }
+  if(a==='up'||a==='down'){
+    wbEditStage(l=>{const ord=stgOrder(l),p=ord.indexOf(k),j=ord[p+(a==='up'?-1:1)];if(j==null)return;
+      const A=l[k],B=l[j],ref=s=>stgKind(s.at,l).k==='step'||l.some(o=>stgKind(o.at,l).k==='step'&&stgKind(o.at,l).step===s.id);
+      if(JSON.stringify(A.at)===JSON.stringify(B.at)){if(ref(A)||ref(B)){return;}const t=l[k];l[k]=l[j];l[j]=t;WB.stgOpen=j;return;}
+      if(stgKind(A.at,l).k==='step'||stgKind(B.at,l).k==='step'){return;}
+      const t=A.at;A.at=B.at;B.at=t;});
+    return wbStagePaint();
+  }
+  if(a==='bump'){const N=STG_NUM[f];if(!N)return;wbEditStage(l=>{const s=l[k],cur=f==='in'?(s.in!=null?s.in:N.def):stgNum(s,f);s[f]=Math.max(N.lo,Math.min(N.hi,stgR(cur+(+v)*N.st)));},'bump'+k+f);return wbStagePaint();}
+  if(a==='set'){
+    wbEditStage(l=>{const s=l[k];if(f==='color'||f==='react')s[f]=v;else s[f]=+v;if(f==='react'&&v==='squash')delete s.px;});return wbStagePaint();
+  }
+  if(a==='play')return stgPlay(b.dataset.n);
+}
+function stgNewId(l){let n=1;const ids=new Set(l.map(s=>s.id));while(ids.has('s'+n))n++;return 's'+n;}
+function wbEditMarks(fn){
+  const m=wbClone((WB.draft.body&&WB.draft.body.marks)||{});fn(m);
+  WB.draft.body=Object.assign({},WB.draft.body||{});if(Object.keys(m).length)WB.draft.body.marks=m;else delete WB.draft.body.marks;
+}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-st]');if(b&&WB.a&&b.tagName==='BUTTON')stgAct(b);
+  const q=e.target.closest&&e.target.closest('[data-snd]');if(q&&WB.a&&q.tagName==='BUTTON')sndAct(q);});
+document.addEventListener('input',e=>{const t=e.target;if(!t||!t.dataset||!WB.a)return;
+  if(t.dataset.st==='text'&&WB.stgOpen>=0){const v=String(t.value).replace(/[<>]/g,'').slice(0,30),k=WB.stgOpen;if(!v)return;wbEditStage(l=>{l[k].text=v;},'txt'+k);
+    const m=t.closest('.fxc').querySelector('.fxm b');if(m)m.textContent=stgSentence(stgList()[k]);}});
+document.addEventListener('change',e=>{const t=e.target;if(!t||!t.dataset||!WB.a)return;const k=WB.stgOpen;
+  if(t.dataset.st&&k>=0){
+    if(t.dataset.st==='text'&&!String(t.value).trim()){t.value=stgList()[k].text||'';return;}
+    if(t.dataset.st==='where')wbEditStage(l=>{l[k].where=t.value;});
+    else if(t.dataset.st==='sound')wbEditStage(l=>{l[k].sfx=t.value;});
+    else if(t.dataset.st==='mark')wbEditStage(l=>{l[k].at=Object.assign({mark:t.value},(typeof l[k].at==='object'&&l[k].at.plus)?{plus:l[k].at.plus}:{});});
+    else if(t.dataset.st==='after')wbEditStage(l=>{const x=l[+t.value];if(!x.id)x.id=stgNewId(l);l[k].at=Object.assign({step:x.id},(typeof l[k].at==='object'&&l[k].at.plus)?{plus:l[k].at.plus}:{});});
+    else if(t.dataset.st==='sec'){const v=parseFloat(t.value);if(isFinite(v))wbEditStage(l=>{l[k].at=Math.max(0,Math.min(12,stgR(v)));});}
+    wbStagePaint();wbSoundPaint();
+  }
+  if(t.dataset.snd==='chg'){const li=t.closest('li'),src=li.dataset.src,i=+li.dataset.i;
+    if(src==='stage')wbEditStage(l=>{l[i].sfx=t.value;});else if(src==='fx')wbEditFx(l=>{l[i].sfx=t.value;});
+    wbStagePaint();wbSoundPaint();wbFxPaint();}
+  if(t.dataset.snd==='pick'){WB.sndPick=t.value;const pb=$('sndpickplay');if(pb)pb.dataset.n=t.value;}
+});
+function sndAct(b){
+  const a=b.dataset.snd;
+  if(a==='play'){const n=b.dataset.n||($('sndpick')&&$('sndpick').value);return stgPlay(n);}
+  if(a==='add'){const n=($('sndpick')&&$('sndpick').value)||'thud';wbEditStage(l=>l.push({at:stgHitAt(),do:'sfx',sfx:n}));wbStagePaint();wbSoundPaint();const m=$('sndmsg');if(m)m.textContent=W('sound.sec.added');return;}
+  if(a==='rm'){const li=b.closest('li');if(!li||li.dataset.src!=='stage')return;const i=+li.dataset.i;wbEditStage(l=>{l.splice(i,1);});WB.stgOpen=-1;wbStagePaint();wbSoundPaint();}
+}
+
 async function openPlayer(animId){
   if(!GUIDE&&GUIDE_P)await GUIDE_P;
   if(!MANI&&MANI_P)await MANI_P;
@@ -2209,7 +2508,7 @@ async function openPlayer(animId){
   const stage=msg=>'<div id="stage"><canvas id="cv" width="2" height="2"></canvas><div id="hitflag">HIT</div>'+(msg?'<div class="msg">'+msg+'</div>':'')+'</div>';
   const S=$('sheet');S.dataset.mode='bench';S.classList.add('open');$('dim').classList.add('open');S.scrollTop=0;
   wbOpen(a);WB.small=false;
-  const done=()=>{benchAttach(a);initMake(a);wbPaint();wbFxPaint();wbScroll();wbSend();wbLoadFile(a);const bd=$('wbbody');if(bd)bd.scrollTop=0;};
+  const done=()=>{benchAttach(a);initMake(a);wbPaint();wbAllPaint();wbScroll();wbSend();wbLoadFile(a);const bd=$('wbbody');if(bd)bd.scrollTop=0;};
   if(!a.clip){
     S.innerHTML=wbHtml(a,stage(a.kind==='state'?'No video yet. In a fight this moment shows one of their other videos until its own is made.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+genBlock(a));
     done();return;

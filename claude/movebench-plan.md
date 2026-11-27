@@ -639,6 +639,19 @@ What differs from the plan, and why:
 
 What phase 9 must know: a staged move's moments are the names in `body.marks` and the step ids; `timing.contact` is `{mark}` or `{step}` for all 20. `msStageRow` caches by the spec object, so a draft played with `msSet` builds a fresh row. A new stage asset must be in the spec's `objects` and baked (`B3G.A`) before the row counts as defined.
 
+**Phase 9, `movebench9` (2026-11-27).** What exists: the Stage section (`wbStageSection`, `wbStagePaint`, `stgAct`, `stgSentence`, `stgKind`, `wbEditStage` in `battle-guide.html`; words under `stage` in `data/movebench-words.json`) and the Sound section (`wbSoundSection`, `wbSoundPaint`, `sndAct`; words under `sound.sec`). Seven tiles (words, shake, flash, dim, glow, knock the monster back, play a sound), each field a named control; moments: At the start, At the hit, At a moment I named, After another step, At a time, plus a fine tune, Set to where the preview is and Name this moment (a mark of the video, `{f}`); Move earlier and Move later; the Sound list with Play (`{bench:'sfx'}` to the frame) and the 61 sounds by name. The draft is `draft.stage.steps` and `draft.body.marks`, the diff fields `steps` and `marks`. Test: new `tools/movebench/stage_test.py` (in the night list; the plan said page_test.py, but like fx_test it needs the golden recorder and its own stand-in GitHub). It adds, changes through every control, times (hit, hit plus 0.3 s, start), fires in the preview and removes each of the seven, reorders, follows a step, removes a followed step, sets and names moments, plays and adds sounds, saves a draft, and checks four sizes.
+
+What differs from the plan, and why:
+- A new `at` form, `{hit: true, plus}` (`b3gAt`), so "at the hit" follows a hit that is automatic or a mark; for a staged move whose contact is a step, the page writes `{step}`.
+- A staged move with an automatic contact now hits where its clip hits (`b3cLandAt`); before, it hit at 0. The 20 staged moves name their hit, so the golden is unchanged.
+- Giving a move with no stage its first step makes it a staged move, and a staged move plays its clip in place with no run-in: Kettlebell Swing's hit goes from 3.58 s to 3.02 s in the preview. This is how every staged move already played; nothing warns Tom on the page. Phase 11 or 12 should decide whether a staged move keeps the run-in.
+- 89 moves have no video in their spec: their steps play in the preview over the standing video and the page says the game plays them once the move has its video.
+- A step that uses a picture is shown and can be moved in time or removed; its settings are phase 10. Steps that follow another step cannot trade places.
+- The hit of a staged move (`timing.contact` a mark or step) is still read-only on the Timing section.
+- Dim has no "restore": the field stays dimmed to the amount until the move ends, as the engine does today. `tools/shots/movebench/stage-*.png` and `sound-*.png` hold the pictures.
+
+What phase 10 must know: add the eight picture actions as tiles to `STG7`/`STG_NEW`/`stgFieldsHtml` (the panel already shows "kept as it is" for them); objects live in `draft.stage.objects` and `stgWrite` keeps every stage key it does not touch; `wbDiff` needs an `objects` field next to `steps`. The page cannot play a sound until the preview frame exists (the Play button says so).
+
 ### g.1 The board's bulk video path (a recommendation; this session did not touch it)
 
 Recommended: **pause now, retire in phase 16.**

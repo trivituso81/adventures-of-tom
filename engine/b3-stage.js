@@ -57,6 +57,7 @@ function b3gAt(R,CL,at,ids) {
   if(typeof at==='string') { if(ids[at]!=null) return ids[at]; const m=b3gMarkMs(R,CL,at); return m==null?0:m/1000; }
   if(at&&at.mark) return (b3gMarkMs(R,CL,at.mark)||0)/1000+(at.plus||0);
   if(at&&at.step) return (ids[at.step]||0)+(at.plus||0);
+  if(at&&at.hit) return (ids.$hit||0)+(at.plus||0);   // movebench9: the hit as the move's own timing names it (a mark, or the clip's hit picture), so a step that follows the hit moves with it
   return 0;
 }
 function b3gH(key) { const u=b3Unit(B3.F,key),sp=BATTLE_SPRITES[u.id]; return sp?sp.idle.length*sp.scale:60; }
@@ -190,6 +191,10 @@ function b3gPlay(R,env) {
   // STAGE: the steps of the row and, for a Capstone, of its set piece, each at its moment.
   const ids={},steps=[].concat(R.steps||[],R.setpiece?R.setpiece.steps:[]);
   const marks={}; for(const m in (R.body.marks||{})) marks[m]=(b3gMarkMs(R,CL,m)||0)/1000;
+  // movebench9: where `at:{hit:true}` lands. A hit named by a mark is that mark; a row that names none (a move whose spec has steps but leaves the contact automatic) hits where its clip does.
+  const hitName0=R.hit==='late'?R.late:R.hit; let hit0=null;
+  if(hitName0&&marks[hitName0]!=null) hit0=marks[hitName0]; else if(!hitName0) { try { hit0=b3cLandAt(CL,msTiming(head)); } catch(e) { hit0=null; } }
+  if(hit0!=null) ids.$hit=hit0;
   let hitT=null,lastEnd=dur;
   for(const s of steps) { const T=b3gAt(R,CL,s.at,ids); if(s.id) ids[s.id]=T; s._T=T; lastEnd=Math.max(lastEnd,T+(s.dur||s.hold||0)); }
   const hitName=R.hit;
@@ -197,9 +202,9 @@ function b3gPlay(R,env) {
   for(const s of steps) { if(s.hit===true&&hitT==null) hitT=s._T+(s.dur||0); if(s.hit==='first'&&hitT==null) hitT=s._T+(s.dur||2)*.35; }
   // A step that carries the hit refines a hit named by its id: a thing that lands (hit:true) hits at its end; a rain (hit:'first') when the first thing lands.
   for(const s of steps) if(s.id&&s.id===hitName&&hitT!=null) { if(s.hit===true) hitT=s._T+(s.dur||0); else if(s.hit==='first') hitT=s._T+(s.dur||2)*.3+.15; }
-  const lateT=b3gAt(R,CL,(hitName==='late'?R.late:hitName)||0,ids);
+  const lateT=!hitName&&hit0!=null?hit0:b3gAt(R,CL,(hitName==='late'?R.late:hitName)||0,ids);
   if(hitT==null) hitT=lateT;
-  const run=B3G.run={id:head.id,t0:now,hitAt:env.hits.length?hitT:lateT,hitReal:null,marks,ids:Object.assign({},ids),setpiece:!!R.setpiece,budget:R.budget,end:null,len:null,noVideo:standIn};
+  const run=B3G.run={id:head.id,t0:now,hitAt:env.hits.length?hitT:lateT,hitReal:null,marks,ids:Object.assign({},ids),setpiece:!!R.setpiece,budget:R.budget,end:null,len:null,noVideo:standIn,clipSec:dur};
   ctx.ids=ids;
   if(env.cue) env.cue(env.hits.length?hitT:lateT);   // vfxfight1: the move's library effects play from the hit's moment (engine/b3-vfx.js)
   for(const s of steps) { b3After(s._T,()=>{ ctx.stepT=s._T; b3gDo(s,ctx); }); }

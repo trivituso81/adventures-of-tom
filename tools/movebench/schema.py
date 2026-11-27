@@ -14,7 +14,7 @@ SECTIONS=['start','body','timing','stage','effects','answer','note']
 WHO_PARAMS={'chainTargets','dualFlavor','targetIds','targetId','allyIds','targetAllyIds','targetAllyId','startPos','endPos','targetEnemyId','rewindAllyId','offenderEnemyId'}
 # the ranges of plan section b.2 for a stage step's numbers
 STEP_RANGE={'dur':(0.05,6),
-  'hold':(0.1,8),'arc':(0,120),'amp':(0,12),'amount':(0,0.95),'size':(1,4),'px':(0,40),'n':(1,40)}
+  'hold':(0.1,8),'in':(0.05,4),'out':(0.05,4),'arc':(0,120),'amp':(0,12),'amount':(0,0.95),'size':(1,4),'px':(0,40),'n':(1,40)}
 EM_DASH=chr(0x2014)
 def split_top(s):
     out=[];cur='';d=0;q=False
@@ -68,7 +68,7 @@ def _rng(v,lo,hi,path,E):
 def at_ok(a):
     if isnum(a): return a>=0
     if isinstance(a,str): return bool(a)
-    if isinstance(a,dict): return any(k in a for k in ('pic','mark','step','sec','f'))
+    if isinstance(a,dict): return any(k in a for k in ('pic','mark','step','sec','f','hit'))
     return False
 def check_effects(lst,path,C,E,W):
     if not isinstance(lst,list): E.append(path+': must be a list'); return

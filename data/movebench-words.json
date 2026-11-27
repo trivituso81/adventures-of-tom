@@ -202,18 +202,6 @@
   },
   "act_note": "For a monster attack only the freeze can be set for now. The rest arrives in a later step."
  },
- "readonly": {
-  "title_hint": "Shown as the game holds it. These become settings in a later step.",
-  "empty": "Nothing set.",
-  "stage_one": "1 step",
-  "stage_many": "{n} steps",
-  "snd_one": "1 cue",
-  "snd_many": "{n} cues",
-  "at_contact": "at the hit",
-  "at_sec": "{s} s",
-  "at_plus": "{s} s after the hit",
-  "at_mark": "at {mark}"
- },
  "stage_do": {
   "words": "Words on screen",
   "fly": "Throw something",
@@ -1122,6 +1110,283 @@
  },
  "sound": {
   "label": "A sound with it",
-  "none": "None"
+  "none": "None",
+  "sec": {
+   "empty": "No sounds yet.",
+   "add": "Add a sound",
+   "adding": "Pick a sound, listen to it, then add it. It is added at the hit; change its moment in the Stage section.",
+   "pick": "A sound",
+   "body": "on picture {n} of the video",
+   "stage_tag": "Stage step",
+   "fx_tag": "Effect",
+   "body_tag": "Video",
+   "count_one": "1 sound",
+   "count_many": "{n} sounds",
+   "remove": "Remove",
+   "from_effect": "This one belongs to an effect: change it under Effects too.",
+   "added": "Added at the hit."
+  }
+ },
+ "stage": {
+  "note_draft": "Steps that need no picture. Each one happens at a moment of the move. Nothing reaches the game until you tap Finished.",
+  "empty": "No steps yet.",
+  "count_one": "1 step",
+  "count_many": "{n} steps",
+  "add": "Add a step",
+  "adding": "What should it do?",
+  "cancel": "Cancel",
+  "change": "Change",
+  "close": "Done",
+  "remove": "Remove",
+  "earlier": "Move earlier",
+  "later": "Move later",
+  "no_swap": "A step that follows another step cannot trade places.",
+  "no_video": "This move has no video yet. The preview plays these steps over the standing video; the game plays them once the move has its video.",
+  "kept": "Kept as it is. Its settings come in the next step.",
+  "when": "When it happens",
+  "when_hint": "Pick a moment, then fine tune it.",
+  "kinds": [
+   {
+    "k": "start",
+    "label": "At the start"
+   },
+   {
+    "k": "hit",
+    "label": "At the hit"
+   },
+   {
+    "k": "mark",
+    "label": "At a moment I named"
+   },
+   {
+    "k": "step",
+    "label": "After another step"
+   },
+   {
+    "k": "time",
+    "label": "At a time"
+   }
+  ],
+  "less": "Earlier",
+  "more": "Later",
+  "set": "Set to where the preview is",
+  "pick_mark": "Which moment",
+  "no_marks": "No named moments yet. Move the preview to a moment and name it below.",
+  "pick_step": "Which step",
+  "no_steps": "This is the first step, so nothing comes before it.",
+  "name_label": "Name this moment",
+  "name_hint": "Names the moment the preview is at, so a step can follow it. Letters and numbers.",
+  "name_btn": "Name this moment",
+  "name_ph": "for example, wind up",
+  "name_taken": "That name is already used by this move.",
+  "name_bad": "Type a name first (letters and numbers).",
+  "name_novideo": "Play the preview once, then name a moment.",
+  "name_done": "Named \"{name}\" at {s} s.",
+  "start_at": "at the start",
+  "hit_at": "at the hit",
+  "mark_at": "at \"{mark}\"",
+  "step_at": "after step {n}",
+  "time_at": "at {s} s",
+  "plus_after": "{s} s after",
+  "plus_before": "{s} s before",
+  "text": "The words",
+  "text_hint": "Up to 30 letters, shown as you type them.",
+  "where": "Where",
+  "size": "Size",
+  "color": "Colour",
+  "hold": "Stays for",
+  "amp": "How hard",
+  "dur": "How long",
+  "amount": "How dark",
+  "fade": "Fades over",
+  "react": "What happens",
+  "px": "How far",
+  "sound": "Which sound",
+  "play": "Play",
+  "play_first": "Start the preview once, then Play works here.",
+  "sizes": [
+   {
+    "k": 1,
+    "label": "Small"
+   },
+   {
+    "k": 2,
+    "label": "Medium"
+   },
+   {
+    "k": 3,
+    "label": "Large"
+   },
+   {
+    "k": 4,
+    "label": "Huge"
+   }
+  ],
+  "holds": [
+   {
+    "k": 0.6,
+    "label": "Short"
+   },
+   {
+    "k": 1.1,
+    "label": "Normal"
+   },
+   {
+    "k": 2,
+    "label": "Long"
+   }
+  ],
+  "amps": [
+   {
+    "k": 3,
+    "label": "Light"
+   },
+   {
+    "k": 6,
+    "label": "Medium"
+   },
+   {
+    "k": 11,
+    "label": "Heavy"
+   }
+  ],
+  "durs": [
+   {
+    "k": 0.15,
+    "label": "Quick"
+   },
+   {
+    "k": 0.3,
+    "label": "Normal"
+   },
+   {
+    "k": 0.6,
+    "label": "Long"
+   }
+  ],
+  "glowdurs": [
+   {
+    "k": 0.5,
+    "label": "Short"
+   },
+   {
+    "k": 1,
+    "label": "Normal"
+   },
+   {
+    "k": 2,
+    "label": "Long"
+   }
+  ],
+  "amounts": [
+   {
+    "k": 0,
+    "label": "Off"
+   },
+   {
+    "k": 0.35,
+    "label": "Dusk"
+   },
+   {
+    "k": 0.7,
+    "label": "Night"
+   }
+  ],
+  "fades": [
+   {
+    "k": 0.15,
+    "label": "Quick"
+   },
+   {
+    "k": 0.3,
+    "label": "Normal"
+   },
+   {
+    "k": 0.8,
+    "label": "Slow"
+   }
+  ],
+  "pxs": [
+   {
+    "k": 8,
+    "label": "Light"
+   },
+   {
+    "k": 14,
+    "label": "Normal"
+   },
+   {
+    "k": 26,
+    "label": "Heavy"
+   }
+  ],
+  "reacts": [
+   {
+    "k": "knock",
+    "label": "Knocked back"
+   },
+   {
+    "k": "squash",
+    "label": "Squashed flat"
+   }
+  ],
+  "places": [
+   {
+    "k": "over:target",
+    "label": "Over the monster"
+   },
+   {
+    "k": "over:each_target",
+    "label": "On every monster"
+   },
+   {
+    "k": "hand",
+    "label": "In his hand"
+   },
+   {
+    "k": "self_front",
+    "label": "In front of him"
+   },
+   {
+    "k": "over:self",
+    "label": "Over him"
+   },
+   {
+    "k": "over:each_ally",
+    "label": "On each family member beside him"
+   },
+   {
+    "k": "foes_front",
+    "label": "In front of the monsters"
+   },
+   {
+    "k": "screen_center",
+    "label": "The middle of the screen"
+   },
+   {
+    "k": "floor",
+    "label": "The floor"
+   }
+  ],
+  "tiles": {
+   "words": "Words on screen",
+   "shake": "Shake",
+   "flash": "Flash",
+   "dim": "Dim the field",
+   "glow": "Glow",
+   "foe": "Knock the monster back",
+   "sfx": "Play a sound"
+  },
+  "s": {
+   "words": "Words on screen \"{text}\", {where}, {color}, stays {hold} s",
+   "shake": "Shake the screen, {amp}, for {dur} s",
+   "flash": "Flash the screen {color}, {dur} s",
+   "dim": "Dim the field to {amount}, fading over {in} s",
+   "glow": "Glow on the family member, {color}, {dur} s",
+   "foe_knock": "Knock the monster back, {px}",
+   "foe_squash": "Squash the monster flat",
+   "sfx": "Play a sound: {name}",
+   "other": "{name}"
+  }
  }
 }
