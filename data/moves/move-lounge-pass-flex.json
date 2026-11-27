@@ -1,0 +1,62 @@
+{
+ "v": 1,
+ "id": "move:lounge_pass_flex",
+ "rev": 1,
+ "live": {
+  "body": {
+   "clip": "tom_loungepass",
+   "motion": "cast",
+   "marks": {
+    "flash": {
+     "pic": 9
+    },
+    "swat": {
+     "pic": 24
+    }
+   },
+   "sound": {
+    "at": 9,
+    "sfx": "ding"
+   }
+  },
+  "timing": {
+   "contact": {
+    "mark": "swat"
+   },
+   "budget": 2.8,
+   "impactMs": 1050,
+   "hitStop": 3
+  },
+  "stage": {
+   "steps": [
+    {
+     "at": "swat",
+     "do": "words",
+     "text": "NOT ON THE LIST",
+     "where": "over:target",
+     "size": 2,
+     "color": "#f1d58c",
+     "hold": 1.1
+    }
+   ]
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_racket_rings"
+   },
+   {
+    "fx": "vfx_core_status_debuff_badges"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

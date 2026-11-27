@@ -1,0 +1,35 @@
+{
+ "v": 1,
+ "id": "move:warm_apple_muffins",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "give"
+  },
+  "timing": {
+   "noHit": true,
+   "impactMs": 1650
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_sizzle_wave"
+   },
+   {
+    "fx": "vfx_core_heal_cleanse"
+   },
+   {
+    "fx": "proj_ally_handoff_party"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

@@ -1,0 +1,64 @@
+{
+ "v": 1,
+ "id": "move:sneaky_nose_boop",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "strike",
+   "marks": {
+    "boop": {
+     "f": 0.4
+    }
+   }
+  },
+  "timing": {
+   "contact": {
+    "mark": "boop"
+   },
+   "budget": 2.5,
+   "impactMs": 1000,
+   "hitStop": 2
+  },
+  "stage": {
+   "steps": [
+    {
+     "at": "boop",
+     "do": "words",
+     "text": "BOOP!",
+     "where": "over:target",
+     "size": 2,
+     "color": "#ffb3d9",
+     "hold": 0.8
+    },
+    {
+     "at": "boop",
+     "do": "sfx",
+     "sfx": "ding"
+    },
+    {
+     "at": "boop",
+     "do": "foe",
+     "react": "squash"
+    }
+   ]
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_racket_rings"
+   },
+   {
+    "fx": "vfx_core_timeline_chevrons"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

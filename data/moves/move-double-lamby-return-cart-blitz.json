@@ -1,0 +1,215 @@
+{
+ "v": 1,
+ "id": "move:double_lamby_return_cart_blitz",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "strike",
+   "marks": {
+    "hoist": {
+     "f": 0.18
+    },
+    "launch": {
+     "f": 0.33
+    },
+    "hero": {
+     "f": 0.85
+    }
+   }
+  },
+  "timing": {
+   "contact": {
+    "step": "r1"
+   },
+   "budget": 7.2,
+   "impactMs": 2300,
+   "hitStop": 4
+  },
+  "stage": {
+   "setpiece": {
+    "dur": 7.2,
+    "dim": 0.7,
+    "steps": [
+     {
+      "at": 0,
+      "do": "dim",
+      "amount": 0.7,
+      "in": 0.4
+     },
+     {
+      "at": "hoist",
+      "do": "sfx",
+      "sfx": "charge"
+     },
+     {
+      "id": "r1",
+      "at": 2.3,
+      "do": "fly",
+      "asset": "rose/backuplamby",
+      "from": "above_self",
+      "to": "target",
+      "arc": 30,
+      "dur": 0.35,
+      "hit": true
+     },
+     {
+      "at": 2.9,
+      "do": "fly",
+      "asset": "rose/lamby",
+      "from": "target",
+      "to": "target",
+      "arc": 50,
+      "dur": 0.35,
+      "hit": true
+     },
+     {
+      "at": 3.5,
+      "do": "fly",
+      "asset": "rose/backuplamby",
+      "from": "target",
+      "to": "target",
+      "arc": 50,
+      "dur": 0.35,
+      "hit": true
+     },
+     {
+      "at": 4.1,
+      "do": "fly",
+      "asset": "rose/lamby",
+      "from": "target",
+      "to": "target",
+      "arc": 50,
+      "dur": 0.35,
+      "hit": true
+     },
+     {
+      "at": 4.7,
+      "do": "fly",
+      "asset": "rose/backuplamby",
+      "from": "target",
+      "to": "target",
+      "arc": 50,
+      "dur": 0.35,
+      "hit": true
+     },
+     {
+      "at": 5.3,
+      "do": "fly",
+      "asset": "rose/lamby",
+      "from": "target",
+      "to": "above_self",
+      "arc": 50,
+      "dur": 0.35,
+      "hit": true
+     },
+     {
+      "at": 2.3,
+      "do": "sfx",
+      "sfx": "ding"
+     },
+     {
+      "at": 2.9,
+      "do": "sfx",
+      "sfx": "ding"
+     },
+     {
+      "at": 3.5,
+      "do": "sfx",
+      "sfx": "ding"
+     },
+     {
+      "at": 4.1,
+      "do": "sfx",
+      "sfx": "ding"
+     },
+     {
+      "at": 4.7,
+      "do": "sfx",
+      "sfx": "ding"
+     },
+     {
+      "at": 5.3,
+      "do": "sfx",
+      "sfx": "ding"
+     },
+     {
+      "at": 2.6,
+      "do": "foe",
+      "react": "knock",
+      "px": 10
+     },
+     {
+      "at": 4.4,
+      "do": "foe",
+      "react": "knock",
+      "px": 16
+     },
+     {
+      "at": 5.6,
+      "do": "foe",
+      "react": "knock",
+      "px": 24
+     },
+     {
+      "at": 5.6,
+      "do": "shake",
+      "amp": 5,
+      "dur": 0.5
+     },
+     {
+      "at": "hero",
+      "do": "words",
+      "text": "DOUBLE LAMBY!",
+      "where": "screen_center",
+      "size": 3,
+      "color": "#fff1cb",
+      "hold": 1.2
+     },
+     {
+      "at": 6.6,
+      "do": "dim",
+      "amount": 0,
+      "out": 0.5
+     }
+    ]
+   },
+   "objects": {
+    "rose/lamby": {
+     "name": "Lamby",
+     "kind": "prop",
+     "bg": "magenta",
+     "size": {
+      "h": 0.2
+     },
+     "entry": "stage-rose-lamby",
+     "prompt": "tools/art-library/prompts/stage-rose-lamby-v1.txt"
+    },
+    "rose/backuplamby": {
+     "name": "Backup Lamby",
+     "kind": "prop",
+     "bg": "magenta",
+     "size": {
+      "h": 0.2
+     },
+     "entry": "stage-rose-backuplamby",
+     "prompt": "tools/art-library/prompts/stage-rose-backuplamby-v1.txt"
+    }
+   }
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_clobber_impact"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

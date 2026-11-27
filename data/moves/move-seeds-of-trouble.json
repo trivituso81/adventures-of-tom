@@ -1,0 +1,32 @@
+{
+ "v": 1,
+ "id": "move:seeds_of_trouble",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "strike"
+  },
+  "timing": {
+   "impactMs": 1250,
+   "hitStop": 2
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_sizzle_wave"
+   },
+   {
+    "fx": "proj_arc_single"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

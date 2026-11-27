@@ -1,0 +1,31 @@
+{
+ "v": 1,
+ "id": "move:weaponized_puppy_eyes",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast"
+  },
+  "timing": {
+   "impactMs": 1550
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_racket_rings"
+   },
+   {
+    "fx": "vfx_core_composure_break"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

@@ -1,0 +1,32 @@
+{
+ "v": 1,
+ "id": "move:backup_iced_coffee",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "throw"
+  },
+  "timing": {
+   "impactMs": 1150,
+   "hitStop": 2
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_drench_splash"
+   },
+   {
+    "fx": "vfx_core_heal_cleanse"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

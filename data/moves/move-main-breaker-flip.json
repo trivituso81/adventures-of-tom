@@ -1,0 +1,35 @@
+{
+ "v": 1,
+ "id": "move:main_breaker_flip",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast"
+  },
+  "timing": {
+   "impactMs": 1950,
+   "hitStop": 5
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_razzle_beam_arc"
+   },
+   {
+    "fx": "vfx_core_composure_break"
+   },
+   {
+    "fx": "vfx_core_status_debuff_badges"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

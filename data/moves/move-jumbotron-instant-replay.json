@@ -1,0 +1,32 @@
+{
+ "v": 1,
+ "id": "move:jumbotron_instant_replay",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast"
+  },
+  "timing": {
+   "impactMs": 3350,
+   "hitStop": 6
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_heal_cleanse"
+   },
+   {
+    "fx": "setpiece_stadium_jumbotron"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

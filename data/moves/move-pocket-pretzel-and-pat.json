@@ -1,0 +1,73 @@
+{
+ "v": 1,
+ "id": "move:pocket_pretzel_and_pat",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "strike",
+   "marks": {
+    "bonk": {
+     "f": 0.35
+    },
+    "pretzel": {
+     "f": 0.55
+    }
+   }
+  },
+  "timing": {
+   "contact": {
+    "mark": "bonk"
+   },
+   "budget": 2.7,
+   "impactMs": 950,
+   "hitStop": 3
+  },
+  "stage": {
+   "steps": [
+    {
+     "at": "bonk",
+     "do": "sfx",
+     "sfx": "thud"
+    },
+    {
+     "at": "bonk",
+     "do": "shake",
+     "amp": 2,
+     "dur": 0.15
+    },
+    {
+     "at": "pretzel",
+     "do": "words",
+     "text": "PAT PAT",
+     "where": "over:ally",
+     "size": 2,
+     "color": "#ffe9b0",
+     "hold": 0.9
+    },
+    {
+     "at": "pretzel",
+     "do": "sfx",
+     "sfx": "ding"
+    }
+   ]
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_heal_cleanse"
+   },
+   {
+    "fx": "proj_ally_handoff_party"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

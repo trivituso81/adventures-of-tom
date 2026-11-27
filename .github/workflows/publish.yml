@@ -15,7 +15,7 @@ on:
   push:
     branches: [main]
     # board2: a push that changes only the board file (a card moved by board-sync, a tap on the phone) is not a site change: the page reads the live file from GitHub.
-    paths-ignore: ['data/board.json', 'data/board-archive.json', 'data/art-requests.json', 'data/clip-requests.json', 'data/music-requests.json', 'data/voice-requests.json', 'data/guide-reconcile.json']
+    paths-ignore: ['data/board.json', 'data/board-archive.json', 'data/art-requests.json', 'data/clip-requests.json', 'data/music-requests.json', 'data/voice-requests.json', 'data/guide-reconcile.json', 'data/moves/**']
   # art-bake pushes its commit with the Actions token, and such a push does not start other workflows: publish after it instead.
   workflow_run:
     workflows: [art-bake, portrait-bake]

@@ -1,0 +1,41 @@
+{
+ "v": 1,
+ "id": "move:livnews_breaking_exclusive",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast"
+  },
+  "timing": {
+   "impactMs": 3250,
+   "hitStop": 6
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_composure_break"
+   },
+   {
+    "fx": "vfx_core_timeline_chevrons"
+   },
+   {
+    "fx": "vfx_core_status_debuff_badges"
+   },
+   {
+    "fx": "setpiece_michael_sprint_and_chopper",
+    "params": {
+     "mode": "livnews_chopper"
+    }
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

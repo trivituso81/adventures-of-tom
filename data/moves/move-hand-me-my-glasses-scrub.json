@@ -1,0 +1,33 @@
+{
+ "v": 1,
+ "id": "move:hand_me_my_glasses_scrub",
+ "rev": 1,
+ "live": {
+  "body": {
+   "clip": "deedee_scrub",
+   "motion": "strike"
+  },
+  "timing": {
+   "impactMs": 1950,
+   "hitStop": 5
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_drench_splash"
+   },
+   {
+    "fx": "vfx_core_status_debuff_badges"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

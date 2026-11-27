@@ -1,0 +1,29 @@
+{
+ "v": 1,
+ "id": "move:flashlight_under_chin",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast"
+  },
+  "timing": {
+   "impactMs": 1150,
+   "hitStop": 2
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_razzle_beam_arc"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

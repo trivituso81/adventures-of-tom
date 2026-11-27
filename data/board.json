@@ -6242,7 +6242,7 @@
    "col": "up",
    "theme": "Battle Animations",
    "title": "Wire the Pass-1 1080p finals and the counter clips",
-   "next": "When Tom has made battle_move_final videos in the Art Factory, rebake them over the pf- drafts with tools/clip-bake/bake_factory.py, and decide how a counter clip and a team-up clip play in Battle 3.",
+   "next": "When Tom has made battle_move_final videos in the Art Factory, rebake them over the pf- drafts with tools/clip-bake/bake_factory.py, write each clip's timing and effects into its spec file in data/moves/ (not data/pass1-meta.js), and decide how a counter clip and a team-up clip play in Battle 3.",
    "chat": {
     "url": "",
     "opening": ""
@@ -6251,11 +6251,15 @@
     {
      "d": "2026-11-25",
      "t": "Made by pass1draft1: finals replace the drafts; counters (deedee-nf-s1_counter, boppy-dep-s1_counter) and univ-double-team, univ-full-ruckus need an engine slot first."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Prompt rewritten by movebench3 (risk 10 of the Move Workbench plan): spec files in data/moves/ take the place of rows of data/pass1-meta.js, which phase 4 deletes."
     }
    ],
    "blocks": [],
    "created": "2026-11-25",
-   "changed": "2026-11-25",
+   "changed": "2026-11-26",
    "prompt": {
     "what": "Replace the Pass-1 draft clips with the 1080p finals and give counter clips a slot.",
     "before": [
@@ -6263,7 +6267,7 @@
     ],
     "model": "Claude Opus 5.5 (row D: engine design for counter and team-up clips)",
     "effort": "medium (the bake tool exists)",
-    "text": "Read the c-pass1final card, its blocking Tom card t-pass1draftplay (note and answer) and docs/CHANGES.md pass1draft1. Point PREVIEW in tools/clip-bake/bake_factory.py at the battle_move_final folders for every final that passed QA in art-factory/queue.json and rebake, add any new move whose kit row has no video, then design how a counter clip (deedee-nf-s1_counter, boppy-dep-s1_counter) plays in Battle 3. Run python3 tools/pass1_preview_test.py and python3 tools/smoke.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "text": "Read the c-pass1final card, its blocking Tom card t-pass1draftplay (note and answer), docs/CHANGES.md pass1draft1 and movebench3, and the Built notes of claude/movebench-plan.md. Point PREVIEW in tools/clip-bake/bake_factory.py at the battle_move_final folders for every final that passed QA in art-factory/queue.json and rebake, add any new move whose kit row has no video, then design how a counter clip (deedee-nf-s1_counter, boppy-dep-s1_counter) plays in Battle 3. Do not write rows of data/pass1-meta.js (the Move Workbench replaces that file): a clip's timing, shake, approach and effects go in its file in data/moves/ (named by the animation's slug) under live.timing and live.effects, hit stop in frames at 24 a second, then run python3 tools/movebench/bundle.py, python3 -I tools/movebench/spec_test.py and python3 -I tools/movebench/golden_test.py. Run python3 tools/pass1_preview_test.py and python3 tools/smoke.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
   },
   {
@@ -9745,6 +9749,10 @@
     {
      "d": "2026-11-26",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "movebench3 built: 222 spec files in data/moves/, data/move-specs.js, engine/b3-spec.js, golden.json of 219 animations, spec_test and golden_test pass."
     }
    ]
   },

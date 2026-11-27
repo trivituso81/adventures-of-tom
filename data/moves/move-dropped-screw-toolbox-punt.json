@@ -1,0 +1,32 @@
+{
+ "v": 1,
+ "id": "move:dropped_screw_toolbox_punt",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "strike"
+  },
+  "timing": {
+   "impactMs": 3650,
+   "hitStop": 7
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_status_debuff_badges"
+   },
+   {
+    "fx": "proj_arc_single"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

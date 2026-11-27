@@ -1,0 +1,38 @@
+{
+ "v": 1,
+ "id": "move:baxter_hill_longboard_express",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast"
+  },
+  "timing": {
+   "impactMs": 3150,
+   "hitStop": 6
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_razzle_beam_arc"
+   },
+   {
+    "fx": "vfx_core_timeline_chevrons"
+   },
+   {
+    "fx": "setpiece_waymo_and_la_metro",
+    "params": {
+     "vehicle": "la_metro_express"
+    }
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

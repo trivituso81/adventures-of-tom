@@ -1,0 +1,38 @@
+{
+ "v": 1,
+ "id": "move:regional_championship_freestyle",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "strike"
+  },
+  "timing": {
+   "impactMs": 2350,
+   "hitStop": 7
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_clobber_impact"
+   },
+   {
+    "fx": "vfx_core_composure_break"
+   },
+   {
+    "fx": "setpiece_gym_bleachers_and_ruckus_crest",
+    "params": {
+     "mode": "gym_pyro"
+    }
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

@@ -1,0 +1,39 @@
+{
+ "v": 1,
+ "id": "move:waymo_tailgate_rescue",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast"
+  },
+  "timing": {
+   "noHit": true,
+   "impactMs": 2050,
+   "hitStop": 4
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_razzle_beam_arc"
+   },
+   {
+    "fx": "vfx_core_heal_cleanse"
+   },
+   {
+    "fx": "setpiece_waymo_and_la_metro",
+    "params": {
+     "vehicle": "waymo_rescue"
+    }
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

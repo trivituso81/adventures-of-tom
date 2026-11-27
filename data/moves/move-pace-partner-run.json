@@ -1,0 +1,29 @@
+{
+ "v": 1,
+ "id": "move:pace_partner_run",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "give"
+  },
+  "timing": {
+   "noHit": true,
+   "impactMs": 1850
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_timeline_chevrons"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "v": 1,
+ "id": "move:three_tier_showstopper",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast"
+  },
+  "timing": {
+   "noHit": true,
+   "impactMs": 3150
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_sizzle_wave"
+   },
+   {
+    "fx": "vfx_core_heal_cleanse"
+   },
+   {
+    "fx": "setpiece_3tier_sparkler_cake"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

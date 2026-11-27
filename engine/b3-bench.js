@@ -23,6 +23,9 @@ const BN_STEP=1/60, BN_SEED=0x5eed11, BN_PICTURE=1/24;   // a replay steps 1/60 
 if(typeof B3C!=='undefined') B3C.waitMax=12;
 const BN_STATES={family:['idle','guard','hit','dodge','ko','victory','run','cast','give'],foe:['idle','hit','die']};   // the body states the preview plays
 
+// movebench3: the golden record (tools/movebench/golden.py). BNG.rec is set only while bngRun records one animation; the game never reads any of it.
+const BNG={rec:null};
+const bngT=()=>Math.round((B3P.t-BN.t0)*1000)/1000;
 // ---------- the same dice every time ----------
 function bnRng(seed) { let a=seed>>>0; return ()=>{ a=(a+0x6D2B79F5)>>>0; let t=a; t=Math.imul(t^t>>>15,t|1); t^=t+Math.imul(t^t>>>7,t|61); return ((t^t>>>14)>>>0)/4294967296; }; }
 // Everything the game draws that is random (a hit's shake, a stage shake, a held picture's jitter) draws from a run seeded by the picture's own moment, so a moment is one picture;
@@ -38,7 +41,12 @@ function bnRng(seed) { let a=seed>>>0; return ()=>{ a=(a+0x6D2B79F5)>>>0; let t=
   // the first beat that touches someone, in the move's own part of the run, is where the bar's HIT line stands (a staged move gives its own, B3G.run.hitAt)
   if(typeof b3Show==='function') { const s=window.b3Show; window.b3Show=function(b) {
     if(BN.rec&&BN.on&&BN.phase==='move'&&BN.rec.hit==null&&b&&(b.t==='hit'||b.t==='miss'||b.t==='heal'||b.t==='shield')) BN.rec.hit=B3P.t-BN.t0;
+    if(BNG.rec&&BN.on&&b&&(b.t==='hit'||b.t==='miss'||b.t==='heal'||b.t==='shield'||b.t==='ko')) BNG.rec.beats.push({t:bngT(),b:b.t,tgt:b.tgt||null,phase:BN.phase});
     return s.apply(this,arguments); }; }
+  // movebench3: every stage step the engine fires is written down for the golden record (what it was, and when)
+  if(typeof b3gDo==='function') { const d=window.b3gDo; window.b3gDo=function(a) {
+    if(BNG.rec&&BN.on&&a) BNG.rec.stage.push({t:bngT(),do:a.do,id:a.id||null,amp:a.do==='shake'?(a.amp||3):undefined,dur:a.do==='shake'?(a.dur||.3):undefined,text:a.text||undefined,sfx:a.sfx||undefined});
+    return d.apply(this,arguments); }; }
 })();
 
 // ---------- what an animation id means ----------
@@ -228,6 +236,7 @@ function bnStepTo(n) {
       BN.n++;
       if(typeof B3V!=='undefined'&&B3V.holds.length) { try { for(const h of B3V.holds.slice()) for(const k of h.keys) b3vTimeOf(k,B3P.t); } catch(e) {} }
       if(BN.rec) bnSample();
+      if(BNG.rec) bngSample();
     }
   } finally { BN.silent=false; sound.enabled=was&&!BN.mute; }
 }
@@ -339,6 +348,54 @@ function bnGo(id,again) {
   };
   wait();
 }
+// ---------- the golden record (movebench3) ----------
+// What one animation does in the stub fight, written down so later phases can prove nothing changed: the moment of each beat that touches someone, every hit stop (start, length, how many
+// units it holds), every effect cue the engine armed (its moment, the contact moment inside the effects' own timeline, how many targets, and for each effect its id, layer and params), every
+// stage step fired (moment, action, and the shake's size), every sound asked for, the videos the bar shows, the stage run's hit and marks, and the move's end. Times are seconds from the
+// clock's start, rounded to a thousandth. The run is the survey's own (fixed seed, 1/60 s steps, nothing drawn), so the same engine gives the same record every time.
+function bngSample() {
+  const R=BNG.rec; if(typeof B3V==='undefined') return;
+  for(const c of B3V.cues) if(!R.cues.has(c)) { R.cues.add(c);
+    R.effects.push({t:Math.round((c.t0-BN.t0)*1000)/1000,impactMs:c.M.impact_ms,tgts:c.tgts.length,src:c.src,
+      fx:c.M.vfx.map(id=>({id,layer:typeof p1Layer==='function'?p1Layer(id):null,params:(c.M.fxp&&c.M.fxp[id])||null,known:!!(typeof P1_VFX!=='undefined'&&P1_VFX[id])}))}); }
+  for(const h of B3V.holds) if(!R.holds.has(h)) { R.holds.add(h); R.hold.push({t:Math.round((h.t0-BN.t0)*1000)/1000,dur:Math.round(h.dur*1000)/1000,units:h.keys.length}); }
+}
+function bngWait(P,ms) {
+  return new Promise(res=>{ const t0=performance.now(),tick=()=>{ const warm=bnWarm(P); if((!bnFightReady()||!warm())&&performance.now()-t0<ms) { setTimeout(tick,100); return; } res(bnFightReady()&&warm()); }; tick(); });
+}
+async function bngRun(id) {
+  const P=bnParse(id); if(!P) return {id,error:'no preview for this kind'};
+  clearTimeout(BN.timer); BN.gen++; BN.on=true; BN.id=id; BN.P=P; BN.kind=P.kind; BN.answer=false; BN.loop=false; BN.ended=false; BN.playing=false; BN.hold=false;
+  if(typeof B3C!=='undefined') B3C.need.clear();
+  Math.random=BN.upd=bnRng(BN_SEED); bnFight(P);
+  const loaded=await bngWait(P,20000);
+  const faults0=(window.__faults||[]).length;
+  BN.rec=bnRecNew();
+  BNG.rec={cues:new Set(),holds:new Set(),beats:[],stage:[],effects:[],hold:[]};
+  let out;
+  try {
+    if(!bnBegin(P)) return {id,error:BN.why||'the stub fight would not play it'};
+    bnStepTo(bnRound(90));
+    const len=Math.max(.3,(BN.fin?BN.doneAt:B3P.t-BN.t0)-.6),tl=bnTimeline(len),R=BN.rec,G=BNG.rec;
+    const r3=x=>Math.round(x*1000)/1000;
+    const lane=n=>{ const l=tl.lanes.find(q=>q.id===n); return l?l.segs.map(s=>({a:r3(s.a),b:r3(s.b),label:s.label,k:s.k})):[]; };
+    out={id,kind:P.kind,loaded,finished:BN.fin,end:BN.fin?r3(BN.doneAt):null,len:r3(len),hit:tl.hit==null?null:r3(tl.hit),
+      run:R.run?{hitAt:r3(R.run.hitAt-R.run.off),marks:Object.fromEntries(Object.entries(R.run.marks||{}).map(([k,v])=>[k,r3(v)])),budget:R.run.budget==null?null:R.run.budget,noVideo:!!R.run.noVideo}:null,
+      beats:G.beats,hold:G.hold,effects:G.effects,stage:G.stage,sound:R.snd.map(s=>({t:r3(s.t),name:s.name})),
+      video:lane('video'),wind:lane('wind'),ticks:tl.ticks.map(t=>({name:t.name,t:r3(t.t)})),faults:(window.__faults||[]).slice(faults0)};
+  } finally { BN.rec=null; BNG.rec=null; BN.gen++; BN.playing=false; try { bnStop(); } catch(e) {} }
+  return out;
+}
+// The animations the golden record covers: every family move, every monster attack with a video or a wind-up, every wind-up alone, every body state that has a video.
+function bngIds() {
+  const ids=[];
+  for(const S of Object.values(B3_SKILLS)) if(S.vibe&&B3_VIBES[S.vibe]) ids.push('move:'+S.id);
+  for(const f of Object.values(B3_FOES)) for(const a of f.acts) { if(a.hits==='attacker') continue;
+    if((a.anim&&a.anim.kind==='clip')||a.wind) ids.push('act:'+f.id+':'+a.id);
+    if(a.wind&&bnParse('wind:'+f.id+':'+a.id)) ids.push('wind:'+f.id+':'+a.id); }
+  for(const o of Object.keys(B3_BODY_CLIPS)) for(const st of Object.keys(B3_BODY_CLIPS[o])) { const id='body:'+o+':'+st; if(bnParse(id)) ids.push(id); }
+  return ids;
+}
 // ---------- the clock ----------
 function bnLoop(now) {
   requestAnimationFrame(bnLoop);
@@ -400,4 +457,4 @@ window.addEventListener('message',ev=>{
   else if(m.bench==='stop') bnStop(); else if(m.bench==='ask') { bnSend(); bnSendTl(); }
 });
 requestAnimationFrame(bnLoop);
-window.B3BENCH={BN,preflight:bnPreflight,go:bnGo,pause:bnPause,resume:bnResume,speed:bnSpeed,loop:bnLoopSet,mute:bnMute,stop:bnStop,can:bnCan,parse:bnParse,status:bnStatus,seek:bnSeek,step:bnStep,timeline:()=>BN.tl,answerSet:bnAnswerSet};
+window.B3BENCH={BN,golden:bngRun,goldenIds:bngIds,preflight:bnPreflight,go:bnGo,pause:bnPause,resume:bnResume,speed:bnSpeed,loop:bnLoopSet,mute:bnMute,stop:bnStop,can:bnCan,parse:bnParse,status:bnStatus,seek:bnSeek,step:bnStep,timeline:()=>BN.tl,answerSet:bnAnswerSet};

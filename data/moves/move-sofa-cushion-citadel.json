@@ -1,0 +1,96 @@
+{
+ "v": 1,
+ "id": "move:sofa_cushion_citadel",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "give",
+   "marks": {
+    "lift": {
+     "f": 0.25
+    },
+    "sweep": {
+     "f": 0.5
+    }
+   }
+  },
+  "timing": {
+   "contact": {
+    "mark": "sweep"
+   },
+   "budget": 4.3,
+   "noHit": true,
+   "impactMs": 1950
+  },
+  "stage": {
+   "steps": [
+    {
+     "at": "lift",
+     "do": "sfx",
+     "sfx": "charge"
+    },
+    {
+     "at": "sweep",
+     "do": "sfx",
+     "sfx": "thud"
+    },
+    {
+     "at": "sweep",
+     "do": "words",
+     "text": "FORT TIME!",
+     "where": "over:each_ally",
+     "size": 2,
+     "color": "#ffe9b0",
+     "hold": 1.2
+    }
+   ],
+   "lasting": [
+    {
+     "while": "pillow_fort",
+     "on": "carrier",
+     "do": "place",
+     "asset": "rose/cushionwall",
+     "side": "front",
+     "enter": {
+      "at": "sweep",
+      "from": "behind",
+      "dur": 0.5
+     },
+     "exit": {
+      "do": "cross",
+      "to": "screen_right",
+      "lane": "floor",
+      "dur": 0.4
+     }
+    }
+   ],
+   "objects": {
+    "rose/cushionwall": {
+     "name": "Cushion wall",
+     "kind": "prop",
+     "bg": "magenta",
+     "size": {
+      "h": 0.5
+     },
+     "entry": "stage-rose-cushionwall",
+     "prompt": "tools/art-library/prompts/stage-rose-cushionwall-v1.txt"
+    }
+   }
+  },
+  "effects": [
+   {
+    "fx": "setpiece_sofa_cushion_fort"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

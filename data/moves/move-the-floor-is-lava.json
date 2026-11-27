@@ -1,0 +1,121 @@
+{
+ "v": 1,
+ "id": "move:the_floor_is_lava",
+ "rev": 1,
+ "live": {
+  "body": {
+   "clip": "rose_lava",
+   "motion": "strike",
+   "marks": {
+    "gasp": {
+     "f": 0.15
+    },
+    "hop1": {
+     "f": 0.33
+    },
+    "hop2": {
+     "f": 0.5
+    },
+    "hop3": {
+     "f": 0.67
+    }
+   }
+  },
+  "timing": {
+   "contact": {
+    "mark": "hop1"
+   },
+   "budget": 3.5,
+   "impactMs": 1150,
+   "hitStop": 3
+  },
+  "stage": {
+   "steps": [
+    {
+     "at": "gasp",
+     "do": "words",
+     "text": "THE FLOOR IS LAVA!",
+     "where": "over:self",
+     "size": 2,
+     "color": "#ff9a4a",
+     "hold": 1
+    },
+    {
+     "id": "hop1",
+     "at": "hop1",
+     "do": "drop",
+     "asset": "rose/cushion",
+     "onto": "target",
+     "dur": 0.25,
+     "hit": true
+    },
+    {
+     "at": "hop2",
+     "do": "drop",
+     "asset": "rose/cushion",
+     "onto": "target",
+     "dur": 0.25,
+     "hit": true
+    },
+    {
+     "at": "hop3",
+     "do": "drop",
+     "asset": "rose/cushion",
+     "onto": "target",
+     "dur": 0.25,
+     "hit": true
+    },
+    {
+     "at": "hop1",
+     "do": "sfx",
+     "sfx": "thud"
+    },
+    {
+     "at": "hop2",
+     "do": "sfx",
+     "sfx": "thud"
+    },
+    {
+     "at": "hop3",
+     "do": "sfx",
+     "sfx": "thud"
+    },
+    {
+     "at": {
+      "step": "hop1",
+      "plus": 0.25
+     },
+     "do": "foe",
+     "react": "squash"
+    }
+   ],
+   "objects": {
+    "rose/cushion": {
+     "name": "Floor cushion",
+     "kind": "prop",
+     "bg": "magenta",
+     "size": {
+      "h": 0.3
+     },
+     "entry": "stage-rose-cushion",
+     "prompt": "tools/art-library/prompts/stage-rose-cushion-v1.txt"
+    }
+   }
+  },
+  "effects": [
+   {
+    "fx": "proj_ground_hazard_mat"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

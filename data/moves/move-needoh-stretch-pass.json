@@ -1,0 +1,32 @@
+{
+ "v": 1,
+ "id": "move:needoh_stretch_pass",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "give"
+  },
+  "timing": {
+   "noHit": true,
+   "impactMs": 1750
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_timeline_chevrons"
+   },
+   {
+    "fx": "proj_ally_handoff_party"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

@@ -1,0 +1,32 @@
+{
+ "v": 1,
+ "id": "move:better_than_bobby_hype",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast"
+  },
+  "timing": {
+   "noHit": true,
+   "impactMs": 1500
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_racket_rings"
+   },
+   {
+    "fx": "vfx_core_timeline_chevrons"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

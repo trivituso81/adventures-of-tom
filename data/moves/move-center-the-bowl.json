@@ -1,0 +1,34 @@
+{
+ "v": 1,
+ "id": "move:center_the_bowl",
+ "rev": 1,
+ "live": {
+  "body": {
+   "clip": "pf_tnb_cer_s1",
+   "motion": "give"
+  },
+  "timing": {
+   "noHit": true,
+   "impactMs": 1650,
+   "approach": "stay"
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_shield_ward"
+   },
+   {
+    "fx": "vfx_core_heal_cleanse"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

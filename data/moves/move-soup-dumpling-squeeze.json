@@ -1,0 +1,36 @@
+{
+ "v": 1,
+ "id": "move:soup_dumpling_squeeze",
+ "rev": 1,
+ "live": {
+  "body": {
+   "clip": "grace_squeeze",
+   "motion": "strike"
+  },
+  "timing": {
+   "impactMs": 1250,
+   "hitStop": 3
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_clobber_impact"
+   },
+   {
+    "fx": "vfx_core_timeline_chevrons"
+   },
+   {
+    "fx": "proj_boomerang_return"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

@@ -1,0 +1,39 @@
+{
+ "v": 1,
+ "id": "move:its_nothing_its_fine_chomp",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast"
+  },
+  "timing": {
+   "noHit": true,
+   "impactMs": 1550
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_sizzle_wave"
+   },
+   {
+    "fx": "vfx_core_heal_cleanse"
+   },
+   {
+    "fx": "vfx_core_shield_ward"
+   }
+  ],
+  "answer": {
+   "clip": null,
+   "effects": []
+  }
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

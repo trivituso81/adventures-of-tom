@@ -1,0 +1,122 @@
+{
+ "v": 1,
+ "id": "move:giddyup_tata_launch",
+ "rev": 1,
+ "live": {
+  "body": {
+   "clip": "rose_giddyup",
+   "motion": "strike",
+   "marks": {
+    "tap": {
+     "f": 0.2
+    },
+    "launch": {
+     "f": 0.53
+    }
+   },
+   "pair": {
+    "with": "tom",
+    "clip": "tom_rose_giddyup"
+   }
+  },
+  "timing": {
+   "contact": {
+    "mark": "launch"
+   },
+   "budget": 4.4,
+   "impactMs": 2350,
+   "hitStop": 5
+  },
+  "stage": {
+   "steps": [
+    {
+     "at": "tap",
+     "do": "words",
+     "text": "GIDDYUP!",
+     "where": "over:ally",
+     "size": 2,
+     "color": "#ffd27a",
+     "hold": 1
+    },
+    {
+     "at": "tap",
+     "do": "sfx",
+     "sfx": "charge"
+    },
+    {
+     "id": "launch",
+     "at": "launch",
+     "do": "fly",
+     "asset": "rose/comet",
+     "from": "above_self",
+     "to": "target",
+     "arc": 40,
+     "dur": 0.4,
+     "blend": "add",
+     "hit": true
+    },
+    {
+     "at": {
+      "step": "launch",
+      "plus": 0.4
+     },
+     "do": "foe",
+     "react": "knock",
+     "px": 20
+    },
+    {
+     "at": {
+      "step": "launch",
+      "plus": 0.4
+     },
+     "do": "shake",
+     "amp": 4,
+     "dur": 0.3
+    },
+    {
+     "at": "launch",
+     "do": "sfx",
+     "sfx": "whoosh"
+    }
+   ],
+   "lasting": [
+    {
+     "while": "giddyup",
+     "on": "carrier",
+     "do": "glow",
+     "color": "#ffd27a"
+    }
+   ],
+   "objects": {
+    "rose/comet": {
+     "name": "Comet",
+     "kind": "prop",
+     "bg": "black",
+     "size": {
+      "h": 0.3
+     },
+     "entry": "stage-rose-comet",
+     "prompt": "tools/art-library/prompts/stage-rose-comet-v1.txt"
+    }
+   }
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_sizzle_wave"
+   },
+   {
+    "fx": "proj_arc_single"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

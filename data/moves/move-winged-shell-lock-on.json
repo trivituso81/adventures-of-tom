@@ -1,0 +1,191 @@
+{
+ "v": 1,
+ "id": "move:winged_shell_lock_on",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "throw",
+   "marks": {
+    "circle": {
+     "pic": 8
+    },
+    "point": {
+     "pic": 19
+    }
+   }
+  },
+  "timing": {
+   "contact": {
+    "step": "bonk"
+   },
+   "budget": 4.5,
+   "impactMs": 1500,
+   "hitStop": 4
+  },
+  "stage": {
+   "steps": [
+    {
+     "id": "arrive",
+     "at": "circle",
+     "do": "drop",
+     "asset": "tom/wingedshell",
+     "onto": "above_self",
+     "dur": 0.4
+    },
+    {
+     "id": "go",
+     "at": "point",
+     "do": "fly",
+     "asset": "tom/wingedshell",
+     "from": "above_self",
+     "to": "above_target",
+     "arc": 20,
+     "dur": 0.4
+    },
+    {
+     "id": "bonk",
+     "at": {
+      "step": "go",
+      "plus": 0.4
+     },
+     "do": "drop",
+     "asset": "tom/wingedshell",
+     "onto": "target",
+     "dur": 0.15,
+     "hit": true
+    },
+    {
+     "at": {
+      "step": "bonk",
+      "plus": 0
+     },
+     "do": "foe",
+     "react": "squash"
+    },
+    {
+     "at": {
+      "step": "bonk",
+      "plus": 0.2
+     },
+     "do": "words",
+     "text": "LOCKED ON",
+     "where": "over:target",
+     "size": 2,
+     "color": "#7aa8ff",
+     "hold": 1
+    },
+    {
+     "at": {
+      "step": "bonk",
+      "plus": 0
+     },
+     "do": "sfx",
+     "sfx": "jumpWhistle"
+    }
+   ],
+   "lasting": [
+    {
+     "while": "winged_shell",
+     "on": "carrier",
+     "do": "hover",
+     "asset": "tom/wingedshell",
+     "amp": 4,
+     "rate": 1.2,
+     "enter": {
+      "at": {
+       "step": "bonk",
+       "plus": 0.2
+      },
+      "dur": 0.3
+     },
+     "then": {
+      "beat": "react",
+      "do": "drop",
+      "asset": "tom/wingedshell",
+      "onto": "carrier",
+      "dur": 0.18,
+      "also": [
+       {
+        "do": "pop",
+        "asset": "tom/bluebang",
+        "on": "carrier",
+        "hold": 0.6,
+        "blend": "add"
+       },
+       {
+        "do": "flash",
+        "color": "#7aa8ff",
+        "dur": 0.3
+       },
+       {
+        "do": "shake",
+        "amp": 5,
+        "dur": 0.35
+       },
+       {
+        "do": "foe",
+        "react": "squash"
+       },
+       {
+        "do": "words",
+        "text": "NOTHING PERSONAL",
+        "where": "over:carrier",
+        "size": 2,
+        "hold": 1.1
+       }
+      ]
+     },
+     "exit": {
+      "do": "fly",
+      "to": "top",
+      "dur": 0.4
+     }
+    }
+   ],
+   "objects": {
+    "tom/wingedshell": {
+     "name": "Winged shell",
+     "kind": "obj",
+     "bg": "magenta",
+     "size": {
+      "h": 0.3
+     },
+     "loop": true,
+     "entry": "stage-tom-wingedshell",
+     "prompt": "tools/art-library/prompts/stage-tom-wingedshell-v1.txt",
+     "motion": "tools/art-library/prompts/stage-tom-wingedshell-motion-v1.txt"
+    },
+    "tom/bluebang": {
+     "name": "Blue blast",
+     "kind": "obj",
+     "bg": "black",
+     "size": {
+      "h": 0.9
+     },
+     "entry": "stage-tom-bluebang",
+     "prompt": "tools/art-library/prompts/stage-tom-bluebang-v1.txt",
+     "motion": "tools/art-library/prompts/stage-tom-bluebang-motion-v1.txt"
+    }
+   }
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_razzle_beam_arc"
+   }
+  ],
+  "answer": {
+   "clip": null,
+   "effects": []
+  }
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

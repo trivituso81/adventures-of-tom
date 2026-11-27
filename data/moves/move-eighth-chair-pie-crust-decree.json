@@ -1,0 +1,36 @@
+{
+ "v": 1,
+ "id": "move:eighth_chair_pie_crust_decree",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast"
+  },
+  "timing": {
+   "noHit": true,
+   "impactMs": 3150,
+   "hitStop": 5
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_composure_break"
+   },
+   {
+    "fx": "vfx_core_timeline_chevrons"
+   },
+   {
+    "fx": "setpiece_eighth_dining_chair"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

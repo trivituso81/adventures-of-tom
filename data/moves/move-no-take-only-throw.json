@@ -1,0 +1,32 @@
+{
+ "v": 1,
+ "id": "move:no_take_only_throw",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "strike"
+  },
+  "timing": {
+   "impactMs": 1750,
+   "hitStop": 4
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_status_debuff_badges"
+   },
+   {
+    "fx": "proj_boomerang_return"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

@@ -1,0 +1,165 @@
+{
+ "v": 1,
+ "id": "move:mega_whoopee_cushion_trap",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast",
+   "marks": {
+    "slide": {
+     "f": 0.25
+    },
+    "brace": {
+     "f": 0.45
+    },
+    "pose": {
+     "f": 0.82
+    }
+   }
+  },
+  "timing": {
+   "contact": {
+    "step": "splat"
+   },
+   "budget": 7,
+   "impactMs": 3100,
+   "hitStop": 7
+  },
+  "stage": {
+   "setpiece": {
+    "dur": 7,
+    "dim": 0.6,
+    "steps": [
+     {
+      "at": 0,
+      "do": "dim",
+      "amount": 0.6,
+      "in": 0.4
+     },
+     {
+      "at": "slide",
+      "do": "sfx",
+      "sfx": "whoosh"
+     },
+     {
+      "id": "slide",
+      "at": "slide",
+      "do": "cross",
+      "asset": "rose/whoopee",
+      "from": "screen_left",
+      "to": "screen_right",
+      "lane": "foes",
+      "dur": 1
+     },
+     {
+      "id": "splat",
+      "at": {
+       "step": "slide",
+       "plus": 1.6
+      },
+      "do": "drop",
+      "asset": "rose/whoopee",
+      "onto": "each_target",
+      "dur": 0.25,
+      "hit": true
+     },
+     {
+      "at": {
+       "step": "splat",
+       "plus": 0.25
+      },
+      "do": "sfx",
+      "sfx": "thud"
+     },
+     {
+      "at": {
+       "step": "splat",
+       "plus": 0.25
+      },
+      "do": "flash",
+      "color": "#ffd0ec",
+      "dur": 0.35
+     },
+     {
+      "at": {
+       "step": "splat",
+       "plus": 0.25
+      },
+      "do": "shake",
+      "amp": 7,
+      "dur": 0.7
+     },
+     {
+      "at": {
+       "step": "splat",
+       "plus": 0.25
+      },
+      "do": "foe",
+      "react": "knock",
+      "px": 32
+     },
+     {
+      "at": {
+       "step": "splat",
+       "plus": 0.5
+      },
+      "do": "words",
+      "text": "PBBBBBBBBT!",
+      "where": "screen_center",
+      "size": 4,
+      "color": "#ffb3d9",
+      "hold": 1.6
+     },
+     {
+      "at": "pose",
+      "do": "words",
+      "text": "MASTER OF MISCHIEF",
+      "where": "over:self",
+      "size": 2,
+      "color": "#fff1cb",
+      "hold": 1.2
+     },
+     {
+      "at": 6.4,
+      "do": "dim",
+      "amount": 0,
+      "out": 0.5
+     }
+    ]
+   },
+   "objects": {
+    "rose/whoopee": {
+     "name": "Whoopee cushion",
+     "kind": "prop",
+     "bg": "magenta",
+     "size": {
+      "sw": 0.35
+     },
+     "entry": "stage-rose-whoopee",
+     "prompt": "tools/art-library/prompts/stage-rose-whoopee-v1.txt"
+    }
+   }
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_composure_break"
+   },
+   {
+    "fx": "proj_ground_hazard_mat"
+   },
+   {
+    "fx": "setpiece_mega_whoopee_cushion"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

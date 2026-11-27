@@ -1,0 +1,32 @@
+{
+ "v": 1,
+ "id": "move:grand_jete_spotlight_finale",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "strike"
+  },
+  "timing": {
+   "impactMs": 3550,
+   "hitStop": 7
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_composure_break"
+   },
+   {
+    "fx": "setpiece_broadway_spotlights"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

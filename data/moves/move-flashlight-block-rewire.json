@@ -1,0 +1,32 @@
+{
+ "v": 1,
+ "id": "move:flashlight_block_rewire",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast"
+  },
+  "timing": {
+   "impactMs": 3300,
+   "hitStop": 7
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_razzle_beam_arc"
+   },
+   {
+    "fx": "vfx_core_detonation_pops"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

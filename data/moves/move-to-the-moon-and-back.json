@@ -1,0 +1,39 @@
+{
+ "v": 1,
+ "id": "move:to_the_moon_and_back",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "give"
+  },
+  "timing": {
+   "noHit": true,
+   "impactMs": 3350,
+   "hitStop": 6
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_sizzle_wave"
+   },
+   {
+    "fx": "vfx_core_composure_break"
+   },
+   {
+    "fx": "vfx_core_heal_cleanse"
+   },
+   {
+    "fx": "setpiece_rising_full_moon"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

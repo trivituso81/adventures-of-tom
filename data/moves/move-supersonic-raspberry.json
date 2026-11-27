@@ -1,0 +1,103 @@
+{
+ "v": 1,
+ "id": "move:supersonic_raspberry",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast",
+   "marks": {
+    "blow": {
+     "f": 0.44
+    }
+   }
+  },
+  "timing": {
+   "contact": {
+    "mark": "blow"
+   },
+   "budget": 3.3,
+   "impactMs": 1450,
+   "hitStop": 4
+  },
+  "stage": {
+   "steps": [
+    {
+     "id": "blow",
+     "at": "blow",
+     "do": "fly",
+     "asset": "rose/ripple",
+     "from": "self_front",
+     "to": "target",
+     "dur": 0.4,
+     "blend": "add",
+     "hit": true
+    },
+    {
+     "at": "blow",
+     "do": "sfx",
+     "sfx": "whoosh"
+    },
+    {
+     "at": {
+      "step": "blow",
+      "plus": 0.4
+     },
+     "do": "words",
+     "text": "PBBBBBT!",
+     "where": "over:target",
+     "size": 3,
+     "color": "#ffb3d9",
+     "hold": 1
+    },
+    {
+     "at": {
+      "step": "blow",
+      "plus": 0.4
+     },
+     "do": "shake",
+     "amp": 4,
+     "dur": 0.3
+    },
+    {
+     "at": {
+      "step": "blow",
+      "plus": 0.4
+     },
+     "do": "foe",
+     "react": "knock",
+     "px": 14
+    }
+   ],
+   "objects": {
+    "rose/ripple": {
+     "name": "Ripple",
+     "kind": "prop",
+     "bg": "black",
+     "size": {
+      "h": 0.4
+     },
+     "entry": "stage-rose-ripple",
+     "prompt": "tools/art-library/prompts/stage-rose-ripple-v1.txt"
+    }
+   }
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_racket_rings"
+   },
+   {
+    "fx": "vfx_core_composure_break"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

@@ -1,0 +1,116 @@
+{
+ "v": 1,
+ "id": "move:suite_door_slide",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "give",
+   "marks": {
+    "open": {
+     "pic": 7
+    },
+    "close": {
+     "pic": 17
+    },
+    "nod": {
+     "pic": 21
+    }
+   }
+  },
+  "timing": {
+   "contact": {
+    "mark": "close"
+   },
+   "budget": 4.5,
+   "noHit": true,
+   "impactMs": 1800
+  },
+  "stage": {
+   "steps": [
+    {
+     "at": "close",
+     "do": "sfx",
+     "sfx": "ding"
+    },
+    {
+     "at": "nod",
+     "do": "words",
+     "text": "DO NOT DISTURB",
+     "where": "over:each_ally",
+     "size": 2,
+     "color": "#ffcf8a",
+     "hold": 1.2
+    }
+   ],
+   "lasting": [
+    {
+     "while": "suite_door",
+     "on": "carrier",
+     "do": "surround",
+     "asset": "tom/suitedoor",
+     "pair": true,
+     "enter": {
+      "at": "close",
+      "dur": 0.45
+     },
+     "then": {
+      "beat": "intercept",
+      "do": "flash",
+      "on": "carrier",
+      "color": "#c9d8f0",
+      "dur": 0.25,
+      "also": [
+       {
+        "do": "words",
+        "text": "REDIRECTED TO TOM",
+        "where": "over:carrier",
+        "size": 2,
+        "hold": 1.1
+       },
+       {
+        "do": "shake",
+        "amp": 2,
+        "dur": 0.2
+       }
+      ]
+     },
+     "exit": {
+      "do": "surround",
+      "reverse": true,
+      "dur": 0.35
+     }
+    }
+   ],
+   "objects": {
+    "tom/suitedoor": {
+     "name": "Suite doors",
+     "kind": "prop",
+     "bg": "magenta",
+     "size": {
+      "h": 0.55
+     },
+     "entry": "stage-tom-suitedoor",
+     "prompt": "tools/art-library/prompts/stage-tom-suitedoor-v1.txt"
+    }
+   }
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_status_debuff_badges"
+   },
+   {
+    "fx": "setpiece_delta_one_pod_doors"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

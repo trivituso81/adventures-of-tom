@@ -1,0 +1,45 @@
+{
+ "v": 1,
+ "id": "move:grand_amphora_masterpiece",
+ "rev": 1,
+ "live": {
+  "body": {
+   "clip": "pf_tnb_cer_cap",
+   "motion": "cast"
+  },
+  "timing": {
+   "noHit": true,
+   "impactMs": 3450,
+   "hitStop": 6,
+   "shake": 11,
+   "approach": "stay"
+  },
+  "effects": [
+   {
+    "fx": "setpiece_leaning_grand_amphora"
+   },
+   {
+    "fx": "vfx_core_composure_break"
+   },
+   {
+    "fx": "vfx_core_razzle_beam_arc"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  },
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "the Pass-1 review row said 6 frames at 60 a second (2 at 24 a second); a real fight holds the manifest's 6, kept"
+  }
+ ]
+}

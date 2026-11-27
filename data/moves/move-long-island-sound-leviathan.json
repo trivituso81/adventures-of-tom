@@ -1,0 +1,35 @@
+{
+ "v": 1,
+ "id": "move:long_island_sound_leviathan",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast"
+  },
+  "timing": {
+   "impactMs": 3450,
+   "hitStop": 7
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_composure_break"
+   },
+   {
+    "fx": "setpiece_cattail_pier_leviathan",
+    "params": {
+     "fishTier": "leviathan"
+    }
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

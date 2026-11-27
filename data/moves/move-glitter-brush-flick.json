@@ -1,0 +1,29 @@
+{
+ "v": 1,
+ "id": "move:glitter_brush_flick",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "throw"
+  },
+  "timing": {
+   "impactMs": 1000,
+   "hitStop": 3
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_razzle_beam_arc"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

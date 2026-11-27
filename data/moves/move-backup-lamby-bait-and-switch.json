@@ -1,0 +1,98 @@
+{
+ "v": 1,
+ "id": "move:backup_lamby_bait_and_switch",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast",
+   "marks": {
+    "place": {
+     "f": 0.25
+    },
+    "peek": {
+     "f": 0.5
+    }
+   }
+  },
+  "timing": {
+   "contact": {
+    "mark": "place"
+   },
+   "budget": 4.3,
+   "noHit": true,
+   "impactMs": 1850,
+   "hitStop": 5
+  },
+  "stage": {
+   "steps": [
+    {
+     "at": "place",
+     "do": "sfx",
+     "sfx": "thud"
+    },
+    {
+     "at": "peek",
+     "do": "words",
+     "text": "SHHHH...",
+     "where": "over:self",
+     "size": 2,
+     "color": "#ffe9b0",
+     "hold": 1.2
+    }
+   ],
+   "lasting": [
+    {
+     "while": "lamby_hide",
+     "on": "self",
+     "do": "place",
+     "asset": "rose/backuplamby",
+     "side": "front",
+     "enter": {
+      "at": "place",
+      "from": "above",
+      "dur": 0.3
+     },
+     "exit": {
+      "do": "fly",
+      "to": "top",
+      "dur": 0.35
+     }
+    }
+   ],
+   "objects": {
+    "rose/backuplamby": {
+     "name": "Backup Lamby",
+     "kind": "prop",
+     "bg": "magenta",
+     "size": {
+      "h": 0.2
+     },
+     "entry": "stage-rose-backuplamby",
+     "prompt": "tools/art-library/prompts/stage-rose-backuplamby-v1.txt"
+    }
+   }
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_racket_rings"
+   },
+   {
+    "fx": "vfx_core_timeline_chevrons"
+   }
+  ],
+  "answer": {
+   "clip": null,
+   "effects": []
+  }
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "id": "move:kingdom_of_ten_thousand_blankets",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "give",
+   "marks": {
+    "wonder": {
+     "f": 0.2
+    },
+    "raise": {
+     "f": 0.5
+    },
+    "hold": {
+     "f": 0.7
+    }
+   }
+  },
+  "timing": {
+   "contact": {
+    "mark": "raise"
+   },
+   "budget": 7.1,
+   "noHit": true,
+   "impactMs": 3300
+  },
+  "stage": {
+   "lasting": [
+    {
+     "while": "blanket_castle",
+     "on": "self",
+     "do": "glow",
+     "color": "#ffd27a"
+    }
+   ],
+   "setpiece": {
+    "dur": 7.1,
+    "dim": 0.75,
+    "steps": [
+     {
+      "at": 0,
+      "do": "dim",
+      "amount": 0.75,
+      "in": 0.4
+     },
+     {
+      "at": "wonder",
+      "do": "sfx",
+      "sfx": "charge"
+     },
+     {
+      "id": "rise",
+      "at": "raise",
+      "do": "drop",
+      "asset": "rose/castle",
+      "onto": "screen_center",
+      "dur": 0.7
+     },
+     {
+      "at": {
+       "step": "rise",
+       "plus": 0.7
+      },
+      "do": "sfx",
+      "sfx": "thud"
+     },
+     {
+      "at": {
+       "step": "rise",
+       "plus": 0.7
+      },
+      "do": "shake",
+      "amp": 3,
+      "dur": 0.3
+     },
+     {
+      "at": {
+       "step": "rise",
+       "plus": 0.9
+      },
+      "do": "flash",
+      "color": "#ffd27a",
+      "dur": 0.5
+     },
+     {
+      "at": {
+       "step": "rise",
+       "plus": 0.9
+      },
+      "do": "sfx",
+      "sfx": "ding"
+     },
+     {
+      "at": {
+       "step": "rise",
+       "plus": 1.2
+      },
+      "do": "words",
+      "text": "LONG LIVE THE BLANKET KINGDOM",
+      "where": "screen_center",
+      "size": 3,
+      "color": "#ffe9b0",
+      "hold": 1.8
+     },
+     {
+      "at": 6.5,
+      "do": "dim",
+      "amount": 0,
+      "out": 0.5
+     }
+    ]
+   },
+   "objects": {
+    "rose/castle": {
+     "name": "Blanket castle",
+     "kind": "prop",
+     "bg": "magenta",
+     "size": {
+      "sw": 0.55
+     },
+     "entry": "stage-rose-castle",
+     "prompt": "tools/art-library/prompts/stage-rose-castle-v1.txt"
+    }
+   }
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_sizzle_wave"
+   },
+   {
+    "fx": "vfx_core_heal_cleanse"
+   },
+   {
+    "fx": "setpiece_blanket_kingdom_castle"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

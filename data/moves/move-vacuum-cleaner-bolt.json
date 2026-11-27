@@ -1,0 +1,29 @@
+{
+ "v": 1,
+ "id": "move:vacuum_cleaner_bolt",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "strike"
+  },
+  "timing": {
+   "impactMs": 1800,
+   "hitStop": 3
+  },
+  "effects": [
+   {
+    "fx": "proj_ground_hazard_mat"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

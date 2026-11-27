@@ -1,0 +1,35 @@
+{
+ "v": 1,
+ "id": "move:colossal_diamond_gold_dumpling",
+ "rev": 1,
+ "live": {
+  "body": {
+   "clip": "pf_grace_sc_cap",
+   "motion": "give"
+  },
+  "timing": {
+   "noHit": true,
+   "impactMs": 3400,
+   "shake": 5,
+   "approach": "stay"
+  },
+  "effects": [
+   {
+    "fx": "setpiece_diamond_gold_dumpling"
+   },
+   {
+    "fx": "vfx_core_timeline_chevrons"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

@@ -1,0 +1,91 @@
+{
+ "v": 1,
+ "id": "move:controller_toss",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "throw",
+   "marks": {
+    "release": {
+     "pic": 9
+    },
+    "catch": {
+     "pic": 21
+    }
+   },
+   "hand": [
+    33,
+    45
+   ]
+  },
+  "timing": {
+   "contact": {
+    "step": "toss"
+   },
+   "budget": 3.2,
+   "impactMs": 1450,
+   "hitStop": 4
+  },
+  "stage": {
+   "steps": [
+    {
+     "id": "toss",
+     "at": "release",
+     "do": "fly",
+     "asset": "tom/controller",
+     "from": "hand",
+     "to": "target",
+     "arc": 30,
+     "spin": 3,
+     "dur": 0.45,
+     "hit": true,
+     "back": {
+      "at": "catch",
+      "to": "hand"
+     }
+    },
+    {
+     "at": {
+      "step": "toss",
+      "plus": 0.45
+     },
+     "do": "foe",
+     "react": "knock",
+     "px": 14
+    },
+    {
+     "at": "release",
+     "do": "sfx",
+     "sfx": "whoosh"
+    }
+   ],
+   "objects": {
+    "tom/controller": {
+     "name": "Game controller",
+     "kind": "prop",
+     "bg": "magenta",
+     "size": {
+      "h": 0.22
+     },
+     "entry": "stage-tom-controller",
+     "prompt": "tools/art-library/prompts/stage-tom-controller-v1.txt"
+    }
+   }
+  },
+  "effects": [
+   {
+    "fx": "proj_boomerang_return"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

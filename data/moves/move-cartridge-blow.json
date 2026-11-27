@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "move:cartridge_blow",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast",
+   "marks": {
+    "blow": {
+     "pic": 15
+    },
+    "squint": {
+     "pic": 18
+    }
+   },
+   "hand": [
+    12,
+    62
+   ]
+  },
+  "timing": {
+   "contact": {
+    "mark": "blow"
+   },
+   "budget": 2.5,
+   "impactMs": 1100,
+   "hitStop": 2
+  },
+  "stage": {
+   "steps": [
+    {
+     "at": "blow",
+     "do": "words",
+     "text": "PFFFFT",
+     "where": "over:hand",
+     "size": 2,
+     "color": "#e8ecf4",
+     "hold": 0.8
+    },
+    {
+     "at": "blow",
+     "do": "sfx",
+     "sfx": "whoosh"
+    }
+   ]
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_racket_rings"
+   },
+   {
+    "fx": "vfx_core_status_debuff_badges"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

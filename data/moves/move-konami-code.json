@@ -1,0 +1,195 @@
+{
+ "v": 1,
+ "id": "move:konami_code",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast",
+   "marks": {
+    "tap": {
+     "pic": 6
+    },
+    "arms": {
+     "pic": 24
+    }
+   }
+  },
+  "timing": {
+   "contact": {
+    "step": "rain"
+   },
+   "budget": 7.5,
+   "impactMs": 3100,
+   "hitStop": 7
+  },
+  "stage": {
+   "setpiece": {
+    "dur": 7.5,
+    "dim": 0.9,
+    "steps": [
+     {
+      "at": 0,
+      "do": "dim",
+      "amount": 0.9,
+      "in": 0.3
+     },
+     {
+      "at": "tap",
+      "do": "words",
+      "glyphs": [
+       "up",
+       "up",
+       "down",
+       "down",
+       "left",
+       "right",
+       "left",
+       "right",
+       "B",
+       "A"
+      ],
+      "where": "screen_center",
+      "size": 4,
+      "color": "#fff1cb",
+      "each": 0.2,
+      "hold": 0.6
+     },
+     {
+      "at": "arms",
+      "do": "flash",
+      "color": "#ffffff",
+      "dur": 0.25
+     },
+     {
+      "at": "arms",
+      "do": "words",
+      "text": "CHEAT ACCEPTED",
+      "where": "screen_center",
+      "size": 3,
+      "color": "#ffe27a",
+      "hold": 1
+     },
+     {
+      "at": "arms",
+      "do": "glow",
+      "on": "self",
+      "color": "rainbow",
+      "dur": 4.5
+     },
+     {
+      "id": "rain",
+      "at": {
+       "mark": "arms",
+       "plus": 0.4
+      },
+      "do": "rain",
+      "assets": [
+       "tom/fireball",
+       "tom/starbeam",
+       "tom/meteor"
+      ],
+      "n": 18,
+      "dur": 2.4,
+      "hit": "first",
+      "blend": "add"
+     },
+     {
+      "at": {
+       "step": "rain",
+       "plus": 0.1
+      },
+      "do": "foe",
+      "react": "knock",
+      "px": 10
+     },
+     {
+      "at": {
+       "step": "rain",
+       "plus": 0
+      },
+      "do": "shake",
+      "amp": 3,
+      "dur": 2.4
+     },
+     {
+      "at": {
+       "step": "rain",
+       "plus": 2.5
+      },
+      "do": "words",
+      "text": "+30 LIVES",
+      "where": "over:self",
+      "size": 2,
+      "color": "#9be39a",
+      "hold": 1.2
+     },
+     {
+      "at": 7.1,
+      "do": "dim",
+      "amount": 0,
+      "out": 0.4
+     }
+    ]
+   },
+   "objects": {
+    "tom/fireball": {
+     "name": "Fireball",
+     "kind": "obj",
+     "bg": "black",
+     "size": {
+      "h": 0.2
+     },
+     "loop": true,
+     "entry": "stage-tom-fireball",
+     "prompt": "tools/art-library/prompts/stage-tom-fireball-v1.txt",
+     "motion": "tools/art-library/prompts/stage-tom-fireball-motion-v1.txt"
+    },
+    "tom/starbeam": {
+     "name": "Star beam",
+     "kind": "obj",
+     "bg": "black",
+     "size": {
+      "h": 0.3
+     },
+     "loop": true,
+     "entry": "stage-tom-starbeam",
+     "prompt": "tools/art-library/prompts/stage-tom-starbeam-v1.txt",
+     "motion": "tools/art-library/prompts/stage-tom-starbeam-motion-v1.txt"
+    },
+    "tom/meteor": {
+     "name": "Meteor",
+     "kind": "obj",
+     "bg": "black",
+     "size": {
+      "h": 0.3
+     },
+     "loop": true,
+     "entry": "stage-tom-meteor",
+     "prompt": "tools/art-library/prompts/stage-tom-meteor-v1.txt",
+     "motion": "tools/art-library/prompts/stage-tom-meteor-motion-v1.txt"
+    }
+   }
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_razzle_beam_arc"
+   },
+   {
+    "fx": "vfx_core_composure_break"
+   },
+   {
+    "fx": "setpiece_giant_sky_controller"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

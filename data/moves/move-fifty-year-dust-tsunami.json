@@ -1,0 +1,44 @@
+{
+ "v": 1,
+ "id": "move:fifty_year_dust_tsunami",
+ "rev": 1,
+ "live": {
+  "body": {
+   "clip": "pf_deedee_nf_cap",
+   "motion": "cast"
+  },
+  "timing": {
+   "impactMs": 3100,
+   "hitStop": 6,
+   "shake": 11,
+   "approach": "stay"
+  },
+  "effects": [
+   {
+    "fx": "setpiece_50yr_dust_tsunami"
+   },
+   {
+    "fx": "vfx_core_drench_splash"
+   },
+   {
+    "fx": "vfx_core_status_debuff_badges"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  },
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "the Pass-1 review row said 6 frames at 60 a second (2 at 24 a second); a real fight holds the manifest's 6, kept"
+  }
+ ]
+}

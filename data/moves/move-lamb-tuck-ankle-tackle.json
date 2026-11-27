@@ -1,0 +1,74 @@
+{
+ "v": 1,
+ "id": "move:lamb_tuck_ankle_tackle",
+ "rev": 1,
+ "live": {
+  "body": {
+   "clip": "rose_tackle",
+   "motion": "strike",
+   "marks": {
+    "dash": {
+     "f": 0.22
+    },
+    "hit1": {
+     "f": 0.37
+    },
+    "hit2": {
+     "f": 0.56
+    }
+   }
+  },
+  "timing": {
+   "contact": {
+    "mark": "hit1"
+   },
+   "budget": 2.7,
+   "impactMs": 1000,
+   "hitStop": 3
+  },
+  "stage": {
+   "steps": [
+    {
+     "at": "hit1",
+     "do": "sfx",
+     "sfx": "thud"
+    },
+    {
+     "at": "hit1",
+     "do": "shake",
+     "amp": 2,
+     "dur": 0.15
+    },
+    {
+     "at": "hit2",
+     "do": "sfx",
+     "sfx": "thud"
+    },
+    {
+     "at": "hit2",
+     "do": "words",
+     "text": "TACKLED!",
+     "where": "over:target",
+     "size": 2,
+     "color": "#ffe08a",
+     "hold": 0.9
+    }
+   ]
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_clobber_impact"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

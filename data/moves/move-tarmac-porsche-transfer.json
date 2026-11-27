@@ -1,0 +1,253 @@
+{
+ "v": 1,
+ "id": "move:tarmac_porsche_transfer",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast",
+   "marks": {
+    "watch": {
+     "pic": 9
+    },
+    "wave": {
+     "pic": 22
+    }
+   }
+  },
+  "timing": {
+   "contact": {
+    "step": "beams"
+   },
+   "budget": 7.5,
+   "impactMs": 3100,
+   "hitStop": 6
+  },
+  "stage": {
+   "lasting": [
+    {
+     "while": "high_beams",
+     "on": "self",
+     "do": "glow",
+     "color": "#ffd27a"
+    }
+   ],
+   "setpiece": {
+    "dur": 7.5,
+    "dim": 0.8,
+    "steps": [
+     {
+      "at": 0,
+      "do": "dim",
+      "amount": 0.8,
+      "in": 0.4
+     },
+     {
+      "at": 0,
+      "do": "sfx",
+      "sfx": "charge"
+     },
+     {
+      "at": 0.4,
+      "do": "pop",
+      "asset": "tom/runwaylights",
+      "on": "floor",
+      "hold": 6.2,
+      "blend": "add"
+     },
+     {
+      "at": "wave",
+      "do": "pop",
+      "asset": "tom/glare",
+      "on": "screen_right",
+      "hold": 0.5,
+      "blend": "add"
+     },
+     {
+      "id": "arrive",
+      "at": {
+       "mark": "wave",
+       "plus": 0.3
+      },
+      "do": "cross",
+      "asset": "tom/porsche",
+      "from": "screen_right",
+      "stop": "foes_front",
+      "lane": "mid",
+      "dur": 0.9,
+      "skid": 0.3
+     },
+     {
+      "at": {
+       "step": "arrive",
+       "plus": 1.2
+      },
+      "do": "sfx",
+      "sfx": "thud"
+     },
+     {
+      "at": {
+       "step": "arrive",
+       "plus": 1.2
+      },
+      "do": "shake",
+      "amp": 4,
+      "dur": 0.3
+     },
+     {
+      "id": "beams",
+      "at": {
+       "step": "arrive",
+       "plus": 1.5
+      },
+      "do": "flash",
+      "color": "#ffffff",
+      "dur": 0.35
+     },
+     {
+      "at": {
+       "step": "beams",
+       "plus": 0
+      },
+      "do": "pop",
+      "asset": "tom/glare",
+      "on": "each_target",
+      "hold": 0.8,
+      "blend": "add"
+     },
+     {
+      "at": {
+       "step": "beams",
+       "plus": 0
+      },
+      "do": "foe",
+      "react": "knock",
+      "px": 24
+     },
+     {
+      "id": "wash",
+      "at": {
+       "step": "beams",
+       "plus": 1
+      },
+      "do": "cross",
+      "asset": "tom/jetwash",
+      "from": "screen_right",
+      "to": "screen_left",
+      "lane": "foes",
+      "dur": 0.8,
+      "blend": "add"
+     },
+     {
+      "at": {
+       "step": "wash",
+       "plus": 0.2
+      },
+      "do": "foe",
+      "react": "knock",
+      "px": 30
+     },
+     {
+      "at": {
+       "step": "wash",
+       "plus": 0.2
+      },
+      "do": "shake",
+      "amp": 6,
+      "dur": 0.6
+     },
+     {
+      "at": {
+       "step": "wash",
+       "plus": 1
+      },
+      "do": "words",
+      "text": "PLEASE ENJOY YOUR TRANSFER",
+      "where": "screen_center",
+      "size": 3,
+      "color": "#f1d58c",
+      "hold": 1.4
+     },
+     {
+      "at": 6,
+      "do": "cross",
+      "asset": "tom/porsche",
+      "from": "foes_front",
+      "to": "screen_left",
+      "lane": "mid",
+      "dur": 0.7
+     },
+     {
+      "at": 6.8,
+      "do": "dim",
+      "amount": 0,
+      "out": 0.5
+     }
+    ]
+   },
+   "objects": {
+    "tom/porsche": {
+     "name": "Black Porsche",
+     "kind": "prop",
+     "bg": "magenta",
+     "size": {
+      "sw": 0.5
+     },
+     "entry": "stage-tom-porsche",
+     "prompt": "tools/art-library/prompts/stage-tom-porsche-v1.txt"
+    },
+    "tom/runwaylights": {
+     "name": "Runway lights",
+     "kind": "obj",
+     "bg": "black",
+     "size": {
+      "sw": 1
+     },
+     "loop": true,
+     "entry": "stage-tom-runwaylights",
+     "prompt": "tools/art-library/prompts/stage-tom-runwaylights-v1.txt",
+     "motion": "tools/art-library/prompts/stage-tom-runwaylights-motion-v1.txt"
+    },
+    "tom/glare": {
+     "name": "High-beam glare",
+     "kind": "obj",
+     "bg": "black",
+     "size": {
+      "h": 1.2
+     },
+     "entry": "stage-tom-glare",
+     "prompt": "tools/art-library/prompts/stage-tom-glare-v1.txt",
+     "motion": "tools/art-library/prompts/stage-tom-glare-motion-v1.txt"
+    },
+    "tom/jetwash": {
+     "name": "Jet wash",
+     "kind": "obj",
+     "bg": "black",
+     "size": {
+      "sw": 0.5
+     },
+     "entry": "stage-tom-jetwash",
+     "prompt": "tools/art-library/prompts/stage-tom-jetwash-v1.txt",
+     "motion": "tools/art-library/prompts/stage-tom-jetwash-motion-v1.txt"
+    }
+   }
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_status_debuff_badges"
+   },
+   {
+    "fx": "setpiece_black_porsche_suv"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

@@ -1,0 +1,25 @@
+{
+ "v": 1,
+ "id": "act:toad:night_croak",
+ "rev": 1,
+ "live": {
+  "body": {
+   "clip": "toad_croak"
+  },
+  "timing": {
+   "contact": {
+    "share": 0.5
+   }
+  }
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

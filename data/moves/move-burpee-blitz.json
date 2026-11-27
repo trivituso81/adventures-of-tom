@@ -1,0 +1,41 @@
+{
+ "v": 1,
+ "id": "move:burpee_blitz",
+ "rev": 1,
+ "live": {
+  "body": {
+   "clip": "pf_amy_fq_s1",
+   "motion": "strike"
+  },
+  "timing": {
+   "impactMs": 1450,
+   "hitStop": 4,
+   "shake": 7,
+   "approach": "run"
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_clobber_impact"
+   },
+   {
+    "fx": "vfx_core_timeline_chevrons"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  },
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "the Pass-1 review row said 4 frames at 60 a second (2 at 24 a second); a real fight holds the manifest's 4, kept"
+  }
+ ]
+}

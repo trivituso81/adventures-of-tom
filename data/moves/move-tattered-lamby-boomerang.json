@@ -1,0 +1,120 @@
+{
+ "v": 1,
+ "id": "move:tattered_lamby_boomerang",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "strike",
+   "marks": {
+    "throw": {
+     "f": 0.23
+    },
+    "lunge": {
+     "f": 0.44
+    },
+    "catch": {
+     "f": 0.75
+    }
+   }
+  },
+  "timing": {
+   "contact": {
+    "step": "toss"
+   },
+   "budget": 3.5,
+   "impactMs": 1550,
+   "hitStop": 4
+  },
+  "stage": {
+   "steps": [
+    {
+     "id": "toss",
+     "at": "throw",
+     "do": "fly",
+     "asset": "rose/lamby",
+     "from": "hand",
+     "to": "target",
+     "arc": 30,
+     "spin": 3,
+     "dur": 0.45,
+     "hit": true
+    },
+    {
+     "at": {
+      "step": "toss",
+      "plus": 0.45
+     },
+     "do": "foe",
+     "react": "squash"
+    },
+    {
+     "at": "throw",
+     "do": "sfx",
+     "sfx": "whoosh"
+    },
+    {
+     "at": "lunge",
+     "do": "sfx",
+     "sfx": "thud"
+    },
+    {
+     "at": "catch",
+     "do": "sfx",
+     "sfx": "ding"
+    }
+   ],
+   "lasting": [
+    {
+     "while": "lamby_stuck",
+     "on": "carrier",
+     "do": "hover",
+     "asset": "rose/lamby",
+     "amp": 3,
+     "rate": 1,
+     "enter": {
+      "at": {
+       "step": "toss",
+       "plus": 0.45
+      },
+      "dur": 0.2
+     },
+     "exit": {
+      "do": "fly",
+      "to": "self",
+      "dur": 0.4
+     }
+    }
+   ],
+   "objects": {
+    "rose/lamby": {
+     "name": "Lamby",
+     "kind": "prop",
+     "bg": "magenta",
+     "size": {
+      "h": 0.2
+     },
+     "entry": "stage-rose-lamby",
+     "prompt": "tools/art-library/prompts/stage-rose-lamby-v1.txt"
+    }
+   }
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_shield_ward"
+   },
+   {
+    "fx": "proj_boomerang_return"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}

@@ -1,0 +1,39 @@
+{
+ "v": 1,
+ "id": "move:michael_grab_the_kids",
+ "rev": 1,
+ "live": {
+  "body": {
+   "motion": "cast"
+  },
+  "timing": {
+   "noHit": true,
+   "impactMs": 3100,
+   "hitStop": 5
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_heal_cleanse"
+   },
+   {
+    "fx": "vfx_core_timeline_chevrons"
+   },
+   {
+    "fx": "setpiece_michael_sprint_and_chopper",
+    "params": {
+     "mode": "michael_sprint"
+    }
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T22:00:00-08:00",
+   "by": "migration",
+   "what": "written from the tables the engine reads today"
+  }
+ ]
+}
