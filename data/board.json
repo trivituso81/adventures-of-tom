@@ -9152,10 +9152,10 @@
    "id": "svc-voice-gen",
    "service": "voice-gen",
    "lane": "elevenlabs",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
-   "title": "voice-gen is running",
-   "next": "voice-gen is running",
+   "title": "voice-gen run finished (skipped, nothing to do)",
+   "next": "Nothing needed.",
    "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45904459655",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukDoRTv4JhJghg7amKk",
@@ -9169,6 +9169,10 @@
     {
      "d": "2026-11-27",
      "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Retired by rescue: run 45904459655 completed as skipped (nothing to run), so there is nothing to finish."
     }
    ],
    "blocks": [],
@@ -9176,14 +9180,8 @@
    "changed": "2026-11-27",
    "reruns": 1,
    "rerun_at": "2026-11-21T21:31:38+00:00",
-   "rescue": {
-    "at": "2026-11-27T08:46:45+00:00",
-    "n": 1,
-    "why": "Quiet: the conversation may have stopped",
-    "url": "https://claude.ai/code/cse_01RXeukDoRTv4JhJghg7amKk",
-    "prev": ""
-   },
-   "started_at": "2026-11-27T08:46:45+00:00"
+   "started_at": "2026-11-27T08:46:45+00:00",
+   "done": "2026-11-27"
   },
   {
    "id": "c-hitstoplab1",
