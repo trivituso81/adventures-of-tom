@@ -10045,7 +10045,7 @@
    "id": "c-movebench-13",
    "tag": "movebench13",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 13: start picture, held and worn",
    "next": "Each move can have its own start picture: you say the one thing that is held and what is worn, make the picture in the Art Library, and Make this video uses it. Starts by itself when Move Workbench 12 ships.",
@@ -10057,7 +10057,7 @@
    "changed": "2026-11-27",
    "auto": true,
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEMoNYqpzg4HGAzdZf",
     "opening": "not started"
    },
    "prompt": {
@@ -10077,6 +10077,10 @@
     {
      "d": "2026-11-27",
      "t": "Unblocked: Move Workbench 12: the spec names the video is done."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -10363,6 +10367,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukEMoNYqpzg4HGAzdZf",
+   "title": "Move Workbench 13: start picture, held and worn",
+   "first": "2026-11-27T15:08:19-08:00",
+   "last": "2026-11-27T15:08:19-08:00",
+   "tags": [],
+   "cards": [
+    "c-movebench-13"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukETPEFvyNWmZVZeXym",
    "title": "Move Workbench 12: the spec names the video",
@@ -17347,8 +17361,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "9e7578795087ef157b19de88bfc1a6bad03b46d8",
- "synced_at": "2026-11-27T22:42:03+00:00",
+ "synced": "e1ae1ffdb9379aafd7488dae311a24e26b2d286f",
+ "synced_at": "2026-11-27T23:09:05+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
