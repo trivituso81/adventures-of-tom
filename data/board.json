@@ -9730,7 +9730,7 @@
    "changed": "2026-11-27",
    "auto": true,
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEqG7kgsoNKup5rty2",
+    "url": "https://claude.ai/code/session_01RXeukEqG7kgsoNKup5rty2",
     "opening": "not started"
    },
    "prompt": {
@@ -9758,6 +9758,10 @@
     {
      "d": "2026-11-27",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "started_at": "2026-11-27T09:58:25+00:00"
@@ -10141,6 +10145,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukEqG7kgsoNKup5rty2",
+   "title": "Move Workbench 7: effects",
+   "first": "2026-11-27T09:59:34Z",
+   "last": "2026-11-27T09:59:34Z",
+   "tags": [],
+   "cards": [
+    "c-movebench-7"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDBRG7sKzYyzp5eNpp",
    "title": "Move Workbench 6: save, finished and progress",
@@ -17040,8 +17054,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "02fd78e604f6f2fc929968e96bd3707386ca6299",
- "synced_at": "2026-11-27T09:58:26+00:00",
+ "synced": "88390f1aa4de59b76238369cb4b73ae3d2ae526a",
+ "synced_at": "2026-11-27T10:00:38+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
