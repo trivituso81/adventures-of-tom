@@ -9641,6 +9641,10 @@
     {
      "d": "2026-11-27",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Built as movebench5: the workbench page with Body video and Timing, five layouts and every Timing control tested (tools/movebench/page_test.py). Nothing for Tom; c-movebench-6 starts when the build ships."
     }
    ]
   },

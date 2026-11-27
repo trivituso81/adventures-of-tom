@@ -213,6 +213,71 @@ a.play.fight{background:var(--surface);border:1px solid var(--accent);color:var(
 }
 /* The Duo folded and held sideways (678 x 445): keep the tab bar thin so the list has room. */
 @media (max-height:480px){#tabs button{min-height:40px;flex-direction:row;justify-content:center;gap:6px}#tabs button svg{width:18px;height:18px}header{height:46px}#stage{height:52vh}}
+/* movebench5: the workbench. The sheet becomes a full-screen page (top bar, preview, sections, bottom bar). Upright: one column, the preview sticks to the top and shrinks to a small player while a setting is changed. Wider than tall: the preview and its bar on the left, the sections on the right. */
+#sheet[data-mode=bench]{left:0;right:0;top:0;bottom:0;transform:none;width:auto;height:100%;max-height:none;border-radius:0;border:0;padding:0;overflow:hidden}
+#sheet[data-mode=bench].open{display:flex;flex-direction:column}
+.wb{display:flex;flex-direction:column;flex:1 1 auto;min-height:0;width:100%}
+.wb-top{flex:none;display:flex;align-items:center;gap:10px;padding:6px 12px;border-bottom:1px solid var(--line);min-height:50px}
+.wb-top .back{flex:none;font-weight:800;color:var(--accent);background:none;border:0;padding:8px 6px;min-height:40px;font-size:16px}
+.wb-top .wt{flex:1 1 auto;min-width:0}
+.wb-top h2{margin:0;font-size:19px;line-height:1.15;overflow-wrap:anywhere}
+.wb-top .wsub{margin:1px 0 0;font-size:12px;color:var(--muted);line-height:1.25}
+.wbstat{flex:none;font-size:12px;font-weight:800;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--well);white-space:nowrap}
+.wbstat.chg{border-color:#d9a82b;color:#ffd34d}.wbstat.nov{color:var(--prob-text);border-color:var(--prob)}
+.wb-body{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding-bottom:14px}
+.wb-prev{position:sticky;top:0;z-index:3;background:var(--surface);padding:8px 12px 2px;border-bottom:1px solid var(--line)}
+.wb-prev .bench{margin:0}
+.wb-secs{padding:0 12px}
+.wb-nav{display:flex;gap:6px;overflow-x:auto;padding:10px 0 4px;scrollbar-width:none}
+.wb-nav button{flex:none;min-height:38px;padding:6px 14px;border-radius:999px;font-weight:700;font-size:14px;background:var(--surface);border:1px solid var(--line)}
+.wb-nav button b{color:var(--accent);margin-left:4px}
+.wbs{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin:10px 0}
+.wbs>h3.wbh{margin:0 0 8px;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.wbs>h3.wbh .wbcount{font-size:12px;letter-spacing:0;text-transform:none;font-weight:700}
+.wbs .gen{border-top:0;margin-top:0}
+.wbs .mani{border-top:0;margin-top:0}
+.wbrow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px;padding:10px 0;border-top:1px solid var(--line)}
+.wbrow:first-of-type{border-top:0}
+.wbrow .wl{flex:1 1 150px;min-width:0}.wbrow .wl b{display:block;font-size:16px}.wbrow .wl span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.wbrow .wc{flex:0 1 auto;display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;align-items:center;max-width:100%}
+.wbseg{display:flex;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.wbseg button{border:0;border-radius:0;min-height:44px;padding:8px 12px;font-size:14px;font-weight:700;background:var(--surface);border-left:1px solid var(--line)}
+.wbseg button:first-child{border-left:0}
+.wbseg button[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}
+.wbstep{min-height:44px;min-width:44px;padding:0 10px;font-weight:800;font-size:18px}
+.wbval{font-weight:900;font-size:20px;color:var(--accent);min-width:64px;text-align:right}
+.wbnum{width:84px;min-height:44px;font:inherit;font-weight:900;font-size:18px;color:var(--accent);background:var(--well);border:1px solid var(--line);border-radius:10px;padding:4px 8px;text-align:right}
+.wbauto{flex:1 1 100%;font-size:12px;color:var(--muted)}
+.wbauto button{min-height:36px;padding:2px 12px;font-size:12px;margin-left:6px}
+.wbrep{margin:8px 0 0;font-size:12px;color:var(--muted);line-height:1.5}.wbrep b{color:var(--text)}
+.wbl{list-style:none;margin:0;padding:0}.wbl li{display:flex;gap:10px;align-items:baseline;padding:8px 0;border-top:1px solid var(--line);font-size:14px}.wbl li:first-child{border-top:0}
+.wbl .tm{flex:none;min-width:58px;font-weight:800;color:var(--accent);font-size:13px}.wbl .dt{color:var(--muted);font-size:12px}
+.wb-bottom{flex:none;border-top:1px solid var(--line);padding:8px 12px calc(8px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center;flex-wrap:nowrap;background:var(--surface)}
+.wb-bottom .wbu{flex:1 1 auto;min-width:0;font-size:13px;line-height:1.25}.wb-bottom .wbu b{display:block;font-size:14px}.wb-bottom .wbu span{color:var(--muted);font-size:12px}
+.wb-bottom button{flex:none;min-height:44px;padding:8px 14px;font-weight:700}
+.wb-bottom button:disabled{opacity:.45}
+/* upright: the preview shrinks to a small player while the page is scrolled to a setting */
+.wb-prev.small .btag{display:none}
+.wb-prev.small{display:grid;grid-template-columns:minmax(0,42%) minmax(0,1fr);gap:0 10px;align-items:start}
+.wb-prev.small .bench{display:contents}
+.wb-prev.small .bslot{grid-column:1;grid-row:1;width:100%;margin:0}
+.wb-prev.small .bctl{grid-column:2;grid-row:1;justify-content:flex-start;align-content:flex-start;gap:5px}
+.wb-prev.small .bctl button{padding:5px 8px;min-height:36px;font-size:13px}
+.wb-prev.small .bctl #bnplay{min-width:70px}
+.wb-prev.small .bctl #bnclock{margin-left:0}
+.wb-prev.small .bbar{grid-column:1 / -1;grid-row:2;margin:2px 0 4px}
+.wb-prev.small .bbar .ln{height:14px;margin-top:2px}
+.wb-prev.small .bbar .ln .it{line-height:10px;font-size:8px}
+@media (min-aspect-ratio:1/1),(min-width:760px){
+ .wb-body{display:grid;grid-template-columns:minmax(300px,50%) minmax(0,1fr);overflow:hidden;padding-bottom:0}
+ .wb-prev{position:static;overflow-y:auto;overscroll-behavior:contain;border-bottom:0;border-right:1px solid var(--line);padding-bottom:10px}
+ .wb-secs{overflow-y:auto;overscroll-behavior:contain;padding-bottom:14px}
+ .wb-top{min-height:44px;padding:3px 12px}.wb-top h2{font-size:17px}
+ .wb-bottom{padding-top:5px;padding-bottom:calc(5px + env(safe-area-inset-bottom))}.wb-bottom button{min-height:40px}
+ .wb-prev.small{display:block}
+}
+@media (min-width:900px) and (min-aspect-ratio:1/1){ .wb-body{grid-template-columns:54% minmax(0,1fr)} }
+
 .mani{border-top:1px solid var(--line);margin-top:6px}
 .mani table.mt,table.mt{width:100%;border-collapse:collapse;font-size:14px}.mt th{width:92px;text-align:left;vertical-align:top;color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:6px 8px 6px 0}.mt td{padding:6px 0;overflow-wrap:anywhere}.mt tr+tr{border-top:1px solid var(--line)}
 .mfx{border:1px solid var(--line);border-radius:12px;padding:8px 10px;margin:6px 0;background:var(--well)}.mfx .chip{margin-top:6px}
@@ -259,6 +324,7 @@ const wide=()=>matchMedia('(min-width:560px) and (min-height:560px)').matches;
 const CLIPS={};            // clip id -> its data, once its file is loaded
 const CLIP_SRC={};         // clip id -> the address of its data file, read from index.html
 function bclipDefine(id,D){CLIPS[id]=D;}
+let WORDS=null,WORDS_P=null;   // movebench5: data/movebench-words.json, every label of the workbench
 let MANI=null,MANI_P=null;   // guidecross1: data/guide-manifest.json (tools/guidegen/manifest_crosswalk.py)
 let BUILD='',BOARD_DOC=null,GUIDE=null,GUIDE_P=null,JOBS=null,PLAN_DOC=null,INDEX_SRCS=[];   // GUIDE: data/guide-anims.json (guidegen1a): per animation its prompt, start picture, price and what is missing
 function addScript(src){return new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=()=>no(new Error('Could not load '+src));document.head.appendChild(s);});}
@@ -273,6 +339,9 @@ async function boot(){
     const data=srcs.filter(s=>/^data\/b3-/.test(s));
     if(!data.length) throw new Error('The game page lists no battle data files');
     for(const s of data) await addScript(s);   // in the game's own order: rules first, then statuses, kits, monsters
+    for(const s of srcs) if(/^data\/move-specs\.js/.test(s)) await addScript(s).catch(()=>{});   // movebench5: what the game plays for each animation (MOVE_SPECS), read by msLive for the workbench's read-only sections
+    for(const s of srcs) if(/^engine\/b3-spec\.js/.test(s)) await addScript(s).catch(()=>{});
+    WORDS_P=fetch('data/movebench-words.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{WORDS=j;return j;}).catch(()=>null);   // movebench5: every label of the workbench
     for(const s of srcs) if(/^engine\/clip-ground\.js/.test(s)) await addScript(s).catch(()=>{});   // rose-lava-xftr: the game's ground effects (lava) for the player
     await addScript('data/portrait-ver.js?t='+Date.now()).catch(()=>{});   // portrait1: PORTRAIT_V, the stamp of the face pictures
     fetch('engine/main.js?t='+Date.now(),{cache:'no-store'}).then(x=>x.text()).then(t=>{const m=t.match(/textContent='build ([^']+)'/);if(m){BUILD=m[1];const bp=$('buildline');bp.textContent=BUILD;bp.href='builds.html?build='+encodeURIComponent(BUILD);bp.hidden=false;}}).catch(()=>{});
@@ -1513,7 +1582,7 @@ function benchStart(){
   const sl=document.getElementById('benchslot');if(!sl)return;const id=sl.dataset.anim;
   BENCH.want=id;BENCH.id=id;BENCH.st=null;BENCH.tl=null;benchBarRender();sl.dataset.on='1';benchFrame();benchPlay();benchUi();
 }
-function benchPlay(){if(BENCH.ready&&BENCH.want){benchSend({bench:'play',id:BENCH.want,speed:BENCH.speed,loop:BENCH.loop,mute:BENCH.mute,answer:BENCH.answer});BENCH.want='';}}
+function benchPlay(){if(BENCH.ready&&BENCH.want){if(typeof WB!=='undefined'&&WB.a&&WB.id===BENCH.want)benchSend({bench:'spec',id:WB.id,live:wbChanges()?WB.draft:null});benchSend({bench:'play',id:BENCH.want,speed:BENCH.speed,loop:BENCH.loop,mute:BENCH.mute,answer:BENCH.answer});BENCH.want='';}}
 function benchToggle(){const s=BENCH.st&&BENCH.st.state;if(s==='playing')benchSend({bench:'pause'});else if(s==='paused'||s==='ended')benchSend({bench:'resume'});}
 function benchPause(){if(BENCH.fr&&BENCH.st&&BENCH.st.state==='playing')benchSend({bench:'pause'});}
 function benchSpeed(v){BENCH.speed=v;benchSend({bench:'speed',v});benchUi();}
@@ -1570,7 +1639,8 @@ function benchPlace(){
   const f=BENCH.fr;if(!f)return;BENCH.raf=requestAnimationFrame(benchPlace);benchHead();
   const sl=document.getElementById('benchslot'),S=document.getElementById('sheet');
   if(!sl||!S.classList.contains('open')||sl.dataset.on!=='1'){if(f.style.display!=='none')f.style.display='none';return;}
-  const r=sl.getBoundingClientRect(),q=S.getBoundingClientRect();
+  const r=sl.getBoundingClientRect();let q=S.getBoundingClientRect();
+  for(let n=sl.parentElement;n&&n!==S;n=n.parentElement){const o=getComputedStyle(n).overflowY;if(o==='auto'||o==='scroll'||o==='hidden'){const c=n.getBoundingClientRect();q={left:Math.max(q.left,c.left),right:Math.min(q.right,c.right),top:Math.max(q.top,c.top),bottom:Math.min(q.bottom,c.bottom)};}}   // movebench5: a column that scrolls inside the sheet cuts the frame too
   const key=[r.left,r.top,r.width,r.height,q.top,q.bottom,q.left,q.right].map(Math.round).join(',');
   if(f.dataset.k!==key){f.dataset.k=key;f.style.left=r.left+'px';f.style.top=r.top+'px';f.style.width=r.width+'px';f.style.height=r.height+'px';
     f.style.clipPath='inset('+Math.max(0,q.top-r.top)+'px '+Math.max(0,r.right-q.right)+'px '+Math.max(0,r.bottom-q.bottom)+'px '+Math.max(0,q.left-r.left)+'px round 12px)';}
@@ -1581,26 +1651,212 @@ addEventListener('message',e=>{
   const m=e.data;if(!m||typeof m.bench!=='string')return;
   if(m.bench==='ready'){BENCH.ready=true;BENCH.boot=m;benchPlay();}
   else if(m.bench==='status'){BENCH.st=m;BENCH.stAt=performance.now();benchUi();}
-  else if(m.bench==='timeline'&&m.id===BENCH.id){BENCH.tl=m;benchBarRender();benchUi();}
+  else if(m.bench==='timeline'&&m.id===BENCH.id){BENCH.tl=m;benchBarRender();benchUi();if(typeof wbPaint==='function')wbPaint();}
 });
 document.addEventListener('pointerdown',e=>{const bar=e.target.closest&&e.target.closest('#bnbar');if(!bar||!BENCH.tl)return;BENCH.drag=true;benchDrag(e);try{bar.setPointerCapture(e.pointerId);}catch(_){}});
 document.addEventListener('pointermove',e=>{if(BENCH.drag)benchDrag(e);});
 function benchDragEnd(){if(!BENCH.drag)return;BENCH.drag=false;if(BENCH.seekRaf){cancelAnimationFrame(BENCH.seekRaf);BENCH.seekRaf=0;}benchSend({bench:'seek',t:BENCH.seekWant});}
 document.addEventListener('pointerup',benchDragEnd);document.addEventListener('pointercancel',benchDragEnd);
 
+
+// ---------- the workbench (movebench5, claude/movebench-plan.md sections d.1, d.2 and d.6) ----------
+// Opening an animation shows the workbench in place of the old sheet: top bar, the preview (the frame above), Body video (today's start picture, prompt, Make this video, takes, Use this one and
+// Keep the old one, unchanged), Timing (the first section Tom can change) and, read-only, what the spec holds for the stage, the effects and the sounds. Every label comes from
+// data/movebench-words.json. A change goes into the draft, which is kept in this browser (aot-movebench) and sent to the frame (postMessage {bench:'spec'}): the frame puts it in the table the game's
+// move-specs fill (msSet) and plays the move again. Nothing is saved to the repo yet and the game does not see the draft.
+const WB={id:'',a:null,base:null,draft:null,undo:[],small:false};
+const WB_KEY='aot-movebench',WB_FIELDS=['contact','hitStop','shake','approach','approachSec','returnSec','gap'];
+function W(path,vars){let v=WORDS;for(const k of path.split('.'))v=v&&v[k];
+  if(typeof v!=='string')return path.split('.').pop().replace(/_/g,' ');
+  return vars?v.replace(/\{(\w+)\}/g,(m,k)=>vars[k]!=null?vars[k]:''):v;}
+function WA(path){let v=WORDS;for(const k of path.split('.'))v=v&&v[k];return Array.isArray(v)?v:[];}
+const wbClone=o=>JSON.parse(JSON.stringify(o==null?{}:o));
+function wbStoreRead(){try{const j=JSON.parse(localStorage.getItem(WB_KEY)||'null');return j&&j.drafts?j:{v:1,drafts:{}};}catch(e){return {v:1,drafts:{}};}}
+function wbStoreWrite(id,live){const st=wbStoreRead();if(live==null)delete st.drafts[id];else st.drafts[id]={live,at:Date.now()};try{localStorage.setItem(WB_KEY,JSON.stringify(st));}catch(e){}}
+const wbSpecOf=id=>{try{return typeof msLive==='function'?msLive(id):null;}catch(e){return null;}};
+// How many of the Timing settings differ from what the game plays.
+function wbChanges(){
+  if(!WB.draft||!WB.base)return 0;const a=WB.draft.timing||{},b=WB.base.timing||{};
+  return WB_FIELDS.filter(f=>JSON.stringify(a[f])!==JSON.stringify(b[f])).length;
+}
+function wbOpen(a){
+  WB.id=a.id;WB.a=a;WB.base=wbClone(wbSpecOf(a.id));WB.undo=[];
+  const kept=wbStoreRead().drafts[a.id];WB.draft=kept&&kept.live?wbClone(kept.live):wbClone(WB.base);
+  if(!WB.draft.timing)WB.draft.timing={};
+  if(wbChanges()===0&&!kept)WB.draft=wbClone(WB.base);
+}
+// Send the draft to the frame (null when nothing differs: the frame puts the file's own back).
+function wbSend(){
+  const n=wbChanges();wbStoreWrite(WB.id,n?WB.draft:null);
+  benchSend({bench:'spec',id:WB.id,live:n?WB.draft:null});
+}
+function wbEdit(patch){
+  WB.undo.push(JSON.stringify(WB.draft));if(WB.undo.length>60)WB.undo.shift();
+  const t=Object.assign({},WB.draft.timing||{});
+  for(const k in patch){if(patch[k]==null)delete t[k];else t[k]=patch[k];}
+  WB.draft.timing=t;wbSend();wbPaint();
+}
+function wbUndo(){if(!WB.undo.length)return;WB.draft=JSON.parse(WB.undo.pop());wbSend();wbPaint();}
+function wbReset(){WB.undo.push(JSON.stringify(WB.draft));WB.draft=wbClone(WB.base);if(!WB.draft.timing)WB.draft.timing={};wbSend();wbPaint();}
+// What the Timing rows show for each field: the draft's value, else the game's default (MS_DEFAULTS, engine/b3-spec.js).
+function wbVal(f){const t=(WB.draft&&WB.draft.timing)||{};const v=t[f];return v==null?(typeof MS_DEFAULTS!=='undefined'?MS_DEFAULTS[f]:undefined):v;}
+const wbRun=()=>(BENCH.tl&&BENCH.tl.id===WB.id&&BENCH.tl.run)||null;
+const wbStaged=()=>{const c=((WB.base&&WB.base.timing)||{}).contact;return !!c&&typeof c==='object'&&(c.mark!=null||c.step!=null);};
+const wbHasClip=()=>!!(WB.a&&WB.a.clip);
+// Where the clip starts on the preview's clock: the first picture of the move's own video (the run in before it is not part of the clip).
+function wbClipStart(){const tl=BENCH.tl;if(!tl)return 0;const L=tl.lanes.find(l=>l.id==='video'||l.id==='wind');const g=L&&L.segs.find(x=>x.k==='video');return g?g.a:0;}
+function wbMoment(){return BENCH.drag?BENCH.dragT:(BENCH.st&&BENCH.st.t!=null?BENCH.st.t:null);}
+const wbFmt=x=>(Math.round(x*100)/100).toString();
+function wbSeg(words,field,steps,cur){
+  return '<div class="wbseg" role="group" aria-label="'+esc(W('timing.'+words+'.label'))+'">'+steps.map(s=>'<button type="button" data-wb="'+field+':'+s.v+'" aria-pressed="'+(s.v===cur?'true':'false')+'">'+esc(s.label)+'</button>').join('')+'</div>';
+}
+function wbTimingHtml(a){
+  if(a.kind==='wind'||a.kind==='state')return '<p class="hint">'+esc(W('timing.none_for_state'))+'</p>';
+  let h='<p class="hint" style="margin:0 0 4px">'+esc(W('timing.note_draft'))+'</p>';
+  const staged=wbStaged();
+  if(a.kind==='move'){
+    h+='<div class="wbrow" data-row="hit"><div class="wl"><b>'+esc(W('timing.hit.label'))+'</b><span id="wbhithint">'+esc(W('timing.hit.hint'))+'</span></div><div class="wc" id="wbhitc"></div></div>';
+  }
+  h+='<div class="wbrow" data-row="freeze"><div class="wl"><b>'+esc(W('timing.freeze.label'))+'</b><span>'+esc(W('timing.freeze.hint'))+'</span></div><div class="wc" id="wbfreeze"></div></div>';
+  if(a.kind==='move'){
+    h+='<div class="wbrow" data-row="shake"><div class="wl"><b>'+esc(W('timing.shake.label'))+'</b><span>'+esc(W('timing.shake.hint'))+'</span></div><div class="wc" id="wbshake"></div></div>';
+    h+='<div class="wbrow" data-row="approach"><div class="wl"><b>'+esc(W('timing.approach.label'))+'</b><span>'+esc(W('timing.approach.hint'))+'</span></div><div class="wc" id="wbappr"></div></div>';
+    h+='<div class="wbrow" data-row="pace" id="wbpacerow"><div class="wl"><b>'+esc(W('timing.pace.label'))+'</b><span>'+esc(W('timing.pace.hint'))+'</span></div><div class="wc" id="wbpace"></div></div>';
+    h+='<div class="wbrow" data-row="gap" id="wbgaprow" hidden><div class="wl"><b>'+esc(W('timing.gap.label'))+'</b><span>'+esc(W('timing.gap.hint'))+'</span></div><div class="wc" id="wbgap"></div></div>';
+  }else h+='<p class="hint">'+esc(W('timing.act_note'))+'</p>';
+  h+='<p class="wbrep" id="wbrep"></p>';
+  return h;
+}
+// Redraw what the controls show, in place (the sheet is not rebuilt, so nothing the Body video section holds is lost).
+function wbPaint(){
+  const a=WB.a;if(!a||!$('wb'))return;
+  const n=wbChanges(),run=wbRun(),t=(WB.draft&&WB.draft.timing)||{};
+  const st=$('wbstat');if(st){const nov=!a.clip&&a.kind!=='state'&&a.kind!=='wind'&&!a.video;st.textContent=n?W('status.changed'):nov?W('status.novideo'):W('status.ingame');st.className='wbstat'+(n?' chg':nov?' nov':'');}
+  const un=$('wbunsaved');if(un)un.innerHTML='<b>'+esc(n===0?W('page.unsaved_none'):n===1?W('page.unsaved_one'):W('page.unsaved_many',{n})+'')+'</b><span>'+esc(W('page.unsaved_hint'))+'</span>';
+  const ub=$('wbundo'),rb=$('wbreset');if(ub)ub.disabled=!WB.undo.length;if(rb)rb.disabled=!n;
+  const hc=$('wbhitc');
+  if(hc){
+    if(wbStaged()){const c=WB.base.timing.contact;hc.innerHTML='<span class="wbval" id="wbhitval">'+(run&&run.hit!=null?esc(wbFmt(run.hit)+' '+W('timing.hit.unit')):'')+'</span>';
+      $('wbhithint').textContent=W('timing.hit.staged_hint',{at:c.mark!=null?'"'+c.mark+'"':'step '+(+c.step+1)});}
+    else{
+      const auto=t.contact==null||t.contact==='auto',shown=run&&run.hit!=null?wbFmt(run.hit):'';
+      hc.innerHTML='<input type="number" class="wbnum" id="wbhit" min="0" max="14" step="0.05" inputmode="decimal" aria-label="'+esc(W('timing.hit.label'))+'" value="'+esc(shown)+'"><span class="hint">'+esc(W('timing.hit.unit'))+'</span>'
+        +'<button type="button" class="wbc" data-wb="hitset">'+esc(W('timing.hit.set'))+'</button>'
+        +(auto?'':'<span class="wbauto"><button type="button" class="wbc" data-wb="hitauto">'+esc(W('timing.hit.back_to_auto'))+'</button></span>');
+      $('wbhithint').textContent=auto?W('timing.hit.hint')+'. '+W('timing.hit.auto'):W('timing.hit.hint');
+    }
+  }
+  const hs=wbVal('hitStop'),fz=$('wbfreeze');
+  if(fz){fz.innerHTML=wbSeg('freeze','hitStop',WA('timing.freeze.steps'),hs)+'<button type="button" class="wbc wbstep" data-wb="hitStop-" aria-label="'+esc(W('timing.freeze.less'))+'">-</button><button type="button" class="wbc wbstep" data-wb="hitStop+" aria-label="'+esc(W('timing.freeze.more'))+'">+</button><span class="wbval">'+esc(W('timing.freeze.frames',{n:hs}))+'</span>';}
+  const sh=wbVal('shake'),sk=$('wbshake');
+  if(sk){sk.innerHTML=wbSeg('shake','shake',WA('timing.shake.steps'),sh)+'<button type="button" class="wbc wbstep" data-wb="shake-" aria-label="'+esc(W('timing.shake.less'))+'">-</button><button type="button" class="wbc wbstep" data-wb="shake+" aria-label="'+esc(W('timing.shake.more'))+'">+</button><span class="wbval">'+esc(W('timing.shake.px',{n:sh}))+'</span>';}
+  const ap=$('wbappr');
+  if(ap){const mode=t.approach==='stay'||t.approach==='run'?t.approach:'auto',ran=run?run.runInSec!=null:null;
+    ap.innerHTML='<div class="wbseg" role="group" aria-label="'+esc(W('timing.approach.label'))+'">'+WA('timing.approach.options').map(o=>'<button type="button" data-wb="approach:'+o.k+'" aria-pressed="'+((mode===o.k||(mode==='auto'&&ran!=null&&((o.k==='run')===ran)))?'true':'false')+'">'+esc(o.label)+'</button>').join('')+'</div>'
+      +(mode==='auto'?'<span class="wbauto">'+esc(W('timing.approach.auto_note',{now:ran==null?'':ran?W('timing.approach.auto_run'):W('timing.approach.auto_stay')}))+'</span>':'<span class="wbauto"><button type="button" class="wbc" data-wb="approach:auto">'+esc(W('timing.approach.back_to_auto'))+'</button></span>');}
+  const pr=$('wbpacerow'),pc=$('wbpace');
+  if(pr&&pc){const ran=run&&run.runInSec!=null;pr.hidden=!ran;
+    const ai=+wbVal('approachSec'),ao=+wbVal('returnSec'),cur=WA('timing.pace.options').find(o=>Math.abs(o.in-ai)<.011&&Math.abs(o.out-ao)<.011);
+    pc.innerHTML='<div class="wbseg" role="group" aria-label="'+esc(W('timing.pace.label'))+'">'+WA('timing.pace.options').map(o=>'<button type="button" data-wb="pace:'+o.k+'" aria-pressed="'+(cur&&cur.k===o.k?'true':'false')+'">'+esc(o.label)+'</button>').join('')+'</div>';}
+  const gr=$('wbgaprow'),gc=$('wbgap');
+  if(gr&&gc){gr.hidden=!(run&&run.hits&&run.hits.length>1);const g=+wbVal('gap');
+    gc.innerHTML='<div class="wbseg" role="group" aria-label="'+esc(W('timing.gap.label'))+'">'+WA('timing.gap.options').map(o=>'<button type="button" data-wb="gap:'+o.k+'" aria-pressed="'+(Math.abs(o.v-g)<.011?'true':'false')+'">'+esc(o.label)+'</button>').join('')+'</div>';}
+  const rp=$('wbrep');
+  if(rp){if(!run)rp.textContent='';else{const R=run,parts=[];
+    parts.push(R.hit!=null?W('timing.report.hit',{t:wbFmt(R.hit)}):W('timing.hit.none'));
+    parts.push(R.holdSec>0?W('timing.report.hold',{s:wbFmt(R.holdSec)}):W('timing.report.nohold'));
+    if(a.kind==='move'){parts.push(R.shakePx>0?W('timing.report.shake',{px:R.shakePx}):W('timing.report.noshake'));parts.push(R.runInSec!=null?W('timing.report.run',{s:wbFmt(R.runInSec)}):W('timing.report.norun'));}
+    if(R.gap!=null)parts.push(W('timing.report.gap',{s:wbFmt(R.gap)}));
+    rp.innerHTML='<b>'+esc(W('timing.report.label'))+':</b> '+parts.map(esc).join(', ');}}
+  wbSubline();
+}
+function wbSubline(){
+  const el=$('wbsub'),a=WB.a;if(!el||!a)return;const g=typeof G==='function'?G(a):null,tl=BENCH.tl&&BENCH.tl.id===a.id?BENCH.tl:null;
+  const tier=g&&g.stage&&g.stage.tier?W('tier.'+g.stage.tier):W('kind.'+a.kind);let t=tier+'.';
+  if(tl)t+=' '+W('runs.line',{len:wbFmt(tl.len)});
+  if(g&&g.stage&&g.stage.budget){const b=g.stage.budget;t+=' '+W('runs.target',{lo:Math.max(0,Math.round((b-1)*10)/10),hi:b});}
+  el.textContent=t;
+}
+function wbReadonly(a){
+  if(a.kind!=='move')return '';const sp=wbSpecOf(a.id)||{},fxn=id=>String(id).replace(/^(vfx_core_|vfx_|proj_|setpiece_)/,'').replace(/_/g,' ');
+  const when=at=>at==null||at==='contact'?W('readonly.at_contact'):typeof at==='number'?W('readonly.at_sec',{s:wbFmt(at)}):typeof at==='string'?W('readonly.at_mark',{mark:at}):at&&at.plus!=null&&at.mark==null&&at.step==null?W('readonly.at_plus',{s:wbFmt(at.plus)}):at&&at.mark!=null?W('readonly.at_mark',{mark:at.mark})+(at.plus?' +'+wbFmt(at.plus)+' s':''):at&&at.sec!=null?W('readonly.at_sec',{s:wbFmt(at.sec)}):W('readonly.at_contact');
+  const st=(sp.stage&&sp.stage.steps)||[],fx=sp.effects||[],snd=[];
+  if(sp.body&&sp.body.sound)snd.push({at:W('readonly.at_sec',{s:'picture '+sp.body.sound.at}),n:sp.body.sound.sfx});
+  st.forEach(s=>{if(s.do==='sfx')snd.push({at:when(s.at),n:s.sfx});});fx.forEach(e=>{if(e.sfx)snd.push({at:when(e.at),n:e.sfx});});
+  const sec=(id,title,count,items)=>'<section class="wbs" id="s-'+id+'"><h3 class="wbh"><span>'+esc(title)+'</span><span class="wbcount">'+esc(count)+'</span></h3>'
+    +(items.length?'<ul class="wbl">'+items.join('')+'</ul>':'<p class="hint">'+esc(W('readonly.empty'))+'</p>')+'<p class="hint">'+esc(W('readonly.title_hint'))+'</p></section>';
+  const cnt=(n,one,many)=>n===1?W(one):W(many,{n});
+  return sec('stage',W('sections.stage'),cnt(st.length,'readonly.stage_one','readonly.stage_many'),st.map(s=>'<li><span class="tm">'+esc(when(s.at))+'</span><span>'+esc(W('stage_do.'+s.do))+(s.text?': '+esc(s.text):'')+(s.hold?' <span class="dt">'+esc(wbFmt(s.hold)+' s')+'</span>':'')+'</span></li>'))
+   +sec('effects',W('sections.effects'),cnt(fx.length,'readonly.fx_one','readonly.fx_many'),fx.map(e=>'<li><span class="tm">'+esc(when(e.at))+'</span><span>'+esc(fxn(e.fx))+' <span class="dt">'+esc((e.on&&e.on!=='auto'?W('readonly.on.'+e.on):'')+(e.off?' '+W('readonly.off'):''))+'</span></span></li>'))
+   +sec('sound',W('sections.sound'),cnt(snd.length,'readonly.snd_one','readonly.snd_many'),snd.map(s=>'<li><span class="tm">'+esc(s.at)+'</span><span>'+esc(words(s.n))+'</span></li>'));
+}
+function wbSpecCounts(a){
+  const sp=wbSpecOf(a.id)||{},st=((sp.stage&&sp.stage.steps)||[]).length,fx=(sp.effects||[]).length;let sn=(sp.body&&sp.body.sound?1:0);
+  ((sp.stage&&sp.stage.steps)||[]).forEach(s=>{if(s.do==='sfx')sn++;});(sp.effects||[]).forEach(e=>{if(e.sfx)sn++;});
+  return {stage:st,effects:fx,sound:sn};
+}
+function wbHtml(a,videoHtml){
+  const nav=[['video','nav.video',0],['timing','nav.timing',0]],C=a.kind==='move'?wbSpecCounts(a):null;
+  if(C)nav.push(['stage','nav.stage',C.stage],['effects','nav.effects',C.effects],['sound','nav.sound',C.sound]);
+  return '<div class="wb" id="wb" data-kind="'+esc(a.kind)+'"><div class="wb-top"><button type="button" class="back" id="bclose" aria-label="'+esc(W('page.back'))+'">&lsaquo; '+esc(ownerName(a.owner))+'</button>'
+   +'<div class="wt"><h2>'+esc(a.name)+'</h2><p class="wsub" id="wbsub"></p></div><span class="wbstat" id="wbstat"></span></div>'
+   +'<div class="wb-body" id="wbbody"><div class="wb-prev" id="wbprev">'+benchBox(a)+'</div><div class="wb-secs" id="wbsecs">'
+   +'<nav class="wb-nav" id="wbnav" aria-label="'+esc(W('page.jump'))+'">'+nav.map(n=>'<button type="button" data-wbgo="'+n[0]+'">'+esc(W(n[1]))+(n[2]?'<b>'+n[2]+'</b>':'')+'</button>').join('')+'</nav>'
+   +'<section class="wbs" id="s-video"><h3 class="wbh"><span>'+esc(W('sections.video'))+'</span></h3>'+videoHtml+'</section>'
+   +'<section class="wbs" id="s-timing"><h3 class="wbh"><span>'+esc(W('sections.timing'))+'</span></h3>'+wbTimingHtml(a)+'</section>'
+   +wbReadonly(a)+'<section class="wbs" id="s-note">'+noteForm(a)+'</section>'+(maniOf(a)?'<section class="wbs" id="s-mani">'+manifestBlock(maniOf(a))+'</section>':'')
+   +'</div></div><div class="wb-bottom"><div class="wbu" id="wbunsaved"></div><button type="button" id="wbundo" data-wb="undo">'+esc(W('page.undo'))+'</button><button type="button" id="wbreset" data-wb="reset" title="'+esc(W('page.reset_hint'))+'">'+esc(W('page.reset'))+'</button></div></div>';
+}
+// The scroller of the sections: the column on the right when the page is wider than tall, else the whole body.
+function wbScroller(){const c=$('wbsecs');return c&&getComputedStyle(c).overflowY==='auto'?c:$('wbbody');}
+function wbGo(id){
+  const sc=wbScroller(),el=$('s-'+id);if(!sc||!el)return;
+  const to=()=>{const pv=sc===$('wbbody')?$('wbprev').offsetHeight:0;sc.scrollTo({top:Math.max(0,sc.scrollTop+el.getBoundingClientRect().top-sc.getBoundingClientRect().top-pv-6),behavior:'auto'});};
+  to();wbScroll();to();   // the preview shrinks to the small player on the way down: aim again with its new height
+}
+// Upright: the preview becomes a small player once the page is scrolled to the settings, and is full size again at the top (with some play so it does not flicker).
+function wbScroll(){
+  const bd=$('wbbody'),pv=$('wbprev');if(!bd||!pv)return;
+  if(getComputedStyle(bd).display==='grid'){pv.classList.remove('small');return;}
+  const y=bd.scrollTop;if(!WB.small&&y>80)WB.small=true;else if(WB.small&&y<6)WB.small=false;
+  pv.classList.toggle('small',WB.small);
+}
+function wbClick(e){
+  const b=e.target.closest&&e.target.closest('[data-wb],[data-wbgo]');if(!b||!WB.a)return;
+  if(b.dataset.wbgo){wbGo(b.dataset.wbgo);return;}
+  const k=b.dataset.wb,i=k.indexOf(':'),f=i<0?k:k.slice(0,i),v=i<0?'':k.slice(i+1);
+  if(f==='undo')return wbUndo();if(f==='reset')return wbReset();
+  if(f==='hitStop'||f==='hitStop-'||f==='hitStop+'||f==='shake'||f==='shake-'||f==='shake+'){
+    const fld=f.replace(/[-+]$/,''),cur=+wbVal(fld)||0,nv=/[-+]$/.test(f)?cur+(f.slice(-1)==='+'?1:-1):+v;
+    return wbEdit({[fld]:Math.max(0,Math.min(12,Math.round(nv)))});
+  }
+  if(f==='approach')return wbEdit({approach:v==='auto'?null:v});
+  if(f==='pace'){const o=WA('timing.pace.options').find(x=>x.k===v);if(o)wbEdit({approachSec:o.in,returnSec:o.out});return;}
+  if(f==='gap'){const o=WA('timing.gap.options').find(x=>x.k===v);if(o)wbEdit({gap:o.v});return;}
+  if(f==='hitauto')return wbEdit({contact:null});
+  if(f==='hitset'){const m=wbMoment();if(m==null)return;return wbEdit({contact:{sec:Math.max(0,Math.min(12,Math.round((m-wbClipStart())*100)/100))}});}
+}
+document.addEventListener('click',wbClick);
+document.addEventListener('change',e=>{
+  if(e.target&&e.target.id==='wbhit'&&WB.a){const m=parseFloat(e.target.value);if(isFinite(m))wbEdit({contact:{sec:Math.max(0,Math.min(12,Math.round((m-wbClipStart())*100)/100))}});}
+});
+document.addEventListener('scroll',e=>{if(e.target&&e.target.id==='wbbody')wbScroll();},true);
+
 async function openPlayer(animId){
   if(!GUIDE&&GUIDE_P)await GUIDE_P;
   if(!MANI&&MANI_P)await MANI_P;
+  if(!WORDS&&WORDS_P)await WORDS_P;
   const a=ANIM_BY[animId];if(!a)return;PL.a=a;PL.on=false;cancelAnimationFrame(PL.raf);PL.D=null;PL.img=null;PL.t=0;PL.speed=1;
-  const head='<div class="sh-top"><h2>'+esc(ownerName(a.owner))+': '+esc(a.name)+'</h2><button type="button" class="ghost" id="bclose">Close</button></div>';
   const stage=msg=>'<div id="stage"><canvas id="cv" width="2" height="2"></canvas><div id="hitflag">HIT</div>'+(msg?'<div class="msg">'+msg+'</div>':'')+'</div>';
-  const S=$('sheet');delete S.dataset.mode;S.classList.add('open');$('dim').classList.add('open');S.scrollTop=0;
+  const S=$('sheet');S.dataset.mode='bench';S.classList.add('open');$('dim').classList.add('open');S.scrollTop=0;
+  wbOpen(a);WB.small=false;
+  const done=()=>{benchAttach(a);initMake(a);wbPaint();wbScroll();wbSend();const bd=$('wbbody');if(bd)bd.scrollTop=0;};
   if(!a.clip){
-    S.innerHTML=head+benchBox(a)+stage(a.kind==='state'?'No video yet. In a fight this moment shows one of their other videos until its own is made.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+genBlock(a)+noteForm(a)+(maniOf(a)?manifestBlock(maniOf(a)):'');
-    benchAttach(a);initMake(a);return;
+    S.innerHTML=wbHtml(a,stage(a.kind==='state'?'No video yet. In a fight this moment shows one of their other videos until its own is made.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+genBlock(a));
+    done();return;
   }
-  S.innerHTML=head+benchBox(a)+stage('Loading the video...')+'<div class="ctl"><button type="button" id="bplay">Pause</button><input type="range" id="scrub" min="0" max="1" step="1" value="0" aria-label="Frame"><button type="button" class="spd" data-s="1" aria-pressed="true">1x</button><button type="button" class="spd" data-s="0.5" aria-pressed="false">&frac12;</button><button type="button" class="spd" data-s="0.25" aria-pressed="false">&frac14;</button></div><p class="hint" id="fno" style="margin:0"></p>'+genBlock(a)+noteForm(a)+(maniOf(a)?manifestBlock(maniOf(a)):'');
-  benchAttach(a);initMake(a);
+  S.innerHTML=wbHtml(a,stage('Loading the video...')+'<div class="ctl"><button type="button" id="bplay">Pause</button><input type="range" id="scrub" min="0" max="1" step="1" value="0" aria-label="Frame"><button type="button" class="spd" data-s="1" aria-pressed="true">1x</button><button type="button" class="spd" data-s="0.5" aria-pressed="false">&frac12;</button><button type="button" class="spd" data-s="0.25" aria-pressed="false">&frac14;</button></div><p class="hint" id="fno" style="margin:0"></p>'+genBlock(a));
+  done();
   try{
     const r=await loadClip(a.clip);if(PL.a!==a)return;PL.D=r.D;PL.img=r.img;
     const cv=$('cv');cv.width=r.D.w*r.D.k;cv.height=r.D.h*r.D.k;$('scrub').max=r.D.n-1;
@@ -1669,7 +1925,7 @@ async function sendNote(){
       c.next='You sent '+(c.notes.length===1?'a note':c.notes.length+' notes')+' on this animation. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: '+w.slice(0,160);
       res={id:c.id,title:c.title,merged,text:c.prompt.text};return d;});
   }catch(e){btn.disabled=false;btn.textContent='Send to Claude';$('nerr').textContent=e.message+'. Your note was not sent.';return;}
-  setPlaying(false);
+  setPlaying(false);delete $('sheet').dataset.mode;
   $('sheet').innerHTML='<div class="sh-top"><h2>Sent to Claude.</h2><button type="button" class="ghost" id="bclose">Close</button></div>'
    +'<p>'+(res.merged?'Added to the open card':'A new card is on the Board')+': <b>'+esc(res.title)+'</b>.</p>'
    +'<h3>What the next session will do</h3><p>Make this animation again from your note, check it, and hand it back to you to watch.</p>'

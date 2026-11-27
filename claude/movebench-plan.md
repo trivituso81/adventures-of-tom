@@ -585,6 +585,19 @@ What differs from the plan, and why:
 
 What phase 5 must know: the spec is the only place a move's contact moment, hit stop, shake, run-in and effects come from, and the preview and the game read it through the same `msTiming` and `msEffects`. A spec that changes at run time (`msSet`) reaches the next move played. `cue.fx` holds the effects as armed (with `at` and `on`); `cue.M` keeps the old summary because the bench recorder reads it. The stage rows (`data/b3-stage.js`) still hold the marks and steps (phase 8 moves them); `timing.contact` of `{mark}` or `{step}` is still resolved by the stage rows, and `{share}` or `{sec}` only applies to a clip with no strike impact. A new test file must go in `tools/night/tests.json`.
 
+**Phase 5, `movebench5` (2026-11-27).** What exists: the workbench in `battle-guide.html` (`wbHtml`, `wbTimingHtml`, `wbClick`, `wbScroll`; labels in `data/movebench-words.json`), a draft per animation in the browser (`aot-movebench`, `{v:1, drafts:{id:{live, at}}}`), a `spec` message to the frame (`bnSpecSet` in `engine/b3-bench.js`: `msSet`, clears the survey cache, plays again) and a `run` block in the frame's timeline message (`hit`, `hits`, `holdSec`, `holdAt`, `shakePx`, `shakeAt`, `runInSec`, `gap`, `len`). `tools/movebench/page_test.py` proves the five layouts (466 x 657, 678 x 445, 951 x 648, 669 x 869 and 829 x 1440, the last being the Admin Dashboard All four pane) and that each Timing control changes the run the preview reports.
+
+What differs from the plan, and why:
+- There is no Save draft and no This move is finished button yet; those and the bottom bar's saving are phase 6. The bar shows the number of changes, Undo and Reset.
+- A staged move (its contact is a stage `{mark}` or `{step}`) shows The hit lands read-only with the stage moment named, because stage rows resolve those until phase 8. Freeze and the others still work on it.
+- Time between hits shows only for a move that hits more than once, Running in only when he runs in.
+- The page covers the Guide's own header while a workbench is open (full screen); Back returns to the list.
+- The Guide boot now loads `data/move-specs.js` and `engine/b3-spec.js` (it had no spec table).
+- A move with `contact.sec` is clip-relative: the page's Set to where the preview is subtracts the start of the first video segment; the test checks the typed and set moments against the run the preview reports within 0.15 s.
+- `tools/battle_guide_test.py` still crashes at line 198 (`manifest_crosswalk` has no `MANIFESTS`). Its checks about making and using a video were run from a temporary copy with that block cut out, before and after: the same checks fail on the commit before this phase (no start picture sentence, the 713 versus 679 animations count, board_check, guideedit1); the timing-dependent G2, G4 and G6 poke and queue checks passed or failed at random in both.
+
+What phase 6 must know: a draft is `{live}` in `aot-movebench`; Save to the game has to write `draft` and `live` through the plan's section f path and then clear the draft (`wbReset` and `wbUndo` already clear it). `wbChanges` counts changed fields against the game's spec; the bottom bar text is in the words file under `page`.
+
 ### g.1 The board's bulk video path (a recommendation; this session did not touch it)
 
 Recommended: **pause now, retire in phase 16.**

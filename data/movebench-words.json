@@ -1,0 +1,236 @@
+{
+ "v": 1,
+ "note": "Every label, hint and button word of the Move Workbench page (battle-guide.html). The page types none of them. A value with no entry shows as the raw word without underscores.",
+ "page": {
+  "back": "Back",
+  "tag": "PREVIEW: THE WHOLE MOVE, PLAYED BY THE GAME",
+  "unsaved_none": "Nothing changed yet",
+  "unsaved_one": "1 change, kept in this browser",
+  "unsaved_many": "{n} changes, kept in this browser",
+  "unsaved_hint": "The game still plays the version it has. Saving to the game comes next.",
+  "undo": "Undo",
+  "reset": "Reset",
+  "jump": "Jump to",
+  "preview_off": "This animation has no preview yet.",
+  "the_old": "The game plays: ",
+  "reset_hint": "Put back the version the game plays"
+ },
+ "kind": {
+  "move": "Move",
+  "act": "Monster attack",
+  "wind": "Wind-up",
+  "state": "Body state"
+ },
+ "tier": {
+  "basic": "Basic",
+  "s1": "Skill 1",
+  "s2": "Skill 2",
+  "cap": "Capstone"
+ },
+ "status": {
+  "novideo": "No video yet",
+  "ingame": "As in the game",
+  "changed": "Changed here, not saved"
+ },
+ "runs": {
+  "line": "Runs {len} s",
+  "target": "(target {lo} to {hi} s)"
+ },
+ "sections": {
+  "video": "Body video",
+  "timing": "Timing",
+  "stage": "Stage and objects",
+  "effects": "Effects",
+  "sound": "Sound",
+  "answer": "When it answers"
+ },
+ "nav": {
+  "video": "Video",
+  "timing": "Timing",
+  "stage": "Stage",
+  "effects": "Effects",
+  "sound": "Sound"
+ },
+ "timing": {
+  "note_draft": "Changes play in the preview at once. Nothing is saved to the game yet.",
+  "none_for_state": "This animation has no timing to set.",
+  "hit": {
+   "label": "The hit lands",
+   "hint": "the moment the move connects",
+   "set": "Set to where the preview is",
+   "auto": "Automatic",
+   "back_to_auto": "Back to automatic",
+   "staged_label": "The hit lands",
+   "staged_hint": "set by the stage steps of this move for now: {at}",
+   "unit": "s",
+   "none": "No hit in this move"
+  },
+  "freeze": {
+   "label": "Freeze on the hit",
+   "hint": "everyone holds still for a beat",
+   "steps": [
+    {
+     "label": "None",
+     "v": 0
+    },
+    {
+     "label": "Short",
+     "v": 3
+    },
+    {
+     "label": "Medium",
+     "v": 5
+    },
+    {
+     "label": "Long",
+     "v": 7
+    }
+   ],
+   "less": "Shorter freeze",
+   "more": "Longer freeze",
+   "frames": "{n} frames"
+  },
+  "shake": {
+   "label": "Screen shake",
+   "hint": "the whole field shakes when the hit lands",
+   "steps": [
+    {
+     "label": "None",
+     "v": 0
+    },
+    {
+     "label": "Light",
+     "v": 3
+    },
+    {
+     "label": "Medium",
+     "v": 6
+    },
+    {
+     "label": "Heavy",
+     "v": 11
+    }
+   ],
+   "less": "Less shake",
+   "more": "More shake",
+   "px": "{n} px"
+  },
+  "approach": {
+   "label": "How he gets there",
+   "hint": "whether the member runs up to the monster",
+   "label_foe": "How it gets there",
+   "options": [
+    {
+     "k": "stay",
+     "label": "Stays in place"
+    },
+    {
+     "k": "run",
+     "label": "Runs to the monster"
+    }
+   ],
+   "auto_note": "Automatic: the game decides ({now})",
+   "auto_run": "runs to the monster",
+   "auto_stay": "stays in place",
+   "auto_na": "stays in place, this move has no run",
+   "back_to_auto": "Back to automatic"
+  },
+  "pace": {
+   "label": "Running in",
+   "hint": "how long the run to the monster and the run home take",
+   "options": [
+    {
+     "k": "quick",
+     "label": "Quick",
+     "in": 0.35,
+     "out": 0.3
+    },
+    {
+     "k": "normal",
+     "label": "Normal",
+     "in": 0.55,
+     "out": 0.5
+    },
+    {
+     "k": "slow",
+     "label": "Slow",
+     "in": 0.9,
+     "out": 0.8
+    }
+   ]
+  },
+  "gap": {
+   "label": "Time between hits",
+   "hint": "only for a move that hits more than once",
+   "options": [
+    {
+     "k": "quick",
+     "label": "Quick",
+     "v": 0.2
+    },
+    {
+     "k": "normal",
+     "label": "Normal",
+     "v": 0.35
+    },
+    {
+     "k": "slow",
+     "label": "Slow",
+     "v": 0.6
+    }
+   ]
+  },
+  "report": {
+   "label": "What the preview just did",
+   "hit": "hit at {t} s",
+   "hold": "froze {s} s",
+   "nohold": "no freeze",
+   "shake": "shook {px} px",
+   "noshake": "no shake",
+   "run": "ran in {s} s",
+   "norun": "did not run in",
+   "gap": "{s} s between hits"
+  },
+  "act_note": "For a monster attack only the freeze can be set for now. The rest arrives in a later step."
+ },
+ "readonly": {
+  "title_hint": "Shown as the game holds it. These become settings in a later step.",
+  "empty": "Nothing set.",
+  "stage_one": "1 step",
+  "stage_many": "{n} steps",
+  "fx_one": "1 effect",
+  "fx_many": "{n} effects",
+  "snd_one": "1 cue",
+  "snd_many": "{n} cues",
+  "at_contact": "at the hit",
+  "at_sec": "{s} s",
+  "at_plus": "{s} s after the hit",
+  "at_mark": "at {mark}",
+  "off": "switched off",
+  "on_auto": "",
+  "on": {
+   "target": "On the monster",
+   "each_target": "On every monster",
+   "self": "On him",
+   "each_ally": "On each family member",
+   "field": "Over the whole field"
+  }
+ },
+ "stage_do": {
+  "words": "Words on screen",
+  "fly": "Throw something",
+  "drop": "Drop something",
+  "cross": "Drive something across",
+  "rain": "Rain things down",
+  "front": "Put something in front",
+  "float": "Float something over",
+  "surround": "Surround",
+  "pop": "Pop up",
+  "foe": "Knock the monster back",
+  "shake": "Shake",
+  "flash": "Flash",
+  "dim": "Dim the field",
+  "glow": "Glow",
+  "sfx": "Play a sound"
+ }
+}

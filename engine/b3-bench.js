@@ -41,6 +41,7 @@ function bnRng(seed) { let a=seed>>>0; return ()=>{ a=(a+0x6D2B79F5)>>>0; let t=
   // the first beat that touches someone, in the move's own part of the run, is where the bar's HIT line stands (a staged move gives its own, B3G.run.hitAt)
   if(typeof b3Show==='function') { const s=window.b3Show; window.b3Show=function(b) {
     if(BN.rec&&BN.on&&BN.phase==='move'&&BN.rec.hit==null&&b&&(b.t==='hit'||b.t==='miss'||b.t==='heal'||b.t==='shield')) BN.rec.hit=B3P.t-BN.t0;
+    if(BN.rec&&BN.on&&BN.phase==='move'&&b&&b.t==='hit'&&BN.rec.rep) BN.rec.rep.hits.push(Math.round((B3P.t-BN.t0)*1000)/1000);   // movebench5: when each hit lands, for the run report
     if(BNG.rec&&BN.on&&b&&(b.t==='hit'||b.t==='miss'||b.t==='heal'||b.t==='shield'||b.t==='ko')) BNG.rec.beats.push({t:bngT(),b:b.t,tgt:b.tgt||null,phase:BN.phase});
     return s.apply(this,arguments); }; }
   // movebench3: every stage step the engine fires is written down for the golden record (what it was, and when)
@@ -246,7 +247,7 @@ const bnRound=sec=>Math.round(sec/BN_STEP);
 const bnFxName=id=>String(id).replace(/^(vfx_core_|vfx_|proj_|setpiece_)/,'').replace(/_/g,' ');
 const bnClipName=id=>String(id||'').replace(/_/g,' ');
 const bnStageName=s=>({words:'Words: '+(s.text||''),shake:'Shake',flash:'Flash',dim:'Dim',glow:'Glow',fly:'Thing flies',drop:'Thing drops',cross:'Thing crosses',rain:'Things rain',pop:'Thing pops',foe:'Monster pushed',sfx:'Sound: '+(s.sfx||'')}[s.do]||s.do);
-function bnRecNew() { return {lanes:{video:[],wind:[],stage:[],fx:[],snd:[]},cur:{},cues:new Set(),holds:new Set(),snd:[],hit:null,run:null,stageDone:false}; }
+function bnRecNew() { return {lanes:{video:[],wind:[],stage:[],fx:[],snd:[]},cur:{},cues:new Set(),holds:new Set(),snd:[],hit:null,run:null,stageDone:false,rep:{hold:null,shake:null,runIn:null,back:false,hits:[]}}; }
 function bnSeg(lane,key,label,k,t) {
   const R=BN.rec,L=R.cur[lane+'|'+key];
   if(L&&t-L.b<=BN_STEP*2.5) { L.b=t; return; }
@@ -267,7 +268,7 @@ function bnSample() {
     const B=B3P.body[BN.sub],cheer=B3P.cheer||B3P.cheerKey===BN.sub;
     if(B) {
       if(B.kind==='cmove') { const e=B3P.t-B.t0,cd=B.C.dur/1000;
-        if(e<B.T0) bnSeg('video','run','Runs in','default',t); else if(e<B.T0+cd+.12) bnSeg('video','cm'+B.C.id,bnClipName(B.C.id),'video',t); else if(B.back) bnSeg('video','home','Runs home','default',t); }
+        if(e<B.T0) { R.rep.runIn=B.T0; R.rep.back=!!B.back; bnSeg('video','run','Runs in','default',t); } else if(e<B.T0+cd+.12) bnSeg('video','cm'+B.C.id,bnClipName(B.C.id),'video',t); else if(B.back) bnSeg('video','home','Runs home','default',t); }
       else if(B.kind==='cs') bnSeg('video','cs'+B.id,bnClipName(B.id),'video',t);
       else if(B.kind==='ko') bnSeg('video','ko','Knocked out','video',t);
       else if(B.kind==='path') bnSeg('video','path','Runs across','default',t);
@@ -288,7 +289,8 @@ function bnSample() {
     for(const c of B3V.cues) if(!R.cues.has(c)) { R.cues.add(c);
       for(const e of c.fx) { let ms=500; try { const L=P1_VFX_MS[e.fx]; ms=typeof L==='function'?L(e.params||null):(L||500); } catch(x) {}
         const off=b3vAtSec(c,e); R.lanes.fx.push({a:c.t0-BN.t0+off,b:c.t0-BN.t0+off+ms/1000,label:bnFxName(e.fx),k:'fx'}); } }
-    for(const h of B3V.holds) if(!R.holds.has(h)) { R.holds.add(h); R.lanes.fx.push({a:h.t0-BN.t0,b:h.t0-BN.t0+h.dur,label:'Freeze on the hit',k:'hold'}); }
+    for(const h of B3V.holds) if(!R.holds.has(h)) { R.holds.add(h); R.rep.hold={at:h.t0-BN.t0,dur:h.dur}; R.lanes.fx.push({a:h.t0-BN.t0,b:h.t0-BN.t0+h.dur,label:'Freeze on the hit',k:'hold'}); }
+    if(B3V.shake&&R.rep.shake==null) R.rep.shake={at:B3V.shake.t0-BN.t0,px:B3V.shake.px};
   }
 }
 // The bar of what was just surveyed, for the page: lanes of {a,b,label,k} in seconds from the start, the HIT moment, the ticks of a staged move's marks.
@@ -304,7 +306,11 @@ function bnTimeline(len) {
   add('snd','Sound',snd);
   const ticks=[]; if(R.run) for(const n in R.run.marks) ticks.push({name:n,t:R.run.marks[n]+R.run.off});
   const hit=R.run?R.run.hitAt:R.hit;
-  return {bench:'timeline',id:BN.id,len,hit:hit==null?null:Math.max(0,Math.min(len,hit)),lanes,ticks,noVideo:!!(R.run&&R.run.noVideo),answer:BN.answer&&P.kind==='move'};
+  // movebench5: what the engine really did in this run (the page's Timing controls are checked against it): the hit, each hit's moment, the freeze, the shake, the run in and home
+  const r3=x=>x==null?null:Math.round(x*1000)/1000,rp=R.rep||{},hits=(rp.hits||[]).slice(),hold=rp.hold,sk=rp.shake;
+  const run={hit:r3(hit),hits:hits,holdSec:hold?r3(hold.dur):0,holdAt:hold?r3(hold.at):null,shakePx:sk?sk.px:0,shakeAt:sk?r3(sk.at):null,runInSec:rp.runIn==null?null:r3(rp.runIn),
+    gap:hits.length>1?r3(hits[1]-hits[0]):null,len:r3(len)};
+  return {bench:'timeline',id:BN.id,len,hit:hit==null?null:Math.max(0,Math.min(len,hit)),lanes,ticks,noVideo:!!(R.run&&R.run.noVideo),answer:BN.answer&&P.kind==='move',run};
 }
 // Run the animation once to its end, silently, and read the bar from what the engine did.
 function bnSurvey(P,key) {
@@ -446,6 +452,13 @@ function bnStatus() {
 function bnSend() { const st=bnStatus(); try { const el=document.getElementById('bench-tag'); if(el) el.hidden=!st.noVideo||BN.state==='idle'; } catch(e) {}
   try { if(parent&&parent!==window) parent.postMessage(st,location.origin); } catch(e) {} }
 function bnSendTl() { try { if(BN.tl&&parent&&parent!==window) parent.postMessage(BN.tl,location.origin); } catch(e) {} }
+// movebench5: the page sends a draft of a spec; it goes into the same table the game's data/move-specs.js fills (msSet) and the move plays again from the start. null puts the file's own back.
+function bnSpecSet(id,live) {
+  if(!id||typeof msSet!=='function') return;
+  msSet(id,live==null?null:live);
+  BN.tlKey='';   // the survey belongs to the old spec
+  if(BN.on&&BN.id===id&&BN.P) bnGo(id,true); else bnSend();
+}
 window.addEventListener('message',ev=>{
   if(ev.origin!==location.origin) return;
   const m=ev.data; if(!m||typeof m.bench!=='string') return;
@@ -454,7 +467,8 @@ window.addEventListener('message',ev=>{
   else if(m.bench==='speed') bnSpeed(m.v); else if(m.bench==='loop') bnLoopSet(m.on); else if(m.bench==='mute') bnMute(m.on);
   else if(m.bench==='answer') bnAnswerSet(m.on);
   else if(m.bench==='seek') bnSeek(m.t); else if(m.bench==='step') bnStep(m.d);
+  else if(m.bench==='spec') bnSpecSet(m.id,m.live);
   else if(m.bench==='stop') bnStop(); else if(m.bench==='ask') { bnSend(); bnSendTl(); }
 });
 requestAnimationFrame(bnLoop);
-window.B3BENCH={BN,golden:bngRun,goldenIds:bngIds,preflight:bnPreflight,go:bnGo,pause:bnPause,resume:bnResume,speed:bnSpeed,loop:bnLoopSet,mute:bnMute,stop:bnStop,can:bnCan,parse:bnParse,status:bnStatus,seek:bnSeek,step:bnStep,timeline:()=>BN.tl,answerSet:bnAnswerSet};
+window.B3BENCH={specSet:bnSpecSet,BN,golden:bngRun,goldenIds:bngIds,preflight:bnPreflight,go:bnGo,pause:bnPause,resume:bnResume,speed:bnSpeed,loop:bnLoopSet,mute:bnMute,stop:bnStop,can:bnCan,parse:bnParse,status:bnStatus,seek:bnSeek,step:bnStep,timeline:()=>BN.tl,answerSet:bnAnswerSet};
