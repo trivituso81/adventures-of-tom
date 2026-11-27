@@ -10180,6 +10180,16 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukH64fYhe1CjPi6dUdA",
+   "title": "Move Workbench 1: preview the whole move",
+   "first": "2026-11-26T19:43:50-08:00",
+   "last": "2026-11-26T19:43:50-08:00",
+   "tags": [],
+   "cards": [
+    "c-movebench-1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDPakuV4EMmLKJKdoF",
    "title": "Design the Move Workbench in the Battle Guide",
    "first": "2026-11-26T17:35:33-08:00",
@@ -16996,8 +17006,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "207a9d4f032bd451abc55e8b3bb53ed4e0d78371",
- "synced_at": "2026-11-27T02:08:36+00:00",
+ "synced": "5392162cb864a7bea8c2ceefa6ffe0009ca8e697",
+ "synced_at": "2026-11-27T03:44:35+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
