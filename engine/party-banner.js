@@ -21,7 +21,10 @@ function pbEl() {
   w.innerHTML='<div class="pb-card"><img class="pb-art" alt=""><img class="pb-face" alt=""><div class="pb-words"><div class="pb-line"></div><div class="pb-note"></div></div>'+
     '<div class="pb-item"><div class="pb-head"><span class="pb-tag">ITEM GAINED</span><span class="pb-page"></span></div><div class="pb-tile"></div>'+
     '<div class="pb-title"><div class="pb-name"></div><div class="pb-type"></div></div><div class="pb-desc"></div>'+
-    '<dl class="pb-rows"><dt>IN BATTLE</dt><dd class="pb-battle"></dd><dt>IN STORY</dt><dd class="pb-story"></dd></dl><div class="pb-inote"></div><div class="pb-ihint"></div></div></div>'+
+    '<dl class="pb-rows"><dt>IN BATTLE</dt><dd class="pb-battle"></dd><dt>IN STORY</dt><dd class="pb-story"></dd></dl><div class="pb-inote"></div><div class="pb-ihint"></div></div>'+
+    '<div class="pb-quest"><div class="pb-head"><span class="pb-qtag"></span><span class="pb-qch"></span></div><div class="pb-seal" aria-hidden="true">!</div>'+
+    '<div class="pb-qtitle"></div><div class="pb-qdesc"></div><ul class="pb-qparts"></ul><div class="pb-qnote"></div>'+
+    '<div class="pb-qwhere">Your quest is in the tracker at the top left.</div><div class="pb-ihint">Tap or press A to continue</div></div></div>'+
     '<div class="pb-hint">Tap or press A to continue</div>';
   (document.getElementById('game')||document.body).appendChild(w);
   return w;
@@ -36,6 +39,11 @@ const pbSound={
   item(){ [698,880,1175].forEach((f,i)=>tone({type:'triangle',f0:f,dur:.12,vol:.14,delay:i*.07}));
     [1397,1760].forEach(f=>tone({type:'triangle',f0:f,dur:.6,vol:.1,delay:.24}));
     tone({type:'sine',f0:2349,dur:.6,vol:.06,delay:.24}); noise({dur:.3,vol:.03,delay:.24,f0:5500,f1:8000}); },
+  // questbanner1: an original three-note horn call that rises and rings out (between item and join in length)
+  quest(){ [392,523,659].forEach((f,i)=>tone({type:'square',f0:f,dur:.13,vol:.06,delay:i*.11}));
+    [392,523,659].forEach((f,i)=>tone({type:'triangle',f0:f,dur:.16,vol:.13,delay:i*.11}));
+    [784,988,1175].forEach(f=>tone({type:'triangle',f0:f,dur:.85,vol:.11,delay:.36}));
+    tone({type:'sine',f0:1568,dur:.85,vol:.05,delay:.36}); noise({dur:.35,vol:.03,delay:.36,f0:4500,f1:7000}); },
   leave(){ [784,659,523].forEach((f,i)=>tone({type:'triangle',f0:f,dur:.22,vol:.13,delay:i*.16}));
     [392,523,659].forEach(f=>tone({type:'sine',f0:f,dur:.9,vol:.09,delay:.5})); }
 };
@@ -54,6 +62,28 @@ function itemBanner(ids,note='') {
   ids=(Array.isArray(ids)?ids:[ids]).filter(id=>typeof items!=='undefined'&&items[id]);
   if(!ids.length) return;
   const go=()=>{ if(typeof battle!=='undefined'&&battle.active) { setTimeout(go,500); return; } pbQueue.push({kind:'item',ids,note}); if(!pbBusy) pbNext(); };
+  go();
+}
+// questbanner1 (Tom 2026-11-27): "After a new quest is given, display a new quest interstitial similar to the item, new chapter, or party join/leave interstitial."
+// questBanner(q): one NEW QUEST (or SIDE QUEST) banner in the same queue, held until dismissed, with its own jingle. q = {title, desc, parts:[labels], note, side, ch}.
+// Called by storySetGoal (engine/story.js) when the story gives a new goal, and by Aunt Ellie's bet (data/ellie-quests.js). It waits while a fight or a
+// chapter card is on screen (the wait is outside the queue, so the card is never held). A newer story goal replaces one that is still waiting or queued.
+let pbQuestWait=null;
+function questBanner(q) {
+  if(!q||!q.title) return;
+  if(!q.side) {
+    const queued=pbQueue.find(b=>b.kind==='quest'&&!b.q.side);
+    if(queued) { queued.q=q; return; }
+    if(pbQuestWait) { pbQuestWait.q=q; return; }
+  }
+  const job={q};
+  if(!q.side) pbQuestWait=job;
+  const go=()=>{
+    const busy=(typeof battle!=='undefined'&&battle.active)||(typeof intro!=='undefined'&&intro.card);
+    if(busy) { setTimeout(go,400); return; }
+    if(pbQuestWait===job) pbQuestWait=null;
+    pbQueue.push({kind:'quest',q:job.q}); if(!pbBusy) pbNext();
+  };
   go();
 }
 // itembannerart1 (report r-20261120-142626-w74f, "missing art for all item banners"): the banner shows the item's painted picture (art/items/<id>.webp, listed in
@@ -85,7 +115,7 @@ function pbNext() {
   const b=pbQueue.shift(); if(!b) { pbBusy=false; return; }
   pbBusy=true;
   if(b.kind==='item') {
-    const w=pbEl(); w.classList.remove('painted','leave'); w.classList.add('item');
+    const w=pbEl(); w.classList.remove('painted','leave','quest','side'); w.classList.add('item');
     w.querySelector('.pb-art').removeAttribute('src'); w.querySelector('.pb-face').removeAttribute('src');
     const n=new Map(); b.ids.forEach(id=>n.set(id,(n.get(id)||0)+1));
     pbItem={pages:[...n.entries()],at:0,note:b.note||''};
@@ -96,9 +126,26 @@ function pbNext() {
     try { pbSound.item(); } catch(e) {}
     return;
   }
+  if(b.kind==='quest') {
+    pbItem=null;
+    const w=pbEl(),q=b.q; w.classList.remove('painted','leave','item'); w.classList.add('quest'); w.classList.toggle('side',!!q.side);
+    w.querySelector('.pb-art').removeAttribute('src'); w.querySelector('.pb-face').removeAttribute('src');
+    w.querySelector('.pb-qtag').textContent=q.side?'SIDE QUEST':'NEW QUEST';
+    w.querySelector('.pb-qch').textContent=q.ch?'Chapter '+q.ch:'';
+    w.querySelector('.pb-qtitle').textContent=q.title;
+    w.querySelector('.pb-qdesc').textContent=q.desc||'';
+    const ul=w.querySelector('.pb-qparts'); ul.replaceChildren(...(q.parts||[]).map(t=>{ const li=document.createElement('li'); li.textContent=t; return li; }));
+    w.querySelector('.pb-qnote').textContent=q.note||'';
+    w.querySelector('.pb-qwhere').hidden=!!q.side;
+    w.classList.remove('out'); void w.offsetWidth; w.classList.add('on');
+    pbShown=true; pbAt=performance.now();
+    if(typeof clearInput==='function') clearInput();
+    try { pbSound.quest(); } catch(e) {}
+    return;
+  }
   pbItem=null;
   const w=pbEl(),name=PB_NAMES[b.id],key=b.kind+'-'+b.id;
-  w.classList.remove('item');
+  w.classList.remove('item','quest','side');
   const has=typeof PARTY_BANNERS!=='undefined'&&PARTY_BANNERS.includes(key);
   const art=w.querySelector('.pb-art'),face=w.querySelector('.pb-face');
   w.classList.toggle('painted',has);
@@ -139,4 +186,4 @@ function partyBannerHeld() { return pbBusy||pbShown||pbQueue.length>0; }   // tr
   for(const t of ['pointerdown','pointerup','mousedown','mouseup','touchstart','touchmove','contextmenu']) window.addEventListener(t,e=>{ if(partyBannerHeld()) stop(e); },{capture:true,passive:false});
   for(const t of ['touchend','click']) window.addEventListener(t,e=>{ if(!partyBannerHeld()) return; stop(e); partyBannerDismiss(); },{capture:true,passive:false});
 })();
-addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{itemBanner,itemDef:typeof itemDef==='function'?itemDef:null,partyBanner,partyBannerBusy,partyBannerHeld,partyBannerDismiss,pbQueue}); });
+addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{itemBanner,questBanner,itemDef:typeof itemDef==='function'?itemDef:null,partyBanner,partyBannerBusy,partyBannerHeld,partyBannerDismiss,pbQueue}); });

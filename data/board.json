@@ -10227,7 +10227,7 @@
    "col": "prog",
    "theme": "Game Shell",
    "title": "NEW QUEST banner whenever a new quest is given",
-   "next": "Building: a NEW QUEST banner like the item, chapter and join/leave banners, shown each time the story gives a new goal or Aunt Ellie makes a bet.",
+   "next": "Shipped as questbanner1: a NEW QUEST banner each time the story gives a new quest, and a SIDE QUEST banner for Aunt Ellie's bets. Next: Tom looks at it on his phone (card t-questbanner-play).",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukGg8ziJ383NrBWAmSb",
     "opening": "\"After a new quest is given, display a new quest interstitial\""
@@ -10236,10 +10236,14 @@
     {
      "d": "2026-11-27",
      "t": "Tom: \"After a new quest is given, display a new quest interstitial similar to the item, new chapter, or party join/leave interstitial.\""
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Built questbanner1: questBanner in engine/party-banner.js, called from storySetGoal and Aunt Ellie's bet. Test tools/questbanner_test.py passes (118 quests fit in both orientations)."
     }
    ],
    "blocks": [],
-   "after": "nothing for Tom: end",
+   "after": "t-questbanner-play",
    "created": "2026-11-27",
    "changed": "2026-11-27",
    "prompt": {
@@ -10251,6 +10255,32 @@
     "effort": "medium (the piece is small: one engine file, one style block, two call sites)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-questbanner in data/board.json. Your first push is the commit board: start c-questbanner. Add a NEW QUEST banner to engine/party-banner.js (same queue, hold and dismiss as itemBanner, its own short original jingle, styles beside #party-banner in index.html), called from storySetGoal in engine/story.js when the goal text changes in the full story, and from Aunt Ellie's bet in data/ellie-quests.js. It waits while a fight or a chapter card is on screen, and a newer goal replaces one still waiting. Test portrait and landscape with screenshots, run python3 tools/smoke.py, push as build questbanner1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "t-questbanner-play",
+   "title": "Look at the new NEW QUEST banner",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "where": "phone",
+   "blocks": [],
+   "next": "On your phone, open the game, tap New Game, and play until the first goal appears after the opening (a NEW QUEST card with a gold ! seal). Read it, tap to close it. Press All good, or Something is wrong and say what you saw (size, words, sound, or too often).",
+   "steps": [
+    "On your phone, open the game and tap New Game.",
+    "Play until the first goal appears after the opening: a NEW QUEST card with a gold ! seal and a short horn sound.",
+    "Read it, then tap to close it.",
+    "Press All good, or Something is wrong and say what you saw (size, words, sound, or too often)."
+   ],
+   "created": "2026-11-27",
+   "changed": "2026-11-27",
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Made by c-questbanner (questbanner1). The banner shows on every new story quest (118 in the game) and on Aunt Ellie's bets."
+    }
+   ],
+   "fyi": true
   }
  ],
  "sessions": [

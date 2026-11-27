@@ -1646,6 +1646,21 @@ function storySetGoal(text) {
   const prev=flag('goal'),nt=String(text).replace(/^Goal: /,'');
   if(prev&&prev!==nt) { const Lg=Array.isArray(flag('goalLog'))?flag('goalLog').slice():[]; Lg.push({c:flag('goalCh')||STORY.chapter,t:prev}); setFlag('goalLog',Lg.slice(-80)); }
   setFlag('goal',nt); setFlag('goalCh',STORY.chapter); refreshObjective();
+  if(prev!==nt) questGiven(nt);
+}
+// questbanner1 (Tom 2026-11-27): a new goal that is a task (not a plain statement such as "The story is complete.") shows the NEW QUEST banner
+// (questBanner, engine/party-banner.js): the first sentence as the quest, the rest as its description, the parts of a multi-part step listed.
+function questIsTask(text) {
+  const t=String(text||'').trim(); if(!t) return false;
+  if(/^(the story is|chapter|part)\b/i.test(t)) return false;
+  if(QUEST_VERBS.test(t)) return true;
+  const ph=questPhrase(t); return ph!==t.charAt(0).toUpperCase()+t.slice(1);
+}
+function questGiven(text) {
+  if(typeof questBanner!=='function'||STORY.mode!=='full'||!questIsTask(text)) return;
+  const ph=questPhrase(text),m=/^(.*?[.!?])(\s|$)/.exec(ph),title=questShort(text),desc=m?ph.slice(m[0].length).trim():'';
+  const subs=questSubs(text);
+  questBanner({title,desc,parts:subs?subs.map(x=>x.label):[],ch:STORY.chapter});
 }
 // ---------- Quest tracker (top left HUD) ----------
 // The HUD frame is a permanent quest tracker: chapter title, the next step, and progress pips for multi-part steps.
@@ -1770,7 +1785,7 @@ function setObjectivePulse(on) {
 function questFlash(prevShort) {
   const brand=document.querySelector('#hud .brand'),tx=document.getElementById('qt-text'); if(!brand||!tx) return;
   qtFlash=1; brand.classList.add('qt-done'); tx.textContent='✓ '+prevShort;
-  if(typeof sfx!=='undefined'&&sfx.levelChime) try { sfx.levelChime(); } catch(e) {}
+  if(typeof sfx!=='undefined'&&sfx.levelChime&&!(typeof partyBannerHeld==='function'&&partyBannerHeld())) try { sfx.levelChime(); } catch(e) {}   // questbanner1: the banner's jingle plays instead
   setTimeout(()=>{ qtFlash=0; brand.classList.remove('qt-done'); refreshObjective(); },1500);
 }
 function watchObjective() {

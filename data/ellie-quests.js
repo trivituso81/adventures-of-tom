@@ -66,6 +66,12 @@ function ellieGive(id,count) {
   grantItem(Array.from({length:count||1},()=>id));
 }
 
+// questbanner1: her bet is a SIDE QUEST banner (it replaced the old pickup-style toast after her offer).
+function ellieQuestBanner(b) {
+  if(typeof questBanner!=='function') return;
+  questBanner({side:true,ch:b.n,title:'Win Aunt Ellie\'s bet',desc:'Finish chapter '+b.n+', then go back to Aunt Ellie.',note:'Reward: a prize from Aunt Ellie.'});
+}
+
 // What Ellie says now, or null when she has no bet business (her usual lines play).
 // Returns {lines, replace, onClose}: replace=true swaps her usual lines, false adds after them.
 function ellieQuest() {
@@ -81,7 +87,7 @@ function ellieQuest() {
   const offers=ELLIE_BETS.filter(b=>b.offer&&ellieBeat(b)&&!ellieOffered(b.n)&&!ellieDone(b.n));
   if(offers.length) {
     const b=offers[0];
-    return {replace:true,lines:b.offer.slice(),onClose:()=>{ setFlag('ellie-offer-'+b.n); showToast('Aunt Ellie has a prize for you if you finish this one.',3.2); }};
+    return {replace:true,lines:b.offer.slice(),onClose:()=>{ setFlag('ellie-offer-'+b.n); ellieQuestBanner(b); }};
   }
   const open=ELLIE_BETS.find(b=>b.remind&&ellieOffered(b.n)&&!ellieDone(b.n));
   if(open) return {replace:false,lines:[open.remind]};

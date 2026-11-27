@@ -814,6 +814,12 @@
    "minutes": 1
   },
   {
+   "id": "questbanner_test",
+   "cmd": "python3 -I tools/questbanner_test.py",
+   "group": "g4",
+   "minutes": 1
+  },
+  {
    "id": "night__clean_test",
    "cmd": "python3 -I tools/night/clean_test.py",
    "group": "g4",
