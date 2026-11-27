@@ -50,7 +50,9 @@
   "effects": "Effects",
   "sound": "Sound",
   "answer": "When it answers",
-  "versions": "Saved versions"
+  "versions": "Saved versions",
+  "lasting": "Lasting things",
+  "setpiece": "Set piece"
  },
  "nav": {
   "video": "Video",
@@ -58,7 +60,10 @@
   "stage": "Stage",
   "effects": "Effects",
   "sound": "Sound",
-  "versions": "Saves"
+  "versions": "Saves",
+  "lasting": "Lasts",
+  "answer": "Answers",
+  "setpiece": "Set piece"
  },
  "timing": {
   "note_draft": "Changes play in the preview at once. Save draft keeps them; Finished puts them in the game.",
@@ -1731,5 +1736,144 @@
   },
   "yes": "On",
   "no": "Off"
+ },
+ "ls": {
+  "note": "A thing that stays on the field for as long as a status lasts: it enters, can answer a monster that attacks, and leaves. The game plays it; nothing here makes a picture.",
+  "empty": "Nothing lasts after this move yet.",
+  "add": "Add a lasting thing",
+  "remove": "Remove",
+  "count_one": "1 thing",
+  "count_many": "{n} things",
+  "while": "While",
+  "while_hint": "which status keeps it here",
+  "on": "On whom",
+  "on_hint": "who it stays with",
+  "on_self": "The one who used the move",
+  "on_carrier": "Whoever has the status",
+  "looks": "It looks like",
+  "do": {
+   "glow": "A glow",
+   "place": "Stands in front",
+   "hover": "Floats over",
+   "surround": "Closes in around"
+  },
+  "no_objects": "Add an object in Stage first to use the other looks.",
+  "color": "Glow colour",
+  "object": "Object",
+  "object_hint": "one of the objects of this move",
+  "enters": "It enters",
+  "at_hit": "At the hit",
+  "at_mark": "At \"{mark}\"",
+  "at_step": "After step {n}",
+  "enter_from": "It comes in from",
+  "from_behind": "Behind",
+  "from_above": "Above",
+  "enter_dur": "It takes",
+  "durs": [
+   {
+    "k": 0.2,
+    "label": "Quick"
+   },
+   {
+    "k": 0.4,
+    "label": "Normal"
+   },
+   {
+    "k": 0.7,
+    "label": "Slow"
+   },
+   {
+    "k": 1.0,
+    "label": "Very slow"
+   }
+  ],
+  "answers": "When a monster attacks",
+  "answers_hint": "it can answer",
+  "ans_none": "It does nothing",
+  "ans_react": "It answers the attack",
+  "ans_intercept": "It steps in for the target",
+  "ans_do": "Its answer",
+  "ans_do_none": "Nothing moves",
+  "ans_do_flash": "A flash",
+  "ans_do_fly": "It is thrown at the monster",
+  "ans_do_drop": "It drops down",
+  "also_words": "Words on screen",
+  "also_foe": "Knock the monster back",
+  "also_shake": "Shake",
+  "also_flash": "Flash",
+  "leaves": "It leaves",
+  "exit_fade": "Fades away",
+  "exit_cross": "Slides off to the right",
+  "exit_fly": "Flies up",
+  "exit_surround": "Opens back up",
+  "exit_dur": "Leaving takes",
+  "s_while": "While {status} lasts, it {look} {on}.",
+  "s_react": "It answers a monster's attack.",
+  "s_intercept": "It steps in for the target.",
+  "s_leaves": "Then it {how}.",
+  "dos": {
+   "glow": "glows around",
+   "place": "stands in front of",
+   "hover": "floats over",
+   "surround": "closes in around"
+  }
+ },
+ "an": {
+  "note": "What plays when a lasting thing answers a monster's attack: the counter video of the one who made the move, and the effects that go with it.",
+  "video": "Counter video",
+  "video_hint": "made the same way as every other video",
+  "video_have": "It has a video.",
+  "video_none": "No video yet. The preview plays the answer without it.",
+  "video_open": "Open the counter video",
+  "video_no_row": "This move has no counter video row.",
+  "effects": "Effects with the answer",
+  "effects_hint": "timed from the start of the answer",
+  "scope_move": "The move's effects",
+  "scope_answer": "The answer's effects ({n})",
+  "scope_on": "The Effects section below now edits the effects of the answer.",
+  "scope_off": "The Effects section below edits the effects of the move.",
+  "fx_banner": "These effects play with the answer, not with the move.",
+  "what_clip": "a counter video"
+ },
+ "sp": {
+  "note": "A Capstone's big moment: the field goes dark and the stage fills the screen. Its steps are edited in the Stage section.",
+  "none": "This move has no set piece.",
+  "add": "Add a set piece",
+  "remove": "Remove the set piece",
+  "len": "How long",
+  "len_hint": "3 to 10 seconds. A step that runs longer keeps the set piece going.",
+  "sec": "{n} s",
+  "dim": "How dark the field goes",
+  "dim_hint": "at the start of the set piece",
+  "dim_pct": "{n}%",
+  "dims": [
+   {
+    "k": 0,
+    "label": "Off"
+   },
+   {
+    "k": 0.35,
+    "label": "Dusk"
+   },
+   {
+    "k": 0.5,
+    "label": "Dim"
+   },
+   {
+    "k": 0.7,
+    "label": "Night"
+   },
+   {
+    "k": 0.9,
+    "label": "Pitch black"
+   }
+  ],
+  "steps": "Steps",
+  "steps_hint": "{n} steps",
+  "steps_edit": "Edit its steps",
+  "scope": "Steps of",
+  "scope_move": "The move",
+  "scope_set": "The set piece",
+  "what": "{dur} s, {dim}% dark"
  }
 }

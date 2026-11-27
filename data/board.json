@@ -9948,7 +9948,7 @@
    "blocks": [
     "c-movebench-12"
    ],
-   "after": "nothing for Tom: c-movebench-12",
+   "after": "t-movebench-11-try",
    "created": "2026-11-26",
    "changed": "2026-11-27",
    "auto": true,
@@ -9977,6 +9977,10 @@
     {
      "d": "2026-11-27",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Built: lasting things, when it answers (counter video rows, answer effects) and the set piece; hands Tom t-movebench-11-try. Test: tools/movebench/lasting_test.py."
     }
    ]
   },
@@ -10302,6 +10306,36 @@
     }
    ],
    "fyi": true
+  },
+  {
+   "id": "t-movebench-11-try",
+   "title": "Stage a move from start to finish",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "where": "phone",
+   "fyi": true,
+   "next": "Open ADMIN > BATTLE GUIDE > Animations > Tom > Tarmac Porsche Transfer. Change one step of its set piece, add words on screen, add one effect and change its settings, and add a new object (it shows as a pink box until its picture is made in the Library). Save draft, then Finished. Press All good, or Something is wrong and say what you tried and what you saw.",
+   "steps": [
+    "Open ADMIN > BATTLE GUIDE > Animations > Tom > Tarmac Porsche Transfer.",
+    "Change one step of its set piece, add words on screen, add one effect and change its settings, and add a new object (it shows as a pink box until its picture is made in the Library).",
+    "Save draft, then Finished.",
+    "Press All good, or Something is wrong and say what you tried and what you saw."
+   ],
+   "blocks": [],
+   "created": "2026-11-27",
+   "changed": "2026-11-27",
+   "chat": {
+    "url": "",
+    "opening": "Move Workbench phase 11"
+   },
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Made by c-movebench-11 (movebench11): lasting things, when it answers and the set piece."
+    }
+   ]
   }
  ],
  "sessions": [

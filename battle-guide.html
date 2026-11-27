@@ -396,7 +396,7 @@ async function boot(){
     fetch('engine/main.js?t='+Date.now(),{cache:'no-store'}).then(x=>x.text()).then(t=>{const m=t.match(/textContent='build ([^']+)'/);if(m){BUILD=m[1];const bp=$('buildline');bp.textContent=BUILD;bp.href='builds.html?build='+encodeURIComponent(BUILD);bp.hidden=false;}}).catch(()=>{});
     fetch(BOARD+'?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{BOARD_DOC=j;moveRefresh();}).catch(()=>{});
     fetch('data/notify.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{NOTIFY=j;moveRefresh();}).catch(()=>{});   // startpics10: the phone notification topic
-    GUIDE_P=fetch('data/guide-anims.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{GUIDE=j;try{if(typeof buildAnims==='function'&&B3_CAST)buildAnims();}catch(e){}moveRefresh();try{if(tab==='anims'&&sel&&typeof renderDetailKeep==='function')renderDetailKeep();}catch(e){}}).catch(()=>{});
+    GUIDE_P=fetch('data/guide-anims.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.json()).then(j=>{GUIDE=j;try{if(typeof buildAnims==='function'&&B3_CAST)buildAnims();if(/^#anims\/answer:/.test(decodeURIComponent(location.hash))&&typeof route==='function')route();}catch(e){}moveRefresh();try{if(tab==='anims'&&sel&&typeof renderDetailKeep==='function')renderDetailKeep();}catch(e){}}).catch(()=>{});
     moveIdxLoad();   // movebench6: data/moves/index.json, the statuses and the list's progress
     fetch('data/guide-manifest.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{if(j){j.by={};j.moves.forEach(m=>{if(m.moveId)j.by[m.moveId]=m;});MAN=j;}}).catch(()=>{});   // manifest1
     fetch('data/guide-words.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{GWORDS=j;}).catch(()=>{});   // guideflow5: the words of each failure (X1 and X2 are the page's own)
@@ -456,7 +456,9 @@ function buildAnims(){
   };
   Object.keys(B3_CAST).forEach(id=>{body(id);
     Object.values(B3_SKILLS).filter(s=>s.vibe&&B3_VIBES[s.vibe]&&B3_VIBES[s.vibe].owner===id).forEach(s=>{const a=s.anim||{};
-      add({id:'move:'+s.id,owner:id,kind:'move',name:s.name,clip:a.kind==='clip'?a.clip:null,shape:a.shape||'',what:'move '+s.id+' in data/b3-kit-'+id+'.js',vibe:B3_VIBES[s.vibe].name});});
+      add({id:'move:'+s.id,owner:id,kind:'move',name:s.name,clip:a.kind==='clip'?a.clip:null,shape:a.shape||'',what:'move '+s.id+' in data/b3-kit-'+id+'.js',vibe:B3_VIBES[s.vibe].name});
+      const ga=GUIDE&&GUIDE.anims&&GUIDE.anims['answer:'+s.id];   // movebench11: a move with a counter video has a row of its own (data/guide-anims.json), made through the same Make this video flow
+      if(ga){const sp=typeof msLive==='function'?msLive('move:'+s.id):null,c=sp&&sp.answer&&sp.answer.clip||null;add({id:'answer:'+s.id,owner:id,kind:'answer',name:ga.name,clip:c,what:'counter video of move '+s.id,vibe:B3_VIBES[s.vibe].name});}});
   });
   if(B3_SKILLS.pick_me_up)add({id:'move:pick_me_up',owner:'team',kind:'move',name:B3_SKILLS.pick_me_up.name,clip:null,shape:'',what:'move pick_me_up in data/b3-rules.js'});   // movebench6: the universal move gets a row of its own
   Object.values(B3_FOES).forEach(f=>{body(f.id);
@@ -957,7 +959,7 @@ function qMakeBtn(a,g,cur){   // the one tap that makes a video (or another one)
   const again=a.video||qVid(a.id).length>0;
   return '<span class="qbtns"><button type="button" class="gold" data-qa="make" data-qid="'+esc(a.id)+'" data-qkey="anim:'+esc(a.id)+'">'+(again?'Make another':'Make this video')+' ('+money(g.price)+')</button></span>';
 }
-const KINDW={state:'Body',move:'Move',act:'Attack',wind:'Wind-up'};
+const KINDW={state:'Body',move:'Move',act:'Attack',wind:'Wind-up',answer:'Counter'};
 function qRowHtml(a){   // the part of an animation's row under its name: kind, the status line or VIDEO / NO VIDEO YET, and the one button
   const g=G(a),n=openNotes(a.id).length,cur=qCur(a.id),key='anim:'+a.id;
   const bd=[cur?'':a.video?'<span class="badge v">VIDEO</span>':'<span class="badge n">NO VIDEO YET</span>',n?'<span class="badge o">NOTE OPEN</span>':''].filter(Boolean);
@@ -1756,9 +1758,12 @@ function wbDiff(){
   WB_FIELDS.forEach(f=>{if(JSON.stringify(a[f])!==JSON.stringify(b[f]))o[f]=a[f]===undefined?null:a[f];});
   if(JSON.stringify((WB.draft&&WB.draft.effects)||[])!==JSON.stringify((WB.base&&WB.base.effects)||[]))o.effects=wbClone((WB.draft&&WB.draft.effects)||[]);   // movebench7: the effects list is one field, the whole list
   const bs=(WB.base&&WB.base.stage&&WB.base.stage.steps)||[],bm=(WB.base&&WB.base.body&&WB.base.body.marks)||{};   // movebench9: the stage steps are one field, and so are the named moments
-  if(JSON.stringify(stgList())!==JSON.stringify(bs))o.steps=wbClone(stgList());
+  if(JSON.stringify(stgStage())!==JSON.stringify(bs))o.steps=wbClone(stgStage());
   if(JSON.stringify(stgMarks())!==JSON.stringify(bm))o.marks=wbClone(stgMarks());
   if(JSON.stringify(stgObjs())!==JSON.stringify((WB.base&&WB.base.stage&&WB.base.stage.objects)||{}))o.objects=wbClone(stgObjs());   // movebench10: the objects of the move are one field too
+  {const bl=(WB.base&&WB.base.stage&&WB.base.stage.lasting)||[];if(JSON.stringify(lsList())!==JSON.stringify(bl))o.lasting=wbClone(lsList());   // movebench11: lasting things, the set piece and the answer are one field each
+    const bp=(WB.base&&WB.base.stage&&WB.base.stage.setpiece)||null;if(JSON.stringify(spGet())!==JSON.stringify(bp))o.setpiece=spGet()?wbClone(spGet()):null;
+    const ba=(WB.base&&WB.base.answer)||null;if(JSON.stringify(anGet())!==JSON.stringify(ba))o.answer=anGet()?wbClone(anGet()):null;}
   return o;
 }
 const wbChanges=()=>(WB.draft&&WB.base)?Object.keys(wbDiff()).length:0;
@@ -1769,7 +1774,7 @@ function wbNow(){const d=new Date(),p=n=>String(n).padStart(2,'0'),o=-d.getTimez
 function wbDate(at){try{return new Date(at).toLocaleDateString(undefined,{month:'short',day:'numeric'});}catch(e){return '';}}
 function wbOpen(a){
   clearTimeout(WB.poll);
-  WB.fxOpen=-1;WB.fxPick=false;WB.stgOpen=-1;WB.stgPick=false;WB.fxk=null;WB.id=a.id;WB.a=a;WB.undo=[];WB.file=null;WB.fsha=null;WB.src='';WB.busy=false;WB.msg=null;WB.confirm=false;
+  WB.fxOpen=-1;WB.fxPick=false;WB.stgOpen=-1;WB.stgPick=false;WB.fxk=null;WB.fxScope='move';WB.stgScope='stage';WB.id=a.id;WB.a=a;WB.undo=[];WB.file=null;WB.fsha=null;WB.src='';WB.busy=false;WB.msg=null;WB.confirm=false;
   const kept=wbStoreRead().drafts[a.id],live=wbClone(wbSpecOf(a.id));
   WB.base=kept&&kept.base?wbClone(kept.base):wbClone(live);if(!WB.base.timing)WB.base.timing={};
   WB.draft=kept&&kept.live?wbClone(kept.live):wbClone(WB.base);
@@ -1790,8 +1795,9 @@ async function wbLoadFile(a){
 function wbRebase(fresh){
   const mine=wbDiff();WB_FIELDS.forEach(f=>{if(!(f in mine)){if(fresh.timing[f]===undefined)delete WB.draft.timing[f];else WB.draft.timing[f]=wbClone(fresh.timing[f]);}});
   if(!('effects' in mine)){if(fresh.effects===undefined)delete WB.draft.effects;else WB.draft.effects=wbClone(fresh.effects);}
-  {const mySteps=wbClone(stgList()),myMarks=wbClone(stgMarks()),myObjs=wbClone(stgObjs());   // movebench9: the rest of the stage and of the body is the file's; his steps and moments stay his (movebench10: and his objects)
-    if(fresh.stage||'steps' in mine||'objects' in mine){const st=fresh.stage?wbClone(fresh.stage):{};if('steps' in mine)st.steps=mySteps;if('objects' in mine){if(Object.keys(myObjs).length)st.objects=myObjs;else delete st.objects;}WB.draft.stage=st;}else delete WB.draft.stage;
+  {const mySteps=wbClone(stgStage()),myLs=wbClone(lsList()),mySp=spGet()?wbClone(spGet()):null,myAn=anGet()?wbClone(anGet()):null,myMarks=wbClone(stgMarks()),myObjs=wbClone(stgObjs());   // movebench9: the rest of the stage and of the body is the file's; his steps and moments stay his (movebench10: and his objects)
+    if(fresh.stage||'steps' in mine||'objects' in mine||'lasting' in mine||'setpiece' in mine){const st=fresh.stage?wbClone(fresh.stage):{};if('steps' in mine)st.steps=mySteps;if('lasting' in mine){if(myLs.length)st.lasting=myLs;else delete st.lasting;}if('setpiece' in mine){if(mySp)st.setpiece=mySp;else delete st.setpiece;}if('objects' in mine){if(Object.keys(myObjs).length)st.objects=myObjs;else delete st.objects;}WB.draft.stage=st;}else delete WB.draft.stage;
+    if('answer' in mine){if(myAn)WB.draft.answer=myAn;else delete WB.draft.answer;}else{if(fresh.answer)WB.draft.answer=wbClone(fresh.answer);else delete WB.draft.answer;}
     const bd=fresh.body?wbClone(fresh.body):{};if('marks' in mine){if(Object.keys(myMarks).length)bd.marks=myMarks;else delete bd.marks;}WB.draft.body=bd;}
   WB.base=wbClone(fresh);
 }
@@ -1799,7 +1805,7 @@ function wbRebase(fresh){
 function wbSend(){
   const n=wbChanges();wbStoreWrite(WB.id,n?WB.draft:null,n?WB.base:null);
   const sp=wbSpecOf(WB.id)||{},ml=sp.timing||{},t=(WB.draft&&WB.draft.timing)||{},differs=WB_FIELDS.some(f=>JSON.stringify(t[f])!==JSON.stringify(ml[f]))||JSON.stringify((WB.draft&&WB.draft.effects)||[])!==JSON.stringify(sp.effects||[])
-    ||JSON.stringify(stgList())!==JSON.stringify((sp.stage&&sp.stage.steps)||[])||JSON.stringify(stgObjs())!==JSON.stringify((sp.stage&&sp.stage.objects)||{})||JSON.stringify(stgMarks())!==JSON.stringify((sp.body&&sp.body.marks)||{});
+    ||JSON.stringify(stgStage())!==JSON.stringify((sp.stage&&sp.stage.steps)||[])||JSON.stringify(lsList())!==JSON.stringify((sp.stage&&sp.stage.lasting)||[])||JSON.stringify(spGet())!==JSON.stringify((sp.stage&&sp.stage.setpiece)||null)||JSON.stringify(anGet())!==JSON.stringify(sp.answer||null)||JSON.stringify(stgObjs())!==JSON.stringify((sp.stage&&sp.stage.objects)||{})||JSON.stringify(stgMarks())!==JSON.stringify((sp.body&&sp.body.marks)||{});
   benchSend({bench:'spec',id:WB.id,live:differs?WB.draft:null});
 }
 function wbEdit(patch){
@@ -1820,6 +1826,9 @@ function wbWhat(ch){
     if(f==='effects'){p.push(W('fx.p.title')+': '+(x&&x.length?x.map(e=>fxName(e.fx)+(e.off?' ('+W('fx.p.off')+')':'')).join(', '):W('fx.p.empty')));continue;}
     if(f==='steps'){p.push(W('sections.stage')+': '+(x&&x.length?x.map(s=>stgSentence(s)).join('; '):W('stage.empty')));continue;}
     if(f==='objects'){p.push(W('stage.o.title')+': '+(x&&Object.keys(x).length?Object.values(x).map(o=>o.name).join(', '):'-'));continue;}
+    if(f==='lasting'){p.push(W('sections.lasting')+': '+(x&&x.length?x.map(r=>lsSentence(r)).join('; '):'-'));continue;}
+    if(f==='setpiece'){p.push(W('sections.setpiece')+': '+(x?W('sp.what',{dur:x.dur,dim:Math.round((x.dim||0)*100)}):'-'));continue;}
+    if(f==='answer'){p.push(W('sections.answer')+': '+(x?(x.clip?W('an.what_clip')+(x.effects&&x.effects.length?', ':''):'')+(x.effects&&x.effects.length?x.effects.map(e=>fxName(e.fx)).join(', '):''):'-'));continue;}
     if(f==='marks'){p.push(W('stage.name_label')+': '+(x&&Object.keys(x).length?Object.keys(x).join(', '):'-'));continue;}
     if(x==null)v=W('save.automatic');
     else if(f==='hitStop')v=W('timing.freeze.frames',{n:x});else if(f==='shake')v=W('timing.shake.px',{n:x});
@@ -1831,11 +1840,14 @@ function wbWhat(ch){
 function wbMerge(cur,ch,kind,now,replayed){
   const d=wbClone(cur);d.v=1;d.id=d.id||WB.id;
   const sec=wbClone((d.draft!=null?d.draft:d.live)||{});const t=Object.assign({},sec.timing||{});
-  for(const f in ch){if(f==='effects'||f==='steps'||f==='marks'||f==='objects')continue;if(ch[f]==null)delete t[f];else t[f]=wbClone(ch[f]);}
+  for(const f in ch){if(f==='effects'||f==='steps'||f==='marks'||f==='objects'||f==='lasting'||f==='setpiece'||f==='answer')continue;if(ch[f]==null)delete t[f];else t[f]=wbClone(ch[f]);}
   if(Object.keys(t).length)sec.timing=t;else delete sec.timing;
   if('effects' in ch)sec.effects=wbClone(ch.effects||[]);
   if('steps' in ch){const had=!!sec.stage,st=Object.assign({},sec.stage||{});st.steps=wbClone(ch.steps||[]);if(!st.steps.length&&!had)delete sec.stage;else sec.stage=st;}
   if('objects' in ch){const st=Object.assign({},sec.stage||{});if(Object.keys(ch.objects||{}).length)st.objects=wbClone(ch.objects);else delete st.objects;if(Object.keys(st).length||sec.stage)sec.stage=st;}
+  if('lasting' in ch){const st=Object.assign({},sec.stage||{});if((ch.lasting||[]).length)st.lasting=wbClone(ch.lasting);else delete st.lasting;if(Object.keys(st).length||sec.stage)sec.stage=st;}   // movebench11
+  if('setpiece' in ch){const st=Object.assign({},sec.stage||{});if(ch.setpiece)st.setpiece=wbClone(ch.setpiece);else delete st.setpiece;if(Object.keys(st).length||sec.stage)sec.stage=st;}
+  if('answer' in ch){if(ch.answer)sec.answer=wbClone(ch.answer);else delete sec.answer;}
   if('marks' in ch){sec.body=Object.assign({},sec.body||{});if(Object.keys(ch.marks||{}).length)sec.body.marks=wbClone(ch.marks);else delete sec.body.marks;}
   d.rev=(d.rev||0)+1;
   const what=(wbWhat(ch)||W(kind==='finished'?'save.what_finished':'save.what_draft'))+(replayed?' ('+W('save.merged')+')':'');
@@ -2017,7 +2029,12 @@ function wbSpecCounts(a){
 }
 function wbHtml(a,videoHtml){
   const nav=[['video','nav.video',0],['timing','nav.timing',0]],C=a.kind==='move'?wbSpecCounts(a):null;
-  if(C)nav.push(['stage','nav.stage',C.stage],['effects','nav.effects',C.effects],['sound','nav.sound',C.sound]);   // the Effects count is repainted by wbFxCounts
+  if(C)nav.push(['stage','nav.stage',C.stage]);
+  if(lsApplicable(a))nav.push(['lasting','nav.lasting',((wbSpecOf(a.id)||{}).stage&&(wbSpecOf(a.id).stage.lasting||[]).length)||0]);
+  if(C)nav.push(['effects','nav.effects',C.effects]);
+  if(anApplicable(a))nav.push(['answer','nav.answer',0]);
+  if(spApplicable(a))nav.push(['setpiece','nav.setpiece',0]);
+  if(C)nav.push(['sound','nav.sound',C.sound]);   // the Effects count is repainted by wbFxCounts
   nav.push(['versions','nav.versions',0]);
   return '<div class="wb" id="wb" data-kind="'+esc(a.kind)+'"><div class="wb-top"><button type="button" class="back" id="bclose" aria-label="'+esc(W('page.back'))+'">&lsaquo; '+esc(ownerName(a.owner))+'</button>'
    +'<div class="wt"><h2>'+esc(a.name)+'</h2><p class="wsub" id="wbsub"></p></div><span class="wbstat" id="wbstat"></span></div>'
@@ -2025,7 +2042,7 @@ function wbHtml(a,videoHtml){
    +'<nav class="wb-nav" id="wbnav" aria-label="'+esc(W('page.jump'))+'">'+nav.map(n=>'<button type="button" data-wbgo="'+n[0]+'">'+esc(W(n[1]))+(n[2]?'<b id="wbnav'+(n[0]==='effects'?'fx':n[0])+'">'+n[2]+'</b>':'')+'</button>').join('')+'</nav>'
    +'<section class="wbs" id="s-video"><h3 class="wbh"><span>'+esc(W('sections.video'))+'</span></h3>'+videoHtml+'</section>'
    +'<section class="wbs" id="s-timing"><h3 class="wbh"><span>'+esc(W('sections.timing'))+'</span></h3>'+wbTimingHtml(a)+'</section>'
-   +wbStageSection(a)+wbFxSection(a)+wbSoundSection(a)+'<section class="wbs" id="s-versions"><h3 class="wbh"><span>'+esc(W('sections.versions'))+'</span></h3><p class="hint" id="wbfinline" style="margin:0 0 8px"></p>'
+   +wbStageSection(a)+wbLastingSection(a)+wbFxSection(a)+wbAnswerSection(a)+wbSetSection(a)+wbSoundSection(a)+'<section class="wbs" id="s-versions"><h3 class="wbh"><span>'+esc(W('sections.versions'))+'</span></h3><p class="hint" id="wbfinline" style="margin:0 0 8px"></p>'
    +'<button type="button" data-wb="versions">'+esc(W('versions.show'))+'</button><div id="wbvers"></div></section><section class="wbs" id="s-note">'+noteForm(a)+'</section>'+(maniOf(a)?'<section class="wbs" id="s-mani">'+manifestBlock(maniOf(a))+'</section>':'')
    +'</div></div><div class="wb-bottom"><div class="wbu" id="wbunsaved"></div><button type="button" id="wbundo" data-wb="undo">'+esc(W('page.undo'))+'</button><button type="button" id="wbreset" data-wb="reset" title="'+esc(W('page.reset_hint'))+'">'+esc(W('page.reset'))+'</button>'
    +'<button type="button" id="wbsave" data-wb="save">'+esc(W('save.draft'))+'</button><button type="button" id="wbfin" data-wb="fin">'+esc(W('save.finished'))+'</button><button type="button" id="wbno" data-wb="no" hidden>'+esc(W('save.not_yet_btn'))+'</button></div></div>';
@@ -2078,13 +2095,15 @@ document.addEventListener('scroll',e=>{if(e.target&&e.target.id==='wbbody')wbScr
 const fxDef=id=>FXD&&FXD.fx&&FXD.fx[id]||null;
 const fxName=id=>{const w=WORDS&&WORDS.fx&&WORDS.fx.items&&WORDS.fx.items[id];return w?w.name:(fxDef(id)?fxDef(id).name:String(id).replace(/^(vfx_core_|vfx_|proj_|setpiece_)/,'').replace(/_/g,' '));};
 const fxHas=id=>typeof P1_VFX!=='undefined'&&!!P1_VFX[id];
-const fxList=()=>(WB.draft&&WB.draft.effects)||[];
+const fxList=()=>WB.fxScope==='answer'?((WB.draft&&WB.draft.answer&&WB.draft.answer.effects)||[]):((WB.draft&&WB.draft.effects)||[]);   // movebench11: the list the Effects section edits is the move's or the counter's
 const fxR=x=>Math.round(x*100)/100;
 function wbEditFx(fn,key){
   const now=Date.now(),same=key&&WB.fxk&&WB.fxk.k===key&&now-WB.fxk.t<1500;
   if(!same){WB.undo.push(JSON.stringify(WB.draft));if(WB.undo.length>60)WB.undo.shift();}
   WB.fxk=key?{k:key,t:now}:null;WB.confirm=false;WB.msg=null;
-  const l=wbClone(WB.draft.effects||[]);fn(l);WB.draft.effects=l;wbSend();wbPaint();
+  const l=wbClone(fxList());fn(l);
+  if(WB.fxScope==='answer'){const an=Object.assign({},WB.draft.answer||{});an.effects=l;if(!l.length)delete an.effects;if(Object.keys(an).length)WB.draft.answer=an;else delete WB.draft.answer;}else WB.draft.effects=l;
+  wbSend();wbPaint();wbAnPaint();
 }
 function fxCur(e,n,p){return e.params&&n in e.params?e.params[n]:p.default;}
 function fxNumSteps(p){const d=+p.default;let a,c;
@@ -2174,11 +2193,11 @@ function fxPickerHtml(){
   const ids=FXD?Object.keys(FXD.fx):[];
   return '<div class="fxpick"><p class="hint" style="margin:0 0 6px">'+esc(W('fx.p.adding'))+'</p><div class="fxgrid">'+ids.map(id=>'<button type="button" class="fxtile" data-fx="pick" data-v="'+esc(id)+'">'+fxSample(id)+'<b>'+esc(fxName(id))+'</b></button>').join('')+'</div><button type="button" data-fx="pickno">'+esc(W('fx.p.cancel'))+'</button></div>';
 }
-function wbAllPaint(){wbFxPaint();wbStagePaint();wbSoundPaint();}
+function wbAllPaint(){wbFxPaint();wbStagePaint();wbSoundPaint();wbLsPaint();wbAnPaint();wbSpPaint();}
 function wbFxPaint(){
   const el=$('wbfx');if(!el||!WB.a||!FXD)return;
   const l=fxList();if(WB.fxOpen>=l.length)WB.fxOpen=-1;
-  el.innerHTML=(l.length?l.map(fxRowHtml).join(''):'<p class="hint">'+esc(W('fx.p.empty'))+'</p>')+(WB.fxPick?fxPickerHtml():'<button type="button" class="fxadd" data-fx="add">+ '+esc(W('fx.p.add'))+'</button>');
+  el.innerHTML=(WB.fxScope==='answer'?'<p class="hint" id="wbfxans">'+esc(W('an.fx_banner'))+'</p>':'')+(l.length?l.map(fxRowHtml).join(''):'<p class="hint">'+esc(W('fx.p.empty'))+'</p>')+(WB.fxPick?fxPickerHtml():'<button type="button" class="fxadd" data-fx="add">+ '+esc(W('fx.p.add'))+'</button>');
   wbFxCounts();fxKick();
 }
 function wbFxCounts(){
@@ -2250,7 +2269,7 @@ const STG_NEW={words:{do:'words',text:'BOOM',where:'over:target',size:2,color:'#
 const STG_OD={fly:{dur:.4},drop:{dur:.4},cross:{dur:.4},rain:{dur:2},place:{hold:2},hover:{hold:2},surround:{hold:2},pop:{hold:.8}};
 const stgNumO=(s,f)=>{const v=s[f];if(typeof v==='number'&&isFinite(v)&&(v>0||f==='arc'))return v;const o=STG_OD[s.do];return o&&o[f]!=null?o[f]:STG_NUM[f].def;};
 const stgR=x=>Math.round(x*100)/100;
-const stgList=()=>((WB.draft&&WB.draft.stage&&WB.draft.stage.steps)||[]);
+const stgList=()=>WB.stgScope==='setpiece'?((WB.draft&&WB.draft.stage&&WB.draft.stage.setpiece&&WB.draft.stage.setpiece.steps)||[]):((WB.draft&&WB.draft.stage&&WB.draft.stage.steps)||[]);   // movebench11: the steps the Stage section edits are the move's or the set piece's
 const stgObjs=()=>((WB.draft&&WB.draft.stage&&WB.draft.stage.objects)||{});
 const stgMarks=()=>((WB.draft&&WB.draft.body&&WB.draft.body.marks)||{});
 const stgNum=(s,f)=>{const v=s[f];return typeof v==='number'&&isFinite(v)&&(v!==0||f==='amount')?v:(s.do==='glow'&&f==='dur'?1:STG_NUM[f].def);};
@@ -2259,6 +2278,7 @@ const stgColorName=c=>{const sw=((WORDS.fx&&WORDS.fx.swatches)||[]),h=x=>{const 
 const stgPick=(arr,v)=>(WA(arr).find(o=>Math.abs(+o.k-v)<1e-9)||null);
 // What the stage section of the draft looks like when its steps are replaced. A move that had no stage and has no steps again has none; one that had a stage keeps it, so its hit still means what it did.
 function stgWrite(l){
+  if(WB.stgScope==='setpiece'){const st=wbClone(WB.draft.stage||{});if(st.setpiece)st.setpiece.steps=l;WB.draft.stage=st;return;}
   const st=wbClone(WB.draft.stage||{});st.steps=l;
   if(!l.length&&Object.keys(st).length===1&&!(WB.base&&WB.base.stage))delete WB.draft.stage;else WB.draft.stage=st;
 }
@@ -2302,7 +2322,7 @@ function stgShift(at,plus,l){
   const o=Object.assign({},at);if(o.sec!=null)o.sec=Math.max(0,stgR(o.sec+plus));else{const p=stgR((o.plus||0)+plus);if(p)o.plus=p;else delete o.plus;}return o;
 }
 function stgRun(){const r=wbRun();return r&&r.staged?r:null;}
-function stgTimes(){const r=stgRun(),l=stgList();return r&&r.steps&&r.steps.length===l.length?r.steps:null;}
+function stgTimes(){if(WB.stgScope==='setpiece')return null;const r=stgRun(),l=stgList();return r&&r.steps&&r.steps.length===l.length?r.steps:null;}
 // seconds from the start of the move at the preview's moment (the preview clock starts a little before the move)
 function stgNowSec(){const m=wbMoment(),r=wbRun();if(m==null)return null;const off=r&&r.off!=null?r.off:0;return Math.max(0,stgR(m-off));}
 function stgOrder(l){const t=stgTimes();return l.map((s,i)=>i).sort((a,b)=>t?(t[a]-t[b]||a-b):a-b);}
@@ -2449,7 +2469,7 @@ function wbStagePaint(keepFocus){
   const l=stgList();if(WB.stgOpen>=l.length)WB.stgOpen=-1;
   if(keepFocus&&el.contains(document.activeElement)&&/^(INPUT|SELECT)$/.test(document.activeElement.tagName)){stgTimesPaint();return;}
   const times=stgTimes(),ord=stgOrder(l);
-  el.innerHTML=(l.length?ord.map(i=>stgRowHtml(i,l,times)).join(''):'<p class="hint">'+esc(W('stage.empty'))+'</p>')
+  el.innerHTML=wbStgScopeHtml()+(l.length?ord.map(i=>stgRowHtml(i,l,times)).join(''):'<p class="hint">'+esc(W('stage.empty'))+'</p>')
    +(WB.stgPick?'<div class="fxpick"><p class="hint" style="margin:0 0 6px">'+esc(W('stage.adding'))+'</p><div class="fxgrid">'+STGALL.map(k=>'<button type="button" class="fxtile sttile" data-st="pick" data-v="'+k+'"><span class="stic" aria-hidden="true">'+STG_ICON[k]+'</span><b>'+esc(W('stage.tiles.'+k))+'</b></button>').join('')+'</div><button type="button" data-st="pickno">'+esc(W('stage.cancel'))+'</button></div>'
      :'<button type="button" class="fxadd" data-st="add">+ '+esc(W('stage.add'))+'</button>')+stgObjectsHtml();
   wbStgCounts();
@@ -2460,9 +2480,9 @@ function stgTimesPaint(){
   document.querySelectorAll('#wbstg .fxc').forEach(c=>{const t=c.querySelector('.stt');if(t)t.textContent=W('stage.time_at',{s:stgR(times[+c.dataset.i])}).replace(/^at /,'');});
 }
 function stgSounds(){
-  const l=stgList(),sp=WB.draft||{},out=[];
+  const l=stgStage(),sp=WB.draft||{},out=[];
   l.forEach((s,i)=>{if(s.do==='sfx')out.push({src:'stage',i,at:stgAtText(s.at,l),n:s.sfx});});
-  fxList().forEach((e,i)=>{if(e.sfx)out.push({src:'fx',i,at:fxWhenText(e),n:e.sfx,name:fxName(e.fx)});});
+  fxMove().forEach((e,i)=>{if(e.sfx)out.push({src:'fx',i,at:fxWhenText(e),n:e.sfx,name:fxName(e.fx)});});
   if(sp.body&&sp.body.sound)out.push({src:'body',i:0,at:W('sound.sec.body',{n:sp.body.sound.at}),n:sp.body.sound.sfx});
   return out;
 }
@@ -2653,6 +2673,214 @@ function wbEditMarks(fn){
   const m=wbClone((WB.draft.body&&WB.draft.body.marks)||{});fn(m);
   WB.draft.body=Object.assign({},WB.draft.body||{});if(Object.keys(m).length)WB.draft.body.marks=m;else delete WB.draft.body.marks;
 }
+// ---------- movebench11: lasting things, when it answers, the set piece ----------
+// Three more parts of a spec (plan b.2): stage.lasting (a thing that stays while a status is on someone), answer (the counter video and the effects that play with it) and
+// stage.setpiece (a Capstone's length and darkness; its steps are edited in the Stage section with its toggle). This page only writes the spec; the game and the preview play it
+// from engine/b3-stage.js (b3gAnswer, the lasting rows) and engine/b3-vfx.js (b3vArmAnswer).
+const lsList=()=>((WB.draft&&WB.draft.stage&&WB.draft.stage.lasting)||[]);
+const spGet=()=>((WB.draft&&WB.draft.stage&&WB.draft.stage.setpiece)||null);
+const anGet=()=>((WB.draft&&WB.draft.answer)||null);
+const stgStage=()=>((WB.draft&&WB.draft.stage&&WB.draft.stage.steps)||[]);
+const fxMove=()=>((WB.draft&&WB.draft.effects)||[]);
+const lsSkill=id=>B3_SKILLS[String(id||WB.id).replace(/^move:/,'')]||null;
+const lsStatusName=id=>{const s=typeof B3_STATUS!=='undefined'&&B3_STATUS[id];return s&&s.name?s.name:String(id).replace(/_/g,' ');};
+function lsStatuses(a){const S=lsSkill(a&&a.id),out=[],add=id=>{if(id&&out.indexOf(id)<0)out.push(id);};
+  ((S&&S.effects)||[]).forEach(e=>{if(e&&(e.op==='status'||e.op==='taunt')&&e.id)add(e.id);});
+  const sp=wbSpecOf(a.id);((sp&&sp.stage&&sp.stage.lasting)||[]).forEach(r=>add(r.while));
+  if(WB.a&&WB.id===a.id)lsList().forEach(r=>add(r.while));return out;}
+const lsApplicable=a=>a&&a.kind==='move'&&lsStatuses(a).length>0;
+const spApplicable=a=>{if(!a||a.kind!=='move')return false;const S=lsSkill(a.id),sp=wbSpecOf(a.id);return !!(S&&S.slot==='cap')||!!(sp&&sp.stage&&sp.stage.setpiece);};
+const anApplicable=a=>{if(!a||a.kind!=='move')return false;const sp=wbSpecOf(a.id);return !!(GUIDE&&GUIDE.anims&&GUIDE.anims['answer:'+a.id.replace(/^move:/,'')])||!!(sp&&sp.answer)||lsStatuses(a).length>0;};
+function wbEditStageKey(fn,key,quiet){
+  const now=Date.now(),same=key&&WB.fxk&&WB.fxk.k===key&&now-WB.fxk.t<1500;
+  if(!same){WB.undo.push(JSON.stringify(WB.draft));if(WB.undo.length>60)WB.undo.shift();}
+  WB.fxk=key?{k:key,t:now}:null;WB.confirm=false;WB.msg=null;
+  const st=wbClone(WB.draft.stage||{});fn(st);
+  if(!st.lasting||!st.lasting.length)delete st.lasting;
+  if(!Object.keys(st).length&&!(WB.base&&WB.base.stage))delete WB.draft.stage;else WB.draft.stage=st;
+  wbSend();wbPaint();if(!quiet)wbSecPaint();
+}
+const lsEdit=(fn,key,quiet)=>wbEditStageKey(st=>{const l=wbClone(st.lasting||[]);fn(l);st.lasting=l;},key,quiet);
+function lsObjKeys(){return Object.keys(stgObjs());}
+function lsNew(a){
+  const ids=lsStatuses(a),used=lsList().map(r=>r.while),w=ids.find(i=>used.indexOf(i)<0)||ids[0];
+  return {while:w,on:'self',do:'glow',color:'#ffd27a'};
+}
+function lsPathSet(o,f,v){const p=f.split('.');let c=o;for(let i=0;i<p.length-1;i++){if(!c[p[i]]||typeof c[p[i]]!=='object')c[p[i]]={};c=c[p[i]];}c[p[p.length-1]]=v;}
+function lsDefaultsFor(r,d){   // the fields each look needs; the ones of the look before are dropped
+  ['side','amp','rate','pair','asset','color'].forEach(k=>delete r[k]);
+  if(r.enter&&d!=='place')delete r.enter.from;
+  r.do=d;
+  if(d==='glow')r.color='#ffd27a';
+  else{r.asset=lsObjKeys()[0]||'';
+    if(d==='place'){r.side='front';r.enter=Object.assign({},r.enter,{from:(r.enter&&r.enter.from)||'behind'});}
+    if(d==='hover'){r.amp=4;r.rate=1.2;}
+    if(d==='surround')r.pair=false;}
+}
+function lsThenDo(r,d){
+  const th=r.then||{beat:'react'},keep={beat:th.beat};if(th.also)keep.also=th.also;
+  const who=th.beat==='intercept'?'carrier':'attacker';
+  if(d==='fly')Object.assign(keep,{do:'fly',asset:r.asset||lsObjKeys()[0],from:'self_front',to:who,back:true,arc:6,dur:.45});
+  else if(d==='drop')Object.assign(keep,{do:'drop',asset:r.asset||lsObjKeys()[0],onto:who,dur:.3});
+  else if(d==='flash')Object.assign(keep,{do:'flash',color:'#c9d8f0',dur:.25});
+  r.then=keep;
+}
+function lsAlso(r,kind,on){
+  const th=r.then;if(!th)return;let al=(th.also||[]).filter(s=>s.do!==kind);
+  if(on){const who=th.beat==='intercept'?'carrier':'attacker';
+    if(kind==='words')al.push({do:'words',text:'NOT TODAY',where:'over:'+who,size:2,hold:1.1});
+    else if(kind==='shake')al.push({do:'shake',amp:5,dur:.35});
+    else if(kind==='flash')al.push({do:'flash',color:'#7aa8ff',dur:.3});
+    else if(kind==='foe')al.push({do:'foe',react:'knock',px:18});}
+  if(al.length)th.also=al;else delete th.also;
+}
+function lsExitDo(r,d){
+  const dur=(r.exit&&r.exit.dur)||.4;
+  if(d==='fade')r.exit={do:'fade',dur};else if(d==='cross')r.exit={do:'cross',to:'screen_right',lane:'floor',dur};
+  else if(d==='fly')r.exit={do:'fly',to:'top',dur};else if(d==='surround')r.exit={do:'surround',reverse:true,dur};
+}
+function lsEnterAt(r,v){
+  const en=Object.assign({},r.enter||{});
+  if(v==='hit')delete en.at;
+  else if(v.indexOf('m:')===0)en.at=v.slice(2);
+  else if(v.indexOf('s:')===0)en.at={step:v.slice(2),plus:0};
+  r.enter=en;
+}
+function lsAtKey(r){const at=r.enter&&r.enter.at;if(at==null)return 'hit';if(typeof at==='string')return 'm:'+at;if(at&&at.step!=null)return 's:'+at.step;return 'hit';}
+function lsSeg(label,f,opts,cur,i,t,hint){
+  return '<div class="wbrow"><div class="wl"><b>'+esc(label)+'</b><span>'+esc(hint||'')+'</span></div><div class="wc"><div class="wbseg wrap" role="group" aria-label="'+esc(label)+'">'
+   +opts.map(o=>'<button type="button" data-ls="set" data-i="'+i+'" data-f="'+f+'" data-t="'+(t||'s')+'" data-v="'+esc(o.k)+'"'+(o.off?' disabled':'')+' aria-pressed="'+((typeof o.k==='number'?Math.abs(o.k-cur)<1e-9:o.k===cur)?'true':'false')+'">'+esc(o.label)+'</button>').join('')+'</div></div></div>';
+}
+function lsRowHtml(r,i,a){
+  const T=(k,v)=>W('ls.'+k,v),ids=lsStatuses(a),objs=lsObjKeys(),has=objs.length>0,al=((r.then&&r.then.also)||[]),isThen=!!r.then,en=r.enter||{},ex=r.exit||{};
+  const sw=(WORDS.fx&&WORDS.fx.swatches)||[],names=stgObjName;
+  const marks=Object.keys(stgMarks()).map(m=>({k:'m:'+m,label:T('at_mark',{mark:m})})),stp=stgStage().map((s,k)=>s.id?{k:'s:'+s.id,label:T('at_step',{n:k+1})}:null).filter(Boolean);
+  const looks=['glow','place','hover','surround'].map(d=>({k:d,label:T('do.'+d),off:d!=='glow'&&!has}));
+  let h='<div class="fxc lsc" data-i="'+i+'"><div class="fxm"><b>'+esc(lsSentence(r))+'</b><button type="button" class="wbc" data-ls="remove" data-i="'+i+'">'+esc(T('remove'))+'</button></div><div class="fxbody">';
+  h+=lsSeg(T('while'),'while',ids.map(x=>({k:x,label:lsStatusName(x)})),r.while,i,'s',T('while_hint'));
+  h+=lsSeg(T('on'),'on',[{k:'self',label:T('on_self')},{k:'carrier',label:T('on_carrier')}],r.on||'self',i,'s',T('on_hint'));
+  h+=lsSeg(T('looks'),'do',looks,r.do,i,'s',has?'':T('no_objects'));
+  if(r.do==='glow')h+='<div class="wbrow"><div class="wl"><b>'+esc(T('color'))+'</b></div><div class="wc"><div class="wbseg wrap" role="group" aria-label="'+esc(T('color'))+'">'+sw.map(q=>'<button type="button" data-ls="set" data-i="'+i+'" data-f="color" data-t="s" data-v="'+esc(q.k)+'" aria-pressed="'+(String(r.color||'').toLowerCase()===String(q.k).toLowerCase()?'true':'false')+'">'+esc(q.label)+'</button>').join('')+'</div></div></div>';
+  else h+=lsSeg(T('object'),'asset',objs.map(k=>({k,label:(stgObjs()[k]&&stgObjs()[k].name)||k})),r.asset,i,'s',T('object_hint'));
+  const atOpts=[{k:'hit',label:T('at_hit')}].concat(marks,stp).slice(0,10);
+  h+=lsSeg(T('enters'),'enter.at',atOpts,lsAtKey(r),i,'at');
+  if(r.do==='place')h+=lsSeg(T('enter_from'),'enter.from',[{k:'behind',label:T('from_behind')},{k:'above',label:T('from_above')}],en.from||'behind',i,'s');
+  h+=lsSeg(T('enter_dur'),'enter.dur',WA('ls.durs'),typeof en.dur==='number'?en.dur:.4,i,'n');
+  h+=lsSeg(T('answers'),'then.beat',[{k:'none',label:T('ans_none')},{k:'react',label:T('ans_react')},{k:'intercept',label:T('ans_intercept')}],isThen?r.then.beat:'none',i,'s',T('answers_hint'));
+  if(isThen){
+    h+=lsSeg(T('ans_do'),'then.do',[{k:'none',label:T('ans_do_none')},{k:'flash',label:T('ans_do_flash')}].concat(has?[{k:'fly',label:T('ans_do_fly')},{k:'drop',label:T('ans_do_drop')}]:[]),r.then.do||'none',i,'s');
+    ['words','foe','shake','flash'].forEach(kd=>{const on=al.some(s=>s.do===kd);
+      h+='<div class="wbrow"><div class="wl"><b>'+esc(T('also_'+kd))+'</b></div><div class="wc"><button type="button" class="fxsw" role="switch" aria-checked="'+(on?'true':'false')+'" data-ls="also" data-i="'+i+'" data-k="'+kd+'" data-v="'+(on?'0':'1')+'" aria-label="'+esc(T('also_'+kd))+'"><i></i></button>'
+       +(kd==='words'&&on?'<input type="text" class="fxt" maxlength="30" data-ls="text" data-i="'+i+'" value="'+esc((al.find(s=>s.do==='words')||{}).text||'')+'" aria-label="'+esc(T('also_words'))+'">':'')+'</div></div>';});
+  }
+  h+=lsSeg(T('leaves'),'exit.do',[{k:'fade',label:T('exit_fade')},{k:'cross',label:T('exit_cross')},{k:'fly',label:T('exit_fly')}].concat(r.do==='surround'?[{k:'surround',label:T('exit_surround')}]:[]),ex.do||'fade',i,'s');
+  h+=lsSeg(T('exit_dur'),'exit.dur',WA('ls.durs'),typeof ex.dur==='number'?ex.dur:.4,i,'n');
+  return h+'</div></div>';
+}
+function lsSentence(r){
+  const T=(k,v)=>W('ls.'+k,v),th=r.then,ex=r.exit||{};
+  let s=T('s_while',{status:lsStatusName(r.while),on:T(r.on==='carrier'?'on_carrier':'on_self').toLowerCase(),look:T('dos.'+r.do)});
+  if(th)s+=' '+T(th.beat==='intercept'?'s_intercept':'s_react');
+  s+=' '+T('s_leaves',{how:T('exit_'+(ex.do||'fade')).toLowerCase()});
+  return s;
+}
+function wbLastingSection(a){
+  if(!lsApplicable(a))return '';
+  return '<section class="wbs" id="s-lasting"><h3 class="wbh"><span>'+esc(W('sections.lasting'))+'</span><span class="wbcount" id="wblscount"></span></h3><p class="hint" style="margin:0 0 6px">'+esc(W('ls.note'))+'</p><div id="wbls"></div></section>';
+}
+function wbLsPaint(){
+  const el=$('wbls'),a=WB.a;if(!el||!a)return;const l=lsList();
+  el.innerHTML=(l.length?l.map((r,i)=>lsRowHtml(r,i,a)).join(''):'<p class="hint">'+esc(W('ls.empty'))+'</p>')+'<button type="button" class="fxadd" data-ls="add">+ '+esc(W('ls.add'))+'</button>';
+  const c=$('wblscount');if(c)c.textContent=l.length===1?W('ls.count_one'):W('ls.count_many',{n:l.length});const nb=$('wbnavlasting');if(nb)nb.textContent=l.length;
+}
+// ---- when it answers ----
+function wbAnswerSection(a){
+  if(!anApplicable(a))return '';
+  return '<section class="wbs" id="s-answer"><h3 class="wbh"><span>'+esc(W('sections.answer'))+'</span><span class="wbcount" id="wbancount"></span></h3><p class="hint" style="margin:0 0 6px">'+esc(W('an.note'))+'</p><div id="wban"></div></section>';
+}
+function wbAnPaint(){
+  const el=$('wban'),a=WB.a;if(!el||!a)return;const sid=a.id.replace(/^move:/,''),row=ANIM_BY['answer:'+sid],an=anGet()||{},eff=an.effects||[];
+  let h='<div class="wbrow"><div class="wl"><b>'+esc(W('an.video'))+'</b><span>'+esc(W('an.video_hint'))+'</span></div><div class="wc">';
+  if(row)h+='<span class="hint" id="wbanvid">'+esc(row.video?W('an.video_have'):W('an.video_none'))+'</span><button type="button" class="wbc" data-an="open" id="wbanopen">'+esc(W('an.video_open'))+'</button>';
+  else h+='<span class="hint">'+esc(W('an.video_no_row'))+'</span>';
+  h+='</div></div><div class="wbrow"><div class="wl"><b>'+esc(W('an.effects'))+'</b><span>'+esc(W('an.effects_hint'))+'</span></div><div class="wc"><div class="wbseg" role="group" aria-label="'+esc(W('an.effects'))+'">'
+    +'<button type="button" data-an="scope" data-v="move" aria-pressed="'+(WB.fxScope==='answer'?'false':'true')+'">'+esc(W('an.scope_move'))+'</button>'
+    +'<button type="button" data-an="scope" data-v="answer" id="wbanscope" aria-pressed="'+(WB.fxScope==='answer'?'true':'false')+'">'+esc(W('an.scope_answer',{n:eff.length}))+'</button></div></div></div>';
+  el.innerHTML=h+'<p class="hint">'+esc(W(WB.fxScope==='answer'?'an.scope_on':'an.scope_off'))+'</p>';
+  const c=$('wbancount');if(c)c.textContent=eff.length===1?W('fx.p.count_one'):W('fx.p.count_many',{n:eff.length});
+}
+// ---- the set piece ----
+const SP_DIMS=()=>WA('sp.dims'),SP_DURS=[3,4,5,6,7,8,9,10];
+function spEdit(fn,key){wbEditStageKey(st=>{const sp=st.setpiece?wbClone(st.setpiece):null;const r=fn(sp);if(r===null)delete st.setpiece;else st.setpiece=r||sp;},key);}
+function spNew(){return {dur:5,dim:.35,steps:[{at:0,do:'dim',amount:.35,in:.4},{at:4.4,do:'dim',amount:0}]};}
+function spSetDur(sp,v){
+  const d=v-sp.dur;sp.dur=v;
+  const ds=(sp.steps||[]).filter(s=>s.do==='dim'&&typeof s.at==='number');const last=ds.filter(s=>!(s.amount>0)).pop();   // the step that puts the light back moves with the end
+  if(last)last.at=Math.max(.5,Math.round((last.at+d)*100)/100);
+  return sp;
+}
+function spSetDim(sp,v){
+  sp.dim=v;const first=(sp.steps||[]).find(s=>s.do==='dim'&&s.amount>0)||(sp.steps||[]).find(s=>s.do==='dim');
+  if(first)first.amount=v;else if(v>0){sp.steps=[{at:0,do:'dim',amount:v,in:.4}].concat(sp.steps||[]);}
+  return sp;
+}
+function wbSetSection(a){
+  if(!spApplicable(a))return '';
+  return '<section class="wbs" id="s-setpiece"><h3 class="wbh"><span>'+esc(W('sections.setpiece'))+'</span></h3><p class="hint" style="margin:0 0 6px">'+esc(W('sp.note'))+'</p><div id="wbsp"></div></section>';
+}
+function wbSpPaint(){
+  const el=$('wbsp'),a=WB.a;if(!el||!a)return;const sp=spGet();
+  if(!sp){el.innerHTML='<p class="hint">'+esc(W('sp.none'))+'</p><button type="button" class="fxadd" data-sp="add">+ '+esc(W('sp.add'))+'</button>';return;}
+  const dims=SP_DIMS(),cur=typeof sp.dim==='number'?sp.dim:0;
+  const near=dims.find(o=>Math.abs(o.k-cur)<1e-9);
+  el.innerHTML='<div class="wbrow"><div class="wl"><b>'+esc(W('sp.len'))+'</b><span>'+esc(W('sp.len_hint'))+'</span></div><div class="wc"><div class="wbseg wrap" role="group" aria-label="'+esc(W('sp.len'))+'">'
+    +SP_DURS.map(v=>'<button type="button" data-sp="dur" data-v="'+v+'" aria-pressed="'+(Math.abs((sp.dur||5)-v)<.5?'true':'false')+'">'+esc(W('sp.sec',{n:v}))+'</button>').join('')+'</div><span class="wbval" id="wbspdur">'+esc(W('sp.sec',{n:sp.dur}))+'</span></div></div>'
+    +'<div class="wbrow"><div class="wl"><b>'+esc(W('sp.dim'))+'</b><span>'+esc(W('sp.dim_hint'))+'</span></div><div class="wc"><div class="wbseg wrap" role="group" aria-label="'+esc(W('sp.dim'))+'">'
+    +dims.map(o=>'<button type="button" data-sp="dim" data-v="'+o.k+'" aria-pressed="'+(near&&near.k===o.k?'true':'false')+'">'+esc(o.label)+'</button>').join('')+'</div><span class="wbval" id="wbspdim">'+esc(near?near.label:W('sp.dim_pct',{n:Math.round(cur*100)}))+'</span></div></div>'
+    +'<div class="wbrow"><div class="wl"><b>'+esc(W('sp.steps'))+'</b><span>'+esc(W('sp.steps_hint',{n:(sp.steps||[]).length}))+'</span></div><div class="wc"><button type="button" class="wbc" data-sp="steps" id="wbspsteps">'+esc(W('sp.steps_edit'))+'</button><button type="button" class="wbc" data-sp="remove">'+esc(W('sp.remove'))+'</button></div></div>';
+}
+// the Stage section's toggle between the move's steps and the set piece's steps
+function wbStgScopeHtml(){
+  if(!spGet())return '';
+  return '<div class="wbrow"><div class="wl"><b>'+esc(W('sp.scope'))+'</b></div><div class="wc"><div class="wbseg" role="group" aria-label="'+esc(W('sp.scope'))+'"><button type="button" data-sp="scope" data-v="stage" aria-pressed="'+(WB.stgScope==='setpiece'?'false':'true')+'">'+esc(W('sp.scope_move'))+'</button><button type="button" data-sp="scope" data-v="setpiece" id="wbspscope" aria-pressed="'+(WB.stgScope==='setpiece'?'true':'false')+'">'+esc(W('sp.scope_set'))+'</button></div></div></div>';
+}
+function wbSecPaint(){wbLsPaint();wbAnPaint();wbSpPaint();wbFxPaint();wbStagePaint();wbSoundPaint();}
+function lsAct(b){
+  const a=b.dataset.ls,i=+b.dataset.i;
+  if(a==='add')return lsEdit(l=>l.push(lsNew(WB.a)));
+  if(a==='remove')return lsEdit(l=>{l.splice(i,1);});
+  if(a==='also')return lsEdit(l=>lsAlso(l[i],b.dataset.k,b.dataset.v==='1'));
+  if(a!=='set')return;
+  const f=b.dataset.f,t=b.dataset.t;let v=b.dataset.v;if(t==='n')v=+v;
+  lsEdit(l=>{const r=l[i];if(!r)return;
+    if(f==='do')lsDefaultsFor(r,v);
+    else if(f==='then.beat'){if(v==='none')delete r.then;else{if(!r.then)r.then={beat:v,do:'flash',color:'#c9d8f0',dur:.25};r.then.beat=v;if(r.then.do==='fly'||r.then.do==='drop')lsThenDo(r,r.then.do);}}
+    else if(f==='then.do'){if(v==='none'){const th={beat:r.then.beat};if(r.then.also)th.also=r.then.also;r.then=th;}else lsThenDo(r,v);}
+    else if(f==='exit.do')lsExitDo(r,v);
+    else if(f==='enter.at')lsEnterAt(r,v);
+    else if(f==='asset'){r.asset=v;if(r.then&&r.then.asset)r.then.asset=v;}
+    else lsPathSet(r,f,v);});
+}
+function anAct(b){
+  const a=b.dataset.an;
+  if(a==='scope'){WB.fxScope=b.dataset.v==='answer'?'answer':'move';WB.fxOpen=-1;WB.fxPick=false;wbSecPaint();return;}
+  if(a==='open'){const id='answer:'+WB.id.replace(/^move:/,'');if(ANIM_BY[id])openPlayer(id);}
+}
+function spAct(b){
+  const a=b.dataset.sp,v=b.dataset.v;
+  if(a==='add')return spEdit(()=>spNew());
+  if(a==='remove'){WB.stgScope='stage';return spEdit(()=>null);}
+  if(a==='dur')return spEdit(sp=>spSetDur(sp,+v),'spdur');
+  if(a==='dim')return spEdit(sp=>spSetDim(sp,+v),'spdim');
+  if(a==='scope'||a==='steps'){WB.stgScope=a==='steps'||v==='setpiece'?'setpiece':'stage';WB.stgOpen=-1;WB.stgPick=false;wbSecPaint();
+    if(a==='steps'){const s=$('s-stage');if(s&&s.scrollIntoView)s.scrollIntoView({block:'start'});}}
+}
+document.addEventListener('click',e=>{if(!WB.a||!e.target.closest)return;
+  let b=e.target.closest('[data-ls]');if(b&&b.tagName==='BUTTON')return lsAct(b);
+  b=e.target.closest('[data-an]');if(b&&b.tagName==='BUTTON')return anAct(b);
+  b=e.target.closest('[data-sp]');if(b&&b.tagName==='BUTTON')return spAct(b);});
+document.addEventListener('input',e=>{const t=e.target;if(!t||!t.dataset||!WB.a||t.dataset.ls!=='text')return;const v=String(t.value).replace(/[<>]/g,'').slice(0,30),i=+t.dataset.i;if(!v)return;
+  lsEdit(l=>{const w=l[i]&&l[i].then&&(l[i].then.also||[]).find(s=>s.do==='words');if(w)w.text=v;},'lstxt'+i,true);});
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-st]');if(b&&WB.a&&b.tagName==='BUTTON')stgAct(b);
   const q=e.target.closest&&e.target.closest('[data-snd]');if(q&&WB.a&&q.tagName==='BUTTON')sndAct(q);});
 document.addEventListener('input',e=>{const t=e.target;if(!t||!t.dataset||!WB.a)return;
@@ -2693,7 +2921,7 @@ async function openPlayer(animId){
   wbOpen(a);WB.small=false;
   const done=()=>{benchAttach(a);initMake(a);wbPaint();wbAllPaint();wbScroll();wbSend();wbLoadFile(a);const bd=$('wbbody');if(bd)bd.scrollTop=0;};
   if(!a.clip){
-    S.innerHTML=wbHtml(a,stage(a.kind==='state'?'No video yet. In a fight this moment shows one of their other videos until its own is made.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+genBlock(a));
+    S.innerHTML=wbHtml(a,stage(a.kind==='state'?'No video yet. In a fight this moment shows one of their other videos until its own is made.':a.kind==='answer'?'No video yet. When what the move left behind answers a hit, the answer plays without the counter video.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+genBlock(a));
     done();return;
   }
   S.innerHTML=wbHtml(a,stage('Loading the video...')+'<div class="ctl"><button type="button" id="bplay">Pause</button><input type="range" id="scrub" min="0" max="1" step="1" value="0" aria-label="Frame"><button type="button" class="spd" data-s="1" aria-pressed="true">1x</button><button type="button" class="spd" data-s="0.5" aria-pressed="false">&frac12;</button><button type="button" class="spd" data-s="0.25" aria-pressed="false">&frac14;</button></div><p class="hint" id="fno" style="margin:0"></p>'+genBlock(a));

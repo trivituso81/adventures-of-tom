@@ -15,6 +15,7 @@ WHO_PARAMS={'chainTargets','dualFlavor','targetIds','targetId','allyIds','target
 # the ranges of plan section b.2 for a stage step's numbers
 STEP_RANGE={'dur':(0.05,6),
   'hold':(0.1,8),'in':(0.05,4),'out':(0.05,4),'arc':(0,120),'amp':(0,12),'amount':(0,0.95),'size':(1,4),'px':(0,40),'n':(1,40)}
+LASTING_DO=['place','hover','surround','glow']
 EM_DASH=chr(0x2014)
 def split_top(s):
     out=[];cur='';d=0;q=False
@@ -140,6 +141,34 @@ def check_stage(st,path,C,E,W):
         q='%s.lasting[%d]'%(path,i)
         if not isinstance(l,dict) or not isinstance(l.get('while'),str): E.append(q+': needs a while'); continue
         if l.get('asset'): refs.append((q,l['asset']))
+        # movebench11: the parts of a lasting thing (the page writes these; the engine reads them in engine/b3-stage.js)
+        if l.get('on') not in (None,'self','carrier'): E.append(q+'.on: self or carrier')
+        if l.get('do') not in LASTING_DO: E.append('%s.do: %r is not one of %s'%(q,l.get('do'),LASTING_DO))
+        elif l['do']!='glow' and not l.get('asset'): E.append(q+'.asset: a thing that stands, floats or closes in needs an object')
+        if 'color' in l and not (isinstance(l['color'],str) and re.match(r'^#[0-9a-fA-F]{6}$',l['color'])): E.append(q+'.color: a colour like #ffd27a')
+        en=l.get('enter')
+        if en is not None:
+            if not isinstance(en,dict): E.append(q+'.enter: must be an object')
+            else:
+                if 'at' in en and not at_ok(en['at']): E.append(q+'.enter.at: seconds, a mark name, {mark, plus} or {step, plus}')
+                if 'from' in en and en['from'] not in ('behind','above'): E.append(q+'.enter.from: behind or above')
+                if 'dur' in en: _rng(en['dur'],0.05,2,q+'.enter.dur',E)
+        th=l.get('then')
+        if th is not None:
+            if not isinstance(th,dict): E.append(q+'.then: must be an object')
+            else:
+                if th.get('beat') not in ('react','intercept'): E.append(q+'.then.beat: react or intercept')
+                if 'do' in th and th['do'] not in STAGE_DO: E.append('%s.then.do: %r is not one of the 15 actions'%(q,th['do']))
+                for k,(lo,hi) in STEP_RANGE.items():
+                    if k in th and isnum(th[k]): _rng(th[k],lo,hi,q+'.then.'+k,E)
+                if th.get('asset'): refs.append((q+'.then',th['asset']))
+                if 'also' in th: steps(th['also'],q+'.then.also')
+        ex=l.get('exit')
+        if ex is not None:
+            if not isinstance(ex,dict): E.append(q+'.exit: must be an object')
+            else:
+                if ex.get('do') not in (None,'fade','cross','fly','surround'): E.append(q+'.exit.do: fade, cross, fly or surround')
+                if 'dur' in ex: _rng(ex['dur'],0.05,2,q+'.exit.dur',E)
     for oid,o in objs.items():
         q='%s.objects.%s'%(path,oid)
         if not isinstance(o,dict): E.append(q+': must be an object'); continue

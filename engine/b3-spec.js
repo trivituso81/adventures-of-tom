@@ -53,3 +53,12 @@ function msStageRow(id) {
 }
 // The spec ids that have a stage, in the table's order.
 function msStagedIds() { const out=[]; for(const id in MS.by) if(MS.by[id]&&MS.by[id].stage&&id.slice(0,5)==='move:') out.push(id); return out; }
+
+// ---------- the answer of a move (movebench11) ----------
+// A move that answers a hit (a ward, a counter) has `answer: {clip, effects}`: the counter video (null until it is made) and the library effects that play with it, timed from the answer's start (an `at` of 'contact'
+// is the start). null when the spec has none or both are empty. engine/b3-stage.js plays it on the react or intercept beat of the move's status.
+function msAnswer(id) {
+  const s=msLive(id),a=s&&s.answer; if(!a||typeof a!=='object') return null;
+  const clip=typeof a.clip==='string'&&a.clip?a.clip:null,E=(Array.isArray(a.effects)?a.effects:[]).filter(e=>e&&typeof e.fx==='string'&&!e.off).map(e=>({fx:e.fx,at:e.at==null?'contact':e.at,on:e.on||'auto',params:e.params&&typeof e.params==='object'?e.params:null,sfx:e.sfx||null}));
+  return clip||E.length?{clip,effects:E}:null;
+}

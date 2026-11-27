@@ -109,6 +109,20 @@ function b3vArm(head,cid,sec,hit){
     return E.some(e=>/^proj_/.test(e.fx)&&P1_VFX[e.fx]);
   } catch(err) { try { gameFault('effects armed',err); } catch(e) {} return false; }
 }
+// movebench11: arm the effects of a move's answer (spec `answer.effects`) to play from now: cast by `src` (the family member who made the move) at `aim` (the monster that was answered). An `at` of 'contact' is the start of
+// the answer, `{plus}` is so many seconds after it. Returns true when something was armed. Never throws.
+function b3vArmAnswer(mid,E,src,aim){
+  try {
+    if(!E||!E.length||!src||!aim||!E.some(e=>P1_VFX[e.fx]||b3gBench())) return false;
+    const t0=B3P.t,cue={M:{impact_ms:0,vfx:E.map(e=>e.fx),fxp:Object.fromEntries(E.filter(e=>e.params).map(e=>[e.fx,e.params]))},fx:E,id:'answer:'+mid,src,tgts:[aim],t0,end:t0,dead:{},tArm:t0}; let maxLen=0;
+    for(const e of E){ const L=P1_VFX_MS[e.fx],p=e.params||null; let len; try { len=(typeof L==='function'?L(p):(L||500)); } catch(x) { len=6000; } maxLen=Math.max(maxLen,len+b3vAtSec(cue,e)*1000); }
+    cue.end=t0+(maxLen+500)/1000;
+    B3V.cues=B3V.cues.filter(c=>c.id!==cue.id);
+    B3V.cues.push(cue);
+    for(const e of E) if(e.sfx&&typeof b3After==='function'&&typeof b3Sfx==='function') b3After(Math.max(0,b3vAtSec(cue,e)),()=>b3Sfx(e.sfx));
+    return true;
+  } catch(err) { try { gameFault('answer effects armed',err); } catch(e) {} return false; }
+}
 // {x,y,h}: the middle of a unit and its height, in fight coordinates. A foe stands where its box says; a family member where it was last drawn (it may have run over to the monster),
 // else at home.
 function b3vGeo(key){

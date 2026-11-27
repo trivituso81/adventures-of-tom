@@ -61,6 +61,17 @@ def wire_row(root, anim_id, clip_key):
     (move:<skill>, act:<foe>:<act>, wind:<foe>:<act>). Returns notes."""
     import glob
     parts = anim_id.split(':'); kind = parts[0]
+    if kind == 'answer':
+        # movebench11: the counter video is the spec's `answer.clip` (data/moves/move-<skill>.json); the spec is rewritten the way the workbench's Finished does (rev + 1, a log line by claude) and bundled
+        f = os.path.join(root, 'data', 'moves', 'move-%s.json' % parts[1].replace('_', '-'))
+        if not os.path.exists(f): raise RuntimeError('the move %s has no spec file (%s) to put the counter video in' % (parts[1], os.path.relpath(f, root)))
+        d = json.load(open(f, encoding='utf-8')); live = d.setdefault('live', {}); an = live.setdefault('answer', {})
+        an['clip'] = clip_key; d['rev'] = int(d.get('rev') or 0) + 1
+        d.setdefault('log', []).append({'rev': d['rev'], 'by': 'claude', 'at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()), 'what': 'counter video %s from the Battle Guide' % clip_key})
+        open(f, 'w', encoding='utf-8').write(json.dumps(d, indent=1, ensure_ascii=False) + '\n')
+        r = subprocess.run([sys.executable, '-I', os.path.join(root, 'tools', 'movebench', 'bundle.py')], capture_output=True, text=True, cwd=root)
+        if r.returncode: raise RuntimeError('bundle.py failed: ' + (r.stderr or r.stdout)[-300:])
+        return ['move %s answer.clip = %s (%s)' % (parts[1], clip_key, os.path.relpath(f, root))]
     if kind == 'move':
         key = parts[1]
         for f in sorted(glob.glob(os.path.join(root, 'data', 'b3-kit-*.js'))):

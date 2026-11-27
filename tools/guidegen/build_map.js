@@ -44,6 +44,7 @@ const JOB_ALIAS = { 'grace-guard': 'video' };   // the guard proof's job is name
 
 // ---------- animations, as battle-guide.html buildAnims lists them ----------
 const WAN_JOBS = jread('tools/art-library/wangen-jobs.json', {});   // startpics2: a person with a start-<id> job lists every family state, like the video-only four, so their standard animations can be made
+const COUNTERS = new Set(((jread('data/guide-manifest.json', {}).moves) || []).filter(m => m.counterClip && m.moveId).map(m => m.moveId));   // movebench11
 const FAMILY_STATES = ['idle', 'guard', 'hit', 'dodge', 'ko', 'victory', 'run'];
 function listAnims(G) {
   const A = [];
@@ -60,6 +61,8 @@ function listAnims(G) {
     Object.values(G.SKILLS).filter(s => s.vibe && G.VIBES[s.vibe] && G.VIBES[s.vibe].owner === id).forEach(s => {
       const a = s.anim || {};
       A.push({ id: 'move:' + s.id, owner: id, kind: 'move', name: s.name, clip: a.kind === 'clip' ? a.clip : null, shape: a.shape || '', what: 'move ' + s.id + ' in data/b3-kit-' + id + '.js', src: s });
+      // movebench11: a move the manifests give a counter video (data/guide-manifest.json counterClip) has a row of its own, `answer:<skill id>`: the video the owner plays when the thing the move left answers a hit
+      if (COUNTERS.has(s.id)) A.push({ id: 'answer:' + s.id, owner: id, kind: 'answer', name: s.name + ' counter', clip: (G.SPECS['move:' + s.id] && G.SPECS['move:' + s.id].answer && G.SPECS['move:' + s.id].answer.clip) || null, what: 'counter video of move ' + s.id + ' (the answer of its spec, data/moves/)', src: s });
     });
   });
   Object.values(G.FOES).forEach(f => {
@@ -201,6 +204,10 @@ function briefOf(a, listRow) {
     b.desc = s.desc || ''; b.flavor = s.flavor || []; b.shape = a.shape || ''; b.target = TARGET[s.target] || s.target;
     b.does = (s.desc || '') + (s.hits ? ' (' + s.hits + ' hit' + (s.hits > 1 ? 's' : '') + ')' : '');
     if (listRow) b.listRow = listRow;
+  } else if (a.kind === 'answer') {
+    const s = a.src;
+    b.desc = s.desc || ''; b.flavor = s.flavor || []; b.target = TARGET[s.target] || s.target;
+    b.does = 'The video the owner plays when what ' + s.name + ' left behind answers a hit. ' + (s.desc || '');
   } else if (a.kind === 'act' || a.kind === 'wind') {
     const s = a.src;
     b.flavor = s.flavor || []; b.target = HITS[s.hits] || s.hits; b.tags = (s.tags || []).map(t => TAG[t] || t);
@@ -310,7 +317,7 @@ function build() {
     if (a.kind === 'state') rname = recipe.byBodyState[a.state] || 'pose';
     else if (a.kind === 'wind') rname = 'windup';
     else rname = recipe.at1x.some(k => entKey && entKey.endsWith('-' + k)) ? 'strike1x' : 'strike';
-    const newClip = stg && !stg.keep ? stg.clip : a.clip ? a.clip : stg ? stg.clip : ent ? under(ent.key) : a.kind === 'state' ? a.owner + '_' + a.state : a.kind === 'wind' ? a.owner + '_' + a.id.split(':')[2] + '_wind' : a.owner + '_' + (a.kind === 'move' ? a.src.id : a.id.split(':')[2]);
+    const newClip = stg && !stg.keep ? stg.clip : a.clip ? a.clip : stg ? stg.clip : ent ? under(ent.key) : a.kind === 'state' ? a.owner + '_' + a.state : a.kind === 'wind' ? a.owner + '_' + a.id.split(':')[2] + '_wind' : a.kind === 'answer' ? a.owner + '_' + a.src.id + '_counter' : a.owner + '_' + (a.kind === 'move' ? a.src.id : a.id.split(':')[2]);
     const lr = a.kind === 'move' ? rows[norm(a.name)] : null;
     const start = ow.start;
     anims[a.id] = {

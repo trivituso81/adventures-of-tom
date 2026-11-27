@@ -260,20 +260,40 @@ function b3gReconcile(t) {
   for(const e of B3G.els) if(!e.leaving&&!want.some(w=>w.def.id===e.def.id&&w.def.L.while===e.L.while&&w.key===e.key)) e.leaving={t0:t,dur:(e.L.exit&&e.L.exit.dur)||.35};
   B3G.els=B3G.els.filter(e=>!e.leaving||t-e.leaving.t0<e.leaving.dur+.05);
 }
-function b3gWarmDef(def) { for(const k of b3gAssetsOf(def.R)) if(B3G.A[k]) B3C.need.set('stage_'+B3G.A[k].fk,performance.now()+B3G_KEEP); }
+function b3gWarmDef(def) { for(const k of b3gAssetsOf(def.R)) if(B3G.A[k]) B3C.need.set('stage_'+B3G.A[k].fk,performance.now()+B3G_KEEP); const A=msAnswer('move:'+def.id); if(A&&A.clip) b3cWant(A.clip,B3G_KEEP); }
 // A react or intercept beat shown: any element whose `then` waits for it answers.
 function b3gBeat(b) {
   if(!B3.active) return;
-  const kind=b.t;
+  const kind=b.t,answered=new Set();
   for(const e of B3G.els) {
     const T=e.L.then; if(e.leaving||!T||T.beat!==kind) continue;
     // react: the status named by the beat (b.id) and a holder that is one of its two units (the ward's owner, or the monster carrying a shell).
     // intercept: the family member the hit was aimed at (b.tgt) holds the status.
     if(kind==='react'?(e.L.while!==b.id||(e.key!==b.src&&e.key!==b.tgt)):e.key!==b.tgt) continue;
     const R=e.def.R,ctx={R,CL:b3gClipOf(R),src:b.src,tgts:[b.tgt],attacker:kind==='react'?b.tgt:null,carrier:e.key,el:e};
-    b3gDo(Object.assign({},T,{hide:true,asset:T.asset||e.L.asset}),ctx);
+    if(T.do) b3gDo(Object.assign({},T,{hide:true,asset:T.asset||e.L.asset}),ctx);   // movebench11: a then with no `do` plays only its `also` steps and the move's answer
     for(const a of T.also||[]) b3gDo(a,ctx);
-    e.thenAt=B3P.t; }
+    e.thenAt=B3P.t; answered.add(e.def.id); b3gAnswer(e.def.id,b,kind==='react'?b.tgt:null); }
+  // the answer of a move whose status this react beat names, when it has no lasting thing of its own that answered
+  if(kind==='react'&&b.id) for(const mid of b3gAnswerIds(b.id)) if(!answered.has(mid)) { answered.add(mid); b3gAnswer(mid,b,b.tgt); }
+}
+// ---------- movebench11: the answer of a move (spec `answer`: a counter video and the effects that play with it) ----------
+// The family member who made the move: the unit whose id is the owner of the move's Vibe, else the holder named by the beat.
+function b3gOwnerKey(mid,fallback) {
+  try { const S=B3_SKILLS[mid],V=S&&B3_VIBES[S.vibe],o=V&&V.owner,u=o&&B3.F.party.find(x=>x.id===o); return u?u.key:fallback; } catch(err) { return fallback; }
+}
+// The moves with an answer that put the status `sid` on someone (its skill row has a status or taunt effect with that id).
+function b3gAnswerIds(sid) {
+  const out=[]; for(const id in MS.by) { if(id.slice(0,5)!=='move:'||!msAnswer(id)) continue;
+    const S=B3_SKILLS[id.slice(5)]; if(S&&(S.effects||[]).some(x=>x&&x.id===sid&&(x.op==='status'||x.op==='taunt'))) out.push(id.slice(5)); }
+  return out;
+}
+function b3gAnswer(mid,b,attacker) {
+  const A=msAnswer('move:'+mid); if(!A||!B3.active||!B3.F) return;
+  const owner=b3gOwnerKey(mid,b.src); if(!owner||!B3.view.u[owner]||B3.view.u[owner].ko) return;
+  if(A.clip) { const CL=BCLIPS[A.clip]; if(CL&&b3cReady(A.clip)) { const home=b3gHome(owner); B3P.body[owner]={kind:'cmove',t0:B3P.t,T0:0,jx:home.cx,jy:home.base,C:CL,back:0,dur:CL.dur/1000+.12}; } }   // a counter video that is not baked plays nothing
+  let aim=attacker; if(!aim||!b3Unit(B3.F,aim)||b3Unit(B3.F,aim).side!=='foe') { const f=B3.F.foes.find(q=>B3P.foe[q.key]&&!(B3.view.u[q.key]&&B3.view.u[q.key].ko)); aim=f?f.key:null; }
+  if(aim&&A.effects.length&&typeof b3vArmAnswer==='function') b3vArmAnswer(mid,A.effects,owner,aim);
 }
 
 // ---------- drawing ----------
@@ -333,14 +353,15 @@ function b3gDrawEls(t) {
     if(L.do==='place') {   // the carry-on stands in front of the fighter, slid in from behind on entry, away across the floor on exit
       const h=b3gHome(key),fx=h.cx-38,fy=h.base-sz.h*.5-2; let x=fx+(1-b3gEase(q))*(L.enter&&L.enter.from==='behind'?40:0),y=fy,a=al;
       if(e.leaving&&L.exit&&L.exit.do==='cross') { const lq=b3gEase((t-e.leaving.t0)/e.leaving.dur); x=fx+(650-fx)*lq; a=1; }
+      if(e.leaving&&L.exit&&L.exit.do==='fly') y-=b3gEase((t-e.leaving.t0)/e.leaving.dur)*120;   // movebench11: Tom can choose that it flies up and out instead
       b3gDraw1(asset,x,y,sz,age*1000,{alpha:a*(b3gEase(Math.min(1,age/.15)))}); }
     else if(L.do==='surround') {   // a pair of doors, one each side of the carrier
-      const s=b3Spot(key),gap=26,k=L.pair?[-1,1]:[0]; const slide=e.leaving?1-b3gEase((t-e.leaving.t0)/e.leaving.dur):b3gEase(q);
-      for(const side of k) b3gDraw1(asset,s.x+side*(gap+(1-slide)*40),s.base-sz.h*.5,sz,0,{alpha:Math.min(1,slide*1.3),flip:side>0}); }
+      const s=b3Spot(key),gap=26,k=L.pair?[-1,1]:[0]; const slide=e.leaving?(L.exit&&L.exit.do==='fade'?1:1-b3gEase((t-e.leaving.t0)/e.leaving.dur)):b3gEase(q);   // movebench11: exit fade only fades
+      for(const side of k) b3gDraw1(asset,s.x+side*(gap+(1-slide)*40),s.base-sz.h*.5,sz,0,{alpha:e.leaving&&L.exit&&L.exit.do==='fade'?al:Math.min(1,slide*1.3),flip:side>0}); }
     else if(L.do==='hover') {   // the shell floats above its carrier, bobbing; it drops in from the top on entry and flies up on exit
       const s=b3Spot(key),bob=Math.sin(t*(L.rate||1.2)*Math.PI*2)*(L.amp||4); let y=s.top-sz.h*.55+bob-(1-b3gEase(q))*70;
-      if(e.leaving) y-=b3gEase((t-e.leaving.t0)/e.leaving.dur)*120;
-      b3gDraw1(asset,s.x,y,sz,age*1000,{alpha:al}); }
+      let hx=s.x; if(e.leaving&&!(L.exit&&L.exit.do==='fade')) { const lq=b3gEase((t-e.leaving.t0)/e.leaving.dur); if(L.exit&&L.exit.do==='cross') hx+=(650-s.x)*lq; else y-=lq*120; }   // movebench11: it flies up (as before), slides off to the right, or only fades
+      b3gDraw1(asset,hx,y,sz,age*1000,{alpha:al}); }
   }
 }
 function b3gDrawWords(t) {

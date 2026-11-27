@@ -118,6 +118,7 @@ function bnWarm(P) {
   else if(P.kind==='wind') { const w=P.foe.acts.find(a=>a.then===P.act); if(w&&w.wind) ids.push(w.wind); if(P.A.wind) ids.push(P.A.wind); }
   else if(P.kind==='state') { const st=P.state;
     for(const k of st==='run'?['run','idle']:st==='guard'?['guard','idle']:[st,'idle']) { const c=typeof b3cOf==='function'?b3cOf(P.owner,k):null; if(c) ids.push(c); } }
+  if(P.kind==='move'){ const an=typeof msAnswer==='function'?msAnswer('move:'+P.skill):null; if(an&&an.clip) ids.push(an.clip); }   // movebench11: the counter video is loaded before the run starts
   if(BN.answer&&P.kind==='move'&&B3.F) { const X=bnAnswerAct(B3.F); if(X&&X.A) { const a=X.A.anim; if(a&&a.kind==='clip') ids.push(a.clip); if(X.A.wind) ids.push(X.A.wind); } }   // the answer's own videos are loaded before the run starts
   for(const id of ids) if(typeof b3cWant==='function') b3cWant(id,30000);
   return ()=>ids.every(id=>!BCLIPS[id]||b3cReady(id))&&(!SR||b3gReady(SR));
@@ -154,6 +155,9 @@ function bnAnswer(done) {
   const e=X.e,A=X.A;
   BN.phase='answer'; BN.ansKey=e.key;
   if(A) { e.force=A.id; e.wait=0; }
+  // movebench11: the monster aims at the one who made the move, so a ward on that member (a lasting thing that answers a hit) is the one that is hit
+  const mv=BN.P&&BN.P.kind==='move'?F.party.find(x=>x.id===BN.P.owner):null;
+  if(A&&mv&&typeof b3Alive==='function'&&b3Alive(mv)) e.aimLock={act:A.id,key:mv.key};
   bnBusy(); b3Render();
   b3After(.4,()=>b3Play(b3FoeTurn(F,e),done));
 }
