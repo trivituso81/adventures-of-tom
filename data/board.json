@@ -9889,7 +9889,7 @@
    "id": "c-movebench-10",
    "tag": "movebench10",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 10: stage editor: objects",
    "next": "Steps that use an object (throw, drop, drive across, rain, put in front, float over, surround, pop up). A new object is asked for in the Art Library and appears when you approve its picture; until then the preview shows a pink box. Starts by itself when Move Workbench 9 ships.",
@@ -9901,7 +9901,7 @@
    "changed": "2026-11-27",
    "auto": true,
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukFTGoqCTNzxmrqNn6f",
     "opening": "not started"
    },
    "prompt": {
@@ -9921,6 +9921,10 @@
     {
      "d": "2026-11-27",
      "t": "Unblocked: Move Workbench 9: stage editor: words and accents is done."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -10274,6 +10278,16 @@
    "tags": [],
    "cards": [
     "svc-voice-gen"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFTGoqCTNzxmrqNn6f",
+   "title": "Move Workbench 10: stage editor: objects",
+   "first": "2026-11-27T07:59:17-08:00",
+   "last": "2026-11-27T07:59:17-08:00",
+   "tags": [],
+   "cards": [
+    "c-movebench-10"
    ]
   },
   {
@@ -17154,8 +17168,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "e7969a7ce6d27bbf88f60195612680d94eec897a",
- "synced_at": "2026-11-27T15:52:10+00:00",
+ "synced": "534c65ce56cf2634fb3dfbda812549d7f42a9468",
+ "synced_at": "2026-11-27T16:00:09+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
