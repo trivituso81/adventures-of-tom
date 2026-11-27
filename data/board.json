@@ -10224,7 +10224,7 @@
    "id": "c-questbanner",
    "tag": "questbanner1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "NEW QUEST banner whenever a new quest is given",
    "next": "Shipped as questbanner1: a NEW QUEST banner each time the story gives a new quest, and a SIDE QUEST banner for Aunt Ellie's bets. Next: Tom looks at it on his phone (card t-questbanner-play).",
@@ -10240,6 +10240,10 @@
     {
      "d": "2026-11-27",
      "t": "Built questbanner1: questBanner in engine/party-banner.js, called from storySetGoal and Aunt Ellie's bet. Test tools/questbanner_test.py passes (118 quests fit in both orientations)."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as questbanner1: a NEW QUEST banner shows every time the story gives a new quest, and Aunt Ellie's bets show a SIDE QUEST banner"
     }
    ],
    "blocks": [],
@@ -10254,7 +10258,8 @@
     "model": "Claude Sonnet 5.5 (row C: a build whose steps are not written yet)",
     "effort": "medium (the piece is small: one engine file, one style block, two call sites)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-questbanner in data/board.json. Your first push is the commit board: start c-questbanner. Add a NEW QUEST banner to engine/party-banner.js (same queue, hold and dismiss as itemBanner, its own short original jingle, styles beside #party-banner in index.html), called from storySetGoal in engine/story.js when the goal text changes in the full story, and from Aunt Ellie's bet in data/ellie-quests.js. It waits while a fight or a chapter card is on screen, and a newer goal replaces one still waiting. Test portrait and landscape with screenshots, run python3 tools/smoke.py, push as build questbanner1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-27"
   },
   {
    "id": "t-questbanner-play",
@@ -10346,8 +10351,10 @@
    "url": "https://claude.ai/code/session_01RXeukGg8ziJ383NrBWAmSb",
    "title": "NEW QUEST banner whenever a new quest is given",
    "first": "2026-11-27T08:05:35-08:00",
-   "last": "2026-11-27T08:05:35-08:00",
-   "tags": [],
+   "last": "2026-11-27T08:19:56-08:00",
+   "tags": [
+    "questbanner1"
+   ],
    "cards": [
     "c-questbanner"
    ]
@@ -17240,8 +17247,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "922521bed4505eaf42d50d0510a368b5b93b88e6",
- "synced_at": "2026-11-27T16:06:26+00:00",
+ "synced": "2588b1f797d1dae5ae29b641f0346014e4b60cbd",
+ "synced_at": "2026-11-27T16:20:58+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
