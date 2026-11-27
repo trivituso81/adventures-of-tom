@@ -9657,7 +9657,7 @@
    "id": "c-movebench-6",
    "tag": "movebench6",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Move Workbench 6: save, finished and progress",
    "next": "Save draft, Undo, Earlier versions and Finished work. Finished puts the move in the game as a new build and marks it Finished by you. The list shows progress across every animation. Starts by itself when Move Workbench 5 ships.",
@@ -9705,16 +9705,20 @@
     {
      "d": "2026-11-27",
      "t": "Built movebench6: Save draft, Undo, Earlier versions, Finished, the statuses and progress list, and the move-apply Action. Hands Tom the card t-movebench-6-try."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as movebench6: the Move Workbench saves your changes (Save draft, Undo, Earlier versions) and Finished puts a move in the game as a new build; the Animations list shows your progress"
     }
    ],
-   "started_at": "2026-11-27T09:22:45+00:00"
+   "started_at": "2026-11-27T09:22:45+00:00",
+   "done": "2026-11-27"
   },
   {
    "id": "c-movebench-7",
    "tag": "movebench7",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 7: effects",
    "next": "The Effects section: add any of the 37 library effects to a move, set when it plays, on whom, and each effect's own settings with sliders, buttons and switches. Starts by itself when Move Workbench 6 ships.",
@@ -9723,10 +9727,10 @@
    ],
    "after": "nothing for Tom: c-movebench-8",
    "created": "2026-11-26",
-   "changed": "2026-11-26",
+   "changed": "2026-11-27",
    "auto": true,
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukEqG7kgsoNKup5rty2",
     "opening": "not started"
    },
    "prompt": {
@@ -9742,8 +9746,21 @@
     {
      "d": "2026-11-26",
      "t": "Added by c-movebench-design: phase 7 of claude/movebench-plan.md section g."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Unblocked: Move Workbench 6: save, finished and progress is done."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started by the night shift."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
-   ]
+   ],
+   "started_at": "2026-11-27T09:58:25+00:00"
   },
   {
    "id": "c-movebench-8",
@@ -10128,8 +10145,10 @@
    "url": "https://claude.ai/code/session_01RXeukDBRG7sKzYyzp5eNpp",
    "title": "Move Workbench 6: save, finished and progress",
    "first": "2026-11-27T09:23:58Z",
-   "last": "2026-11-27T09:23:58Z",
-   "tags": [],
+   "last": "2026-11-27T09:57:31Z",
+   "tags": [
+    "movebench6"
+   ],
    "cards": [
     "c-movebench-6"
    ]
@@ -17021,8 +17040,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "d9e97301fc8c7caaf9ba3223872d98c5fafddb62",
- "synced_at": "2026-11-27T09:24:49+00:00",
+ "synced": "02fd78e604f6f2fc929968e96bd3707386ca6299",
+ "synced_at": "2026-11-27T09:58:26+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -17129,6 +17148,11 @@
     {
      "id": "c-movebench-6",
      "at": "2026-11-27T09:22:45+00:00",
+     "kind": "queued"
+    },
+    {
+     "id": "c-movebench-7",
+     "at": "2026-11-27T09:58:25+00:00",
      "kind": "queued"
     }
    ]
