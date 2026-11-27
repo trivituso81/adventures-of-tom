@@ -254,6 +254,33 @@ a.play.fight{background:var(--surface);border:1px solid var(--accent);color:var(
 .wbauto{flex:1 1 100%;font-size:12px;color:var(--muted)}
 .wbauto button{min-height:36px;padding:2px 12px;font-size:12px;margin-left:6px}
 .wbrep{margin:8px 0 0;font-size:12px;color:var(--muted);line-height:1.5}.wbrep b{color:var(--text)}
+/* movebench7: the Effects section (a list of effects, the picker of 37, one control per setting) */
+.fxs{display:block;width:96px;height:54px;border-radius:8px;background:#0a161a;flex:none}
+.fxc{border:1px solid var(--line);border-radius:14px;padding:8px;margin:0 0 8px;background:var(--surface)}
+.fxc.off{opacity:.62}.fxc.open{border-color:var(--accent)}
+.fxtop{display:flex;align-items:center;gap:10px}
+.fxm{flex:1 1 auto;min-width:0}.fxm b{display:block;font-size:16px}.fxm span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.fxch{flex:none;min-height:44px;padding:6px 14px;font-weight:700}
+.fxpink,.fxpinknote{color:#ff5bd2;text-decoration:none;font-weight:700}.fxpinknote{font-size:13px;margin:0 0 6px}
+.fxadd{width:100%;min-height:48px;font-weight:800}
+.fxgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:0 0 8px}
+.fxtile{display:flex;flex-direction:column;align-items:stretch;gap:4px;padding:6px;border-radius:12px;text-align:left;background:var(--surface);border:1px solid var(--line);min-height:44px}
+.fxtile .fxs{width:100%;height:auto;aspect-ratio:16/9}.fxtile b{font-size:13px;line-height:1.2}
+.fxpanel{margin-top:8px;border-top:1px solid var(--line);padding-top:6px}
+.fxh{margin:10px 0 0;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.fxr{flex:1 1 140px;min-width:120px;min-height:44px;accent-color:var(--accent)}
+.wbseg.wrap{flex-wrap:wrap}.wbseg.wrap button{border-top:1px solid var(--line)}
+.fxsw{width:56px;min-height:44px;border-radius:24px;background:var(--btn);border:1px solid var(--line);position:relative;padding:0}
+.fxsw i{position:absolute;top:8px;left:8px;width:26px;height:26px;border-radius:50%;background:var(--text);transition:left .12s}
+.fxsw[aria-checked=true]{background:var(--accent)}.fxsw[aria-checked=true] i{left:24px;background:var(--on-accent)}
+.fxsws{display:flex;flex-wrap:wrap;gap:6px}
+.fxsw2{width:44px;height:44px;min-height:44px;border-radius:50%;border:2px solid var(--line);padding:0}.fxsw2[aria-pressed=true]{border-color:var(--text);box-shadow:0 0 0 3px var(--accent)}
+.fxseq{display:flex;flex-wrap:wrap;gap:4px;max-width:100%}.fxlet{background:var(--well);border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-weight:800;font-size:13px}
+.fxt{min-height:44px;font:inherit;font-weight:700;color:var(--text);background:var(--well);border:1px solid var(--line);border-radius:10px;padding:4px 10px;width:190px;max-width:100%}
+.fxsel{min-height:44px;font:inherit;color:var(--text);background:var(--well);border:1px solid var(--line);border-radius:10px;padding:4px 8px;max-width:100%}
+.fxchg{font-style:normal;font-size:11px;color:var(--accent);margin-left:6px}
+.fxacts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.fxacts button{min-height:44px;padding:6px 14px}
+.wbpink{margin:4px 0 0;padding:4px 8px;text-align:center;font-size:12px;font-weight:800;letter-spacing:.04em;color:#ff5bd2;border:1px dashed #ff5bd2;border-radius:8px}
 .wbl{list-style:none;margin:0;padding:0}.wbl li{display:flex;gap:10px;align-items:baseline;padding:8px 0;border-top:1px solid var(--line);font-size:14px}.wbl li:first-child{border-top:0}
 .wbl .tm{flex:none;min-width:58px;font-weight:800;color:var(--accent);font-size:13px}.wbl .dt{color:var(--muted);font-size:12px}
 .wb-bottom{flex:none;border-top:1px solid var(--line);padding:8px 12px calc(8px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--surface)}
@@ -332,6 +359,7 @@ const wide=()=>matchMedia('(min-width:560px) and (min-height:560px)').matches;
 const CLIPS={};            // clip id -> its data, once its file is loaded
 const CLIP_SRC={};         // clip id -> the address of its data file, read from index.html
 function bclipDefine(id,D){CLIPS[id]=D;}
+let FXD=null,FX_P=null;   // movebench7: data/movebench-fx.json
 let WORDS=null,WORDS_P=null;   // movebench5: data/movebench-words.json, every label of the workbench
 let MANI=null,MANI_P=null;   // guidecross1: data/guide-manifest.json (tools/guidegen/manifest_crosswalk.py)
 let BUILD='',BOARD_DOC=null,GUIDE=null,GUIDE_P=null,PLAN_DOC=null,INDEX_SRCS=[];   // GUIDE: data/guide-anims.json (guidegen1a): per animation its prompt, start picture, price and what is missing
@@ -349,6 +377,8 @@ async function boot(){
     for(const s of data) await addScript(s);   // in the game's own order: rules first, then statuses, kits, monsters
     for(const s of srcs) if(/^data\/move-specs\.js/.test(s)) await addScript(s).catch(()=>{});   // movebench5: what the game plays for each animation (MOVE_SPECS), read by msLive for the workbench's read-only sections
     for(const s of srcs) if(/^engine\/b3-spec\.js/.test(s)) await addScript(s).catch(()=>{});
+    for(const s of srcs) if(/^engine\/(b3-vfx|vfx-library)\.js/.test(s)) await addScript(s).catch(()=>{});   // movebench7: the game's own effect drawers (P1_VFX), for the samples of the Effects section
+    FX_P=fetch('data/movebench-fx.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{FXD=j;return j;}).catch(()=>null);   // movebench7: the 37 effects and their settings (tools/movebench/fxparams.py)
     WORDS_P=fetch('data/movebench-words.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{WORDS=j;return j;}).catch(()=>null);   // movebench5: every label of the workbench
     for(const s of srcs) if(/^engine\/clip-ground\.js/.test(s)) await addScript(s).catch(()=>{});   // rose-lava-xftr: the game's ground effects (lava) for the player
     await addScript('data/portrait-ver.js?t='+Date.now()).catch(()=>{});   // portrait1: PORTRAIT_V, the stamp of the face pictures
@@ -361,7 +391,7 @@ async function boot(){
     fetch('data/guide-words.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{GWORDS=j;}).catch(()=>{});   // guideflow5: the words of each failure (X1 and X2 are the page's own)
     MANI_P=fetch('data/guide-manifest.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).then(j=>{MANI=(j&&j.summary&&j.bySkill)?j:null;try{if(tab==='anims'&&sel&&typeof renderDetailKeep==='function')renderDetailKeep();}catch(e){}return j;}).catch(()=>null);
     PLAN_DOC=await fetch('data/guide-planned.json?t='+Date.now(),{cache:'no-store'}).then(x=>x.ok?x.json():null).catch(()=>null);   // battleguide2: everything planned and not built (tools/guide_planned.py)
-    await WORDS_P;build();route();qStart();
+    await WORDS_P;await FX_P;build();route();qStart();
   }catch(e){$('list').innerHTML='<div id="boot" class="err">'+esc(e.message)+'. Open this page again in a minute; if it stays, tell Claude.</div>';}
 }
 
@@ -1711,7 +1741,9 @@ const wbSpecOf=id=>{try{return typeof msLive==='function'?msLive(id):null;}catch
 // (a second device, a session) puts them on top of it instead of overwriting it (plan f.3).
 function wbDiff(){
   const a=(WB.draft&&WB.draft.timing)||{},b=(WB.base&&WB.base.timing)||{},o={};
-  WB_FIELDS.forEach(f=>{if(JSON.stringify(a[f])!==JSON.stringify(b[f]))o[f]=a[f]===undefined?null:a[f];});return o;
+  WB_FIELDS.forEach(f=>{if(JSON.stringify(a[f])!==JSON.stringify(b[f]))o[f]=a[f]===undefined?null:a[f];});
+  if(JSON.stringify((WB.draft&&WB.draft.effects)||[])!==JSON.stringify((WB.base&&WB.base.effects)||[]))o.effects=wbClone((WB.draft&&WB.draft.effects)||[]);   // movebench7: the effects list is one field, the whole list
+  return o;
 }
 const wbChanges=()=>(WB.draft&&WB.base)?Object.keys(wbDiff()).length:0;
 const wbPath=a=>'data/moves/'+slugOf(a.id)+'.json';
@@ -1721,7 +1753,7 @@ function wbNow(){const d=new Date(),p=n=>String(n).padStart(2,'0'),o=-d.getTimez
 function wbDate(at){try{return new Date(at).toLocaleDateString(undefined,{month:'short',day:'numeric'});}catch(e){return '';}}
 function wbOpen(a){
   clearTimeout(WB.poll);
-  WB.id=a.id;WB.a=a;WB.undo=[];WB.file=null;WB.fsha=null;WB.src='';WB.busy=false;WB.msg=null;WB.confirm=false;
+  WB.fxOpen=-1;WB.fxPick=false;WB.fxk=null;WB.id=a.id;WB.a=a;WB.undo=[];WB.file=null;WB.fsha=null;WB.src='';WB.busy=false;WB.msg=null;WB.confirm=false;
   const kept=wbStoreRead().drafts[a.id],live=wbClone(wbSpecOf(a.id));
   WB.base=kept&&kept.base?wbClone(kept.base):wbClone(live);if(!WB.base.timing)WB.base.timing={};
   WB.draft=kept&&kept.live?wbClone(kept.live):wbClone(WB.base);
@@ -1736,17 +1768,18 @@ async function wbLoadFile(a){
   if(WB.id!==id||!src)return;
   WB.src=src;WB.file=doc||wbBlank(a);WB.fsha=sha;
   const fresh=wbClone((doc&&(doc.draft!=null?doc.draft:doc.live))||wbSpecOf(id));if(!fresh.timing)fresh.timing={};
-  wbRebase(fresh);wbSend();wbPaint();
+  wbRebase(fresh);wbSend();wbPaint();wbFxPaint();
 }
 // Fields Tom did not touch take the file's value; fields he changed stay his.
 function wbRebase(fresh){
   const mine=wbDiff();WB_FIELDS.forEach(f=>{if(!(f in mine)){if(fresh.timing[f]===undefined)delete WB.draft.timing[f];else WB.draft.timing[f]=wbClone(fresh.timing[f]);}});
+  if(!('effects' in mine)){if(fresh.effects===undefined)delete WB.draft.effects;else WB.draft.effects=wbClone(fresh.effects);}
   WB.base=wbClone(fresh);
 }
 // Send the draft to the frame (null when it is what the game plays: the frame puts its own table's back).
 function wbSend(){
   const n=wbChanges();wbStoreWrite(WB.id,n?WB.draft:null,n?WB.base:null);
-  const ml=(wbSpecOf(WB.id)||{}).timing||{},t=(WB.draft&&WB.draft.timing)||{},differs=WB_FIELDS.some(f=>JSON.stringify(t[f])!==JSON.stringify(ml[f]));
+  const ml=(wbSpecOf(WB.id)||{}).timing||{},t=(WB.draft&&WB.draft.timing)||{},differs=WB_FIELDS.some(f=>JSON.stringify(t[f])!==JSON.stringify(ml[f]))||JSON.stringify((WB.draft&&WB.draft.effects)||[])!==JSON.stringify((wbSpecOf(WB.id)||{}).effects||[]);
   benchSend({bench:'spec',id:WB.id,live:differs?WB.draft:null});
 }
 function wbEdit(patch){
@@ -1755,8 +1788,8 @@ function wbEdit(patch){
   for(const k in patch){if(patch[k]==null)delete t[k];else t[k]=patch[k];}
   WB.draft.timing=t;wbSend();wbPaint();
 }
-function wbUndo(){if(!WB.undo.length)return;WB.draft=JSON.parse(WB.undo.pop());WB.confirm=false;WB.msg=null;wbSend();wbPaint();}
-function wbReset(){WB.undo.push(JSON.stringify(WB.draft));WB.draft=wbClone(WB.base);if(!WB.draft.timing)WB.draft.timing={};WB.confirm=false;WB.msg=null;wbSend();wbPaint();}
+function wbUndo(){if(!WB.undo.length)return;WB.draft=JSON.parse(WB.undo.pop());WB.confirm=false;WB.msg=null;WB.fxk=null;wbSend();wbPaint();wbFxPaint();}
+function wbReset(){WB.undo.push(JSON.stringify(WB.draft));WB.draft=wbClone(WB.base);if(!WB.draft.timing)WB.draft.timing={};WB.confirm=false;WB.msg=null;WB.fxk=null;wbSend();wbPaint();wbFxPaint();}
 // ---- Save draft, Finished (plan d.3, f.3, f.4) ----
 // Both write ONE file, data/moves/<slug>.json, through the contents API with the sha of the file as just read. A 409 (the file moved: a second device, a session, the apply job) reads it
 // again and puts Tom's field changes on top of the newer file. Save draft writes `draft`; Finished makes the draft `live`, clears `draft` and sets `finished` to him and now. The
@@ -1764,6 +1797,7 @@ function wbReset(){WB.undo.push(JSON.stringify(WB.draft));WB.draft=wbClone(WB.ba
 function wbWhat(ch){
   const lab={hitStop:'timing.freeze.label',shake:'timing.shake.label',approach:'timing.approach.label',approachSec:'timing.pace.label',returnSec:'timing.pace.label',gap:'timing.gap.label',contact:'timing.hit.label'},p=[];
   for(const f in ch){const x=ch[f];let v;
+    if(f==='effects'){p.push(W('fx.p.title')+': '+(x&&x.length?x.map(e=>fxName(e.fx)+(e.off?' ('+W('fx.p.off')+')':'')).join(', '):W('fx.p.empty')));continue;}
     if(x==null)v=W('save.automatic');
     else if(f==='hitStop')v=W('timing.freeze.frames',{n:x});else if(f==='shake')v=W('timing.shake.px',{n:x});
     else if(f==='approach')v=(WA('timing.approach.options').find(o=>o.k===x)||{label:x}).label;
@@ -1774,8 +1808,9 @@ function wbWhat(ch){
 function wbMerge(cur,ch,kind,now,replayed){
   const d=wbClone(cur);d.v=1;d.id=d.id||WB.id;
   const sec=wbClone((d.draft!=null?d.draft:d.live)||{});const t=Object.assign({},sec.timing||{});
-  for(const f in ch){if(ch[f]==null)delete t[f];else t[f]=wbClone(ch[f]);}
+  for(const f in ch){if(f==='effects')continue;if(ch[f]==null)delete t[f];else t[f]=wbClone(ch[f]);}
   if(Object.keys(t).length)sec.timing=t;else delete sec.timing;
+  if('effects' in ch)sec.effects=wbClone(ch.effects||[]);
   d.rev=(d.rev||0)+1;
   const what=(wbWhat(ch)||W(kind==='finished'?'save.what_finished':'save.what_draft'))+(replayed?' ('+W('save.merged')+')':'');
   if(kind==='draft'){d.draft=sec;}else{d.live=sec;d.draft=null;d.finished={rev:d.rev,at:now,by:'tom',build:null};}
@@ -1859,7 +1894,8 @@ async function wbBringBack(sha){
     const src=(g.doc.draft!=null?g.doc.draft:g.doc.live)||{},t=src.timing||{};
     WB.undo.push(JSON.stringify(WB.draft));WB.draft.timing=Object.assign({},WB.draft.timing||{});
     WB_FIELDS.forEach(f=>{if(t[f]===undefined)delete WB.draft.timing[f];else WB.draft.timing[f]=wbClone(t[f]);});
-    wbSend();wbMsg(W('versions.brought'),false,W('versions.brought_hint'));
+    if(src.effects===undefined)delete WB.draft.effects;else WB.draft.effects=wbClone(src.effects);
+    wbSend();wbFxPaint();wbMsg(W('versions.brought'),false,W('versions.brought_hint'));
   }catch(e){wbMsg(W('versions.failed',{why:e.message}),true);}
 }
 // What the Timing rows show for each field: the draft's value, else the game's default (MS_DEFAULTS, engine/b3-spec.js).
@@ -1937,7 +1973,7 @@ function wbPaint(){
     if(a.kind==='move'){parts.push(R.shakePx>0?W('timing.report.shake',{px:R.shakePx}):W('timing.report.noshake'));parts.push(R.runInSec!=null?W('timing.report.run',{s:wbFmt(R.runInSec)}):W('timing.report.norun'));}
     if(R.gap!=null)parts.push(W('timing.report.gap',{s:wbFmt(R.gap)}));
     rp.innerHTML='<b>'+esc(W('timing.report.label'))+':</b> '+parts.map(esc).join(', ');}}
-  wbSubline();
+  wbSubline();wbFxCounts();
 }
 function wbSubline(){
   const el=$('wbsub'),a=WB.a;if(!el||!a)return;const g=typeof G==='function'?G(a):null,tl=BENCH.tl&&BENCH.tl.id===a.id?BENCH.tl:null;
@@ -1946,8 +1982,8 @@ function wbSubline(){
   if(g&&g.stage&&g.stage.budget){const b=g.stage.budget;t+=' '+W('runs.target',{lo:Math.max(0,Math.round((b-1)*10)/10),hi:b});}
   el.textContent=t;
 }
-function wbReadonly(a){
-  if(a.kind!=='move')return '';const sp=wbSpecOf(a.id)||{},fxn=id=>String(id).replace(/^(vfx_core_|vfx_|proj_|setpiece_)/,'').replace(/_/g,' ');
+function wbReadonly(a,part){
+  if(a.kind!=='move')return '';const sp=wbSpecOf(a.id)||{};
   const when=at=>at==null||at==='contact'?W('readonly.at_contact'):typeof at==='number'?W('readonly.at_sec',{s:wbFmt(at)}):typeof at==='string'?W('readonly.at_mark',{mark:at}):at&&at.plus!=null&&at.mark==null&&at.step==null?W('readonly.at_plus',{s:wbFmt(at.plus)}):at&&at.mark!=null?W('readonly.at_mark',{mark:at.mark})+(at.plus?' +'+wbFmt(at.plus)+' s':''):at&&at.sec!=null?W('readonly.at_sec',{s:wbFmt(at.sec)}):W('readonly.at_contact');
   const st=(sp.stage&&sp.stage.steps)||[],fx=sp.effects||[],snd=[];
   if(sp.body&&sp.body.sound)snd.push({at:W('readonly.at_sec',{s:'picture '+sp.body.sound.at}),n:sp.body.sound.sfx});
@@ -1955,9 +1991,8 @@ function wbReadonly(a){
   const sec=(id,title,count,items)=>'<section class="wbs" id="s-'+id+'"><h3 class="wbh"><span>'+esc(title)+'</span><span class="wbcount">'+esc(count)+'</span></h3>'
     +(items.length?'<ul class="wbl">'+items.join('')+'</ul>':'<p class="hint">'+esc(W('readonly.empty'))+'</p>')+'<p class="hint">'+esc(W('readonly.title_hint'))+'</p></section>';
   const cnt=(n,one,many)=>n===1?W(one):W(many,{n});
-  return sec('stage',W('sections.stage'),cnt(st.length,'readonly.stage_one','readonly.stage_many'),st.map(s=>'<li><span class="tm">'+esc(when(s.at))+'</span><span>'+esc(W('stage_do.'+s.do))+(s.text?': '+esc(s.text):'')+(s.hold?' <span class="dt">'+esc(wbFmt(s.hold)+' s')+'</span>':'')+'</span></li>'))
-   +sec('effects',W('sections.effects'),cnt(fx.length,'readonly.fx_one','readonly.fx_many'),fx.map(e=>'<li><span class="tm">'+esc(when(e.at))+'</span><span>'+esc(fxn(e.fx))+' <span class="dt">'+esc((e.on&&e.on!=='auto'?W('readonly.on.'+e.on):'')+(e.off?' '+W('readonly.off'):''))+'</span></span></li>'))
-   +sec('sound',W('sections.sound'),cnt(snd.length,'readonly.snd_one','readonly.snd_many'),snd.map(s=>'<li><span class="tm">'+esc(s.at)+'</span><span>'+esc(words(s.n))+'</span></li>'));
+  if(part==='stage')return sec('stage',W('sections.stage'),cnt(st.length,'readonly.stage_one','readonly.stage_many'),st.map(s=>'<li><span class="tm">'+esc(when(s.at))+'</span><span>'+esc(W('stage_do.'+s.do))+(s.text?': '+esc(s.text):'')+(s.hold?' <span class="dt">'+esc(wbFmt(s.hold)+' s')+'</span>':'')+'</span></li>'))
+  ;return sec('sound',W('sections.sound'),cnt(snd.length,'readonly.snd_one','readonly.snd_many'),snd.map(s=>'<li><span class="tm">'+esc(s.at)+'</span><span>'+esc(words(s.n))+'</span></li>'));
 }
 function wbSpecCounts(a){
   const sp=wbSpecOf(a.id)||{},st=((sp.stage&&sp.stage.steps)||[]).length,fx=(sp.effects||[]).length;let sn=(sp.body&&sp.body.sound?1:0);
@@ -1966,15 +2001,15 @@ function wbSpecCounts(a){
 }
 function wbHtml(a,videoHtml){
   const nav=[['video','nav.video',0],['timing','nav.timing',0]],C=a.kind==='move'?wbSpecCounts(a):null;
-  if(C)nav.push(['stage','nav.stage',C.stage],['effects','nav.effects',C.effects],['sound','nav.sound',C.sound]);
+  if(C)nav.push(['stage','nav.stage',C.stage],['effects','nav.effects',C.effects],['sound','nav.sound',C.sound]);   // the Effects count is repainted by wbFxCounts
   nav.push(['versions','nav.versions',0]);
   return '<div class="wb" id="wb" data-kind="'+esc(a.kind)+'"><div class="wb-top"><button type="button" class="back" id="bclose" aria-label="'+esc(W('page.back'))+'">&lsaquo; '+esc(ownerName(a.owner))+'</button>'
    +'<div class="wt"><h2>'+esc(a.name)+'</h2><p class="wsub" id="wbsub"></p></div><span class="wbstat" id="wbstat"></span></div>'
-   +'<div class="wb-body" id="wbbody"><div class="wb-prev" id="wbprev">'+benchBox(a)+'</div><div class="wb-secs" id="wbsecs">'
-   +'<nav class="wb-nav" id="wbnav" aria-label="'+esc(W('page.jump'))+'">'+nav.map(n=>'<button type="button" data-wbgo="'+n[0]+'">'+esc(W(n[1]))+(n[2]?'<b>'+n[2]+'</b>':'')+'</button>').join('')+'</nav>'
+   +'<div class="wb-body" id="wbbody"><div class="wb-prev" id="wbprev">'+benchBox(a)+'<div class="wbpink" id="wbpink" hidden>'+esc(W('fx.p.pink_tag'))+'</div></div><div class="wb-secs" id="wbsecs">'
+   +'<nav class="wb-nav" id="wbnav" aria-label="'+esc(W('page.jump'))+'">'+nav.map(n=>'<button type="button" data-wbgo="'+n[0]+'">'+esc(W(n[1]))+(n[2]?'<b'+(n[0]==='effects'?' id="wbnavfx"':'')+'>'+n[2]+'</b>':'')+'</button>').join('')+'</nav>'
    +'<section class="wbs" id="s-video"><h3 class="wbh"><span>'+esc(W('sections.video'))+'</span></h3>'+videoHtml+'</section>'
    +'<section class="wbs" id="s-timing"><h3 class="wbh"><span>'+esc(W('sections.timing'))+'</span></h3>'+wbTimingHtml(a)+'</section>'
-   +wbReadonly(a)+'<section class="wbs" id="s-versions"><h3 class="wbh"><span>'+esc(W('sections.versions'))+'</span></h3><p class="hint" id="wbfinline" style="margin:0 0 8px"></p>'
+   +wbReadonly(a,'stage')+wbFxSection(a)+wbReadonly(a,'sound')+'<section class="wbs" id="s-versions"><h3 class="wbh"><span>'+esc(W('sections.versions'))+'</span></h3><p class="hint" id="wbfinline" style="margin:0 0 8px"></p>'
    +'<button type="button" data-wb="versions">'+esc(W('versions.show'))+'</button><div id="wbvers"></div></section><section class="wbs" id="s-note">'+noteForm(a)+'</section>'+(maniOf(a)?'<section class="wbs" id="s-mani">'+manifestBlock(maniOf(a))+'</section>':'')
    +'</div></div><div class="wb-bottom"><div class="wbu" id="wbunsaved"></div><button type="button" id="wbundo" data-wb="undo">'+esc(W('page.undo'))+'</button><button type="button" id="wbreset" data-wb="reset" title="'+esc(W('page.reset_hint'))+'">'+esc(W('page.reset'))+'</button>'
    +'<button type="button" id="wbsave" data-wb="save">'+esc(W('save.draft'))+'</button><button type="button" id="wbfin" data-wb="fin">'+esc(W('save.finished'))+'</button><button type="button" id="wbno" data-wb="no" hidden>'+esc(W('save.not_yet_btn'))+'</button></div></div>';
@@ -2019,6 +2054,152 @@ document.addEventListener('change',e=>{
 });
 document.addEventListener('scroll',e=>{if(e.target&&e.target.id==='wbbody')wbScroll();},true);
 
+
+// ---------- Effects (movebench7, claude/movebench-plan.md sections e.1 and e.3) ----------
+// A list of the library effects this move plays. Each one has When (at the hit, so long before or after it), On whom, a control for every setting its library entry lists (data/movebench-fx.json: a slider for a
+// range, buttons for a choice, a switch for true or false, named steps for a number, swatches for a colour, arrow buttons for the button code, a text box for words, the drawn objects for what is thrown), Switch
+// off and an optional sound. The picker shows the game's own drawing of each of the 37 (P1_VFX, engine/vfx-library.js) moving. Nothing here is saved to the repo until Save draft; the list is draft.effects.
+const fxDef=id=>FXD&&FXD.fx&&FXD.fx[id]||null;
+const fxName=id=>{const w=WORDS&&WORDS.fx&&WORDS.fx.items&&WORDS.fx.items[id];return w?w.name:(fxDef(id)?fxDef(id).name:String(id).replace(/^(vfx_core_|vfx_|proj_|setpiece_)/,'').replace(/_/g,' '));};
+const fxHas=id=>typeof P1_VFX!=='undefined'&&!!P1_VFX[id];
+const fxList=()=>(WB.draft&&WB.draft.effects)||[];
+const fxR=x=>Math.round(x*100)/100;
+function wbEditFx(fn,key){
+  const now=Date.now(),same=key&&WB.fxk&&WB.fxk.k===key&&now-WB.fxk.t<1500;
+  if(!same){WB.undo.push(JSON.stringify(WB.draft));if(WB.undo.length>60)WB.undo.shift();}
+  WB.fxk=key?{k:key,t:now}:null;WB.confirm=false;WB.msg=null;
+  const l=wbClone(WB.draft.effects||[]);fn(l);WB.draft.effects=l;wbSend();wbPaint();
+}
+function fxCur(e,n,p){return e.params&&n in e.params?e.params[n]:p.default;}
+function fxNumSteps(p){const d=+p.default;let a,c;
+  if(p.int){a=Math.max(d>0?1:0,Math.round(d/2));c=Math.round(d*1.5);if(a>=d)a=Math.max(0,d-1);if(c<=d)c=d+1;}
+  else{a=fxR(d*.5);c=fxR(d*1.5);if(d<=1&&c>1)c=1;}
+  return [a,d,c];}
+function fxNumBump(p,v,dir){const d=+p.default,st=p.int?Math.max(1,Math.round(d*.1)):Math.max(.01,fxR(d*.1)),n=fxR(v+dir*st);return Math.max(0,p.int?Math.round(n):d<=1?Math.min(1,n):n);}
+function fxWhen(e){const a=e.at;if(a==null||a==='contact')return{m:'hit',s:0};if(typeof a==='object'&&a.plus!=null&&a.mark==null&&a.sec==null)return a.plus<0?{m:'before',s:-a.plus}:a.plus>0?{m:'after',s:a.plus}:{m:'hit',s:0};return{m:'other',s:0};}
+function fxWhenText(e){const w=fxWhen(e);if(w.m==='hit')return W('when.hit');if(w.m==='before')return W('when.seconds',{s:fxR(w.s)})+' '+W('when.before').toLowerCase();if(w.m==='after')return W('when.seconds',{s:fxR(w.s)})+' '+W('when.after').toLowerCase();
+  const a=e.at;return W('when.other',{at:typeof a==='object'&&a.mark!=null?'"'+a.mark+'"':typeof a==='object'&&a.sec!=null?fxR(a.sec)+' s':'?'});}
+function fxOnDefault(id){return typeof P1_VFX_ON!=='undefined'&&P1_VFX_ON[id]||(typeof P1_VFX_SELF!=='undefined'&&P1_VFX_SELF[id]?'self':'target');}
+function fxChanged(e){return e.params?Object.keys(e.params).length:0;}
+function fxSample(id,i){return '<canvas class="fxs" width="192" height="108" data-fxs="'+esc(id)+'"'+(i==null?'':' data-fxi="'+i+'"')+' role="img" aria-label="'+esc(fxName(id))+'"></canvas>';}
+// ---- the moving samples: the game's own drawer (p1DrawVfx) on a small field, only for the canvases on screen ----
+const FXS={raf:0,last:0};
+function fxDraw(cv,ts){
+  const id=cv.dataset.fxs,i=cv.dataset.fxi,e=i!=null?fxList()[+i]:null,params=e&&e.params||null,g=cv.getContext('2d'),k=cv.width/576;
+  g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,cv.width,cv.height);g.fillStyle='#0a161a';g.fillRect(0,0,cv.width,cv.height);g.fillStyle='rgba(255,255,255,.06)';g.fillRect(0,cv.height*.72,cv.width,cv.height);
+  g.setTransform(k,0,0,k,0,0);
+  const tg={x:150,y:170,h:100},A={x:430,y:185,h:110};
+  g.fillStyle='rgba(255,255,255,.12)';g.beginPath();g.ellipse(tg.x,tg.y+tg.h/2,34,9,0,0,7);g.fill();g.beginPath();g.ellipse(A.x,A.y+A.h/2,34,9,0,0,7);g.fill();
+  g.fillStyle='rgba(255,255,255,.10)';g.fillRect(tg.x-20,tg.y-tg.h/2,40,tg.h);g.fillRect(A.x-18,A.y-A.h/2,36,A.h);
+  if(!fxHas(id)){g.fillStyle='rgba(255,91,210,.22)';g.fillRect(tg.x-60,tg.y-40,120,80);g.strokeStyle='#ff5bd2';g.lineWidth=4;g.setLineDash([12,8]);g.strokeRect(tg.x-60,tg.y-40,120,80);g.setLineDash([]);return;}
+  const L=P1_VFX_LEAD[id],lead=typeof L==='function'?L(params):(L||0),M=P1_VFX_MS[id],len=typeof M==='function'?M(params):(M||500),cyc=len+450,ms=ts%cyc;
+  if(ms>len)return;
+  try{p1DrawVfx(g,{id:'sample'},ms,A,{meta:{impact_ms:lead,vfx:[id],fxp:params?{[id]:params}:null},target:tg,foe:tg,dead:{}});}catch(x){}
+}
+function fxTick(ts){
+  FXS.raf=0;const cvs=[...document.querySelectorAll('canvas.fxs')];if(!cvs.length||document.hidden)return;
+  if(ts-FXS.last>=45){FXS.last=ts;const vh=innerHeight;for(const cv of cvs){const r=cv.getBoundingClientRect();if(r.bottom<-20||r.top>vh+20||r.width===0)continue;fxDraw(cv,ts);}}
+  FXS.raf=requestAnimationFrame(fxTick);
+}
+function fxKick(){if(!FXS.raf&&document.querySelector('canvas.fxs'))FXS.raf=requestAnimationFrame(fxTick);}
+// ---- the section ----
+function wbFxSection(a){
+  if(a.kind!=='move')return '';
+  return '<section class="wbs" id="s-effects"><h3 class="wbh"><span>'+esc(W('sections.effects'))+'</span><span class="wbcount" id="wbfxcount"></span></h3><p class="hint" style="margin:0 0 6px">'+esc(W('fx.p.note_draft'))+'</p><div id="wbfx"></div></section>';
+}
+function fxParamHtml(e,i,n,p){
+  const cur=fxCur(e,n,p),pw=(WORDS.fx.params||{})[n]||{},label=pw.label||n.replace(/([A-Z])/g,' $1').toLowerCase(),chg=e.params&&n in e.params&&JSON.stringify(e.params[n])!==JSON.stringify(p.default);
+  const dn='data-fx="p" data-i="'+i+'" data-n="'+esc(n)+'"';let c='';
+  if(p.kind==='who')return '';
+  if(p.kind==='range'){const step=p.int?1:.05;c='<input type="range" class="fxr" min="'+p.lo+'" max="'+p.hi+'" step="'+step+'" value="'+cur+'" '+dn+' aria-label="'+esc(label)+'"><span class="wbval fxv">'+fxR(cur)+'</span>';}
+  else if(p.kind==='choice'){c='<div class="wbseg wrap">'+p.choices.map(v=>'<button type="button" '+dn+' data-v="'+esc(v)+'" aria-pressed="'+(v===cur?'true':'false')+'">'+esc((WORDS.fx.choices||{})[v]||v.replace(/_/g,' '))+'</button>').join('')+'</div>';}
+  else if(p.kind==='bool'){c='<button type="button" class="fxsw" role="switch" aria-checked="'+(cur?'true':'false')+'" '+dn+' data-v="'+(cur?'0':'1')+'" aria-label="'+esc(label)+'"><i></i></button>';}
+  else if(p.kind==='number'){const st=fxNumSteps(p),nm=(pw.steps||WA('fx.steps'));c='<div class="wbseg">'+st.map((v,k)=>'<button type="button" '+dn+' data-v="'+v+'" aria-pressed="'+(Math.abs(v-cur)<1e-9?'true':'false')+'">'+esc(nm[k]||v)+'</button>').join('')+'</div><button type="button" class="wbc wbstep" data-fx="pb" data-i="'+i+'" data-n="'+esc(n)+'" data-v="-1" aria-label="-">-</button><button type="button" class="wbc wbstep" data-fx="pb" data-i="'+i+'" data-n="'+esc(n)+'" data-v="1" aria-label="+">+</button><span class="wbval fxv">'+fxR(cur)+'</span>';}
+  else if(p.kind==='color'){const sw=WORDS.fx.swatches||[],all=sw.some(x=>x.k.toLowerCase()===String(p.default).toLowerCase())?sw:[{k:p.default,label:''}].concat(sw);
+    c='<div class="fxsws" role="group" aria-label="'+esc(label)+'">'+all.map(x=>'<button type="button" class="fxsw2" '+dn+' data-v="'+esc(x.k)+'" style="background:'+esc(x.k)+'" aria-label="'+esc(x.label||x.k)+'" aria-pressed="'+(String(cur).toLowerCase()===x.k.toLowerCase()?'true':'false')+'"></button>').join('')+'</div>';}
+  else if(p.kind==='list'){const L=WORDS.fx.letters||[],nm=k=>(L.find(x=>x.k===k)||{label:k}).label;
+    c='<div class="fxseq">'+(cur.length?cur.map(k=>'<span class="fxlet">'+esc(k)+'</span>').join(''):'<span class="hint">-</span>')+'</div><div class="wbseg wrap">'+L.map(x=>'<button type="button" data-fx="pl" data-i="'+i+'" data-n="'+esc(n)+'" data-v="'+esc(x.k)+'">'+esc(x.label)+'</button>').join('')+'</div><button type="button" class="wbc" data-fx="pl" data-i="'+i+'" data-n="'+esc(n)+'" data-v="-">'+esc(W('fx.p.letters_back'))+'</button>';}
+  else if(p.kind==='text'){c='<input type="text" class="fxt" maxlength="24" value="'+esc(cur)+'" '+dn+' aria-label="'+esc(label)+'">';}
+  else if(p.kind==='sprite'){c='<div class="wbseg wrap">'+(WORDS.fx.props||[]).map(x=>'<button type="button" '+dn+' data-v="'+esc(x.k)+'" aria-pressed="'+(x.k===cur?'true':'false')+'">'+esc(x.label)+'</button>').join('')+'</div>';}
+  else if(p.kind==='effect'){const others=fxList().map((q,k)=>({k,fx:q.fx})).filter(q=>q.k!==i);
+    c=others.length?'<div class="wbseg wrap"><button type="button" '+dn+' data-v="" aria-pressed="'+(!cur?'true':'false')+'">'+esc(W('fx.p.effect_none'))+'</button>'+others.map(q=>'<button type="button" '+dn+' data-v="'+esc(q.fx)+'" aria-pressed="'+(q.fx===cur?'true':'false')+'">'+esc(fxName(q.fx))+'</button>').join('')+'</div>':'<span class="hint">'+esc(W('fx.p.effect_none_hint'))+'</span>';}
+  return '<div class="wbrow fxp" data-pn="'+esc(n)+'"><div class="wl"><b>'+esc(label)+(chg?' <em class="fxchg">'+esc(W('fx.p.changed'))+'</em>':'')+'</b><span>'+esc(pw.hint||'')+'</span></div><div class="wc">'+c+(chg?'<button type="button" class="wbc" data-fx="pr" data-i="'+i+'" data-n="'+esc(n)+'">'+esc(W('fx.p.back_normal'))+'</button>':'')+'</div></div>';
+}
+function fxPanelHtml(e,i){
+  const D=fxDef(e.fx),wh=fxWhen(e),on=e.on||'auto',ps=D?Object.entries(D.params).filter(q=>q[1].kind!=='who'):[],item=(WORDS.fx.items||{})[e.fx]||{};
+  let h='<div class="fxpanel" data-i="'+i+'"><p class="hint" style="margin:0 0 6px">'+esc(item.what||(D?D.summary:''))+'</p>';
+  if(!fxHas(e.fx))h+='<p class="fxpinknote">'+esc(W('fx.p.pink_note'))+'</p>';
+  // When
+  h+='<div class="wbrow"><div class="wl"><b>'+esc(W('when.label'))+'</b><span>'+esc(W('when.hint'))+'</span></div><div class="wc"><div class="wbseg">'
+    +['hit','before','after'].map(m=>'<button type="button" data-fx="wm" data-i="'+i+'" data-v="'+m+'" aria-pressed="'+(wh.m===m?'true':'false')+'">'+esc(W('when.'+m))+'</button>').join('')+'</div>'
+    +(wh.m==='other'?'<span class="wbauto">'+esc(fxWhenText(e))+' <button type="button" class="wbc" data-fx="wm" data-i="'+i+'" data-v="hit">'+esc(W('when.other_back'))+'</button></span>'
+      :'<button type="button" class="wbc wbstep" data-fx="ws" data-i="'+i+'" data-v="-1" aria-label="'+esc(W('when.less'))+'">-</button><button type="button" class="wbc wbstep" data-fx="ws" data-i="'+i+'" data-v="1" aria-label="'+esc(W('when.more'))+'">+</button><span class="wbval fxwv">'+esc(wh.m==='hit'?'0 s':W('when.seconds',{s:fxR(wh.s)}))+'</span>')
+    +'<button type="button" class="wbc" data-fx="wset" data-i="'+i+'">'+esc(W('when.set'))+'</button></div></div>';
+  // On whom
+  h+='<div class="wbrow"><div class="wl"><b>'+esc(W('on.label'))+'</b><span>'+esc(on==='auto'?W('on.auto_is',{now:W('on.'+(P1_VFX_ON&&P1_VFX_ON[e.fx]||fxOnDefault(e.fx)))}):'')+'</span></div><div class="wc"><div class="wbseg wrap">'
+    +['auto','target','each_target','self','each_ally','field'].map(o=>'<button type="button" data-fx="on" data-i="'+i+'" data-v="'+o+'" aria-pressed="'+(on===o?'true':'false')+'">'+esc(W('on.'+o))+'</button>').join('')+'</div></div></div>';
+  // settings
+  h+='<h4 class="fxh">'+esc(W('fx.p.settings'))+'</h4>';
+  const rows=ps.map(q=>fxParamHtml(e,i,q[0],q[1])).join('');
+  h+=rows||'<p class="hint">'+esc(W('fx.p.no_settings'))+'</p>';
+  if(D&&Object.values(D.params).some(q=>q.kind==='who'))h+='<p class="hint">'+esc(W('fx.p.who_note'))+'</p>';
+  // sound
+  h+='<div class="wbrow"><div class="wl"><b>'+esc(W('sound.label'))+'</b></div><div class="wc"><select class="fxsel" data-fx="snd" data-i="'+i+'" aria-label="'+esc(W('sound.label'))+'"><option value="">'+esc(W('sound.none'))+'</option>'
+    +((FXD&&FXD.sounds)||[]).map(n=>'<option value="'+esc(n)+'"'+(e.sfx===n?' selected':'')+'>'+esc(typeof words==='function'?words(n):n)+'</option>').join('')+'</select></div></div>';
+  h+='<div class="fxacts"><button type="button" data-fx="off" data-i="'+i+'">'+esc(W(e.off?'fx.p.switch_on':'fx.p.switch_off'))+'</button><button type="button" data-fx="remove" data-i="'+i+'">'+esc(W('fx.p.remove'))+'</button><button type="button" data-fx="close">'+esc(W('fx.p.close'))+'</button></div></div>';
+  return h;
+}
+function fxRowHtml(e,i){
+  const open=WB.fxOpen===i,ch=fxChanged(e),on=e.on&&e.on!=='auto'?' · '+W('on.'+e.on):'';
+  return '<div class="fxc'+(e.off?' off':'')+(open?' open':'')+'" data-i="'+i+'"><div class="fxtop">'+fxSample(e.fx,i)+'<div class="fxm"><b>'+esc(fxName(e.fx))+'</b><span>'+esc(fxWhenText(e)+on)+(ch?' · '+esc(ch+' '+W('fx.p.changed')):'')+(e.off?' · '+esc(W('fx.p.off')):'')+(fxHas(e.fx)?'':' · <u class="fxpink">'+esc(W('fx.p.no_drawing'))+'</u>')+'</span></div>'
+   +'<button type="button" class="fxch" data-fx="open" data-i="'+i+'" aria-expanded="'+(open?'true':'false')+'">'+esc(W(open?'fx.p.close':'fx.p.change'))+'</button></div>'+(open?fxPanelHtml(e,i):'')+'</div>';
+}
+function fxPickerHtml(){
+  const ids=FXD?Object.keys(FXD.fx):[];
+  return '<div class="fxpick"><p class="hint" style="margin:0 0 6px">'+esc(W('fx.p.adding'))+'</p><div class="fxgrid">'+ids.map(id=>'<button type="button" class="fxtile" data-fx="pick" data-v="'+esc(id)+'">'+fxSample(id)+'<b>'+esc(fxName(id))+'</b></button>').join('')+'</div><button type="button" data-fx="pickno">'+esc(W('fx.p.cancel'))+'</button></div>';
+}
+function wbFxPaint(){
+  const el=$('wbfx');if(!el||!WB.a||!FXD)return;
+  const l=fxList();if(WB.fxOpen>=l.length)WB.fxOpen=-1;
+  el.innerHTML=(l.length?l.map(fxRowHtml).join(''):'<p class="hint">'+esc(W('fx.p.empty'))+'</p>')+(WB.fxPick?fxPickerHtml():'<button type="button" class="fxadd" data-fx="add">+ '+esc(W('fx.p.add'))+'</button>');
+  wbFxCounts();fxKick();
+}
+function wbFxCounts(){
+  const l=fxList(),c=$('wbfxcount');if(c)c.textContent=l.length===1?W('fx.p.count_one'):W('fx.p.count_many',{n:l.length});
+  const nb=$('wbnavfx');if(nb)nb.textContent=l.length;
+  const pk=$('wbpink');if(pk)pk.hidden=!l.some(e=>!e.off&&!fxHas(e.fx));
+}
+function fxSetParam(i,n,val,key){
+  const e=fxList()[i],D=e&&fxDef(e.fx),p=D&&D.params[n];if(!p)return;
+  wbEditFx(l=>{const q=l[i];q.params=q.params||{};if(JSON.stringify(val)===JSON.stringify(p.default))delete q.params[n];else q.params[n]=val;if(!Object.keys(q.params).length)delete q.params;},key||('p'+i+n));
+}
+function fxAct(b){
+  const a=b.dataset.fx,i=+b.dataset.i,v=b.dataset.v,n=b.dataset.n,hit=()=>{const r=wbRun();return r&&r.hit!=null?r.hit:null;};
+  if(a==='add'){WB.fxPick=true;return wbFxPaint();}
+  if(a==='pickno'){WB.fxPick=false;return wbFxPaint();}
+  if(a==='pick'){const D=fxDef(v);if(!D)return;WB.fxPick=false;WB.fxOpen=fxList().length;wbEditFx(l=>l.push({fx:v}));return wbFxPaint();}
+  if(a==='open'){WB.fxOpen=WB.fxOpen===i?-1:i;return wbFxPaint();}
+  if(a==='close'){WB.fxOpen=-1;return wbFxPaint();}
+  if(a==='off'){wbEditFx(l=>{if(l[i].off)delete l[i].off;else l[i].off=true;});return wbFxPaint();}
+  if(a==='remove'){WB.fxOpen=-1;wbEditFx(l=>l.splice(i,1));return wbFxPaint();}
+  if(a==='on'){wbEditFx(l=>{if(v==='auto')delete l[i].on;else l[i].on=v;});return wbFxPaint();}
+  if(a==='wm'){wbEditFx(l=>{const w=fxWhen(l[i]);if(v==='hit')delete l[i].at;else if(v==='before'&&!(w.m==='before'))l[i].at={plus:-.2};else if(v==='after'&&!(w.m==='after'))l[i].at={plus:.2};});return wbFxPaint();}
+  if(a==='ws'){wbEditFx(l=>{const e=l[i],cur=e.at&&typeof e.at==='object'&&e.at.plus!=null?e.at.plus:0,nx=Math.max(-2,Math.min(6,Math.round((cur+(+v)*.1)*10)/10));if(nx===0)delete e.at;else e.at={plus:nx};},'ws'+i);return wbFxPaint();}
+  if(a==='wset'){const m=wbMoment(),h=hit();if(m==null||h==null)return;wbEditFx(l=>{const nx=Math.max(-2,Math.min(6,Math.round((m-h)*10)/10));if(nx===0)delete l[i].at;else l[i].at={plus:nx};});return wbFxPaint();}
+  const e=fxList()[i],D=e&&fxDef(e.fx),p=D&&n&&D.params[n];
+  if(a==='p'&&p){let val=v;if(p.kind==='bool')val=v==='1';else if(p.kind==='number'||p.kind==='range')val=+v;fxSetParam(i,n,val);return wbFxPaint();}
+  if(a==='pb'&&p){fxSetParam(i,n,fxNumBump(p,+fxCur(e,n,p),+v),'pb'+i+n);return wbFxPaint();}
+  if(a==='pr'&&p){fxSetParam(i,n,p.default);return wbFxPaint();}
+  if(a==='pl'&&p){const cur=fxCur(e,n,p).slice();if(v==='-')cur.pop();else if(cur.length<14)cur.push(v);fxSetParam(i,n,cur);return wbFxPaint();}
+}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-fx]');if(b&&WB.a&&b.tagName==='BUTTON')fxAct(b);});
+document.addEventListener('input',e=>{const t=e.target;if(!t||!t.dataset||t.dataset.fx!=='p'||!WB.a)return;const i=+t.dataset.i,n=t.dataset.n,q=fxList()[i],D=q&&fxDef(q.fx),p=D&&D.params[n];if(!p)return;
+  if(t.type==='range'){const v=+t.value;fxSetParam(i,n,v);const sp=t.parentNode.querySelector('.fxv');if(sp)sp.textContent=fxR(v);const ch=t.closest('.fxc');if(ch){const m=ch.querySelector('.fxm span');if(m)m.textContent=fxWhenText(fxList()[i])+(fxChanged(fxList()[i])?' · '+fxChanged(fxList()[i])+' '+W('fx.p.changed'):'');}}});
+document.addEventListener('change',e=>{const t=e.target;if(!t||!t.dataset||!WB.a)return;
+  if(t.dataset.fx==='p'&&t.type==='text'){const i=+t.dataset.i;fxSetParam(i,t.dataset.n,String(t.value).replace(/[<>]/g,'').slice(0,24));wbFxPaint();}
+  if(t.dataset.fx==='snd'){const i=+t.dataset.i;wbEditFx(l=>{if(t.value)l[i].sfx=t.value;else delete l[i].sfx;});wbFxPaint();}
+  if(t.dataset.fx==='p'&&t.type==='range')wbFxPaint();});
+
 async function openPlayer(animId){
   if(!GUIDE&&GUIDE_P)await GUIDE_P;
   if(!MANI&&MANI_P)await MANI_P;
@@ -2027,7 +2208,7 @@ async function openPlayer(animId){
   const stage=msg=>'<div id="stage"><canvas id="cv" width="2" height="2"></canvas><div id="hitflag">HIT</div>'+(msg?'<div class="msg">'+msg+'</div>':'')+'</div>';
   const S=$('sheet');S.dataset.mode='bench';S.classList.add('open');$('dim').classList.add('open');S.scrollTop=0;
   wbOpen(a);WB.small=false;
-  const done=()=>{benchAttach(a);initMake(a);wbPaint();wbScroll();wbSend();wbLoadFile(a);const bd=$('wbbody');if(bd)bd.scrollTop=0;};
+  const done=()=>{benchAttach(a);initMake(a);wbPaint();wbFxPaint();wbScroll();wbSend();wbLoadFile(a);const bd=$('wbbody');if(bd)bd.scrollTop=0;};
   if(!a.clip){
     S.innerHTML=wbHtml(a,stage(a.kind==='state'?'No video yet. In a fight this moment shows one of their other videos until its own is made.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+genBlock(a));
     done();return;

@@ -613,6 +613,20 @@ What differs from the plan, and why:
 
 What phase 7 must know: add the Effects fields to `wbDiff` (it lists `WB_FIELDS`, the Timing fields) and to `wbMerge`, which merges a change list into `draft || live`; `WB.base` is the saved version, `WB.draft` the working copy, `WB.file` the file as read. The workbench reads a file on open (`wbLoadFile`: the contents API with a token or `?gh=`, else the copy the site serves, which can be a few minutes behind) and rebases Tom's changes onto it. `?wbpoll=<ms>` sets how often the page looks for `finished.build` (test only). A new test that writes through the stand-in GitHub reuses `GHS` and `gh_route` in `page_test.py`.
 
+**Phase 7, `movebench7` (2026-11-27).** What exists: the Effects section of the workbench (`wbFxSection`, `wbFxPaint`, `fxAct`, `fxParamHtml`, `fxPanelHtml`, `fxDraw` in `battle-guide.html`), `tools/movebench/fxparams.py` and `data/movebench-fx.json` (37 effects, 93 settings with a control, 61 sounds), the `fx`, `when`, `on` and `sound` blocks of `data/movebench-words.json`, `b3vPink` in `engine/b3-vfx.js` (the pink dashed box, bench only) and `tools/movebench/fx_test.py` (night list). `spec_test.py` gained the fx checks (fresh file, a control kind and words for every setting, every choice worded, defaults in range). The picker's samples are the game's own `p1DrawVfx` on a 576 x 324 field scaled down, drawn only while on screen at about 20 a second; the Guide now loads `engine/b3-vfx.js` and `engine/vfx-library.js` for that.
+
+What differs from the plan, and why:
+- The test is a new file, `fx_test.py`, not an addition to `page_test.py`: it needs its own stand-in GitHub only for Save draft and runs in about 3 minutes; it sets one setting of each control kind (range, choice, true or false, number, colour, button code, text, drawn object, another effect) and reads each from the effect the frame's fight armed (the `B3V` cue).
+- `effects` is one field of the diff and the merge after a 409 takes the whole list (a change to one effect on a second device is replaced by the newer save of the list, not merged effect by effect). Timing fields still merge one by one.
+- `schema.parse_params` read a bare `spriteId`, `impactVfxId` and `onCatchVfxId` as numbers; now a drawn object (`sprite`) and an effect (`effect`). `chainTargets` and `dualFlavor` are aims (`who`), not settings.
+- A range's default is the drawer's own default (the library line gives none); a bare number's default is the drawer's too. Both come from the `vlP(p,{...})` of each drawer by `fxparams.py`.
+- `spriteId` offers the 15 objects `vlProp` draws in code (a plain ball, clay, chilies, a jar...), not objects of the move: a move has no objects of its own until phases 8 to 10.
+- A number setting has three named steps (words per setting where the setting is a time or a brightness) plus minus and plus by a tenth of the default; its range is not clamped beyond 0 (and 1 for a setting whose default is a fraction).
+- `at` is written as `{plus: seconds}` (minus is before the hit); `{mark}` and `{sec}` from older files are shown as read-only text with Back to the hit.
+- The sound is a plain list of the 61 sounds with no Play button: the Guide page loads no audio engine. The preview plays it.
+
+What phase 8 must know: the Effects section is the only place `draft.effects` is written. The page keeps `WB.fxOpen` (the open effect) and `WB.fxPick`. Stage steps come next to it as `draft.stage`: add it to `wbDiff`, `wbRebase`, `wbMerge`, `wbBringBack` as `effects` was. `wbEditFx(fn, key)` is the pattern (one Undo step per key within 1.5 s, `wbSend`, `wbPaint`), and a structural change calls `wbFxPaint()`; a slider must never re-render while it is dragged. An effect that Tom sets `at` to a named moment by hand is not possible yet (phase 9 adds named moments).
+
 ### g.1 The board's bulk video path (a recommendation; this session did not touch it)
 
 Recommended: **pause now, retire in phase 16.**

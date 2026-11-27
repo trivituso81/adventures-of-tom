@@ -240,8 +240,8 @@ with sync_playwright() as pw:
     rl = run_of(pg)
     r = change(pg, '[data-wb="hitStop:7"]', 'staged freeze Long')
     if not (r and near(r['holdSec'], 7 / 24, .02)): fail('Lounge Pass Flex freeze Long reports %s s' % (r and r['holdSec']))
-    sec = pg.evaluate("()=>[...document.querySelectorAll('#s-stage li, #s-effects li, #s-sound li')].map(l=>l.textContent)")
-    if not any('NOT ON THE LIST' in x for x in sec) or not any('racket rings' in x for x in sec): fail('the read-only sections do not show what the spec holds: %s' % sec[:4])
+    sec = pg.evaluate("()=>[...document.querySelectorAll('#s-stage li, #s-effects .fxm b, #s-sound li')].map(l=>l.textContent)")
+    if not any('NOT ON THE LIST' in x for x in sec) or not any('Brass rings' in x for x in sec): fail('the read-only Stage and Sound sections and the Effects list do not show what the spec holds: %s' % sec[:4])
     pg.screenshot(path=os.path.join(OUT, 'page-staged-lounge-pass-flex.png'))
     # ---------- 4. Time between hits: a move that hits more than once ----------
     open_anim(pg, 'move:lamb_tuck_ankle_tackle')

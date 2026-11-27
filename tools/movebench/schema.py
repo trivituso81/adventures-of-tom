@@ -11,7 +11,7 @@ STAGE_DO=['fly','hover','drop','cross','rain','surround','place','pop','words','
 ON_WORDS=['auto','target','each_target','self','each_ally','field']
 APPROACH=['auto','stay','run']
 SECTIONS=['start','body','timing','stage','effects','answer','note']
-WHO_PARAMS={'targetIds','targetId','allyIds','targetAllyIds','targetAllyId','startPos','endPos','targetEnemyId','rewindAllyId','offenderEnemyId'}
+WHO_PARAMS={'chainTargets','dualFlavor','targetIds','targetId','allyIds','targetAllyIds','targetAllyId','startPos','endPos','targetEnemyId','rewindAllyId','offenderEnemyId'}
 # the ranges of plan section b.2 for a stage step's numbers
 STEP_RANGE={'dur':(0.05,6),
   'hold':(0.1,8),'arc':(0,120),'amp':(0,12),'amount':(0,0.95),'size':(1,4),'px':(0,40),'n':(1,40)}
@@ -35,7 +35,7 @@ def parse_params(txt):
     out={}
     for item in split_top(t):
         if ':' not in item:
-            out[item]={'kind':'who' if item in WHO_PARAMS else 'number'}; continue
+            out[item]={'kind':'who' if item in WHO_PARAMS else 'sprite' if item=='spriteId' else 'effect' if item in ('impactVfxId','onCatchVfxId') else 'number'}; continue
         n,v=[x.strip() for x in item.split(':',1)]
         if n in WHO_PARAMS: out[n]={'kind':'who'}
         elif n=='spriteId': out[n]={'kind':'sprite'}

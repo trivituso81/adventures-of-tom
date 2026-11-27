@@ -1,0 +1,997 @@
+{
+ "v": 1,
+ "note": "Written by tools/movebench/fxparams.py from art-factory/aot-stage2c-vfx-library-v11.json and engine/vfx-library.js. Do not edit by hand.",
+ "fx": {
+  "vfx_core_clobber_impact": {
+   "name": "Clobber Kinetic Impact Burst",
+   "category": "Core Primitive",
+   "layer": "unit_overlay",
+   "color": "#d97706",
+   "summary": "Universal physical hit burst parameterized by hit count (1-7), scale, dust puff, and shield-piercing crack overlay. Handles every Basic, multi-hit flurry, and physical Capstone.",
+   "params": {
+    "targetIds": {
+     "kind": "who"
+    },
+    "hits": {
+     "kind": "range",
+     "lo": 1,
+     "hi": 7,
+     "default": 1,
+     "int": true
+    },
+    "intervalMs": {
+     "kind": "number",
+     "default": 110,
+     "int": true
+    },
+    "scale": {
+     "kind": "range",
+     "lo": 0.8,
+     "hi": 1.8,
+     "default": 1,
+     "int": false
+    },
+    "pierceShield": {
+     "kind": "bool",
+     "default": false
+    },
+    "color": {
+     "kind": "color",
+     "default": "#d97706"
+    }
+   }
+  },
+  "vfx_core_sizzle_wave": {
+   "name": "Sizzle Heat Wave & Burn Embers",
+   "category": "Core Primitive",
+   "layer": "foreground_sweep",
+   "color": "#ef4444",
+   "summary": "Sweeping heat distortion wave, rising cinnamon/kiln steam, Toasty ember rings, Five-Alarm Burn flame upgrades, and instant double burn-tick pop bursts.",
+   "params": {
+    "scope": {
+     "kind": "choice",
+     "choices": [
+      "single",
+      "aoe",
+      "dual"
+     ],
+     "default": "single"
+    },
+    "applyToasty": {
+     "kind": "bool",
+     "default": false
+    },
+    "fiveAlarm": {
+     "kind": "bool",
+     "default": false
+    },
+    "triggerTicks": {
+     "kind": "range",
+     "lo": 0,
+     "hi": 2,
+     "default": 0,
+     "int": true
+    }
+   }
+  },
+  "vfx_core_drench_splash": {
+   "name": "Drench Splash, Mist & Droplet Spray",
+   "category": "Core Primitive",
+   "layer": "foreground_sweep",
+   "color": "#0284c7",
+   "summary": "Tintable liquid splash primitive supporting Windex blue mist, bubbly sourdough beige foam, iced cold brew, wine pour, 360-degree wet-dog shake spray, and nursery cool-mist clouds.",
+   "params": {
+    "mode": {
+     "kind": "choice",
+     "choices": [
+      "spray",
+      "row_wave",
+      "aoe_cloud",
+      "shake_360"
+     ],
+     "default": "spray"
+    },
+    "tintHex": {
+     "kind": "color",
+     "default": "#0284c7"
+    },
+    "applyDrenched": {
+     "kind": "bool",
+     "default": true
+    }
+   }
+  },
+  "vfx_core_razzle_beam_arc": {
+   "name": "Razzle Voltage Arc, Beam & Glitter",
+   "category": "Core Primitive",
+   "layer": "foreground_sweep",
+   "color": "#9333ea",
+   "summary": "Covers voltage-tester sparks, copper banner links, 240V chain-lightning splashes, flashlight/camera LED beams, neon glitter ribbons, and Dazzled sparkle icons.",
+   "params": {
+    "style": {
+     "kind": "choice",
+     "choices": [
+      "beam",
+      "chain_arc",
+      "glitter_flick",
+      "blackout_flash"
+     ],
+     "default": "chain_arc"
+    },
+    "chainTargets": {
+     "kind": "who"
+    },
+    "splashPct": {
+     "kind": "range",
+     "lo": 0.25,
+     "hi": 0.75,
+     "default": 0.5,
+     "int": false
+    }
+   }
+  },
+  "vfx_core_racket_rings": {
+   "name": "Racket Sonic Rings & Callout Waves",
+   "category": "Core Primitive",
+   "layer": "foreground_sweep",
+   "color": "#db2777",
+   "summary": "Expanding acoustic rings for VIP pass flick reverberations, sugar-cube crunch, Rikers bark, 5-beat teacher clap, violin screech, dad-sneeze, raspberry, hot-mic feedback, and Broadway vocal belt.",
+   "params": {
+    "shape": {
+     "kind": "choice",
+     "choices": [
+      "rings",
+      "jagged_screech",
+      "cone_blast",
+      "story_loops"
+     ],
+     "default": "rings"
+    },
+    "count": {
+     "kind": "range",
+     "lo": 3,
+     "hi": 5,
+     "default": 3,
+     "int": true
+    },
+    "targetScope": {
+     "kind": "choice",
+     "choices": [
+      "single",
+      "aoe"
+     ],
+     "default": "single"
+    }
+   }
+  },
+  "vfx_core_detonation_pops": {
+   "name": "All 6 v11 Prime -> Detonation Bursts",
+   "category": "Core Primitive",
+   "layer": "unit_overlay",
+   "color": "#f59e0b",
+   "summary": "Shared global combat payoff VFX for Steam Cloud! (blind mist), Panic Boil! (guard drop), Hydro-Slip! (25% push), Short Circuit! (40% splash), Shatter Glitz! (buff strip), and Sensory Overload! (-25% Atk).",
+   "params": {
+    "recipe": {
+     "kind": "choice",
+     "choices": [
+      "steam",
+      "panic_boil",
+      "hydro_slip",
+      "short_circuit",
+      "shatter_glitz",
+      "sensory_overload"
+     ],
+     "default": "steam"
+    },
+    "targetId": {
+     "kind": "who"
+    }
+   }
+  },
+  "vfx_core_composure_break": {
+   "name": "Composure Pip Shatter & Flustered Banner",
+   "category": "Core Primitive",
+   "layer": "unit_overlay",
+   "color": "#dc2626",
+   "summary": "Fires whenever a move shaves 1-4 Composure pips; escalates into a full dramatic shatter-ring and Flustered slowdown banner when pips hit 0.",
+   "params": {
+    "targetId": {
+     "kind": "who"
+    },
+    "pipsShaved": {
+     "kind": "range",
+     "lo": 1,
+     "hi": 4,
+     "default": 1,
+     "int": true
+    },
+    "triggeredBreak": {
+     "kind": "bool",
+     "default": false
+    }
+   }
+  },
+  "vfx_core_heal_cleanse": {
+   "name": "Emerald Heal, Regen, Cleanse & Revive",
+   "category": "Core Primitive",
+   "layer": "unit_overlay",
+   "color": "#10b981",
+   "summary": "Handles single/party heals (5%-100%), overheal-to-Clean-Bill-Shield conversion glow, rising debuff-dissolve sparks, and vertical revive beams (25% Pick-Me-Up, 40% Waymo, 80% Moon).",
+   "params": {
+    "targetIds": {
+     "kind": "who"
+    },
+    "healPct": {
+     "kind": "range",
+     "lo": 5,
+     "hi": 100,
+     "default": 25,
+     "int": true
+    },
+    "cleanse": {
+     "kind": "bool",
+     "default": false
+    },
+    "isRevive": {
+     "kind": "bool",
+     "default": false
+    },
+    "overhealShield": {
+     "kind": "bool",
+     "default": false
+    }
+   }
+  },
+  "vfx_core_shield_ward": {
+   "name": "Ally Shield, Carapace, Drywall & Ward Shell",
+   "category": "Core Primitive",
+   "layer": "unit_overlay",
+   "color": "#0d9488",
+   "summary": "Unified defensive overlay supporting Velvet Stanchion, Pottery Wheel Clay -> Fired Glaze, Gypsum Drywall, Cozy Jacket Wrap, Golden Bread Crust, Mom-Arm Seatbelt Bar, and Plushie Self-Shield.",
+   "params": {
+    "targetIds": {
+     "kind": "who"
+    },
+    "skin": {
+     "kind": "choice",
+     "choices": [
+      "clay",
+      "glaze",
+      "drywall",
+      "jacket",
+      "crust",
+      "seatbelt",
+      "velvet",
+      "plush"
+     ],
+     "default": "glaze"
+    },
+    "shieldPct": {
+     "kind": "number",
+     "default": 30,
+     "int": true
+    }
+   }
+  },
+  "vfx_core_timeline_chevrons": {
+   "name": "Timeline Push, Pull, Swap & Pep/Ruckus Pop",
+   "category": "Core Primitive",
+   "layer": "unit_overlay",
+   "color": "#0ea5e9",
+   "summary": "Immediately communicates timeline manipulation (10%-35% pushback, 15%-30% turn pull, 25-tick swap, bonus mini-turn ring) plus +1/+2 Pep stars and +20%/+25% Family Ruckus surge arcs.",
+   "params": {
+    "targetIds": {
+     "kind": "who"
+    },
+    "dir": {
+     "kind": "choice",
+     "choices": [
+      "pull",
+      "push",
+      "swap",
+      "bonus_turn"
+     ],
+     "default": "push"
+    },
+    "pct": {
+     "kind": "range",
+     "lo": 10,
+     "hi": 35,
+     "default": 20,
+     "int": true
+    },
+    "pepDelta": {
+     "kind": "range",
+     "lo": 0,
+     "hi": 2,
+     "default": 0,
+     "int": true
+    }
+   }
+  },
+  "vfx_core_status_debuff_badges": {
+   "name": "Stat Buff/Debuff, Strip, Invert & Taunt Tether",
+   "category": "Core Primitive",
+   "layer": "unit_overlay",
+   "color": "#6366f1",
+   "summary": "Handles Eyes On Me spotlight, aggro tethers, buff-strip shatter orbs, buff-steal flight arcs, Fact-Check buff inversion flips, 4-Tab Mix markers, forced Razzle Pet Peeve badge, and permanent Def-crack fissures.",
+   "params": {
+    "mode": {
+     "kind": "choice",
+     "choices": [
+      "buff_up",
+      "debuff_down",
+      "strip",
+      "steal",
+      "invert",
+      "taunt_tether",
+      "mix_mark",
+      "perm_def_crack"
+     ],
+     "default": "debuff_down"
+    }
+   }
+  },
+  "proj_arc_single": {
+   "name": "Lobbed Projectile Arc Engine",
+   "category": "Projectile Engine",
+   "layer": "foreground_sweep",
+   "color": "#b45309",
+   "summary": "Drives parabolic right-to-left projectile travel with spin, shadow projection, and impact trigger. Swaps sprite for wet clay, chili seeds, 1989 Mason jar, yellow penalty flag, buttered popcorn, and 80-lb toolbox.",
+   "params": {
+    "spriteId": {
+     "kind": "sprite",
+     "default": ""
+    },
+    "startPos": {
+     "kind": "who"
+    },
+    "endPos": {
+     "kind": "who"
+    },
+    "arcHeightPx": {
+     "kind": "range",
+     "lo": 45,
+     "hi": 110,
+     "default": 70,
+     "int": true
+    },
+    "spinSpeed": {
+     "kind": "number",
+     "default": 2,
+     "int": true
+    },
+    "impactVfxId": {
+     "kind": "effect",
+     "default": ""
+    }
+   }
+  },
+  "proj_boomerang_return": {
+   "name": "Boomerang & Fishing-Line Pull Engine",
+   "category": "Projectile Engine",
+   "layer": "foreground_sweep",
+   "color": "#0284c7",
+   "summary": "Handles out-and-back projectiles that physically bonk the enemy at t=0.5 and curve cleanly back to the caster's hand (soup dumpling, wrist-strap controller, tattered Lamby, and Boppy's pier fishing line + lure).",
+   "params": {
+    "spriteId": {
+     "kind": "sprite",
+     "default": ""
+    },
+    "hasLine": {
+     "kind": "bool",
+     "default": false
+    },
+    "pullTargetToFront": {
+     "kind": "bool",
+     "default": false
+    },
+    "apexTimeFrac": {
+     "kind": "number",
+     "default": 0.5,
+     "int": false
+    }
+   }
+  },
+  "proj_ally_handoff_party": {
+   "name": "Ally Toss & Party Snack Distribution Engine",
+   "category": "Projectile Engine",
+   "layer": "foreground_sweep",
+   "color": "#059669",
+   "summary": "Arcs tangible items directly from caster into one or all four ally slots (neon NeeDoh ball, frosted cinnamon roll, diaper-bag snacks, dairy-free snack pack, warm apple muffins from 12-cup tin, rental e-bike chirp).",
+   "params": {
+    "spriteId": {
+     "kind": "sprite",
+     "default": ""
+    },
+    "targetAllyIds": {
+     "kind": "who"
+    },
+    "arcHeightPx": {
+     "kind": "range",
+     "lo": 30,
+     "hi": 55,
+     "default": 42,
+     "int": true
+    },
+    "onCatchVfxId": {
+     "kind": "effect",
+     "default": ""
+    }
+   }
+  },
+  "proj_ground_hazard_mat": {
+   "name": "Persistent Ground Hazard & Lava Floor Engine",
+   "category": "Projectile Engine",
+   "layer": "ground_decal",
+   "color": "#ea580c",
+   "summary": "Renders perspective-matched floor overlays beneath enemy feet for multi-turn traps and floor-is-lava sequences: Wet-Floor soapy slick, Bedazzle-Gun hot-glue rhinestone mat, bubbling molten lava under floating sofa cushions, and Skateboard rolling debris.",
+   "params": {
+    "hazardType": {
+     "kind": "choice",
+     "choices": [
+      "wet_floor",
+      "hot_glue",
+      "molten_lava",
+      "skateboard_debris"
+     ],
+     "default": "wet_floor"
+    },
+    "durationRounds": {
+     "kind": "range",
+     "lo": 1,
+     "hi": 2,
+     "default": 1,
+     "int": true
+    }
+   }
+  },
+  "setpiece_black_porsche_suv": {
+   "name": "Delta 360 Black Tarmac Porsche SUV",
+   "category": "Custom Set-Piece",
+   "layer": "foreground_sweep",
+   "color": "#db2777",
+   "summary": "Screeches right-to-left across the enemy half of the clearing with blinding LED high-beams and swirling jet-wash rings for Tom's Frequent Flier Capstone.",
+   "params": {
+    "speedPxSec": {
+     "kind": "number",
+     "default": 1150,
+     "int": true
+    },
+    "highBeamAlpha": {
+     "kind": "number",
+     "default": 0.85,
+     "int": false
+    },
+    "dustTrail": {
+     "kind": "bool",
+     "default": true
+    }
+   }
+  },
+  "setpiece_delta_one_pod_doors": {
+   "name": "Delta One Privacy-Pod Sliding Doors",
+   "category": "Custom Set-Piece",
+   "layer": "unit_overlay",
+   "color": "#0f766e",
+   "summary": "Materializes and physically glides shut around adjacent allies during Suite Door Slide, clicking cabin lock lights on with redirect tethers back to Tom.",
+   "params": {
+    "allyIds": {
+     "kind": "who"
+    },
+    "closeDurationMs": {
+     "kind": "number",
+     "default": 420,
+     "int": true
+    },
+    "amberLedPulse": {
+     "kind": "bool",
+     "default": true
+    }
+   }
+  },
+  "setpiece_giant_sky_controller": {
+   "name": "Giant Sky-Dropped Floor Controller (Konami Code)",
+   "category": "Custom Set-Piece",
+   "layer": "ground_decal",
+   "color": "#9333ea",
+   "summary": "Drops from the sky beneath Tom's sneakers so he can hop across the oversized D-pad and B/A buttons reciting the Konami Code, then fires rainbow starbeams and retro meteors across all foes.",
+   "params": {
+    "buttonSeq": {
+     "kind": "list",
+     "default": [
+      "U",
+      "U",
+      "D",
+      "D",
+      "L",
+      "R",
+      "L",
+      "R",
+      "B",
+      "A"
+     ]
+    },
+    "meteorCount": {
+     "kind": "number",
+     "default": 14,
+     "int": true
+    }
+   }
+  },
+  "setpiece_3tier_sparkler_cake": {
+   "name": "Three-Tier Showstopper Cake Cart",
+   "category": "Custom Set-Piece",
+   "layer": "behind_units",
+   "color": "#f59e0b",
+   "summary": "Rolls onto the party side blazing with golden sparkler candles to heal, cleanse, and infuse all allies' next attacks with Sizzle embers.",
+   "params": {
+    "sparklerCount": {
+     "kind": "number",
+     "default": 9,
+     "int": true
+    },
+    "partyInfusionTint": {
+     "kind": "color",
+     "default": "#ef4444"
+    }
+   }
+  },
+  "setpiece_diamond_gold_dumpling": {
+   "name": "Colossal Sky-Steamer & Diamond-Gold Dumpling",
+   "category": "Custom Set-Piece",
+   "layer": "foreground_sweep",
+   "color": "#eab308",
+   "summary": "Unlatches overhead to drop a house-sized Sparkling Diamond-Gold Soup Dumpling onto the chosen ally, bouncing softly with golden Pep bursts to grant a free skill.",
+   "params": {
+    "targetAllyId": {
+     "kind": "who"
+    },
+    "squashBounceFactor": {
+     "kind": "number",
+     "default": 0.18,
+     "int": false
+    },
+    "sparkleDensity": {
+     "kind": "number",
+     "default": 28,
+     "int": true
+    }
+   }
+  },
+  "setpiece_giant_easel_portrait": {
+   "name": "Giant Wooden Easel & Neon Portrait Reveal",
+   "category": "Custom Set-Piece",
+   "layer": "behind_units",
+   "color": "#a855f7",
+   "summary": "Flips open beside Grace as velvet falls away, blasting neon watercolor waves and craft gems into the target enemy to force a temporary Razzle Pet Peeve.",
+   "params": {
+    "targetEnemyId": {
+     "kind": "who"
+    },
+    "gemCount": {
+     "kind": "number",
+     "default": 24,
+     "int": true
+    },
+    "forcePeeve": {
+     "kind": "text",
+     "default": "Razzle"
+    }
+   }
+  },
+  "setpiece_broadway_spotlights": {
+   "name": "Broadway Spotlights & Flashbulb Rig",
+   "category": "Custom Set-Piece",
+   "layer": "screen_lighting",
+   "color": "#f59e0b",
+   "summary": "Dims the clearing slightly while sweeping three golden theatre spotlights onto Grace's soaring split-leap triple-twist dismount and popping flashbulbs at impact.",
+   "params": {
+    "dimAlpha": {
+     "kind": "number",
+     "default": 0.42,
+     "int": false
+    },
+    "flashCount": {
+     "kind": "number",
+     "default": 12,
+     "int": true
+    },
+    "trackCaster": {
+     "kind": "bool",
+     "default": true
+    }
+   }
+  },
+  "setpiece_sofa_cushion_fort": {
+   "name": "Sofa-Cushion Citadel & Twin-Lamby Lookouts",
+   "category": "Custom Set-Piece",
+   "layer": "unit_overlay",
+   "color": "#059669",
+   "summary": "Assembles a sturdy living-room pillow fort spanning all four party slots with both Lambies perched on top as lookouts blocking timeline pushback.",
+   "params": {
+    "partyShieldPct": {
+     "kind": "number",
+     "default": 0.25,
+     "int": false
+    },
+    "antiPushAnchor": {
+     "kind": "bool",
+     "default": true
+    }
+   }
+  },
+  "setpiece_blanket_kingdom_castle": {
+   "name": "Star-Lit Kingdom of Ten-Thousand Blankets",
+   "category": "Custom Set-Piece",
+   "layer": "behind_units",
+   "color": "#f97316",
+   "summary": "Rises behind the party bathed in warm twinkling string lights to deliver a 60% ally heal and full cleanse before rolling an AoE Sizzle warmth wave left.",
+   "params": {
+    "targetAllyId": {
+     "kind": "who"
+    },
+    "warmWaveDelayTurns": {
+     "kind": "number",
+     "default": 1,
+     "int": true
+    },
+    "twinkleStars": {
+     "kind": "number",
+     "default": 30,
+     "int": true
+    }
+   }
+  },
+  "setpiece_mega_whoopee_cushion": {
+   "name": "Trampoline-Sized Pink Whoopee Cushion",
+   "category": "Custom Set-Piece",
+   "layer": "ground_decal",
+   "color": "#ec4899",
+   "summary": "Slides smoothly under all enemies and detonates in an earth-shaking tuba-blasting PFFFFRT! shockwave that shatters active stances and drops enemy Attack.",
+   "params": {
+    "inflateMs": {
+     "kind": "number",
+     "default": 650,
+     "int": true
+    },
+    "blastScale": {
+     "kind": "number",
+     "default": 2.1,
+     "int": false
+    },
+    "breakStances": {
+     "kind": "bool",
+     "default": true
+    }
+   }
+  },
+  "setpiece_8seat_sunday_table": {
+   "name": "Full-House 8-Seat Sunday Dinner Table",
+   "category": "Custom Set-Piece",
+   "layer": "behind_units",
+   "color": "#d97706",
+   "summary": "Glides across the party side for 2 full rounds, bathing every teammate in candlelight so each ally turn opens with 15% heal, +1 Pep, and a random stat boost.",
+   "params": {
+    "durationRounds": {
+     "kind": "number",
+     "default": 2,
+     "int": true
+    },
+    "candleFlicker": {
+     "kind": "bool",
+     "default": true
+    }
+   }
+  },
+  "setpiece_rising_full_moon": {
+   "name": "Rising Full Moon & Moonlight Embrace",
+   "category": "Custom Set-Piece",
+   "layer": "screen_lighting",
+   "color": "#f59e0b",
+   "summary": "Lifts a radiant full moon above the clearing for Deedee's To the Moon & Back Capstone: 80% revive / 100% heal on target ally + warm AoE Sizzle shockwave (-2 Composure).",
+   "params": {
+    "targetAllyId": {
+     "kind": "who"
+    },
+    "moonRiseMs": {
+     "kind": "number",
+     "default": 1800,
+     "int": true
+    },
+    "sizzleShave": {
+     "kind": "number",
+     "default": 2,
+     "int": true
+    }
+   }
+  },
+  "setpiece_50yr_dust_tsunami": {
+   "name": "Fifty-Year Sparkling Soapy Tsunami",
+   "category": "Custom Set-Piece",
+   "layer": "foreground_sweep",
+   "color": "#0284c7",
+   "summary": "Surges right-to-left across the entire enemy clearing, scrubbing away all enemy hazards, buffs, and stealth while leaving every foe gleaming and Drenched.",
+   "params": {
+    "sweepMs": {
+     "kind": "number",
+     "default": 1650,
+     "int": true
+    },
+    "wipeHazards": {
+     "kind": "bool",
+     "default": true
+    },
+    "wipeBuffs": {
+     "kind": "bool",
+     "default": true
+    }
+   }
+  },
+  "setpiece_rikers_iron_gates": {
+   "name": "Gleaming Brass-and-Iron Rikers Warden Gates",
+   "category": "Custom Set-Piece",
+   "layer": "unit_overlay",
+   "color": "#b45309",
+   "summary": "Thunders down vertically in front of all four party slots for 2 rounds (-40% AoE damage taken + Clobber melee thorns) as Boppy slams his brass keys.",
+   "params": {
+    "dropMs": {
+     "kind": "number",
+     "default": 480,
+     "int": true
+    },
+    "screenShakePx": {
+     "kind": "number",
+     "default": 6,
+     "int": true
+    },
+    "durationRounds": {
+     "kind": "number",
+     "default": 2,
+     "int": true
+    }
+   }
+  },
+  "setpiece_cattail_pier_leviathan": {
+   "name": "Cattail Pier Pilings, Swells & Breaching Catch (NO BOAT)",
+   "category": "Custom Set-Piece",
+   "layer": "foreground_sweep",
+   "color": "#0369a1",
+   "summary": "Strictly honors the NO-BOAT canon lock: anchors weathered Cattail Pier pilings and a shore folding chair on Boppy's edge while Long Island Sound swells surge on the left for both Trophy Striper Haul and the whale-sized Leviathan breach.",
+   "params": {
+    "fishTier": {
+     "kind": "choice",
+     "choices": [
+      "striper",
+      "leviathan"
+     ],
+     "default": "striper"
+    },
+    "tallySpent": {
+     "kind": "range",
+     "lo": 0,
+     "hi": 4,
+     "default": 0,
+     "int": true
+    },
+    "showFoldingChair": {
+     "kind": "bool",
+     "default": true
+    }
+   }
+  },
+  "setpiece_sentient_ghost_pepper": {
+   "name": "Sentient Back-Garden Ghost Pepper",
+   "category": "Custom Set-Piece",
+   "layer": "foreground_sweep",
+   "color": "#dc2626",
+   "summary": "Floats forward off Boppy's open palm and unleashes a massive roaring cone of Sizzle fire that triggers 2 full burn ticks across all foes without consuming burns.",
+   "params": {
+    "coneWidthDeg": {
+     "kind": "number",
+     "default": 42,
+     "int": true
+    },
+    "instantBurnTicks": {
+     "kind": "number",
+     "default": 2,
+     "int": true
+    }
+   }
+  },
+  "setpiece_leaning_grand_amphora": {
+   "name": "Leaning Museum-Sized Grand Terracotta Amphora",
+   "category": "Custom Set-Piece",
+   "layer": "unit_overlay",
+   "color": "#c2410c",
+   "summary": "Rises calmly between the formations to absorb 2 hits before shattering outward across every foe in razor-sharp glazed Clobber and Razzle shards (-2 Composure).",
+   "params": {
+    "hitsToAbsorb": {
+     "kind": "number",
+     "default": 2,
+     "int": true
+    },
+    "shardCount": {
+     "kind": "number",
+     "default": 36,
+     "int": true
+    },
+    "dualFlavor": {
+     "kind": "who"
+    }
+   }
+  },
+  "setpiece_waymo_and_la_metro": {
+   "name": "Autonomous Waymo SUV & LA Metro Express Train",
+   "category": "Custom Set-Piece",
+   "layer": "foreground_sweep",
+   "color": "#7c3aed",
+   "summary": "Two iconic car-free LA transit set-pieces for TNB Longboarder: the white Waymo SUV lidar-blinding foes while opening its door for a 40% revive, and the gleaming LA Metro train rushing alongside steep Baxter Street lines.",
+   "params": {
+    "vehicle": {
+     "kind": "choice",
+     "choices": [
+      "waymo_rescue",
+      "la_metro_express"
+     ],
+     "default": "waymo_rescue"
+    },
+    "lidarFlash": {
+     "kind": "bool",
+     "default": true
+    },
+    "ruckusGain": {
+     "kind": "number",
+     "default": 20,
+     "int": true
+    }
+   }
+  },
+  "setpiece_eighth_dining_chair": {
+   "name": "Ornate Eighth Wooden Dining Chair",
+   "category": "Custom Set-Piece",
+   "layer": "behind_units",
+   "color": "#db2777",
+   "summary": "Slides cleanly beneath Nara so she can hop onto her own human seat on all four paws and bark her pie-crust decree (-1 Composure all foes, party mental cleanse, +20% pull).",
+   "params": {
+    "seatHeightPx": {
+     "kind": "number",
+     "default": 28,
+     "int": true
+    },
+    "decreeBarks": {
+     "kind": "number",
+     "default": 3,
+     "int": true
+    }
+   }
+  },
+  "setpiece_stadium_jumbotron": {
+   "name": "Stadium Jumbotron Instant Replay Screen",
+   "category": "Custom Set-Piece",
+   "layer": "screen_lighting",
+   "color": "#eab308",
+   "summary": "Drops above the meadow for Justin's Armchair Ref Capstone, visibly rewinding 50% of the last ally hit taken while slamming the offending monster with a -25% Def Racket penalty beam.",
+   "params": {
+    "rewindAllyId": {
+     "kind": "who"
+    },
+    "offenderEnemyId": {
+     "kind": "who"
+    },
+    "rewindPct": {
+     "kind": "number",
+     "default": 0.5,
+     "int": false
+    }
+   }
+  },
+  "setpiece_michael_sprint_and_chopper": {
+   "name": "6'4\" Michael Toddler Sprint & LivNews Chopper",
+   "category": "Custom Set-Piece",
+   "layer": "foreground_sweep",
+   "color": "#db2777",
+   "summary": "Olivia's two signature large-scale set-pieces: 6'4\" Michael sprinting across the field to startle foes (-25% bar) while sliding hot dinner to the party, and the LivNews chopper sweeping twin searchlights with a BREAKING NEWS ticker.",
+   "params": {
+    "mode": {
+     "kind": "choice",
+     "choices": [
+      "michael_sprint",
+      "livnews_chopper"
+     ],
+     "default": "michael_sprint"
+    },
+    "tickerText": {
+     "kind": "text",
+     "default": "BREAKING NEWS"
+    }
+   }
+  },
+  "setpiece_gym_bleachers_and_ruckus_crest": {
+   "name": "Neon Gym Bleachers Pyro & 100% Family Ruckus Crest",
+   "category": "Custom Set-Piece",
+   "layer": "screen_lighting",
+   "color": "#4f46e5",
+   "summary": "Shared climactic arena overlays: neon championship gym bleachers and pyro for Olivia's Rope Champ Capstone, plus the 50% Double Team link flash and 100% Full Family Ruckus storybook crest.",
+   "params": {
+    "mode": {
+     "kind": "choice",
+     "choices": [
+      "gym_pyro",
+      "ruckus_50_link",
+      "ruckus_100_crest"
+     ],
+     "default": "gym_pyro"
+    },
+    "composureCap": {
+     "kind": "number",
+     "default": 4,
+     "int": true
+    }
+   }
+  }
+ },
+ "sounds": [
+  "advance",
+  "allDoors",
+  "blocked",
+  "boing",
+  "bonk",
+  "boop",
+  "bump",
+  "charge",
+  "coin",
+  "combo",
+  "dance",
+  "ding",
+  "doorIn",
+  "doorOut",
+  "equip",
+  "fanfare",
+  "fireball",
+  "fountain",
+  "giggle",
+  "grumpAttack",
+  "grumpDie",
+  "grumpHurt",
+  "grumpTaunt",
+  "guard",
+  "heal",
+  "hitEnemy",
+  "hitParty",
+  "intro",
+  "jumpWhistle",
+  "kiss",
+  "laser",
+  "levelChime",
+  "levelUp",
+  "lineClear",
+  "look",
+  "lose",
+  "menuClose",
+  "menuOpen",
+  "move",
+  "nope",
+  "pickup",
+  "raspberry",
+  "run",
+  "select",
+  "sell",
+  "slash",
+  "slideWhistle",
+  "splat",
+  "step",
+  "stun",
+  "sulk",
+  "tab",
+  "talk",
+  "tetris",
+  "text",
+  "thud",
+  "travel",
+  "unequip",
+  "vapor",
+  "whoosh",
+  "win"
+ ]
+}

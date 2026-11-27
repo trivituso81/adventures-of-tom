@@ -98,7 +98,7 @@ function b3vArm(head,cid,sec,hit){
   try { if(hit&&T&&!T.noHit&&typeof sec==='number'&&isFinite(sec)) { b3vHold(head,B3P.t+Math.max(0,sec),T); if(head&&head.src&&head.src[0]!=='f') b3vShake(B3P.t+Math.max(0,sec),T.shake); } } catch(err) { try { gameFault('hit stop armed',err); } catch(e) {} }
   try {
     if(!head||head.t!=='act'||!head.src||head.src[0]==='f'||typeof sec!=='number'||!isFinite(sec)) return false;   // a foe's move draws no library effect (phase 14)
-    const E=msEffects(head); if(!E.length||!E.some(e=>P1_VFX[e.fx])) return false;
+    const E=msEffects(head); if(!E.length||!E.some(e=>P1_VFX[e.fx]||b3gBench())) return false;   // movebench7: in the workbench preview an effect with no drawer still arms, to show its pink box
     const tg=(head.tgts&&head.tgts.length?head.tgts:[head.src]).slice(), t0=B3P.t+Math.max(0,sec), imp=T&&T.impactMs!=null?T.impactMs:0; let maxLen=0;
     const cue={M:{impact_ms:imp,vfx:E.map(e=>e.fx),fxp:Object.fromEntries(E.filter(e=>e.params).map(e=>[e.fx,e.params]))},fx:E,id:head.id,src:head.src,tgts:tg,t0,end:t0,dead:{},tArm:B3P.t};
     for(const e of E){ const L=P1_VFX_MS[e.fx],p=e.params||null; let len; try { len=(typeof L==='function'?L(p):(L||500)); } catch(x) { len=6000; } maxLen=Math.max(maxLen,len+b3vAtSec(cue,e)*1000); }
@@ -117,6 +117,14 @@ function b3vGeo(key){
   if(u.side!=='foe'){ const d=B3P.at&&B3P.at[key]; if(d) return {x:d.cx,y:d.base-Math.round(d.h*.5),h:d.h}; }
   const S=b3Spot(key); return {x:S.x,y:S.y,h:Math.max(1,S.base-S.top)};
 }
+// movebench7: an effect id with no drawer (a library entry that is not built) is a pink dashed box in the workbench preview only (cfg.bench; claude/movebench-plan.md section e.3). It sits on the target for 0.9 s from the
+// effect's moment and says what it is and that it is not final. The game never draws it.
+function b3vPink(id,e,c,t,aim){
+  const st=c.t0+b3vAtSec(c,e), u=(t-st)/.9; if(!(u>=0&&u<=1)||!aim) return;
+  const w=84,h=54,x=aim.x-w/2,y=aim.y-h/2; gfx.save(); gfx.globalAlpha=u<.8?1:(1-u)/.2; gfx.fillStyle='rgba(255,91,210,.22)'; gfx.fillRect(x,y,w,h); gfx.strokeStyle='#ff5bd2'; gfx.lineWidth=2; gfx.setLineDash([6,4]); gfx.strokeRect(x,y,w,h);
+  gfx.setLineDash([]); gfx.fillStyle='#ff5bd2'; gfx.font='700 9px sans-serif'; gfx.textAlign='center'; gfx.textBaseline='middle';
+  gfx.fillText(String(id).replace(/^(vfx_core_|vfx_|proj_|setpiece_)/,'').replace(/_/g,' ').slice(0,18),aim.x,aim.y-5); gfx.fillText('NOT FINAL',aim.x,aim.y+9); gfx.restore();
+}
 // Draw every active cue's effects of one layer at fight time t. Called from b3Draw at each layer's point.
 function b3vDraw(layer,t){
   if(!B3V.cues.length||typeof p1DrawVfx!=='function') return;
@@ -130,7 +138,8 @@ function b3vDraw(layer,t){
       let foe=foes.length?foes[0].g:null;
       if(!foe){ const f=B3.F.foes.find(q=>B3P.foe[q.key]&&!(B3.view&&B3.view.u[q.key]&&B3.view.u[q.key].ko)); foe=f?b3vGeo(f.key):aim; }
       for(const e of c.fx){
-        const id=e.fx; if(!P1_VFX[id]||c.dead[id]||p1Layer(id)!==layer) continue;
+        const id=e.fx; if(!P1_VFX[id]){ if(b3gBench()&&layer==='unit_overlay') b3vPink(id,e,c,t,aim); continue; }   // no drawer: the preview shows a pink box, the game shows nothing
+        if(c.dead[id]||p1Layer(id)!==layer) continue;
         const ms=c.M.impact_ms+(t-c.t0-b3vAtSec(c,e))*1000,Me={impact_ms:c.M.impact_ms,vfx:[id],fxp:e.params?{[id]:e.params}:null};
         const base={meta:Me,layer,foe,dead:c.dead},S={id:c.id},self=!!P1_VFX_SELF[id],on=e.on&&e.on!=='auto'?e.on:(P1_VFX_ON[id]||(self?'self':'target'));
         const al=tgs.filter(q=>q.u.side!=='foe');

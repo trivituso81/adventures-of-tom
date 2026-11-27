@@ -5,6 +5,8 @@
 #   - data/move-specs.js is not what the files give (bundle.py --check), or the files are not what the old tables give (migrate.py --check);
 #   - an animation that has something today (a clip, a stage row, a manifest row, a Pass-1 row, a body clip) has no file, or a file says something the old tables do not;
 #   - engine/b3-spec.js is not loaded after data/move-specs.js, or msLive, msSet and msReset do not answer as documented (checked in node, no browser);
+#   - (movebench7) data/movebench-fx.json is not what fxparams.py gives; a setting of any of the 37 effects has no control kind or no words in data/movebench-words.json (fx.params, fx.choices),
+#     an effect has no name or line of words, or a drawer's default is outside its own range;
 #   - a spec disagrees with what the engine plays today (golden.json): the effects a move arms, their contact moment, the hit stop, the stage steps, the body clip.
 # Prints the counts and the things a spec names that do not exist yet (a clip not baked): those are listed, not failures.
 # Usage (repo root): python3 -I tools/movebench/spec_test.py     Prints FAILS: [] when all pass.
@@ -134,6 +136,35 @@ else:
         if g['kind'] in('act','state') and not (g['kind']=='act' and not L.get('body')):
             pass
     notes.append('%d golden records read against the specs, %d disagree'%(len(GD),bad))
+
+# ---------- movebench7: every effect and setting reaches the page with a control and words ----------
+import fxparams
+FXJ=json.load(open(os.path.join(ROOT,'data','movebench-fx.json'),encoding='utf8')); WD=json.load(open(os.path.join(ROOT,'data','movebench-words.json'),encoding='utf8'))
+if fxparams.text(fxparams.build())!=open(os.path.join(ROOT,'data','movebench-fx.json'),encoding='utf8').read(): fail('data/movebench-fx.json is not what fxparams.py gives: run python3 tools/movebench/fxparams.py')
+FW=WD.get('fx') or {}; nset=0; nfx=0
+for fid,D in FXJ['fx'].items():
+    nfx+=1
+    it=(FW.get('items') or {}).get(fid)
+    if not it or not it.get('name') or not it.get('what'): fail('%s: no name and line of words in data/movebench-words.json fx.items'%fid)
+    for n,q in D['params'].items():
+        k=q['kind']
+        if k not in fxparams.KINDS: fail('%s.%s: kind %r has no control'%(fid,n,k)); continue
+        if k=='who': continue
+        nset+=1
+        pw=(FW.get('params') or {}).get(n)
+        if not pw or not pw.get('label'): fail('%s.%s: no words in fx.params'%(fid,n))
+        if k=='choice':
+            for c in q['choices']:
+                if c not in (FW.get('choices') or {}): fail('%s.%s: the choice %r has no words in fx.choices'%(fid,n,c))
+            if q['default'] not in q['choices']: fail('%s.%s: default %r is not a choice'%(fid,n,q['default']))
+        if k=='range' and not (q['lo']<=q['default']<=q['hi']): fail('%s.%s: default %r is outside %s to %s'%(fid,n,q['default'],q['lo'],q['hi']))
+        if k=='number' and not isinstance(q['default'],(int,float)): fail('%s.%s: no default number'%(fid,n))
+        if k=='color' and not (isinstance(q['default'],str) and q['default'].startswith('#')): fail('%s.%s: no default colour'%(fid,n))
+for sec in ('when','on','sound'):
+    if sec not in WD: fail('data/movebench-words.json has no %s block'%sec)
+if '\u2014' in open(os.path.join(ROOT,'data','movebench-fx.json'),encoding='utf8').read(): fail('data/movebench-fx.json holds an em dash')
+if set(FXJ['fx'])!=set(C['fx'])-set(schema.EXTRA_FX): fail('movebench-fx.json and the library name different effects')
+notes.append('movebench7: %d effects, %d settings with a control kind and words'%(nfx,nset))
 if warns:
     notes.append('named and not there yet (%d): %s'%(len(warns),'; '.join(sorted(set(w.split(': ',1)[1] for w in warns))[:6])))
 for n in notes: print(n)

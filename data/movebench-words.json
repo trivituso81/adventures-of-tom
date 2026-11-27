@@ -207,23 +207,12 @@
   "empty": "Nothing set.",
   "stage_one": "1 step",
   "stage_many": "{n} steps",
-  "fx_one": "1 effect",
-  "fx_many": "{n} effects",
   "snd_one": "1 cue",
   "snd_many": "{n} cues",
   "at_contact": "at the hit",
   "at_sec": "{s} s",
   "at_plus": "{s} s after the hit",
-  "at_mark": "at {mark}",
-  "off": "switched off",
-  "on_auto": "",
-  "on": {
-   "target": "On the monster",
-   "each_target": "On every monster",
-   "self": "On him",
-   "each_ally": "On each family member",
-   "field": "Over the whole field"
-  }
+  "at_mark": "at {mark}"
  },
  "stage_do": {
   "words": "Words on screen",
@@ -300,5 +289,839 @@
   "brought": "Brought back into your draft.",
   "brought_hint": "Save draft to keep it, or Undo.",
   "failed": "Could not read the versions: {why}."
+ },
+ "fx": {
+  "note": "Plain words for the Effects section. items: name and one line for each effect; params: label, hint and (for a number) its three steps; choices: the words of each choice.",
+  "items": {
+   "vfx_core_clobber_impact": {
+    "name": "Starburst hit",
+    "what": "A yellow starburst where a hit lands, one to seven times."
+   },
+   "vfx_core_sizzle_wave": {
+    "name": "Heat wave",
+    "what": "A red heat wave with burning embers."
+   },
+   "vfx_core_drench_splash": {
+    "name": "Water splash",
+    "what": "A splash of water, from a spray to a wave."
+   },
+   "vfx_core_razzle_beam_arc": {
+    "name": "Purple bolt",
+    "what": "A purple bolt, beam or chain of sparks."
+   },
+   "vfx_core_racket_rings": {
+    "name": "Brass rings",
+    "what": "Rings of loud sound that spread out."
+   },
+   "vfx_core_detonation_pops": {
+    "name": "Burst pops",
+    "what": "A small burst on the monster: steam, a boil, a short circuit and more."
+   },
+   "vfx_core_composure_break": {
+    "name": "Composure break",
+    "what": "The little pips over a monster shatter."
+   },
+   "vfx_core_heal_cleanse": {
+    "name": "Green heal",
+    "what": "A green glow that heals, cleans or brings someone back."
+   },
+   "vfx_core_shield_ward": {
+    "name": "Shield",
+    "what": "A shell around a family member: clay, glaze, a jacket and more."
+   },
+   "vfx_core_timeline_chevrons": {
+    "name": "Turn arrows",
+    "what": "Arrows that push or pull who goes next."
+   },
+   "vfx_core_status_debuff_badges": {
+    "name": "Status badges",
+    "what": "Little badges that show something went up, went down or was taken."
+   },
+   "proj_arc_single": {
+    "name": "Thrown object",
+    "what": "Something thrown in an arc from the family member to the monster."
+   },
+   "proj_boomerang_return": {
+    "name": "Boomerang",
+    "what": "Something thrown that comes back, or pulls the monster in on a line."
+   },
+   "proj_ally_handoff_party": {
+    "name": "Pass to the family",
+    "what": "Something tossed from one family member to the next."
+   },
+   "proj_ground_hazard_mat": {
+    "name": "Floor hazard",
+    "what": "A patch on the floor that stays: a wet floor, glue, lava."
+   },
+   "setpiece_black_porsche_suv": {
+    "name": "Black Porsche",
+    "what": "A black Porsche rolls across the field with its high beams on."
+   },
+   "setpiece_delta_one_pod_doors": {
+    "name": "Pod doors",
+    "what": "Sliding pod doors close around the family."
+   },
+   "setpiece_giant_sky_controller": {
+    "name": "Giant game controller",
+    "what": "A huge controller drops from the sky and rains meteors."
+   },
+   "setpiece_3tier_sparkler_cake": {
+    "name": "Sparkler cake",
+    "what": "A three-tier cake on a cart, with sparklers."
+   },
+   "setpiece_diamond_gold_dumpling": {
+    "name": "Gold dumpling",
+    "what": "A giant gold dumpling drops on a family member."
+   },
+   "setpiece_giant_easel_portrait": {
+    "name": "Giant easel",
+    "what": "A giant easel flips open and a neon portrait blasts out."
+   },
+   "setpiece_broadway_spotlights": {
+    "name": "Spotlights",
+    "what": "The field goes dark and three spotlights swing in."
+   },
+   "setpiece_sofa_cushion_fort": {
+    "name": "Cushion fort",
+    "what": "A fort of sofa cushions with two lambs on top."
+   },
+   "setpiece_blanket_kingdom_castle": {
+    "name": "Blanket castle",
+    "what": "A castle of blankets under string lights."
+   },
+   "setpiece_mega_whoopee_cushion": {
+    "name": "Giant whoopee cushion",
+    "what": "A giant pink cushion inflates and blasts."
+   },
+   "setpiece_8seat_sunday_table": {
+    "name": "Sunday dinner table",
+    "what": "A long dinner table with eight chairs and candles."
+   },
+   "setpiece_rising_full_moon": {
+    "name": "Full moon",
+    "what": "A full moon rises and moonlight falls on one ally."
+   },
+   "setpiece_50yr_dust_tsunami": {
+    "name": "Soapy wave",
+    "what": "A huge sparkling soapy wave sweeps across the field."
+   },
+   "setpiece_rikers_iron_gates": {
+    "name": "Iron gates",
+    "what": "Brass and iron gates drop down with a thud."
+   },
+   "setpiece_cattail_pier_leviathan": {
+    "name": "Pier and big fish",
+    "what": "A pier and a giant fish breaching out of the water."
+   },
+   "setpiece_sentient_ghost_pepper": {
+    "name": "Ghost pepper",
+    "what": "A ghost pepper with a face roars a cone of fire."
+   },
+   "setpiece_leaning_grand_amphora": {
+    "name": "Leaning urn",
+    "what": "A giant urn soaks up hits, then shatters."
+   },
+   "setpiece_waymo_and_la_metro": {
+    "name": "Car or train",
+    "what": "A self-driving car or a Metro train crosses the field."
+   },
+   "setpiece_eighth_dining_chair": {
+    "name": "Eighth chair",
+    "what": "An ornate wooden chair slides in and barks pop out."
+   },
+   "setpiece_stadium_jumbotron": {
+    "name": "Replay screen",
+    "what": "A stadium screen replays the moment."
+   },
+   "setpiece_michael_sprint_and_chopper": {
+    "name": "Sprint or news helicopter",
+    "what": "A toddler sprint, or a news helicopter with a ticker."
+   },
+   "setpiece_gym_bleachers_and_ruckus_crest": {
+    "name": "Gym bleachers",
+    "what": "Neon bleachers with fireworks, or the family crest."
+   }
+  },
+  "params": {
+   "hits": {
+    "label": "How many hits",
+    "hint": "One to seven bursts, one after another."
+   },
+   "intervalMs": {
+    "label": "Time between hits",
+    "hint": "How long between one burst and the next.",
+    "steps": [
+     "Quick",
+     "Normal",
+     "Slow"
+    ]
+   },
+   "scale": {
+    "label": "Size",
+    "hint": "How big each burst is."
+   },
+   "pierceShield": {
+    "label": "Cracks the shield",
+    "hint": "Shows a crack across a shield."
+   },
+   "color": {
+    "label": "Colour",
+    "hint": "The colour of the burst."
+   },
+   "scope": {
+    "label": "Who it reaches",
+    "hint": "One monster, all of them, or two."
+   },
+   "applyToasty": {
+    "label": "Leaves them toasty",
+    "hint": "Shows the toasty mark."
+   },
+   "fiveAlarm": {
+    "label": "Five-alarm",
+    "hint": "A bigger fire."
+   },
+   "triggerTicks": {
+    "label": "Burn ticks",
+    "hint": "How many burn ticks show."
+   },
+   "mode": {
+    "label": "Style",
+    "hint": "Which version of the effect."
+   },
+   "tintHex": {
+    "label": "Colour of the water",
+    "hint": "Tints the splash."
+   },
+   "applyDrenched": {
+    "label": "Leaves them soaked",
+    "hint": "Shows the soaked mark."
+   },
+   "style": {
+    "label": "Style",
+    "hint": "Which version of the bolt."
+   },
+   "splashPct": {
+    "label": "How much spreads",
+    "hint": "How much of the hit splashes to the next one."
+   },
+   "shape": {
+    "label": "Shape",
+    "hint": "How the sound spreads."
+   },
+   "count": {
+    "label": "How many rings",
+    "hint": "Three to five."
+   },
+   "targetScope": {
+    "label": "Who it reaches",
+    "hint": "One monster or all of them."
+   },
+   "recipe": {
+    "label": "Which burst",
+    "hint": "The kind of pop."
+   },
+   "pipsShaved": {
+    "label": "Pips lost",
+    "hint": "How many pips shatter."
+   },
+   "triggeredBreak": {
+    "label": "All pips break",
+    "hint": "Every pip shatters."
+   },
+   "healPct": {
+    "label": "How much it heals",
+    "hint": "Percent of health."
+   },
+   "cleanse": {
+    "label": "Cleans away bad things",
+    "hint": "Shows the cleanse sparkle."
+   },
+   "isRevive": {
+    "label": "Brings someone back",
+    "hint": "Shows the revive."
+   },
+   "overhealShield": {
+    "label": "Extra turns into a shield",
+    "hint": "Shows a shield for the extra."
+   },
+   "skin": {
+    "label": "What the shield is made of",
+    "hint": "The look of the shell."
+   },
+   "shieldPct": {
+    "label": "How strong",
+    "hint": "Percent the shield absorbs."
+   },
+   "dir": {
+    "label": "Which way",
+    "hint": "Who moves and how."
+   },
+   "pct": {
+    "label": "How far",
+    "hint": "How far along the turn bar."
+   },
+   "pepDelta": {
+    "label": "Pep change",
+    "hint": "Pep gained or lost."
+   },
+   "spriteId": {
+    "label": "What is thrown",
+    "hint": "One of the drawn objects."
+   },
+   "arcHeightPx": {
+    "label": "How high it arcs",
+    "hint": "The top of the throw."
+   },
+   "spinSpeed": {
+    "label": "How fast it spins",
+    "hint": "Turns during the flight.",
+    "steps": [
+     "Slow",
+     "Normal",
+     "Fast"
+    ]
+   },
+   "impactVfxId": {
+    "label": "What it does on landing",
+    "hint": "Another effect of this move."
+   },
+   "hasLine": {
+    "label": "Shows the line",
+    "hint": "A line back to the thrower."
+   },
+   "pullTargetToFront": {
+    "label": "Pulls the monster forward",
+    "hint": "The monster is dragged to the front."
+   },
+   "apexTimeFrac": {
+    "label": "When it turns back",
+    "hint": "How far through the flight it turns.",
+    "steps": [
+     "Early",
+     "Middle",
+     "Late"
+    ]
+   },
+   "onCatchVfxId": {
+    "label": "What it does when caught",
+    "hint": "Another effect of this move."
+   },
+   "hazardType": {
+    "label": "Which hazard",
+    "hint": "What is on the floor."
+   },
+   "durationRounds": {
+    "label": "How many rounds it stays",
+    "hint": "Rounds the picture stays.",
+    "steps": [
+     "Short",
+     "Normal",
+     "Long"
+    ]
+   },
+   "speedPxSec": {
+    "label": "How fast it drives",
+    "hint": "Speed across the field.",
+    "steps": [
+     "Slow",
+     "Normal",
+     "Fast"
+    ]
+   },
+   "highBeamAlpha": {
+    "label": "High beams",
+    "hint": "How bright the high beams are.",
+    "steps": [
+     "Dim",
+     "Normal",
+     "Bright"
+    ]
+   },
+   "dustTrail": {
+    "label": "Dust trail",
+    "hint": "Dust behind the wheels."
+   },
+   "closeDurationMs": {
+    "label": "How fast the doors close",
+    "hint": "Time to close.",
+    "steps": [
+     "Quick",
+     "Normal",
+     "Slow"
+    ]
+   },
+   "amberLedPulse": {
+    "label": "Amber light pulses",
+    "hint": "The little light on the doors."
+   },
+   "buttonSeq": {
+    "label": "Button code",
+    "hint": "The buttons that light, in order."
+   },
+   "meteorCount": {
+    "label": "How many meteors",
+    "hint": "Rainbow meteors."
+   },
+   "sparklerCount": {
+    "label": "How many sparklers",
+    "hint": "Sparklers on the cake."
+   },
+   "partyInfusionTint": {
+    "label": "Colour of the embers",
+    "hint": "Rising over the family."
+   },
+   "squashBounceFactor": {
+    "label": "How much it squashes",
+    "hint": "The bounce after landing.",
+    "steps": [
+     "Less",
+     "Normal",
+     "More"
+    ]
+   },
+   "sparkleDensity": {
+    "label": "How many sparkles",
+    "hint": "Sparkles around it."
+   },
+   "gemCount": {
+    "label": "How many gems",
+    "hint": "Craft gems that fly."
+   },
+   "forcePeeve": {
+    "label": "Word on the portrait",
+    "hint": "The word it shows."
+   },
+   "dimAlpha": {
+    "label": "How dark",
+    "hint": "How dark the field goes.",
+    "steps": [
+     "Light",
+     "Normal",
+     "Dark"
+    ]
+   },
+   "flashCount": {
+    "label": "How many flashes",
+    "hint": "Flashbulb pops."
+   },
+   "trackCaster": {
+    "label": "Lights follow him",
+    "hint": "The spotlights follow the family member."
+   },
+   "partyShieldPct": {
+    "label": "How strong",
+    "hint": "Shield for the family."
+   },
+   "antiPushAnchor": {
+    "label": "Shows the anchor",
+    "hint": "A small anchor mark."
+   },
+   "warmWaveDelayTurns": {
+    "label": "Turns before the warm wave",
+    "hint": "How long the wave waits.",
+    "steps": [
+     "Soon",
+     "Normal",
+     "Late"
+    ]
+   },
+   "twinkleStars": {
+    "label": "How many string lights",
+    "hint": "Twinkling lights."
+   },
+   "inflateMs": {
+    "label": "How long it inflates",
+    "hint": "Time to fill.",
+    "steps": [
+     "Quick",
+     "Normal",
+     "Slow"
+    ]
+   },
+   "blastScale": {
+    "label": "How big the blast is",
+    "hint": "Size of the blast.",
+    "steps": [
+     "Small",
+     "Normal",
+     "Big"
+    ]
+   },
+   "breakStances": {
+    "label": "Knocks monsters off balance",
+    "hint": "Shows the stance break."
+   },
+   "candleFlicker": {
+    "label": "Candles flicker",
+    "hint": "Candlelight moves."
+   },
+   "moonRiseMs": {
+    "label": "How long it rises",
+    "hint": "Time for the moon to rise.",
+    "steps": [
+     "Quick",
+     "Normal",
+     "Slow"
+    ]
+   },
+   "sizzleShave": {
+    "label": "Heat taken off",
+    "hint": "Size of the warm wave."
+   },
+   "sweepMs": {
+    "label": "How long it sweeps",
+    "hint": "Time across the field.",
+    "steps": [
+     "Quick",
+     "Normal",
+     "Slow"
+    ]
+   },
+   "wipeHazards": {
+    "label": "Wipes the floor hazards",
+    "hint": "Clears the floor."
+   },
+   "wipeBuffs": {
+    "label": "Wipes the boosts",
+    "hint": "Clears boosts."
+   },
+   "dropMs": {
+    "label": "How fast the gates drop",
+    "hint": "Time to fall.",
+    "steps": [
+     "Quick",
+     "Normal",
+     "Slow"
+    ]
+   },
+   "screenShakePx": {
+    "label": "Shake when they land",
+    "hint": "Pixels of shake.",
+    "steps": [
+     "Light",
+     "Normal",
+     "Heavy"
+    ]
+   },
+   "fishTier": {
+    "label": "Which fish",
+    "hint": "The size of the catch."
+   },
+   "tallySpent": {
+    "label": "Tally marks used",
+    "hint": "Marks on the tally."
+   },
+   "showFoldingChair": {
+    "label": "Shows the folding chair",
+    "hint": "A chair on the pier."
+   },
+   "coneWidthDeg": {
+    "label": "How wide the fire is",
+    "hint": "Width of the cone.",
+    "steps": [
+     "Narrow",
+     "Normal",
+     "Wide"
+    ]
+   },
+   "instantBurnTicks": {
+    "label": "Burn ticks",
+    "hint": "How many show."
+   },
+   "hitsToAbsorb": {
+    "label": "Hits it soaks up",
+    "hint": "Before it shatters."
+   },
+   "shardCount": {
+    "label": "How many shards",
+    "hint": "Pieces when it shatters."
+   },
+   "vehicle": {
+    "label": "Which one",
+    "hint": "A car or a train."
+   },
+   "lidarFlash": {
+    "label": "Laser flash",
+    "hint": "The car's scanner flashes."
+   },
+   "ruckusGain": {
+    "label": "Ruckus gained",
+    "hint": "Shown on the badge."
+   },
+   "seatHeightPx": {
+    "label": "How tall the seat is",
+    "hint": "Height of the chair.",
+    "steps": [
+     "Low",
+     "Normal",
+     "Tall"
+    ]
+   },
+   "decreeBarks": {
+    "label": "How many barks",
+    "hint": "Speech bubbles."
+   },
+   "rewindPct": {
+    "label": "How far it rewinds",
+    "hint": "Percent of the replay.",
+    "steps": [
+     "Short",
+     "Half",
+     "Long"
+    ]
+   },
+   "tickerText": {
+    "label": "Ticker words",
+    "hint": "The words that scroll."
+   },
+   "composureCap": {
+    "label": "Composure pips",
+    "hint": "The pips shown."
+   }
+  },
+  "choices": {
+   "single": "One monster",
+   "aoe": "All the monsters",
+   "dual": "Two at once",
+   "spray": "Spray",
+   "row_wave": "A wave along the row",
+   "aoe_cloud": "A cloud",
+   "shake_360": "A shake all round",
+   "beam": "A beam",
+   "chain_arc": "A chain of sparks",
+   "glitter_flick": "A glitter flick",
+   "blackout_flash": "A blackout flash",
+   "rings": "Rings",
+   "jagged_screech": "A jagged screech",
+   "cone_blast": "A cone blast",
+   "story_loops": "Story loops",
+   "steam": "Steam",
+   "panic_boil": "A panic boil",
+   "hydro_slip": "A slippery splash",
+   "short_circuit": "A short circuit",
+   "shatter_glitz": "Shattering glitter",
+   "sensory_overload": "Sensory overload",
+   "clay": "Clay",
+   "glaze": "Glaze",
+   "drywall": "Drywall",
+   "jacket": "A jacket",
+   "crust": "Crust",
+   "seatbelt": "A seatbelt",
+   "velvet": "Velvet",
+   "plush": "Plush",
+   "pull": "Pull forward",
+   "push": "Push back",
+   "swap": "Swap places",
+   "bonus_turn": "A bonus turn",
+   "buff_up": "Goes up",
+   "debuff_down": "Goes down",
+   "strip": "Taken away",
+   "steal": "Stolen",
+   "invert": "Flipped",
+   "taunt_tether": "A taunt line",
+   "mix_mark": "A mix mark",
+   "perm_def_crack": "A lasting crack",
+   "wet_floor": "A wet floor",
+   "hot_glue": "Hot glue",
+   "molten_lava": "Molten lava",
+   "skateboard_debris": "Skateboard junk",
+   "striper": "A striper",
+   "leviathan": "The big one",
+   "waymo_rescue": "The self-driving car",
+   "la_metro_express": "The Metro train",
+   "michael_sprint": "A toddler sprint",
+   "livnews_chopper": "The news helicopter",
+   "gym_pyro": "Gym fireworks",
+   "ruckus_50_link": "The link to the family",
+   "ruckus_100_crest": "The family crest"
+  },
+  "steps": [
+   "Less",
+   "Normal",
+   "More"
+  ],
+  "swatches": [
+   {
+    "k": "#ef4444",
+    "label": "Red"
+   },
+   {
+    "k": "#f97316",
+    "label": "Orange"
+   },
+   {
+    "k": "#eab308",
+    "label": "Gold"
+   },
+   {
+    "k": "#22c55e",
+    "label": "Green"
+   },
+   {
+    "k": "#0ea5e9",
+    "label": "Blue"
+   },
+   {
+    "k": "#8b5cf6",
+    "label": "Purple"
+   },
+   {
+    "k": "#ec4899",
+    "label": "Pink"
+   },
+   {
+    "k": "#f8fafc",
+    "label": "White"
+   }
+  ],
+  "letters": [
+   {
+    "k": "U",
+    "label": "Up"
+   },
+   {
+    "k": "D",
+    "label": "Down"
+   },
+   {
+    "k": "L",
+    "label": "Left"
+   },
+   {
+    "k": "R",
+    "label": "Right"
+   },
+   {
+    "k": "B",
+    "label": "B"
+   },
+   {
+    "k": "A",
+    "label": "A"
+   }
+  ],
+  "props": [
+   {
+    "k": "",
+    "label": "A plain ball"
+   },
+   {
+    "k": "clay",
+    "label": "Clay lump"
+   },
+   {
+    "k": "chili",
+    "label": "Chilies"
+   },
+   {
+    "k": "jar",
+    "label": "Jar"
+   },
+   {
+    "k": "flag",
+    "label": "Penalty flag"
+   },
+   {
+    "k": "popcorn",
+    "label": "Popcorn"
+   },
+   {
+    "k": "toolbox",
+    "label": "Toolbox"
+   },
+   {
+    "k": "dumpling",
+    "label": "Dumpling"
+   },
+   {
+    "k": "controller",
+    "label": "Controller"
+   },
+   {
+    "k": "lamb",
+    "label": "Lamby"
+   },
+   {
+    "k": "lure",
+    "label": "Fishing lure"
+   },
+   {
+    "k": "doh",
+    "label": "Dough ball"
+   },
+   {
+    "k": "cinnamon",
+    "label": "Cinnamon roll"
+   },
+   {
+    "k": "muffin",
+    "label": "Muffin"
+   },
+   {
+    "k": "snack",
+    "label": "Snack pack"
+   },
+   {
+    "k": "bike",
+    "label": "Bike"
+   }
+  ],
+  "p": {
+   "title": "Effects",
+   "add": "Add an effect",
+   "adding": "Pick an effect. Each picture is the game's own drawing.",
+   "cancel": "Never mind",
+   "change": "Change",
+   "close": "Done",
+   "remove": "Remove effect",
+   "switch_off": "Switch off",
+   "switch_on": "Switch on",
+   "off": "Switched off",
+   "empty": "No effects on this move.",
+   "count_one": "1 effect",
+   "count_many": "{n} effects",
+   "settings": "Settings",
+   "no_settings": "This effect has no settings to change.",
+   "who_note": "Where it lands follows the move. Use On whom.",
+   "back_normal": "Back to normal",
+   "pink_tag": "PINK BOXES ARE NOT FINAL",
+   "pink_note": "This effect has no drawing yet. The game shows nothing for it.",
+   "no_drawing": "no drawing yet",
+   "sprite_none": "A plain ball",
+   "effect_none": "Nothing",
+   "effect_none_hint": "Add the other effect to this move first.",
+   "letters_back": "Back one",
+   "letters_clear": "Back to normal",
+   "text_label": "Words",
+   "changed": "changed",
+   "note_draft": "Changes play in the preview at once. Save draft keeps them. The game changes only when you press Finished."
+  }
+ },
+ "when": {
+  "label": "When it plays",
+  "hit": "At the hit",
+  "before": "Before the hit",
+  "after": "After the hit",
+  "less": "Earlier",
+  "more": "Later",
+  "seconds": "{s} s",
+  "set": "Set to where the preview is",
+  "other": "At {at}",
+  "other_back": "Back to the hit",
+  "hint": "Seconds from the hit."
+ },
+ "on": {
+  "label": "On whom",
+  "auto": "Automatic",
+  "auto_is": "Automatic: {now}",
+  "target": "The monster",
+  "each_target": "Every monster",
+  "self": "The family member",
+  "each_ally": "Each family member",
+  "field": "The whole field"
+ },
+ "sound": {
+  "label": "A sound with it",
+  "none": "None"
  }
 }
