@@ -9605,7 +9605,7 @@
    "id": "c-movebench-5",
    "tag": "movebench5",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Move Workbench 5: the workbench page and Timing",
    "next": "Opening an animation shows the new workbench page as drawn, with the first section you can change: Timing. A change plays in the preview at once. Nothing is saved to the game yet. Starts by itself when Move Workbench 4 ships.",
@@ -9645,15 +9645,19 @@
     {
      "d": "2026-11-27",
      "t": "Built as movebench5: the workbench page with Body video and Timing, five layouts and every Timing control tested (tools/movebench/page_test.py). Nothing for Tom; c-movebench-6 starts when the build ships."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as movebench5: the Battle Guide opens an animation as the Move Workbench: preview, Body video and Timing you can change and watch at once"
     }
-   ]
+   ],
+   "done": "2026-11-27"
   },
   {
    "id": "c-movebench-6",
    "tag": "movebench6",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 6: save, finished and progress",
    "next": "Save draft, Undo, Earlier versions and Finished work. Finished puts the move in the game as a new build and marks it Finished by you. The list shows progress across every animation. Starts by itself when Move Workbench 5 ships.",
@@ -9662,10 +9666,10 @@
    ],
    "after": "nothing for Tom: c-movebench-7",
    "created": "2026-11-26",
-   "changed": "2026-11-26",
+   "changed": "2026-11-27",
    "auto": true,
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDBRG7sKzYyzp5eNpp",
     "opening": "not started"
    },
    "prompt": {
@@ -9681,8 +9685,21 @@
     {
      "d": "2026-11-26",
      "t": "Added by c-movebench-design: phase 6 of claude/movebench-plan.md section g."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Unblocked: Move Workbench 5: the workbench page and Timing is done."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started by the night shift."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
-   ]
+   ],
+   "started_at": "2026-11-27T09:22:45+00:00"
   },
   {
    "id": "c-movebench-7",
@@ -10087,8 +10104,10 @@
    "url": "https://claude.ai/code/session_01RXeukDjjTT12gnCoXtVe6r",
    "title": "Move Workbench 5: the workbench page and Timing",
    "first": "2026-11-27T00:45:53-08:00",
-   "last": "2026-11-27T00:45:53-08:00",
-   "tags": [],
+   "last": "2026-11-27T01:21:57-08:00",
+   "tags": [
+    "movebench5"
+   ],
    "cards": [
     "c-movebench-5"
    ]
@@ -16958,8 +16977,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "0f460bdd94bfd7f3455ae9fcc9beaccf89a271ff",
- "synced_at": "2026-11-27T08:49:14+00:00",
+ "synced": "325689488fb9435bb7ebe9208d3e1e94138f82a6",
+ "synced_at": "2026-11-27T09:22:46+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -17062,6 +17081,11 @@
      "id": "c-night-clean",
      "at": "2026-11-27T07:56:00+00:00",
      "kind": "standing"
+    },
+    {
+     "id": "c-movebench-6",
+     "at": "2026-11-27T09:22:45+00:00",
+     "kind": "queued"
     }
    ]
   },
