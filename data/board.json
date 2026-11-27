@@ -9518,7 +9518,7 @@
    "created": "2026-11-26",
    "changed": "2026-11-26",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDPakuV4EMmLKJKdoF",
     "opening": "\"You are designing a feature for The Adventures of Tom. This session is DESIGN ONLY.\""
    },
    "prompt": {
@@ -9534,11 +9534,25 @@
     {
      "d": "2026-11-26",
      "t": "Added by this session. Tom (2026-11-26): \"I don't wanna do any more automatic videos because of the quality issues. I'm gonna curate them all myself, but I need a way to do it, and I think that the battle guide is the best place to do it in the animations tab\"."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDPakuV4EMmLKJKdoF",
+   "title": "Design the Move Workbench in the Battle Guide",
+   "first": "2026-11-26T17:35:33-08:00",
+   "last": "2026-11-26T17:35:33-08:00",
+   "tags": [],
+   "cards": [
+    "c-movebench-design"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGWAy9zihymc3KiLZk",
    "title": "Fix the two failures smoke shows on main",
@@ -16344,8 +16358,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "ca2969cbdf4c5c90743122a402d15c746ac150b9",
- "synced_at": "2026-11-26T23:52:26+00:00",
+ "synced": "37baca1a5ccf3f8f641df41fe4bb252c16457ac0",
+ "synced_at": "2026-11-27T01:36:31+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
