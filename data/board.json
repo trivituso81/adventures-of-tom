@@ -10192,6 +10192,29 @@
      "t": "Made by c-movebench-6 (movebench6): Save draft, Undo, Earlier versions, Finished and the move-apply Action. The Action has not run for real yet: your first Finished tap is its first run."
     }
    ]
+  },
+  {
+   "id": "b-board-nightwin",
+   "tag": "board-nightwin",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-27",
+   "theme": "Game Shell",
+   "title": "the night shift starts queued cards until 6 am and writes Last night at 7 am",
+   "next": "Done: the night shift starts queued cards until 6 am and writes Last night at 7 am",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDjjTT12gnCoXtVe6r",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as board-nightwin. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-27",
+   "changed": "2026-11-27"
   }
  ],
  "sessions": [
@@ -10257,9 +10280,10 @@
    "url": "https://claude.ai/code/session_01RXeukDjjTT12gnCoXtVe6r",
    "title": "Move Workbench 5: the workbench page and Timing",
    "first": "2026-11-27T00:45:53-08:00",
-   "last": "2026-11-27T01:21:57-08:00",
+   "last": "2026-11-27T07:51:05-08:00",
    "tags": [
-    "movebench5"
+    "movebench5",
+    "board-nightwin"
    ],
    "cards": [
     "c-movebench-5"
@@ -17130,8 +17154,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "1dc285d90689c0b49191dbdf703393b12e389123",
- "synced_at": "2026-11-27T12:11:46+00:00",
+ "synced": "e7969a7ce6d27bbf88f60195612680d94eec897a",
+ "synced_at": "2026-11-27T15:52:10+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
