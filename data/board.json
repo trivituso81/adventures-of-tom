@@ -9713,7 +9713,7 @@
    "id": "c-movebench-3",
    "tag": "movebench3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Move Workbench 3: the spec files",
    "next": "Writes one settings file per animation from what the game plays today, and records every move's timeline so later phases can prove nothing changed. No screen changes. Starts by itself when Move Workbench 2 ships.",
@@ -9753,15 +9753,19 @@
     {
      "d": "2026-11-26",
      "t": "movebench3 built: 222 spec files in data/moves/, data/move-specs.js, engine/b3-spec.js, golden.json of 219 animations, spec_test and golden_test pass."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as movebench3: every animation has a settings file, and the game's timeline is recorded before the engine moves onto them"
     }
-   ]
+   ],
+   "done": "2026-11-26"
   },
   {
    "id": "c-movebench-4",
    "tag": "movebench4",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Move Workbench 4: the engine reads timing and effects",
    "next": "The game takes each move's hit moment, freeze, shake and effects from its settings file. The old timing files and the Pass-1 draft review are deleted. Moves look the same. Starts by itself when Move Workbench 3 ships.",
@@ -9789,6 +9793,10 @@
     {
      "d": "2026-11-26",
      "t": "Added by c-movebench-design: phase 4 of claude/movebench-plan.md section g."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Unblocked: Move Workbench 3: the spec files is done."
     }
    ]
   },
@@ -10257,8 +10265,10 @@
    "url": "https://claude.ai/code/session_01RXeukDAbfqqsB5gUSXAvTk",
    "title": "Move Workbench 3: the spec files",
    "first": "2026-11-26T21:30:35-08:00",
-   "last": "2026-11-26T21:30:35-08:00",
-   "tags": [],
+   "last": "2026-11-26T22:02:35-08:00",
+   "tags": [
+    "movebench3"
+   ],
    "cards": [
     "c-movebench-3"
    ]
@@ -17104,8 +17114,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "068ea8d78bf64d3166f7131df8e5e1c2bff3d98c",
- "synced_at": "2026-11-27T05:31:28+00:00",
+ "synced": "569676a4c43e624bc6d71bcb806ce99115a9aeab",
+ "synced_at": "2026-11-27T06:04:00+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
