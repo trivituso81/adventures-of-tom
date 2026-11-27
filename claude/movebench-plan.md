@@ -522,6 +522,23 @@ Every phase is one session on **Claude Sonnet 5.5, effort medium** (row B of `cl
 
 Phase 1 is usable on the phone by itself. Phases 3, 4, 8 and 12 change no screen: they are the engine moving to the spec under the golden test, and are placed so that each editing phase has its part of the engine ready.
 
+### Built notes
+
+**Phase 1, `movebench1` (2026-11-26).** What exists: `bench.html` (reads `index.html`, adds its script tags in order without `data/voice-clips.js` and `data/voice/*.js`, voice off, no splash), `engine/b3-bench.js` (the stub fight and the clock), and the Preview the whole move box on the sheet of every family move (`move:<id>`) and monster attack (`act:<foe>:<act>`) in `battle-guide.html`. Test: `tools/movebench/preview_test.py` (in the night list).
+
+Risk 2, measured: the frame boots in about 2.3 to 3.1 s (desktop Chromium, local server) with 583 scripts and 20.9 MB. From the tap to the move playing is 7 to 8 s at the four Duo sizes, most of it the move's own clips and stage pictures loading. Safari on the phone was not measured; Tom's first tap on the phone is the real check, and the risk stays open for that.
+
+What differs from the plan, and why:
+- The clock steps `updateBattle(dt)`, not `b3Update` alone, because `updateBattle` also runs the RFX timers that effects need. Steps are at most 0.05 s of real time times speed.
+- `bnWarm` prewarms the move's clips and stage assets before it plays and the run waits up to 10 s real. The game's own 2.5 s wait is not copied. Without it a first play showed the standing video.
+- Sounds do not follow slow speed (Web Audio plays at its own rate). Phase 2 should decide whether that matters.
+- A staged row whose assets are not baked plays the defaults, as in the game (Tarmac Porsche Transfer today). The pink box for it comes with phase 10.
+- Counter acts (hits the attacker) and wind-up and body-state animations have no box yet (phase 2). `bnParse` returns null for them.
+- A `turbo` hook (`?turbo=4` on `bench.html`, used only by the test) runs the clock faster so the test does not wait in real time.
+- The Guide's own code asks api.github.com (the board and queue). The frame asks only its own site; the test checks both.
+
+What phase 2 must know: the frame is one iframe, created on the first tap, floating over `#benchslot` (positioned each frame by `benchPlace`), so rebuilding the sheet does not reload it; it is removed when the tab leaves Animations. The parent talks to it with `postMessage` (play, pause, resume, speed, loop, mute, stop, ask; replies `{bench:'status'}` and `{bench:'ready'}`), to the same origin only. In the frame, `window.B3BENCH` holds `BN`, `preflight`, `go`, `pause`, `resume`, `speed`, `loop`, `mute`, `stop`, `can`, `parse`, `status`. Switching animation clears `B3C.need` and builds a new fight; the clock start and `Math.random` are not pinned yet (phase 2 needs that for same-moment replays). Capstone (`slot cap`) uses the `bigone` formation, other moves the `mudling` one.
+
 ### g.1 The board's bulk video path (a recommendation; this session did not touch it)
 
 Recommended: **pause now, retire in phase 16.**

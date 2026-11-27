@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Move preview stage</title>
+<style>
+/* The preview stage (movebench1). It is the game page with the title screen, the voice and the battle menus taken away:
+   only the battle scene shows, because the Battle Guide holds the controls. */
+html,body{margin:0;background:#0b1a16}
+#b3-bar,#b3-tray,#b3-side,#b3-party,#b3-deck,#b3-tools,#b3-msg,#b3-rows,.b3-hide{display:none!important}
+#splash{display:none!important}
+/* the scene fills the frame (the Guide gives the frame a 16:9 box); the battle's own grid has nothing else to hold */
+html,body{width:100%;height:100%;overflow:hidden}
+body{display:block!important}
+#stage,#game{position:fixed!important;inset:0;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin:0!important}
+#battle{position:fixed!important;inset:0!important}
+#battle.v3 #b3-app{display:block!important}
+#battle.v3 #b3-app .battle-stage{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;aspect-ratio:auto!important}
+#battle.v3 #b3-app #battle-canvas{width:100%!important;height:100%!important;aspect-ratio:auto!important;object-fit:contain}
+#bench-msg{position:fixed;z-index:99;left:0;right:0;top:0;padding:8px 10px;font:700 12px/1.3 system-ui,sans-serif;color:#d7e7e0;background:#0b1a16e8;text-align:center}
+#bench-msg.err{color:#ffb4a8}
+#bench-msg[hidden]{display:none}
+</style>
+</head>
+<body>
+<div id="bench-msg">Loading the game's battle code...</div>
+<script>
+/* bench.html reads index.html (so it is always the version being played), takes its style sheets and its page, and adds its script tags in
+   order, leaving out the baked voice audio (data/voice-clips.js and data/voice/*.js: 38 MB). Voice is off in this frame. Then engine/b3-bench.js. */
+try{performance.setResourceTimingBufferSize(4000);}catch(e){}   /* the default keeps only 250 loaded files, and the size count below needs all of them */
+window.VOICE_CLIPS={clips:{},meta:{}};   /* the voice file is not loaded; engine/speech.js asks for this name */
+(function(){
+var msg=document.getElementById('bench-msg');
+var T0=performance.now();
+window.__BENCH_BOOT={t0:T0,done:false,error:'',scripts:0,ms:0,bytes:0};
+function fail(e){window.__BENCH_BOOT.error=String(e&&e.message||e);msg.className='err';msg.textContent=window.__BENCH_BOOT.error+'. Close this and open it again.';}
+function skip(src){return /^data\/voice-clips\.js/.test(src)||/^data\/voice\//.test(src);}
+fetch('index.html?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('Could not read the game page ('+r.status+')');return r.text();}).then(function(html){
+  var doc=new DOMParser().parseFromString(html,'text/html');
+  var srcs=[].map.call(doc.querySelectorAll('script[src]'),function(s){return s.getAttribute('src');}).filter(function(s){return !skip(s);});
+  [].forEach.call(doc.querySelectorAll('link[rel=stylesheet],style'),function(n){document.head.appendChild(document.importNode(n,true));});
+  [].forEach.call(doc.body.querySelectorAll('script'),function(s){s.remove();});
+  while(doc.body.firstChild) document.body.appendChild(document.adoptNode(doc.body.firstChild));
+  document.body.insertBefore(msg,document.body.firstChild);
+  document.documentElement.className=doc.documentElement.className;
+  srcs.push('engine/b3-bench.js');
+  var left=srcs.length,failed=null;
+  function one(src){return new Promise(function(ok){var s=document.createElement('script');s.src=src;s.async=false;s.onload=function(){left--;ok();};s.onerror=function(){failed=failed||src;left--;ok();};document.head.appendChild(s);});}
+  /* async=false: the files download together and run in the order of the page */
+  return Promise.all(srcs.map(one)).then(function(){
+    if(failed) throw new Error('Could not load '+failed);
+    window.__BENCH_BOOT.scripts=srcs.length;
+  });
+}).then(function(){
+  /* the game hides its title screen behind a "splash" state: end it, and keep the page quiet */
+  try{splash.active=false;var el=document.getElementById('splash');if(el)el.hidden=true;}catch(e){}
+  try{say=function(){};}catch(e){}   /* no spoken lines in this frame */
+  var b=window.__BENCH_BOOT;b.done=true;b.ms=Math.round(performance.now()-T0);
+  var bytes=0;performance.getEntriesByType('resource').forEach(function(e){if(e.initiatorType==='script'||/\.js(\?|$)/.test(e.name))bytes+=e.decodedBodySize||e.encodedBodySize||0;});
+  b.bytes=bytes;msg.hidden=true;
+  try{parent.postMessage({bench:'ready',ms:b.ms,bytes:bytes,scripts:b.scripts},location.origin);}catch(e){}
+}).catch(fail);
+})();
+</script>
+</body>
+</html>

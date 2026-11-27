@@ -1,3 +1,18 @@
+## movebench1 (2026-11-26): the Battle Guide plays the whole move, with the game's own battle code, above the video player
+
+Card c-movebench-1 (phase 1 of `claude/movebench-plan.md`). Every family move (120) and monster attack (457) has a box on its sheet, Preview the whole move, with Play, Pause, 1x, half, quarter, Loop and Mute. New: `bench.html`, `engine/b3-bench.js`, `tools/movebench/preview_test.py` (also in `tools/night/tests.json`). `battle-guide.html` makes the frame on the first tap, reuses it and removes it on leaving the Animations tab. Card `c-movelab-rose` is retired (the preview replaces the Move Lab). Nothing deleted, no spec yet, no paid run.
+
+Risk 2 measured: the frame boots in about 3 s with 583 scripts and 20.9 MB (limit 25 MB). The test plays a staged move (Lounge Pass Flex, 3.2 s), a clip-only move (Soup Dumpling Squeeze, 3.5 s), a default-motion move (1.3 s), a monster attack with a wind-up (Mud Pie, 3.7 s) and a capstone (1.3 s) to the end; clips in memory at most 10 of 16; no request to a dispatch, fal or xAI address. The four sizes, the sheet before and after Play, and the five samples:
+
+![466 x 657](movebench1/guide-duo-folded-up-466x657.png)
+![678 x 445](movebench1/guide-duo-folded-side-678x445.png)
+![951 x 648](movebench1/guide-duo-unfolded-951x648.png)
+![669 x 869](movebench1/guide-duo-unfolded-up-669x869.png)
+![ended, Play again](movebench1/guide-ended-466x657.png)
+![five samples played](movebench1/play-sheet.png)
+
+Known and not mine: `python3 tools/battle_guide_test.py` stops at its first block (`manifest_crosswalk` has no `MANIFESTS`), the same with this change taken out.
+
 ## movebench-design (2026-11-26): a plan and drawings for the Move Workbench in the Battle Guide; nothing in the game changed
 
 Card c-movebench-design. Tom (11-26): "I don't wanna do any more automatic videos because of the quality issues. I'm gonna curate them all myself, but I need a way to do it, and I think that the battle guide is the best place to do it in the animations tab". Design only: no engine file, data file, Battle Guide page or paid generation was touched.

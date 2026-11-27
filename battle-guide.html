@@ -128,6 +128,18 @@ textarea{min-height:92px;resize:vertical}
 #stage canvas{max-width:100%;max-height:100%;image-rendering:auto}
 #stage .msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--muted);font-size:15px}
 #hitflag{position:absolute;top:10px;right:10px;font-weight:900;font-size:13px;letter-spacing:.08em;padding:4px 9px;border-radius:8px;background:var(--accent);color:var(--on-accent);opacity:0}
+/* movebench1: the Preview the whole move box. The frame is one iframe (bench.html: the game's own battle code) that floats over the box, so it survives the sheet being rebuilt for the next animation. */
+.bench{margin:0 0 10px}
+.bench .btag{font:800 11px/1.2 system-ui,sans-serif;letter-spacing:.06em;color:var(--muted);margin:0 0 6px}
+.bslot{position:relative;aspect-ratio:16/9;width:min(100%,calc(46vh*16/9));margin:0 auto;border-radius:12px;background:#0b1a16;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.bslot .bgo{padding:12px 18px;font-weight:800}
+.bslot .bmsg{position:absolute;left:8px;right:8px;bottom:6px;text-align:center;color:var(--muted);font-size:12px}
+.bctl{flex-wrap:wrap;justify-content:center}
+.bctl button{padding:8px 12px;min-height:40px}
+.bctl .bsp[aria-pressed=true],.bctl #bnloop[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}
+.bctl #bnplay{background:var(--accent);color:var(--on-accent);font-weight:800;min-width:96px}
+.bctl #bnclock{margin-left:auto;color:var(--muted);font-size:13px}
+#benchframe{position:fixed;z-index:22;border:0;border-radius:12px;background:#0b1a16;display:none}
 .ctl{display:flex;align-items:center;gap:8px;margin:10px 0}
 .ctl input[type=range]{flex:1 1 auto;min-width:0;accent-color:var(--accent);height:44px}
 .ctl button{padding:8px 12px}
@@ -421,6 +433,7 @@ function route(){
   const h=decodeURIComponent(location.hash.replace(/^#/,'')),i=h.indexOf('/');
   const t=i<0?h:h.slice(0,i);tab=TABS.some(x=>x[0]===t)?t:'rules';sel=i<0?'':h.slice(i+1);
   if(tab==='anims'&&ANIM_BY[sel]){const a=ANIM_BY[sel];sel=a.owner;setTimeout(()=>openPlayer(a.id),50);}   // a card can link straight to one animation: #anims/move:lounge_pass_flex
+  if(tab!=='anims')benchRemove();   // movebench1: the preview frame lives only while the Animations tab does
   document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===tab?'true':'false'));
   renderList();
   if(!sel&&wide()) sel=firstOf(tab);
@@ -1074,7 +1087,7 @@ function animsHtml(id){
 // ---------- the player ----------
 // Plays a clip the way the game holds it: one packed picture (D.src) and, per frame, where it sits in the picture (x,y,w,h) and inside the full frame (ox,oy).
 const PL={a:null,D:null,img:null,t:0,last:0,on:false,speed:1,raf:0,hold:0};
-function closeSheet(){MP.on=false;GCUR.tok++;delete $('sheet').dataset.mode;$('sheet').classList.remove('open');$('dim').classList.remove('open');PL.on=false;cancelAnimationFrame(PL.raf);PL.a=null;}
+function closeSheet(){benchPause();MP.on=false;GCUR.tok++;delete $('sheet').dataset.mode;$('sheet').classList.remove('open');$('dim').classList.remove('open');PL.on=false;cancelAnimationFrame(PL.raf);PL.a=null;}
 function clipLen(D){return D.kind==='loop'&&!D.wrap?2*D.dur:D.dur+(D.kind==='loop'?0:700);}   // a one-shot holds its last picture a moment, then repeats
 function frameAt(D,t){
   let ms=t;if(D.kind==='loop'){ms=D.wrap?t%D.dur:(t%(2*D.dur));if(!D.wrap&&ms>=D.dur)ms=2*D.dur-ms-1;}else ms=Math.min(t,D.dur-1);
@@ -1436,6 +1449,78 @@ function todoHtml(){
   return h;
 }
 
+// ---------- the Preview the whole move box (movebench1) ----------
+// The box plays the move in bench.html, a frame that loads the game's own scripts (not the baked voice) and starts a stub fight (engine/b3-bench.js).
+// Nothing here draws a move: this page only holds the frame, the controls and what the frame reports. The frame is made on the first tap of the
+// start button, reused from one animation to the next and removed when the Animations tab is left. Phase 2 adds the bar and the moments.
+const BENCH={fr:null,ready:false,st:null,id:'',want:'',speed:1,loop:true,mute:false,raf:0,boot:null,clip:''};
+function benchOk(a){
+  if(!a)return false;if(a.kind==='move')return !!B3_SKILLS[a.id.slice(5)];
+  if(a.kind!=='act')return false;const p=a.id.split(':'),f=B3_FOES[p[1]],A=f&&f.acts.find(x=>x.id===p[2]);return !!A&&A.hits!=='attacker';
+}
+function benchBox(a){
+  if(!benchOk(a))return '';const w=a.kind==='act'?'attack':'move';
+  return '<div class="bench" id="bench"><div class="btag">PREVIEW: THE WHOLE '+w.toUpperCase()+', PLAYED BY THE GAME</div>'
+   +'<div class="bslot" id="benchslot" data-anim="'+esc(a.id)+'" data-on="0"><button type="button" class="bgo" id="bnstart">Preview the whole '+w+'</button><div class="bmsg" id="bnmsg"></div></div>'
+   +'<div class="ctl bctl" id="bnctl" hidden><button type="button" id="bnplay">Pause</button>'
+   +'<button type="button" class="bsp" data-s="1" aria-pressed="true">1x</button><button type="button" class="bsp" data-s="0.5" aria-pressed="false">&frac12;</button><button type="button" class="bsp" data-s="0.25" aria-pressed="false">&frac14;</button>'
+   +'<button type="button" id="bnloop" aria-pressed="true">Loop</button><button type="button" id="bnmute" aria-pressed="false">Mute</button><span id="bnclock"></span></div></div>';
+}
+// After the sheet is built: show this animation's state (a frame that is still on another animation is paused and hidden).
+function benchAttach(a){
+  const sl=document.getElementById('benchslot');if(!sl)return;
+  const on=BENCH.fr&&BENCH.id===a.id;sl.dataset.on=on?'1':'0';
+  if(BENCH.fr&&!on)benchSend({bench:'pause'});
+  benchUi();
+}
+function benchSend(m){try{if(BENCH.fr&&BENCH.fr.contentWindow)BENCH.fr.contentWindow.postMessage(m,location.origin);}catch(e){}}
+function benchFrame(){
+  if(BENCH.fr)return BENCH.fr;
+  const f=document.createElement('iframe');f.id='benchframe';f.title='Move preview';f.src='bench.html';f.setAttribute('allow','autoplay');document.body.appendChild(f);
+  BENCH.fr=f;BENCH.ready=false;BENCH.st=null;cancelAnimationFrame(BENCH.raf);BENCH.raf=requestAnimationFrame(benchPlace);return f;
+}
+function benchStart(){
+  const sl=document.getElementById('benchslot');if(!sl)return;const id=sl.dataset.anim;
+  BENCH.want=id;BENCH.id=id;BENCH.st=null;sl.dataset.on='1';benchFrame();benchPlay();benchUi();
+}
+function benchPlay(){if(BENCH.ready&&BENCH.want){benchSend({bench:'play',id:BENCH.want,speed:BENCH.speed,loop:BENCH.loop,mute:BENCH.mute});BENCH.want='';}}
+function benchToggle(){const s=BENCH.st&&BENCH.st.state;if(s==='playing')benchSend({bench:'pause'});else if(s==='paused'||s==='ended')benchSend({bench:'resume'});}
+function benchPause(){if(BENCH.fr&&BENCH.st&&BENCH.st.state==='playing')benchSend({bench:'pause'});}
+function benchSpeed(v){BENCH.speed=v;benchSend({bench:'speed',v});benchUi();}
+function benchLoop(on){BENCH.loop=on;benchSend({bench:'loop',on});benchUi();}
+function benchMute(on){BENCH.mute=on;benchSend({bench:'mute',on});benchUi();}
+function benchRemove(){
+  if(!BENCH.fr)return;cancelAnimationFrame(BENCH.raf);BENCH.raf=0;BENCH.fr.remove();BENCH.fr=null;BENCH.ready=false;BENCH.st=null;BENCH.id='';BENCH.want='';
+}
+function benchUi(){
+  const sl=document.getElementById('benchslot');if(!sl)return;
+  const on=sl.dataset.on==='1',ctl=document.getElementById('bnctl'),st=BENCH.st,go=document.getElementById('bnstart'),msg=document.getElementById('bnmsg');
+  if(go)go.hidden=on;if(ctl)ctl.hidden=!on;
+  document.querySelectorAll('.bsp').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.s===BENCH.speed?'true':'false'));
+  const lp=document.getElementById('bnloop'),mu=document.getElementById('bnmute');if(lp)lp.setAttribute('aria-pressed',BENCH.loop?'true':'false');if(mu)mu.setAttribute('aria-pressed',BENCH.mute?'true':'false');
+  const pl=document.getElementById('bnplay'),ck=document.getElementById('bnclock');
+  if(pl)pl.textContent=!st?'Loading':st.state==='playing'?'Pause':st.state==='ended'?'Play again':st.state==='loading'?'Loading':'Play';
+  if(ck)ck.textContent=st&&st.state!=='loading'?(st.len!=null?Math.min(st.t,st.len):st.t).toFixed(1)+(st.len!=null?' of '+st.len.toFixed(1):'')+' s':'';
+  if(msg)msg.textContent=on&&st&&st.msg?st.msg:'';
+}
+// The frame floats over the box: fixed to the box's place, cut off at the sheet's edges.
+function benchPlace(){
+  const f=BENCH.fr;if(!f)return;BENCH.raf=requestAnimationFrame(benchPlace);
+  const sl=document.getElementById('benchslot'),S=document.getElementById('sheet');
+  if(!sl||!S.classList.contains('open')||sl.dataset.on!=='1'){if(f.style.display!=='none')f.style.display='none';return;}
+  const r=sl.getBoundingClientRect(),q=S.getBoundingClientRect();
+  const key=[r.left,r.top,r.width,r.height,q.top,q.bottom,q.left,q.right].map(Math.round).join(',');
+  if(f.dataset.k!==key){f.dataset.k=key;f.style.left=r.left+'px';f.style.top=r.top+'px';f.style.width=r.width+'px';f.style.height=r.height+'px';
+    f.style.clipPath='inset('+Math.max(0,q.top-r.top)+'px '+Math.max(0,r.right-q.right)+'px '+Math.max(0,r.bottom-q.bottom)+'px '+Math.max(0,q.left-r.left)+'px round 12px)';}
+  if(f.style.display!=='block')f.style.display='block';
+}
+addEventListener('message',e=>{
+  if(e.origin!==location.origin||!BENCH.fr||e.source!==BENCH.fr.contentWindow)return;
+  const m=e.data;if(!m||typeof m.bench!=='string')return;
+  if(m.bench==='ready'){BENCH.ready=true;BENCH.boot=m;benchPlay();}
+  else if(m.bench==='status'){BENCH.st=m;benchUi();}
+});
+
 async function openPlayer(animId){
   if(!GUIDE&&GUIDE_P)await GUIDE_P;
   if(!MANI&&MANI_P)await MANI_P;
@@ -1444,11 +1529,11 @@ async function openPlayer(animId){
   const stage=msg=>'<div id="stage"><canvas id="cv" width="2" height="2"></canvas><div id="hitflag">HIT</div>'+(msg?'<div class="msg">'+msg+'</div>':'')+'</div>';
   const S=$('sheet');delete S.dataset.mode;S.classList.add('open');$('dim').classList.add('open');S.scrollTop=0;
   if(!a.clip){
-    S.innerHTML=head+stage(a.kind==='state'?'No video yet. In a fight this moment shows one of their other videos until its own is made.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+genBlock(a)+noteForm(a)+(maniOf(a)?manifestBlock(maniOf(a)):'');
-    initMake(a);return;
+    S.innerHTML=head+benchBox(a)+stage(a.kind==='state'?'No video yet. In a fight this moment shows one of their other videos until its own is made.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+genBlock(a)+noteForm(a)+(maniOf(a)?manifestBlock(maniOf(a)):'');
+    benchAttach(a);initMake(a);return;
   }
-  S.innerHTML=head+stage('Loading the video...')+'<div class="ctl"><button type="button" id="bplay">Pause</button><input type="range" id="scrub" min="0" max="1" step="1" value="0" aria-label="Frame"><button type="button" class="spd" data-s="1" aria-pressed="true">1x</button><button type="button" class="spd" data-s="0.5" aria-pressed="false">&frac12;</button><button type="button" class="spd" data-s="0.25" aria-pressed="false">&frac14;</button></div><p class="hint" id="fno" style="margin:0"></p>'+genBlock(a)+noteForm(a)+(maniOf(a)?manifestBlock(maniOf(a)):'');
-  initMake(a);
+  S.innerHTML=head+benchBox(a)+stage('Loading the video...')+'<div class="ctl"><button type="button" id="bplay">Pause</button><input type="range" id="scrub" min="0" max="1" step="1" value="0" aria-label="Frame"><button type="button" class="spd" data-s="1" aria-pressed="true">1x</button><button type="button" class="spd" data-s="0.5" aria-pressed="false">&frac12;</button><button type="button" class="spd" data-s="0.25" aria-pressed="false">&frac14;</button></div><p class="hint" id="fno" style="margin:0"></p>'+genBlock(a)+noteForm(a)+(maniOf(a)?manifestBlock(maniOf(a)):'');
+  benchAttach(a);initMake(a);
   try{
     const r=await loadClip(a.clip);if(PL.a!==a)return;PL.D=r.D;PL.img=r.img;
     const cv=$('cv');cv.width=r.D.w*r.D.k;cv.height=r.D.h*r.D.k;$('scrub').max=r.D.n-1;
@@ -1581,6 +1666,7 @@ document.addEventListener('click',e=>{
   if(t.dataset.af){animFilter=t.dataset.af;renderDetailKeep();return;}
   if(t.id==='bsearch'){const b=$('searchbar');b.hidden=!b.hidden;if(!b.hidden)$('q').focus();else{$('q').value='';sFilter='all';document.querySelectorAll('#sflt .chip').forEach(x=>x.setAttribute('aria-pressed',x.dataset.sf==='all'?'true':'false'));renderList();}return;}
   if(t.id==='bclose'){closeSheet();return;}
+  if(t.id==='bnstart'){benchStart();return;}if(t.id==='bnplay'){benchToggle();return;}if(t.classList&&t.classList.contains('bsp')){benchSpeed(+t.dataset.s);return;}if(t.id==='bnloop'){benchLoop(!BENCH.loop);return;}if(t.id==='bnmute'){benchMute(!BENCH.mute);return;}
   if(t.id==='bplay'){setPlaying(!PL.on);return;}
   if(t.classList.contains('spd')){PL.speed=+t.dataset.s;document.querySelectorAll('.spd').forEach(b=>b.setAttribute('aria-pressed',b===t?'true':'false'));return;}
   if(t.id==='nsend'){sendNote();return;}

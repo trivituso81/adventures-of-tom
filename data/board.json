@@ -9607,7 +9607,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 1: preview the whole move",
-   "next": "A Preview the whole move box on every family move and monster attack in the Battle Guide: the game's own battle code plays the video, stage, effects, freeze and sounds together, with Play, Pause, half and quarter speed, Loop and Mute. Waits on your answer to the card Approve the Move Workbench plan and drawings.",
+   "next": "Shipped as movebench1: every family move and monster attack in the Battle Guide has a Preview the whole move box (Play, Pause, 1x, half, quarter, Loop, Mute). The frame boots in about 3 s with 20.9 MB of script. Nothing for Tom. Next: c-movebench-2 starts when this build ships.",
    "blocks": [
     "c-movebench-2"
    ],
@@ -9636,6 +9636,10 @@
     {
      "d": "2026-11-26",
      "t": "Started by Tom pasting the prompt (card t-movebench-plan had no answer or note recorded on the board when the session read it)."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Built bench.html, engine/b3-bench.js, the Guide preview box and tools/movebench/preview_test.py (passes). Risk 2: about 3 s, 583 scripts, 20.9 MB at 466 x 657 (desktop Chromium; phone Safari not measured)."
     }
    ]
   },
