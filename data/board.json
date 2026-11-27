@@ -9597,14 +9597,19 @@
     {
      "d": "2026-11-26",
      "t": "Made by c-movebench-design (movebench-design): the plan claude/movebench-plan.md, the mock claude/movebench-mock/ and sixteen build cards wait on this answer."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Made fyi by the board: the work this card blocked is finished, so it no longer holds anything up."
     }
-   ]
+   ],
+   "fyi": true
   },
   {
    "id": "c-movebench-1",
    "tag": "movebench1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Move Workbench 1: preview the whole move",
    "next": "Shipped as movebench1: every family move and monster attack in the Battle Guide has a Preview the whole move box (Play, Pause, 1x, half, quarter, Loop, Mute). The frame boots in about 3 s with 20.9 MB of script. Nothing for Tom. Next: c-movebench-2 starts when this build ships.",
@@ -9640,15 +9645,19 @@
     {
      "d": "2026-11-26",
      "t": "Built bench.html, engine/b3-bench.js, the Guide preview box and tools/movebench/preview_test.py (passes). Risk 2: about 3 s, 583 scripts, 20.9 MB at 466 x 657 (desktop Chromium; phone Safari not measured)."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Shipped as movebench1: the Battle Guide plays the whole move, with the game's own battle code, above the video player"
     }
-   ]
+   ],
+   "done": "2026-11-26"
   },
   {
    "id": "c-movebench-2",
    "tag": "movebench2",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Move Workbench 2: drag to any moment, every kind",
    "next": "The preview gains a bar you drag to any moment, one-picture steps, lanes for video, stage, effects and sound, and plays body states, wind-ups, answers and moves that have no video yet. Starts by itself when Move Workbench 1 ships.",
@@ -9676,6 +9685,10 @@
     {
      "d": "2026-11-26",
      "t": "Added by c-movebench-design: phase 2 of claude/movebench-plan.md section g."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Unblocked: Move Workbench 1: preview the whole move is done."
     }
    ]
   },
@@ -10187,8 +10200,10 @@
    "url": "https://claude.ai/code/session_01RXeukH64fYhe1CjPi6dUdA",
    "title": "Move Workbench 1: preview the whole move",
    "first": "2026-11-26T19:43:50-08:00",
-   "last": "2026-11-26T19:43:50-08:00",
-   "tags": [],
+   "last": "2026-11-26T20:08:33-08:00",
+   "tags": [
+    "movebench1"
+   ],
    "cards": [
     "c-movebench-1"
    ]
@@ -17010,8 +17025,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "5392162cb864a7bea8c2ceefa6ffe0009ca8e697",
- "synced_at": "2026-11-27T03:44:35+00:00",
+ "synced": "62df40354db8b572d65e6e2f1fa1e6cc9e84748e",
+ "synced_at": "2026-11-27T04:09:22+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
