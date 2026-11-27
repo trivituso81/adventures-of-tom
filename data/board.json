@@ -9709,7 +9709,7 @@
    "id": "c-movebench-3",
    "tag": "movebench3",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 3: the spec files",
    "next": "Writes one settings file per animation from what the game plays today, and records every move's timeline so later phases can prove nothing changed. No screen changes. Starts by itself when Move Workbench 2 ships.",
@@ -9721,7 +9721,7 @@
    "changed": "2026-11-26",
    "auto": true,
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDAbfqqsB5gUSXAvTk",
     "opening": "not started"
    },
    "prompt": {
@@ -9741,6 +9741,10 @@
     {
      "d": "2026-11-26",
      "t": "Unblocked: Move Workbench 2: drag to any moment, every kind is done."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -10241,6 +10245,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDAbfqqsB5gUSXAvTk",
+   "title": "Move Workbench 3: the spec files",
+   "first": "2026-11-26T21:30:35-08:00",
+   "last": "2026-11-26T21:30:35-08:00",
+   "tags": [],
+   "cards": [
+    "c-movebench-3"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukECBgnxBZp8d9JQrAb",
    "title": "Move Workbench 2: drag to any moment, every kind",
@@ -17082,8 +17096,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "af07f0925c4b5058efb0c48539fd2a62f52e8995",
- "synced_at": "2026-11-27T05:15:27+00:00",
+ "synced": "068ea8d78bf64d3166f7131df8e5e1c2bff3d98c",
+ "synced_at": "2026-11-27T05:31:28+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
