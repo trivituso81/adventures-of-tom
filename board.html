@@ -918,7 +918,7 @@ function openSheet(id){
   const w=open_?attnWhy(c):'';
   if(w) body+='<p class="err" style="font-size:14px;margin-top:10px">Needs attention: '+esc(w)+'</p>';
   else if(c.start_error&&open_) body+='<p class="err">START failed last time: '+esc(c.start_error)+'</p>';
-  if(c.nightly) body+='<h4>Runs every night</h4><p>Starts by itself between 11 pm and 3 am, so there is no START. Last run '+esc((c.last_run&&c.last_run.date)||'never')+(c.last_run&&c.last_run.build?' ('+esc(c.last_run.build)+')':'')+(lastResult(c)?': '+esc(lastResult(c)):'')+'.</p>';
+  if(c.nightly) body+='<h4>Runs every night</h4><p>Starts by itself between 11 pm and 6 am, so there is no START. Last run '+esc((c.last_run&&c.last_run.date)||'never')+(c.last_run&&c.last_run.build?' ('+esc(c.last_run.build)+')':'')+(lastResult(c)?': '+esc(lastResult(c)):'')+'.</p>';
   if(open_&&(c.col==='wait'||bb.length)) body+='<h4>Waiting on</h4><p>'+(bb.length?esc(bb.map(x=>dispTitle(x)).join('; ')):esc(laneName(c.waiting_on||'')))+(waitsOnClaude(c)?'. When it ships, this card comes back to you to check again.':'')+'</p>';
   if(bl.length){const back=!tom&&bl.every(x=>x.lane==='tom');
     body+='<h4>'+(tom?'Why it matters':back?'Returns to you when fixed':'Unblocks')+'</h4><p>'+(tom?'It unblocks: ':'')+esc(bl.map(x=>dispTitle(x)).join('; '))+'</p>';}

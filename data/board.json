@@ -17161,8 +17161,8 @@
   "enabled": true,
   "max": 5,
   "from": 23,
-  "to": 3,
-  "fixes_until": 6,
+  "to": 6,
+  "fixes_until": 7,
   "tz": "America/Los_Angeles",
   "log": {
    "2026-11-21": [],

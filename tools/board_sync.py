@@ -364,7 +364,7 @@ def r9_start(B, fire, now=None):
             c.pop('start', None); B.hist(c, 'START is not set up for this model and effort. Use Copy prompt.'); B.say('start not set up for %s' % c['id']); continue
         if fire is None: continue   # no way to fire from here (a test or a dry run): leave the flag
         if c.get('wan_card') and in_night(B.b.get('night') or {}, now or datetime.datetime.now(datetime.timezone.utc)):
-            continue   # wanauto1: a video fix card writes a video prompt, which the night table forbids; it keeps `start` and fires after 3 am
+            continue   # wanauto1: a video fix card writes a video prompt, which the night table forbids; it keeps `start` and fires after the window
         try:
             url = fire(r, c['id'])
         except Exception as e:

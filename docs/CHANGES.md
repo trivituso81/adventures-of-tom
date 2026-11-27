@@ -1,3 +1,7 @@
+## board-nightwin (2026-11-27): the night shift starts queued cards until 6 am and writes Last night at 7 am
+
+Tom asked why the window stopped at 3 am. `night.to` in `data/board.json` is now 6 and `fixes_until` 7, so the hourly job (minute 17) starts a queued Sonnet 5.5 medium card through its 6:17 run, and the Last night card is written by the 7:17 run. The other night rules are unchanged.
+
 ## movebench9 (2026-11-27): the Move Workbench has a Stage editor for steps that need no picture, and a Sound section
 
 Card c-movebench-9 (phase 9 of `claude/movebench-plan.md`). In a family move's workbench, Stage is now a list of steps (words on screen, shake, flash, dim, glow, knock the monster back, play a sound) that can be added, changed, timed to the start, the hit, a moment named on the preview, another step or a time, moved earlier or later, and removed; Sound lists every sound cue with Play and adds one from the 61 sounds. Nothing reaches the game until Finished. Engine: `at` takes `{hit:true, plus}` and a staged move with an automatic contact hits at its clip's hit. Golden record unchanged. Pictures are in `tools/shots/movebench/` (`stage-*`, `sound-*`). Test: `python3 -I tools/movebench/stage_test.py` (all checks pass); see Built notes in the plan for what differs.
