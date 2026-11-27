@@ -4059,44 +4059,6 @@
    "after": "t-movefun-gen"
   },
   {
-   "id": "t-stuck-svvoice-gen",
-   "lane": "tom",
-   "col": "done",
-   "theme": "Tools",
-   "ask": "unstick",
-   "unstick": {
-    "card": "svc-voice-gen",
-    "kind": "stuck"
-   },
-   "title": "Stuck twice: voice-gen is running",
-   "next": "Card svc-voice-gen (voice-gen is running) stalled again after its one automatic rescue. The rescue started 12:00 AM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it.",
-   "blocks": [
-    "svc-voice-gen"
-   ],
-   "chat": {
-    "url": "",
-    "opening": "board"
-   },
-   "history": [
-    {
-     "d": "2026-11-22",
-     "t": "Added by board-sync: card svc-voice-gen stalled after its rescue"
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Made fyi by the board: the work this card blocked is finished, so it no longer holds anything up."
-    },
-    {
-     "d": "2026-11-22",
-     "t": "Done by the board: the card is being worked on again."
-    }
-   ],
-   "created": "2026-11-22",
-   "changed": "2026-11-22",
-   "fyi": true,
-   "done": "2026-11-22"
-  },
-  {
    "id": "c-fix-menu4play-4",
    "tag": "fix-menu4play-4",
    "lane": "claude",
@@ -10107,6 +10069,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDoRTv4JhJghg7amKk",
+   "title": "voice-gen run finished (skipped, nothing to do)",
+   "first": "2026-11-27T08:48:25Z",
+   "last": "2026-11-27T08:48:25Z",
+   "tags": [],
+   "cards": [
+    "svc-voice-gen"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDjjTT12gnCoXtVe6r",
    "title": "Move Workbench 5: the workbench page and Timing",
@@ -16982,8 +16954,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "f397c2824697587fdaf94daace7fc97c2e0f3910",
- "synced_at": "2026-11-27T08:46:47+00:00",
+ "synced": "0f460bdd94bfd7f3455ae9fcc9beaccf89a271ff",
+ "synced_at": "2026-11-27T08:49:14+00:00",
  "routines": [
   {
    "id": "sonnet-medium",

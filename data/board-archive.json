@@ -11145,6 +11145,20 @@
    ]
   },
   {
+   "id": "t-stuck-svvoice-gen",
+   "title": "Stuck twice: voice-gen is running",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "done": "2026-11-22",
+   "history": [
+    {
+     "d": "2026-11-22",
+     "t": "Done by the board: the card is being worked on again."
+    }
+   ]
+  },
+  {
    "id": "t-wangaveup-stage-tom-bluebang-vid-r2",
    "title": "The video stage-tom-bluebang-vid did not pass in 4 tries",
    "theme": "Battle Animations",
