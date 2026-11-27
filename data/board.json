@@ -9941,7 +9941,7 @@
    "id": "c-movebench-11",
    "tag": "movebench11",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Move Workbench 11: lasting objects, answers, set pieces",
    "next": "The last editing sections: objects that stay while a status lasts and how they answer a hit, the counter video of a move, and the set piece of a Capstone (length, how dark, its steps). Starts by itself when Move Workbench 10 ships.",
@@ -9981,15 +9981,19 @@
     {
      "d": "2026-11-27",
      "t": "Built: lasting things, when it answers (counter video rows, answer effects) and the set piece; hands Tom t-movebench-11-try. Test: tools/movebench/lasting_test.py."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as movebench11: the Move Workbench has lasting things, a counter video and its effects, and a Capstone's set piece"
     }
-   ]
+   ],
+   "done": "2026-11-27"
   },
   {
    "id": "c-movebench-12",
    "tag": "movebench12",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Move Workbench 12: the spec names the video",
    "next": "Which video an animation plays moves into its settings file, for moves, monster attacks, wind-ups and body states, and you can trim a video's first and last picture. Use this one works as before. Starts by itself when Move Workbench 11 ships.",
@@ -9998,7 +10002,7 @@
    ],
    "after": "nothing for Tom: c-movebench-13",
    "created": "2026-11-26",
-   "changed": "2026-11-26",
+   "changed": "2026-11-27",
    "auto": true,
    "chat": {
     "url": "",
@@ -10017,6 +10021,10 @@
     {
      "d": "2026-11-26",
      "t": "Added by c-movebench-design: phase 12 of claude/movebench-plan.md section g."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Unblocked: Move Workbench 11: lasting objects, answers, set pieces is done."
     }
    ]
   },
@@ -10352,6 +10360,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFhETWt9hMPEKu2Xtr",
+   "title": "Move Workbench 11: lasting objects, answers, set pieces",
+   "first": "2026-11-27T10:15:23-08:00",
+   "last": "2026-11-27T11:44:52-08:00",
+   "tags": [
+    "movebench11"
+   ],
+   "cards": [
+    "c-movebench-11"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGMpRRocMwXoJ8sTFd",
    "title": "Move Workbench 8: the engine reads the stage",
    "first": "2026-11-27T10:37:41Z",
@@ -10373,16 +10393,6 @@
    ],
    "cards": [
     "c-movebench-7"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFhETWt9hMPEKu2Xtr",
-   "title": "Move Workbench 11: lasting objects, answers, set pieces",
-   "first": "2026-11-27T10:15:23-08:00",
-   "last": "2026-11-27T10:15:23-08:00",
-   "tags": [],
-   "cards": [
-    "c-movebench-11"
    ]
   },
   {
@@ -17309,8 +17319,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "98bd1104356ca8d1615444c60c9f35a10d33d07f",
- "synced_at": "2026-11-27T18:16:19+00:00",
+ "synced": "6fefaeec90fdac3620c3a08a9954f238f7be440f",
+ "synced_at": "2026-11-27T19:45:41+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
