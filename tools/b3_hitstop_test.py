@@ -131,7 +131,7 @@ with sync_playwright() as pw:
     br=pw.chromium.launch(**kw)
     pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
-    pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start&&typeof GT!=="undefined"&&GT.loaded',timeout=180000); pg.wait_for_timeout(1500)
+    pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start&&typeof msLive==="function"&&MS.n>0',timeout=180000); pg.wait_for_timeout(1500)
     man=json.load(open(os.path.join(ROOT,'data/guide-manifest.json'),encoding='utf-8'))
     fid=([a for a in sys.argv[1:] if not a.startswith('-')] or ['new1'])[0]
     pf=[]; lf=[]

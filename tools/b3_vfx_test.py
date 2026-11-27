@@ -50,7 +50,7 @@ LAYERS="""()=>{
   for(const L in ids){ const id=ids[L],f=P1_VFX[id]; real[id]=f; P1_VFX[id]=function(){ ord.push('fx:'+L); return f.apply(this,arguments); }; }
   const foe=b3DrawFoe,mem=b3DrawMember; window.b3DrawFoe=function(){ ord.push('foe'); return foe.apply(this,arguments); }; window.b3DrawMember=function(){ ord.push('member'); return mem.apply(this,arguments); };
   const t=B3P.t, src=B3.F.party[0].key; B3V.cues.length=0;
-  for(const L in ids){ const id=ids[L],len=(()=>{ const M=P1_VFX_MS[id]; return typeof M==='function'?M(null):(M||500); })(); B3V.cues.push({M:{impact_ms:0,vfx:[id],fxp:null},id:'layers',src,tgts:['f0'],t0:t-len*.0004,end:t+30,dead:{}}); }
+  for(const L in ids){ const id=ids[L],len=(()=>{ const M=P1_VFX_MS[id]; return typeof M==='function'?M(null):(M||500); })(); B3V.cues.push({M:{impact_ms:0,vfx:[id],fxp:null},fx:[{fx:id,at:'contact',on:'auto',params:null,sfx:null}],tArm:t,id:'layers',src,tgts:['f0'],t0:t-len*.0004,end:t+30,dead:{}}); }
   const faults0=(window.__faults||[]).length; b3Draw();
   B3V.cues.length=0; Object.assign(P1_VFX,real); window.b3DrawFoe=foe; window.b3DrawMember=mem;
   return {ord,faults:(window.__faults||[]).length-faults0}; }"""
@@ -132,7 +132,7 @@ with sync_playwright() as pw:
     br=pw.chromium.launch(**kw)
     pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
-    pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start&&typeof GT!=="undefined"&&GT.loaded',timeout=180000); pg.wait_for_timeout(1500)
+    pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start&&typeof msLive==="function"&&MS.n>0',timeout=180000); pg.wait_for_timeout(1500)
     man=json.load(open(os.path.join(ROOT,'data/guide-manifest.json'),encoding='utf-8'))
     fights=[a for a in sys.argv[1:] if not a.startswith('-')] or ['new1','new10','new9','new8']
     # 1. layers
@@ -147,7 +147,7 @@ with sync_playwright() as pw:
     # layer frames for the sheet: one frame per layer, drawn alone
     lf=[]
     for L,id_ in [('ground_decal','proj_ground_hazard_mat'),('behind_units','setpiece_3tier_sparkler_cake'),('unit_overlay','vfx_core_clobber_impact'),('foreground_sweep','vfx_core_sizzle_wave'),('screen_lighting','setpiece_broadway_spotlights')]:
-        pg.evaluate("""([id,src])=>{ const L=P1_VFX_MS[id],len=typeof L==='function'?L(null):(L||500); B7.speed=1; B3V.cues.length=0; B3V.cues.push({M:{impact_ms:0,vfx:[id],fxp:null},id:'l',src:B3.F.party[0].key,tgts:['f0'],t0:B3P.t-len*.00045,end:B3P.t+30,dead:{}}); }""",[id_,0])
+        pg.evaluate("""([id,src])=>{ const L=P1_VFX_MS[id],len=typeof L==='function'?L(null):(L||500); B7.speed=1; B3V.cues.length=0; B3V.cues.push({M:{impact_ms:0,vfx:[id],fxp:null},fx:[{fx:id,at:'contact',on:'auto',params:null,sfx:null}],tArm:B3P.t,id:'l',src:B3.F.party[0].key,tgts:['f0'],t0:B3P.t-len*.00045,end:B3P.t+30,dead:{}}); }""",[id_,0])
         pg.wait_for_timeout(60); lf.append(canvas(pg,False)); pg.evaluate("()=>{ B3V.cues.length=0; B7.speed=2; }")
     sheet(lf,5,os.path.join(OUT,'b3-vfx-layers.png'),w=360)
     # 2. every manifest move, swept
@@ -178,10 +178,10 @@ with sync_playwright() as pw:
     need(st['fault'].count('effect vfx_core_clobber_impact')==1,f"the fault is logged once: {st['fault']}")
     need(st['same'] and st['alpha']==1 and st['clipOk'],f"the canvas is put back after a throw (same transform {st['same']}, alpha {st['alpha']}, no leftover clip {st['clipOk']})")
     # a cue whose unit is gone, and a move that names an effect nobody built
-    v=pg.evaluate("""()=>{ window.__faults=[]; const f0=B3V.fault; B3V.cues.length=0; B3V.cues.push({M:{impact_ms:0,vfx:['vfx_core_clobber_impact'],fxp:null},id:'g',src:'nobody',tgts:['nobody'],t0:B3P.t,end:B3P.t+9,dead:{}}); b3Draw(); const gone=B3V.cues.length,gf=B3V.fault-f0;
-      const key=B3.F.foes[0].key,box=B3P.foe[key]; B3P.foe[key]={}; B3V.cues.push({M:{impact_ms:0,vfx:['vfx_core_clobber_impact'],fxp:null},id:'g2',src:B3.F.party[0].key,tgts:[key],t0:B3P.t,end:B3P.t+9,dead:{}}); let thr1=null; try{ b3vDraw('unit_overlay',B3P.t); b3vDraw('unit_overlay',B3P.t); }catch(e){ thr1=e.message; } B3P.foe[key]=box; const broke=B3V.cues.length,bf=B3V.fault-f0;
+    v=pg.evaluate("""()=>{ window.__faults=[]; const f0=B3V.fault; B3V.cues.length=0; B3V.cues.push({M:{impact_ms:0,vfx:['vfx_core_clobber_impact'],fxp:null},fx:[{fx:'vfx_core_clobber_impact',at:'contact',on:'auto',params:null,sfx:null}],tArm:B3P.t,id:'g',src:'nobody',tgts:['nobody'],t0:B3P.t,end:B3P.t+9,dead:{}}); b3Draw(); const gone=B3V.cues.length,gf=B3V.fault-f0;
+      const key=B3.F.foes[0].key,box=B3P.foe[key]; B3P.foe[key]={}; B3V.cues.push({M:{impact_ms:0,vfx:['vfx_core_clobber_impact'],fxp:null},fx:[{fx:'vfx_core_clobber_impact',at:'contact',on:'auto',params:null,sfx:null}],tArm:B3P.t,id:'g2',src:B3.F.party[0].key,tgts:[key],t0:B3P.t,end:B3P.t+9,dead:{}}); let thr1=null; try{ b3vDraw('unit_overlay',B3P.t); b3vDraw('unit_overlay',B3P.t); }catch(e){ thr1=e.message; } B3P.foe[key]=box; const broke=B3V.cues.length,bf=B3V.fault-f0;
       B3V.cues.length=0; const head={t:'act',id:'rose_x',src:B3.F.party[0].key,tgts:['f0']}; const arm=b3vArm(head,null,1); const none=B3V.cues.length;
-      const M={impact_ms:0,vfx:['vfx_nobody_built'],fxp:null}; B3V.cues.push({M,id:'n',src:B3.F.party[0].key,tgts:['f0'],t0:B3P.t,end:B3P.t+9,dead:{}}); let thrown=null; try{ b3Draw(); }catch(e){ thrown=e.message; }
+      const M={impact_ms:0,vfx:['vfx_nobody_built'],fxp:null}; B3V.cues.push({M,fx:[{fx:'vfx_nobody_built',at:'contact',on:'auto',params:null,sfx:null}],tArm:B3P.t,id:'n',src:B3.F.party[0].key,tgts:['f0'],t0:B3P.t,end:B3P.t+9,dead:{}}); let thrown=null; try{ b3Draw(); }catch(e){ thrown=e.message; }
       B3V.cues.length=0; return {gone,gf,broke,bf,thr1,arm,none,thrown,faults:(window.__faults||[]).map(f=>f.where)}; }""")
     print('gone unit / broken cue / unbuilt effect:',v)
     need(v['gone']==0 and v['gf']==0,f"a cue whose targets are all gone is dropped without a fault ({v})")

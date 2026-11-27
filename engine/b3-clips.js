@@ -60,7 +60,9 @@ function b3cPair(head) {
   return u&&vu&&!vu.ko?{key:u.key,clip:P.clip}:null;
 }
 // When, in seconds after a clip starts, its move lands: the marked impact frame, or `at` of its length for a clip with no impact.
-function b3cLandAt(C,anim) { return (C.kind==='strike'&&C.impact!=null?C.ms[C.impact]:C.dur*(anim&&anim.at!=null?anim.at:.5))/1000; }
+// Where in a clip the hit lands, in seconds: the move's own `contact` (engine/b3-spec.js msTiming) when it gives a time ({sec}); else the clip's hit picture (a strike clip's impact); else {share} of the clip's length, half of it when the move names none.
+function b3cLandAt(C,TM) { const ct=TM&&TM.contact; if(ct&&typeof ct==='object'&&typeof ct.sec==='number'&&isFinite(ct.sec)) return Math.max(0,ct.sec);
+  return (C.kind==='strike'&&C.impact!=null?C.ms[C.impact]:C.dur*(ct&&typeof ct==='object'&&typeof ct.share==='number'&&isFinite(ct.share)?ct.share:.5))/1000; }
 
 // ---------- Asking ahead ----------
 // A move is about to play: load what its beats will show, so the pictures are there when the hit lands.

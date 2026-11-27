@@ -1336,7 +1336,7 @@ async function showTake(a,t){
 function manBlock(a){   // manifest1: what the manifests plan for a move and what of it is done (data/guide-manifest.json)
   if(!MAN||!a||a.kind!=='move')return '';const m=MAN.by[a.id.replace(/^move:/,'')];if(!m)return '';const c=m.check,g=G(a)||{};
   const yes=v=>v?'<b style="color:#6fd08c">Done</b>':'<b style="color:#e0a050">Not yet</b>';
-  const rows=[['Staging row written (data/b3-stage.js)',c.staged],['Video made and wired',c.clipWired&&g.video!==false],['Contact moment and hit stop applied ('+m.contactSec+' s, '+m.hitStopFrames+' frames)',c.contactApplied],['Effects built ('+(m.effects.length)+' named)',c.effectsBuilt],['Sound effects attached',c.sfxWired]];
+  const rows=[['Staging row written (data/b3-stage.js)',c.staged],['Video made and wired',c.clipWired&&g.video!==false],['Effects built ('+(m.effects.length)+' named)',c.effectsBuilt],['Sound effects attached',c.sfxWired]];
   const all=rows.every(r=>r[1]);
   let h='<div class="gen" id="gman"><h3>What is done</h3><p class="hint">'+(all?'Everything below is done. Play it once in a fight to judge it.':'A move is finished when every line below says Done and you have played it once in a fight.')+'</p><table style="width:100%;border-collapse:collapse">';
   rows.forEach(r=>{h+='<tr><td style="padding:3px 6px">'+esc(r[0])+'</td><td style="padding:3px 6px;text-align:right">'+yes(r[1])+'</td></tr>';});

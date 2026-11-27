@@ -286,8 +286,8 @@ function bnSample() {
   }
   if(typeof B3V!=='undefined') {
     for(const c of B3V.cues) if(!R.cues.has(c)) { R.cues.add(c);
-      for(const id of c.M.vfx) { let ms=500; try { const L=P1_VFX_MS[id],p=(c.M.fxp&&c.M.fxp[id])||null; ms=typeof L==='function'?L(p):(L||500); } catch(e) {}
-        R.lanes.fx.push({a:c.t0-BN.t0,b:c.t0-BN.t0+ms/1000,label:bnFxName(id),k:'fx'}); } }
+      for(const e of c.fx) { let ms=500; try { const L=P1_VFX_MS[e.fx]; ms=typeof L==='function'?L(e.params||null):(L||500); } catch(x) {}
+        const off=b3vAtSec(c,e); R.lanes.fx.push({a:c.t0-BN.t0+off,b:c.t0-BN.t0+off+ms/1000,label:bnFxName(e.fx),k:'fx'}); } }
     for(const h of B3V.holds) if(!R.holds.has(h)) { R.holds.add(h); R.lanes.fx.push({a:h.t0-BN.t0,b:h.t0-BN.t0+h.dur,label:'Freeze on the hit',k:'hold'}); }
   }
 }

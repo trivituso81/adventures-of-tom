@@ -7,9 +7,7 @@
 // token), and the clip is made again in the chapter's next batch once Claude has fixed its prompt.
 // Engine side: bclipShowFrame (engine/clips.js) draws the shown clip; battle-draw.js and b2FoeFrame ask for it first. Only the clip being
 // shown (and the monsters' idle loops) is loaded, so a whole chapter fits in a phone's memory (bclipWanted).
-// pass1review1 (2026-11-25): a Lab row with reviewClips (PASS-1 DRAFT REVIEW) lists those baked clips instead of an Art Library group; they are
-// Art Factory drafts, not Library entries, so their rows have PLAY and no REDO.
-const CRV={fixed:null,fbefore:null,total:0,on:false,group:'',name:'',rows:[],sent:{},cur:'',queue:[],all:false,redo:'',testEntries:null,fold:false,say:''};
+const CRV={fbefore:null,total:0,on:false,group:'',name:'',rows:[],sent:{},cur:'',queue:[],all:false,redo:'',testEntries:null,fold:false,say:''};
 const crvQ=new URLSearchParams(location.search);
 const crvKey=e=>e.clip.id.replace(/-/g,'_');
 const crvOnField=owner=>typeof B2!=='undefined'&&B2.active&&(B2.party.some(u=>u.id===owner)||B2.foes.some(f=>f.id===owner));
@@ -17,7 +15,6 @@ const crvEsc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt
 const crvLabel=e=>String(e.title||e.id).replace(/ video clip$/,'').replace(/\s*\([^)]*\)\s*$/,'');
 async function crvEntries(group){
   if(CRV.testEntries) return CRV.testEntries;
-  if(CRV.fixed) return CRV.fixed;
   const r=await fetch('data/art-prompts.json',{cache:'no-store'}); if(!r.ok) throw new Error('Could not read the clip list ('+r.status+').');
   return (await r.json()).entries.filter(e=>e.tab==='Clips'&&e.group===group&&e.clip&&!e.clip.test);
 }
@@ -35,7 +32,7 @@ function crvState(e){
 function crvRowHtml(e){
   const [txt,cls]=crvState(e), key=crvKey(e), can=!!BCLIPS[key]&&crvOnField(e.clip.owner), id=crvEsc(e.id);
   return '<div class="crv-row'+(CRV.cur===e.id?' playing':'')+'" data-id="'+id+'"><div class="crv-line"><span class="crv-name">'+crvEsc(crvLabel(e))+'</span>'+(crvIsNew(e)?'<span class="crv-chip warn">NEW</span>':'')+'<span class="crv-chip '+cls+'">'+crvEsc(txt)+'</span>'+
-    '<button type="button" data-crv="play"'+(can?'':' disabled')+'>'+(CRV.cur===e.id?'PLAYING':'PLAY')+'</button>'+(e.fixed?'':'<button type="button" data-crv="redo"'+((e.versions||[]).length||BCLIPS[key]?'':' disabled')+'>REDO</button>')+'</div>'+
+    '<button type="button" data-crv="play"'+(can?'':' disabled')+'>'+(CRV.cur===e.id?'PLAYING':'PLAY')+'</button>'+'<button type="button" data-crv="redo"'+((e.versions||[]).length||BCLIPS[key]?'':' disabled')+'>REDO</button>'+'</div>'+
     (CRV.redo===e.id?'<div class="crv-note"><input type="text" maxlength="400" placeholder="What looks wrong?" aria-label="Note for Claude" autocomplete="off"><button type="button" data-crv="send">SEND</button><button type="button" data-crv="cancel">CANCEL</button></div>':'')+'</div>';
 }
 function crvPaint(){
@@ -96,8 +93,8 @@ async function crvSend(id,note){
   try { await crvReject(id,note.trim()); CRV.sent[id]=1; CRV.redo=''; crvPaint(); crvSay('REDO sent for '+crvLabel(e)+'. It is made again in the next batch, after Claude fixes its prompt.'); }
   catch(err) { crvSay(String(err.message||err)); }
 }
-function crvOpen(group,name,fixed){
-  crvClose(); CRV.fixed=fixed?fixed.map(r=>({id:r.clip.replace(/_/g,'-'),title:r.title,clip:{id:r.clip.replace(/_/g,'-'),owner:r.owner},fixed:true})):null; CRV.on=true; CRV.group=group; CRV.name=name||group+' REVIEW'; CRV.rows=[]; CRV.sent={}; CRV.cur=''; CRV.queue=[]; CRV.all=false; CRV.redo=''; CRV.fold=false; CRV.fbefore=null; CRV.total=0; CRV.say='Loading the clip list...';
+function crvOpen(group,name){
+  crvClose(); CRV.on=true; CRV.group=group; CRV.name=name||group+' REVIEW'; CRV.rows=[]; CRV.sent={}; CRV.cur=''; CRV.queue=[]; CRV.all=false; CRV.redo=''; CRV.fold=false; CRV.fbefore=null; CRV.total=0; CRV.say='Loading the clip list...';
   const host=document.getElementById('battle')||document.getElementById('game'); if(!host) return;
   const el=document.createElement('div'); el.id='crv'; el.className='crv';
   el.innerHTML='<div class="crv-top"><b>'+crvEsc(CRV.name)+'</b><button type="button" data-crv="new">PLAY NEW</button><button type="button" data-crv="all">PLAY ALL</button><button type="button" data-crv="stop">STOP</button><button type="button" data-crv="fold">HIDE</button></div><div class="crv-msg" role="status"></div><div class="crv-list"></div>';
@@ -114,7 +111,7 @@ function crvOpen(group,name,fixed){
     else if(a==='send'&&e){ const i=row.querySelector('.crv-note input'); crvSend(e.id,i?i.value:''); }
   });
   host.appendChild(el); crvPaint();
-  crvEntries(group).then(rows=>{ if(!CRV.on) return; CRV.rows=rows.slice().sort((a,b)=>(crvIsNew(b)?1:0)-(crvIsNew(a)?1:0)); CRV.say=rows.length?(CRV.rows.some(crvIsNew)?'Clips marked NEW were made again and are at the top: PLAY NEW. The rest are the old clips. ':'')+'Tap PLAY on a clip, or PLAY ALL.'+(CRV.fixed?'':' REDO sends a clip back with a note.'):'No clips in "'+group+'" yet. Make them in ADMIN > ART LIBRARY > Clips > '+group+' > GENERATE CHAPTER.'; crvPaint(); })
+  crvEntries(group).then(rows=>{ if(!CRV.on) return; CRV.rows=rows.slice().sort((a,b)=>(crvIsNew(b)?1:0)-(crvIsNew(a)?1:0)); CRV.say=rows.length?(CRV.rows.some(crvIsNew)?'Clips marked NEW were made again and are at the top: PLAY NEW. The rest are the old clips. ':'')+'Tap PLAY on a clip, or PLAY ALL. REDO sends a clip back with a note.':'No clips in "'+group+'" yet. Make them in ADMIN > ART LIBRARY > Clips > '+group+' > GENERATE CHAPTER.'; crvPaint(); })
     .catch(err=>{ CRV.say=String(err.message||err); crvPaint(); });
 }
 function crvClose(){ CRV.on=false; CRV.all=false; CRV.queue=[]; const el=document.getElementById('crv'); if(el) el.remove(); }

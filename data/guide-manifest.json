@@ -46,7 +46,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": true,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -83,7 +82,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": true,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -120,7 +118,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -158,7 +155,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -197,7 +193,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": true,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -234,7 +229,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -271,7 +265,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": true,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -308,7 +301,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": true,
-    "contactApplied": true,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -343,7 +335,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -380,7 +371,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -418,7 +408,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": true,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -454,7 +443,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -490,7 +478,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": true,
-    "contactApplied": true,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -527,7 +514,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": true,
-    "contactApplied": true,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -563,7 +549,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -600,7 +585,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -636,7 +620,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": true,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -673,7 +656,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": true,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -710,7 +692,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": true,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -746,7 +727,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": true,
-    "contactApplied": true,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -783,7 +763,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -820,7 +799,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -858,7 +836,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -894,7 +871,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -930,7 +906,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -967,7 +942,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": true,
-    "contactApplied": true,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1004,7 +978,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1041,7 +1014,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": true,
-    "contactApplied": true,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1078,7 +1050,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1114,7 +1085,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1151,7 +1121,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1189,7 +1158,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1226,7 +1194,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": true,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1261,7 +1228,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1297,7 +1263,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1335,7 +1300,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1371,7 +1335,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1407,7 +1370,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1445,7 +1407,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1484,14 +1445,8 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
-   },
-   "effectParams": {
-    "setpiece_gym_bleachers_and_ruckus_crest": {
-     "mode": "gym_pyro"
-    }
    }
   },
   {
@@ -1524,7 +1479,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1561,14 +1515,8 @@
     "inGame": false,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
-   },
-   "effectParams": {
-    "setpiece_gym_bleachers_and_ruckus_crest": {
-     "mode": "ruckus_50_link"
-    }
    }
   },
   {
@@ -1603,14 +1551,8 @@
     "inGame": false,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
-   },
-   "effectParams": {
-    "setpiece_gym_bleachers_and_ruckus_crest": {
-     "mode": "ruckus_100_crest"
-    }
    }
   },
   {
@@ -1645,7 +1587,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1681,7 +1622,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1717,7 +1657,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1756,7 +1695,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1792,7 +1730,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1830,7 +1767,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1866,7 +1802,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1905,7 +1840,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1942,7 +1876,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -1980,7 +1913,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2017,7 +1949,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2056,7 +1987,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2093,7 +2023,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2131,7 +2060,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2168,7 +2096,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2205,7 +2132,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2242,7 +2168,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2279,7 +2204,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2317,7 +2241,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2357,7 +2280,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2394,7 +2316,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2432,7 +2353,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2469,7 +2389,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2507,7 +2426,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2542,7 +2460,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": false,
     "sfxWired": false
    }
@@ -2580,7 +2497,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2619,14 +2535,8 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
-   },
-   "effectParams": {
-    "setpiece_waymo_and_la_metro": {
-     "vehicle": "waymo_rescue"
-    }
    }
   },
   {
@@ -2664,14 +2574,8 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
-   },
-   "effectParams": {
-    "setpiece_waymo_and_la_metro": {
-     "vehicle": "la_metro_express"
-    }
    }
   },
   {
@@ -2706,7 +2610,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2743,7 +2646,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2780,7 +2682,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2816,7 +2717,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2852,7 +2752,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2889,7 +2788,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2927,7 +2825,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -2964,7 +2861,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3000,7 +2896,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3039,7 +2934,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3075,7 +2969,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3114,14 +3007,8 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
-   },
-   "effectParams": {
-    "setpiece_michael_sprint_and_chopper": {
-     "mode": "michael_sprint"
-    }
    }
   },
   {
@@ -3154,7 +3041,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3192,7 +3078,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3229,7 +3114,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3268,7 +3152,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3304,7 +3187,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3341,7 +3223,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3378,7 +3259,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3415,7 +3295,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3452,7 +3331,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3489,7 +3367,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3525,7 +3402,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3563,7 +3439,6 @@
     "inGame": true,
     "staged": true,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3599,7 +3474,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3635,7 +3509,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3673,7 +3546,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3709,7 +3581,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3745,7 +3616,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3784,7 +3654,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3821,7 +3690,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3858,7 +3726,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3896,7 +3763,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -3930,7 +3796,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": false,
     "sfxWired": false
    }
@@ -3968,14 +3833,8 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
-   },
-   "effectParams": {
-    "setpiece_cattail_pier_leviathan": {
-     "fishTier": "striper"
-    }
    }
   },
   {
@@ -4010,14 +3869,8 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
-   },
-   "effectParams": {
-    "setpiece_cattail_pier_leviathan": {
-     "fishTier": "leviathan"
-    }
    }
   },
   {
@@ -4051,7 +3904,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -4088,7 +3940,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -4125,7 +3976,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -4161,7 +4011,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -4197,7 +4046,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -4234,7 +4082,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -4272,7 +4119,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -4311,7 +4157,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -4348,7 +4193,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -4386,7 +4230,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -4425,7 +4268,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -4463,7 +4305,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -4500,7 +4341,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -4536,7 +4376,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -4573,7 +4412,6 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
    }
@@ -4613,14 +4451,8 @@
     "inGame": true,
     "staged": false,
     "clipWired": false,
-    "contactApplied": false,
     "effectsBuilt": true,
     "sfxWired": false
-   },
-   "effectParams": {
-    "setpiece_michael_sprint_and_chopper": {
-     "mode": "livnews_chopper"
-    }
    }
   }
  ],

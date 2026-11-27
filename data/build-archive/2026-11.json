@@ -1,4 +1,13 @@
 [
+{"tag":"syncfix1","at":"2026-11-19T23:01:00-08:00","what":"The board-sync job no longer stops on a duplicate report card","card":"c-syncfix1","theme":"Tools"},
+{"tag":"board-artgen1","at":"2026-11-20T07:00:08+00:00","what":"Dry run result on c-artgen1","kind":"house"},
+{"tag":"artgen1c","at":"2026-11-20T06:59:05+00:00","what":"Art-gen checks out only the files it reads (the checkout took minutes)","card":"c-artgen1","theme":"Tools"},
+{"tag":"artgen1b","at":"2026-11-20T06:58:16+00:00","what":"Art-gen no longer checks out art/raw (its checkout took minutes)","card":"c-artgen1","theme":"Tools"},
+{"tag":"artgen1","at":"2026-11-20T06:55:19+00:00","what":"Generate all pictures from a board card, made on GitHub for you to review in the Art Library","card":"c-artgen1","theme":"Tools"},
+{"tag":"adminhub1","at":"2026-11-20T06:52:40+00:00","what":"One admin page with its own address, ?go= links into the game, a home screen icon for the board","card":"c-adminhub1","theme":"Tools"},
+{"tag":"board-adminhub","at":"2026-11-19T22:40:52-08:00","what":"Board only: the plan for one admin page with its own address","card":"b-board-adminhub","theme":"Tools","kind":"house"},
+{"tag":"board-artgen","at":"2026-11-19T22:26:53-08:00","what":"Board only: the plan for generating a card's pictures with one approval, QA, auto-approve and Library links","card":"b-board-artgen","theme":"Tools","kind":"house"},
+{"tag":"artbake1518","at":"2026-11-20T06:25:44+00:00","what":"","kind":"house"},
 {"tag":"bannerhold1","at":"2026-11-19T20:05:59-08:00","what":"A join or leave banner holds the game until you dismiss it","card":"c-bannerhold1","theme":"Game Shell"},
 {"tag":"clipposes","at":"2026-11-20T04:04:00+00:00","what":"The family's battle body states are painted poses moved by the game; their videos are removed","card":"c-clipposes","theme":"Battle Animations"},
 {"tag":"heistart","at":"2026-11-20T04:02:11+00:00","what":"The muffin pan now leaves the counter when the Mudling takes it, and the new Mudling sheet for the theft is in the Art Library, ready to generate","card":"c-heistart","theme":"Story and Dialogue"},

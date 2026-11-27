@@ -31,14 +31,14 @@
   },
   {
    "script": "tools/b3_vfx_test.py",
-   "why": "plays every move of four Lab fights in real time in Chrome (about 9 minutes); run by hand after a change to engine/b3-vfx.js, engine/pass1-vfx.js or the effect layers in engine/vfx-library.js"
+   "why": "plays every move of four Lab fights in real time in Chrome (about 9 minutes); run by hand after a change to engine/b3-vfx.js or the effect layers in engine/vfx-library.js"
   }
  ],
  "tests": [
   {"id": "movebench_preview_test", "cmd": "python3 -I tools/movebench/preview_test.py", "group": "g1", "minutes": 4, "outdir": true},
+  {"id": "movebench_realfight_test", "cmd": "python3 -I tools/movebench/realfight_test.py", "group": "g1", "minutes": 2, "outdir": true},
   {"id": "movebench_spec_test", "cmd": "python3 -I tools/movebench/spec_test.py", "group": "g1", "minutes": 1},
   {"id": "movebench_golden_test", "cmd": "python3 -I tools/movebench/golden_test.py", "group": "g1", "minutes": 3, "outdir": true},
-  {"id": "justin_stages_test", "cmd": "python3 -I tools/justin_stages_test.py", "group": "g1", "minutes": 2, "outdir": true},
   {"id": "benchmark_run_test", "cmd": "python3 -I tools/benchmark_run_test.py", "group": "g1", "minutes": 1},
   {
    "id": "amber_test",
@@ -1557,12 +1557,6 @@
    "minutes": 2
   },
   {
-   "id": "pass1_review_test",
-   "cmd": "python3 -I tools/pass1_review_test.py",
-   "group": "g1",
-   "minutes": 2
-  },
-  {
    "id": "script_studio_epnote_test",
    "cmd": "python3 -I tools/script-studio/epnote_test.py",
    "group": "g1",
@@ -1575,10 +1569,11 @@
    "minutes": 1
   },
   {
-   "id": "guide_timing_test",
-   "cmd": "python3 -I tools/guide_timing_test.py",
+   "id": "movebench_timing_test",
+   "cmd": "python3 -I tools/movebench/timing_test.py",
    "group": "g1",
-   "minutes": 1
+   "minutes": 1,
+   "outdir": true
   },
   {
    "id": "b3_hitstop_test",

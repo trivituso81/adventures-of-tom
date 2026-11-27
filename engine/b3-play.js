@@ -335,28 +335,29 @@ function b3PlayMove(beats,done,mid,waited) {   // mid: the first move of a Famil
   if(CL&&PR) {
     // pairmove1: the partner's body plays the video at the partner's spot, the mover is hidden; the hit lands as the mover springs off (impact frame),
     // carried to the monster by a short arc.
-    const land=b3cLandAt(CL,head.anim),dur=CL.dur/1000,ph=b3PartyHome(b3Unit(B3.F,PR.key)),fly=.3;
+    const TM=msTiming(head),gap=TM.gap,land=b3cLandAt(CL,TM),dur=CL.dur/1000,ph=b3PartyHome(b3Unit(B3.F,PR.key)),fly=.3;
     vfx(hits.length?land+fly:land);
     B3P.body[PR.key]={kind:'cmove',t0:B3P.t,T0:0,jx:ph.cx,jy:ph.base,C:CL,back:0,dur:dur+.12};
     B3P.body[src]={kind:'away',t0:B3P.t,dur:dur+.12};
     const tg=hits.length&&hits[0].swing.tgts[0];
     if(tg) { const z=b3Spot(tg); B3P.fx.push({kind:'proj',x0:ph.cx-24,y0:ph.base-70,x1:z.x,y1:z.y,color:fl.color,t0:B3P.t+land,dur:fly,arc:50}); }
-    if(hits.length) hits.forEach((h,k)=>b3After(land+fly+k*.35,reveal)); else b3After(land,()=>{ for(const b of late) b3Show(b); });
-    b3After(Math.max(dur+.1,land+fly+Math.max(0,hits.length-1)*.35+.25),finishNow); return;
+    if(hits.length) hits.forEach((h,k)=>b3After(land+fly+k*gap,reveal)); else b3After(land,()=>{ for(const b of late) b3Show(b); });
+    b3After(Math.max(dur+.1,land+fly+Math.max(0,hits.length-1)*gap+.25),finishNow); return;
   }
   if(CL) {
-    const land=b3cLandAt(CL,head.anim),dur=CL.dur/1000;
-    let T0=0;
+    const TM=msTiming(head),gap=TM.gap,land=b3cLandAt(CL,TM),dur=CL.dur/1000;
+    let T0=0,back0=0;
     if(foe) B3P.fa[src].cl={id:cid,t0:B3P.t,dur};
     else {
-      const home=b3PartyHome(b3Unit(B3.F,src)),tg=hits.length&&hits[0].swing.tgts[0],travel=!!tg&&tg[0]==='f';
-      let jx=home.cx,jy=home.base; if(travel) { const st=b3cStand(src,CL,tg); jx=st.x; jy=st.y; T0=.55; }
-      B3P.body[src]={kind:'cmove',t0:B3P.t,T0,jx,jy,C:CL,back:travel?.5:0,dur:T0+dur+.12+(travel?.5:0)};
+      // movebench4: how he gets there is the spec's `approach`: auto runs to the monster when the hit is on one, stay never does, run does whenever the hit is on a monster; approachSec and returnSec are the two runs
+      const home=b3PartyHome(b3Unit(B3.F,src)),tg=hits.length&&hits[0].swing.tgts[0],onFoe=!!tg&&tg[0]==='f',travel=onFoe&&TM.approach!=='stay';
+      let jx=home.cx,jy=home.base; if(travel) { const st=b3cStand(src,CL,tg); jx=st.x; jy=st.y; T0=TM.approachSec; back0=TM.returnSec; }
+      B3P.body[src]={kind:'cmove',t0:B3P.t,T0,jx,jy,C:CL,back:back0,dur:T0+dur+.12+back0};
     }
     vfx(T0+land);
     const SN=head.anim.sound; if(SN&&CL.ms[SN.at]!=null) b3After(T0+CL.ms[SN.at]/1000,()=>b3Sfx(SN.sfx));   // a sound on a given clip picture (data/b3-sfx.js)
-    if(hits.length) hits.forEach((h,k)=>b3After(T0+land+k*.35,reveal)); else b3After(T0+land,()=>{ for(const b of late) b3Show(b); });
-    b3After(Math.max(T0+dur+.1,T0+land+Math.max(0,hits.length-1)*.35+.25),finishNow); return;
+    if(hits.length) hits.forEach((h,k)=>b3After(T0+land+k*gap,reveal)); else b3After(T0+land,()=>{ for(const b of late) b3Show(b); });
+    b3After(Math.max(T0+dur+.1,T0+land+Math.max(0,hits.length-1)*gap+.25),finishNow); return;
   }
   // A move with no hits (a pass, a self buff): a pose, then the effects.
   if(!hits.length) {
@@ -408,6 +409,7 @@ function b3Draw() {
   gfx=fightCtx; gfx.setTransform(BS,0,0,BS,0,0);
   const t=B3P.t,F=B3.F,V=B3.view;
   const skk=typeof b3gShakeAt==='function'?b3gShakeAt(t):null; if(skk) gfx.translate(skk.x,skk.y);   // movestage2: a stage shake moves the whole field
+  const vsk=typeof b3vShakeAt==='function'?b3vShakeAt(t):null; if(vsk) gfx.translate(vsk.x,vsk.y);   // movebench4: a move's own screen shake (timing.shake, engine/b3-vfx.js)
   const bg=BG_IMG[(B3.cfg&&B3.cfg.bg)||'pond'];
   if(bg&&bg.complete&&bg.naturalWidth) { const sm=gfx.imageSmoothingEnabled; gfx.imageSmoothingEnabled=true; gfx.imageSmoothingQuality='high'; gfx.drawImage(bg,0,0,576,324); gfx.imageSmoothingEnabled=sm; }
   else rect(0,0,576,324,'#14141c');

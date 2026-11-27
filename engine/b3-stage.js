@@ -203,9 +203,10 @@ function b3gPlay(R,env) {
   for(const s of steps) { b3After(s._T,()=>{ ctx.stepT=s._T; b3gDo(s,ctx); }); }
   // THE HIT (or, for a move with no hit, its effects) shows at its moment.
   const reveal=env.reveal,mark=()=>{ if(run.hitReal==null) run.hitReal=B3P.t-run.t0; };
-  if(env.hits.length) env.hits.forEach((h,k)=>b3After(hitT+k*.35,()=>{ mark(); reveal(); }));
+  const gap=msTiming(head).gap;   // movebench4: the time between hits of a many-hit move is the spec's `gap`
+  if(env.hits.length) env.hits.forEach((h,k)=>b3After(hitT+k*gap,()=>{ mark(); reveal(); }));
   else b3After(lateT,()=>{ mark(); for(const b of env.late) b3Show(b); });
-  const end=Math.max(dur+.1,lastEnd+.15,(env.hits.length?hitT+Math.max(0,env.hits.length-1)*.35:lateT)+.3,R.setpiece?R.setpiece.dur:0);
+  const end=Math.max(dur+.1,lastEnd+.15,(env.hits.length?hitT+Math.max(0,env.hits.length-1)*gap:lateT)+.3,R.setpiece?R.setpiece.dur:0);
   run.len=end;
   b3After(end,()=>{ run.end=B3P.t-run.t0; b3gLetGo(R); env.finishNow(); });
   return true;

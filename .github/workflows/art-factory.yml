@@ -253,7 +253,7 @@ jobs:
         run: |
           git config user.name "aot-art-factory[bot]"
           git config user.email "aot-art-factory@users.noreply.github.com"
-          git add art-factory data/clips art/clips index.html data/costs.json data/pass1-meta.js
+          git add art-factory data/clips art/clips index.html data/costs.json
           if ! git diff --cached --quiet; then
             git commit -m "art-factory: benchmark $(python3 -c 'import json;print(json.load(open("art-factory/benchmark-trigger.json"))["run_id"])') (outcome ${{ steps.run.outcome }})"
             git pull --rebase -X theirs origin main

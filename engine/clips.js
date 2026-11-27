@@ -74,7 +74,7 @@ function bclipReady(id) { const a=PAINTED['clip_'+id]; return !!(a&&a.ready); }
 // its last picture stays a moment, then the review is told (B2.clipShow.onEnd) so it can start the next one. t is battle.time in seconds.
 function bclipShowFrame(owner,t) {
   const S=typeof B2!=='undefined'&&B2.active&&B2.labReview&&B2.clipShow;
-  if(!S||S.owner!==owner) {   // pass-1 review: a member with a video idle (pf_<who>_idle) rests on it, no painted frame (engine/pass1-vfx.js)
+  if(!S||S.owner!==owner) {   // a review: a member with a video idle (pf_<who>_idle) rests on it, no painted frame
     if(typeof B2==='undefined'||!B2.active||!B2.labReview||!B2.party||!B2.party.some(u=>u.id===owner)) return null;
     const I=BCLIPS['pf_'+owner+'_idle']; if(!I||!bclipReady(I.id)) return null;
     if(!I._warm) bclipWarm(I);
@@ -83,10 +83,9 @@ function bclipShowFrame(owner,t) {
   const C=BCLIPS[S.id]; if(!C||!bclipReady(S.id)) return null;
   if(!C._warm) { bclipWarm(C); return bclipFrameAt(C,0); }   // every picture is made into a canvas first, so the clock never waits on one (iPhone)
   if(S.t0==null) S.t0=t;   // the clock starts when the first picture can be drawn
-  const P=typeof p1Lead==='function', lead=P?p1Lead(S):0, wall0=(t-S.t0)*1000, wall=wall0-lead, ms=P?p1Clock(S,Math.max(0,wall)):wall0;   // pass-1 review: slide out first (lead), then the clip, then slide back (engine/pass1-vfx.js)
+  const ms=(t-S.t0)*1000;
   const len=C.kind==='loop'?bclipLoopLen(C):C.dur+(C.kind==='state'?1500:500);
-  if(P) { S.slide=p1Slide(S,wall0,lead,ms,len); S.shake=p1Shake(S,Math.max(0,wall)); S.ms=Math.max(0,wall); }
-  if(ms>=len+lead) { if(!S.over) { S.over=true; const f=S.onEnd; setTimeout(()=>{ if(B2.clipShow===S) B2.clipShow=null; if(f) f(S.id); },0); } return C.kind==='loop'?bclipLoopFrame(C,0):bclipFrameAt(C,C.dur); }
+  if(ms>=len) { if(!S.over) { S.over=true; const f=S.onEnd; setTimeout(()=>{ if(B2.clipShow===S) B2.clipShow=null; if(f) f(S.id); },0); } return C.kind==='loop'?bclipLoopFrame(C,0):bclipFrameAt(C,C.dur); }
   return C.kind==='loop'?bclipLoopFrame(C,ms):bclipFrameAt(C,Math.min(ms,C.dur));
 }
 // ST.clip(id,{onImpact}): onImpact runs once, the moment the impact frame is first drawn. The body path runs on the

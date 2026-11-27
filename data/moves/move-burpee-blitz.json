@@ -1,7 +1,7 @@
 {
  "v": 1,
  "id": "move:burpee_blitz",
- "rev": 1,
+ "rev": 2,
  "live": {
   "body": {
    "clip": "pf_amy_fq_s1",
@@ -36,6 +36,12 @@
    "at": "2026-11-26T22:00:00-08:00",
    "by": "migration",
    "what": "the Pass-1 review row said 4 frames at 60 a second (2 at 24 a second); a real fight holds the manifest's 4, kept"
+  },
+  {
+   "rev": 2,
+   "at": "2026-11-26T22:21:00-08:00",
+   "by": "claude",
+   "what": "movebench4: the Pass-1 draft numbers (impact, shake, run-in, effects) now live only in this file; data/pass1-meta.js is deleted"
   }
  ]
 }

@@ -135,7 +135,6 @@ function b2DrawEnemies(t) {
     const bob=fly&&!dying?Math.round(Math.sin(t*3+f.idx*1.7)*2)-B2_HOVER:0,breath=dying||fly?0:(.5+.5*Math.sin(t*1.7+f.idx*1.7))*.008;
     const spawn=f.spawnT!=null&&f.spawnT<.6?f.spawnT/.6:1;
     let sx=0,sy=0;
-    if(typeof B2!=='undefined'&&B2.labReview&&B2.clipShow&&B2.clipShow.shake) sx+=B2.clipShow.shake*2;   // pass-1 review: the hit shakes the foe (engine/pass1-vfx.js)
     if(aimed) {
       if(battle.shakeEnemy>0) { sx+=rand(-5,5); sy+=rand(-3,3); }
       if(battle.enemyWobble>0) sx+=Math.round(Math.sin(t*30)*4);

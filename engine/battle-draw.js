@@ -96,7 +96,6 @@ function drawBattle() {
   // Tom is drawn last while blocking so he stands in front of whoever he is shielding.
   const order=party.map((_,i)=>i);
   if(battle.block) { const ti=party.findIndex(p=>p.id==='tom'); if(ti>=0) { order.splice(order.indexOf(ti),1); order.push(ti); } }
-  if(typeof B2!=='undefined'&&B2.labReview&&B2.clipShow&&B2.clipShow.slide>0) { const ci=party.findIndex(p=>p.id===B2.clipShow.owner); if(ci>=0) { order.splice(order.indexOf(ci),1); order.push(ci); } }   // pass-1 review: the member sliding to the foe is drawn on top of everyone
   if(battle.v2) b2RideOrder(order,party);   // Rose sits on Tom's shoulders (engine/battle2-traits.js)
   battle.drawnAt=battle.drawnAt||[];
   order.forEach(i=>{
@@ -154,7 +153,6 @@ function drawBattle() {
     let appr=0;
     if(fx.appr>0) { const e=fx.apprDur-fx.appr; appr=e<APPR_SLIDE?Math.min(1,e/APPR_SLIDE):(fx.appr<APPR_SLIDE?fx.appr/APPR_SLIDE:1); }
     let cx=pos.x*3-Math.round(lunge*(pos.x*3-250))-Math.round(appr*(pos.x*3-(m.id==='rose'?236:262)))+(fx.shake>0?rand(-5,5):0)+(fx.tongue>0?Math.round(Math.sin(t*22)*2):0)+(dancing?Math.round(Math.sin(t*4.5)*16):0);
-    if(shownClip&&B2.clipShow&&B2.clipShow.owner===m.id) { const S=B2.clipShow; cx=cx-Math.round((S.slide||0)*(pos.x*3-262))+(S.shake||0); }   // pass-1 review slides and shake (engine/pass1-vfx.js)
     let base=pos.base*3-Math.round(lunge*12)-hop;
     base+=koSink;
     if(m.id==='tom'&&battle.block) {
@@ -262,7 +260,6 @@ function drawBattle() {
       rideBodyDraw(m,fr3,sp.pal,(poking?x-sp.scale*3:x)+wig,y+(fx.tickle>0?Math.abs(wig):0),sp.scale,{flash:fx.flash>0,alpha:1,lean:guarding?-7:0});
       if(stretch) gfx.restore();
       activeKneelCut=0;
-      if(shownClip&&B2.clipShow&&B2.clipShow.owner===m.id&&typeof p1DrawVfx==='function') p1DrawVfx(gfx,B2.clipShow,B2.clipShow.ms||0,{x:cx,y:base-Math.round(h*.5),h});   // pass-1 impact effects on the foe, drawn in code; a heal draws here on the member (engine/pass1-vfx.js)
       if(sp.handAt) RFX.postParty(i,sp,fr3,(poking?x-sp.scale*3:x)+wig,y+(fx.tickle>0?Math.abs(wig):0));
     }
     if(battle.v2) roseSeatFront(m);   // Rose's shoes on Tom's shoulders

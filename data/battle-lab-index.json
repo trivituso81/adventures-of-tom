@@ -17,180 +17,173 @@
   {
    "i": 2,
    "ch": 0,
-   "name": "PASS-1 DRAFT REVIEW",
-   "sub": "Watch the 7 Pass-1 draft videos on their owners in one fight: tap PLAY on a clip, or PLAY ALL. No Pep, combos or switching fights needed.",
-   "solo": false
-  },
-  {
-   "i": 3,
-   "ch": 0,
    "name": "CLIP TEST: ROSE",
    "sub": "Animation test. Pick ATTACK, then Boop: Rose plays her video-made Boop. The Mudling moves on its own.",
    "solo": false
   },
   {
-   "i": 4,
+   "i": 3,
    "ch": 0,
    "name": "JUSTIN’S TRYOUT",
    "sub": "Test fight. Tom, Grace, Rose and Justin, every move unlocked.",
    "solo": false
   },
   {
-   "i": 5,
+   "i": 4,
    "ch": 0,
    "name": "SOLO",
    "sub": "Test fight. Pick anyone, alone, every move unlocked. Nobody can be hurt. Leave with EXIT.",
    "solo": true
   },
   {
-   "i": 6,
+   "i": 5,
    "ch": 0,
    "name": "OLIVIA’S TRYOUT",
    "sub": "Test fight. Tom, Grace, Rose and Olivia, every move unlocked.",
    "solo": false
   },
   {
-   "i": 7,
+   "i": 6,
    "ch": 1,
    "name": "THE BIG ONE",
    "sub": "Chapter 1. Tom, Grace, Rose and Deedee.",
    "solo": false
   },
   {
-   "i": 8,
+   "i": 7,
    "ch": 2,
    "name": "THE BIG SHAKE",
    "sub": "Chapter 2. Tom, TNB and Nara.",
    "solo": false
   },
   {
-   "i": 9,
+   "i": 8,
    "ch": 3,
    "name": "OLD IRON-GILL",
    "sub": "Chapter 3. Tom, Grace, Rose and Boppy.",
    "solo": false
   },
   {
-   "i": 10,
+   "i": 9,
    "ch": 4,
    "name": "THE DIRECTOR’S CUT",
    "sub": "Chapter 4. Tom, TNB and Nara.",
    "solo": false
   },
   {
-   "i": 11,
+   "i": 10,
    "ch": 5,
    "name": "THE RED PEN",
    "sub": "Chapter 5. Tom, Grace, Rose and Amy.",
    "solo": false
   },
   {
-   "i": 12,
+   "i": 11,
    "ch": 6,
    "name": "CHAIRMAN CHEEKS",
    "sub": "Chapter 6. Tom, TNB and Nara.",
    "solo": false
   },
   {
-   "i": 13,
+   "i": 12,
    "ch": 7,
    "name": "THE UNREAD",
    "sub": "Chapter 7. Tom, Grace and Rose.",
    "solo": false
   },
   {
-   "i": 14,
+   "i": 13,
    "ch": 8,
    "name": "OLD IRONBELLY",
    "sub": "Chapter 8. Tom, TNB and Nara.",
    "solo": false
   },
   {
-   "i": 15,
+   "i": 14,
    "ch": 9,
    "name": "THE MIRRORBALL",
    "sub": "Chapter 9. Tom, Deedee and Boppy.",
    "solo": false
   },
   {
-   "i": 16,
+   "i": 15,
    "ch": 10,
    "name": "THE LAST CALL",
    "sub": "Chapter 10. Tom, Grace, Rose and Amy.",
    "solo": false
   },
   {
-   "i": 17,
+   "i": 16,
    "ch": 11,
    "name": "FINAL CALL",
    "sub": "Chapter 11. Tom, Grace, Rose and Amy.",
    "solo": false
   },
   {
-   "i": 18,
+   "i": 17,
    "ch": 12,
    "name": "GRIDLOCK PRIME",
    "sub": "Chapter 12. Tom, Grace, Rose and Amy.",
    "solo": false
   },
   {
-   "i": 19,
+   "i": 18,
    "ch": 13,
    "name": "DRILL WORM",
    "sub": "Chapter 13. Tom, Amy, TNB and Nara.",
    "solo": false
   },
   {
-   "i": 20,
+   "i": 19,
    "ch": 14,
    "name": "WARDEN BOPPY",
    "sub": "Chapter 14. Tom, Amy, Grace and Rose.",
    "solo": false
   },
   {
-   "i": 21,
+   "i": 20,
    "ch": 15,
    "name": "HUSH-9 FINAL FORM",
    "sub": "Chapter 15. Tom, Amy, Grace and Rose.",
    "solo": false
   },
   {
-   "i": 22,
+   "i": 21,
    "ch": 16,
    "name": "MARLOWE TRANSFORMED",
    "sub": "Chapter 16. Tom, Amy, TNB and Nara.",
    "solo": false
   },
   {
-   "i": 23,
+   "i": 22,
    "ch": 17,
    "name": "THE TWIN LENSES",
    "sub": "Chapter 17. Tom, Grace, Rose and Amy.",
    "solo": false
   },
   {
-   "i": 24,
+   "i": 23,
    "ch": 18,
    "name": "JULIAN VANCE",
    "sub": "Chapter 18. Survival fight, cannot be won. Tom, Grace, Rose and Amy.",
    "solo": false
   },
   {
-   "i": 25,
+   "i": 24,
    "ch": 19,
    "name": "THE OBLIVION CENSOR",
    "sub": "Chapter 19. Tom, Grace, Rose and Amy.",
    "solo": false
   },
   {
-   "i": 26,
+   "i": 25,
    "ch": 20,
    "name": "THE CHRONOS-LEVIATHAN",
    "sub": "Chapter 20. Tom, Grace, Rose and Amy.",
    "solo": false
   },
   {
-   "i": 27,
+   "i": 26,
    "ch": 20,
    "name": "JULIAN, LAST FIGHT",
    "sub": "Chapter 20. Tom, Grace, Rose and Amy.",

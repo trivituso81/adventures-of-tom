@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # tools/movebench/migrate.py (movebench3): writes data/moves/<slug>.json, one file per animation that has anything today, from the places the engine reads now (claude/movebench-plan.md b.5 step 1):
 #   data/b3-stage.js rows (stage, marks, the hit, the budget, objects)   data/guide-manifest.json (contact, hit stop, effects, their settings, the ward's answer)
-#   data/pass1-meta.js rows (contact, shake, approach, effects of the 7 Pass-1 clips)   anim and wind of data/b3-kit-*.js and data/b3-foes-ch*.js   B3_BODY_CLIPS (data/b3-clips.js)
+#   anim and wind of data/b3-kit-*.js and data/b3-foes-ch*.js   B3_BODY_CLIPS (data/b3-clips.js)
 # The engine does not read these files yet. A file whose rev is above 1, or whose log has a line by tom or claude, is Tom's or a session's work and is never overwritten.
 #   python3 -I tools/movebench/migrate.py            writes the files (and removes none)
 #   python3 -I tools/movebench/migrate.py --check    exits 1 when a file on disk is not what this would write (only files still at rev 1 and written by the migration)
@@ -39,10 +39,13 @@ def stage_section(row):
         objs[oid]=o
     if objs: st['objects']=objs
     return st
+def own_live(aid):
+    """The live part of the file this animation already has on disk, or None when it has no file."""
+    try: A=jread('data/guide-anims.json')['anims']; return (json.load(open(os.path.join(OUT,A[aid]['slug']+'.json'),encoding='utf8')).get('live'))
+    except Exception: return None
 def build():
-    G=game(); A=jread('data/guide-anims.json')['anims']; M=jread('data/guide-manifest.json'); P1=G['PASS1']
+    G=game(); A=jread('data/guide-anims.json')['anims']; M=jread('data/guide-manifest.json')
     mby={m['moveId']:m for m in M['moves'] if m.get('moveId')}
-    p1by={k.replace('pf-',''):v for k,v in P1.items()}
     docs={}; skipped=[]
     def put(aid,live,log=None):
         if not live: return
@@ -64,38 +67,30 @@ def build():
             if an.get('sound'): body['sound']=an['sound']
             if body: live['body']=body
             t={}
-            # the pass-1 row of the clip (the game's p1Meta) wins over the manifest for the contact moment and the effects; the hit stop of a real fight is the manifest's own (b3vHitStopSec)
-            p1=None
-            if an.get('kind')=='clip' and an['clip'].replace('_','-').startswith('pf-'): p1=P1.get(an['clip'].replace('_','-'))
+            # movebench4: the engine reads the contact moment of the effects, the hit stop, the shake, the run-in and the effects from the spec, so a file that exists owns them (data/pass1-meta.js, which held the
+            # 7 Pass-1 rows, and the manifest's effectParams are gone); only a move with no file yet is filled from the manifest
+            ol=own_live(aid); ot=(ol or {}).get('timing') or {}
             valid=mrow is not None and isinstance(mrow.get('contactSec'),(int,float)) and mrow['contactSec']>=0
-            src=p1 or ({'impact_ms':round(mrow['contactSec']*1000),'vfx':list(mrow.get('libraryAssets') or [])} if valid else None)
             if row:
                 if row['hit']=='late': t['contact']=ref(row,row['late'])
                 else: t['contact']=ref(row,row['hit'])
                 t['budget']=row['budget']
             elif an.get('at') is not None: t['contact']={'share':an['at']}
             if not S.get('hits') or (any(e.get('op')=='later' for e in S['effects']) and not any(e.get('op')=='damage' for e in S['effects'])): t['noHit']=True   # no swing in its own beats (a ward, a pass, a hit that comes later): b3PlayMove arms no hit stop for it
-            if src: t['impactMs']=int(src['impact_ms'])
-            if valid:
+            if ol is not None:
+                for k in ('impactMs','hitStop','shake','approach'):
+                    if k in ot: t[k]=ot[k]
+            elif valid:
+                t['impactMs']=round(mrow['contactSec']*1000)
                 f=int(round(mrow.get('hitStopFrames') or 0))
                 if f>0: t['hitStop']=f
-            if p1:
-                if p1.get('screen_shake_px'): t['shake']=int(p1['screen_shake_px'])
-                t['approach']='run' if p1.get('approach') else 'stay'
-                if p1.get('hit_stop_frames') and valid and round(p1['hit_stop_frames']*24/60)!=int(round(mrow.get('hitStopFrames') or 0)):
-                    log.append({'rev':1,'at':AT,'by':'migration','what':'the Pass-1 review row said %d frames at 60 a second (%d at 24 a second); a real fight holds the manifest\'s %d, kept'%(p1['hit_stop_frames'],round(p1['hit_stop_frames']*24/60),int(round(mrow.get('hitStopFrames') or 0)))})
             if t: live['timing']=t
             if row:
                 st=stage_section(row)
                 if st: live['stage']=st
             fx=[]
-            if p1 and p1.get('vfx'): ids=p1['vfx']; fxp={}
-            elif valid: ids=mrow.get('libraryAssets') or []; fxp=mrow.get('effectParams') or {}
-            else: ids=[]; fxp={}
-            for i in ids:
-                e={'fx':i}
-                if fxp.get(i): e['params']=fxp[i]
-                fx.append(e)
+            if ol is not None: fx=[dict(e) for e in (ol.get('effects') or [])]
+            elif valid: fx=[{'fx':i} for i in (mrow.get('libraryAssets') or [])]
             if fx: live['effects']=fx
             if mrow and mrow.get('counterClip'): live['answer']={'clip':None,'effects':[]}
             put(aid,live,log)

@@ -1,7 +1,7 @@
 {
  "v": 1,
  "id": "move:colossal_diamond_gold_dumpling",
- "rev": 1,
+ "rev": 2,
  "live": {
   "body": {
    "clip": "pf_grace_sc_cap",
@@ -30,6 +30,12 @@
    "at": "2026-11-26T22:00:00-08:00",
    "by": "migration",
    "what": "written from the tables the engine reads today"
+  },
+  {
+   "rev": 2,
+   "at": "2026-11-26T22:21:00-08:00",
+   "by": "claude",
+   "what": "movebench4: the Pass-1 draft numbers (impact, shake, run-in, effects) now live only in this file; data/pass1-meta.js is deleted"
   }
  ]
 }

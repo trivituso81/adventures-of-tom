@@ -9,7 +9,6 @@ const html = rd('index.html');
 const files = [...html.matchAll(/<script[^>]+src="(data\/b3-[^"?]+\.js)/g)].map(m => m[1]);
 const ctx = vm.createContext({ Math, JSON, Object, Array, String, Number, Error, console: { log() {}, error() {} } });
 for (const f of files) vm.runInContext(rd(f), ctx, { filename: f });
-vm.runInContext(rd('data/pass1-meta.js'), ctx, { filename: 'data/pass1-meta.js' });
 const g = n => JSON.parse(vm.runInContext('JSON.stringify(typeof ' + n + '!=="undefined"?' + n + ':null)', ctx));
 const clips = fs.readdirSync(path.join(ROOT, 'data', 'clips')).filter(f => f.endsWith('.js')).map(f => f.replace(/\.js$/, '')).sort();
-process.stdout.write(JSON.stringify({ SKILLS: g('B3_SKILLS'), VIBES: g('B3_VIBES'), FOES: g('B3_FOES'), STAGE: g('B3_STAGE'), BODY_CLIPS: g('B3_BODY_CLIPS'), PASS1: g('PASS1_META'), CLIPS: clips }));
+process.stdout.write(JSON.stringify({ SKILLS: g('B3_SKILLS'), VIBES: g('B3_VIBES'), FOES: g('B3_FOES'), STAGE: g('B3_STAGE'), BODY_CLIPS: g('B3_BODY_CLIPS'), CLIPS: clips }));

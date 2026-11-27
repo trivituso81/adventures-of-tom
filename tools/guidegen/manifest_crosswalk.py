@@ -23,21 +23,7 @@ lib = {a['id']: a for a in J('art-factory/aot-stage2c-vfx-library-v11.json')['as
 used_by = {}
 for a in lib.values():
     for m in a['usedBy']: used_by.setdefault(m, []).append(a['id'])
-# The pass-1 clips the engine plays have a row in data/pass1-meta.js (impact_ms, hit_stop_frames), and that row wins over the manifest (engine/guide-timing.js).
-# A move's contact moment and hit stop are Done when its clip has a row and the row holds the manifest's contactSec and hitStopFrames; a row that differs is Not yet.
-_m = open(os.path.join(ROOT, 'data', 'pass1-meta.js'), encoding='utf-8').read()
-PASS1_META = json.loads(_m[_m.index('{'):_m.rindex('}') + 1])
-def contact_applied(mid, contact_sec, hit_stop):
-    r = PASS1_META.get('pf-' + mid)
-    return bool(r) and r['impact_ms'] == round(contact_sec * 1000) and r['hit_stop_frames'] == hit_stop
-# Four library set-pieces draw one of several modes, and the library entry lists which move uses which (its usedBy and summary); the crosswalk hands that choice to the engine as effectParams
-# (engine/guide-timing.js copies it to the move's fxp, engine/pass1-vfx.js gives it to the effect as its params). Every other effect draws with its defaults.
-EFFECT_PARAMS = {
-    'boppy-ba-s2': {'setpiece_cattail_pier_leviathan': {'fishTier': 'striper'}}, 'boppy-ba-cap': {'setpiece_cattail_pier_leviathan': {'fishTier': 'leviathan'}},
-    'tnb-lb-s2': {'setpiece_waymo_and_la_metro': {'vehicle': 'waymo_rescue'}}, 'tnb-lb-cap': {'setpiece_waymo_and_la_metro': {'vehicle': 'la_metro_express'}},
-    'olivia-wm-cap': {'setpiece_michael_sprint_and_chopper': {'mode': 'michael_sprint'}}, 'olivia-na-cap': {'setpiece_michael_sprint_and_chopper': {'mode': 'livnews_chopper'}},
-    'olivia-rc-cap': {'setpiece_gym_bleachers_and_ruckus_crest': {'mode': 'gym_pyro'}}, 'univ-double-team': {'setpiece_gym_bleachers_and_ruckus_crest': {'mode': 'ruckus_50_link'}},
-    'univ-full-ruckus': {'setpiece_gym_bleachers_and_ruckus_crest': {'mode': 'ruckus_100_crest'}}}
+# movebench4: the contact moment, hit stop, shake and effect settings of a move are in its spec (data/moves/<slug>.json, engine/b3-spec.js), not in this file.
 moves, unmatched = [], []
 for p in ('pass1', 'pass2', 'pass3'):
     for m in J('art-factory/aot-stage2-%s-manifest-24fps.json' % p)['moves']:
@@ -53,10 +39,8 @@ for p in ('pass1', 'pass2', 'pass3'):
                'check': {'inManifest': True, 'inGame': bool(sk),
                          'staged': bool(row),
                          'clipWired': bool(sk and (sk.get('anim') or {}).get('kind') == 'clip' and (not row or (row.get('body') or {}).get('keep') or (sk.get('anim') or {}).get('clip') == (row.get('body') or {}).get('clip'))),   # a staged move with a new body counts only once its NEW clip is the one wired
-                         'contactApplied': contact_applied(m['id'], e['contactTriggerSec'], e['hitStopFrames']),   # engine/guide-timing.js reads both; a move counts once a baked pass-1 clip plays at exactly these numbers
                          'effectsBuilt': bool(m['id'] in used_by) and all(lib[a]['buildStatus'] != 'todo' for a in used_by.get(m['id'], [])),
                          'sfxWired': False}}          # no SFX files exist; the library names hooks only
-        if m['id'] in EFFECT_PARAMS: rec['effectParams'] = EFFECT_PARAMS[m['id']]
         moves.append(rec)
         if not gid: unmatched.append(m['id'] + ': ' + m['name'])
 mi = {m['moveId'] for m in moves if m['moveId']}

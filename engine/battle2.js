@@ -103,7 +103,7 @@ function b2Letters() {
 // The same reset the old battle did, so drawBattle starts clean.
 function b2ResetStage() {
   while(battle.fx.length<B2.party.length) battle.fx.push(Object.assign({},battle.fx[0]));
-  BATTLE_POS.length=0; for(const q of ([null,BATTLE_POS1,BATTLE_POS2,BATTLE_POS3][B2.party.length]||(B2.party.length>4?BATTLE_POS5:BATTLE_POS4))) BATTLE_POS.push(q);
+  BATTLE_POS.length=0; for(const q of ([null,BATTLE_POS1,BATTLE_POS2,BATTLE_POS3][B2.party.length]||BATTLE_POS4)) BATTLE_POS.push(q);
   if(typeof RFX!=='undefined') RFX.reset();
   for(const f of battle.fx) { for(const k in f) if(typeof f[k]==='number') f[k]=0; f.poseK=''; f.path=null; f.koAt=null; f.levelUp=false; }
   if(B2.staged&&typeof b2Unstage==='function') b2Unstage(true);
@@ -1488,5 +1488,5 @@ function b2Lab(i,who) {
   const solo=!!L.solo,party=solo?[who||L.party[0]]:L.party;
   B2.labLA=!!L.la; B2.labStudio=!!L.studio; B2.labSchool=!!L.school; B2.labCafe=!!L.cafe; B2.labOak=!!L.oak; B2.labCrown=!!L.crown; B2.labStacks=!!L.stacks; B2.labRead=!!L.readroom; B2.labBarn=!!L.barn; B2.labBoiler=!!L.boiler; B2.labClub=!!L.club; B2.labDome=!!L.dome; B2.labTerm=!!L.term; B2.labGate=!!L.gate; B2.labClip=!!L.clip; B2.labClips=L.clips||null; B2.labReview=L.review||''; B2.clipShow=null;
   b2Start({lab:true,solo,party,level:L.level,foes:L.foes,bag:B2_LAB_BAG.slice(),heart:100,infinite:true,tombos:'all',allSkills:true,onEnd:()=>{ B2.labLA=false; B2.labStudio=false; B2.labSchool=false; B2.labCafe=false; B2.labOak=false; B2.labCrown=false; B2.labStacks=false; B2.labRead=false; B2.labBarn=false; B2.labBoiler=false; B2.labClub=false; B2.labDome=false; B2.labTerm=false; B2.labGate=false; B2.labClip=false; B2.labClips=null; B2.labReview=''; B2.clipShow=null; if(typeof crvClose==='function') crvClose(); if(typeof splashToLab==='function') splashToLab(); }});
-  if(L.review&&typeof crvOpen==='function') crvOpen(L.review,L.name,L.reviewClips);   // CHAPTER n REVIEW (engine/clip-review.js)
+  if(L.review&&typeof crvOpen==='function') crvOpen(L.review,L.name);   // CHAPTER n REVIEW (engine/clip-review.js)
 }

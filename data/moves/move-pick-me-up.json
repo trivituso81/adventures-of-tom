@@ -1,0 +1,25 @@
+{
+ "v": 1,
+ "id": "move:pick_me_up",
+ "rev": 1,
+ "live": {
+  "timing": {
+   "impactMs": 1750
+  },
+  "effects": [
+   {
+    "fx": "vfx_core_heal_cleanse"
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-26T23:30:00-08:00",
+   "by": "claude",
+   "what": "movebench4: written from the manifest row the game read before (contact 1.75 s, the heal); the move is not in the Guide yet, phase 6 lists it"
+  }
+ ]
+}

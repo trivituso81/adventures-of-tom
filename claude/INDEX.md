@@ -367,59 +367,59 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | File | First line | Date |
 |---|---|---|
 | movebench-mock/README.md | Move Workbench: the mock (movebench-design, 2026-11-26) | 2026-11-26 |
-| movebench-mock/basic-editing.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i |  |
-| movebench-mock/basic-long.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i |  |
-| movebench-mock/basic.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i |  |
-| movebench-mock/capstone-editing.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i |  |
-| movebench-mock/capstone-long.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i |  |
-| movebench-mock/capstone.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i |  |
-| movebench-mock/dash-basic.html | <!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0b0a18;font-family:-apple-system,system- |  |
-| movebench-mock/dash-capstone.html | <!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0b0a18;font-family:-apple-system,system- |  |
-| movebench-mock/dash-monster.html | <!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0b0a18;font-family:-apple-system,system- |  |
-| movebench-mock/dash-skill.html | <!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0b0a18;font-family:-apple-system,system- |  |
-| movebench-mock/img/preview-basic.jpg | ���� JFIF      �� C 				 |  |
-| movebench-mock/img/preview-capstone.jpg | ���� JFIF      �� C 				 |  |
-| movebench-mock/img/preview-monster.jpg | ���� JFIF      �� C 				 |  |
-| movebench-mock/img/preview-skill.jpg | ���� JFIF      �� C 				 |  |
-| movebench-mock/img/start-deedee.jpg | ���� JFIF      �� C  |  |
-| movebench-mock/img/start-mudling.jpg | ���� JFIF      �� C  |  |
-| movebench-mock/img/start-tom.jpg | ���� JFIF      �� C  |  |
-| movebench-mock/monster-editing.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i |  |
-| movebench-mock/monster-long.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i |  |
-| movebench-mock/monster.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i |  |
-| movebench-mock/shots/basic-3440x1440.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/basic-466x657-editing.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/basic-466x657.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/basic-669x869.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/basic-678x445.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/basic-951x648.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/basic-phone-whole-page.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/capstone-3440x1440.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/capstone-466x657-editing.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/capstone-466x657.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/capstone-669x869.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/capstone-678x445.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/capstone-951x648.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/capstone-phone-whole-page.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/monster-3440x1440.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/monster-466x657-editing.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/monster-466x657.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/monster-669x869.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/monster-678x445.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/monster-951x648.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/monster-phone-whole-page.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/skill-3440x1440.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/skill-466x657-editing.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/skill-466x657.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/skill-669x869.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/skill-678x445.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/skill-951x648.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/shots/skill-phone-whole-page.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� |  |
-| movebench-mock/skill-editing.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i |  |
-| movebench-mock/skill-long.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i |  |
-| movebench-mock/skill.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i |  |
-| movebench-mock/src/build.py | !/usr/bin/env python3 |  |
-| movebench-mock/src/shoot.py | !/usr/bin/env python3 |  |
+| movebench-mock/basic-editing.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i | 2026-11-26 |
+| movebench-mock/basic-long.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i | 2026-11-26 |
+| movebench-mock/basic.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i | 2026-11-26 |
+| movebench-mock/capstone-editing.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i | 2026-11-26 |
+| movebench-mock/capstone-long.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i | 2026-11-26 |
+| movebench-mock/capstone.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i | 2026-11-26 |
+| movebench-mock/dash-basic.html | <!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0b0a18;font-family:-apple-system,system- | 2026-11-26 |
+| movebench-mock/dash-capstone.html | <!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0b0a18;font-family:-apple-system,system- | 2026-11-26 |
+| movebench-mock/dash-monster.html | <!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0b0a18;font-family:-apple-system,system- | 2026-11-26 |
+| movebench-mock/dash-skill.html | <!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0b0a18;font-family:-apple-system,system- | 2026-11-26 |
+| movebench-mock/img/preview-basic.jpg | ���� JFIF      �� C 				 | 2026-11-26 |
+| movebench-mock/img/preview-capstone.jpg | ���� JFIF      �� C 				 | 2026-11-26 |
+| movebench-mock/img/preview-monster.jpg | ���� JFIF      �� C 				 | 2026-11-26 |
+| movebench-mock/img/preview-skill.jpg | ���� JFIF      �� C 				 | 2026-11-26 |
+| movebench-mock/img/start-deedee.jpg | ���� JFIF      �� C  | 2026-11-26 |
+| movebench-mock/img/start-mudling.jpg | ���� JFIF      �� C  | 2026-11-26 |
+| movebench-mock/img/start-tom.jpg | ���� JFIF      �� C  | 2026-11-26 |
+| movebench-mock/monster-editing.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i | 2026-11-26 |
+| movebench-mock/monster-long.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i | 2026-11-26 |
+| movebench-mock/monster.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i | 2026-11-26 |
+| movebench-mock/shots/basic-3440x1440.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/basic-466x657-editing.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/basic-466x657.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/basic-669x869.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/basic-678x445.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/basic-951x648.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/basic-phone-whole-page.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/capstone-3440x1440.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/capstone-466x657-editing.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/capstone-466x657.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/capstone-669x869.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/capstone-678x445.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/capstone-951x648.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/capstone-phone-whole-page.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/monster-3440x1440.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/monster-466x657-editing.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/monster-466x657.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/monster-669x869.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/monster-678x445.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/monster-951x648.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/monster-phone-whole-page.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/skill-3440x1440.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/skill-466x657-editing.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/skill-466x657.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/skill-669x869.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/skill-678x445.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/skill-951x648.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/shots/skill-phone-whole-page.jpg | ���� JFIF      ���ICC_PROFILE   �    0  mntrRGB XYZ �        acsp                             �� | 2026-11-26 |
+| movebench-mock/skill-editing.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i | 2026-11-26 |
+| movebench-mock/skill-long.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i | 2026-11-26 |
+| movebench-mock/skill.html | <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,i | 2026-11-26 |
+| movebench-mock/src/build.py | !/usr/bin/env python3 | 2026-11-26 |
+| movebench-mock/src/shoot.py | !/usr/bin/env python3 | 2026-11-26 |
 
 ## nara
 
@@ -779,7 +779,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | move-fun-review.md | Move fun review (movefun1, 2026-11-21) | 2026-11-21 |
 | move-review.md | Move review round 2 (2026-10-24, build 1792878363) | 2026-10-24 |
 | move-staging-plan.md | Family moves in three layers: body, stage, set piece (movestage1, 2026-11-22) | 2026-11-22 |
-| movebench-plan.md | The Move Workbench: one page per battle animation where Tom sets everything and previews the whole move (moveb |  |
+| movebench-plan.md | The Move Workbench: one page per battle animation where Tom sets everything and previews the whole move (moveb | 2026-11-26 |
 | mudling-heist-prompt.md | Mudling pie heist: 16-frame sheet prompt (2026-10-30) | 2026-10-30 |
 | music-library.md | Music Library (BUILT 2026-11-02, `music1`; spec below, with the as-built notes in section 6) | 2026-11-02 |
 | music-scripts.json | { | 2026-11-26 |

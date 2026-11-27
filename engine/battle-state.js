@@ -32,7 +32,6 @@ const BATTLE_POS1=[{x:150,base:90}];
 const BATTLE_POS2=[{x:140,base:84},{x:162,base:97}];
 const BATTLE_POS3=[{x:142,base:84},{x:157,base:94},{x:172,base:104}];
 const BATTLE_POS4=[{x:139,base:80},{x:150,base:89},{x:161,base:98},{x:172,base:106}];
-const BATTLE_POS5=[{x:136,base:77},{x:146,base:84},{x:156,base:91},{x:166,base:98},{x:176,base:106}];   // pass1review1: five on the field (only Battle Lab > PASS-1 DRAFT REVIEW)
 const BATTLE_POS=BATTLE_POS3.slice();
 
 // Detailed battle sprites, drawn pixel by pixel. '.' is transparent.

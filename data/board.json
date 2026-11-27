@@ -6206,7 +6206,7 @@
   {
    "id": "t-pass1draftplay",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Battle Animations",
    "ask": "play",
    "title": "Watch the seven Pass-1 draft moves in a fight",
@@ -6214,12 +6214,8 @@
    "blocks": [
     "c-pass1final"
    ],
-   "jump": {
-    "fight": "lab",
-    "i": 2
-   },
    "created": "2026-11-25",
-   "changed": "2026-11-25",
+   "changed": "2026-11-26",
    "chat": {
     "url": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45672541108",
     "opening": "Go ahead and bake the 15 passing 480p battle_move_draft clips"
@@ -6232,8 +6228,13 @@
     {
      "d": "2026-11-25",
      "t": "Tom (PR 17) asked for a review fight with PLAY for all 7 and the drafts 1.5x longer: card c-pass1review1. Check moved to PASS-1 DRAFT REVIEW."
+    },
+    {
+     "d": "2026-11-26",
+     "t": "Retired by movebench4: the PASS-1 DRAFT REVIEW row of the Battle Lab is deleted; the workbench preview replaces it (Move Workbench plan, phase 4)."
     }
-   ]
+   ],
+   "done": "2026-11-26"
   },
   {
    "id": "c-pass1final",
