@@ -2144,7 +2144,7 @@
    "ask": "setup",
    "fyi": true,
    "blocks": [],
-   "next": "Night of 2026-11-26. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: nothing. Starts used: 0 of 5. Limits of the night QA: the test browser is Chromium on a server, not Safari on the iPhone; it cannot hear, cannot judge touch, and cannot see the Duo fold.",
+   "next": "Night of 2026-11-27. Ran: nothing started. Shipped: nothing. Tests: no test run yet (it is built by card c-nighttests). Closed for you: nothing. Needs you: nothing. Starts used: 0 of 5. Limits of the night QA: the test browser is Chromium on a server, not Safari on the iPhone; it cannot hear, cannot judge touch, and cannot see the Duo fold.",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukEJLmj5a5ydSskzMGQ",
     "opening": "board"
@@ -2252,7 +2252,7 @@
      ]
     ]
    ],
-   "night_key": "2026-11-26",
+   "night_key": "2026-11-27",
    "tag": "t-lastnight",
    "note": "The what to do doesn't tell me what to do",
    "after": "nothing for Tom: end",
@@ -9993,7 +9993,7 @@
    "id": "c-movebench-12",
    "tag": "movebench12",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 12: the spec names the video",
    "next": "Which video an animation plays moves into its settings file, for moves, monster attacks, wind-ups and body states, and you can trim a video's first and last picture. Use this one works as before. Starts by itself when Move Workbench 11 ships.",
@@ -10005,7 +10005,7 @@
    "changed": "2026-11-27",
    "auto": true,
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukETPEFvyNWmZVZeXym",
     "opening": "not started"
    },
    "prompt": {
@@ -10025,6 +10025,10 @@
     {
      "d": "2026-11-27",
      "t": "Unblocked: Move Workbench 11: lasting objects, answers, set pieces is done."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -10347,6 +10351,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukETPEFvyNWmZVZeXym",
+   "title": "Move Workbench 12: the spec names the video",
+   "first": "2026-11-27T13:01:49-08:00",
+   "last": "2026-11-27T13:01:49-08:00",
+   "tags": [],
+   "cards": [
+    "c-movebench-12"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDDtc1BVG2EiEUQ55d",
    "title": "Move Workbench 9: stage editor: words and accents",
@@ -17319,8 +17333,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "6fefaeec90fdac3620c3a08a9954f238f7be440f",
- "synced_at": "2026-11-27T19:45:41+00:00",
+ "synced": "d2ef0ca04fc728a73d75958156fb1da02a072c32",
+ "synced_at": "2026-11-27T21:02:53+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -17446,6 +17460,6 @@
     }
    ]
   },
-  "reported": "2026-11-26"
+  "reported": "2026-11-27"
  }
 }
