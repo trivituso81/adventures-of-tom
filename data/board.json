@@ -10101,7 +10101,7 @@
    "id": "c-movebench-14",
    "tag": "movebench14",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 14: monster attacks get effects and stage",
    "next": "Monster attacks can have effects, stage steps, a freeze on the hit and a shake, set on the same page as family moves. Starts by itself when Move Workbench 13 ships.",
@@ -10113,7 +10113,7 @@
    "changed": "2026-11-27",
    "auto": true,
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukFhHBWjuLeCZDLcBjK",
     "opening": "\"Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md, then build Move Workbench 14\""
    },
    "prompt": {
@@ -10137,6 +10137,14 @@
     {
      "d": "2026-11-27",
      "t": "Session started on this card (Sonnet 5.5, medium)."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -10442,6 +10450,29 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukFhHBWjuLeCZDLcBjK",
+   "title": "Move Workbench 14: monster attacks get effects and stage",
+   "first": "2026-11-27T16:26:28-08:00",
+   "last": "2026-11-27T16:26:28-08:00",
+   "tags": [],
+   "cards": [
+    "c-movebench-14"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDPakuV4EMmLKJKdoF",
+   "title": "Design the Move Workbench in the Battle Guide",
+   "first": "2026-11-26T17:35:33-08:00",
+   "last": "2026-11-27T16:26:20-08:00",
+   "tags": [
+    "movebench-design"
+   ],
+   "cards": [
+    "c-movebench-design",
+    "c-movebench-14"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ",
    "title": "Battle screen: storybook look proposal, every case drawn",
    "first": "2026-11-27T16:11:58-08:00",
@@ -10631,18 +10662,6 @@
    ],
    "cards": [
     "c-movebench-1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDPakuV4EMmLKJKdoF",
-   "title": "Design the Move Workbench in the Battle Guide",
-   "first": "2026-11-26T17:35:33-08:00",
-   "last": "2026-11-26T18:07:31-08:00",
-   "tags": [
-    "movebench-design"
-   ],
-   "cards": [
-    "c-movebench-design"
    ]
   },
   {
@@ -17450,8 +17469,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "603a36fab4c1471b7e5943e8d9edc726b50f7ec6",
- "synced_at": "2026-11-28T00:17:30+00:00",
+ "synced": "7b216803dd4b04be5cbedfe7a30518352d7bb855",
+ "synced_at": "2026-11-28T00:27:09+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
