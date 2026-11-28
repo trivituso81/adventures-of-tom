@@ -10393,7 +10393,7 @@
    "created": "2026-11-27",
    "changed": "2026-11-27",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ",
     "opening": "not started"
    },
    "prompt": {
@@ -10411,9 +10411,45 @@
      "t": "Added by board-b3story. Tom, 11-27 16:02, with a picture of a storybook-style battle screen: \"Assess this mockup of a revision to the battle UI. What edge cases or use cases is it missing? What problems might it have.\" The assessment is claude/battleux-mock2/assessment.md and the picture is saved beside it. Assessing session: https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ"
     }
    ]
+  },
+  {
+   "id": "b-board-b3story",
+   "tag": "board-b3story",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-27",
+   "theme": "Battle System",
+   "title": "Tom's storybook mockup of the battle screen was assessed, and a board card holds the proposal that comes next",
+   "next": "Done: Tom's storybook mockup of the battle screen was assessed, and a board card holds the proposal that comes next",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as board-b3story. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-27",
+   "changed": "2026-11-27"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ",
+   "title": "Battle screen: storybook look proposal, every case drawn",
+   "first": "2026-11-27T16:11:58-08:00",
+   "last": "2026-11-27T16:16:35-08:00",
+   "tags": [
+    "board-b3story"
+   ],
+   "cards": [
+    "c-b3story",
+    "b-board-b3story"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukEMoNYqpzg4HGAzdZf",
    "title": "Move Workbench 13: start picture, held and worn",
@@ -17410,8 +17446,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "a429d97f1ae7ddf950f921358aa59f136a6bcc54",
- "synced_at": "2026-11-28T00:05:51+00:00",
+ "synced": "603a36fab4c1471b7e5943e8d9edc726b50f7ec6",
+ "synced_at": "2026-11-28T00:17:30+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
