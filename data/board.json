@@ -10994,9 +10994,9 @@
    "title": "Battle screen: pick what to do with the storybook proposal",
    "theme": "Battle System",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "decide",
-   "next": "Open ADMIN > Battle system > Battle screen: storybook proposal (https://trivituso81.github.io/adventures-of-tom/battle-story.html) on the Duo held sideways, or on the desktop to see all six screen sizes side by side. Tap a move, then its Use button, and watch the moves follow Grace, Tom, a monster, then Deedee. The States list (the Mock states button on the phone) shows every case: five monsters, aiming at the family or the floor, a wind-up, Combos, a knock-out, a free Skill, the end of a fight, Rose Mode, Nara. Then tap one answer; a note with it is read by the next session. Your answer starts the card Battle screen: build the storybook look in the game.",
+   "next": "Retired: the storybook proposal is being rebuilt to match your mockup exactly. Nothing to do here; a new decide card follows that rebuild.",
    "choices": [
     "Build it as shown (Recommended)",
     "Build it, and make the menu follow the storybook look",
@@ -11020,18 +11020,23 @@
     {
      "d": "2026-11-27",
      "t": "Added by b3story with the proposal (claude/b3story-plan.md)."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Retired by b3storyx. Tom, 11-27 23:28, on the mock that build b3story made: \"It looks nothing like the mockup. ... identify a way to mock this exactly as it is in the mockup. You just have to tap the ability a second time after it's focused to execute it.\" The proposal is being rebuilt to match his picture (card Battle screen: mock it exactly as the mockup), so there is nothing to decide or build from the first one."
     }
-   ]
+   ],
+   "done": "2026-11-27",
+   "retired": true
   },
   {
    "id": "c-b3story1",
    "tag": "b3story1",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "done",
    "theme": "Battle System",
    "title": "Battle screen: build the storybook look in the game",
-   "next": "Waits on your answer on the card Battle screen: pick what to do with the storybook proposal. Then builds the storybook screen into the new battle (moves beside whoever is up, controls over the scene) at every screen size. Then: tap the card, Copy prompt, NEW conversation on Claude Sonnet 5.5, effort high.",
+   "next": "Retired: it would have built the first storybook proposal, which you rejected. A build card for the exact version follows the rebuild.",
    "blocks": [
     "c-b3story2"
    ],
@@ -11055,8 +11060,14 @@
     {
      "d": "2026-11-27",
      "t": "Added by b3story (plan claude/b3story-plan.md section 10). Waits on t-b3story-decide."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Retired by b3storyx. Tom, 11-27 23:28, on the mock that build b3story made: \"It looks nothing like the mockup. ... identify a way to mock this exactly as it is in the mockup. You just have to tap the ability a second time after it's focused to execute it.\" The proposal is being rebuilt to match his picture (card Battle screen: mock it exactly as the mockup), so there is nothing to decide or build from the first one."
     }
-   ]
+   ],
+   "done": "2026-11-27",
+   "retired": true
   },
   {
    "id": "c-b3story2",
@@ -11067,7 +11078,7 @@
    "theme": "Battle System",
    "auto": true,
    "title": "Battle screen: storybook marks, Rose Mode, mock purged",
-   "next": "Waits on the card Battle screen: build the storybook look in the game. Then adds the scene marks (aim ring and arrow, floor glow, wind-up banner, Flustered stars), Rose Mode pictures and the key hints, deletes the proposal page and the prototype, and hands you one play card. Starts by itself (Sonnet 5.5, effort medium).",
+   "next": "Waits on the card Battle screen: mock it exactly as the mockup, then on the build card that follows your decision. Then adds the scene marks (aim ring and arrow, floor glow, wind-up banner, Flustered stars), Rose Mode pictures and the key hints, deletes the proposal page and the prototype, and hands you one play card. Starts by itself (Sonnet 5.5, effort medium).",
    "blocks": [],
    "created": "2026-11-27",
    "changed": "2026-11-27",
@@ -11088,6 +11099,43 @@
     {
      "d": "2026-11-27",
      "t": "Added by b3story (plan claude/b3story-plan.md section 10). Waits on c-b3story1."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Still waits: the build card it followed was retired (Tom rejected the first proposal, 11-27 23:28). It now waits on the card Battle screen: mock it exactly as the mockup, and then on the rewritten build card."
+    }
+   ]
+  },
+  {
+   "id": "c-b3story-exact",
+   "tag": "b3storyx",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle System",
+   "title": "Battle screen: mock it exactly as the mockup",
+   "next": "Rebuilds the storybook mock (battle-story.html) so it matches your mockup picture side by side at 951 x 648 on the Duo: where everything stands, the sizes, the painted frames, fonts, colors, ribbons, the gold banner and the damage ring. Tapping a move highlights it and tapping it again uses it (no Use button). Then hands you one decide card.",
+   "blocks": [
+    "c-b3story2"
+   ],
+   "created": "2026-11-27",
+   "changed": "2026-11-27",
+   "chat": {
+    "url": "",
+    "opening": "\"Read CLAUDE.md, claude/handoff-rules.md, claude/b3story-plan.md and claude/battleux-mock2/assessment.md\""
+   },
+   "prompt": {
+    "what": "Measures every difference between your mockup and the mock that build b3story made, writes them in one table, and rebuilds the mock so it matches your picture at 951 x 648. Then hands you one decide card.",
+    "before": [
+     "Nothing to do first. Tom started this session himself with the two screenshots attached."
+    ],
+    "model": "Claude Fable 5.2 (row E, condition 3: Tom started this session on it himself)",
+    "effort": "high (a whole screen has to be measured and rebuilt with nothing written to follow)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, claude/b3story-plan.md and claude/battleux-mock2/assessment.md. Look at Tom's mockup claude/battleux-mock2/tom-mockup-2026-11-27.jpg and the same picture at the Duo's width, claude/battleux-mock2/tom-mockup-at-duo-width-951.jpg, and at the mock that build b3story made (battle-story.html, source claude/battleux-mock2/src/). Tom, 11-27 23:28: \"It looks nothing like the mockup. ... identify a way to mock this exactly as it is in the mockup. You just have to tap the ability a second time after it's focused to execute it.\" Your first push is the commit board: start c-b3story-exact. The goal is a mock that looks like Tom's picture when the two are laid side by side at 951 x 648 (the Duo unfolded, held sideways). First compare the two and write every difference in a table in claude/b3story-plan.md under a new heading Exact to the mockup: where each thing is and how big it is (the Big One, the family, the moves panel, the plate, the Combo bar, the party cards, the turn bar, the tools), the frames, the fonts, the colors, the ribbons, the highlight banner and the damage ring, measured from the 951-wide picture in pixels. Then rebuild the mock so every row of that table matches, and change only what the table names. The mockup wins over the game's current positions and over the earlier calls in the plan. Interaction: tapping a move highlights it as the gold banner in the picture shows; tapping the highlighted move again uses it; no separate Use button; a tap on a monster aims at it. For the painted look of this mock only, the frames, ribbons, scroll, plate, banner and gauge may be cut out of Tom's mockup picture and stretched in CSS (nine-slice) with live text on top; never an outside image tool; list in the plan which pieces would later be made properly in the Art Library. Keep these rules unless the picture cannot be matched without breaking one, then say so in one line in the plan: text at least 12.5 px on a phone, tap targets of 44 px, every picture with its word next to it, no tabs hiding moves, every fact shown once. Keep every state the mock has and the six screen sizes, matching the mockup at 951 x 648 first. Update tools/b3story_test.py so it fails when any element at 951 x 648 is more than 12 px from the position measured in the table. Before pushing, put a screenshot at 951 x 648 beside the mockup in one picture, claude/battleux-mock2/compare-exact.jpg, and look at it. Then hand Tom ONE decide card in the same push, t-b3storyx-decide (the first choice yours and marked Recommended), blocking a rewritten build card c-b3story1 (Sonnet 5.5 high) that builds this version into the game. Build name b3storyx. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Added by this session's first push. Tom, 11-27 23:28, on the mock that build b3story made: \"It looks nothing like the mockup. ... identify a way to mock this exactly as it is in the mockup. You just have to tap the ability a second time after it's focused to execute it.\" It holds the next card (Battle screen: storybook marks, Rose Mode, mock purged) until the rewritten build card exists."
     }
    ]
   }
