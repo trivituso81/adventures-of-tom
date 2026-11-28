@@ -7,7 +7,7 @@
  "body:tom:victory":{"status":"todo","slug":"body-tom-victory","owner":"tom","rev":1},
  "body:tom:run":{"status":"todo","slug":"body-tom-run","owner":"tom","rev":1},
  "body:tom:cast":{"status":"todo","slug":"body-tom-cast","owner":"tom","rev":1},
- "move:lounge_pass_flex":{"status":"todo","slug":"move-lounge-pass-flex","owner":"tom","rev":3},
+ "move:lounge_pass_flex":{"status":"todo","slug":"move-lounge-pass-flex","owner":"tom","rev":4},
  "move:zone_one_blockade":{"status":"todo","slug":"move-zone-one-blockade","owner":"tom","rev":2},
  "answer:zone_one_blockade":{"status":"novideo","slug":"answer-zone-one-blockade","owner":"tom","rev":0},
  "move:suite_door_slide":{"status":"todo","slug":"move-suite-door-slide","owner":"tom","rev":2},
