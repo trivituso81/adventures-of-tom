@@ -10438,7 +10438,7 @@
    "id": "c-b3story",
    "tag": "b3story",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "theme": "Battle System",
    "title": "Battle screen: storybook look proposal, every case drawn",
    "next": "Waits on your card Try the battle screen prototype on the Duo (the lightweight prototype is built first, card Battle screen: a lightweight prototype to try). After your All good, this card turns the mockup into the full tappable proposal at the four real screens with every missing case, using your prototype notes. Then: tap the card, Copy prompt, NEW conversation on Claude Opus 5.5, effort high.",
@@ -10446,7 +10446,7 @@
    "created": "2026-11-27",
    "changed": "2026-11-27",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ",
+    "url": "https://claude.ai/code/session_01RXeukCgK3r6u7c5CU21MGw",
     "opening": "\"Read CLAUDE.md, claude/handoff-rules.md, claude/battleux-plan.md, claude/b3look-plan.md and claude/battleux-mock2/assessment.md\""
    },
    "prompt": {
@@ -10478,9 +10478,12 @@
     {
      "d": "2026-11-27",
      "t": "Started at 21:45 from the pasted prompt. Card t-b3proto-try has no note or answer from Tom, so the proposal starts without prototype notes (Tom can paste them in this conversation). Section 7 of claude/battleux-mock2/assessment.md had been removed by the movebench15 push (19:04, a stale copy of the file); restored from board-b3story3 (6b02215)."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started: the conversation claimed this card."
     }
-   ],
-   "waiting_on": "tom"
+   ]
   },
   {
    "id": "b-board-b3story",
@@ -10766,6 +10769,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukCgK3r6u7c5CU21MGw",
+   "title": "Battle screen: storybook look proposal, every case drawn",
+   "first": "2026-11-27T21:49:39-08:00",
+   "last": "2026-11-27T21:49:39-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3story"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukE21G668MNVQvNAKtP",
    "title": "Battle screen: a lightweight prototype to try",
@@ -17830,8 +17843,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "1b452d33249175c7e96c116169f751fbe7651c66",
- "synced_at": "2026-11-28T04:33:53+00:00",
+ "synced": "e40fb0559415c2460b896faba810e3fe195d0d94",
+ "synced_at": "2026-11-28T05:50:24+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
