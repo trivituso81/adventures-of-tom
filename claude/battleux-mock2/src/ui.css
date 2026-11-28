@@ -1,0 +1,11 @@
+/* written by cut_ui.py: the painted frames cut from Tom's mockup, as nine-slices */
+.f-scroll{border-style:solid;border-color:transparent;border-width:0 28.3px 0 25.9px;border-image:url(battle-story/ui/scroll.webp) 0 71 0 65 fill / 0 28.3px 0 25.9px round}
+.f-tag{border-style:solid;border-color:transparent;border-width:8.2px 8.2px 8.2px 8.2px;border-image:url(battle-story/ui/tag.webp) 18 18 18 18 fill / 8.2px 8.2px 8.2px 8.2px stretch}
+.f-basic{border-style:solid;border-color:transparent;border-width:15.1px 15.1px 15.1px 15.1px;border-image:url(battle-story/ui/basic.webp) 38 38 38 38 fill / 15.1px 15.1px 15.1px 15.1px stretch}
+.f-plaque{border-style:solid;border-color:transparent;border-width:0 21.9px;border-image:url(battle-story/ui/plaque.webp) 0 50 fill / 0 21.9px stretch}
+.f-panel{border-style:solid;border-color:transparent;border-width:15.1px 15.1px 15.1px 15.1px;border-image:url(battle-story/ui/panel.webp) 38 38 38 38 fill / 15.1px 15.1px 15.1px 15.1px stretch}
+:root{--cream:rgb(238,221,186)}
+.f-banner{border-style:solid;border-color:transparent;border-width:11.9px 27.1px 14.3px 27.1px;border-image:url(battle-story/ui/banner.webp) 30 68 36 68 fill / 11.9px 27.1px 14.3px 27.1px stretch}
+.f-plate{border-style:solid;border-color:transparent;border-width:21.9px 21.9px 21.9px 21.9px;border-image:url(battle-story/ui/plate.webp) 55 55 55 55 fill / 21.9px 21.9px 21.9px 21.9px stretch}
+.f-cplaque{border-style:solid;border-color:transparent;border-width:0 46.2px;border-image:url(battle-story/ui/comboplaque.webp) 0 116 fill / 0 46.2px stretch}
+.f-gauge{border-style:solid;border-color:transparent;border-width:0 67.7px 0 33.9px;border-image:url(battle-story/ui/gauge.webp) 0 170 0 85 fill / 0 67.7px 0 33.9px stretch}

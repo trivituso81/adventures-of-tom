@@ -1,4 +1,4 @@
-// The storybook battle screen, tappable mock (card c-b3story; plan claude/b3story-plan.md). NOT the game: no battle engine, fixed sample numbers.
+// The storybook battle screen, tappable mock (cards c-b3story and c-b3story-exact; plan claude/b3story-plan.md, "Exact to the mockup"). NOT the game: no battle engine, fixed sample numbers.
 // Real data: move names, prices, flavors, short lines, descriptions, statuses and monsters come from the game's data files (data/b3-*.js), loaded
 // by the page; the words the screen adds come from data/b3-ux-words.js. The layout and the look are the spec; this code is not the implementation.
 'use strict';
@@ -44,7 +44,7 @@ const FOUR=['grace','tom','rose','deedee'];                      // standing ord
 const ORDER={grace:0,tom:1,deedee:2,rose:3,tnb:1,nara:2};       // turn order of the mock fight
 function base(o){
   const party=o.party||FOUR,m={};for(const id of party)m[id]=mem(id);
-  const s={party,mem:m,foes:o.foes||ONE(),turn:o.turn||null,actor:o.actor||party[0],round:2,roundAt:4,combo:30,hi:null,aim:null,lastFoe:null,free:null,
+  const s={party,mem:m,foes:o.foes||ONE(),turn:o.turn||null,actor:o.actor||party[0],round:1,roundAt:4,combo:30,hi:null,aim:null,lastFoe:null,free:null,
     det:PREF.det,rose:PREF.rose,bg:PREF.bg,phase:'turn',speed:PREF.speed,look:null,sheet:null,caption:'',cap2:'',
     pops:[],state:o.id||'start',keys:false,prev:null};
   if(!s.turn){const foes=s.foes.map(f=>'f:'+f.key),ms=party.map(id=>'m:'+id),out=[];
@@ -56,11 +56,11 @@ function base(o){
   return s;
 }
 const STATES=[
-  {id:'start',n:'One monster, Grace’s turn',d:'The Basic is highlighted when a turn opens; it is aimed already.',f(){S=base({id:'start'});}},
-  {id:'tom',n:'Tom’s turn',d:'The bar has moved to Tom: he steps to the front spot and the bar opens on the monsters’ side.',f(){S=base({id:'tom',actor:'tom'});S.mem.grace.pep=6;}},
-  {id:'deedee',n:'Deedee’s turn',d:'Deedee stands in the Back row; she steps to the same front spot, so the bar has one place.',f(){S=base({id:'deedee',actor:'deedee'});S.combo=42;}},
-  {id:'five',n:'Five monsters (3 Front, 2 Back)',d:'Each monster has a strip under it; the aimed one’s full plate sits bottom left.',f(){S=base({id:'five',foes:FIVE()});}},
-  {id:'aim_one',n:'Aimed at one monster',d:'Crunchy Sugar-Cube Pop on The Big One: the forecast is on the plate.',f(){S=base({id:'aim_one'});S.mem.grace.pep=5;S.hi='crunchy_sugar_cube_pop';}},
+  {id:'start',n:'One monster, Grace’s turn',d:'The Basic is highlighted when a turn opens; it is aimed already, so one tap uses it.',f(){S=base({id:'start'});}},
+  {id:'tom',n:'Tom’s turn',d:'Tom’s turn: his name heads the list, his card is raised and his face leads the turn bar.',f(){S=base({id:'tom',actor:'tom'});S.mem.grace.pep=6;}},
+  {id:'deedee',n:'Deedee’s turn',d:'Deedee’s turn: the list keeps its place beside the family.',f(){S=base({id:'deedee',actor:'deedee'});S.combo=42;}},
+  {id:'five',n:'Five monsters (3 Front, 2 Back)',d:'Each monster has a small plate under it; the aimed one’s full plate sits bottom left.',f(){S=base({id:'five',foes:FIVE()});}},
+  {id:'aim_one',n:'As in Tom’s mockup: aimed at one monster',d:'The state of Tom’s picture: Crunchy Sugar-Cube Pop highlighted, aimed at The Big One, Combos at 65%. Tap the gold banner again to use it.',f(){S=base({id:'aim_one'});S.combo=65;S.hi='crunchy_sugar_cube_pop';}},
   {id:'aim_all',n:'Aimed at every monster',d:'Open-String Violin Screech: every strip shows its own damage; the plate sums it up.',f(){S=base({id:'aim_all',foes:FIVE()});S.hi='open_string_violin_screech';}},
   {id:'aim_mem',n:'Aimed at one family member',d:'Deedee Makes It Better on Tom: the forecast sits on his card.',f(){S=base({id:'aim_mem',actor:'deedee'});S.mem.tom.hp=71;S.mem.tom.st=['drenched'];S.hi='deedee_makes_it_better';S.aim={k:'mem',id:'tom'};}},
   {id:'aim_fam',n:'Aimed at the whole family',d:'Sofa-Cushion Citadel: every card shows the shield it gets.',f(){S=base({id:'aim_fam',actor:'rose'});S.mem.rose.pep=5;S.hi='sofa_cushion_citadel';}},
@@ -68,13 +68,13 @@ const STATES=[
   {id:'windup',n:'Winding up, Rose marked',d:'The Big One glared at Rose: Swamp Chomp comes next. Crunchy Sugar-Cube Pop cancels it.',f(){S=base({id:'windup'});const b=S.foes[0];b.wind={name:'Swamp Chomp',at:'rose'};S.mem.rose.marked=true;S.mem.grace.pep=5;S.hi='crunchy_sugar_cube_pop';}},
   {id:'status',n:'Statuses, and a Flustered monster',d:'Log Lump is out of Composure (Flustered); the others carry statuses.',f(){S=base({id:'status',actor:'tom',foes:FIVE()});const f=S.foes;
     f[0].st=['drenched','windexed'];f[1].st=['dazzled'];f[2].st=['off_key'];f[4].pips=0;f[4].flu=true;f[4].st=['mossy_brace'];S.aim={k:'foe',key:'E'};S.hi='controller_toss';S.mem.tom.st=['eyes_on_me'];}},
-  {id:'combo65',n:'Combos 65%: Double Team',d:'At 50% a Double Team joins the top of the list, with the partner named.',f(){S=base({id:'combo65',actor:'tom'});S.combo=65;S.hi='ruckus_double';}},
-  {id:'combo100',n:'Combos 100%: Family Ruckus',d:'At 100% the Family Ruckus is offered too.',f(){S=base({id:'combo100',actor:'deedee'});S.combo=100;S.hi='ruckus_full';}},
+  {id:'combo65',n:'Combos 65%: Double Team',d:'At 50% the Double Team mark under the Combo bar lights up: tap it to highlight it, tap again to use it.',f(){S=base({id:'combo65',actor:'tom'});S.combo=65;S.hi='ruckus_double';}},
+  {id:'combo100',n:'Combos 100%: Family Ruckus',d:'At 100% the Family Ruckus mark lights up too.',f(){S=base({id:'combo100',actor:'deedee'});S.combo=100;S.hi='ruckus_full';}},
   {id:'ko',n:'Rose knocked out: Pick-Me-Up',d:'Pick-Me-Up appears for everyone; it aims at Rose’s card.',f(){S=base({id:'ko',actor:'tom'});S.mem.rose.ko=true;S.mem.rose.hp=0;S.mem.tom.pep=5;S.hi='pick_me_up';}},
   {id:'free',n:'A free Skill (from Grace)',d:'Grace’s Colossal Diamond-Gold Dumpling: Deedee may use one Skill of 4 Pep or less, free, now.',f(){S=base({id:'free',actor:'deedee'});S.free={from:'grace',max:4};S.mem.deedee.pep=5;S.hi='hand_me_my_glasses_scrub';}},
-  {id:'playing',n:'A move playing, with the battle text',d:'The bar folds away while a move plays; one caption line says what happened.',f(){S=base({id:'playing'});S.phase='playing';S.caption='Grace uses Crunchy Sugar-Cube Pop!';S.cap2='Racket is a Pet Peeve: Composure down 1.';S.foes[0].hp=397;S.foes[0].pips=5;S.mem.grace.pep=1;S.combo=42;S.pops=[{at:'f:A',t:'-21'}];}},
+  {id:'playing',n:'A move playing, with the battle text',d:'The list folds away while a move plays; one caption line says what happened.',f(){S=base({id:'playing'});S.phase='playing';S.caption='Grace uses Crunchy Sugar-Cube Pop!';S.cap2='Racket is a Pet Peeve: Composure down 1.';S.foes[0].hp=397;S.foes[0].pips=5;S.mem.grace.pep=1;S.combo=42;S.pops=[{at:'f:A',t:'-21'}];}},
   {id:'end',n:'End of the fight',d:'What the win paid, and Continue.',f(){S=base({id:'end'});S.foes[0].hp=0;S.foes[0].out=true;S.phase='end';}},
-  {id:'nara',n:'A party of three with Nara',d:'Tom, TNB and Nara. Nara is short: the bar still sits beside her, its tail at her head.',f(){S=base({id:'nara',party:['tom','tnb','nara'],actor:'nara'});S.combo=20;}},
+  {id:'nara',n:'A party of three with Nara',d:'Tom, TNB and Nara: three family members on the picture’s first three spots.',f(){S=base({id:'nara',party:['tom','tnb','nara'],actor:'nara'});S.combo=20;}},
 ];
 function setState(id){const st=STATES.find(x=>x.id===id)||STATES[0];st.f();S.state=st.id;
   if(!S.hi&&S.phase==='turn')S.hi=startHi();if(S.hi&&!S.aim)S.aim=defaultAim(sk(S.hi));
@@ -85,13 +85,14 @@ function list(){
   const k=KIT[S.actor],out=[];
   if(S.free){out.push({grp:fill(W.freeFrom,{who:B3_CAST[S.free.from].name}).replace(/\.$/,''),free:1});
     for(const s of k.priSk.concat(k.secSk))if(s.pep<=S.free.max)out.push({s,free:1});return out;}
-  if(S.combo>=50){out.push({grp:W.group.ruckus});out.push({s:RUCK.ruckus_double});if(S.combo>=100)out.push({s:RUCK.ruckus_full});}
+  if(RUCK[S.hi]){out.push({grp:W.group.ruckus});out.push({s:RUCK[S.hi]});}   // a Combo lives on the Combo bar's marks; while one is highlighted it shows here as the banner
   if(S.party.some(id=>S.mem[id].ko)){out.push({grp:W.group.any});out.push({s:B3_SKILLS.pick_me_up});}
   out.push({s:k.basic,basic:1});for(const s of k.priSk)out.push({s});
   out.push({grp:W.group.pocket+': '+k.sec.name});for(const s of k.secSk)out.push({s});
   return out;
 }
-const moves=()=>list().filter(r=>r.s).map(r=>r.s);
+const ruckOn=()=>S.free?[]:[RUCK.ruckus_double,RUCK.ruckus_full].filter(s=>S.combo>=s.combo);
+const moves=()=>ruckOn().concat(list().filter(r=>r.s&&!RUCK[r.s.id]).map(r=>r.s));
 function cost(s){return S.free||s.slot==='basic'||s.slot==='ruckus'?0:s.pep;}
 function gain(s){return s.slot==='basic'?B3_RULES.pep.basic:0;}
 function whyNot(s){if(s.slot==='ruckus')return S.combo>=s.combo?null:'needs '+s.combo+'% Combos';
@@ -151,53 +152,57 @@ function plateFoe(){if(S.look&&S.look.f)return foeBy(S.look.f);const a=aimedFoes
   if(S.lastFoe&&foeBy(S.lastFoe)&&!foeBy(S.lastFoe).out)return foeBy(S.lastFoe);return liveFoes()[0]||S.foes[0];}
 
 // ---------------------------------------------------------------- geometry
+// Where everything stands comes from Tom's mockup picture (claude/battleux-mock2/tom-mockup-2026-11-27.jpg), measured at 951 px wide and
+// written down in the plan's table "Exact to the mockup". The picture is 951 x 713; the Duo is 951 x 648, so the 65 px that go are sky:
+// the turn bar and the tools keep their distance from the top, everything else keeps its distance from the bottom.
+// The numbers below are that 951 x 648 design. A wider or taller screen keeps the left group (turn bar, monsters, plate) on the left and the
+// right group (tools, list, family, Combo bar, party cards) on the right; a screen bigger both ways shows the design scaled up as one piece.
 const ratio={};
 function safe(){const q=(Q.get('safe')||'').split(',').map(Number);const pr=$('probe'),cs=getComputedStyle(pr);
   const env=[cs.paddingTop,cs.paddingRight,cs.paddingBottom,cs.paddingLeft].map(parseFloat);
   return q.length===4&&q.every(n=>!isNaN(n))?{t:q[0],r:q[1],b:q[2],l:q[3]}:{t:env[0]||0,r:env[1]||0,b:env[2]||0,l:env[3]||0};}
-// Where everyone stands is the game's own battle screen (engine/b3-play.js, engine/battle-state.js): a 576 x 324 field. The family stands on
-// BATTLE_POS (a diagonal, slot 0 up and left, the last slot down and right; a Back row member 14 further right), the monsters on b3LayoutFoes's
-// spots (the Front row in a column near the middle, the Back row in a column behind it on the left, a boss drawn 2.5 times). The mock maps that
-// field onto the screen as large as it fits above the party row, and lays the controls over it.
-const POS={1:[[150,90]],2:[[140,84],[162,97]],3:[[142,84],[157,94],[172,104]],4:[[139,80],[150,89],[161,98],[172,106]]};   // BATTLE_POS1..4 (x3 = field units)
-const FAM_H={grace:122,tom:134,rose:92,deedee:128,tnb:134,nara:94};   // standing height on the field, measured from the game's battle frames (Battle Lab NEW 6, NEW 8)
-const FOE_FX={1:[168],2:[184,156],3:[188,158,188]},FOE_FY={1:[264],2:[224,302],3:[218,262,306]},FOE_BX={1:[84],2:[92,70]},FOE_BY={1:[236],2:[214,268]};
-const FOE_WANT=[0,96,80,68,60,60],FOE_SIZE={bigone:2.5},FOE_HOVER={skeeter:14};
-const STEP=16;   // the acting member takes one step toward the monsters (section 7 row 1); nobody else moves
+const D={turns:{x:12,y:13,w:513,h:64},toolsR:22,bar:{x:396,w:284,top:130,bottom:481},plate:{x:96,y:466,w:255},combo:{x:440,y:483,w:420,h:88},cards:{x:430,y:571,w:434,h:66}};
+// the family's spots (centre x, feet y) and heights, from the picture; three members take the first, second and a spot between the third and fourth
+const SLOT={4:[[715,432],[768,460],[830,475],[879,501]],3:[[715,432],[770,460],[852,492]],2:[[715,432],[768,460]],1:[[715,432]]};
+const FAM_H={grace:169,tom:182,rose:126,deedee:169,tnb:182,nara:104};
+// the monsters: one stands where The Big One stands in the picture; more than one share that ground, Front row nearer the family
+const FOE_W={bigone:324},FOE_ONE=[214,447],FOE_F={1:[[300,400]],2:[[320,300],[262,430]],3:[[330,245],[228,330],[330,415]]},FOE_B={1:[[118,340]],2:[[112,270],[118,400]]};
+const FOE_HOVER={skeeter:14},RING_AT={bigone:[.52,.587]};
 function geo(){
-  const Wd=innerWidth,H=innerHeight,sf=safe(),up=H>Wd,short=!up&&H<500,big=!up&&Wd>=1200&&H>=760,pad=8,gap=6;
-  const g={W:Wd,H,up,short,big,pad,gap,sf,x0:sf.l+pad,x1:Wd-sf.r-pad,y0:sf.t+pad,y1:H-sf.b-pad};
-  const field=(x,y,w,h)=>{const s=Math.min(w/576,h/324);g.cv={s,x:x+(w-576*s)/2,y:y+h-324*s};};
+  const RW=innerWidth,RH=innerHeight,sf=safe(),up=RH>RW,short=!up&&RH<500,pad=8,gap=6;
+  const g={up,short,sf,pad,gap,z:1,W:RW,H:RH};
+  if(!up&&!short){
+    const z=Math.min(RW/951,RH/648),W=RW/z,H=RH/z,dx=W-951,dy=H-648;   // the design shown whole: scaled up on a bigger screen, down on a slightly smaller one (867 px wide in Firefox on the Duo)
+    Object.assign(g,{mode:'wide',z,W,H,dx,dy,ks:1,LX:40,RX:920+dx,BY:505+dy,x0:8,x1:W-8,y0:8,y1:H-8,TB:77});
+    g.scene={x:0,y:0,w:W,h:H};g.turns=Object.assign({},D.turns);g.tools={r:W-D.toolsR,y:0};
+    g.bar={x:D.bar.x+dx,w:D.bar.w,top:D.bar.top+dy,bottom:D.bar.bottom+dy};
+    g.plate={x:D.plate.x,y:D.plate.y+dy,w:D.plate.w};g.combo={x:D.combo.x+dx,y:D.combo.y+dy,w:D.combo.w,h:D.combo.h};
+    g.cards={x:D.cards.x+dx,y:D.cards.y+dy,w:D.cards.w,h:D.cards.h};g.strips=true;return g;}
+  const x0=sf.l+pad,x1=RW-sf.r-pad,y0=sf.t+pad,y1=RH-sf.b-pad;Object.assign(g,{x0,x1,y0,y1,TB:44});
   if(up){
-    g.scene={x:0,y:sf.t,w:Wd,h:Math.round(Wd/2)};g.TB=44;
-    g.turns={x:g.x0,y:sf.t+6,w:Wd-2*pad-sf.l-sf.r-118,h:g.TB};g.tools={r:g.x1,y:sf.t+6};
-    const below=g.scene.y+g.scene.h+gap;g.plate={x:g.x0,y:below,w:g.x1-g.x0,h:98};
-    g.two=Wd<420;g.cards={x:g.x0,y:g.plate.y+g.plate.h+gap,w:g.x1-g.x0,h:g.two?110:54};g.combo={x:g.x0,y:g.cards.y+g.cards.h+gap,w:g.x1-g.x0,h:42};
-    g.sheet={x:sf.l,y:g.combo.y+g.combo.h+gap,w:Wd-sf.l-sf.r,h:H-sf.b-(g.combo.y+g.combo.h+gap)};
-    field(0,g.scene.y+g.TB,Wd,g.scene.h-g.TB-2);g.strips=false;return g;}
-  const TB=short?44:big?58:52,PC=short?50:big?70:64,CB=short?50:big?50:46,PH=short?96:big?142:128;
-  g.scene={x:0,y:0,w:Wd,h:H};g.TB=TB;g.turns={x:g.x0+8,y:g.y0+3,h:TB-6};g.tools={r:g.x1,y:g.y0};
-  const PW=Math.min((g.x1-g.x0)*(short?.3:.38),short?260:big?420:350);
-  g.plate={x:g.x0,y:g.y1-PH,w:PW,h:PH};g.MZ=g.x0+PW;
-  if(short){const CW=Math.min(250,(g.x1-g.x0)*.33);g.combo={x:g.x0,y:g.y1-PC,w:CW,h:PC};g.cards={x:g.x0+CW+gap,y:g.y1-PC,w:g.x1-g.x0-CW-gap,h:PC};
-    g.plate={x:g.x0,y:g.cards.y-gap-PH,w:PW,h:PH};g.comboTop=false;}
-  else{g.cards={x:g.MZ+gap,y:g.y1-PC,w:g.x1-g.MZ-gap,h:PC};g.combo={x:0,y:g.y0,w:0,h:CB};g.comboTop=true;}   // Combos sits in the top line, between the turn bar and the tools
-  field(g.x0,g.y0,g.x1-g.x0,g.cards.y-4-g.y0);   // the field stands on the party row: every foot stays in view
-  g.lane={y:g.y0+TB+gap+6,b:g.cards.y-gap};g.strips=true;
-  g.turns.w=g.x1-g.x0-16-(Q.has('bare')?250:400)*(big?1.1:short?.88:1);
-  return g;}
-function laneLeft(g){let lx=g.x0;const op=foePos(g);for(const f of S.foes){if(f.out)continue;const p=op[f.key];lx=Math.max(lx,p.x+p.w);}
-  for(const e of document.querySelectorAll('.ms'))lx=Math.max(lx,e.getBoundingClientRect().right);return lx+10;}
-const F2S=(g,x,y)=>({x:g.cv.x+x*g.cv.s,y:g.cv.y+y*g.cv.s});
-function famPos(g){const out={},n=S.party.length,T=POS[Math.min(4,n)];
+    g.mode='up';g.scene={x:0,y:sf.t,w:RW,h:Math.round(RW/2)};
+    g.turns={x:x0+2,y:sf.t+5,w:RW-2*pad-sf.l-sf.r-(Q.has('bare')?98:214),h:40};g.tools={r:x1,y:sf.t};
+    const below=g.scene.y+g.scene.h+gap;g.plate={x:x0,y:below,w:x1-x0,h:88};
+    g.two=RW<420;g.cards={x:x0,y:g.plate.y+g.plate.h+gap,w:x1-x0,h:g.two?108:52};g.combo={x:x0,y:g.cards.y+g.cards.h+gap,w:x1-x0,h:52};
+    g.sheet={x:sf.l,y:g.combo.y+g.combo.h+gap,w:RW-sf.l-sf.r,h:RH-sf.b-(g.combo.y+g.combo.h+gap)};
+    g.ks=Math.min((g.scene.h-g.TB-14)/387,(RW-16)/600);g.LX=6;g.RX=RW-6;g.BY=g.scene.y+g.scene.h-5;g.strips=false;return g;}
+  g.mode='short';const PC=52,CH=64,CW=Math.min(250,(x1-x0)*.36);
+  g.scene={x:0,y:0,w:RW,h:RH};g.turns={x:x0+2,y:y0,w:x1-x0-(Q.has('bare')?200:310),h:40};g.tools={r:x1,y:sf.t};
+  g.combo={x:x0,y:y1-CH,w:CW,h:CH};g.cards={x:x0+CW+gap,y:y1-PC,w:x1-x0-CW-gap,h:PC};
+  g.plate={x:x0,w:Math.min(270,(x1-x0)*.36),bottom:g.combo.y-gap};
+  g.BY=g.cards.y-5;g.ks=Math.min((g.BY-(y0+g.TB+2))/387,((x1-x0)-246)/574);g.LX=x0;g.RX=x1;
+  const r=g.RX-238*g.ks-5,l=g.LX+336*g.ks+5,w=Math.max(236,Math.min(280,r-l));
+  g.bar={x:r-w,w,top:y0+g.TB+2,bottom:g.cards.y-gap};g.strips=true;return g;}
+const sxL=(g,X)=>g.LX+(X-40)*g.ks,sxR=(g,X)=>g.RX-(920-X)*g.ks,syB=(g,Y)=>g.BY-(505-Y)*g.ks;
+function famPos(g){const out={},n=S.party.length,T=SLOT[Math.min(4,n)];
   S.party.forEach((id,i)=>{const back=B3_RULES.rowByLean[B3_VIBES[KIT[id].pri.id].lean]==='back';
-    let fx=T[i][0]*3+(back?14:0);const fb=T[i][1]*3;if(id===S.actor&&S.phase==='turn')fx-=STEP;
-    const h=FAM_H[id]*g.cv.s,w=h*(ratio[id]||.4),p=F2S(g,fx,fb);out[id]={x:p.x-w/2,y:p.y-h,w,h,cx:p.x,feet:p.y,back};});return out;}
-function foePos(g){const out={},F=S.foes,fr=F.filter(f=>f.row!=='back'),bk=F.filter(f=>f.row==='back'),want=FOE_WANT[Math.min(5,F.length)];
-  const put=(f,fx,fy,k)=>{const fw=want*k*(FOE_SIZE[f.id]||1),r=ratio[f.id]||1,w=fw*g.cv.s,h=w/r,hov=(FOE_HOVER[f.id]||0)*g.cv.s,p=F2S(g,fx,fy);
-    out[f.key]={x:p.x-w/2,y:p.y-h-hov,w,h,cx:p.x,feet:p.y-hov,slot:w,ground:p.y};};
-  fr.forEach((f,k)=>put(f,(FOE_FX[fr.length]||FOE_FX[3])[k%3],(FOE_FY[fr.length]||FOE_FY[3])[k%3],1));
-  bk.forEach((f,k)=>put(f,(FOE_BX[bk.length]||FOE_BX[2])[k%2],(FOE_BY[bk.length]||FOE_BY[2])[k%2],.9));
+    const h=FAM_H[id]*g.ks,w=h*(ratio[id]||.4),cx=sxR(g,T[i][0]),feet=syB(g,T[i][1]);out[id]={x:cx-w/2,y:feet-h,w,h,cx,feet,back};});return out;}
+function foePos(g){const out={},F=S.foes,fr=F.filter(f=>f.row!=='back'),bk=F.filter(f=>f.row==='back');
+  const put=(f,at,want)=>{const r=ratio[f.id]||1,w=(FOE_W[f.id]&&F.length===1?FOE_W[f.id]:want)*g.ks,h=w/r,hov=(FOE_HOVER[f.id]||0)*g.ks,cx=sxL(g,at[0]),gy=syB(g,at[1]);
+    out[f.key]={x:cx-w/2,y:gy-h-hov,w,h,cx,feet:gy-hov,slot:w,ground:gy};};
+  if(F.length===1){put(F[0],FOE_ONE,150);return out;}
+  fr.forEach((f,k)=>put(f,(FOE_F[Math.min(3,fr.length)])[k%3],104));
+  bk.forEach((f,k)=>put(f,(FOE_B[Math.min(2,bk.length)])[k%2],96));
   return out;}
 
 // ---------------------------------------------------------------- drawing helpers
@@ -207,74 +212,94 @@ function flIcon(f){const c=B3_FLAVORS[f].color;
     racket:'<path d="M2 7h3l4-4v12l-4-4H2z"/><path d="M11 6c2 2 2 4 0 6M13 4c4 3 4 7 0 10" stroke="#3b220f" fill="none" stroke-width="1.6"/>',
     support:'<path d="M9 15C2 10 2 4 6 4c2 0 3 1 3 2 0-1 1-2 3-2 4 0 4 6-3 11z"/>'}[f];
   return `<svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="8.4" fill="${c}" stroke="#3b220f" stroke-width="1.2"/><g transform="translate(2.5 2.5) scale(.72)" fill="#3b220f">${g}</g></svg>`;}
-const flChip=f=>`<span class="fl" style="background:${B3_FLAVORS[f].color}66">${flIcon(f)}${B3_FLAVORS[f].name}</span>`;
+const flChip=f=>`<span class="fl">${flIcon(f)}${B3_FLAVORS[f].name}</span>`;
 const face=id=>`battle-story/face-${id}.webp`;
 const stName=id=>B3_STATUS[id]?B3_STATUS[id].name:id;
+const FR=c=>`<i class="fr ${c}"></i>`;   // a painted frame cut from the mockup, laid behind its box (nine-slice, ui.css)
 function hpBar(u){const r=u.max?u.hp/u.max:0;return `<div class="hp${r<=B3_RULES.lowHp?' low':''}"><u style="width:${Math.max(0,100*r)}%"></u></div>`;}
 function pipsHtml(f,go){let h='<span class="pips">';for(let i=0;i<f.maxPips;i++){const live=i<f.pips;h+=`<i class="pip${live?'':' gone'}${live&&go&&i>=f.pips-go?' go':''}"></i>`;}return h+'</span>';}
 function stChip(id){const s=B3_STATUS[id];if(!s)return '';const bad=s.kind==='debuff'||s.kind==='mark';const t=S.det&&s.dur?`${s.name}, ${s.dur.n} ${s.dur.unit==='turn'?'turns':'rounds'}`:s.name;return `<span class="sc${bad?' bad':s.kind==='buff'||s.kind==='stance'?' good':''}">${esc(t)}</span>`;}
+// the damage ring of the picture: a dark disc in two gold rings with four gold points (drawn, not cut: the picture's ring is half under its chips)
+const RING_SVG=(()=>{const sp=(a,l)=>`<path transform="rotate(${a})" d="M0,${-l} L3.3,-36 L0,-27.5 L-3.3,-36Z" fill="#f6dc93" stroke="#8d6a22" stroke-width=".7"/>`;
+  return `<svg viewBox="-50 -50 100 100" aria-hidden="true"><circle r="36" fill="#5d4a36"/><circle r="36" fill="none" stroke="#3a2815" stroke-width="5.2"/><circle r="36" fill="none" stroke="#dcb65c" stroke-width="3.2"/><circle r="30.5" fill="none" stroke="#cfa651" stroke-width="1.5"/>${sp(0,49)}${sp(90,49)}${sp(180,49)}${sp(270,49)}${sp(45,45)}</svg>`;})();
+const ringHtml=(n,word,cls)=>`<div class="dring${cls||''}">${RING_SVG}<b>${n}</b><span>${word}</span></div>`;
+const CREST='<svg viewBox="0 0 28 32" aria-hidden="true"><path d="M2 3h24v13c0 8-6 12-12 14C8 28 2 24 2 16z" fill="#c9a24e" stroke="#4a3013" stroke-width="1.6"/><path d="M5.2 6h17.6v10c0 6-4.6 9.200-8.800 10.800C9.800 25.200 5.200 22 5.200 16z" fill="#e4c477" stroke="#8d6a22" stroke-width=".8"/></svg>';
+function fcTags(s,f,c){const tags=[];if(c.peeve)tags.push(['gold','1.5x '+W.peeveTag]);if(c.resist)tags.push(['bad',fill(W.resist,{flavor:flavWord(s)})]);if(c.ko)tags.push(['gold',W.ko]);if(c.brk)tags.push(['gold',W.brk]);
+  if(c.push)tags.push(['','Pushed back']);if(c.cancel)tags.push(['good',fill(W.cancels,{name:f.wind.name})]);
+  if(c.pips&&S.det&&!c.brk)tags.push(['',fill(W.pips,{n:c.pips,left:f.pips-c.pips})]);if(S.det)for(const l of c.leaves)tags.push(['','Leaves '+l]);return tags;}
+// the forecast sits on the monster itself when the monster is big enough to carry it (the picture); a small monster's forecast stays on its plate
+const onBody=(g,p)=>p.h>=190&&p.w>=190;
 
 // ---------------------------------------------------------------- render
 function render(full){
   const g=geo(),app=$('app');S.g=g;
-  app.classList.toggle('up',g.up);app.classList.toggle('two',!!g.two);app.classList.toggle('short',g.short);app.classList.toggle('big',g.big);app.classList.toggle('det',S.det);app.classList.toggle('rose',S.rose);
-  app.style.setProperty('--k',g.big?1.12:g.short?.94:1);
+  for(const c of ['up','short','wide'])app.classList.toggle(c,g.mode===c);
+  app.classList.toggle('two',!!g.two);app.classList.toggle('det',S.det);app.classList.toggle('rose',S.rose);
+  Object.assign(app.style,{width:g.W+'px',height:g.H+'px',transform:g.z===1?'':'scale('+g.z+')'});
   const sc=$('scene');Object.assign(sc.style,{left:g.scene.x+'px',top:g.scene.y+'px',width:g.scene.w+'px',height:g.scene.h+'px'});
   if($('bg').dataset.bg!==S.bg){$('bg').src=BGS[S.bg][0];$('bg').dataset.bg=S.bg;}
   renderUnits(g);renderTurns(g);renderTools(g);renderStrips(g);renderPlate(g);renderCombo(g);renderCards(g);renderCaption(g);renderEnd(g);renderSheet(g);renderMock();
-  if(S.phase==='turn')showBar(full?'none':null);else{$('bar').className='pn';$('shade').classList.remove('on');}
+  if(S.phase==='turn')showBar(full?'none':null);else $('bar').className='';
 }
 function place(el,r){Object.assign(el.style,{left:r.x+'px',top:r.y+'px',width:r.w+'px',height:r.h+'px'});}
 function renderUnits(g){
   const box=$('units'),fp=famPos(g),op=foePos(g),sc=g.scene;let h='';
-  const am=aimedMems(),af=aimedFoes(),s=S.hi?sk(S.hi):null;
+  const am=aimedMems(),af=aimedFoes(),s=S.hi?sk(S.hi):null,many=liveFoes().length>1;
   for(const f of S.foes){if(f.out)continue;const p=op[f.key];
     h+=`<div class="u foe" data-foe="${f.key}" style="left:${p.x-sc.x}px;top:${p.y-sc.y}px;width:${p.w}px;height:${p.h}px;z-index:${Math.round(p.feet)}"><img src="battle-story/${f.id}.webp" alt="${esc(B3_FOES[f.id].name)}"></div>`;
-    if(af.includes(f)){const rw=Math.min(p.w*.8,p.slot*.9);h+=`<div class="ring${af.length>1?' dash':''}" style="left:${p.cx-rw/2-sc.x}px;top:${p.feet-11-sc.y}px;width:${rw}px;height:22px;z-index:${Math.round(p.feet)-1}"></div>`;
+    if(af.includes(f)&&many){const rw=Math.min(p.w*.8,p.slot*.9);h+=`<div class="ring${af.length>1?' dash':''}" style="left:${p.cx-rw/2-sc.x}px;top:${p.feet-11-sc.y}px;width:${rw}px;height:22px;z-index:${Math.round(p.feet)-1}"></div>`;
       if(af.length===1)h+=`<div class="arrow" style="left:${p.cx-sc.x}px;top:${p.y-28-sc.y}px;z-index:900"></div>`;}
+    if(af.length===1&&af[0]===f&&s&&S.phase==='turn'&&onBody(g,p)){const c=fcFoe(s,f);
+      if(c.dmg||c.cancel||c.push){const at=RING_AT[f.id]||[.5,.55],tags=fcTags(s,f,c);
+        h+=`<div class="fcx" style="left:${p.x+p.w*at[0]-sc.x}px;top:${p.y+p.h*at[1]-sc.y}px">${ringHtml(c.dmg,'damage')}<div class="chs">${tags.map(t=>`<span class="cp ${t[0]}">${esc(t[1])}</span>`).join('')}</div></div>`;}}
     if(f.flu)h+=`<div class="stars" style="left:${p.cx-sc.x}px;top:${p.y-6-sc.y}px;z-index:901"><i></i><i></i><i></i></div>`;
-    if(f.wind&&S.phase!=='end'){h+=`<div class="wind" style="left:${p.x-sc.x}px;top:${p.y+4-sc.y}px;z-index:902">Winding up: <b>${esc(f.wind.name)}</b></div>`;}
+    if(f.wind&&S.phase!=='end'){h+=`<div class="wind" style="left:${p.x+p.w*.12-sc.x}px;top:${p.y+4-sc.y}px;z-index:902">Winding up: <b>${esc(f.wind.name)}</b></div>`;}
     if(g.up||(g.short&&S.foes.length>1)){const c=af.length>1&&s?fcFoe(s,f):null;h+=`<span class="ulet" style="left:${p.x+2-sc.x}px;top:${p.y+p.h*.35-sc.y}px;z-index:903"><span class="lt">${f.key}</span>${c&&g.up&&c.dmg?`<span class="dm${c.peeve?' pv':''}">${c.dmg}</span>`:''}</span>`;}
   }
   if(s&&S.phase==='turn'&&aimKind(s)==='floor'){const ps=Object.values(op),l=Math.min(...ps.map(p=>p.x))-10,r=Math.max(...ps.map(p=>p.x+p.w))+10,fe=ps.map(p=>p.ground),top=Math.min(...fe)-18,bot=Math.max(...fe)+14;
     h+=`<div class="floor" style="left:${l-sc.x}px;top:${top-sc.y}px;width:${r-l}px;height:${Math.max(40,bot-top)}px;z-index:5"></div><span class="flab" style="left:${(l+r)/2-sc.x}px;top:${(top+bot)/2-sc.y}px">${esc(s.name)} goes here</span>`;}
   for(const id of S.party){const p=fp[id],m=S.mem[id];
-    h+=`<div class="u mem${m.ko?' ko':''}" id="fig-${id}" data-mem="${id}" style="left:${p.x-sc.x}px;top:${p.y-sc.y}px;width:${p.w}px;height:${p.h}px;z-index:${Math.round(p.feet)+(id===S.actor?50:0)}"><img src="battle-story/${id}.webp" alt="${esc(B3_CAST[id].name)}"></div>`;
-    if(id===S.actor&&S.phase==='turn'&&!am.includes(id)){const rw=p.w*.85;h+=`<div class="ring act" style="left:${p.cx-rw/2-sc.x}px;top:${p.feet-8-sc.y}px;width:${rw}px;height:16px;z-index:${Math.round(p.feet)-1}"></div>`;}
+    h+=`<div class="u mem${m.ko?' ko':''}" id="fig-${id}" data-mem="${id}" style="left:${p.x-sc.x}px;top:${p.y-sc.y}px;width:${p.w}px;height:${p.h}px;z-index:${Math.round(p.feet)}"><img src="battle-story/${id}.webp" alt="${esc(B3_CAST[id].name)}"></div>`;
     if(am.includes(id)){const rw=p.w*.9;h+=`<div class="ring ally" style="left:${p.cx-rw/2-sc.x}px;top:${p.feet-9-sc.y}px;width:${rw}px;height:18px;z-index:${Math.round(p.feet)-1}"></div>`;
       if(am.length===1&&id!==S.actor)h+=`<div class="arrow" style="left:${p.cx-sc.x}px;top:${(m.ko?p.feet-50:p.y-26)-sc.y}px;z-index:900"></div>`;}}
   for(const pp of S.pops){const at=pp.at[0]==='f'?op[pp.at.slice(2)]:fp[pp.at.slice(2)];if(!at)continue;
     h+=`<div class="pop${pp.heal?' heal':''}${S.state==='playing'?' stay':''}" style="left:${at.cx-20-sc.x}px;top:${at.y+at.h*.25-sc.y}px;z-index:950">${esc(pp.t)}</div>`;}
   box.innerHTML=h;
 }
+// The turn bar, as the picture draws it: whose turn it is as a big face, the faces that follow, the red Round ribbon where the next round
+// starts, and a dashed arrow to the big face that shows where the acting member lands after the highlighted move.
 function renderTurns(g){
-  const el=$('turns');el.className='pn';el.style.display=S.phase==='end'?'none':'';const n=g.up?7:g.short?6:g.big?9:7;
-  const s=S.hi&&S.phase==='turn'?sk(S.hi):null;let toks=S.turn.concat(S.turn,S.turn).slice(0,n+2).map(t=>({t}));
-  if(S.phase==='end')toks=[];
-  if(s){const land=landing(s),again=toks.findIndex((x,j)=>j>0&&x.t==='m:'+S.actor);if(again>0)toks.splice(again,1);toks.splice(Math.min(land,toks.length),0,{t:'m:'+S.actor,ghost:1});
-    const af=aimedFoes();for(const f of af){const c=fcFoe(s,f);if(c.push){const i=toks.findIndex((x,j)=>j>0&&!x.ghost&&x.t==='f:'+f.key);if(i>0){const [x]=toks.splice(i,1);x.pushed=1;toks.splice(Math.min(i+2,toks.length),0,x);}}}
-    }
-  toks=toks.slice(0,n);
-  let h='<i class="roll l"></i>';
-  toks.forEach((x,i)=>{if(i===S.roundAt&&!x.ghost)h+=`<span class="rnd">Round<b>${S.round+1}</b></span>`;
+  const el=$('turns');el.className='';el.style.display=S.phase==='end'?'none':'';const max=g.mode==='wide'?7:g.short?6:5;
+  const s=S.hi&&S.phase==='turn'?sk(S.hi):null;
+  let toks=S.turn.slice(0,S.roundAt).map(t=>({t})).concat([{r:S.round+1}],S.turn.map(t=>({t})),[{r:S.round+2}],S.turn.map(t=>({t})));
+  if(s){const again=toks.findIndex((x,j)=>j>0&&x.t==='m:'+S.actor);if(again>0)toks.splice(again,1);
+    let seen=0,at=toks.length;for(let j=0;j<toks.length;j++){if(seen===landing(s)){at=j;break;}if(toks[j].t)seen++;}
+    if(toks[at]&&toks[at].r)at++;toks.splice(at,0,{t:'m:'+S.actor,ghost:1});
+    for(const f of aimedFoes()){const c=fcFoe(s,f);if(c.push){const i=toks.findIndex((x,j)=>j>0&&!x.ghost&&x.t==='f:'+f.key);if(i>0){const [x]=toks.splice(i,1);x.pushed=1;toks.splice(Math.min(i+2,toks.length),0,x);}}}}
+  let n=0,cut=toks.length;for(let j=0;j<toks.length;j++){if(toks[j].t)n++;if(n===max){cut=j+1;break;}}
+  const gi=toks.findIndex(x=>x.ghost),ri=toks.findIndex(x=>x.r);
+  if(gi>=cut)toks=toks.slice(0,cut-1).concat([toks[gi]]);else if(gi>ri)toks=toks.slice(0,gi+1);else toks=toks.slice(0,cut);   // as the picture: the bar ends at the landing face when it lies past the ribbon
+  while(toks.length&&toks[toks.length-1].r)toks.pop();
+  let h=FR('f-scroll');
+  toks.forEach((x,i)=>{if(x.r){h+=`<span class="rnd">Round<b>${x.r}</b></span>`;return;}
     const isF=x.t[0]==='f',id=x.t.slice(2),u=isF?foeBy(id):S.mem[id];if(!u)return;
     const img=isF?face(u.id):face(id),alt=isF?B3_FOES[u.id].name:B3_CAST[id].name;
     const bd=isF&&u.wind?'<span class="bd">!</span>':isF&&u.flu?'<span class="bd f">F</span>':'';
-    h+=`<span class="tf${i===0?' now':''}${isF?' foe':''}${x.ghost?' ghost':''}${x.pushed?' pushed':''}${!isF&&u.ko?' ko':''}"><img src="${img}" alt="${esc(alt)}">${bd}</span>`;
-    if(x.pushed)h+='<span class="tl">pushed back</span>';});
-  if(!toks.length)h+=`<span class="rnd">Round<b>${S.round}</b></span>`;
-  el.innerHTML=h+'<i class="roll r"></i>';
-  el.style.left=g.turns.x+'px';el.style.top=g.turns.y+'px';el.style.height=g.turns.h+'px';el.style.width='auto';el.style.maxWidth=g.turns.w+'px';
+    if(x.ghost)h+='<i class="dash"></i>';
+    h+=`<span class="tf${i===0?' now':''}${isF?' foe':''}${x.ghost?' ghost':''}${x.pushed?' pushed':''}${!isF&&u.ko?' ko':''}"><img src="${img}" alt="${esc(alt)}">${bd}</span>`;});
+  if(S.phase==='end')h=FR('f-scroll')+`<span class="rnd">Round<b>${S.round}</b></span>`;
+  el.innerHTML=h;
+  Object.assign(el.style,{left:g.turns.x+'px',top:g.turns.y+'px',height:g.turns.h+'px',width:g.mode==='wide'?g.turns.w+'px':'auto',maxWidth:g.turns.w+'px'});
 }
 function renderTools(g){
-  const el=$('tools');el.style.right=(g.W-g.tools.r)+'px';el.style.top=g.tools.y+(g.up?0:-2)+'px';
-  const mock=Q.has('bare')?'':`<button class="tb pn mock" type="button" data-mock="1">Mock states</button>`;
-  el.innerHTML=mock+(g.up?'':`<button class="tb pn" type="button" data-det="1"><i class="str"></i>${W.details}<span class="tg${S.det?' on':''}"></span></button><button class="tb pn" type="button" data-speed="1"><i class="str"></i>${S.speed}x</button>`)
-    +`<a class="tb pn" href="admin.html"><i class="str"></i>${W.exit}</a>`;
-  if(g.up){el.innerHTML=mock+`<button class="tb pn" type="button" data-det="1">${W.details}<span class="tg${S.det?' on':''}"></span></button>`;}
+  const el=$('tools');el.style.right=(g.W-g.tools.r)+'px';el.style.top=g.tools.y+'px';
+  const tb=(attr,inner,href)=>href?`<a class="tb" href="${href}"><i class="str"></i><span class="tgf">${FR('f-tag')}<b>${inner}</b></span></a>`:`<button class="tb" type="button" ${attr}><i class="str"></i><span class="tgf">${FR('f-tag')}<b>${inner}</b></span></button>`;
+  const mock=Q.has('bare')?'':`<button class="tb mock" type="button" data-mock="1"><span class="tgf"><b>Mock states</b></span></button>`;
+  const det=tb('data-det="1"',`${W.details}<span class="tg${S.det?' on':''}"></span>`);
+  el.innerHTML=mock+(g.up?det:tb('data-speed="1"',S.speed+'x')+det+tb('',W.exit,'admin.html'));
 }
 function renderStrips(g){
-  const box=$('strips');let h='';const op=foePos(g),s=S.hi&&S.phase==='turn'?sk(S.hi):null,k=s?aimKind(s):null,pf=plateFoe(),af=aimedFoes();
+  const box=$('strips');let h='';const op=foePos(g),s=S.hi&&S.phase==='turn'?sk(S.hi):null,pf=plateFoe(),af=aimedFoes();
   if(g.strips&&S.foes.length>1&&S.phase!=='end')for(const f of S.foes){if(f.out)continue;const p=op[f.key];const main=pf===f&&af.length<=1;if(main)continue;
     const F=B3_FOES[f.id],tgt=af.includes(f),w=S.foes.length>=4?118:Math.max(124,Math.min(170,p.w*.8)),c=tgt&&s?fcFoe(s,f):null;
     const fc=c&&c.dmg?`<span class="dm${c.peeve?' pv':''}">${c.dmg}</span>`:'';
@@ -285,84 +310,81 @@ function renderStrips(g){
 }
 function renderPlate(g){
   const el=$('plate');if(S.phase==='end'){el.style.display='none';return;}el.style.display='';
-  const s=S.hi&&S.phase==='turn'?sk(S.hi):null,k=s?aimKind(s):null,af=aimedFoes();let h='';
+  const s=S.hi&&S.phase==='turn'?sk(S.hi):null,k=s?aimKind(s):null,af=aimedFoes();let h=FR('f-plate');
   if(s&&(k==='all'||k==='random')&&af.length>1){
     const cs=af.map(f=>fcFoe(s,f)),ds=cs.map(c=>c.dmg),lo=Math.min(...ds),hi=Math.max(...ds),np=cs.filter(c=>c.peeve).length;
-    h=`<div class="top"><span>${k==='all'?'Every monster':'Random monsters'}</span></div><div class="rw">${k==='random'?esc(s.hits+' hops, each on a random monster'):g.up?'Each monster shows its own damage.':'Each strip shows its own damage.'}</div>`
+    h+=`<div class="top wide2"><span>${k==='all'?'Every monster':'Random monsters'}</span></div><div class="rw">${k==='random'?esc(s.hits+' hops, each on a random monster'):g.up?'Each monster shows its own damage.':'Each small plate shows its own damage.'}</div>`
      +`<div class="rw">${np?`<span class="sc gold">Pet Peeve on ${np} of ${af.length}</span>`:''}</div>`
-     +`<div class="fc"><div class="dring${lo===hi?'':' rng'}"><b>${lo===hi?lo:lo+'–'+hi}</b><span>each</span></div></div>`;
-    el.className='pn orn pl';el.innerHTML=h;placePlate(el,g);return;}
-  const f=plateFoe();if(!f){el.style.display='none';return;}const F=B3_FOES[f.id];
-  const c=s&&af.length===1&&af[0]===f?fcFoe(s,f):null;
+     +`<div class="fc">${ringHtml(lo===hi?lo:lo+'–'+hi,'each',lo===hi?'':' rng')}</div>`;
+    el.className='pl';delete el.dataset.foe;el.innerHTML=h;placePlate(el,g);return;}
+  const f=plateFoe();if(!f){el.style.display='none';return;}const F=B3_FOES[f.id],p=foePos(g)[f.key];
+  const c=s&&af.length===1&&af[0]===f?fcFoe(s,f):null,body=c&&onBody(g,p);
   const back=f.row==='back'&&S.foes.length>1?`<span class="sc">${W.backRow}</span>`:'',hpTxt=`${f.hp}${S.det?' / '+f.max:''} HP`;
-  if(g.short)h+=`<div class="top tl1"><span class="lt">${f.key}</span><span>${esc(F.name)}</span>${hpBar(f)}<b class="hpt">${f.hp} HP</b></div>`;
-  else h+=`<div class="top"><span class="lt">${f.key}</span><span>${esc(F.name)}</span>${back}</div><div class="hl">${hpBar(f)}<b>${hpTxt}</b></div>`;
+  h+=`<span class="crest">${CREST}<b>${f.key}</b></span><div class="top"><span>${esc(F.name)}</span>${back}</div><div class="hl">${hpBar(f)}<b>${hpTxt}</b></div>`;
   const pipRow=f.maxPips?(f.flu?`<span class="sc bad">Flustered: takes 35% more</span>`:`<span class="lab">Composure</span>${pipsHtml(f,c?c.pips:0)}`):'';
-  h+=`<div class="rw">${pipRow}${f.st.map(stChip).join('')}</div>`;
-  h+=`<div class="rw"><span class="lab">${(F.peeves||[]).length?W.peeves:W.noPeeves}</span>${(F.peeves||[]).map(flChip).join('')}${(F.resists||[]).map(r=>`<span class="sc bad">${fill(W.resist,{flavor:B3_FLAVORS[r].name})}</span>`).join('')}</div>`;
-  if(g.short){const parts=h.split('<div class="rw">');if(parts.length===3)h=parts[0]+'<div class="rw">'+parts[1].replace(/<\/div>$/,'')+parts[2];}
-  if(c&&(c.dmg||c.cancel||c.push)){
-    h+=`<div class="fc"><div class="dring"><b>${c.dmg}</b><span>damage</span></div></div>`;
-    const tags=[];if(c.peeve)tags.push(['gold','1.5x '+W.peeveTag]);if(c.resist)tags.push(['bad',fill(W.resist,{flavor:flavWord(s)})]);if(c.ko)tags.push(['gold',W.ko]);if(c.brk)tags.push(['gold',W.brk]);
-    if(c.cancel)tags.push(['good',fill(W.cancels,{name:f.wind.name})]);if(c.pips&&S.det&&!c.brk)tags.push(['',fill(W.pips,{n:c.pips,left:f.pips-c.pips})]);
-    if(S.det)for(const l of c.leaves)tags.push(['','Leaves '+l]);
+  if(g.mode==='wide'){h+=`<div class="rw">${pipRow}</div>`;if(f.st.length)h+=`<div class="rw">${f.st.map(stChip).join('')}</div>`;}
+  else h+=`<div class="rw">${pipRow}${f.st.map(stChip).join('')}</div>`;
+  h+=`<div class="rw"><span class="lab">${(F.peeves||[]).length?W.peeves+':':W.noPeeves}</span>${(F.peeves||[]).map(flChip).join('')}${(F.resists||[]).map(r=>`<span class="sc bad">${fill(W.resist,{flavor:B3_FLAVORS[r].name})}</span>`).join('')}</div>`;
+  if(c&&!body&&(c.dmg||c.cancel||c.push)){
+    h+=`<div class="fc">${ringHtml(c.dmg,'damage')}</div>`;const tags=fcTags(s,f,c);
     if(tags.length)h+=`<div class="fcl">${tags.map(t=>`<span class="sc ${t[0]}">${esc(t[1])}</span>`).join('')}</div>`;}
   if(S.look&&S.look.f===f.key&&s&&!af.includes(f))h+=`<div class="note">${W.noAim}. Tap here for ${W.fullList}.</div>`;
-  else if(s&&S.phase==='turn'&&k==='foe'&&liveFoes().length>1&&!S.det)h+='';
-  el.className='pn orn pl';el.dataset.foe=f.key;el.innerHTML=h;placePlate(el,g);
+  el.className='pl'+(c&&!body?' hasfc':'');el.dataset.foe=f.key;el.innerHTML=h;placePlate(el,g);
 }
-function plateRect(g){const r=g.plate;if(g.up||g.short)return r;const op=foePos(g),hit=Object.values(op).some(p=>p.x<r.x+r.w&&p.x+p.w>r.x&&p.y+p.h>r.y+12);
-  return hit?Object.assign({},r,{y:g.y0+g.TB+g.gap+4,top:true}):r;}
-function placePlate(el,g){const r=plateRect(g);el.style.left=r.x+'px';el.style.width=r.w+'px';el.style.height='auto';el.style.top='0px';
-  const hh=el.offsetHeight;el.style.top=(g.up||r.top?r.y:Math.max(g.y0+g.TB+gap6(),r.y+r.h-hh))+'px';}
-const gap6=()=>6;
+function placePlate(el,g){const r=g.plate;el.style.left=r.x+'px';el.style.width=r.w+'px';el.style.height='auto';el.style.top='0px';const hh=el.offsetHeight;
+  if(g.short){el.style.top=Math.max(g.y0+g.TB+4,r.bottom-hh)+'px';return;}
+  if(g.up){el.style.top=r.y+'px';el.style.height=r.h+'px';return;}
+  // the picture's home is under the monster; when several monsters stand there, the plate moves under the turn bar
+  const hit=Object.values(foePos(g)).some(p=>p.x<r.x+r.w&&p.x+p.w>r.x&&p.ground+50>r.y)&&liveFoes().length>1;
+  el.style.top=(hit?g.turns.y+g.turns.h+10:Math.min(r.y,g.H-6-hh))+'px';}
+function comboChip(s,cls,small){const on=S.combo>=s.combo&&!S.free,hi=S.hi===s.id;   // small screens: the name only (the gauge beside it shows the mark)
+  return `<button class="cchip${on?' on':''}${hi?' hi':''} ${cls}" type="button" ${on?`data-sk="${s.id}"`:'disabled'}><span class="cv">${small?'':s.combo+'% · '}${esc(s.name)}</span></button>`;}
 function renderCombo(g){
-  const el=$('combo');if(S.phase==='end'){el.style.display='none';return;}el.style.display='';el.className='pn'+(S.combo>=100?' full':'');
-  const c=S.combo,trk=`<div class="trk"><u style="width:${c}%"></u><s style="left:50%"></s></div>`;el.classList.toggle('cmp',g.up||g.short);
-  el.innerHTML=(g.up||g.short?`<div class="ct">${W.combos} ${c}%${trk}</div><div class="mk2"><span class="${c>=50?'on':''}">Double Team</span><span class="${c>=100?'on':''}">Family Ruckus</span></div>`
-    :`<div class="ct">${W.combos} ${c}%</div>${trk}<div class="mk"><span class="r${c>=50?' on':''}" style="left:50%">50% Double Team</span><span class="r${c>=100?' on':''}" style="left:100%">100% Family Ruckus</span></div>`);
-  if(g.comboTop){   // desktop: in the top line between the turn bar and the tools; the Duo: under the tools, over the sky above the family
-    const tr=$('turns').getBoundingClientRect().right,tl=$('tools').getBoundingClientRect().left,w=tl-tr-20;
-    el.classList.add('cmp');el.innerHTML=`<div class="ct">${W.combos} ${c}%${trk}</div><div class="mk2"><span class="${c>=50?'on':''}">50% Double Team</span><span class="${c>=100?'on':''}">100% Family Ruckus</span></div>`;
-    if(g.big)place(el,{x:tr+10,y:g.y0,w:Math.min(w,420),h:g.combo.h});else{const fp=famPos(g),gl=Math.min(...Object.values(fp).map(p=>p.x+p.w*.12)),ww=Math.min(320,g.x1-gl);place(el,{x:g.x1-ww,y:g.y0+g.TB+g.gap,w:ww,h:g.combo.h});}
-    return;}
+  const el=$('combo');if(S.phase==='end'){el.style.display='none';return;}el.style.display='';
+  const c=S.combo;
+  if(g.mode==='wide'){el.className='wd'+(c>=100?' full':'');
+    el.innerHTML=`<div class="gz">${FR('f-gauge')}<div class="ch"><u style="width:${c}%"></u><s></s></div></div><div class="cpl">${FR('f-cplaque')}<b>Combo ${c}%</b></div>`+comboChip(RUCK.ruckus_double,'c1')+comboChip(RUCK.ruckus_full,'c2');}
+  else{el.className='pn cmp'+(c>=100?' full':'');
+    el.innerHTML=`<div class="ct">Combo ${c}%<div class="trk"><u style="width:${c}%"></u><s style="left:50%"></s></div></div>`+comboChip(RUCK.ruckus_double,'c1',1)+comboChip(RUCK.ruckus_full,'c2',1);}
   place(el,g.combo);
 }
 function renderCards(g){
   const el=$('cards');if(S.phase==='end'){el.style.display='none';return;}el.style.display='';
-  const s=S.hi&&S.phase==='turn'?sk(S.hi):null,am=aimedMems();let h='';
+  const s=S.hi&&S.phase==='turn'?sk(S.hi):null,am=aimedMems(),wide=g.mode==='wide';let h='';
   for(const id of S.party){const m=S.mem[id],now=id===S.actor&&S.phase!=='end',aim=am.includes(id);
-    let p='';if(now){const sp=s?cost(s):0,gn=s?gain(s):0,after=Math.max(0,Math.min(10,m.pep-sp+gn));let pp='<span class="pp2">';
-      for(let i=0;i<10;i++){const cls=i<m.pep-sp?'on':i<m.pep?'spend':i<after?'gain':'';pp+=`<i class="${cls}"></i>`;}pp+='</span>';
-      p=`<div class="p">${W.pepWord} ${pp}<span>${after!==m.pep?m.pep+' → '+after:m.pep}</span></div>`;}
-    else if(S.det&&!m.ko)p=`<div class="p">${W.pepWord} ${m.pep}${m.st.length?' '+m.st.map(stChip).join(''):''}</div>`;
+    let p='',pf='';const sp=now&&s?cost(s):0,gn=now&&s?gain(s):0,after=Math.max(0,Math.min(10,m.pep-sp+gn));
+    if((now||wide)&&!m.ko){let pp='<span class="pp2">';for(let i=0;i<10;i++){const cls=i<m.pep-sp?'on':i<m.pep?'spend':i<after?'gain':'';pp+=`<i class="${cls}"></i>`;}pp+='</span>';
+      p=`<div class="p">${W.pepWord} ${pp}${wide?'':`<span>${after!==m.pep?m.pep+'→'+after:m.pep}</span>`}</div>`;
+      if(now&&wide)pf=`<span class="pf${after<m.pep?' dn':''}">${after!==m.pep?m.pep+' → '+after+' '+W.pepWord:m.pep+' '+W.pepWord}</span>`;}
+    else if(S.det&&!m.ko)p=`<div class="p">${W.pepWord} ${m.pep}</div>`;
     const chips=[];if(m.marked)chips.push(`<span class="sc bad">${W.marked}</span>`);if(m.next)chips.push(`<span class="sc bad">${W.nextTarget}</span>`);if(m.ko)chips.push(`<span class="sc bad">${W.knockedOut}</span>`);
-    const fc=aim&&s?fcMem(s,m):[];
-    h+=`<div class="pc pn${now?' now':''}${aim?' aim':''}${m.ko?' ko':''}" data-mem="${id}"><div class="f"><img src="${face(id)}" alt=""></div>`
-      +`<div class="n">${esc(B3_CAST[id].name)}${S.det&&!g.short?`<em>${B3_RULES.rowByLean[B3_VIBES[KIT[id].pri.id].lean]==='back'?W.back:''}</em>`:''}</div>`
-      +`<div class="h">${hpBar(m)}<span>${m.hp}${S.det?'/'+m.max:''}</span></div>${p}`
-      +(chips.length?`<div class="ch">${chips.join('')}</div>`:'')+(fc.length?`<div class="fc2">${fc.slice(0,2).map(t=>`<span class="sc ${t[0]}">${esc(t[1])}</span>`).join(' ')}</div>`:'')+'</div>';}
-  el.innerHTML=h;place(el,g.cards);
+    const fc=aim&&s?fcMem(s,m):[],back=S.det&&!g.short&&B3_RULES.rowByLean[B3_VIBES[KIT[id].pri.id].lean]==='back';
+    h+=`<div class="pc${now?' now':''}${aim?' aim':''}${m.ko?' ko':''}" data-mem="${id}"><div class="f"><img src="${face(id)}" alt=""></div>`
+      +`<div class="n">${esc(B3_CAST[id].name)}${back?`<em>${W.back}</em>`:''}</div>`
+      +`<div class="ht">${S.det?m.hp+'/'+m.max:m.hp+' HP'}</div>${hpBar(m)}${p}`
+      +(S.det&&m.st.length&&!m.ko?`<div class="st">${m.st.map(stChip).join('')}</div>`:'')
+      +(chips.length?`<div class="ch">${chips.join('')}</div>`:'')+(fc.length?`<div class="fc2">${fc.slice(0,2).map(t=>`<span class="sc ${t[0]}">${esc(t[1])}</span>`).join(' ')}</div>`:'')+pf+'</div>';}
+  el.innerHTML=h;place(el,g.cards);if(wide){el.style.height='auto';el.style.top='auto';el.style.bottom=(g.H-g.cards.y-g.cards.h)+'px';}else el.style.bottom='auto';
 }
 function renderCaption(g){
   const el=$('caption');if(S.phase!=='playing'||!S.caption){el.className='pn';return;}
   el.className='pn on';el.innerHTML=esc(S.caption)+(S.cap2?`<small>${esc(S.cap2)}</small>`:'');
   if(g.up){el.style.left=g.x0+'px';el.style.width=(g.x1-g.x0)+'px';el.style.top='0px';el.style.top=(g.scene.y+g.scene.h-el.offsetHeight-8)+'px';return;}
-  const fp=famPos(g),right=Math.min(...Object.values(fp).map(p=>p.x))-10,left=Math.max(g.MZ+g.gap,laneLeft(g)),w=Math.max(220,right-left);el.style.width=w+'px';el.style.left=left+'px';el.style.top='0px';
-  el.style.top=(g.cards.y-g.gap-el.offsetHeight-6)+'px';
+  const w=Math.max(250,g.bar.w);el.style.width=w+'px';el.style.left=(g.bar.x+g.bar.w-w)+'px';el.style.top='0px';   // where the list was, low, above the Combo bar
+  el.style.top=(g.bar.bottom-el.offsetHeight-8)+'px';
 }
 function renderEnd(g){
-  const el=$('endp');if(S.phase!=='end'){el.className='pn orn';return;}
+  const el=$('endp');if(S.phase!=='end'){el.className='';return;}
   const drops=S.foes.map(f=>B3_FOES[f.id].drop).filter(Boolean);
-  el.className='pn orn on';el.innerHTML=`<h3>You win!</h3>`
+  el.className='on';el.innerHTML=FR('f-panel')+`<h3>You win!</h3>`
     +`<div class="er"><span>Everyone</span><b>+48 XP</b></div>`
     +S.party.map(id=>`<div class="er"><span>${esc(B3_CAST[id].name)}, ${esc(KIT[id].pri.name)}</span><b>+18 Vibe points</b></div>`).join('')
     +`<div class="er"><span>Found</span><b>${drops.length?drops.map(d=>d[0].toUpperCase()+d.slice(1)).join(', '):'Nothing this time'}</b></div>`
     +`<button class="cont" type="button" data-cont="1">${W.cont}</button>`;
-  const w=Math.min(380,g.W-2*g.pad-g.sf.l-g.sf.r);el.style.width=w+'px';el.style.left=(g.W/2-w/2)+'px';el.style.top='0px';
+  const w=Math.min(390,g.W-2*g.pad-g.sf.l-g.sf.r);el.style.width=w+'px';el.style.left=(g.W/2-w/2)+'px';el.style.top='0px';
   el.style.top=Math.max(g.y0,(g.H-el.offsetHeight)/2)+'px';
 }
-function renderSheet(g){const el=$('sheet');if(!S.sheet){el.className='pn';return;}
+function renderSheet(g){const el=$('sheet');if(!S.sheet){el.className='';return;}
   const x=S.sheet;let h='';
   if(x.f){const f=foeBy(x.f),F=B3_FOES[f.id];h=`<h4>${esc(F.name)}</h4><div class="er"><span>HP</span><b>${f.hp} / ${f.max}</b></div><div class="er"><span>Composure</span><b>${f.pips} of ${f.maxPips}</b></div>`
     +`<div class="er"><span>${W.peeves}</span><b>${(F.peeves||[]).map(p=>B3_FLAVORS[p].name).join(', ')||'None'}</b></div><div class="er"><span>Row</span><b>${f.row==='back'?'Back':'Front'}</b></div>`
@@ -370,56 +392,40 @@ function renderSheet(g){const el=$('sheet');if(!S.sheet){el.className='pn';retur
   else{const m=S.mem[x.m];h=`<h4>${esc(B3_CAST[x.m].name)}</h4><div class="er"><span>HP</span><b>${m.hp} / ${m.max}</b></div><div class="er"><span>Pep</span><b>${m.pep} of 10</b></div>`
     +`<div class="er"><span>Primary</span><b>${esc(KIT[x.m].pri.name)}</b></div><div class="er"><span>Secondary</span><b>${esc(KIT[x.m].sec.name)}</b></div>`
     +m.st.map(id=>`<div class="er"><span>${esc(stName(id))}</span><b style="white-space:normal;font-weight:500">${esc((B3_STATUS[id]||{}).desc||'')}</b></div>`).join('');}
-  el.className='pn orn on';el.innerHTML=h+`<button class="cont" type="button" data-close="1">${W.close}</button>`;
-  const w=Math.min(360,g.W-40);el.style.width=w+'px';el.style.left=(g.up?g.W/2-w/2:g.MZ+g.gap)+'px';el.style.top='0px';el.style.top=Math.max(g.y0+50,(g.H-el.offsetHeight)/2)+'px';
+  el.className='on';el.innerHTML=FR('f-panel')+h+`<button class="cont" type="button" data-close="1">${W.close}</button>`;
+  const w=Math.min(360,g.W-40);el.style.width=w+'px';el.style.left=(g.up?g.W/2-w/2:Math.max(g.x0,Math.min(g.W-w-8,g.bar.x-70)))+'px';el.style.top='0px';el.style.top=Math.max(g.y0+50,(g.H-el.offsetHeight)/2)+'px';
 }
 
-// ---------------------------------------------------------------- the bar
+// ---------------------------------------------------------------- the list of moves (the picture's middle: the name, the Basic card, the tab, the framed list)
 function rowHtml(r){
-  const s=r.s,hi=S.hi===s.id,why=whyNot(s),k=aimKind(s),fl=flavs(s),af=aimedFoes();
+  const s=r.s,hi=S.hi===s.id,why=whyNot(s),fl=flavs(s),af=aimedFoes();
   let peeve=false,resist=false;
   if(hi&&af.length){peeve=af.some(f=>fcFoe(s,f).peeve);resist=!peeve&&af.length===1&&fcFoe(s,af[0]).resist;}
   else if(basePower(s))peeve=liveFoes().some(f=>fcFoe(s,f).peeve);
-  const price=r.free?`<span class="pp free">${W.free}</span>`:s.slot==='basic'?`<span class="pp gain">+${gain(s)} ${W.pepWord}</span>`:s.slot==='ruckus'?`<span class="pp combo">${s.combo}% ${W.combos}</span>`:`<span class="pp">${s.pep} ${W.pepWord}</span>`;
+  const price=r.free?`<span class="pp free">${W.free}</span>`:s.slot==='basic'?`<span class="pp gain">+${gain(s)} ${W.pepWord}</span>`:s.slot==='ruckus'?`<span class="pp combo">${s.combo}%</span>`:`<span class="pp${why?' no':''}">${s.pep} ${W.pepWord}</span>`;
   const tags=(peeve?`<span class="tag">${W.peeveTag}</span>`:'')+(resist?`<span class="tag">${fill(W.resist,{flavor:''}).trim()}</span>`:'')+(S.rose&&rec()&&rec().id===s.id?`<span class="tag rec">${W.recTag}</span>`:'');
   const ic=S.rose?`<span class="em">${fl.map(f=>EMO[f]).join('')}</span>`:flIcon(fl[0]||'support');
-  const line=hi?(S.det?s.desc:s.short):s.short;
-  const use=hi?`<button class="use" type="button" data-use="${s.id}"${why&&S.phase==='turn'?' disabled':''}>${why?esc(why[0].toUpperCase()+why.slice(1)):`${W.use}<small>${S.keys?W.useKey:W.useTap}</small>`}</button>`:'';
+  const kind=s.slot==='ruckus'?esc(kindWord(s)):esc(flavWord(s))+' '+esc(kindWord(s));
+  const kd=why&&!hi?`<span class="why">${esc(why)}</span>`:`${kind}${tags}`;
+  const line=hi||S.det?`<div class="dsc${hi?' open':''}" data-for="${s.id}">${esc((hi&&S.det?s.desc:s.short)||'')}${hi&&why?` <b class="why">${esc(why[0].toUpperCase()+why.slice(1))}.</b>`:''}</div>`:'';
   return `<div class="row${hi?' hi':''}${why?' poor':''}${r.basic?' basic':''}${s.slot==='ruckus'?' combo':''}${r.free?' free':''}" data-sk="${s.id}" role="button" aria-pressed="${hi}">`
-    +(r.basic?'<span class="bt">Basic</span>':'')
-    +`<span class="ic">${ic}</span><span class="nm">${esc(s.name)}</span>`
-    +`<span class="l2"><span class="kd">${s.slot==='ruckus'?esc(kindWord(s)):esc(flavWord(s))+' '+esc(kindWord(s))}</span><span class="rt">${tags}${price}</span></span>`
-    +(why&&!hi?`<span class="why">${esc(why)}</span>`:'')+`<span class="ln1">${esc(line||'')}</span>`+use+'</div>';
+    +FR(hi?'f-banner':r.basic?'f-basic':'f-row')+(r.basic?`<span class="plq">${FR('f-plaque')}<b>Basic attack</b></span>`:'')
+    +`<span class="ic">${ic}</span><span class="nm">${esc(s.name)}</span>${price}<span class="kd">${kd}</span></div>`+line;
 }
-function barHtml(){const k=KIT[S.actor],L=list();let h='<i class="tail"></i>';
-  h+=`<div class="ribbon">${esc(k.name)}${S.det?`<small>${esc(k.pri.name)}</small>`:''}</div><div class="scr">`;
-  for(const r of L){if(r.grp)h+=`<div class="grp${r.free?' free':''}">${esc(r.grp)}</div>`;else h+=rowHtml(r);}
-  return h+'</div>'+(S.keys&&!S.g.up?'<div class="keys">Up and down: move. Left and right: aim. Enter: use.</div>':'');}
+function barHtml(){const k=KIT[S.actor],L=list();let top='',rows='';
+  for(const r of L){if(r.basic)top+=rowHtml(r);else if(r.grp){if(!r.free)rows+=`<div class="grp">${esc(r.grp)}</div>`;}else rows+=rowHtml(r);}
+  const tab=S.free?`<span class="vtab free">${esc(L[0].grp)}</span>`:`<span class="vtab"><i>★</i>${esc(k.pri.name)}</span>`;
+  return `<div class="ttl" data-t="${esc(k.name)}">${esc(k.name)}</div>${top}<div class="vt">${tab}</div><div class="pnl">${FR('f-panel')}<div class="scr">${rows}</div></div>`
+    +(S.keys&&!S.g.up?'<div class="keys">Up and down: move. Left and right: aim. Enter: use.</div>':'');}
 function showBar(slide){
   const bar=$('bar'),g=S.g;const wasShown=bar.classList.contains('show');
-  bar.innerHTML=barHtml();bar.className='pn orn';bar.style.display='flex';bar.style.visibility='hidden';
-  const scr=bar.querySelector('.scr');
-  if(g.up){const r=g.sheet;Object.assign(bar.style,{left:r.x+'px',top:r.y+'px',width:r.w+'px',height:r.h+'px',maxHeight:''});bar.classList.add('up-sheet');
-    scr.style.maxHeight=(r.h-bar.querySelector('.ribbon').offsetHeight-20)+'px';}
-  else{const all=famPos(g),fp=all[S.actor],bw=g.short?250:g.big?340:290,minW=g.short?220:236;
-    // the family stands in a diagonal with no gap, so the bar opens left of the whole group (never between two members), level with the acting member
-    const right=Math.min(...Object.values(all).map(p=>p.x+p.w*.12))-14,lx=laneLeft(g);g.laneX=lx;
-    let left,width,top,above=false;width=Math.max(minW,Math.min(bw,right-lx));left=right-width;
-    bar.classList.toggle('narrow',width<262);Object.assign(bar.style,{left:left+'px',width:width+'px',height:'auto',top:'0px'});
-    const laneH=g.lane.b-g.lane.y;scr.style.maxHeight='none';
-    let bh=bar.offsetHeight;if(bh>laneH){scr.style.maxHeight=(laneH-(bh-scr.offsetHeight))+'px';bh=bar.offsetHeight;}
-    const shoulder=fp.y+Math.min(fp.h*.2,60);
-    top=Math.max(g.lane.y,Math.min(g.lane.b-bh,shoulder-46));bar.style.top=top+'px';
-    bar.classList.toggle('up',above);bar.classList.toggle('narrow',width<262);
-    if(above)bar.style.setProperty('--tailx',(fp.cx-left)+'px');else bar.style.setProperty('--tail',Math.max(22,Math.min(bh-22,shoulder-top))+'px');
-    const sh=$('shade');Object.assign(sh.style,{left:(left-40)+'px',top:(top-40)+'px',width:(width+80)+'px',height:(bh+80)+'px'});sh.classList.add('on');
-    if(slide&&slide!=='none'&&S.prev){const pp=famPos(g)[S.prev];if(pp)bar.style.setProperty('--from',Math.round(pp.cx-(left+width))+'px');}else bar.style.setProperty('--from','30px');}
-  const hiEl=bar.querySelector('.row.hi');
-  if(hiEl&&scr&&!g.up){let bh=bar.offsetHeight;const laneH=g.lane.b-g.lane.y;if(bh>laneH&&scr.style.maxHeight==='none'){scr.style.maxHeight=(laneH-(bh-scr.offsetHeight))+'px';}}
-  if(hiEl&&scr){const top=hiEl.offsetTop-scr.offsetTop,bot=top+hiEl.offsetHeight;if(bot>scr.scrollTop+scr.clientHeight)scr.scrollTop=bot-scr.clientHeight+4;if(top<scr.scrollTop)scr.scrollTop=top-4;}
-  if(scr){const upd=()=>{const m=bar.querySelector('.more');const left=scr.scrollHeight-scr.clientHeight-scr.scrollTop>4;if(left&&!m){const e=document.createElement('span');e.className='more';e.textContent='More below';bar.appendChild(e);}else if(!left&&m)m.remove();};upd();scr.onscroll=upd;}
+  bar.innerHTML=barHtml();bar.className='';bar.style.display='flex';bar.style.visibility='hidden';
+  const scr=bar.querySelector('.scr'),r=g.up?{x:g.sheet.x+6,w:g.sheet.w-12,top:g.sheet.y,bottom:g.sheet.y+g.sheet.h}:g.bar;
+  Object.assign(bar.style,{left:r.x+'px',width:r.w+'px',top:r.top+'px',maxHeight:(r.bottom-r.top)+'px',height:g.up?(r.bottom-r.top)+'px':'auto'});
+  const hiEl=scr.querySelector('.row.hi'),ds=scr.querySelector('.dsc.open');
+  if(hiEl){const top=hiEl.offsetTop-6,bot=(ds||hiEl).offsetTop+(ds||hiEl).offsetHeight+8;if(bot>scr.scrollTop+scr.clientHeight)scr.scrollTop=bot-scr.clientHeight;if(top<scr.scrollTop)scr.scrollTop=top;}
+  const upd=()=>{const m=bar.querySelector('.more');const left=scr.scrollHeight-scr.clientHeight-scr.scrollTop>6;if(left&&!m){const e=document.createElement('span');e.className='more';e.textContent='More below';bar.querySelector('.pnl').appendChild(e);}else if(!left&&m)m.remove();};upd();scr.onscroll=upd;
   bar.style.visibility='';bar.style.display='';
-  if(slide===null&&wasShown)bar.classList.add('show-still');
   bar.classList.add('show');if(slide===null&&wasShown)bar.style.animation='none';else bar.style.animation='';
 }
 
@@ -427,8 +433,8 @@ function showBar(slide){
 async function useMove(id){
   if(S.phase!=='turn')return;const s=sk(id);if(!s||whyNot(s))return;
   const a=S.actor,m=S.mem[a],k=aimKind(s),af=aimedFoes(),am=aimedMems();
-  S.phase='playing';const bar=$('bar');bar.classList.remove('show');bar.style.animation='';bar.classList.add('fold');$('shade').classList.remove('on');
-  await T(150);bar.className='pn';
+  S.phase='playing';const bar=$('bar');bar.classList.remove('show');bar.style.animation='';bar.classList.add('fold');
+  await T(150);bar.className='';
   S.caption=`${B3_CAST[a].name} uses ${s.name}!`;S.cap2='';render();
   const fig=$('fig-'+a);if(fig){if(af.length&&basePower(s)){const p=foePos(S.g)[af[0].key],fp=famPos(S.g)[a];fig.style.setProperty('--lx',Math.round((p.cx+p.w*.3)-fp.cx)+'px');fig.classList.add('lunge');}else fig.classList.add('cast');}
   await T(360);
@@ -441,7 +447,7 @@ async function useMove(id){
   for(const id of am){const mm=S.mem[id];for(const t of fcMem(s,mm)){const n=parseInt(t[1].replace(/\D/g,''));if(/HP/.test(t[1])&&n){mm.hp=Math.min(mm.max,mm.hp+n);S.pops.push({at:'m:'+id,t:'+'+n,heal:1});}
     if(t[1]===W.revive){mm.ko=false;mm.hp=Math.round(mm.max*.25);}if(/^Clears/.test(t[1]))mm.st=[];}}
   if(k==='floor')notes.push(s.name+' is on the floor.');
-  S.cap2=notes.slice(0,2).join(' ');S.free=null;render();
+  S.cap2=notes.slice(0,2).join(' ');S.free=null;S.hi=null;render();
   af.forEach(f=>{const u=document.querySelector(`.u.foe[data-foe="${f.key}"]`);if(u)u.classList.add('shake');});
   await T(1100);
   for(const f of S.foes){if(f.hp<f.max*.15){f.hp=f.max;f.pips=f.maxPips;f.flu=false;}}   // the mock fight never ends: a nearly beaten monster is topped up
@@ -456,7 +462,7 @@ function next(s){
 }
 async function foeTurn(f){
   if(!f||f.out){next(null);return;}
-  const F=B3_FOES[f.id];S.phase='playing';
+  const F=B3_FOES[f.id];S.phase='playing';S.hi=null;
   let act=(F.acts||[]).find(x=>x.power>0)||{name:'a swipe'},tgt=S.party.filter(id=>!S.mem[id].ko)[0];
   if(f.wind){act={name:f.wind.name};tgt=f.wind.at;f.wind=null;S.mem[tgt].marked=false;}
   const m=S.mem[tgt],d=18;m.hp=Math.max(1,m.hp-d);S.caption=`${F.name} uses ${act.name} on ${B3_CAST[tgt].name}.`;S.cap2='';S.pops=[{at:'m:'+tgt,t:'-'+d}];render();
@@ -464,8 +470,9 @@ async function foeTurn(f){
   await T(1300);S.pops=[];next(null);
 }
 
-// ---------------------------------------------------------------- input
+// ---------------------------------------------------------------- input: a tap on a move highlights it (the gold banner); a tap on the highlighted move uses it
 function pick(id){if(S.phase!=='turn')return;S.look=null;S.sheet=null;if(S.hi===id)return;S.hi=id;S.aim=defaultAim(sk(id));if(S.aim.key)S.lastFoe=S.aim.key;render();}
+function tapMove(id){if(S.phase!=='turn'||!sk(id))return;if(S.hi===id){if(!whyNot(sk(id)))useMove(id);return;}pick(id);}
 function tapFoe(key){if(S.phase!=='turn')return;const f=foeBy(key);if(!f||f.out)return;const s=S.hi&&sk(S.hi),k=s&&aimKind(s);S.sheet=null;
   if(k==='foe'||(s&&s.target==='either')){S.aim={k:'foe',key};S.lastFoe=key;S.look=null;}else S.look={f:key};render();}
 function tapMem(id){if(S.phase!=='turn')return;const s=S.hi&&sk(S.hi),k=s&&aimKind(s),m=S.mem[id];S.look=null;
@@ -483,8 +490,7 @@ document.addEventListener('click',e=>{
   if(t.closest('[data-speed]')){S.speed=PREF.speed=S.speed===1?2:1;render(true);return;}
   if(t.closest('[data-close]')){S.sheet=null;render(true);return;}
   if(t.closest('[data-cont]')){S=null;setState('start');return;}
-  const u=t.closest('[data-use]');if(u){if(!u.disabled)useMove(u.dataset.use);return;}
-  const r=t.closest('.row');if(r){S.keys=false;pick(r.dataset.sk);return;}
+  const r=t.closest('[data-sk]')||(t.closest('.dsc.open')&&{dataset:{sk:t.closest('.dsc.open').dataset.for}});if(r){S.keys=false;tapMove(r.dataset.sk);return;}
   const pl=t.closest('#plate');if(pl&&pl.dataset.foe&&S.look&&S.look.f){S.sheet={f:S.look.f};render(true);return;}
   const f=t.closest('[data-foe]');if(f){tapFoe(f.dataset.foe);return;}
   const m=t.closest('[data-mem]');if(m){tapMem(m.dataset.mem);return;}
@@ -493,7 +499,7 @@ document.addEventListener('keydown',e=>{if(!S||S.phase!=='turn')return;const ms=
   if(e.key==='ArrowDown'||e.key==='s'){pick(ms[Math.min(ms.length-1,i+1)].id);e.preventDefault();}
   else if(e.key==='ArrowUp'||e.key==='w'){pick(ms[Math.max(0,i-1)].id);e.preventDefault();}
   else if(e.key==='ArrowLeft'||e.key==='a')stepAim(-1);else if(e.key==='ArrowRight'||e.key==='d')stepAim(1);
-  else if(e.key==='Enter'||e.key===' '){useMove(S.hi);e.preventDefault();}else return;render();});
+  else if(e.key==='Enter'||e.key===' '){useMove(S.hi);e.preventDefault();return;}else return;render();});
 function renderMock(){const el=$('mockp');if(!el.classList.contains('on'))return;
   const sw=(k,v,l,on)=>`<button type="button" data-sw="${k}:${v}" class="${on?'on':''}">${l}</button>`;
   el.innerHTML=`<h4>Mock: states</h4><div class="sg">${STATES.map(s=>`<button type="button" data-st="${s.id}" class="${S.state===s.id?'on':''}">${esc(s.n)}</button>`).join('')}</div>`
@@ -506,4 +512,4 @@ function startApp(){
     setState(Q.get('st')||'start');document.body.classList.add('ready');});
   addEventListener('resize',()=>{if(S)render(true);});
 }
-window.__STORY={get S(){return S},STATES,setState,useMove,pick,tapFoe,tapMem,render,geo,moves,list,fcFoe,famPos,foePos};
+window.__STORY={get S(){return S},STATES,setState,useMove,tapMove,pick,tapFoe,tapMem,render,geo,moves,list,fcFoe,famPos,foePos,D};

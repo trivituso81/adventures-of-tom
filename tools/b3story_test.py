@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""tools/b3story_test.py: layout check of the storybook battle screen proposal (battle-story.html, card c-b3story, plan claude/b3story-plan.md).
+"""tools/b3story_test.py: layout check of the storybook battle screen proposal (battle-story.html, cards c-b3story and c-b3story-exact, plan claude/b3story-plan.md).
+Exact to the mockup (b3storyx): at 951 x 648, in the state of Tom's picture (aim_one), every row P1 to P32 of the plan's table "Exact to the mockup"
+is read from the plan itself and checked: each edge of the element within 12 px of the table's "Now" column, and each edge the row says is kept from
+the picture within 12 px of the table's "On the Duo" column. Also: no Use button anywhere; a tap on a move highlights it and a tap on the highlighted
+move uses it; a tap on a monster aims at it.
 Own server on 8863. Opens the mock at the six real screens of the plan and every state, and fails when:
   the highlighted move is off the screen (or hidden inside the list's scroll), a name is cut (move, monster, family member), text is under 12.5 px
   on a phone-sized screen, a tap target is under 44 px, the bar covers a monster's face, a waiting family member, the plate, Combos, the party row, the turn bar or the tools, the bar is not beside the acting member
@@ -34,10 +38,10 @@ CHECK_JS = r"""(phone) => {
     const r = e.getBoundingClientRect(); if (!r.width || !r.height) continue;
     const fs = parseFloat(getComputedStyle(e).fontSize); if (phone && fs < 12.5) out.small.push(t.slice(0, 28) + ' ' + fs); }
   // tap targets (rows, buttons, links, monster strips, party cards, the plate when it opens a sheet)
-  for (const e of app.querySelectorAll('.row, button, a, .ms, .pc')) { if (!vis(e)) continue; const r = e.getBoundingClientRect(); if (!r.width) continue;
+  for (const e of app.querySelectorAll('.row, button, a, .ms, .pc')) { if (e.disabled) continue; if (!vis(e)) continue; const r = e.getBoundingClientRect(); if (!r.width) continue;
     if (r.height < 43.5 || r.width < 43.5) out.taps.push((e.className || e.tagName) + ' ' + (e.textContent || '').trim().slice(0, 18) + ' ' + Math.round(r.width) + 'x' + Math.round(r.height)); }
   // names cut: a name element whose text overflows its box, or that is clipped by an ancestor that hides overflow
-  for (const e of app.querySelectorAll('.row .nm, .ms .nm, .pl .top span, .pc .n, .ribbon')) { if (!vis(e)) continue;
+  for (const e of app.querySelectorAll('.row .nm, .ms .nm, .pl .top span, .pc .n, .pc .ht, .ttl, .vtab, .cv, .cpl b, .tgf b')) { if (!vis(e)) continue;
     if (e.scrollWidth > e.clientWidth + 1) out.cut.push((e.textContent || '').trim().slice(0, 30)); }
   // panels inside the screen (the list's scroll may hide rows, but the panel itself must be on screen)
   for (const e of app.querySelectorAll('#turns, #tools, #plate, #bar, #combo, #cards, .ms, #caption.on, #endp.on, #sheet.on')) { if (!vis(e)) continue;
@@ -46,12 +50,13 @@ CHECK_JS = r"""(phone) => {
   return out; }"""
 
 GEO_JS = r"""() => { const R = e => { if (!e) return null; const r = e.getBoundingClientRect(); return {l: r.left, t: r.top, r: r.right, b: r.bottom, w: r.width, h: r.height}; };
-  const S = window.__STORY.S, bar = document.getElementById('bar'), hi = bar.querySelector('.row.hi'), scr = bar.querySelector('.scr');
+  const S = window.__STORY.S, bar = document.getElementById('bar'), hi = bar.querySelector('.row.hi'), scr0 = bar.querySelector('.scr'), scr = hi && scr0 && scr0.contains(hi) ? scr0 : null;
   const o = {W: innerWidth, H: innerHeight, up: S.g.up, phase: S.phase, actor: S.actor, bar: R(bar), hi: R(hi), scr: R(scr), foes: [], waiting: [], act: R(document.getElementById('fig-' + S.actor)),
     shown: bar.classList.contains('show') || bar.classList.contains('show-still')};
   // a monster's face: the middle half of its picture, top 60% (a boss is drawn 2.5 times and the bar may lie over its edge, never its face)
   for (const u of document.querySelectorAll('.u.foe')) { const r = R(u); o.foes.push({l: r.l + r.w * .25, r: r.r - r.w * .25, t: r.t, b: r.t + r.h * .6}); }
-  o.others = ['plate', 'combo', 'cards', 'turns', 'tools'].map(i => R(document.getElementById(i))).filter(x => x && x.w);
+  o.others = ['#plate', '#combo .gz, #combo.cmp', '#cards', '#turns', '#tools'].map(i => R(document.querySelector(i))).filter(x => x && x.w);
+  o.use = document.querySelectorAll('[data-use], .use').length;
   for (const id of S.party) { if (id === S.actor) continue; const r = R(document.getElementById('fig-' + id)); if (r) o.waiting.push({id, l: r.l, r: r.r, t: r.t, b: r.t + r.h * 0.3}); }
   return o; }"""
 
@@ -81,6 +86,7 @@ def check_state(pg, tag, size, st):
         if g['hi']:
             ok(g['hi']['t'] >= -1 and g['hi']['b'] <= g['H'] + 1, f'{tag}: the highlighted move is on the screen')
             if g['scr']: ok(g['hi']['t'] >= g['scr']['t'] - 3 and g['hi']['b'] <= g['scr']['b'] + 3, f'{tag}: the highlighted move is not hidden in the list scroll')
+        ok(g['use'] == 0, f'{tag}: no Use button')
         if not g['up']:
             bar = g['bar']
             # short sideways screens (H < 500): the field is too small for a lane beside a 2.5x boss; the plan lists it as a weak spot (section 9)
@@ -107,6 +113,56 @@ def contrast_check(pg, tag, path):
     ink = (43, 26, 16); paper = (247, 237, 211); dim = tuple(round(ink[i] * .6 + paper[i] * .4) for i in range(3))
     ok(contrast(ink, paper) >= 7, f'{tag}: ink on parchment {contrast(ink, paper):.1f}:1')
     ok(contrast(dim, paper) >= 3, f'{tag}: dimmed row text {contrast(dim, paper):.1f}:1')
+
+# ---- Exact to the mockup: the plan's table is the measure (rows P1..P32), this is where each row is found on the page
+PLAN = os.path.join(ROOT, 'claude', 'b3story-plan.md')
+ROWS = {'P1': '#turns', 'P2': '#turns .tf.now', 'P3': '#turns .rnd', 'P4': '#turns .tf.ghost', 'P5': '#tools [data-speed] .tgf', 'P6': '#tools [data-det] .tgf', 'P7': '#tools a .tgf',
+        'P8': '#bar .ttl', 'P9': '#bar .row.basic', 'P10': '#bar .plq', 'P11': '#bar .vtab', 'P12': '#bar .pnl', 'P13': '#bar .scr .row', 'P14': '#bar .row.hi .fr', 'P15': '#bar .dsc.open',
+        'P16': '.u.foe', 'P17': '.fcx .dring', 'P18': '.fcx .cp', 'P19': '#plate', 'P20': '#combo .cpl', 'P21': '#combo .gz', 'P22': '#combo .c1 .cv', 'P23': '#combo .c2 .cv',
+        'P24': '.pc:nth-child(1)', 'P25': '.pc:nth-child(2)', 'P26': '.pc:nth-child(3)', 'P27': '.pc:nth-child(4)', 'P28': '.pc .pf',
+        'P29': '#fig-grace', 'P30': '#fig-tom', 'P31': '#fig-rose', 'P32': '#fig-deedee'}
+TOL = 12
+def plan_rows():
+    out = {}
+    for line in open(PLAN, encoding='utf-8'):
+        c = [x.strip() for x in line.strip().strip('|').split('|')]
+        if len(c) >= 7 and c[0] in ROWS:
+            rect = lambda t: [float(v) for v in t.split(',')] if t.count(',') == 3 else None
+            out[c[0]] = {'thing': c[1], 'duo': rect(c[3]), 'now': rect(c[5]), 'kept': [k.strip() for k in c[6].replace('all', 'l,t,r,b').split(',') if k.strip() in ('l', 't', 'r', 'b', 'cx', 'cy')]}
+    return out
+def edges(r): return {'l': r[0], 't': r[1], 'r': r[2], 'b': r[3], 'cx': (r[0] + r[2]) / 2, 'cy': (r[1] + r[3]) / 2}
+def exact_check(pg):
+    rows = plan_rows()
+    ok(len(rows) == len(ROWS), f'exact: the plan table has every row P1 to P{len(ROWS)} ({len(rows)} found)')
+    got = pg.evaluate("(sel) => { const o = {}; for (const k in sel) { const e = document.querySelector(sel[k]); if (e) { const r = e.getBoundingClientRect(); o[k] = [r.left, r.top, r.right, r.bottom]; } } return o; }", ROWS)
+    worst = 0
+    for k, row in rows.items():
+        if not ok(k in got, f'exact {k} {row["thing"]}: on the screen'): continue
+        a = edges(got[k])
+        if ok(row['now'] is not None, f'exact {k}: the table gives the Now position'):
+            n = edges(row['now']); d = max(abs(a[e] - n[e]) for e in 'ltrb'); worst = max(worst, d)
+            ok(d <= TOL, f'exact {k} {row["thing"]}: within {TOL} px of the table ({[round(v) for v in got[k]]} against {row["now"]}, off by {d:.0f})')
+        if row['duo'] is not None and row['kept']:
+            m = edges(row['duo']); bad = [(e, round(a[e]), m[e]) for e in row['kept'] if abs(a[e] - m[e]) > TOL]
+            ok(not bad, f'exact {k} {row["thing"]}: the edges kept from the picture are within {TOL} px of it ({bad})')
+    print(f'INFO exact: {len(rows)} rows checked at 951 x 648, the largest distance from the table is {worst:.1f} px')
+
+def tap_check(pg, tag):
+    # a tap highlights (the gold banner), a tap on the highlighted move uses it; there is no Use button; a tap on a monster aims at it
+    open_state(pg, 'start')
+    ok(pg.evaluate("document.querySelectorAll('[data-use], .use').length") == 0, f'{tag}: no Use button')
+    hi0 = pg.evaluate("window.__STORY.S.hi")
+    row = pg.query_selector('#bar .scr .row:not(.hi):not(.poor)'); sk = row.get_attribute('data-sk'); row.click(); pg.wait_for_timeout(150)
+    st = pg.evaluate("[window.__STORY.S.hi, window.__STORY.S.phase, !!document.querySelector('#bar .row.hi .f-banner'), document.querySelector('#bar .row.hi').dataset.sk]")
+    ok(st[0] == sk and st[0] != hi0 and st[1] == 'turn' and st[2] and st[3] == sk, f'{tag}: the first tap highlights the move as the gold banner and does not use it ({st})')
+    pg.click('#bar .row.hi'); pg.wait_for_timeout(250)
+    ok(pg.evaluate("window.__STORY.S.phase") == 'playing', f'{tag}: a tap on the highlighted move uses it')
+    open_state(pg, 'start'); pg.click('#bar .row.basic'); pg.wait_for_timeout(250)
+    ok(pg.evaluate("window.__STORY.S.phase") == 'playing', f'{tag}: the Basic opens highlighted, so one tap uses it')
+    open_state(pg, 'combo65'); pg.click('#combo .cchip.on'); pg.wait_for_timeout(250)
+    ok(pg.evaluate("window.__STORY.S.phase") == 'playing', f'{tag}: a tap on the highlighted Combo mark uses it')
+    open_state(pg, 'five'); pg.click('.u.foe[data-foe="C"]', force=True); pg.wait_for_timeout(150)
+    ok(pg.evaluate("window.__STORY.S.aim.key") == 'C' and pg.evaluate("window.__STORY.S.phase") == 'turn', f'{tag}: a tap on a monster aims at it')
 
 def play_turns(pg, tag):
     open_state(pg, 'start')
@@ -161,6 +217,8 @@ def main():
                             open_state(pg, st, sq + f'&bg={bg}'); tag = f'{st}-{bg}-{size}'; path = os.path.join(SHOTS, f'b3story-{tag}.png'); pg.screenshot(path=path)
                             contrast_check(pg, tag, path)
                     play_turns(pg, size)
+                if size == 'duo':
+                    open_state(pg, 'aim_one'); exact_check(pg); tap_check(pg, size)
                 ok(not errs, f'{size}: no page errors ({errs[:3]})')
                 pg.close()
             # the viewer page on a big screen lists the six screens, Duo first

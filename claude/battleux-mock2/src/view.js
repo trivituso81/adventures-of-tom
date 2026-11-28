@@ -6,7 +6,7 @@ function startViewer(){
     {id:'fold-side',n:'Duo folded, sideways',s:'678 x 445',w:678,h:445,q:'',c:'Short screen: the list scrolls, the highlighted move stays in view.'},
     {id:'ip-up',n:'iPhone, upright',s:'393 x 852',w:393,h:852,q:'&safe=54,0,34,0',c:'The bands at the top and bottom are the iPhone’s own (clock, home bar).'},
     {id:'ip-side',n:'iPhone, sideways',s:'852 x 393',w:852,h:393,q:'&safe=0,50,21,50',c:'Short screen with the iPhone’s side margins. The list scrolls.'}];
-  let cur=0,st='start',det=0,rose=0,bg='pond';
+  let cur=0,st=new URLSearchParams(location.search).get('st')||'aim_one',det=0,rose=0,bg='pond';   // opens on the state of Tom's picture
   const $=id=>document.getElementById(id),fr=$('fr'),dev=$('dev');
   const BG=[['pond','Pond'],['night','Night'],['indoor','Indoor, dark'],['bright','Indoor, bright']];
   function fit(){const D=DEV[cur],aw=$('stage').clientWidth-16,ah=Math.max(380,innerHeight*.78),k=Math.min(1,aw/D.w,ah/D.h);
