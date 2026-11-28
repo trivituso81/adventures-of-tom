@@ -10857,7 +10857,7 @@
    "id": "c-wideframe",
    "tag": "wideframe1",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "night": false,
    "title": "Wider video frame for moves with a reaching arm",
@@ -10879,10 +10879,14 @@
     {
      "d": "2026-11-27",
      "t": "Tom (22:44): 'The new video I made is cut off. Why is the box the animation is contained to so narrow? It doesn't accommodate a characters arm reaching forward or back' and (22:50) 'Go'. Added from the movebench16 conversation after checking Wan 3.0 shapes and what the bake and gate assume."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukF5T9H671xWNXfKgbv",
+    "url": "https://claude.ai/code/session_01RXeukCxxfQRSup37D9SVjV",
     "opening": "not started"
    }
   },
@@ -10911,6 +10915,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukCxxfQRSup37D9SVjV",
+   "title": "Wider video frame for moves with a reaching arm",
+   "first": "2026-11-27T22:56:18-08:00",
+   "last": "2026-11-27T22:56:18-08:00",
+   "tags": [],
+   "cards": [
+    "c-wideframe"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukF5T9H671xWNXfKgbv",
    "title": "Move Workbench 16: wide monitor layout and clean-up",
@@ -17991,8 +18005,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "fa8d3e2a2cca7be1d5c952ad332fe5882dcd224c",
- "synced_at": "2026-11-28T06:53:33+00:00",
+ "synced": "5803b3f32fb271286ed91dd461466a9a84d7d39a",
+ "synced_at": "2026-11-28T06:57:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
