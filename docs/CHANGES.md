@@ -1,3 +1,7 @@
+## board-wideframe (2026-11-27): one card for a wider video frame on moves with a reaching arm
+
+Tom (11-27 22:44): the new Lounge Pass Flex take was cut off at the side. Cause: the workbench makes every video in the tall 9:16 frame. Card c-wideframe (Sonnet 5.5 medium) adds a per-move square frame; no code changed here.
+
 ## board-b3proto-fb3 (2026-11-27): the proposal card now says the party and monsters stay where the game puts them
 
 Tom (11-27 22:41): the prototype changed party and monster layout when it was only meant to be about the move list. Added a line to the prompt of c-b3story and a note under call 2 in the prototype plan. No game change.

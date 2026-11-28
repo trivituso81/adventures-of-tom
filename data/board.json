@@ -10852,6 +10852,39 @@
    "blocks": [],
    "created": "2026-11-27",
    "changed": "2026-11-27"
+  },
+  {
+   "id": "c-wideframe",
+   "tag": "wideframe1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "night": false,
+   "title": "Wider video frame for moves with a reaching arm",
+   "next": "Adds a per-move choice, Room for a reaching arm, that makes the body video in a square frame instead of the tall narrow one; sets it on Lounge Pass Flex only.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "created": "2026-11-27",
+   "changed": "2026-11-27",
+   "prompt": {
+    "what": "Lets one move ask for a square video frame so a reaching arm is not cut off, starting with Lounge Pass Flex.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the files and the change are written below; tests catch mistakes)",
+    "effort": "medium (one new field, one frame mode, tests written)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md (section b.2 body and start, d.1), then card c-wideframe in data/board.json. Your first push is the commit board: start c-wideframe. Fact found on 2026-11-27: every video the Move Workbench makes (Make another, `tools/guidegen/worker.py`) copies the job `tom-idle` in tools/art-library/wangen-jobs.json: aspect 9:16, fit 720x1280, so the figure sits in a tall narrow frame and a reaching arm runs off the edge (Tom's take 3 of Lounge Pass Flex: the clip gate flagged edge, 8 pictures). Wan 3.0 accepts aspect_ratio 16:9, 4:3, 1:1, 3:4 and 9:16 (fal.ai/models/alibaba/wan-3.0/image-to-video). tools/clip-bake/bake_clip.py (trimmed rects) and tools/clip-gate/gate.py (edge check uses the video's own w and h) do not assume the tall shape. What does: `fit_frame` in tools/art-library/wangen.py only fits a target narrower than the picture (it fills the height or pads top and bottom); a square target would need the new mode 'fit the height, pad left and right with the same magenta', with the figure kept the same height in the frame. Build: (1) a body field in the spec schema, `frame: 'tall' | 'wide'` (default tall, so no existing move changes; add it to the schema, data/move-specs.js bundle, tools/movebench/apply.py if it lists fields, and the workbench Body video section as one plain choice, 'Room for a reaching arm', with Undo and Save draft like every other control); (2) `fit_frame` gets the side-padding mode and a unit test with the Lounge Pass Flex start picture showing the figure keeps its height and has margin on both sides; (3) the worker, for a move with frame wide, uses aspect 1:1, resolution 1080p, fit 1080x1080 (est about $0.75 a take; check the worker's VID_CAP and the Make another price label read the real estimate); (4) set `frame: 'wide'` on move:lounge_pass_flex only. Smallest change: touch nothing else, do not re-make any video, do not run the worker for real (the first paid take is Tom's tap on Make another). Look at the frame picture the test writes before you push. Tests: the tests of what you touch (wangen_test.py, tools/guidegen/worker_test.py, tools/movebench/page_test.py, apply tests), python3 tools/battle_guide_test.py as far as it ran before (it already stops at line 198 from an older phase; say so, do not fix it), python3 tools/board_check.py, python3 tools/smoke.py. Write the docs/CHANGES.md heading for build wideframe1 and run bump_tags. After pushing, add the Tom play card t-wideframe-try (ask play, fyi true, where phone): 'Open Admin > Battle Guide > Animations > Tom > Lounge Pass Flex. In Body video, choose Room for a reaching arm, press Save draft, then Make another ($0.75). When the take finishes, compare Now in the game with New take: the arm should not be cut off. Press All good, or Something is wrong and say what you saw.' Set after on this card to t-wideframe-try. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Tom (22:44): 'The new video I made is cut off. Why is the box the animation is contained to so narrow? It doesn't accommodate a characters arm reaching forward or back' and (22:50) 'Go'. Added from the movebench16 conversation after checking Wan 3.0 shapes and what the bake and gate assume."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   }
   }
  ],
  "sessions": [
