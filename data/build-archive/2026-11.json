@@ -1,4 +1,7 @@
 [
+{"tag":"fix-wanproof-watch","at":"2026-11-20T17:22:19-08:00","what":"PROOF: GRACE'S GUARD (VIDEO) is now the first box on the NEW BATTLE list","card":"c-fix-wanproof-watch","theme":"Battle Animations"},
+{"tag":"keysecrets3","at":"2026-11-20T17:09:15-08:00","what":"Voice Library and Script Editor takes are made on GitHub; the ElevenLabs key box and aot-el-key are gone","card":"c-keysecrets3","theme":"Tools"},
+{"tag":"startfix1","at":"2026-11-21T01:05:41+00:00","what":"The Opus medium and Sonnet high START routes tried again and are still not proven, so both stay paused","card":"c-startfix","theme":"Project Ops"},
 {"tag":"fix-hollowtrail1-pics","at":"2026-11-20T17:04:25-08:00","what":"Hollow wrapper trail 1 remade and reviewed before Tom sees it; trails 2 to 4 need his OK for a different method","card":"c-fix-hollowtrail1-pics","theme":"Areas"},
 {"tag":"clipstuck1","at":"2026-11-20T16:56:30-08:00","what":"A single GENERATE VIDEO press waits for Tom's review; every GitHub-made version has REVIEW on the clip's card","card":"c-clipstuck1","theme":"Tools"},
 {"tag":"artbake1540","at":"2026-11-21T00:54:32+00:00","what":"","kind":"house"},
