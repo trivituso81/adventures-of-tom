@@ -1611,6 +1611,18 @@
    "group": "g6",
    "minutes": 1,
    "outdir": true
+  },
+  {
+   "id": "wideframe_test",
+   "cmd": "python3 -I tools/art-library/wideframe_test.py",
+   "group": "g1",
+   "minutes": 1
+  },
+  {
+   "id": "movebench_frame_test",
+   "cmd": "python3 -I tools/movebench/frame_test.py",
+   "group": "g1",
+   "minutes": 1
   }
  ]
 }

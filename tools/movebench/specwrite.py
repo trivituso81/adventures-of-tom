@@ -88,3 +88,13 @@ if __name__ == '__main__':
     a = ap.parse_args()
     if a.clip: print('\n'.join(set_clip(a.root, a.anim, a.clip)))
     if a.trim: print('\n'.join(set_trim(a.root, a.anim, *a.trim)))
+
+
+def set_frame(root, anim_id, frame, slug=None):
+    """wideframe1: body.frame 'wide' (a square video frame with room for a reaching arm) or 'tall' (the default, no field)."""
+    def fn(body, live):
+        if frame == 'wide': body['frame'] = 'wide'
+        else: body.pop('frame', None)
+    what = '%s: video frame %s' % (anim_id, 'wide (room for a reaching arm)' if frame == 'wide' else 'tall')
+    rel = edit_body(root, anim_id, fn, what, slug)
+    return ['%s %s (%s)' % (anim_id, what.split(': ', 1)[1], rel)]

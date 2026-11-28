@@ -10331,11 +10331,11 @@
    "theme": "Battle Animations",
    "night": false,
    "title": "Wider video frame for moves with a reaching arm",
-   "next": "Adds a per-move choice, Room for a reaching arm, that makes the body video in a square frame instead of the tall narrow one; sets it on Lounge Pass Flex only.",
+   "next": "Shipped as wideframe1: a move can ask for Room for a reaching arm (a square 1080x1080 video frame, 1080p, $0.75 a try); set on Lounge Pass Flex only. Waits on Tom's card Try Room for a reaching arm on Lounge Pass Flex.",
    "blocks": [],
-   "after": "nothing for Tom: end",
+   "after": "t-wideframe-try",
    "created": "2026-11-27",
-   "changed": "2026-11-27",
+   "changed": "2026-11-28",
    "prompt": {
     "what": "Lets one move ask for a square video frame so a reaching arm is not cut off, starting with Lounge Pass Flex.",
     "before": [
@@ -10353,12 +10353,36 @@
     {
      "d": "2026-11-27",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-28",
+     "t": "Shipped wideframe1. body.frame tall or wide in the move spec, one workbench choice (Room for a reaching arm), worker makes a wide move 1:1 at 1080p from a 1080x1080 frame (figure keeps its height, magenta each side), price chip reads $0.75. Set on move:lounge_pass_flex only. No video was made and nothing paid was run. Next: Tom card t-wideframe-try."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukCxxfQRSup37D9SVjV",
-    "opening": "not started"
+    "opening": "Read CLAUDE.md, claude/handoff-rules.md, then card c-wideframe in data/board.json and do what its prompt says."
    }
+  },
+  {
+   "id": "t-wideframe-try",
+   "title": "Try Room for a reaching arm on Lounge Pass Flex",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "where": "phone",
+   "next": "Open Admin > Battle Guide > Animations > Tom > Lounge Pass Flex. In Body video, choose Room for a reaching arm, press Save draft, then Make another ($0.75). When the take finishes, compare Now in the game with New take: the arm should not be cut off. Press All good, or Something is wrong and say what you saw.",
+   "blocks": [],
+   "created": "2026-11-28",
+   "changed": "2026-11-28",
+   "history": [
+    {
+     "d": "2026-11-28",
+     "t": "Added with c-wideframe (wideframe1)."
+    }
+   ]
   },
   {
    "id": "b-board-wideframe",

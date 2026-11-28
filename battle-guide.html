@@ -950,7 +950,7 @@ function qPicSrc(who){   // the start picture to show: the file on main, or the 
 // ---- the status line of plan section 5.1, word for word ----
 function qAhead(it){return qItems().filter(x=>x.state==='queued'&&x.lane===it.lane&&(String(x.at)+x.id)<(String(it.at)+it.id)).length;}
 function qLine(it,ctx){   // ctx: sheet (all the buttons), list or act (a decision opens the sheet)
-  const pic=isPic(it),up=it.kind==='upload',U=it.use||null,an=ANIM_BY[it.anim],price=pic?0.15:((an&&G(an))||{}).price||0.5;
+  const pic=isPic(it),up=it.kind==='upload',U=it.use||null,an=ANIM_BY[it.anim],price=pic?0.15:((an&&vidPrice(an,G(an)))||0.5);
   const o={t:'',since:'',cls:'wait',btns:[]},mk=(a,l)=>({a,l});
   if(it.state==='queued'){
     const worker=qItems().some(x=>x.lane===it.lane&&(x.state==='making'||x.state==='checking')),ahead=qAhead(it);
@@ -989,7 +989,7 @@ function qMakeBtn(a,g,cur){   // the one tap that makes a video (or another one)
   if(!QS.doc||!g||(g.route==='wan'?!qStartReadyA(a):!g.canMake))return '';   // a monster (xAI) needs no start picture of its own: its picture is part of its recipe
   if(cur&&!(cur.state==='cancelled'||(cur.state==='done'&&cur.use&&cur.use.state==='live')))return '';
   const again=a.video||qVid(a.id).length>0;
-  return '<span class="qbtns"><button type="button" class="gold" data-qa="make" data-qid="'+esc(a.id)+'" data-qkey="anim:'+esc(a.id)+'">'+(again?'Make another':'Make this video')+' ('+money(g.price)+')</button></span>';
+  return '<span class="qbtns"><button type="button" class="gold" data-qa="make" data-qid="'+esc(a.id)+'" data-qkey="anim:'+esc(a.id)+'">'+(again?'Make another':'Make this video')+' ('+money(vidPrice(a,g))+')</button></span>';
 }
 const KINDW={state:'Body',move:'Move',act:'Attack',wind:'Wind-up',answer:'Counter',ruckus:'Family Ruckus'};
 function qRowHtml(a){   // the part of an animation's row under its name: kind, the status line or VIDEO / NO VIDEO YET, and the one button
@@ -1189,7 +1189,7 @@ function qMissing(who){   // the standard poses with no video in the game and no
     return !qVid(a.id).some(i=>i.state==='queued'||i.state==='making'||i.state==='checking'||(i.state==='done'&&!i.left));
   });
 }
-const qTotal=m=>m.reduce((t,a)=>t+(G(a).price||0),0);
+const qTotal=m=>m.reduce((t,a)=>t+(vidPrice(a,G(a))||0),0);
 function qAllHtml(who){
   const m=qMissing(who);if(!m.length)return '';
   const key='all:'+who,tot=money(qTotal(m)),at=' data-qid="'+esc(who)+'" data-qkey="'+esc(key)+'"';
@@ -1326,6 +1326,9 @@ function noteForm(a){
 const SRC_WORDS={job:'The prompt of the Wan job that made this animation',entry:'The prompt of this animation\'s Art Library entry',used:'A prompt written in the Battle Guide',
   'model-draft':'A DRAFT prompt written for this animation: the same person\'s approved prompt, with only the MOTION part new','rule-draft':'A STARTER DRAFT: the same person\'s approved prompt, with only the MOTION part new, built from the move\'s own data'};
 const G=a=>(GUIDE&&GUIDE.anims&&GUIDE.anims[a.id])||null;
+// wideframe1: a move whose saved spec asks for the square frame costs 1080p x 5 s on Wan 3.0 (est_per_s 0.15 in tools/art-library/wangen-jobs.json); the worker reads the same saved spec
+const WIDE_PRICE=0.75;
+function vidPrice(a,g){const base=g&&g.price;if(!a||!g||g.route!=='wan')return base;let sp=null;try{sp=(WB.a&&WB.a.id===a.id&&WB.base)?WB.base:wbSpecOf(a.id);}catch(e){}return sp&&sp.body&&sp.body.frame==='wide'?WIDE_PRICE:base;}
 // A prompt Tom accepted or edited by hand, kept in this browser until a video is made from it (guidegen1b).
 let GW={};try{GW=JSON.parse(lsGet('aot-guide-work')||'{}')||{};}catch(e){GW={};}
 const saveGW=()=>{try{localStorage.setItem('aot-guide-work',JSON.stringify(GW));}catch(e){}};
@@ -1554,7 +1557,7 @@ function genBlock(a){
   const g=G(a);if(!g)return '<div class="gen"><h3>Prompt</h3><p class="hint" id="gstate">This animation is not in the prompt list yet. Ask Claude to rebuild it (node tools/guidegen/build_map.js).</p></div>';
   const sg=wbStage(a),src=SRC_WORDS[g.promptSource]||g.promptSource,draft=/draft/.test(g.promptSource),fam=g.route==='wan';
   let h='<div class="gen" id="gen">'+((fam||g.canMake)?'<div id="gq"></div><div id="gtake"></div>':'')+'<h3>Prompt</h3>';
-  h+='<div class="meta" id="gmeta"><span class="chip">'+(draft?'DRAFT':'Prompt v'+(g.promptRev||0))+'</span>'+(sg?'<span class="chip" id="gstage">'+esc(STAGE_TIER[sg.tier]||sg.tier)+', about '+sg.budget+' s</span>':'')+'<span class="chip">'+esc(g.route==='wan'?'Wan 3.0':'xAI Grok lite')+'</span><span class="chip">$'+g.price.toFixed(2)+' a try</span><span class="chip" id="gtk">Takes made: ...</span><span class="chip" id="gsp">Spent: ...</span></div>';
+  h+='<div class="meta" id="gmeta"><span class="chip">'+(draft?'DRAFT':'Prompt v'+(g.promptRev||0))+'</span>'+(sg?'<span class="chip" id="gstage">'+esc(STAGE_TIER[sg.tier]||sg.tier)+', about '+sg.budget+' s</span>':'')+'<span class="chip">'+esc(g.route==='wan'?'Wan 3.0':'xAI Grok lite')+'</span><span class="chip">$'+vidPrice(a,g).toFixed(2)+' a try</span><span class="chip" id="gtk">Takes made: ...</span><span class="chip" id="gsp">Spent: ...</span></div>';
   h+='<p class="hint" id="gsrc">'+esc(src)+(g.madeBy?' ('+esc(g.madeBy)+')':'')+(g.video?'. It made the video above.':'. This animation has no video yet.')+'</p>';
   if(!g.canMake&&!g.canStart&&g.missing)h+='<div class="cant" id="gcant"><b>Cannot be made yet.</b> '+esc(g.missing)+'</div>';
   const w=GW[a.id];
@@ -1570,7 +1573,7 @@ function genBlock(a){
       +'<p class="err" id="gerr" style="margin:6px 0;font-size:14px"></p><button type="button" class="gold" id="gupd" style="width:100%">Update the prompt</button>'
       +'<p class="hint">'+(g.video?'Your words are folded into the prompt with the smallest change, and you see what was kept and what changed before anything is made.':'Claude folds your words into the draft with the smallest change. Leave it empty to keep the draft as it is.')+'</p><div id="gres"></div>';
   }
-  if(fam||g.canMake)h+='<p class="hint" id="ghow">One tap makes one video from the prompt above ('+esc(genWords(g))+', about $'+g.price.toFixed(2)+'). You see it next to '+(g.video?'the one in the game':'the standard motion')+' before anything changes in the game.</p>';
+  if(fam||g.canMake)h+='<p class="hint" id="ghow">One tap makes one video from the prompt above ('+esc(genWords(g))+', about $'+vidPrice(a,g).toFixed(2)+'). You see it next to '+(g.video?'the one in the game':'the standard motion')+' before anything changes in the game.</p>';
   return h+'</div>';
 }
 // ---------- the Manifest panel and the To do screen (guidecross1, card c-guide-crosswalk) ----------
@@ -1789,6 +1792,7 @@ function wbDiff(){
   if(JSON.stringify(stgStage())!==JSON.stringify(bs))o.steps=wbClone(stgStage());
   if(JSON.stringify(stgMarks())!==JSON.stringify(bm))o.marks=wbClone(stgMarks());
   {const bt=(WB.base&&WB.base.body&&WB.base.body.trim)||null,dt=(WB.draft&&WB.draft.body&&WB.draft.body.trim)||null;if(JSON.stringify(dt)!==JSON.stringify(bt))o.trim=dt?wbClone(dt):null;}   // movebench12: the first and last picture of the video are one field
+  {const bf=(WB.base&&WB.base.body&&WB.base.body.frame)||null,df=(WB.draft&&WB.draft.body&&WB.draft.body.frame)||null;if(df!==bf)o.frame=df;}   // wideframe1: the video's frame shape is one field
   if(JSON.stringify(stGet())!==JSON.stringify((WB.base&&WB.base.start)||null))o.start=stGet()?wbClone(stGet()):null;   // movebench13: the start picture's settings are one field
   if(JSON.stringify(stgObjs())!==JSON.stringify((WB.base&&WB.base.stage&&WB.base.stage.objects)||{}))o.objects=wbClone(stgObjs());   // movebench10: the objects of the move are one field too
   {const bl=(WB.base&&WB.base.stage&&WB.base.stage.lasting)||[];if(JSON.stringify(lsList())!==JSON.stringify(bl))o.lasting=wbClone(lsList());   // movebench11: lasting things, the set piece and the answer are one field each
@@ -1829,14 +1833,14 @@ function wbRebase(fresh){
     if(fresh.stage||'steps' in mine||'objects' in mine||'lasting' in mine||'setpiece' in mine){const st=fresh.stage?wbClone(fresh.stage):{};if('steps' in mine)st.steps=mySteps;if('lasting' in mine){if(myLs.length)st.lasting=myLs;else delete st.lasting;}if('setpiece' in mine){if(mySp)st.setpiece=mySp;else delete st.setpiece;}if('objects' in mine){if(Object.keys(myObjs).length)st.objects=myObjs;else delete st.objects;}WB.draft.stage=st;}else delete WB.draft.stage;
     {const mySt=stGet()?wbClone(stGet()):null;if('start' in mine){if(mySt)WB.draft.start=mySt;else delete WB.draft.start;}else{if(fresh.start)WB.draft.start=wbClone(fresh.start);else delete WB.draft.start;}}
     if('answer' in mine){if(myAn)WB.draft.answer=myAn;else delete WB.draft.answer;}else{if(fresh.answer)WB.draft.answer=wbClone(fresh.answer);else delete WB.draft.answer;}
-    const myTrim=(WB.draft.body&&WB.draft.body.trim)||null,bd=fresh.body?wbClone(fresh.body):{};if('marks' in mine){if(Object.keys(myMarks).length)bd.marks=myMarks;else delete bd.marks;}if('trim' in mine){if(myTrim)bd.trim=wbClone(myTrim);else delete bd.trim;}WB.draft.body=bd;}
+    const myTrim=(WB.draft.body&&WB.draft.body.trim)||null,myFrame=(WB.draft.body&&WB.draft.body.frame)||null,bd=fresh.body?wbClone(fresh.body):{};if('frame' in mine){if(myFrame)bd.frame=myFrame;else delete bd.frame;}if('marks' in mine){if(Object.keys(myMarks).length)bd.marks=myMarks;else delete bd.marks;}if('trim' in mine){if(myTrim)bd.trim=wbClone(myTrim);else delete bd.trim;}WB.draft.body=bd;}
   WB.base=wbClone(fresh);
 }
 // Send the draft to the frame (null when it is what the game plays: the frame puts its own table's back).
 function wbSend(){
   const n=wbChanges();wbStoreWrite(WB.id,n?WB.draft:null,n?WB.base:null);
   const sp=wbSpecOf(WB.id)||{},ml=sp.timing||{},t=(WB.draft&&WB.draft.timing)||{},differs=WB_FIELDS.some(f=>JSON.stringify(t[f])!==JSON.stringify(ml[f]))||JSON.stringify((WB.draft&&WB.draft.effects)||[])!==JSON.stringify(sp.effects||[])
-    ||JSON.stringify(stgStage())!==JSON.stringify((sp.stage&&sp.stage.steps)||[])||JSON.stringify(lsList())!==JSON.stringify((sp.stage&&sp.stage.lasting)||[])||JSON.stringify(spGet())!==JSON.stringify((sp.stage&&sp.stage.setpiece)||null)||JSON.stringify(anGet())!==JSON.stringify(sp.answer||null)||JSON.stringify(stGet())!==JSON.stringify(sp.start||null)||JSON.stringify(stgObjs())!==JSON.stringify((sp.stage&&sp.stage.objects)||{})||JSON.stringify(stgMarks())!==JSON.stringify((sp.body&&sp.body.marks)||{})||JSON.stringify((WB.draft&&WB.draft.body&&WB.draft.body.trim)||null)!==JSON.stringify((sp.body&&sp.body.trim)||null);
+    ||JSON.stringify(stgStage())!==JSON.stringify((sp.stage&&sp.stage.steps)||[])||JSON.stringify(lsList())!==JSON.stringify((sp.stage&&sp.stage.lasting)||[])||JSON.stringify(spGet())!==JSON.stringify((sp.stage&&sp.stage.setpiece)||null)||JSON.stringify(anGet())!==JSON.stringify(sp.answer||null)||JSON.stringify(stGet())!==JSON.stringify(sp.start||null)||JSON.stringify(stgObjs())!==JSON.stringify((sp.stage&&sp.stage.objects)||{})||JSON.stringify(stgMarks())!==JSON.stringify((sp.body&&sp.body.marks)||{})||JSON.stringify((WB.draft&&WB.draft.body&&WB.draft.body.trim)||null)!==JSON.stringify((sp.body&&sp.body.trim)||null)||((WB.draft&&WB.draft.body&&WB.draft.body.frame)||null)!==((sp.body&&sp.body.frame)||null);
   benchSend({bench:'spec',id:WB.id,live:differs?WB.draft:null});
 }
 function wbEdit(patch){
@@ -1861,6 +1865,7 @@ function wbWhat(ch){
     if(f==='setpiece'){p.push(W('sections.setpiece')+': '+(x?W('sp.what',{dur:x.dur,dim:Math.round((x.dim||0)*100)}):'-'));continue;}
     if(f==='answer'){p.push(W('sections.answer')+': '+(x?(x.clip?W('an.what_clip')+(x.effects&&x.effects.length?', ':''):'')+(x.effects&&x.effects.length?x.effects.map(e=>fxName(e.fx)).join(', '):''):'-'));continue;}
     if(f==='start'){p.push(W('start.label')+': '+stSentence(x));continue;}
+    if(f==='frame'){p.push(W('video.frame.label')+': '+(x?W('video.frame.on'):W('video.frame.off')));continue;}
     if(f==='trim'){p.push(W('timing.trim.label')+': '+(x?W('timing.trim.what',{from:x.from+1,to:x.to+1}):W('timing.trim.whole')));continue;}
     if(f==='marks'){p.push(W('stage.name_label')+': '+(x&&Object.keys(x).length?Object.keys(x).join(', '):'-'));continue;}
     if(x==null)v=W('save.automatic');
@@ -1873,7 +1878,7 @@ function wbWhat(ch){
 function wbMerge(cur,ch,kind,now,replayed){
   const d=wbClone(cur);d.v=1;d.id=d.id||WB.id;
   const sec=wbClone((d.draft!=null?d.draft:d.live)||{});const t=Object.assign({},sec.timing||{});
-  for(const f in ch){if(f==='effects'||f==='steps'||f==='marks'||f==='objects'||f==='lasting'||f==='setpiece'||f==='answer'||f==='trim'||f==='start')continue;if(ch[f]==null)delete t[f];else t[f]=wbClone(ch[f]);}
+  for(const f in ch){if(f==='effects'||f==='steps'||f==='marks'||f==='objects'||f==='lasting'||f==='setpiece'||f==='answer'||f==='trim'||f==='frame'||f==='start')continue;if(ch[f]==null)delete t[f];else t[f]=wbClone(ch[f]);}
   if(Object.keys(t).length)sec.timing=t;else delete sec.timing;
   if('effects' in ch)sec.effects=wbClone(ch.effects||[]);
   if('steps' in ch){const had=!!sec.stage,st=Object.assign({},sec.stage||{});st.steps=wbClone(ch.steps||[]);if(!st.steps.length&&!had)delete sec.stage;else sec.stage=st;}
@@ -1882,6 +1887,7 @@ function wbMerge(cur,ch,kind,now,replayed){
   if('setpiece' in ch){const st=Object.assign({},sec.stage||{});if(ch.setpiece)st.setpiece=wbClone(ch.setpiece);else delete st.setpiece;if(Object.keys(st).length||sec.stage)sec.stage=st;}
   if('answer' in ch){if(ch.answer)sec.answer=wbClone(ch.answer);else delete sec.answer;}
   if('start' in ch){if(ch.start)sec.start=wbClone(ch.start);else delete sec.start;}   // movebench13
+  if('frame' in ch){sec.body=Object.assign({},sec.body||{});if(ch.frame)sec.body.frame=ch.frame;else delete sec.body.frame;}
   if('trim' in ch){sec.body=Object.assign({},sec.body||{});if(ch.trim)sec.body.trim=wbClone(ch.trim);else delete sec.body.trim;}
   if('marks' in ch){sec.body=Object.assign({},sec.body||{});if(Object.keys(ch.marks||{}).length)sec.body.marks=wbClone(ch.marks);else delete sec.body.marks;}
   d.rev=(d.rev||0)+1;
@@ -1969,7 +1975,7 @@ async function wbBringBack(sha){
     WB_FIELDS.forEach(f=>{if(t[f]===undefined)delete WB.draft.timing[f];else WB.draft.timing[f]=wbClone(t[f]);});
     if(src.effects===undefined)delete WB.draft.effects;else WB.draft.effects=wbClone(src.effects);
     {const sst=(src.stage&&src.stage.steps)||[];stgWrite(wbClone(sst));if(!sst.length&&!(src.stage))delete WB.draft.stage;
-      const so=(src.stage&&src.stage.objects)||{};if(Object.keys(so).length){WB.draft.stage=Object.assign({},WB.draft.stage||{});WB.draft.stage.objects=wbClone(so);}else if(WB.draft.stage){delete WB.draft.stage.objects;}const bd=Object.assign({},WB.draft.body||{}),mk=(src.body&&src.body.marks)||{};if(Object.keys(mk).length)bd.marks=wbClone(mk);else delete bd.marks;if(src.body&&src.body.trim)bd.trim=wbClone(src.body.trim);else delete bd.trim;WB.draft.body=bd;}
+      const so=(src.stage&&src.stage.objects)||{};if(Object.keys(so).length){WB.draft.stage=Object.assign({},WB.draft.stage||{});WB.draft.stage.objects=wbClone(so);}else if(WB.draft.stage){delete WB.draft.stage.objects;}const bd=Object.assign({},WB.draft.body||{}),mk=(src.body&&src.body.marks)||{};if(Object.keys(mk).length)bd.marks=wbClone(mk);else delete bd.marks;if(src.body&&src.body.trim)bd.trim=wbClone(src.body.trim);else delete bd.trim;if(src.body&&src.body.frame)bd.frame=src.body.frame;else delete bd.frame;WB.draft.body=bd;}
     wbSend();wbAllPaint();wbMsg(W('versions.brought'),false,W('versions.brought_hint'));
   }catch(e){wbMsg(W('versions.failed',{why:e.message}),true);}
 }
@@ -2078,7 +2084,7 @@ function wbHtml(a,videoHtml){
    +'<div class="wt"><h2>'+esc(a.name)+'</h2><p class="wsub" id="wbsub"></p></div><span class="wbstat" id="wbstat"></span></div>'
    +'<div class="wb-body" id="wbbody"><div class="wb-prev" id="wbprev">'+benchBox(a)+'<div class="wbpink" id="wbpink" hidden>'+esc(W('fx.p.pink_tag'))+'</div></div><div class="wb-secs" id="wbsecs">'
    +'<nav class="wb-nav" id="wbnav" aria-label="'+esc(W('page.jump'))+'">'+nav.map(n=>'<button type="button" data-wbgo="'+n[0]+'">'+esc(W(n[1]))+(n[2]?'<b id="wbnav'+(n[0]==='effects'?'fx':n[0])+'">'+n[2]+'</b>':'')+'</button>').join('')+'</nav>'
-   +'<div class="wbcol" id="wbcA">'+(RK?'':'<section class="wbs" id="s-video"><h3 class="wbh"><span>'+esc(W('sections.video'))+'</span></h3>'+videoHtml+wbStartHtml(a)+wbTrimHtml()+'</section>')
+   +'<div class="wbcol" id="wbcA">'+(RK?'':'<section class="wbs" id="s-video"><h3 class="wbh"><span>'+esc(W('sections.video'))+'</span></h3>'+videoHtml+wbStartHtml(a)+wbFrameHtml()+wbTrimHtml()+'</section>')
    +'<section class="wbs" id="s-timing"><h3 class="wbh"><span>'+esc(W('sections.timing'))+'</span></h3>'+wbTimingHtml(a)+'</section></div><div class="wbcol" id="wbcB">'
    +wbStageSection(a)+wbLastingSection(a)+wbFxSection(a)+wbAnswerSection(a)+wbSetSection(a)+wbSoundSection(a)+'</div><div class="wbcol" id="wbcC"><section class="wbs" id="s-versions"><h3 class="wbh"><span>'+esc(W('sections.versions'))+'</span></h3><p class="hint" id="wbfinline" style="margin:0 0 8px"></p>'
    +'<button type="button" data-wb="versions">'+esc(W('versions.show'))+'</button><div id="wbvers"></div></section><section class="wbs" id="s-note">'+noteForm(a)+'</section>'+(maniOf(a)?'<section class="wbs" id="s-mani">'+manifestBlock(maniOf(a))+'</section>':'')
@@ -2249,7 +2255,7 @@ function fxPickerHtml(){
   const ids=FXD?Object.keys(FXD.fx):[];
   return '<div class="fxpick"><p class="hint" style="margin:0 0 6px">'+esc(W('fx.p.adding'))+'</p><div class="fxgrid">'+ids.map(id=>'<button type="button" class="fxtile" data-fx="pick" data-v="'+esc(id)+'">'+fxSample(id)+'<b>'+esc(fxName(id))+'</b></button>').join('')+'</div><button type="button" data-fx="pickno">'+esc(W('fx.p.cancel'))+'</button></div>';
 }
-function wbAllPaint(){wbStartPaint();wbFxPaint();wbStagePaint();wbSoundPaint();wbLsPaint();wbAnPaint();wbSpPaint();}
+function wbAllPaint(){wbFramePaint();wbStartPaint();wbFxPaint();wbStagePaint();wbSoundPaint();wbLsPaint();wbAnPaint();wbSpPaint();}
 function wbFxPaint(){
   const el=$('wbfx');if(!el||!WB.a||!FXD)return;
   const l=fxList();if(WB.fxOpen>=l.length)WB.fxOpen=-1;
@@ -2746,6 +2752,20 @@ function wbTrimPaint(){
    +b('reset',esc(W('timing.trim.reset')),W('timing.trim.reset'),!T.set);
 }
 function wbTrimHtml(){return '<div class="wbrow" data-row="trim"><div class="wl"><b>'+esc(W('timing.trim.label'))+'</b><span>'+esc(W('timing.trim.hint'))+'</span></div><div class="wc" id="wbtrim"></div></div>';}
+// ---------- wideframe1: Room for a reaching arm (spec body.frame 'wide'; the video is made in a square frame, the figure the same height; tools/guidegen/worker.py) ----------
+const wbFrameOn=()=>!!(WB.draft&&WB.draft.body&&WB.draft.body.frame==='wide');
+function wbFrameHtml(){return '<div class="wbrow" data-row="frame"><div class="wl"><b>'+esc(W('video.frame.label'))+'</b><span>'+esc(W('video.frame.hint'))+'</span></div><div class="wc" id="wbframe"></div></div>';}
+function wbFramePaint(){
+  const el=$('wbframe');if(!el)return;const on=wbFrameOn();
+  el.innerHTML='<div class="wbseg" role="group" aria-label="'+esc(W('video.frame.label'))+'"><button type="button" data-fr="tall" aria-pressed="'+(on?'false':'true')+'">'+esc(W('video.frame.off'))+'</button><button type="button" data-fr="wide" aria-pressed="'+(on?'true':'false')+'">'+esc(W('video.frame.on'))+'</button></div>'
+   +'<span class="hint">'+esc(W('video.frame.price',{p:WIDE_PRICE.toFixed(2)}))+'</span>';
+}
+document.addEventListener('click',e=>{const b=e.target&&e.target.closest&&e.target.closest('[data-fr]');if(!b||!WB.a||b.tagName!=='BUTTON')return;
+  const want=b.dataset.fr==='wide';if(want===wbFrameOn())return;
+  WB.undo.push(JSON.stringify(WB.draft));if(WB.undo.length>60)WB.undo.shift();WB.confirm=false;WB.msg=null;
+  const bd=Object.assign({},WB.draft.body||{});if(want)bd.frame='wide';else delete bd.frame;WB.draft.body=bd;
+  wbSend();wbPaint();wbFramePaint();
+});
 function wbTrimStep(v){
   const T=wbTrimOf();if(!T)return;let f=T.from,t=T.to;
   if(v==='from-')f--;else if(v==='from+')f++;else if(v==='to-')t--;else if(v==='to+')t++;else if(v==='reset'){f=0;t=T.n-1;}

@@ -53,6 +53,22 @@ def estimate(job):
     return float(job['est'])
 
 
+def fit_frame_wide(png_bytes, size):
+    """wideframe1: the picture placed on an exact WxH magenta frame wider than the picture: scaled to fill the height (the figure keeps the same share of the height as in the tall
+    frame) and padded left and right with the same magenta, so a reaching arm has room on both sides."""
+    from PIL import Image
+    import numpy as np
+    W, H = size
+    im = Image.open(io.BytesIO(png_bytes)).convert('RGB')
+    a = np.asarray(im).astype(int)
+    bg = tuple(int(v) for v in np.median(np.concatenate([a[:20, :20].reshape(-1, 3), a[:20, -20:].reshape(-1, 3)]), 0))
+    s = H / im.height; nw = round(im.width * s)
+    if nw > W: raise SystemExit('the picture is wider than the %dx%d frame; use fit_frame' % (W, H))
+    out = Image.new('RGB', (W, H), bg); out.paste(im.resize((nw, H), Image.LANCZOS), ((W - nw) // 2, 0))
+    b = io.BytesIO(); out.save(b, 'PNG')
+    return b.getvalue(), 'height filled, padded %d px left and right' % ((W - nw) // 2)
+
+
 def fit_frame(png_bytes, size):
     """The picture placed on an exact WxH magenta frame for the video model: scaled to fill the height, the sides cut evenly when the figure
     keeps at least 4 percent margin on both sides, else scaled to fit the width and padded top and bottom with the same magenta."""
@@ -127,7 +143,7 @@ def build(job, repo):
             frame, how, W, H = open(p, 'rb').read(), 'sent as it is', 0, 0
         else:
             W, H = [int(x) for x in job['fit'].split('x')]
-            frame, how = fit_frame(open(p, 'rb').read(), (W, H))
+            frame, how = (fit_frame_wide if job.get('frame_mode') == 'wide' else fit_frame)(open(p, 'rb').read(), (W, H))
         if job.get('pad'): frame, how = pad_frame(frame, float(job['pad'])), how + ', then shrunk to %d%% on the same magenta (pad)' % round(100 * float(job['pad']))
         if job.get('shift'):
             frame, dx = shift_frame(frame, float(job['shift'])); how += ', then moved %d px right (shift)' % dx

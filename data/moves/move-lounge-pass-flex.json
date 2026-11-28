@@ -1,7 +1,7 @@
 {
  "v": 1,
  "id": "move:lounge_pass_flex",
- "rev": 3,
+ "rev": 4,
  "live": {
   "body": {
    "clip": "tom_loungepass",
@@ -18,7 +18,8 @@
     "at": 9,
     "sfx": "ding"
    },
-   "until": "tom_loungepass"
+   "until": "tom_loungepass",
+   "frame": "wide"
   },
   "timing": {
    "contact": {
@@ -80,6 +81,12 @@
    "at": "2026-11-27T23:31:19Z",
    "by": "claude",
    "what": "move:lounge_pass_flex: start picture standard, holds laminated Sky Club pass, wears 1 (one held prop, the rest worn; Pipeline Lock, One held prop)"
+  },
+  {
+   "rev": 4,
+   "at": "2026-11-28T06:58:16Z",
+   "by": "claude",
+   "what": "move:lounge_pass_flex: video frame wide (room for a reaching arm)"
   }
  ]
 }

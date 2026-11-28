@@ -1994,5 +1994,14 @@
    "over:each_ally",
    "foe"
   ]
+ },
+ "video": {
+  "frame": {
+   "label": "Room for a reaching arm",
+   "hint": "makes the body video in a square frame instead of the tall narrow one; the figure stays the same height",
+   "off": "Tall frame (standard)",
+   "on": "Room for a reaching arm",
+   "price": "Square videos are sharper and cost about ${p} a try."
+  }
  }
 }

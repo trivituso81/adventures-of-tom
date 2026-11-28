@@ -204,7 +204,7 @@ def check_section_set(S,path,C,E,W):
         if not isinstance(b,dict): E.append(p+': must be an object')
         else:
             for k in b:
-                if k not in ('clip','until','motion','trim','marks','pair','hand','sound'): E.append('%s: unknown field %s'%(p,k))
+                if k not in ('clip','until','motion','trim','marks','pair','hand','sound','frame'): E.append('%s: unknown field %s'%(p,k))
             c=b.get('clip')
             if c is not None:
                 if not isinstance(c,str): E.append(p+'.clip: a clip id or null')
@@ -214,6 +214,7 @@ def check_section_set(S,path,C,E,W):
                 if not isinstance(u,str): E.append(p+'.until: a clip id or absent')
                 elif u not in C['clips']: E.append('%s.until: %s is not baked in data/clips/ (it is the video that plays until `clip` is made)'%(p,u))
             if 'motion' in b and b['motion'] not in MOTIONS: E.append('%s.motion: %r is not one of %s'%(p,b['motion'],MOTIONS))
+            if 'frame' in b and b['frame'] not in ('tall','wide'): E.append(p+'.frame: tall or wide (wide is a square video frame with room for a reaching arm)')
             if b.get('trim') is not None:
                 t=b['trim']
                 if not(isinstance(t,dict) and isint(t.get('from')) and isint(t.get('to')) and 0<=t['from']<t['to']): E.append(p+'.trim: {from, to} pictures, from below to')

@@ -111,6 +111,31 @@ def own_active(doc, who):
     return max(done, key=lambda i: (i.get('since') or '', i['id'])).get('kind') == 'upload'
 
 
+WIDE = {'fit': '1080x1080', 'aspect_ratio': '1:1', 'resolution': '1080p'}   # wideframe1: Wan 3.0 accepts 1:1; 1080p keeps the figure as sharp as the tall 720x1280 frame
+
+
+def frame_of(repo, anim_id):
+    """The frame a move asks for in its spec: 'wide' or 'tall'. The saved draft is read first (Tom presses Make another before he presses Finished), then the live part."""
+    if not anim_id: return 'tall'
+    try:   # the file name is the Guide's slug (the index of data/moves/ names it; else the rule of tools/movebench/specwrite.py slug_of; not imported, so no other folder is put on the path)
+        slug = None
+        try: slug = json.load(open(os.path.join(repo, 'data', 'moves', 'index.json'), encoding='utf-8'))['anims'].get(anim_id, {}).get('slug')   # the small index (guide-anims.json is large and four rows start at once)
+        except (OSError, ValueError, KeyError): pass
+        d = json.load(open(os.path.join(repo, 'data', 'moves', (slug or re.sub(r'[:_]', '-', anim_id)) + '.json'), encoding='utf-8'))
+    except (OSError, ValueError): return 'tall'
+    for part in ('draft', 'live'):
+        sec = d.get(part)
+        if sec is not None: return 'wide' if (sec.get('body') or {}).get('frame') == 'wide' else 'tall'
+    return 'tall'
+
+
+def apply_frame(job, repo, anim_id):
+    if frame_of(repo, anim_id) != 'wide': return job
+    job['fit'] = WIDE['fit']; job['frame_mode'] = 'wide'
+    job['input'] = dict(job['input'], aspect_ratio=WIDE['aspect_ratio'], resolution=WIDE['resolution'])
+    return job
+
+
 class Worker:
     def __init__(self, lane, pool=4, linger=120, once=False, dry_run=False, alive=None, fal=None, judge_factory=None, jobs=None, repo=ROOT, run_id=None, xai=None):
         self.lane, self.pool, self.linger, self.once, self.dry_run = lane, pool, linger, once, dry_run
@@ -330,6 +355,7 @@ class Worker:
         pf = os.path.join(self.tmp, rid + '-prompt.txt'); open(pf, 'w', encoding='utf-8').write((it.get('prompt') or '').strip() + '\n')
         if not (it.get('prompt') or '').strip(): return self.fail_row(it, ('This request has no prompt.', 'Send a note to Claude from this sheet.'))
         job['prompt_file'] = pf
+        apply_frame(job, self.repo, it.get('anim'))   # wideframe1: a move that asks for room for a reaching arm gets a square 1080p frame
         cap = min(float(it.get('cap') or VID_CAP), VID_CAP)
         est = wangen.estimate(job)
         if est > cap + 1e-9: return self.fail_code(it, 'X22')   # X22
