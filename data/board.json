@@ -10216,9 +10216,9 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 16: wide monitor layout and clean-up",
-   "next": "A new Admin Dashboard layout, Animations, gives the workbench most of the wide monitor. The Move Lab and the old animation sheet are deleted. Starts by itself when Move Workbench 15 ships.",
+   "next": "Built: the Animations layout (420, 951, 1589, 440) and the workbench wide at 1589; the Move Lab and the old sheet pieces are deleted. Tom tries it on the wide monitor (card t-movebench-16-try).",
    "blocks": [],
-   "after": "nothing for Tom: end",
+   "after": "t-movebench-16-try",
    "created": "2026-11-26",
    "changed": "2026-11-27",
    "auto": true,
@@ -10247,6 +10247,10 @@
     {
      "d": "2026-11-27",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Built movebench16: the Animations layout in dashboard.html, the Move Workbench wide layout (list 300, preview and versions in the middle, sections in two columns), and the purge of engine/b3-movelab.js, b3-movelab.css, the MOVE LAB: TOM row, tools/movestage_lab_test.py, the What is done block and the NOTE OPEN badge. Hands Tom t-movebench-16-try and the decide card t-movebench-bulkvideo. This is the last phase."
     }
    ]
   },
@@ -10634,6 +10638,106 @@
    "blocks": [],
    "created": "2026-11-27",
    "changed": "2026-11-27"
+  },
+  {
+   "id": "t-movebench-16-try",
+   "title": "Try the Animations layout on the wide monitor",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open the Admin Dashboard on the wide monitor and switch Layout to Animations. Open three animations from the list, play each preview and change one setting in each. Press All good, or Something is wrong and say what you saw.",
+   "steps": [
+    "Open the Admin Dashboard on the wide monitor and switch Layout to Animations.",
+    "Open three animations from the list, play each preview and change one setting in each.",
+    "Press All good, or Something is wrong and say what you saw."
+   ],
+   "blocks": [],
+   "created": "2026-11-27",
+   "changed": "2026-11-27",
+   "chat": {
+    "url": "",
+    "opening": "Move Workbench phase 16"
+   },
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Made by c-movebench-16 (movebench16): the Animations layout of the Admin Dashboard."
+    }
+   ]
+  },
+  {
+   "id": "t-movebench-bulkvideo",
+   "title": "Decide what happens to the board's bulk video path",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "decide",
+   "next": "You said you will make the videos yourself now, in the Move Workbench. The board's bulk video path (Generate all N videos, its automatic re-rolls and the sessions it starts when a video misses) still exists and can spend without your tap. Tap one answer. This card blocks the card that does what you pick (c-wanbulk-pause).",
+   "steps": [
+    "Read the three answers on this card. The first is the recommendation of section g.1 of claude/movebench-plan.md.",
+    "Tap one answer. Nothing else is needed from you."
+   ],
+   "choices": [
+    "Pause the automatic re-rolls now, retire the bulk video path later (Recommended)",
+    "Retire the bulk video path now",
+    "Leave the bulk video path as it is"
+   ],
+   "leads": [
+    "A session sets the automatic tries to 0 so a miss stops with no second paid try and no session, retires the ten open videos-gave-up cards and the video fix card (each move shows in the workbench as No video yet or To do), and leaves the bulk code in place, unused, until you have made videos from the workbench for a week. Then a card of its own retires it.",
+    "A session retires and removes the bulk video path now: the button, the automatic re-rolls, the checks and the baking of its videos, and the cards that belong to it. The Guide's own video making (Make this video) stays.",
+    "Nothing changes. A missed bulk video can still be tried again by the Action and can still start a session."
+   ],
+   "blocks": [
+    "c-wanbulk-pause"
+   ],
+   "created": "2026-11-27",
+   "changed": "2026-11-27",
+   "chat": {
+    "url": "",
+    "opening": "Move Workbench phase 16"
+   },
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Made by c-movebench-16 (movebench16): the recommendation of section g.1 of claude/movebench-plan.md, asked as a decision. The bulk video path itself was not changed."
+    }
+   ]
+  },
+  {
+   "id": "c-wanbulk-pause",
+   "tag": "wanbulkpause",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "theme": "Battle Animations",
+   "night": false,
+   "title": "Do what Tom decided about the bulk video path",
+   "next": "Waits on your answer (card t-movebench-bulkvideo). Then pauses, retires or leaves the board's bulk video path as you chose.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "created": "2026-11-27",
+   "changed": "2026-11-27",
+   "prompt": {
+    "what": "Carries out Tom's answer on the bulk video path: pause the automatic re-rolls and retire its cards (recommended), retire the path now, or leave it.",
+    "before": [
+     "Tap one answer on the card Decide what happens to the board's bulk video path (t-movebench-bulkvideo). Nothing else to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: written steps in section g.1 of claude/movebench-plan.md, tests catch mistakes; none of the three Fable conditions holds)",
+    "effort": "medium (the steps, files and tests are written)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and section g.1 of claude/movebench-plan.md, then card c-wanbulk-pause and Tom's decide card t-movebench-bulkvideo in data/board.json: his answer and note on that card say which of three things to do. Your first push is the commit board: start c-wanbulk-pause. If he chose the first answer (pause now, retire later): set `_bulk.auto.tries` to 0 in tools/art-library/wangen-jobs.json (so a miss stops with no second paid try and no session), then retire the open cards t-wangaveup-* and c-fix-movefun-gen with a history line saying why and that each move shows in the workbench as No video yet or To do with its last prompt. Leave t-rosestage-lab, t-wanwatch-* and t-movefun-gen open until the videos already made are judged. Keep wan-gen --bulk, wanbulk.py, wanqa.py, wanbake.py and the Generate all N videos button in place, unused; falq.py and wangen.py's single-job path always stay (the Guide's worker uses them). Then add one Claude card in Up next (night false) titled Retire the bulk video path, with its full prompt, to remove that code once Tom has made videos from the workbench for a week. If he chose the second answer (retire now): remove wan-gen --bulk, wanbulk.py, wanqa.py, wanbake.py, the Generate all N videos button and the automatic re-roll and c-wanstop-* machinery, the tests and docs that describe them (CLAUDE.md wanbulk1, wanauto1, wannoday1 paragraphs), retire the cards that belong to them, and grep for zero references (falq.py and wangen.py's single-job path stay). If he chose the third answer (leave it): change nothing, mark this card Done with a history line quoting his answer. Rules for every choice: a session never makes a video or spends money and never runs wangen.py; never weaken art-factory/PIPELINE_LOCK.json or the lock files; run python3 tools/art-library/wanbulk_test.py, python3 tools/board_wan_test.py, python3 tools/board_check.py and python3 tools/smoke.py; write the docs/CHANGES.md heading for build wanbulkpause and run bump_tags. Set after on this card to nothing for Tom: end, or to the next card's id. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Added by c-movebench-16 (movebench16): behind Tom's decide card t-movebench-bulkvideo."
+    }
+   ]
   }
  ],
  "sessions": [

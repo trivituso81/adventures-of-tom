@@ -210,7 +210,4 @@ const B3_LAB=[
     party:['grace','rose','amy','tnb'],level:47,formation:'censor',bg:'sorting'},
   {id:'new98',name:'NEW 98: THE COLLECTOR',sub:'Chapter 20 last boss. Three phases: damage past two thirds and one third of its HP is lost, and the next phase starts at once. You pick your four again at each change (the bench is Deedee, Boppy, TNB and Nara). Phase 1 Still Frame: move on the turn bar or take part in a Mix or Detonation before your next turn. Phase 2 sets the Blue and Orange Lens in Back. Phase 3 is a 200-tick Countdown that only a Break stops.',
     party:['tom','grace','rose','amy'],reserve:['deedee','boppy','tnb','nara'],level:50,formation:'leviathan',bg:'engine'},
-  // movestage2: the Move Lab for Tom's eight staged moves (engine/b3-movelab.js). Last in the list so the numbers of the fights above stay; the NEW BATTLE list shows it first.
-  {id:'moves-tom',name:'MOVE LAB: TOM',sub:'Play Tom\u2019s eight staged moves in a real fight, in ladder order, then Keep, Tweak or Replace each one. The Capstones play against The Big One.',
-    party:['tom','grace','rose','deedee'],level:7,formation:'mudling',bg:'pond',movelab:true},
 ];

@@ -149,7 +149,10 @@ var LAYOUTS=[
  {id:'all',label:'All four',w:[1000,951,829,620],size:'os',p4:{page:'admin.html',name:'Admin'},
   cols:'290px 310px minmax(0,1fr)',place:[['sizes','story','diff','mrow'],['chap','fights'],['next','keys']]},
  {id:'battle',label:'Battle',w:[520,1600,860,420],size:'dw',p4:{page:'builds.html',name:'Builds'},
-  cols:'300px 330px 330px minmax(0,1fr)',nextRow:true,place:[['sizes','keys'],['story','diff','mrow','chap'],['fights'],['next']]}
+  cols:'300px 330px 330px minmax(0,1fr)',nextRow:true,place:[['sizes','keys'],['story','diff','mrow','chap'],['fights'],['next']]},
+ // movebench16: the Move Workbench gets most of the wide monitor. Pane 3 opens the Battle Guide on its Animations tab and takes the keys; the game stays 951 x 648 (Duo open, sideways) with the All four strip; pane 4 is Admin (the Art Library opens there from an object that needs a picture).
+ {id:'anim',label:'Animations',w:[420,951,1589,440],size:'os',keys:3,p3:{page:'battle-guide.html#anims/tom',name:'Battle Guide: Animations'},p4:{page:'admin.html',name:'Admin'},
+  cols:'290px 310px minmax(0,1fr)',place:[['sizes','story','diff','mrow'],['chap','fights'],['next','keys']]}
 ];
 var LS_LAYOUT='aot-dash-layout',LS_TOKEN='aot-gh-token';
 var APP_TITLE=': The Adventures of Tom';
@@ -240,12 +243,12 @@ function build(){
  var left=3,started=false;
  function startGame(){if(started)return;started=true;P[2].cur=gameUrl('index.html');P[2].frame.src=P[2].cur;}
  [1,3,4].forEach(function(n){
-  var page=n===1?'board.html':n===3?'battle-guide.html':cur.p4.page;
+  var page=n===1?'board.html':n===3?(cur.p3?cur.p3.page:'battle-guide.html'):cur.p4.page;
   P[n].cur=page;P[n].frame.addEventListener('load',function once(){P[n].frame.removeEventListener('load',once);if(--left===0)startGame();});
   P[n].frame.src=page;
  });
  setTimeout(startGame,2500);
- markKeys(2);
+ markKeys(cur.keys||2);
  document.addEventListener('keydown',onKey,true);window.addEventListener('keydown',onKey,true);
  document.addEventListener('pointerdown',function(e){if(!e.target.closest('#menu')&&!e.target.closest('[data-a=change]'))closeMenu();},true);
  window.addEventListener('blur',function(){   // focus moved into a frame (a click there, or Tab)
@@ -285,7 +288,7 @@ function applyLayout(first){
  PANES.forEach(function(p,i){
   var o=P[p.n];
   if(p.n!==4)o.slot.style.width=L.w[i]+'px';
-  o.nm.textContent=p.n===4?L.p4.name:p.name;
+  o.nm.textContent=p.n===4?L.p4.name:p.n===3&&L.p3?L.p3.name:p.name;
  });
  LAYOUTS.forEach(function(x){$('lay-'+x.id).setAttribute('aria-pressed',String(x.id===L.id));});
  placeStrip();
@@ -309,8 +312,12 @@ function setLayout(id){
  applyLayout(false);
  // Pane 4 takes the new layout's page (Admin in All four, Builds in Battle).
  if(old.p4.page!==L.p4.page){P[4].cur=L.p4.page;P[4].explicit=null;P[4].frame.contentWindow.location.replace(L.p4.page);}
+ // A layout with its own page for pane 3 puts the Battle Guide on that tab (a hash change only, so the Guide keeps what it has loaded).
+ if(L.p3){var u3=frameUrl(3);
+  if(u3&&fileOf(u3)==='battle-guide.html'){if(!/^#anims/.test(u3.hash)){try{frameWin(3).location.hash=L.p3.page.split('#')[1]?'#'+L.p3.page.split('#')[1]:'';}catch(e){}}}
+  else{P[3].cur=L.p3.page;P[3].explicit=null;P[3].frame.contentWindow.location.replace(L.p3.page);}}
  if(bigN)makeBig(0);
- setKeys(keys);
+ setKeys(L.keys||keys);
 }
 // The game frame must not use the shared le-duo setting (it would hit every game tab in this browser) and ?duo= is dropped when go= is
 // in the address. So the dashboard answers for the game frame only: it replaces that frame's detectDuo and asks the game to lay out again.

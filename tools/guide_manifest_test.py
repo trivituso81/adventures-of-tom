@@ -17,5 +17,5 @@ check('every game family move has a manifest entry', d['gameMovesWithNoManifestE
 raw = open(os.path.join(R, 'data/guide-manifest.json'), encoding='utf-8').read().lower()
 check('no green screen or gouache style in the file (pipeline lock)', '#00ff00' not in raw and 'gouache' not in raw and 'chroma-key' not in raw)
 page = open(os.path.join(R, 'battle-guide.html'), encoding='utf-8').read()
-check('the Guide page loads the file and shows What is done', 'data/guide-manifest.json' in page and 'What is done' in page and 'h+=manBlock(a);' in page)
+check('the Guide page loads the file (the Manifest panel) and the old What is done block is gone', 'data/guide-manifest.json' in page and 'manBlock' not in page and 'What is done' not in page)
 print('FAILS:', fails); sys.exit(1 if fails else 0)

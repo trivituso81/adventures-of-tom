@@ -1,8 +1,7 @@
 'use strict';
 // engine/b3-bench.js: the preview stage of the Move Workbench (movebench1 and movebench2, plan claude/movebench-plan.md sections c and g).
 // Loaded only by bench.html (never by index.html). It starts a stub Battle 3 fight, plays ONE animation in it with the game's own engine
-// and owns the clock. There is no second implementation of anything: a family move goes through b3Act and b3Play (the way
-// engine/b3-movelab.js b3mlPlay does), a monster attack through b3FoeTurn with e.force (the way b3FirstSet does), a body state through the
+// and owns the clock. There is no second implementation of anything: a family move goes through b3Act and b3Play, a monster attack through b3FoeTurn with e.force (the way b3FirstSet does), a body state through the
 // beats the rules would send (b3Show) and the guard proof's own calls, the pictures, stage, effects, hit stop and sounds are the game's.
 // Nothing is saved and nothing is asked of any server.
 // The clock: while a preview is up B7.speed is 0, so the game's own frame calls updateBattle(0) and nothing moves by itself. This file calls
@@ -167,7 +166,7 @@ function bnAnswer(done) {
   bnBusy(); b3Render();
   b3After(.4,()=>b3Play(b3FoeTurn(F,e),done));
 }
-// Plays the family move NOW (b3mlPlay's own way).
+// Plays the family move NOW.
 function bnPlayMove(P,done) {
   const F=B3.F,u=F.party.find(x=>x.id===P.owner); if(!u) { bnWhy('The mover is not in the stub fight.'); return false; }
   bnRefill(); if(typeof B3G!=='undefined') B3G.run=null;

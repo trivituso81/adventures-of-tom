@@ -712,6 +712,18 @@ What phase 15 must know: a monster attack is a normal spec now; `msStageRow('act
 
 What phase 16 must know: a spend is a spec like a move with no body; `ruckus:<kind>` ids exist only for double and full; to add another spend kind add it to `msIdOf`, `apply.py` EXTRA, the Guide's `buildAnims` and the schema's ruckus slugs.
 
+**Phase 16, `movebench16` (2026-11-27).** What exists: the Admin Dashboard layout Animations (`LAYOUTS` row `anim` in `dashboard.html`: panes 420, 951, 1589, 440; the game stays 951 x 648 with the All four strip; pane 3 opens `battle-guide.html#anims/tom` and takes the keys; pane 4 is Admin; a layout row may now carry `p3` and `keys`), and the workbench's wide layout in `battle-guide.html` (`WB_WIDE`, `wbWide`, `wbWideOff`, the `wbcA`, `wbcB`, `wbcC` wrappers of `wbHtml`). Deleted (step 5 of b.5): `engine/b3-movelab.js`, `b3-movelab.css`, the MOVE LAB: TOM row of `data/b3-lab.js` and every hook in `engine/b3-lab.js` and `index.html`, `tools/movestage_lab_test.py` (and its row in `tools/night/tests.json`), the What is done block (`manBlock`), the NOTE OPEN badge, `wbHasClip`; `data/battle-lab-index.json` is rewritten (the Lab row was last, so no fight number moved). `grep -rI b3ml` is zero outside `claude/`, `docs/CHANGES.md`, the board's history and, by chance, base64 audio in `data/voice/*.js`. Tests: `dashboard_test.py` (new Animations checks, 3440 x 1328 and 3440 x 1440) and `page_test.py` (a sixth size, 1589 x 1440, plus 829 x 1440 unchanged). Board: `t-movebench-16-try` (Tom tries it on the wide monitor) and the decide card `t-movebench-bulkvideo` with the waiting Claude card `c-wanbulk-pause` behind it (section g.1's recommendation; the bulk path itself was not changed). `c-movelab-rose` had already been retired by phase 1.
+
+What differs from the plan, and why:
+- The plan's wide layout put the list at 300 px beside the workbench. The Guide has two columns on a wide page (owners, then that owner's animations), so while a workbench is open in the wide layout the owners column steps aside and the animation list (300 px) is the one beside the workbench; Back closes the sheet and the owners column returns. Tapping another animation in the list opens it without closing the workbench (the dimmer is off in this layout).
+- Earlier versions sits under the preview in the wide layout, as drawn. It is the same `#s-versions` node: it moves under `#wbprev` on open and back to `#wbcC` otherwise, so nothing else knows. Saved versions, the note and the Manifest panel run across the bottom of the two columns.
+- The dashboard takes the Guide to its Animations tab by changing the frame's hash only, and only when it is not already on an `#anims` address.
+- The golden and the other movebench tests were not re-run in full for this phase beyond `page_test.py`, `preview_test.py`, `spec_test.py` and `timing_test.py`: nothing in the engine changed except the deleted Lab hook.
+- `tools/battle_guide_test.py` still stops at its line 198 (`manifest_crosswalk` has no `MANIFESTS`), as in phases 3 to 6; its NOTE OPEN check was changed to expect no badge.
+- `tools/dashboard_test.py` is flaky in this environment on a tree with none of this phase's changes (a different Nine Scoops or chapter jump check fails each run, phases 4 and 16); every Animations check passed in all runs.
+
+What a later session must know: this is the last phase. The Move Workbench is complete: spec, preview, all sections, save and Finished, the wide layout. The bulk video path is Tom's decision (`t-movebench-bulkvideo`); `c-wanbulk-pause` carries it out.
+
 ### g.1 The board's bulk video path (a recommendation; this session did not touch it)
 
 Recommended: **pause now, retire in phase 16.**

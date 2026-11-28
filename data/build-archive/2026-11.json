@@ -1,4 +1,13 @@
 [
+{"tag":"itemdef-css","at":"2026-11-20T20:07:53-08:00","what":"The item definition banner's look and words are back (itemdef1 lost them on the way in)","card":"c-itemdef1","theme":"Game Shell"},
+{"tag":"fix-gatelayer-pics-2","at":"2026-11-20T20:01:49-08:00","what":"Gate pictures checked by Claude: three ready for Tom, three rewritten to a method that works","card":"c-fix-gatelayer-pics-2","theme":"Tools"},
+{"tag":"itemdef1","at":"2026-11-20T20:01:04-08:00","what":"Every item banner reads like a JRPG item definition: picture, name and type, description, In battle, In story","card":"c-itemdef1","theme":"Game Shell"},
+{"tag":"qa-coh03","at":"2026-11-20T19:59:19-08:00","what":"Boppy's fishing spot shows his folding chair, not a wooden bench","card":"c-qa-coh03","theme":"Areas"},
+{"tag":"fix-itembannerart-pics-2","at":"2026-11-20T19:54:48-08:00","what":"285 item pictures are in the game; 3 that missed twice are made alone; the cutter no longer drops cells or leaves crimson shadows","card":"c-fix-itembannerart-pics-2","theme":"Game Shell"},
+{"tag":"b3s13a","at":"2026-11-20T19:53:46-08:00","what":"New battle: the chapter 8 car barn monsters and Old Ironbelly join the Battle Lab (stage 13, part a of four)","card":"c-b3s13","theme":"Battle System"},
+{"tag":"fix-gatelayer-pics-2b","at":"2026-11-20T19:52:40-08:00","what":"Gate pictures round 2: two doors pass, four open states rejected with details and reworded","card":"c-fix-gatelayer-pics-2","theme":"Tools"},
+{"tag":"qa-coh05","at":"2026-11-20T19:51:44-08:00","what":"Grump Hollow gets its own woodland battle backdrop in the Art Library; fights there switch to it once Tom approves the picture","card":"c-qa-coh05","theme":"Areas"},
+{"tag":"voiceboard1","at":"2026-11-21T03:50:33+00:00","what":"Generate all N voices on the board: one tap makes the voices and puts them in the game","card":"c-voiceboard","theme":"Voice Clips"},
 {"tag":"fix-gatelayer-pics-2a","at":"2026-11-20T19:47:13-08:00","what":"Gate pictures: detailed rejects, Amy's door matched to the painted arch, door crop fixed","card":"c-fix-gatelayer-pics-2","theme":"Tools"},
 {"tag":"fix-hollowtrail-play-2","at":"2026-11-21T03:40:13+00:00","what":"Grump Hollow wrapper trail is now three legs of four wrappers: Mudling to the top left Toad, Toad to the Log, Log to the fishing spot","card":"c-fix-hollowtrail-play-2","theme":"Areas"},
 {"tag":"qa-coh07","at":"2026-11-21T03:38:55+00:00","what":"The twelve-cup muffin pan sits on Deedee's island from the moment Tom walks in","card":"c-qa-coh07","theme":"Story and Dialogue"},

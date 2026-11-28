@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """movebench/page_test.py (movebench5): the Move Workbench page (battle-guide.html, claude/movebench-plan.md sections d.1, d.2, d.6).
 Opening an animation in the Battle Guide shows the workbench: top bar, the preview, Body video, Timing, and read-only Stage, Effects and Sound. This test FAILS when:
-  - in any of the five layouts (466 x 657 phone upright, 678 x 445 folded sideways, 951 x 648 open sideways, 669 x 869 open upright, 829 x 1440 the Admin Dashboard's All four pane) the top bar, the preview
+  - in any of the five layouts (466 x 657 phone upright, 678 x 445 folded sideways, 951 x 648 open sideways, 669 x 869 open upright, 829 x 1440 the Admin Dashboard's All four pane, and movebench16: 1589 x 1440 its Animations pane) the top bar, the preview
     box (16:9, fully on screen, at least 300 px wide), the sections in order (Body video, Timing, Stage, Effects, Sound), the bottom bar or a Timing control is missing, cut off, covered or too small, the page
     scrolls sideways, the sections are not beside the preview when the page is wider than tall (or 760 px wide) and under it when it is not, or, upright, the preview does not become a small player
     that stays on the screen (frame on its box, nothing over it) while a Timing setting is changed;
@@ -32,7 +32,7 @@ srv = Srv(('127.0.0.1', 0), functools.partial(Q, directory=ROOT)); PORT = srv.se
 threading.Thread(target=srv.serve_forever, daemon=True).start()
 BASE = 'http://127.0.0.1:%d' % PORT
 FORBID = re.compile(r'api\.github\.com/.*dispatches|fal\.(ai|run)|queue\.fal|api\.x\.ai|(^|\.)x\.ai/', re.I)
-SIZES = [('phone-upright', 466, 657), ('folded-sideways', 678, 445), ('open-sideways', 951, 648), ('open-upright', 669, 869), ('dash-all-four', 829, 1440)]
+SIZES = [('phone-upright', 466, 657), ('folded-sideways', 678, 445), ('open-sideways', 951, 648), ('open-upright', 669, 869), ('dash-all-four', 829, 1440), ('dash-animations', 1589, 1440)]
 fails = []; notes = []; sent = []
 def fail(m): fails.append(m); print('FAIL', m, flush=True)
 def watch(pg):
@@ -91,7 +91,7 @@ with sync_playwright() as pw:
         pg.add_init_script("try{localStorage.removeItem('aot-movebench');}catch(e){}")
         open_anim(pg, 'move:kettlebell_swing')
         pg.wait_for_timeout(600)
-        L = pg.evaluate("""()=>{ const q=s=>document.querySelector(s),r=e=>e&&e.getBoundingClientRect(),slot=r(q('#benchslot')),secs=[...document.querySelectorAll('#wbsecs > section')].map(s=>s.id),
+        L = pg.evaluate("""()=>{ const q=s=>document.querySelector(s),r=e=>e&&e.getBoundingClientRect(),slot=r(q('#benchslot')),secs=[...document.querySelectorAll('#wbsecs .wbcol > section')].map(s=>s.id),
             sec=r(q('#wbsecs')),bot=r(q('.wb-bottom')),top=r(q('.wb-top')),fr=r(q('#benchframe')),h2=q('.wb-top h2'),back=r(q('#bclose')),stat=q('#wbstat');
           const hit=document.elementFromPoint(slot.left+slot.width/2,slot.top+slot.height/2);
           return {slot:[slot.left,slot.top,slot.width,slot.height],secs,sec:[sec.left,sec.top],bot:[bot.top,bot.bottom,bot.height],top:[top.top,top.bottom],frame:[fr.left,fr.top,fr.width,fr.height],onTop:!!hit&&hit.id==='benchframe',
@@ -114,6 +114,35 @@ with sync_playwright() as pw:
         if not side and not L['sec'][1] >= sl[1] + sl[3] - 2: fail('%s: the sections are not under the preview' % name)
         if not (L['video'] and L['prompt'] and L['note'] and L['stageMsg'] and L['gen']): fail('%s: the Body video section lost a part of the old sheet: %s' % (name, {k: L[k] for k in ('video', 'prompt', 'note', 'gen')}))
         pg.screenshot(path=os.path.join(OUT, 'page-%s-%dx%d-top.png' % (name, w, h)))
+        # movebench16: the wide layout (1300 px or wider, wider than tall): the list stays on the left at 300 px, the preview and Earlier versions in the middle, the sections in two columns; at 829 wide the list is under the page
+        WD = pg.evaluate("""()=>{ const q=s=>document.querySelector(s),r=e=>e&&e.getBoundingClientRect(),d=r(q('#detail')),sh=r(q('#sheet')),pv=r(q('#wbprev')),ver=q('#s-versions'),vid=r(q('#s-video')),stg=r(q('#s-stage')),tim=r(q('#s-timing')),nav=r(q('#wbnav')),sec=r(q('#wbsecs')),
+          on=q('#detail .anim.on'),lst=q('#list'),dim=q('#dim');
+          return {wide:document.body.hasAttribute('data-wbwide')&&q('#sheet').dataset.wide==='1',detail:d&&[d.left,d.top,d.width],sheetLeft:sh.left,sheetTop:sh.top,prev:[pv.left,pv.width],verIn:!!ver&&!!ver.closest('#wbprev'),vid:vid&&[vid.left,vid.width],stg:stg&&[stg.left,stg.width],tim:tim&&[tim.left,tim.top],
+          nav:nav&&[nav.left,nav.width],sec:[sec.left,sec.width],on:on?on.textContent.slice(0,30):null,listHidden:getComputedStyle(lst).display==='none',dim:dim.classList.contains('open'),h2:q('.wb-top h2').textContent}; }""")
+        if w >= 1300:
+            if not WD['wide']: fail('%s: the wide layout is not on (%s)' % (name, WD))
+            else:
+                if abs(WD['detail'][2] - 300) > 2: fail('%s: the animation list is %.0f px wide, not 300' % (name, WD['detail'][2]))
+                if abs(WD['sheetLeft'] - (WD['detail'][0] + WD['detail'][2])) > 2 or abs(WD['sheetTop'] - WD['detail'][1]) > 2: fail('%s: the workbench does not start where the list ends (%s)' % (name, WD))
+                if not WD['on']: fail('%s: the open animation is not marked in the list' % name)
+                if not WD['verIn']: fail('%s: Earlier versions is not under the preview' % name)
+                if not (WD['vid'][0] + WD['vid'][1] <= WD['stg'][0] + 2 and WD['stg'][0] >= WD['prev'][0] + WD['prev'][1] and abs(WD['tim'][0] - WD['vid'][0]) < 2): fail('%s: the sections are not in two columns (%s)' % (name, WD))
+                if WD['dim']: fail('%s: the dimmer covers the list' % name)
+                if not WD['listHidden']: fail('%s: the owners column did not step aside' % name)
+                if abs(WD['nav'][1] - WD['sec'][1]) > 30: fail('%s: the jump chips do not span both columns (%s)' % (name, WD))
+                pg.screenshot(path=os.path.join(OUT, 'page-%s-%dx%d-wide.png' % (name, w, h)))
+                # a tap on another animation in the list opens it and moves the mark
+                other = pg.evaluate("()=>{const b=[...document.querySelectorAll('#detail button.play')].find(x=>x.dataset.anim!==document.querySelector('.wb').dataset.id&&x.dataset.anim.startsWith('move:')&&x.dataset.anim!=='move:kettlebell_swing');return b&&b.dataset.anim}")
+                if not other: fail('%s: no other move in the list to tap' % name)
+                else:
+                    pg.evaluate("(id)=>document.querySelector('#detail button.play[data-anim=\"'+id+'\"]').click()", other)
+                    pg.wait_for_function("(id)=>{const b=document.querySelector('#detail .anim.on button.play');return b&&b.dataset.anim===id&&document.querySelector('.wb-top h2').textContent!=='Kettlebell Swing'}", arg=other, timeout=30000)
+                    pg.wait_for_timeout(500)
+                pg.screenshot(path=os.path.join(OUT, 'page-%s-%dx%d-wide-other.png' % (name, w, h)))
+                open_anim(pg, 'move:kettlebell_swing'); pg.wait_for_timeout(600)   # the rest of the checks run on the first animation, started again
+        else:
+            if WD['wide'] or WD['verIn']: fail('%s: the wide layout is on at %d px (%s)' % (name, w, WD))
+            if not WD['dim'] and w < 560: fail('%s: the dimmer is missing' % name)
         # every Timing control can be reached and tapped: scrolled to, on screen, nothing over it, big enough
         pg.click('[data-wbgo=timing]'); pg.wait_for_timeout(500)
         C = pg.evaluate("""()=>{ const out=[],bar=document.querySelector('.wb-bottom').getBoundingClientRect();
@@ -259,7 +288,7 @@ with sync_playwright() as pw:
     pg = br.new_page(viewport={'width': 951, 'height': 648}); watch(pg)
     pg.goto(BASE + '/battle-guide.html#anims/body:tom:guard'); pg.wait_for_selector('#wb', timeout=90000)
     if pg.locator('#s-timing button[data-wb]').count() != 0: fail('a body state shows timing controls')
-    if [s for s in pg.evaluate("()=>[...document.querySelectorAll('#wbsecs > section')].map(s=>s.id)")][:2] != ['s-video', 's-timing']: fail('a body state lost its Body video or Timing section')
+    if [s for s in pg.evaluate("()=>[...document.querySelectorAll('#wbsecs .wbcol > section')].map(s=>s.id)")][:2] != ['s-video', 's-timing']: fail('a body state lost its Body video or Timing section')
     pg.close()
     # movebench14: a monster attack has Timing (the hit, the freeze, the shake), Stage, Effects and Sound, and none of the family-only rows; at every layout
     for name, w, h in [z for z in SIZES[:4] if not os.environ.get('ONLY') or z[0] == os.environ['ONLY']]:
@@ -267,7 +296,7 @@ with sync_playwright() as pw:
         pg.add_init_script("try{localStorage.removeItem('aot-movebench');}catch(e){}")
         pg.goto(BASE + '/battle-guide.html#anims/act:mudling:mud_pie'); pg.wait_for_selector('#wb', timeout=90000)
         pg.wait_for_timeout(500)
-        secs = pg.evaluate("()=>[...document.querySelectorAll('#wbsecs > section')].map(s=>s.id)")
+        secs = pg.evaluate("()=>[...document.querySelectorAll('#wbsecs .wbcol > section')].map(s=>s.id)")
         if secs[:5] != ['s-video', 's-timing', 's-stage', 's-effects', 's-sound']: fail('attack %s: the sections are %s' % (name, secs))
         rows = pg.evaluate("()=>[...document.querySelectorAll('#s-timing [data-row]')].map(r=>r.dataset.row)")
         if rows != ['hit', 'freeze', 'shake']: fail('attack %s: the Timing rows are %s, not hit, freeze, shake' % (name, rows))

@@ -1527,12 +1527,6 @@
    "minutes": 1
   },
   {
-   "id": "movestage_lab_test",
-   "cmd": "python3 tools/movestage_lab_test.py",
-   "group": "g3",
-   "minutes": 4
-  },
-  {
    "id": "art-library__queue_test",
    "cmd": "python3 -I tools/art-library/queue_test.py",
    "group": "g4",

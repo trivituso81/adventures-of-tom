@@ -9,9 +9,7 @@ function b3Lab(i,opt) {
   const cfg=Object.assign({lab:true,party:L.party.slice(),reserve:L.reserve?L.reserve.slice():undefined,level:L.level,formation:L.formation,bg:L.bg,rows:L.rows,
     loadouts:JSON.parse(JSON.stringify(b3LabBook())),award:()=>b3LabAward(vp),onEnd:b3LabBack,ruckus:b3LabRuckus(),onRuckus:b3LabRuckusSave},opt||{});
   if(cfg.first) b3LabFirst(cfg);
-  if(L.movelab) { cfg.movelab=true; b3mlPrepare(cfg); }   // movestage2: MOVE LAB: TOM (engine/b3-movelab.js)
   b3Start(cfg);
-  if(L.movelab) b3mlOpen();
 }
 // "See it in a fight" (the Battle Guide's second button beside Play): index.html?go=new&i=<fight index in B3_LAB>&move=<skill id>   or   &act=<monster id>:<act id>.
 // b3LabFirstOpt turns those two words into cfg.first; b3LabFirst makes the move usable on the first turn: its owner must be in the fight, the move's Vibe
@@ -81,7 +79,7 @@ SPLASH_MODES.lab3={tab:'Battle Lab: new battle',cue:'A / Enter to fight. B / Esc
   choices:()=>{ const r=b3LabRank();
     return [
       {name:"PROOF: GRACE'S GUARD (VIDEO)",sub:'Grace against one Mudling. Her guard is a video made by Wan 3.0: watch it go up, take a hit and come down, three times (about 30 seconds). Then the list comes back.',cast:['grace'],act:()=>b3LabGuardProof()},
-      ...B3_LAB.map((L,i)=>({L,i})).sort((a,b)=>(b.L.movelab?1:0)-(a.L.movelab?1:0)).map(({L,i})=>({name:L.name,sub:L.sub,cast:L.party,act:()=>b3LabGo(i)})),   // the Move Lab row stands first
+      ...B3_LAB.map((L,i)=>({name:L.name,sub:L.sub,cast:L.party,act:()=>b3LabGo(i)})),
       {name:'VIBES AND RANKS',sub:'Main and Pocket Vibe, Quirks and rows for these fights. '+(r?'Every Vibe is Rank '+r+'.':'The Vibes are at different Ranks.'),cls:'nav',vibes:true,act:()=>m2OpenLab()},
       {name:'BACK',sub:'',cls:'back',act:splashBack}]; }};
 SPLASH_PARENT.lab3='lab';

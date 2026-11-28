@@ -383,7 +383,7 @@ for(const f of files)vm.runInContext(fs.readFileSync(f,'utf8'),ctx,{filename:f})
     check('the sent screen has the five handoff items', all(k in txt for k in ('what the next session will do', 'before you paste', 'claude opus 5.5', 'medium', 'copy prompt')), txt[:300])
     pg.screenshot(path=os.path.join(out, 'battleguide-sent.png'))
     pg.click('#bclose'); pg.goto(URL + '#anims/tom'); pg.wait_for_selector('#detail .anim')
-    check('the animation shows NOTE OPEN', 'NOTE OPEN' in pg.locator('#detail').inner_text())
+    check('an open note shows as Waiting on Claude, with no separate NOTE OPEN badge', 'NOTE OPEN' not in pg.locator('#detail').inner_text())
     pg.click('#detail [data-anim="move:lounge_pass_flex"]'); pg.wait_for_selector('#ntxt')
     pg.fill('#ntxt', 'Also the tag should clank.'); pg.click('#nsend'); pg.wait_for_selector('#pcopy', timeout=20000)
     cards = [c for c in board['doc']['cards'] if c.get('anim', {}).get('id') == 'move:lounge_pass_flex']

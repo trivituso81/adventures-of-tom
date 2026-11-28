@@ -332,6 +332,20 @@ a.play.fight{background:var(--surface);border:1px solid var(--accent);color:var(
  .wb-prev.small{display:block}
 }
 @media (min-width:900px) and (min-aspect-ratio:1/1){ .wb-body{grid-template-columns:54% minmax(0,1fr)} }
+/* movebench16: the wide layout (the Admin Dashboard's Animations pane, 1300 px or wider and wider than tall). The animation list stays on the left (300 px, the owners column steps aside), the workbench fills the rest: the preview, its bar and Earlier versions in the middle, the sections in two columns on the right. */
+.wbcol{display:contents}
+@media (min-width:1300px) and (min-aspect-ratio:1/1) and (min-height:560px){
+ body[data-wbwide] #list{display:none}
+ body[data-wbwide] #detail .anim.on{outline:2px solid var(--accent);border-radius:12px}
+ body[data-wbwide] #detail{flex:none;width:300px;padding:0 10px 24px;border-right:1px solid var(--line)}
+ #sheet[data-mode=bench][data-wide]{left:var(--wbl,300px);top:var(--wbt,100px);bottom:0;right:0;width:auto;height:auto}
+ #sheet[data-mode=bench][data-wide] .wb-body{grid-template-columns:minmax(400px,44%) minmax(0,1fr)}
+ #sheet[data-mode=bench][data-wide] .wb-secs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 14px;align-content:start;padding:0 14px 14px}
+ #sheet[data-mode=bench][data-wide] .wb-nav{grid-column:1 / -1;flex-wrap:wrap;overflow:visible;min-height:50px}
+ #sheet[data-mode=bench][data-wide] .wbcol{display:block;min-width:0}
+ #sheet[data-mode=bench][data-wide] #wbcC{grid-column:1 / -1}
+ #sheet[data-mode=bench][data-wide] .wb-prev #s-versions{margin-top:12px;padding-bottom:6px}
+}
 
 .mani{border-top:1px solid var(--line);margin-top:6px}
 .mani table.mt,table.mt{width:100%;border-collapse:collapse;font-size:14px}.mt th{width:92px;text-align:left;vertical-align:top;color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:6px 8px 6px 0}.mt td{padding:6px 0;overflow-wrap:anywhere}.mt tr+tr{border-top:1px solid var(--line)}
@@ -980,7 +994,7 @@ function qMakeBtn(a,g,cur){   // the one tap that makes a video (or another one)
 const KINDW={state:'Body',move:'Move',act:'Attack',wind:'Wind-up',answer:'Counter',ruckus:'Family Ruckus'};
 function qRowHtml(a){   // the part of an animation's row under its name: kind, the status line or VIDEO / NO VIDEO YET, and the one button
   const g=G(a),n=openNotes(a.id).length,cur=qCur(a.id),key='anim:'+a.id;
-  const bd=[cur?'':a.video?'<span class="badge v">VIDEO</span>':'<span class="badge n">NO VIDEO YET</span>',n?'<span class="badge o">NOTE OPEN</span>':''].filter(Boolean);
+  const bd=[cur?'':a.video?'<span class="badge v">VIDEO</span>':'<span class="badge n">NO VIDEO YET</span>',''].filter(Boolean);
   let h='<div class="qsub">'+esc(a.kind==='move'?(a.vibe||'Move'):KINDW[a.kind])+(bd.length?' · '+bd.join(' '):'')+'</div>';
   if(cur)h+=qLineHtml(cur,'list',key);
   else if(g&&g.route==='wan'&&!qStartReadyA(a))h+='<div class="qline"><span class="qtext">'+esc(ownStartPath(a)?W('start.needs_own'):'Needs the start picture first.')+'</span></div>';
@@ -1268,7 +1282,7 @@ function animsHtml(id){
 // ---------- the player ----------
 // Plays a clip the way the game holds it: one packed picture (D.src) and, per frame, where it sits in the picture (x,y,w,h) and inside the full frame (ox,oy).
 const PL={a:null,D:null,img:null,t:0,last:0,on:false,speed:1,raf:0,hold:0};
-function closeSheet(){clearTimeout(WB.poll);benchPause();MP.on=false;GCUR.tok++;delete $('sheet').dataset.mode;$('sheet').classList.remove('open');$('dim').classList.remove('open');PL.on=false;cancelAnimationFrame(PL.raf);PL.a=null;}
+function closeSheet(){wbWideOff();clearTimeout(WB.poll);benchPause();MP.on=false;GCUR.tok++;delete $('sheet').dataset.mode;$('sheet').classList.remove('open');$('dim').classList.remove('open');PL.on=false;cancelAnimationFrame(PL.raf);PL.a=null;}
 function clipLen(D){return D.kind==='loop'&&!D.wrap?2*D.dur:D.dur+(D.kind==='loop'?0:700);}   // a one-shot holds its last picture a moment, then repeats
 function frameAt(D,t){
   let ms=t;if(D.kind==='loop'){ms=D.wrap?t%D.dur:(t%(2*D.dur));if(!D.wrap&&ms>=D.dur)ms=2*D.dur-ms-1;}else ms=Math.min(t,D.dur-1);
@@ -1496,17 +1510,6 @@ async function showTake(a,t){
   else{const c=$('cvc');if(c)c.parentNode.innerHTML='<div class="hint" style="padding:12px;text-align:center">No video yet</div>';}
   if(items.length)mpStart(items);
 }
-function manBlock(a){   // manifest1: what the manifests plan for a move and what of it is done (data/guide-manifest.json)
-  if(!MAN||!a||a.kind!=='move')return '';const m=MAN.by[a.id.replace(/^move:/,'')];if(!m)return '';const c=m.check,g=G(a)||{};
-  const yes=v=>v?'<b style="color:#6fd08c">Done</b>':'<b style="color:#e0a050">Not yet</b>';
-  const rows=[['Stage written (in its spec file)',c.staged],['Video made and wired',c.clipWired&&g.video!==false],['Effects built ('+(m.effects.length)+' named)',c.effectsBuilt],['Sound effects attached',c.sfxWired]];
-  const all=rows.every(r=>r[1]);
-  let h='<div class="gen" id="gman"><h3>What is done</h3><p class="hint">'+(all?'Everything below is done. Play it once in a fight to judge it.':'A move is finished when every line below says Done and you have played it once in a fight.')+'</p><table style="width:100%;border-collapse:collapse">';
-  rows.forEach(r=>{h+='<tr><td style="padding:3px 6px">'+esc(r[0])+'</td><td style="padding:3px 6px;text-align:right">'+yes(r[1])+'</td></tr>';});
-  h+='</table><p class="hint">The manifest plans '+m.seconds+' s: '+esc(m.motion)+'</p>';
-  if(m.effects.length)h+='<p class="hint">Effects it names: '+m.effects.map(esc).join(', ')+'.'+(m.libraryAssets.length?' Library assets: '+m.libraryAssets.map(esc).join(', ')+'.':' No library asset is assigned to it yet.')+'</p>';
-  return h+'</div>';
-}
 function askUse(){
   const a=GCUR.a,t=GCUR.t;if(!a||!t)return;
   if(!(lsGet(TOKEN)||Q.get('gh'))){$('guseconf').innerHTML='<p class="err">This browser has no GitHub token. Open the Board, tap the three dots, paste the token there, then come back.</p>';return;}
@@ -1553,7 +1556,6 @@ function genBlock(a){
   let h='<div class="gen" id="gen">'+((fam||g.canMake)?'<div id="gq"></div><div id="gtake"></div>':'')+'<h3>Prompt</h3>';
   h+='<div class="meta" id="gmeta"><span class="chip">'+(draft?'DRAFT':'Prompt v'+(g.promptRev||0))+'</span>'+(sg?'<span class="chip" id="gstage">'+esc(STAGE_TIER[sg.tier]||sg.tier)+', about '+sg.budget+' s</span>':'')+'<span class="chip">'+esc(g.route==='wan'?'Wan 3.0':'xAI Grok lite')+'</span><span class="chip">$'+g.price.toFixed(2)+' a try</span><span class="chip" id="gtk">Takes made: ...</span><span class="chip" id="gsp">Spent: ...</span></div>';
   h+='<p class="hint" id="gsrc">'+esc(src)+(g.madeBy?' ('+esc(g.madeBy)+')':'')+(g.video?'. It made the video above.':'. This animation has no video yet.')+'</p>';
-  h+=manBlock(a);
   if(!g.canMake&&!g.canStart&&g.missing)h+='<div class="cant" id="gcant"><b>Cannot be made yet.</b> '+esc(g.missing)+'</div>';
   const w=GW[a.id];
   const wp=w&&w.prompt;
@@ -1975,7 +1977,6 @@ async function wbBringBack(sha){
 function wbVal(f){const t=(WB.draft&&WB.draft.timing)||{};const v=t[f];return v==null?(typeof MS_DEFAULTS!=='undefined'?MS_DEFAULTS[f]:undefined):v;}
 const wbRun=()=>(BENCH.tl&&BENCH.tl.id===WB.id&&BENCH.tl.run)||null;
 const wbStaged=()=>{const c=(((WB.draft||WB.base)&&(WB.draft||WB.base).timing)||{}).contact;return !!c&&typeof c==='object'&&(c.mark!=null||c.step!=null);};
-const wbHasClip=()=>!!(WB.a&&WB.a.clip);
 // Where the clip starts on the preview's clock: the first picture of the move's own video (the run in before it is not part of the clip).
 function wbClipStart(){const tl=BENCH.tl;if(!tl)return 0;const L=tl.lanes.find(l=>l.id==='video'||l.id==='wind');const g=L&&L.segs.find(x=>x.k==='video');return g?g.a:0;}
 function wbMoment(){return BENCH.drag?BENCH.dragT:(BENCH.st&&BENCH.st.t!=null?BENCH.st.t:null);}
@@ -2076,13 +2077,30 @@ function wbHtml(a,videoHtml){
    +'<div class="wt"><h2>'+esc(a.name)+'</h2><p class="wsub" id="wbsub"></p></div><span class="wbstat" id="wbstat"></span></div>'
    +'<div class="wb-body" id="wbbody"><div class="wb-prev" id="wbprev">'+benchBox(a)+'<div class="wbpink" id="wbpink" hidden>'+esc(W('fx.p.pink_tag'))+'</div></div><div class="wb-secs" id="wbsecs">'
    +'<nav class="wb-nav" id="wbnav" aria-label="'+esc(W('page.jump'))+'">'+nav.map(n=>'<button type="button" data-wbgo="'+n[0]+'">'+esc(W(n[1]))+(n[2]?'<b id="wbnav'+(n[0]==='effects'?'fx':n[0])+'">'+n[2]+'</b>':'')+'</button>').join('')+'</nav>'
-   +(RK?'':'<section class="wbs" id="s-video"><h3 class="wbh"><span>'+esc(W('sections.video'))+'</span></h3>'+videoHtml+wbStartHtml(a)+wbTrimHtml()+'</section>')
-   +'<section class="wbs" id="s-timing"><h3 class="wbh"><span>'+esc(W('sections.timing'))+'</span></h3>'+wbTimingHtml(a)+'</section>'
-   +wbStageSection(a)+wbLastingSection(a)+wbFxSection(a)+wbAnswerSection(a)+wbSetSection(a)+wbSoundSection(a)+'<section class="wbs" id="s-versions"><h3 class="wbh"><span>'+esc(W('sections.versions'))+'</span></h3><p class="hint" id="wbfinline" style="margin:0 0 8px"></p>'
+   +'<div class="wbcol" id="wbcA">'+(RK?'':'<section class="wbs" id="s-video"><h3 class="wbh"><span>'+esc(W('sections.video'))+'</span></h3>'+videoHtml+wbStartHtml(a)+wbTrimHtml()+'</section>')
+   +'<section class="wbs" id="s-timing"><h3 class="wbh"><span>'+esc(W('sections.timing'))+'</span></h3>'+wbTimingHtml(a)+'</section></div><div class="wbcol" id="wbcB">'
+   +wbStageSection(a)+wbLastingSection(a)+wbFxSection(a)+wbAnswerSection(a)+wbSetSection(a)+wbSoundSection(a)+'</div><div class="wbcol" id="wbcC"><section class="wbs" id="s-versions"><h3 class="wbh"><span>'+esc(W('sections.versions'))+'</span></h3><p class="hint" id="wbfinline" style="margin:0 0 8px"></p>'
    +'<button type="button" data-wb="versions">'+esc(W('versions.show'))+'</button><div id="wbvers"></div></section><section class="wbs" id="s-note">'+noteForm(a)+'</section>'+(maniOf(a)?'<section class="wbs" id="s-mani">'+manifestBlock(maniOf(a))+'</section>':'')
-   +'</div></div><div class="wb-bottom"><div class="wbu" id="wbunsaved"></div><button type="button" id="wbundo" data-wb="undo">'+esc(W('page.undo'))+'</button><button type="button" id="wbreset" data-wb="reset" title="'+esc(W('page.reset_hint'))+'">'+esc(W('page.reset'))+'</button>'
+   +'</div></div></div><div class="wb-bottom"><div class="wbu" id="wbunsaved"></div><button type="button" id="wbundo" data-wb="undo">'+esc(W('page.undo'))+'</button><button type="button" id="wbreset" data-wb="reset" title="'+esc(W('page.reset_hint'))+'">'+esc(W('page.reset'))+'</button>'
    +'<button type="button" id="wbsave" data-wb="save">'+esc(W('save.draft'))+'</button><button type="button" id="wbfin" data-wb="fin">'+esc(W('save.finished'))+'</button><button type="button" id="wbno" data-wb="no" hidden>'+esc(W('save.not_yet_btn'))+'</button></div></div>';
 }
+// movebench16: the wide layout. Inside the Admin Dashboard's Animations pane (1589 wide) the sheet starts where the animation list ends, so the list stays on screen and a tap on another animation opens it. Earlier versions moves under the preview in this layout and back in every other one.
+const WB_WIDE='(min-width:1300px) and (min-aspect-ratio:1/1) and (min-height:560px)';
+function wbWideOff(){
+  const S=$('sheet');document.body.removeAttribute('data-wbwide');if(S){delete S.dataset.wide;S.style.removeProperty('--wbl');S.style.removeProperty('--wbt');}
+  const v=$('s-versions'),c=$('wbcC');if(v&&c&&v.parentElement!==c)c.insertBefore(v,c.firstChild);
+}
+function wbWide(){
+  const S=$('sheet');if(!S||S.dataset.mode!=='bench'||!S.classList.contains('open'))return;
+  let on=matchMedia(WB_WIDE).matches;
+  if(on){document.body.setAttribute('data-wbwide','');const d=$('detail').getBoundingClientRect();if(d.width<50)on=false;else{S.dataset.wide='1';S.style.setProperty('--wbl',Math.round(d.right)+'px');S.style.setProperty('--wbt',Math.round(d.top)+'px');}}
+  if(!on){wbWideOff();$('dim').classList.add('open');return;}
+  $('dim').classList.remove('open');
+  const v=$('s-versions'),pv=$('wbprev');if(v&&pv&&v.parentElement!==pv)pv.appendChild(v);
+  document.querySelectorAll('#detail .anim.on').forEach(r=>r.classList.remove('on'));
+  const cb=WB.a&&document.querySelector('#detail button.play[data-anim="'+WB.a.id+'"]'),cur=cb&&cb.closest('.anim');if(cur)cur.classList.add('on');
+}
+addEventListener('resize',()=>{if($('sheet')&&$('sheet').dataset.mode==='bench')wbWide();});
 // The scroller of the sections: the column on the right when the page is wider than tall, else the whole body.
 function wbScroller(){const c=$('wbsecs');return c&&getComputedStyle(c).overflowY==='auto'?c:$('wbbody');}
 function wbGo(id){
@@ -3056,7 +3074,7 @@ async function openPlayer(animId){
   const stage=msg=>'<div id="stage"><canvas id="cv" width="2" height="2"></canvas><div id="hitflag">HIT</div>'+(msg?'<div class="msg">'+msg+'</div>':'')+'</div>';
   const S=$('sheet');S.dataset.mode='bench';S.classList.add('open');$('dim').classList.add('open');S.scrollTop=0;
   wbOpen(a);WB.small=false;
-  const done=()=>{benchAttach(a);initMake(a);wbPaint();wbAllPaint();wbScroll();wbSend();wbLoadFile(a);const bd=$('wbbody');if(bd)bd.scrollTop=0;};
+  const done=()=>{wbWide();benchAttach(a);initMake(a);wbPaint();wbAllPaint();wbScroll();wbSend();wbLoadFile(a);const bd=$('wbbody');if(bd)bd.scrollTop=0;};
   if(a.kind==='ruckus'){S.innerHTML=wbHtml(a,'');done();return;}   // movebench15: nothing to play and nothing to make: the preview, then Timing, Stage, Effects and Sound
   if(!a.clip){
     S.innerHTML=wbHtml(a,stage(a.kind==='state'?'No video yet. In a fight this moment shows one of their other videos until its own is made.':a.kind==='answer'?'No video yet. When what the move left behind answers a hit, the answer plays without the counter video.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+genBlock(a));

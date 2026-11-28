@@ -108,6 +108,30 @@ def strip_geometry(pg, tag, H, errs):
     ok(pg.evaluate("__DASH.layout()") == 'battle' and gsize(pg) == [669, 869] and 'duo' in gcls(pg), '%s: a Duo size picked in the Battle layout stays in it' % tag)
     pg.click('#lay-all'); settle(pg, 2500)
     ok(pg.evaluate("__DASH.layout()") == 'all' and pg.evaluate("__DASH.size()") == 'os' and gsize(pg) == [951, 648], '%s: back to All four: Duo open, sideways again' % tag)
+    # --- movebench16: the Animations layout (Move Workbench on the wide monitor)
+    game_src = geval(pg, "location.pathname")
+    pg.click('#lay-anim'); settle(pg, 3000)
+    ok(pg.evaluate("__DASH.layout()") == 'anim' and [box(pg, '.slot:nth-child(%d)' % i)[2] for i in (1, 2, 3)] == [420, 951, 1589] and box(pg, '.slot:nth-child(4)')[2] >= 440 - 1, '%s: Animations layout: panes 420, 951, 1589 and 440 (%s)' % (tag, [box(pg, '.slot:nth-child(%d)' % i)[2] for i in (1, 2, 3, 4)]))
+    ok(pg.evaluate("__DASH.size()") == 'os' and gsize(pg) == [951, 648] and 'duo' in gcls(pg) and 'duo=1' in geval(pg, "location.search"), '%s: Animations layout: the game stays Duo open, sideways, 951 x 648 (%s)' % (tag, gcls(pg)))
+    ok(pg.evaluate("document.getElementById('lay-anim').getAttribute('aria-pressed')") == 'true' and pg.evaluate("document.querySelectorAll('#lay .on, #lay [aria-pressed=true]').length") == 1, '%s: Animations layout: its button is the one marked' % tag)
+    ok('Battle Guide: Animations' in pg.inner_text('#pane3 .nm') and pg.evaluate("__DASH.P[3].pane.classList.contains('keys')") and not pg.evaluate("__DASH.P[2].pane.classList.contains('keys')"), '%s: Animations layout: pane 3 is named for it and has the keys' % tag)
+    ok(pg.evaluate("/^#anims/.test(__DASH.P[3].frame.contentWindow.location.hash)") and pg.evaluate("__DASH.P[3].frame.contentWindow.location.pathname.endsWith('battle-guide.html')"), '%s: Animations layout: the Battle Guide is on its Animations tab (%s)' % (tag, pg.evaluate("__DASH.P[3].frame.contentWindow.location.hash")))
+    ok(pg.evaluate("__DASH.P[4].frame.contentWindow.location.pathname.endsWith('admin.html')") and pg.evaluate("document.getElementById('pane4').querySelector('.nm').textContent") == 'Admin', '%s: Animations layout: pane 4 is Admin' % tag)
+    ok(pg.evaluate("(()=>{var e=document.getElementById('sg');return e.scrollWidth<=e.clientWidth})()") and pg.evaluate("document.documentElement.scrollWidth<=innerWidth"), '%s: Animations layout: nothing scrolls sideways' % tag)
+    ok(geval(pg, "location.pathname") == game_src, '%s: Animations layout: the game was not restarted' % tag)
+    pg.evaluate("__DASH.P[3].frame.contentWindow.openPlayer('move:kettlebell_swing')")
+    pg.wait_for_function("()=>{var w=__DASH.P[3].frame.contentWindow;return w.document.body.hasAttribute('data-wbwide')&&w.document.getElementById('sheet').dataset.wide==='1'}", timeout=60000)
+    pg.wait_for_timeout(800)
+    WB = pg.evaluate("""()=>{var w=__DASH.P[3].frame.contentWindow,d=w.document,r=e=>e.getBoundingClientRect();return {iw:w.innerWidth,detail:r(d.getElementById('detail')).width,sheetLeft:r(d.getElementById('sheet')).left,
+      vid:r(d.getElementById('s-video')).left,stg:r(d.getElementById('s-stage')).left,prevW:r(d.getElementById('wbprev')).width,ver:!!d.getElementById('s-versions').closest('#wbprev'),sw:d.documentElement.scrollWidth}}""")
+    ok(abs(WB['iw'] - 1589) <= 2 and abs(WB['detail'] - 300) <= 2 and abs(WB['sheetLeft'] - 300) <= 2, '%s: Animations layout: the workbench opens beside a 300 px list in the 1589 px pane (%s)' % (tag, WB))
+    ok(WB['stg'] > WB['vid'] + 100 and WB['ver'] and WB['prevW'] >= 400 and WB['sw'] <= WB['iw'] + 1, '%s: Animations layout: preview, two columns of sections and Earlier versions under the preview (%s)' % (tag, WB))
+    pg.screenshot(path=os.path.join(SHOTS, 'dashboard-animations-%d.png' % H))
+    pg.evaluate("__DASH.P[3].frame.contentWindow.closeSheet()")
+    pg.click('#lay-all'); settle(pg, 2500)
+    ok(pg.evaluate("__DASH.layout()") == 'all' and [box(pg, '.slot:nth-child(%d)' % i)[2] for i in (1, 2, 3)] == [1000, 951, 829] and pg.evaluate("__DASH.P[3].pane.classList.contains('keys')"), '%s: back to All four from Animations: widths 1000, 951, 829; the keys stay in pane 3' % tag)
+    pg.evaluate("__DASH.setKeys(2)")
+    pg.screenshot(path=os.path.join(SHOTS, 'dashboard-allfour-after-animations-%d.png' % H))
     ok(not errs, '%s: no page errors in the strip tests %s' % (tag, errs[:3]))
 
 def standin_card(i, title, theme, **kw):
@@ -119,7 +143,7 @@ def take_me_there(pg, ctx, errs, board_standin):
     chapter), a phone card and cards that must not be listed: the strip lists three, Take me there works from the strip and from the Board pane."""
     real = real_board(); cards = open_jump_cards(real)
     ok(len(cards) >= 1, 'dash3: the real board has at least one open Tom play card with a jump (%s)' % [c['id'] for c in cards])
-    ok(not [c['id'] for c in real['cards'] if c.get('lane') == 'tom' and c.get('ask') == 'play' and c.get('col') not in ('done', 'wait') and not c.get('backlog') and not c.get('jump') and c.get('where') != 'phone' and c['id'] not in ('t-dash3-try', 't-dash4-try')],
+    ok(not [c['id'] for c in real['cards'] if c.get('lane') == 'tom' and c.get('ask') == 'play' and c.get('col') not in ('done', 'wait') and not c.get('backlog') and not c.get('jump') and c.get('where') != 'phone' and c['id'] not in ('t-dash3-try', 't-dash4-try', 't-movebench-16-try')],
        'dash3: every open Tom play card has a jump or the mark where phone (the two dashboard cards need neither)')
     for c in cards:
         j = c['jump']

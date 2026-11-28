@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """manifest_crosswalk.py (card c-rosestage, 2026-11-26): ties every move of the three Stage 2A manifests to its game move, and every effect the
-moves name to an asset of the Stage 2C VFX library, then writes data/guide-manifest.json for the Battle Guide's "What is done" checklist.
+moves name to an asset of the Stage 2C VFX library, then writes data/guide-manifest.json for the Battle Guide's Manifest panel.
 Inputs: art-factory/aot-stage2-pass{1,2,3}-manifest-24fps.json, art-factory/aot-stage2c-vfx-library-v11.json, the game's data/b3-*.js (through
 tools/guidegen/build_map.js), the stage sections of the move specs (data/move-specs.js). Nothing here spends money. The manifests' stylePrefix and negativePrompt (a green screen and
 "gouache") are NOT copied: the pipeline lock bans them (CLAUDE.md), only the motion text and the engine spec are used.
