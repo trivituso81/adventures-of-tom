@@ -10470,9 +10470,7 @@
     "The same build, then one more card restyles the menu to match (plan section 5).",
     "Nothing is built yet: a session on Opus changes the proposal from your note, and this card comes back to you."
    ],
-   "blocks": [
-    "c-b3story1"
-   ],
+   "blocks": [],
    "created": "2026-11-27",
    "changed": "2026-11-27",
    "chat": {
@@ -10496,28 +10494,28 @@
    "id": "c-b3story1",
    "tag": "b3story1",
    "lane": "claude",
-   "col": "done",
+   "col": "wait",
    "theme": "Battle System",
    "title": "Battle screen: build the storybook look in the game",
-   "next": "Retired: it would have built the first storybook proposal, which you rejected. A build card for the exact version follows the rebuild.",
+   "next": "Waits on your answer on the card Battle screen: is the mock your mockup now? Then builds this version into the new battle: your arrangement, your frames, tap a move again to use it, at every screen size. Then: tap the card, Copy prompt, NEW conversation on Claude Sonnet 5.5, effort high.",
    "blocks": [
     "c-b3story2"
    ],
    "after": "nothing for Tom: c-b3story2",
    "created": "2026-11-27",
-   "changed": "2026-11-27",
+   "changed": "2026-11-28",
    "chat": {
     "url": "",
     "opening": "not started"
    },
    "prompt": {
-    "what": "Builds the storybook battle screen of claude/b3story-plan.md into the new battle (Battle 3 only): the list of moves beside whoever is up, the controls over the scene, at every screen size, with the old strip and tray removed. No rule or number changes.",
+    "what": "Builds the storybook battle screen as the rebuilt mock shows it (claude/b3story-plan.md, section Exact to the mockup) into the new battle, Battle 3 only: Tom's arrangement and frames, a tap highlights and a second tap uses, at every screen size, with the old strip and tray removed. No rule or number changes.",
     "before": [
-     "Answer the card Battle screen: pick what to do with the storybook proposal (t-b3story-decide). Your answer starts this card; nothing else to do first."
+     "Answer the card Battle screen: is the mock your mockup now? (t-b3storyx-decide). Your answer starts this card; nothing else to do first."
     ],
-    "model": "Claude Sonnet 5.5 (row C: the design is written and drawn, the code path is not, and it crosses several engine files; none of the three Fable conditions holds)",
+    "model": "Claude Sonnet 5.5 (row C: the design is measured, drawn and tested in the mock, the code path in the engine is not written, and it crosses several engine files; none of the three Fable conditions holds)",
     "effort": "high (a large screen change has to be worked out in the engine with no steps written for the code)",
-    "text": "Read CLAUDE.md, claude/handoff-rules.md, claude/b3story-plan.md (the plan you build: sections 1, 4, 8 and 10), claude/battleux-plan.md section 6 (the hooks) and claude/b3look-plan.md, then card c-b3story1 and Tom's card t-b3story-decide in data/board.json: his answer and note come first. Your first push is the commit board: start c-b3story1. If his answer is Change something first, do not build: rewrite this card's prompt into a revision of the mock (claude/battleux-mock2/src/, rebuilt into battle-story.html) that carries out his note, for Claude Opus 5.5 at effort medium, push it with build name board-b3story1, tell Tom, and stop. If his answer is to make the menu follow too, add card c-b3story-menu in your first push (plan section 5, Sonnet 5.5 medium, blocked by c-b3story2). Otherwise build the storybook screen in the game for Battle 3 only (#battle.v3; battle 2 untouched) as the mock shows it: open battle-story.html at the six sizes of the plan and carry its layout and look into engine/b3-deck.js, b3-deck.css and the scene drawing in engine/b3-play.js. claude/battleux-mock2/src/app.css is the look and layout spec; its app.js is not the implementation. The parts: the overlay layout of plan section 1 (container queries on the stage like b3-deck.css, so the rotated stage and the Duo scale follow), where the party and the monsters stand left exactly as the game stands them today (plan section 1, the field), the acting member's one step, the bar left of the family group at their shoulder with its tail, sliding in from the last member and folding away on Use, the lane that starts where the monsters end, the plate home bottom left, the strips (Back row strips above the heads), the turn bar marks, the Combos gauge, the party row with the Pep on the acting card, the caption, the end panel, All details, and the upright sheet; the Details table of section 4. Put the Fraunces font in fonts/ (copy battle-story/fraunces.woff2 and battle-story/fraunces-OFL.txt). New words go in data/b3-ux-words.js only. No rule, number or move changes: node tools/b3-sim.js check must pass unchanged. Purge what the new layout replaces (the right strip, the tray, their CSS and helpers) in the same push and grep that no reference is left. Rewrite tools/b3_layout_test.py with the checks of tools/b3story_test.py on the real screen (the highlighted move on screen and not hidden in the scroll, no cut name, no text under 12.5 px on a phone, taps of 44 px, the bar never over a monster or a waiting family member) and fix the parts of tools/b3_test.py that drive the deck; run python3 tools/smoke.py. Look at screenshots of Battle Lab NEW BATTLE fights NEW 2, NEW 6 and NEW 10 at the six sizes before pushing. If the session runs long, ship the sideways screens as b3story1a and leave the upright sheet and tests for b3story1b. Write a Built section at the end of the plan. Build name b3story1; this card's after is nothing for Tom: c-b3story2. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/b3story-plan.md: its last section, Exact to the mockup (E1 to E8), is the plan you build and it wins over sections 1 to 10. Also read claude/battleux-plan.md section 6 (the hooks) and claude/b3look-plan.md. Then read card c-b3story1 and Tom's card t-b3storyx-decide in data/board.json: his answer and note come first. Your first push is the commit board: start c-b3story1. If his answer is Change something first: do not build. Rewrite this card's prompt into a revision of the mock (source claude/battleux-mock2/src/, rebuilt into battle-story.html with python3 -I claude/battleux-mock2/src/build.py; python3 tools/b3story_test.py must pass, and table E1 of the plan is updated with what moved) that carries out his note by the smallest change, for Claude Opus 5.5 at effort medium, add a new decide card for Tom that blocks this card, push with build name board-b3story1, tell Tom, and stop. If his answer is to make the frames in the Art Library first: do not build. Add a Claude card c-b3story-frames (Claude Opus 5.5, effort medium: picture prompts) that writes one Art Library entry for each piece of the plan's table E4 and hands Tom one pictures card, make that pictures card block this card, push with build name board-b3story1, tell Tom, and stop. Otherwise build this version into the game for Battle 3 only (#battle.v3; battle 2 untouched). The mock is the spec: open battle-story.html?frame=1&st=aim_one at 951 x 648 and at the other five sizes of the plan; claude/battleux-mock2/src/app.css and ui.css are the look and layout spec, app.js is not the implementation. The parts: (1) the arrangement of table E1 as one 951 x 648 design: the turn bar and the tools hold to the top, everything else to the bottom, the left group to the left and the right group to the right, the whole design scaled as one piece on a screen that is not 951 x 648 (so the rotated stage and the Duo scale follow), and the packed forms for short sideways and upright screens (plan E7); (2) where the party and the monsters stand in a fight moves to the picture's arrangement (table E1 rows P16 and P29 to P32, and call X6 for several monsters): this is the one change in engine/b3-play.js and it changes no rule; battle clips and stage specs read those positions, so run python3 tools/battle_guide_test.py and the clip tests, keep every seam working (a move plays with or without its clip), retune no animation, and write a card in the Battle Animations theme for any move that no longer lines up; (3) the look of plan E2 with the painted frames: copy the cut pieces from battle-story/ui/ to art/ui/battle/ and carry their rules from claude/battleux-mock2/src/ui.css into the battle's CSS (Tom chose these frames; each can be replaced by an Art Library piece later; do not generate any picture), and put Fraunces in fonts/ (battle-story/fraunces.woff2 and battle-story/fraunces-OFL.txt); (4) the taps of plan E3: a tap highlights a move as the gold banner, a tap on the highlighted move uses it, there is no Use button, a tap on a monster aims, a Combo is used from its lit mark under the Combo bar; keys and gamepad as today; (5) the Details table of plan section 4, the caption, the end panel and All details. Every number comes from b3Preview and b3Matchups; new words go in data/b3-ux-words.js only. No rule, number or move changes: node tools/b3-sim.js check must pass unchanged. Purge what the new layout replaces (the right strip, the tray, the Use bar, their CSS and helpers) in the same push and grep that no reference is left. Rewrite tools/b3_layout_test.py with the checks of tools/b3story_test.py on the real screen, including the 12 px position check against table E1 at 951 x 648 in Battle Lab NEW 6: THE BIG ONE, and fix the parts of tools/b3_test.py that drive the deck; run python3 tools/smoke.py. Look at screenshots of Battle Lab NEW BATTLE fights NEW 2, NEW 6 and NEW 10 at the six sizes before pushing, put NEW 6 at 951 x 648 beside Tom's mockup in one picture, claude/battleux-mock2/compare-game.jpg, and look at it. If the session runs long, ship the sideways screens as b3story1a and leave the upright screens and the tests for b3story1b. Write a Built section at the end of the plan. Build name b3story1; this card's after is nothing for Tom: c-b3story2. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "history": [
     {
@@ -10527,10 +10525,13 @@
     {
      "d": "2026-11-27",
      "t": "Retired by b3storyx. Tom, 11-27 23:28, on the mock that build b3story made: \"It looks nothing like the mockup. ... identify a way to mock this exactly as it is in the mockup. You just have to tap the ability a second time after it's focused to execute it.\" The proposal is being rebuilt to match his picture (card Battle screen: mock it exactly as the mockup), so there is nothing to decide or build from the first one."
+    },
+    {
+     "d": "2026-11-28",
+     "t": "Rewritten and reopened by b3storyx: it now builds the mock that matches Tom's mockup (plan section Exact to the mockup). Waits on t-b3storyx-decide."
     }
    ],
-   "done": "2026-11-27",
-   "retired": true
+   "waiting_on": "tom"
   },
   {
    "id": "c-b3story2",
@@ -10541,10 +10542,10 @@
    "theme": "Battle System",
    "auto": true,
    "title": "Battle screen: storybook marks, Rose Mode, mock purged",
-   "next": "Waits on the card Battle screen: mock it exactly as the mockup, then on the build card that follows your decision. Then adds the scene marks (aim ring and arrow, floor glow, wind-up banner, Flustered stars), Rose Mode pictures and the key hints, deletes the proposal page and the prototype, and hands you one play card. Starts by itself (Sonnet 5.5, effort medium).",
+   "next": "Waits on the card Battle screen: build the storybook look in the game. Then adds the scene marks (aim ring and arrow when several monsters stand, floor glow, wind-up banner, Flustered stars), Rose Mode pictures and the key hints, deletes the proposal page and the prototype, and hands you one play card. Starts by itself (Sonnet 5.5, effort medium).",
    "blocks": [],
    "created": "2026-11-27",
-   "changed": "2026-11-27",
+   "changed": "2026-11-28",
    "chat": {
     "url": "",
     "opening": "not started"
@@ -10556,7 +10557,7 @@
     ],
     "model": "Claude Sonnet 5.5 (row B: the steps are written in the plan and in the Built section c-b3story1 writes, and tests catch mistakes)",
     "effort": "medium (the steps are known)",
-    "text": "Read CLAUDE.md, claude/handoff-rules.md, claude/b3story-plan.md (section 10, the card c-b3story2, the purge rule at the top, and the Built section c-b3story1 wrote), then card c-b3story2 in data/board.json. Your first push is the commit board: start c-b3story2. Add to the new battle's scene and list what the plan gives this card, matching battle-story.html: the aim ring and arrow on the aimed monster or family member, the floor glow with its label naming the move (\"Wet-Floor Hazard goes here\") for a floor move, the red wind-up banner, the Flustered stars, monster letters on short and upright screens, Rose Mode pictures beside the words with Try this on the recommended move (which opens highlighted), and the key hints. Retire card t-battleuxplay (it tested the screen this replaces). Then apply the purge rule at the top of the plan: delete battle-story.html, battle-story/, tools/b3story_test.py and its row in tools/night/tests.json, battle-proto.html, art/proto/, tools/b3proto_test.py and its row, and both ADMIN buttons; grep for every name and confirm none is left. Tests: python3 tools/b3_layout_test.py at every size, python3 tools/b3_test.py, node tools/b3-sim.js check, python3 tools/admin_hub_test.py, python3 tools/smoke.py; look at the screenshots. Create Tom's play card t-b3storyplay in the same push (ask play, where phone): play Battle Lab NEW BATTLE fights NEW 2, NEW 6 and NEW 10 on the Duo unfolded held sideways and NEW 2 on the iPhone upright, judging look and feel only; set this card's after to it. Build name b3story2. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, claude/b3story-plan.md (its last section Exact to the mockup wins over sections 1 to 10: read E2, E3, E7 and E8, the purge rule at the top, and the Built section c-b3story1 wrote), then card c-b3story2 in data/board.json. Your first push is the commit board: start c-b3story2. Add to the new battle's scene and list what the plan gives this card, matching battle-story.html: the aim ring and arrow on the aimed monster when more than one monster stands and on an aimed family member, the floor glow with its label naming the move (\"Wet-Floor Hazard goes here\") for a floor move, the red wind-up banner, the Flustered stars, monster letters on short and upright screens, Rose Mode pictures beside the words with Try this on the recommended move (which opens highlighted), and the key hints. Retire card t-battleuxplay (it tested the screen this replaces). Then apply the purge rule at the top of the plan: delete battle-story.html, battle-story/, tools/b3story_test.py and its row in tools/night/tests.json, battle-proto.html, art/proto/, tools/b3proto_test.py and its row, and both ADMIN buttons; grep for every name and confirm none is left. Tests: python3 tools/b3_layout_test.py at every size, python3 tools/b3_test.py, node tools/b3-sim.js check, python3 tools/admin_hub_test.py, python3 tools/smoke.py; look at the screenshots. Create Tom's play card t-b3storyplay in the same push (ask play, where phone): play Battle Lab NEW BATTLE fights NEW 2, NEW 6 and NEW 10 on the Duo unfolded held sideways and NEW 2 on the iPhone upright, judging look and feel only; set this card's after to it. Build name b3story2. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "history": [
     {
@@ -10566,6 +10567,10 @@
     {
      "d": "2026-11-27",
      "t": "Still waits: the build card it followed was retired (Tom rejected the first proposal, 11-27 23:28). It now waits on the card Battle screen: mock it exactly as the mockup, and then on the rewritten build card."
+    },
+    {
+     "d": "2026-11-28",
+     "t": "Waits on the rewritten build card again (b3storyx); its prompt now points at the plan section Exact to the mockup."
     }
    ]
   },
@@ -10576,12 +10581,12 @@
    "col": "prog",
    "theme": "Battle System",
    "title": "Battle screen: mock it exactly as the mockup",
-   "next": "Rebuilds the storybook mock (battle-story.html) so it matches your mockup picture side by side at 951 x 648 on the Duo: where everything stands, the sizes, the painted frames, fonts, colors, ribbons, the gold banner and the damage ring. Tapping a move highlights it and tapping it again uses it (no Use button). Then hands you one decide card.",
+   "next": "Rebuilt: the mock (ADMIN > Battle system > Battle screen: storybook proposal) now follows your mockup at 951 x 648: your painted frames cut from the picture, your arrangement, tap a move to highlight it and tap it again to use it. The measured table is in claude/b3story-plan.md, section Exact to the mockup. Hands you the card Battle screen: is the mock your mockup now?",
    "blocks": [
     "c-b3story2"
    ],
    "created": "2026-11-27",
-   "changed": "2026-11-27",
+   "changed": "2026-11-28",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukEf9f6b6LGnFVDAiBY",
     "opening": "\"Read CLAUDE.md, claude/handoff-rules.md, claude/b3story-plan.md and claude/battleux-mock2/assessment.md\""
@@ -10603,8 +10608,13 @@
     {
      "d": "2026-11-27",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-28",
+     "t": "Built as b3storyx: 32 things measured in the mockup and matched within 12 px at 951 x 648 (checked by tools/b3story_test.py against the plan table), frames cut from the mockup as nine-slices, Use button removed (tap the highlighted move again), Combos used from the lit mark under the Combo bar. All 18 states and six sizes kept. Side by side picture: claude/battleux-mock2/compare-exact.jpg. Hands to t-b3storyx-decide."
     }
-   ]
+   ],
+   "after": "t-b3storyx-decide"
   },
   {
    "id": "t-stageapproachplay",
@@ -10628,6 +10638,46 @@
     "url": "",
     "opening": ""
    }
+  },
+  {
+   "id": "t-b3storyx-decide",
+   "title": "Battle screen: is the mock your mockup now?",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "decide",
+   "next": "Open https://trivituso81.github.io/adventures-of-tom/battle-story/compare-exact.jpg to see your mockup beside the mock at the Duo's size. Then open ADMIN > Battle system > Battle screen: storybook proposal (https://trivituso81.github.io/adventures-of-tom/battle-story.html?st=aim_one) on the Duo held sideways: it opens on the state of your picture. Tap a move: it becomes the gold banner. Tap the banner again: the move is used. Tap a lit mark under the Combo bar the same way. The Mock states button shows every other case. Then tap one answer; a note with it is read by the next session. Your answer starts the card Battle screen: build the storybook look in the game.",
+   "steps": [
+    "Open the side by side picture: https://trivituso81.github.io/adventures-of-tom/battle-story/compare-exact.jpg",
+    "Open ADMIN > Battle system > Battle screen: storybook proposal on the Duo, held sideways (https://trivituso81.github.io/adventures-of-tom/battle-story.html?st=aim_one).",
+    "Tap a move, then tap it again to use it. Tap a monster to aim. Try Mock states: five monsters, Combos 65%, Rose knocked out.",
+    "Tap one answer. Add a note if something is still off: say what and where."
+   ],
+   "choices": [
+    "Build it in the game with these frames (Recommended)",
+    "Make the frames in the Art Library first, then build",
+    "Change something first (say what in the note)"
+   ],
+   "leads": [
+    "The next session builds this screen into the new battle, with the frames cut from your mockup; each frame can be swapped for an Art Library piece later.",
+    "Nothing is built yet: one card writes an Art Library entry for each of the 11 frames, you generate and approve them, then the build starts.",
+    "Nothing is built yet: a session on Opus changes the mock from your note by the smallest change, and a decide card comes back to you."
+   ],
+   "blocks": [
+    "c-b3story1"
+   ],
+   "created": "2026-11-28",
+   "changed": "2026-11-28",
+   "chat": {
+    "url": "",
+    "opening": "\"Read CLAUDE.md, claude/handoff-rules.md, claude/b3story-plan.md and claude/battleux-mock2/assessment.md\""
+   },
+   "history": [
+    {
+     "d": "2026-11-28",
+     "t": "Added by b3storyx with the rebuilt mock (claude/b3story-plan.md, section Exact to the mockup). It replaces the retired card Battle screen: pick what to do with the storybook proposal."
+    }
+   ]
   }
  ],
  "sessions": [
