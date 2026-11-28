@@ -1,0 +1,930 @@
+[
+ {
+  "id": "amyhouse",
+  "spot": "front",
+  "tile": [
+   9,
+   14
+  ],
+  "tomArt": 102,
+  "wantArt": 106,
+  "bbox": [
+   187,
+   626,
+   209,
+   686
+  ]
+ },
+ {
+  "id": "amyhouse",
+  "spot": "back",
+  "tile": [
+   7,
+   3
+  ],
+  "tomArt": 9,
+  "wantArt": 106,
+  "bbox": [
+   191,
+   175,
+   204,
+   180
+  ]
+ },
+ {
+  "id": "grands",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 500,
+  "wantArt": 284,
+  "bbox": [
+   151,
+   394,
+   227,
+   687
+  ]
+ },
+ {
+  "id": "grands",
+  "spot": "back",
+  "tile": [
+   12,
+   3
+  ],
+  "tomArt": 282,
+  "wantArt": 284,
+  "bbox": [
+   202,
+   15,
+   262,
+   180
+  ]
+ },
+ {
+  "id": "elliehouse",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 287,
+  "wantArt": 287,
+  "bbox": [
+   167,
+   519,
+   229,
+   687
+  ]
+ },
+ {
+  "id": "elliehouse",
+  "spot": "back",
+  "tile": [
+   8,
+   5
+  ],
+  "tomArt": 51,
+  "wantArt": 287,
+  "bbox": [
+   173,
+   243,
+   221,
+   273
+  ]
+ },
+ {
+  "id": "library",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 261,
+  "wantArt": 263,
+  "bbox": [
+   169,
+   533,
+   226,
+   686
+  ]
+ },
+ {
+  "id": "library",
+  "spot": "back",
+  "tile": [
+   11,
+   5
+  ],
+  "tomArt": 258,
+  "wantArt": 263,
+  "bbox": [
+   169,
+   122,
+   224,
+   273
+  ]
+ },
+ {
+  "id": "bakery",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 324,
+  "wantArt": 325,
+  "bbox": [
+   162,
+   496,
+   234,
+   686
+  ]
+ },
+ {
+  "id": "bakery",
+  "spot": "back",
+  "tile": [
+   7,
+   4
+  ],
+  "tomArt": 323,
+  "wantArt": 325,
+  "bbox": [
+   163,
+   37,
+   233,
+   226
+  ]
+ },
+ {
+  "id": "greenhouse",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 326,
+  "wantArt": 325,
+  "bbox": [
+   162,
+   496,
+   234,
+   687
+  ]
+ },
+ {
+  "id": "greenhouse",
+  "spot": "back",
+  "tile": [
+   8,
+   4
+  ],
+  "tomArt": 323,
+  "wantArt": 325,
+  "bbox": [
+   163,
+   37,
+   234,
+   226
+  ]
+ },
+ {
+  "id": "shop",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 347,
+  "wantArt": 346,
+  "bbox": [
+   159,
+   484,
+   235,
+   687
+  ]
+ },
+ {
+  "id": "shop",
+  "spot": "back",
+  "tile": [
+   12,
+   5
+  ],
+  "tomArt": 342,
+  "wantArt": 346,
+  "bbox": [
+   196,
+   73,
+   271,
+   273
+  ]
+ },
+ {
+  "id": "observatory",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 48,
+  "wantArt": 266,
+  "bbox": [
+   176,
+   659,
+   221,
+   687
+  ]
+ },
+ {
+  "id": "observatory",
+  "spot": "back",
+  "tile": [
+   8,
+   5
+  ],
+  "tomArt": 265,
+  "wantArt": 266,
+  "bbox": [
+   170,
+   117,
+   226,
+   272
+  ]
+ },
+ {
+  "id": "post",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 316,
+  "wantArt": 317,
+  "bbox": [
+   163,
+   502,
+   233,
+   687
+  ]
+ },
+ {
+  "id": "post",
+  "spot": "back",
+  "tile": [
+   9,
+   5
+  ],
+  "tomArt": 328,
+  "wantArt": 317,
+  "bbox": [
+   164,
+   89,
+   241,
+   281
+  ]
+ },
+ {
+  "id": "tea",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 307,
+  "wantArt": 308,
+  "bbox": [
+   164,
+   507,
+   232,
+   687
+  ]
+ },
+ {
+  "id": "tea",
+  "spot": "back",
+  "tile": [
+   6,
+   4
+  ],
+  "tomArt": 297,
+  "wantArt": 308,
+  "bbox": [
+   165,
+   52,
+   230,
+   226
+  ]
+ },
+ {
+  "id": "taxi",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 312,
+  "wantArt": 314,
+  "bbox": [
+   163,
+   503,
+   232,
+   686
+  ]
+ },
+ {
+  "id": "taxi",
+  "spot": "back",
+  "tile": [
+   3,
+   5
+  ],
+  "tomArt": 312,
+  "wantArt": 314,
+  "bbox": [
+   127,
+   90,
+   195,
+   273
+  ]
+ },
+ {
+  "id": "lofts",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 331,
+  "wantArt": 337,
+  "bbox": [
+   161,
+   491,
+   233,
+   685
+  ]
+ },
+ {
+  "id": "lofts",
+  "spot": "back",
+  "tile": [
+   5,
+   3
+  ],
+  "tomArt": 302,
+  "wantArt": 337,
+  "bbox": [
+   161,
+   0,
+   232,
+   177
+  ]
+ },
+ {
+  "id": "loftlobby",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 248,
+  "wantArt": 251,
+  "bbox": [
+   171,
+   540,
+   225,
+   685
+  ]
+ },
+ {
+  "id": "loftlobby",
+  "spot": "back",
+  "tile": [
+   8,
+   4
+  ],
+  "tomArt": 41,
+  "wantArt": 251,
+  "bbox": [
+   179,
+   202,
+   214,
+   226
+  ]
+ },
+ {
+  "id": "tomhouse",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 63,
+  "wantArt": 118,
+  "bbox": [
+   187,
+   650,
+   211,
+   687
+  ]
+ },
+ {
+  "id": "tomhouse",
+  "spot": "back",
+  "tile": [
+   7,
+   1
+  ],
+  "tomArt": 111,
+  "wantArt": 118,
+  "bbox": [
+   185,
+   23,
+   211,
+   88
+  ]
+ },
+ {
+  "id": "coffee",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 295,
+  "wantArt": 299,
+  "bbox": [
+   166,
+   513,
+   231,
+   686
+  ]
+ },
+ {
+  "id": "coffee",
+  "spot": "back",
+  "tile": [
+   11,
+   5
+  ],
+  "tomArt": 55,
+  "wantArt": 299,
+  "bbox": [
+   174,
+   241,
+   222,
+   273
+  ]
+ },
+ {
+  "id": "ramen",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 234,
+  "wantArt": 248,
+  "bbox": [
+   173,
+   547,
+   223,
+   684
+  ]
+ },
+ {
+  "id": "ramen",
+  "spot": "back",
+  "tile": [
+   11,
+   5
+  ],
+  "tomArt": 241,
+  "wantArt": 248,
+  "bbox": [
+   171,
+   131,
+   224,
+   272
+  ]
+ },
+ {
+  "id": "tomsuite",
+  "spot": "front",
+  "tile": [
+   3,
+   8
+  ],
+  "tomArt": 10,
+  "wantArt": 136,
+  "bbox": [
+   153,
+   403,
+   171,
+   409
+  ]
+ },
+ {
+  "id": "tomsuite",
+  "spot": "back",
+  "tile": [
+   6,
+   4
+  ],
+  "tomArt": 131,
+  "wantArt": 136,
+  "bbox": [
+   184,
+   149,
+   213,
+   226
+  ]
+ },
+ {
+  "id": "juicebar",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 294,
+  "wantArt": 293,
+  "bbox": [
+   164,
+   515,
+   229,
+   687
+  ]
+ },
+ {
+  "id": "juicebar",
+  "spot": "back",
+  "tile": [
+   12,
+   5
+  ],
+  "tomArt": 290,
+  "wantArt": 293,
+  "bbox": [
+   201,
+   103,
+   265,
+   273
+  ]
+ },
+ {
+  "id": "cinema",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 41,
+  "wantArt": 269,
+  "bbox": [
+   179,
+   660,
+   215,
+   684
+  ]
+ },
+ {
+  "id": "cinema",
+  "spot": "back",
+  "tile": [
+   8,
+   5
+  ],
+  "tomArt": 265,
+  "wantArt": 269,
+  "bbox": [
+   168,
+   115,
+   226,
+   270
+  ]
+ },
+ {
+  "id": "boards",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 290,
+  "wantArt": 293,
+  "bbox": [
+   164,
+   516,
+   229,
+   686
+  ]
+ },
+ {
+  "id": "boards",
+  "spot": "back",
+  "tile": [
+   3,
+   5
+  ],
+  "tomArt": 285,
+  "wantArt": 293,
+  "bbox": [
+   129,
+   106,
+   192,
+   273
+  ]
+ },
+ {
+  "id": "lacab",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 307,
+  "wantArt": 308,
+  "bbox": [
+   164,
+   507,
+   232,
+   687
+  ]
+ },
+ {
+  "id": "lacab",
+  "spot": "back",
+  "tile": [
+   12,
+   5
+  ],
+  "tomArt": 306,
+  "wantArt": 308,
+  "bbox": [
+   201,
+   94,
+   267,
+   273
+  ]
+ },
+ {
+  "id": "nickels",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 282,
+  "wantArt": 281,
+  "bbox": [
+   167,
+   522,
+   227,
+   687
+  ]
+ },
+ {
+  "id": "nickels",
+  "spot": "back",
+  "tile": [
+   8,
+   6
+  ],
+  "tomArt": 275,
+  "wantArt": 281,
+  "bbox": [
+   167,
+   158,
+   227,
+   319
+  ]
+ },
+ {
+  "id": "pupuseria",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 294,
+  "wantArt": 299,
+  "bbox": [
+   165,
+   513,
+   231,
+   685
+  ]
+ },
+ {
+  "id": "pupuseria",
+  "spot": "back",
+  "tile": [
+   8,
+   6
+  ],
+  "tomArt": 297,
+  "wantArt": 299,
+  "bbox": [
+   166,
+   145,
+   230,
+   319
+  ]
+ },
+ {
+  "id": "wardrobe",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 277,
+  "wantArt": 290,
+  "bbox": [
+   166,
+   524,
+   229,
+   686
+  ]
+ },
+ {
+  "id": "wardrobe",
+  "spot": "back",
+  "tile": [
+   8,
+   5
+  ],
+  "tomArt": 297,
+  "wantArt": 290,
+  "bbox": [
+   166,
+   107,
+   241,
+   281
+  ]
+ },
+ {
+  "id": "creole",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 301,
+  "wantArt": 302,
+  "bbox": [
+   164,
+   510,
+   229,
+   686
+  ]
+ },
+ {
+  "id": "creole",
+  "spot": "back",
+  "tile": [
+   8,
+   6
+  ],
+  "tomArt": 294,
+  "wantArt": 302,
+  "bbox": [
+   164,
+   147,
+   229,
+   319
+  ]
+ },
+ {
+  "id": "casa",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 36,
+  "wantArt": 207,
+  "bbox": [
+   180,
+   666,
+   214,
+   687
+  ]
+ },
+ {
+  "id": "casa",
+  "spot": "back",
+  "tile": [
+   4,
+   3
+  ],
+  "tomArt": 195,
+  "wantArt": 207,
+  "bbox": [
+   174,
+   65,
+   218,
+   179
+  ]
+ },
+ {
+  "id": "jordansam",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 266,
+  "wantArt": 266,
+  "bbox": [
+   169,
+   530,
+   227,
+   686
+  ]
+ },
+ {
+  "id": "jordansam",
+  "spot": "back",
+  "tile": [
+   8,
+   5
+  ],
+  "tomArt": 266,
+  "wantArt": 266,
+  "bbox": [
+   170,
+   117,
+   227,
+   273
+  ]
+ },
+ {
+  "id": "tower",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 312,
+  "wantArt": 311,
+  "bbox": [
+   163,
+   504,
+   230,
+   687
+  ]
+ },
+ {
+  "id": "tower",
+  "spot": "back",
+  "tile": [
+   8,
+   3
+  ],
+  "tomArt": 309,
+  "wantArt": 311,
+  "bbox": [
+   164,
+   0,
+   230,
+   181
+  ]
+ },
+ {
+  "id": "dakota",
+  "spot": "front",
+  "tile": [
+   8,
+   14
+  ],
+  "tomArt": 295,
+  "wantArt": 299,
+  "bbox": [
+   165,
+   513,
+   231,
+   686
+  ]
+ },
+ {
+  "id": "dakota",
+  "spot": "back",
+  "tile": [
+   6,
+   4
+  ],
+  "tomArt": 297,
+  "wantArt": 299,
+  "bbox": [
+   166,
+   53,
+   229,
+   227
+  ]
+ }
+]
