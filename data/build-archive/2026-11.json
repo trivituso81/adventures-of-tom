@@ -1,4 +1,13 @@
 [
+{"tag":"projclean1","at":"2026-11-21T00:00:56-08:00","what":"Project docs move finished: working notes live in the repo's claude/ folder, the Project keeps four mirrors","card":"c-projclean","theme":"Project Ops"},
+{"tag":"board-itemart-refs","at":"2026-11-20T23:54:43-08:00","what":"Board only: the 3 remade item pictures missed again; stop-loss, card c-itemart-refs waits on 3 reference photos from Tom","kind":"house","card":"b-board-itemart-refs","theme":"Tools"},
+{"tag":"fix-itembannerart-pics-3","at":"2026-11-20T23:50:50-08:00","what":"The 3 item pictures that missed get new prompts and are made again","card":"c-fix-itembannerart-pics-3","theme":"Game Shell"},
+{"tag":"projclean1f","at":"2026-11-20T23:47:34-08:00","what":"Project docs moved into the repo: the last 10 large docs copied into claude/ (ability revamp plans, battle design, old changes and status notes)","card":"c-projclean","theme":"Project Ops"},
+{"tag":"fix-conflictmarks","at":"2026-11-20T23:42:21-08:00","what":"The game would not start: merge conflict markers on main removed from engine/main.js and index.html","card":"b-fix-conflictmarks","theme":"Game Shell"},
+{"tag":"board-boppy-bigfish","at":"2026-11-20T23:37:26-08:00","what":"Board only: Boppy cap card waits on Tom's picture approval","kind":"house","card":"b-board-boppy-bigfish","theme":"Tools"},
+{"tag":"boppy-bigfisha","at":"2026-11-20T23:33:11-08:00","what":"Boppy's unimpressed pose prompt now uses his Paso Robles reference, back under To do in the Art Library","card":"c-boppy-bigfish","theme":"Characters"},
+{"tag":"projclean1e","at":"2026-11-20T23:14:35-08:00","what":"Project docs move: progress and next steps written on card c-projclean (second run paused, 444 docs moved)","card":"c-projclean","theme":"Project Ops"},
+{"tag":"board-b3s15","at":"2026-11-20T23:12:54-08:00","what":"Board only: stage 15 card and handoff notes added","card":"b-board-b3s15","theme":"Tools","kind":"house"},
 {"tag":"projclean1d","at":"2026-11-20T23:10:41-08:00","what":"Project docs moved into the repo: 61 more docs copied into claude/ (fourth part of the second run)","card":"c-projclean","theme":"Project Ops"},
 {"tag":"projclean1c","at":"2026-11-20T23:00:36-08:00","what":"Project docs moved into the repo: 118 more docs copied into claude/ (third part of the second run)","card":"c-projclean","theme":"Project Ops"},
 {"tag":"projclean2b","at":"2026-11-20T22:35:30-08:00","what":"Project docs move: build name 2a put on its card, no files copied","card":"b-projclean2b","theme":"Game Shell"},
