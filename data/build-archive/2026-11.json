@@ -1,4 +1,5 @@
 [
+{"tag":"takes-2026-11-20b","at":"2026-11-21T00:02:28+00:00","what":"Merged 15 more voice takes from branch takes","card":"c-takes-56fb01","theme":"Voice Clips"},
 {"tag":"board-startpause","at":"2026-11-20T15:57:22-08:00","what":"The two broken START routes are paused instead of failing silently","kind":"house","card":"b-board-startpause","theme":"Game Shell"},
 {"tag":"fix-listen1-play","at":"2026-11-20T23:55:17+00:00","what":"The listening test steps named \"Grandma's\"; they now say Deedee's kitchen","card":"c-fix-listen1-play","theme":"Characters"},
 {"tag":"fix-keysecrets2-try-4","at":"2026-11-20T23:54:08+00:00","what":"The page reads the video job's report through the GitHub API, not the 5 minute cached copy","card":"c-fix-keysecrets2-try-4","theme":"Tools"},
