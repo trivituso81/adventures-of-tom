@@ -10493,9 +10493,49 @@
    "blocks": [],
    "created": "2026-11-27",
    "changed": "2026-11-27"
+  },
+  {
+   "id": "b-board-b3story3",
+   "tag": "board-b3story3",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-27",
+   "theme": "Battle System",
+   "title": "a proposed solution for each open point of the storybook battle screen is written down for the proposal session",
+   "next": "Done: a proposed solution for each open point of the storybook battle screen is written down for the proposal session",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as board-b3story3. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-27",
+   "changed": "2026-11-27"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ",
+   "title": "Battle screen: storybook look proposal, every case drawn",
+   "first": "2026-11-27T16:11:58-08:00",
+   "last": "2026-11-27T17:56:37-08:00",
+   "tags": [
+    "board-b3story",
+    "board-b3story2",
+    "board-b3story3"
+   ],
+   "cards": [
+    "c-b3story",
+    "b-board-b3story",
+    "b-board-b3story2",
+    "b-board-b3story3"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFUh8sJasfXzMouUXk",
    "title": "Move Workbench 15: Family Ruckus",
@@ -10516,21 +10556,6 @@
    ],
    "cards": [
     "c-movebench-14"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ",
-   "title": "Battle screen: storybook look proposal, every case drawn",
-   "first": "2026-11-27T16:11:58-08:00",
-   "last": "2026-11-27T17:08:33-08:00",
-   "tags": [
-    "board-b3story",
-    "board-b3story2"
-   ],
-   "cards": [
-    "c-b3story",
-    "b-board-b3story",
-    "b-board-b3story2"
    ]
   },
   {
@@ -17530,8 +17555,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "28403c5a136c10522929529f416afa2b4e0f711a",
- "synced_at": "2026-11-28T01:54:40+00:00",
+ "synced": "03b9a7f73c4c8569458702286577d0275f26713d",
+ "synced_at": "2026-11-28T01:57:32+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
