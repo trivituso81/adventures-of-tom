@@ -10801,6 +10801,52 @@
    "blocks": [],
    "created": "2026-11-27",
    "changed": "2026-11-27"
+  },
+  {
+   "id": "b-board-b3proto-fb2",
+   "tag": "board-b3proto-fb2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-27",
+   "theme": "Game Shell",
+   "title": "the note on Tom's prototype answers is corrected: only \"the look and feel is not final\" stands",
+   "next": "Done: the note on Tom's prototype answers is corrected: only \"the look and feel is not final\" stands",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukE21G668MNVQvNAKtP",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as board-b3proto-fb2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-27",
+   "changed": "2026-11-27"
+  },
+  {
+   "id": "b-board-b3proto-fb3",
+   "tag": "board-b3proto-fb3",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-27",
+   "theme": "Game Shell",
+   "title": "the proposal card now says the party and monsters stay where the game puts them",
+   "next": "Done: the proposal card now says the party and monsters stay where the game puts them",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukE21G668MNVQvNAKtP",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as board-b3proto-fb3. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-27",
+   "changed": "2026-11-27"
   }
  ],
  "sessions": [
@@ -10808,10 +10854,12 @@
    "url": "https://claude.ai/code/session_01RXeukE21G668MNVQvNAKtP",
    "title": "Battle screen: a lightweight prototype to try",
    "first": "2026-11-27T20:10:13-08:00",
-   "last": "2026-11-27T22:40:51-08:00",
+   "last": "2026-11-27T22:42:52-08:00",
    "tags": [
     "b3proto",
-    "board-b3proto-fb"
+    "board-b3proto-fb",
+    "board-b3proto-fb2",
+    "board-b3proto-fb3"
    ],
    "cards": [
     "c-b3proto"
@@ -17879,8 +17927,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "07581a3a65945b38634e40af5864dbef8cc63335",
- "synced_at": "2026-11-28T06:41:34+00:00",
+ "synced": "f6bd59b14e74fda70fd82c99d2c298748076dcf9",
+ "synced_at": "2026-11-28T06:43:43+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
