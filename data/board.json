@@ -10447,7 +10447,7 @@
    "id": "c-b3story",
    "tag": "b3story",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle System",
    "title": "Battle screen: storybook look proposal, every case drawn",
    "next": "Proposal built: battle-story.html (ADMIN > Battle system > Battle screen: storybook proposal), plan claude/b3story-plan.md. Hands you the card Battle screen: pick what to do with the storybook proposal.",
@@ -10503,9 +10503,14 @@
     {
      "d": "2026-11-27",
      "t": "Built as build b3story: the tappable storybook mock, drawn on the game's own arrangement of the family and the monsters (Tom's 22:52 addition, read before anything was pushed), at the six real screens with every state the card listed (source claude/battleux-mock2/src/, check tools/b3story_test.py passes at every size, every state looked at), and claude/b3story-plan.md (what the screen is, section 7 drawn with what changed, every row of sections 2 to 4, the Details table, the menu table, 13 Art Library pieces listed and none made, contrast, 18 calls, weak spots, build cards). No rule, number or engine file changed. Hands to t-b3story-decide."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as b3story: the storybook battle screen proposal to tap through: the moves open beside whoever is up, every case drawn at the six real screen sizes"
     }
    ],
-   "after": "t-b3story-decide"
+   "after": "t-b3story-decide",
+   "done": "2026-11-27"
   },
   {
    "id": "b-board-b3story",
@@ -10928,7 +10933,7 @@
    "id": "c-stageapproach",
    "tag": "stageapproach1",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "night": false,
    "title": "Make Runs to the monster work on moves with stage steps",
@@ -10950,10 +10955,14 @@
     {
      "d": "2026-11-27",
      "t": "Tom (23:06): 'I can't change the impact? How come it doesn't work when I say approach monster' on Lounge Pass Flex. Reproduced: Runs to the monster is ignored on a staged move; the hit is read-only on a staged move."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukF5T9H671xWNXfKgbv",
+    "url": "https://claude.ai/code/session_01RXeukDCLLECEkf1Lk73xzy",
     "opening": "not started"
    }
   },
@@ -11085,6 +11094,28 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukCgK3r6u7c5CU21MGw",
+   "title": "Battle screen: storybook look proposal, every case drawn",
+   "first": "2026-11-27T21:49:39-08:00",
+   "last": "2026-11-27T23:13:19-08:00",
+   "tags": [
+    "b3story"
+   ],
+   "cards": [
+    "c-b3story"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDCLLECEkf1Lk73xzy",
+   "title": "Make Runs to the monster work on moves with stage steps",
+   "first": "2026-11-27T23:13:01-08:00",
+   "last": "2026-11-27T23:13:01-08:00",
+   "tags": [],
+   "cards": [
+    "c-stageapproach"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukF5T9H671xWNXfKgbv",
    "title": "Move Workbench 16: wide monitor layout and clean-up",
    "first": "2026-11-27T19:33:32-08:00",
@@ -11124,16 +11155,6 @@
    "cards": [
     "c-b3proto",
     "t-b3proto-try"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCgK3r6u7c5CU21MGw",
-   "title": "Battle screen: storybook look proposal, every case drawn",
-   "first": "2026-11-27T21:49:39-08:00",
-   "last": "2026-11-27T21:49:39-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3story"
    ]
   },
   {
@@ -18176,8 +18197,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "e0b164c8bf426387f54752f883558de15125944c",
- "synced_at": "2026-11-28T07:08:55+00:00",
+ "synced": "a4451d009a35045c498ab8895c91c1ff33ffffb1",
+ "synced_at": "2026-11-28T07:13:45+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
