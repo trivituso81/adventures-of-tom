@@ -10114,7 +10114,7 @@
    "auto": true,
    "chat": {
     "url": "",
-    "opening": "not started"
+    "opening": "\"Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md, then build Move Workbench 14\""
    },
    "prompt": {
     "what": "Monster attacks can have effects, stage steps, a freeze on the hit and a shake, set on the same page as family moves.",
@@ -10133,6 +10133,10 @@
     {
      "d": "2026-11-27",
      "t": "Unblocked: Move Workbench 13: start picture, held and worn is done."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Session started on this card (Sonnet 5.5, medium)."
     }
    ]
   },
