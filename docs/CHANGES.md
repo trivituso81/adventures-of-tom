@@ -1,3 +1,7 @@
+## board-b3proto-fb3 (2026-11-27): the proposal card now says the party and monsters stay where the game puts them
+
+Tom (11-27 22:41): the prototype changed party and monster layout when it was only meant to be about the move list. Added a line to the prompt of c-b3story and a note under call 2 in the prototype plan. No game change.
+
 ## board-b3proto-fb2 (2026-11-27): the note on Tom's prototype answers is corrected: only "the look and feel is not final" stands
 
 Tom (11-27 22:41): the fold-away speed is a placeholder and five monsters on the battlefield is how the game already works, so neither is a finding. Rewrote the note on t-b3proto-try and c-b3story. No game change.
