@@ -10161,7 +10161,7 @@
    "id": "c-movebench-15",
    "tag": "movebench15",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Move Workbench 15: Family Ruckus",
    "next": "Built: Double Team and Full Family Ruckus are listed under Family Ruckus and have Timing, Stage, Effects and Sound on the Workbench page; they play on the spend beat before the two members' moves. Ships as movebench15. Nothing for Tom to judge.",
@@ -10201,22 +10201,26 @@
     {
      "d": "2026-11-27",
      "t": "Built movebench15: ruckus:double and ruckus:full (spec files, Guide rows, engine link on the spend beat, preview with two members). Golden unchanged (219, 0 differ); ruckus_test, acts, spec, page, preview, apply, b3_test pass. stage_test and objects_test fail the same lines before this build (a 'start' key in the expected diff); not touched. Nothing for Tom to judge. Next: c-movebench-16."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as movebench15: the two Family Ruckus spends (Double Team, Full Family Ruckus) can have effects, stage steps, a freeze and a shake, set on the Workbench page"
     }
-   ]
+   ],
+   "done": "2026-11-27"
   },
   {
    "id": "c-movebench-16",
    "tag": "movebench16",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Move Workbench 16: wide monitor layout and clean-up",
    "next": "A new Admin Dashboard layout, Animations, gives the workbench most of the wide monitor. The Move Lab and the old animation sheet are deleted. Starts by itself when Move Workbench 15 ships.",
    "blocks": [],
    "after": "nothing for Tom: end",
    "created": "2026-11-26",
-   "changed": "2026-11-26",
+   "changed": "2026-11-27",
    "auto": true,
    "chat": {
     "url": "",
@@ -10235,6 +10239,10 @@
     {
      "d": "2026-11-26",
      "t": "Added by c-movebench-design: phase 16 of claude/movebench-plan.md section g."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Unblocked: Move Workbench 15: Family Ruckus is done."
     }
    ]
   },
@@ -10524,6 +10532,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukFUh8sJasfXzMouUXk",
+   "title": "Move Workbench 15: Family Ruckus",
+   "first": "2026-11-27T17:53:53-08:00",
+   "last": "2026-11-27T19:04:55-08:00",
+   "tags": [
+    "movebench15"
+   ],
+   "cards": [
+    "c-movebench-15"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ",
    "title": "Battle screen: storybook look proposal, every case drawn",
    "first": "2026-11-27T16:11:58-08:00",
@@ -10538,16 +10558,6 @@
     "b-board-b3story",
     "b-board-b3story2",
     "b-board-b3story3"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFUh8sJasfXzMouUXk",
-   "title": "Move Workbench 15: Family Ruckus",
-   "first": "2026-11-27T17:53:53-08:00",
-   "last": "2026-11-27T17:53:53-08:00",
-   "tags": [],
-   "cards": [
-    "c-movebench-15"
    ]
   },
   {
@@ -17559,8 +17569,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "03b9a7f73c4c8569458702286577d0275f26713d",
- "synced_at": "2026-11-28T01:57:32+00:00",
+ "synced": "9ed674994691bb796a4dfbd13a3a758827b056ed",
+ "synced_at": "2026-11-28T03:05:40+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
