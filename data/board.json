@@ -10482,6 +10482,10 @@
     {
      "d": "2026-11-27",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Tom (11-27 22:39), after trying the prototype: the look and feel is not final, so most of it is untestable (list beside the character, Use button, how it feels, backgrounds, Details, legibility). Findings: (1) the list vanishes for under a second during a move, too short to register anything before the next person's list appears; (2) with five monsters he expects all five on the battlefield, not small boxes under the big one; (3) first tap then Use works. 'That was a massive waste of time - I just tested something that doesn't matter because almost every test relies on the look and feel.' Direction: judge the real storybook look, not a plain-CSS prototype."
     }
    ]
   },
@@ -10641,6 +10645,10 @@
     {
      "d": "2026-11-27",
      "t": "Unblocked: Battle screen: a lightweight prototype to try is done."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Tom (11-27 22:39), after trying the prototype: the look and feel is not final, so most of it is untestable (list beside the character, Use button, how it feels, backgrounds, Details, legibility). Findings: (1) the list vanishes for under a second during a move, too short to register anything before the next person's list appears; (2) with five monsters he expects all five on the battlefield, not small boxes under the big one; (3) first tap then Use works. 'That was a massive waste of time - I just tested something that doesn't matter because almost every test relies on the look and feel.' Direction: judge the real storybook look, not a plain-CSS prototype."
     }
    ]
   },
