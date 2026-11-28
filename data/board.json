@@ -10327,7 +10327,7 @@
    "id": "c-wideframe",
    "tag": "wideframe1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "night": false,
    "title": "Wider video frame for moves with a reaching arm",
@@ -10357,12 +10357,17 @@
     {
      "d": "2026-11-28",
      "t": "Shipped wideframe1. body.frame tall or wide in the move spec, one workbench choice (Room for a reaching arm), worker makes a wide move 1:1 at 1080p from a 1080x1080 frame (figure keeps its height, magenta each side), price chip reads $0.75. Set on move:lounge_pass_flex only. No video was made and nothing paid was run. Next: Tom card t-wideframe-try."
+    },
+    {
+     "d": "2026-11-28",
+     "t": "Shipped as wideframe1: a move can ask for a square video frame so a reaching arm is not cut off; Lounge Pass Flex asks for it"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukCxxfQRSup37D9SVjV",
     "opening": "Read CLAUDE.md, claude/handoff-rules.md, then card c-wideframe in data/board.json and do what its prompt says."
-   }
+   },
+   "done": "2026-11-28"
   },
   {
    "id": "t-wideframe-try",
@@ -10711,6 +10716,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukCxxfQRSup37D9SVjV",
+   "title": "Wider video frame for moves with a reaching arm",
+   "first": "2026-11-27T22:56:18-08:00",
+   "last": "2026-11-28T00:39:06-08:00",
+   "tags": [
+    "wideframe1"
+   ],
+   "cards": [
+    "c-wideframe"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEf9f6b6LGnFVDAiBY",
    "title": "Battle screen: mock it exactly as the mockup",
    "first": "2026-11-27T23:32:47-08:00",
@@ -10763,16 +10780,6 @@
     "c-movebench-16",
     "c-wideframe",
     "c-stageapproach"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCxxfQRSup37D9SVjV",
-   "title": "Wider video frame for moves with a reaching arm",
-   "first": "2026-11-27T22:56:18-08:00",
-   "last": "2026-11-27T22:56:18-08:00",
-   "tags": [],
-   "cards": [
-    "c-wideframe"
    ]
   },
   {
@@ -17831,8 +17838,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "0502718ef659b3c16c6d1f39686e9397c6f8e5fe",
- "synced_at": "2026-11-28T08:29:05+00:00",
+ "synced": "980d1ef660466cf5958bb6976689409830ae351c",
+ "synced_at": "2026-11-28T08:39:59+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
