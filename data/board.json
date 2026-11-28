@@ -10774,9 +10774,45 @@
      "t": "Added by c-movebench-16 (movebench16): behind Tom's decide card t-movebench-bulkvideo."
     }
    ]
+  },
+  {
+   "id": "b-board-b3proto-fb",
+   "tag": "board-b3proto-fb",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-27",
+   "theme": "Battle System",
+   "title": "Tom's answers after trying the battle screen prototype are written on the prototype card and on the proposal card",
+   "next": "Done: Tom's answers after trying the battle screen prototype are written on the prototype card and on the proposal card",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukE21G668MNVQvNAKtP",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as board-b3proto-fb. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-27",
+   "changed": "2026-11-27"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukE21G668MNVQvNAKtP",
+   "title": "Battle screen: a lightweight prototype to try",
+   "first": "2026-11-27T20:10:13-08:00",
+   "last": "2026-11-27T22:40:51-08:00",
+   "tags": [
+    "b3proto",
+    "board-b3proto-fb"
+   ],
+   "cards": [
+    "c-b3proto"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukCgK3r6u7c5CU21MGw",
    "title": "Battle screen: storybook look proposal, every case drawn",
@@ -10785,18 +10821,6 @@
    "tags": [],
    "cards": [
     "c-b3story"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukE21G668MNVQvNAKtP",
-   "title": "Battle screen: a lightweight prototype to try",
-   "first": "2026-11-27T20:10:13-08:00",
-   "last": "2026-11-27T20:32:57-08:00",
-   "tags": [
-    "b3proto"
-   ],
-   "cards": [
-    "c-b3proto"
    ]
   },
   {
@@ -17851,8 +17875,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "e40fb0559415c2460b896faba810e3fe195d0d94",
- "synced_at": "2026-11-28T05:50:24+00:00",
+ "synced": "07581a3a65945b38634e40af5864dbef8cc63335",
+ "synced_at": "2026-11-28T06:41:34+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
