@@ -10542,7 +10542,7 @@
    "id": "c-b3proto",
    "tag": "b3proto",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle System",
    "auto": true,
    "title": "Battle screen: a lightweight prototype to try",
@@ -10554,7 +10554,7 @@
    "created": "2026-11-27",
    "changed": "2026-11-27",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukE21G668MNVQvNAKtP",
     "opening": "not started"
    },
    "prompt": {
@@ -10570,6 +10570,10 @@
     {
      "d": "2026-11-27",
      "t": "Added by board-b3proto-plan. Tom, 19:45: \"Can you plan for a super lightweight prototype to see how I like it and why issues I find?\" Plan: claude/battleux-mock2/proto-plan.md. Planning session: https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ"
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -10633,6 +10637,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukE21G668MNVQvNAKtP",
+   "title": "Battle screen: a lightweight prototype to try",
+   "first": "2026-11-27T20:10:13-08:00",
+   "last": "2026-11-27T20:10:13-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3proto"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ",
    "title": "Battle screen: storybook look proposal, every case drawn",
@@ -17683,8 +17697,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "e352b35bdd5ddbdae6ead97d2d409173e6316672",
- "synced_at": "2026-11-28T03:53:09+00:00",
+ "synced": "f4999b4d85aeb2b56e1fe3487bccd55dee17822f",
+ "synced_at": "2026-11-28T04:11:00+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
