@@ -156,8 +156,8 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | battleux-mock/src/view.html | <div class="vw"> | 2026-11-26 |
 | battleux-mock/src/view.js | function startViewer(){ | 2026-11-26 |
 | battleux-mock2/assessment.md | Battle screen, storybook mockup: assessment (board-b3story, 2026-11-27) | 2026-11-27 |
-| battleux-mock2/tom-mockup-2026-11-27.jpg | ���� JFIF      �� C  |  |
-| battleux-mock2/tom-mockup-at-duo-width-951.jpg | ���� JFIF      �� C  |  |
+| battleux-mock2/tom-mockup-2026-11-27.jpg | ���� JFIF      �� C  | 2026-11-27 |
+| battleux-mock2/tom-mockup-at-duo-width-951.jpg | ���� JFIF      �� C  | 2026-11-27 |
 | battleux-plan.md | Battle screen redesign: the proposal (battleux-plan, 2026-11-21) | 2026-11-21 |
 | bestiary-v10-gemini-draft-part1.md | THE ADVENTURES OF TOM: PURE v10 BESTIARY & ENCOUNTER DIRECTORY (`bestiary-v10.md`) | 2026-11-26 |
 | bestiary-v10-gemini-draft-part2.md | - **Pet Peeves:** `Sizzle`, `Razzle` / **Resists:** `Racket` | 2026-11-26 |

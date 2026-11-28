@@ -46,7 +46,7 @@ Checked against: `data/b3-rules.js`, `data/b3-kit-*.js` (120 family moves), `dat
 
 | # | Problem | Fact |
 |---|---|---|
-| 1 | The move panel floats over the middle of the scene | A side shows up to 3 monsters in Front and 2 in Back, and the family runs across the middle to attack. The panel covers about a quarter of the width and nearly half the height, where the Back row and the action are. Nothing says whether it hides while a move plays. |
+| 1 | The move panel lies over the middle of the scene (Tom wants this kept: section 6) | A side shows up to 3 monsters in Front and 2 in Back, and the family runs across the middle to attack. The panel covers about a quarter of the width and nearly half the height. To solve, not to remove: what it covers with five monsters, and whether it hides while a move plays. |
 | 2 | The family is squeezed into the right quarter and overlaps | Grace and Tom overlap in the picture. Tapping a family member's body to aim a heal would be unreliable. |
 | 3 | Text is too small at real size | Scaled to the Duo unfolded (951 px wide): move names about 11 px; "Support skill", "115 / 115 HP", Pep and the Pet Peeve chips about 9 to 10 px. The floor set in b3look is 12.5 px. |
 | 4 | One shape only | The picture is 4:3. The four real screens are the Duo unfolded sideways (951 x 648), desktop, the Duo folded, and the iPhone upright (393 x 852) and sideways (852 x 393). At iPhone sideways height the whole picture is 523 px wide. An upright phone needs its own arrangement and none is drawn. |
@@ -79,3 +79,14 @@ Checked against: `data/b3-rules.js`, `data/b3-kit-*.js` (120 family moves), `dat
 ## 5. The call
 
 Recommendation: do not build from the picture as it is. Keep the six ideas of section 1 and the approved rules of 11-21 (one list, first tap shows and second tap uses, a tap on a monster aims, every picture has its word, every fact once), and draw the storybook look as a tappable mock at the four real screens with every case of section 4, as the first redesign did. Card c-b3story holds that step.
+
+## 6. Tom's answer (11-27 17:03): what must stay
+
+Tom: "one thing that I really do like is the actions appearing kind of like to the left of the character, and that sort of more of a dynamic bar. It reminds me of Expedition 33. And I like to keep that in some way, shape, or form. I like that most of the UI is overlay and not pushing the screen up or down or to the side".
+
+| Fixed point | What it means for the proposal |
+|---|---|
+| The moves appear beside the character whose turn it is, as a dynamic bar (his reference: Clair Obscur: Expedition 33) | The list is anchored to the acting family member and moves with the turn. It does not go back into a side strip or a band under the scene. Section 1 gains this as idea 7. |
+| Most of the controls lie over the scene | The scene keeps the whole screen; nothing pushes it up, down or to the side. Idea 8. |
+
+This overrules the reading of section 3 row 1 as a reason to move the panel. What is left to solve inside the two points: where the bar sits for each family member and near an edge, what it covers with five monsters, hiding while a move plays, contrast on any background, text and tap sizes at real screens, and the upright phone. Section 2's rows (two moves picked, no Use, tabs that hide moves, repeats, wrong words) are unchanged by this.
