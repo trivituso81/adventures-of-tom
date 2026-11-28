@@ -10049,7 +10049,7 @@
    "id": "c-movebench-13",
    "tag": "movebench13",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Move Workbench 13: start picture, held and worn",
    "next": "Shipped as movebench13: Start picture row (Holds one thing, Wears, standard or own picture), the Library entry start-<who>-<move> made from the Hero with only the hands edited, startPic on a video row, the seven two-held-prop lines gone. Nothing paid ran. Next: Move Workbench 14 starts by itself.",
@@ -10089,15 +10089,19 @@
     {
      "d": "2026-11-27",
      "t": "movebench13 built: Start picture row on the Workbench, 8 two-prop moves seeded (one held, rest worn), Art Library entry start-<who>-<move> via ownstart.py with lock_hero_pixels and Gate 1 unchanged, startPic on video rows, t-guidecross-decide rewritten to four. Tests passed: start_test, ownstart_test, spec_test, apply_test, store_test, worker_test, page_test, golden_test. Not run: any paid generation; a real model's hand edit (a drawn stand-in was used). Pre-existing failures left: tools/battle_guide_test.py (manifest_crosswalk has no MANIFESTS) and tools/board_test.py (#bcopy timeout), both fail on HEAD without this change."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as movebench13: each move can say what it holds (one thing) and what it wears, and have its own start picture made from the Hero with only the hands edited"
     }
-   ]
+   ],
+   "done": "2026-11-27"
   },
   {
    "id": "c-movebench-14",
    "tag": "movebench14",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Move Workbench 14: monster attacks get effects and stage",
    "next": "Monster attacks can have effects, stage steps, a freeze on the hit and a shake, set on the same page as family moves. Starts by itself when Move Workbench 13 ships.",
@@ -10106,7 +10110,7 @@
    ],
    "after": "nothing for Tom: c-movebench-15",
    "created": "2026-11-26",
-   "changed": "2026-11-26",
+   "changed": "2026-11-27",
    "auto": true,
    "chat": {
     "url": "",
@@ -10125,6 +10129,10 @@
     {
      "d": "2026-11-26",
      "t": "Added by c-movebench-design: phase 14 of claude/movebench-plan.md section g."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Unblocked: Move Workbench 13: start picture, held and worn is done."
     }
    ]
   },
@@ -10379,8 +10387,10 @@
    "url": "https://claude.ai/code/session_01RXeukEMoNYqpzg4HGAzdZf",
    "title": "Move Workbench 13: start picture, held and worn",
    "first": "2026-11-27T15:08:19-08:00",
-   "last": "2026-11-27T15:08:19-08:00",
-   "tags": [],
+   "last": "2026-11-27T16:02:09-08:00",
+   "tags": [
+    "movebench13"
+   ],
    "cards": [
     "c-movebench-13"
    ]
@@ -17369,8 +17379,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "e1ae1ffdb9379aafd7488dae311a24e26b2d286f",
- "synced_at": "2026-11-27T23:09:05+00:00",
+ "synced": "a429d97f1ae7ddf950f921358aa59f136a6bcc54",
+ "synced_at": "2026-11-28T00:05:51+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
