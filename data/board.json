@@ -2263,13 +2263,13 @@
    "title": "Night cleanup: one bucket of cleanup every night",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Standing card. Each night the night shift runs one of four buckets: unused files, old notes, a shorter working agreement, dead tests. It never goes to Done. Nothing for Tom to do; he reads the result on the card Last night.",
    "blocks": [],
    "created": "2026-11-21",
    "changed": "2026-11-27",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDoxxAERG8vXEgZerK",
     "opening": "not started"
    },
    "nightly": true,
@@ -2352,6 +2352,14 @@
     {
      "d": "2026-11-27",
      "t": "Not running: START fired the task but its conversation pushed nothing in 30 minutes. Back to Up next. Use Copy prompt or START again."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started by the night shift."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -2366,7 +2374,8 @@
    "last_run": {
     "date": "2026-11-23",
     "build": ""
-   }
+   },
+   "started_at": "2026-11-28T07:08:54+00:00"
   },
   {
    "id": "c-night-qa",
@@ -10942,12 +10951,51 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukF5T9H671xWNXfKgbv",
     "opening": "not started"
    }
+  },
+  {
+   "id": "b-board-stageapproach",
+   "tag": "board-stageapproach",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-27",
+   "theme": "Game Shell",
+   "title": "one card to make Runs to the monster work on moves with stage steps",
+   "next": "Done: one card to make Runs to the monster work on moves with stage steps",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukF5T9H671xWNXfKgbv",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as board-stageapproach. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-27",
+   "changed": "2026-11-27"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukF5T9H671xWNXfKgbv",
+   "title": "Move Workbench 16: wide monitor layout and clean-up",
+   "first": "2026-11-27T19:33:32-08:00",
+   "last": "2026-11-27T23:08:03-08:00",
+   "tags": [
+    "movebench16",
+    "board-wideframe",
+    "board-stageapproach"
+   ],
+   "cards": [
+    "c-movebench-16",
+    "c-wideframe",
+    "c-stageapproach"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukCxxfQRSup37D9SVjV",
    "title": "Wider video frame for moves with a reaching arm",
@@ -10955,20 +11003,6 @@
    "last": "2026-11-27T22:56:18-08:00",
    "tags": [],
    "cards": [
-    "c-wideframe"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukF5T9H671xWNXfKgbv",
-   "title": "Move Workbench 16: wide monitor layout and clean-up",
-   "first": "2026-11-27T19:33:32-08:00",
-   "last": "2026-11-27T22:52:42-08:00",
-   "tags": [
-    "movebench16",
-    "board-wideframe"
-   ],
-   "cards": [
-    "c-movebench-16",
     "c-wideframe"
    ]
   },
@@ -18038,8 +18072,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "5803b3f32fb271286ed91dd461466a9a84d7d39a",
- "synced_at": "2026-11-28T06:57:03+00:00",
+ "synced": "e0b164c8bf426387f54752f883558de15125944c",
+ "synced_at": "2026-11-28T07:08:55+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
@@ -18162,6 +18196,13 @@
      "id": "c-movebench-9",
      "at": "2026-11-27T11:38:51+00:00",
      "kind": "queued"
+    }
+   ],
+   "2026-11-27": [
+    {
+     "id": "c-night-clean",
+     "at": "2026-11-28T07:08:54+00:00",
+     "kind": "standing"
     }
    ]
   },
