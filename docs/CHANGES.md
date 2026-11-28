@@ -1,3 +1,7 @@
+## board-stageapproach (2026-11-27): one card to make Runs to the monster work on moves with stage steps
+
+Tom (11-27 23:06): approach did nothing on Lounge Pass Flex. Cause found: staged moves return early in `b3PlayMove` before the approach code. Card c-stageapproach (Sonnet 5.5 medium); no code changed here.
+
 ## board-wideframe (2026-11-27): one card for a wider video frame on moves with a reaching arm
 
 Tom (11-27 22:44): the new Lounge Pass Flex take was cut off at the side. Cause: the workbench makes every video in the tall 9:16 frame. Card c-wideframe (Sonnet 5.5 medium) adds a per-move square frame; no code changed here.

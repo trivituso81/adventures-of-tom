@@ -10912,6 +10912,39 @@
    "blocks": [],
    "created": "2026-11-27",
    "changed": "2026-11-27"
+  },
+  {
+   "id": "c-stageapproach",
+   "tag": "stageapproach1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle Animations",
+   "night": false,
+   "title": "Make Runs to the monster work on moves with stage steps",
+   "next": "Makes How he gets there (run to the monster, run back) work on a move with stage steps like Lounge Pass Flex, and explains the read-only hit.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "created": "2026-11-27",
+   "changed": "2026-11-27",
+   "prompt": {
+    "what": "Makes the approach setting work for moves with stage steps, and says where their hit comes from.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: cause and files found, golden tests catch mistakes)",
+    "effort": "medium (one early return to fix, tests written)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/movebench-plan.md (sections d.1, d.2 and the Phase 11 and 12 Built notes on staged moves), then card c-stageapproach in data/board.json. Your first push is the commit board: start c-stageapproach. Fact found on 2026-11-27 (repro, 951 x 648, move:lounge_pass_flex): the workbench Timing section offers How he gets there (Stays in place / Runs to the monster) on a staged move, but choosing Runs to the monster changes nothing: the preview's run still reports runInSec null and the same hit time. Cause: in `b3PlayMove` (engine/b3-play.js) a move with a staged row returns early through `b3gPlay(SR, ...)` (engine/b3-stage.js, 'movestage2') BEFORE the approach logic (`travel`, `msTiming(head).approach`, `approachSec`, `returnSec`) that only the plain clip branch has. Second fact: on a staged move The hit lands is read-only by design ('set by the stage steps of this move'; it follows the swat mark and the stage steps), so Tom cannot type an impact for it. Build: make a staged move honour the spec's `timing.approach`, `approachSec` and `returnSec` exactly as the plain clip branch does (the body crosses to the monster before the clip starts and back after it; the clip's marks, stage steps and hit time are measured from the clip's start, so they shift by approachSec); a staged move whose approach is auto keeps playing exactly as today (golden records must not change: run `python3 -I tools/movebench/stage_test.py`, the golden tests, and check the 20 staged moves are byte for byte the same with approach unset). Reuse `b3cStand` and the `cmove` body kind; do not write a second implementation. Then in the Timing section, for a staged move, say in the hit row where the hit comes from in words Tom can act on ('the hit is the swat mark, picture 24; change it in Body video, Marks') and add a test that every Timing control shown on a staged move changes the run the preview reports (page_test.py already does this for Kettlebell Swing; add Lounge Pass Flex). Look at the pictures the tests write before you push. Tests: stage_test.py, page_test.py, lasting_test.py, tools/b3_test.py, python3 tools/board_check.py, python3 tools/smoke.py. Write the docs/CHANGES.md heading for build stageapproach1 and run bump_tags. Set after on this card to nothing for Tom: end, or a Tom play card you create (ask play, fyi true): open Lounge Pass Flex in the Battle Guide, choose Runs to the monster, Preview the whole move, and see Tom run to the monster, swing, and run back. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Tom (23:06): 'I can't change the impact? How come it doesn't work when I say approach monster' on Lounge Pass Flex. Reproduced: Runs to the monster is ignored on a staged move; the hit is read-only on a staged move."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   }
   }
  ],
  "sessions": [
