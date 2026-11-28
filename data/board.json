@@ -10213,7 +10213,7 @@
    "id": "c-movebench-16",
    "tag": "movebench16",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Move Workbench 16: wide monitor layout and clean-up",
    "next": "Built: the Animations layout (420, 951, 1589, 440) and the workbench wide at 1589; the Move Lab and the old sheet pieces are deleted. Tom tries it on the wide monitor (card t-movebench-16-try).",
@@ -10251,8 +10251,13 @@
     {
      "d": "2026-11-27",
      "t": "Built movebench16: the Animations layout in dashboard.html, the Move Workbench wide layout (list 300, preview and versions in the middle, sections in two columns), and the purge of engine/b3-movelab.js, b3-movelab.css, the MOVE LAB: TOM row, tools/movestage_lab_test.py, the What is done block and the NOTE OPEN badge. Hands Tom t-movebench-16-try and the decide card t-movebench-bulkvideo. This is the last phase."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as movebench16: the Move Workbench gets the wide monitor (Admin Dashboard layout Animations), and the old Move Lab is deleted"
     }
-   ]
+   ],
+   "done": "2026-11-27"
   },
   {
    "id": "t-movebench-2-try",
@@ -10742,6 +10747,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukF5T9H671xWNXfKgbv",
+   "title": "Move Workbench 16: wide monitor layout and clean-up",
+   "first": "2026-11-27T19:33:32-08:00",
+   "last": "2026-11-27T20:11:56-08:00",
+   "tags": [
+    "movebench16"
+   ],
+   "cards": [
+    "c-movebench-16"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukE21G668MNVQvNAKtP",
    "title": "Battle screen: a lightweight prototype to try",
    "first": "2026-11-27T20:10:13-08:00",
@@ -10768,16 +10785,6 @@
     "b-board-b3story2",
     "b-board-b3story3",
     "b-board-b3proto-plan"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukF5T9H671xWNXfKgbv",
-   "title": "Move Workbench 16: wide monitor layout and clean-up",
-   "first": "2026-11-27T19:33:32-08:00",
-   "last": "2026-11-27T19:33:32-08:00",
-   "tags": [],
-   "cards": [
-    "c-movebench-16"
    ]
   },
   {
@@ -17801,8 +17808,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "f4999b4d85aeb2b56e1fe3487bccd55dee17822f",
- "synced_at": "2026-11-28T04:11:00+00:00",
+ "synced": "caa00b4040d659748cac89df326b7f2e158d1599",
+ "synced_at": "2026-11-28T04:12:40+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
