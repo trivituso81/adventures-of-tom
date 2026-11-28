@@ -157,6 +157,14 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | battleux-mock/src/view.js | function startViewer(){ | 2026-11-27 |
 | battleux-mock2/assessment.md | Battle screen, storybook mockup: assessment (board-b3story, 2026-11-27) | 2026-11-27 |
 | battleux-mock2/proto-plan.md | Battle screen prototype: the plan (board-b3proto-plan, 2026-11-27) | 2026-11-27 |
+| battleux-mock2/src/app.css | /* The storybook battle screen, mock (card c-b3story, plan claude/b3story-plan.md). This CSS is the look spec; |  |
+| battleux-mock2/src/app.js | // The storybook battle screen, tappable mock (card c-b3story; plan claude/b3story-plan.md). NOT the game: no  |  |
+| battleux-mock2/src/build.py | Builds battle-story.html (the storybook battle screen proposal, card c-b3story) from the files in this folder. |  |
+| battleux-mock2/src/cut.py | Cuts the still pictures the storybook mock shows (card c-b3story) from the magenta start pictures in art/clips |  |
+| battleux-mock2/src/shell.html | <!doctype html> |  |
+| battleux-mock2/src/view.css | body:not(.app){font-family:'Figtree',system-ui,sans-serif;background:#2b1a33;color:#fff1d6;overflow:auto;heigh |  |
+| battleux-mock2/src/view.html | <header id="vh"><h1>Battle screen: the storybook look <small>proposal, card c-b3story</small></h1> |  |
+| battleux-mock2/src/view.js | function startViewer(){ |  |
 | battleux-mock2/tom-mockup-2026-11-27.jpg | ���� JFIF      �� C  | 2026-11-27 |
 | battleux-mock2/tom-mockup-at-duo-width-951.jpg | ���� JFIF      �� C  | 2026-11-27 |
 | battleux-plan.md | Battle screen redesign: the proposal (battleux-plan, 2026-11-21) | 2026-11-21 |
@@ -738,6 +746,7 @@ Written by tools/claude_index.py; do not edit by hand. This folder replaces the 
 | attn-plan.md | Needs attention: automatic rescue (attn1), plan of 2026-11-20 | 2026-11-20 |
 | audit-fix4-part3.md | Audit fix 4, part 2 finished: no more freezes (2026-11-02, NO PUSH, nothing changed in the repo) | 2026-11-02 |
 | b3look-plan.md | Battle screen: the new menu's look, and only what is needed (b3look-plan, 2026-11-22) | 2026-11-22 |
+| b3story-plan.md | Battle screen, the storybook look: the proposal (b3story, 2026-11-27) | 2026-11-27 |
 | bonus-chapter-nine-scoops.md | Bonus Chapter: Nine Scoops (premise) | 2026-11-27 |
 | boss-endings-spec.md | Boss endings: Step 2 spec (bossend2, 2026-11-11) | 2026-11-11 |
 | boss-finale-status-11-11.md | Boss endings status (2026-11-11 15:10) | 2026-11-11 |

@@ -1323,6 +1323,12 @@
    "minutes": 2
   },
   {
+   "id": "b3story_test",
+   "cmd": "python3 -I tools/b3story_test.py",
+   "group": "g6",
+   "minutes": 8
+  },
+  {
    "id": "closeup_ch7_test",
    "cmd": "python3 -I tools/closeup_ch7_test.py",
    "group": "g6",
