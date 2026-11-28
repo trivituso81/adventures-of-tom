@@ -10940,9 +10940,9 @@
    "theme": "Battle Animations",
    "night": false,
    "title": "Make Runs to the monster work on moves with stage steps",
-   "next": "Makes How he gets there (run to the monster, run back) work on a move with stage steps like Lounge Pass Flex, and explains the read-only hit.",
+   "next": "Built (stageapproach1): Runs to the monster, the run time and the return now work on Lounge Pass Flex and every move with stage steps; the Timing hit row says where the hit comes from. Waiting for the build to reach main and for Tom to look at it.",
    "blocks": [],
-   "after": "nothing for Tom: end",
+   "after": "t-stageapproachplay",
    "created": "2026-11-27",
    "changed": "2026-11-27",
    "prompt": {
@@ -10962,6 +10962,10 @@
     {
      "d": "2026-11-27",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Built as stageapproach1: b3gPlay honours approach, approachSec and returnSec (marks, steps and hit come the run-in later); automatic and stay play as before (golden 219, 0 differ). Hit row on a staged move now reads: the hit is the moment \"swat\", picture 24 of the body video; change it in Stage and objects, Name this moment. Tests: realfight, page, lasting, golden, smoke and b3_test s8 pass; stage_test already failed 9 checks on main before this change; full b3_test stalled and was stopped."
     }
    ],
    "chat": {
@@ -11145,6 +11149,29 @@
      "t": "Started: the conversation claimed this card."
     }
    ]
+  },
+  {
+   "id": "t-stageapproachplay",
+   "title": "Watch Lounge Pass Flex run to the monster",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open ADMIN > BATTLE GUIDE, open Lounge Pass Flex, and in Timing set How he gets there to Runs to the monster. Press Preview the whole move. You should see Tom run to the monster, swing, and run back. The hit now lands later by the run time; to change when it lands, move the swat moment in Stage and objects.",
+   "blocks": [],
+   "created": "2026-11-27",
+   "changed": "2026-11-27",
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Added with c-stageapproach."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": ""
+   }
   }
  ],
  "sessions": [

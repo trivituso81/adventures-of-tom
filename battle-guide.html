@@ -2019,7 +2019,8 @@ function wbPaint(){
   const hc=$('wbhitc');
   if(hc){
     if(wbStaged()){const c=(WB.draft||WB.base).timing.contact,si=stgList().findIndex(s=>s.id===c.step);hc.innerHTML='<span class="wbval" id="wbhitval">'+(run&&run.hit!=null?esc(wbFmt(run.hit)+' '+W('timing.hit.unit')):'')+'</span>';
-      $('wbhithint').textContent=W('timing.hit.staged_hint',{at:c.mark!=null?'"'+c.mark+'"':'step '+(si>=0?si+1:(+c.step+1)||'?')});}
+      const mk=c.mark!=null?stgMarks()[c.mark]:null;   // stageapproach1: say where the staged hit comes from in words he can act on
+      $('wbhithint').textContent=c.mark!=null?W('timing.hit.staged_hint_mark',{mark:c.mark,pic:mk&&mk.pic!=null?W('timing.hit.staged_hint_pic',{n:mk.pic}):''}):W('timing.hit.staged_hint_step',{n:si>=0?si+1:(+c.step+1)||'?'});}
     else{
       const auto=t.contact==null||t.contact==='auto',shown=run&&run.hit!=null?wbFmt(run.hit):'';
       hc.innerHTML='<input type="number" class="wbnum" id="wbhit" min="0" max="14" step="0.05" inputmode="decimal" aria-label="'+esc(W('timing.hit.label'))+'" value="'+esc(shown)+'"><span class="hint">'+esc(W('timing.hit.unit'))+'</span>'

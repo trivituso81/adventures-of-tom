@@ -8,7 +8,7 @@
 // Assets (data/stage/*.js, baked by tools/clip-bake/bake_stage.py) are lazy atlases named clip_stage_<owner>-<name>: they are asked for through B3C.need like a clip,
 // so they count toward the clip memory limit (b3cLoaded) and are released with the clips.
 // Field: the monsters stand on the LEFT, the party on the right; a fighter faces left.
-const B3G={stand:{},A:{},els:[],ins:[],words:[],dim:{from:0,to:0,t0:0,dur:0},shake:null,glows:[],run:null,hits:0};
+const B3G={at:null,stand:{},A:{},els:[],ins:[],words:[],dim:{from:0,to:0,t0:0,dur:0},shake:null,glows:[],run:null,hits:0};
 const B3G_KEEP=9000;   // ms an asset stays wanted after it was last asked for
 
 // The baked stage assets (data/stage/*.js, written by tools/clip-bake/bake_stage.py) call b3gDefine; those files load right after this one (index.html).
@@ -55,10 +55,11 @@ function b3gRowFor(head) {
 const b3gEase=q=>{ q=Math.max(0,Math.min(1,q)); return q*q*(3-2*q); };
 function b3gMarkMs(R,CL,name) { const m=R.body.marks&&R.body.marks[name]; if(!m) return null; return m.pic!=null?(CL.ms[Math.max(0,Math.min(CL.n-1,m.pic-(CL.trimmed?CL.trimmed.from:0)))]||0):m.f!=null?m.f*CL.dur:m.ms!=null?m.ms:null; }
 // Seconds from the start of the move for an `at`: a number, a mark name, a step id, {mark,plus} or {step,plus}.
-function b3gAt(R,CL,at,ids) {
+function b3gAt(R,CL,at,ids,O) {   // stageapproach1: O is the run-in, in seconds: a moment named on the video is measured from the video's start, which is O seconds into the move
+  O=O||0;
   if(typeof at==='number') return at;
-  if(typeof at==='string') { if(ids[at]!=null) return ids[at]; const m=b3gMarkMs(R,CL,at); return m==null?0:m/1000; }
-  if(at&&at.mark) return (b3gMarkMs(R,CL,at.mark)||0)/1000+(at.plus||0);
+  if(typeof at==='string') { if(ids[at]!=null) return ids[at]; const m=b3gMarkMs(R,CL,at); return m==null?0:m/1000+O; }
+  if(at&&at.mark) return (b3gMarkMs(R,CL,at.mark)||0)/1000+O+(at.plus||0);
   if(at&&at.step) return (ids[at.step]||0)+(at.plus||0);
   if(at&&at.hit) return (ids.$hit||0)+(at.plus||0);   // movebench9: the hit as the move's own timing names it (a mark, or the clip's hit picture), so a step that follows the hit moves with it
   return 0;
@@ -70,7 +71,7 @@ const b3gHome=key=>b3PartyHome(b3Unit(B3.F,key));
 // Where a unit stands and which way it faces: {cx, base, sc, dir}; dir is 1 for a family member (faces left, toward the monsters) and -1 for a monster (faces right), so `cx - 38*dir` is in front of either.
 function b3gHomeOf(key) {
   if(b3gIsFoe(key)&&B3P.foe[key]) { const b=b3FoeBox(key); return {cx:b.x,base:B3P.foe[key].py,sc:B3P.foe[key].sc,dir:-1}; }
-  const h=b3gHome(key),sp=BATTLE_SPRITES[b3Unit(B3.F,key).id]||{scale:1}; return {cx:h.cx,base:h.base,sc:sp.scale,dir:1};
+  const h=B3G.at&&B3G.at.key===key?{cx:B3G.at.cx,base:B3G.at.base}:b3gHome(key),sp=BATTLE_SPRITES[b3Unit(B3.F,key).id]||{scale:1}; return {cx:h.cx,base:h.base,sc:sp.scale,dir:1};   // stageapproach1: a member who ran to the monster holds the hand and the front where he stands now
 }
 const b3gDir=key=>b3gIsFoe(key)?-1:1;
 // The other units on the mover's side that are up: family members for a family member, standing monsters for a monster.
@@ -201,7 +202,7 @@ function b3gDo(a,ctx,t0) {
       if(a.back===true) o.back={to:a.from||'self_front'}; else if(a.back&&a.back.to) o.back={to:a.back.to,at:a.back.at};
       if(a.hide&&ctx.el) ctx.el.hideUntil=now+(a.dur||.4)*(o.back?2:1)+.2;
       if(o.back) { o.backTo=b3gPt(o.back.to,ctx);
-        if(o.back.at!=null&&ctx.ids) o.hold=Math.max(0,b3gAt(R,ctx.CL,o.back.at,ctx.ids)-(ctx.stepT||0)-o.dur); }   // the thing waits where it landed until the mark (a catch)
+        if(o.back.at!=null&&ctx.ids) o.hold=Math.max(0,b3gAt(R,ctx.CL,o.back.at,ctx.ids,ctx.O)-(ctx.stepT||0)-o.dur); }   // the thing waits where it landed until the mark (a catch)
       push(o); break; }
     case 'rain': {
       const ks=b3gOpponents(ctx.src),n=a.n||12,dur=a.dur||2,list=a.assets||[a.asset];
@@ -228,27 +229,32 @@ function b3gFoeOffset(key,t) {
 function b3gPlay(R,env) {
   const head=env.head,src=head.src,CL=b3gClipOf(R),standIn=!!CL.standIn,fm=b3gIsFoe(src),home=fm?null:b3gHome(src),dur=CL.dur/1000,now=B3P.t;
   const tg0=env.hits.length?env.hits[0].swing.tgts:head.tgts||[];
-  const ctx={R,CL,src,tgts:tg0.length?tg0:(head.tgts||[]),attacker:null,carrier:null};
+  const ctx={R,CL,src,tgts:tg0.length?tg0:(head.tgts||[]),attacker:null,carrier:null,O:0};
   // BODY: the clip plays where the fighter stands, on the clip's own clock.
-  if(!standIn) { if(fm) B3P.fa[src].cl={id:R.body.clip,C:CL,t0:now,dur}; else B3P.body[src]={kind:'cmove',t0:now,T0:0,jx:home.cx,jy:home.base,C:CL,back:0,dur:dur+.12}; }   // a stand-in leaves the mover on the idle video; a monster plays it where it stands (movebench14)
+  // stageapproach1: how he gets there. The spec's `approach` is 'run' (the member crosses to the monster before the video starts and back after it), 'stay' or 'auto'; auto on a staged move stays in place, exactly as every staged move always played. The video's marks, the stage steps and the hit are measured from the video's start, so they all come O seconds later.
+  const TMv=msTiming(head),tgA=env.hits.length&&env.hits[0].swing.tgts[0],travel=!fm&&!standIn&&TMv.approach==='run'&&!!tgA&&tgA[0]==='f',O=travel?TMv.approachSec:0,back0=travel?TMv.returnSec:0;
+  B3G.at=null;
+  if(!standIn) { if(fm) B3P.fa[src].cl={id:R.body.clip,C:CL,t0:now,dur};
+    else if(travel) { const st=b3cStand(src,CL,tgA); B3G.at={key:src,cx:st.x,base:st.y}; B3P.body[src]={kind:'cmove',t0:now,T0:O,jx:st.x,jy:st.y,C:CL,back:back0,dur:O+dur+.12+back0}; }   // b3cStand and the cmove body are the plain clip's own (engine/b3-play.js)
+    else B3P.body[src]={kind:'cmove',t0:now,T0:0,jx:home.cx,jy:home.base,C:CL,back:0,dur:dur+.12}; }   // a stand-in leaves the mover on the idle video; a monster plays it where it stands (movebench14)
   // STAGE: the steps of the row and, for a Capstone, of its set piece, each at its moment.
   const ids={},steps=[].concat(R.steps||[],R.setpiece?R.setpiece.steps:[]);
-  const marks={}; for(const m in (R.body.marks||{})) marks[m]=(b3gMarkMs(R,CL,m)||0)/1000;
+  const marks={}; for(const m in (R.body.marks||{})) marks[m]=(b3gMarkMs(R,CL,m)||0)/1000+O;
   // movebench9: where `at:{hit:true}` lands. A hit named by a mark is that mark; a row that names none (a move whose spec has steps but leaves the contact automatic) hits where its clip does.
   const hitName0=R.hit==='late'?R.late:R.hit; let hit0=null;
-  if(hitName0&&marks[hitName0]!=null) hit0=marks[hitName0]; else if(!hitName0) { try { hit0=b3cLandAt(CL,msTiming(head)); } catch(e) { hit0=null; } }
+  if(hitName0&&marks[hitName0]!=null) hit0=marks[hitName0]; else if(!hitName0) { try { hit0=b3cLandAt(CL,msTiming(head))+O; } catch(e) { hit0=null; } }
   if(hit0!=null) ids.$hit=hit0;
-  let hitT=null,lastEnd=dur;
-  for(const s of steps) { const T=b3gAt(R,CL,s.at,ids); if(s.id) ids[s.id]=T; s._T=T; lastEnd=Math.max(lastEnd,T+(s.dur||s.hold||0)); }
+  let hitT=null,lastEnd=dur+O;
+  for(const s of steps) { const T=b3gAt(R,CL,s.at,ids,O); if(s.id) ids[s.id]=T; s._T=T; lastEnd=Math.max(lastEnd,T+(s.dur||s.hold||0)); }
   const hitName=R.hit;
   if(hitName&&hitName!=='late') hitT=ids[hitName]!=null?ids[hitName]:(marks[hitName]!=null?marks[hitName]:null);
   for(const s of steps) { if(s.hit===true&&hitT==null) hitT=s._T+(s.dur||0); if(s.hit==='first'&&hitT==null) hitT=s._T+(s.dur||2)*.35; }
   // A step that carries the hit refines a hit named by its id: a thing that lands (hit:true) hits at its end; a rain (hit:'first') when the first thing lands.
   for(const s of steps) if(s.id&&s.id===hitName&&hitT!=null) { if(s.hit===true) hitT=s._T+(s.dur||0); else if(s.hit==='first') hitT=s._T+(s.dur||2)*.3+.15; }
-  const lateT=!hitName&&hit0!=null?hit0:b3gAt(R,CL,(hitName==='late'?R.late:hitName)||0,ids);
+  const lateT=!hitName&&hit0!=null?hit0:b3gAt(R,CL,(hitName==='late'?R.late:hitName)||0,ids,O);
   if(hitT==null) hitT=lateT;
   const run=B3G.run={id:head.id,t0:now,hitAt:env.hits.length?hitT:lateT,hitReal:null,marks,ids:Object.assign({},ids),setpiece:!!R.setpiece,budget:R.budget,end:null,len:null,noVideo:standIn&&!R.nobody,clipSec:dur};
-  ctx.ids=ids;
+  ctx.ids=ids; ctx.O=O;
   if(env.cue) env.cue(env.hits.length?hitT:lateT);   // vfxfight1: the move's library effects play from the hit's moment (engine/b3-vfx.js)
   for(const s of steps) { b3After(s._T,()=>{ ctx.stepT=s._T; b3gDo(s,ctx); }); }
   // THE HIT (or, for a move with no hit, its effects) shows at its moment.
@@ -256,9 +262,9 @@ function b3gPlay(R,env) {
   const gap=msTiming(head).gap;   // movebench4: the time between hits of a many-hit move is the spec's `gap`
   if(env.hits.length) env.hits.forEach((h,k)=>b3After(hitT+k*gap,()=>{ mark(); reveal(); }));
   else b3After(lateT,()=>{ mark(); for(const b of env.late) b3Show(b); });
-  const end=Math.max(dur+.1,lastEnd+.15,(env.hits.length?hitT+Math.max(0,env.hits.length-1)*gap:lateT)+.3,R.setpiece?R.setpiece.dur:0);
+  const end=Math.max(O+dur+.1,lastEnd+.15,(env.hits.length?hitT+Math.max(0,env.hits.length-1)*gap:lateT)+.3,R.setpiece?R.setpiece.dur:0);
   run.len=end;
-  b3After(end,()=>{ run.end=B3P.t-run.t0; b3gLetGo(R); env.finishNow(); });
+  b3After(end,()=>{ run.end=B3P.t-run.t0; b3gLetGo(R); B3G.at=null; env.finishNow(); });
   return true;
 }
 

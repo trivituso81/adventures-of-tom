@@ -76,7 +76,9 @@
    "auto": "Automatic",
    "back_to_auto": "Back to automatic",
    "staged_label": "The hit lands",
-   "staged_hint": "set by the stage steps of this move for now: {at}",
+   "staged_hint_mark": "the hit is the moment \"{mark}\"{pic}; change it in Stage and objects, Name this moment",
+"staged_hint_pic": ", picture {n} of the body video",
+"staged_hint_step": "the hit is step {n} in Stage and objects; change it there",
    "unit": "s",
    "none": "No hit in this move"
   },
