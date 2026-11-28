@@ -1,6 +1,10 @@
+## board-b3proto-fb2 (2026-11-27): the note on Tom's prototype answers is corrected: only "the look and feel is not final" stands
+
+Tom (11-27 22:41): the fold-away speed is a placeholder and five monsters on the battlefield is how the game already works, so neither is a finding. Rewrote the note on t-b3proto-try and c-b3story. No game change.
+
 ## board-b3proto-fb (2026-11-27): Tom's answers after trying the battle screen prototype are written on the prototype card and on the proposal card
 
-Tom (11-27 22:39): the look and feel is not final, so the prototype cannot answer most of its questions; the list vanishes for under a second during a move; five monsters should all stand on the battlefield. Added to the history of t-b3proto-try and c-b3story so the proposal session reads them first. No game change.
+Tom (11-27 22:39 and 22:41): the look and feel is not final, so the prototype cannot answer most of its questions; the fold-away speed and five monsters on the field are not findings (placeholder animation speed; already how the game works). Corrected the first version of this note. Added to the history of t-b3proto-try and c-b3story so the proposal session reads them first. No game change.
 
 ## b3proto (2026-11-27): a one-page fake fight to try the battle screen on the Duo: the moves list beside whoever acts, tap a row then Use, 1 or 5 monsters, three backgrounds, a Note button
 
