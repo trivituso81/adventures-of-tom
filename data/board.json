@@ -10450,9 +10450,47 @@
    "blocks": [],
    "created": "2026-11-27",
    "changed": "2026-11-27"
+  },
+  {
+   "id": "b-board-b3story2",
+   "tag": "board-b3story2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-27",
+   "theme": "Battle System",
+   "title": "the battle screen proposal card now keeps the moves beside the acting character and the controls over the scene",
+   "next": "Done: the battle screen proposal card now keeps the moves beside the acting character and the controls over the scene",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as board-b3story2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-27",
+   "changed": "2026-11-27"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ",
+   "title": "Battle screen: storybook look proposal, every case drawn",
+   "first": "2026-11-27T16:11:58-08:00",
+   "last": "2026-11-27T17:08:33-08:00",
+   "tags": [
+    "board-b3story",
+    "board-b3story2"
+   ],
+   "cards": [
+    "c-b3story",
+    "b-board-b3story",
+    "b-board-b3story2"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFhHBWjuLeCZDLcBjK",
    "title": "Move Workbench 14: monster attacks get effects and stage",
@@ -10474,19 +10512,6 @@
    "cards": [
     "c-movebench-design",
     "c-movebench-14"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ",
-   "title": "Battle screen: storybook look proposal, every case drawn",
-   "first": "2026-11-27T16:11:58-08:00",
-   "last": "2026-11-27T16:16:35-08:00",
-   "tags": [
-    "board-b3story"
-   ],
-   "cards": [
-    "c-b3story",
-    "b-board-b3story"
    ]
   },
   {
@@ -17473,8 +17498,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "7b216803dd4b04be5cbedfe7a30518352d7bb855",
- "synced_at": "2026-11-28T00:27:09+00:00",
+ "synced": "e1fe146da6ccc482d0e4fde7abf983bd32641840",
+ "synced_at": "2026-11-28T01:09:22+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
