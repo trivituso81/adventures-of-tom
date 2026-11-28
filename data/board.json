@@ -10161,7 +10161,7 @@
    "id": "c-movebench-15",
    "tag": "movebench15",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 15: Family Ruckus",
    "next": "Double Team and Full Family Ruckus get their own two rows in the list, with stage steps, effects and sound played at the moment the two members link up. Starts by itself when Move Workbench 14 ships.",
@@ -10173,7 +10173,7 @@
    "changed": "2026-11-27",
    "auto": true,
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukFUh8sJasfXzMouUXk",
     "opening": "not started"
    },
    "prompt": {
@@ -10193,6 +10193,10 @@
     {
      "d": "2026-11-27",
      "t": "Unblocked: Move Workbench 14: monster attacks get effects and stage is done."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -10488,6 +10492,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFUh8sJasfXzMouUXk",
+   "title": "Move Workbench 15: Family Ruckus",
+   "first": "2026-11-27T17:53:53-08:00",
+   "last": "2026-11-27T17:53:53-08:00",
+   "tags": [],
+   "cards": [
+    "c-movebench-15"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFhHBWjuLeCZDLcBjK",
    "title": "Move Workbench 14: monster attacks get effects and stage",
@@ -17512,8 +17526,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "0c6830a673bea4323f97b4eebcc49e97c10ccf64",
- "synced_at": "2026-11-28T01:28:04+00:00",
+ "synced": "28403c5a136c10522929529f416afa2b4e0f711a",
+ "synced_at": "2026-11-28T01:54:40+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
