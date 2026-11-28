@@ -11110,7 +11110,7 @@
    "id": "c-b3story-exact",
    "tag": "b3storyx",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle System",
    "title": "Battle screen: mock it exactly as the mockup",
    "next": "Rebuilds the storybook mock (battle-story.html) so it matches your mockup picture side by side at 951 x 648 on the Duo: where everything stands, the sizes, the painted frames, fonts, colors, ribbons, the gold banner and the damage ring. Tapping a move highlights it and tapping it again uses it (no Use button). Then hands you one decide card.",
@@ -11120,7 +11120,7 @@
    "created": "2026-11-27",
    "changed": "2026-11-27",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEf9f6b6LGnFVDAiBY",
     "opening": "\"Read CLAUDE.md, claude/handoff-rules.md, claude/b3story-plan.md and claude/battleux-mock2/assessment.md\""
    },
    "prompt": {
@@ -11136,11 +11136,25 @@
     {
      "d": "2026-11-27",
      "t": "Added by this session's first push. Tom, 11-27 23:28, on the mock that build b3story made: \"It looks nothing like the mockup. ... identify a way to mock this exactly as it is in the mockup. You just have to tap the ability a second time after it's focused to execute it.\" It holds the next card (Battle screen: storybook marks, Rose Mode, mock purged) until the rewritten build card exists."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukEf9f6b6LGnFVDAiBY",
+   "title": "Battle screen: mock it exactly as the mockup",
+   "first": "2026-11-27T23:32:47-08:00",
+   "last": "2026-11-27T23:32:47-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3story-exact"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukCgK3r6u7c5CU21MGw",
    "title": "Battle screen: storybook look proposal, every case drawn",
@@ -18245,8 +18259,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "a4451d009a35045c498ab8895c91c1ff33ffffb1",
- "synced_at": "2026-11-28T07:13:45+00:00",
+ "synced": "2744c1afedb7b892391c879e4b19e10fef626eff",
+ "synced_at": "2026-11-28T07:33:43+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
