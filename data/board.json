@@ -10551,7 +10551,7 @@
    "id": "c-b3proto",
    "tag": "b3proto",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle System",
    "auto": true,
    "title": "Battle screen: a lightweight prototype to try",
@@ -10587,16 +10587,20 @@
     {
      "d": "2026-11-27",
      "t": "Built as build b3proto (page battle-proto.html, test tools/b3proto_test.py passes at 951 x 648 and 1440 x 900, screenshots looked at). No note from Tom was on this card. Section 7 of assessment.md is not in the repo (file ends at section 6), so the build follows the plan's section 1 and assessment section 6. The calls made are under Built in claude/battleux-mock2/proto-plan.md. The card closes from the b3proto heading in docs/CHANGES.md; the next card is t-b3proto-try."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as b3proto: a one-page fake fight to try the battle screen on the Duo: the moves list beside whoever acts, tap a row then Use, 1 or 5 monsters, three backgrounds, a Note button"
     }
-   ]
+   ],
+   "done": "2026-11-27"
   },
   {
    "id": "t-b3proto-try",
    "title": "Try the battle screen prototype on the Duo",
    "theme": "Battle System",
    "lane": "tom",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "ask": "play",
    "where": "phone",
    "next": "Waits on the card Battle screen: a lightweight prototype to try. Then: open ADMIN > Battle system > Battle screen prototype (the page is https://trivituso81.github.io/adventures-of-tom/battle-proto.html) on the Duo held sideways, play two rounds, try 5 monsters and the night and indoor backgrounds under the Try button at the top right, tap Note for anything that bothers you, then Copy my notes. Press All good (the full proposal, card Battle screen: storybook look proposal, every case drawn, can then start), or Something is wrong and paste your notes (a fix of the prototype starts by itself).",
@@ -10626,6 +10630,10 @@
     {
      "d": "2026-11-27",
      "t": "b3proto built: the page address added to next and step 1; the Try chip is a button labeled Try at the top right (beside Note and Exit)."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Unblocked: Battle screen: a lightweight prototype to try is done."
     }
    ]
   },
@@ -10755,6 +10763,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukE21G668MNVQvNAKtP",
+   "title": "Battle screen: a lightweight prototype to try",
+   "first": "2026-11-27T20:10:13-08:00",
+   "last": "2026-11-27T20:32:57-08:00",
+   "tags": [
+    "b3proto"
+   ],
+   "cards": [
+    "c-b3proto"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukF5T9H671xWNXfKgbv",
    "title": "Move Workbench 16: wide monitor layout and clean-up",
    "first": "2026-11-27T19:33:32-08:00",
@@ -10764,16 +10784,6 @@
    ],
    "cards": [
     "c-movebench-16"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukE21G668MNVQvNAKtP",
-   "title": "Battle screen: a lightweight prototype to try",
-   "first": "2026-11-27T20:10:13-08:00",
-   "last": "2026-11-27T20:10:13-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3proto"
    ]
   },
   {
@@ -17816,8 +17826,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "caa00b4040d659748cac89df326b7f2e158d1599",
- "synced_at": "2026-11-28T04:12:40+00:00",
+ "synced": "1b452d33249175c7e96c116169f751fbe7651c66",
+ "synced_at": "2026-11-28T04:33:53+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
