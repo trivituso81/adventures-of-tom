@@ -11407,6 +11407,171 @@
      "t": "Shipped as scriptstudio4: Script Studio audits upgraded (chapter coherence report card, cross-chapter tie-in ledger) and Gemini 4 model presets"
     }
    ]
+  },
+  {
+   "id": "c-justinbb9",
+   "title": "Justin benchmark: Wan 3.0 vs Kling v3 Pro, #808080",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "justinbb9",
+   "done": "2026-11-25",
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "bench-justinbb9-7 (WO-01H): Wan 3.0 2/3, winner wan3_s1 score 0.9439, $2.10 of $2.25. Baked into pf-justin-bb-basic (one held prop, stud finder on belt). Build justinbb9k."
+    }
+   ]
+  },
+  {
+   "id": "c-justinpoc1",
+   "title": "Justin proof clip: stricter prompt and two-stage QA gate",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "justinpoc1",
+   "done": "2026-11-25",
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Rescue (RETIRE): the work already shipped as justinpoc2regate5 (clip baked, 2 renders total, gate passed 4 of 4). Tom's watch card t-pass1draftplay is open. The old 'Re-run' prompt is obsolete (render budget spent, no poc-1c run wanted). Closed."
+    }
+   ]
+  },
+  {
+   "id": "c-pass1draft1",
+   "title": "Play the Pass-1 draft videos in the new battle",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "pass1draft1",
+   "done": "2026-11-25",
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as pass1draft1: Seven Art Factory draft videos play as previews in the new battle"
+    }
+   ]
+  },
+  {
+   "id": "c-pass1review1",
+   "title": "PASS-1 DRAFT REVIEW in the Battle Lab, drafts 1.5x longer",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "tag": "pass1review1",
+   "done": "2026-11-25",
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as pass1review1: PASS-1 DRAFT REVIEW in the Battle Lab, and the seven drafts play 1.5 times longer"
+    }
+   ]
+  },
+  {
+   "id": "c-scriptstudio10",
+   "title": "Script Studio: leaner writer, stricter critic",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "scriptstudio10",
+   "done": "2026-11-25",
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as scriptstudio10."
+    }
+   ]
+  },
+  {
+   "id": "c-scriptstudio11",
+   "title": "Script Studio: EP Note box",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "scriptstudio11",
+   "done": "2026-11-25",
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as scriptstudio11."
+    }
+   ]
+  },
+  {
+   "id": "c-scriptstudio5",
+   "title": "Script Studio: Fix button, Ta-Ta check, tighter rules",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "scriptstudio5",
+   "done": "2026-11-25",
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as scriptstudio5: Script Studio QA loop: Fix Remaining Issues button, Ta-Ta spelling check, sharper writer rules"
+    }
+   ]
+  },
+  {
+   "id": "c-scriptstudio6",
+   "title": "Script Studio: Fix button now rewrites flagged lines",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "scriptstudio6",
+   "done": "2026-11-25",
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as scriptstudio6: Script Studio: Fix Remaining Issues and Pass 4 now really rewrite Critic-flagged lines"
+    }
+   ]
+  },
+  {
+   "id": "c-scriptstudio7",
+   "title": "Script Studio: strict QA bar and Generate Chapter",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "scriptstudio7",
+   "done": "2026-11-25",
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as scriptstudio7."
+    }
+   ]
+  },
+  {
+   "id": "c-scriptstudio8",
+   "title": "Script Studio: Read Mode",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "scriptstudio8",
+   "done": "2026-11-25",
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as scriptstudio8."
+    }
+   ]
+  },
+  {
+   "id": "c-scriptstudio9",
+   "title": "Script Studio: Tata spelling fix, Read Mode branches",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "tag": "scriptstudio9",
+   "done": "2026-11-25",
+   "history": [
+    {
+     "d": "2026-11-25",
+     "t": "Shipped as scriptstudio9."
+    }
+   ]
   }
  ]
 }

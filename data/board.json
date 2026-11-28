@@ -5763,240 +5763,6 @@
    "changed": "2026-11-24"
   },
   {
-   "id": "c-scriptstudio5",
-   "tag": "scriptstudio5",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Tools",
-   "title": "Script Studio: Fix button, Ta-Ta check, tighter rules",
-   "next": "Shipped: Fix Remaining Issues button, Ta-Ta linter check, surgical rewrite rules. Next: use it on a real scene and tell me if passing lines still drift.",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
-    "opening": "Make three targeted improvements to AoT Script Studio's auto-QA loop"
-   },
-   "history": [
-    {
-     "d": "2026-11-25",
-     "t": "Tom: \"Add a Fix Remaining Issues button ... flag Tata ... update the Pass 1 and Pass 4 system prompts\". New card; started."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Shipped as scriptstudio5."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Shipped as scriptstudio5: Script Studio QA loop: Fix Remaining Issues button, Ta-Ta spelling check, sharper writer rules"
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-25",
-   "changed": "2026-11-25",
-   "after": "nothing for Tom: end",
-   "prompt": {
-    "what": "Adds the Fix Remaining Issues button, the Ta-Ta check and surgical rewrite rules to Script Studio's QA loop.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row C: a build with the design in the card)",
-    "effort": "medium (the changes are specified in the card)",
-    "text": "Read the c-scriptstudio5 card and tools/script-studio/README.md, then finish the Script Studio QA loop changes in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/qa_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "done": "2026-11-25"
-  },
-  {
-   "id": "c-scriptstudio6",
-   "tag": "scriptstudio6",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Tools",
-   "title": "Script Studio: Fix button now rewrites flagged lines",
-   "next": "Shipped: flagged lines must change, one forced redo, no silent revert. Next: run Fix Remaining Issues on ch1Goal again and tell me if any line still comes back unchanged.",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
-    "opening": "In tools/script-studio/src/App.jsx, there is a bug in Fix Remaining Issues"
-   },
-   "history": [
-    {
-     "d": "2026-11-25",
-     "t": "Tom: \"it only changed Tata to Ta-Ta and left every single Critic-flagged line word-for-word identical\". New card; started."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Shipped as scriptstudio6."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Shipped as scriptstudio6: Script Studio: Fix Remaining Issues and Pass 4 now really rewrite Critic-flagged lines"
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-25",
-   "changed": "2026-11-25",
-   "after": "nothing for Tom: end",
-   "prompt": {
-    "what": "Fixes Script Studio's Fix Remaining Issues so Critic-flagged lines are really rewritten.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row C: a bug whose cause had to be found)",
-    "effort": "medium (cause and fix are written in the card)",
-    "text": "Read the c-scriptstudio6 card and docs/CHANGES.md scriptstudio6, then re-check rewriteScene and qualityRank in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/qa_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "done": "2026-11-25"
-  },
-  {
-   "id": "c-scriptstudio7",
-   "tag": "scriptstudio7",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Tools",
-   "title": "Script Studio: strict QA bar and Generate Chapter",
-   "next": "Shipped: strict bar, carbon default, 4 retries with early stop, Generate Chapter. Next: open a chapter with empty scenes, tap Generate Chapter and read the summary banner.",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
-    "opening": "Update AoT Script Studio (tools/script-studio/src/App.jsx) to enforce a strict QA bar"
-   },
-   "history": [
-    {
-     "d": "2026-11-25",
-     "t": "Tom: \"enforce a strict QA bar while running hands-free across an entire chapter\". New card; started."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Shipped as scriptstudio7."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-25",
-   "changed": "2026-11-25",
-   "after": "nothing for Tom: end",
-   "prompt": {
-    "what": "Script Studio strict QA bar, carbon default, 4 retries and Generate Chapter.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row C: a build with the design in the card)",
-    "effort": "medium (the changes are specified in the card)",
-    "text": "Read the c-scriptstudio7 card and docs/CHANGES.md scriptstudio7, then re-check runSceneQAPipeline and handleGenerateChapter in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/qa_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "done": "2026-11-25"
-  },
-  {
-   "id": "c-scriptstudio8",
-   "tag": "scriptstudio8",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Tools",
-   "title": "Script Studio: Read Mode",
-   "next": "Shipped: Edit Mode | Read Mode toggle, screenplay layout, Current Scene or Full Chapter, click a line to edit it. Next: open Read Mode on a chapter and tell me what to change in the look.",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
-    "opening": "Add a distraction-free Read Mode toggle to AoT Script Studio"
-   },
-   "history": [
-    {
-     "d": "2026-11-25",
-     "t": "Tom: \"distraction-free Read Mode toggle ... review scripts cleanly\". New card; started."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Shipped as scriptstudio8."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-25",
-   "changed": "2026-11-25",
-   "after": "nothing for Tom: end",
-   "prompt": {
-    "what": "Script Studio Read Mode.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row C: a build with the design in the card)",
-    "effort": "medium (the changes are specified in the card)",
-    "text": "Read the c-scriptstudio8 card and docs/CHANGES.md scriptstudio8, then adjust the Read Mode view in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/read_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "done": "2026-11-25"
-  },
-  {
-   "id": "c-pass1draft1",
-   "tag": "pass1draft1",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Battle Animations",
-   "title": "Play the Pass-1 draft videos in the new battle",
-   "next": "Shipped on branch claude/issue-16-20261125-1815: seven 480p draft videos baked and wired to their kit moves. Waits for the pull request to be merged.",
-   "chat": {
-    "url": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45672541108",
-    "opening": "Go ahead and bake the 15 passing 480p battle_move_draft clips"
-   },
-   "history": [
-    {
-     "d": "2026-11-25",
-     "t": "Tom (issue 16): \"Go ahead and bake the 15 passing 480p battle_move_draft clips into data/clips/<id>.js and wire them into Battle 3 (data/b3-kit-<id>.js) as a playable preview so I can test them in Battle Lab today.\" New card; started."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Shipped as pass1draft1: 7 of 15 wired. 3 moves already play a video and were kept, 3 team-up clips and 2 counter clips have no slot in Battle 3 yet (card c-pass1final)."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Shipped as pass1draft1: Seven Art Factory draft videos play as previews in the new battle"
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-25",
-   "changed": "2026-11-25",
-   "after": "t-pass1draftplay",
-   "prompt": {
-    "what": "Bake the Pass-1 draft videos into battle clips and wire them as a preview.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Opus 5.5 (row D: new tool and judgement on which moves to wire)",
-    "effort": "medium (the pieces exist: bake_clip.py, wanbake.wire)",
-    "text": "Read the c-pass1draft1 card and docs/CHANGES.md pass1draft1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "done": "2026-11-25"
-  },
-  {
-   "id": "c-pass1review1",
-   "tag": "pass1review1",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Battle Animations",
-   "title": "PASS-1 DRAFT REVIEW in the Battle Lab, drafts 1.5x longer",
-   "next": "Add the PASS-1 DRAFT REVIEW Lab fight with PLAY for the 7 Pass-1 clips and rebake them 1.5 times longer.",
-   "chat": {
-    "url": "https://github.com/trivituso81/adventures-of-tom/actions/runs/45688849925",
-    "opening": "Two fixes for Pass-1 draft review"
-   },
-   "history": [
-    {
-     "d": "2026-11-25",
-     "t": "Tom (PR 17): \"Two fixes for Pass-1 draft review: 1. Add a PASS-1 DRAFT REVIEW preset under ADMIN > BATTLE LAB > TESTS AND REVIEWS (similar to CHAPTER 1 REVIEW) with direct PLAY buttons for all 7 wired Pass-1 clips ... 2. Make the playback duration of those 7 baked clips 1.5x longer so the actions read clearly at both 1x and 2x battle speed.\" New card; started."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Shipped as pass1review1: PASS-1 DRAFT REVIEW in the Battle Lab, and the seven drafts play 1.5 times longer"
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-25",
-   "changed": "2026-11-25",
-   "after": "t-pass1draftplay",
-   "prompt": {
-    "what": "A Battle Lab review fight for the Pass-1 drafts, and the drafts played 1.5 times longer.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Opus 5.5 (row C: a Lab fight, the review panel and a rebake)",
-    "effort": "medium (the review panel and the bake tool exist)",
-    "text": "Read the c-pass1review1 card and docs/CHANGES.md pass1review1. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "done": "2026-11-25"
-  },
-  {
    "id": "t-pass1draftplay",
    "lane": "tom",
    "col": "done",
@@ -6091,321 +5857,6 @@
    ],
    "created": "2026-11-25",
    "changed": "2026-11-25"
-  },
-  {
-   "id": "c-scriptstudio9",
-   "tag": "scriptstudio9",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Tools",
-   "title": "Script Studio: Tata spelling fix, Read Mode branches",
-   "next": "Shipped: Tata is the on-screen spelling and Ta-Ta is flagged; conditional action lines are badged in Read Mode. Next: regenerate or Fix Remaining Issues on scenes that still say Ta-Ta.",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
-    "opening": "Make two fixes and push to main: 1. Fix the inverted Tata spelling rule"
-   },
-   "history": [
-    {
-     "d": "2026-11-25",
-     "t": "Tom: \"Fix the inverted Tata spelling rule\" and badge conditional branches in Read Mode. New card; started."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Shipped as scriptstudio9."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-25",
-   "changed": "2026-11-25",
-   "after": "nothing for Tom: end",
-   "prompt": {
-    "what": "Script Studio Tata spelling and Read Mode branch badges.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row C: a build with the design in the card)",
-    "effort": "medium (the changes are specified in the card)",
-    "text": "Read the c-scriptstudio9 card and docs/CHANGES.md scriptstudio9, then re-check the TATA linter rule and branchLabel in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/qa_test.py and read_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "done": "2026-11-25"
-  },
-  {
-   "id": "c-scriptstudio10",
-   "tag": "scriptstudio10",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Tools",
-   "title": "Script Studio: leaner writer, stricter critic",
-   "next": "Shipped: writer rules for lean pacing, plain English, no meta-jargon; critic caps padded or awkward scenes at 6.5. Next: generate a scene and tell me if the dialogue is leaner and the scores more honest.",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
-    "opening": "Update the Writer and Audit/Critic prompts in tools/script-studio/src/App.jsx"
-   },
-   "history": [
-    {
-     "d": "2026-11-25",
-     "t": "Tom: \"fix bloated, unfocused dialogue and over-scoring\". New card; started."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Shipped as scriptstudio10."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-25",
-   "changed": "2026-11-25",
-   "after": "nothing for Tom: end",
-   "prompt": {
-    "what": "Script Studio writer and critic prompt calibration.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row C: a build with the design in the card)",
-    "effort": "medium (the changes are specified in the card)",
-    "text": "Read the c-scriptstudio10 card and docs/CHANGES.md scriptstudio10, then adjust WRITER_CRAFT_RULES and the Critic prompt in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/qa_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "done": "2026-11-25"
-  },
-  {
-   "id": "c-justinpoc1",
-   "tag": "justinpoc1",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Battle Animations",
-   "title": "Justin proof clip: stricter prompt and two-stage QA gate",
-   "next": "Done. Justin proof clip is baked and live in PASS-1 DRAFT REVIEW; Tom judges it on t-pass1draftplay.",
-   "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukCaFAwDGmB8YFJQsNt",
-    "opening": "You are the Technical Director and Pipeline Engineer for trivituso81/adventures-of-tom"
-   },
-   "history": [
-    {
-     "d": "2026-11-25",
-     "t": "Tom: \"battle_move_draft prompt rules (planted feet, props in hand from frame 1, one leftward action), a two-stage QA gate so cutout cleanliness alone never passes, and ONE 480p clip pf-justin-bb-basic with max_retries 1\". Cost lock: no batch, the other 6 clips untouched."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Part shipped as justinpoc1a: Justin's Stud-Finder Beep & Knock gets stricter draft rules, a two-stage QA gate and one 480p proof run"
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Pushed justinpoc1a (prompt rules, two-stage gate, single-clip trigger). Run 1 crashed before any render (packet lookup, fixed). Run 2 (justin-poc-1b) stopped at the first fal call: 403 Forbidden from fal storage auth. No render happened, nothing spent. Ended without shipping the clip: fal refuses the repo key, which needs Tom."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Run justin-poc-2 (fal fixed): 2 renders at 480p. Render 1 failed Stage 1 (foot_retreat 0.21). Render 2 passed Stage 1 (churn 0.753, left reach 0.452, foot retreat 0.142) and was re-gated with no new render after a Stage 2 bug fix: rejected on feet_planted (left foot lifts and shifts). Ended without shipping: nothing baked, the old Justin clip stays in PASS-1 DRAFT REVIEW. Render budget of this proof is spent."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Tom: feet_planted was too strict, re-gate render 2 with no render. Rubric changed (bracing step allowed), feet_planted now passes. Stage 2 then failed prop_visible_frame1 twice (single call, then 3-run majority 2 of 3 false) although frame 0 clearly shows the hammer gripped in one hand and the stud finder in the other: the 200 px contact-sheet tile is too small for that one question. Ended without baking. Recommended: ask the frame 1 question on the full-size frame 0, keep the other three on the 200 px sheet. 0 new renders."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Tom: \"Implement the full-res Frame 0 split for prop_visible_frame1 and re-gate/bake the saved Render 2 video\". Stage 2 now sends Frame 0 at full size plus the 200 px sheet in each of 3 votes: all four checks 3 of 3 true. Baked at 1.5x into PASS-1 DRAFT REVIEW as art/clips/pf-justin-bb-basic.webp?v=justinbb9k (run justin-poc-2-regate5). Total renders for the proof: 2, 0 after poc-2."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Rescue started (Its note starts with Shipped but the card is open). One automatic session decides: finish it, back to Tom, start next, or retire."
-    },
-    {
-     "d": "2026-11-25",
-     "at": "2026-11-25T22:10:00+00:00",
-     "t": "Rescue (RETIRE): the work already shipped as justinpoc2regate5 (clip baked, 2 renders total, gate passed 4 of 4). Tom's watch card t-pass1draftplay is open. The old 'Re-run' prompt is obsolete (render budget spent, no poc-1c run wanted). Closed."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-25",
-   "changed": "2026-11-25",
-   "after": "t-pass1draftplay",
-   "prompt": {
-    "what": "Re-run the Justin proof clip after Tom fixes fal.",
-    "before": [
-     "Do the card 'Fix the fal key or balance' first."
-    ],
-    "model": "Claude Sonnet 5.5 (row A: one value change and a report)",
-    "effort": "low (change one field, read one report)",
-    "text": "Read the c-justinpoc1 card and docs/CHANGES.md justinpoc1a. Change run_id in art-factory/single-clip-trigger.json to justin-poc-1c (nothing else) and push it; the push starts the single 480p clip. When the run ends read art-factory/qa-single-clip-justin-poc-1c.json and report whether it passed the gate. Do not run anything else. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "started_at": "2026-11-25T22:02:04+00:00",
-   "done": "2026-11-25"
-  },
-  {
-   "id": "c-scriptstudio11",
-   "tag": "scriptstudio11",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Tools",
-   "title": "Script Studio: EP Note box",
-   "next": "Shipped: EP Note box next to Rewrite Unlocked; it is the top-priority Writer instruction for one run, then clears. Next: type a note, tap Generate Scene or Rewrite, and check the box clears.",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukG4Z6kDZP3oX1Cq2XB",
-    "opening": "add a single-line EP Note text input right next to the Rewrite Unlocked button"
-   },
-   "history": [
-    {
-     "d": "2026-11-25",
-     "t": "Tom: \"add a single-line EP Note text input right next to the Rewrite Unlocked button\". New card; started."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Shipped as scriptstudio11."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-25",
-   "changed": "2026-11-25",
-   "after": "nothing for Tom: end",
-   "prompt": {
-    "what": "Script Studio EP Note box.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row C: a build with the design in the card)",
-    "effort": "medium (the changes are specified in the card)",
-    "text": "Read the c-scriptstudio11 card and docs/CHANGES.md scriptstudio11, then adjust the EP Note box in tools/script-studio/src/App.jsx, rebuild and run tools/script-studio/epnote_test.py. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "done": "2026-11-25"
-  },
-  {
-   "id": "c-justinbb9",
-   "tag": "justinbb9",
-   "lane": "claude",
-   "col": "done",
-   "theme": "Battle Animations",
-   "title": "Justin benchmark: Wan 3.0 vs Kling v3 Pro, #808080",
-   "next": "Shipped in justinbb9k: Justin Stud-Finder Beep and Knock clip (Wan 3.0, hammer only, stud finder on belt). Look at it in the Battle Lab.",
-   "chat": {
-    "url": "https://claude.ai/code/session_01RXeukD88aZXMwDZ8KSAuK8",
-    "opening": "UNCONSTRAINED PRODUCTION ORDER (REPO: trivituso81/adventures-of-tom)"
-   },
-   "history": [
-    {
-     "d": "2026-11-25",
-     "t": "Tom: \"Remove the sandbox spend cap and produce ONE 100% production-grade transparent .webm for justin-bb-basic ... Loop and re-roll autonomously until EVERY QA gate passes.\" Attempt 8 inspected: fails Gate 1 (pastel green) and Gate 2 (turns, face smear, hammer overhead). Cap raised to a $60 runaway guard."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Started: the conversation claimed this card."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Roll 1 with Tom's new prompt from an exact #00FF00 start: failed (3.04 s long, background drifted to pastel green, he turns to camera and scowls, hammer swung at arm's length). Same miss as attempt 8, so stop-loss applied. Ended without shipping; nothing pushed to the game. Total fal spend $3.68. Handoff: claude/next-justinbb9.md."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Rescue started (A session ended without shipping). One automatic session decides: finish it, back to Tom, start next, or retire."
-    },
-    {
-     "d": "2026-11-26",
-     "at": "2026-11-26T00:20:31+00:00",
-     "t": "Rescue chose START NEXT: the method change (four pinned pose keyframes, first-last-frame video, key.py, 8-frame checkerboard QA) is taste work for Opus 5.5 and needs paid fal runs, so a Sonnet rescue does not run it. Prompt already carries the method from claude/next-justinbb9.md; card moved to Up next."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Started: the conversation claimed this card."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Tom: video is possible, the implementation is the problem. Handoff rewritten to stay on the Kling video route. Roll 2: cfg_scale 0.85 (was the 0.5 default), duration 6."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Roll 2 (cfg_scale 0.85, 6 s): green now true (7,241,3), chromakey works, clip 6.04 s. Failed QA: hammer smears over face in 2 of 8 frames, ends with hand on hip not exact idle. Roll 3: cfg_scale 0.95, nothing else changed. Total fal spend $4.10 before roll 3."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Roll 3 (cfg 0.95): worse, scowl and hammer blur over face, so cfg goes back to 0.85. Roll 4 changes only the negative prompt: adds hammer in front of face, hammer blocking face, motion blur, hand on hip. Spend $4.50 before roll 4."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Roll 4: face clear, rap forward right, green keys clean; still fails QA (ghosted frame while drawing the hammer, not an exact idle at the end, faint boot shadow). Ended without shipping; nothing pushed to the game. Four rolls this session, total fal spend about $5.0. Next: Kling multi_prompt (three shots), see claude/next-justinbb9.md."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Started: the conversation claimed this card."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Tom: \"i approve full repo access\" and replaced the green-screen plan with the Board order (Hero-style lock, #808080, Wan 3.0 vs Kling v3 Pro, $5.00 cap). Phase 0 built as justinbb9a."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Part shipped as justinbb9a: Battle animation pipeline lock, Hero-style prompts on #808080, gate v2, and the Battle Lab review extras"
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Shipped as justinbb9: Phase 1 benchmark started: Wan 3.0 and Kling v3 Pro, 3 seeds each, $5.00 cap"
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Benchmark bench-justinbb9-2 finished: Wan 3.0 3/3, Kling v3 Pro 0/3, winner wan3_s1 matted and baked, $4.98 spent. Results in art-factory/benchmark/bench-justinbb9-2/."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Tom (WO-01C): live review still showed the old clip. The winner was already baked; fixed the clip-key mismatch (slide, shake, effects now fire), wired his video idle into the resting slot, put the sliding member on top. Build justinbb9c, $0.00 spent."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Tom (WO-01D): on iPhone Justin froze on frame 0 and the effects were missing. Not reproduced in WebKit; removed the per-frame tint and pre-render every frame, and moved the effects onto the Mudling (they were drawn beside Justin). Build justinbb9d, $0.00."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Tom (WO-01E): wan3_s1 failed visual QA (start frame redrawn, no stud-finder scan, effects unseen). Start frame now locks the Hero pixels, prompt restored to both beats, Wan 3.0 re-run with a $2.00 cap. Build justinbb9e."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Run bench-justinbb9-3 stopped at Gate 1 (seams from a misaligned hand edit, $0.38). Fixed by registering the edit to the Hero and joining at the neck; re-run bench-justinbb9-4. Build justinbb9f."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "bench-justinbb9-4: Gate 1 passed on the Hero-locked start frame (head diff 0); Wan 3.0 0/3, the scan played but not the tap or return. Halted per the order, $1.89 spent. Build justinbb9f, ended without shipping a baked clip: the previous clip (wan3_s1 of bench-justinbb9-2) stays in the review."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Tom WO-01F: one beat per move, reuse the justinbb9f start frame, Wan 3.0 only, $2.00 cap. Run bench-justinbb9-5 started by build justinbb9g."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "bench-justinbb9-5 (WO-01F, build justinbb9g): Wan 3.0 0/3, $1.69 of $2.00. Stage B fails: s1 hammer taps own stud finder, s2 and s3 baked-in yellow sparks around the props. Nothing matted or baked; the earlier clip stays. Build justinbb9g, ended without shipping a baked clip."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Tom WO-01G: separate hand zones, ban comic impact lines, same start frame, Wan only, $2.00 cap. Run bench-justinbb9-6, build justinbb9h."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "bench-justinbb9-6 (WO-01G): Wan 3.0 gate 1/3, $1.90. Seed 2 passed the gate but its frames show a second stud finder floating ahead of the hammer in about 4 frames, so it was not baked. Matte alpha fix in matte_winner.py. Build justinbb9i, ended without shipping a baked clip."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "Tom WO-01H: one held prop (stud finder clipped on belt), new Direct-Hero start frame, Wan only, $2.25 cap. Run bench-justinbb9-7, build justinbb9j."
-    },
-    {
-     "d": "2026-11-25",
-     "t": "bench-justinbb9-7 (WO-01H): Wan 3.0 2/3, winner wan3_s1 score 0.9439, $2.10 of $2.25. Baked into pf-justin-bb-basic (one held prop, stud finder on belt). Build justinbb9k."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-25",
-   "changed": "2026-11-25",
-   "prompt": {
-    "what": "Roll the Justin Kling video with three multi_prompt shots from start.png, key and QA.",
-    "before": [
-     "Nothing to do first."
-    ],
-    "model": "Claude Sonnet 5.5 (row B: written steps, QA gate catches mistakes)",
-    "effort": "medium (steps are known)",
-    "text": "Read the c-justinbb9 card and claude/next-justinbb9.md. Roll Kling v3 Pro for justin-bb-basic from start.png with roll 4's settings but the action split into three multi_prompt shots, key with the #00FF00 chromakey, trim to 4.0 s, run the 8-frame checkerboard QA before pushing. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   },
-   "rescue": {
-    "at": "2026-11-26T00:19:22+00:00",
-    "n": 1,
-    "why": "A session ended without shipping",
-    "url": "https://claude.ai/code/cse_01RXeukFJ3SQckykBNpN3Deq",
-    "prev": "https://claude.ai/code/session_01RXeukHG5RM8zrqSWjpjE8C"
-   },
-   "after": "nothing for Tom: end",
-   "done": "2026-11-25"
   },
   {
    "id": "c-guide-crosswalk",
@@ -10936,7 +10387,7 @@
    "id": "c-stageapproach",
    "tag": "stageapproach1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "night": false,
    "title": "Make Runs to the monster work on moves with stage steps",
@@ -10944,7 +10395,7 @@
    "blocks": [],
    "after": "t-stageapproachplay",
    "created": "2026-11-27",
-   "changed": "2026-11-27",
+   "changed": "2026-11-28",
    "prompt": {
     "what": "Makes the approach setting work for moves with stage steps, and says where their hit comes from.",
     "before": [
@@ -10966,12 +10417,17 @@
     {
      "d": "2026-11-27",
      "t": "Built as stageapproach1: b3gPlay honours approach, approachSec and returnSec (marks, steps and hit come the run-in later); automatic and stay play as before (golden 219, 0 differ). Hit row on a staged move now reads: the hit is the moment \"swat\", picture 24 of the body video; change it in Stage and objects, Name this moment. Tests: realfight, page, lasting, golden, smoke and b3_test s8 pass; stage_test already failed 9 checks on main before this change; full b3_test stalled and was stopped."
+    },
+    {
+     "d": "2026-11-28",
+     "t": "Shipped as stageapproach1: Runs to the monster now works on moves with stage steps, and the staged hit says where it comes from"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDCLLECEkf1Lk73xzy",
     "opening": "not started"
-   }
+   },
+   "done": "2026-11-28"
   },
   {
    "id": "b-board-stageapproach",
@@ -11176,6 +10632,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukDCLLECEkf1Lk73xzy",
+   "title": "Make Runs to the monster work on moves with stage steps",
+   "first": "2026-11-27T23:13:01-08:00",
+   "last": "2026-11-28T00:15:38-08:00",
+   "tags": [
+    "stageapproach1"
+   ],
+   "cards": [
+    "c-stageapproach"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEf9f6b6LGnFVDAiBY",
    "title": "Battle screen: mock it exactly as the mockup",
    "first": "2026-11-27T23:32:47-08:00",
@@ -11195,16 +10663,6 @@
    ],
    "cards": [
     "c-b3story"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDCLLECEkf1Lk73xzy",
-   "title": "Make Runs to the monster work on moves with stage steps",
-   "first": "2026-11-27T23:13:01-08:00",
-   "last": "2026-11-27T23:13:01-08:00",
-   "tags": [],
-   "cards": [
-    "c-stageapproach"
    ]
   },
   {
@@ -18289,8 +17747,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "08a7b1b349ee0e3de4ea7010c480878ac141e299",
- "synced_at": "2026-11-28T07:53:00+00:00",
+ "synced": "4a98264dc38328e5ba991099ef201990ee0b5604",
+ "synced_at": "2026-11-28T08:16:25+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
