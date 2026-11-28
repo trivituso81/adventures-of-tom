@@ -45,10 +45,10 @@ function b3gWarm(R) {
 // A lasting element that is still on screen asks again every frame (b3gWarmDef), so it keeps what it draws.
 function b3gLetGo(R) { B3C.need.delete(R.body.clip); for(const k of b3gAssetsOf(R)) if(B3G.A[k]) B3C.need.delete('stage_'+B3G.A[k].fk); }
 const b3gReady=R=>b3gDefined(R)&&(b3gNoVideo(R)||b3gPink()?b3gAssetsOf(R).every(k=>!B3G.A[k]||B3G.A[k].atlas.ready)&&(b3gNoVideo(R)||b3cReady(R.body.clip)):b3cReady(R.body.clip)&&b3gAssetsOf(R).every(k=>B3G.A[k].atlas.ready));
-// The row of the move this `act` beat plays, or null (a monster's move, a move with no row, a row that is not baked yet).
+// The row of the move or attack this `act` beat plays, or null (a move or attack with no stage in its spec, a row that is not baked yet). movebench14: a monster's attack has one too, from its spec 'act:<monster>:<attack>'.
 function b3gRowFor(head) {
-  if(!head||head.t!=='act'||!head.id||!head.src||head.src[0]==='f') return null;
-  const R=msStageRow('move:'+head.id); return R&&b3gDefined(R)?R:null;
+  if(!head||head.t!=='act'||!head.id||!head.src) return null;
+  const id=msIdOf(head),R=id?msStageRow(id):null; return R&&b3gDefined(R)?R:null;
 }
 
 // ---------- time and place ----------
@@ -63,32 +63,53 @@ function b3gAt(R,CL,at,ids) {
   if(at&&at.hit) return (ids.$hit||0)+(at.plus||0);   // movebench9: the hit as the move's own timing names it (a mark, or the clip's hit picture), so a step that follows the hit moves with it
   return 0;
 }
-function b3gH(key) { const u=b3Unit(B3.F,key),sp=BATTLE_SPRITES[u.id]; return sp?sp.idle.length*sp.scale:60; }
+// movebench14: a monster's attack plays a stage too. It stands on the left and faces right, so everything that is "in front of", "behind", "at the hand", "the other side" or "the way across" is mirrored for it: b3gIsFoe, b3gHomeOf, b3gDir.
+const b3gIsFoe=key=>!!key&&key[0]==='f';
+function b3gH(key) { const u=b3Unit(B3.F,key); if(u.side==='foe'&&B3P.foe[key]) return b3FoeBox(key).h; const sp=BATTLE_SPRITES[u.id]; return sp?sp.idle.length*sp.scale:60; }
 const b3gHome=key=>b3PartyHome(b3Unit(B3.F,key));
+// Where a unit stands and which way it faces: {cx, base, sc, dir}; dir is 1 for a family member (faces left, toward the monsters) and -1 for a monster (faces right), so `cx - 38*dir` is in front of either.
+function b3gHomeOf(key) {
+  if(b3gIsFoe(key)&&B3P.foe[key]) { const b=b3FoeBox(key); return {cx:b.x,base:B3P.foe[key].py,sc:B3P.foe[key].sc,dir:-1}; }
+  const h=b3gHome(key),sp=BATTLE_SPRITES[b3Unit(B3.F,key).id]||{scale:1}; return {cx:h.cx,base:h.base,sc:sp.scale,dir:1};
+}
+const b3gDir=key=>b3gIsFoe(key)?-1:1;
+// The other units on the mover's side that are up: family members for a family member, standing monsters for a monster.
+function b3gAllies(src) {
+  if(b3gIsFoe(src)) return B3.F.foes.filter(f=>f.key!==src&&B3P.foe[f.key]&&!B3.view.u[f.key].ko).map(f=>f.key);
+  return B3.F.party.filter(u=>u.key!==src&&!B3.view.u[u.key].ko).map(u=>u.key);
+}
+// The units the mover is against: the monsters that are standing for a family member, the family members who are up for a monster.
+function b3gOpponents(src) {
+  if(b3gIsFoe(src)) return B3.F.party.filter(u=>!B3.view.u[u.key].ko).map(u=>u.key);
+  return b3gLiveFoes();
+}
 const b3gFoeBase=key=>{ const L=B3P.foe[key]; return L?L.py:250; };
 function b3gLiveFoes() { return B3.F.foes.filter(f=>B3P.foe[f.key]&&!B3.view.u[f.key].ko&&B3P.fa[f.key]&&B3P.fa[f.key].die==null).map(f=>f.key); }
 // One anchor as a list of {x,y}. ctx: {src, tgts, attacker, carrier, CL, R}.
 function b3gPts(name,ctx) {
-  const src=ctx.src,out=[],one=(x,y)=>[{x,y}];
+  const src=ctx.src,out=[],one=(x,y)=>[{x,y}],fm=b3gIsFoe(src);
+  if(fm) name={screen_left:'screen_right',screen_right:'screen_left'}[name]||name;   // movebench14: a monster crosses toward the family, the other way
   const sp=k=>b3Spot(k);
-  const front=()=>{ const ks=b3gLiveFoes(); let r=0,y=0; for(const k of ks) { const b=b3FoeBox(k); r=Math.max(r,b.x+b.w*.5); y+=b.y; } return {x:Math.min(420,r+70),y:ks.length?y/ks.length-30:230}; };
+  const front=()=>{
+    if(fm) { const ks=b3gOpponents(src); let l=1e9,y=0; for(const k of ks) { const z=b3Spot(k); l=Math.min(l,z.x); y+=z.base; } return {x:Math.max(156,(ks.length?l:360)-70),y:ks.length?y/ks.length-30:230}; }   // the family's front: its left edge, mirrored from the monsters' right edge
+    const ks=b3gLiveFoes(); let r=0,y=0; for(const k of ks) { const b=b3FoeBox(k); r=Math.max(r,b.x+b.w*.5); y+=b.y; } return {x:Math.min(420,r+70),y:ks.length?y/ks.length-30:230}; };
   switch(name) {
     case 'self': { const s=sp(src); return one(s.x,s.y); }
-    case 'self_front': { const h=b3gHome(src); return one(h.cx-38,h.base-12); }
+    case 'self_front': { const h=b3gHomeOf(src); return one(h.cx-38*h.dir,h.base-12); }
     case 'above_self': { const s=sp(src); return one(s.x,s.top-26); }
-    case 'hand': { const h=b3gHome(src),C=ctx.CL,sc=(BATTLE_SPRITES[b3Unit(B3.F,src).id]||{scale:1}).scale,hd=(ctx.R.body.hand)||[16,.5*b3gH(src)/sc]; return one(h.cx-hd[0]*sc,h.base-hd[1]*sc); }
+    case 'hand': { const h=b3gHomeOf(src),sc=h.sc,hd=(ctx.R.body.hand)||[16,.5*b3gH(src)/sc]; return one(h.cx-hd[0]*sc*h.dir,h.base-hd[1]*sc); }
     case 'target': return (ctx.tgts||[]).slice(0,1).map(k=>{ const s=sp(k); return {x:s.x,y:s.y}; });
     case 'each_target': return (ctx.tgts||[]).map(k=>{ const s=sp(k); return {x:s.x,y:s.y}; });
     case 'above_target': return (ctx.tgts||[]).slice(0,1).map(k=>{ const s=sp(k); return {x:s.x,y:s.top-30}; });
     case 'attacker': return ctx.attacker?(k=>{ const s=sp(k); return one(s.x,s.y); })(ctx.attacker):[];
     case 'carrier': return ctx.carrier?(k=>{ const s=sp(k); return one(s.x,s.y); })(ctx.carrier):[];
     case 'above_carrier': return ctx.carrier?(k=>{ const s=sp(k); return one(s.x,s.top-26); })(ctx.carrier):[];
-    case 'ally': case 'each_ally': return B3.F.party.filter(u=>u.key!==src&&!B3.view.u[u.key].ko).map(u=>{ const s=sp(u.key); return {x:s.x,y:s.y}; }).slice(0,name==='ally'?1:9);
+    case 'ally': case 'each_ally': return b3gAllies(src).map(k=>{ const s=sp(k); return {x:s.x,y:s.y}; }).slice(0,name==='ally'?1:9);
     case 'foes_front': return one(front().x,front().y);
     case 'screen_center': return one(288,162);
     case 'screen_left': return one(-70,162);
     case 'screen_right': return one(650,162);
-    case 'top': return one((b3gHome(src)).cx,-50);
+    case 'top': return one(b3gHomeOf(src).cx,-50);
     case 'floor': return one(288,300);
     default: return [];
   }
@@ -96,7 +117,7 @@ function b3gPts(name,ctx) {
 const b3gPt=(name,ctx)=>(b3gPts(name,ctx)[0]||{x:288,y:162});
 // The units an anchor names (movebench10: who a placed, floating or surrounding object belongs to).
 function b3gKeysOf(name,ctx) {
-  const n=String(name||'self').replace(/^above_/,''),others=()=>B3.F.party.filter(u=>u.key!==ctx.src&&!B3.view.u[u.key].ko).map(u=>u.key);
+  const n=String(name||'self').replace(/^above_/,''),others=()=>b3gAllies(ctx.src);
   switch(n) {
     case 'self': return [ctx.src];
     case 'target': return (ctx.tgts||[]).slice(0,1);
@@ -114,7 +135,7 @@ function b3gWordsAt(where,ctx) {
   for(const p of b3gPts(m?m[1]:where,ctx)) out.push({x:p.x,y:m?(m[1]==='target'||m[1]==='attacker'||m[1]==='carrier'||m[1]==='each_ally'||m[1]==='self'?p.y-b3gH(ctx.src)*(m[1]==='self'||m[1]==='each_ally'?.6:.9):p.y-26):p.y});
   return out;
 }
-function b3gLane(lane,ctx) { return lane==='floor'?300:lane==='mid'?250:lane==='foes'?(()=>{ const ks=b3gLiveFoes(); return ks.length?ks.reduce((s,k)=>s+b3gFoeBase(k),0)/ks.length-30:230; })():250; }
+function b3gLane(lane,ctx) { return lane==='floor'?300:lane==='mid'?250:lane==='foes'?(()=>{ const ks=b3gOpponents(ctx.src); return ks.length?ks.reduce((s,k)=>s+(b3gIsFoe(k)?b3gFoeBase(k):b3Spot(k).base),0)/ks.length-30:230; })():250; }
 
 // ---------- sizes and drawing ----------
 function b3gSize(key,spec,ctx) {   // {h: share of the mover's standing height} or {sw: share of the screen width}
@@ -183,9 +204,9 @@ function b3gDo(a,ctx,t0) {
         if(o.back.at!=null&&ctx.ids) o.hold=Math.max(0,b3gAt(R,ctx.CL,o.back.at,ctx.ids)-(ctx.stepT||0)-o.dur); }   // the thing waits where it landed until the mark (a catch)
       push(o); break; }
     case 'rain': {
-      const ks=b3gLiveFoes(),n=a.n||12,dur=a.dur||2,list=a.assets||[a.asset];
-      const xs=ks.map(k=>b3FoeBox(k).x),x0=Math.min.apply(null,xs.concat([300]))-60,x1=Math.max.apply(null,xs.concat([200]))+60;
-      for(let i=0;i<n;i++) { const k=ks.length?ks[i%ks.length]:null,tx=k?b3FoeBox(k).x+(Math.random()-.5)*40:x0+(x1-x0)*Math.random(),ty=k?b3Spot(k).y+(Math.random()-.5)*30:230,asset=list[i%list.length];
+      const ks=b3gOpponents(ctx.src),n=a.n||12,dur=a.dur||2,list=a.assets||[a.asset];
+      const xs=ks.map(k=>b3Spot(k).x),x0=Math.min.apply(null,xs.concat([300]))-60,x1=Math.max.apply(null,xs.concat([200]))+60;
+      for(let i=0;i<n;i++) { const k=ks.length?ks[i%ks.length]:null,tx=k?b3Spot(k).x+(Math.random()-.5)*40:x0+(x1-x0)*Math.random(),ty=k?b3Spot(k).y+(Math.random()-.5)*30:230,asset=list[i%list.length];
         if(!R.assets[asset]) continue;
         push({kind:'fall',asset,name:(R.assets[asset]||{}).name,from:{x:tx+60,y:-70},to:{x:tx,y:ty},t0:now+(dur*.7)*i/n,dur:dur*.3+.15,blend:a.blend,size:b3gSize(asset,R.assets[asset].size,ctx),burst:true}); }
       break; }
@@ -205,11 +226,11 @@ function b3gFoeOffset(key,t) {
 // ---------- playing a move's row (b3PlayMove hands over here) ----------
 // env: the pieces of b3PlayMove: head, hits, late, reveal, finishNow, cue (arms the move's library effects). Returns true when the row plays the move.
 function b3gPlay(R,env) {
-  const head=env.head,src=head.src,CL=b3gClipOf(R),standIn=!!CL.standIn,home=b3gHome(src),dur=CL.dur/1000,now=B3P.t;
+  const head=env.head,src=head.src,CL=b3gClipOf(R),standIn=!!CL.standIn,fm=b3gIsFoe(src),home=fm?null:b3gHome(src),dur=CL.dur/1000,now=B3P.t;
   const tg0=env.hits.length?env.hits[0].swing.tgts:head.tgts||[];
   const ctx={R,CL,src,tgts:tg0.length?tg0:(head.tgts||[]),attacker:null,carrier:null};
   // BODY: the clip plays where the fighter stands, on the clip's own clock.
-  if(!standIn) B3P.body[src]={kind:'cmove',t0:now,T0:0,jx:home.cx,jy:home.base,C:CL,back:0,dur:dur+.12};   // a stand-in leaves the mover on the idle video
+  if(!standIn) { if(fm) B3P.fa[src].cl={id:R.body.clip,C:CL,t0:now,dur}; else B3P.body[src]={kind:'cmove',t0:now,T0:0,jx:home.cx,jy:home.base,C:CL,back:0,dur:dur+.12}; }   // a stand-in leaves the mover on the idle video; a monster plays it where it stands (movebench14)
   // STAGE: the steps of the row and, for a Capstone, of its set piece, each at its moment.
   const ids={},steps=[].concat(R.steps||[],R.setpiece?R.setpiece.steps:[]);
   const marks={}; for(const m in (R.body.marks||{})) marks[m]=(b3gMarkMs(R,CL,m)||0)/1000;
@@ -316,7 +337,8 @@ function b3gDrawHeld(i,t,e) {
   const s=b3Spot(i.key); if(!s) return;
   const inq=b3gEase(Math.min(1,e/.3)),out=i.dur-e<.25?Math.max(0,(i.dur-e)/.25):1,al=Math.min(inq*1.3,1)*out;
   const draw=(x,y,flip)=>{ if(!b3gDraw1(i.asset,x,y,i.size,e*1000,{alpha:al,flip,blend:i.blend})&&b3gPink()&&!B3G.A[i.asset]) b3gDrawPink(i,x,y,0,1,al); };
-  if(i.kind==='place') draw(s.x-38+(1-inq)*40,s.base-i.size.h*.5-2,false);
+  const dir=b3gDir(i.key);   // movebench14: in front of a monster is to its right
+  if(i.kind==='place') draw(s.x-(38-(1-inq)*40)*dir,s.base-i.size.h*.5-2,false);
   else if(i.kind==='surround') for(const side of i.pair?[-1,1]:[0]) draw(s.x+side*(26+(1-inq)*40),s.base-i.size.h*.5,side>0);
   else draw(s.x,s.top-i.size.h*.55+Math.sin(t*1.2*Math.PI*2)*4-(1-inq)*70,false);
 }

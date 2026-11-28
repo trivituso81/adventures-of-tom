@@ -114,7 +114,9 @@ function bnWarm(P) {
   const ids=[]; let SR=null;
   if(P.kind==='move') { SR=typeof msStageRow==='function'&&msStageRow('move:'+P.skill)&&typeof b3gDefined==='function'&&b3gDefined(msStageRow('move:'+P.skill))?msStageRow('move:'+P.skill):null;
     if(SR) b3gWarm(SR); const mid='move:'+P.skill,mc=msClipOf(mid),mp=msPairOf(mid); if(mc) ids.push(mc); if(mp) ids.push(mp.clip); }
-  else if(P.kind==='act') { const ac=msClipOf('act:'+P.foeId+':'+P.act),wc=msWindClip(P.foeId,P.act); if(ac) ids.push(ac); if(wc) ids.push(wc); }
+  else if(P.kind==='act') { const sid='act:'+P.foeId+':'+P.act,ac=msClipOf(sid),wc=msWindClip(P.foeId,P.act);   // movebench14: an attack with a stage loads its row's video and pictures first, like a move
+    SR=typeof msStageRow==='function'&&msStageRow(sid)&&typeof b3gDefined==='function'&&b3gDefined(msStageRow(sid))?msStageRow(sid):null; if(SR) b3gWarm(SR);
+    if(ac) ids.push(ac); if(wc) ids.push(wc); }
   else if(P.kind==='wind') { const w=P.foe.acts.find(a=>a.then===P.act),wc=w&&msWindClip(P.foeId,w.id),wa=msWindClip(P.foeId,P.act); if(wc) ids.push(wc); if(wa) ids.push(wa); }
   else if(P.kind==='state') { const st=P.state;
     for(const k of st==='run'?['run','idle']:st==='guard'?['guard','idle']:[st,'idle']) { const c=typeof b3cOf==='function'?b3cOf(P.owner,k):null; if(c) ids.push(c); } }
@@ -284,10 +286,12 @@ function bnSample() {
     if(cheer&&BN.on&&BN.P&&BN.P.state==='victory') bnSeg('video','cheer','Victory','video',t);
     if(BN.P&&BN.P.state==='guard'&&B3P.body[BN.sub]==null&&b3cGuarding&&b3cGuarding(u)) bnSeg('video','guard','Guard up','video',t);
     if(typeof B3G!=='undefined'&&B3G.run&&B3G.run.noVideo&&B3P.t<B3G.run.t0+(B3G.run.len||0)) bnSeg('video','novideo','No video yet: standing video','need',t);
-  } else if(u) bnSampleFoe(BN.sub,'video','');
+  } else if(u) { bnSampleFoe(BN.sub,'video','');
+    if(typeof B3G!=='undefined'&&B3G.run&&B3G.run.noVideo&&B3P.t<B3G.run.t0+(B3G.run.len||0)) bnSeg('video','novideo','No video yet: standing video','need',t); }
   if(BN.ansKey&&BN.phase==='answer') bnSampleFoe(BN.ansKey,'video','Answer: ');
-  if(typeof B3G!=='undefined'&&B3G.run&&BN.P&&BN.P.kind==='move'&&B3G.run.id===BN.P.skill&&!R.stageDone) {
-    R.stageDone=true; const run=B3G.run,row=msStageRow('move:'+BN.P.skill),off=run.t0-BN.t0;
+  const sP=BN.P,sKey=sP&&(sP.kind==='move'?sP.skill:sP.kind==='act'?sP.act:null),sSid=sP&&(sP.kind==='move'?'move:'+sP.skill:sP.kind==='act'?'act:'+sP.foeId+':'+sP.act:null);   // movebench14: a monster's attack has a stage run too
+  if(typeof B3G!=='undefined'&&B3G.run&&sKey&&B3G.run.id===sKey&&!R.stageDone) {
+    R.stageDone=true; const run=B3G.run,row=msStageRow(sSid),off=run.t0-BN.t0;
     R.run={hitAt:run.hitAt+off,off,marks:run.marks,ids:run.ids,noVideo:!!run.noVideo,budget:run.budget,clipSec:run.clipSec,times:(row&&row.steps||[]).map(s=>s._T)};   // movebench9: times is each step's moment, seconds from the start of the move, in the order of the spec's steps
     if(row) for(const s of [].concat(row.steps||[],row.setpiece&&row.setpiece.steps||[])) if(s._T!=null) R.lanes.stage.push({a:s._T+off,b:s._T+off+(s.dur||s.hold||.3),label:bnStageName(s),k:'stage',pink:typeof B3G!=='undefined'&&[].concat(s.assets||s.asset||[]).some(k=>!B3G.A[k])});
   }
@@ -307,7 +311,7 @@ function bnTimeline(len) {
   if(P.kind==='act') { add('wind','Wind-up',R.lanes.wind); add('video','Attack',R.lanes.video); }
   else if(P.kind==='wind') add('wind','Wind-up',R.lanes.wind.concat(R.lanes.video));
   else add('video','Video',R.lanes.video);
-  if(P.kind==='move') add('stage','Stage',R.lanes.stage);
+  if(P.kind==='move'||P.kind==='act') add('stage','Stage',R.lanes.stage);
   if(P.kind!=='state'&&P.kind!=='wind') add('fx','Effects',R.lanes.fx);
   add('snd','Sound',snd);
   const ticks=[]; if(R.run) for(const n in R.run.marks) ticks.push({name:n,t:R.run.marks[n]+R.run.off});
@@ -376,7 +380,7 @@ function bngSample() {
 function bngWait(P,ms) {
   return new Promise(res=>{ const t0=performance.now(),tick=()=>{ const warm=bnWarm(P); if((!bnFightReady()||!warm())&&performance.now()-t0<ms) { setTimeout(tick,100); return; } res(bnFightReady()&&warm()); }; tick(); });
 }
-async function bngRun(id) {
+async function bngRun(id,withReport) {   // withReport (movebench14, tools/movebench/acts_test.py only): also the run's own report (hit, freeze, shake), so a shake is on the record; the file golden.json never has it
   const P=bnParse(id); if(!P) return {id,error:'no preview for this kind'};
   BN.golden=true;
   clearTimeout(BN.timer); BN.gen++; BN.on=true; BN.id=id; BN.P=P; BN.kind=P.kind; BN.answer=false; BN.loop=false; BN.ended=false; BN.playing=false; BN.hold=false;
@@ -397,6 +401,7 @@ async function bngRun(id) {
       run:R.run?{hitAt:r3(R.run.hitAt-R.run.off),marks:Object.fromEntries(Object.entries(R.run.marks||{}).map(([k,v])=>[k,r3(v)])),budget:R.run.budget==null?null:R.run.budget,noVideo:!!R.run.noVideo}:null,
       beats:G.beats,hold:G.hold,effects:G.effects,stage:G.stage,sound:R.snd.map(s=>({t:r3(s.t),name:s.name})),
       video:lane('video'),wind:lane('wind'),ticks:tl.ticks.map(t=>({name:t.name,t:r3(t.t)})),faults:(window.__faults||[]).slice(faults0)};
+    if(withReport) out.report=tl.run;
   } finally { BN.golden=false; BN.rec=null; BNG.rec=null; BN.gen++; BN.playing=false; try { bnStop(); } catch(e) {} }
   return out;
 }

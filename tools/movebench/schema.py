@@ -268,6 +268,17 @@ def check_section_set(S,path,C,E,W):
             check_effects(a.get('effects',[]),p+'.effects',C,E,W)
     n=S.get('note')
     if n is not None and not(isinstance(n,str) and len(n)<=500): E.append(path+'.note: text of at most 500 letters')
+def check_act(S,path,E):
+    # movebench14: a monster's attack has Timing, Stage steps, Effects and Sound. It has no answer, no lasting thing, no set piece, no start picture of its own, and cannot "knock the monster back" (it is the monster).
+    if not isinstance(S,dict): return
+    if S.get('answer') is not None: E.append(path+'.answer: a monster attack has no answer')
+    if S.get('start') is not None: E.append(path+'.start: a monster attack plays from the monster\'s standard picture')
+    st=S.get('stage')
+    if isinstance(st,dict):
+        if st.get('lasting'): E.append(path+'.stage.lasting: a monster attack leaves nothing standing')
+        if st.get('setpiece') is not None: E.append(path+'.stage.setpiece: only a Capstone has a set piece')
+        for i,x in enumerate(st.get('steps') or []):
+            if isinstance(x,dict) and x.get('do')=='foe': E.append('%s.stage.steps[%d].do: a monster attack cannot knock the monster back'%(path,i))
 def validate(doc,C):
     E=[];W=[]
     if not isinstance(doc,dict): return ['the file is not an object'],W
@@ -278,7 +289,9 @@ def validate(doc,C):
     if not(isint(doc.get('rev')) and doc['rev']>=1): E.append('rev: a whole number from 1')
     for sec in ('live','draft'):
         if sec not in doc: E.append(sec+' is missing (use null)')
-        elif doc[sec] is not None: check_section_set(doc[sec],sec,C,E,W)
+        elif doc[sec] is not None:
+            check_section_set(doc[sec],sec,C,E,W)
+            if isinstance(doc.get('id'),str) and doc['id'].startswith('act:'): check_act(doc[sec],sec,E)
     f=doc.get('finished')
     if f is not None:
         if not isinstance(f,dict): E.append('finished: must be an object or null')

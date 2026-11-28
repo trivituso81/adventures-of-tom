@@ -11,9 +11,9 @@
 // effect once on the move's target (the foe it hits; an ally when the move is aimed at one). `at` is when it starts: at the contact (the default), so many seconds from it, a named moment of the move, or so many seconds from the move's start.
 // A fight never breaks because of an effect: p1DrawVfx guards each one (a throw is logged once and that effect stops for the cue), and the draw here is wrapped again, so a cue that fails is dropped.
 // Nothing here changes the fight: the rules finished before the first beat played, and nothing waits on an effect.
-// Hit stop (hitstop1, 2026-11-26): when a family move's first hit shows, the member who made the move and the foes it hits are held on the picture they show at that moment for timing.hitStop / 24 seconds
+// Hit stop (hitstop1, 2026-11-26; monsters too since movebench14): when a move's first hit shows, whoever made it and the units it hits on the other side are held on the picture they show at that moment for timing.hitStop / 24 seconds
 // (frames at the 24 fps the clips were made at). Only what is DRAWN is held: b3Draw draws those units at a held time (b3vUnit); the battle clock, the queue of beats, the rules, the clips and every other effect run at their
-// normal pace, and nothing waits for a hold. A move with a hitStop of 0, with no spec, with no hit, or a foe's move changes nothing. A hold that throws is dropped and the unit is drawn as it always was.
+// normal pace, and nothing waits for a hold. A move with a hitStop of 0, with no spec or with no hit changes nothing (a monster's attack with no spec too). A hold that throws is dropped and the unit is drawn as it always was.
 // Screen shake (movebench4): timing.shake pixels, a short side to side shake of the whole field for a third of a second from the moment the first hit lands (b3vShakeAt, drawn by b3Draw).
 const B3V={cues:[],holds:[],shake:null,fault:0};
 const B3V_FPS=24, B3V_HOLD_MAX=.5, B3V_SHAKE_MS=320;   // the frames are at 24 per second; the longest hold in a spec is 8 frames (.33 s), never hold more than half a second
@@ -51,11 +51,14 @@ function p1DrawVfx(g,S,ms,A,O){ O=O||{}; const M=O.meta; if(!M||!M.vfx) return;
     }catch(err){ dead[id]=true; p1Fault(id,err); } } }
 // The hold, in seconds, a move's timing gives it (0 for none): timing.hitStop frames at 24 a second, never more than half a second.
 function b3vHitStopSec(T){ const f=T&&T.hitStop; return typeof f==='number'&&isFinite(f)&&f>0?Math.min(B3V_HOLD_MAX,f/B3V_FPS):0; }
-// Arm a hold for a family move whose first hit shows at fight time t0: the member and the foes the move is aimed at. A unit plays one move at a time: its older hold is dropped.
+// movebench14: true when the unit is a monster (its attack's targets, allies and anchors are mirrored: it stands on the left).
+const b3vSideOf=key=>{ try { const u=b3Unit(B3.F,key); return !!u&&u.side==='foe'; } catch(e) { return key&&key[0]==='f'; } };
+// Arm a hold for a move whose first hit shows at fight time t0: the member and the foes the move is aimed at. A unit plays one move at a time: its older hold is dropped.
 function b3vHold(head,t0,T){
-  if(!head||head.t!=='act'||!head.src||head.src[0]==='f'||!isFinite(t0)) return;
+  if(!head||head.t!=='act'||!head.src||!isFinite(t0)) return;
   const dur=b3vHitStopSec(T); if(!(dur>0)) return;
-  const keys=[head.src]; for(const k of (head.tgts||[])){ const u=b3Unit(B3.F,k); if(u&&u.side==='foe'&&keys.indexOf(k)<0) keys.push(k); }
+  // movebench14: a monster's attack holds too: the monster and the family members it hits (the other side from the mover)
+  const mine=b3vSideOf(head.src),keys=[head.src]; for(const k of (head.tgts||[])){ const u=b3Unit(B3.F,k); if(u&&(u.side==='foe')!==mine&&keys.indexOf(k)<0) keys.push(k); }
   B3V.holds=B3V.holds.filter(h=>h.src!==head.src);
   B3V.holds.push({src:head.src,keys,t0,dur,start:null,r:Math.random()});   // r: the one shake the held picture keeps
 }
@@ -95,9 +98,9 @@ function b3vAtSec(c,e){ const a=e.at; if(a==null||a==='contact') return 0; const
 // the move has no effect). Never throws.
 function b3vArm(head,cid,sec,hit){
   let T=null; try { T=msTiming(head); } catch(err) { T=null; }
-  try { if(hit&&T&&!T.noHit&&typeof sec==='number'&&isFinite(sec)) { b3vHold(head,B3P.t+Math.max(0,sec),T); if(head&&head.src&&head.src[0]!=='f') b3vShake(B3P.t+Math.max(0,sec),T.shake); } } catch(err) { try { gameFault('hit stop armed',err); } catch(e) {} }
+  try { if(hit&&T&&!T.noHit&&typeof sec==='number'&&isFinite(sec)) { b3vHold(head,B3P.t+Math.max(0,sec),T); if(head&&head.src) b3vShake(B3P.t+Math.max(0,sec),T.shake); } } catch(err) { try { gameFault('hit stop armed',err); } catch(e) {} }
   try {
-    if(!head||head.t!=='act'||!head.src||head.src[0]==='f'||typeof sec!=='number'||!isFinite(sec)) return false;   // a foe's move draws no library effect (phase 14)
+    if(!head||head.t!=='act'||!head.src||typeof sec!=='number'||!isFinite(sec)) return false;   // movebench14: a monster's attack arms its effects like a family move (a spec with none arms nothing)
     const E=msEffects(head); if(!E.length||!E.some(e=>P1_VFX[e.fx]||b3gBench())) return false;   // movebench7: in the workbench preview an effect with no drawer still arms, to show its pink box
     const tg=(head.tgts&&head.tgts.length?head.tgts:[head.src]).slice(), t0=B3P.t+Math.max(0,sec), imp=T&&T.impactMs!=null?T.impactMs:0; let maxLen=0;
     const cue={M:{impact_ms:imp,vfx:E.map(e=>e.fx),fxp:Object.fromEntries(E.filter(e=>e.params).map(e=>[e.fx,e.params]))},fx:E,id:head.id,src:head.src,tgts:tg,t0,end:t0,dead:{},tArm:B3P.t};
@@ -149,15 +152,17 @@ function b3vDraw(layer,t){
       if(t<c.t0-1.5+Math.min(0,...c.fx.map(e=>b3vAtSec(c,e)))) continue;   // armed ahead of its hit: a projectile starts up to its flight time before it
       const tgs=c.tgts.map(k=>({k,u:b3Unit(B3.F,k),g:b3vGeo(k)})).filter(q=>q.u&&q.g);
       if(!tgs.length) { B3V.cues.splice(B3V.cues.indexOf(c),1); continue; }   // everyone it aimed at is gone
-      const caster=b3vGeo(c.src),foes=tgs.filter(q=>q.u.side==='foe'),aim=(foes[0]||tgs[0]).g;
+      // movebench14: `foes` are the targets on the other side from the caster (for a monster's attack, the family members it hits), `foe` is who the effects aim at
+      const cf=b3vSideOf(c.src),caster=b3vGeo(c.src),foes=tgs.filter(q=>(q.u.side==='foe')!==cf),aim=(foes[0]||tgs[0]).g;
       let foe=foes.length?foes[0].g:null;
-      if(!foe){ const f=B3.F.foes.find(q=>B3P.foe[q.key]&&!(B3.view&&B3.view.u[q.key]&&B3.view.u[q.key].ko)); foe=f?b3vGeo(f.key):aim; }
+      if(!foe){ const alive=k=>!(B3.view&&B3.view.u[k]&&B3.view.u[k].ko);
+        const f=cf?B3.F.party.find(q=>alive(q.key)&&b3vGeo(q.key)):B3.F.foes.find(q=>B3P.foe[q.key]&&alive(q.key)); foe=f?b3vGeo(f.key):aim; }
       for(const e of c.fx){
         const id=e.fx; if(!P1_VFX[id]){ if(b3gBench()&&layer==='unit_overlay') b3vPink(id,e,c,t,aim); continue; }   // no drawer: the preview shows a pink box, the game shows nothing
         if(c.dead[id]||p1Layer(id)!==layer) continue;
         const ms=c.M.impact_ms+(t-c.t0-b3vAtSec(c,e))*1000,Me={impact_ms:c.M.impact_ms,vfx:[id],fxp:e.params?{[id]:e.params}:null};
         const base={meta:Me,layer,foe,dead:c.dead},S={id:c.id},self=!!P1_VFX_SELF[id],on=e.on&&e.on!=='auto'?e.on:(P1_VFX_ON[id]||(self?'self':'target'));
-        const al=tgs.filter(q=>q.u.side!=='foe');
+        const al=tgs.filter(q=>(q.u.side==='foe')===cf);
         if(on==='each_ally'){ for(const q of (al.length?al:[{g:caster}])) if(q.g) { if(self) p1DrawVfx(gfx,S,ms,q.g,base); else p1DrawVfx(gfx,S,ms,caster,Object.assign({},base,{target:q.g})); } }
         else if(on==='each_target'){ for(const q of tgs.slice(0,4)) { if(self) { if(q.g) p1DrawVfx(gfx,S,ms,q.g,base); } else p1DrawVfx(gfx,S,ms,caster,Object.assign({},base,{target:q.g})); } }
         else if(on==='self'){ if(caster) { if(self) p1DrawVfx(gfx,S,ms,caster,base); else p1DrawVfx(gfx,S,ms,caster,Object.assign({},base,{target:caster})); } }

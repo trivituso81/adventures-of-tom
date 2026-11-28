@@ -10104,7 +10104,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 14: monster attacks get effects and stage",
-   "next": "Monster attacks can have effects, stage steps, a freeze on the hit and a shake, set on the same page as family moves. Starts by itself when Move Workbench 13 ships.",
+   "next": "Built and tested by machine (movebench14). Nothing for Tom. Next card: c-movebench-15.",
    "blocks": [
     "c-movebench-15"
    ],
@@ -10145,6 +10145,10 @@
     {
      "d": "2026-11-27",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Built movebench14: a monster attack with settings plays effects, freeze, shake and stage steps (mirrored); the Workbench page sets them. Golden unchanged (219, 0 differ); new golden_acts.json; page test at four phone layouts passed. Nothing for Tom to judge. Next: c-movebench-15."
     }
    ]
   },

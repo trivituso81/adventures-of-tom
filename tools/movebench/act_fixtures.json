@@ -1,0 +1,45 @@
+{
+ "about": "movebench14: what tools/movebench/acts_test.py puts on six monster attacks before it plays them, over the file's own live spec (a section named here replaces that section). These are test settings, never written to data/moves/ and never played by the game: Tom sets his own on the workbench page. golden_acts.json is what the engine plays with them.",
+ "specs": {
+  "act:mudling:mud_pie": {
+   "why": "a charged, thrown attack (wind-up first): a freeze, a shake and a splash on the family member it hits",
+   "timing": {"contact": {"share": 0.55}, "hitStop": 3, "shake": 3},
+   "effects": [{"fx": "vfx_core_drench_splash", "at": "contact", "on": "auto"}]
+  },
+  "act:toad:body_slam": {
+   "why": "a melee attack: two effects (one at the hit, one a quarter second after, on each target), a sound on an effect",
+   "timing": {"hitStop": 4, "shake": 5},
+   "effects": [
+    {"fx": "vfx_core_clobber_impact", "at": "contact", "on": "auto", "sfx": "thud"},
+    {"fx": "vfx_core_composure_break", "at": {"plus": 0.25}, "on": "each_target"}
+   ]
+  },
+  "act:log:timber": {
+   "why": "a staged attack: five stage steps around a named hit moment, with a freeze, a shake and an effect on top",
+   "body": {"clip": "log_timber", "until": "log_timber", "marks": {"hit": {"f": 0.5}}},
+   "timing": {"contact": {"mark": "hit"}, "hitStop": 2, "shake": 4},
+   "stage": {"steps": [
+    {"id": "warn", "at": 0.2, "do": "words", "text": "TIMBER", "where": "over:target", "size": 2, "hold": 0.8},
+    {"id": "dark", "at": {"mark": "hit", "plus": -0.3}, "do": "dim", "amount": 0.5, "in": 0.2},
+    {"id": "thump", "at": "hit", "do": "sfx", "sfx": "thud"},
+    {"id": "rock", "at": "hit", "do": "shake", "amp": 4, "dur": 0.4},
+    {"id": "light", "at": {"mark": "hit", "plus": 0.6}, "do": "dim", "amount": 0, "out": 0.3}
+   ]},
+   "effects": [{"fx": "vfx_core_clobber_impact", "at": "contact", "on": "auto"}]
+  },
+  "act:skeeter:darting_bite": {
+   "why": "a melee attack with badges on the target and nothing else",
+   "effects": [{"fx": "vfx_core_status_debuff_badges", "at": "contact", "on": "each_target"}]
+  },
+  "act:grump:bog_splash": {
+   "why": "a thrown attack with no video of its own (it plays the default throw): a library projectile instead of the default ball, a splash and a freeze",
+   "body": {"clip": null},
+   "timing": {"hitStop": 2},
+   "effects": [{"fx": "proj_arc_single", "at": "contact", "on": "auto"}, {"fx": "vfx_core_drench_splash", "at": "contact", "on": "auto"}]
+  },
+  "act:bigone:crown_polish": {
+   "why": "a buff on itself with no hit: effects on the monster itself (self) and on its allies",
+   "effects": [{"fx": "vfx_core_shield_ward", "at": "contact", "on": "self"}]
+  }
+ }
+}

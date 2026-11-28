@@ -205,7 +205,6 @@
    "norun": "did not run in",
    "gap": "{s} s between hits"
   },
-  "act_note": "For a monster attack only the freeze can be set for now. The rest arrives in a later step.",
   "trim": {
    "label": "Trim",
    "hint": "the first and last picture of the video that play",
@@ -1919,5 +1918,28 @@
   "s_game": "The picture is in the game; videos of this move are made from it.",
   "open": "Open in the Art Library",
   "needs_own": "Needs this move's own start picture first. Open the move to see where it is."
+ },
+ "act_side": {
+  "on.target": "The family member it hits",
+  "on.each_target": "Every family member it hits",
+  "on.self": "The monster",
+  "on.each_ally": "Each monster beside it",
+  "over:target": "Over the family member it hits",
+  "over:each_target": "On every family member it hits",
+  "hand": "In its hand or claw",
+  "self_front": "In front of it",
+  "over:self": "Over it",
+  "over:each_ally": "On each monster beside it",
+  "foes_front": "In front of the family",
+  "self": "The monster acting",
+  "above_self": "Over the monster acting",
+  "target": "The family member hit",
+  "each_target": "Each family member hit",
+  "above_target": "Over the family member hit",
+  "ally": "A monster beside",
+  "each_ally": "Each monster beside",
+  "attacker": "The monster",
+  "screen_left": "The edge on the family's side",
+  "screen_right": "The edge behind the monster"
  }
 }

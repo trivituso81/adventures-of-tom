@@ -686,6 +686,19 @@ What differs from the plan, and why:
 
 What phase 13 must know: a start picture is a part of `body` too; `specwrite.edit_body(root, anim_id, fn, why)` is the one way a session changes a spec's live part (it makes the file when there is none). The Guide page reads clip numbers from `CLIPS` (loaded on demand by `wbTrimEnsure`), not from `BCLIPS`, which only the game and the preview frame have. Pictures: `tools/shots/movebench/golden-timelines.png`, `trim-buttons.png`, `trim-dragged.png`.
 
+#### Phase 14 (movebench14, 2026-11-27): a monster attack with a spec plays effects, a freeze, a shake and stage steps
+
+- The rule that a foe's move draws nothing is gone: `b3vMeta` in `engine/b3-vfx.js` (the shake, the effects, the freeze keys) and `b3gRowFor` in `engine/b3-stage.js` no longer skip a foe. The foe's strike path of `b3PlayMove` (`engine/b3-play.js`) arms them at the first hit (`vfx` right after the hold, the same moment the freeze starts).
+- Sides: `b3vSideOf` and `b3vDraw` in `b3-vfx.js` decide "target", "each target", "self" and "each ally" from the caster's side, so for a monster the target is the family member it hits (the first live family member when it hits nobody) and its allies are the other monsters. `b3-stage.js` gained `b3gHomeOf`, `b3gAllies` and `b3gOpponents`; `b3gPts` mirrors for a monster that stands on the left: `screen_left` and `screen_right` swap, `front` is the family's near edge, and a thrown object's direction flips. A family move gives the same numbers as before.
+- A foe's stage run plays its `body.clip` through `B3P.fa[src].cl`; a party member's through `B3P.body[src]` as before.
+- Spec rules for attacks (`check_act` in `tools/movebench/schema.py`): no `answer`, `start`, `stage.lasting` or `stage.setpiece`, and no stage step `foe`. Approach, pace and gap stay family only.
+- The page: Timing shows the hit, the freeze and the shake; Stage, Effects and Sound show for an attack. The words are said from the monster's side (`act_side` in `data/movebench-words.json`: "the family member it hits"). The step picker has no "Knock the monster back". `timing.act_note` is deleted.
+- Golden: no attack spec had effects, steps, a freeze or a shake before this phase, so `golden.json` is unchanged (219 animations, 0 differ: an attack with no spec plays exactly as before). The new record `tools/movebench/golden_acts.json` comes from `tools/movebench/act_fixtures.json` (six attacks with test-only settings laid over each file's live spec: Mud Pie, Body Slam, Timber, Darting Bite, Bog Splash, Crown Polish); `python3 tools/movebench/acts_test.py` checks it plus the freeze, shake, effect sources and targets, sound, step times, the library projectile and the mirrored anchors, and writes `tools/shots/movebench/acts-sheet.png`. `python3 tools/movebench/acts_test.py --record` rewrites the record.
+- `B3BENCH.golden(id, true)` adds the run's `report`; without the flag the record has no `report` key (adding a key breaks the diff).
+- No attack's live settings were changed: nothing in the game plays a new effect on a monster until Tom saves one.
+
+What phase 15 must know: a monster attack is a normal spec now; `msStageRow('act:<foe>:<act>')` and `msEffects` work for it, and the fixtures file is the place to add a test attack.
+
 ### g.1 The board's bulk video path (a recommendation; this session did not touch it)
 
 Recommended: **pause now, retire in phase 16.**

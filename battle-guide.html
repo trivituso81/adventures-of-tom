@@ -1762,6 +1762,10 @@ function W(path,vars){let v=WORDS;for(const k of path.split('.'))v=v&&v[k];
   if(typeof v!=='string')return path.split('.').pop().replace(/_/g,' ');
   return vars?v.replace(/\{(\w+)\}/g,(m,k)=>vars[k]!=null?vars[k]:''):v;}
 function WA(path){let v=WORDS;for(const k of path.split('.'))v=v&&v[k];return Array.isArray(v)?v:[];}
+// movebench14: a monster attack has Timing (hit, freeze, shake), Stage, Effects and Sound like a move; "the monster" and "him" are said from the monster's side (words.act_side)
+const wbHas=a=>!!a&&(a.kind==='move'||a.kind==='act'),wbIsAct=()=>!!(WB.a&&WB.a.kind==='act');
+const WAS=path=>{const L=WA(path),m=wbIsAct()&&WORDS.act_side;return m?L.map(o=>o&&typeof o==='object'&&m[o.k]?Object.assign({},o,{label:m[o.k]}):o):L;};
+const WOn=k=>wbIsAct()&&WORDS.act_side&&WORDS.act_side['on.'+k]||W('on.'+k);
 const wbClone=o=>JSON.parse(JSON.stringify(o==null?{}:o));
 function wbStoreRead(){try{const j=JSON.parse(localStorage.getItem(WB_KEY)||'null');return j&&j.drafts?j:{v:1,drafts:{}};}catch(e){return {v:1,drafts:{}};}}
 function wbStoreWrite(id,live,base){const st=wbStoreRead();if(live==null)delete st.drafts[id];else st.drafts[id]={live,base:base||null,at:Date.now()};try{localStorage.setItem(WB_KEY,JSON.stringify(st));}catch(e){}}
@@ -1978,16 +1982,18 @@ function wbTimingHtml(a){
   if(a.kind==='wind'||a.kind==='state')return '<p class="hint">'+esc(W('timing.none_for_state'))+'</p>';
   let h='<p class="hint" style="margin:0 0 4px">'+esc(W('timing.note_draft'))+'</p>';
   const staged=wbStaged();
-  if(a.kind==='move'){
+  if(wbHas(a)){
     h+='<div class="wbrow" data-row="hit"><div class="wl"><b>'+esc(W('timing.hit.label'))+'</b><span id="wbhithint">'+esc(W('timing.hit.hint'))+'</span></div><div class="wc" id="wbhitc"></div></div>';
   }
   h+='<div class="wbrow" data-row="freeze"><div class="wl"><b>'+esc(W('timing.freeze.label'))+'</b><span>'+esc(W('timing.freeze.hint'))+'</span></div><div class="wc" id="wbfreeze"></div></div>';
-  if(a.kind==='move'){
+  if(wbHas(a)){
     h+='<div class="wbrow" data-row="shake"><div class="wl"><b>'+esc(W('timing.shake.label'))+'</b><span>'+esc(W('timing.shake.hint'))+'</span></div><div class="wc" id="wbshake"></div></div>';
+  }
+  if(a.kind==='move'){
     h+='<div class="wbrow" data-row="approach"><div class="wl"><b>'+esc(W('timing.approach.label'))+'</b><span>'+esc(W('timing.approach.hint'))+'</span></div><div class="wc" id="wbappr"></div></div>';
     h+='<div class="wbrow" data-row="pace" id="wbpacerow"><div class="wl"><b>'+esc(W('timing.pace.label'))+'</b><span>'+esc(W('timing.pace.hint'))+'</span></div><div class="wc" id="wbpace"></div></div>';
     h+='<div class="wbrow" data-row="gap" id="wbgaprow" hidden><div class="wl"><b>'+esc(W('timing.gap.label'))+'</b><span>'+esc(W('timing.gap.hint'))+'</span></div><div class="wc" id="wbgap"></div></div>';
-  }else h+='<p class="hint">'+esc(W('timing.act_note'))+'</p>';
+  }
   h+='<p class="wbrep" id="wbrep"></p>';
   return h;
 }
@@ -2034,7 +2040,7 @@ function wbPaint(){
   if(rp){if(!run)rp.textContent='';else{const R=run,parts=[];
     parts.push(R.hit!=null?W('timing.report.hit',{t:wbFmt(R.hit)}):W('timing.hit.none'));
     parts.push(R.holdSec>0?W('timing.report.hold',{s:wbFmt(R.holdSec)}):W('timing.report.nohold'));
-    if(a.kind==='move'){parts.push(R.shakePx>0?W('timing.report.shake',{px:R.shakePx}):W('timing.report.noshake'));parts.push(R.runInSec!=null?W('timing.report.run',{s:wbFmt(R.runInSec)}):W('timing.report.norun'));}
+    parts.push(R.shakePx>0?W('timing.report.shake',{px:R.shakePx}):W('timing.report.noshake'));if(a.kind==='move')parts.push(R.runInSec!=null?W('timing.report.run',{s:wbFmt(R.runInSec)}):W('timing.report.norun'));
     if(R.gap!=null)parts.push(W('timing.report.gap',{s:wbFmt(R.gap)}));
     rp.innerHTML='<b>'+esc(W('timing.report.label'))+':</b> '+parts.map(esc).join(', ');}}
   wbSubline();wbFxCounts();wbStagePaint(true);wbSoundPaint();
@@ -2052,7 +2058,7 @@ function wbSpecCounts(a){
   return {stage:st,effects:fx,sound:sn};
 }
 function wbHtml(a,videoHtml){
-  const nav=[['video','nav.video',0],['timing','nav.timing',0]],C=a.kind==='move'?wbSpecCounts(a):null;
+  const nav=[['video','nav.video',0],['timing','nav.timing',0]],C=wbHas(a)?wbSpecCounts(a):null;
   if(C)nav.push(['stage','nav.stage',C.stage]);
   if(lsApplicable(a))nav.push(['lasting','nav.lasting',((wbSpecOf(a.id)||{}).stage&&(wbSpecOf(a.id).stage.lasting||[]).length)||0]);
   if(C)nav.push(['effects','nav.effects',C.effects]);
@@ -2164,7 +2170,7 @@ function fxTick(ts){
 function fxKick(){if(!FXS.raf&&document.querySelector('canvas.fxs'))FXS.raf=requestAnimationFrame(fxTick);}
 // ---- the section ----
 function wbFxSection(a){
-  if(a.kind!=='move')return '';
+  if(!wbHas(a))return '';
   return '<section class="wbs" id="s-effects"><h3 class="wbh"><span>'+esc(W('sections.effects'))+'</span><span class="wbcount" id="wbfxcount"></span></h3><p class="hint" style="margin:0 0 6px">'+esc(W('fx.p.note_draft'))+'</p><div id="wbfx"></div></section>';
 }
 function fxParamHtml(e,i,n,p){
@@ -2196,8 +2202,8 @@ function fxPanelHtml(e,i){
       :'<button type="button" class="wbc wbstep" data-fx="ws" data-i="'+i+'" data-v="-1" aria-label="'+esc(W('when.less'))+'">-</button><button type="button" class="wbc wbstep" data-fx="ws" data-i="'+i+'" data-v="1" aria-label="'+esc(W('when.more'))+'">+</button><span class="wbval fxwv">'+esc(wh.m==='hit'?'0 s':W('when.seconds',{s:fxR(wh.s)}))+'</span>')
     +'<button type="button" class="wbc" data-fx="wset" data-i="'+i+'">'+esc(W('when.set'))+'</button></div></div>';
   // On whom
-  h+='<div class="wbrow"><div class="wl"><b>'+esc(W('on.label'))+'</b><span>'+esc(on==='auto'?W('on.auto_is',{now:W('on.'+(P1_VFX_ON&&P1_VFX_ON[e.fx]||fxOnDefault(e.fx)))}):'')+'</span></div><div class="wc"><div class="wbseg wrap">'
-    +['auto','target','each_target','self','each_ally','field'].map(o=>'<button type="button" data-fx="on" data-i="'+i+'" data-v="'+o+'" aria-pressed="'+(on===o?'true':'false')+'">'+esc(W('on.'+o))+'</button>').join('')+'</div></div></div>';
+  h+='<div class="wbrow"><div class="wl"><b>'+esc(W('on.label'))+'</b><span>'+esc(on==='auto'?W('on.auto_is',{now:WOn(P1_VFX_ON&&P1_VFX_ON[e.fx]||fxOnDefault(e.fx))}):'')+'</span></div><div class="wc"><div class="wbseg wrap">'
+    +['auto','target','each_target','self','each_ally','field'].map(o=>'<button type="button" data-fx="on" data-i="'+i+'" data-v="'+o+'" aria-pressed="'+(on===o?'true':'false')+'">'+esc(WOn(o))+'</button>').join('')+'</div></div></div>';
   // settings
   h+='<h4 class="fxh">'+esc(W('fx.p.settings'))+'</h4>';
   const rows=ps.map(q=>fxParamHtml(e,i,q[0],q[1])).join('');
@@ -2210,7 +2216,7 @@ function fxPanelHtml(e,i){
   return h;
 }
 function fxRowHtml(e,i){
-  const open=WB.fxOpen===i,ch=fxChanged(e),on=e.on&&e.on!=='auto'?' · '+W('on.'+e.on):'';
+  const open=WB.fxOpen===i,ch=fxChanged(e),on=e.on&&e.on!=='auto'?' · '+WOn(e.on):'';
   return '<div class="fxc'+(e.off?' off':'')+(open?' open':'')+'" data-i="'+i+'"><div class="fxtop">'+fxSample(e.fx,i)+'<div class="fxm"><b>'+esc(fxName(e.fx))+'</b><span>'+esc(fxWhenText(e)+on)+(ch?' · '+esc(ch+' '+W('fx.p.changed')):'')+(e.off?' · '+esc(W('fx.p.off')):'')+(fxHas(e.fx)?'':' · <u class="fxpink">'+esc(W('fx.p.no_drawing'))+'</u>')+'</span></div>'
    +'<button type="button" class="fxch" data-fx="open" data-i="'+i+'" aria-expanded="'+(open?'true':'false')+'">'+esc(W(open?'fx.p.close':'fx.p.change'))+'</button></div>'+(open?fxPanelHtml(e,i):'')+'</div>';
 }
@@ -2354,7 +2360,7 @@ function stgOrder(l){const t=stgTimes();return l.map((s,i)=>i).sort((a,b)=>t?(t[
 // ---- the sentence ----
 function stgSentence(s){
   const T=(k,v)=>W('stage.s.'+k,v),col=c=>stgColorName(c);
-  if(s.do==='words'){const pl=WA('stage.places').find(o=>o.k===(s.where||'screen_center'));
+  if(s.do==='words'){const pl=WAS('stage.places').find(o=>o.k===(s.where||'screen_center'));
     if(s.glyphs)return T('other',{name:W('stage_do.words')+': '+s.glyphs.length+' buttons'});
     return T('words',{text:s.text||'',where:(pl?pl.label:String(s.where||'screen_center').replace(/[:_]/g,' ')).toLowerCase(),color:col(s.color||'#fff1cb'),hold:stgR(stgNum(s,'hold'))});}
   if(s.do==='shake'){const a=stgNum(s,'amp'),p=stgPick('stage.amps',a);return T('shake',{amp:(p?p.label:a+' px').toLowerCase(),dur:stgR(stgNum(s,'dur'))});}
@@ -2367,7 +2373,7 @@ function stgSentence(s){
   return T('other',{name:W('stage_do.'+s.do)});
 }
 // movebench10: the sentence of a step that uses an object
-const stgAnchorWord=k=>{const o=WA('stage.anchors').find(x=>x.k===k);return (o?o.label:String(k||'').replace(/_/g,' ')).toLowerCase();};
+const stgAnchorWord=k=>{const o=WAS('stage.anchors').find(x=>x.k===k);return (o?o.label:String(k||'').replace(/_/g,' ')).toLowerCase();};
 const stgObjName=s=>{const o=stgObjs()[s.asset];return o&&o.name?o.name:(s.asset?String(s.asset).split('/').pop():W('stage.obj').toLowerCase());};
 function stgObjSentence(s){
   const T=(k,v)=>W('stage.s2.'+k,v),d=s.do,obj=stgObjName(s);let x='';
@@ -2380,7 +2386,7 @@ function stgObjSentence(s){
 const stgDir=s=>((s.from||'screen_right')==='screen_left')?'lr':'rl';
 // ---- the section ----
 function wbStageSection(a){
-  if(a.kind!=='move')return '';
+  if(!wbHas(a))return '';
   return '<section class="wbs" id="s-stage"><h3 class="wbh"><span>'+esc(W('sections.stage'))+'</span><span class="wbcount" id="wbstgcount"></span></h3><p class="hint" style="margin:0 0 6px">'+esc(W('stage.note_draft'))+'</p><p class="hint" id="wbstgnov" hidden>'+esc(W('stage.no_video'))+'</p><div id="wbstg"></div></section>';
 }
 function stgSeg(label,hint,f,opts,cur,attr){
@@ -2409,7 +2415,7 @@ function stgFieldsHtml(s){
   if(d==='words'){
     h+='<div class="wbrow"><div class="wl"><b>'+esc(W('stage.text'))+'</b><span>'+esc(W('stage.text_hint'))+'</span></div><div class="wc"><input type="text" class="fxt" data-st="text" maxlength="30" value="'+esc(s.text||'')+'" aria-label="'+esc(W('stage.text'))+'"></div></div>';
     h+='<div class="wbrow"><div class="wl"><b>'+esc(W('stage.where'))+'</b></div><div class="wc"><select class="fxsel" data-st="where" aria-label="'+esc(W('stage.where'))+'">'
-      +WA('stage.places').map(o=>'<option value="'+esc(o.k)+'"'+(o.k===(s.where||'screen_center')?' selected':'')+'>'+esc(o.label)+'</option>').join('')+(WA('stage.places').some(o=>o.k===(s.where||'screen_center'))?'':'<option value="'+esc(s.where)+'" selected>'+esc(words(s.where))+'</option>')+'</select></div></div>';
+      +WAS('stage.places').map(o=>'<option value="'+esc(o.k)+'"'+(o.k===(s.where||'screen_center')?' selected':'')+'>'+esc(o.label)+'</option>').join('')+(WAS('stage.places').some(o=>o.k===(s.where||'screen_center'))?'':'<option value="'+esc(s.where)+'" selected>'+esc(words(s.where))+'</option>')+'</select></div></div>';
     h+=stgSeg(W('stage.size'),'','size',WA('stage.sizes'),stgNum(s,'size'));
     h+=stgColors(W('stage.color'),s.color||'#fff1cb');
     h+=stgSeg(W('stage.hold'),'','hold',WA('stage.holds'),stgNum(s,'hold'),stgBump('hold',stgNum(s,'hold')));
@@ -2495,7 +2501,7 @@ function wbStagePaint(keepFocus){
   if(keepFocus&&el.contains(document.activeElement)&&/^(INPUT|SELECT)$/.test(document.activeElement.tagName)){stgTimesPaint();return;}
   const times=stgTimes(),ord=stgOrder(l);
   el.innerHTML=wbStgScopeHtml()+(l.length?ord.map(i=>stgRowHtml(i,l,times)).join(''):'<p class="hint">'+esc(W('stage.empty'))+'</p>')
-   +(WB.stgPick?'<div class="fxpick"><p class="hint" style="margin:0 0 6px">'+esc(W('stage.adding'))+'</p><div class="fxgrid">'+STGALL.map(k=>'<button type="button" class="fxtile sttile" data-st="pick" data-v="'+k+'"><span class="stic" aria-hidden="true">'+STG_ICON[k]+'</span><b>'+esc(W('stage.tiles.'+k))+'</b></button>').join('')+'</div><button type="button" data-st="pickno">'+esc(W('stage.cancel'))+'</button></div>'
+   +(WB.stgPick?'<div class="fxpick"><p class="hint" style="margin:0 0 6px">'+esc(W('stage.adding'))+'</p><div class="fxgrid">'+STGALL.filter(k=>!(wbIsAct()&&k==='foe')).map(k=>'<button type="button" class="fxtile sttile" data-st="pick" data-v="'+k+'"><span class="stic" aria-hidden="true">'+STG_ICON[k]+'</span><b>'+esc(W('stage.tiles.'+k))+'</b></button>').join('')+'</div><button type="button" data-st="pickno">'+esc(W('stage.cancel'))+'</button></div>'
      :'<button type="button" class="fxadd" data-st="add">+ '+esc(W('stage.add'))+'</button>')+stgObjectsHtml();
   wbStgCounts();
 }
@@ -2512,7 +2518,7 @@ function stgSounds(){
   return out;
 }
 function wbSoundSection(a){
-  if(a.kind!=='move')return '';
+  if(!wbHas(a))return '';
   return '<section class="wbs" id="s-sound"><h3 class="wbh"><span>'+esc(W('sections.sound'))+'</span><span class="wbcount" id="wbsndcount"></span></h3><div id="wbsnd"></div></section>';
 }
 function wbSoundPaint(){

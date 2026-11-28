@@ -374,7 +374,7 @@ function b3PlayMove(beats,done,mid,waited) {   // mid: the first move of a Famil
     const keys=[],home=foe?null:b3PartyHome(b3Unit(B3.F,src));
     if(foe) {
       // An enemy leans back first (the hold), then lunges; the hit shows at the far point of the lunge.
-      B3P.fa[src].hold=B3P.t+.22*K; t=.22;
+      B3P.fa[src].hold=B3P.t+.22*K; t=.22; vfx((.22+.27)*K);   // movebench14: the attack's effects, hit stop and shake come at the first hit (nothing is armed for an attack whose spec has none)
       for(const h of hits) { const z=b3Spot(h.swing.tgts[0]); at(t,()=>{ B3P.fa[src].lunge={t0:B3P.t,dur:.55*K,tx:z.sx,ty:z.sb}; }); at(t+.27,reveal); t+=.6; }
       finish(t); return;
     }

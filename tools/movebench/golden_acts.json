@@ -1,0 +1,593 @@
+{
+ "about": "Written by tools/movebench/acts_test.py --record (movebench14): what the engine plays for six monster attacks with the test settings of act_fixtures.json. A difference later is a bug or a change of the fixtures.",
+ "animations": {
+  "act:bigone:crown_polish": {
+   "beats": [],
+   "effects": [
+    {
+     "fx": [
+      {
+       "id": "vfx_core_shield_ward",
+       "known": true,
+       "layer": "unit_overlay",
+       "params": null
+      }
+     ],
+     "impactMs": 0,
+     "src": "f0",
+     "t": 1.25,
+     "tgts": 1
+    }
+   ],
+   "end": 2.8,
+   "faults": [],
+   "finished": true,
+   "hit": null,
+   "hold": [],
+   "id": "act:bigone:crown_polish",
+   "kind": "act",
+   "len": 2.2,
+   "loaded": true,
+   "report": {
+    "clipSec": null,
+    "gap": null,
+    "hit": null,
+    "hits": [],
+    "holdAt": null,
+    "holdSec": 0,
+    "len": 2.2,
+    "marks": null,
+    "noVideoRun": false,
+    "off": null,
+    "runInSec": null,
+    "shakeAt": null,
+    "shakePx": 0,
+    "staged": false,
+    "steps": null
+   },
+   "run": null,
+   "sound": [
+    {
+     "name": "intro",
+     "t": 0
+    }
+   ],
+   "stage": [],
+   "ticks": [],
+   "video": [
+    {
+     "a": 0.017,
+     "b": 2.117,
+     "k": "video",
+     "label": "bigone polish"
+    }
+   ],
+   "wind": []
+  },
+  "act:grump:bog_splash": {
+   "beats": [
+    {
+     "b": "hit",
+     "phase": "move",
+     "t": 0.95,
+     "tgt": "p2"
+    }
+   ],
+   "effects": [
+    {
+     "fx": [
+      {
+       "id": "proj_arc_single",
+       "known": true,
+       "layer": "foreground_sweep",
+       "params": null
+      },
+      {
+       "id": "vfx_core_drench_splash",
+       "known": true,
+       "layer": "foreground_sweep",
+       "params": null
+      }
+     ],
+     "impactMs": 0,
+     "src": "f0",
+     "t": 0.937,
+     "tgts": 1
+    }
+   ],
+   "end": 1.917,
+   "faults": [],
+   "finished": true,
+   "hit": 0.95,
+   "hold": [
+    {
+     "dur": 0.083,
+     "t": 0.937,
+     "units": 2
+    }
+   ],
+   "id": "act:grump:bog_splash",
+   "kind": "act",
+   "len": 1.317,
+   "loaded": true,
+   "report": {
+    "clipSec": null,
+    "gap": null,
+    "hit": 0.95,
+    "hits": [
+     0.95
+    ],
+    "holdAt": 0.937,
+    "holdSec": 0.083,
+    "len": 1.317,
+    "marks": null,
+    "noVideoRun": false,
+    "off": null,
+    "runInSec": null,
+    "shakeAt": null,
+    "shakePx": 0,
+    "staged": false,
+    "steps": null
+   },
+   "run": null,
+   "sound": [
+    {
+     "name": "intro",
+     "t": 0
+    },
+    {
+     "name": "hitParty",
+     "t": 0.95
+    }
+   ],
+   "stage": [],
+   "ticks": [],
+   "video": [
+    {
+     "a": 0.017,
+     "b": 1.183,
+     "k": "default",
+     "label": "Default motion"
+    }
+   ],
+   "wind": []
+  },
+  "act:log:timber": {
+   "beats": [
+    {
+     "b": "hit",
+     "phase": "move",
+     "t": 2.233,
+     "tgt": "p2"
+    }
+   ],
+   "effects": [
+    {
+     "fx": [
+      {
+       "id": "vfx_core_clobber_impact",
+       "known": true,
+       "layer": "unit_overlay",
+       "params": null
+      }
+     ],
+     "impactMs": 0,
+     "src": "f0",
+     "t": 2.228,
+     "tgts": 1
+    }
+   ],
+   "end": 3.7,
+   "faults": [],
+   "finished": true,
+   "hit": 2.228,
+   "hold": [
+    {
+     "dur": 0.083,
+     "t": 2.228,
+     "units": 2
+    }
+   ],
+   "id": "act:log:timber",
+   "kind": "act",
+   "len": 3.1,
+   "loaded": true,
+   "report": {
+    "clipSec": 1.389,
+    "gap": null,
+    "hit": 2.228,
+    "hits": [
+     2.233
+    ],
+    "holdAt": 2.228,
+    "holdSec": 0.083,
+    "len": 3.1,
+    "marks": {
+     "hit": 0.695
+    },
+    "noVideoRun": false,
+    "off": 1.533,
+    "runInSec": null,
+    "shakeAt": 2.228,
+    "shakePx": 4,
+    "staged": true,
+    "steps": [
+     0.2,
+     0.395,
+     0.695,
+     0.695,
+     1.295
+    ]
+   },
+   "run": {
+    "budget": 3,
+    "hitAt": 0.695,
+    "marks": {
+     "hit": 0.695
+    },
+    "noVideo": false
+   },
+   "sound": [
+    {
+     "name": "intro",
+     "t": 0
+    },
+    {
+     "name": "charge",
+     "t": 0.017
+    },
+    {
+     "name": "thud",
+     "t": 2.233
+    },
+    {
+     "name": "hitParty",
+     "t": 2.233
+    }
+   ],
+   "stage": [
+    {
+     "amp": null,
+     "do": "words",
+     "dur": null,
+     "id": "warn",
+     "sfx": null,
+     "t": 1.75,
+     "text": "TIMBER"
+    },
+    {
+     "amp": null,
+     "do": "dim",
+     "dur": null,
+     "id": "dark",
+     "sfx": null,
+     "t": 1.933,
+     "text": null
+    },
+    {
+     "amp": null,
+     "do": "sfx",
+     "dur": null,
+     "id": "thump",
+     "sfx": "thud",
+     "t": 2.233,
+     "text": null
+    },
+    {
+     "amp": 4,
+     "do": "shake",
+     "dur": 0.4,
+     "id": "rock",
+     "sfx": null,
+     "t": 2.233,
+     "text": null
+    },
+    {
+     "amp": null,
+     "do": "dim",
+     "dur": null,
+     "id": "light",
+     "sfx": null,
+     "t": 2.833,
+     "text": null
+    }
+   ],
+   "ticks": [
+    {
+     "name": "hit",
+     "t": 2.228
+    }
+   ],
+   "video": [
+    {
+     "a": 0.017,
+     "b": 0.8,
+     "k": "default",
+     "label": "Default motion"
+    },
+    {
+     "a": 1.533,
+     "b": 2.967,
+     "k": "video",
+     "label": "log timber"
+    }
+   ],
+   "wind": [
+    {
+     "a": 0.017,
+     "b": 1.517,
+     "k": "video",
+     "label": "log timberwind, held"
+    }
+   ]
+  },
+  "act:mudling:mud_pie": {
+   "beats": [
+    {
+     "b": "hit",
+     "phase": "move",
+     "t": 2.717,
+     "tgt": "p2"
+    }
+   ],
+   "effects": [
+    {
+     "fx": [
+      {
+       "id": "vfx_core_drench_splash",
+       "known": true,
+       "layer": "foreground_sweep",
+       "params": null
+      }
+     ],
+     "impactMs": 0,
+     "src": "f0",
+     "t": 2.7,
+     "tgts": 1
+    }
+   ],
+   "end": 4.317,
+   "faults": [],
+   "finished": true,
+   "hit": 2.717,
+   "hold": [
+    {
+     "dur": 0.125,
+     "t": 2.7,
+     "units": 2
+    }
+   ],
+   "id": "act:mudling:mud_pie",
+   "kind": "act",
+   "len": 3.717,
+   "loaded": true,
+   "report": {
+    "clipSec": null,
+    "gap": null,
+    "hit": 2.717,
+    "hits": [
+     2.717
+    ],
+    "holdAt": 2.7,
+    "holdSec": 0.125,
+    "len": 3.717,
+    "marks": null,
+    "noVideoRun": false,
+    "off": null,
+    "runInSec": null,
+    "shakeAt": 2.7,
+    "shakePx": 3,
+    "staged": false,
+    "steps": null
+   },
+   "run": null,
+   "sound": [
+    {
+     "name": "intro",
+     "t": 0
+    },
+    {
+     "name": "charge",
+     "t": 0.017
+    },
+    {
+     "name": "hitParty",
+     "t": 2.717
+    }
+   ],
+   "stage": [],
+   "ticks": [],
+   "video": [
+    {
+     "a": 0.017,
+     "b": 0.8,
+     "k": "default",
+     "label": "Default motion"
+    },
+    {
+     "a": 1.533,
+     "b": 3.633,
+     "k": "video",
+     "label": "mudling throw"
+    }
+   ],
+   "wind": [
+    {
+     "a": 0.017,
+     "b": 1.517,
+     "k": "video",
+     "label": "mudling windup, held"
+    }
+   ]
+  },
+  "act:skeeter:darting_bite": {
+   "beats": [
+    {
+     "b": "hit",
+     "phase": "move",
+     "t": 0.75,
+     "tgt": "p2"
+    }
+   ],
+   "effects": [
+    {
+     "fx": [
+      {
+       "id": "vfx_core_status_debuff_badges",
+       "known": true,
+       "layer": "unit_overlay",
+       "params": null
+      }
+     ],
+     "impactMs": 0,
+     "src": "f1",
+     "t": 0.75,
+     "tgts": 1
+    }
+   ],
+   "end": 2.267,
+   "faults": [],
+   "finished": true,
+   "hit": 0.75,
+   "hold": [],
+   "id": "act:skeeter:darting_bite",
+   "kind": "act",
+   "len": 1.667,
+   "loaded": true,
+   "report": {
+    "clipSec": null,
+    "gap": null,
+    "hit": 0.75,
+    "hits": [
+     0.75
+    ],
+    "holdAt": null,
+    "holdSec": 0,
+    "len": 1.667,
+    "marks": null,
+    "noVideoRun": false,
+    "off": null,
+    "runInSec": null,
+    "shakeAt": null,
+    "shakePx": 0,
+    "staged": false,
+    "steps": null
+   },
+   "run": null,
+   "sound": [
+    {
+     "name": "intro",
+     "t": 0
+    },
+    {
+     "name": "hitParty",
+     "t": 0.75
+    }
+   ],
+   "stage": [],
+   "ticks": [],
+   "video": [
+    {
+     "a": 0.017,
+     "b": 1.583,
+     "k": "video",
+     "label": "skeeter bite"
+    }
+   ],
+   "wind": []
+  },
+  "act:toad:body_slam": {
+   "beats": [
+    {
+     "b": "hit",
+     "phase": "move",
+     "t": 0.8,
+     "tgt": "p2"
+    }
+   ],
+   "effects": [
+    {
+     "fx": [
+      {
+       "id": "vfx_core_clobber_impact",
+       "known": true,
+       "layer": "unit_overlay",
+       "params": null
+      },
+      {
+       "id": "vfx_core_composure_break",
+       "known": true,
+       "layer": "unit_overlay",
+       "params": null
+      }
+     ],
+     "impactMs": 0,
+     "src": "f0",
+     "t": 0.795,
+     "tgts": 1
+    }
+   ],
+   "end": 2.3,
+   "faults": [],
+   "finished": true,
+   "hit": 0.8,
+   "hold": [
+    {
+     "dur": 0.167,
+     "t": 0.795,
+     "units": 2
+    }
+   ],
+   "id": "act:toad:body_slam",
+   "kind": "act",
+   "len": 1.7,
+   "loaded": true,
+   "report": {
+    "clipSec": null,
+    "gap": null,
+    "hit": 0.8,
+    "hits": [
+     0.8
+    ],
+    "holdAt": 0.795,
+    "holdSec": 0.167,
+    "len": 1.7,
+    "marks": null,
+    "noVideoRun": false,
+    "off": null,
+    "runInSec": null,
+    "shakeAt": 0.795,
+    "shakePx": 5,
+    "staged": false,
+    "steps": null
+   },
+   "run": null,
+   "sound": [
+    {
+     "name": "intro",
+     "t": 0
+    },
+    {
+     "name": "thud",
+     "t": 0.8
+    },
+    {
+     "name": "hitParty",
+     "t": 0.8
+    }
+   ],
+   "stage": [],
+   "ticks": [],
+   "video": [
+    {
+     "a": 0.017,
+     "b": 1.617,
+     "k": "video",
+     "label": "toad slam"
+    }
+   ],
+   "wind": []
+  }
+ },
+ "tol": 0.0011
+}
