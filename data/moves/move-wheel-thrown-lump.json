@@ -1,7 +1,7 @@
 {
  "v": 1,
  "id": "move:wheel_thrown_lump",
- "rev": 1,
+ "rev": 2,
  "live": {
   "body": {
    "motion": "strike"
@@ -14,7 +14,17 @@
    {
     "fx": "proj_arc_single"
    }
-  ]
+  ],
+  "start": {
+   "picture": "standard",
+   "held": "hefty lump of wet gray stoneware clay",
+   "worn": [
+    {
+     "what": "studio potter apron",
+     "where": "tied at the waist"
+    }
+   ]
+  }
  },
  "draft": null,
  "finished": null,
@@ -24,6 +34,12 @@
    "at": "2026-11-26T22:00:00-08:00",
    "by": "migration",
    "what": "written from the tables the engine reads today"
+  },
+  {
+   "rev": 2,
+   "at": "2026-11-27T23:31:19Z",
+   "by": "claude",
+   "what": "move:wheel_thrown_lump: start picture standard, holds hefty lump of wet gray stoneware clay, wears 1 (one held prop, the rest worn; Pipeline Lock, One held prop)"
   }
  ]
 }

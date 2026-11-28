@@ -6563,28 +6563,32 @@
   },
   {
    "id": "t-guidecross-decide",
-   "title": "Battle Guide: five decisions the manifest crosswalk lists",
+   "title": "Battle Guide: four decisions the manifest crosswalk lists",
    "theme": "Battle Animations",
    "lane": "tom",
    "col": "up",
    "ask": "decide",
    "fyi": true,
-   "next": "Open ADMIN > BATTLE GUIDE > Animations > What Tom has to do and read the five lines under Decide (name differences 3, two held props 7, Capstone clips longer than 5.0 s 28, one effect with no library asset, one weak effect match). Then tap one answer here. Nothing is built from your answer yet; the next session that makes start frames, clips or effects reads it.",
+   "next": "Open ADMIN > BATTLE GUIDE > Animations > What Tom has to do and read the four lines under Decide (name differences 3, Capstone clips longer than 5.0 s 28, one effect with no library asset, one weak effect match). Then tap one answer here. Nothing is built from your answer yet; the next session that makes clips or effects reads it.",
    "choices": [
-    "Approve all five as recommended (Recommended)",
+    "Approve all four as recommended (Recommended)",
     "I will answer line by line in chat"
    ],
    "leads": [
-    "Names stay the game's except Boppy's Pier Slam; the first listed prop is held and the other is worn on the belt; Capstone body clips run up to 5.0 s with the engine drawing the rest; vfx_sunset_gold_stunt_lines is dropped; the elimination match for the Lamby decoy glint stays.",
+    "Names stay the game's except Boppy's Pier Slam; Capstone body clips run up to 5.0 s with the engine drawing the rest; vfx_sunset_gold_stunt_lines is dropped; the elimination match for the Lamby decoy glint stays.",
     "Nothing is assumed; tell me each answer in a new chat and it goes onto the cards."
    ],
    "blocks": [],
    "created": "2026-11-26",
-   "changed": "2026-11-26",
+   "changed": "2026-11-27",
    "history": [
     {
      "d": "2026-11-26",
      "t": "Made by c-guide-crosswalk (guidecross1): the decisions the page lists for Tom."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "movebench13: the seven two-held-prop lines are gone. Each of those moves now has one held thing and the rest worn in its own Start picture settings, so only four decisions are left."
     }
    ]
   },
@@ -10048,7 +10052,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 13: start picture, held and worn",
-   "next": "Each move can have its own start picture: you say the one thing that is held and what is worn, make the picture in the Art Library, and Make this video uses it. Starts by itself when Move Workbench 12 ships.",
+   "next": "Shipped as movebench13: Start picture row (Holds one thing, Wears, standard or own picture), the Library entry start-<who>-<move> made from the Hero with only the hands edited, startPic on a video row, the seven two-held-prop lines gone. Nothing paid ran. Next: Move Workbench 14 starts by itself.",
    "blocks": [
     "c-movebench-14"
    ],
@@ -10081,6 +10085,10 @@
     {
      "d": "2026-11-27",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "movebench13 built: Start picture row on the Workbench, 8 two-prop moves seeded (one held, rest worn), Art Library entry start-<who>-<move> via ownstart.py with lock_hero_pixels and Gate 1 unchanged, startPic on video rows, t-guidecross-decide rewritten to four. Tests passed: start_test, ownstart_test, spec_test, apply_test, store_test, worker_test, page_test, golden_test. Not run: any paid generation; a real model's hand edit (a drawn stand-in was used). Pre-existing failures left: tools/battle_guide_test.py (manifest_crosswalk has no MANIFESTS) and tools/board_test.py (#bcopy timeout), both fail on HEAD without this change."
     }
    ]
   },

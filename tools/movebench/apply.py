@@ -19,7 +19,7 @@ What it does, in order (every step starts from the newest main, so a save by Tom
 --dry-run does everything except the push and the writes through the API.
 Environment: GH_TOKEN, GITHUB_REPOSITORY (GUIDE_API for a stand-in), GITHUB_RUN_ID, GITHUB_OUTPUT (`pushed=true|false`, `tag=...`), APPLY_PAUSE (seconds between tries, 5).
 Test: python3 -I tools/movebench/apply_test.py"""
-import argparse, base64, datetime, hashlib, json, os, subprocess, sys, time, urllib.parse
+import argparse, base64, datetime, hashlib, json, os, re, subprocess, sys, time, urllib.parse
 
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT0 = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(ROOT0, 'tools', 'guidegen'))
@@ -109,12 +109,40 @@ def stamp(root, tag):
 
 
 def add_entries(root):
-    """movebench10: runs tools/art-library/stage-prompts.js on the tree. Returns the ids of the Art Library entries it added or changed (the lines it prints that end in a bracket)."""
-    js = os.path.join(root, 'tools', 'art-library', 'stage-prompts.js')
-    if not os.path.exists(js) or not os.path.exists(os.path.join(root, 'data', 'art-prompts.json')): return []
-    p = subprocess.run(['node', js, '--root', root], cwd=root, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-    if p.returncode: say('stage-prompts.js failed:', p.stdout[-300:]); return []
-    return [l.strip().split(' ')[0] for l in p.stdout.splitlines() if l.strip().startswith('stage-') and l.strip().endswith('(new)')]
+    """movebench10 and 13: runs tools/art-library/stage-prompts.js (a drawn object) and start-prompts.js (a start picture made for one move) on the tree. Before the second, the grey
+    reference picture of each person that has an own start picture is made (tools/movebench/ownstart.py grey_ref, art/raw/startref/<who>-grey.png: the entry's reference).
+    Returns the ids of the Art Library entries it added (the lines it prints that end in (new))."""
+    if not os.path.exists(os.path.join(root, 'data', 'art-prompts.json')): return []
+    out = []
+    for mod, pre in (('stage-prompts.js', 'stage-'), ('start-prompts.js', 'start-')):
+        js = os.path.join(root, 'tools', 'art-library', mod)
+        if not os.path.exists(js): continue
+        if pre == 'start-': make_start_refs(root)
+        p = subprocess.run(['node', js, '--root', root], cwd=root, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+        if p.returncode: say('%s failed: %s' % (mod, p.stdout[-300:])); continue
+        out += [l.strip().split(' ')[0] for l in p.stdout.splitlines() if l.strip().startswith(pre) and l.strip().endswith('(new)')]
+    return out
+
+
+def make_start_refs(root):
+    """The grey reference of every person with an own start picture in a spec (live or draft) that holds or wears something. Never overwrites a reference that is there."""
+    d = os.path.join(root, 'data', 'moves'); who = set()
+    try: files = sorted(f for f in os.listdir(d) if f.endswith('.json') and f != 'index.json')
+    except OSError: return
+    for f in files:
+        try: doc = json.load(open(os.path.join(d, f), encoding='utf-8'))
+        except ValueError: continue
+        part = doc.get('draft') if (doc.get('draft') or {}).get('start') else doc.get('live')
+        s = (part or {}).get('start') or {}
+        m = re.match(r'^start-([a-z0-9]+)-[a-z0-9-]+$', str(s.get('entry') or ''))
+        if s.get('picture') == 'own' and m and (s.get('held') or s.get('worn')): who.add(m.group(1))
+    sys.path.insert(0, os.path.join(root, 'tools', 'movebench'))
+    import ownstart
+    for w in sorted(who):
+        out = os.path.join(root, 'art', 'raw', 'startref', '%s-grey.png' % w)
+        if os.path.exists(out): continue
+        try: ownstart.grey_ref(w, root, out=out)
+        except Exception as e: say('no reference for %s: %s' % (w, e))   # a missing standard picture or a bad file must not stop the job: the entry then waits for its reference
 
 
 def prepare(root, tag, do_stamp, allow_build=True):
@@ -146,7 +174,7 @@ def push_loop(root, a, tag):
         if kind is None: return None, []
         if git(root, 'grep', '-q', '^<<<<<<<', check=False).returncode == 0: say('conflict markers, try %d' % i); continue
         git(root, 'add', '-A')
-        git(root, *BOT, 'commit', '-q', '-m', ('move-apply: %s, %d animation%s finished in the Move Workbench [skip ci]' % (tag, len(ids), '' if len(ids) == 1 else 's')) if kind == 'build' else ('move-apply: Art Library entries for new stage objects: %s [skip ci]' % ', '.join(NOTE['entries'])) if kind == 'entries' else 'move-apply: statuses [skip ci]')
+        git(root, *BOT, 'commit', '-q', '-m', ('move-apply: %s, %d animation%s finished in the Move Workbench [skip ci]' % (tag, len(ids), '' if len(ids) == 1 else 's')) if kind == 'build' else ('move-apply: Art Library entries for new objects and start pictures: %s [skip ci]' % ', '.join(NOTE['entries'])) if kind == 'entries' else 'move-apply: statuses [skip ci]')
         if a.dry_run: say('dry run: would push %s on try %d' % (kind, i)); return kind, ids
         p = git(root, 'push', a.remote, 'HEAD:' + a.branch, check=False)
         if p.returncode == 0: say('pushed %s on try %d' % (kind, i)); return kind, ids

@@ -1,7 +1,7 @@
 {
  "v": 1,
  "id": "move:fifty_year_dust_tsunami",
- "rev": 2,
+ "rev": 3,
  "live": {
   "body": {
    "clip": "pf_deedee_nf_cap",
@@ -22,7 +22,17 @@
    {
     "fx": "vfx_core_status_debuff_badges"
    }
-  ]
+  ],
+  "start": {
+   "picture": "standard",
+   "held": "wooden-handle string mop",
+   "worn": [
+    {
+     "what": "bright yellow rubber cleaning gloves",
+     "where": "tucked into the belt"
+    }
+   ]
+  }
  },
  "draft": null,
  "finished": null,
@@ -50,6 +60,12 @@
    "at": "2026-11-26T22:21:00-08:00",
    "by": "claude",
    "what": "run in: automatic (the Pass-1 draft said stays at home, but the game runs her to the monster today and the golden timeline holds that hit moment; set Stays in place when you want it)"
+  },
+  {
+   "rev": 3,
+   "at": "2026-11-27T23:31:19Z",
+   "by": "claude",
+   "what": "move:fifty_year_dust_tsunami: start picture standard, holds wooden-handle string mop, wears 1 (one held prop, the rest worn; Pipeline Lock, One held prop)"
   }
  ]
 }

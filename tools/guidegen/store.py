@@ -21,7 +21,7 @@ Environment: GUIDE_API (default https://api.github.com), GH_TOKEN, GITHUB_REPOSI
   reap(alive)                          decision D5 for rows whose run is dead
   archive(days)                        finished rows older than that move to queue-archive.json
 A change that matters to Tom (plan 5.6) sends exactly one phone message from the function that made it, after the save went through. A dry row (a free test) sends none."""
-import base64, json, os, sys, time, urllib.error, urllib.request
+import base64, json, os, re, sys, time, urllib.error, urllib.request
 from datetime import datetime, timedelta, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
@@ -251,7 +251,10 @@ def add(item):
     for k in ('id', 'kind', 'anim'):
         if not item.get(k): raise Refused('a row needs %s' % k)
     if item['kind'] not in KINDS: raise Refused('kind %s' % item['kind'])
-    it = {'lane': KINDS[item['kind']], 'who': '', 'take': 0, 'route': '', 'prompt': '', 'promptRev': 0, 'start': '', 'note': '', 'cap': 0, 'at': now(),
+    sp = item.get('startPic') or ''
+    if sp and not (item['kind'] == 'video' and re.match(r'^art/clips/start/[a-z0-9]+-[a-z0-9-]+\.png$', sp) and not sp.endswith('-hero.png')):
+        raise Refused('startPic must be a move start picture of a video row: art/clips/start/<who>-<move>.png')   # movebench13: the one new field a row may carry
+    it = {'lane': KINDS[item['kind']], 'who': '', 'take': 0, 'route': '', 'prompt': '', 'promptRev': 0, 'start': '', 'startPic': '', 'note': '', 'cap': 0, 'at': now(),
           'state': 'queued', 'since': '', 'run': 0, 'fal': None, 'svc': None, 'tries': 0, 'cost': 0, 'why': '', 'do': '', 'result': None, 'use': None, 'left': False, 'dry': False, 'replay': ''}
     it.update(item)
     it['state'] = 'queued'; it['since'] = it['since'] or it['at']; it['use'] = None; it['lane'] = KINDS[it['kind']]

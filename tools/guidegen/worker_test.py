@@ -546,4 +546,13 @@ check('T10 the run cost is logged once: xai $0.20 for two monster videos, named 
 os.environ.pop('GUIDE_NO_GATE', None)
 check('T10 worker.py calls clipgen\'s own Xai client and never copies it (no requests.post in worker.py)', 'clipgen.Xai(' in open(os.path.join(HERE, 'worker.py'), encoding='utf-8').read() and 'requests.post' not in open(os.path.join(HERE, 'worker.py'), encoding='utf-8').read())
 
+# movebench13: a video row may carry its own start picture (startPic): a missing file fails in plain words with nothing sent, an existing one is used
+vreset(); S.add(vrow('v-own-m1', take=50, anim='move:wet_floor_hazard', who='deedee', start='deedee', startPic='art/clips/start/deedee-nopic-test.png')); fal = vfal(); vworker(fal).run(); r = doc()['items']['v-own-m1']
+check('T11 a row whose own start picture is not in the game fails in plain words and sends nothing to fal', r['state'] == 'failed' and 'start picture of this move' in r['why'] and fal.sent == 0, r)
+_own = os.path.join(ROOT, 'art', 'clips', 'start', 'deedee-ownstart-test.png'); open(_own, 'wb').write(GOOD)
+try:
+    vreset(); S.add(vrow('v-own-m2', take=51, anim='move:wet_floor_hazard', who='deedee', start='deedee', startPic='art/clips/start/deedee-ownstart-test.png')); fal = vfal(); vworker(fal).run(); r = doc()['items']['v-own-m2']
+finally: os.remove(_own)
+check('T11 a row with its own start picture that exists makes its video from it (one fal send, no standard picture needed)', fal.sent == 1 and r['state'] in ('done', 'checking', 'making') and r['startPic'] == 'art/clips/start/deedee-ownstart-test.png', (r.get('state'), r.get('why'), fal.sent))
+
 print('\nFAILS:', fails); sys.exit(1 if fails else 0)

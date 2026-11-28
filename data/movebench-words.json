@@ -1892,5 +1892,32 @@
   "scope_move": "The move",
   "scope_set": "The set piece",
   "what": "{dur} s, {dim}% dark"
+ },
+ "start": {
+  "label": "Start picture",
+  "hint": "A video can hold one thing only: one thing in the hand, everything else worn.",
+  "standard": "The standard picture",
+  "own": "This move's own picture",
+  "holds": "holds",
+  "wears": "wears",
+  "holds_label": "Holds (one thing)",
+  "holds_hint": "the one thing the hand holds; the video keeps it in the hand",
+  "holds_ph": "for example: wooden-handle string mop",
+  "wears_label": "Wears",
+  "wears_hint": "clipped flat on the belt or tucked in; its effect is a Battle Lab effect",
+  "what": "what",
+  "where": "where",
+  "where_default": "on the belt",
+  "add": "Add a worn thing",
+  "remove": "Remove it",
+  "max": "Three worn things at most.",
+  "status": "Picture",
+  "s_standard": "It uses the person's standard start picture.",
+  "s_empty": "Say what the hand holds or what is worn first.",
+  "s_unsaved": "Save the draft first: saving adds this picture to the Art Library within a few minutes.",
+  "s_waiting": "Saved. In the Art Library, find this picture, press Generate, then Approve. The video waits for it.",
+  "s_game": "The picture is in the game; videos of this move are made from it.",
+  "open": "Open in the Art Library",
+  "needs_own": "Needs this move's own start picture first. Open the move to see where it is."
  }
 }

@@ -11,6 +11,8 @@ A CLIP entry (field `clip`, tab Clips: a short video of a character, see tools/a
 field: its approved file is art/raw/clips/<id>-v<n>.mp4 (or a .json holding the video's address when the phone could not keep
 a copy; the video is then downloaded next to it), and the newest version carries Tom's three marks in seconds
 (`marks`: first, hit, last). bake_clip() turns the marks into frame numbers and runs tools/clip-bake/bake_clip.py.
+A START PICTURE entry (field `startpic`, movebench13: a start picture made for one move, tools/art-library/start-prompts.js) is baked by tools/movebench/ownstart.py (the Direct-Hero hand band:
+the factory's own register_edit, lock_hero_pixels and gate1_measured, unchanged) to art/clips/start/<who>-<slug>.png; a picture that fails Gate 1 is named in the CHANGES entry and nothing is written.
 A STAGE entry (field `stage`, movebench10: a Battle stage object picture, tools/art-library/stage-prompts.js) is baked by tools/clip-bake/bake_stage.py.
 An entry with no `bake` field is reported and left alone (art that only lives in art/raw/ until a bake is wired for it).
 
@@ -124,6 +126,18 @@ def bake_stage(e, p):
         open(ix, 'w', encoding='utf-8').write(html.replace(anchor, anchor + f'<script src="data/stage/{fk}.js?v=stage0"></script>\n', 1))
     return f'{e["id"]}: stage object `{key}` baked from {p}. {r.stdout.strip().splitlines()[-1] if r.stdout.strip() else ""}'
 
+def bake_start(e, p):
+    """movebench13: one approved start picture of one move (field `startpic`) -> art/clips/start/<who>-<slug>.png. The hand band of the Library's picture is put on the person's standard start picture
+    (tools/movebench/ownstart.py); the head, the face and the body proportions stay the standard picture's pixels. Returns a note; raises when Gate 1 fails."""
+    s = e['startpic']; who, slug = s.get('who', ''), s.get('slug', '')
+    if not re.fullmatch(r'[a-z0-9]+', who) or not re.fullmatch(r'[a-z0-9-]+', slug) or e['id'] != f'start-{who}-{slug}': raise SystemExit(f'{e["id"]}: odd start picture entry {s!r}')
+    sys.path.insert(0, os.path.join(ROOT, 'tools', 'movebench'))
+    import ownstart
+    out = os.path.join(ROOT, 'art', 'clips', 'start', f'{who}-{slug}.png')
+    try: rep = ownstart.finish(who, os.path.join(ROOT, p), out, ROOT)
+    except ownstart.StartPicError as x: raise SystemExit(str(x))
+    return f'{e["id"]}: start picture of {who} for {s.get("move", slug)} baked from {p}: only the hand band is the Library picture, the rest is the standard start picture (head difference {rep["gate1"]["head_mean_abs_diff_vs_hero"]}). It is the start picture of that move now: Make this video uses it.'
+
 def stale_stage(entries):
     """Approved stage objects the game does not have yet (a cancelled run would leave one uncut; clipbatch1's reason, for pictures)."""
     out = set()
@@ -185,7 +199,7 @@ def main():
         if e.get('status') != 'approved' or not vs: continue
         newest = vs[-1].get('file') or vs[-1].get('path')
         if newest not in raws and e['id'] not in catchup: continue
-        (todo if e.get('bake') or e.get('clip') or e.get('stage') else skipped).append((e, newest))
+        (todo if e.get('bake') or e.get('clip') or e.get('stage') or e.get('startpic') else skipped).append((e, newest))
     for e, p in skipped: print(f'art_bake: {e["id"]} ({p}) has no `bake` field yet: stored only, nothing baked')
     # a picture in art/raw that no approved entry claims (e.g. committed by hand)
     claimed = {p for _, p in todo + skipped}
@@ -201,6 +215,13 @@ def main():
                 try: notes.append(bake_clip(e, p)); ids.append(e['id'])
                 except (SystemExit, Exception) as x:   # one bad clip must not stop the other 69 (clipbatch1); it is named in the CHANGES entry and tried again by the next run
                     failed.append(e['id']); notes.append(f'FAILED to cut {e["id"]} ({p}): {x}'); print(f'art_bake: FAILED {e["id"]}: {x}', file=sys.stderr)
+            continue
+        if e.get('startpic'):
+            print(f'art_bake: {e["id"]}: start picture {p} -> art/clips/start/{e["startpic"].get("who")}-{e["startpic"].get("slug")}.png')
+            if not dry:
+                try: notes.append(bake_start(e, p)); ids.append(e['id'])
+                except (SystemExit, Exception) as x:
+                    failed.append(e['id']); notes.append(f'FAILED to bake {e["id"]} ({p}): {x}'); print(f'art_bake: FAILED {e["id"]}: {x}', file=sys.stderr)
             continue
         if e.get('stage'):
             print(f'art_bake: {e["id"]}: stage object picture {p} -> data/stage/' + e['stage']['key'].replace('/', '-') + '.js')

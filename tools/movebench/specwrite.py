@@ -70,6 +70,18 @@ def set_trim(root, anim_id, first, last, slug=None):
     return ['%s %s (%s)' % (anim_id, what.split(': ', 1)[1], rel)]
 
 
+def set_start(root, anim_id, picture='standard', held=None, worn=None, entry=None, slug=None, why='from the Battle Guide'):
+    """movebench13: the start picture section of a move (live): ONE held thing, the rest worn. `picture` is standard (the Hero picture) or own (a picture made in the Art Library)."""
+    def fn(body, live):
+        st = {'picture': picture}
+        if held: st['held'] = held
+        if worn: st['worn'] = [dict(w) for w in worn]
+        if entry: st['entry'] = entry
+        live['start'] = st
+    rel = edit_body(root, anim_id, fn, '%s: start picture %s, holds %s, wears %d %s' % (anim_id, picture, held or 'nothing', len(worn or []), why), slug)
+    return ['%s start picture %s (%s)' % (anim_id, picture, rel)]
+
+
 if __name__ == '__main__':
     import argparse
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0]); ap.add_argument('anim'); ap.add_argument('--clip'); ap.add_argument('--trim', nargs=2, type=int); ap.add_argument('--root', default=ROOT0)

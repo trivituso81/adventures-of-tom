@@ -1,7 +1,7 @@
 {
  "v": 1,
  "id": "move:wet_floor_hazard",
- "rev": 1,
+ "rev": 2,
  "live": {
   "body": {
    "clip": "deedee_wetfloor",
@@ -22,6 +22,16 @@
   "answer": {
    "clip": null,
    "effects": []
+  },
+  "start": {
+   "picture": "standard",
+   "held": "wooden-handle string mop",
+   "worn": [
+    {
+     "what": "folded yellow caution sign",
+     "where": "tucked into the belt"
+    }
+   ]
   }
  },
  "draft": null,
@@ -32,6 +42,12 @@
    "at": "2026-11-26T22:00:00-08:00",
    "by": "migration",
    "what": "written from the tables the engine reads today"
+  },
+  {
+   "rev": 2,
+   "at": "2026-11-27T23:31:19Z",
+   "by": "claude",
+   "what": "move:wet_floor_hazard: start picture standard, holds wooden-handle string mop, wears 1 (one held prop, the rest worn; Pipeline Lock, One held prop)"
   }
  ]
 }

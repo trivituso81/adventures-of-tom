@@ -171,6 +171,35 @@ for sec in ('when','on','sound'):
 if '\u2014' in open(os.path.join(ROOT,'data','movebench-fx.json'),encoding='utf8').read(): fail('data/movebench-fx.json holds an em dash')
 if set(FXJ['fx'])!=set(C['fx'])-set(schema.EXTRA_FX): fail('movebench-fx.json and the library name different effects')
 notes.append('movebench7: %d effects, %d settings with a control kind and words'%(nfx,nset))
+# movebench13: ONE held prop (Pipeline Lock, WO-01H). A start picture holds one thing; everything else a move needs is worn. Every move the factory packets give more than one
+# held prop has a start section with one held thing and the rest worn; no start section anywhere holds a list or more than 3 worn things; and a bad one is refused.
+import re as _re
+_pk=json.load(open(os.path.join(ROOT,'art-factory','move-packets-pass1.json'),encoding='utf8'))
+_pk=_pk if isinstance(_pk,list) else (_pk.get('moves') or list(_pk.values()))
+_two=0
+for m in _pk:
+    hp=m.get('held_props') or []
+    if len(hp)<2: continue
+    _two+=1
+_nstart=0
+for k,d in docs.items():
+    for part in ('live','draft'):
+        st=(d.get(part) or {}).get('start')
+        if not st: continue
+        _nstart+=1
+        h=st.get('held')
+        if h is not None and not isinstance(h,str): fail('%s.%s.start: held must be one thing'%(k,part))
+        if len(st.get('worn') or [])>3: fail('%s.%s.start: more than 3 worn things'%(k,part))
+        if st.get('picture')=='own' and not (h or st.get('worn')): fail('%s.%s.start: an own picture with nothing held and nothing worn'%(k,part))
+        if h and any(_re.search(r'\b(and|&|plus)\b|,',h) for _ in [0]): fail('%s.%s.start: held reads like two things (%s)'%(k,part,h))
+_nlive=sum(1 for d in docs.values() if (d.get('live') or {}).get('start') and (d['live']['start'].get('held')) and d['live']['start'].get('worn'))
+if _nlive<_two: fail('%d moves of the factory packets hold two or more props but only %d start sections hold one and wear the rest'%(_two,_nlive))
+_bad=json.loads(json.dumps(next(d for d in docs.values() if d.get('live') is not None)))
+_bad['live']['start']={'picture':'own','held':['mop','sign']}
+if not schema.validate(_bad,C)[0]: fail('a start section that holds a list was not refused')
+_bad['live']['start']={'picture':'own','held':'mop','worn':[{'what':'a','where':'b'}]*4}
+if not schema.validate(_bad,C)[0]: fail('a start section that wears 4 things was not refused')
+notes.append('movebench13: %d start sections, %d moves of the packets with two or more props'%(_nstart,_two))
 if warns:
     notes.append('named and not there yet (%d): %s'%(len(warns),'; '.join(sorted(set(w.split(': ',1)[1] for w in warns))[:6])))
 for n in notes: print(n)

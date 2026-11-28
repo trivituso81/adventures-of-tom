@@ -1,7 +1,7 @@
 {
  "v": 1,
  "id": "move:double_lamby_return_cart_blitz",
- "rev": 2,
+ "rev": 3,
  "live": {
   "body": {
    "clip": "rose_doublelamby",
@@ -201,7 +201,17 @@
    {
     "fx": "vfx_core_clobber_impact"
    }
-  ]
+  ],
+  "start": {
+   "picture": "standard",
+   "held": "tattered Lamby plush",
+   "worn": [
+    {
+     "what": "spotless white Backup Lamby plush",
+     "where": "tucked at the belt"
+    }
+   ]
+  }
  },
  "draft": null,
  "finished": null,
@@ -217,6 +227,12 @@
    "at": "2026-11-27T12:00:00-08:00",
    "by": "claude",
    "what": "movebench8: body.clip is the video the stage plays over (the old staging row's clip)"
+  },
+  {
+   "rev": 3,
+   "at": "2026-11-27T23:31:19Z",
+   "by": "claude",
+   "what": "move:double_lamby_return_cart_blitz: start picture standard, holds tattered Lamby plush, wears 1 (one held prop, the rest worn; Pipeline Lock, One held prop)"
   }
  ]
 }

@@ -1,7 +1,7 @@
 {
  "v": 1,
  "id": "move:giddyup_tata_launch",
- "rev": 2,
+ "rev": 3,
  "live": {
   "body": {
    "clip": "rose_giddyup",
@@ -108,7 +108,17 @@
    {
     "fx": "proj_arc_single"
    }
-  ]
+  ],
+  "start": {
+   "picture": "standard",
+   "held": "tattered Lamby plush",
+   "worn": [
+    {
+     "what": "tiny aviator goggles",
+     "where": "clipped at the belt"
+    }
+   ]
+  }
  },
  "draft": null,
  "finished": null,
@@ -124,6 +134,12 @@
    "by": "claude",
    "at": "2026-11-27T13:10:03-08:00",
    "what": "movebench12: body.until = the clip: the video this staged move plays while its stage is not ready (the kit row named it)"
+  },
+  {
+   "rev": 3,
+   "at": "2026-11-27T23:31:19Z",
+   "by": "claude",
+   "what": "move:giddyup_tata_launch: start picture standard, holds tattered Lamby plush, wears 1 (one held prop, the rest worn; Pipeline Lock, One held prop)"
   }
  ]
 }

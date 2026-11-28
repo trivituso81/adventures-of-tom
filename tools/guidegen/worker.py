@@ -30,6 +30,7 @@ NO_JUDGE = ('The picture was made but its facing could not be checked.', 'Tap Ma
 TOO_SMALL = ('The figure is too small in the picture.', 'Make the figure fill more of the picture, then tap Upload my own.')
 NO_HERO = ('There is no start picture recipe for this person yet.', 'Send a note to Claude from this sheet.')
 BAD_PICTURE = ('That file could not be read as a picture.', 'Send a PNG or a JPEG, then tap Upload my own.')
+NO_OWN_START = ('The start picture of this move is not in the game yet.', 'Make it on the move sheet (Make the start picture), approve it in the Art Library, then ask again.')
 NO_START = ('There is no start picture for this person yet.', 'Make the start picture first.')
 NOT_YET = ('This kind of video is not made by this line.', 'Send a note to Claude from this sheet.')
 NO_XAI_RECIPE = ('There is no recipe for this monster video yet.', 'Send a note to Claude from this sheet.')
@@ -318,7 +319,10 @@ class Worker:
             return self.finish_video(it, p, 0.0)
         if route == 'xai': return self.run_xai(it)
         who = it.get('start') or it.get('who') or ''
-        frame = self.start_picture(who)
+        if it.get('startPic'):   # movebench13: a move's own start picture (Hero hands edited), made in the Art Library and baked to main
+            frame = os.path.join(self.repo, it['startPic'])
+            if not os.path.exists(frame): return self.fail_row(it, NO_OWN_START)
+        else: frame = self.start_picture(who)
         if not frame: return self.fail_row(it, NO_START)
         base = self.get_jobs().get(VID_TEMPLATE)
         if not base: return self.fail_row(it, ('There is no video recipe for this line yet.', 'Send a note to Claude from this sheet.'))

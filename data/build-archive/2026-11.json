@@ -1,4 +1,13 @@
 [
+{"tag":"board-startpause","at":"2026-11-20T15:57:22-08:00","what":"The two broken START routes are paused instead of failing silently","kind":"house","card":"b-board-startpause","theme":"Game Shell"},
+{"tag":"fix-listen1-play","at":"2026-11-20T23:55:17+00:00","what":"The listening test steps named \"Grandma's\"; they now say Deedee's kitchen","card":"c-fix-listen1-play","theme":"Characters"},
+{"tag":"fix-keysecrets2-try-4","at":"2026-11-20T23:54:08+00:00","what":"The page reads the video job's report through the GitHub API, not the 5 minute cached copy","card":"c-fix-keysecrets2-try-4","theme":"Tools"},
+{"tag":"artbake1536","at":"2026-11-20T23:42:43+00:00","what":"","kind":"house"},
+{"tag":"reports-2026-11-20c","at":"2026-11-20T15:17:00-08:00","what":"Muffin tray off the Mudling's face, \"Nine wrappers\", and the voice and table purge for the Chapter 1 line cuts","card":"c-reports-2","theme":"Game Shell"},
+{"tag":"fix-keysecrets2-try-3","at":"2026-11-20T23:11:14+00:00","what":"The Art Library page no longer serves a stale video script, and a stalled network ends in a plain line","card":"c-fix-keysecrets2-try-3","theme":"Tools"},
+{"tag":"reports-2026-11-20b","at":"2026-11-20T23:03:33+00:00","what":"Report backlog, Chapter 1 script cuts, Sal's ride and Rose's facing","card":"c-reports-2","theme":"Game Shell"},
+{"tag":"artbake1535","at":"2026-11-20T22:58:30+00:00","what":"","kind":"house"},
+{"tag":"fix-keysecrets2-try-2","at":"2026-11-20T22:55:13+00:00","what":"GENERATE VIDEO works on a clip that is already approved","card":"c-fix-keysecrets2-try-2","theme":"Tools"},
 {"tag":"reports-2026-11-20a","at":"2026-11-20T14:03:02-08:00","what":"The welcome page frame is only as wide as its four buttons and stays centred","card":"c-reports-2","theme":"Game Shell"},
 {"tag":"fix-keysecrets2-try","at":"2026-11-20T22:01:16+00:00","what":"GENERATE VIDEO now shows it is still working, and reads the job's report on any phone","card":"c-fix-keysecrets2-try","theme":"Tools"},
 {"tag":"artbake1534","at":"2026-11-20T21:58:01+00:00","what":"","kind":"house"},

@@ -1,7 +1,7 @@
 {
  "v": 1,
  "id": "move:lounge_pass_flex",
- "rev": 2,
+ "rev": 3,
  "live": {
   "body": {
    "clip": "tom_loungepass",
@@ -48,7 +48,17 @@
    {
     "fx": "vfx_core_status_debuff_badges"
    }
-  ]
+  ],
+  "start": {
+   "picture": "standard",
+   "held": "laminated Sky Club pass",
+   "worn": [
+    {
+     "what": "metal brag tag",
+     "where": "on the belt"
+    }
+   ]
+  }
  },
  "draft": null,
  "finished": null,
@@ -64,6 +74,12 @@
    "by": "claude",
    "at": "2026-11-27T13:10:03-08:00",
    "what": "movebench12: body.until = the clip: the video this staged move plays while its stage is not ready (the kit row named it)"
+  },
+  {
+   "rev": 3,
+   "at": "2026-11-27T23:31:19Z",
+   "by": "claude",
+   "what": "move:lounge_pass_flex: start picture standard, holds laminated Sky Club pass, wears 1 (one held prop, the rest worn; Pipeline Lock, One held prop)"
   }
  ]
 }

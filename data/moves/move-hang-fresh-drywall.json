@@ -1,7 +1,7 @@
 {
  "v": 1,
  "id": "move:hang_fresh_drywall",
- "rev": 1,
+ "rev": 2,
  "live": {
   "body": {
    "motion": "give"
@@ -14,7 +14,17 @@
    {
     "fx": "vfx_core_shield_ward"
    }
-  ]
+  ],
+  "start": {
+   "picture": "standard",
+   "held": "cordless impact driver",
+   "worn": [
+    {
+     "what": "small carpenter level",
+     "where": "clipped flat on the belt"
+    }
+   ]
+  }
  },
  "draft": null,
  "finished": null,
@@ -24,6 +34,12 @@
    "at": "2026-11-26T22:00:00-08:00",
    "by": "migration",
    "what": "written from the tables the engine reads today"
+  },
+  {
+   "rev": 2,
+   "at": "2026-11-27T23:31:19Z",
+   "by": "claude",
+   "what": "move:hang_fresh_drywall: start picture standard, holds cordless impact driver, wears 1 (one held prop, the rest worn; Pipeline Lock, One held prop)"
   }
  ]
 }

@@ -266,6 +266,12 @@ a.play.fight{background:var(--surface);border:1px solid var(--accent);color:var(
 .fxch{flex:none;min-height:44px;padding:6px 14px;font-weight:700}
 .fxpink,.fxpinknote{color:#ff5bd2;text-decoration:none;font-weight:700}.fxpinknote{font-size:13px;margin:0 0 6px}
 .fxadd{width:100%;min-height:48px;font-weight:800}
+.wbrow[data-row=start] .wc{flex:1 1 100%;justify-content:flex-start;flex-direction:column;align-items:stretch}
+#wbstart .wbrow.nested{padding:8px 0 0;border-top:0}#wbstart .wbrow.nested .wc{flex:1 1 100%;justify-content:flex-start;align-items:stretch}
+#wbstart .wbseg{align-self:flex-start}
+.wbtext{width:100%;min-height:44px;font:inherit;font-size:16px;padding:6px 10px;border:1px solid var(--line);border-radius:10px;background:var(--well);color:var(--text);box-sizing:border-box}
+.stworn{display:grid;grid-template-columns:1fr 1fr 44px;gap:6px;align-items:center;width:100%}.stworn .wbc{min-height:44px}
+
 .fxgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:0 0 8px}
 .fxtile{display:flex;flex-direction:column;align-items:stretch;gap:4px;padding:6px;border-radius:12px;text-align:left;background:var(--surface);border:1px solid var(--line);min-height:44px}
 .fxtile .fxs{width:100%;height:auto;aspect-ratio:16/9}.fxtile b{font-size:13px;line-height:1.2}
@@ -908,6 +914,11 @@ function qCur(id){   // the row an animation shows: its newest, unless that one 
 }
 function qPicCur(who){const r=qPics(who).filter(i=>!goneCancel(i));return r[r.length-1]||null;}
 const qBusy=a=>{const c=qCur(a.id);return !!c&&c.state!=='cancelled'&&!(c.state==='done'&&c.use&&c.use.state==='live');};
+// movebench13: a move whose spec says it has its own start picture (Hero hands edited, made in the Art Library) is made from THAT picture: its file art/clips/start/<who>-<move>.png
+const ownStartPath=a=>{try{if(!a||a.kind!=='move')return '';const sp=wbSpecOf(a.id),t=sp&&sp.start;return t&&t.picture==='own'&&(t.held||(t.worn&&t.worn.length))?'art/clips/start/'+a.owner+'-'+slugOf(a.id).replace(/^move-/,'')+'.png':'';}catch(e){return '';}};
+const OWNHAVE={};
+function ownHave(path){if(!(path in OWNHAVE)){OWNHAVE[path]=null;fetch(path+'?t='+Date.now(),{method:'HEAD',cache:'no-store'}).then(r=>{OWNHAVE[path]=r.ok;}).catch(()=>{OWNHAVE[path]=false;}).then(()=>{try{if(typeof qPaint==='function')qPaint();if(typeof wbStartPaint==='function'&&WB.a)wbStartPaint();moveRefresh();}catch(e){}});}return OWNHAVE[path];}
+const qStartReadyA=a=>{const p=ownStartPath(a);return p?ownHave(p)===true:qStartReady(a.owner);};
 function qStartReady(who){const o=(GUIDE&&GUIDE.owners&&GUIDE.owners[who])||{};return !!o.start||qPics(who).some(i=>i.state==='done');}   // D10: usable the moment its row is done
 function qPicSrc(who){   // the start picture to show: the file on main, or the one on branch guidegen when the row says so (read once, kept as a local picture)
   const o=(GUIDE&&GUIDE.owners&&GUIDE.owners[who])||{},rows=qPics(who).filter(i=>i.state==='done'),r=rows[rows.length-1],res=r&&r.result;
@@ -959,7 +970,7 @@ function qLineHtml(it,ctx,key){
 const qErrHtml=key=>QERR[key]?'<div class="qerr err">'+esc(QERR[key])+'</div>':'';
 function qErr(key,text){QERR[key]=text;qPaint();setTimeout(()=>{if(QERR[key]===text){delete QERR[key];qPaint();}},9000);}
 function qMakeBtn(a,g,cur){   // the one tap that makes a video (or another one): not while a row of this animation is going, waiting for a decision or failed
-  if(!QS.doc||!g||(g.route==='wan'?!qStartReady(a.owner):!g.canMake))return '';   // a monster (xAI) needs no start picture of its own: its picture is part of its recipe
+  if(!QS.doc||!g||(g.route==='wan'?!qStartReadyA(a):!g.canMake))return '';   // a monster (xAI) needs no start picture of its own: its picture is part of its recipe
   if(cur&&!(cur.state==='cancelled'||(cur.state==='done'&&cur.use&&cur.use.state==='live')))return '';
   const again=a.video||qVid(a.id).length>0;
   return '<span class="qbtns"><button type="button" class="gold" data-qa="make" data-qid="'+esc(a.id)+'" data-qkey="anim:'+esc(a.id)+'">'+(again?'Make another':'Make this video')+' ('+money(g.price)+')</button></span>';
@@ -970,7 +981,7 @@ function qRowHtml(a){   // the part of an animation's row under its name: kind, 
   const bd=[cur?'':a.video?'<span class="badge v">VIDEO</span>':'<span class="badge n">NO VIDEO YET</span>',n?'<span class="badge o">NOTE OPEN</span>':''].filter(Boolean);
   let h='<div class="qsub">'+esc(a.kind==='move'?(a.vibe||'Move'):KINDW[a.kind])+(bd.length?' · '+bd.join(' '):'')+'</div>';
   if(cur)h+=qLineHtml(cur,'list',key);
-  else if(g&&g.route==='wan'&&!qStartReady(a.owner))h+='<div class="qline"><span class="qtext">Needs the start picture first.</span></div>';
+  else if(g&&g.route==='wan'&&!qStartReadyA(a))h+='<div class="qline"><span class="qtext">'+esc(ownStartPath(a)?W('start.needs_own'):'Needs the start picture first.')+'</span></div>';
   return h+qMakeBtn(a,g,cur)+qErrHtml(key);
 }
 function qPicBlock(who,ctx){   // a person's start picture with its status line and its one action
@@ -993,7 +1004,7 @@ function qSheetHtml(a,g){   // inside an animation's sheet: the status line and 
   const key='anim:'+a.id,cur=qCur(a.id);let h='';
   if(g.route!=='wan'&&g.canMake){if(cur)h+=qLineHtml(cur,'sheet',key);h+=qMakeBtn(a,g,cur)+qErrHtml(key);}
   if(g.route==='wan'){
-    if(!qStartReady(a.owner))h+='<div class="qline"><span class="qtext">Needs the start picture first.</span></div>'+qPicBlock(a.owner,'sheet');
+    if(!qStartReadyA(a))h+='<div class="qline"><span class="qtext">'+esc(ownStartPath(a)?W('start.needs_own'):'Needs the start picture first.')+'</span></div>'+(ownStartPath(a)?'':qPicBlock(a.owner,'sheet'));
     else{if(cur)h+=qLineHtml(cur,'sheet',key);h+=qMakeBtn(a,g,cur);}
     h+=qErrHtml(key);
   }
@@ -1095,7 +1106,7 @@ async function qMakeVideo(a,retry,key0){
     const note=retry?(retry.note||''):((GW[a.id]&&GW[a.id].note)||'');
     if(!retry){const why=stopFor(a,note);if(why){qErr(key,'Stop here. '+why+' Send Claude a note below: it will look at the takes and change the cause, not the wording.');if(PL.a===a)fillStopNote(a);return;}}
     await loadTakes();
-    const n=nextTake(a),mon=g.route!=='wan',row={id:'v-'+(g.slug||slugOf(a.id))+'-t'+n,kind:'video',lane:'vid',route:mon?'xai':'wan',anim:a.id,who:a.owner,take:n,prompt:retry?retry.prompt:workPrompt(a),promptRev:retry?retry.promptRev:(g.promptRev||0),start:mon?'':a.owner,note,cap:mon?0.15:1};
+    const n=nextTake(a),mon=g.route!=='wan',row={id:'v-'+(g.slug||slugOf(a.id))+'-t'+n,kind:'video',lane:'vid',route:mon?'xai':'wan',anim:a.id,who:a.owner,take:n,prompt:retry?retry.prompt:workPrompt(a),promptRev:retry?retry.promptRev:(g.promptRev||0),start:mon?'':a.owner,startPic:mon?'':ownStartPath(a),note,cap:mon?0.15:1};
     if(mon){const x=GUIDE.routes.xai,rc=(GUIDE.recipes||{})[g.recipe]||{};row.clip={id:(g.clip||g.newClip).replace(/_/g,'-'),owner:a.owner,kind:rc.kind||'strike',start:g.start,model:x.model,res:x.res,dur:x.dur,figRows:g.figRows};}
     if(g.pad)row.pad=g.pad;if(retry&&retry.fal)row.fal=retry.fal;if(retry&&retry.svc)row.svc=retry.svc;
     await qAdd([row],'guide: add '+row.id);
@@ -1181,7 +1192,7 @@ async function qMakeAll(who,confirmed,key){   // $2 or less adds the rows at onc
     m.forEach(a=>{
       const g=G(a),note=(GW[a.id]&&GW[a.id].note)||'';
       if(stopFor(a,note)){left.push(a);return;}   // two takes missed the same way: a third is not made here (the stop rule)
-      const n=nextTake(a),row={id:'v-'+(g.slug||slugOf(a.id))+'-t'+n,kind:'video',lane:'vid',route:'wan',anim:a.id,who:a.owner,take:n,prompt:workPrompt(a),promptRev:g.promptRev||0,start:a.owner,note,cap:1};
+      const n=nextTake(a),row={id:'v-'+(g.slug||slugOf(a.id))+'-t'+n,kind:'video',lane:'vid',route:'wan',anim:a.id,who:a.owner,take:n,prompt:workPrompt(a),promptRev:g.promptRev||0,start:a.owner,startPic:ownStartPath(a),note,cap:1};
       if(g.pad)row.pad=g.pad;rows.push(row);notes[a.id]={n,note};
     });
     if(!rows.length){qErr(key,'Nothing was made. Each of these missed twice the same way. Open one and send Claude a note.');return;}
@@ -1767,6 +1778,7 @@ function wbDiff(){
   if(JSON.stringify(stgStage())!==JSON.stringify(bs))o.steps=wbClone(stgStage());
   if(JSON.stringify(stgMarks())!==JSON.stringify(bm))o.marks=wbClone(stgMarks());
   {const bt=(WB.base&&WB.base.body&&WB.base.body.trim)||null,dt=(WB.draft&&WB.draft.body&&WB.draft.body.trim)||null;if(JSON.stringify(dt)!==JSON.stringify(bt))o.trim=dt?wbClone(dt):null;}   // movebench12: the first and last picture of the video are one field
+  if(JSON.stringify(stGet())!==JSON.stringify((WB.base&&WB.base.start)||null))o.start=stGet()?wbClone(stGet()):null;   // movebench13: the start picture's settings are one field
   if(JSON.stringify(stgObjs())!==JSON.stringify((WB.base&&WB.base.stage&&WB.base.stage.objects)||{}))o.objects=wbClone(stgObjs());   // movebench10: the objects of the move are one field too
   {const bl=(WB.base&&WB.base.stage&&WB.base.stage.lasting)||[];if(JSON.stringify(lsList())!==JSON.stringify(bl))o.lasting=wbClone(lsList());   // movebench11: lasting things, the set piece and the answer are one field each
     const bp=(WB.base&&WB.base.stage&&WB.base.stage.setpiece)||null;if(JSON.stringify(spGet())!==JSON.stringify(bp))o.setpiece=spGet()?wbClone(spGet()):null;
@@ -1804,6 +1816,7 @@ function wbRebase(fresh){
   if(!('effects' in mine)){if(fresh.effects===undefined)delete WB.draft.effects;else WB.draft.effects=wbClone(fresh.effects);}
   {const mySteps=wbClone(stgStage()),myLs=wbClone(lsList()),mySp=spGet()?wbClone(spGet()):null,myAn=anGet()?wbClone(anGet()):null,myMarks=wbClone(stgMarks()),myObjs=wbClone(stgObjs());   // movebench9: the rest of the stage and of the body is the file's; his steps and moments stay his (movebench10: and his objects)
     if(fresh.stage||'steps' in mine||'objects' in mine||'lasting' in mine||'setpiece' in mine){const st=fresh.stage?wbClone(fresh.stage):{};if('steps' in mine)st.steps=mySteps;if('lasting' in mine){if(myLs.length)st.lasting=myLs;else delete st.lasting;}if('setpiece' in mine){if(mySp)st.setpiece=mySp;else delete st.setpiece;}if('objects' in mine){if(Object.keys(myObjs).length)st.objects=myObjs;else delete st.objects;}WB.draft.stage=st;}else delete WB.draft.stage;
+    {const mySt=stGet()?wbClone(stGet()):null;if('start' in mine){if(mySt)WB.draft.start=mySt;else delete WB.draft.start;}else{if(fresh.start)WB.draft.start=wbClone(fresh.start);else delete WB.draft.start;}}
     if('answer' in mine){if(myAn)WB.draft.answer=myAn;else delete WB.draft.answer;}else{if(fresh.answer)WB.draft.answer=wbClone(fresh.answer);else delete WB.draft.answer;}
     const myTrim=(WB.draft.body&&WB.draft.body.trim)||null,bd=fresh.body?wbClone(fresh.body):{};if('marks' in mine){if(Object.keys(myMarks).length)bd.marks=myMarks;else delete bd.marks;}if('trim' in mine){if(myTrim)bd.trim=wbClone(myTrim);else delete bd.trim;}WB.draft.body=bd;}
   WB.base=wbClone(fresh);
@@ -1812,7 +1825,7 @@ function wbRebase(fresh){
 function wbSend(){
   const n=wbChanges();wbStoreWrite(WB.id,n?WB.draft:null,n?WB.base:null);
   const sp=wbSpecOf(WB.id)||{},ml=sp.timing||{},t=(WB.draft&&WB.draft.timing)||{},differs=WB_FIELDS.some(f=>JSON.stringify(t[f])!==JSON.stringify(ml[f]))||JSON.stringify((WB.draft&&WB.draft.effects)||[])!==JSON.stringify(sp.effects||[])
-    ||JSON.stringify(stgStage())!==JSON.stringify((sp.stage&&sp.stage.steps)||[])||JSON.stringify(lsList())!==JSON.stringify((sp.stage&&sp.stage.lasting)||[])||JSON.stringify(spGet())!==JSON.stringify((sp.stage&&sp.stage.setpiece)||null)||JSON.stringify(anGet())!==JSON.stringify(sp.answer||null)||JSON.stringify(stgObjs())!==JSON.stringify((sp.stage&&sp.stage.objects)||{})||JSON.stringify(stgMarks())!==JSON.stringify((sp.body&&sp.body.marks)||{})||JSON.stringify((WB.draft&&WB.draft.body&&WB.draft.body.trim)||null)!==JSON.stringify((sp.body&&sp.body.trim)||null);
+    ||JSON.stringify(stgStage())!==JSON.stringify((sp.stage&&sp.stage.steps)||[])||JSON.stringify(lsList())!==JSON.stringify((sp.stage&&sp.stage.lasting)||[])||JSON.stringify(spGet())!==JSON.stringify((sp.stage&&sp.stage.setpiece)||null)||JSON.stringify(anGet())!==JSON.stringify(sp.answer||null)||JSON.stringify(stGet())!==JSON.stringify(sp.start||null)||JSON.stringify(stgObjs())!==JSON.stringify((sp.stage&&sp.stage.objects)||{})||JSON.stringify(stgMarks())!==JSON.stringify((sp.body&&sp.body.marks)||{})||JSON.stringify((WB.draft&&WB.draft.body&&WB.draft.body.trim)||null)!==JSON.stringify((sp.body&&sp.body.trim)||null);
   benchSend({bench:'spec',id:WB.id,live:differs?WB.draft:null});
 }
 function wbEdit(patch){
@@ -1836,6 +1849,7 @@ function wbWhat(ch){
     if(f==='lasting'){p.push(W('sections.lasting')+': '+(x&&x.length?x.map(r=>lsSentence(r)).join('; '):'-'));continue;}
     if(f==='setpiece'){p.push(W('sections.setpiece')+': '+(x?W('sp.what',{dur:x.dur,dim:Math.round((x.dim||0)*100)}):'-'));continue;}
     if(f==='answer'){p.push(W('sections.answer')+': '+(x?(x.clip?W('an.what_clip')+(x.effects&&x.effects.length?', ':''):'')+(x.effects&&x.effects.length?x.effects.map(e=>fxName(e.fx)).join(', '):''):'-'));continue;}
+    if(f==='start'){p.push(W('start.label')+': '+stSentence(x));continue;}
     if(f==='trim'){p.push(W('timing.trim.label')+': '+(x?W('timing.trim.what',{from:x.from+1,to:x.to+1}):W('timing.trim.whole')));continue;}
     if(f==='marks'){p.push(W('stage.name_label')+': '+(x&&Object.keys(x).length?Object.keys(x).join(', '):'-'));continue;}
     if(x==null)v=W('save.automatic');
@@ -1848,7 +1862,7 @@ function wbWhat(ch){
 function wbMerge(cur,ch,kind,now,replayed){
   const d=wbClone(cur);d.v=1;d.id=d.id||WB.id;
   const sec=wbClone((d.draft!=null?d.draft:d.live)||{});const t=Object.assign({},sec.timing||{});
-  for(const f in ch){if(f==='effects'||f==='steps'||f==='marks'||f==='objects'||f==='lasting'||f==='setpiece'||f==='answer'||f==='trim')continue;if(ch[f]==null)delete t[f];else t[f]=wbClone(ch[f]);}
+  for(const f in ch){if(f==='effects'||f==='steps'||f==='marks'||f==='objects'||f==='lasting'||f==='setpiece'||f==='answer'||f==='trim'||f==='start')continue;if(ch[f]==null)delete t[f];else t[f]=wbClone(ch[f]);}
   if(Object.keys(t).length)sec.timing=t;else delete sec.timing;
   if('effects' in ch)sec.effects=wbClone(ch.effects||[]);
   if('steps' in ch){const had=!!sec.stage,st=Object.assign({},sec.stage||{});st.steps=wbClone(ch.steps||[]);if(!st.steps.length&&!had)delete sec.stage;else sec.stage=st;}
@@ -1856,6 +1870,7 @@ function wbMerge(cur,ch,kind,now,replayed){
   if('lasting' in ch){const st=Object.assign({},sec.stage||{});if((ch.lasting||[]).length)st.lasting=wbClone(ch.lasting);else delete st.lasting;if(Object.keys(st).length||sec.stage)sec.stage=st;}   // movebench11
   if('setpiece' in ch){const st=Object.assign({},sec.stage||{});if(ch.setpiece)st.setpiece=wbClone(ch.setpiece);else delete st.setpiece;if(Object.keys(st).length||sec.stage)sec.stage=st;}
   if('answer' in ch){if(ch.answer)sec.answer=wbClone(ch.answer);else delete sec.answer;}
+  if('start' in ch){if(ch.start)sec.start=wbClone(ch.start);else delete sec.start;}   // movebench13
   if('trim' in ch){sec.body=Object.assign({},sec.body||{});if(ch.trim)sec.body.trim=wbClone(ch.trim);else delete sec.body.trim;}
   if('marks' in ch){sec.body=Object.assign({},sec.body||{});if(Object.keys(ch.marks||{}).length)sec.body.marks=wbClone(ch.marks);else delete sec.body.marks;}
   d.rev=(d.rev||0)+1;
@@ -2049,7 +2064,7 @@ function wbHtml(a,videoHtml){
    +'<div class="wt"><h2>'+esc(a.name)+'</h2><p class="wsub" id="wbsub"></p></div><span class="wbstat" id="wbstat"></span></div>'
    +'<div class="wb-body" id="wbbody"><div class="wb-prev" id="wbprev">'+benchBox(a)+'<div class="wbpink" id="wbpink" hidden>'+esc(W('fx.p.pink_tag'))+'</div></div><div class="wb-secs" id="wbsecs">'
    +'<nav class="wb-nav" id="wbnav" aria-label="'+esc(W('page.jump'))+'">'+nav.map(n=>'<button type="button" data-wbgo="'+n[0]+'">'+esc(W(n[1]))+(n[2]?'<b id="wbnav'+(n[0]==='effects'?'fx':n[0])+'">'+n[2]+'</b>':'')+'</button>').join('')+'</nav>'
-   +'<section class="wbs" id="s-video"><h3 class="wbh"><span>'+esc(W('sections.video'))+'</span></h3>'+videoHtml+wbTrimHtml()+'</section>'
+   +'<section class="wbs" id="s-video"><h3 class="wbh"><span>'+esc(W('sections.video'))+'</span></h3>'+videoHtml+wbStartHtml(a)+wbTrimHtml()+'</section>'
    +'<section class="wbs" id="s-timing"><h3 class="wbh"><span>'+esc(W('sections.timing'))+'</span></h3>'+wbTimingHtml(a)+'</section>'
    +wbStageSection(a)+wbLastingSection(a)+wbFxSection(a)+wbAnswerSection(a)+wbSetSection(a)+wbSoundSection(a)+'<section class="wbs" id="s-versions"><h3 class="wbh"><span>'+esc(W('sections.versions'))+'</span></h3><p class="hint" id="wbfinline" style="margin:0 0 8px"></p>'
    +'<button type="button" data-wb="versions">'+esc(W('versions.show'))+'</button><div id="wbvers"></div></section><section class="wbs" id="s-note">'+noteForm(a)+'</section>'+(maniOf(a)?'<section class="wbs" id="s-mani">'+manifestBlock(maniOf(a))+'</section>':'')
@@ -2203,7 +2218,7 @@ function fxPickerHtml(){
   const ids=FXD?Object.keys(FXD.fx):[];
   return '<div class="fxpick"><p class="hint" style="margin:0 0 6px">'+esc(W('fx.p.adding'))+'</p><div class="fxgrid">'+ids.map(id=>'<button type="button" class="fxtile" data-fx="pick" data-v="'+esc(id)+'">'+fxSample(id)+'<b>'+esc(fxName(id))+'</b></button>').join('')+'</div><button type="button" data-fx="pickno">'+esc(W('fx.p.cancel'))+'</button></div>';
 }
-function wbAllPaint(){wbFxPaint();wbStagePaint();wbSoundPaint();wbLsPaint();wbAnPaint();wbSpPaint();}
+function wbAllPaint(){wbStartPaint();wbFxPaint();wbStagePaint();wbSoundPaint();wbLsPaint();wbAnPaint();wbSpPaint();}
 function wbFxPaint(){
   const el=$('wbfx');if(!el||!WB.a||!FXD)return;
   const l=fxList();if(WB.fxOpen>=l.length)WB.fxOpen=-1;
@@ -2899,7 +2914,62 @@ function wbStgScopeHtml(){
   if(!spGet())return '';
   return '<div class="wbrow"><div class="wl"><b>'+esc(W('sp.scope'))+'</b></div><div class="wc"><div class="wbseg" role="group" aria-label="'+esc(W('sp.scope'))+'"><button type="button" data-sp="scope" data-v="stage" aria-pressed="'+(WB.stgScope==='setpiece'?'false':'true')+'">'+esc(W('sp.scope_move'))+'</button><button type="button" data-sp="scope" data-v="setpiece" id="wbspscope" aria-pressed="'+(WB.stgScope==='setpiece'?'true':'false')+'">'+esc(W('sp.scope_set'))+'</button></div></div></div>';
 }
-function wbSecPaint(){wbLsPaint();wbAnPaint();wbSpPaint();wbFxPaint();wbStagePaint();wbSoundPaint();}
+
+// ---- movebench13: the start picture of a move: ONE held thing, the rest worn ----
+// A video model holds one thing at a time (Pipeline Lock, WO-01H): a second prop is worn, clipped flat on the belt, and its effect is a Battle Lab effect. The picture is made from the
+// Hero picture with only the hand band edited, in the Art Library (entry start-<who>-<move>); this section writes the settings, the move-apply job adds the entry.
+const stGet=()=>((WB.draft&&WB.draft.start)||null);
+const stApplicable=a=>a&&a.kind==='move'&&!!a.owner;
+const stEntryId=a=>'start-'+a.owner+'-'+slugOf(a.id).replace(/^move-/,'');
+function stSentence(x){if(!x)return W('start.standard');const w=(x.worn||[]).map(o=>o.what+' ('+o.where+')');return (x.picture==='own'?W('start.own'):W('start.standard'))+(x.held?'; '+W('start.holds')+' '+x.held:'')+(w.length?'; '+W('start.wears')+' '+w.join(', '):'');}
+function stEdit(fn){
+  if(!WB.a)return;
+  const s=stGet()?wbClone(stGet()):{picture:'standard'},before=JSON.stringify(stGet());fn(s);
+  if(!s.held)delete s.held;if(!(s.worn||[]).length)delete s.worn;
+  if(JSON.stringify(s.picture!=='own'&&!s.held&&!s.worn?null:s)===before)return;   // nothing changed (a field left without a change): no undo step
+  WB.undo.push(JSON.stringify(WB.draft));if(WB.undo.length>60)WB.undo.shift();WB.confirm=false;WB.msg=null;
+  if(s.picture!=='own'&&!s.held&&!s.worn)delete WB.draft.start;else WB.draft.start=s;   // a standard picture with nothing held or worn is no section at all
+  wbSend();wbPaint();wbStartPaint();
+}
+function wbStartHtml(a){
+  if(!stApplicable(a))return '';
+  return '<div class="wbrow" data-row="start"><div class="wl"><b>'+esc(W('start.label'))+'</b><span>'+esc(W('start.hint'))+'</span></div><div class="wc" id="wbstart"></div></div>';
+}
+function stStatus(a,s){
+  if(!s||s.picture!=='own')return {t:W('start.s_standard'),open:false};
+  const p=ownStartPath(a),saved=!!p,have=p?ownHave(p):null,same=JSON.stringify(wbSpecOf(a.id)&&wbSpecOf(a.id).start||null)===JSON.stringify(s);
+  if(!s.held&&!(s.worn||[]).length)return {t:W('start.s_empty'),open:false};
+  if(!same||!saved)return {t:W('start.s_unsaved'),open:false};
+  if(have===true)return {t:W('start.s_game'),open:true};
+  return {t:W('start.s_waiting'),open:true};
+}
+function wbStartPaint(){
+  const el=$('wbstart'),a=WB.a;if(!el||!a||!stApplicable(a))return;
+  const s=stGet(),own=!!(s&&s.picture==='own'),worn=(s&&s.worn)||[],st=stStatus(a,s);
+  let h='<div class="wbseg" role="group" aria-label="'+esc(W('start.label'))+'"><button type="button" data-st="pic" data-v="standard" aria-pressed="'+(own?'false':'true')+'">'+esc(W('start.standard'))+'</button><button type="button" data-st="pic" data-v="own" aria-pressed="'+(own?'true':'false')+'">'+esc(W('start.own'))+'</button></div>';
+  {
+    h+='<div class="wbrow nested"><div class="wl"><b>'+esc(W('start.holds_label'))+'</b><span>'+esc(W('start.holds_hint'))+'</span></div><div class="wc"><input type="text" class="wbtext" data-st="held" maxlength="60" value="'+esc((s&&s.held)||'')+'" placeholder="'+esc(W('start.holds_ph'))+'" aria-label="'+esc(W('start.holds_label'))+'"></div></div>'
+      +'<div class="wbrow nested"><div class="wl"><b>'+esc(W('start.wears_label'))+'</b><span>'+esc(W('start.wears_hint'))+'</span></div><div class="wc">'
+      +worn.map((w,i)=>'<div class="stworn"><input type="text" class="wbtext" data-st="what" data-i="'+i+'" maxlength="40" value="'+esc(w.what)+'" aria-label="'+esc(W('start.what'))+'"><input type="text" class="wbtext" data-st="where" data-i="'+i+'" maxlength="40" value="'+esc(w.where)+'" aria-label="'+esc(W('start.where'))+'"><button type="button" class="wbc" data-st="rm" data-i="'+i+'" aria-label="'+esc(W('start.remove'))+'">&times;</button></div>').join('')
+      +(worn.length<3?'<button type="button" class="fxadd" data-st="add">+ '+esc(W('start.add'))+'</button>':'<span class="hint">'+esc(W('start.max'))+'</span>')+'</div></div>';
+  }
+  if(own){
+    h+='<div class="wbrow nested"><div class="wl"><b>'+esc(W('start.status'))+'</b></div><div class="wc"><span class="hint" id="wbstartstat">'+esc(st.t)+'</span>'
+      +(st.open?'<a class="wbc" id="wbstartopen" href="art.html?open='+encodeURIComponent(stEntryId(a))+'" target="_blank" rel="noopener">'+esc(W('start.open'))+'</a>':'')+'</div></div>';
+  }
+  el.innerHTML=h;
+}
+function stAct(b){
+  const k=b.dataset.st,i=+b.dataset.i;
+  if(k==='pic')return stEdit(s=>{s.picture=b.dataset.v==='own'?'own':'standard';});
+  if(k==='add')return stEdit(s=>{s.worn=(s.worn||[]).concat([{what:'',where:W('start.where_default')}]).slice(0,3);});
+  if(k==='rm')return stEdit(s=>{s.worn=(s.worn||[]).filter((_,j)=>j!==i);});
+}
+document.addEventListener('click',e=>{if(!WB.a||!e.target.closest)return;const b=e.target.closest('[data-st]');if(b&&b.tagName==='BUTTON')stAct(b);});
+document.addEventListener('change',e=>{const t=e.target;if(!t||!t.dataset||!WB.a||!t.dataset.st||t.tagName!=='INPUT')return;
+  const v=String(t.value).replace(/[<>]/g,'').trim(),k=t.dataset.st,i=+t.dataset.i;
+  stEdit(s=>{if(k==='held')s.held=v.slice(0,60);else{const w=(s.worn||[]).map(x=>Object.assign({},x));if(w[i]){w[i][k]=v.slice(0,40);s.worn=w.filter(x=>x.what||x.where&&x.where!==W('start.where_default'));}}});});
+function wbSecPaint(){wbStartPaint();wbLsPaint();wbAnPaint();wbSpPaint();wbFxPaint();wbStagePaint();wbSoundPaint();}
 function lsAct(b){
   const a=b.dataset.ls,i=+b.dataset.i;
   if(a==='add')return lsEdit(l=>l.push(lsNew(WB.a)));

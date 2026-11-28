@@ -162,7 +162,7 @@ check('M1 data/move-specs.js on main is exactly what the files on main give', sc
 fin = [doc_of(i)['finished'] for i in (LJ, KB, BB)]
 check('M1 finished.build is the build name in all three files, written through the contents API (one write each)', all(f['build'] == 'movespec-t1' for f in fin) and sorted(API_PUTS) == sorted('data/moves/%s.json' % slug(i) for i in (LJ, KB, BB)), (fin, API_PUTS))
 check('M1 the index says Finished for all three, with the build, and names the script build', all(ix['anims'][i]['status'] == 'finished' and ix['anims'][i]['finished']['build'] == 'movespec-t1' for i in (LJ, KB, BB)) and ix['script_build'] == 'movespec-t1', {i: ix['anims'][i] for i in (LJ, KB, BB)})
-check('M1 every other animation of the Guide is in the index (680 with Pick-Me-Up)', len(ix['anims']) == 680 and 'move:pick_me_up' in ix['anims'], len(ix['anims']))
+check('M1 every other animation of the Guide is in the index (the ones of data/guide-anims.json and Pick-Me-Up; movebench11 added the seven counter rows)', len(ix['anims']) == len(json.load(open(ROOT + '/data/guide-anims.json'))['anims']) + 1 and 'move:pick_me_up' in ix['anims'], len(ix['anims']))
 nm = sh('git', '-C', root, 'status', '--porcelain').stdout.strip()
 check('M1 nothing left uncommitted in the checkout and no conflict markers on main', not nm and sh('git', '--git-dir', ORIGIN, 'grep', '-q', '^<<<<<<<', 'main').returncode == 1, nm)
 check('M1 the commit order (newest first): the statuses, then the stamps, then the build', subj.index('move-apply: statuses [skip ci]') < subj.index(build_commits[0]) and any(x.startswith('move-apply: move:') for x in subj[:subj.index(build_commits[0])]), subj[:8])
@@ -257,9 +257,30 @@ check('M13 a saved draft naming an object with words adds exactly one Art Librar
 ent = [e for e in (after_prompts if isinstance(after_prompts, list) else after_prompts.get('entries', [])) if e.get('id') == 'stage-amy-wetfloor']
 e0 = ent[0] if ent else {}
 check('M13 the entry is under Props > Battle stage, holds his words and the magenta pattern, and is not made yet (no picture, not approved, no generation field)', e0.get('tab') == 'Props' and e0.get('group') == 'Battle stage' and 'WET FLOOR' in e0.get('prompt', '') and 'magenta' in e0.get('prompt', '').lower() and e0.get('status') in (None, 'draft', 'todo') and not e0.get('versions') and not e0.get('gen') and e0.get('stage'), json.dumps({k: (v if k != 'prompt' else v[:60]) for k, v in e0.items()})[:300])
-check('M13 no build, no CHANGES entry, no generation request, one commit for the entry', not any('movespec-t13' in s for s in subjects()) and 'movespec-t13' not in show('docs/CHANGES.md') and any(s.startswith('move-apply: Art Library entries for new stage objects: stage-amy-wetfloor') for s in subjects()) and not API_PUTS, (subjects()[:3], API_PUTS))
+check('M13 no build, no CHANGES entry, no generation request, one commit for the entry', not any('movespec-t13' in s for s in subjects()) and 'movespec-t13' not in show('docs/CHANGES.md') and any(s.startswith('move-apply: Art Library entries for new objects and start pictures: stage-amy-wetfloor') for s in subjects()) and not API_PUTS, (subjects()[:3], API_PUTS))
 cnt = commits(); rc2 = A.main(['--root', root, '--tag', 'movespec-t13b', '--tries', '6'])
 check('M13 a second run adds nothing (the entry exists)', rc2 == 0 and commits() == cnt, (rc2, commits() - cnt))
+
+# ---------------------------------------------------------------- M14 an own start picture makes one Art Library entry and its grey reference, and generates nothing (movebench13)
+WFH = 'move:wet_floor_hazard'
+def own_start():
+    wt = os.path.join(TMP, 'tom-start-%d' % len(os.listdir(TMP))); sh('git', 'clone', '-q', 'file://' + ORIGIN, wt)
+    os.makedirs(wt + '/art/clips/start', exist_ok=True); shutil.copy(ROOT + '/art/clips/start/deedee-hero.png', wt + '/art/clips/start/deedee-hero.png')
+    p = os.path.join(wt, 'data/moves/%s.json' % slug(WFH)); d = json.load(open(p)); d['rev'] += 1; live = d.get('live') or {}
+    d['draft'] = dict(live, start={'picture': 'own', 'held': 'wooden-handle string mop', 'worn': [{'what': 'folded yellow caution sign', 'where': 'clipped on her apron'}], 'entry': 'start-deedee-wet-floor-hazard'})
+    d['log'].append({'rev': d['rev'], 'at': NOW, 'by': 'tom', 'what': 'draft'})
+    open(p, 'w').write(json.dumps(d, indent=1, ensure_ascii=False) + '\n')
+    sh(*GIT, '-C', wt, 'add', '-A'); sh(*GIT, '-C', wt, 'commit', '-q', '-m', 'move: draft %s [skip ci]' % WFH); sh('git', '-C', wt, 'push', '-q', 'origin', 'HEAD:main')
+API_PUTS.clear()
+rc, root = run_case(own_start, tag='movespec-t14')
+ap = json.loads(show('data/art-prompts.json')); ent = [e for e in ap['entries'] if e['id'].startswith('start-')]
+check('M14 a saved draft with an own start picture adds exactly one Art Library entry, start-deedee-wet-floor-hazard', rc == 0 and [e['id'] for e in ent] == ['start-deedee-wet-floor-hazard'], (rc, [e['id'] for e in ent]))
+e0 = ent[0] if ent else {}
+check('M14 the entry is under Characters > Battle start pictures, not made yet, holds his words, refers to the grey reference and names no generation', e0.get('tab') == 'Characters' and e0.get('group') == 'Battle start pictures' and 'wooden-handle string mop' in e0.get('prompt', '') and e0.get('refs') == ['art/raw/startref/deedee-grey.png'] and e0.get('status') in (None, 'draft', 'todo') and not e0.get('versions') and not e0.get('gen') and e0.get('startpic'), json.dumps({k: (v if k != 'prompt' else v[:60]) for k, v in e0.items()})[:300])
+ref_png = sh('git', '--git-dir', ORIGIN, 'cat-file', '-s', 'main:art/raw/startref/deedee-grey.png').stdout.strip()
+check('M14 the grey reference picture was committed with it, and no build, no CHANGES entry and no generation request were made', ref_png.isdigit() and int(ref_png) > 1000 and not any('movespec-t14' in s for s in subjects()) and not API_PUTS and any(s.startswith('move-apply: Art Library entries for new objects and start pictures: start-deedee-wet-floor-hazard') for s in subjects()), (ref_png, subjects()[:3], API_PUTS))
+cnt = commits(); rc2 = A.main(['--root', root, '--tag', 'movespec-t14b', '--tries', '6'])
+check('M14 a second run adds nothing (the entry and the reference exist)', rc2 == 0 and commits() == cnt, (rc2, commits() - cnt))
 
 # ---------------------------------------------------------------- M12 the workflow file
 wf = open(os.path.join(ROOT, '.github/workflows/move-apply.yml'), encoding='utf-8').read()

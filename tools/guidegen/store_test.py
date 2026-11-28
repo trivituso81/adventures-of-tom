@@ -311,5 +311,14 @@ check('data/guide-words.json is the same table (run python3 tools/guidegen/store
 check('the plan\'s texts for X5, X8, X18 and X19 are word for word', S.WORDS['X5']['why'] + ' ' + S.WORDS['X5']['do'] == 'fal is out of credit. Add credit at fal, then tap Try again.' and S.words('X18', reason='no frames')[0] == 'The take could not be cut: no frames.' and S.words('X19') == ('It did not reach the game.', 'Tap Use this one again.'))
 check('the file uses only the standard library', not re.search(r'^\s*(import|from)\s+(requests|aiohttp|httpx|yaml)', open(os.path.join(HERE, 'store.py')).read(), re.M))
 
+
+# movebench13: startPic is the one new field a video row may carry, and only a move's own start picture is accepted
+fresh()
+check('S13 a video row may carry a move start picture', S.add({'id': 'v-sp1', 'kind': 'video', 'anim': 'move:x', 'startPic': 'art/clips/start/deedee-wet-floor-hazard.png'}).get('startPic') == 'art/clips/start/deedee-wet-floor-hazard.png')
+for bad_ in ('art/clips/start/deedee-hero.png', '../x.png', 'art/clips/start/Deedee.png', 'data/x.png'):
+    check('S13 startPic %s is refused' % bad_, raises(lambda b=bad_: S.add({'id': 'v-sp2', 'kind': 'video', 'anim': 'move:x', 'startPic': b})) is True)
+check('S13 a picture row cannot carry startPic', raises(lambda: S.add({'id': 'v-sp3', 'kind': 'picture', 'anim': 'a', 'startPic': 'art/clips/start/deedee-x.png'})) is True)
+check('S13 a row without it has an empty startPic', S.add({'id': 'v-sp4', 'kind': 'video', 'anim': 'move:x'}).get('startPic') == '')
+
 print('FAILS:', fails)
 sys.exit(1 if fails else 0)

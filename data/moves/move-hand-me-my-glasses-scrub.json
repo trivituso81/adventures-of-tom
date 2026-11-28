@@ -1,7 +1,7 @@
 {
  "v": 1,
  "id": "move:hand_me_my_glasses_scrub",
- "rev": 1,
+ "rev": 2,
  "live": {
   "body": {
    "clip": "deedee_scrub",
@@ -18,7 +18,17 @@
    {
     "fx": "vfx_core_status_debuff_badges"
    }
-  ]
+  ],
+  "start": {
+   "picture": "standard",
+   "held": "wooden rolling pin",
+   "worn": [
+    {
+     "what": "reading glasses",
+     "where": "hooked on the belt"
+    }
+   ]
+  }
  },
  "draft": null,
  "finished": null,
@@ -28,6 +38,12 @@
    "at": "2026-11-26T22:00:00-08:00",
    "by": "migration",
    "what": "written from the tables the engine reads today"
+  },
+  {
+   "rev": 2,
+   "at": "2026-11-27T23:31:19Z",
+   "by": "claude",
+   "what": "move:hand_me_my_glasses_scrub: start picture standard, holds wooden rolling pin, wears 1 (one held prop, the rest worn; Pipeline Lock, One held prop)"
   }
  ]
 }
