@@ -10615,7 +10615,7 @@
    "title": "Try the battle screen prototype on the Duo",
    "theme": "Battle System",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "where": "phone",
    "next": "Waits on the card Battle screen: a lightweight prototype to try. Then: open ADMIN > Battle system > Battle screen prototype (the page is https://trivituso81.github.io/adventures-of-tom/battle-proto.html) on the Duo held sideways, play two rounds, try 5 monsters and the night and indoor backgrounds under the Try button at the top right, tap Note for anything that bothers you, then Copy my notes. Press All good (the full proposal, card Battle screen: storybook look proposal, every case drawn, can then start), or Something is wrong and paste your notes (a fix of the prototype starts by itself).",
@@ -10653,8 +10653,13 @@
     {
      "d": "2026-11-27",
      "t": "Tom (11-27 22:39 and 22:41), after trying the prototype: the look and feel is not final, so most of it cannot be judged (list beside the character, Use button, how it feels, backgrounds, Details, legibility). Not findings: the fold-away speed (the animations are placeholders and fast), and five monsters standing on the battlefield (that is how the game already works; the prototype's small boxes were only a shortcut). The one thing that worked: first tap then Use. Direction: judge the real storybook look, not a plain-CSS prototype. 'I just tested something that doesn't matter because almost every test relies on the look and feel.'"
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Tom: all good. (Tom asked Claude to press it for him at 22:46: \"Can you do it\".)"
     }
-   ]
+   ],
+   "done": "2026-11-27"
   },
   {
    "id": "b-board-b3proto-plan",
