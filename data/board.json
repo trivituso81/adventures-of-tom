@@ -10505,7 +10505,7 @@
    "created": "2026-11-27",
    "changed": "2026-11-28",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEf9f6b6LGnFVDAiBY",
     "opening": "not started"
    },
    "prompt": {
@@ -10578,7 +10578,7 @@
    "id": "c-b3story-exact",
    "tag": "b3storyx",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle System",
    "title": "Battle screen: mock it exactly as the mockup",
    "next": "Rebuilt: the mock (ADMIN > Battle system > Battle screen: storybook proposal) now follows your mockup at 951 x 648: your painted frames cut from the picture, your arrangement, tap a move to highlight it and tap it again to use it. The measured table is in claude/b3story-plan.md, section Exact to the mockup. Hands you the card Battle screen: is the mock your mockup now?",
@@ -10612,9 +10612,14 @@
     {
      "d": "2026-11-28",
      "t": "Built as b3storyx: 32 things measured in the mockup and matched within 12 px at 951 x 648 (checked by tools/b3story_test.py against the plan table), frames cut from the mockup as nine-slices, Use button removed (tap the highlighted move again), Combos used from the lit mark under the Combo bar. All 18 states and six sizes kept. Side by side picture: claude/battleux-mock2/compare-exact.jpg. Hands to t-b3storyx-decide."
+    },
+    {
+     "d": "2026-11-28",
+     "t": "Shipped as b3storyx: the storybook battle screen mock rebuilt to match Tom's mockup at the Duo's size: his painted frames, his arrangement, tap a move again to use it"
     }
    ],
-   "after": "t-b3storyx-decide"
+   "after": "t-b3storyx-decide",
+   "done": "2026-11-28"
   },
   {
    "id": "t-stageapproachplay",
@@ -10669,7 +10674,7 @@
    "created": "2026-11-28",
    "changed": "2026-11-28",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEf9f6b6LGnFVDAiBY",
     "opening": "\"Read CLAUDE.md, claude/handoff-rules.md, claude/b3story-plan.md and claude/battleux-mock2/assessment.md\""
    },
    "history": [
@@ -10682,6 +10687,21 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEf9f6b6LGnFVDAiBY",
+   "title": "Battle screen: mock it exactly as the mockup",
+   "first": "2026-11-27T23:32:47-08:00",
+   "last": "2026-11-28T00:28:17-08:00",
+   "tags": [
+    "b3storyx"
+   ],
+   "cards": [
+    "c-b3story-exact",
+    "c-b3story",
+    "c-b3story1",
+    "t-b3storyx-decide"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDCLLECEkf1Lk73xzy",
    "title": "Make Runs to the monster work on moves with stage steps",
    "first": "2026-11-27T23:13:01-08:00",
@@ -10691,16 +10711,6 @@
    ],
    "cards": [
     "c-stageapproach"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEf9f6b6LGnFVDAiBY",
-   "title": "Battle screen: mock it exactly as the mockup",
-   "first": "2026-11-27T23:32:47-08:00",
-   "last": "2026-11-27T23:32:47-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3story-exact"
    ]
   },
   {
@@ -17797,8 +17807,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "4a98264dc38328e5ba991099ef201990ee0b5604",
- "synced_at": "2026-11-28T08:16:25+00:00",
+ "synced": "0502718ef659b3c16c6d1f39686e9397c6f8e5fe",
+ "synced_at": "2026-11-28T08:29:05+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
