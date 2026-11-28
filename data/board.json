@@ -10101,7 +10101,7 @@
    "id": "c-movebench-14",
    "tag": "movebench14",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Battle Animations",
    "title": "Move Workbench 14: monster attacks get effects and stage",
    "next": "Built and tested by machine (movebench14). Nothing for Tom. Next card: c-movebench-15.",
@@ -10149,15 +10149,19 @@
     {
      "d": "2026-11-27",
      "t": "Built movebench14: a monster attack with settings plays effects, freeze, shake and stage steps (mirrored); the Workbench page sets them. Golden unchanged (219, 0 differ); new golden_acts.json; page test at four phone layouts passed. Nothing for Tom to judge. Next: c-movebench-15."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as movebench14: monster attacks can have effects, stage steps, a freeze and a shake, set on the Workbench page like a family move"
     }
-   ]
+   ],
+   "done": "2026-11-27"
   },
   {
    "id": "c-movebench-15",
    "tag": "movebench15",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Battle Animations",
    "title": "Move Workbench 15: Family Ruckus",
    "next": "Double Team and Full Family Ruckus get their own two rows in the list, with stage steps, effects and sound played at the moment the two members link up. Starts by itself when Move Workbench 14 ships.",
@@ -10166,7 +10170,7 @@
    ],
    "after": "nothing for Tom: c-movebench-16",
    "created": "2026-11-26",
-   "changed": "2026-11-26",
+   "changed": "2026-11-27",
    "auto": true,
    "chat": {
     "url": "",
@@ -10185,6 +10189,10 @@
     {
      "d": "2026-11-26",
      "t": "Added by c-movebench-design: phase 15 of claude/movebench-plan.md section g."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Unblocked: Move Workbench 14: monster attacks get effects and stage is done."
     }
    ]
   },
@@ -10481,6 +10489,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukFhHBWjuLeCZDLcBjK",
+   "title": "Move Workbench 14: monster attacks get effects and stage",
+   "first": "2026-11-27T16:26:28-08:00",
+   "last": "2026-11-27T17:27:14-08:00",
+   "tags": [
+    "movebench14"
+   ],
+   "cards": [
+    "c-movebench-14"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ",
    "title": "Battle screen: storybook look proposal, every case drawn",
    "first": "2026-11-27T16:11:58-08:00",
@@ -10493,16 +10513,6 @@
     "c-b3story",
     "b-board-b3story",
     "b-board-b3story2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFhHBWjuLeCZDLcBjK",
-   "title": "Move Workbench 14: monster attacks get effects and stage",
-   "first": "2026-11-27T16:26:28-08:00",
-   "last": "2026-11-27T16:26:28-08:00",
-   "tags": [],
-   "cards": [
-    "c-movebench-14"
    ]
   },
   {
@@ -17502,8 +17512,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "e1fe146da6ccc482d0e4fde7abf983bd32641840",
- "synced_at": "2026-11-28T01:09:22+00:00",
+ "synced": "0c6830a673bea4323f97b4eebcc49e97c10ccf64",
+ "synced_at": "2026-11-28T01:28:04+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
