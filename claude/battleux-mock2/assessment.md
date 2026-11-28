@@ -90,3 +90,27 @@ Tom: "one thing that I really do like is the actions appearing kind of like to t
 | Most of the controls lie over the scene | The scene keeps the whole screen; nothing pushes it up, down or to the side. Idea 8. |
 
 This overrules the reading of section 3 row 1 as a reason to move the panel. What is left to solve inside the two points: where the bar sits for each family member and near an edge, what it covers with five monsters, hiding while a move plays, contrast on any background, text and tap sizes at real screens, and the upright phone. Section 2's rows (two moves picked, no Use, tabs that hide moves, repeats, wrong words) are unchanged by this.
+
+## 7. A proposed solution for each open point (11-27 17:51)
+
+Tom: "Propose a solution for each one including viewport specific hi for portrait although I would deprioritize this". These are recommendations for the proposal session to draw and test, not built facts. Sizes are for the Duo unfolded held sideways (951 x 648).
+
+| # | Open point | Proposed solution |
+|---|---|---|
+| 1 | Where the bar sits for each family member, and near an edge | When a turn opens, the acting member takes one step toward the monsters. The bar opens on the side facing the monsters, level with their shoulders, with a small tail pointing at them, and slides there from the last member's spot. It is clamped 12 px inside the screen; if there is no room beside them it opens above them instead. Back row members step forward the same way, so the rule is one rule. |
+| 2 | What it covers with five monsters | Keep an empty lane between the two sides for the bar: monsters stand in the left half, the family in the right 28%, the lane between is at least 22% of the width (about 210 px). The bar is 210 to 240 px wide. Only the aimed monster shows a full plate (name, HP, Composure, Pet Peeves); every other monster shows a small strip under it (HP bar, pips, Pet Peeve pictures). The damage ring moves from the body to the plate. |
+| 3 | While a move plays | The bar folds away the moment Use is tapped (about 150 ms) and stays away through the move and through monster turns. It opens again beside the next family member. Battle text and story tips show as one caption line low on the scene. The party row, the turn bar and the Combo bar stay. |
+| 4 | Night and indoor backgrounds | No text sits straight on the scene. Every panel is solid paper with a dark ink edge and a soft shadow; the name of the member (the gold "Grace") gets a ribbon behind it. A light shade (about 15%) falls on the scene behind the open bar only. Checked on the pond, a night scene and an indoor scene. |
+| 5 | Text and tap sizes on the Duo | Each row is 44 px tall with a 15 px name and nothing under 12.5 px. It fits by showing less per row: flavor picture and word, name, price. Only the highlighted row opens to show its one line and the Use button. Seven rows of 44 px plus one open row come to about 410 px of the 648. Party cards: face, name, HP bar, Pep as a number (pips only for the member whose turn it is). |
+| 6 | An upright phone (lower priority, built last) | The scene is only 393 x 221 there, so a bar over it would cover it. The one exception to the overlay rule: the same list docks as a sheet under the scene, same rows and order, with the party row between. Sideways on the iPhone keeps the overlay, with 4 rows showing and the list scrolling. |
+
+The findings of section 2 that still stand, each with its solution:
+
+| Finding | Proposed solution |
+|---|---|
+| Two moves look picked | One list, one highlight. The Basic is the first row of the same list, styled apart, and is highlighted when the turn opens. The Pep forecast follows the highlight. |
+| No way to use a move | First tap highlights and opens the row; the open row carries a gold Use button; second tap uses. |
+| Tabs hide moves | No tabs. Primary moves, then a labelled line "Secondary: Craft Artist", then its moves, all visible. |
+| The same fact several times | One home each: Pet Peeve on the row tag and the monster's plate only; the Pep change on the member's card only; the push on the turn bar only; the member's name on the bar's ribbon and the card. |
+| "Shield" | Composure, the game's word. The pip the move will remove pulses, and the plate says "1 Composure" in the forecast line. |
+

@@ -10447,7 +10447,7 @@
    "changed": "2026-11-27",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ",
-    "opening": "not started"
+    "opening": "\"Read CLAUDE.md, claude/handoff-rules.md, claude/battleux-plan.md, claude/b3look-plan.md and claude/battleux-mock2/assessment.md\""
    },
    "prompt": {
     "what": "Turns your storybook mockup into a tappable proposal of the battle screen at the four real screen sizes, with every case the mockup left out. The moves stay beside the character whose turn it is and the controls stay over the scene, as you asked. Then hands you one card to approve it.",
@@ -10474,6 +10474,10 @@
     {
      "d": "2026-11-27",
      "t": "Tom, 19:45: \"Can you plan for a super lightweight prototype to see how I like it and why issues I find?\" This card now waits on t-b3proto-try; the prototype (c-b3proto) is built first. Build board-b3proto-plan."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started at 21:45 from the pasted prompt. Card t-b3proto-try has no note or answer from Tom, so the proposal starts without prototype notes (Tom can paste them in this conversation). Section 7 of claude/battleux-mock2/assessment.md had been removed by the movebench15 push (19:04, a stale copy of the file); restored from board-b3story3 (6b02215)."
     }
    ],
    "waiting_on": "tom"
