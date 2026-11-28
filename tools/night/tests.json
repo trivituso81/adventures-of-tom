@@ -1317,6 +1317,12 @@
    "minutes": 1
   },
   {
+   "id": "b3proto_test",
+   "cmd": "python3 -I tools/b3proto_test.py",
+   "group": "g6",
+   "minutes": 2
+  },
+  {
    "id": "closeup_ch7_test",
    "cmd": "python3 -I tools/closeup_ch7_test.py",
    "group": "g6",

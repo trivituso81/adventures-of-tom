@@ -1,4 +1,7 @@
 [
+{"tag":"b3s13b","at":"2026-11-20T20:26:46-08:00","what":"New battle: the chapter 9 ballroom monsters and The Mirrorball join the Battle Lab (stage 13, part b of four)","card":"c-b3s13","theme":"Battle System"},
+{"tag":"wanch1h","at":"2026-11-20T20:17:04-08:00","what":"Rose and Deedee fight in Wan videos too (idle with breathing, guard, hit, run), The Floor Is Lava!, the Glasses Scrub and Zone One Blockade are videos, Grace's knock-out sits on the ground","card":"c-wanch1","theme":"Battle Animations"},
+{"tag":"qa-bug12c","at":"2026-11-20T20:09:16-08:00","what":"Boppy's Paso Robles cap reads the right way round when a scene turns him to face left","card":"c-qa-bug12c","theme":"Characters"},
 {"tag":"itemdef-css","at":"2026-11-20T20:07:53-08:00","what":"The item definition banner's look and words are back (itemdef1 lost them on the way in)","card":"c-itemdef1","theme":"Game Shell"},
 {"tag":"fix-gatelayer-pics-2","at":"2026-11-20T20:01:49-08:00","what":"Gate pictures checked by Claude: three ready for Tom, three rewritten to a method that works","card":"c-fix-gatelayer-pics-2","theme":"Tools"},
 {"tag":"itemdef1","at":"2026-11-20T20:01:04-08:00","what":"Every item banner reads like a JRPG item definition: picture, name and type, description, In battle, In story","card":"c-itemdef1","theme":"Game Shell"},

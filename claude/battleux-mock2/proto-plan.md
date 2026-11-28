@@ -48,3 +48,23 @@ All good unblocks c-b3story. Something is wrong with his notes makes a fix card 
 ## 5. Purge rule
 
 `battle-proto.html`, `tools/b3proto_test.py` and the ADMIN button are deleted by the build that ships the real screen, or as soon as Tom says the prototype is not needed. c-b3story's proposal session reads Tom's notes on t-b3proto-try first.
+
+## Built (b3proto, 2026-11-27)
+
+Built as sections 1 to 3 say: `battle-proto.html`, the ADMIN > Battle system button "Battle screen prototype", `tools/b3proto_test.py` (all pass at 951 x 648 and 1440 x 900), screenshots looked at in `tools/shots/b3proto-*.png`. No battle, rule or engine file changed; the page loads only `data/b3-rules.js`, the four `data/b3-kit-*.js` files and `data/b3-foes-ch01.js` (data, no engine), and the test fails if an `engine/` file is requested.
+
+What is real and what is fixed: move names, Pep prices, flavors, the one-line description and the full description come from the kit files; the monsters' names, HP, Composure and Pet Peeves come from `B3_FOES`. Fixed on purpose: damage by the size word (light 14, standard 22, heavy 34, capstone 48, 1.5x on a Pet Peeve, none for a move with power 0), Pep (start 4, Basic +2, a Skill costs its price, never above 10), Combo +12% a move, party HP. A monster under 20% HP is topped up between turns, so the fight never ends.
+
+Calls made (each is a choice the plan did not settle):
+
+| # | Call |
+|---|---|
+| 1 | Section 7 of assessment.md is not in the repo (the file ends at section 6; docs/CHANGES.md says board-b3story3 added it). Built from this plan's section 1 and assessment section 6 (Tom's two fixed points). Card c-b3proto had no note from Tom on it. |
+| 2 | The party stands as a queue on the right: the acting member steps forward to the front spot, the others wait behind in turn order, the member who just acted goes to the back and the bar slides in from that spot. This keeps the bar clear of every other member's face on every turn. |
+| 3 | Seven rows: the Basic, the Primary Vibe's three Skills (its capstone included), a line "Secondary: <Vibe>", the Secondary Vibe's three Skills. A closed row is 44 px: a flavor picture, the name, a Pet Peeve tag, the Pep price. The flavor word and kind ("Clobber basic") show on the open row. This is what lets the list fit without scrolling at 951 x 648. |
+| 4 | Details Off: the open row shows its one line, the plate shows the damage ring and the Pet Peeve tag. Details On: also the move's full description and hit count on the row, and the plate adds Composure, push and cancel tags. |
+| 5 | Night is the pond with a dark blue wash. Indoor is `bgs/06-library-reading-room.webp`. |
+| 6 | The still pictures are cut from `art/clips/start/*.png` (magenta keyed out) into `art/proto/`, for this page only. Family figures are drawn in proportion to their real heights. |
+| 7 | A move Grace cannot pay for is dimmed and its Use button reads "Need N Pep" and is disabled. |
+| 8 | Notes are kept on the phone (`b3proto-notes`) with the state they were written in; Clear needs a second tap. |
+| 9 | Not mine: `tools/admin_hub_test.py` fails 2 checks ("one link per fight", at 390 and 844 px) with and without my change; it counts every `a.btn` against the number of Lab fights plus 1, which the admin page outgrew earlier. `tools/night/tests.json` got a `b3proto_test` row, which smoke requires. |

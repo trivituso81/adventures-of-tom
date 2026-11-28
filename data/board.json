@@ -10583,6 +10583,10 @@
     {
      "d": "2026-11-27",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Built as build b3proto (page battle-proto.html, test tools/b3proto_test.py passes at 951 x 648 and 1440 x 900, screenshots looked at). No note from Tom was on this card. Section 7 of assessment.md is not in the repo (file ends at section 6), so the build follows the plan's section 1 and assessment section 6. The calls made are under Built in claude/battleux-mock2/proto-plan.md. The card closes from the b3proto heading in docs/CHANGES.md; the next card is t-b3proto-try."
     }
    ]
   },
@@ -10595,11 +10599,11 @@
    "waiting_on": "claude",
    "ask": "play",
    "where": "phone",
-   "next": "Waits on the card Battle screen: a lightweight prototype to try. Then: open ADMIN > Battle system > Battle screen prototype on the Duo held sideways, play two rounds, try 5 monsters and the night and indoor backgrounds, tap Note for anything that bothers you, then Copy my notes. Press All good (the full proposal, card Battle screen: storybook look proposal, every case drawn, can then start), or Something is wrong and paste your notes (a fix of the prototype starts by itself).",
+   "next": "Waits on the card Battle screen: a lightweight prototype to try. Then: open ADMIN > Battle system > Battle screen prototype (the page is https://trivituso81.github.io/adventures-of-tom/battle-proto.html) on the Duo held sideways, play two rounds, try 5 monsters and the night and indoor backgrounds under the Try button at the top right, tap Note for anything that bothers you, then Copy my notes. Press All good (the full proposal, card Battle screen: storybook look proposal, every case drawn, can then start), or Something is wrong and paste your notes (a fix of the prototype starts by itself).",
    "steps": [
-    "Open ADMIN > Battle system > Battle screen prototype on the Duo, unfolded and held sideways.",
+    "Open ADMIN > Battle system > Battle screen prototype (https://trivituso81.github.io/adventures-of-tom/battle-proto.html) on the Duo, unfolded and held sideways.",
     "Play two rounds: tap a move, then its gold Use button. Watch the list move from Grace to Tom to Deedee to Rose.",
-    "Open the Try chip in the corner: switch Monsters to 5, then Background to night and to indoor.",
+    "Tap the Try button at the top right: switch Monsters to 5, then Background to night and to indoor.",
     "Judge five things: (1) does the list beside the character feel right as it moves; (2) is anything you want to see covered; (3) can you read and tap it comfortably; (4) is first tap, then Use, clear; (5) when the list folds away during a move, do you lose your place.",
     "Each time something bothers you, tap Note and type it. At the end tap Copy my notes.",
     "Press All good, or Something is wrong and paste your notes."
@@ -10618,6 +10622,10 @@
     {
      "d": "2026-11-27",
      "t": "Added by board-b3proto-plan with card c-b3proto. Tom, 19:45: \"Can you plan for a super lightweight prototype to see how I like it and why issues I find?\""
+    },
+    {
+     "d": "2026-11-27",
+     "t": "b3proto built: the page address added to next and step 1; the Try chip is a button labeled Try at the top right (beside Note and Exit)."
     }
    ]
   },
