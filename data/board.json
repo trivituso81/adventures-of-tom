@@ -10607,9 +10607,51 @@
      "t": "Added by board-b3proto-plan with card c-b3proto. Tom, 19:45: \"Can you plan for a super lightweight prototype to see how I like it and why issues I find?\""
     }
    ]
+  },
+  {
+   "id": "b-board-b3proto-plan",
+   "tag": "board-b3proto-plan",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-27",
+   "theme": "Battle System",
+   "title": "a plan and two cards for a lightweight battle screen prototype Tom can try before the full proposal",
+   "next": "Done: a plan and two cards for a lightweight battle screen prototype Tom can try before the full proposal",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Shipped as board-b3proto-plan. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-27",
+   "changed": "2026-11-27"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ",
+   "title": "Battle screen: storybook look proposal, every case drawn",
+   "first": "2026-11-27T16:11:58-08:00",
+   "last": "2026-11-27T19:52:18-08:00",
+   "tags": [
+    "board-b3story",
+    "board-b3story2",
+    "board-b3story3",
+    "board-b3proto-plan"
+   ],
+   "cards": [
+    "c-b3story",
+    "b-board-b3story",
+    "b-board-b3story2",
+    "b-board-b3story3",
+    "b-board-b3proto-plan"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukF5T9H671xWNXfKgbv",
    "title": "Move Workbench 16: wide monitor layout and clean-up",
@@ -10630,23 +10672,6 @@
    ],
    "cards": [
     "c-movebench-15"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ",
-   "title": "Battle screen: storybook look proposal, every case drawn",
-   "first": "2026-11-27T16:11:58-08:00",
-   "last": "2026-11-27T17:56:37-08:00",
-   "tags": [
-    "board-b3story",
-    "board-b3story2",
-    "board-b3story3"
-   ],
-   "cards": [
-    "c-b3story",
-    "b-board-b3story",
-    "b-board-b3story2",
-    "b-board-b3story3"
    ]
   },
   {
@@ -17658,8 +17683,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "084b460c2c0b6d995d8863dc0d952d39710e06b8",
- "synced_at": "2026-11-28T03:34:20+00:00",
+ "synced": "e352b35bdd5ddbdae6ead97d2d409173e6316672",
+ "synced_at": "2026-11-28T03:53:09+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
