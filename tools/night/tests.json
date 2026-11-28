@@ -50,6 +50,7 @@
   {"id": "movebench_ownstart_test", "cmd": "python3 -I tools/movebench/ownstart_test.py", "group": "g1", "minutes": 1},
   {"id": "movebench_golden_test", "cmd": "python3 -I tools/movebench/golden_test.py", "group": "g1", "minutes": 3, "outdir": true},
   {"id": "movebench_acts_test", "cmd": "python3 -I tools/movebench/acts_test.py", "group": "g1", "minutes": 4, "outdir": true},
+  {"id": "movebench_ruckus_test", "cmd": "python3 -I tools/movebench/ruckus_test.py", "group": "g1", "minutes": 3, "outdir": true},
   {"id": "benchmark_run_test", "cmd": "python3 -I tools/benchmark_run_test.py", "group": "g1", "minutes": 1},
   {
    "id": "amber_test",

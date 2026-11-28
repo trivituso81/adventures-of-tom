@@ -20,6 +20,7 @@ function msReset() { MS.by=Object.assign({},typeof MOVE_SPECS!=='undefined'?MOVE
 // The spec's id of the move a beat plays: 'move:<skill id>' for a family move, 'act:<monster id>:<act id>' for a monster's attack. null for a beat that is not a move.
 function msIdOf(head) {
   try {
+    if(head&&head.t==='ruckusSpend'&&(head.kind==='double'||head.kind==='full')) return 'ruckus:'+head.kind;   // movebench15: the Family Ruckus spend beat has a spec of its own ('ruckus:double', 'ruckus:full')
     if(!head||head.t!=='act'||!head.id) return null;
     if(head.src&&head.src[0]==='f') { const u=typeof b3Unit==='function'&&typeof B3!=='undefined'&&B3.F?b3Unit(B3.F,head.src):null; return u&&u.id?'act:'+u.id+':'+head.id:null; }
     return 'move:'+head.id;
@@ -48,7 +49,9 @@ function msStageRow(id) {
   const s=msLive(id); if(!s||!s.stage) return null;
   let R=MS_ROWS.get(s); if(R) return R;
   const b=s.body||{},t=s.timing||{},st=s.stage,c=t.contact,name=c&&typeof c==='object'?(c.mark||c.step||null):null;
-  R={body:{clip:b.clip||null,marks:b.marks||{},hand:b.hand||null,trim:msTrimOf(id)},budget:typeof t.budget==='number'?t.budget:3,steps:st.steps||null,lasting:st.lasting||null,setpiece:st.setpiece||null,assets:st.objects||{}};
+  const nobody=id.slice(0,7)==='ruckus:';   // movebench15: the Family Ruckus has no body video of its own (each member plays their own move), so its stage runs on a stand-in of its budget (1 s unless the spec says)
+  R={body:{clip:b.clip||null,marks:b.marks||{},hand:b.hand||null,trim:msTrimOf(id)},budget:typeof t.budget==='number'?t.budget:(nobody?1:3),steps:st.steps||null,lasting:st.lasting||null,setpiece:st.setpiece||null,assets:st.objects||{}};
+  if(nobody) R.nobody=true;
   if(name) { if(t.noHit) { R.hit='late'; R.late=name; } else R.hit=name; }
   MS_ROWS.set(s,R); return R;
 }

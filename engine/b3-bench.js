@@ -52,9 +52,10 @@ function bnRng(seed) { let a=seed>>>0; return ()=>{ a=(a+0x6D2B79F5)>>>0; let t=
 
 // ---------- what an animation id means ----------
 // 'move:<skill id>' a family move; 'act:<monster id>:<act id>' a monster attack (its wind-up plays first); 'wind:<monster id>:<act id>' the wind-up alone;
-// 'body:<owner>:<state>' a body state (one of BN_STATES).
+// 'body:<owner>:<state>' a body state (one of BN_STATES); 'ruckus:double' and 'ruckus:full' (movebench15) the Family Ruckus spend: the link, then the two members' own moves.
 function bnParse(id) {
   const p=String(id||'').split(':');
+  if(p[0]==='ruckus'&&(p[1]==='double'||p[1]==='full')&&p.length===2) return {kind:'ruckus',mode:p[1],owner:BN_FILL[0]};
   if(p[0]==='move'&&B3_SKILLS[p[1]]) { const S=B3_SKILLS[p[1]],V=B3_VIBES[S.vibe]; if(V) return {kind:'move',S,V,owner:V.owner,skill:S.id};
     return S.common&&!S.vibe?{kind:'move',S,V:null,owner:BN_FILL[0],skill:S.id}:null; }   // movebench6: Pick-Me-Up, the move every family member has, is shown on the first of them
   if(p[0]==='act'&&B3_FOES[p[1]]) { const A=B3_FOES[p[1]].acts.find(a=>a.id===p[2]); return A&&A.hits!=='attacker'?{kind:'act',foe:B3_FOES[p[1]],A,foeId:p[1],act:A.id}:null; }
@@ -71,7 +72,7 @@ const bnCan=id=>!!bnParse(id);
 // ---------- the stub fight ----------
 function bnConfig(P) {
   const cfg={lab:true,seed:11,plain:true,mods:{foeHp:1,taken:1,foeSpeed:1},bench:true,pink:!BN.golden,loadouts:{}};   // movebench10: pink boxes for an object with no picture; the golden recorder leaves them off so it records what the game plays
-  if(P.kind==='move'||(P.kind==='state'&&!P.isFoe)) {
+  if(P.kind==='move'||P.kind==='ruckus'||(P.kind==='state'&&!P.isFoe)) {
     const party=[P.owner].concat(BN_FILL.filter(x=>x!==P.owner&&B3_CAST[x]&&b3HasKit(x))).slice(0,BN_PARTY);
     cfg.party=party; cfg.formation=P.kind==='move'&&P.S.slot==='cap'?'bigone':'mudling';
     for(const id of party) { const L=b3NewLoadout(id,B3_RULES.rankVp.length); if(P.kind==='move'&&P.V&&id===P.owner) b3SetMain(id,L,P.V.id); cfg.loadouts[id]=L; }
@@ -88,7 +89,7 @@ function bnConfig(P) {
 // The unit this animation is about (a family member's or a monster's key).
 function bnSubject(P) {
   const F=B3.F; if(!F) return null;
-  const u=P.kind==='move'||(P.kind==='state'&&!P.isFoe)?F.party.find(x=>x.id===P.owner):F.foes.find(f=>f.id===P.foeId);
+  const u=P.kind==='move'||P.kind==='ruckus'||(P.kind==='state'&&!P.isFoe)?F.party.find(x=>x.id===P.owner):F.foes.find(f=>f.id===P.foeId);
   return u?u.key:null;
 }
 // Start (or restart) the stub fight for this animation, in the same page. No turn flow: the queue the opening put on the clock is dropped and
@@ -111,19 +112,21 @@ function bnRefill() {
 // Everything the fight needs is on screen: the painted sheets of the units. And everything the animation shows is loaded: the game waits only 2.5 s of battle
 // time for a clip and then plays its default motion, which would show Tom a move that is not the move; the preview asks first and waits (10 s at most).
 function bnWarm(P) {
-  const ids=[]; let SR=null;
+  const ids=[],rows=[]; let SR=null;
   if(P.kind==='move') { SR=typeof msStageRow==='function'&&msStageRow('move:'+P.skill)&&typeof b3gDefined==='function'&&b3gDefined(msStageRow('move:'+P.skill))?msStageRow('move:'+P.skill):null;
     if(SR) b3gWarm(SR); const mid='move:'+P.skill,mc=msClipOf(mid),mp=msPairOf(mid); if(mc) ids.push(mc); if(mp) ids.push(mp.clip); }
   else if(P.kind==='act') { const sid='act:'+P.foeId+':'+P.act,ac=msClipOf(sid),wc=msWindClip(P.foeId,P.act);   // movebench14: an attack with a stage loads its row's video and pictures first, like a move
     SR=typeof msStageRow==='function'&&msStageRow(sid)&&typeof b3gDefined==='function'&&b3gDefined(msStageRow(sid))?msStageRow(sid):null; if(SR) b3gWarm(SR);
     if(ac) ids.push(ac); if(wc) ids.push(wc); }
+  else if(P.kind==='ruckus') { const sid='ruckus:'+P.mode; SR=typeof msStageRow==='function'&&msStageRow(sid)&&typeof b3gDefined==='function'&&b3gDefined(msStageRow(sid))?msStageRow(sid):null; if(SR) b3gWarm(SR);   // movebench15: the spend's stage pictures, and the stage row and video of each of the two moves that follow it (a staged move plays its row inside a Ruckus too)
+    try { const u=B3.F.party.find(x=>x.id===P.owner),pl=bnRuckusSet(B3.F,u,P.mode); for(const pt of (pl.parts||[])) { const mid='move:'+pt.S.id,R2=msStageRow(mid); if(R2&&b3gDefined(R2)) { b3gWarm(R2); rows.push(R2); } const mc=msClipOf(mid); if(mc) ids.push(mc); } } catch(e) {} }
   else if(P.kind==='wind') { const w=P.foe.acts.find(a=>a.then===P.act),wc=w&&msWindClip(P.foeId,w.id),wa=msWindClip(P.foeId,P.act); if(wc) ids.push(wc); if(wa) ids.push(wa); }
   else if(P.kind==='state') { const st=P.state;
     for(const k of st==='run'?['run','idle']:st==='guard'?['guard','idle']:[st,'idle']) { const c=typeof b3cOf==='function'?b3cOf(P.owner,k):null; if(c) ids.push(c); } }
   if(P.kind==='move'){ const an=typeof msAnswer==='function'?msAnswer('move:'+P.skill):null; if(an&&an.clip) ids.push(an.clip); }   // movebench11: the counter video is loaded before the run starts
   if(BN.answer&&P.kind==='move'&&B3.F) { const X=bnAnswerAct(B3.F); if(X&&X.A) { const ac=msClipOf('act:'+X.e.id+':'+X.A.id),wc=msWindClip(X.e.id,X.A.id); if(ac) ids.push(ac); if(wc) ids.push(wc); } }   // the answer's own videos are loaded before the run starts
   for(const id of ids) if(typeof b3cWant==='function') b3cWant(id,30000);
-  return ()=>ids.every(id=>!BCLIPS[id]||b3cReady(id))&&(!SR||b3gReady(SR));
+  return ()=>ids.every(id=>!BCLIPS[id]||b3cReady(id))&&(!SR||b3gReady(SR))&&rows.every(r=>b3gReady(r));
 }
 const bnFightReady=()=>!(typeof paintedFightReady==='function'&&!paintedFightReady());
 
@@ -140,6 +143,7 @@ function bnPreflight(id) {
   if(P.kind==='act'||P.kind==='wind') { const e=F.foes.find(f=>f.id===P.foeId); return e?'':'the monster is not in its formation'; }
   if(P.kind==='state') { if(P.isFoe) return F.foes.find(f=>f.id===P.owner)?'':'the monster is not in its formation'; return F.party.find(x=>x.id===P.owner)?'':'the member is not in the stub fight'; }
   const u=F.party.find(x=>x.id===P.owner); if(!u) return 'the mover is not in the stub fight';
+  if(P.kind==='ruckus') { const pl=bnRuckusSet(F,u,P.mode); return pl.ok?'':(pl.why||'the rules would not let the spend happen'); }
   for(const x of F.units) { x.hp=x.maxHp; if(x.side==='party') x.pep=Math.max(x.pep,9); }
   const S=P.S; bnSetup(F,u,S);
   const O=b3Options(F,u,S).find(o=>!o.no); if(!O) return 'nobody to use it on';
@@ -178,6 +182,23 @@ function bnPlayMove(P,done) {
 }
 // Plays the monster attack: an attack that is wound up (a charge_up act with a `wind` video, or a wind-up act that `then` leads to) takes two monster turns, so the
 // wind-up plays first and the attack on the monster's next turn (b3FirstSet's way: e.force on the first turn, then the charge the rules left on the monster).
+// movebench15: the Family Ruckus spend in the stub fight: the gauge is full, the spender is first on the turn bar and the next family member second (the partner the rules take), the monsters wait. Returns the rules' plan.
+function bnRuckusSet(F,u,kind) {
+  for(const x of F.units) { x.hp=x.maxHp; x.wait=60; x.pri=0; if(x.side==='party') x.pep=Math.max(x.pep,9); }
+  const partner=F.party.find(x=>x!==u); if(!partner) return {ok:false,why:'the stub fight has no partner for the spend'};
+  u.wait=0; partner.wait=1; F.ruckus=B3_RULES.ruckus.full;
+  return b3RuckusPlan(F,u,kind);
+}
+function bnPlayRuckus(P,done) {
+  const F=B3.F,u=F.party.find(x=>x.id===P.owner); if(!u) { bnWhy('The member is not in the stub fight.'); return false; }
+  if(typeof B3G!=='undefined') B3G.run=null;
+  const pl=bnRuckusSet(F,u,P.mode); b3ViewSync();
+  if(!pl.ok) { bnWhy(pl.why||'The rules would not let the spend happen.'); return false; }
+  const r=b3Ruckus(F,u,P.mode,pl.foeOpts.length?pl.foeOpts[0].key:null);
+  if(!r.ok) { bnWhy(r.why||'The rules would not let the spend happen.'); return false; }
+  bnBusy(); b3Render();
+  b3Play(r.beats,done); return true;
+}
 function bnPlayAct(P,done) {
   const F=B3.F,e=F.foes.find(f=>f.id===P.foeId&&!f.ko); if(!e) { bnWhy('The monster is not in the stub fight.'); return false; }
   bnRefill();
@@ -221,7 +242,7 @@ function bnPlayState(P,done) {
   b3After(len+.6,done); return true;
 }
 // The run's play, by kind, from the clock's start. done() is called .6 s after the last thing it shows.
-function bnPlayKind(P,done) { return P.kind==='move'?bnPlayMove(P,done):P.kind==='act'?bnPlayAct(P,done):P.kind==='wind'?bnPlayWind(P,done):bnPlayState(P,done); }
+function bnPlayKind(P,done) { return P.kind==='move'?bnPlayMove(P,done):P.kind==='ruckus'?bnPlayRuckus(P,done):P.kind==='act'?bnPlayAct(P,done):P.kind==='wind'?bnPlayWind(P,done):bnPlayState(P,done); }
 
 // Build the fight from the start and begin the animation at moment 0, now. Everything it shows has to be loaded already (bnGo waits for that). The same call starts a survey,
 // a replay and a live play, so they are the same run.
@@ -289,7 +310,7 @@ function bnSample() {
   } else if(u) { bnSampleFoe(BN.sub,'video','');
     if(typeof B3G!=='undefined'&&B3G.run&&B3G.run.noVideo&&B3P.t<B3G.run.t0+(B3G.run.len||0)) bnSeg('video','novideo','No video yet: standing video','need',t); }
   if(BN.ansKey&&BN.phase==='answer') bnSampleFoe(BN.ansKey,'video','Answer: ');
-  const sP=BN.P,sKey=sP&&(sP.kind==='move'?sP.skill:sP.kind==='act'?sP.act:null),sSid=sP&&(sP.kind==='move'?'move:'+sP.skill:sP.kind==='act'?'act:'+sP.foeId+':'+sP.act:null);   // movebench14: a monster's attack has a stage run too
+  const sP=BN.P,sKey=sP&&(sP.kind==='move'?sP.skill:sP.kind==='act'?sP.act:sP.kind==='ruckus'?'ruckus_'+sP.mode:null),sSid=sP&&(sP.kind==='move'?'move:'+sP.skill:sP.kind==='act'?'act:'+sP.foeId+':'+sP.act:sP.kind==='ruckus'?'ruckus:'+sP.mode:null);   // movebench14: a monster's attack has a stage run too
   if(typeof B3G!=='undefined'&&B3G.run&&sKey&&B3G.run.id===sKey&&!R.stageDone) {
     R.stageDone=true; const run=B3G.run,row=msStageRow(sSid),off=run.t0-BN.t0;
     R.run={hitAt:run.hitAt+off,off,marks:run.marks,ids:run.ids,noVideo:!!run.noVideo,budget:run.budget,clipSec:run.clipSec,times:(row&&row.steps||[]).map(s=>s._T)};   // movebench9: times is each step's moment, seconds from the start of the move, in the order of the spec's steps
@@ -310,8 +331,8 @@ function bnTimeline(len) {
   const lanes=[],add=(id,name,segs)=>lanes.push({id,name,segs:segs.map(cl).sort((x,y)=>x.a-y.a)});
   if(P.kind==='act') { add('wind','Wind-up',R.lanes.wind); add('video','Attack',R.lanes.video); }
   else if(P.kind==='wind') add('wind','Wind-up',R.lanes.wind.concat(R.lanes.video));
-  else add('video','Video',R.lanes.video);
-  if(P.kind==='move'||P.kind==='act') add('stage','Stage',R.lanes.stage);
+  else add('video',P.kind==='ruckus'?'Their moves':'Video',R.lanes.video);   // movebench15: after the link the two members play their own moves
+  if(P.kind==='move'||P.kind==='act'||P.kind==='ruckus') add('stage','Stage',R.lanes.stage);
   if(P.kind!=='state'&&P.kind!=='wind') add('fx','Effects',R.lanes.fx);
   add('snd','Sound',snd);
   const ticks=[]; if(R.run) for(const n in R.run.marks) ticks.push({name:n,t:R.run.marks[n]+R.run.off});

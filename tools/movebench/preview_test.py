@@ -67,6 +67,7 @@ with sync_playwright() as pw:
     r=pg.evaluate("""()=>{ const out={moves:0,acts:0,bad:[]};
       for(const S of Object.values(B3_SKILLS)){ if(!S.vibe||!B3_VIBES[S.vibe]) continue; out.moves++; const w=B3BENCH.preflight('move:'+S.id); if(w) out.bad.push(['move:'+S.id,w]); }
       for(const f of Object.values(B3_FOES)) for(const a of f.acts){ if(a.hits==='attacker') continue; out.acts++; const w=B3BENCH.preflight('act:'+f.id+':'+a.id); if(w) out.bad.push(['act:'+f.id+':'+a.id,w]); }
+      for(const id of ['ruckus:double','ruckus:full']){ out.moves++; const w=B3BENCH.preflight(id); if(w) out.bad.push([id,w]); }   // movebench15: the two Family Ruckus spends
       return out; }""")
     notes.append('set up in the stub fight: %d family moves, %d monster attacks, %d that cannot'%(r['moves'],r['acts'],len(r['bad'])))
     for x in r['bad']: fail('cannot be set up: %s (%s)'%tuple(x))

@@ -31,6 +31,7 @@ for f in files:
     for e in E[:6]: fail('%s: %s'%(f,e))
     warns+=['%s: %s'%(f,w) for w in W]
     if f[:-5]=='move-pick-me-up' and d.get('id')=='move:pick_me_up': pass   # a team move that data/guide-anims.json has no row for (the Guide page lists it from movebench6, owner team); movebench4 wrote its file so it keeps the heal it had
+    elif f[:-5] in ('ruckus-double','ruckus-full') and d.get('id')==f[:-5].replace('-',':',1): pass   # movebench15: the two Family Ruckus spends, which data/guide-anims.json has no row for (the Guide page lists them under Family Ruckus)
     elif f[:-5] not in slug2id: fail('%s: no animation of the Guide has this slug'%f)
     elif slug2id[f[:-5]]!=d.get('id'): fail('%s: id %s but the Guide says %s'%(f,d.get('id'),slug2id[f[:-5]]))
     txt=open(os.path.join(D,f),encoding='utf8').read()

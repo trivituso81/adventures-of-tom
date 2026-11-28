@@ -15,7 +15,7 @@
 // (frames at the 24 fps the clips were made at). Only what is DRAWN is held: b3Draw draws those units at a held time (b3vUnit); the battle clock, the queue of beats, the rules, the clips and every other effect run at their
 // normal pace, and nothing waits for a hold. A move with a hitStop of 0, with no spec or with no hit changes nothing (a monster's attack with no spec too). A hold that throws is dropped and the unit is drawn as it always was.
 // Screen shake (movebench4): timing.shake pixels, a short side to side shake of the whole field for a third of a second from the moment the first hit lands (b3vShakeAt, drawn by b3Draw).
-const B3V={cues:[],holds:[],shake:null,fault:0};
+const B3V={cues:[],holds:[],shake:null,fault:0,lastLen:0};
 const B3V_FPS=24, B3V_HOLD_MAX=.5, B3V_SHAKE_MS=320;   // the frames are at 24 per second; the longest hold in a spec is 8 frames (.33 s), never hold more than half a second
 function b3vReset(){ B3V.cues.length=0; B3V.holds.length=0; B3V.shake=null; }
 // The library effects register themselves here (engine/vfx-library.js): how long each draws (ms, or a function of its params), whether it draws on the member, not the foe, how many ms before the contact it starts (a projectile in flight; 0 when
@@ -55,10 +55,11 @@ function b3vHitStopSec(T){ const f=T&&T.hitStop; return typeof f==='number'&&isF
 const b3vSideOf=key=>{ try { const u=b3Unit(B3.F,key); return !!u&&u.side==='foe'; } catch(e) { return key&&key[0]==='f'; } };
 // Arm a hold for a move whose first hit shows at fight time t0: the member and the foes the move is aimed at. A unit plays one move at a time: its older hold is dropped.
 function b3vHold(head,t0,T){
-  if(!head||head.t!=='act'||!head.src||!isFinite(t0)) return;
+  const link=!!head&&head.t==='ruckusSpend';   // movebench15: the Family Ruckus spend holds the two members who link up
+  if(!head||(head.t!=='act'&&!link)||!head.src||!isFinite(t0)) return;
   const dur=b3vHitStopSec(T); if(!(dur>0)) return;
   // movebench14: a monster's attack holds too: the monster and the family members it hits (the other side from the mover)
-  const mine=b3vSideOf(head.src),keys=[head.src]; for(const k of (head.tgts||[])){ const u=b3Unit(B3.F,k); if(u&&(u.side==='foe')!==mine&&keys.indexOf(k)<0) keys.push(k); }
+  const mine=b3vSideOf(head.src),keys=[head.src]; if(link) { if(head.partner) keys.push(head.partner); } else for(const k of (head.tgts||[])){ const u=b3Unit(B3.F,k); if(u&&(u.side==='foe')!==mine&&keys.indexOf(k)<0) keys.push(k); }
   B3V.holds=B3V.holds.filter(h=>h.src!==head.src);
   B3V.holds.push({src:head.src,keys,t0,dur,start:null,r:Math.random()});   // r: the one shake the held picture keeps
 }
@@ -100,11 +101,14 @@ function b3vArm(head,cid,sec,hit){
   let T=null; try { T=msTiming(head); } catch(err) { T=null; }
   try { if(hit&&T&&!T.noHit&&typeof sec==='number'&&isFinite(sec)) { b3vHold(head,B3P.t+Math.max(0,sec),T); if(head&&head.src) b3vShake(B3P.t+Math.max(0,sec),T.shake); } } catch(err) { try { gameFault('hit stop armed',err); } catch(e) {} }
   try {
-    if(!head||head.t!=='act'||!head.src||typeof sec!=='number'||!isFinite(sec)) return false;   // movebench14: a monster's attack arms its effects like a family move (a spec with none arms nothing)
+    B3V.lastLen=0;   // movebench15: how long the effects just armed play, in seconds from the contact (the Family Ruckus link waits for it before the two moves start)
+    const link=!!head&&head.t==='ruckusSpend';   // movebench15: the Family Ruckus spend beat arms like a move; its target is the partner who links up, its caster the member who spends
+    if(!head||(head.t!=='act'&&!link)||!head.src||typeof sec!=='number'||!isFinite(sec)) return false;   // movebench14: a monster's attack arms its effects like a family move (a spec with none arms nothing)
     const E=msEffects(head); if(!E.length||!E.some(e=>P1_VFX[e.fx]||b3gBench())) return false;   // movebench7: in the workbench preview an effect with no drawer still arms, to show its pink box
-    const tg=(head.tgts&&head.tgts.length?head.tgts:[head.src]).slice(), t0=B3P.t+Math.max(0,sec), imp=T&&T.impactMs!=null?T.impactMs:0; let maxLen=0;
-    const cue={M:{impact_ms:imp,vfx:E.map(e=>e.fx),fxp:Object.fromEntries(E.filter(e=>e.params).map(e=>[e.fx,e.params]))},fx:E,id:head.id,src:head.src,tgts:tg,t0,end:t0,dead:{},tArm:B3P.t};
+    const tg=link?[head.partner||head.src]:(head.tgts&&head.tgts.length?head.tgts:[head.src]).slice(), t0=B3P.t+Math.max(0,sec), imp=T&&T.impactMs!=null?T.impactMs:0; let maxLen=0;
+    const cue={M:{impact_ms:imp,vfx:E.map(e=>e.fx),fxp:Object.fromEntries(E.filter(e=>e.params).map(e=>[e.fx,e.params]))},fx:E,id:link?'ruckus:'+head.kind:head.id,src:head.src,tgts:tg,t0,end:t0,dead:{},tArm:B3P.t};
     for(const e of E){ const L=P1_VFX_MS[e.fx],p=e.params||null; let len; try { len=(typeof L==='function'?L(p):(L||500)); } catch(x) { len=6000; } maxLen=Math.max(maxLen,len+b3vAtSec(cue,e)*1000); }
+    B3V.lastLen=Math.max(0,maxLen/1000);
     cue.end=t0+(maxLen+500)/1000;
     B3V.cues=B3V.cues.filter(c=>c.src!==head.src);   // a unit plays one move at a time: an older cue of theirs that never finished is dropped
     B3V.cues.push(cue);

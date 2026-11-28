@@ -24,7 +24,7 @@ const b3gAssetsOf=R=>Object.keys(R.assets||{});
 // movebench2: cfg.bench is set only by the Move Workbench preview fight (engine/b3-bench.js). There, a row whose body video is not made yet plays its stage steps,
 // effects, freeze, shake and sounds over the mover's idle video, and the pictures of its marks fall at 24 pictures a second inside its budget. The game never sets it.
 const b3gBench=()=>!!(typeof B3!=='undefined'&&B3.active&&B3.cfg&&B3.cfg.bench);
-const b3gNoVideo=R=>!!(R&&R.body&&!BCLIPS[R.body.clip]&&b3gBench());
+const b3gNoVideo=R=>!!(R&&R.body&&(R.nobody||(!BCLIPS[R.body.clip]&&b3gBench())));   // movebench15: a row with no body at all (the Family Ruckus, R.nobody) always plays on the stand-in, in the game too
 // The stand-in for the missing clip: as long as the row's budget, with a picture every 1/24 s (a mark {pic:n} is n/24 s, never past 95% of the budget).
 function b3gStandIn(R) {
   const key=R.body.clip+'|'+(R.budget||3); if(B3G.stand[key]) return B3G.stand[key];
@@ -36,7 +36,7 @@ const b3gClipOf=R=>BCLIPS[R.body.clip]?b3cTrimmed(BCLIPS[R.body.clip],R.body.tri
 // movebench10: in the workbench preview only (cfg.pink, set by engine/b3-bench.js; never by the game or the golden recorder) an object with no baked picture is a pink dashed box of its size, so a row whose picture is
 // not made yet still plays its stage. The game plays a row only when every picture is baked, as before.
 const b3gPink=()=>!!(typeof B3!=='undefined'&&B3.active&&B3.cfg&&B3.cfg.pink);
-const b3gDefined=R=>!!(R&&R.body&&((BCLIPS[R.body.clip]&&(b3gPink()||b3gAssetsOf(R).every(k=>B3G.A[k])))||b3gNoVideo(R)));
+const b3gDefined=R=>!!(R&&R.body&&(R.nobody?(b3gPink()||b3gAssetsOf(R).every(k=>B3G.A[k])):((BCLIPS[R.body.clip]&&(b3gPink()||b3gAssetsOf(R).every(k=>B3G.A[k])))||b3gNoVideo(R))));
 function b3gWarm(R) {
   b3cWant(R.body.clip,B3G_KEEP);
   for(const k of b3gAssetsOf(R)) if(B3G.A[k]) B3C.need.set('stage_'+B3G.A[k].fk,performance.now()+B3G_KEEP);
@@ -47,7 +47,7 @@ function b3gLetGo(R) { B3C.need.delete(R.body.clip); for(const k of b3gAssetsOf(
 const b3gReady=R=>b3gDefined(R)&&(b3gNoVideo(R)||b3gPink()?b3gAssetsOf(R).every(k=>!B3G.A[k]||B3G.A[k].atlas.ready)&&(b3gNoVideo(R)||b3cReady(R.body.clip)):b3cReady(R.body.clip)&&b3gAssetsOf(R).every(k=>B3G.A[k].atlas.ready));
 // The row of the move or attack this `act` beat plays, or null (a move or attack with no stage in its spec, a row that is not baked yet). movebench14: a monster's attack has one too, from its spec 'act:<monster>:<attack>'.
 function b3gRowFor(head) {
-  if(!head||head.t!=='act'||!head.id||!head.src) return null;
+  if(!head||(head.t!=='act'&&head.t!=='ruckusSpend')||!head.id||!head.src) return null;   // movebench15: the Family Ruckus spend beat (a head made by b3RuckusHead in engine/b3-play.js) has a row too
   const id=msIdOf(head),R=id?msStageRow(id):null; return R&&b3gDefined(R)?R:null;
 }
 
@@ -247,7 +247,7 @@ function b3gPlay(R,env) {
   for(const s of steps) if(s.id&&s.id===hitName&&hitT!=null) { if(s.hit===true) hitT=s._T+(s.dur||0); else if(s.hit==='first') hitT=s._T+(s.dur||2)*.3+.15; }
   const lateT=!hitName&&hit0!=null?hit0:b3gAt(R,CL,(hitName==='late'?R.late:hitName)||0,ids);
   if(hitT==null) hitT=lateT;
-  const run=B3G.run={id:head.id,t0:now,hitAt:env.hits.length?hitT:lateT,hitReal:null,marks,ids:Object.assign({},ids),setpiece:!!R.setpiece,budget:R.budget,end:null,len:null,noVideo:standIn,clipSec:dur};
+  const run=B3G.run={id:head.id,t0:now,hitAt:env.hits.length?hitT:lateT,hitReal:null,marks,ids:Object.assign({},ids),setpiece:!!R.setpiece,budget:R.budget,end:null,len:null,noVideo:standIn&&!R.nobody,clipSec:dur};
   ctx.ids=ids;
   if(env.cue) env.cue(env.hits.length?hitT:lateT);   // vfxfight1: the move's library effects play from the hit's moment (engine/b3-vfx.js)
   for(const s of steps) { b3After(s._T,()=>{ ctx.stepT=s._T; b3gDo(s,ctx); }); }

@@ -10164,7 +10164,7 @@
    "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 15: Family Ruckus",
-   "next": "Double Team and Full Family Ruckus get their own two rows in the list, with stage steps, effects and sound played at the moment the two members link up. Starts by itself when Move Workbench 14 ships.",
+   "next": "Built: Double Team and Full Family Ruckus are listed under Family Ruckus and have Timing, Stage, Effects and Sound on the Workbench page; they play on the spend beat before the two members' moves. Ships as movebench15. Nothing for Tom to judge.",
    "blocks": [
     "c-movebench-16"
    ],
@@ -10197,6 +10197,10 @@
     {
      "d": "2026-11-27",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Built movebench15: ruckus:double and ruckus:full (spec files, Guide rows, engine link on the spend beat, preview with two members). Golden unchanged (219, 0 differ); ruckus_test, acts, spec, page, preview, apply, b3_test pass. stage_test and objects_test fail the same lines before this build (a 'start' key in the expected diff); not touched. Nothing for Tom to judge. Next: c-movebench-16."
     }
    ]
   },

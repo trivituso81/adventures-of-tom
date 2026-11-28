@@ -685,5 +685,7 @@
  "act:brainfreeze:ice_cube_pitch":{"status":"novideo","slug":"act-brainfreeze-ice-cube-pitch","owner":"brainfreeze","rev":0},
  "act:brainfreeze:temple_throb":{"status":"novideo","slug":"act-brainfreeze-temple-throb","owner":"brainfreeze","rev":0},
  "act:brainfreeze:deep_freeze":{"status":"novideo","slug":"act-brainfreeze-deep-freeze","owner":"brainfreeze","rev":0},
- "move:pick_me_up":{"status":"novideo","slug":"move-pick-me-up","owner":"team","rev":2}
+ "move:pick_me_up":{"status":"novideo","slug":"move-pick-me-up","owner":"team","rev":2},
+ "ruckus:double":{"status":"todo","slug":"ruckus-double","owner":"ruckus","rev":1},
+ "ruckus:full":{"status":"todo","slug":"ruckus-full","owner":"ruckus","rev":1}
 }}

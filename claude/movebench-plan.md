@@ -699,6 +699,19 @@ What phase 13 must know: a start picture is a part of `body` too; `specwrite.edi
 
 What phase 15 must know: a monster attack is a normal spec now; `msStageRow('act:<foe>:<act>')` and `msEffects` work for it, and the fixtures file is the place to add a test attack.
 
+#### Phase 15 (movebench15, 2026-11-27): the two Family Ruckus spends have a spec that plays on the spend beat
+
+- Two animations, `ruckus:double` and `ruckus:full` (files `data/moves/ruckus-double.json`, `ruckus-full.json`, owner `ruckus`, no video, listed under Family Ruckus in the Battle Guide Animations tab, status To do). `msIdOf` (`engine/b3-spec.js`) names the `ruckusSpend` head `ruckus:<kind>`; `msStageRow` gives the row `nobody: true` (a stage with no body video: `b3gNoVideo`, `b3gDefined` in `engine/b3-stage.js`) and a budget of 1 s.
+- `b3Play` (`engine/b3-play.js`): after the `ruckusSpend` beat's own wait, if the spec has content (`b3RuckusLinked`) the first of the two members' moves waits for the link: `b3RuckusLink` runs the stage row (or the effects alone) through `b3gPlay`, arms the effects, freeze and shake with `b3vArm` (cue id `ruckus:<kind>`, target = the partner who links in, source = the member who spends it), then hands over to the two moves after `max(.9, contact + effect length + .1)` seconds. A spec with no content changes nothing: the two moves start exactly when they did (checked against the empty spec).
+- The library set piece `setpiece_gym_bleachers_and_ruckus_crest` is each spend's first effect (modes `ruckus_50_link`, `ruckus_100_crest`), arming at about 0.52 s, so for the first time the game plays it on the spend. The "DOUBLE TEAM / 50%" text banner stays; the set piece is added to it.
+- Spec rules (`check_ruckus` in `tools/movebench/schema.py`): no `body`, `start`, `answer`, `stage.lasting`, `stage.setpiece`, no stage step `foe`. `apply.py` `EXTRA` lists both ids (like Pick-Me-Up); `data/moves/index.json` has the two rows (689 in all).
+- The page: no Body video section for these (a one line note says why), Timing shows the link (its hit, the freeze, the shake: `timing.ruckus`), Stage, Effects and Sound as for a move; the words are said from the spender's side (`ruckus_side` in `data/movebench-words.json`: "the member who spends it", "the partner who links in"; sides that do not exist for a spend are dropped). The preview plays the spend with two members (`bnRuckusSet`, `bnPlayRuckus` in `engine/b3-bench.js`; its timeline has a lane "Their moves").
+- Golden: `golden.json` is unchanged for the 219 it held (0 differ). The two ruckus records are checked by `tools/movebench/ruckus_test.py` (schema refusals, link effect at 0.5 s, effect, sound, freeze, shake and steps on the link, empty spec plays no link, four screen sizes). `preview_test.py` preflights both.
+- `timing_test.py` counts 225 spec files now (was 223).
+- Known, not caused here: `stage_test.py` (10 lines) and `objects_test.py` (1 line) report "the diff of an added step is ['steps','start']"; they fail the same way on the tree before this phase (a `start` key the page adds to a draft since phase 13). A Claude card should fix those two tests' expected diffs.
+
+What phase 16 must know: a spend is a spec like a move with no body; `ruckus:<kind>` ids exist only for double and full; to add another spend kind add it to `msIdOf`, `apply.py` EXTRA, the Guide's `buildAnims` and the schema's ruckus slugs.
+
 ### g.1 The board's bulk video path (a recommendation; this session did not touch it)
 
 Recommended: **pause now, retire in phase 16.**

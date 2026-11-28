@@ -450,7 +450,7 @@ function statusesOf(effects){const out=[];(function walk(a){(a||[]).forEach(e=>{
 // An animation is: a body state of someone (idle, hit...), a family move, or a monster act (plus its wind-up). `clip` is its video's id when it has one.
 let ANIMS=[],ANIM_BY={};
 function owners(){return Object.keys(B3_CAST).concat(Object.keys(B3_FOES));}
-const ownerName=id=>((GUIDE&&GUIDE.owners&&GUIDE.owners[id])||{}).name||(B3_CAST[id]||B3_FOES[id]||{}).name||(id==='team'?'Everyone':cap(id));   // movebench6: team holds Pick-Me-Up, the move every family member has
+const ownerName=id=>((GUIDE&&GUIDE.owners&&GUIDE.owners[id])||{}).name||(B3_CAST[id]||B3_FOES[id]||{}).name||(id==='team'?'Everyone':id==='ruckus'?'Family Ruckus':cap(id));   // movebench6: team holds Pick-Me-Up, the move every family member has
 // movebench12: the spec's body of an animation, {clip, motion} (null clip when it has none)
 const msBodyClipOf=id=>{const b=typeof msLive==='function'&&msLive(id);return {clip:(b&&b.body&&b.body.clip)||null,motion:(b&&b.body&&b.body.motion)||''};};
 function buildAnims(){
@@ -472,6 +472,7 @@ function buildAnims(){
       if(ga){const sp=typeof msLive==='function'?msLive('move:'+s.id):null,c=sp&&sp.answer&&sp.answer.clip||null;add({id:'answer:'+s.id,owner:id,kind:'answer',name:ga.name,clip:c,what:'counter video of move '+s.id,vibe:B3_VIBES[s.vibe].name});}});
   });
   if(B3_SKILLS.pick_me_up)add({id:'move:pick_me_up',owner:'team',kind:'move',name:B3_SKILLS.pick_me_up.name,clip:null,shape:'',what:'move pick_me_up in data/b3-rules.js'});   // movebench6: the universal move gets a row of its own
+  if(typeof b3Ruckus==='function')[['double','Double Team'],['full','Full Family Ruckus']].forEach(k=>add({id:'ruckus:'+k[0],owner:'ruckus',kind:'ruckus',name:k[1],clip:null,shape:'',what:'the Family Ruckus spend '+k[0]+' in engine/b3-ruckus.js'}));   // movebench15: the two spends of the Family Ruckus gauge, each with a link that plays before the two members' own moves
   Object.values(B3_FOES).forEach(f=>{body(f.id);
     f.acts.forEach(act=>{const a=msBodyClipOf('act:'+f.id+':'+act.id),wc=msBodyClipOf('wind:'+f.id+':'+act.id).clip;
       add({id:'act:'+f.id+':'+act.id,owner:f.id,kind:'act',name:act.name,clip:a.clip,what:'act '+act.id+' of '+f.id+' in data/b3-foes-ch'+String(f.ch).padStart(2,'0')+'.js'});
@@ -623,6 +624,7 @@ function renderList(){
       return rowHtml('anims',id,ownerName(id),esc(W('list.person',{f:o.fin,n:o.n}))+(g?' &middot; '+esc(W('list.match',{k})):''),facePic(id));};
     const grp=(t,ids)=>{const r=ids.map(line).join('');return r?'<div class="grp">'+t+'</div>'+r:'';};
     h+=grp('Family',Object.keys(B3_CAST).concat(['team']));
+    h+=grp('Family Ruckus',['ruckus']);
     const by={};Object.values(B3_FOES).forEach(f=>{(by[f.ch]=by[f.ch]||[]).push(f);});
     h+=Object.keys(by).map(ch=>grp((isNaN(ch)?cap(ch)+' chapter':'Chapter '+ch)+' monsters',by[ch].map(f=>f.id))).join('');
     if(MS_GROUP[MF]&&!h.includes('class="row'))h+='<p class="hint">'+esc(W('list.none'))+'</p>';
@@ -655,9 +657,9 @@ function moveStatus(a){
   if(typeof WB!=='undefined'&&WB.a&&WB.id===a.id){
     if(wbChanges()>0)return 'inprogress';
     const d=WB.file;   // the file as just read answers before the index does (the index is rebuilt only when move-apply runs); the same rules as status_of in tools/movebench/apply.py
-    if(d)return d.draft!=null?'inprogress':d.finished?(d.finished.rev===d.rev?'finished':'changed'):(a.video?'todo':'novideo');
+    if(d)return d.draft!=null?'inprogress':d.finished?(d.finished.rev===d.rev?'finished':'changed'):((a.video||a.kind==='ruckus')?'todo':'novideo');   // movebench15: a Family Ruckus row has no video to make, so it starts at To do
   }
-  return e?e.status:(a.video?'todo':'novideo');
+  return e?e.status:((a.video||a.kind==='ruckus')?'todo':'novideo');
 }
 const moveEntry=a=>MOVEIDX&&MOVEIDX.anims&&MOVEIDX.anims[a.id]||null;
 function moveStatusText(a,s){
@@ -975,7 +977,7 @@ function qMakeBtn(a,g,cur){   // the one tap that makes a video (or another one)
   const again=a.video||qVid(a.id).length>0;
   return '<span class="qbtns"><button type="button" class="gold" data-qa="make" data-qid="'+esc(a.id)+'" data-qkey="anim:'+esc(a.id)+'">'+(again?'Make another':'Make this video')+' ('+money(g.price)+')</button></span>';
 }
-const KINDW={state:'Body',move:'Move',act:'Attack',wind:'Wind-up',answer:'Counter'};
+const KINDW={state:'Body',move:'Move',act:'Attack',wind:'Wind-up',answer:'Counter',ruckus:'Family Ruckus'};
 function qRowHtml(a){   // the part of an animation's row under its name: kind, the status line or VIDEO / NO VIDEO YET, and the one button
   const g=G(a),n=openNotes(a.id).length,cur=qCur(a.id),key='anim:'+a.id;
   const bd=[cur?'':a.video?'<span class="badge v">VIDEO</span>':'<span class="badge n">NO VIDEO YET</span>',n?'<span class="badge o">NOTE OPEN</span>':''].filter(Boolean);
@@ -1253,11 +1255,11 @@ function animRow(a){
 function animsHtml(id){
   const A=animsOf(id),f=animFilter,show=A.filter(a=>f==='all'||(f==='work'?qBusy(a):(f==='video')===a.video)).filter(moveMatch);
   const o=(GUIDE&&GUIDE.owners&&GUIDE.owners[id])||{};
-  let h='<div class="hero"><img alt="" src="'+facePic(id)+'" onerror="this.style.visibility=\'hidden\'"><div><h2>'+esc(ownerName(id))+'</h2><div class="hint">'+A.filter(a=>a.video).length+' of '+A.length+' animations are videos</div></div></div>';
+  let h='<div class="hero"><img alt="" src="'+facePic(id)+'" onerror="this.style.visibility=\'hidden\'"><div><h2>'+esc(ownerName(id))+'</h2><div class="hint">'+(id==='ruckus'?esc(W('ruckus.hint')):A.filter(a=>a.video).length+' of '+A.length+' animations are videos')+'</div></div></div>';
   if(o.route==='wan')h+='<div class="card qtop" data-qtop="'+esc(id)+'"></div>';
   if(o.route==='wan')h+='<div class="qall" data-qall="'+esc(id)+'"></div>';
   h+='<div class="seg">'+[['all','All'],['video','Videos'],['none','No video yet'],['work','In the works']].map(x=>'<button type="button" data-af="'+x[0]+'" aria-pressed="'+(f===x[0])+'">'+x[1]+'</button>').join('')+'</div>';
-  const grp=[['state','Body'],['move','Moves'],['act','Attacks'],['wind','Wind-ups']];
+  const grp=[['state','Body'],['move','Moves'],['ruckus','Family Ruckus'],['act','Attacks'],['wind','Wind-ups']];
   grp.forEach(g=>{const r=show.filter(a=>a.kind===g[0]);if(r.length)h+='<h3>'+g[1]+'</h3>'+r.map(animRow).join('');});
   if(!show.length)h+='<p class="hint">Nothing in this filter.</p>';
   return h;
@@ -1634,6 +1636,7 @@ function todoHtml(){
 const BENCH={fr:null,ready:false,st:null,stAt:0,tl:null,id:'',want:'',speed:1,loop:true,mute:false,answer:false,raf:0,boot:null,clip:'',drag:false,dragT:0,seekWant:0,seekRaf:0};
 function benchOk(a){
   if(!a)return false;if(a.kind==='move')return !!B3_SKILLS[a.id.slice(5)];
+  if(a.kind==='ruckus')return a.id==='ruckus:double'||a.id==='ruckus:full';   // movebench15
   const p=String(a.id).split(':');
   if(a.kind==='act'){const f=B3_FOES[p[1]],A=f&&f.acts.find(x=>x.id===p[2]);return !!A&&A.hits!=='attacker';}
   if(a.kind==='wind'){const f=B3_FOES[p[1]],A=f&&f.acts.find(x=>x.id===p[2]);return !!A&&A.hits!=='attacker'&&!!(msWindClip(p[1],A.id)||f.acts.some(x=>x.then===A.id));}
@@ -1641,11 +1644,11 @@ function benchOk(a){
     return !!(B3_CAST[o]&&B3_CAST[o].vibes.length)&&['idle','guard','hit','dodge','ko','victory','run','cast','give'].indexOf(st)>=0;}
   return false;
 }
-function benchWord(a){return a.kind==='act'?'attack':a.kind==='wind'?'wind-up':a.kind==='state'?'body state':'move';}
+function benchWord(a){return a.kind==='ruckus'?'spend':a.kind==='act'?'attack':a.kind==='wind'?'wind-up':a.kind==='state'?'body state':'move';}
 function benchBox(a){
   if(!benchOk(a))return '';const w=benchWord(a);
-  const tag=a.kind==='move'||a.kind==='act'?'THE WHOLE '+w.toUpperCase():a.kind==='wind'?'THE WIND-UP':'THIS BODY STATE';
-  const go=a.kind==='move'||a.kind==='act'?'Preview the whole '+w:a.kind==='wind'?'Preview the wind-up':'Preview this body state';
+  const tag=a.kind==='ruckus'?W('ruckus.tag'):a.kind==='move'||a.kind==='act'?'THE WHOLE '+w.toUpperCase():a.kind==='wind'?'THE WIND-UP':'THIS BODY STATE';
+  const go=a.kind==='ruckus'?W('ruckus.preview'):a.kind==='move'||a.kind==='act'?'Preview the whole '+w:a.kind==='wind'?'Preview the wind-up':'Preview this body state';
   return '<div class="bench" id="bench"><div class="btag">PREVIEW: '+tag+', PLAYED BY THE GAME</div>'
    +'<div class="bslot" id="benchslot" data-anim="'+esc(a.id)+'" data-on="0"><button type="button" class="bgo" id="bnstart">'+go+'</button><div class="bmsg" id="bnmsg"></div></div>'
    +'<div class="ctl bctl" id="bnctl" hidden><button type="button" id="bnplay">Pause</button>'
@@ -1763,9 +1766,11 @@ function W(path,vars){let v=WORDS;for(const k of path.split('.'))v=v&&v[k];
   return vars?v.replace(/\{(\w+)\}/g,(m,k)=>vars[k]!=null?vars[k]:''):v;}
 function WA(path){let v=WORDS;for(const k of path.split('.'))v=v&&v[k];return Array.isArray(v)?v:[];}
 // movebench14: a monster attack has Timing (hit, freeze, shake), Stage, Effects and Sound like a move; "the monster" and "him" are said from the monster's side (words.act_side)
-const wbHas=a=>!!a&&(a.kind==='move'||a.kind==='act'),wbIsAct=()=>!!(WB.a&&WB.a.kind==='act');
-const WAS=path=>{const L=WA(path),m=wbIsAct()&&WORDS.act_side;return m?L.map(o=>o&&typeof o==='object'&&m[o.k]?Object.assign({},o,{label:m[o.k]}):o):L;};
-const WOn=k=>wbIsAct()&&WORDS.act_side&&WORDS.act_side['on.'+k]||W('on.'+k);
+const wbHas=a=>!!a&&(a.kind==='move'||a.kind==='act'||a.kind==='ruckus'),wbIsAct=()=>!!(WB.a&&WB.a.kind==='act'),wbIsRk=()=>!!(WB.a&&WB.a.kind==='ruckus');   // movebench15: a Family Ruckus spend has Timing, Stage, Effects and Sound
+const wbSide=()=>wbIsAct()?WORDS.act_side:wbIsRk()?WORDS.ruckus_side:null;   // the words said from the other side: a monster's attack, or the spend of the Family Ruckus (the member who spends it, the partner who links in)
+const WAS=path=>{const L=WA(path),m=wbSide(),dr=(m&&m.drop)||[];return m?L.filter(o=>!(o&&typeof o==='object'&&dr.indexOf(o.k)>=0)).map(o=>o&&typeof o==='object'&&m[o.k]?Object.assign({},o,{label:m[o.k]}):o):L;};
+const WOn=k=>wbSide()&&wbSide()['on.'+k]||W('on.'+k);
+const wbOnList=()=>{const dr=(wbSide()&&wbSide().drop)||[];return ['auto','target','each_target','self','each_ally','field'].filter(o=>dr.indexOf('on.'+o)<0);};
 const wbClone=o=>JSON.parse(JSON.stringify(o==null?{}:o));
 function wbStoreRead(){try{const j=JSON.parse(localStorage.getItem(WB_KEY)||'null');return j&&j.drafts?j:{v:1,drafts:{}};}catch(e){return {v:1,drafts:{}};}}
 function wbStoreWrite(id,live,base){const st=wbStoreRead();if(live==null)delete st.drafts[id];else st.drafts[id]={live,base:base||null,at:Date.now()};try{localStorage.setItem(WB_KEY,JSON.stringify(st));}catch(e){}}
@@ -1975,19 +1980,20 @@ const wbHasClip=()=>!!(WB.a&&WB.a.clip);
 function wbClipStart(){const tl=BENCH.tl;if(!tl)return 0;const L=tl.lanes.find(l=>l.id==='video'||l.id==='wind');const g=L&&L.segs.find(x=>x.k==='video');return g?g.a:0;}
 function wbMoment(){return BENCH.drag?BENCH.dragT:(BENCH.st&&BENCH.st.t!=null?BENCH.st.t:null);}
 const wbFmt=x=>(Math.round(x*100)/100).toString();
+const wbTW=path=>{if(wbIsRk()){let v=WORDS;for(const k of path.replace(/^timing\./,'timing.ruckus.').split('.'))v=v&&v[k];if(typeof v==='string')return v;}return W(path);};   // movebench15: the Family Ruckus says the hit, the freeze and the shake as the link
 function wbSeg(words,field,steps,cur){
   return '<div class="wbseg" role="group" aria-label="'+esc(W('timing.'+words+'.label'))+'">'+steps.map(s=>'<button type="button" data-wb="'+field+':'+s.v+'" aria-pressed="'+(s.v===cur?'true':'false')+'">'+esc(s.label)+'</button>').join('')+'</div>';
 }
 function wbTimingHtml(a){
   if(a.kind==='wind'||a.kind==='state')return '<p class="hint">'+esc(W('timing.none_for_state'))+'</p>';
-  let h='<p class="hint" style="margin:0 0 4px">'+esc(W('timing.note_draft'))+'</p>';
+  let h='<p class="hint" style="margin:0 0 4px">'+esc(W('timing.note_draft'))+'</p>'+(a.kind==='ruckus'?'<p class="hint" style="margin:0 0 6px">'+esc(W('timing.ruckus.note'))+'</p>':'');
   const staged=wbStaged();
   if(wbHas(a)){
-    h+='<div class="wbrow" data-row="hit"><div class="wl"><b>'+esc(W('timing.hit.label'))+'</b><span id="wbhithint">'+esc(W('timing.hit.hint'))+'</span></div><div class="wc" id="wbhitc"></div></div>';
+    h+='<div class="wbrow" data-row="hit"><div class="wl"><b>'+esc(wbTW('timing.hit.label'))+'</b><span id="wbhithint">'+esc(wbTW('timing.hit.hint'))+'</span></div><div class="wc" id="wbhitc"></div></div>';
   }
-  h+='<div class="wbrow" data-row="freeze"><div class="wl"><b>'+esc(W('timing.freeze.label'))+'</b><span>'+esc(W('timing.freeze.hint'))+'</span></div><div class="wc" id="wbfreeze"></div></div>';
+  h+='<div class="wbrow" data-row="freeze"><div class="wl"><b>'+esc(wbTW('timing.freeze.label'))+'</b><span>'+esc(wbTW('timing.freeze.hint'))+'</span></div><div class="wc" id="wbfreeze"></div></div>';
   if(wbHas(a)){
-    h+='<div class="wbrow" data-row="shake"><div class="wl"><b>'+esc(W('timing.shake.label'))+'</b><span>'+esc(W('timing.shake.hint'))+'</span></div><div class="wc" id="wbshake"></div></div>';
+    h+='<div class="wbrow" data-row="shake"><div class="wl"><b>'+esc(wbTW('timing.shake.label'))+'</b><span>'+esc(wbTW('timing.shake.hint'))+'</span></div><div class="wc" id="wbshake"></div></div>';
   }
   if(a.kind==='move'){
     h+='<div class="wbrow" data-row="approach"><div class="wl"><b>'+esc(W('timing.approach.label'))+'</b><span>'+esc(W('timing.approach.hint'))+'</span></div><div class="wc" id="wbappr"></div></div>';
@@ -2018,7 +2024,7 @@ function wbPaint(){
       hc.innerHTML='<input type="number" class="wbnum" id="wbhit" min="0" max="14" step="0.05" inputmode="decimal" aria-label="'+esc(W('timing.hit.label'))+'" value="'+esc(shown)+'"><span class="hint">'+esc(W('timing.hit.unit'))+'</span>'
         +'<button type="button" class="wbc" data-wb="hitset">'+esc(W('timing.hit.set'))+'</button>'
         +(auto?'':'<span class="wbauto"><button type="button" class="wbc" data-wb="hitauto">'+esc(W('timing.hit.back_to_auto'))+'</button></span>');
-      $('wbhithint').textContent=auto?W('timing.hit.hint')+'. '+W('timing.hit.auto'):W('timing.hit.hint');
+      $('wbhithint').textContent=auto?wbTW('timing.hit.hint')+'. '+W('timing.hit.auto'):wbTW('timing.hit.hint');
     }
   }
   const hs=wbVal('hitStop'),fz=$('wbfreeze');
@@ -2047,7 +2053,7 @@ function wbPaint(){
 }
 function wbSubline(){
   const el=$('wbsub'),a=WB.a;if(!el||!a)return;const g=typeof G==='function'?G(a):null,tl=BENCH.tl&&BENCH.tl.id===a.id?BENCH.tl:null;
-  const sg=wbStage(a),tier=sg&&sg.tier?W('tier.'+sg.tier):W('kind.'+a.kind);let t=tier+'.';
+  const sg=wbStage(a),tier=sg&&sg.tier?W('tier.'+sg.tier):W('kind.'+a.kind);let t=a.kind==='ruckus'?W('ruckus.sub'):tier+'.';
   if(tl)t+=' '+W('runs.line',{len:wbFmt(tl.len)});
   if(sg&&sg.budget){const b=sg.budget;t+=' '+W('runs.target',{lo:Math.max(0,Math.round((b-1)*10)/10),hi:b});}
   el.textContent=t;
@@ -2058,7 +2064,7 @@ function wbSpecCounts(a){
   return {stage:st,effects:fx,sound:sn};
 }
 function wbHtml(a,videoHtml){
-  const nav=[['video','nav.video',0],['timing','nav.timing',0]],C=wbHas(a)?wbSpecCounts(a):null;
+  const RK=a.kind==='ruckus',nav=(RK?[]:[['video','nav.video',0]]).concat([['timing','nav.timing',0]]),C=wbHas(a)?wbSpecCounts(a):null;   // movebench15: the Family Ruckus has no body video, so no Body video section
   if(C)nav.push(['stage','nav.stage',C.stage]);
   if(lsApplicable(a))nav.push(['lasting','nav.lasting',((wbSpecOf(a.id)||{}).stage&&(wbSpecOf(a.id).stage.lasting||[]).length)||0]);
   if(C)nav.push(['effects','nav.effects',C.effects]);
@@ -2070,7 +2076,7 @@ function wbHtml(a,videoHtml){
    +'<div class="wt"><h2>'+esc(a.name)+'</h2><p class="wsub" id="wbsub"></p></div><span class="wbstat" id="wbstat"></span></div>'
    +'<div class="wb-body" id="wbbody"><div class="wb-prev" id="wbprev">'+benchBox(a)+'<div class="wbpink" id="wbpink" hidden>'+esc(W('fx.p.pink_tag'))+'</div></div><div class="wb-secs" id="wbsecs">'
    +'<nav class="wb-nav" id="wbnav" aria-label="'+esc(W('page.jump'))+'">'+nav.map(n=>'<button type="button" data-wbgo="'+n[0]+'">'+esc(W(n[1]))+(n[2]?'<b id="wbnav'+(n[0]==='effects'?'fx':n[0])+'">'+n[2]+'</b>':'')+'</button>').join('')+'</nav>'
-   +'<section class="wbs" id="s-video"><h3 class="wbh"><span>'+esc(W('sections.video'))+'</span></h3>'+videoHtml+wbStartHtml(a)+wbTrimHtml()+'</section>'
+   +(RK?'':'<section class="wbs" id="s-video"><h3 class="wbh"><span>'+esc(W('sections.video'))+'</span></h3>'+videoHtml+wbStartHtml(a)+wbTrimHtml()+'</section>')
    +'<section class="wbs" id="s-timing"><h3 class="wbh"><span>'+esc(W('sections.timing'))+'</span></h3>'+wbTimingHtml(a)+'</section>'
    +wbStageSection(a)+wbLastingSection(a)+wbFxSection(a)+wbAnswerSection(a)+wbSetSection(a)+wbSoundSection(a)+'<section class="wbs" id="s-versions"><h3 class="wbh"><span>'+esc(W('sections.versions'))+'</span></h3><p class="hint" id="wbfinline" style="margin:0 0 8px"></p>'
    +'<button type="button" data-wb="versions">'+esc(W('versions.show'))+'</button><div id="wbvers"></div></section><section class="wbs" id="s-note">'+noteForm(a)+'</section>'+(maniOf(a)?'<section class="wbs" id="s-mani">'+manifestBlock(maniOf(a))+'</section>':'')
@@ -2203,7 +2209,7 @@ function fxPanelHtml(e,i){
     +'<button type="button" class="wbc" data-fx="wset" data-i="'+i+'">'+esc(W('when.set'))+'</button></div></div>';
   // On whom
   h+='<div class="wbrow"><div class="wl"><b>'+esc(W('on.label'))+'</b><span>'+esc(on==='auto'?W('on.auto_is',{now:WOn(P1_VFX_ON&&P1_VFX_ON[e.fx]||fxOnDefault(e.fx))}):'')+'</span></div><div class="wc"><div class="wbseg wrap">'
-    +['auto','target','each_target','self','each_ally','field'].map(o=>'<button type="button" data-fx="on" data-i="'+i+'" data-v="'+o+'" aria-pressed="'+(on===o?'true':'false')+'">'+esc(WOn(o))+'</button>').join('')+'</div></div></div>';
+    +wbOnList().map(o=>'<button type="button" data-fx="on" data-i="'+i+'" data-v="'+o+'" aria-pressed="'+(on===o?'true':'false')+'">'+esc(WOn(o))+'</button>').join('')+'</div></div></div>';
   // settings
   h+='<h4 class="fxh">'+esc(W('fx.p.settings'))+'</h4>';
   const rows=ps.map(q=>fxParamHtml(e,i,q[0],q[1])).join('');
@@ -2501,7 +2507,7 @@ function wbStagePaint(keepFocus){
   if(keepFocus&&el.contains(document.activeElement)&&/^(INPUT|SELECT)$/.test(document.activeElement.tagName)){stgTimesPaint();return;}
   const times=stgTimes(),ord=stgOrder(l);
   el.innerHTML=wbStgScopeHtml()+(l.length?ord.map(i=>stgRowHtml(i,l,times)).join(''):'<p class="hint">'+esc(W('stage.empty'))+'</p>')
-   +(WB.stgPick?'<div class="fxpick"><p class="hint" style="margin:0 0 6px">'+esc(W('stage.adding'))+'</p><div class="fxgrid">'+STGALL.filter(k=>!(wbIsAct()&&k==='foe')).map(k=>'<button type="button" class="fxtile sttile" data-st="pick" data-v="'+k+'"><span class="stic" aria-hidden="true">'+STG_ICON[k]+'</span><b>'+esc(W('stage.tiles.'+k))+'</b></button>').join('')+'</div><button type="button" data-st="pickno">'+esc(W('stage.cancel'))+'</button></div>'
+   +(WB.stgPick?'<div class="fxpick"><p class="hint" style="margin:0 0 6px">'+esc(W('stage.adding'))+'</p><div class="fxgrid">'+STGALL.filter(k=>!((wbIsAct()||wbIsRk())&&k==='foe')).map(k=>'<button type="button" class="fxtile sttile" data-st="pick" data-v="'+k+'"><span class="stic" aria-hidden="true">'+STG_ICON[k]+'</span><b>'+esc(W('stage.tiles.'+k))+'</b></button>').join('')+'</div><button type="button" data-st="pickno">'+esc(W('stage.cancel'))+'</button></div>'
      :'<button type="button" class="fxadd" data-st="add">+ '+esc(W('stage.add'))+'</button>')+stgObjectsHtml();
   wbStgCounts();
 }
@@ -3051,6 +3057,7 @@ async function openPlayer(animId){
   const S=$('sheet');S.dataset.mode='bench';S.classList.add('open');$('dim').classList.add('open');S.scrollTop=0;
   wbOpen(a);WB.small=false;
   const done=()=>{benchAttach(a);initMake(a);wbPaint();wbAllPaint();wbScroll();wbSend();wbLoadFile(a);const bd=$('wbbody');if(bd)bd.scrollTop=0;};
+  if(a.kind==='ruckus'){S.innerHTML=wbHtml(a,'');done();return;}   // movebench15: nothing to play and nothing to make: the preview, then Timing, Stage, Effects and Sound
   if(!a.clip){
     S.innerHTML=wbHtml(a,stage(a.kind==='state'?'No video yet. In a fight this moment shows one of their other videos until its own is made.':a.kind==='answer'?'No video yet. When what the move left behind answers a hit, the answer plays without the counter video.':'No video yet. In a fight this '+(a.kind==='act'?'attack':'move')+' uses the standard '+(a.shape?words(a.shape)+' ':'')+'motion every move shares.')+genBlock(a));
     done();return;

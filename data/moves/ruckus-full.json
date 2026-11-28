@@ -1,0 +1,25 @@
+{
+ "v": 1,
+ "id": "ruckus:full",
+ "rev": 1,
+ "live": {
+  "effects": [
+   {
+    "fx": "setpiece_gym_bleachers_and_ruckus_crest",
+    "params": {
+     "mode": "ruckus_100_crest"
+    }
+   }
+  ]
+ },
+ "draft": null,
+ "finished": null,
+ "log": [
+  {
+   "rev": 1,
+   "at": "2026-11-27T19:00:00-08:00",
+   "by": "claude",
+   "what": "movebench15: the spend of Full Family Ruckus gets a spec; the library set piece setpiece_gym_bleachers_and_ruckus_crest (mode ruckus_100_crest, the storybook crest) is its first effect"
+  }
+ ]
+}

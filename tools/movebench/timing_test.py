@@ -166,7 +166,7 @@ check('the engine files load and run in Node', r.returncode == 0, r.stderr)
 o = json.loads(r.stdout.strip().splitlines()[-1]) if r.returncode == 0 else {}
 specs = json.load(open(os.path.join(R, 'tools/movebench/golden.json'), encoding='utf-8'))
 DEF = {'contact': 'auto', 'noHit': False, 'impactMs': None, 'hitStop': 0, 'shake': 0, 'approach': 'auto', 'approachSec': .55, 'returnSec': .5, 'gap': .35}
-check('the spec bundle holds every animation file (223)', o.get('n') == 223 == len([f for f in os.listdir(os.path.join(R, 'data/moves')) if f.endswith('.json') and f != 'index.json']), o.get('n'))
+check('the spec bundle holds every animation file (225)', o.get('n') == 225 == len([f for f in os.listdir(os.path.join(R, 'data/moves')) if f.endswith('.json') and f != 'index.json']), o.get('n'))
 check('a beat finds its spec: a family move is move:<id>, a monster attack act:<monster>:<act>, anything else none', o.get('idMove') == 'move:lounge_pass_flex' and o.get('idAct') == 'act:mudling:bite' and o.get('idNone') == [None, None, None], (o.get('idMove'), o.get('idAct'), o.get('idNone')))
 check('a move with no spec plays every default and no effects, and a null beat cannot break it', o.get('dflt') == DEF and o.get('nullHead') == DEF and o.get('dfltFx') == [], (o.get('dflt'), o.get('nullHead')))
 cl = o.get('clamp') or {}
@@ -198,7 +198,7 @@ tw = lambda k: [(r[0], r[1], r[2]) for r in (o.get(k) or [])]
 check('on: the clobber draws on each foe it is aimed at by default, "each_target" on every one, "self" on the member, a heal on the member, "each_ally" on each ally, and an off effect not at all',
       len(o.get('onDefault') or []) == 2 and len(o.get('onEachTarget') or []) == 2 and (o.get('onSelf') or [[0, 0, 0]])[0][1:3] == [100, 160] and len(o.get('onHealDefault') or []) == 1 and (o.get('onHealDefault') or [[0, 0, 0]])[0][1:3] == [140, 160] and len(o.get('onHealAlly') or []) == 2 and (o.get('onOff') or []) == [], {k: o.get(k) for k in ('onDefault', 'onEachTarget', 'onSelf', 'onHealDefault', 'onHealAlly', 'onOff')})
 check('an effect set .4 s after the contact draws nothing at the contact and from .4 s on', (o.get('onLater') or [])[:2] == [0, 0] and (o.get('onLater') or [0] * 4)[2] == 1, o.get('onLater'))
-check('a reset brings back the files\' specs', o.get('reset') == 223, o.get('reset'))
+check('a reset brings back the files\' specs', o.get('reset') == 225, o.get('reset'))
 # ---- p1DrawVfx and the library ----
 check('all 37 library assets are registered as effects, each with a length of 400 ms or more', o.get('registered') == ['function'] * 37 and len(o.get('lib', [])) == 37 and all(isinstance(v, (int, float)) and v >= 400 for v in o.get('lens', [])), (o.get('registered'), o.get('lens')))
 SELF = ['vfx_core_heal_cleanse', 'vfx_core_shield_ward', 'setpiece_delta_one_pod_doors', 'setpiece_giant_sky_controller', 'setpiece_3tier_sparkler_cake', 'setpiece_diamond_gold_dumpling', 'setpiece_giant_easel_portrait', 'setpiece_broadway_spotlights', 'setpiece_sofa_cushion_fort', 'setpiece_blanket_kingdom_castle', 'setpiece_8seat_sunday_table', 'setpiece_rising_full_moon', 'setpiece_sentient_ghost_pepper', 'setpiece_cattail_pier_leviathan']

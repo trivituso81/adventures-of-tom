@@ -287,13 +287,38 @@ function b3Show(b) {
 // default animation calls reveal() once per hit. The beats after the last hit follow, and then done() runs.
 function b3Play(beats,done) {
   const i=beats.findIndex(b=>b.t==='act'||b.t==='telegraph'),lead=i<0?beats:beats.slice(0,i),rest=i<0?[]:beats.slice(i);
-  let wait=0;
-  for(const b of lead) { if(b.t==='over') continue; const w=wait; b3After(w,()=>b3Show(b)); if(b.t==='round') wait+=.55; else if(b.t==='stance'||b.t==='stamp'||b.t==='phase'||b.t==='frame') wait+=.7; else if(b.t==='repick') wait+=.6; else if(b.t==='hit'||b.t==='heal') wait+=.45; else if(b.t==='ko') wait+=.5; else if(b.t==='hazardTrip') wait+=.6; else if(b.t==='skip') wait+=.8; else if(b.t==='script') wait+=1.7; else if(b.t==='ruckusSpend') wait+=.9; }
+  let wait=0,link=null;
+  for(const b of lead) { if(b.t==='over') continue; const w=wait; b3After(w,()=>b3Show(b)); if(b.t==='round') wait+=.55; else if(b.t==='stance'||b.t==='stamp'||b.t==='phase'||b.t==='frame') wait+=.7; else if(b.t==='repick') wait+=.6; else if(b.t==='hit'||b.t==='heal') wait+=.45; else if(b.t==='ko') wait+=.5; else if(b.t==='hazardTrip') wait+=.6; else if(b.t==='skip') wait+=.8; else if(b.t==='script') wait+=1.7; else if(b.t==='ruckusSpend') { wait+=.9; if(rest.length&&lead.filter(x=>x.t!=='over').pop()===b&&b3RuckusLinked(b)) link={b,w}; } }
   if(!rest.length) { b3After(wait+.05,done); return; }
   // A Family Ruckus spend is one action with two moves in it: the second move's `act` beat is marked part2 and plays after the first.
   const segs=[]; let cur=[]; for(const b of rest) { if(b.t==='act'&&b.part2&&cur.length) { segs.push(cur); cur=[]; } cur.push(b); } segs.push(cur);
   const run=k=>b3PlayMove(segs[k],k+1<segs.length?()=>run(k+1):done,k+1<segs.length);
+  if(link) { b3gWarmLink(link.b); b3After(link.w,()=>b3RuckusLink(link.b,()=>run(0))); return; }   // movebench15: a Family Ruckus with a spec plays its link (stage, effects, sound) at the spend beat, then the two moves
   b3After(wait,()=>run(0));
+}
+// ---------- The Family Ruckus link (movebench15) ----------
+// The beat that spends the gauge ('ruckusSpend') has a spec of its own ('ruckus:double', 'ruckus:full'; data/moves/ruckus-*.json): timing (the moment the link shows, the freeze of the two members, the shake),
+// stage steps, effects and sound. They play where the two members link up, BEFORE their own moves, and the first move starts when the link has finished (never before the .9 s the beat always took).
+// The caster is the member who spends, the target the partner whose turn goes with it. A spend with no spec (or an empty one) plays exactly as before. Nothing here changes the fight.
+const b3RuckusHead=b=>({t:'ruckusSpend',kind:b.kind,src:b.src,partner:b.partner,tgts:[b.partner],id:'ruckus_'+b.kind,name:b.name});
+function b3RuckusLinked(b) {
+  try {
+    const H=b3RuckusHead(b),id=msIdOf(H),s=id&&msLive(id); if(!s) return false;
+    const T=msTiming(H); return !!(msEffects(H).length||s.stage&&(s.stage.steps||[]).length||T.hitStop>0||T.shake>0);
+  } catch(e) { return false; }
+}
+function b3gWarmLink(b) { try { const R=b3gRowFor(b3RuckusHead(b)); if(R) b3gWarm(R); } catch(e) {} }
+function b3RuckusLink(b,cont,waited) {
+  const H=b3RuckusHead(b),t0=B3P.t; let over=false,need=.9;
+  const end=()=>{ if(over) return; over=true; b3After(Math.max(0,need-(B3P.t-t0)),cont); };
+  try {
+    const SR=typeof b3gRowFor==='function'?b3gRowFor(H):null;
+    if(SR&&!b3gReady(SR)&&(waited||0)<B3C.waitMax) { b3gWarm(SR); b3After(.1,()=>b3RuckusLink(b,cont,(waited||0)+.1)); return; }   // its pictures are still loading: wait for them like a move does, 2.5 s at most
+    const cue=sec=>{ const r=b3vArm(H,null,sec,true); need=Math.max(need,sec+B3V.lastLen+.1); return r; };
+    if(SR&&b3gReady(SR)) { b3gPlay(SR,{head:H,hits:[],late:[],reveal:()=>{},finishNow:end,cue}); return; }
+    const s=msLive(msIdOf(H)),bud=s&&s.timing&&typeof s.timing.budget==='number'?s.timing.budget:1;
+    cue(b3cLandAt({dur:bud*1000},msTiming(H))); end();   // no stage (or not baked): the effects, the freeze and the shake alone, the same moment the stage would have used
+  } catch(err) { try { gameFault('ruckus link',err); } catch(e) {} end(); }
 }
 function b3PlayMove(beats,done,mid,waited) {   // mid: the first move of a Family Ruckus pair (the screen is synced when the pair has finished)
   const head=beats[0];

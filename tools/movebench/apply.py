@@ -28,7 +28,9 @@ import store   # only its small GitHub caller (_call, _decode): the same one the
 
 STAMP = ('engine/main.js', 'index.html', 'data/build-history.js', 'docs/CHANGES.md')
 BOT = ['-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com']
-EXTRA = {'move:pick_me_up': {'slug': 'move-pick-me-up', 'video': False, 'owner': 'team'}}   # the universal move has no row in data/guide-anims.json (movebench6 lists it)
+EXTRA = {'move:pick_me_up': {'slug': 'move-pick-me-up', 'video': False, 'owner': 'team'},   # the universal move has no row in data/guide-anims.json (movebench6 lists it)
+         'ruckus:double': {'slug': 'ruckus-double', 'video': True, 'owner': 'ruckus'},   # movebench15: the two Family Ruckus spends have no row there either; they have no video to make, so they start at To do, not No video yet
+         'ruckus:full': {'slug': 'ruckus-full', 'video': True, 'owner': 'ruckus'}}
 INDEX = 'data/moves/index.json'
 NOTE = {'entries': []}   # what the last prepare() added to the Art Library (the commit message names it)
 FIRST_BUILD = 'movebench3'   # the build that first wrote data/move-specs.js: the name of a script no move-apply build has changed yet

@@ -20,7 +20,8 @@
   "move": "Move",
   "act": "Monster attack",
   "wind": "Wind-up",
-  "state": "Body state"
+  "state": "Body state",
+  "ruckus": "Family Ruckus"
  },
  "tier": {
   "basic": "Basic",
@@ -221,6 +222,21 @@
    "last_end": "Drag: last picture of the video",
    "first": "first",
    "last": "last"
+  },
+  "ruckus": {
+   "note": "Each of the two members plays their own move. This is what plays at the moment they link up, before those two moves.",
+   "hit": {
+    "label": "The link shows",
+    "hint": "the moment the two members link up"
+   },
+   "freeze": {
+    "label": "Freeze on the link",
+    "hint": "the two members hold still for a beat"
+   },
+   "shake": {
+    "label": "Screen shake",
+    "hint": "the whole field shakes when the link shows"
+   }
   }
  },
  "stage_do": {
@@ -1941,5 +1957,40 @@
   "attacker": "The monster",
   "screen_left": "The edge on the family's side",
   "screen_right": "The edge behind the monster"
+ },
+ "ruckus": {
+  "owner": "Family Ruckus",
+  "double": "Double Team",
+  "full": "Full Family Ruckus",
+  "hint": "Each member plays their own move, so there is no video here. The preview plays the spend with two members: the link first, then their two moves.",
+  "video_note": "No video: each member plays their own move. Everything here plays at the moment they link up.",
+  "preview": "Preview the spend with two members",
+  "tag": "THE WHOLE FAMILY RUCKUS",
+  "sub": "The link before the two moves.",
+  "lane": "Their moves"
+ },
+ "ruckus_side": {
+  "on.target": "The partner who links in",
+  "on.self": "The member who spends it",
+  "on.field": "The monsters' side",
+  "over:target": "Over the partner who links in",
+  "over:self": "Over the member who spends it",
+  "self_front": "In front of the member who spends it",
+  "self": "The member who spends it",
+  "above_self": "Over the member who spends it",
+  "target": "The partner who links in",
+  "above_target": "Over the partner who links in",
+  "drop": [
+   "on.each_target",
+   "on.each_ally",
+   "hand",
+   "attacker",
+   "ally",
+   "each_ally",
+   "each_target",
+   "over:each_target",
+   "over:each_ally",
+   "foe"
+  ]
  }
 }

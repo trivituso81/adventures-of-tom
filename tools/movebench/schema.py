@@ -279,6 +279,22 @@ def check_act(S,path,E):
         if st.get('setpiece') is not None: E.append(path+'.stage.setpiece: only a Capstone has a set piece')
         for i,x in enumerate(st.get('steps') or []):
             if isinstance(x,dict) and x.get('do')=='foe': E.append('%s.stage.steps[%d].do: a monster attack cannot knock the monster back'%(path,i))
+def check_ruckus(S,path,E):
+    # movebench15: the Family Ruckus spend ('ruckus:double', 'ruckus:full') has Timing (the moment the link shows, the freeze, the shake), Stage steps, Effects and Sound. Each member plays their own move, so it has no body video,
+    # no start picture, no answer, no lasting thing and no set piece of its own (the library set piece is an effect), and nothing to run in or hit.
+    if not isinstance(S,dict): return
+    for k,why in (('body','each member plays their own move: there is no video of the spend'),('start','there is no start picture'),('answer','the spend has no answer')):
+        if S.get(k) is not None: E.append('%s.%s: %s'%(path,k,why))
+    t=S.get('timing')
+    if isinstance(t,dict):
+        for k in ('approach','approachSec','returnSec','gap','noHit'):
+            if k in t: E.append('%s.timing.%s: the spend runs nobody in and has no hit of its own'%(path,k))
+    st=S.get('stage')
+    if isinstance(st,dict):
+        if st.get('lasting'): E.append(path+'.stage.lasting: the spend leaves nothing standing')
+        if st.get('setpiece') is not None: E.append(path+'.stage.setpiece: the set piece is an effect of the spend')
+        for i,x in enumerate(st.get('steps') or []):
+            if isinstance(x,dict) and x.get('do')=='foe': E.append('%s.stage.steps[%d].do: the spend cannot knock the monster back'%(path,i))
 def validate(doc,C):
     E=[];W=[]
     if not isinstance(doc,dict): return ['the file is not an object'],W
@@ -292,6 +308,7 @@ def validate(doc,C):
         elif doc[sec] is not None:
             check_section_set(doc[sec],sec,C,E,W)
             if isinstance(doc.get('id'),str) and doc['id'].startswith('act:'): check_act(doc[sec],sec,E)
+            if isinstance(doc.get('id'),str) and doc['id'].startswith('ruckus:'): check_ruckus(doc[sec],sec,E)
     f=doc.get('finished')
     if f is not None:
         if not isinstance(f,dict): E.append('finished: must be an object or null')
