@@ -10213,7 +10213,7 @@
    "id": "c-movebench-16",
    "tag": "movebench16",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Battle Animations",
    "title": "Move Workbench 16: wide monitor layout and clean-up",
    "next": "A new Admin Dashboard layout, Animations, gives the workbench most of the wide monitor. The Move Lab and the old animation sheet are deleted. Starts by itself when Move Workbench 15 ships.",
@@ -10223,7 +10223,7 @@
    "changed": "2026-11-27",
    "auto": true,
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukF5T9H671xWNXfKgbv",
     "opening": "not started"
    },
    "prompt": {
@@ -10243,6 +10243,10 @@
     {
      "d": "2026-11-27",
      "t": "Unblocked: Move Workbench 15: Family Ruckus is done."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   },
@@ -10531,6 +10535,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukF5T9H671xWNXfKgbv",
+   "title": "Move Workbench 16: wide monitor layout and clean-up",
+   "first": "2026-11-27T19:33:32-08:00",
+   "last": "2026-11-27T19:33:32-08:00",
+   "tags": [],
+   "cards": [
+    "c-movebench-16"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFUh8sJasfXzMouUXk",
    "title": "Move Workbench 15: Family Ruckus",
@@ -17569,8 +17583,8 @@
    "takes/20261122T201002-4hq/state.json"
   ]
  },
- "synced": "9ed674994691bb796a4dfbd13a3a758827b056ed",
- "synced_at": "2026-11-28T03:05:40+00:00",
+ "synced": "084b460c2c0b6d995d8863dc0d952d39710e06b8",
+ "synced_at": "2026-11-28T03:34:20+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
