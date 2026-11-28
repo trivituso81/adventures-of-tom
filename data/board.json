@@ -10429,10 +10429,10 @@
    "id": "c-b3story",
    "tag": "b3story",
    "lane": "claude",
-   "col": "up",
+   "col": "wait",
    "theme": "Battle System",
    "title": "Battle screen: storybook look proposal, every case drawn",
-   "next": "Your storybook mockup was assessed on 11-27 (claude/battleux-mock2/assessment.md). You then said what must stay: the moves beside the character whose turn it is, like Expedition 33, and controls that lie over the scene. This card turns the mockup into a tappable proposal at the four real screens that keeps both and draws every missing case, then hands you one card to approve it. Tap the card, Copy prompt, paste it into a NEW conversation on Claude Opus 5.5 with effort high.",
+   "next": "Waits on your card Try the battle screen prototype on the Duo (the lightweight prototype is built first, card Battle screen: a lightweight prototype to try). After your All good, this card turns the mockup into the full tappable proposal at the four real screens with every missing case, using your prototype notes. Then: tap the card, Copy prompt, NEW conversation on Claude Opus 5.5, effort high.",
    "blocks": [],
    "created": "2026-11-27",
    "changed": "2026-11-27",
@@ -10443,11 +10443,11 @@
    "prompt": {
     "what": "Turns your storybook mockup into a tappable proposal of the battle screen at the four real screen sizes, with every case the mockup left out. The moves stay beside the character whose turn it is and the controls stay over the scene, as you asked. Then hands you one card to approve it.",
     "before": [
-     "Nothing to do first. Your mockup picture is already saved in the repo."
+     "Try the prototype and answer the card Try the battle screen prototype on the Duo (All good, or Something is wrong with your notes)."
     ],
     "model": "Claude Opus 5.5 (row D: a look you judge by taste, and a miss costs you review time; none of the three Fable conditions holds)",
     "effort": "high (a whole screen with 15 cases at four screen sizes has to be worked out; the assessment lists what to solve, not how)",
-    "text": "Read CLAUDE.md, claude/handoff-rules.md, claude/battleux-plan.md, claude/b3look-plan.md and claude/battleux-mock2/assessment.md, and look at Tom's picture claude/battleux-mock2/tom-mockup-2026-11-27.jpg (his mockup of a storybook look for the battle screen) and the same picture at the Duo's width beside it. Read card c-b3story in data/board.json; a note of Tom's on it comes first. Your first push is the commit board: start c-b3story. This is a proposal, not a build of the game's battle screen. Tom's two fixed points come first (11-27 17:03, the assessment's section 6): the moves appear beside the family member whose turn it is, as a dynamic bar in the manner of Clair Obscur: Expedition 33, and most of the screen's controls lie over the scene, so the scene keeps the whole screen and nothing pushes it up, down or to the side. Do not move the moves back into a side strip or a band under the scene. Solve the problems that come with an overlay inside those two points: where the bar sits when the acting member stands in a different spot or near an edge, what it covers with five monsters on the field, whether it hides while a move plays, how it reads on any background, and what an upright phone does. Section 7 of the assessment holds a proposed solution for each of these and for the findings that still stand; Tom has read them. Start from them, draw them, and change one only where the drawing shows it fails, saying so in the plan. The upright phone is the lowest priority and is drawn last. Then keep the six ideas of the assessment's section 1 (the painted storybook look, the result of the move shown on the aimed monster, a plate per monster, the wide Combo bar with both marks, the party row along the bottom, the Basic set apart) and solve every row of its sections 2, 3 and 4. Keep the rules Tom approved on 11-21 and 11-22 unless the plan argues a change in one line: one list of moves with nothing hidden behind a tab, the first tap shows and the second tap uses, a tap on a monster aims, every picture has its word next to it, every fact shown once, the Details switch hides details everywhere, no text under 12.5 px on a phone, tap targets of 44 px. No rule, number or engine file of the battle changes. Build it the way the first redesign was proposed (claude/battleux-plan.md, source claude/battleux-mock/src/): a tappable mock in which the bar moves to whoever is up (show at least Grace, Tom and Deedee taking a turn), source in claude/battleux-mock2/src/, published as one page on the site with a button under ADMIN, using real move names and lines from data/b3-kit-*.js and the real scene pictures. It must open at the real screens, the Duo unfolded held sideways (951 x 648) first, then desktop, the Duo folded upright and sideways, the iPhone upright (393 x 852) and sideways (852 x 393), and it must be able to show each of these states: one monster and five monsters (3 in Front, 2 in Back); a move aimed at one monster, at every monster, at one family member, at the whole family, at the floor; a monster winding up with a family member marked; a monster with statuses and a Flustered one; the Combo bar at 65% with Double Team offered and at 100% with Family Ruckus; a family member knocked out with Pick-Me-Up; a free Skill list; a move playing with the battle text; the end of the fight with Continue; Details on and off; Rose Mode; a party of three with Nara. The frames are CSS first. List in the plan every painted piece that would have to come from the Art Library (never an outside image tool) and do not make one. The storybook look is for the battle screen only; the menu keeps its look, and the plan says in one table what the menu would need if Tom wants it to follow. Check contrast on a night and an indoor background as well as the pond. Look at a screenshot of every state at every size before pushing, and add a layout check like tools/b3_layout_test.py for the mock (fails when the highlighted move is off the screen, a name is cut, text is under 12.5 px on a phone or a tap target is under 44 px). Write claude/b3story-plan.md: what the screen is, a table of every call you made that Tom can overrule, the purge rule for the mock page, and the build cards with model and effort chosen by the logic in claude/handoff-rules.md. The card you ship hands Tom ONE decide card, t-b3story-decide (ask decide, the first choice yours and marked Recommended), created in the same push; it blocks the first build card. Build name b3story. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, claude/battleux-plan.md, claude/b3look-plan.md and claude/battleux-mock2/assessment.md, and look at Tom's picture claude/battleux-mock2/tom-mockup-2026-11-27.jpg (his mockup of a storybook look for the battle screen) and the same picture at the Duo's width beside it. Read card c-b3story in data/board.json; a note of Tom's on it comes first. Tom tried a lightweight prototype first (claude/battleux-mock2/proto-plan.md, page battle-proto.html): read his notes and answer on card t-b3proto-try and on any fix card of it before anything else, and treat what he said there as overruling section 7 where they differ. Your first push is the commit board: start c-b3story. This is a proposal, not a build of the game's battle screen. Tom's two fixed points come first (11-27 17:03, the assessment's section 6): the moves appear beside the family member whose turn it is, as a dynamic bar in the manner of Clair Obscur: Expedition 33, and most of the screen's controls lie over the scene, so the scene keeps the whole screen and nothing pushes it up, down or to the side. Do not move the moves back into a side strip or a band under the scene. Solve the problems that come with an overlay inside those two points: where the bar sits when the acting member stands in a different spot or near an edge, what it covers with five monsters on the field, whether it hides while a move plays, how it reads on any background, and what an upright phone does. Section 7 of the assessment holds a proposed solution for each of these and for the findings that still stand; Tom has read them. Start from them, draw them, and change one only where the drawing shows it fails, saying so in the plan. The upright phone is the lowest priority and is drawn last. Then keep the six ideas of the assessment's section 1 (the painted storybook look, the result of the move shown on the aimed monster, a plate per monster, the wide Combo bar with both marks, the party row along the bottom, the Basic set apart) and solve every row of its sections 2, 3 and 4. Keep the rules Tom approved on 11-21 and 11-22 unless the plan argues a change in one line: one list of moves with nothing hidden behind a tab, the first tap shows and the second tap uses, a tap on a monster aims, every picture has its word next to it, every fact shown once, the Details switch hides details everywhere, no text under 12.5 px on a phone, tap targets of 44 px. No rule, number or engine file of the battle changes. Build it the way the first redesign was proposed (claude/battleux-plan.md, source claude/battleux-mock/src/): a tappable mock in which the bar moves to whoever is up (show at least Grace, Tom and Deedee taking a turn), source in claude/battleux-mock2/src/, published as one page on the site with a button under ADMIN, using real move names and lines from data/b3-kit-*.js and the real scene pictures. It must open at the real screens, the Duo unfolded held sideways (951 x 648) first, then desktop, the Duo folded upright and sideways, the iPhone upright (393 x 852) and sideways (852 x 393), and it must be able to show each of these states: one monster and five monsters (3 in Front, 2 in Back); a move aimed at one monster, at every monster, at one family member, at the whole family, at the floor; a monster winding up with a family member marked; a monster with statuses and a Flustered one; the Combo bar at 65% with Double Team offered and at 100% with Family Ruckus; a family member knocked out with Pick-Me-Up; a free Skill list; a move playing with the battle text; the end of the fight with Continue; Details on and off; Rose Mode; a party of three with Nara. The frames are CSS first. List in the plan every painted piece that would have to come from the Art Library (never an outside image tool) and do not make one. The storybook look is for the battle screen only; the menu keeps its look, and the plan says in one table what the menu would need if Tom wants it to follow. Check contrast on a night and an indoor background as well as the pond. Look at a screenshot of every state at every size before pushing, and add a layout check like tools/b3_layout_test.py for the mock (fails when the highlighted move is off the screen, a name is cut, text is under 12.5 px on a phone or a tap target is under 44 px). Write claude/b3story-plan.md: what the screen is, a table of every call you made that Tom can overrule, the purge rule for the mock page, and the build cards with model and effort chosen by the logic in claude/handoff-rules.md. The card you ship hands Tom ONE decide card, t-b3story-decide (ask decide, the first choice yours and marked Recommended), created in the same push; it blocks the first build card. Build name b3story. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "history": [
     {
@@ -10461,8 +10461,13 @@
     {
      "d": "2026-11-27",
      "t": "Tom, 17:51: \"Propose a solution for each one including viewport specific hi for portrait although I would deprioritize this\". Section 7 of claude/battleux-mock2/assessment.md now holds one proposed solution per open point (bar position, five monsters, hiding during a move, backgrounds, sizes on the Duo, the upright phone last) and per standing finding; the prompt starts from them. Build board-b3story3."
+    },
+    {
+     "d": "2026-11-27",
+     "t": "Tom, 19:45: \"Can you plan for a super lightweight prototype to see how I like it and why issues I find?\" This card now waits on t-b3proto-try; the prototype (c-b3proto) is built first. Build board-b3proto-plan."
     }
-   ]
+   ],
+   "waiting_on": "tom"
   },
   {
    "id": "b-board-b3story",
@@ -10532,6 +10537,76 @@
    "blocks": [],
    "created": "2026-11-27",
    "changed": "2026-11-27"
+  },
+  {
+   "id": "c-b3proto",
+   "tag": "b3proto",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Battle System",
+   "auto": true,
+   "title": "Battle screen: a lightweight prototype to try",
+   "next": "Builds one page with a fake fight so you can feel the two things you want kept: the list of moves beside the character whose turn it is, and controls that lie over the scene. Plan: claude/battleux-mock2/proto-plan.md. Tap the card and press START (or Copy prompt into a NEW conversation on Claude Sonnet 5.5, effort medium). It then hands you the card Try the battle screen prototype on the Duo.",
+   "blocks": [
+    "t-b3proto-try"
+   ],
+   "after": "t-b3proto-try",
+   "created": "2026-11-27",
+   "changed": "2026-11-27",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Builds a one-page fake fight you can tap through on the Duo: the list of moves beside whoever's turn it is, Use, the list folding away, 1 or 5 monsters, three backgrounds, and a Note button. No rules and no change to the game's battle.",
+    "before": [
+     "Nothing to do first. Press START on the card; if it does not start, open a NEW conversation, choose Claude Sonnet 5.5, set effort to medium, and paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the plan writes every part and the checks; a test catches mistakes; none of the three Fable conditions holds)",
+    "effort": "medium (the steps are known and the piece is one page)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, claude/battleux-mock2/proto-plan.md (the plan you are building, follow it row by row) and section 7 of claude/battleux-mock2/assessment.md, and look at Tom's picture claude/battleux-mock2/tom-mockup-2026-11-27.jpg. Read card c-b3proto in data/board.json; a note of Tom's on it comes first. Your first push is the commit board: start c-b3proto. Build the lightweight prototype exactly as the plan's section 1 says and nothing from its section 2: one page battle-proto.html with a button under ADMIN > Battle system, a fake fight with no battle engine, the list of moves beside the member whose turn it is, first tap opens a row and the gold Use button uses it, the list folds away while the move plays, the Try chip (Monsters 1 or 5, Background pond, night or indoor, Details), and the Note button with Copy my notes. Read move names, Pep prices, flavors and lines from the data/b3-kit files; do not change any battle, rule or engine file. The still pictures are for this page only. Do the plan's section 3 checks yourself before pushing: look at every screenshot at 951 x 648 and 1440 x 900, write tools/b3proto_test.py and make it pass, run tools/admin_hub_test.py and tools/smoke.py. Tom is not asked whether a button exists or a round plays; he is asked only the five questions of section 4. Card t-b3proto-try already exists and is your after: rewrite its next and steps only if what you built differs from them, and add the page's address. Write what you built and any call you made under a Built heading in the plan. Build name b3proto. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Added by board-b3proto-plan. Tom, 19:45: \"Can you plan for a super lightweight prototype to see how I like it and why issues I find?\" Plan: claude/battleux-mock2/proto-plan.md. Planning session: https://claude.ai/code/session_01RXeukCdSRAhwGRhiJnAWHZ"
+    }
+   ]
+  },
+  {
+   "id": "t-b3proto-try",
+   "title": "Try the battle screen prototype on the Duo",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "wait",
+   "waiting_on": "claude",
+   "ask": "play",
+   "where": "phone",
+   "next": "Waits on the card Battle screen: a lightweight prototype to try. Then: open ADMIN > Battle system > Battle screen prototype on the Duo held sideways, play two rounds, try 5 monsters and the night and indoor backgrounds, tap Note for anything that bothers you, then Copy my notes. Press All good (the full proposal, card Battle screen: storybook look proposal, every case drawn, can then start), or Something is wrong and paste your notes (a fix of the prototype starts by itself).",
+   "steps": [
+    "Open ADMIN > Battle system > Battle screen prototype on the Duo, unfolded and held sideways.",
+    "Play two rounds: tap a move, then its gold Use button. Watch the list move from Grace to Tom to Deedee to Rose.",
+    "Open the Try chip in the corner: switch Monsters to 5, then Background to night and to indoor.",
+    "Judge five things: (1) does the list beside the character feel right as it moves; (2) is anything you want to see covered; (3) can you read and tap it comfortably; (4) is first tap, then Use, clear; (5) when the list folds away during a move, do you lose your place.",
+    "Each time something bothers you, tap Note and type it. At the end tap Copy my notes.",
+    "Press All good, or Something is wrong and paste your notes."
+   ],
+   "blocks": [
+    "c-b3story"
+   ],
+   "first": "Waits on the card Battle screen: a lightweight prototype to try.",
+   "created": "2026-11-27",
+   "changed": "2026-11-27",
+   "chat": {
+    "url": "",
+    "opening": "\"Assess this mockup of a revision to the battle UI.\""
+   },
+   "history": [
+    {
+     "d": "2026-11-27",
+     "t": "Added by board-b3proto-plan with card c-b3proto. Tom, 19:45: \"Can you plan for a super lightweight prototype to see how I like it and why issues I find?\""
+    }
+   ]
   }
  ],
  "sessions": [
